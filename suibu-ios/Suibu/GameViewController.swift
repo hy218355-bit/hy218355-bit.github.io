@@ -10,7 +10,7 @@ final class GameViewController: UIViewController {
 
     override func loadView() {
         let config = WKWebViewConfiguration()
-        config.setURLSchemeHandler(BundleSchemeHandler(folder: "suibu"), forURLScheme: BundleSchemeHandler.scheme)
+        config.setURLSchemeHandler(BundleSchemeHandler(folder: "Game/suibu"), forURLScheme: BundleSchemeHandler.scheme)
         config.mediaTypesRequiringUserActionForPlayback = []
         config.allowsInlineMediaPlayback = true
 

@@ -27,7 +27,7 @@ jobs:
             build | tail -40
           APP=build-sim/Build/Products/Debug-iphonesimulator/Suibu.app
           ls "$APP" | head -20
-          du -sh "$APP" "$APP/suibu"
+          du -sh "$APP" "$APP/Game/suibu"
           /usr/libexec/PlistBuddy -c 'Print :CFBundleDisplayName' "$APP/Info.plist"
       - name: Boot simulator
         run: |

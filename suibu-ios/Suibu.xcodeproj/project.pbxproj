@@ -14,7 +14,7 @@
 		A6070B9CF28E71610AA267AE /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A790BB479B2477E3A634A1EB /* Assets.xcassets */; };
 		0B986C876E3EC44800452396 /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = C45E8EE69BEC76964CA40C2E /* PrivacyInfo.xcprivacy */; };
 		CBF6B15AEA2443D97859AA5F /* selftest.js in Resources */ = {isa = PBXBuildFile; fileRef = C896D4AB6BD132EC9030910A /* selftest.js */; };
-		416A0C80D41785D1EBB407D1 /* suibu in Resources */ = {isa = PBXBuildFile; fileRef = 2FE820D3446FF5F947D2F604 /* suibu */; };
+		416A0C80D41785D1EBB407D1 /* suibu in Copy Game Files */ = {isa = PBXBuildFile; fileRef = 2FE820D3446FF5F947D2F604 /* suibu */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -39,6 +39,20 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		11407A66E22A2AD74BBDB6C5 /* Copy Game Files */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = Game;
+			dstSubfolderSpec = 7;
+			files = (
+				416A0C80D41785D1EBB407D1 /* suibu in Copy Game Files */,
+			);
+			name = "Copy Game Files";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXGroup section */
 		518DA81DB9B99529C0C0AEBE = {
@@ -83,6 +97,7 @@
 				7A70D71C385290AF96BF1031 /* Sources */,
 				424153ED3CD079DB4DB459AF /* Frameworks */,
 				285BB1C1430063331E9F5DD0 /* Resources */,
+				11407A66E22A2AD74BBDB6C5 /* Copy Game Files */,
 			);
 			buildRules = (
 			);
@@ -134,7 +149,6 @@
 				A6070B9CF28E71610AA267AE /* Assets.xcassets in Resources */,
 				0B986C876E3EC44800452396 /* PrivacyInfo.xcprivacy in Resources */,
 				CBF6B15AEA2443D97859AA5F /* selftest.js in Resources */,
-				416A0C80D41785D1EBB407D1 /* suibu in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
