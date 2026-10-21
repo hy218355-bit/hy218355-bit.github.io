@@ -74,7 +74,8 @@ class Playback {
           // 音色の力が低いほど、息の雑音・音量の揺れ・鼻にかかった響きが増える
           const iT = 1 - n.T;
           const ms = q.list.map(x => x.midi).sort((a, b) => a - b);
-          q.voice = new WindVoice(this.ac, this.mem[q.mid].g, n.inst, {
+          const Voice = sampleCfg(n.inst) ? SampleVoice : WindVoice;
+          q.voice = new Voice(this.ac, this.mem[q.mid].g, n.inst, {
             trem: 0.3 * Math.pow(iT, 1.2), noise: 0.5 + 1.8 * Math.pow(iT, 1.3),
             vibRateMul: 0.94 + 0.12 * hash(q.mid, 'vr'), midi: ms[Math.floor(ms.length / 2)],
           });

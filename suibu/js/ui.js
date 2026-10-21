@@ -50,8 +50,17 @@ function rangeSpan(pid){
 }
 const nowLabel = () => `いまの音（${S.phase === 'choose' ? '選曲前' : wkLabel(S.week)}・${VENUE[U.venue].name}）`;
 const busy = () => !!(S.pending && !S.pending.revealed);
-function saveUI(){ try{ localStorage.setItem(UI_KEY, JSON.stringify({venue: U.venue, pos: U.pos})); }catch(e){} }
-function loadUI(){ try{ const x = JSON.parse(localStorage.getItem(UI_KEY) || 'null'); if(x){ if(VENUE[x.venue]) U.venue = x.venue; if(POSITION[x.pos]) U.pos = x.pos; } }catch(e){} }
+function saveUI(){ try{ localStorage.setItem(UI_KEY, JSON.stringify({venue: U.venue, pos: U.pos, snd: SAMPLES.use ? 'rec' : 'synth'})); }catch(e){} }
+function loadUI(){ try{ const x = JSON.parse(localStorage.getItem(UI_KEY) || 'null'); if(x){ if(VENUE[x.venue]) U.venue = x.venue; if(POSITION[x.pos]) U.pos = x.pos; if(x.snd === 'synth') SAMPLES.use = false; } }catch(e){} }
+// 録音音源の読み込み状況
+function renderSnd(){
+  document.querySelectorAll('#sndSel [data-snd]').forEach(b => b.setAttribute('aria-pressed', String((b.dataset.snd === 'rec') === SAMPLES.use)));
+  const st = $('#sndStatus');
+  if(!SAMPLES.use) st.textContent = '';
+  else if(SAMPLES.error) st.textContent = '録音を読み込めなかったので、合成音で鳴らします';
+  else if(!SAMPLES.ready) st.textContent = `読み込み中 ${Math.round(SAMPLES.progress * 100)}%（それまでは合成音）`;
+  else st.textContent = '';
+}
 function commit(next){ S = next; save(S); }
 
 /* ===== いまの演奏を作り直す ===== */
@@ -695,6 +704,11 @@ function bind(){
   });
   $('#btnRec').addEventListener('click', () => playRec($('#recSel').value));
   $('#btnStop').addEventListener('click', stopPlay);
+  $('#sndSel').addEventListener('click', e => {
+    const b = e.target.closest('[data-snd]'); if(!b) return;
+    SAMPLES.use = b.dataset.snd === 'rec';
+    saveUI(); renderSnd();
+  });
   $('#btnLab').addEventListener('click', () => {
     const pre = LAB_PRESETS[U.labPreset];
     playPerf(labPerf(), `ラボ：${pre ? pre.name : `音程${U.lab.pitch}・リズム${U.lab.rhythm}・音色${U.lab.tone}・表現${U.lab.expr}`}（${VENUE[U.venue].name}）`);
@@ -819,6 +833,8 @@ function start(data){
   E.venueId = U.venue; E.posId = U.pos;
   renderAll(); renderLab();
   bind();
+  renderSnd();
+  loadSamples('snd/', renderSnd).then(renderSnd, renderSnd);
   U.perfNow = perform(currentCtx());
   U.diag = analyze(U.perfNow);
   U.shown = U.perfNow; U.shownLabel = nowLabel();

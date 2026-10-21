@@ -432,6 +432,7 @@ const STRIKE = {
   },
 };
 function strike(ac, out, h, T0, srcs){
+  if(typeof sampleCfg === 'function' && sampleCfg(h.inst)) return sampleStrike(ac, out, h, T0, srcs);
   const inst = INST[h.inst];
   const lvl = v => inst.gain * (0.04 + 0.96 * Math.pow(clamp01(v), 1.6));
   return STRIKE[inst.strike](ac, out, h, T0 + h.t, srcs, lvl);

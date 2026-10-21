@@ -124,6 +124,8 @@ select{background:var(--sheet);border:1.5px solid var(--rule);border-radius:8px;
 #recSel{max-width:min(100%,260px)}
 .options{display:flex;flex-wrap:wrap;gap:8px 16px;font-size:13px;color:var(--ink-soft)}
 .options label{display:flex;align-items:center;gap:6px;min-width:0}
+.snd{display:flex;align-items:center;gap:6px;flex-wrap:wrap}
+#sndStatus{font-size:12px}
 .now-playing{font-size:13px;color:var(--ink-soft);min-height:1.7em}
 .now-playing b{color:var(--brass)}
 .view-head{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:6px 12px;font-size:13px;color:var(--ink-soft)}
@@ -299,6 +301,7 @@ tr.empty td{color:var(--ink-soft)}
           <label>範囲 <select id="rangeSel"></select></label>
           <label>聴く位置 <select id="posSel"></select></label>
           <label>聴くパート <select id="soloSel"></select></label>
+          <span class="snd"><span>音源</span><span class="seg" id="sndSel" role="group" aria-label="音源"><button type="button" data-snd="rec" aria-pressed="true">録音</button><button type="button" data-snd="synth" aria-pressed="false">合成</button></span><span id="sndStatus" aria-live="polite"></span></span>
         </div>
         <p class="now-playing" id="nowPlaying" aria-live="polite"></p>
         <div class="view-head"><span id="viewTitle"></span><label>表示 <select id="viewSel" aria-label="表示するパート"></select></label></div>
@@ -366,12 +369,13 @@ tr.empty td{color:var(--ink-soft)}
     <ol id="histList"></ol>
   </section>
 
-  <p class="foot">曲はドヴォルザーク《新世界より》（1893年）とベートーヴェン《第九》（1824年）で、どちらもパブリックドメインです。編曲と音はすべて、このページの中で楽譜データからその場で合成しています。録音音源やサンプル音源は使っていません。高校の吹奏楽で使う木管・金管・弦バス・打楽器・鍵盤の音を、倍音と胴の響きと息の雑音から組み立てています。</p>
+  <p class="foot">曲はドヴォルザーク《新世界より》（1893年）とベートーヴェン《第九》（1824年）で、どちらもパブリックドメインです。編曲はこのページの中で楽譜データから組み立てています。楽器の音は、Versilian Studios「VSCO 2 Community Edition」（CC0）の録音と、Karoryfer「Weresax」のアルトサックスの録音（tonejs-instruments 経由、CC BY 3.0）を使っています。E♭クラリネット・バスクラリネットはクラリネット、テナー・バリトンサックスはアルトサックス、ユーフォニアム・バストロンボーンはトロンボーンの録音を、高さと明るさを変えて使っています。ヴィブラフォンと、「合成」を選んだときの音は、倍音と胴の響きと息の雑音からその場で合成しています。</p>
 </div>
 
 <script src="js/util.js"></script>
 <script src="js/instruments.js"></script>
 <script src="js/venues.js"></script>
+<script src="js/samples.js"></script>
 <script src="js/scores.js"></script>
 <script src="js/band.js"></script>
 <script src="js/game.js"></script>
