@@ -7,6 +7,8 @@ final class GameViewController: UIViewController {
     private let saves = SaveStore()
     /// CIの動作確認用：起動引数 -selftest のとき、ページの中で数秒ぶんの演奏を書き出して結果を出力し、終了する
     private let selfTest = ProcessInfo.processInfo.arguments.contains("-selftest")
+    private let tapFeedback = UIImpactFeedbackGenerator(style: .light)
+    private let resultFeedback = UINotificationFeedbackGenerator()
 
     override func loadView() {
         let config = WKWebViewConfiguration()
@@ -17,6 +19,7 @@ final class GameViewController: UIViewController {
         let content = config.userContentController
         content.addUserScript(WKUserScript(source: saves.restoreScript(), injectionTime: .atDocumentStart, forMainFrameOnly: true))
         content.addUserScript(WKUserScript(source: Self.errorReporter, injectionTime: .atDocumentStart, forMainFrameOnly: true))
+        content.addUserScript(WKUserScript(source: Self.launchScript(), injectionTime: .atDocumentStart, forMainFrameOnly: true))
         if selfTest, let url = Bundle.main.url(forResource: "selftest", withExtension: "js"),
            let js = try? String(contentsOf: url, encoding: .utf8) {
             content.addUserScript(WKUserScript(source: js, injectionTime: .atDocumentEnd, forMainFrameOnly: true))
@@ -29,6 +32,7 @@ final class GameViewController: UIViewController {
         // ノッチやホームバーの余白はページ側（CSSの safe-area）で取る
         webView.scrollView.contentInsetAdjustmentBehavior = .never
         webView.allowsBackForwardNavigationGestures = false
+        webView.allowsLinkPreview = false
         webView.isOpaque = false
         webView.backgroundColor = UIColor(named: "Paper")
         webView.scrollView.backgroundColor = UIColor(named: "Paper")
@@ -54,6 +58,12 @@ final class GameViewController: UIViewController {
         case "playing":
             // 演奏を聴いているあいだは画面を暗くしない（画面がロックされると音が止まるため）
             UIApplication.shared.isIdleTimerDisabled = (msg["on"] as? Bool) == true
+        case "haptic":
+            switch msg["kind"] as? String {
+            case "success": resultFeedback.notificationOccurred(.success)
+            case "warning": resultFeedback.notificationOccurred(.warning)
+            default: tapFeedback.impactOccurred()
+            }
         case "log":
             Self.output("[web] \(msg["msg"] ?? "")")
         case "selftest":
@@ -78,6 +88,13 @@ final class GameViewController: UIViewController {
     private static func finishSelfTest(ok: Bool, detail: String) {
         output("SELFTEST \(ok ? "OK" : "FAIL") \(detail)")
         exit(ok ? 0 : 1)
+    }
+
+    /// アプリの中で動いていることと、起動引数（-tab play など。スクリーンショット用）をページに伝える
+    private static func launchScript() -> String {
+        let tab = UserDefaults.standard.string(forKey: "tab") ?? ""
+        let safe = tab.filter { $0.isLetter }
+        return "window.SUIBU_NATIVE = true; window.SUIBU_LAUNCH = {tab: '\(safe)'};"
     }
 
     /// ページで起きたエラーをアプリのログに出す

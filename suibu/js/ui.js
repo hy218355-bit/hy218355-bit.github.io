@@ -8,6 +8,7 @@ const U = {
   venue: 'room', pos: 'center', range: 'all', view: 'mel', sel: null, piece: null, solo: 'all',
   shown: null, shownLabel: '', perfNow: null, diag: null, ptr: null, raf: 0, onEnd: null, playing: false,
   lab: {pitch: 100, rhythm: 100, tone: 100, expr: 0, cohesion: 100, fam: 100}, labPreset: 1, refreshT: 0,
+  tab: 'week', tabScroll: {},
 };
 const UI_KEY = 'suibu-ui-v2';
 
@@ -80,10 +81,42 @@ function refreshNow(){
 }
 function setNowPlaying(){
   $('#nowPlaying').innerHTML = U.playing ? `<b>再生中</b>：${esc(U.shownLabel)}` : `表示中：${esc(U.shownLabel)}`;
+  updateMini();
+}
+
+/* ===== スマホ・タブレット縦：画面下のタブ ===== */
+const TABS = ['week', 'play', 'members', 'log', 'lab'];
+const narrow = window.matchMedia('(max-width: 960px)');
+const tabHidden = t => narrow.matches && U.tab !== t;
+function setTab(t, keep){
+  if(!TABS.includes(t)) t = 'week';
+  if(U.tab !== t) U.tabScroll[U.tab] = window.scrollY;
+  U.tab = t;
+  document.documentElement.classList.add('tabbed');
+  document.querySelectorAll('[data-tab]').forEach(el => el.classList.toggle('tab-on', el.dataset.tab.split(' ').includes(t)));
+  document.querySelectorAll('[data-tabgo]').forEach(b => { if(b.dataset.tabgo === t) b.setAttribute('aria-current', 'page'); else b.removeAttribute('aria-current'); });
+  if(narrow.matches) window.scrollTo(0, keep ? (U.tabScroll[t] || 0) : 0);
+  updateMini();
+  // 隠れていたあいだは描けないので、見えたところで描き直す
+  if(t === 'play' && !U.playing) requestAnimationFrame(drawIdle);
+}
+// 合奏の画面以外で鳴っているときは、下に小さく「再生中」と止めるボタンを出す
+function updateMini(){
+  const mini = $('#mini'); if(!mini) return;
+  mini.hidden = !(U.playing && tabHidden('play'));
+  if(!mini.hidden) $('#miniLabel').textContent = `♪ ${U.shownLabel}`;
 }
 
 /* ===== 再生 ===== */
 function playPerf(perf, label, onEnd){
+  if(SAMPLES.use && !SAMPLES.ready && SAMPLES.loading && !SAMPLES.error){
+    const token = U.waitPlay = {};
+    $('#nowPlaying').textContent = '録音を読み込んでいます…（読み込めたら鳴ります）';
+    const go = () => { if(U.waitPlay === token){ U.waitPlay = null; playPerf(perf, label, onEnd); } };
+    SAMPLES.loading.then(go, go);
+    return;
+  }
+  U.waitPlay = null;
   const pb = E.play(perf);
   if(!pb){ $('#nowPlaying').textContent = 'このブラウザでは音を鳴らせません。'; return; }
   U.shown = perf; U.shownLabel = label; U.playing = true; U.onEnd = onEnd || null;
@@ -95,7 +128,7 @@ function playPerf(perf, label, onEnd){
   const tick = () => {
     if(!E.pb) return;
     const t = E.now();
-    drawStage(t); drawRoll(U.shown, t); drawTuner(tunerPair(U.shown, t));
+    if(!tabHidden('play')){ drawStage(t); drawRoll(U.shown, t); drawTuner(tunerPair(U.shown, t)); }
     if(t > U.shown.total + 0.8){
       const p = E.pb; E.pb = null; p.finish();
       endPlay();
@@ -116,6 +149,7 @@ function endPlay(){
   if(cb) cb();
 }
 function stopPlay(){
+  U.waitPlay = null;
   if(!U.playing) return;
   E.stop();
   endPlay();
@@ -692,6 +726,9 @@ function reveal(){
   S.pending.revealed = true;
   commit(S);
   renderAll();
+  const p = S.pending;
+  if(p.kind === 'concert') haptic(p.q >= 60 ? 'success' : 'tap');
+  else if(p.judge) haptic(p.judge.rep || p.judge.award === 'gold' ? 'success' : p.judge.award === 'bronze' ? 'warning' : 'tap');
 }
 function playRec(id){
   const rec = S.recs.find(r => r.id === id);
@@ -733,20 +770,22 @@ function bind(){
     U.sel = m ? m.id : null;
     U.view = s.sec;
     renderSelectors(); renderMemberCard(); renderRoster(); drawIdle();
-    if(m) $('#memberCard').scrollIntoView({block: 'nearest', behavior: 'smooth'});
+    if(m) $('#memberCard').scrollIntoView({block: narrow.matches ? 'start' : 'nearest', behavior: 'smooth'});
   });
   $('#secGrid').addEventListener('click', e => {
     const b = e.target.closest('[data-sec]'); if(!b) return;
     U.view = U.view === b.dataset.sec ? 'mel' : b.dataset.sec;
     renderSelectors(); renderRoster(); drawIdle();
+    if(tabHidden('play') && U.view !== 'mel'){ setTab('play'); $('.roll-wrap').scrollIntoView({block: 'center'}); }
   });
   $('#rosterTable').addEventListener('click', e => {
     const tr = e.target.closest('[data-mid]'); if(!tr) return;
     U.sel = tr.dataset.mid;
     const m = memberById(U.sel);
     if(m?.seat) U.view = SEAT[m.seat].sec;
+    if(tabHidden('play')) setTab('play');
     renderSelectors(); renderMemberCard(); renderRoster(); drawIdle();
-    $('#memberCard').scrollIntoView({block: 'nearest', behavior: 'smooth'});
+    $('#memberCard').scrollIntoView({block: narrow.matches ? 'start' : 'nearest', behavior: 'smooth'});
   });
   $('#memberCard').addEventListener('click', e => {
     const b = e.target.closest('[data-mact]'); if(!b) return;
@@ -764,6 +803,7 @@ function bind(){
     const b = e.target.closest('button'); if(!b || b.disabled) return;
     if(b.dataset.menu){
       if(busy()) return;
+      haptic('tap');
       commit(practiceWeek(S, b.dataset.menu));
       renderAll(); refreshNow();
       return;
@@ -821,6 +861,10 @@ function bind(){
     commit(freshState(2026)); U.sel = null; U.piece = null; U.view = 'mel';
     renderAll(); refreshNow();
   });
+  $('#tabbar').addEventListener('click', e => { const b = e.target.closest('[data-tabgo]'); if(b) setTab(b.dataset.tabgo, true); });
+  $('#miniLabel').addEventListener('click', () => setTab('play'));
+  $('#miniStop').addEventListener('click', () => stopPlay());
+  narrow.addEventListener?.('change', () => setTab(U.tab, true));
   const redraw = () => { if(U.playing) return; drawIdle(); };
   if('ResizeObserver' in window) new ResizeObserver(redraw).observe($('.stand'));
   else window.addEventListener('resize', redraw);
@@ -830,11 +874,13 @@ function bind(){
 }
 
 function start(data){
+  if(window.SUIBU_NATIVE) document.documentElement.classList.add('native');
   S = (data && data.S && data.S.v === 2) ? data.S : (load() || freshState(2026));
   loadUI();
   E.venueId = U.venue; E.posId = U.pos;
   renderAll(); renderLab();
   bind();
+  setTab(window.SUIBU_LAUNCH?.tab || 'week');
   renderSnd();
   loadSamples('snd/', renderSnd).then(renderSnd, renderSnd);
   // 響きの読み込みが再生より後になったら、読み込めた時点で計算した響きに切り替える

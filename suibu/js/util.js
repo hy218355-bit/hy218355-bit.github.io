@@ -22,6 +22,8 @@ const mtof = m => A4 * Math.pow(2, (m - 69) / 12);
 const esc = s => String(s).replace(/[&<>"]/g, c => ({'&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;'}[c]));
 // iOSアプリの中で動いているときだけ、アプリ側へ知らせる（ブラウザでは何もしない）
 const nativePost = m => { try{ window.webkit.messageHandlers.native.postMessage(m); }catch(e){} };
+// 手ごたえ（振動）：tap＝軽く、success＝うれしい結果、warning＝残念な結果
+const haptic = kind => nativePost({type: 'haptic', kind});
 
 function interp(pts, x){
   if(x <= pts[0][0]) return pts[0][1];

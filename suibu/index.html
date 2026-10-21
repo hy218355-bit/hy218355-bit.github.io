@@ -270,12 +270,35 @@ tr.empty td{color:var(--ink-soft)}
 .history{display:grid;gap:10px;border-top:2px solid var(--ink);padding-top:16px}
 .history ol{list-style:none;padding:0;display:grid;gap:6px;font-family:var(--f-hand);font-size:15px}
 .foot{font-size:12px;color:var(--ink-soft);max-width:64em;line-height:1.8}
+/* スマホ・タブレット縦：1列になる幅では、画面下のタブで「今週・合奏・部員・日誌・ラボ」を切り替える */
+.tabbar,.mini{display:none}
+@media (max-width:960px){
+  .tabbed [data-tab]:not(.tab-on){display:none!important}
+  .tabbed .app{padding-bottom:calc(92px + env(safe-area-inset-bottom,0px))}
+  .tabbed .member-card{scroll-margin-top:calc(14px + env(safe-area-inset-top,0px))}
+}
+.native,.native body{-webkit-user-select:none;user-select:none;-webkit-touch-callout:none}
+.native select,.native input{-webkit-user-select:auto;user-select:auto}
+@media (max-width:960px){
+  .tabbar{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));position:fixed;left:0;right:0;bottom:0;z-index:60;
+    padding:4px max(6px,env(safe-area-inset-left,0px)) calc(4px + env(safe-area-inset-bottom,0px)) max(6px,env(safe-area-inset-right,0px));
+    background:var(--sheet);background:color-mix(in srgb,var(--sheet) 88%,transparent);-webkit-backdrop-filter:blur(16px) saturate(1.4);backdrop-filter:blur(16px) saturate(1.4);border-top:1px solid var(--rule)}
+  .tabbar button{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1px;min-height:50px;border:0;background:none;color:var(--ink-soft);
+    font:inherit;font-size:11px;font-weight:700;letter-spacing:.08em;cursor:pointer}
+  .tabbar button[aria-current="page"]{color:var(--brass)}
+  .tabbar svg{width:25px;height:25px;fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
+  .tabbar button[aria-current="page"] svg{stroke-width:2.1}
+  .mini:not([hidden]){display:flex;align-items:center;gap:8px;position:fixed;left:max(12px,env(safe-area-inset-left,0px));right:max(12px,env(safe-area-inset-right,0px));
+    bottom:calc(64px + env(safe-area-inset-bottom,0px));z-index:59;padding:6px 6px 6px 14px;border-radius:14px;background:var(--ink);color:var(--paper);box-shadow:0 8px 24px var(--shadow)}
+  .mini-label{flex:1;min-width:0;border:0;background:none;color:inherit;font:inherit;font-size:13px;text-align:left;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;cursor:pointer;padding:6px 0}
+  .mini-stop{flex:none;width:40px;height:40px;border-radius:10px;border:0;background:var(--brass);color:var(--on-brass);font-size:15px;cursor:pointer}
+}
 @media (prefers-reduced-motion: reduce){*{transition:none!important}}
 </style>
 </head>
 <body>
 <div class="app">
-  <header class="top">
+  <header class="top" data-tab="week">
     <h1 class="banner">吹部日誌</h1>
     <div class="top-main">
       <p class="school" id="school">県立みなと高校 吹奏楽部</p>
@@ -289,7 +312,7 @@ tr.empty td{color:var(--ink-soft)}
   </header>
 
   <main class="grid">
-    <div class="col-stage">
+    <div class="col-stage" data-tab="play">
       <section class="stand" aria-labelledby="piece">
         <div class="stand-head">
           <div class="piece">
@@ -331,26 +354,26 @@ tr.empty td{color:var(--ink-soft)}
     </div>
 
     <div class="board">
-      <section class="panel" aria-labelledby="h-week">
+      <section class="panel" data-tab="week" aria-labelledby="h-week">
         <h2 id="h-week">今週</h2>
         <div class="week" id="week"></div>
       </section>
-      <section class="panel" aria-labelledby="h-stats">
+      <section class="panel" data-tab="week" aria-labelledby="h-stats">
         <h2 id="h-stats">部の実力 <small id="memberCount"></small></h2>
         <div class="stats" id="stats"></div>
         <div class="vitals" id="vitals"></div>
       </section>
-      <section class="panel" aria-labelledby="h-diag">
+      <section class="panel" data-tab="play" aria-labelledby="h-diag">
         <h2 id="h-diag">いまの合奏の診断 <small id="diagVenue"></small></h2>
         <div class="stats" id="diag"></div>
         <p class="diag-note" id="diagNote"></p>
       </section>
-      <section class="panel" aria-labelledby="h-interp">
+      <section class="panel" data-tab="play" aria-labelledby="h-interp">
         <h2 id="h-interp">指揮者の解釈</h2>
         <div class="interp" id="interp"></div>
         <p class="small">部の実力に見合わない解釈は、審査で「大げさ」と言われる。</p>
       </section>
-      <section class="panel" aria-labelledby="h-log">
+      <section class="panel" data-tab="log" aria-labelledby="h-log">
         <h2 id="h-log">部活日誌</h2>
         <ol class="log" id="log"></ol>
         <div class="reset-row"><button class="link" id="btnReset" type="button">最初からやり直す</button></div>
@@ -358,7 +381,7 @@ tr.empty td{color:var(--ink-soft)}
     </div>
   </main>
 
-  <section class="roster" aria-labelledby="h-roster">
+  <section class="roster" data-tab="members" aria-labelledby="h-roster">
     <div class="roster-head">
       <h2 id="h-roster">パートと部員</h2>
       <p class="small">パートを押すと、その音だけを図とチューナーで追える。部員を押すと詳しい情報が出る。</p>
@@ -367,7 +390,7 @@ tr.empty td{color:var(--ink-soft)}
     <div class="table-wrap"><table id="rosterTable"></table></div>
   </section>
 
-  <section class="lab" aria-labelledby="h-lab">
+  <section class="lab" data-tab="lab" aria-labelledby="h-lab">
     <div class="lab-head">
       <h2 id="h-lab">聴き比べラボ</h2>
       <p>ゲームの進行とは別に、39席すべてがうまった部で鳴らせます。部員の癖はそのままで、数値だけが変わります。会場と聴く位置は上のステージで切り替えられます。</p>
@@ -377,13 +400,23 @@ tr.empty td{color:var(--ink-soft)}
     <button class="btn primary" id="btnLab" type="button">▶ この設定で鳴らす</button>
   </section>
 
-  <section class="history" id="history" hidden aria-labelledby="h-hist">
+  <section class="history" id="history" data-tab="log" hidden aria-labelledby="h-hist">
     <h2 id="h-hist">部の歴史</h2>
     <ol id="histList"></ol>
   </section>
 
-  <p class="foot">曲はドヴォルザーク《新世界より》（1893年）とベートーヴェン《第九》（1824年）で、どちらもパブリックドメインです。編曲はこのページの中で楽譜データから組み立てています。楽器の音は、Versilian Studios「VSCO 2 Community Edition」（CC0）の録音、Karoryfer「Weresax」のアルトサックスの録音（tonejs-instruments 経由、CC BY 3.0）、Frank Wen「FluidR3_GM」のテナー・バリトンサックスとヴィブラフォン（midi-js-soundfonts 経由、CC BY 3.0）を使っています。E♭クラリネット・バスクラリネットはクラリネット、ユーフォニアム・バストロンボーンはトロンボーンの録音を、高さと明るさを変えて使っています。「合成」を選んだときの音は、倍音と胴の響きと息の雑音からその場で合成しています。会場の響きは、部屋の寸法と壁・床・客席の材質から pyroomacoustics で計算したものです。文字は Zen Kaku Gothic New・Klee One・Dela Gothic One・Share Tech Mono（SIL Open Font License）です。</p>
+  <p class="foot" data-tab="lab">曲はドヴォルザーク《新世界より》（1893年）とベートーヴェン《第九》（1824年）で、どちらもパブリックドメインです。編曲はこのページの中で楽譜データから組み立てています。楽器の音は、Versilian Studios「VSCO 2 Community Edition」（CC0）の録音、Karoryfer「Weresax」のアルトサックスの録音（tonejs-instruments 経由、CC BY 3.0）、Frank Wen「FluidR3_GM」のテナー・バリトンサックスとヴィブラフォン（midi-js-soundfonts 経由、CC BY 3.0）を使っています。E♭クラリネット・バスクラリネットはクラリネット、ユーフォニアム・バストロンボーンはトロンボーンの録音を、高さと明るさを変えて使っています。「合成」を選んだときの音は、倍音と胴の響きと息の雑音からその場で合成しています。会場の響きは、部屋の寸法と壁・床・客席の材質から pyroomacoustics で計算したものです。文字は Zen Kaku Gothic New・Klee One・Dela Gothic One・Share Tech Mono（SIL Open Font License）です。</p>
 </div>
+
+<!-- スマホ・タブレット縦：画面下のタブで切り替える -->
+<div class="mini" id="mini" hidden><button type="button" class="mini-label" id="miniLabel"></button><button type="button" class="mini-stop" id="miniStop" aria-label="止める">■</button></div>
+<nav class="tabbar" id="tabbar" aria-label="画面の切り替え">
+  <button type="button" data-tabgo="week"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3.5" y="5" width="17" height="15" rx="2"/><path d="M3.5 9.5h17M8 3v4M16 3v4"/></svg><span>今週</span></button>
+  <button type="button" data-tabgo="play"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 18V6l10-2v12"/><circle cx="6.5" cy="18" r="2.5"/><circle cx="16.5" cy="16" r="2.5"/></svg><span>合奏</span></button>
+  <button type="button" data-tabgo="members"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="9" cy="8" r="3.2"/><path d="M3 20c0-3.3 2.7-6 6-6s6 2.7 6 6"/><circle cx="17" cy="9" r="2.6"/><path d="M15.5 14.2c3 .2 5.5 2.6 5.5 5.8"/></svg><span>部員</span></button>
+  <button type="button" data-tabgo="log"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 5.5C4 4.7 4.7 4 5.5 4H11v16H5.5c-.8 0-1.5-.7-1.5-1.5z"/><path d="M20 5.5c0-.8-.7-1.5-1.5-1.5H13v16h5.5c.8 0 1.5-.7 1.5-1.5z"/></svg><span>日誌</span></button>
+  <button type="button" data-tabgo="lab"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h10M18 7h2M4 17h4M12 17h8"/><circle cx="16" cy="7" r="2"/><circle cx="10" cy="17" r="2"/></svg><span>ラボ</span></button>
+</nav>
 
 <script src="js/util.js"></script>
 <script src="js/instruments.js"></script>
