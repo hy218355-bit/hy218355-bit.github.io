@@ -1,0 +1,828 @@
+'use strict';
+/* 画面：ステージ・譜面台・チューナー・ホワイトボード・名簿・ラボ */
+
+const $ = s => document.querySelector(s);
+const E = new Engine();
+let S = null;
+const U = {
+  venue: 'room', pos: 'center', range: 'all', view: 'mel', sel: null, piece: null, solo: 'all',
+  shown: null, shownLabel: '', perfNow: null, diag: null, ptr: null, raf: 0, onEnd: null, playing: false,
+  lab: {pitch: 100, rhythm: 100, tone: 100, expr: 0, cohesion: 100, fam: 100}, labPreset: 1, refreshT: 0,
+};
+const UI_KEY = 'suibu-ui-v2';
+
+/* ===== 小道具 ===== */
+function tok(){
+  const cs = getComputedStyle(document.documentElement), g = n => cs.getPropertyValue(n).trim();
+  return {
+    ink: g('--ink'), soft: g('--ink-soft'), rule: g('--rule'), sheet: g('--sheet'), paper: g('--paper'), brass: g('--brass'),
+    floor: g('--floor'), floorLine: g('--floor-line'), good: g('--good'), warn: g('--warn'), bad: g('--bad'),
+    lcdInk: g('--lcd-ink'), lcdDim: g('--lcd-dim'), fBody: g('--f-body'), fLcd: g('--f-lcd'), fHand: g('--f-hand'),
+  };
+}
+function rgb(hex){
+  const h = hex.replace('#', '');
+  return [0, 2, 4].map(i => parseInt(h.slice(i, i + 2), 16));
+}
+function mix(a, b, t){
+  const x = rgb(a), y = rgb(b);
+  return `rgb(${x.map((v, i) => Math.round(v + (y[i] - v) * t)).join(',')})`;
+}
+const skillColor = (C, v) => v < 50 ? mix(C.bad, C.warn, clamp01(v / 50)) : mix(C.warn, C.good, clamp01((v - 50) / 40));
+const errColor = (C, e, wrong) => wrong ? C.bad : Math.abs(e) < 5 ? C.good : Math.abs(e) < 15 ? C.warn : C.bad;
+function fitCanvas(cv, H){
+  const W = Math.max(240, cv.parentElement.clientWidth - (cv.id === 'tuner' ? 12 : 0));
+  const dpr = Math.min(2, window.devicePixelRatio || 1);
+  cv.style.height = H + 'px';
+  if(cv.width !== Math.round(W * dpr) || cv.height !== Math.round(H * dpr)){ cv.width = Math.round(W * dpr); cv.height = Math.round(H * dpr); }
+  const g = cv.getContext('2d');
+  g.setTransform(dpr, 0, 0, dpr, 0, 0);
+  g.clearRect(0, 0, W, H);
+  return {g, W, H};
+}
+const memberById = id => S.members.find(m => m.id === id);
+const playPiece = () => U.piece || S.pieceId || 'largo';
+const avgStats = m => STAT_KEYS.reduce((a, k) => a + m.stats[k], 0) / 4;
+function rangeSpan(pid){
+  const pc = PIECES[pid];
+  if(U.range === 'all') return {from: 0, to: pc.beats};
+  return pc.spans[+U.range] || {from: 0, to: pc.beats};
+}
+const nowLabel = () => `いまの音（${S.phase === 'choose' ? '選曲前' : wkLabel(S.week)}・${VENUE[U.venue].name}）`;
+const busy = () => !!(S.pending && !S.pending.revealed);
+function saveUI(){ try{ localStorage.setItem(UI_KEY, JSON.stringify({venue: U.venue, pos: U.pos})); }catch(e){} }
+function loadUI(){ try{ const x = JSON.parse(localStorage.getItem(UI_KEY) || 'null'); if(x){ if(VENUE[x.venue]) U.venue = x.venue; if(POSITION[x.pos]) U.pos = x.pos; } }catch(e){} }
+function commit(next){ S = next; save(S); }
+
+/* ===== いまの演奏を作り直す ===== */
+function currentCtx(){
+  const pid = playPiece(), span = rangeSpan(pid);
+  return perfCtx(S, {pieceId: pid, venue: U.venue, from: span.from, to: span.to, fam: S.fam[pid] ?? 0});
+}
+function refreshNow(){
+  clearTimeout(U.refreshT);
+  U.refreshT = setTimeout(() => {
+    U.perfNow = perform(currentCtx());
+    U.diag = analyze(U.perfNow);
+    if(!U.playing){ U.shown = U.perfNow; U.shownLabel = nowLabel(); setNowPlaying(); }
+    renderDiag();
+    drawIdle();
+  }, 20);
+}
+function setNowPlaying(){
+  $('#nowPlaying').innerHTML = U.playing ? `<b>再生中</b>：${esc(U.shownLabel)}` : `表示中：${esc(U.shownLabel)}`;
+}
+
+/* ===== 再生 ===== */
+function playPerf(perf, label, onEnd){
+  const pb = E.play(perf);
+  if(!pb){ $('#nowPlaying').textContent = 'このブラウザでは音を鳴らせません。'; return; }
+  U.shown = perf; U.shownLabel = label; U.playing = true; U.onEnd = onEnd || null;
+  U.ptr = buildPtr(perf);
+  $('#btnStop').disabled = false;
+  setNowPlaying();
+  cancelAnimationFrame(U.raf);
+  const tick = () => {
+    if(!E.pb) return;
+    const t = E.now();
+    drawStage(t); drawRoll(U.shown, t); drawTuner(tunerPair(U.shown, t));
+    if(t > U.shown.total + 0.8){
+      const p = E.pb; E.pb = null; p.finish();
+      endPlay();
+      return;
+    }
+    U.raf = requestAnimationFrame(tick);
+  };
+  U.raf = requestAnimationFrame(tick);
+}
+function endPlay(){
+  U.playing = false;
+  cancelAnimationFrame(U.raf);
+  $('#btnStop').disabled = true;
+  setNowPlaying();
+  drawIdle();
+  const cb = U.onEnd; U.onEnd = null;
+  if(cb) cb();
+}
+function stopPlay(){
+  if(!U.playing) return;
+  E.stop();
+  endPlay();
+}
+function setVenue(id){
+  U.venue = id; saveUI();
+  E.setVenue(id);
+  renderVenues();
+  refreshNow();
+}
+
+/* ===== ステージ（座席） ===== */
+function stageGeom(W){
+  const H = Math.round(clamp(W * 0.5, 210, 360));
+  const R = Math.min((W / 2 - 18) / 0.78, (H - 46) / 0.92);
+  return {W, H, cx: W / 2, baseY: H - 28, R, r: clamp(R * 0.038, 6, 13)};
+}
+const seatXY = (s, G) => [G.cx + s.x * G.R, G.baseY - s.y * G.R * 0.95];
+// 席ごとに音を並べておく（ラボや昔の録音でも、座っていた席が光るように）
+function buildPtr(perf){
+  const m = {};
+  for(const n of perf.notes) (m[n.seat] ||= {mid: n.mid, notes: [], hits: [], i: 0, j: 0}).notes.push(n);
+  for(const h of perf.hits) (m[h.seat] ||= {mid: h.mid, notes: [], hits: [], i: 0, j: 0}).hits.push(h);
+  return m;
+}
+function levelAt(p, t){
+  while(p.i < p.notes.length - 1 && p.notes[p.i].t + p.notes[p.i].d < t) p.i++;
+  let lv = 0, err = 0, wrong = false;
+  const n = p.notes[p.i];
+  if(n && t >= n.t && t < n.t + n.d){ lv = interp(n.env, t - n.t); err = n.err; wrong = n.wrong; }
+  while(p.j < p.hits.length && p.hits[p.j].t <= t) p.j++;
+  const h = p.hits[p.j - 1];
+  if(h){
+    const d = h.dur || 0;
+    lv = Math.max(lv, t < h.t + d ? lerp(h.v, h.v1 ?? h.v, (t - h.t) / Math.max(0.01, d)) : h.v * Math.exp(-(t - h.t - d) / 0.35));
+  }
+  return {lv, err, wrong};
+}
+function drawStage(t = -1){
+  const cv = $('#stage');
+  const G = stageGeom(Math.max(240, cv.parentElement.clientWidth));
+  const {g, W, H} = fitCanvas(cv, G.H);
+  const C = tok();
+  // 床とひな壇
+  g.fillStyle = C.floor;
+  g.beginPath(); g.moveTo(G.cx - G.R * 0.95, G.baseY + 18); g.lineTo(G.cx - G.R * 1.0, G.baseY - G.R * 0.62);
+  g.quadraticCurveTo(G.cx, G.baseY - G.R * 1.18, G.cx + G.R * 1.0, G.baseY - G.R * 0.62); g.lineTo(G.cx + G.R * 0.95, G.baseY + 18); g.closePath(); g.fill();
+  g.strokeStyle = C.floorLine; g.lineWidth = 1;
+  for(const rr of [0.45, 0.67, 0.88]){
+    g.beginPath(); g.arc(G.cx, G.baseY, G.R * rr, Math.PI * 1.08, Math.PI * 1.92); g.stroke();
+  }
+  // 指揮台
+  g.fillStyle = C.ink; g.globalAlpha = .8;
+  g.fillRect(G.cx - 18, G.baseY + 2, 36, 12);
+  g.globalAlpha = 1; g.fillStyle = C.sheet; g.font = `700 9px ${C.fBody}`; g.textAlign = 'center'; g.textBaseline = 'middle';
+  g.fillText('指揮', G.cx, G.baseY + 8.5);
+
+  const viewSec = U.view !== 'mel' ? U.view : null;
+  const sel = U.sel && memberById(U.sel);
+  for(const s of SEATS){
+    const [x, y] = seatXY(s, G);
+    const m = S.members.find(mm => mm.seat === s.id);
+    const dim = viewSec && s.sec !== viewSec;
+    g.globalAlpha = dim ? 0.3 : 1;
+    const p = t >= 0 && U.ptr?.[s.id];
+    if(p){
+      const st = levelAt(p, t);
+      if(st.lv > 0.02){
+        const audible = E.pb ? E.pb.audible(p.mid, E.solo) : true;
+        g.fillStyle = st.wrong || Math.abs(st.err) > 15 ? C.bad : C.brass;
+        g.globalAlpha = (dim ? 0.15 : 0.22 + 0.45 * st.lv) * (audible ? 1 : 0.25);
+        g.beginPath(); g.arc(x, y, G.r + 2 + st.lv * G.r * 0.7, 0, Math.PI * 2); g.fill();
+        g.globalAlpha = dim ? 0.3 : 1;
+      }
+    }
+    if(m){
+      g.fillStyle = skillColor(C, avgStats(m));
+      g.beginPath(); g.arc(x, y, G.r, 0, Math.PI * 2); g.fill();
+      if(m.grade === 1){ g.strokeStyle = C.sheet; g.lineWidth = 1.5; g.beginPath(); g.arc(x, y, G.r - 2.5, 0, Math.PI * 2); g.stroke(); }
+    } else {
+      g.setLineDash([3, 3]); g.strokeStyle = C.soft; g.lineWidth = 1.2;
+      g.beginPath(); g.arc(x, y, G.r - 1, 0, Math.PI * 2); g.stroke(); g.setLineDash([]);
+    }
+    if(sel && sel.seat === s.id){
+      g.strokeStyle = C.ink; g.lineWidth = 3; g.globalAlpha = 1;
+      g.beginPath(); g.arc(x, y, G.r + 3.5, 0, Math.PI * 2); g.stroke();
+    }
+    if(G.r >= 10){
+      g.fillStyle = m ? '#fff' : C.soft;
+      g.font = `700 ${G.r >= 13 ? 9 : 8}px ${C.fBody}`;
+      g.fillText(s.sec === 'perc' ? 'Perc' : INST[s.inst].short.replace('Sax', 'S'), x, y + 0.5);
+    }
+    g.globalAlpha = 1;
+  }
+}
+function seatAt(ev){
+  const cv = $('#stage'), rect = cv.getBoundingClientRect();
+  const G = stageGeom(rect.width);
+  const px = ev.clientX - rect.left, py = ev.clientY - rect.top;
+  let best = null, bd = Infinity;
+  for(const s of SEATS){
+    const [x, y] = seatXY(s, G);
+    const d = Math.hypot(x - px, y - py);
+    if(d < bd){ bd = d; best = s; }
+  }
+  return bd < G.r * 1.6 ? best : null;
+}
+
+/* ===== 譜面台（音の見える化） ===== */
+function viewNotes(perf){
+  if(U.view === 'mel') return perf.notes.filter(n => n.role === 'mel');
+  return perf.notes.filter(n => n.sec === U.view);
+}
+function viewHits(perf){
+  if(U.view === 'mel') return perf.hits.filter(h => h.role === 'mel');
+  return perf.hits.filter(h => h.sec === U.view);
+}
+function drawRoll(perf, t = -1){
+  const {g, W, H} = fitCanvas($('#roll'), 260);
+  const C = tok();
+  if(!perf) return;
+  const notes = viewNotes(perf), hits = viewHits(perf);
+  const L = 38, Rm = 8;
+  const X = s => L + (W - L - Rm) * s / perf.total;
+  const MA = {y: 20, h: 168}, DY = {y: 200, h: 52};
+  const ms = [...notes.map(n => n.midi), ...hits.filter(h => h.midi != null).map(h => h.midi)];
+  let lo = ms.length ? Math.min(...ms) - 1.5 : 60, hi = ms.length ? Math.max(...ms) + 1.5 : 72;
+  if(hi - lo < 10){ const c = (hi + lo) / 2; lo = c - 5; hi = c + 5; }
+  const Y = m => MA.y + MA.h - (m - lo) / (hi - lo) * MA.h;
+  const EX = Math.min(2.5, 40 / (hi - lo));
+  g.textBaseline = 'middle'; g.font = `500 10px ${C.fBody}`; g.lineWidth = 1;
+  for(let m = Math.ceil(lo); m <= hi; m++){
+    if(m % 12 !== 0 && (hi - lo) > 18) continue;
+    g.strokeStyle = C.rule; g.globalAlpha = m % 12 === 0 ? 1 : 0.5;
+    g.beginPath(); g.moveTo(L, Math.round(Y(m)) + .5); g.lineTo(W - Rm, Math.round(Y(m)) + .5); g.stroke();
+    g.globalAlpha = 1;
+    if(m % 12 === 0 || (hi - lo) <= 18 && [0, 2, 4, 5, 7, 9, 11].includes(((m - PIECES[perf.pieceId].trans) % 12 + 12) % 12)){
+      g.fillStyle = C.soft; g.textAlign = 'left'; g.fillText(NAME_DE[m % 12] + (m % 12 === 0 ? Math.floor(m / 12) - 1 : ''), 2, Y(m));
+    }
+  }
+  perf.bars.forEach((s, i) => {
+    const x = Math.round(X(s)) + .5;
+    g.strokeStyle = C.rule;
+    g.beginPath(); g.moveTo(x, MA.y - 6); g.lineTo(x, DY.y + DY.h); g.stroke();
+    if(i < perf.bars.length - 1){ g.fillStyle = C.soft; g.textAlign = 'left'; g.fillText(String(Math.round(perf.from / 4) + i + 1), x + 3, MA.y - 11); }
+  });
+  g.fillStyle = C.soft; g.textAlign = 'left'; g.fillText('抑揚', 2, DY.y + 8);
+  g.strokeStyle = C.rule; g.beginPath(); g.moveTo(L, DY.y + DY.h + .5); g.lineTo(W - Rm, DY.y + DY.h + .5); g.stroke();
+
+  const selId = U.sel;
+  const bh = clamp(MA.h / (hi - lo) * 0.7, 3, 8);
+  for(const n of notes){
+    const x0 = X(n.t), w = Math.max(2, X(n.t + n.d) - x0), y = Y(n.midi + (n.wrong ? 0 : n.err) * EX / 100);
+    g.fillStyle = errColor(C, n.err, n.wrong);
+    g.globalAlpha = selId && n.mid !== selId ? 0.35 : 0.8;
+    rrect(g, x0, y - bh / 2, w, bh, Math.min(3, bh / 2)); g.fill();
+    if(n.crack){
+      g.globalAlpha = 1; g.fillStyle = C.bad;
+      g.beginPath(); g.moveTo(x0, y - bh / 2 - 2); g.lineTo(x0 + 6, y - bh / 2 - 9); g.lineTo(x0 - 3, y - bh / 2 - 9); g.closePath(); g.fill();
+    }
+  }
+  for(const h of hits){
+    const x = X(h.t), y = h.midi != null ? Y(h.midi) : MA.y + MA.h * 0.5;
+    g.globalAlpha = selId && h.mid !== selId ? 0.35 : 0.85;
+    g.fillStyle = h.wrong ? C.bad : C.brass;
+    if(h.roll){ rrect(g, x, y - 3, Math.max(3, X(h.t + h.dur) - x), 6, 3); g.fill(); }
+    else { g.beginPath(); g.arc(x, y, 2.5 + h.v * 3, 0, Math.PI * 2); g.fill(); }
+  }
+  g.globalAlpha = 1;
+
+  // 抑揚：実際の強さ（実線）と、指揮者の理想（点線）
+  const yD = v => DY.y + DY.h - v * DY.h;
+  g.font = `italic 600 11px ${C.fHand}`; g.fillStyle = C.soft; g.textAlign = 'right';
+  for(const [v, nm] of [[.8, 'f'], [.5, 'mf'], [.2, 'p']]) g.fillText(nm, L - 4, yD(v));
+  if(U.view === 'mel'){
+    g.strokeStyle = C.brass; g.lineWidth = 1.5; g.setLineDash([4, 4]);
+    g.beginPath(); perf.ideal.forEach(([s, v], i) => i ? g.lineTo(X(s), yD(v)) : g.moveTo(X(s), yD(v))); g.stroke();
+    g.setLineDash([]);
+  }
+  g.strokeStyle = C.ink; g.lineWidth = 2;
+  g.beginPath();
+  let pen = false;
+  for(let s = 0; s <= perf.total; s += 0.2){
+    let sum = 0, k = 0;
+    for(const n of notes){ if(s >= n.t && s < n.t + n.d){ sum += interp(n.env, s - n.t); k++; } }
+    if(k){ const y = yD(sum / k); pen ? g.lineTo(X(s), y) : g.moveTo(X(s), y); pen = true; } else pen = false;
+  }
+  g.stroke();
+  if(t >= 0){
+    const x = X(Math.min(t, perf.total));
+    g.strokeStyle = C.brass; g.lineWidth = 2;
+    g.beginPath(); g.moveTo(x, MA.y - 14); g.lineTo(x, DY.y + DY.h); g.stroke();
+  }
+}
+function rrect(g, x, y, w, h, r){
+  r = Math.min(r, w / 2, h / 2);
+  g.beginPath(); g.moveTo(x + r, y); g.arcTo(x + w, y, x + w, y + h, r); g.arcTo(x + w, y + h, x, y + h, r);
+  g.arcTo(x, y + h, x, y, r); g.arcTo(x, y, x + w, y, r); g.closePath();
+}
+
+/* ===== チューナー ===== */
+function centsAt(n, x){
+  if(n.crack && x < n.crackDur + 0.02) return n.cents + n.crack;
+  const x0 = n.crack ? n.crackDur + 0.02 : 0;
+  const from = n.cents + (n.crack ? n.scoop * 0.4 : n.scoop);
+  const xs = x0 + n.settle;
+  let v = x < xs ? from + (n.cents - from) * (x - x0) / n.settle : n.cents;
+  if(Math.abs(n.sag) > 3 && n.d > 0.5){ if(x > n.d * 0.85) v = n.cents + n.sag; else if(x > n.d * 0.6) v = n.cents + n.sag * 0.45; }
+  if(n.vib > 0.5 && n.d > 0.6){ const on = Math.min(0.35, n.d * 0.3); if(x > on) v += n.vib * Math.min(1, (x - on) / 0.4) * Math.sin(2 * Math.PI * 5.2 * x); }
+  return v;
+}
+function tunerPair(perf, t){
+  if(!perf || t < 0) return null;
+  const act = viewNotes(perf).filter(n => t >= n.t && t < n.t + n.d);
+  if(!act.length) return null;
+  const groups = {};
+  for(const n of act) (groups[n.midi] ||= []).push(n);
+  const best = Object.values(groups).sort((a, b) => b.length - a.length)[0];
+  const n1 = best[0], n2 = best.find(n => n.mid !== n1.mid);
+  return {n1, n2, c1: centsAt(n1, t - n1.t), c2: n2 ? centsAt(n2, t - n2.t) : null};
+}
+function drawTuner(a){
+  const {g, W, H} = fitCanvas($('#tuner'), 124);
+  const C = tok();
+  const cx = W / 2, cy = H - 10, R = Math.min(W / 2 - 34, H - 30);
+  const ang = c => (-90 + clamp(c, -50, 50) * 0.9) * Math.PI / 180;
+  for(let c = -50; c <= 50; c += 5){
+    const a = ang(c), r0 = R - (c % 10 === 0 ? 12 : 6);
+    g.strokeStyle = c === 0 ? C.lcdInk : C.lcdDim; g.lineWidth = c === 0 ? 2 : 1.2;
+    g.beginPath(); g.moveTo(cx + Math.cos(a) * r0, cy + Math.sin(a) * r0); g.lineTo(cx + Math.cos(a) * R, cy + Math.sin(a) * R); g.stroke();
+  }
+  g.fillStyle = C.lcdDim; g.font = `11px ${C.fLcd}`; g.textAlign = 'center'; g.textBaseline = 'middle';
+  for(const c of [-50, 50]){ const a = ang(c); g.fillText(c > 0 ? '+50' : '-50', cx + Math.cos(a) * (R + 14), cy + Math.sin(a) * (R + 14) + 4); }
+  g.fillText('0', cx, cy - R - 10);
+  const needle = (c, width, len, alpha) => {
+    const a = ang(c ?? 0);
+    g.globalAlpha = c == null ? 0.25 : alpha;
+    g.strokeStyle = C.lcdInk; g.lineWidth = width; g.lineCap = 'round';
+    g.beginPath(); g.moveTo(cx, cy); g.lineTo(cx + Math.cos(a) * len, cy + Math.sin(a) * len); g.stroke();
+    g.globalAlpha = 1;
+  };
+  needle(a?.c2, 1.5, R * 0.86, 0.75);
+  needle(a?.c1, 3, R - 2, 1);
+  g.fillStyle = C.lcdInk; g.beginPath(); g.arc(cx, cy, 4, 0, Math.PI * 2); g.fill();
+  const midi = a?.n1?.midi;
+  g.textAlign = 'left';
+  g.font = `30px ${C.fLcd}`; g.fillStyle = a ? C.lcdInk : C.lcdDim;
+  g.fillText(midi != null ? NAME_DE[midi % 12] : 'B', 10, 26);
+  g.font = `11px ${C.fLcd}`; g.fillText('A4=442Hz', 10, 50);
+  const fmt = c => c == null ? '  --' : `${c >= 0 ? '+' : '-'}${String(Math.round(Math.abs(c))).padStart(3, ' ')}`;
+  const who = n => n ? (memberById(n.mid)?.name.split(' ')[0] || INST[n.inst].short) : '';
+  g.textAlign = 'right'; g.font = `14px ${C.fLcd}`; g.fillStyle = C.lcdInk;
+  g.fillText(`${fmt(a?.c1)}c`, W - 10, 18);
+  g.fillText(`${fmt(a?.c2)}c`, W - 10, 36);
+  g.font = `500 11px ${C.fBody}`;
+  g.fillText(a ? `${who(a.n1)}${a.n2 ? '・' + who(a.n2) : ''}` : '', W - 64, 27);
+  let beat = '';
+  if(a?.n1 && a?.n2){
+    const f = mtof(a.n1.midi);
+    const hz = Math.abs(f * Math.pow(2, a.c1 / 1200) - f * Math.pow(2, a.c2 / 1200));
+    beat = hz < 0.8 ? 'うなり ほぼなし' : `うなり ${hz.toFixed(1)}回/秒`;
+  }
+  g.font = `500 12px ${C.fBody}`;
+  g.fillText(beat, W - 10, 56);
+}
+function drawIdle(){
+  if(U.playing) return;
+  drawStage(-1);
+  drawRoll(U.shown, -1);
+  drawTuner(null);
+}
+
+/* ===== 上部：カレンダー・曲・会場 ===== */
+function seasonEnd(){
+  const qualified = lvl => S.season.some(r => r.level === lvl && r.rep);
+  if(qualified('block') || S.week > BLOCK_WEEK) return NATIONAL_WEEK;
+  if(qualified('pref') || S.week > PREF_WEEK) return BLOCK_WEEK;
+  return PREF_WEEK;
+}
+function renderHeader(){
+  $('#school').textContent = `県立みなと高校 吹奏楽部　${S.year}年度`;
+  const ol = $('#cal');
+  ol.innerHTML = '';
+  const last = seasonEnd();
+  for(let w = 0; w <= last; w++){
+    const li = document.createElement('li');
+    const ev = EVENTS[w];
+    if(ev?.kind === 'contest'){ li.className = 'contest'; li.textContent = {pref: '県', block: '支部', national: '全国'}[ev.level]; }
+    else if(ev?.kind === 'concert') li.classList.add('show');
+    else if(ev) li.classList.add('ev');
+    if(S.phase !== 'choose' && w < S.week) li.classList.add('done');
+    if(S.phase === 'week' && w === S.week) li.classList.add('now');
+    if(S.phase === 'end' && w > S.week) li.classList.add('later');
+    li.title = wkLabel(w) + (ev ? `：${ev.title}` : '');
+    if(w % 4 === 0){ const mo = document.createElement('span'); mo.className = 'mo'; mo.textContent = `${wkMonth(w)}月`; li.appendChild(mo); }
+    ol.appendChild(li);
+  }
+  if(S.phase === 'choose'){ $('#weekNow').textContent = `${S.year}年 4月・選曲会議`; $('#weeksLeft').textContent = '県大会まで16週'; return; }
+  if(S.phase === 'end'){ $('#weekNow').textContent = `${S.year}年度のコンクールが終わった`; $('#weeksLeft').textContent = ''; return; }
+  $('#weekNow').textContent = wkLabel(S.week);
+  let nx = null;
+  for(let w = S.week; w <= last; w++){ const ev = EVENTS[w]; if(ev && (ev.kind === 'concert' || ev.kind === 'contest')){ nx = [w, ev]; break; } }
+  $('#weeksLeft').textContent = nx ? (nx[0] === S.week ? `今週は本番：${nx[1].title}` : `次の本番「${nx[1].title}」まで${nx[0] - S.week}週`) : '';
+}
+function renderPiece(){
+  const pid = playPiece(), pc = PIECES[pid];
+  $('#pieceEyebrow').textContent = S.phase === 'choose' ? '試しに聴く曲' : pid === S.pieceId ? '自由曲' : 'もう1曲（初見で吹いてみる）';
+  $('#piece').textContent = pc.full;
+  $('#pieceMeta').textContent = `${pc.composer}｜${pc.key}｜♩=${pc.tempi[S.interp.tempo]}｜問われる力：${pc.asks}`;
+  $('#pieceSel').innerHTML = PIECE_IDS.map(id => `<button type="button" data-piece="${id}" aria-pressed="${id === pid}">${PIECES[id].title}</button>`).join('');
+  $('#rangeSel').innerHTML = `<option value="all">全部</option>` + pc.spans.map((sp, i) => `<option value="${i}">${sp.name}</option>`).join('');
+  $('#rangeSel').value = U.range;
+}
+function renderVenues(){
+  $('#venueSel').innerHTML = VENUES.map(v => `<button type="button" data-venue="${v.id}" aria-pressed="${v.id === U.venue}">${v.name}</button>`).join('');
+  const v = VENUE[U.venue];
+  $('#venueDesc').innerHTML = `<b>${v.name}</b>（${v.size}・残響 約${v.rt.toFixed(1)}秒）${v.desc}`;
+  $('#posSel').innerHTML = POSITIONS.map(p => `<option value="${p.id}">${p.name}</option>`).join('');
+  $('#posSel').value = U.pos;
+}
+function renderSelectors(){
+  const recs = S.recs.slice().reverse();
+  $('#recSel').innerHTML = recs.length ? recs.map(r => `<option value="${r.id}">${esc(r.label)}（${VENUE[r.venue].name}）</option>`).join('') : '<option value="">録音はまだない</option>';
+  $('#btnRec').disabled = !recs.length;
+  const sel = U.sel && memberById(U.sel);
+  $('#soloSel').innerHTML = `<option value="all">全員</option>` + SECTIONS.map(s => `<option value="sec:${s.id}">${s.name}だけ</option>`).join('')
+    + (sel ? `<option value="member:${sel.id}">${esc(sel.name)}だけ</option>` : '');
+  if(![...$('#soloSel').options].some(o => o.value === U.solo)) U.solo = 'all';
+  $('#soloSel').value = U.solo;
+  $('#viewSel').innerHTML = `<option value="mel">旋律（メロディを吹いている全員）</option>` + SECTIONS.map(s => `<option value="${s.id}">${s.name}パート</option>`).join('');
+  $('#viewSel').value = U.view;
+  $('#viewTitle').textContent = U.view === 'mel' ? '旋律を吹いている部員の音' : `${SEC[U.view].name}パートの音`;
+}
+function applySolo(){
+  const [type, id] = U.solo.split(':');
+  E.setSolo(type === 'all' ? {type: 'all'} : {type: type === 'sec' ? 'sec' : 'member', id});
+}
+
+/* ===== ホワイトボード ===== */
+function statRow(name, v, desc, delta, cls){
+  return `<div class="stat"><span class="nm">${name}</span><span class="track"><span class="fill${cls ? ' ' + cls : ''}" style="width:${clamp(v, 0, 100)}%"></span></span><span class="val">${Math.round(v)}</span><span class="ds">${desc}${delta ? `<span class="delta">+${delta}</span>` : ''}</span></div>`;
+}
+function renderStats(){
+  const ms = seated(S);
+  $('#memberCount').textContent = `${ms.length}人／39席`;
+  const d = S.lastDelta || {};
+  const pid = S.pieceId || playPiece();
+  $('#stats').innerHTML = STAT_KEYS.map(k => statRow(STAT_LABEL[k], bandAvg(S, k), STAT_DESC[k], d[k] > 0 ? d[k].toFixed(1) : '')).join('')
+    + statRow('まとまり', S.cohesion, '互いを聴き合う力。合奏・ハーモニー練習で育つ', d.coh > 0 ? d.coh.toFixed(1) : '')
+    + statRow('仕上がり', S.fam[pid] ?? 0, `${PIECES[pid].title}の譜読みと曲づくり。低いと音を間違える`, d.fam > 0 ? d.fam.toFixed(1) : '');
+  const vital = (nm, v) => {
+    const c = v >= 60 ? 'good' : v >= 30 ? 'warn' : 'bad';
+    return `<div class="vital"><span class="row"><span>${nm}</span><b>${Math.round(v)}</b></span><span class="track"><span class="fill ${c}" style="width:${clamp(v, 0, 100)}%"></span></span></div>`;
+  };
+  $('#vitals').innerHTML = vital('体力', S.stamina) + vital('やる気', S.morale) + vital('会場慣れ', S.hallExp);
+}
+function renderDiag(){
+  const a = U.diag;
+  $('#diagVenue').textContent = `${VENUE[U.venue].name}・${PIECES[playPiece()].title}`;
+  if(!a){ $('#diag').innerHTML = ''; return; }
+  const desc = {
+    pitch: `平均のずれ ${a.pitchDev.toFixed(1)}セント・ユニゾンのばらつき ${a.spread.toFixed(1)}`,
+    rhythm: `出だしのずれ 平均${Math.round(a.rhythmMs)}ミリ秒・テンポの流れ ${(a.drift * 100).toFixed(1)}%`,
+    tone: `音の裏返り ${a.cracks}回`,
+    expr: '強弱とテンポの揺れが、指揮者の解釈どおりに出ているか',
+    balance: `旋律と伴奏の音量差 ${a.balanceDb >= 0 ? '+' : ''}${a.balanceDb.toFixed(1)}dB`,
+  };
+  $('#diag').innerHTML = Object.keys(DIM_LABEL).map(k => {
+    const v = a.score[k], c = v >= 70 ? 'good' : v >= 45 ? 'warn' : 'bad';
+    return statRow(DIM_LABEL[k], v, desc[k], '', c);
+  }).join('');
+  const dims = Object.keys(DIM_LABEL);
+  const weak = dims.reduce((x, y) => a.score[x] <= a.score[y] ? x : y);
+  const strong = dims.reduce((x, y) => a.score[x] >= a.score[y] ? x : y);
+  const notes = [];
+  if(a.score[weak] < 72) notes.push(commentFor(weak, a, false));
+  if(a.score[strong] >= 70) notes.push(commentFor(strong, a, true));
+  if(a.wrong) notes.push(`まだ譜読みが終わっておらず、${a.wrong}か所で音を間違えている。`);
+  $('#diagNote').textContent = notes.join(' ') || '大きな問題はない。ここからは細部の磨き込み。';
+}
+function moodText(n){
+  return n <= 3 ? 'みんな落ち着いている。いつもどおり吹けそうだ。' : n <= 6 ? '少し緊張している。本番では実力より少し下がりそうだ。' : '緊張と不安で、本番は実力を出しきれないかもしれない。';
+}
+function renderWeek(){
+  const w = $('#week'), ev = EVENTS[S.week];
+  const head = $('#h-week');
+  if(S.phase === 'choose'){
+    head.textContent = '選曲会議';
+    w.innerHTML = `<p class="small">コンクールの自由曲を決めよう。試しに聴くと、まだ譜読みをしていない状態の音が聞ける。</p>`
+      + PIECE_IDS.map(id => { const pc = PIECES[id]; return `<div class="pcard"><h3>${pc.full}</h3><p>${pc.composer}｜${pc.key}｜問われる力：${pc.asks}</p><p>${pc.desc}</p><div class="row"><button class="btn small" type="button" data-act="preview" data-pid="${id}">▶ 試しに聴く</button><button class="btn small primary" type="button" data-act="choose" data-pid="${id}">この曲に決める</button></div></div>`; }).join('');
+    return;
+  }
+  if(S.phase === 'end'){
+    head.textContent = `${S.year}年度のおわり`;
+    const nm = {gold: '金賞', silver: '銀賞', bronze: '銅賞'};
+    const res = S.season.map(r => `<li>${LEVELS[r.level].name}　${nm[r.award]}${r.rep ? '・代表' : ''}（平均${r.avg}点）</li>`).join('');
+    const seniors = S.members.filter(m => m.grade === 3);
+    const april = S.recs.find(r => r.year === S.year && r.keep && r.week === 0);
+    const lastStage = S.recs.slice().reverse().find(r => r.year === S.year && r.result);
+    w.innerHTML = `<div class="stagecard"><h3>3年生が引退します</h3><ol class="small" style="padding-left:1.2em">${res}</ol>
+      <p class="txt">${seniors.map(m => esc(m.name)).join('、')}（${seniors.length}人）が引退する。4月の録音と最後の本番を聴き比べてみよう。</p>
+      <div class="transport">${april ? `<button class="btn small" type="button" data-act="playrec" data-id="${april.id}">▶ 4月の録音</button>` : ''}${lastStage ? `<button class="btn small" type="button" data-act="playrec" data-id="${lastStage.id}">▶ 最後の本番</button>` : ''}<button class="btn small primary" type="button" data-act="newyear">次の年度へ</button></div></div>`;
+    return;
+  }
+  head.textContent = `${wkLabel(S.week)}`;
+  if(S.pending) return renderStageResult(w, ev);
+  if(ev && (ev.kind === 'concert' || ev.kind === 'contest')){
+    const n = nervesFor(S, ev), v = VENUE[ev.venue];
+    w.innerHTML = `<div class="stagecard"><span class="tag">${ev.kind === 'contest' ? 'コンクール' : '本番'}</span><h3>${ev.title}</h3>
+      <p class="small">会場：${v.name}（残響 約${v.rt.toFixed(1)}秒）。${v.desc}</p>
+      ${ev.text ? `<p class="txt">${ev.text}</p>` : ''}
+      <p class="txt">${moodText(n)}（緊張 −${n}）${v.play.hall ? `会場慣れ ${Math.round(S.hallExp)}。` : ''}</p>
+      <button class="btn primary" type="button" data-act="stage">本番の演奏をはじめる</button></div>`;
+    return;
+  }
+  if(ev?.kind === 'forced'){
+    w.innerHTML = `<div class="event"><span class="tag">${ev.title}</span><span>${ev.text}</span></div><div class="menu"><button class="mbtn wide" type="button" data-act="test"><b>テスト勉強に集中する</b><span>1週すすむ・体力が回復</span></button></div>`;
+    return;
+  }
+  if(ev?.kind === 'assign' && S.recruits){
+    const map = autoAssign(S);
+    const free = FILL_ORDER.filter(id => !S.members.some(m => m.seat === id));
+    w.innerHTML = `<div class="event"><span class="tag">${ev.title}</span><span>${ev.text}</span></div>
+      <div class="assign">${S.recruits.map(r => `<div class="row"><span class="who">${esc(r.name)}<small>希望：${INST[r.hope].name}${r.exp ? '・中学で経験あり' : '・初心者'}${r.trait ? '・' + TRAITS[r.trait].name : ''}</small></span>
+        <select id="as-${r.id}" aria-label="${esc(r.name)}の担当"><option value="">控え（席なし）</option>${free.map(id => `<option value="${id}"${map[r.id] === id ? ' selected' : ''}>${PART_LABEL[SEAT[id].part]}</option>`).join('')}</select></div>`).join('')}</div>
+      <p class="small" id="assignErr"></p>
+      <button class="btn primary" type="button" data-act="assign">この担当で決める</button>`;
+    return;
+  }
+  const parts = [];
+  if(ev) parts.push(`<div class="event"><span class="tag">${ev.title}</span><span>${ev.text}</span></div>`);
+  parts.push(`<div class="focus"><span>重点を置くパート（そのパートの伸びが1.6倍、ほかは少し下がる）</span><div class="chips">
+    <button class="chip" type="button" data-focus="" aria-pressed="${!S.focus}">なし</button>${SECTIONS.map(s => `<button class="chip" type="button" data-focus="${s.id}" aria-pressed="${S.focus === s.id}">${s.name}</button>`).join('')}</div></div>`);
+  const cm = ev?.costMult || 1;
+  parts.push(`<div class="menu">${MENU.filter(m => !m.from || S.week >= m.from).map(m => `<button class="mbtn${m.id === 'rest' ? ' rest' : ''}" type="button" data-menu="${m.id}"><b>${m.name}</b><span>${m.hint}</span><span class="cost">体力 ${m.cost > 0 ? '−' + Math.round(m.cost * cm) : '+' + (-m.cost)}</span></button>`).join('')}</div>`);
+  if(S.stamina < 30) parts.push(`<p class="small">体力が30を切っている。練習の効果が半分になる。</p>`);
+  w.innerHTML = parts.join('');
+}
+function renderStageResult(w, ev){
+  const p = S.pending;
+  if(!p.revealed){
+    w.innerHTML = `<div class="stagecard"><span class="tag">${ev.kind === 'contest' ? 'コンクール' : '本番'}</span><h3>${ev.title}</h3><p class="txt">ステージで演奏中…</p><button class="btn" type="button" data-act="reveal">結果を見る</button></div>`;
+    return;
+  }
+  if(p.kind === 'concert'){
+    w.innerHTML = `<div class="stagecard"><span class="tag">本番</span><h3>${ev.title}</h3><p class="small">演奏の出来 ${Math.round(p.q)}点（緊張 −${p.nerves}）</p><p class="txt">${esc(p.text)}</p>
+      <div class="transport"><button class="btn small" type="button" data-act="playrec" data-id="${p.recId}">▶ もう一度聴く</button><button class="btn primary" type="button" data-act="next">次の週へ</button></div></div>`;
+    return;
+  }
+  const j = p.judge, L = LEVELS[j.level];
+  const nm = {gold: '金賞', silver: '銀賞', bronze: '銅賞'}[j.award];
+  const headTxt = j.rep ? `${L.rep}への代表に選ばれた！` : j.award === 'gold' && L.rep ? '金賞。でも代表には届かなかった（ダメ金）。' : j.award === 'gold' ? '全国大会で金賞。' : j.award === 'silver' ? '銀賞。手応えはあった。' : '銅賞。来年こそ。';
+  w.innerHTML = `<div class="result" style="--award:var(--${j.award})">
+    <div class="award"><span class="stamp">${nm}</span><div><b>${headTxt}</b><p class="small">${L.name}・審査員平均 ${j.avg.toFixed(1)}点・緊張 −${p.nerves}</p></div></div>
+    <ol class="judges">${j.judges.map(x => `<li><span class="grade">${x.grade}</span><p class="cmt"><small>${esc(x.name)}・${x.score}点</small>${esc(x.comment)}</p></li>`).join('')}</ol>
+    <div class="transport"><button class="btn small" type="button" data-act="playrec" data-id="${p.recId}">▶ 本番の録音</button><button class="btn primary" type="button" data-act="next">${j.rep ? '次の大会に向けて練習を続ける' : 'シーズンを終える'}</button></div></div>`;
+}
+function renderInterp(){
+  const pc = PIECES[playPiece()];
+  const rows = [
+    ['tempo', 'テンポ', [0, 1, 2].map(i => `${INTERP_NAMES.tempo[i]} ♩=${pc.tempi[i]}`)],
+    ['dyn', '抑揚の幅', INTERP_NAMES.dyn],
+    ['rub', 'テンポの揺れ', INTERP_NAMES.rub],
+  ];
+  const lock = busy();
+  $('#interp').innerHTML = rows.map(([k, nm, labels]) => `<div class="row"><span>${nm}</span><div class="seg" role="group" aria-label="${nm}">${labels.map((l, i) => `<button type="button" data-interp="${k}:${i}" aria-pressed="${S.interp[k] === i}"${lock ? ' disabled' : ''}>${l}</button>`).join('')}</div></div>`).join('');
+}
+function renderLog(){
+  $('#log').innerHTML = S.log.slice().reverse().slice(0, 80)
+    .map(e => `<li><time>${e.y !== S.year ? e.y + ' ' : ''}${wkShort(e.w)}</time><span>${esc(e.text)}</span></li>`).join('');
+}
+
+/* ===== 部員カード・名簿 ===== */
+function renderMemberCard(){
+  const card = $('#memberCard');
+  const m = U.sel && memberById(U.sel);
+  if(!m){ card.hidden = true; return; }
+  card.hidden = false;
+  const seat = m.seat && SEAT[m.seat];
+  const tr = m.trait && TRAITS[m.trait];
+  const seats = SEATS.filter(s => s.id !== m.seat).map(s => {
+    const o = S.members.find(x => x.seat === s.id);
+    return `<option value="${s.id}">${PART_LABEL[s.part]}${o ? `（${esc(o.name)}と交代）` : '（空席）'}</option>`;
+  }).join('');
+  card.innerHTML = `<div class="mc-head"><h3>${esc(m.name)}</h3>${m.title ? `<span class="tag">${m.title}</span>` : ''}<span class="sub">${m.grade}年・${seat ? PART_LABEL[seat.part] : '控え（席なし）'}</span></div>
+    ${tr ? `<p class="mc-trait">癖：${tr.name}。${tr.desc}</p>` : '<p class="mc-trait">目立った癖はない。</p>'}
+    <div class="stats">${STAT_KEYS.map(k => statRow(STAT_LABEL[k], m.stats[k], STAT_DESC[k], '')).join('')}</div>
+    <div class="mc-actions">
+      ${seat ? `<button class="btn small" type="button" data-mact="solo">この人だけ聴く</button><button class="btn small" type="button" data-mact="secsolo">パートだけ聴く</button>` : ''}
+      <button class="btn small quiet" type="button" data-mact="all">全員で聴く</button>
+    </div>
+    <div class="mc-actions"><label class="small" for="moveSel">席を移す</label><select id="moveSel"><option value="">控え（席なし）</option>${seats}</select><button class="btn small" type="button" data-mact="move"${busy() ? ' disabled' : ''}>移す</button></div>
+    <p class="small">楽器が変わると、その楽器での音程と音色は基礎からやり直しになる。</p>`;
+}
+function renderRoster(){
+  $('#secGrid').innerHTML = SECTIONS.map(s => {
+    const ms = secMembers(S, s.id), seats = SEATS.filter(x => x.sec === s.id).length;
+    const av = k => ms.length ? ms.reduce((a, m) => a + m.stats[k], 0) / ms.length : 0;
+    return `<button class="sec-tile" type="button" data-sec="${s.id}" aria-pressed="${U.view === s.id}"><b>${s.name}</b>
+      <span class="bars">${STAT_KEYS.map(k => `<i title="${STAT_LABEL[k]} ${Math.round(av(k))}"><span style="height:${av(k)}%"></span></i>`).join('')}</span>
+      <small>${ms.length}/${seats}人・音程 リズム 音色 表現</small></button>`;
+  }).join('');
+  const rows = [];
+  for(const sec of SECTIONS){
+    rows.push(`<tr class="sec-row"><td colspan="8">${sec.name}</td></tr>`);
+    for(const s of SEATS.filter(x => x.sec === sec.id)){
+      const m = S.members.find(x => x.seat === s.id);
+      if(!m){ rows.push(`<tr class="empty"><td>空席</td><td></td><td>${PART_LABEL[s.part]}</td><td colspan="5"></td></tr>`); continue; }
+      rows.push(memberRow(m, PART_LABEL[s.part]));
+    }
+  }
+  const bench = S.members.filter(m => !m.seat);
+  if(bench.length){
+    rows.push(`<tr class="sec-row"><td colspan="8">控え</td></tr>`);
+    for(const m of bench) rows.push(memberRow(m, '席なし'));
+  }
+  $('#rosterTable').innerHTML = `<thead><tr><th>名前</th><th>学年</th><th>担当</th><th>音程</th><th>リズム</th><th>音色</th><th>表現</th><th>癖</th></tr></thead><tbody>${rows.join('')}</tbody>`;
+}
+function memberRow(m, part){
+  const C = tok();
+  return `<tr class="mem${U.sel === m.id ? ' sel' : ''}" data-mid="${m.id}"><td>${esc(m.name)}${m.title ? ` <span class="tag">${m.title}</span>` : ''}</td><td>${m.grade}年</td><td>${part}</td>`
+    + STAT_KEYS.map(k => `<td class="num" style="color:${skillColor(C, m.stats[k])}">${Math.round(m.stats[k])}</td>`).join('')
+    + `<td>${m.trait ? TRAITS[m.trait].name : ''}</td></tr>`;
+}
+function renderHistory(){
+  const h = S.history || [];
+  $('#history').hidden = !h.length;
+  const nm = {gold: '金賞', silver: '銀賞', bronze: '銅賞'};
+  $('#histList').innerHTML = h.map(x => `<li>${x.year}年度　${esc(x.piece)}　${x.results.map(r => `${LEVELS[r.level].name} ${nm[r.award]}${r.rep ? '（代表）' : ''}`).join(' → ') || '出場なし'}</li>`).join('');
+}
+
+/* ===== ラボ ===== */
+const LAB_PRESETS = [
+  {name: '入部直後', st: {pitch: 12, rhythm: 18, tone: 10, expr: 4, cohesion: 15, fam: 10}},
+  {name: '正確だけど棒読み', st: {pitch: 100, rhythm: 100, tone: 100, expr: 0, cohesion: 100, fam: 100}},
+  {name: '気持ちだけ先走り', st: {pitch: 25, rhythm: 30, tone: 35, expr: 90, cohesion: 40, fam: 70}},
+  {name: '金管だけうまい', st: {pitch: 25, rhythm: 30, tone: 25, expr: 30, cohesion: 60, fam: 80}, special: s => ['tp', 'hn', 'tb', 'low'].includes(s.sec) && s.inst !== 'cb' ? 90 : null},
+  {name: '低音が弱い', st: {pitch: 85, rhythm: 85, tone: 85, expr: 80, cohesion: 70, fam: 90}, special: s => s.sec === 'low' ? 15 : null},
+  {name: '全国大会レベル', st: {pitch: 100, rhythm: 100, tone: 100, expr: 100, cohesion: 100, fam: 100}},
+];
+const LAB_KEYS = [['pitch', '音程'], ['rhythm', 'リズム'], ['tone', '音色'], ['expr', '表現'], ['cohesion', 'まとまり'], ['fam', '仕上がり']];
+function renderLab(){
+  $('#presets').innerHTML = LAB_PRESETS.map((p, i) => `<button class="chip" type="button" data-p="${i}" aria-pressed="${U.labPreset === i}">${p.name}</button>`).join('');
+  $('#sliders').innerHTML = LAB_KEYS.map(([k, nm]) => `<div class="sl"><label for="lab-${k}">${nm}<output id="out-${k}" for="lab-${k}">${U.lab[k]}</output></label><input type="range" id="lab-${k}" min="0" max="100" step="1" value="${U.lab[k]}"></div>`).join('');
+}
+function labPerf(){
+  const pid = playPiece(), span = rangeSpan(pid);
+  const pre = LAB_PRESETS[U.labPreset];
+  const members = fullBand({pitch: U.lab.pitch, rhythm: U.lab.rhythm, tone: U.lab.tone, expr: U.lab.expr});
+  if(pre?.special) for(const m of members){ const v = pre.special(SEAT[m.seat]); if(v != null) for(const k of STAT_KEYS) m.stats[k] = v; }
+  return perform({members, pieceId: pid, cohesion: U.lab.cohesion, fam: U.lab.fam, interp: S.interp, venue: U.venue, from: span.from, to: span.to, seed: 'band'});
+}
+
+/* ===== まとめて描く ===== */
+function renderAll(){
+  renderHeader(); renderPiece(); renderVenues(); renderSelectors();
+  renderStats(); renderWeek(); renderInterp(); renderLog();
+  renderMemberCard(); renderRoster(); renderHistory();
+  $('#btnNow').disabled = busy();
+}
+
+/* ===== 操作 ===== */
+function startStage(){
+  stopPlay();
+  commit(beginStage(S));
+  const rec = S.recs.find(r => r.id === S.pending.recId);
+  U.piece = null; U.range = 'all';
+  setVenue(rec.venue);
+  renderAll();
+  playPerf(perform(recCtx(rec)), rec.label, () => reveal());
+}
+function reveal(){
+  if(!S.pending || S.pending.revealed) return;
+  S.pending.revealed = true;
+  commit(S);
+  renderAll();
+}
+function playRec(id){
+  const rec = S.recs.find(r => r.id === id);
+  if(!rec) return;
+  setVenue(rec.venue);
+  playPerf(perform(recCtx(rec)), `${rec.label}（${VENUE[rec.venue].name}で録音）`);
+}
+function bind(){
+  $('#btnNow').addEventListener('click', () => {
+    if(!U.perfNow) U.perfNow = perform(currentCtx());
+    playPerf(U.perfNow, nowLabel());
+  });
+  $('#btnRec').addEventListener('click', () => playRec($('#recSel').value));
+  $('#btnStop').addEventListener('click', stopPlay);
+  $('#btnLab').addEventListener('click', () => {
+    const pre = LAB_PRESETS[U.labPreset];
+    playPerf(labPerf(), `ラボ：${pre ? pre.name : `音程${U.lab.pitch}・リズム${U.lab.rhythm}・音色${U.lab.tone}・表現${U.lab.expr}`}（${VENUE[U.venue].name}）`);
+  });
+  $('#pieceSel').addEventListener('click', e => {
+    const b = e.target.closest('[data-piece]'); if(!b) return;
+    U.piece = b.dataset.piece === S.pieceId ? null : b.dataset.piece;
+    U.range = 'all';
+    renderPiece(); renderInterp(); renderStats(); refreshNow();
+  });
+  $('#venueSel').addEventListener('click', e => { const b = e.target.closest('[data-venue]'); if(b) setVenue(b.dataset.venue); });
+  $('#posSel').addEventListener('change', e => { U.pos = e.target.value; saveUI(); E.setPosition(U.pos); });
+  $('#rangeSel').addEventListener('change', e => { U.range = e.target.value; refreshNow(); });
+  $('#soloSel').addEventListener('change', e => { U.solo = e.target.value; applySolo(); });
+  $('#viewSel').addEventListener('change', e => { U.view = e.target.value; renderSelectors(); renderRoster(); drawIdle(); if(U.playing) drawRoll(U.shown, E.now()); });
+  $('#stage').addEventListener('click', e => {
+    const s = seatAt(e);
+    if(!s) return;
+    const m = S.members.find(x => x.seat === s.id);
+    U.sel = m ? m.id : null;
+    U.view = s.sec;
+    renderSelectors(); renderMemberCard(); renderRoster(); drawIdle();
+    if(m) $('#memberCard').scrollIntoView({block: 'nearest', behavior: 'smooth'});
+  });
+  $('#secGrid').addEventListener('click', e => {
+    const b = e.target.closest('[data-sec]'); if(!b) return;
+    U.view = U.view === b.dataset.sec ? 'mel' : b.dataset.sec;
+    renderSelectors(); renderRoster(); drawIdle();
+  });
+  $('#rosterTable').addEventListener('click', e => {
+    const tr = e.target.closest('[data-mid]'); if(!tr) return;
+    U.sel = tr.dataset.mid;
+    const m = memberById(U.sel);
+    if(m?.seat) U.view = SEAT[m.seat].sec;
+    renderSelectors(); renderMemberCard(); renderRoster(); drawIdle();
+    $('#memberCard').scrollIntoView({block: 'nearest', behavior: 'smooth'});
+  });
+  $('#memberCard').addEventListener('click', e => {
+    const b = e.target.closest('[data-mact]'); if(!b) return;
+    const m = memberById(U.sel); if(!m) return;
+    const act = b.dataset.mact;
+    if(act === 'solo'){ U.solo = `member:${m.id}`; renderSelectors(); applySolo(); if(!U.playing) $('#btnNow').click(); }
+    else if(act === 'secsolo'){ U.solo = `sec:${SEAT[m.seat].sec}`; renderSelectors(); applySolo(); if(!U.playing) $('#btnNow').click(); }
+    else if(act === 'all'){ U.solo = 'all'; renderSelectors(); applySolo(); }
+    else if(act === 'move'){
+      commit(moveMember(S, m.id, $('#moveSel').value || null));
+      renderAll(); refreshNow();
+    }
+  });
+  $('#week').addEventListener('click', e => {
+    const b = e.target.closest('button'); if(!b || b.disabled) return;
+    if(b.dataset.menu){
+      if(busy()) return;
+      commit(practiceWeek(S, b.dataset.menu));
+      renderAll(); refreshNow();
+      return;
+    }
+    if(b.dataset.focus !== undefined){ S.focus = b.dataset.focus || null; commit(S); renderWeek(); return; }
+    const act = b.dataset.act;
+    if(act === 'preview'){ U.piece = b.dataset.pid; U.range = 'all'; renderPiece(); renderInterp(); U.perfNow = perform(currentCtx()); U.diag = analyze(U.perfNow); renderDiag(); playPerf(U.perfNow, `試聴：${PIECES[b.dataset.pid].title}（譜読み前）`); }
+    else if(act === 'choose'){ stopPlay(); commit(choosePiece(S, b.dataset.pid)); U.piece = null; renderAll(); refreshNow(); }
+    else if(act === 'test'){ commit(practiceWeek(S, 'test')); renderAll(); refreshNow(); }
+    else if(act === 'assign'){
+      const map = {}, used = new Set();
+      for(const r of S.recruits){
+        const v = $(`#as-${r.id}`).value || null;
+        if(v && used.has(v)){ $('#assignErr').textContent = '同じ席に2人は座れない。担当を選び直そう。'; return; }
+        if(v) used.add(v);
+        map[r.id] = v;
+      }
+      commit(assignRecruits(S, map)); renderAll(); refreshNow();
+    }
+    else if(act === 'stage') startStage();
+    else if(act === 'reveal'){ stopPlay(); reveal(); }
+    else if(act === 'next'){ stopPlay(); commit(finishStage(S)); renderAll(); refreshNow(); }
+    else if(act === 'newyear'){ stopPlay(); commit(newYear(S)); U.sel = null; U.piece = null; renderAll(); refreshNow(); }
+    else if(act === 'playrec') playRec(b.dataset.id);
+  });
+  $('#interp').addEventListener('click', e => {
+    const b = e.target.closest('[data-interp]'); if(!b || b.disabled) return;
+    const [k, i] = b.dataset.interp.split(':');
+    S.interp[k] = +i; commit(S);
+    renderInterp(); renderPiece(); refreshNow();
+  });
+  $('#presets').addEventListener('click', e => {
+    const b = e.target.closest('[data-p]'); if(!b) return;
+    U.labPreset = +b.dataset.p;
+    U.lab = {...LAB_PRESETS[U.labPreset].st};
+    renderLab();
+  });
+  $('#sliders').addEventListener('input', e => {
+    const k = e.target.id.replace('lab-', '');
+    if(!(k in U.lab)) return;
+    U.lab[k] = +e.target.value;
+    $(`#out-${k}`).textContent = U.lab[k];
+    U.labPreset = -1;
+    document.querySelectorAll('#presets .chip').forEach(c => c.setAttribute('aria-pressed', 'false'));
+  });
+  const rs = $('#btnReset');
+  rs.addEventListener('click', () => {
+    if(!rs.classList.contains('armed')){
+      rs.classList.add('armed'); rs.textContent = 'もう一度押すと、最初の年度の4月からやり直します';
+      setTimeout(() => { rs.classList.remove('armed'); rs.textContent = '最初からやり直す'; }, 4000);
+      return;
+    }
+    rs.classList.remove('armed'); rs.textContent = '最初からやり直す';
+    stopPlay();
+    commit(freshState(2026)); U.sel = null; U.piece = null; U.view = 'mel';
+    renderAll(); refreshNow();
+  });
+  const redraw = () => { if(U.playing) return; drawIdle(); };
+  if('ResizeObserver' in window) new ResizeObserver(redraw).observe($('.stand'));
+  else window.addEventListener('resize', redraw);
+  window.matchMedia?.('(prefers-color-scheme: dark)').addEventListener?.('change', () => { redraw(); renderRoster(); });
+  new MutationObserver(() => { redraw(); renderRoster(); }).observe(document.documentElement, {attributes: true, attributeFilter: ['data-theme']});
+  document.fonts?.ready.then(redraw);
+}
+
+function start(data){
+  S = (data && data.S && data.S.v === 2) ? data.S : (load() || freshState(2026));
+  loadUI();
+  E.venueId = U.venue; E.posId = U.pos;
+  renderAll(); renderLab();
+  bind();
+  U.perfNow = perform(currentCtx());
+  U.diag = analyze(U.perfNow);
+  U.shown = U.perfNow; U.shownLabel = nowLabel();
+  setNowPlaying(); renderDiag(); drawIdle();
+}
+window.claude?.hot?.snapshot?.(() => ({S}));
+window.claude?.hot?.ready ? window.claude.hot.ready(start) : start(window.claude?.hot?.data ?? {});

@@ -5,12 +5,13 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>吹部日誌</title>
 <meta name="claude:viewport-fit-sides" content="cover">
-<meta name="description" content="高校吹奏楽部の育成シミュレーション試作。練習するほど、同じ8小節の音程・リズム・音色・表現が変わっていく。">
+<meta name="description" content="高校吹奏楽部の育成シミュレーション。全楽器の部員一人ひとりの音が、練習で少しずつ変わっていく。音楽室・体育館・ホールで響きも変わる。">
+<link rel="icon" href="data:,">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Dela+Gothic+One&family=Klee+One:wght@600&family=Share+Tech+Mono&family=Zen+Kaku+Gothic+New:wght@400;500;700&display=swap">
 <style>
-/* Layout: 合奏室。上に部の垂れ幕と週カレンダー、左に譜面台（演奏ロール＋チューナー）、右にホワイトボード（実力・今週の練習・日誌）、下に聴き比べラボ */
+/* Layout: 合奏室。上に部の垂れ幕と週カレンダー、左にステージ（座席・譜面台・チューナー）、右にホワイトボード（実力・診断・今週・解釈・日誌）、下に名簿とラボ */
 :root{
   --paper:#ECEFF3;
   --sheet:#FAFBFC;
@@ -20,6 +21,8 @@
   --brass:#A26F14;
   --on-brass:#FFF8EA;
   --navy:#2A3D6E;
+  --floor:#E6DFD2;
+  --floor-line:#CFC4B0;
   --lcd:#BAC7A4;
   --lcd-ink:#1E2915;
   --lcd-dim:rgba(30,41,21,.28);
@@ -38,7 +41,7 @@
 @media (prefers-color-scheme: dark){
   :root:not([data-theme="light"]){
     --paper:#0D1320; --sheet:#141C2D; --ink:#E3E8F2; --ink-soft:#97A1B6; --rule:#28324A;
-    --brass:#DDAE55; --on-brass:#1A1305; --navy:#9DB2E6;
+    --brass:#DDAE55; --on-brass:#1A1305; --navy:#9DB2E6; --floor:#1B2233; --floor-line:#2C3650;
     --lcd:#152117; --lcd-ink:#A4E287; --lcd-dim:rgba(164,226,135,.22);
     --good:#55C287; --warn:#E2B23F; --bad:#EF6A5F;
     --gold:#E2BC4A; --silver:#B4BDC9; --bronze:#D08A5A; --shadow:rgba(0,0,0,.5);
@@ -47,7 +50,7 @@
 }
 :root[data-theme="dark"]{
   --paper:#0D1320; --sheet:#141C2D; --ink:#E3E8F2; --ink-soft:#97A1B6; --rule:#28324A;
-  --brass:#DDAE55; --on-brass:#1A1305; --navy:#9DB2E6;
+  --brass:#DDAE55; --on-brass:#1A1305; --navy:#9DB2E6; --floor:#1B2233; --floor-line:#2C3650;
   --lcd:#152117; --lcd-ink:#A4E287; --lcd-dim:rgba(164,226,135,.22);
   --good:#55C287; --warn:#E2B23F; --bad:#EF6A5F;
   --gold:#E2BC4A; --silver:#B4BDC9; --bronze:#D08A5A; --shadow:rgba(0,0,0,.5);
@@ -59,100 +62,143 @@ body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--f-body)
 h1,h2,h3,p,ol,ul{margin:0}
 h2{font-size:16px;font-weight:700;letter-spacing:.04em;text-wrap:balance}
 :focus-visible{outline:2px solid var(--brass);outline-offset:2px}
+button,select{font:inherit;color:inherit}
 
-.app{max-width:1180px;margin:0 auto;padding-block:28px 48px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));display:grid;gap:28px}
+.app{max-width:1240px;margin:0 auto;padding-block:28px 48px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));display:grid;gap:30px}
 
 /* 垂れ幕と週カレンダー */
 .top{display:grid;grid-template-columns:auto minmax(0,1fr);gap:clamp(14px,3vw,28px);align-items:start}
 .banner{writing-mode:vertical-rl;font-family:var(--f-display);font-weight:400;font-size:clamp(30px,5.4vw,46px);letter-spacing:.16em;line-height:1;color:var(--on-brass);background:var(--brass);padding:16px 12px 34px;clip-path:polygon(0 0,100% 0,100% 100%,50% calc(100% - 16px),0 100%)}
 .top-main{display:grid;gap:12px;min-width:0;padding-top:2px}
 .school{font-size:13px;letter-spacing:.14em;color:var(--ink-soft)}
-.lede{font-size:clamp(17px,2.2vw,21px);font-weight:500;line-height:1.6;max-width:32em;text-wrap:pretty}
+.lede{font-size:clamp(17px,2.2vw,21px);font-weight:500;line-height:1.6;max-width:36em;text-wrap:pretty}
 .cal-wrap{display:grid;gap:22px;margin-top:4px}
 .cal-head{display:flex;flex-wrap:wrap;justify-content:space-between;gap:4px 12px;font-size:13px;color:var(--ink-soft);font-variant-numeric:tabular-nums}
 .cal-head b{color:var(--ink);font-size:15px}
-.cal{list-style:none;padding:0;display:grid;grid-template-columns:repeat(16,minmax(0,1fr)) minmax(0,2fr);gap:3px}
+.cal{list-style:none;padding:0;display:grid;grid-auto-flow:column;grid-auto-columns:minmax(0,1fr);gap:3px}
 .cal li{position:relative;height:28px;border-radius:3px;background:var(--sheet);border:1px solid var(--rule)}
 .cal li.done{background:var(--rule)}
 .cal li.now{border:2px solid var(--brass)}
-.cal li.ev::after{content:"";position:absolute;top:50%;left:50%;width:6px;height:6px;margin:-3px 0 0 -3px;border-radius:50%;background:var(--brass)}
-.cal li.final{background:var(--brass);border-color:var(--brass);color:var(--on-brass);font-weight:700;font-size:12px;display:flex;align-items:center;justify-content:center}
-.cal li.final.now{outline:2px solid var(--ink);outline-offset:1px}
+.cal li.ev::after{content:"";position:absolute;top:50%;left:50%;width:6px;height:6px;margin:-3px 0 0 -3px;border-radius:50%;background:var(--ink-soft)}
+.cal li.show::after{content:"";position:absolute;top:50%;left:50%;width:8px;height:8px;margin:-4px 0 0 -4px;border-radius:50%;background:var(--brass)}
+.cal li.contest{background:var(--brass);border-color:var(--brass);color:var(--on-brass);font-weight:700;font-size:11px;display:flex;align-items:center;justify-content:center;white-space:nowrap;overflow:hidden}
+.cal li.contest.now{outline:2px solid var(--ink);outline-offset:1px}
+.cal li.later{opacity:.35}
 .cal .mo{position:absolute;bottom:calc(100% + 3px);left:0;font-size:11px;line-height:1;color:var(--ink-soft);white-space:nowrap}
-.cal-key{font-size:12px;color:var(--ink-soft);display:flex;align-items:center;gap:6px}
-.cal-key i{width:6px;height:6px;border-radius:50%;background:var(--brass);display:inline-block}
+.cal-key{font-size:12px;color:var(--ink-soft);display:flex;flex-wrap:wrap;align-items:center;gap:6px 14px}
+.cal-key i{width:7px;height:7px;border-radius:50%;display:inline-block;margin-right:5px;vertical-align:1px}
+.k-ev{background:var(--ink-soft)} .k-show{background:var(--brass)}
 
-/* 譜面台 */
-.grid{display:grid;grid-template-columns:minmax(0,1.6fr) minmax(0,1fr);gap:28px;align-items:start}
-@media (max-width:900px){.grid{grid-template-columns:minmax(0,1fr)}}
-@media (min-width:901px) and (min-height:820px){.stand{position:sticky;top:calc(env(safe-area-inset-top,0px) + 16px)}}
+/* レイアウト */
+.grid{display:grid;grid-template-columns:minmax(0,1.65fr) minmax(0,1fr);gap:28px;align-items:start}
+@media (max-width:960px){.grid{grid-template-columns:minmax(0,1fr)}}
+.col-stage{display:grid;gap:18px;min-width:0}
+
+/* ステージと譜面台 */
 .stand{background:var(--sheet);border:1px solid var(--rule);border-radius:6px;padding:20px clamp(14px,2.4vw,24px) 22px;display:grid;gap:14px;min-width:0;box-shadow:0 18px 34px -26px var(--shadow)}
+.stand-head{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:flex-end;gap:10px 16px}
+.piece{min-width:0}
 .eyebrow{font-size:12px;letter-spacing:.2em;color:var(--brass);font-weight:700}
-.piece h2{font-family:var(--f-display);font-weight:400;font-size:clamp(20px,2.6vw,26px);line-height:1.35;letter-spacing:.02em;margin:2px 0 4px}
+.piece h2{font-family:var(--f-display);font-weight:400;font-size:clamp(20px,2.6vw,26px);line-height:1.35;letter-spacing:.02em;margin:2px 0 2px}
 .meta{font-size:13px;color:var(--ink-soft);font-variant-numeric:tabular-nums}
-.roll-wrap{width:100%;min-width:0}
-#roll{display:block;width:100%;height:300px}
-.legend{list-style:none;padding:0;display:flex;flex-wrap:wrap;gap:4px 16px;font-size:12px;color:var(--ink-soft)}
-.legend li{display:flex;align-items:center;gap:6px}
-.k{display:inline-block;width:18px;height:7px;border-radius:2px}
-.k-fill{background:var(--ink-soft)}
-.k-line{border:1.5px solid var(--ink-soft)}
-.k-dash{height:0;border-top:2px dashed var(--brass);border-radius:0}
-.dot{display:inline-block;width:8px;height:8px;border-radius:50%}
-.dot.good{background:var(--good)} .dot.warn{background:var(--warn)} .dot.bad{background:var(--bad)}
-.transport{display:flex;flex-wrap:wrap;align-items:center;gap:10px}
-.now-playing{flex-basis:100%;font-size:13px;color:var(--ink-soft);min-height:1.7em}
-.btn{font:inherit;font-weight:700;font-size:14px;line-height:1.3;padding:10px 16px;border-radius:999px;border:1.5px solid var(--ink);background:transparent;color:var(--ink);cursor:pointer;transition:background .15s,color .15s,border-color .15s}
+.seg{display:inline-flex;flex-wrap:wrap;gap:4px;padding:3px;border:1px solid var(--rule);border-radius:999px;background:var(--paper)}
+.seg button{border:0;background:transparent;border-radius:999px;padding:5px 12px;font-size:13px;line-height:1.4;cursor:pointer;color:var(--ink-soft)}
+.seg button[aria-pressed="true"]{background:var(--ink);color:var(--sheet);font-weight:700}
+.seg button:disabled{opacity:.4;cursor:default}
+.venues{display:grid;gap:6px}
+.venues .seg{border-radius:12px}
+.venue-desc{font-size:13px;color:var(--ink-soft);line-height:1.6}
+.venue-desc b{color:var(--ink);font-weight:700}
+.stage-wrap{width:100%;min-width:0;border-radius:8px;overflow:hidden}
+#stage{display:block;width:100%;cursor:pointer;touch-action:manipulation}
+.transport{display:flex;flex-wrap:wrap;align-items:center;gap:8px 10px}
+.btn{font-weight:700;font-size:14px;line-height:1.3;padding:10px 16px;border-radius:999px;border:1.5px solid var(--ink);background:transparent;color:var(--ink);cursor:pointer;transition:background .15s,color .15s,border-color .15s}
 .btn:hover{border-color:var(--brass);color:var(--brass)}
 .btn.primary{background:var(--ink);color:var(--sheet);border-color:var(--ink)}
 .btn.primary:hover{background:var(--brass);border-color:var(--brass);color:var(--on-brass)}
 .btn.quiet{border-color:var(--rule);color:var(--ink-soft)}
+.btn.small{padding:6px 12px;font-size:13px}
 .btn:disabled{opacity:.4;cursor:default}
 .btn:disabled:hover{border-color:var(--rule);color:var(--ink-soft)}
+select{background:var(--sheet);border:1.5px solid var(--rule);border-radius:8px;padding:7px 10px;font-size:13px;max-width:100%;min-width:0}
+#recSel{max-width:min(100%,260px)}
+.options{display:flex;flex-wrap:wrap;gap:8px 16px;font-size:13px;color:var(--ink-soft)}
+.options label{display:flex;align-items:center;gap:6px;min-width:0}
+.now-playing{font-size:13px;color:var(--ink-soft);min-height:1.7em}
+.now-playing b{color:var(--brass)}
+.view-head{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:6px 12px;font-size:13px;color:var(--ink-soft)}
+.view-head label{display:flex;align-items:center;gap:6px}
+.roll-wrap{width:100%;min-width:0}
+#roll{display:block;width:100%;height:260px}
+.legend{list-style:none;padding:0;display:flex;flex-wrap:wrap;gap:4px 16px;font-size:12px;color:var(--ink-soft)}
+.legend li{display:flex;align-items:center;gap:6px}
+.k{display:inline-block;width:18px;height:7px;border-radius:2px;background:var(--ink-soft)}
+.k-dash{height:0;border-top:2px dashed var(--brass);border-radius:0;background:none}
+.dot{display:inline-block;width:8px;height:8px;border-radius:50%}
+.dot.good{background:var(--good)} .dot.warn{background:var(--warn)} .dot.bad{background:var(--bad)}
 .tuner{background:var(--lcd);border-radius:12px;padding:4px 6px}
 #tuner{display:block;width:100%;height:124px}
 .tuner-cap{font-size:12px;color:var(--ink-soft);margin-top:-6px}
 
+/* 部員カード */
+.member-card{background:var(--sheet);border:1px solid var(--rule);border-radius:6px;padding:16px clamp(14px,2.4vw,22px);display:grid;gap:10px}
+.mc-head{display:flex;flex-wrap:wrap;align-items:baseline;gap:4px 12px}
+.mc-head h3{font-size:19px;font-weight:700}
+.mc-head .sub{font-size:13px;color:var(--ink-soft)}
+.tag{font-size:12px;font-weight:700;letter-spacing:.06em;color:var(--on-brass);background:var(--brass);border-radius:3px;padding:1px 8px;white-space:nowrap}
+.mc-trait{font-family:var(--f-hand);font-size:15px}
+.mc-actions{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+
 /* ホワイトボード */
 .board{display:grid;gap:28px;min-width:0}
 .panel{display:grid;gap:12px;min-width:0}
-.panel>h2{padding-bottom:6px;border-bottom:2px solid var(--ink)}
-.stats{display:grid;gap:12px}
-.stat{display:grid;grid-template-columns:4.2em minmax(0,1fr) 2.4em;align-items:center;gap:2px 10px}
-.stat .nm{font-weight:700}
-.stat .val{font-family:var(--f-lcd);font-size:18px;text-align:right;font-variant-numeric:tabular-nums}
+.panel>h2{padding-bottom:6px;border-bottom:2px solid var(--ink);display:flex;justify-content:space-between;align-items:baseline;gap:8px}
+.panel>h2 small{font-size:12px;font-weight:500;color:var(--ink-soft);letter-spacing:0}
+.stats{display:grid;gap:11px}
+.stat{display:grid;grid-template-columns:5.4em minmax(0,1fr) 2.6em;align-items:center;gap:2px 10px}
+.stat .nm{font-weight:700;font-size:14px}
+.stat .val{font-family:var(--f-lcd);font-size:17px;text-align:right;font-variant-numeric:tabular-nums}
 .track{height:10px;background:var(--rule);border-radius:2px;position:relative;overflow:hidden}
 .track .fill{position:absolute;inset:0 auto 0 0;background:var(--brass);transition:width .5s ease}
 .track::after{content:"";position:absolute;inset:0;background:repeating-linear-gradient(90deg,transparent 0 calc(10% - 1px),var(--sheet) calc(10% - 1px) 10%);opacity:.75}
+.track .fill.good{background:var(--good)} .track .fill.warn{background:var(--warn)} .track .fill.bad{background:var(--bad)}
 .stat .ds{grid-column:2/4;font-size:12px;color:var(--ink-soft);line-height:1.45}
-.delta{color:var(--good);font-family:var(--f-lcd);font-weight:400;margin-left:4px}
-.vitals{display:grid;grid-template-columns:1fr 1fr;gap:14px;padding-top:2px}
-.vital{display:grid;gap:4px;font-size:13px}
-.vital .row{display:flex;justify-content:space-between}
-.vital .row b{font-family:var(--f-lcd);font-weight:400;font-size:15px}
-.vital .track .fill.good{background:var(--good)} .vital .track .fill.warn{background:var(--warn)} .vital .track .fill.bad{background:var(--bad)}
+.delta{color:var(--good);font-family:var(--f-lcd);margin-left:4px}
+.vitals{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+.vital{display:grid;gap:4px;font-size:12.5px}
+.vital .row{display:flex;justify-content:space-between;gap:4px}
+.vital .row b{font-family:var(--f-lcd);font-weight:400;font-size:14px}
+.diag-note{font-family:var(--f-hand);font-size:15px;line-height:1.65}
 .event{font-family:var(--f-hand);font-size:15px;line-height:1.65;display:grid;gap:4px}
-.tag{font-family:var(--f-body);font-size:12px;font-weight:700;letter-spacing:.08em;color:var(--on-brass);background:var(--brass);border-radius:3px;padding:1px 8px;justify-self:start}
+.event .tag{font-family:var(--f-body);justify-self:start}
+.focus{display:grid;gap:6px;font-size:13px;color:var(--ink-soft)}
+.chips{display:flex;flex-wrap:wrap;gap:6px}
+.chip{font-size:12.5px;line-height:1.4;padding:5px 10px;border-radius:999px;border:1.5px solid var(--rule);background:var(--sheet);color:var(--ink);cursor:pointer}
+.chip:hover{border-color:var(--brass)}
+.chip[aria-pressed="true"]{border-color:var(--brass);color:var(--brass);font-weight:700}
+.week{display:grid;gap:12px}
 .menu{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
 @media (max-width:340px){.menu{grid-template-columns:minmax(0,1fr)}}
-.mbtn{font:inherit;text-align:left;display:grid;gap:1px;align-content:start;padding:10px 12px;border:1.5px solid var(--rule);border-radius:8px;background:var(--sheet);color:var(--ink);cursor:pointer;transition:border-color .15s}
+.mbtn{text-align:left;display:grid;gap:1px;align-content:start;padding:10px 12px;border:1.5px solid var(--rule);border-radius:8px;background:var(--sheet);color:var(--ink);cursor:pointer;transition:border-color .15s}
 .mbtn:hover{border-color:var(--brass)}
 .mbtn b{font-size:14px;line-height:1.45}
 .mbtn span{font-size:12px;color:var(--ink-soft);line-height:1.5}
 .mbtn .cost{font-family:var(--f-lcd);font-size:12px}
 .mbtn.wide{grid-column:1/-1}
 .mbtn.rest{border-style:dashed}
-.contest{display:grid;gap:12px;grid-column:1/-1}
+.pcard{border:1.5px solid var(--rule);border-radius:8px;padding:12px 14px;display:grid;gap:6px;background:var(--sheet)}
+.pcard h3{font-family:var(--f-display);font-weight:400;font-size:18px;line-height:1.35}
+.pcard p{font-size:13px;color:var(--ink-soft)}
+.pcard .row{display:flex;flex-wrap:wrap;gap:8px}
 .small{font-size:13px;color:var(--ink-soft)}
-.log{list-style:none;padding:0;display:grid;max-height:340px;overflow:auto;font-family:var(--f-hand);font-size:15px;line-height:1.7}
-.log li{padding:7px 0;border-bottom:1px dashed var(--rule);display:grid;grid-template-columns:4.4em minmax(0,1fr);gap:8px}
-.log time{font-family:var(--f-lcd);font-size:12px;color:var(--ink-soft);padding-top:3px}
-.reset-row{display:flex;justify-content:flex-end}
-.link{font:inherit;font-size:12px;color:var(--ink-soft);background:none;border:none;padding:4px 0;cursor:pointer;text-decoration:underline;text-underline-offset:3px}
-.link.armed{color:var(--bad);font-weight:700}
-
-/* 結果 */
-.result{display:grid;gap:16px;grid-column:1/-1}
+.stagecard{display:grid;gap:12px}
+.stagecard h3{font-family:var(--f-display);font-weight:400;font-size:20px;line-height:1.35}
+.stagecard .txt{font-family:var(--f-hand);font-size:15px;line-height:1.7}
+.assign{display:grid;gap:8px}
+.assign .row{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.3fr);gap:6px 10px;align-items:center;padding-bottom:8px;border-bottom:1px dashed var(--rule)}
+.assign .who{font-size:14px;line-height:1.4}
+.assign .who small{display:block;font-size:12px;color:var(--ink-soft)}
+.result{display:grid;gap:14px}
 .award{display:flex;align-items:center;gap:18px}
 .stamp{flex:none;font-family:var(--f-display);font-size:34px;line-height:1;padding:14px 14px 12px;border:3px double var(--award);color:var(--award);border-radius:10px;transform:rotate(-5deg)}
 .award b{font-size:16px;line-height:1.5}
@@ -161,24 +207,54 @@ h2{font-size:16px;font-weight:700;letter-spacing:.04em;text-wrap:balance}
 .grade{font-family:var(--f-display);font-size:22px;line-height:1.3;text-align:center}
 .cmt{font-family:var(--f-hand);font-size:15px;line-height:1.7}
 .cmt small{display:block;font-family:var(--f-body);font-size:12px;color:var(--ink-soft);line-height:1.4}
+.interp{display:grid;gap:8px}
+.interp .row{display:grid;grid-template-columns:6.5em minmax(0,1fr);align-items:center;gap:8px;font-size:13px}
+.log{list-style:none;padding:0;display:grid;max-height:340px;overflow:auto;font-family:var(--f-hand);font-size:15px;line-height:1.7}
+.log li{padding:7px 0;border-bottom:1px dashed var(--rule);display:grid;grid-template-columns:4.6em minmax(0,1fr);gap:8px}
+.log time{font-family:var(--f-lcd);font-size:12px;color:var(--ink-soft);padding-top:3px}
+.reset-row{display:flex;justify-content:flex-end}
+.link{font-size:12px;color:var(--ink-soft);background:none;border:none;padding:4px 0;cursor:pointer;text-decoration:underline;text-underline-offset:3px}
+.link.armed{color:var(--bad);font-weight:700}
 
-/* ラボ */
+/* 名簿 */
+.roster{display:grid;gap:16px;border-top:2px solid var(--ink);padding-top:16px}
+.roster-head{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:baseline;gap:6px 16px}
+.roster-head h2,.lab-head h2,.history h2{font-family:var(--f-display);font-weight:400;font-size:22px}
+.table-wrap{overflow:auto;max-height:520px;border:1px solid var(--rule);border-radius:6px;background:var(--sheet)}
+table{border-collapse:collapse;width:100%;font-size:13px;font-variant-numeric:tabular-nums}
+th,td{padding:7px 10px;text-align:left;white-space:nowrap;border-bottom:1px solid var(--rule)}
+th{font-size:12px;color:var(--ink-soft);font-weight:700;background:var(--paper);position:sticky;top:0;z-index:1}
+td.num{text-align:right;font-family:var(--f-lcd);font-size:14px}
+tr.sec-row td{background:var(--paper);font-weight:700;font-size:12px;letter-spacing:.06em;color:var(--ink-soft)}
+tbody tr.mem{cursor:pointer}
+tbody tr.mem:hover td{background:var(--paper)}
+tbody tr.mem.sel td{background:var(--paper)}
+tbody tr.mem.sel td:first-child{box-shadow:inset 3px 0 0 var(--brass)}
+tr.empty td{color:var(--ink-soft)}
+.sec-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:8px}
+.sec-tile{border:1.5px solid var(--rule);border-radius:8px;padding:8px 10px;background:var(--sheet);cursor:pointer;text-align:left;display:grid;gap:5px}
+.sec-tile:hover{border-color:var(--brass)}
+.sec-tile[aria-pressed="true"]{border-color:var(--brass);box-shadow:inset 0 0 0 1px var(--brass)}
+.sec-tile b{font-size:13px}
+.sec-tile .bars{display:grid;grid-template-columns:repeat(4,1fr);gap:3px}
+.sec-tile .bars i{display:block;height:24px;border-radius:2px;background:var(--rule);position:relative;overflow:hidden}
+.sec-tile .bars i span{position:absolute;inset:auto 0 0 0;background:var(--brass)}
+.sec-tile small{font-size:11px;color:var(--ink-soft);line-height:1.4}
+
+/* ラボ・歴史 */
 .lab{border-top:2px solid var(--ink);padding-top:16px;display:grid;gap:16px}
 .lab-head{display:grid;gap:4px}
-.lab-head h2{font-family:var(--f-display);font-weight:400;font-size:22px}
-.lab-head p{color:var(--ink-soft);font-size:14px;max-width:46em}
-.presets{display:flex;flex-wrap:wrap;gap:8px}
-.chip{font:inherit;font-size:13px;line-height:1.4;padding:6px 12px;border-radius:999px;border:1.5px solid var(--rule);background:var(--sheet);color:var(--ink);cursor:pointer}
-.chip:hover{border-color:var(--brass)}
-.chip[aria-pressed="true"]{border-color:var(--brass);color:var(--brass);font-weight:700}
-.sliders{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px 24px}
+.lab-head p{color:var(--ink-soft);font-size:14px;max-width:48em}
+.sliders{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px 24px}
 @media (max-width:760px){.sliders{grid-template-columns:repeat(2,minmax(0,1fr))}}
 .sl{display:grid;gap:2px}
 .sl label{display:flex;justify-content:space-between;font-weight:700;font-size:14px}
 .sl output{font-family:var(--f-lcd);font-weight:400}
 .sl input{width:100%;accent-color:var(--brass)}
 .lab .btn{justify-self:start}
-.foot{font-size:12px;color:var(--ink-soft);max-width:60em}
+.history{display:grid;gap:10px;border-top:2px solid var(--ink);padding-top:16px}
+.history ol{list-style:none;padding:0;display:grid;gap:6px;font-family:var(--f-hand);font-size:15px}
+.foot{font-size:12px;color:var(--ink-soft);max-width:64em;line-height:1.8}
 @media (prefers-reduced-motion: reduce){*{transition:none!important}}
 </style>
 </head>
@@ -187,51 +263,76 @@ h2{font-size:16px;font-weight:700;letter-spacing:.04em;text-wrap:balance}
   <header class="top">
     <h1 class="banner">吹部日誌</h1>
     <div class="top-main">
-      <p class="school">県立みなと高校 吹奏楽部　2026年度</p>
-      <p class="lede">夏のコンクールまで16週。毎週ひとつ練習を選ぶと、同じ8小節の聞こえ方が少しずつ変わっていきます。</p>
+      <p class="school" id="school">県立みなと高校 吹奏楽部</p>
+      <p class="lede">あなたは吹奏楽部の顧問。毎週の練習を決めると、39の席に座る部員一人ひとりの音が少しずつ変わっていく。同じ演奏でも、音楽室と体育館とホールでは聞こえ方がまるで違う。</p>
       <div class="cal-wrap">
-        <div class="cal-head"><b id="weekNow">4月 第1週</b><span id="weeksLeft">本番まであと16週</span></div>
-        <ol class="cal" id="cal" aria-label="コンクールまでの16週"></ol>
+        <div class="cal-head"><b id="weekNow"></b><span id="weeksLeft"></span></div>
+        <ol class="cal" id="cal" aria-label="今シーズンの週"></ol>
       </div>
-      <p class="cal-key"><i></i>行事のある週</p>
+      <p class="cal-key"><span><i class="k-ev"></i>行事</span><span><i class="k-show"></i>本番の演奏</span></p>
     </div>
   </header>
 
   <main class="grid">
-    <section class="stand" aria-labelledby="piece">
-      <div class="piece">
-        <p class="eyebrow">自由曲</p>
-        <h2 id="piece">ドヴォルザーク《新世界より》第2楽章</h2>
-        <p class="meta">Largo・冒頭の主題8小節｜変ニ長調｜A=442Hz｜Tp 2人・Cl/Hn 3人・Tuba 1人</p>
-      </div>
-      <div class="roll-wrap" id="rollWrap"><canvas id="roll" role="img" aria-label="演奏の見える化。上段がメロディ、中段が伴奏、下段が抑揚。"></canvas></div>
-      <ul class="legend">
-        <li><i class="k k-fill"></i>1st</li>
-        <li><i class="k k-line"></i>2nd</li>
-        <li>上下のずれ＝音程のずれ（拡大表示）</li>
-        <li><i class="dot good"></i>合っている <i class="dot warn"></i>少しずれ <i class="dot bad"></i>ずれ</li>
-        <li><i class="k k-dash"></i>理想の抑揚</li>
-      </ul>
-      <div class="transport">
-        <button class="btn primary" id="btnNow" type="button">▶ いまの音で合奏</button>
-        <button class="btn" id="btnApril" type="button">▶ 4月の録音</button>
-        <button class="btn quiet" id="btnStop" type="button" disabled>■ 止める</button>
+    <div class="col-stage">
+      <section class="stand" aria-labelledby="piece">
+        <div class="stand-head">
+          <div class="piece">
+            <p class="eyebrow" id="pieceEyebrow">自由曲</p>
+            <h2 id="piece"></h2>
+            <p class="meta" id="pieceMeta"></p>
+          </div>
+          <div class="seg" id="pieceSel" role="group" aria-label="演奏する曲"></div>
+        </div>
+        <div class="venues">
+          <div class="seg" id="venueSel" role="group" aria-label="会場"></div>
+          <p class="venue-desc" id="venueDesc"></p>
+        </div>
+        <div class="stage-wrap"><canvas id="stage" role="img" aria-label="ステージの座席。色が部員の実力、演奏中は音量に合わせて光る。席を押すと部員の詳しい情報が出る。"></canvas></div>
+        <div class="transport">
+          <button class="btn primary" id="btnNow" type="button">▶ いまの音で合奏</button>
+          <button class="btn" id="btnRec" type="button">▶ 録音を聴く</button>
+          <select id="recSel" aria-label="録音を選ぶ"></select>
+          <button class="btn quiet" id="btnStop" type="button" disabled>■ 止める</button>
+        </div>
+        <div class="options">
+          <label>範囲 <select id="rangeSel"></select></label>
+          <label>聴く位置 <select id="posSel"></select></label>
+          <label>聴くパート <select id="soloSel"></select></label>
+        </div>
         <p class="now-playing" id="nowPlaying" aria-live="polite"></p>
-      </div>
-      <div class="tuner"><canvas id="tuner" role="img" aria-label="チューナー。メロディ1stと2ndの音程のずれを表示。"></canvas></div>
-      <p class="tuner-cap">チューナーはメロディの1st（太い針）と2nd（細い針）。2人のずれが大きいほど「うなり」が速くなります。</p>
-    </section>
+        <div class="view-head"><span id="viewTitle"></span><label>表示 <select id="viewSel" aria-label="表示するパート"></select></label></div>
+        <div class="roll-wrap"><canvas id="roll" role="img" aria-label="演奏の見える化。横が時間、縦が音の高さ、下段が抑揚。"></canvas></div>
+        <ul class="legend">
+          <li>上下のずれ＝音程のずれ（拡大表示）</li>
+          <li><i class="dot good"></i>合っている <i class="dot warn"></i>少しずれ <i class="dot bad"></i>ずれ・間違い</li>
+          <li><i class="k k-dash"></i>指揮者が考える理想の抑揚</li>
+        </ul>
+        <div class="tuner"><canvas id="tuner" role="img" aria-label="チューナー。同じ音を吹く2人の音程のずれを表示。"></canvas></div>
+        <p class="tuner-cap">チューナーは、表示中のパートで同じ音を吹いている2人の音程（太い針と細い針）。2人のずれが大きいほど「うなり」が速くなる。</p>
+      </section>
+      <section class="member-card" id="memberCard" hidden aria-live="polite"></section>
+    </div>
 
     <div class="board">
+      <section class="panel" aria-labelledby="h-week">
+        <h2 id="h-week">今週</h2>
+        <div class="week" id="week"></div>
+      </section>
       <section class="panel" aria-labelledby="h-stats">
-        <h2 id="h-stats">部の実力</h2>
+        <h2 id="h-stats">部の実力 <small id="memberCount"></small></h2>
         <div class="stats" id="stats"></div>
         <div class="vitals" id="vitals"></div>
       </section>
-      <section class="panel" aria-labelledby="h-week">
-        <h2 id="h-week">4月 第1週の練習</h2>
-        <div class="event" id="eventNote" hidden></div>
-        <div class="menu" id="menu"></div>
+      <section class="panel" aria-labelledby="h-diag">
+        <h2 id="h-diag">いまの合奏の診断 <small id="diagVenue"></small></h2>
+        <div class="stats" id="diag"></div>
+        <p class="diag-note" id="diagNote"></p>
+      </section>
+      <section class="panel" aria-labelledby="h-interp">
+        <h2 id="h-interp">指揮者の解釈</h2>
+        <div class="interp" id="interp"></div>
+        <p class="small">部の実力に見合わない解釈は、審査で「大げさ」と言われる。</p>
       </section>
       <section class="panel" aria-labelledby="h-log">
         <h2 id="h-log">部活日誌</h2>
@@ -241,872 +342,40 @@ h2{font-size:16px;font-weight:700;letter-spacing:.04em;text-wrap:balance}
     </div>
   </main>
 
+  <section class="roster" aria-labelledby="h-roster">
+    <div class="roster-head">
+      <h2 id="h-roster">パートと部員</h2>
+      <p class="small">パートを押すと、その音だけを図とチューナーで追える。部員を押すと詳しい情報が出る。</p>
+    </div>
+    <div class="sec-grid" id="secGrid"></div>
+    <div class="table-wrap"><table id="rosterTable"></table></div>
+  </section>
+
   <section class="lab" aria-labelledby="h-lab">
     <div class="lab-head">
       <h2 id="h-lab">聴き比べラボ</h2>
-      <p>ゲームの進行とは別に、4つの力を直接動かして鳴らせます。部員の癖はそのままで、数値だけが変わります。「正確だけど棒読み」と「全国大会レベル」の差が、抑揚の差です。</p>
+      <p>ゲームの進行とは別に、39席すべてがうまった部で鳴らせます。部員の癖はそのままで、数値だけが変わります。会場と聴く位置は上のステージで切り替えられます。</p>
     </div>
-    <div class="presets" id="presets"></div>
+    <div class="chips" id="presets"></div>
     <div class="sliders" id="sliders"></div>
     <button class="btn primary" id="btnLab" type="button">▶ この設定で鳴らす</button>
   </section>
 
-  <p class="foot">曲はドヴォルザーク作曲（1893年）のパブリックドメイン作品です。編曲と音は、このページの中で楽譜データからその場で合成しています。録音音源は使っていません。</p>
+  <section class="history" id="history" hidden aria-labelledby="h-hist">
+    <h2 id="h-hist">部の歴史</h2>
+    <ol id="histList"></ol>
+  </section>
+
+  <p class="foot">曲はドヴォルザーク《新世界より》（1893年）とベートーヴェン《第九》（1824年）で、どちらもパブリックドメインです。編曲と音はすべて、このページの中で楽譜データからその場で合成しています。録音音源やサンプル音源は使っていません。高校の吹奏楽で使う木管・金管・弦バス・打楽器・鍵盤の音を、倍音と胴の響きと息の雑音から組み立てています。</p>
 </div>
 
-<script>
-'use strict';
-/* ===== 楽譜とバンド ===== */
-const A4 = 442;                 // 日本の吹奏楽はA=442Hzで合わせることが多い
-const TRANS = 1;                // ハ長調で書いて、原調の変ニ長調へ移す
-const BPM = 60, SPB = 60 / BPM;
-const TOTAL = 32;               // 8小節 × 4拍
-const WEEKS = 16;
-const BAND_SEED = 'minato-2026';
-const START = {pitch: 12, rhythm: 18, tone: 10, expr: 4};
-const STAT_KEYS = ['pitch', 'rhythm', 'tone', 'expr'];
-const STAT_LABEL = {pitch: '音程', rhythm: 'リズム', tone: '音色', expr: '表現'};
-const STAT_DESC = {
-  pitch: 'ユニゾンのうなり・和音の響き',
-  rhythm: '縦の線・テンポの安定・音の長さ',
-  tone: '音の出だし・息の支え・音割れ',
-  expr: '強弱・テンポの揺れ・ビブラート',
-};
-
-// 主題 [MIDI(ハ長調), 拍, 長さ]
-const MEL = [
-  [76,0,1.5],[79,1.5,.5],[79,2,2],
-  [76,4,1.5],[74,5.5,.5],[72,6,2],
-  [74,8,1.5],[76,9.5,.5],[79,10,1.5],[76,11.5,.5],
-  [74,12,3],
-  [76,16,1.5],[79,17.5,.5],[79,18,2],
-  [76,20,1.5],[74,21.5,.5],[72,22,2],
-  [74,24,1.5],[76,25.5,.5],[74,26,1.5],[72,27.5,.5],
-  [72,28,4],
-];
-// 和音（root はハ長調でのピッチクラス、q は純正調の取り方）
-const CHORDS = [
-  {b:0,  d:4, root:0, q:'maj',  v:[60,64,67], bass:48},
-  {b:4,  d:4, root:9, q:'min',  v:[60,64,69], bass:45},
-  {b:8,  d:2, root:2, q:'min',  v:[62,65,69], bass:41},
-  {b:10, d:4, root:7, q:'maj',  v:[62,67,71], bass:43},
-  {b:14, d:2, root:7, q:'dom7', v:[62,65,71], bass:43},
-  {b:16, d:4, root:0, q:'maj',  v:[64,67,72], bass:48},
-  {b:20, d:2, root:9, q:'min',  v:[64,69,72], bass:45},
-  {b:22, d:2, root:5, q:'maj',  v:[65,69,72], bass:41},
-  {b:24, d:2, root:2, q:'min7', v:[65,69,72], bass:38},
-  {b:26, d:2, root:7, q:'dom7', v:[65,67,71], bass:43},
-  {b:28, d:4, root:0, q:'maj',  v:[64,67,72], bass:36},
-];
-// 純正調で取るときの平均律からのずれ（セント）。長3度は約14セント低く、短3度は約16セント高く
-const JI = {
-  maj:  {0:0, 4:-13.7, 7:2},
-  min:  {0:0, 3:15.6, 7:2},
-  dom7: {0:0, 4:-13.7, 7:2, 10:-31.2},
-  min7: {0:0, 3:15.6, 7:2, 10:17.6},
-};
-// 理想の解釈：抑揚（0〜1）とテンポの伸び縮み（拍の長さの倍率）
-const DYN = [[0,.34],[2,.46],[4,.42],[6,.38],[8,.42],[10,.66],[12,.5],[15,.3],[16,.4],[18,.62],[20,.74],[22,.62],[24,.56],[26,.46],[28,.34],[32,.12]];
-const RUBATO = [[0,1.04],[2,1],[10,1],[13,1.08],[15.5,1.22],[16,1],[18,.98],[22,1],[24,1.04],[28,1.22],[31,1.5],[32,1.6]];
-
-const PLAYERS = (() => {
-  const mel = MEL.map(([m, b, d]) => ({m, b, d}));
-  const voice = i => CHORDS.map((c, k) => ({m: c.v[i], b: c.b, d: c.d, tie: k > 0 && CHORDS[k-1].v[i] === c.v[i]}));
-  const bass = [];
-  for(const c of CHORDS){
-    const last = bass[bass.length - 1];
-    if(last && last.m === c.bass && last.b + last.d === c.b) last.d += c.d;
-    else bass.push({m: c.bass, b: c.b, d: c.d});
-  }
-  return [
-    {id: 0, part: 'mel', name: 'Tp 1st', pan: -0.2, events: mel},
-    {id: 1, part: 'mel', name: 'Tp 2nd', pan: 0.16, events: mel},
-    {id: 2, part: 'har', name: 'Cl',     pan: -0.45, events: voice(2)},
-    {id: 3, part: 'har', name: 'Hn 1',   pan: 0.4, events: voice(1)},
-    {id: 4, part: 'har', name: 'Hn 2',   pan: 0.08, events: voice(0)},
-    {id: 5, part: 'bas', name: 'Tuba',   pan: 0.24, events: bass},
-  ];
-})();
-
-// 音色の設計（Web Audioの合成パラメータ）
-const TB = {
-  mel: {wave: 'sawtooth', gain: 0.16, att: 0.035, rel: 0.16, c0: 1.6, c1: 6.5, q: 0.9, noise: 1.2},
-  har: {wave: 'square',   gain: 0.06, att: 0.06,  rel: 0.22, c0: 1.2, c1: 3.2, q: 0.6, noise: 0.9},
-  bas: {wave: 'sawtooth', gain: 0.25, att: 0.05,  rel: 0.2,  c0: 2.5, c1: 7,   q: 0.7, noise: 0.7},
-};
-
-/* ===== 乱数（同じ部員は同じ癖を持つように、すべて決定的に引く） ===== */
-function hash(...args){
-  const s = args.join('|');
-  let h = 2166136261 >>> 0;
-  for(let i = 0; i < s.length; i++){ h ^= s.charCodeAt(i); h = Math.imul(h, 16777619); }
-  h ^= h >>> 16; h = Math.imul(h, 2246822507); h ^= h >>> 13; h = Math.imul(h, 3266489909); h ^= h >>> 16;
-  return (h >>> 0) / 4294967296;
-}
-function gauss(...args){
-  const u = Math.max(1e-9, hash(...args, 'u')), v = hash(...args, 'v');
-  return Math.sqrt(-2 * Math.log(u)) * Math.cos(2 * Math.PI * v);
-}
-const clamp = (x, a, b) => Math.max(a, Math.min(b, x));
-const clamp01 = x => clamp(x, 0, 1);
-const clampG = g => clamp(g, -2.5, 2.5);
-const mtof = m => A4 * Math.pow(2, (m - 69) / 12);
-function interp(pts, x){
-  if(x <= pts[0][0]) return pts[0][1];
-  for(let i = 1; i < pts.length; i++){
-    if(x <= pts[i][0]){
-      const [x0, y0] = pts[i-1], [x1, y1] = pts[i];
-      return y0 + (y1 - y0) * (x - x0) / (x1 - x0);
-    }
-  }
-  return pts[pts.length - 1][1];
-}
-function jiOf(m, b){
-  const c = CHORDS.find(c => b >= c.b - 1e-6 && b < c.b + c.d - 1e-6);
-  if(!c) return 0;
-  const iv = ((m - c.root) % 12 + 12) % 12;
-  return JI[c.q][iv] ?? 0;
-}
-
-/* ===== 演奏の生成：楽譜 × 実力 → 1音ずつの「ずれ」 =====
-   音程：部員ごとの癖＋音ごとのばらつき＋出だしのずり上がり。上達すると純正調でハモる
-   リズム：出だしのばらつき、だんだん走る、長い音を保てない
-   音色：息の雑音、音量の揺れ、鼻にかかった響き、音がひっくり返る
-   表現：ベタ打ち（一定の音量・テンポ）→ 理想の抑揚・テンポの揺れ・ビブラート・伴奏とのバランス */
-function perform(st, seed = BAND_SEED){
-  const P = st.pitch / 100, R = st.rhythm / 100, TN = st.tone / 100, E = st.expr / 100;
-  const iP = 1 - P, iR = 1 - R, iT = 1 - TN;
-  const STEP = 0.125, cum = [0];
-  for(let i = 1; i * STEP <= TOTAL + 8; i++){
-    const b = (i - 0.5) * STEP;
-    let m = 1 + E * (interp(RUBATO, b) - 1);
-    m *= 1 - 0.10 * iR * Math.min(b, TOTAL) / TOTAL;
-    m *= 1 + 0.07 * Math.pow(iR, 1.2) * clampG(gauss(seed, 'tempo', Math.floor(b)));
-    cum.push(cum[i-1] + SPB * Math.max(0.6, m) * STEP);
-  }
-  const b2s = b => {
-    const x = Math.max(0, b) / STEP, i = Math.min(Math.floor(x), cum.length - 2);
-    return cum[i] + (cum[i+1] - cum[i]) * (x - i);
-  };
-  const jf = clamp01((P - 0.7) / 0.3);
-  const notes = [];
-  for(const pl of PLAYERS){
-    const tb = TB[pl.part];
-    const tend = clampG(gauss(seed, pl.id, 'tend'));
-    const lag = clampG(gauss(seed, pl.id, 'lag'));
-    const nat = 1.6 * clampG(gauss(seed, pl.id, 'nat'));
-    const scale = pl.part === 'mel' ? 1 : 0.74;
-    pl.events.forEach((ev, i) => {
-      const k = [seed, pl.id, i];
-      const endB = ev.b + ev.d;
-      const t = Math.max(0, b2s(ev.b) + Math.pow(iR, 1.2) * (0.075 * clampG(gauss(...k, 't')) + 0.04 * lag));
-      let d = (b2s(endB) - b2s(ev.b)) * (pl.part === 'mel' ? 0.9 + 0.085 * E : 0.94 + 0.05 * E);
-      if(ev.d >= 2) d *= 1 - 0.32 * iR * (0.5 + 0.5 * hash(...k, 'hold'));
-      if(endB >= TOTAL - 1e-6) d += 1.2 * E;
-      const ji = jiOf(ev.m, ev.b);
-      const miss = nat + 24 * Math.pow(iP, 1.1) * tend + 30 * Math.pow(iP, 1.4) * clampG(gauss(...k, 'p'));
-      const cents = miss + ji * jf;
-      const crackP = (pl.part === 'bas' ? 0.05 : 0.12) * iT * iT;
-      const crack = hash(...k, 'cr') < crackP ? (hash(...k, 'cd') < 0.6 ? 1 : -1) * (320 + 380 * hash(...k, 'ca')) : 0;
-      const vj = 0.1 * iT * clampG(gauss(...k, 'v'));
-      const env = [];
-      const pts = Math.max(2, Math.ceil(d / 0.25));
-      for(let j = 0; j <= pts; j++){
-        const fr = j / pts;
-        let v = 0.58 + (interp(DYN, ev.b + ev.d * fr) * scale - 0.58) * E;
-        if(pl.part === 'mel' && ev.d >= 2) v += 0.07 * E * Math.sin(Math.PI * fr);
-        v *= 1 - 0.38 * Math.pow(iT, 1.3) * fr * fr;
-        env.push([d * fr, clamp(v + vj, 0.04, 1)]);
-      }
-      notes.push({
-        part: pl.part, pid: pl.id, pan: pl.pan, key: k.join(':'),
-        midi: ev.m + TRANS, t, d, cents, err: cents - ji,
-        scoop: -(0.5 + hash(...k, 'sc')) * 50 * iP,
-        settle: 0.03 + 0.17 * iP,
-        sag: -(ev.d >= 1.5 ? 24 : 8) * Math.pow(iT, 1.2),
-        crack, crackDur: 0.06 + 0.04 * hash(...k, 'cl'),
-        vib: pl.part === 'mel' && ev.d >= 1.5 ? 13 * E * Math.sqrt(TN) : 0,
-        vibRate: 5 + 0.7 * hash(...k, 'vr'),
-        att: tb.att * (1 + 0.9 * iT),
-        blat: ev.tie ? 1 : 1 + 0.55 * Math.pow(iT, 1.2),
-        tie: !!ev.tie,
-        bright: 1 + 0.45 * iT,
-        q: tb.q + 6 * Math.pow(iT, 1.5),
-        trem: 0.3 * Math.pow(iT, 1.2),
-        noise: 0.06 + 0.3 * Math.pow(iT, 1.3),
-        env,
-      });
-    });
-  }
-  const bars = [];
-  for(let b = 0; b <= TOTAL; b += 4) bars.push(b2s(b));
-  const ideal = [];
-  for(let b = 0; b <= TOTAL; b += 0.25) ideal.push([b2s(b), interp(DYN, b)]);
-  const total = Math.max(...notes.map(n => n.t + n.d)) + 0.4;
-  return {notes, bars, ideal, total, stats: {...st}};
-}
-
-/* ===== 練習と行事 ===== */
-const MENU = [
-  {id: 'long',   name: 'ロングトーン',         hint: '音色 ↑↑　音程 ↑',        cost: 14, gain: {tone: 24, pitch: 6}},
-  {id: 'tune',   name: 'チューナーで音程合わせ', hint: '音程 ↑↑',               cost: 12, gain: {pitch: 24, tone: 4}},
-  {id: 'harm',   name: 'ハーモニー練習',        hint: '音程 ↑　音色 ↑',          cost: 14, gain: {pitch: 15, tone: 12}},
-  {id: 'metro',  name: 'メトロノーム基礎合奏',   hint: 'リズム ↑↑',              cost: 14, gain: {rhythm: 24, pitch: 5}},
-  {id: 'phrase', name: '歌ってからフレーズ練習', hint: '表現 ↑↑（基礎が要る）',    cost: 12, gain: {expr: 26}, basics: true},
-  {id: 'tutti',  name: '合奏で通す',           hint: '全部 ↑　やる気 ↑',        cost: 18, gain: {pitch: 5, rhythm: 6, tone: 5, expr: 6}, morale: 5},
-  {id: 'rest',   name: 'オフにする',           hint: '体力とやる気が回復',        cost: -38, gain: {}, morale: 12},
-];
-const EVENTS = {
-  2:  {title: '仮入部', text: '1年生が音楽室をのぞきに来た。先輩としての自覚で、やる気が上がった。', morale: 8},
-  4:  {title: 'GW一日練習', text: '今週は朝から夕方まで練習できる。練習の効果が1.5倍、体力の消費も増える。', mult: 1.5, costMult: 1.25},
-  7:  {title: '中間テスト', text: 'テスト期間で部活は停止。練習はできないが、体力は戻る。', forced: true},
-  10: {title: 'パート内のもめごと', text: '1stを誰が吹くかで、トランペットパートがぎくしゃくしている。やる気が下がった。', morale: -12},
-  13: {title: '夏合宿', text: '合宿所で朝から晩まで合奏。練習の効果が1.6倍、体力の消費も1.3倍。', mult: 1.6, costMult: 1.3},
-  14: {title: '夏合宿・後半', text: '合宿の後半。疲れはたまるが、音はまとまってくる。練習の効果が1.6倍。', mult: 1.6, costMult: 1.3},
-};
-const MILESTONES = [
-  {k: 'tone',   at: 40, text: '音の出だしが安定してきた。ひっくり返る音が減った。'},
-  {k: 'pitch',  at: 50, text: '1stと2ndのユニゾンで、うなりがゆっくりになってきた。'},
-  {k: 'rhythm', at: 50, text: '長い音を最後まで伸ばせるようになってきた。'},
-  {k: 'expr',   at: 40, text: 'フレーズの山をどこに作るか、みんなで話し合うようになった。'},
-  {k: 'pitch',  at: 75, text: 'ハーモニー練習で、和音がふっと「鳴った」。第3音を少し低めに取ると響くらしい。'},
-  {k: 'rhythm', at: 75, text: 'テンポが走らなくなった。縦の線がそろってきた。'},
-  {k: 'tone',   at: 75, text: '柔らかくて芯のある音になってきた。'},
-  {k: 'expr',   at: 75, text: 'Largoの最後、指揮を見なくても全員で自然にテンポを落とせた。'},
-];
-const JUDGES = [
-  {name: '審査員1（音程・響き）', w: {pitch: .45, tone: .3, rhythm: .15, expr: .1}, focus: ['pitch', 'tone']},
-  {name: '審査員2（音楽表現）', w: {expr: .45, tone: .2, pitch: .2, rhythm: .15}, focus: ['expr', 'tone']},
-  {name: '審査員3（アンサンブル）', w: {rhythm: .4, pitch: .3, expr: .15, tone: .15}, focus: ['rhythm', 'pitch']},
-];
-const WEAK = {
-  pitch: 'ユニゾンのうなりが最後まで気になりました。チューナーを見るだけでなく、隣の音を聴き合いましょう。',
-  rhythm: 'テンポが前に流れ、長い音が保たれていません。縦の線をそろえましょう。',
-  tone: '音の出だしが不安定で、息の支えが足りない印象です。',
-  expr: '正確ですが、音楽が平板に聞こえます。フレーズの山をどこに作るか考えてみてください。',
-};
-const STRONG = {
-  pitch: '和音の第3音が美しく、響きが豊かでした。',
-  rhythm: '縦の線がよくそろい、安定感がありました。',
-  tone: '柔らかく芯のある音色で、Largoによく合っていました。',
-  expr: '歌心があり、最後のリタルダンドが印象的でした。',
-};
-
-const wkLabel = w => w >= WEEKS ? '8月 県大会' : `${4 + Math.floor(w / 4)}月 第${w % 4 + 1}週`;
-const wkShort = w => w >= WEEKS ? '8月本番' : `${4 + Math.floor(w / 4)}月${w % 4 + 1}週`;
-
-function freshState(){
-  return {
-    week: 0, stats: {...START}, stamina: 100, morale: 70, lastDelta: {}, flags: {},
-    log: [{w: 0, text: '新体制スタート。コンクールの自由曲は《新世界より》第2楽章に決まった。最初の合奏を録音した（4月の録音）。'}],
-    contest: null, result: null,
-  };
-}
-
-function practiceWeek(s0, id){
-  const s = JSON.parse(JSON.stringify(s0));
-  const w = s.week, ev = EVENTS[w] || {};
-  const add = text => s.log.push({w, text});
-  if(id === 'test'){
-    s.stamina += 30; s.morale += 2; s.lastDelta = {};
-    add('テスト期間。楽器には触らず、みんなで図書室にこもった。');
-  } else {
-    const m = MENU.find(x => x.id === id);
-    const tired = s.stamina < 30;
-    const eff = (0.6 + 0.4 * s.morale / 100) * (tired ? 0.5 : 1) * (ev.mult || 1);
-    const basics = (s.stats.pitch + s.stats.rhythm + s.stats.tone) / 300;
-    const d = {};
-    for(const [k, g] of Object.entries(m.gain)){
-      let x = g * eff * (1 - s.stats[k] / 170) * (0.85 + 0.3 * hash(BAND_SEED, 'wk', w, id, k));
-      if(m.basics) x *= clamp((basics - 0.1) / 0.5, 0.1, 1);
-      d[k] = Math.max(0, Math.round(x));
-      s.stats[k] = clamp(s.stats[k] + d[k], 0, 100);
-    }
-    s.lastDelta = d;
-    s.stamina -= m.cost > 0 ? m.cost * (ev.costMult || 1) : m.cost;
-    s.morale += (m.morale || 0) - (id === 'rest' ? 0 : tired ? 8 : 3);
-    const gains = Object.entries(d).filter(([, v]) => v > 0).map(([k, v]) => `${STAT_LABEL[k]}+${v}`).join('　');
-    add(id === 'rest' ? 'オフ。しっかり休んだ。' : `${m.name}。${gains || '手応えなし。'}`);
-    if(tired && id !== 'rest') add('疲れがたまっていて、身が入らなかった。');
-    if(m.basics && basics < 0.4) add('歌ってはみたけれど、楽器を持つと音程とリズムで手一杯。基礎がもう少し要りそうだ。');
-    for(const ms of MILESTONES){
-      const f = ms.k + ms.at;
-      if(!s.flags[f] && s.stats[ms.k] >= ms.at){ s.flags[f] = true; add(ms.text); }
-    }
-  }
-  s.stamina = clamp(s.stamina + 6, 0, 100);
-  s.morale = clamp(s.morale, 0, 100);
-  s.week++;
-  const nx = EVENTS[s.week];
-  if(nx){
-    if(nx.morale) s.morale = clamp(s.morale + nx.morale, 0, 100);
-    s.log.push({w: s.week, text: `【${nx.title}】${nx.text}`});
-  }
-  if(s.week === WEEKS) s.log.push({w: s.week, text: 'いよいよ県大会。'});
-  return s;
-}
-
-const nervesOf = s => (s.morale < 45 ? 7 : s.morale < 65 ? 4 : 1) + (s.stamina < 30 ? 4 : 0);
-function contestStats(s){
-  const n = nervesOf(s), o = {};
-  for(const k of STAT_KEYS) o[k] = clamp(s.stats[k] - n, 0, 100);
-  return o;
-}
-function judge(st){
-  const judges = JUDGES.map((j, i) => {
-    let sc = 0;
-    for(const k of STAT_KEYS) sc += j.w[k] * st[k];
-    sc = Math.round(clamp(sc + 3 * clampG(gauss(BAND_SEED, 'judge', i)), 0, 100));
-    const weakest = j.focus.reduce((a, b) => st[a] <= st[b] ? a : b);
-    const strongest = j.focus.reduce((a, b) => st[a] >= st[b] ? a : b);
-    const comment = st[weakest] < 70 ? WEAK[weakest] : STRONG[strongest];
-    return {name: j.name, score: sc, grade: sc >= 78 ? 'A' : sc >= 60 ? 'B' : 'C', comment};
-  });
-  const avg = judges.reduce((a, j) => a + j.score, 0) / judges.length;
-  const award = avg >= 72 && judges.every(j => j.grade !== 'C') ? 'gold' : avg >= 56 ? 'silver' : 'bronze';
-  return {judges, avg, award, rep: award === 'gold' && judges.every(j => j.grade === 'A')};
-}
-
-/* ===== 音を鳴らす（Web Audio） ===== */
-const NOISE = new WeakMap();
-function noiseBuf(ac){
-  let b = NOISE.get(ac);
-  if(!b){
-    b = ac.createBuffer(1, ac.sampleRate * 2, ac.sampleRate);
-    const d = b.getChannelData(0);
-    for(let i = 0; i < d.length; i++) d[i] = Math.random() * 2 - 1;
-    NOISE.set(ac, b);
-  }
-  return b;
-}
-function makeIR(ac, sec){
-  const sr = ac.sampleRate, len = Math.floor(sr * sec);
-  const buf = ac.createBuffer(2, len, sr);
-  for(let ch = 0; ch < 2; ch++){
-    const d = buf.getChannelData(ch);
-    let lp = 0;
-    for(let i = 0; i < len; i++){
-      const t = i / len;
-      lp += (Math.random() * 2 - 1 - lp) * (0.5 - 0.42 * t);
-      d[i] = lp * Math.pow(1 - t, 2.8) * (i < sr * 0.012 ? i / (sr * 0.012) : 1);
-    }
-  }
-  return buf;
-}
-// 音楽ホールっぽい残響とコンプレッサーを通す出口
-function makeChain(ac){
-  const input = ac.createGain(); input.gain.value = 1.4;
-  const comp = ac.createDynamicsCompressor();
-  comp.threshold.value = -16; comp.knee.value = 10; comp.ratio.value = 3; comp.attack.value = 0.01; comp.release.value = 0.25;
-  const conv = ac.createConvolver(); conv.buffer = makeIR(ac, 2.4);
-  const wet = ac.createGain(); wet.gain.value = 0.34;
-  const dry = ac.createGain(); dry.gain.value = 0.85;
-  input.connect(dry); input.connect(conv); conv.connect(wet);
-  dry.connect(comp); wet.connect(comp); comp.connect(ac.destination);
-  return input;
-}
-function scheduleNote(ac, bus, n, t0, srcs){
-  const tb = TB[n.part];
-  const s = t0 + n.t, e = s + n.d;
-  const f0 = mtof(n.midi);
-  const osc = ac.createOscillator();
-  osc.type = tb.wave; osc.frequency.value = f0;
-
-  // 音程：ひっくり返り → ずり上がり → 落ち着く → 息が続かず下がる
-  const dt = osc.detune;
-  let ts = s;
-  if(n.crack){
-    dt.setValueAtTime(n.cents + n.crack, s);
-    dt.setValueAtTime(n.cents + n.crack, s + n.crackDur);
-    ts = s + n.crackDur + 0.02;
-    dt.linearRampToValueAtTime(n.cents + n.scoop * 0.4, ts);
-  } else {
-    dt.setValueAtTime(n.cents + n.scoop, s);
-  }
-  const tSet = Math.min(ts + n.settle, e);
-  dt.linearRampToValueAtTime(n.cents, tSet);
-  if(n.sag && e > tSet + 0.05) dt.linearRampToValueAtTime(n.cents + n.sag, e);
-  if(n.vib > 0.5){
-    const lfo = ac.createOscillator(); lfo.frequency.value = n.vibRate;
-    const lg = ac.createGain();
-    const on = s + Math.min(0.45, n.d * 0.35);
-    lg.gain.setValueAtTime(0, s);
-    lg.gain.setValueAtTime(0, on);
-    lg.gain.linearRampToValueAtTime(n.vib, Math.min(e, on + 0.5));
-    lfo.connect(lg); lg.connect(dt);
-    lfo.start(s); lfo.stop(e + tb.rel + 0.1);
-    srcs.push(lfo);
-  }
-
-  // 音量と明るさ：強く吹くほど明るい音になる
-  const flt = ac.createBiquadFilter(); flt.type = 'lowpass'; flt.Q.value = n.q;
-  const amp = ac.createGain();
-  const lvl = v => tb.gain * (0.05 + 0.95 * Math.pow(v, 1.7));
-  const cut = v => clamp(f0 * (tb.c0 + tb.c1 * v) * n.bright, 120, 11000);
-  const env = n.env, v0 = env[0][1], vEnd = env[env.length - 1][1];
-  amp.gain.setValueAtTime(n.tie ? lvl(v0) * 0.55 : 0, s);
-  amp.gain.linearRampToValueAtTime(lvl(v0) * n.blat, s + n.att);
-  flt.frequency.setValueAtTime(n.tie ? cut(v0) * 0.8 : f0 * 1.1, s);
-  flt.frequency.linearRampToValueAtTime(cut(v0) * Math.sqrt(n.blat), s + n.att * 1.4);
-  const after = s + n.att * 1.4 + 0.04;
-  for(let j = 1; j < env.length; j++){
-    const tt = s + env[j][0];
-    if(tt <= after) continue;
-    amp.gain.linearRampToValueAtTime(lvl(env[j][1]), tt);
-    flt.frequency.linearRampToValueAtTime(cut(env[j][1]), tt);
-  }
-  const relAt = Math.max(e, after + 0.01);
-  amp.gain.linearRampToValueAtTime(lvl(vEnd), relAt);
-  amp.gain.linearRampToValueAtTime(0.0001, relAt + tb.rel);
-  const end = relAt + tb.rel + 0.05;
-
-  osc.connect(flt); flt.connect(amp);
-  let out = amp;
-  if(n.trem > 0.02){
-    const wob = ac.createGain();
-    wob.gain.setValueAtTime(1, s);
-    let k = 1;
-    for(let tt = s + 0.085; tt < relAt; tt += 0.085, k++){
-      wob.gain.linearRampToValueAtTime(1 + n.trem * (hash(n.key, 'w', k) * 2 - 1), tt);
-    }
-    amp.connect(wob); out = wob;
-  }
-  if(n.noise > 0.01){
-    const src = ac.createBufferSource(); src.buffer = noiseBuf(ac); src.loop = true;
-    const bp = ac.createBiquadFilter(); bp.type = 'bandpass'; bp.frequency.value = Math.min(9000, f0 * 1.7); bp.Q.value = 1.1;
-    const ng = ac.createGain(); ng.gain.value = n.noise * tb.noise;
-    src.connect(bp); bp.connect(ng); ng.connect(amp);
-    src.start(s, hash(n.key, 'no') * 1.5); src.stop(end);
-    srcs.push(src);
-  }
-  if(ac.createStereoPanner){
-    const p = ac.createStereoPanner(); p.pan.value = n.pan;
-    out.connect(p); out = p;
-  }
-  out.connect(bus);
-  osc.start(s); osc.stop(end);
-  srcs.push(osc);
-}
-function scheduleAll(ac, bus, perf, t0){
-  const srcs = [];
-  for(const n of perf.notes) scheduleNote(ac, bus, n, t0, srcs);
-  return srcs;
-}
-
-/* ===== 画面 ===== */
-const $ = s => document.querySelector(s);
-const SAVE_KEY = 'suibu-nisshi-v1';
-const NAME = ['C', 'Des', 'D', 'Es', 'E', 'F', 'Ges', 'G', 'As', 'A', 'B', 'H'];
-const PRESETS = [
-  {name: '入部直後', st: {...START}},
-  {name: '正確だけど棒読み', st: {pitch: 100, rhythm: 100, tone: 100, expr: 0}},
-  {name: '気持ちだけ先走り', st: {pitch: 25, rhythm: 30, tone: 35, expr: 90}},
-  {name: '音程だけ苦手', st: {pitch: 30, rhythm: 95, tone: 90, expr: 85}},
-  {name: '全国大会レベル', st: {pitch: 100, rhythm: 100, tone: 100, expr: 100}},
-];
-let state = null, perfNow = null, perfApril = null, shown = null, shownLabel = '';
-let ac = null, chainIn = null, playing = null, raf = 0;
-let labStats = {...PRESETS[1].st};
-const esc = s => String(s).replace(/[&<>"]/g, c => ({'&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;'}[c]));
-
-function save(){ try{ localStorage.setItem(SAVE_KEY, JSON.stringify(state)); }catch(e){} }
-function load(){
-  try{
-    const s = JSON.parse(localStorage.getItem(SAVE_KEY) || 'null');
-    if(s && s.stats && typeof s.week === 'number' && Array.isArray(s.log)) return s;
-  }catch(e){}
-  return null;
-}
-function tok(){
-  const cs = getComputedStyle(document.documentElement), g = n => cs.getPropertyValue(n).trim();
-  return {
-    ink: g('--ink'), soft: g('--ink-soft'), rule: g('--rule'), sheet: g('--sheet'), brass: g('--brass'), navy: g('--navy'),
-    good: g('--good'), warn: g('--warn'), bad: g('--bad'), lcd: g('--lcd'), lcdInk: g('--lcd-ink'), lcdDim: g('--lcd-dim'),
-    fBody: g('--f-body'), fLcd: g('--f-lcd'), fHand: g('--f-hand'),
-  };
-}
-function fitCanvas(cv, H){
-  const W = Math.max(200, cv.parentElement.clientWidth - (cv.id === 'tuner' ? 12 : 0));
-  const dpr = Math.min(2, window.devicePixelRatio || 1);
-  if(cv.width !== Math.round(W * dpr) || cv.height !== Math.round(H * dpr)){
-    cv.width = Math.round(W * dpr); cv.height = Math.round(H * dpr);
-  }
-  const g = cv.getContext('2d');
-  g.setTransform(dpr, 0, 0, dpr, 0, 0);
-  g.clearRect(0, 0, W, H);
-  return {g, W, H};
-}
-const errColor = (C, e) => Math.abs(e) < 5 ? C.good : Math.abs(e) < 15 ? C.warn : C.bad;
-function rrect(g, x, y, w, h, r){
-  r = Math.min(r, w / 2, h / 2);
-  g.beginPath();
-  g.moveTo(x + r, y); g.arcTo(x + w, y, x + w, y + h, r); g.arcTo(x + w, y + h, x, y + h, r);
-  g.arcTo(x, y + h, x, y, r); g.arcTo(x, y, x + w, y, r); g.closePath();
-}
-
-// 演奏ロール：上段メロディ（音程のずれを拡大）、中段伴奏、下段抑揚
-function drawRoll(perf, playT = -1){
-  const {g, W, H} = fitCanvas($('#roll'), 300);
-  const C = tok();
-  const L = 40, Rm = 8;
-  const X = s => L + (W - L - Rm) * s / perf.total;
-  const MA = {y: 22, h: 128}, AC = {y: 164, h: 60}, DY = {y: 240, h: 50};
-  const lo = 71.6, hi = 81.4, EXAG = 2.5;
-  const yM = m => MA.y + MA.h - (m - lo) / (hi - lo) * MA.h;
-  const yA = m => AC.y + AC.h - (m - 34) / (76 - 34) * AC.h;
-  const yD = v => DY.y + DY.h - v * DY.h;
-  g.textBaseline = 'middle';
-  g.font = `500 11px ${C.fBody}`;
-
-  g.lineWidth = 1;
-  for(const [m, nm] of [[73, 'Des'], [75, 'Es'], [77, 'F'], [78, 'Ges'], [80, 'As']]){
-    g.strokeStyle = C.rule;
-    g.beginPath(); g.moveTo(L, yM(m) + .5); g.lineTo(W - Rm, yM(m) + .5); g.stroke();
-    g.fillStyle = C.soft; g.textAlign = 'left'; g.fillText(nm, 4, yM(m));
-  }
-  g.fillText('伴奏', 4, AC.y + AC.h / 2);
-  g.fillText('抑揚', 4, DY.y + 8);
-  perf.bars.forEach((s, i) => {
-    const x = Math.round(X(s)) + .5;
-    g.strokeStyle = C.rule;
-    g.beginPath(); g.moveTo(x, MA.y - 8); g.lineTo(x, DY.y + DY.h); g.stroke();
-    if(i < perf.bars.length - 1){ g.fillStyle = C.soft; g.textAlign = 'left'; g.fillText(String(i + 1), x + 4, MA.y - 12); }
-  });
-  g.strokeStyle = C.rule;
-  g.beginPath(); g.moveTo(L, DY.y + DY.h + .5); g.lineTo(W - Rm, DY.y + DY.h + .5); g.stroke();
-
-  for(const n of perf.notes){
-    if(n.part === 'mel') continue;
-    g.globalAlpha = 0.55;
-    g.fillStyle = errColor(C, n.err);
-    rrect(g, X(n.t), yA(n.midi + n.err * 2 / 100) - 1.5, Math.max(2, X(n.t + n.d) - X(n.t)), 3, 1.5); g.fill();
-  }
-  g.globalAlpha = 1;
-  for(const n of perf.notes){
-    if(n.part !== 'mel') continue;
-    const x0 = X(n.t), w = Math.max(3, X(n.t + n.d) - x0), y = yM(n.midi + n.err * EXAG / 100);
-    const col = errColor(C, n.err);
-    rrect(g, x0, y - 4, w, 8, 3);
-    if(n.pid === 0){ g.fillStyle = col; g.fill(); }
-    else { g.strokeStyle = col; g.lineWidth = 1.5; g.stroke(); }
-    if(n.crack){
-      g.fillStyle = C.bad;
-      g.beginPath(); g.moveTo(x0, y - 7); g.lineTo(x0 + 6, y - 14); g.lineTo(x0 - 3, y - 14); g.closePath(); g.fill();
-    }
-  }
-
-  g.font = `italic 600 12px ${C.fHand}`; g.fillStyle = C.soft; g.textAlign = 'right';
-  for(const [v, nm] of [[.8, 'f'], [.5, 'mf'], [.2, 'p']]) g.fillText(nm, L - 6, yD(v));
-  g.strokeStyle = C.brass; g.lineWidth = 1.5; g.setLineDash([4, 4]);
-  g.beginPath();
-  perf.ideal.forEach(([s, v], i) => i ? g.lineTo(X(s), yD(v)) : g.moveTo(X(s), yD(v)));
-  g.stroke(); g.setLineDash([]);
-  g.strokeStyle = C.ink; g.lineWidth = 2;
-  for(const n of perf.notes){
-    if(n.pid !== 0) continue;
-    g.beginPath();
-    n.env.forEach(([tt, v], i) => i ? g.lineTo(X(n.t + tt), yD(v)) : g.moveTo(X(n.t + tt), yD(v)));
-    g.stroke();
-  }
-
-  if(playT >= 0){
-    const x = X(Math.min(playT, perf.total));
-    g.strokeStyle = C.brass; g.lineWidth = 2;
-    g.beginPath(); g.moveTo(x, MA.y - 16); g.lineTo(x, DY.y + DY.h); g.stroke();
-  }
-}
-
-function centsAt(n, x){
-  if(n.crack && x < n.crackDur + 0.02) return n.cents + n.crack;
-  const x0 = n.crack ? n.crackDur + 0.02 : 0;
-  const from = n.cents + (n.crack ? n.scoop * 0.4 : n.scoop);
-  const xs = x0 + n.settle;
-  let v = x < xs ? from + (n.cents - from) * (x - x0) / n.settle
-                 : n.cents + n.sag * Math.min(1, (x - xs) / Math.max(0.05, n.d - xs));
-  if(n.vib > 0.5){
-    const on = Math.min(0.45, n.d * 0.35);
-    if(x > on) v += n.vib * Math.min(1, (x - on) / 0.5) * Math.sin(2 * Math.PI * n.vibRate * x);
-  }
-  return v;
-}
-function activeMel(perf, τ){
-  const pick = pid => perf.notes.find(n => n.pid === pid && τ >= n.t && τ < n.t + n.d);
-  const n1 = pick(0), n2 = pick(1);
-  if(!n1 && !n2) return null;
-  return {n1, n2, c1: n1 ? centsAt(n1, τ - n1.t) : null, c2: n2 ? centsAt(n2, τ - n2.t) : null};
-}
-function drawTuner(a){
-  const {g, W, H} = fitCanvas($('#tuner'), 124);
-  const C = tok();
-  const cx = W / 2, cy = H - 10, R = Math.min(W / 2 - 30, H - 30);
-  const ang = c => (-90 + clamp(c, -50, 50) * 0.9) * Math.PI / 180;
-  for(let c = -50; c <= 50; c += 5){
-    const a = ang(c), r0 = R - (c % 10 === 0 ? 12 : 6);
-    g.strokeStyle = c === 0 ? C.lcdInk : C.lcdDim; g.lineWidth = c === 0 ? 2 : 1.2;
-    g.beginPath(); g.moveTo(cx + Math.cos(a) * r0, cy + Math.sin(a) * r0); g.lineTo(cx + Math.cos(a) * R, cy + Math.sin(a) * R); g.stroke();
-  }
-  g.fillStyle = C.lcdDim; g.font = `11px ${C.fLcd}`; g.textAlign = 'center'; g.textBaseline = 'middle';
-  for(const c of [-50, 50]){ const a = ang(c); g.fillText(c > 0 ? '+50' : '-50', cx + Math.cos(a) * (R + 14), cy + Math.sin(a) * (R + 14) + 4); }
-  g.fillText('0', cx, cy - R - 10);
-  const needle = (c, width, len, alpha) => {
-    const a = ang(c ?? 0);
-    g.globalAlpha = c == null ? 0.25 : alpha;
-    g.strokeStyle = C.lcdInk; g.lineWidth = width; g.lineCap = 'round';
-    g.beginPath(); g.moveTo(cx, cy); g.lineTo(cx + Math.cos(a) * len, cy + Math.sin(a) * len); g.stroke();
-    g.globalAlpha = 1;
-  };
-  needle(a?.c2, 1.5, R * 0.86, 0.75);
-  needle(a?.c1, 3, R - 2, 1);
-  g.fillStyle = C.lcdInk; g.beginPath(); g.arc(cx, cy, 4, 0, Math.PI * 2); g.fill();
-
-  const midi = a?.n1?.midi ?? a?.n2?.midi;
-  g.textAlign = 'left';
-  g.font = `30px ${C.fLcd}`; g.fillStyle = a ? C.lcdInk : C.lcdDim;
-  g.fillText(midi != null ? NAME[midi % 12] : 'B', 10, 26);
-  g.font = `11px ${C.fLcd}`; g.fillText('A4=442Hz', 10, 50);
-  const fmt = c => c == null ? '  --' : `${c >= 0 ? '+' : '-'}${String(Math.round(Math.abs(c))).padStart(3, ' ')}`;
-  g.textAlign = 'right'; g.font = `14px ${C.fLcd}`; g.fillStyle = C.lcdInk;
-  g.fillText(`1st ${fmt(a?.c1)}c`, W - 10, 18);
-  g.fillText(`2nd ${fmt(a?.c2)}c`, W - 10, 36);
-  let beat = '';
-  if(a?.n1 && a?.n2 && a.n1.midi === a.n2.midi){
-    const f = mtof(a.n1.midi);
-    const hz = Math.abs(f * Math.pow(2, a.c1 / 1200) - f * Math.pow(2, a.c2 / 1200));
-    beat = hz < 0.8 ? 'うなり ほぼなし' : `うなり ${hz.toFixed(1)}回/秒`;
-  }
-  g.font = `500 12px ${C.fBody}`;
-  g.fillText(beat, W - 10, 56);
-}
-
-function setShown(perf, label){
-  shown = perf; shownLabel = label;
-  drawRoll(perf);
-  if(!playing) $('#nowPlaying').textContent = `表示中：${label}`;
-}
-const nowLabel = () => `いまの音（${wkLabel(Math.min(state.week, WEEKS))}）`;
-
-function ensureAudio(){
-  if(ac) return true;
-  const AC = window.AudioContext || window.webkitAudioContext;
-  if(!AC){ $('#nowPlaying').textContent = 'このブラウザでは音を鳴らせません。'; return false; }
-  ac = new AC();
-  chainIn = makeChain(ac);
-  return true;
-}
-function play(perf, label, onEnd){
-  if(!ensureAudio()) return;
-  stop();
-  if(ac.state === 'suspended') ac.resume();
-  const bus = ac.createGain(); bus.connect(chainIn);
-  const t0 = ac.currentTime + 0.15;
-  const srcs = scheduleAll(ac, bus, perf, t0);
-  playing = {perf, label, bus, srcs, t0, onEnd};
-  shown = perf; shownLabel = label;
-  $('#btnStop').disabled = false;
-  $('#nowPlaying').textContent = `再生中：${label}`;
-  cancelAnimationFrame(raf);
-  raf = requestAnimationFrame(loop);
-}
-function release(p, hard){
-  if(hard){
-    const now = ac.currentTime;
-    p.bus.gain.setTargetAtTime(0, now, 0.05);
-    for(const s of p.srcs){ try{ s.stop(now + 0.3); }catch(e){} }
-  }
-  setTimeout(() => { try{ p.bus.disconnect(); }catch(e){} }, hard ? 600 : 3000);
-}
-function stop(){
-  if(!playing) return;
-  const p = playing; playing = null;
-  cancelAnimationFrame(raf);
-  release(p, true);
-  $('#btnStop').disabled = true;
-  $('#nowPlaying').textContent = `表示中：${p.label}`;
-  drawRoll(shown); drawTuner(null);
-}
-function loop(){
-  if(!playing) return;
-  const p = playing, τ = ac.currentTime - p.t0;
-  drawRoll(p.perf, τ);
-  drawTuner(τ >= 0 ? activeMel(p.perf, τ) : null);
-  if(τ > p.perf.total + 0.6){
-    playing = null;
-    release(p, false);
-    $('#btnStop').disabled = true;
-    $('#nowPlaying').textContent = `表示中：${p.label}（再生おわり）`;
-    drawRoll(shown); drawTuner(null);
-    if(p.onEnd) p.onEnd();
-    return;
-  }
-  raf = requestAnimationFrame(loop);
-}
-
-function renderCal(){
-  const ol = $('#cal');
-  ol.innerHTML = '';
-  for(let i = 0; i <= WEEKS; i++){
-    const li = document.createElement('li');
-    if(i === WEEKS){
-      li.className = 'final'; li.textContent = '本番'; li.title = '8月 県大会';
-      if(state.week >= WEEKS) li.classList.add('now');
-    } else {
-      if(i < state.week) li.classList.add('done');
-      if(i === state.week) li.classList.add('now');
-      li.title = wkLabel(i) + (EVENTS[i] ? `：${EVENTS[i].title}` : '');
-      if(EVENTS[i]) li.classList.add('ev');
-      if(i % 4 === 0){ const mo = document.createElement('span'); mo.className = 'mo'; mo.textContent = `${4 + i / 4}月`; li.appendChild(mo); }
-    }
-    ol.appendChild(li);
-  }
-  $('#weekNow').textContent = wkLabel(state.week);
-  $('#weeksLeft').textContent = state.week >= WEEKS ? '本番当日' : `本番まであと${WEEKS - state.week}週`;
-}
-function renderStats(){
-  $('#stats').innerHTML = STAT_KEYS.map(k => {
-    const v = Math.round(state.stats[k]), d = state.lastDelta?.[k];
-    return `<div class="stat"><span class="nm">${STAT_LABEL[k]}</span><span class="track"><span class="fill" style="width:${v}%"></span></span><span class="val">${v}</span><span class="ds">${STAT_DESC[k]}${d ? `<span class="delta">+${d}</span>` : ''}</span></div>`;
-  }).join('');
-  const vital = (nm, v) => {
-    const c = v >= 60 ? 'good' : v >= 30 ? 'warn' : 'bad';
-    return `<div class="vital"><span class="row"><span>${nm}</span><b>${Math.round(v)}</b></span><span class="track"><span class="fill ${c}" style="width:${v}%"></span></span></div>`;
-  };
-  $('#vitals').innerHTML = vital('体力', state.stamina) + vital('やる気', state.morale);
-}
-function renderMenu(){
-  const ev = EVENTS[state.week], note = $('#eventNote'), menu = $('#menu');
-  $('#h-week').textContent = state.week >= WEEKS ? '8月 県大会' : `${wkLabel(state.week)}の練習`;
-  if(state.week < WEEKS && ev){
-    note.hidden = false;
-    note.innerHTML = `<span class="tag">${esc(ev.title)}</span><span>${esc(ev.text)}</span>`;
-  } else note.hidden = true;
-  if(state.week >= WEEKS){ renderContest(menu); return; }
-  if(ev?.forced){
-    menu.innerHTML = `<button class="mbtn wide" data-id="test" type="button"><b>テスト勉強に集中する</b><span>1週すすむ・体力が回復</span></button>`;
-    return;
-  }
-  const tired = state.stamina < 30;
-  menu.innerHTML = MENU.map(m => {
-    const cost = m.cost > 0 ? `体力 −${Math.round(m.cost * (ev?.costMult || 1))}` : `体力 +${-m.cost}`;
-    return `<button class="mbtn${m.id === 'rest' ? ' rest' : ''}" data-id="${m.id}" type="button"><b>${m.name}</b><span>${m.hint}</span><span class="cost">${cost}</span></button>`;
-  }).join('') + (tired ? `<p class="small" style="grid-column:1/-1">体力が30を切ると練習の効果が半分になります。</p>` : '');
-}
-function renderContest(menu){
-  const r = state.result;
-  if(!r){
-    const n = nervesOf(state);
-    const mood = n <= 1 ? 'やる気は十分。落ち着いて本番に臨めそうだ。' : n <= 5 ? '少し緊張している。本番では実力より少し下がりそうだ。' : '疲れと不安で、本番は実力を出しきれないかもしれない。';
-    menu.innerHTML = `<div class="contest"><p>いよいよ県大会。ステージでの演奏は一回きりです。</p><p class="small">${mood}（本番の緊張 −${n}）</p><button class="btn primary" data-act="contest" type="button">本番の演奏をはじめる</button></div>`;
-  } else if(!r.revealed){
-    menu.innerHTML = `<div class="contest"><p>ステージで演奏中…</p><button class="btn" data-act="reveal" type="button">結果を見る</button></div>`;
-  } else {
-    const nm = {gold: '金賞', silver: '銀賞', bronze: '銅賞'}[r.award];
-    const head = r.rep ? '県代表に選ばれた。支部大会へ。' : r.award === 'gold' ? '金賞。でも代表には届かなかった（ダメ金）。' : r.award === 'silver' ? '銀賞。手応えはあった。' : '銅賞。来年こそ。';
-    menu.innerHTML = `<div class="result" style="--award:var(--${r.award})">
-      <div class="award"><span class="stamp">${nm}</span><div><b>${head}</b><p class="small">審査員平均 ${r.avg.toFixed(1)}点・本番の緊張 −${state.contest.nerves}</p></div></div>
-      <ol class="judges">${r.judges.map(j => `<li><span class="grade">${j.grade}</span><p class="cmt"><small>${esc(j.name)}・${j.score}点</small>${esc(j.comment)}</p></li>`).join('')}</ol>
-      <div class="transport"><button class="btn primary" data-act="playContest" type="button">▶ 本番の録音</button><button class="btn" data-act="playApril" type="button">▶ 4月の録音</button></div>
-    </div>`;
-  }
-}
-function renderLog(){
-  $('#log').innerHTML = state.log.slice().reverse().slice(0, 60)
-    .map(e => `<li><time>${wkShort(e.w)}</time><span>${esc(e.text)}</span></li>`).join('');
-}
-function renderAll(){
-  renderCal(); renderStats(); renderMenu(); renderLog();
-  $('#btnNow').textContent = state.week >= WEEKS ? '▶ 本番前の音で合奏' : '▶ いまの音で合奏';
-}
-
-function refreshNow(){
-  perfNow = perform(state.stats);
-  if(!playing) setShown(perfNow, nowLabel());
-}
-function onMenu(e){
-  const b = e.target.closest('button');
-  if(!b) return;
-  if(b.dataset.id){
-    state = practiceWeek(state, b.dataset.id);
-    save(); renderAll(); refreshNow();
-    return;
-  }
-  const act = b.dataset.act;
-  if(act === 'contest'){
-    const cs = contestStats(state);
-    state.contest = {stats: cs, nerves: nervesOf(state)};
-    state.result = {...judge(cs), revealed: false};
-    save(); renderMenu();
-    play(perform(cs), '県大会 本番', reveal);
-  } else if(act === 'reveal'){
-    reveal();
-  } else if(act === 'playContest' && state.contest){
-    play(perform(state.contest.stats), '県大会 本番');
-  } else if(act === 'playApril'){
-    play(perfApril, '4月の録音');
-  }
-}
-function reveal(){
-  if(!state.result || state.result.revealed) return;
-  state.result.revealed = true;
-  const nm = {gold: '金賞', silver: '銀賞', bronze: '銅賞'}[state.result.award];
-  state.log.push({w: WEEKS, text: `県大会の結果は${nm}${state.result.rep ? '、県代表' : ''}。`});
-  save(); renderMenu(); renderLog();
-}
-
-function buildLab(){
-  $('#presets').innerHTML = PRESETS.map((p, i) => `<button class="chip" type="button" data-p="${i}" aria-pressed="${i === 1}">${p.name}</button>`).join('');
-  $('#sliders').innerHTML = STAT_KEYS.map(k => `<div class="sl"><label for="lab-${k}">${STAT_LABEL[k]}<output id="out-${k}" for="lab-${k}">${labStats[k]}</output></label><input type="range" id="lab-${k}" min="0" max="100" step="1" value="${labStats[k]}"></div>`).join('');
-  $('#presets').addEventListener('click', e => {
-    const b = e.target.closest('[data-p]');
-    if(!b) return;
-    labStats = {...PRESETS[+b.dataset.p].st};
-    for(const k of STAT_KEYS){ $(`#lab-${k}`).value = labStats[k]; $(`#out-${k}`).textContent = labStats[k]; }
-    document.querySelectorAll('#presets .chip').forEach(c => c.setAttribute('aria-pressed', String(c === b)));
-    const p = perform(labStats);
-    if(!playing) setShown(p, `ラボ：${b.textContent}`);
-  });
-  $('#sliders').addEventListener('input', e => {
-    const k = e.target.id.replace('lab-', '');
-    if(!STAT_KEYS.includes(k)) return;
-    labStats[k] = +e.target.value;
-    $(`#out-${k}`).textContent = labStats[k];
-    document.querySelectorAll('#presets .chip').forEach(c => c.setAttribute('aria-pressed', 'false'));
-    if(!playing) setShown(perform(labStats), 'ラボの設定');
-  });
-}
-const labLabel = () => `ラボ（音程${labStats.pitch}・リズム${labStats.rhythm}・音色${labStats.tone}・表現${labStats.expr}）`;
-
-function start(data){
-  state = (data && data.state) || load() || freshState();
-  perfApril = perform(START);
-  buildLab();
-  $('#menu').addEventListener('click', onMenu);
-  $('#btnNow').addEventListener('click', () => play(perfNow, nowLabel()));
-  $('#btnApril').addEventListener('click', () => play(perfApril, '4月の録音'));
-  $('#btnStop').addEventListener('click', stop);
-  $('#btnLab').addEventListener('click', () => play(perform(labStats), labLabel()));
-  const rs = $('#btnReset');
-  rs.addEventListener('click', () => {
-    if(!rs.classList.contains('armed')){
-      rs.classList.add('armed'); rs.textContent = 'もう一度押すと4月からやり直します';
-      setTimeout(() => { rs.classList.remove('armed'); rs.textContent = '最初からやり直す'; }, 4000);
-      return;
-    }
-    rs.classList.remove('armed'); rs.textContent = '最初からやり直す';
-    stop();
-    state = freshState(); save(); renderAll(); refreshNow();
-  });
-  renderAll();
-  refreshNow();
-  drawTuner(null);
-  const redraw = () => { if(!playing){ drawRoll(shown); drawTuner(null); } };
-  if('ResizeObserver' in window) new ResizeObserver(redraw).observe($('#rollWrap'));
-  else window.addEventListener('resize', redraw);
-  window.matchMedia?.('(prefers-color-scheme: dark)').addEventListener?.('change', redraw);
-  new MutationObserver(redraw).observe(document.documentElement, {attributes: true, attributeFilter: ['data-theme']});
-  document.fonts?.ready.then(redraw);
-}
-window.claude?.hot?.snapshot?.(() => ({state}));
-window.claude?.hot?.ready ? window.claude.hot.ready(start) : start(window.claude?.hot?.data ?? {});
-</script>
+<script src="js/util.js"></script>
+<script src="js/instruments.js"></script>
+<script src="js/venues.js"></script>
+<script src="js/scores.js"></script>
+<script src="js/band.js"></script>
+<script src="js/game.js"></script>
+<script src="js/engine.js"></script>
+<script src="js/ui.js"></script>
 </body>
 </html>
