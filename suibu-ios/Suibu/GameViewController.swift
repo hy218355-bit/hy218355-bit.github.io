@@ -1,5 +1,6 @@
 import UIKit
 import WebKit
+import AVFoundation
 
 /// ゲームを動かす画面。ページからの知らせ（セーブ・再生中かどうか・エラー）を受けて、アプリ側の処理をする
 final class GameViewController: UIViewController {
@@ -9,6 +10,8 @@ final class GameViewController: UIViewController {
     private let selfTest = ProcessInfo.processInfo.arguments.contains("-selftest")
     private let tapFeedback = UIImpactFeedbackGenerator(style: .light)
     private let resultFeedback = UINotificationFeedbackGenerator()
+    /// 録音の保存：ページから少しずつ届く WAV をためておく
+    private var incoming: (id: String, url: URL, handle: FileHandle)?
 
     override func loadView() {
         let config = WKWebViewConfiguration()
@@ -64,6 +67,8 @@ final class GameViewController: UIViewController {
             case "warning": resultFeedback.notificationOccurred(.warning)
             default: tapFeedback.impactOccurred()
             }
+        case "file":
+            receiveFile(msg)
         case "log":
             Self.output("[web] \(msg["msg"] ?? "")")
         case "selftest":
@@ -71,6 +76,80 @@ final class GameViewController: UIViewController {
         default:
             break
         }
+    }
+
+    // MARK: 録音の保存（WAV を受け取り、m4a にして共有シートを出す）
+
+    private func receiveFile(_ msg: [String: Any]) {
+        guard let id = msg["id"] as? String, let i = msg["i"] as? Int, let n = msg["n"] as? Int,
+              let name = msg["name"] as? String, let b64 = msg["data"] as? String,
+              let data = Data(base64Encoded: b64) else { return }
+        if i == 0 {
+            if let old = incoming { try? old.handle.close() }
+            let dir = FileManager.default.temporaryDirectory.appendingPathComponent("recordings", isDirectory: true)
+            try? FileManager.default.createDirectory(at: dir, withIntermediateDirectories: true)
+            let safe = name.replacingOccurrences(of: "/", with: "_")
+            let url = dir.appendingPathComponent(safe)
+            try? FileManager.default.removeItem(at: url)
+            FileManager.default.createFile(atPath: url.path, contents: nil)
+            guard let handle = try? FileHandle(forWritingTo: url) else { fileDone(false); return }
+            incoming = (id, url, handle)
+        }
+        guard let file = incoming, file.id == id else { return }
+        file.handle.write(data)
+        guard i == n - 1 else { return }
+        try? file.handle.close()
+        incoming = nil
+        exportM4A(wav: file.url, title: msg["title"] as? String, artist: msg["artist"] as? String, album: msg["album"] as? String)
+    }
+
+    /// AAC（m4a）にすると WAV の5分の1ほどの大きさになる。題名・学校名・年度も書き込む
+    private func exportM4A(wav: URL, title: String?, artist: String?, album: String?) {
+        let out = wav.deletingPathExtension().appendingPathExtension("m4a")
+        try? FileManager.default.removeItem(at: out)
+        guard let session = AVAssetExportSession(asset: AVURLAsset(url: wav), presetName: AVAssetExportPresetAppleM4A) else {
+            deliver(wav); return
+        }
+        session.outputURL = out
+        session.outputFileType = .m4a
+        let tags: [(AVMetadataIdentifier, String?)] = [(.commonIdentifierTitle, title), (.commonIdentifierArtist, artist), (.commonIdentifierAlbumName, album)]
+        session.metadata = tags.compactMap { key, value in
+            guard let value else { return nil }
+            let item = AVMutableMetadataItem()
+            item.identifier = key
+            item.value = value as NSString
+            item.extendedLanguageTag = "und"
+            return item
+        }
+        session.exportAsynchronously { [weak self] in
+            let ok = session.status == .completed
+            DispatchQueue.main.async {
+                if ok { try? FileManager.default.removeItem(at: wav) }
+                self?.deliver(ok ? out : wav)
+            }
+        }
+    }
+
+    private func deliver(_ url: URL) {
+        if selfTest {
+            // 動作確認：共有シートは出さず、できたファイルの大きさを記録する
+            let size = (try? FileManager.default.attributesOfItem(atPath: url.path)[.size] as? Int) ?? 0
+            Self.output("FILE \(url.pathExtension) \(size) bytes")
+            fileDone(size > 0)
+            return
+        }
+        let share = UIActivityViewController(activityItems: [url], applicationActivities: nil)
+        if let pop = share.popoverPresentationController {
+            pop.sourceView = view
+            pop.sourceRect = CGRect(x: view.bounds.midX, y: view.bounds.maxY - 120, width: 1, height: 1)
+            pop.permittedArrowDirections = []
+        }
+        share.completionWithItemsHandler = { [weak self] _, _, _, _ in self?.fileDone(true) }
+        present(share, animated: true)
+    }
+
+    private func fileDone(_ ok: Bool) {
+        webView.evaluateJavaScript("window.onNativeFileDone && window.onNativeFileDone(\(ok))", completionHandler: nil)
     }
 
     private static func output(_ line: String) {

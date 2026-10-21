@@ -108,16 +108,16 @@ function updateMini(){
 }
 
 /* ===== 再生 ===== */
-function playPerf(perf, label, onEnd){
+function playPerf(perf, label, onEnd, opts = {}){
   if(SAMPLES.use && !SAMPLES.ready && SAMPLES.loading && !SAMPLES.error){
     const token = U.waitPlay = {};
     $('#nowPlaying').textContent = '録音を読み込んでいます…（読み込めたら鳴ります）';
-    const go = () => { if(U.waitPlay === token){ U.waitPlay = null; playPerf(perf, label, onEnd); } };
+    const go = () => { if(U.waitPlay === token){ U.waitPlay = null; playPerf(perf, label, onEnd, opts); } };
     SAMPLES.loading.then(go, go);
     return;
   }
   U.waitPlay = null;
-  const pb = E.play(perf);
+  const pb = E.play(perf, null, opts);
   if(!pb){ $('#nowPlaying').textContent = 'このブラウザでは音を鳴らせません。'; return; }
   U.shown = perf; U.shownLabel = label; U.playing = true; U.onEnd = onEnd || null;
   nativePost({type: 'playing', on: true});
@@ -131,14 +131,15 @@ function playPerf(perf, label, onEnd){
     if(!tabHidden('play')){ drawStage(t); drawRoll(U.shown, t); drawTuner(tunerPair(U.shown, t)); }
     if(t > U.shown.total + 0.8){
       const p = E.pb; E.pb = null; p.finish();
-      endPlay();
+      endPlay(true);
       return;
     }
     U.raf = requestAnimationFrame(tick);
   };
   U.raf = requestAnimationFrame(tick);
 }
-function endPlay(){
+// natural：最後まで鳴り終わったとき（止めるボタンなら false）
+function endPlay(natural = false){
   U.playing = false;
   nativePost({type: 'playing', on: false});
   cancelAnimationFrame(U.raf);
@@ -146,7 +147,7 @@ function endPlay(){
   setNowPlaying();
   drawIdle();
   const cb = U.onEnd; U.onEnd = null;
-  if(cb) cb();
+  if(cb) cb(natural);
 }
 function stopPlay(){
   U.waitPlay = null;
@@ -474,6 +475,7 @@ function renderSelectors(){
   const recs = S.recs.slice().reverse();
   $('#recSel').innerHTML = recs.length ? recs.map(r => `<option value="${r.id}">${esc(r.label)}（${VENUE[r.venue].name}）</option>`).join('') : '<option value="">録音はまだない</option>';
   $('#btnRec').disabled = !recs.length;
+  $('#btnSave').disabled = !recs.length;
   const sel = U.sel && memberById(U.sel);
   $('#soloSel').innerHTML = `<option value="all">全員</option>` + SECTIONS.map(s => `<option value="sec:${s.id}">${s.name}だけ</option>`).join('')
     + (sel ? `<option value="member:${sel.id}">${esc(sel.name)}だけ</option>` : '');
@@ -551,7 +553,7 @@ function renderWeek(){
     const lastStage = S.recs.slice().reverse().find(r => r.year === S.year && r.result);
     w.innerHTML = `<div class="stagecard"><h3>3年生が引退します</h3><ol class="small" style="padding-left:1.2em">${res}</ol>
       <p class="txt">${seniors.map(m => esc(m.name)).join('、')}（${seniors.length}人）が引退する。4月の録音と最後の本番を聴き比べてみよう。</p>
-      <div class="transport">${april ? `<button class="btn small" type="button" data-act="playrec" data-id="${april.id}">▶ 4月の録音</button>` : ''}${lastStage ? `<button class="btn small" type="button" data-act="playrec" data-id="${lastStage.id}">▶ 最後の本番</button>` : ''}<button class="btn small primary" type="button" data-act="newyear">次の年度へ</button></div></div>`;
+      <div class="transport">${april ? `<button class="btn small" type="button" data-act="playrec" data-id="${april.id}">▶ 4月の録音</button>` : ''}${lastStage ? `<button class="btn small" type="button" data-act="playrec" data-id="${lastStage.id}">▶ 最後の本番</button><button class="btn small" type="button" data-act="saverec" data-id="${lastStage.id}">⤓ 最後の本番を保存</button>` : ''}<button class="btn small primary" type="button" data-act="newyear">次の年度へ</button></div></div>`;
     return;
   }
   head.textContent = `${wkLabel(S.week)}`;
@@ -596,7 +598,7 @@ function renderStageResult(w, ev){
   }
   if(p.kind === 'concert'){
     w.innerHTML = `<div class="stagecard"><span class="tag">本番</span><h3>${ev.title}</h3><p class="small">演奏の出来 ${Math.round(p.q)}点（緊張 −${p.nerves}）</p><p class="txt">${esc(p.text)}</p>
-      <div class="transport"><button class="btn small" type="button" data-act="playrec" data-id="${p.recId}">▶ もう一度聴く</button><button class="btn primary" type="button" data-act="next">次の週へ</button></div></div>`;
+      <div class="transport"><button class="btn small" type="button" data-act="playrec" data-id="${p.recId}">▶ もう一度聴く</button><button class="btn small" type="button" data-act="saverec" data-id="${p.recId}">⤓ 保存</button><button class="btn primary" type="button" data-act="next">次の週へ</button></div></div>`;
     return;
   }
   const j = p.judge, L = LEVELS[j.level];
@@ -605,7 +607,7 @@ function renderStageResult(w, ev){
   w.innerHTML = `<div class="result" style="--award:var(--${j.award})">
     <div class="award"><span class="stamp">${nm}</span><div><b>${headTxt}</b><p class="small">${L.name}・審査員平均 ${j.avg.toFixed(1)}点・緊張 −${p.nerves}</p></div></div>
     <ol class="judges">${j.judges.map(x => `<li><span class="grade">${x.grade}</span><p class="cmt"><small>${esc(x.name)}・${x.score}点</small>${esc(x.comment)}</p></li>`).join('')}</ol>
-    <div class="transport"><button class="btn small" type="button" data-act="playrec" data-id="${p.recId}">▶ 本番の録音</button><button class="btn primary" type="button" data-act="next">${j.rep ? '次の大会に向けて練習を続ける' : 'シーズンを終える'}</button></div></div>`;
+    <div class="transport"><button class="btn small" type="button" data-act="playrec" data-id="${p.recId}">▶ 本番の録音</button><button class="btn small" type="button" data-act="saverec" data-id="${p.recId}">⤓ 保存</button><button class="btn primary" type="button" data-act="next">${j.rep ? '次の大会に向けて練習を続ける' : 'シーズンを終える'}</button></div></div>`;
 }
 function renderInterp(){
   const pc = PIECES[playPiece()];
@@ -734,7 +736,7 @@ function playRec(id){
   const rec = S.recs.find(r => r.id === id);
   if(!rec) return;
   setVenue(rec.venue);
-  playPerf(perform(recCtx(rec)), `${rec.label}（${VENUE[rec.venue].name}で録音）`);
+  playRecording(rec, `${rec.label}（${VENUE[rec.venue].name}で録音）`);
 }
 function bind(){
   $('#btnNow').addEventListener('click', () => {
@@ -828,6 +830,7 @@ function bind(){
     else if(act === 'next'){ stopPlay(); commit(finishStage(S)); renderAll(); refreshNow(); }
     else if(act === 'newyear'){ stopPlay(); commit(newYear(S)); U.sel = null; U.piece = null; renderAll(); refreshNow(); }
     else if(act === 'playrec') playRec(b.dataset.id);
+    else if(act === 'saverec'){ const rec = S.recs.find(r => r.id === b.dataset.id); if(rec) saveRecording(rec); }
   });
   $('#interp').addEventListener('click', e => {
     const b = e.target.closest('[data-interp]'); if(!b || b.disabled) return;
@@ -861,6 +864,7 @@ function bind(){
     commit(freshState(2026)); U.sel = null; U.piece = null; U.view = 'mel';
     renderAll(); refreshNow();
   });
+  bindConduct();
   $('#tabbar').addEventListener('click', e => { const b = e.target.closest('[data-tabgo]'); if(b) setTab(b.dataset.tabgo, true); });
   $('#miniLabel').addEventListener('click', () => setTab('play'));
   $('#miniStop').addEventListener('click', () => stopPlay());

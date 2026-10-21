@@ -270,6 +270,41 @@ tr.empty td{color:var(--ink-soft)}
 .history{display:grid;gap:10px;border-top:2px solid var(--ink);padding-top:16px}
 .history ol{list-style:none;padding:0;display:grid;gap:6px;font-family:var(--f-hand);font-size:15px}
 .foot{font-size:12px;color:var(--ink-soft);max-width:64em;line-height:1.8}
+.btn.brass{background:var(--brass);border-color:var(--brass);color:var(--on-brass)}
+.btn.brass:hover{filter:brightness(1.08)}
+.btn:disabled{opacity:.45;cursor:default}
+/* 指揮：画面いっぱいの叩く面 */
+.conduct{position:fixed;inset:0;z-index:80;display:flex;flex-direction:column;gap:10px;background:var(--paper);
+  padding:calc(14px + env(safe-area-inset-top,0px)) max(16px,env(safe-area-inset-right,0px)) calc(14px + env(safe-area-inset-bottom,0px)) max(16px,env(safe-area-inset-left,0px))}
+.conduct[hidden]{display:none}
+.conducting body{overflow:hidden}
+.cd-top{display:flex;justify-content:space-between;align-items:flex-start;gap:12px;max-width:720px;width:100%;margin:0 auto}
+.cd-top h2{font-family:var(--f-display);font-weight:400;font-size:clamp(17px,4.6vw,22px);line-height:1.35}
+.cd-msg{max-width:720px;width:100%;margin:0 auto;min-height:3.4em;font-size:14px;color:var(--ink-soft)}
+.cd-pad{position:relative;flex:1;min-height:0;max-width:720px;width:100%;margin:0 auto;border-radius:22px;overflow:hidden;cursor:pointer;
+  touch-action:none;-webkit-user-select:none;user-select:none;-webkit-touch-callout:none;outline-offset:4px;
+  background:linear-gradient(180deg,color-mix(in srgb,var(--brass) 26%,var(--sheet)),var(--sheet) 60%,color-mix(in srgb,var(--navy) 10%,var(--sheet)));border:1.5px solid var(--rule)}
+.cd-pad[hidden]{display:none}
+.cd-pattern{position:absolute;inset:6% 10%;width:80%;height:88%}
+.cd-pattern circle{fill:var(--sheet);stroke:var(--ink-soft);stroke-width:1.5;transition:r .12s}
+.cd-pattern circle.on{fill:var(--brass);stroke:var(--brass)}
+.cd-pattern circle.tip{fill:var(--ink);stroke:none}
+.cd-pattern text{font-family:var(--f-lcd);font-size:14px;text-anchor:middle;fill:var(--ink);pointer-events:none}
+.cd-hint{position:absolute;right:14px;font-size:12px;font-weight:700;letter-spacing:.1em;color:var(--ink-soft);pointer-events:none}
+.cd-hint.top{top:12px}.cd-hint.bot{bottom:12px}
+.cd-ripple{position:absolute;width:20px;height:20px;margin:-10px 0 0 -10px;border-radius:50%;border:3px solid var(--brass);pointer-events:none;animation:cdr .55s ease-out forwards}
+@keyframes cdr{to{transform:scale(7);opacity:0}}
+.cd-stats{max-width:720px;width:100%;margin:0 auto;display:flex;gap:18px;font-size:14px;color:var(--ink-soft);font-variant-numeric:tabular-nums}
+.cd-stats b{font-family:var(--f-lcd);font-size:22px;color:var(--ink);margin-left:2px}
+.cd-result{max-width:720px;width:100%;margin:0 auto;display:grid;gap:12px;align-content:start;flex:1}
+.cd-result h3{font-family:var(--f-display);font-weight:400;font-size:24px}
+.cd-num{display:flex;gap:24px}.cd-num span{display:grid;font-size:13px;color:var(--ink-soft)}.cd-num b{font-family:var(--f-lcd);font-size:30px;color:var(--ink)}
+.toast{position:fixed;left:50%;transform:translateX(-50%);bottom:calc(24px + env(safe-area-inset-bottom,0px));z-index:90;display:flex;align-items:center;gap:12px;
+  max-width:calc(100% - 32px);padding:10px 12px 10px 16px;border-radius:14px;background:var(--ink);color:var(--paper);font-size:14px;box-shadow:0 8px 24px var(--shadow)}
+.toast[hidden]{display:none}
+.tabbed .toast{bottom:calc(126px + env(safe-area-inset-bottom,0px))}
+@media (prefers-reduced-motion: reduce){.cd-ripple{animation:none;opacity:0}}
+
 /* スマホ・タブレット縦：1列になる幅では、画面下のタブで「今週・合奏・部員・日誌・ラボ」を切り替える */
 .tabbar,.mini{display:none}
 @media (max-width:960px){
@@ -329,9 +364,13 @@ tr.empty td{color:var(--ink-soft)}
         <div class="stage-wrap"><canvas id="stage" role="img" aria-label="ステージの座席。色が部員の実力、演奏中は音量に合わせて光る。席を押すと部員の詳しい情報が出る。"></canvas></div>
         <div class="transport">
           <button class="btn primary" id="btnNow" type="button">▶ いまの音で合奏</button>
+          <button class="btn brass" id="btnConduct" type="button">指揮する</button>
+          <button class="btn quiet" id="btnStop" type="button" disabled>■ 止める</button>
+        </div>
+        <div class="transport">
           <button class="btn" id="btnRec" type="button">▶ 録音を聴く</button>
           <select id="recSel" aria-label="録音を選ぶ"></select>
-          <button class="btn quiet" id="btnStop" type="button" disabled>■ 止める</button>
+          <button class="btn" id="btnSave" type="button" title="会場の響きつきで音声ファイルに書き出す">⤓ 保存</button>
         </div>
         <div class="options">
           <label>範囲 <select id="rangeSel"></select></label>
@@ -408,6 +447,22 @@ tr.empty td{color:var(--ink-soft)}
   <p class="foot" data-tab="lab">曲はドヴォルザーク《新世界より》（1893年）とベートーヴェン《第九》（1824年）で、どちらもパブリックドメインです。編曲はこのページの中で楽譜データから組み立てています。楽器の音は、Versilian Studios「VSCO 2 Community Edition」（CC0）の録音、Karoryfer「Weresax」のアルトサックスの録音（tonejs-instruments 経由、CC BY 3.0）、Frank Wen「FluidR3_GM」のテナー・バリトンサックスとヴィブラフォン（midi-js-soundfonts 経由、CC BY 3.0）を使っています。E♭クラリネット・バスクラリネットはクラリネット、ユーフォニアム・バストロンボーンはトロンボーンの録音を、高さと明るさを変えて使っています。「合成」を選んだときの音は、倍音と胴の響きと息の雑音からその場で合成しています。会場の響きは、部屋の寸法と壁・床・客席の材質から pyroomacoustics で計算したものです。文字は Zen Kaku Gothic New・Klee One・Dela Gothic One・Share Tech Mono（SIL Open Font License）です。</p>
 </div>
 
+<!-- 指揮：拍に合わせてタップ。上ほど大きく、下ほど小さく -->
+<section class="conduct" id="conduct" hidden aria-labelledby="cdTitle">
+  <div class="cd-top">
+    <div><p class="eyebrow">指揮</p><h2 id="cdTitle"></h2></div>
+    <button class="btn small quiet" type="button" id="cdClose">やめる</button>
+  </div>
+  <p class="cd-msg" id="cdMsg" aria-live="polite"></p>
+  <div class="cd-pad" id="cdPad" role="button" tabindex="0" aria-label="拍に合わせてここをタップ（上ほど大きく、下ほど小さく）">
+    <svg class="cd-pattern" id="cdPattern" viewBox="0 0 200 210" aria-hidden="true"></svg>
+    <span class="cd-hint top">大きく</span><span class="cd-hint bot">小さく</span>
+  </div>
+  <div class="cd-result" id="cdResult" hidden></div>
+  <p class="cd-stats"><span>いまのテンポ ♩=<b id="cdTempo">--</b></span><span>指定 ♩=<b id="cdRef"></b></span></p>
+</section>
+<div class="toast" id="toast" role="status" hidden></div>
+
 <!-- スマホ・タブレット縦：画面下のタブで切り替える -->
 <div class="mini" id="mini" hidden><button type="button" class="mini-label" id="miniLabel"></button><button type="button" class="mini-stop" id="miniStop" aria-label="止める">■</button></div>
 <nav class="tabbar" id="tabbar" aria-label="画面の切り替え">
@@ -426,6 +481,7 @@ tr.empty td{color:var(--ink-soft)}
 <script src="js/band.js"></script>
 <script src="js/game.js"></script>
 <script src="js/engine.js"></script>
+<script src="js/conduct.js"></script>
 <script src="js/ui.js"></script>
 </body>
 </html>

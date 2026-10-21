@@ -31,8 +31,15 @@
     for(let i = 0; i < d.length; i++){ const v = d[i]; if(v !== v){ nan++; continue; } pk = Math.max(pk, Math.abs(v)); sum += v * v; }
     const rms = 10 * Math.log10(sum / d.length + 1e-12);
     const ir = chain.stage.conv.buffer ? chain.stage.conv.buffer.length : 0;
-    const detail = `peak ${pk.toFixed(3)} rms ${rms.toFixed(1)}dB nan ${nan} rendered ${(len / sr).toFixed(1)}s in ${Date.now() - t1}ms, voices ${pb.voices.length}, ir ${ir}`;
-    post({type: 'selftest', ok: nan === 0 && pk > 0.05 && pk <= 1.0 && rms > -40 && ir > 0, detail});
+    let detail = `peak ${pk.toFixed(3)} rms ${rms.toFixed(1)}dB nan ${nan} rendered ${(len / sr).toFixed(1)}s in ${Date.now() - t1}ms, voices ${pb.voices.length}, ir ${ir}`;
+    // 指揮した演奏の書き出し → アプリへ渡して m4a に
+    const clock = BeatClock.start(0.5, perf.from, 0.5);
+    for(let k = 1; k <= 8; k++) clock.tap(0.5 + k * 0.47);
+    const wavBuf = await renderPerf(perf, {venue: 'hall', conduct: {ev: clock.saved(), lv: [[0, 1], [2, 1.3]]}});
+    const wav = encodeWav(wavBuf, {title: 'セルフテスト', artist: '県立みなと高校吹奏楽部'});
+    const fileOk = await new Promise(res => { window.onNativeFileDone = ok => res(ok); deliverFile(wav, 'selftest.wav', {title: 'セルフテスト', artist: '県立みなと高校吹奏楽部'}); setTimeout(() => res(false), 60000); });
+    detail += `, wav ${(wav.byteLength / 1e6).toFixed(2)}MB -> file ${fileOk ? 'ok' : 'FAILED'}`;
+    post({type: 'selftest', ok: nan === 0 && pk > 0.05 && pk <= 1.0 && rms > -40 && ir > 0 && fileOk, detail});
   }catch(e){
     post({type: 'selftest', ok: false, detail: String(e && e.stack || e)});
   }

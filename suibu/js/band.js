@@ -218,7 +218,7 @@ function perform(ctx){
         const inst = e.inst;
         const written = e.role === 'hit' ? 0.58 + (e.v - 0.58) * SPREAD : ideal(e.b) * e.sc;
         const v = clamp(vScale(written) + 0.2 * iT * clampG(gauss(...k, 'v')) * 0.5, 0.04, 1);
-        const h = {mid: m.id, seat: seat.id, sec: p.sec, inst, role: e.role, t, tIdeal, v, key: k.join(':'), b: e.b, weight: ROLE_WEIGHT.hit};
+        const h = {mid: m.id, seat: seat.id, sec: p.sec, inst, role: e.role, t, tIdeal, v, key: k.join(':'), b: e.b, db: e.d || 0, tg: b2s(e.b) - off, R, weight: ROLE_WEIGHT.hit};
         if(e.roll){
           h.roll = true;
           h.dur = b2s(endB) - b2s(e.b) + fermata;
@@ -268,8 +268,8 @@ function perform(ctx){
         env.push([d * fr, clamp(v + vj, 0.04, 1)]);
       }
       mine.push({
-        mid: m.id, seat: seat.id, sec: p.sec, part: p.part, inst: seat.inst, role: e.role, solo: !!e.solo, b: e.b, key: k.join(':'),
-        midi, t, tIdeal, d, cents, err: wrong ? 100 : cents - e.ji, wrong: !!wrong, T, E,
+        mid: m.id, seat: seat.id, sec: p.sec, part: p.part, inst: seat.inst, role: e.role, solo: !!e.solo, b: e.b, db: e.d, tg: b2s(e.b) - off, key: k.join(':'),
+        midi, t, tIdeal, d, cents, err: wrong ? 100 : cents - e.ji, wrong: !!wrong, T, E, R,
         scoop: -(0.5 + hash(...k, 'sc')) * 45 * iP * (tb.brass ? 1.2 : 0.6),
         settle: 0.03 + 0.16 * iP,
         sag: -(e.d >= 1.5 ? 22 : 7) * Math.pow(iT, 1.2),
@@ -297,7 +297,10 @@ function perform(ctx){
   for(let b = from; b <= to + 1e-6; b += 0.25) idealLine.push([b2s(b) - off, ideal(b)]);
   const ends = [...notes.map(n => n.t + n.d), ...hits.map(h => h.t + (h.dur || 0))];
   const total = Math.max(1, ...ends) + 0.4;
-  return {pieceId: ctx.pieceId, venue: venue.id, from, to, bpm, notes, hits, bars, ideal: idealLine, total,
+  // 楽譜の拍 ⇔ この演奏での時刻（指揮で速さを変えるときや、図を描くときに使う）
+  const b2t = b => b2s(b) - off;
+  const t2b = t => { let lo = from, hi = to + 8; for(let i = 0; i < 40; i++){ const mid = (lo + hi) / 2; if(b2t(mid) < t) lo = mid; else hi = mid; } return (lo + hi) / 2; };
+  return {pieceId: ctx.pieceId, venue: venue.id, from, to, bpm, notes, hits, bars, ideal: idealLine, total, b2t, t2b, meter: pc.meter,
     idealDur: b2sIdeal(to) - b2sIdeal(from), realDur: b2s(to) - off, cohesion: C, fam: FAM, interp: {...ip}, rubUse, spread: SPREAD,
     bandE, bandR, players: players.length};
 }
