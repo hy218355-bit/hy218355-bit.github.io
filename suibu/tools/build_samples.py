@@ -2,6 +2,7 @@
 import sys, os, re, json, subprocess, numpy as np
 sys.path.insert(0, os.path.dirname(__file__))
 from sample_lib import *
+from fill_gaps import fill, measured_pitch
 V = '/home/user/sgossner/vsco-2-ce/'
 T = '/home/user/nbrosowsky/tonejs-instruments/samples/'
 F = '/home/user/gleitz/midi-js-soundfonts/FluidR3_GM/'
@@ -26,12 +27,18 @@ WINDS = {
   'cbass':   (V + 'Strings/Solo Contrabass/SusNV', 12, (27, 56)),
 }
 KEEP_WIND = 3.0
+# 録音の高さで、どこまで使うか（その録音を使う楽器の音域。SAMPLE_BANK の shift を戻した高さ）
+NEED = {'picc': (74, 108), 'flute': (60, 96), 'oboe': (58, 91), 'bassoon': (34, 75), 'clar': (46, 93),
+        'sax': (49, 81), 'horn': (35, 77), 'tpt': (54, 84), 'tbn': (28, 72), 'tuba': (26, 58), 'cbass': (28, 60)}
 
 def fine_midi(x, nominal):
-    try:
-        m = hz2midi(f0(x))
-        if abs(m - nominal) < 0.5: return float(m)
-    except Exception: pass
+    # 録音の本当の高さを Praat で測る。ファイル名の音名と1音ずれている録音（例：クラリネットの最高音）も直す
+    got = measured_pitch(x, nominal, wide=True)
+    if got is None: return float(nominal)
+    if abs(got - nominal) < 0.6: return float(got)
+    if abs(got - round(got)) < 0.12 and abs(got - nominal) < 1.6:
+        print(f'  ! {nominal} は実際には {got:.2f}')
+        return float(got)
     return float(nominal)
 
 def prep(x, keep, fade=0.05):
@@ -90,6 +97,7 @@ for bank, (d, shift, (lo, hi)) in WINDS.items():
             x = rms_norm(prep(x, KEEP_WIND))
             # 長い音は、ここをなめらかにつないでくり返す
             items.append({'x': x, 'm': round(fm, 2), 'l': li if len(pick) > 1 else -1, 'lp': [1.0, round(len(x) / SR - 0.12, 3)]})
+    items = fill(items, *NEED[bank], log=print)
     manifest[bank] = {'kind': 'sus', 'samples': pack(bank, items)}
     print(bank, len(items), 'samples', sorted(by))
 
@@ -123,7 +131,9 @@ for bank, (d, shift, (lo, hi)) in STACS.items():
             for r, f in sorted(by[midi][lv].items()):
                 x = load(d + '/' + f)
                 x = rms_norm(prep(x, 0.9, fade=0.12), a=0.0, b=0.2)
-                items.append({'x': x, 'm': float(midi), 'l': li if len(pick) > 1 else -1, 'rr': r})
+                fm = fine_midi(x[:int(0.6 * SR)], midi)
+                items.append({'x': x, 'm': round(fm, 2), 'l': li if len(pick) > 1 else -1, 'rr': r})
+    items = fill(items, *NEED[bank[:-3]], log=print)
     manifest[bank] = {'kind': 'stac', 'samples': pack(bank, items)}
     print(bank, len(items), 'samples', sorted(by))
 

@@ -65,7 +65,8 @@ function pickSample(bank, midi, v, opts = {}){
   if(!list.length) list = bank.samples;
   if(bank.layers.length > 1 && !opts.roll){
     const want = bank.layers[Math.min(bank.layers.length - 1, Math.floor(clamp01(v) * bank.layers.length))];
-    const lay = list.filter(s => s.l === want);
+    // 強弱段が1つしかない高さの録音（l = -1）は、どの強さでも使う
+    const lay = list.filter(s => s.l === want || s.l === -1);
     if(lay.length) list = lay;
   }
   if(midi == null){
