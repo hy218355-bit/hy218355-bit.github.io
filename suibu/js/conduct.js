@@ -14,15 +14,17 @@ const CD_PATTERN = {
 };
 const cdPts = () => CD_PATTERN[CD.perf?.meter] || CD_PATTERN[4];
 
-function openConduct(){
-  if(busy()) return;
+// stage を渡すと本番の指揮（{rec, ev}）。終わると、その指揮で演奏した結果が採点される
+function openConduct(stage = null){
+  if(!stage && busy()) return;
   stopPlay();
   if(!E.ensure()) return;
   if(E.ac.state === 'suspended') E.ac.resume();
-  CD.perf = perform(currentCtx());
+  CD.stage = stage;
+  CD.perf = stage ? perform(recCtx(stage.rec)) : perform(currentCtx());
   CD.phase = 'count'; CD.count = []; CD.lv = []; CD.level = 1; CD.clock = null; CD.rec = null; CD.lastTap = 0; CD.idleHint = false; CD.beatShown = -1;
   const pc = PIECES[CD.perf.pieceId];
-  $('#cdTitle').textContent = `${pc.title}（${VENUE[U.venue].name}）`;
+  $('#cdTitle').textContent = stage ? `${stage.ev.title}：${pc.title}` : `${pc.title}（${VENUE[U.venue].name}）`;
   $('#cdRef').textContent = CD.perf.bpm;
   $('#cdTempo').textContent = '--';
   $('#cdResult').hidden = true; $('#cdPad').hidden = false;
@@ -45,6 +47,7 @@ function closeConduct(){
   const playing = CD.phase === 'play';
   CD.phase = 'idle';
   if(playing) stopPlay();
+  if(CD.stage && S.pending && !S.pending.revealed){ CD.stage = null; renderAll(); }
   $('#conduct').hidden = true;
   document.documentElement.classList.remove('conducting');
 }
@@ -82,7 +85,7 @@ function cdTap(e){
     CD.phase = 'play';
     $('#cdTempo').textContent = Math.round(60 / P);
     cdMsg('拍に合わせてタップし続けよう。上のほうを叩くと大きく、下のほうは小さく。');
-    playPerf(CD.perf, `あなたの指揮：${PIECES[CD.perf.pieceId].title}（${VENUE[U.venue].name}）`, cdFinish, {clock: CD.clock});
+    playPerf(CD.perf, CD.stage ? `${CD.stage.rec.label}（あなたの指揮）` : `あなたの指揮：${PIECES[CD.perf.pieceId].title}（${VENUE[U.venue].name}）`, cdFinish, {clock: CD.clock});
     E.pb?.setLevel(level, CD.clock.t0);
     return;
   }
@@ -139,6 +142,11 @@ function cdFinish(natural){
   if(!natural){
     $('#cdPad').hidden = true; cdMsg('');
     $('#cdResult').hidden = false;
+    if(CD.stage){
+      $('#cdResult').innerHTML = `<h3>指揮を降りた</h3><p>残りは部員だけで演奏した。結果は部員まかせのときと同じになる。</p>
+        <div class="transport"><button class="btn primary" type="button" data-cd="reveal">結果を見る</button></div>`;
+      return;
+    }
     $('#cdResult').innerHTML = `<h3>途中で止めた</h3><p>最後まで振ると、その演奏が録音に残る。</p>
       <div class="transport"><button class="btn primary" type="button" data-cd="retry">もう一度指揮する</button><button class="btn quiet" type="button" data-cd="close">閉じる</button></div>`;
     return;
@@ -157,9 +165,24 @@ function cdFinish(natural){
     : stab >= 65 ? 'ところどころテンポが揺れたが、部員はよくついてきた。'
     : 'テンポが大きく揺れ、リズムの苦手な部員ほどついてくるのに苦労した。';
   const pc = PIECES[CD.perf.pieceId];
+  const conduct = {ev: c.saved(), lv: CD.lv, bpm, stab};
+  if(CD.stage){
+    // 本番：この指揮で演奏した結果で採点し直す
+    commit(conductStage(S, conduct));
+    CD.rec = S.recs.find(r => r.id === S.pending.recId);
+    renderAll();
+    $('#cdPad').hidden = true; cdMsg('');
+    $('#cdResult').hidden = false;
+    $('#cdResult').innerHTML = `<h3>演奏おわり</h3>
+      <p class="cd-num"><span>平均テンポ<b>♩=${bpm}</b></span><span>安定度<b>${followed ? stab + '%' : '—'}</b></span></p>
+      <p>${speed}。${comment}</p>
+      <div class="transport"><button class="btn primary" type="button" data-cd="reveal">結果を見る</button></div>`;
+    haptic(stab >= 85 ? 'success' : 'tap');
+    return;
+  }
   const rec = addRec(S, `あなたの指揮：${pc.title}（${S.phase === 'choose' ? '選曲前' : wkLabel(S.week)}）`, {pieceId: CD.perf.pieceId, venue: U.venue});
   rec.span = {from: CD.perf.from, to: CD.perf.to};
-  rec.conduct = {ev: c.saved(), lv: CD.lv, bpm, stab};
+  rec.conduct = conduct;
   commit(S);
   renderSelectors();
   CD.rec = rec;
@@ -257,6 +280,7 @@ function bindConduct(){
     else if(act === 'save' && CD.rec) saveRecording(CD.rec);
     else if(act === 'retry'){ stopPlay(); openConduct(); }
     else if(act === 'close'){ stopPlay(); closeConduct(); }
+    else if(act === 'reveal'){ closeConduct(); setTab('week'); reveal(); }
   });
   document.addEventListener('keydown', e => { if(e.key === 'Escape' && !$('#conduct').hidden) closeConduct(); });
 }

@@ -564,7 +564,8 @@ function renderWeek(){
       <p class="small">会場：${v.name}（${v.rt < 0.2 ? '響きはほとんどない' : `残響 約${v.rt.toFixed(1)}秒`}）。${v.desc}</p>
       ${ev.text ? `<p class="txt">${ev.text}</p>` : ''}
       <p class="txt">${moodText(n)}（緊張 −${n}）${v.play.hall ? `会場慣れ ${Math.round(S.hallExp)}。` : ''}</p>
-      <button class="btn primary" type="button" data-act="stage">本番の演奏をはじめる</button></div>`;
+      <div class="transport"><button class="btn primary" type="button" data-act="stage">本番の演奏をはじめる</button><button class="btn brass" type="button" data-act="stageconduct">自分で指揮する</button></div>
+      <p class="small">自分で指揮すると、その指揮で演奏した結果が審査される。テンポが大きく揺れると、リズムの苦手な部員ほどついてこられない。</p></div>`;
     return;
   }
   if(ev?.kind === 'forced'){
@@ -590,6 +591,7 @@ function renderWeek(){
   if(S.stamina < 30) parts.push(`<p class="small">体力が30を切っている。練習の効果が半分になる。</p>`);
   w.innerHTML = parts.join('');
 }
+const conductNote = p => p.conducted ? `・あなたの指揮 ♩=${p.conducted.bpm}、安定度${p.conducted.stab}%` : '';
 function renderStageResult(w, ev){
   const p = S.pending;
   if(!p.revealed){
@@ -597,7 +599,7 @@ function renderStageResult(w, ev){
     return;
   }
   if(p.kind === 'concert'){
-    w.innerHTML = `<div class="stagecard"><span class="tag">本番</span><h3>${ev.title}</h3><p class="small">演奏の出来 ${Math.round(p.q)}点（緊張 −${p.nerves}）</p><p class="txt">${esc(p.text)}</p>
+    w.innerHTML = `<div class="stagecard"><span class="tag">本番</span><h3>${ev.title}</h3><p class="small">演奏の出来 ${Math.round(p.q)}点（緊張 −${p.nerves}）${conductNote(p)}</p><p class="txt">${esc(p.text)}</p>
       <div class="transport"><button class="btn small" type="button" data-act="playrec" data-id="${p.recId}">▶ もう一度聴く</button><button class="btn small" type="button" data-act="saverec" data-id="${p.recId}">⤓ 保存</button><button class="btn primary" type="button" data-act="next">次の週へ</button></div></div>`;
     return;
   }
@@ -605,7 +607,7 @@ function renderStageResult(w, ev){
   const nm = {gold: '金賞', silver: '銀賞', bronze: '銅賞'}[j.award];
   const headTxt = j.rep ? `${L.rep}への代表に選ばれた！` : j.award === 'gold' && L.rep ? '金賞。でも代表には届かなかった（ダメ金）。' : j.award === 'gold' ? '全国大会で金賞。' : j.award === 'silver' ? '銀賞。手応えはあった。' : '銅賞。来年こそ。';
   w.innerHTML = `<div class="result" style="--award:var(--${j.award})">
-    <div class="award"><span class="stamp">${nm}</span><div><b>${headTxt}</b><p class="small">${L.name}・審査員平均 ${j.avg.toFixed(1)}点・緊張 −${p.nerves}</p></div></div>
+    <div class="award"><span class="stamp">${nm}</span><div><b>${headTxt}</b><p class="small">${L.name}・審査員平均 ${j.avg.toFixed(1)}点・緊張 −${p.nerves}${conductNote(p)}</p></div></div>
     <ol class="judges">${j.judges.map(x => `<li><span class="grade">${x.grade}</span><p class="cmt"><small>${esc(x.name)}・${x.score}点</small>${esc(x.comment)}</p></li>`).join('')}</ol>
     <div class="transport"><button class="btn small" type="button" data-act="playrec" data-id="${p.recId}">▶ 本番の録音</button><button class="btn small" type="button" data-act="saverec" data-id="${p.recId}">⤓ 保存</button><button class="btn primary" type="button" data-act="next">${j.rep ? '次の大会に向けて練習を続ける' : 'シーズンを終える'}</button></div></div>`;
 }
@@ -723,6 +725,16 @@ function startStage(){
   renderAll();
   playPerf(perform(recCtx(rec)), rec.label, () => reveal());
 }
+// 本番を自分で指揮する：結果はいったん部員まかせで決め、指揮しきったら指揮の演奏で採点し直す
+function startStageConduct(){
+  stopPlay();
+  commit(beginStage(S));
+  const rec = S.recs.find(r => r.id === S.pending.recId);
+  U.piece = null; U.range = 'all';
+  setVenue(rec.venue);
+  renderAll();
+  openConduct({rec, ev: EVENTS[S.week]});
+}
 function reveal(){
   if(!S.pending || S.pending.revealed) return;
   S.pending.revealed = true;
@@ -826,6 +838,7 @@ function bind(){
       commit(assignRecruits(S, map)); renderAll(); refreshNow();
     }
     else if(act === 'stage') startStage();
+    else if(act === 'stageconduct') startStageConduct();
     else if(act === 'reveal'){ stopPlay(); reveal(); }
     else if(act === 'next'){ stopPlay(); commit(finishStage(S)); renderAll(); refreshNow(); }
     else if(act === 'newyear'){ stopPlay(); commit(newYear(S)); U.sel = null; U.piece = null; renderAll(); refreshNow(); }

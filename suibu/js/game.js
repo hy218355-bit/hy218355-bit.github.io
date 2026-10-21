@@ -184,6 +184,10 @@ function beginStage(s0){
   const rec = addRec(s, `${s.year} ${ev.title}`, {venue: ev.venue, nerves});
   rec.keep = ev.kind === 'contest';
   const perf = perform(recCtx(rec));
+  stageResult(s, ev, rec, perf, nerves);
+  return s;
+}
+function stageResult(s, ev, rec, perf, nerves){
   const a = analyze(perf);
   if(ev.kind === 'contest'){
     const j = judge(perf, a, ev.level);
@@ -193,6 +197,16 @@ function beginStage(s0){
     const q = quality(a);
     s.pending = {kind: 'concert', recId: rec.id, q, nerves, revealed: false, ...concertOutcome(s, ev, q, perf, a)};
   }
+}
+// 本番を自分で指揮したとき：その拍の進み方で演奏し直したものを採点する
+function conductStage(s0, conduct){
+  const s = clone(s0);
+  const ev = EVENTS[s.week], p = s.pending;
+  const rec = s.recs.find(r => r.id === p.recId);
+  rec.conduct = conduct;
+  const perf = warpPerf(perform(recCtx(rec)), BeatClock.fromSaved(conduct.ev, 0));
+  stageResult(s, ev, rec, perf, p.nerves);
+  s.pending.conducted = {bpm: conduct.bpm, stab: conduct.stab};
   return s;
 }
 function concertOutcome(s, ev, q, perf, a){

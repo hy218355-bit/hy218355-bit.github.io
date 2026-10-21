@@ -46,12 +46,40 @@ class Engine {
   }
 }
 
+// 指揮に合わせて、楽譜どおりの時刻を置き直す。各自の出だしの癖はそのまま残し、
+// 速さが急に変わったところでは、リズムの苦手な部員ほどついてこられずにばらつく
+function warpNote(n, c, pf, T0){
+  const span = Math.max(n.db || 0, 0.25);
+  const ref = pf.b2t(n.b + span) - pf.b2t(n.b);
+  const real = c.timeOf(n.b + span) - c.timeOf(n.b);
+  const k = ref > 1e-4 ? real / ref : 1;
+  const dev = (n.t - n.tg) * k + 0.22 * Math.min(0.6, c.joltAt(n.b)) * (1 - 0.7 * (n.R ?? 0.5)) * clampG(gauss(n.key, 'cond'));
+  const w = {...n, t: Math.max(0, c.timeOf(n.b) - T0 + dev)};
+  if(n.d != null){ w.d = n.d * k; if(n.env) w.env = n.env.map(([x, v]) => [x * k, v]); }
+  if(n.dur != null) w.dur = n.dur * k;
+  return w;
+}
+// 指揮した演奏そのもの（採点用）。時刻は演奏の始まりから
+function warpPerf(perf, clock){
+  const notes = perf.notes.map(n => warpNote(n, clock, perf, clock.t0)), hits = perf.hits.map(h => warpNote(h, clock, perf, clock.t0));
+  const realDur = clock.timeOf(perf.to) - clock.t0;
+  const ends = [...notes.map(n => n.t + n.d), ...hits.map(h => h.t + (h.dur || 0))];
+  // 拍ごとの長さのがたつき（となりの拍との比）。なめらかに速くなる・遅くなるのは小さく、拍ごとにばらばらだと大きい
+  let jit = 0, nj = 0;
+  for(let b = Math.ceil(perf.from) + 1; b + 1 <= perf.to; b++){
+    const d0 = clock.timeOf(b) - clock.timeOf(b - 1), d1 = clock.timeOf(b + 1) - clock.timeOf(b);
+    if(d0 > 0 && d1 > 0){ jit += Math.abs(Math.log(d1 / d0)); nj++; }
+  }
+  return {...perf, notes, hits, realDur, total: Math.max(1, ...ends) + 0.4, conducted: true, jitter: nj ? jit / nj : 0};
+}
+
 /* ===== 指揮の拍 =====
    タップのたびに速さを決め直し、次の拍で指揮に追いつく。拍の進み方は途切れず、逆戻りもしない。
    ev は「拍 b の時刻 t から、1拍 P 秒で進む」という区切りの並び（jolt は速さの変わり方の大きさ） */
 class BeatClock {
   constructor(ev){ this.ev = ev; this.P = ev[ev.length - 1].P; this.last = null; this.taps = []; }
-  static start(t0, b0, P){ return new BeatClock([{b: b0, t: t0, P, jolt: 0}]); }
+  // 入りの合図の最後のタップが b0 の1拍前（t0 - P）。次のタップが b0 になる
+  static start(t0, b0, P){ const c = new BeatClock([{b: b0, t: t0, P, jolt: 0}]); c.last = {k: b0 - 1, t: t0 - P}; return c; }
   // 保存した拍の進み方（t は演奏の始まりからの秒）から作り直す
   static fromSaved(ev, t0){ return new BeatClock(ev.map(e => ({...e, t: e.t + t0}))); }
   get t0(){ return this.ev[0].t; }
@@ -60,19 +88,23 @@ class BeatClock {
   timeOf(b){ const e = this.seg(b); return e.t + (b - e.b) * e.P; }
   beatAt(t){ const e = this.segT(t); return e.b + (t - e.t) / e.P; }
   joltAt(b){ return this.seg(b).jolt || 0; }
-  // 演奏中のタップ（AudioContext の時計の秒）
+  // 演奏中のタップ（AudioContext の時計の秒）。タップは1回ごとに「次の拍」。
+  // 間が大きく空いたときだけ、空いた分の拍を数える（部員の位置から拍を当て推量すると、ずれが自分で大きくなるため）
   tap(tau){
-    const bp = this.beatAt(tau), k = Math.round(bp);
-    let P = this.P;
-    if(this.last && k > this.last.k && k - this.last.k <= 4){
-      const meas = (tau - this.last.t) / (k - this.last.k);
-      P += 0.6 * (clamp(meas, 0.6 * P, 1.6 * P) - P);
-      P = clamp(P, 0.25, 2.0);
-    }
+    const bp = this.beatAt(tau);
+    let P = this.P, k;
+    if(this.last){
+      const gap = tau - this.last.t;
+      const nb = gap >= 1.6 * P ? Math.max(1, Math.round(gap / P)) : 1;
+      k = this.last.k + nb;
+      if(nb <= 4) P = clamp(P + 0.6 * (clamp(gap / nb, 0.6 * P, 1.6 * P) - P), 0.25, 2.0);
+    } else k = Math.round(bp);
+    // 部員は「いま k 拍目」にいるはず。ずれていれば次の拍までに追いつく／待つ（行きすぎても戻らない）
+    const ahead = clamp(bp - k, -0.75, 0.75);
     const jolt = Math.abs(P / this.P - 1) + 0.5 * Math.abs(bp - k);
     while(this.ev.length > 1 && this.ev[this.ev.length - 1].b > bp) this.ev.pop();
-    // いまの拍から、次の拍にちょうど指揮の時刻で着くように進め、そこからは新しい速さで
-    this.ev.push({b: bp, t: tau, P: P / (k + 1 - bp), jolt}, {b: k + 1, t: tau + P, P, jolt});
+    // いまから P 秒後（指揮の次の拍）に、部員の数え方で 1 - ahead 拍ぶん進んだところへ着く
+    this.ev.push({b: bp, t: tau, P: P / (1 - ahead), jolt}, {b: bp + 1 - ahead, t: tau + P, P, jolt});
     this.P = P; this.last = {k, t: tau};
     this.taps.push({t: tau, k, P, off: bp - k});
     return k;
@@ -138,21 +170,7 @@ class Playback {
     this.timer = setInterval(() => this.pump(), 60);
     this.ended = false;
   }
-  // 指揮に合わせて、楽譜どおりの時刻を置き直す。各自の出だしの癖はそのまま残し、
-  // 速さが急に変わったところでは、リズムの苦手な部員ほどついてこられずにばらつく
-  warp(n){
-    if(!n || !this.clock) return n;
-    const c = this.clock, pf = this.perf;
-    const span = Math.max(n.db || 0, 0.25);
-    const ref = pf.b2t(n.b + span) - pf.b2t(n.b);
-    const real = c.timeOf(n.b + span) - c.timeOf(n.b);
-    const k = ref > 1e-4 ? real / ref : 1;
-    const dev = (n.t - n.tg) * k + 0.07 * c.joltAt(n.b) * (1 - (n.R ?? 0.5)) * clampG(gauss(n.key, 'cond'));
-    const w = {...n, t: Math.max(0, c.timeOf(n.b) - this.T0 + dev)};
-    if(n.d != null){ w.d = n.d * k; if(n.env) w.env = n.env.map(([x, v]) => [x * k, v]); }
-    if(n.dur != null) w.dur = n.dur * k;
-    return w;
-  }
+  warp(n){ return n && this.clock ? warpNote(n, this.clock, this.perf, this.T0) : n; }
   // 指揮の振りの大きさ（全体の音量）
   setLevel(g, at = this.ac.currentTime){
     this.bus.gain.setTargetAtTime(g, at, 0.12);

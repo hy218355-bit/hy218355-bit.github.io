@@ -369,7 +369,7 @@ function analyze(perf){
   }
   const balanceDb = bN ? bSum / bN : 0;
   const pitchDev = pW ? pE / pW : 0, spread = sW ? sE / sW : 0, rhythmMs = rW ? rE / rW : 0;
-  const drift = Math.abs(perf.realDur / perf.idealDur - 1);
+  const drift = perf.conducted ? Math.max(0, Math.abs(perf.realDur / perf.idealDur - 1) - 0.08) : Math.abs(perf.realDur / perf.idealDur - 1);
   const secOut = {};
   for(const s of SECTIONS){
     const x = sec[s.id];
@@ -381,7 +381,8 @@ function analyze(perf){
   }
   const score = {
     pitch: 100 * Math.exp(-(0.7 * pitchDev + 0.45 * spread) / 18),
-    rhythm: 100 * Math.exp(-(rhythmMs / 55 + drift * 3)),
+    // 指揮した演奏は、拍ごとにテンポががたつくほど落ち着かない演奏になる
+    rhythm: 100 * Math.exp(-(rhythmMs / 55 + drift * 3 + (perf.conducted ? 5 * Math.max(0, (perf.jitter || 0) - 0.04) : 0))),
     tone: clamp(100 * (tW ? tE / tW : 0) - 250 * cracks / Math.max(50, perf.notes.length), 0, 100),
     expr: 100 * (eW ? eE / eW : 0) * (0.75 + 0.25 * clamp01(perf.rubUse / Math.max(0.3, RUBATOS[perf.interp.rub ?? 1]))),
     balance: clamp(75 + 8 * (balanceDb - pc.balRef), 0, 100),
@@ -501,6 +502,7 @@ function judge(perf, a, levelId){
     if(i === 1 && it.notes.length) comments.push(it.notes[0]);
     if(i === 2 && a.wrong >= 4) comments.push('まだ譜面が手の内に入っていない箇所が見られます。');
     if(i === 0 && a.missingMel.length) comments.push('人数の少ないパートの旋律が聞こえにくくなっていました。');
+    if(i === 0 && perf.conducted && perf.jitter > 0.12) comments.push('指揮の拍が安定せず、合奏が落ち着きませんでした。');
     if(!comments.length) comments.push('全体によくまとまっています。あと一歩の磨き込みを期待します。');
     return {name: j.name, score: sc, grade: sc >= L.A ? 'A' : sc >= L.B ? 'B' : 'C', comment: comments.join('')};
   });
