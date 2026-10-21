@@ -35,6 +35,16 @@ class Engine {
   now(){ return this.pb && this.ac ? this.ac.currentTime - this.pb.T0 : -1; }
 }
 
+// ステージの奥行き：後ろの列ほど音が遅れて届き、高音が減り、響きの割合が増える。
+// ホルンはベルが後ろを向いているので、こもった間接音が多い
+const ROW_DEPTH = [
+  {lp: 0,     delay: 0,      send: 0},
+  {lp: 14000, delay: 0.0015, send: 0.12},
+  {lp: 11000, delay: 0.003,  send: 0.25},
+  {lp: 9500,  delay: 0.0045, send: 0.35},
+];
+const HORN_DEPTH = {lp: 5500, delay: 0.002, send: 0.5};
+
 class Playback {
   constructor(engine, perf, onEnd){
     const ac = this.ac = engine.ac;
@@ -60,10 +70,18 @@ class Playback {
     const seatOf = {};
     for(const n of perf.notes) seatOf[n.mid] = n.seat;
     for(const h of perf.hits) seatOf[h.mid] ||= h.seat;
+    this.wet = ac.createGain();
+    if(engine.chain.wetIn) this.wet.connect(engine.chain.wetIn);
     for(const [mid, seat] of Object.entries(seatOf)){
+      const st = SEAT[seat];
+      const rd = st.inst === 'hn' ? HORN_DEPTH : ROW_DEPTH[st.row] || ROW_DEPTH[0];
       const g = ac.createGain();
-      const p = makePan(ac, SEAT[seat].pan * width);
-      g.connect(p); p.connect(this.bus);
+      let node = g;
+      if(rd.lp){ const f = ac.createBiquadFilter(); f.type = 'lowpass'; f.frequency.value = rd.lp; f.Q.value = 0.5; node.connect(f); node = f; }
+      if(rd.delay){ const d = ac.createDelay(0.05); d.delayTime.value = rd.delay; node.connect(d); node = d; }
+      const p = makePan(ac, st.pan * width);
+      node.connect(p); p.connect(this.bus);
+      if(rd.send){ const s = ac.createGain(); s.gain.value = rd.send; p.connect(s); s.connect(this.wet); }
       this.mem[mid] = {g, p, seat};
     }
     this.applySolo(engine.solo, true);
@@ -124,17 +142,18 @@ class Playback {
     clearInterval(this.timer);
     const now = this.ac.currentTime;
     this.bus.gain.setTargetAtTime(0, now, 0.04);
+    this.wet.gain.setTargetAtTime(0, now, 0.04);
     for(const v of this.voices) v.stop(now + 0.3);
     for(const s of this.srcs){ try{ s.stop(now + 0.3); }catch(e){} }
-    const bus = this.bus;
-    setTimeout(() => { try{ bus.disconnect(); }catch(e){} }, 800);
+    const bus = this.bus, wet = this.wet;
+    setTimeout(() => { try{ bus.disconnect(); wet.disconnect(); }catch(e){} }, 800);
   }
   // 自然に終わったとき：残響が消えるまで待ってから片づける
   finish(){
     if(this.ended) return;
     this.ended = true;
     clearInterval(this.timer);
-    const bus = this.bus;
-    setTimeout(() => { try{ bus.disconnect(); }catch(e){} }, 4000);
+    const bus = this.bus, wet = this.wet;
+    setTimeout(() => { try{ bus.disconnect(); wet.disconnect(); }catch(e){} }, 4000);
   }
 }

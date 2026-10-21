@@ -4,7 +4,7 @@
    初期反射、体育館の「鳴き」（平行な壁の間を行き来するはね返り）、屋外の校舎からのはね返りを加える。 */
 
 const VENUES = [
-  {id: 'room', name: '音楽室', rt: 0.8, bass: 1.15, treble: .55, pre: .005, diffuse: .02,
+  {id: 'room', name: '音楽室', rt: 0.95, bass: 1.15, treble: .55, pre: .005, diffuse: .02,
    er: {n: 16, spread: .03, g: .32}, eq: [['peaking', 220, 3, 1], ['highshelf', 5000, 1.5]], wet: .36, dry: 1.0,
    play: {timing: 1.0, pitch: 1.0}, size: '約80m²',
    desc: '響きが短く、音が近い。金管がうるさく聞こえやすく、ごまかしがききにくい。'},
@@ -12,15 +12,15 @@ const VENUES = [
    er: {n: 8, spread: .14, g: .3}, flutter: {t0: .07, period: .072, n: 26, g: .2}, eq: [['peaking', 150, 3.5, .9], ['highshelf', 4000, -3]], wet: .62, dry: .72,
    play: {timing: 1.45, pitch: 1.05}, size: '天井高10m',
    desc: '天井が高く、響きは長いがぼやける。壁ではね返る「鳴き」があり、奏者どうしの音が聞こえにくい。'},
-  {id: 'outdoor', name: '屋外ステージ', rt: .45, bass: .7, treble: .5, pre: 0, diffuse: .01,
+  {id: 'outdoor', name: '屋外ステージ', rt: 0.1, bass: .7, treble: .5, pre: 0, diffuse: .01,
    er: {n: 3, spread: .02, g: .25}, slap: {t: .21, g: .16}, eq: [['lowshelf', 180, -5], ['highshelf', 6000, -2]], wet: .14, dry: 1.0,
-   play: {timing: 1.15, pitch: 1.15}, size: '校庭',
+   play: {timing: 1.15, pitch: 1.15}, size: '校庭', irLvl: {podium: .9, center: .67, back: .5},
    desc: '響きがほとんどなく、音が散っていく。少し遅れて校舎からのはね返りが返ってくる。'},
-  {id: 'civic', name: '市民会館', rt: 1.4, bass: 1.05, treble: .62, pre: .02, diffuse: .05,
+  {id: 'civic', name: '市民会館', rt: 1.5, bass: 1.05, treble: .62, pre: .02, diffuse: .05,
    er: {n: 12, spread: .06, g: .26}, eq: [], wet: .42, dry: .85,
    play: {timing: 1.05, pitch: 1.0}, size: '800席',
    desc: '多目的ホール。響きはやや短めで、細かいところまで聞こえる。'},
-  {id: 'camp', name: '合宿所ホール', rt: 1.15, bass: 1.15, treble: .68, pre: .012, diffuse: .035,
+  {id: 'camp', name: '合宿所ホール', rt: 1.1, bass: 1.15, treble: .68, pre: .012, diffuse: .035,
    er: {n: 14, spread: .045, g: .3}, eq: [['peaking', 300, 1.5, .8]], wet: .4, dry: .9,
    play: {timing: 1.0, pitch: 1.0}, size: '木の小ホール',
    desc: '木の内装の小ホール。響きは柔らかく、合奏の練習に向いている。'},
@@ -28,7 +28,7 @@ const VENUES = [
    er: {n: 18, spread: .09, g: .24}, eq: [['lowshelf', 250, 1.5]], wet: .5, dry: .78,
    play: {timing: 1.08, pitch: 1.0, hall: true}, size: '1500席',
    desc: '県大会の会場。豊かで温かい響きが約2秒続く。'},
-  {id: 'grand', name: '大ホール（支部・全国）', rt: 2.4, bass: 1.25, treble: .64, pre: .034, diffuse: .08,
+  {id: 'grand', name: '大ホール（支部・全国）', rt: 2.8, bass: 1.25, treble: .64, pre: .034, diffuse: .08,
    er: {n: 20, spread: .11, g: .22}, eq: [['lowshelf', 250, 2]], wet: .55, dry: .7,
    play: {timing: 1.1, pitch: 1.0, hall: true}, size: '2000席',
    desc: '支部大会・全国大会の会場。響きは長く、ステージが遠く感じる。'},
@@ -36,9 +36,9 @@ const VENUES = [
 const VENUE = Object.fromEntries(VENUES.map(v => [v.id, v]));
 
 const POSITIONS = [
-  {id: 'podium', name: '指揮台',     dry: 1.15, wet: .6,  hf: 16000, width: 1.0},
-  {id: 'center', name: '客席の中央', dry: .8,   wet: 1.0, hf: 9000,  width: .75},
-  {id: 'back',   name: '客席の後ろ', dry: .5,   wet: 1.3, hf: 5500,  width: .5},
+  {id: 'podium', name: '指揮台',     dry: 1.15, wet: .6,  hf: 16000, hfIR: 18000, width: 1.0},
+  {id: 'center', name: '客席の中央', dry: .8,   wet: 1.0, hf: 9000,  hfIR: 12000, width: .75},
+  {id: 'back',   name: '客席の後ろ', dry: .5,   wet: 1.3, hf: 5500,  hfIR: 9000, width: .5},
 ];
 const POSITION = Object.fromEntries(POSITIONS.map(p => [p.id, p]));
 
@@ -103,57 +103,111 @@ function makeIR(ac, v){
   return (cache[v.id] = buf);
 }
 
-// 会場の出口。会場を切り替えると、古い響きから新しい響きへなめらかに入れ替える
+/* ===== 物理シミュレーションで作った響き（7会場×3つの聴く位置） =====
+   部屋の寸法と壁・床・天井・客席の材質から計算したインパルス応答（直接音は取り除いてある）。
+   後半の響きの量は、実際のホールで測られる明瞭さ（C80）の範囲に合わせてある。
+   ir.json の mus は「直接音を1としたときの、合奏の音に対する響きの量」、wetGain は書き出し時に正規化した倍率。 */
+const VIR = {man: null, raw: {}, loading: null, error: null};
+function loadVenueIRs(base){
+  if(VIR.loading) return VIR.loading;
+  VIR.loading = (async () => {
+    const man = await (await fetch(base + 'ir.json')).json();
+    await Promise.all(Object.entries(man.venues).flatMap(([vid, ps]) => Object.keys(ps).map(async pos => {
+      VIR.raw[vid + '_' + pos] = await (await fetch(`${base}${vid}_${pos}.mp3`)).arrayBuffer();
+    })));
+    VIR.man = man;
+  })().catch(e => { VIR.error = e; });
+  return VIR.loading;
+}
+const VIR_CACHE = new WeakMap();
+// その会場・位置の響きを、再生環境のサンプリング周波数でデコードして返す。まだなら null を返し、できたら onReady を呼ぶ
+function venueIR(ac, vid, pos, onReady){
+  const key = vid + '_' + pos;
+  let c = VIR_CACHE.get(ac);
+  if(!c){ c = {}; VIR_CACHE.set(ac, c); }
+  if(c[key] && c[key].buf) return c[key].buf;
+  if(!c[key] && VIR.man && VIR.raw[key]){
+    c[key] = {};
+    decodeBuf(ac, VIR.raw[key].slice(0)).then(buf => {
+      const sr = buf.sampleRate, info = VIR.man.venues[vid][pos];
+      // MP3の頭の無音は環境で違うので、書き出し時に入れた目印のクリックから位置を合わせる
+      const d0 = buf.getChannelData(0);
+      let mark = 0, mv = 0;
+      for(let i = 0; i < Math.min(d0.length, Math.floor((VIR.man.mark + 0.06) * sr)); i++){ const a = Math.abs(d0[i]); if(a > mv){ mv = a; mark = i; } }
+      const start = mark + Math.round((VIR.man.lead - VIR.man.mark) * sr);
+      const n = Math.max(1, Math.min(Math.round(info.len * sr), buf.length - start));
+      const out = ac.createBuffer(2, n, sr);
+      for(let ch = 0; ch < 2; ch++) out.copyToChannel(buf.getChannelData(Math.min(ch, buf.numberOfChannels - 1)).subarray(start, start + n), ch);
+      c[key].buf = out;
+      if(onReady) onReady();
+    }, () => { c[key].error = true; });
+  }
+  return null;
+}
+
+// 会場の出口。会場や聴く位置を切り替えると、古い響きから新しい響きへなめらかに入れ替える。
+// input は直接音＋響き、wetIn は響きだけに送る入口（ステージの奥の列ほど多く送る）
 class VenueChain {
   constructor(ac, dest){
     this.ac = ac;
     this.input = ac.createGain();
+    this.wetIn = ac.createGain();
     this.sum = ac.createGain();
     const comp = ac.createDynamicsCompressor();
     comp.threshold.value = -12; comp.knee.value = 12; comp.ratio.value = 2.5; comp.attack.value = 0.02; comp.release.value = 0.35;
     this.master = ac.createGain(); this.master.gain.value = 1.8;
-    this.sum.connect(comp); comp.connect(this.master); this.master.connect(dest || ac.destination);
+    // 最後に音割れを防ぐリミッター（全員でffを吹いても0dBを越えない）
+    const lim = ac.createDynamicsCompressor();
+    lim.threshold.value = -4; lim.knee.value = 2; lim.ratio.value = 20; lim.attack.value = 0.002; lim.release.value = 0.2;
+    this.sum.connect(comp); comp.connect(this.master); this.master.connect(lim); lim.connect(dest || ac.destination);
     this.stage = null;
     this.venueId = null; this.posId = 'center';
   }
-  set(venueId, posId = this.posId, fade = 0.4){
+  set(venueId, posId = this.posId, fade = 0.4, force = false){
     const ac = this.ac, v = VENUE[venueId], p = POSITION[posId];
-    if(this.stage && this.venueId === venueId){ this.setPosition(posId); return; }
+    if(this.stage && this.venueId === venueId && this.posId === posId && !force) return;
+    this.venueId = venueId; this.posId = posId;
+    const ir = venueIR(ac, venueId, posId, () => { if(this.venueId === venueId && this.posId === posId) this.set(venueId, posId, 0.3, true); });
     const st = {};
     let node = ac.createGain();
     st.head = node;
-    for(const [type, f, g, q] of v.eq){
-      const b = ac.createBiquadFilter(); b.type = type; b.frequency.value = f; b.gain.value = g; if(q) b.Q.value = q;
-      node.connect(b); node = b;
+    st.lp = ac.createBiquadFilter(); st.lp.type = 'lowpass'; st.lp.Q.value = .5;
+    st.conv = ac.createConvolver(); st.conv.normalize = false;
+    st.dry = ac.createGain(); st.wet = ac.createGain();
+    if(ir){
+      // 直接音と響きの量の比は計算のまま。全体の大きさは会場・位置によらずそろえる（屋外だけは離れると小さくなる）
+      const info = VIR.man.venues[venueId][posId];
+      // 1.4 はステージ奥の列から響きへ多めに送るぶん
+      const g = 1.1 * (v.irLvl ? v.irLvl[posId] : 1) / Math.sqrt(1 + 1.4 * info.mus);
+      st.lp.frequency.value = p.hfIR;
+      st.dry.gain.value = g;
+      st.wet.gain.value = g * info.wetGain;
+      st.conv.buffer = ir;
+    } else {
+      for(const [type, f, g, q] of v.eq){
+        const b = ac.createBiquadFilter(); b.type = type; b.frequency.value = f; b.gain.value = g; if(q) b.Q.value = q;
+        node.connect(b); node = b;
+      }
+      st.lp.frequency.value = p.hf;
+      st.dry.gain.value = v.dry * p.dry;
+      st.wet.gain.value = v.wet * p.wet;
+      st.conv.buffer = makeIR(ac, v);
     }
-    st.lp = ac.createBiquadFilter(); st.lp.type = 'lowpass'; st.lp.frequency.value = p.hf; st.lp.Q.value = .5;
-    st.dry = ac.createGain(); st.dry.gain.value = v.dry * p.dry;
     node.connect(st.lp); st.lp.connect(st.dry);
-    st.conv = ac.createConvolver(); st.conv.normalize = false; st.conv.buffer = makeIR(ac, v);
-    st.wet = ac.createGain(); st.wet.gain.value = v.wet * p.wet;
     st.conv.connect(st.wet);
     st.out = ac.createGain();
     st.dry.connect(st.out); st.wet.connect(st.out);
     st.out.connect(this.sum);
-    this.input.connect(st.head); this.input.connect(st.conv);
+    this.input.connect(st.head); this.input.connect(st.conv); this.wetIn.connect(st.conv);
     const now = ac.currentTime;
-    if(this.stage && fade > 0){
-      const old = this.stage;
+    const old = this.stage;
+    const drop = o => { try{ this.input.disconnect(o.head); this.input.disconnect(o.conv); this.wetIn.disconnect(o.conv); o.out.disconnect(); }catch(e){} };
+    if(old && fade > 0){
       st.out.gain.setValueAtTime(0, now); st.out.gain.linearRampToValueAtTime(1, now + fade);
       old.out.gain.setValueAtTime(old.out.gain.value, now); old.out.gain.linearRampToValueAtTime(0, now + fade);
-      setTimeout(() => { try{ this.input.disconnect(old.head); this.input.disconnect(old.conv); old.out.disconnect(); }catch(e){} }, (fade + 0.2) * 1000);
-    } else if(this.stage){
-      const old = this.stage;
-      try{ this.input.disconnect(old.head); this.input.disconnect(old.conv); old.out.disconnect(); }catch(e){}
-    }
-    this.stage = st; this.venueId = venueId; this.posId = posId;
+      setTimeout(() => drop(old), (fade + 0.2) * 1000);
+    } else if(old) drop(old);
+    this.stage = st;
   }
-  setPosition(posId){
-    this.posId = posId;
-    if(!this.stage) return;
-    const v = VENUE[this.venueId], p = POSITION[posId], now = this.ac.currentTime;
-    this.stage.dry.gain.setTargetAtTime(v.dry * p.dry, now, 0.08);
-    this.stage.wet.gain.setTargetAtTime(v.wet * p.wet, now, 0.08);
-    this.stage.lp.frequency.setTargetAtTime(p.hf, now, 0.08);
-  }
+  setPosition(posId){ if(this.venueId) this.set(this.venueId, posId); else this.posId = posId; }
 }

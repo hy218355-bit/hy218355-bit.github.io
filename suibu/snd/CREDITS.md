@@ -6,5 +6,12 @@
   https://github.com/sgossner/VSCO-2-CE
   フルート、ピッコロ、オーボエ、ファゴット、クラリネット、ホルン、トランペット、トロンボーン、チューバ、コントラバス（弓・ピチカート）、ティンパニ、スネアドラム、バスドラム、シンバル、サスペンデッドシンバル、トライアングル、タンブリン、タムタム、グロッケン、シロフォン、マリンバ、チャイム
 - **Karoryfer Samples「Weresax」**（アルトサックス）。tonejs-instruments（https://github.com/nbrosowsky/tonejs-instruments）に収録されたものを、同リポジトリの表記に従い CC BY 3.0 で利用しています。
+- **Frank Wen「FluidR3_GM」**（テナーサックス、バリトンサックス、ヴィブラフォン）。midi-js-soundfonts（https://github.com/gleitz/midi-js-soundfonts）で書き出されたものを、同リポジトリの表記に従い CC BY 3.0（https://creativecommons.org/licenses/by/3.0/us/）で利用しています。
 
-E♭クラリネット・バスクラリネットはクラリネット、テナー・バリトンサックスはアルトサックス、ユーフォニアム・バストロンボーンはトロンボーンの録音を、高さと明るさを変えて使っています。
+E♭クラリネット・バスクラリネットはクラリネット、ユーフォニアム・バストロンボーンはトロンボーンの録音を、高さと明るさを変えて使っています。
+
+## 会場の響き（`ir/`）
+
+7つの会場 × 3つの聴く位置の響き（インパルス応答）は録音ではなく、このページのために計算したものです。
+部屋の寸法と、壁・床・天井・客席の材質ごとの吸音率から、pyroomacoustics（https://github.com/LCAV/pyroomacoustics 、MIT License）の鏡像法＋音線法で計算し、直接音を取り除いてあります。
+点音源の計算では楽器の指向性や反射板の初期反射が入らないため、後半の響きの量だけを実際のホールで測られる明瞭さ（C80）の範囲に合わせています（作り方は `../tools/ir_sim.py` → `../tools/ir_build.py` → `../tools/ir_c80.py`）。

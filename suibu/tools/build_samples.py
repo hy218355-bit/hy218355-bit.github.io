@@ -4,9 +4,13 @@ sys.path.insert(0, os.path.dirname(__file__))
 from sample_lib import *
 V = '/home/user/sgossner/vsco-2-ce/'
 T = '/home/user/nbrosowsky/tonejs-instruments/samples/'
+F = '/home/user/gleitz/midi-js-soundfonts/FluidR3_GM/'
 OUT = '/home/user/hy218355-bit.github.io/suibu/snd/'
 os.makedirs(OUT, exist_ok=True)
 GAP = 0.12
+# 引数で楽器名を渡すと、その楽器だけ作り直して目録を更新する
+ONLY = set(sys.argv[1:])
+want = lambda bank: not ONLY or bank in ONLY
 
 WINDS = {
   'flute':   (V + 'Woodwinds/Flute/susNV', 12, (56, 98)),
@@ -65,8 +69,9 @@ def pack(name, items):
     assert p.returncode == 0
     return meta
 
-manifest = {}
+manifest = json.load(open(OUT + 'manifest.json')) if ONLY else {}
 for bank, (d, shift, (lo, hi)) in WINDS.items():
+    if not want(bank): continue
     fs = sorted(f for f in os.listdir(d) if f.endswith('.wav'))
     by = {}
     for f in fs:
@@ -101,6 +106,7 @@ STACS = {
   'cbass_st':   (V + 'Strings/Solo Contrabass/Spic', 12, (27, 56)),
 }
 for bank, (d, shift, (lo, hi)) in STACS.items():
+    if not want(bank): continue
     fs = sorted(f for f in os.listdir(d) if f.endswith('.wav'))
     by = {}
     for f in fs:
@@ -121,7 +127,26 @@ for bank, (d, shift, (lo, hi)) in STACS.items():
     manifest[bank] = {'kind': 'stac', 'samples': pack(bank, items)}
     print(bank, len(items), 'samples', sorted(by))
 
+# FluidR3_GM（CC BY 3.0）：VSCOにないテナー・バリトンサックスとヴィブラフォン。
+# 半音ごとの録音から短3度おきに選ぶ（ファイル名は実音・♭表記）
+FL_PC = {'C': 0, 'Db': 1, 'D': 2, 'Eb': 3, 'E': 4, 'F': 5, 'Gb': 6, 'G': 7, 'Ab': 8, 'A': 9, 'Bb': 10, 'B': 11}
+def fl_name(midi):
+    pc = [k for k, v in FL_PC.items() if v == midi % 12][0]
+    return pc + str(midi // 12 - 1)
+FLUID = {'tsax': ('tenor_sax', (41, 80)), 'bsax': ('baritone_sax', (33, 72))}
+for bank, (d, (lo, hi)) in FLUID.items():
+    if not want(bank): continue
+    items = []
+    for midi in range(lo, hi + 1, 3):
+        x = load(F + d + '-mp3/' + fl_name(midi) + '.mp3')
+        fm = fine_midi(x[onset(x):], midi)
+        x = rms_norm(prep(x, KEEP_WIND))
+        items.append({'x': x, 'm': round(fm, 2), 'l': -1, 'lp': [1.0, round(len(x) / SR - 0.12, 3)]})
+    manifest[bank] = {'kind': 'sus', 'samples': pack(bank, items)}
+    print(bank, len(items), 'samples', [i['m'] for i in manifest[bank]['samples']])
+
 def hits(bank, specs, keep, pitched=False, norm='peak'):
+    if not want(bank): return
     items = []
     for path, extra in specs:
         x = load(path)
@@ -173,6 +198,7 @@ nm = lambda f, sh: 12 * (name_note(f)[1] + 1) + name_note(f)[0] + sh
 hits('glock', [(P + 'Glock/' + f, {'m': nm(f, 12)}) for f in sorted(os.listdir(P + 'Glock'))], 2.5)
 hits('xylo', [(P + 'Xylo/' + f, {'m': nm(f, 12)}) for f in sorted(os.listdir(P + 'Xylo'))], 1.0)
 hits('mrb', [(P + 'Marimba/' + f, {'m': nm(f, 12)}) for f in sorted(os.listdir(P + 'Marimba'))], 1.6)
+hits('vib', [(F + 'vibraphone-mp3/' + fl_name(m) + '.mp3', {'m': m}) for m in range(53, 90, 3)], 3.0)
 hits('chime', [(P + f, {'m': nm(f, 0)}) for f in sorted(os.listdir(P)) if f.startswith('TB_hit')], 4.5)
 
 json.dump(manifest, open(OUT + 'manifest.json', 'w'), ensure_ascii=False, separators=(',', ':'))

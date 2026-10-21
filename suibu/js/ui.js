@@ -430,7 +430,7 @@ function renderPiece(){
 function renderVenues(){
   $('#venueSel').innerHTML = VENUES.map(v => `<button type="button" data-venue="${v.id}" aria-pressed="${v.id === U.venue}">${v.name}</button>`).join('');
   const v = VENUE[U.venue];
-  $('#venueDesc').innerHTML = `<b>${v.name}</b>（${v.size}・残響 約${v.rt.toFixed(1)}秒）${v.desc}`;
+  $('#venueDesc').innerHTML = `<b>${v.name}</b>（${v.size}・${v.rt < 0.2 ? '響きはほとんどない' : `残響 約${v.rt.toFixed(1)}秒`}）${v.desc}`;
   $('#posSel').innerHTML = POSITIONS.map(p => `<option value="${p.id}">${p.name}</option>`).join('');
   $('#posSel').value = U.pos;
 }
@@ -523,7 +523,7 @@ function renderWeek(){
   if(ev && (ev.kind === 'concert' || ev.kind === 'contest')){
     const n = nervesFor(S, ev), v = VENUE[ev.venue];
     w.innerHTML = `<div class="stagecard"><span class="tag">${ev.kind === 'contest' ? 'コンクール' : '本番'}</span><h3>${ev.title}</h3>
-      <p class="small">会場：${v.name}（残響 約${v.rt.toFixed(1)}秒）。${v.desc}</p>
+      <p class="small">会場：${v.name}（${v.rt < 0.2 ? '響きはほとんどない' : `残響 約${v.rt.toFixed(1)}秒`}）。${v.desc}</p>
       ${ev.text ? `<p class="txt">${ev.text}</p>` : ''}
       <p class="txt">${moodText(n)}（緊張 −${n}）${v.play.hall ? `会場慣れ ${Math.round(S.hallExp)}。` : ''}</p>
       <button class="btn primary" type="button" data-act="stage">本番の演奏をはじめる</button></div>`;
@@ -835,6 +835,8 @@ function start(data){
   bind();
   renderSnd();
   loadSamples('snd/', renderSnd).then(renderSnd, renderSnd);
+  // 響きの読み込みが再生より後になったら、読み込めた時点で計算した響きに切り替える
+  loadVenueIRs('snd/ir/').then(() => { if(E.chain) E.chain.set(E.venueId, E.posId, 0.3, true); });
   U.perfNow = perform(currentCtx());
   U.diag = analyze(U.perfNow);
   U.shown = U.perfNow; U.shownLabel = nowLabel();
