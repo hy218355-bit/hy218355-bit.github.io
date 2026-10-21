@@ -67,6 +67,11 @@ jobs:
           xcrun simctl ui "$UDID" appearance dark
           sleep 4
           xcrun simctl io "$UDID" screenshot shot-dark.png
+          # ログからも見られるように、縮小したJPEGを base64 で出す
+          for n in light dark; do
+            sips -s format jpeg -s formatOptions 55 -Z 760 "shot-$n.png" --out "small-$n.jpg" >/dev/null
+            echo "SHOT-$n $(base64 -i small-$n.jpg | tr -d '\n')"
+          done
       - uses: actions/upload-artifact@v4
         if: always()
         with:
