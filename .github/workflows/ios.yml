@@ -1,0 +1,70 @@
+# 吹部日誌 iOSアプリ：シミュレータ用とiPhone用（署名なし）にビルドし、シミュレータの中で動作確認する
+name: iOS app
+on:
+  push:
+    paths: ['suibu/**', 'suibu-ios/**', '.github/workflows/ios.yml']
+  workflow_dispatch:
+jobs:
+  build-and-test:
+    runs-on: macos-15
+    timeout-minutes: 40
+    defaults:
+      run:
+        shell: bash
+    steps:
+      - uses: actions/checkout@v4
+      - name: Xcode
+        run: xcodebuild -version
+      - name: Build for iPhone (Release, unsigned)
+        run: |
+          xcodebuild -project suibu-ios/Suibu.xcodeproj -scheme Suibu -configuration Release \
+            -sdk iphoneos -destination 'generic/platform=iOS' -derivedDataPath build-device \
+            CODE_SIGNING_ALLOWED=NO build | tail -40
+      - name: Build for simulator (Debug)
+        run: |
+          xcodebuild -project suibu-ios/Suibu.xcodeproj -scheme Suibu -configuration Debug \
+            -sdk iphonesimulator -destination 'generic/platform=iOS Simulator' -derivedDataPath build-sim \
+            build | tail -40
+          APP=build-sim/Build/Products/Debug-iphonesimulator/Suibu.app
+          ls "$APP" | head -20
+          du -sh "$APP" "$APP/suibu"
+          /usr/libexec/PlistBuddy -c 'Print :CFBundleDisplayName' "$APP/Info.plist"
+      - name: Boot simulator
+        run: |
+          UDID=$(xcrun simctl list devices available -j | python3 -c "
+          import json, sys
+          devs = json.load(sys.stdin)['devices']
+          c = [(k, d) for k, v in devs.items() if 'iOS' in k for d in v if d['name'].startswith('iPhone')]
+          c.sort(key=lambda x: x[0])
+          print(c[-1][1]['udid'])")
+          echo "UDID=$UDID" >> "$GITHUB_ENV"
+          xcrun simctl list devices | grep "$UDID"
+          xcrun simctl boot "$UDID"
+          xcrun simctl bootstatus "$UDID" -b
+          xcrun simctl install "$UDID" build-sim/Build/Products/Debug-iphonesimulator/Suibu.app
+      - name: Self-test inside the app (WebKit)
+        timeout-minutes: 6
+        run: |
+          xcrun simctl launch --console-pty "$UDID" io.github.hy218355-bit.suibu -selftest > console.txt 2>&1 || true
+          sleep 2
+          cat console.txt | tail -40
+          DATA=$(xcrun simctl get_app_container "$UDID" io.github.hy218355-bit.suibu data)
+          echo "--- selftest.txt"
+          cat "$DATA/Documents/selftest.txt"
+          grep -q "SELFTEST OK" "$DATA/Documents/selftest.txt"
+      - name: Screenshot after normal launch
+        run: |
+          xcrun simctl launch "$UDID" io.github.hy218355-bit.suibu
+          sleep 25
+          xcrun simctl io "$UDID" screenshot shot-light.png
+          xcrun simctl ui "$UDID" appearance dark
+          sleep 4
+          xcrun simctl io "$UDID" screenshot shot-dark.png
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: simulator-screenshots
+          path: |
+            shot-*.png
+            console.txt
+          if-no-files-found: ignore

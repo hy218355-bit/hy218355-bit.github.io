@@ -20,6 +20,8 @@ const clampG = g => clamp(g, -2.5, 2.5);
 const lerp = (a, b, t) => a + (b - a) * t;
 const mtof = m => A4 * Math.pow(2, (m - 69) / 12);
 const esc = s => String(s).replace(/[&<>"]/g, c => ({'&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;'}[c]));
+// iOSアプリの中で動いているときだけ、アプリ側へ知らせる（ブラウザでは何もしない）
+const nativePost = m => { try{ window.webkit.messageHandlers.native.postMessage(m); }catch(e){} };
 
 function interp(pts, x){
   if(x <= pts[0][0]) return pts[0][1];

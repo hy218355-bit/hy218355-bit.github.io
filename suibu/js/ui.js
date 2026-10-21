@@ -87,6 +87,7 @@ function playPerf(perf, label, onEnd){
   const pb = E.play(perf);
   if(!pb){ $('#nowPlaying').textContent = 'このブラウザでは音を鳴らせません。'; return; }
   U.shown = perf; U.shownLabel = label; U.playing = true; U.onEnd = onEnd || null;
+  nativePost({type: 'playing', on: true});
   U.ptr = buildPtr(perf);
   $('#btnStop').disabled = false;
   setNowPlaying();
@@ -106,6 +107,7 @@ function playPerf(perf, label, onEnd){
 }
 function endPlay(){
   U.playing = false;
+  nativePost({type: 'playing', on: false});
   cancelAnimationFrame(U.raf);
   $('#btnStop').disabled = true;
   setNowPlaying();

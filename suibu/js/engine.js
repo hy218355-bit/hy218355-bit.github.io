@@ -6,11 +6,17 @@ class Engine {
     this.ac = null; this.chain = null; this.pb = null;
     this.venueId = 'room'; this.posId = 'center';
     this.solo = {type: 'all'};
+    // iPhoneで別のアプリから戻ったときや電話のあと、止められた音を再開する
+    const wake = () => { if(this.ac && this.ac.state !== 'running' && this.pb && !this.pb.ended) this.ac.resume(); };
+    document.addEventListener('visibilitychange', () => { if(!document.hidden) wake(); });
+    document.addEventListener('touchend', wake, {passive: true});
   }
   ensure(){
     if(this.ac) return true;
     const AC = window.AudioContext || window.webkitAudioContext;
     if(!AC) return false;
+    // iPhoneのSafari：マナーモードでも音が出るように、音楽再生として扱ってもらう
+    try{ if(navigator.audioSession) navigator.audioSession.type = 'playback'; }catch(e){}
     this.ac = new AC({latencyHint: 'playback'});
     this.chain = new VenueChain(this.ac);
     this.chain.set(this.venueId, this.posId, 0);
