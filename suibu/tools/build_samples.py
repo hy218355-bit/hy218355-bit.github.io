@@ -61,7 +61,7 @@ def pack(name, items):
     y = np.concatenate(buf)
     y = np.clip(y, -0.98, 0.98)
     p = subprocess.run(['ffmpeg', '-v', 'error', '-y', '-f', 'f32le', '-ar', str(SR), '-ac', '1', '-i', '-',
-                        '-ar', '32000', '-codec:a', 'libmp3lame', '-b:a', '64k', OUT + name + '.mp3'], input=y.tobytes())
+                        '-ar', '44100', '-codec:a', 'libmp3lame', '-b:a', '96k', OUT + name + '.mp3'], input=y.tobytes())
     assert p.returncode == 0
     return meta
 
@@ -86,6 +86,39 @@ for bank, (d, shift, (lo, hi)) in WINDS.items():
             # 長い音は、ここをなめらかにつないでくり返す
             items.append({'x': x, 'm': round(fm, 2), 'l': li if len(pick) > 1 else -1, 'lp': [1.0, round(len(x) / SR - 0.12, 3)]})
     manifest[bank] = {'kind': 'sus', 'samples': pack(bank, items)}
+    print(bank, len(items), 'samples', sorted(by))
+
+# 短い音（スタッカート）：テイク違い2つと強弱2段
+STACS = {
+  'flute_st':   (V + 'Woodwinds/Flute/stac', 12, (56, 98)),
+  'oboe_st':    (V + 'Woodwinds/Oboe/Stacc', 12, (58, 86)),
+  'bassoon_st': (V + 'Woodwinds/Bassoon/stac', 12, (30, 70)),
+  'clar_st':    (V + 'Woodwinds/Clarinet/stac', 12, (48, 94)),
+  'horn_st':    (V + 'Brass/F Horn/stac', 12, (44, 78)),
+  'tpt_st':     (V + 'Brass/Trumpet/stac', 12, (55, 87)),
+  'tbn_st':     (V + 'Brass/Tenor Trombone/stac', 12, (30, 70)),
+  'tuba_st':    (V + 'Brass/Tuba/stac', 12, (27, 56)),
+  'cbass_st':   (V + 'Strings/Solo Contrabass/Spic', 12, (27, 56)),
+}
+for bank, (d, shift, (lo, hi)) in STACS.items():
+    fs = sorted(f for f in os.listdir(d) if f.endswith('.wav'))
+    by = {}
+    for f in fs:
+        nn = name_note(f)
+        if not nn: continue
+        midi = 12 * (nn[1] + 1) + nn[0] + shift
+        if midi < lo or midi > hi or rr(f) > 2: continue
+        by.setdefault(midi, {}).setdefault(layer(f), {})[rr(f)] = f
+    items = []
+    for midi in sorted(by):
+        lays = sorted(by[midi])
+        pick = [lays[0]] if len(lays) == 1 else [lays[0], lays[-1]]
+        for li, lv in enumerate(pick):
+            for r, f in sorted(by[midi][lv].items()):
+                x = load(d + '/' + f)
+                x = rms_norm(prep(x, 0.9, fade=0.12), a=0.0, b=0.2)
+                items.append({'x': x, 'm': float(midi), 'l': li if len(pick) > 1 else -1, 'rr': r})
+    manifest[bank] = {'kind': 'stac', 'samples': pack(bank, items)}
     print(bank, len(items), 'samples', sorted(by))
 
 def hits(bank, specs, keep, pitched=False, norm='peak'):

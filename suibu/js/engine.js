@@ -49,6 +49,11 @@ class Playback {
     const byMem = {};
     for(const n of perf.notes) (byMem[n.mid] ||= []).push(n);
     this.queues = Object.entries(byMem).map(([mid, list]) => ({mid, list, i: 0, voice: null}));
+    // 同じパートの何人目か（録音の使い分けに使う）
+    const byPart = {};
+    for(const q of this.queues) (byPart[q.list[0].part] ||= []).push(q.mid);
+    this.rank = {};
+    for(const ids of Object.values(byPart)) ids.sort().forEach((id, i) => { this.rank[id] = i; });
     this.hits = perf.hits;
     this.hi = 0;
     // 部員ごとの出口：ソロ用の音量 → 座席の左右
@@ -78,6 +83,8 @@ class Playback {
           q.voice = new Voice(this.ac, this.mem[q.mid].g, n.inst, {
             trem: 0.3 * Math.pow(iT, 1.2), noise: 0.5 + 1.8 * Math.pow(iT, 1.3),
             vibRateMul: 0.94 + 0.12 * hash(q.mid, 'vr'), midi: ms[Math.floor(ms.length / 2)],
+            // うまい奏者どうしでも、ほんの少しの音程差と出だしの差は残る（合奏らしい厚み）
+            alt: this.rank[q.mid] || 0, det: 2.2 * clampG(gauss(q.mid, 'det')), dt: 0.006 * clampG(gauss(q.mid, 'dt')),
           });
           q.voice.start(Math.max(this.ac.currentTime, this.T0 + n.t - 0.05));
           this.voices.push(q.voice);

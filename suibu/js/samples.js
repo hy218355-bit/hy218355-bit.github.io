@@ -58,7 +58,8 @@ function loadSamples(base, onProgress){
 }
 const sampleCfg = instId => SAMPLES.ready && SAMPLES.use ? SAMPLE_BANK[instId] && SAMPLES.banks[SAMPLE_BANK[instId].bank] && SAMPLE_BANK[instId] : null;
 
-// 音の高さ（と強弱段）が一番近い録音を選ぶ
+// 音の高さ（と強弱段）が近い録音を選ぶ。rank を指定すると2番目・3番目に近い録音（5半音以内）を使う
+// 同じパートの複数人が同じ録音を重ねると、シュワシュワした不自然な響きになるため
 function pickSample(bank, midi, v, opts = {}){
   let list = bank.samples.filter(s => !!s.roll === !!opts.roll);
   if(!list.length) list = bank.samples;
@@ -71,13 +72,15 @@ function pickSample(bank, midi, v, opts = {}){
     const same = list.filter(s => s.l === list[0].l);
     return same[Math.floor(hash(opts.key || '', 'rr') * same.length)] || list[0];
   }
-  let best = list[0], bd = Infinity;
-  for(const s of list){
-    if(s.m == null) continue;
-    const d = Math.abs(s.m - midi) + (s.m < midi ? 0.01 : 0);
-    if(d < bd){ bd = d; best = s; }
-  }
-  return best;
+  const near = list.filter(s => s.m != null).map(s => [Math.abs(s.m - midi) + (s.m < midi ? 0.01 : 0), s]).sort((a, b) => a[0] - b[0]);
+  if(!near.length) return list[0];
+  const d0 = near[0][0];
+  // 同じ高さのテイク違い（スタッカート）は順番に、それ以外は近い順に
+  const takes = near.filter(([d]) => Math.abs(d - d0) < 0.02);
+  if(takes.length > 1) return takes[Math.floor(hash(opts.key || '', 'rr') * takes.length)][1];
+  const r = opts.rank || 0;
+  const ok = near.filter(([d], i) => i === 0 || d <= 5);
+  return ok[Math.min(r, ok.length - 1)][1];
 }
 
 // 録音を時間 [t0, t1] だけ鳴らす。録音より長ければ、後半をなめらかにつないでくり返す
@@ -106,7 +109,9 @@ function playSegments(ac, dest, bank, smp, t0, t1, rate, firstOffset, srcs, onSr
   }
 }
 
-/* ===== 管楽器・弦バス：録音で吹く奏者1人ぶんの声 ===== */
+/* ===== 管楽器・弦バス：録音で吹く奏者1人ぶんの声 =====
+   音色が育っていない奏者は、こもった細い音・ゆらぐ音量・裏返り・不安定な音程で表す（雑音は足さない）。
+   同じパートの部員は、使う録音・ごく小さな音程と出だしの差を一人ずつ変えて、合奏らしい重なりにする。 */
 class SampleVoice {
   constructor(ac, dest, instId, opts){
     this.ac = ac;
@@ -114,35 +119,30 @@ class SampleVoice {
     this.tb = TIMBRE[this.inst.timbre];
     this.cfg = SAMPLE_BANK[instId];
     this.bank = SAMPLES.banks[this.cfg.bank];
+    this.stac = SAMPLES.banks[this.cfg.bank + '_st'] || null;
     this.gain = this.inst.gain * SUS_GAIN * (this.cfg.g || 1);
+    this.rank = opts.alt || 0;
+    this.det = opts.det || 0;
+    this.dt = opts.dt || 0;
     this.srcs = [];
     this.in = ac.createGain();
     this.lp = ac.createBiquadFilter(); this.lp.type = 'lowpass'; this.lp.Q.value = 0.5; this.lp.frequency.value = 16000;
     this.in.connect(this.lp);
     let node = this.lp;
     if(opts.trem > 0.05){
-      this.wob = ac.createGain(); this.trem = opts.trem;
+      this.wob = ac.createGain(); this.trem = opts.trem * 0.6;
       node.connect(this.wob); node = this.wob;
     }
     node.connect(dest);
-    // 音色が育っていない奏者は、息の雑音が混じる
-    const noise = this.tb.noise * (opts.noise ?? 1) * 0.6;
-    if(noise > 0.03){
-      const src = ac.createBufferSource(); src.buffer = noiseBuf(ac); src.loop = true;
-      const bp = ac.createBiquadFilter(); bp.type = 'bandpass'; bp.Q.value = 0.8;
-      bp.frequency.value = Math.max(this.tb.nMin, mtof(opts.midi || this.inst.center) * this.tb.nMul);
-      this.ng = ac.createGain(); this.ng.gain.value = 0; this.noise = noise;
-      src.connect(bp); bp.connect(this.ng); this.ng.connect(this.in);
-      this.noiseSrc = src; this.srcs.push(src);
-    }
     this.vibRate = (this.inst.vibRate || 5) * (opts.vibRateMul || 1);
     this.prev = null;
   }
-  start(t){ if(this.noiseSrc) this.noiseSrc.start(t, (t * 13.7) % 1.5); }
+  start(){}
   stop(t){ for(const s of this.srcs){ try{ s.stop(t); }catch(e){} } }
 
   play(n, next, T0){
     const ac = this.ac, tb = this.tb, cfg = this.cfg;
+    T0 += this.dt;
     const s = T0 + n.t;
     const nextS = next ? T0 + next.t : Infinity;
     const joined = !!n.join && !!this.prev;
@@ -152,10 +152,35 @@ class SampleVoice {
     const vMax = env.reduce((a, [, v]) => Math.max(a, v), 0);
     const lv = v => this.gain * (0.03 + 0.97 * Math.pow(v, 1.8));
     const smooth = joined && (n.slur || n.art === 'tie');
+    const f = mtof(n.midi);
+    // 明るさ：弱い音・音色の育っていない奏者ほどこもる。低く下げて使う録音（バスクラなど）は lp で丸める
+    const cut = clamp(f * (cfg.lp || 40) * lerp(0.55, 1, vMax) * (0.45 + 0.55 * (n.T ?? 1)), 300, 16000);
+    this.lp.frequency.setValueAtTime(cut, s);
 
-    const smp = pickSample(this.bank, n.midi - (cfg.shift || 0), vMax);
+    // 短い音はスタッカートの録音をそのまま鳴らす
+    const short = this.stac && !smooth && (n.art === 'stac' || n.d < 0.3);
+    if(short){
+      const smp = pickSample(this.stac, n.midi - (cfg.shift || 0), vMax, {key: n.key});
+      const rate = Math.pow(2, (n.midi - smp.m) / 12) / SAMPLE_TUNE * Math.pow(2, (n.cents + this.det + (n.crack ? n.crack : 0)) / 1200);
+      const src = ac.createBufferSource(); src.buffer = this.stac.buf;
+      src.playbackRate.setValueAtTime(rate, s);
+      if(n.crack) src.playbackRate.setValueAtTime(rate * Math.pow(2, -n.crack / 1200), s + n.crackDur);
+      const g = ac.createGain();
+      src.connect(g); g.connect(this.in);
+      const end = Math.min(s + smp.d / rate, nextS + 0.03);
+      g.gain.setValueAtTime(0, s);
+      g.gain.linearRampToValueAtTime(lv(vMax) * n.blat, s + 0.004);
+      if(nextS < s + smp.d / rate){ g.gain.setValueAtTime(lv(vMax), nextS - 0.002); g.gain.linearRampToValueAtTime(0, nextS + 0.03); }
+      src.start(s, smp.start);
+      src.stop(end + 0.01);
+      this.srcs.push(src);
+      this.prev = n; this.lastCents = n.cents;
+      return end;
+    }
+
+    const smp = pickSample(this.bank, n.midi - (cfg.shift || 0), vMax, {rank: this.rank});
     const base = Math.pow(2, (n.midi - smp.m) / 12) / SAMPLE_TUNE;
-    const R = c => base * Math.pow(2, c / 1200);
+    const R = c => base * Math.pow(2, (c + this.det) / 1200);
     const relEnd = legNext ? nextS + 0.06 : endT + tb.rel;
 
     // 1音ぶんの音量（強弱の流れ）
@@ -177,17 +202,13 @@ class SampleVoice {
     if(legNext){ G.setValueAtTime(lv(vEnd), nextS); G.linearRampToValueAtTime(0, nextS + (next.slur ? 0.06 : 0.03)); }
     else G.linearRampToValueAtTime(0, endT + tb.rel);
 
-    // 明るさ：弱い音ほど暗く。低く下げて使う録音（バスクラなど）は lp で丸める
-    const f = mtof(n.midi);
-    this.lp.frequency.setValueAtTime(clamp(f * (cfg.lp || 40) * lerp(0.55, 1, vMax), 300, 16000), s);
-
     // 再生速度で音程を動かす（ずり上がり → 落ち着く → 息が続かず下がる、音の裏返り）
     const firstOffset = smooth ? 0.08 : 0;
     const vib = n.vib > 0.5 && endT - s > 0.6 ? n.vib : 0;
-    let vg = null, lfo = null;
+    let vg = null;
     if(vib){
       const on = s + Math.min(0.35, (endT - s) * 0.3);
-      lfo = ac.createOscillator(); lfo.frequency.value = this.vibRate;
+      const lfo = ac.createOscillator(); lfo.frequency.value = this.vibRate;
       vg = ac.createGain();
       vg.gain.setValueAtTime(0, on);
       vg.gain.linearRampToValueAtTime(base * (Math.pow(2, vib / 1200) - 1), Math.min(endT, on + 0.4));
@@ -224,18 +245,12 @@ class SampleVoice {
       }
       if(vg) vg.connect(P);
     });
-    if(this.ng){
-      const N = this.ng.gain;
-      N.setValueAtTime(0, s);
-      N.linearRampToValueAtTime(this.noise * lv(vMax) / this.gain, s + 0.03);
-      N.setValueAtTime(this.noise * lv(vEnd) / this.gain, Math.max(s + 0.04, endT - 0.01));
-      N.linearRampToValueAtTime(0, endT + 0.05);
-    }
+    // 息の支えが弱い奏者は、音量がゆっくり揺れる
     if(this.wob){
       const W = this.wob.gain;
       W.setValueAtTime(1, s);
       let j = 0;
-      for(let tt = s + 0.09; tt < endT; tt += 0.09) W.linearRampToValueAtTime(1 + this.trem * (hash(n.key, 'w', j++) * 2 - 1), tt);
+      for(let tt = s + 0.22; tt < endT; tt += 0.22) W.linearRampToValueAtTime(1 + this.trem * (hash(n.key, 'w', j++) * 2 - 1), tt);
     }
     this.prev = n;
     this.lastCents = n.cents + (useSag ? n.sag : 0);

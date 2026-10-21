@@ -5,7 +5,7 @@
 
 const VENUES = [
   {id: 'room', name: '音楽室', rt: 0.8, bass: 1.15, treble: .55, pre: .005, diffuse: .02,
-   er: {n: 16, spread: .03, g: .5}, eq: [['peaking', 220, 3, 1], ['highshelf', 5000, 1.5]], wet: .36, dry: 1.0,
+   er: {n: 16, spread: .03, g: .32}, eq: [['peaking', 220, 3, 1], ['highshelf', 5000, 1.5]], wet: .36, dry: 1.0,
    play: {timing: 1.0, pitch: 1.0}, size: '約80m²',
    desc: '響きが短く、音が近い。金管がうるさく聞こえやすく、ごまかしがききにくい。'},
   {id: 'gym', name: '体育館', rt: 2.9, bass: 1.3, treble: .42, pre: .04, diffuse: .09,
@@ -17,19 +17,19 @@ const VENUES = [
    play: {timing: 1.15, pitch: 1.15}, size: '校庭',
    desc: '響きがほとんどなく、音が散っていく。少し遅れて校舎からのはね返りが返ってくる。'},
   {id: 'civic', name: '市民会館', rt: 1.4, bass: 1.05, treble: .62, pre: .02, diffuse: .05,
-   er: {n: 12, spread: .06, g: .36}, eq: [], wet: .42, dry: .85,
+   er: {n: 12, spread: .06, g: .26}, eq: [], wet: .42, dry: .85,
    play: {timing: 1.05, pitch: 1.0}, size: '800席',
    desc: '多目的ホール。響きはやや短めで、細かいところまで聞こえる。'},
   {id: 'camp', name: '合宿所ホール', rt: 1.15, bass: 1.15, treble: .68, pre: .012, diffuse: .035,
-   er: {n: 14, spread: .045, g: .42}, eq: [['peaking', 300, 1.5, .8]], wet: .4, dry: .9,
+   er: {n: 14, spread: .045, g: .3}, eq: [['peaking', 300, 1.5, .8]], wet: .4, dry: .9,
    play: {timing: 1.0, pitch: 1.0}, size: '木の小ホール',
    desc: '木の内装の小ホール。響きは柔らかく、合奏の練習に向いている。'},
   {id: 'hall', name: '県民文化会館', rt: 2.1, bass: 1.2, treble: .6, pre: .026, diffuse: .07,
-   er: {n: 18, spread: .09, g: .34}, eq: [['lowshelf', 250, 1.5]], wet: .5, dry: .78,
+   er: {n: 18, spread: .09, g: .24}, eq: [['lowshelf', 250, 1.5]], wet: .5, dry: .78,
    play: {timing: 1.08, pitch: 1.0, hall: true}, size: '1500席',
    desc: '県大会の会場。豊かで温かい響きが約2秒続く。'},
   {id: 'grand', name: '大ホール（支部・全国）', rt: 2.4, bass: 1.25, treble: .64, pre: .034, diffuse: .08,
-   er: {n: 20, spread: .11, g: .3}, eq: [['lowshelf', 250, 2]], wet: .55, dry: .7,
+   er: {n: 20, spread: .11, g: .22}, eq: [['lowshelf', 250, 2]], wet: .55, dry: .7,
    play: {timing: 1.1, pitch: 1.0, hall: true}, size: '2000席',
    desc: '支部大会・全国大会の会場。響きは長く、ステージが遠く感じる。'},
 ];
@@ -70,10 +70,13 @@ function makeIR(ac, v){
     // はね返りの強さは残響全体のエネルギーに対する割合で決める
     let tail = 0;
     for(let i = 0; i < len; i++) tail += d[i] * d[i];
+    // 反射1つは、壁で高音が少し吸われた短いかたまりとして置く（1点だけだと金属的に聞こえる）
+    const SHAPE = [1, 0.72, 0.5, 0.34, 0.22, 0.14, 0.08, 0.04];
+    const s2 = SHAPE.reduce((a, x) => a + x * x, 0);
     const taps = (list, frac) => {
-      const w2 = list.reduce((a, [, w]) => a + w * w, 0);
+      const w2 = list.reduce((a, [, w]) => a + w * w, 0) * s2;
       const k = Math.sqrt(tail * frac / w2);
-      for(const [i, w] of list) if(i < len) d[i] += k * w;
+      for(const [i, w] of list) for(let j = 0; j < SHAPE.length; j++) if(i + j < len) d[i + j] += k * w * SHAPE[j];
     };
     // 初期反射：壁・床・天井からの最初のはね返り
     taps(Array.from({length: v.er.n}, (_, k) => [
@@ -107,8 +110,8 @@ class VenueChain {
     this.input = ac.createGain();
     this.sum = ac.createGain();
     const comp = ac.createDynamicsCompressor();
-    comp.threshold.value = -14; comp.knee.value = 8; comp.ratio.value = 4; comp.attack.value = 0.006; comp.release.value = 0.2;
-    this.master = ac.createGain(); this.master.gain.value = 1;
+    comp.threshold.value = -12; comp.knee.value = 12; comp.ratio.value = 2.5; comp.attack.value = 0.02; comp.release.value = 0.35;
+    this.master = ac.createGain(); this.master.gain.value = 1.8;
     this.sum.connect(comp); comp.connect(this.master); this.master.connect(dest || ac.destination);
     this.stage = null;
     this.venueId = null; this.posId = 'center';
