@@ -80,13 +80,16 @@ jobs:
         if: always()
         timeout-minutes: 14
         run: |
+          # CI のマシンはメモリが少ないので、iPhone のシミュレータを止めてから iPad を起動する
+          xcrun simctl shutdown "$IPHONE" || true
           xcrun simctl list devices | grep "$IPAD"
           xcrun simctl boot "$IPAD"
           xcrun simctl bootstatus "$IPAD" -b
           xcrun simctl status_bar "$IPAD" override --time 9:41 --batteryState charged --batteryLevel 100 --wifiBars 3 || true
-          xcrun simctl install "$IPAD" build-sim/Build/Products/Debug-iphonesimulator/Suibu.app
+          limit() { perl -e 'alarm shift; exec @ARGV' "$@"; }   # 固まったら打ち切る
+          limit 240 xcrun simctl install "$IPAD" build-sim/Build/Products/Debug-iphonesimulator/Suibu.app
           # iPad でも同じセルフテストを通す（初回起動は時間がかかるので、これで温めてから撮る）
-          xcrun simctl launch "$IPAD" io.github.hy218355-bit.suibu -selftest
+          limit 240 xcrun simctl launch "$IPAD" io.github.hy218355-bit.suibu -selftest
           DATA=$(xcrun simctl get_app_container "$IPAD" io.github.hy218355-bit.suibu data)
           for i in $(seq 1 120); do
             grep -q "^SELFTEST" "$DATA/Documents/selftest.txt" 2>/dev/null && break
@@ -95,7 +98,7 @@ jobs:
           echo "--- iPad selftest.txt"; cat "$DATA/Documents/selftest.txt" || true
           for t in play week; do
             xcrun simctl terminate "$IPAD" io.github.hy218355-bit.suibu || true
-            xcrun simctl launch "$IPAD" io.github.hy218355-bit.suibu -tab "$t"
+            limit 120 xcrun simctl launch "$IPAD" io.github.hy218355-bit.suibu -tab "$t"
             sleep 20
             xcrun simctl io "$IPAD" screenshot "shot-ipad-$t.png"
           done
