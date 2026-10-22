@@ -742,37 +742,144 @@ function arrangement(pid){
   // 打楽器パートの鍵盤（ロール指定の旋律）も打つ音として扱う
   for(const evs of Object.values(parts)) for(const e of evs) if(e.inst && e.inst !== 'cbpizz' && e.role !== 'hit') e.kind = 'hit';
 
-  for(const [part, evs] of Object.entries(parts)){
-    evs.sort((a, b) => a.b - b.b);
-    // 楽器の音域に収める（はみ出したらオクターブで移す）
-    for(const e of evs){
-      if(e.m == null) continue;
-      const inst = INST[e.inst || PART_INST[part]];
-      if(!inst || !inst.range) continue;
-      const s = e.m + pc.trans;
-      if(s < inst.range[0]) e.m += 12 * Math.ceil((inst.range[0] - s) / 12);
-      else if(s > inst.range[1]) e.m -= 12 * Math.ceil((s - inst.range[1]) / 12);
+  for(const [part, evs] of Object.entries(parts)) finishPart(pc, part, evs);
+  return (ARR[pid] = {parts, pc});
+}
+// 1パートぶんの仕上げ：楽器の音域に収め（はみ出したらオクターブで移す）、つなぎ方を決める
+function finishPart(pc, part, evs){
+  evs.sort((a, b) => a.b - b.b);
+  for(const e of evs){
+    if(e.m == null) continue;
+    const inst = INST[e.inst || PART_INST[part]];
+    if(!inst || !inst.range) continue;
+    const s = e.m + pc.trans;
+    if(s < inst.range[0]) e.m += 12 * Math.ceil((inst.range[0] - s) / 12);
+    else if(s > inst.range[1]) e.m -= 12 * Math.ceil((s - inst.range[1]) / 12);
+  }
+  // つなぎ方：スラー／やわらかいタンギング／普通のタンギング（曲や区間ごとの slur で決める）
+  for(let i = 0; i < evs.length; i++){
+    const e = evs[i], p = evs[i-1];
+    if(e.kind === 'hit') continue;
+    const joined = p && p.kind !== 'hit' && Math.abs(p.b + p.d - e.b) < 1e-6;
+    if(e.art === 'stac' || e.art === 'norm'){ e.slur = false; continue; }
+    if(!joined){ e.art = 'norm'; e.slur = false; continue; }
+    const style = sectionAt(pc.slur, e.b, 'bar');
+    if(p.m === e.m && !LINE_ROLES.has(e.role)){ e.art = 'tie'; e.slur = true; p.leg = true; continue; }
+    if(style === 'tongue'){ e.art = 'norm'; e.slur = false; continue; }
+    if(LINE_ROLES.has(e.role)){
+      const barStart = Math.abs(e.b / pc.meter - Math.round(e.b / pc.meter)) < 1e-6;
+      const slurred = style === 'bar' ? !barStart && p.m !== e.m : style === 'pairs' ? (p.d <= .5 && e.d <= .5 && p.m !== e.m) : false;
+      e.art = slurred ? 'slur' : style === 'bar' ? 'ten' : 'norm';
+      e.slur = slurred;
+    } else {
+      e.art = 'ten'; e.slur = false;
     }
-    // つなぎ方：スラー／やわらかいタンギング／普通のタンギング（曲や区間ごとの slur で決める）
-    for(let i = 0; i < evs.length; i++){
-      const e = evs[i], p = evs[i-1];
-      if(e.kind === 'hit') continue;
-      const joined = p && p.kind !== 'hit' && Math.abs(p.b + p.d - e.b) < 1e-6;
-      if(e.art === 'stac' || e.art === 'norm'){ e.slur = false; continue; }
-      if(!joined){ e.art = 'norm'; e.slur = false; continue; }
-      const style = sectionAt(pc.slur, e.b, 'bar');
-      if(p.m === e.m && !LINE_ROLES.has(e.role)){ e.art = 'tie'; e.slur = true; p.leg = true; continue; }
-      if(style === 'tongue'){ e.art = 'norm'; e.slur = false; continue; }
-      if(LINE_ROLES.has(e.role)){
-        const barStart = Math.abs(e.b / pc.meter - Math.round(e.b / pc.meter)) < 1e-6;
-        const slurred = style === 'bar' ? !barStart && p.m !== e.m : style === 'pairs' ? (p.d <= .5 && e.d <= .5 && p.m !== e.m) : false;
-        e.art = slurred ? 'slur' : style === 'bar' ? 'ten' : 'norm';
-        e.slur = slurred;
-      } else {
-        e.art = 'ten'; e.slur = false;
-      }
-      if(p.art !== 'stac') p.leg = true;
+    if(p.art !== 'stac') p.leg = true;
+  }
+  return evs;
+}
+
+/* ===== 人数が少ない部の編曲 =====
+   小節ごとに、旋律・低音・和音（内声）を吹く人がいるかを見る。誰もいなければ、いる人の中から向いている人が持ち替えて吹く
+   （持ち替えた小節では、その人の本来の楽譜は吹かない）。オクターブは曲全体で人ごとに1つに決め、はみ出す音だけ移す。
+   全員そろっていれば、何も変わらない。 */
+const MEL_PREF = ['tp', 'cl', 'asax', 'fl', 'ob', 'ebcl', 'euph', 'picc', 'tsax', 'hn', 'tb', 'bcl', 'fg', 'bsax', 'btb', 'tuba', 'cb'];
+const HARM_ROLES = new Set(['pad', 'mel3', 'cm']);
+const RED = {};
+function reduction(pid, present){
+  const key = pid + ':' + [...present].sort().join(',');
+  if(RED[key]) return RED[key];
+  const {parts, pc} = arrangement(pid);
+  const M = pc.meter, nBars = Math.ceil(pc.beats / M - 1e-6);
+  const barOf = b => Math.floor(b / M + 1e-6);
+  const bars = () => Array.from({length: nBars}, () => []);
+  // 小節ごとに、その小節で始まる音が旋律・低音・和音のどれを受け持っているか
+  const roleOf = e => e.m == null ? null : e.role === 'mel' || e.solo ? 'mel' : e.role === 'bass' ? 'bass' : HARM_ROLES.has(e.role) ? 'harm' : null;
+  const rolesIn = list => {
+    const r = Array.from({length: nBars}, () => ({mel: false, bass: false, harm: false}));
+    for(const e of list){ const k = roleOf(e), x = r[barOf(e.b)]; if(k && x) x[k] = true; }
+    return r;
+  };
+  const need = rolesIn(Object.values(parts).flat());
+  const own = Object.fromEntries([...present].map(p => [p, rolesIn(parts[p] || [])]));
+  // ソロの代わり（fb）：担当のいないパートのソロは、決められた代わりのパートが吹く
+  const fbBy = bars();
+  for(const [part, evs] of Object.entries(parts)){
+    if(present.has(part)) continue;
+    for(const e of evs){
+      const alt = e.fb && e.fb.find(q => present.has(q));
+      if(alt) fbBy[barOf(e.b)]?.push([alt, e]);
     }
   }
-  return (ARR[pid] = {parts, pc});
+  const instOfPart = p => INST[PART_INST[p]];
+  const wind = [...present].filter(p => instOfPart(p) && instOfPart(p).sec !== 'perc').sort();
+  const median = xs => { const v = xs.slice().sort((a, b) => a - b); return v.length ? v[Math.floor(v.length / 2)] : 60; };
+  const melMed = median(pc.mel.map(e => e.m)) + pc.trans, bassMed = median(pc.bass.map(e => e.m)) + pc.trans;
+  const shiftTo = (p, med, aim) => 12 * Math.round((instOfPart(p).center + aim - med) / 12);
+  const melBy = bars(), bassBy = bars();
+  for(const e of pc.mel) melBy[barOf(e.b)]?.push(e);
+  for(const e of pc.bass) bassBy[barOf(e.b)]?.push(e);
+  const marks = e => ({...(e.st ? {art: 'stac'} : {}), ...(e.acc ? {acc: true} : {})});
+  const take = {};   // part → {小節: 代わりに吹く音}
+  const miss = {mel: [], bass: []};
+  for(let bar = 0; bar < nBars; bar++){
+    const busy = new Set(), got = {mel: false, bass: false, harm: false};
+    const give = (p, evs) => {
+      ((take[p] ||= {})[bar] ||= []).push(...evs);
+      busy.add(p);
+      for(const e of evs){ const k = roleOf(e); if(k) got[k] = true; }
+    };
+    for(const [alt, e] of fbBy[bar]) give(alt, [e]);
+    const has = k => got[k] || [...present].some(p => !busy.has(p) && own[p][bar][k]);
+    // 旋律を何人もで重ねているときは、いちばん旋律に向いた人だけ残して、ほかの人は低音や和音に回れる
+    const byPref = (a, b) => MEL_PREF.indexOf(PART_INST[a]) - MEL_PREF.indexOf(PART_INST[b]);
+    const lead = () => got.mel ? null : wind.filter(p => !busy.has(p) && own[p][bar].mel).sort(byPref)[0];
+    const free = p => !busy.has(p) && !own[p][bar].bass && (!own[p][bar].mel || (has('mel') && p !== lead()));
+    if(need[bar].mel && !has('mel')){
+      const p = wind.filter(q => !busy.has(q)).sort(byPref)[0];
+      if(p){
+        const sh = shiftTo(p, melMed, 0);
+        give(p, melBy[bar].map(e => ({role: 'mel', sc: ROLE_SCALE.mel, m: e.m + sh, b: e.b, d: e.d, ji: jiOf(e.m + sh, chordAt(pc, e.b)), ...marks(e)})));
+      } else miss.mel.push(bar * M);
+    }
+    if(need[bar].bass && !has('bass')){
+      const p = wind.filter(free).sort((a, b) => instOfPart(a).center - instOfPart(b).center)[0];
+      if(p){
+        const sh = shiftTo(p, bassMed, -6);
+        give(p, bassBy[bar].map(e => ({role: 'bass', sc: ROLE_SCALE.bass, m: e.m + sh, b: e.b, d: e.d, ji: jiOf(e.m, chordAt(pc, e.b)), ...marks(e)})));
+      } else if(!wind.length) miss.bass.push(bar * M);
+    }
+    if(need[bar].harm && !has('harm') && wind.length >= 3){
+      const p = wind.filter(free).sort((a, b) => Math.abs(instOfPart(a).center - 62) - Math.abs(instOfPart(b).center - 62))[0];
+      if(p){
+        const center = instOfPart(p).center - pc.trans, sh = shiftTo(p, melMed - 4, 0);
+        give(p, melBy[bar].length
+          ? melBy[bar].map(e => { const c = chordAt(pc, e.b), m = thirdBelow(e.m, c, sectionAt(pc.scale, e.b, SCALE)) + sh;
+            return {role: 'mel3', sc: ROLE_SCALE.mel3 * .8, m, b: e.b, d: e.d, ji: jiOf(m, c), ...marks(e)}; })
+          : clipChords(pc, bar * M, (bar + 1) * M).map(c => {
+            const tone = (c.root + (HAS_THIRD[c.q] ?? 7)) % 12, m = Math.round((center - tone) / 12) * 12 + tone;
+            return {role: 'pad', sc: ROLE_SCALE.pad, m, b: c.b, d: c.d, ji: jiOf(m, c)};
+          }));
+      }
+    }
+  }
+  const out = {};
+  for(const p of present){
+    const tk = take[p];
+    if(!tk){ out[p] = parts[p] || []; continue; }
+    const keep = [];
+    for(const e of parts[p] || []){
+      const bar = barOf(e.b);
+      if(tk[bar]) continue;
+      // 持ち替える小節にかかる長い音は、その手前で切る
+      let cut = null;
+      for(let k = bar + 1; k <= barOf(e.b + e.d - 1e-6); k++) if(tk[k]){ cut = k * M; break; }
+      keep.push({...e, leg: false, ...(cut != null ? {d: cut - e.b} : {})});
+    }
+    const evs = [...keep, ...Object.values(tk).flat().map(e => ({...e, leg: false}))].sort((a, b) => a.b - b.b);
+    // 一人で吹くので、次の音にかかる音はその手前で切る
+    for(let i = 0; i < evs.length - 1; i++) if(evs[i + 1].b < evs[i].b + evs[i].d - 1e-6) evs[i].d = Math.max(.125, evs[i + 1].b - evs[i].b);
+    out[p] = finishPart(pc, p, evs);
+  }
+  return (RED[key] = {parts: out, miss});
 }

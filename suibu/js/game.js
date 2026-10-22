@@ -4,28 +4,45 @@
 const SAVE_KEY = 'suibu-nisshi-v2';
 const PREF_WEEK = 16, BLOCK_WEEK = 20, NATIONAL_WEEK = 26;
 
+// 部員ひとりずつに、週に1つ出す練習の指示。合奏と会場練習は、出た人の割合だけ部全体（まとまり・仕上がり・会場慣れ）に効く
 const MENU = [
   {id: 'long',   name: 'ロングトーン',           hint: '音色↑↑　音程↑',               cost: 14, gain: {tone: 20, pitch: 5}},
   {id: 'tune',   name: 'チューニング練習',       hint: '音程↑↑',                       cost: 12, gain: {pitch: 20, tone: 3}},
-  {id: 'harm',   name: 'ハーモニー練習',         hint: '音程↑　音色↑　まとまり↑',      cost: 14, gain: {pitch: 12, tone: 8}, coh: 5},
-  {id: 'metro',  name: 'メトロノーム基礎合奏',   hint: 'リズム↑↑　まとまり↑',          cost: 14, gain: {rhythm: 20, pitch: 3}, coh: 3},
-  {id: 'phrase', name: '歌ってからフレーズ練習', hint: '表現↑↑　仕上がり↑（基礎が要る）', cost: 12, gain: {expr: 22}, basics: true, fam: 12},
-  {id: 'tutti',  name: '合奏',                   hint: '全部↑　まとまり↑↑　仕上がり↑↑', cost: 18, gain: {pitch: 5, rhythm: 6, tone: 5, expr: 6}, coh: 9, fam: 16, morale: 5},
-  {id: 'hall',   name: '本番の会場を借りて練習', hint: '会場慣れ↑↑　まとまり↑',        cost: 16, gain: {pitch: 3, rhythm: 3, tone: 3, expr: 3}, coh: 5, fam: 6, hallExp: 45, morale: 3, from: 12},
-  {id: 'rest',   name: 'オフにする',             hint: '体力とやる気が回復',            cost: -38, gain: {}, morale: 12},
+  {id: 'metro',  name: 'メトロノーム練習',       hint: 'リズム↑↑',                     cost: 13, gain: {rhythm: 20, pitch: 3}},
+  {id: 'phrase', name: '歌ってからフレーズ練習', hint: '表現↑↑（基礎が要る）',         cost: 12, gain: {expr: 22}, basics: true, fam: 6},
+  {id: 'piece',  name: '曲の個人練習',           hint: '曲の仕上がり↑↑　リズム・表現↑', cost: 12, gain: {rhythm: 4, expr: 4, pitch: 2}, fam: 20},
+  {id: 'tutti',  name: '合奏',                   hint: '全部↑　まとまり↑↑　仕上がり↑', cost: 18, gain: {pitch: 5, rhythm: 6, tone: 5, expr: 6}, coh: 12, fam: 16, morale: 5, group: true},
+  {id: 'hall',   name: '会場を借りて合奏',       hint: '会場慣れ↑↑　まとまり↑',        cost: 16, gain: {pitch: 3, rhythm: 3, tone: 3, expr: 3}, coh: 6, fam: 6, hallExp: 45, morale: 3, from: 12, group: true},
+  {id: 'rest',   name: '休ませる',               hint: '体力とやる気が回復',            cost: -38, gain: {}, morale: 12},
 ];
 const MENU_BY = Object.fromEntries(MENU.map(m => [m.id, m]));
+const menuOpen = (s, id) => !MENU_BY[id].from || s.week >= MENU_BY[id].from;
+// 方針：顧問が毎週指示を出さなくても、部員はこの方針で自分の練習を決める
+const POLICIES = [
+  {id: 'auto',   name: 'おまかせ',       desc: '苦手なところを中心に。3週に1回は合奏、本番の前は合奏'},
+  {id: 'basics', name: '基礎を固める',   desc: 'ロングトーン・チューニング・メトロノームを、低いものから'},
+  {id: 'weak',   name: '苦手をなくす',   desc: 'いちばん低い力を、ひたすら伸ばす'},
+  {id: 'strong', name: '得意を伸ばす',   desc: 'いちばん高い力を、さらに伸ばす'},
+  {id: 'piece',  name: '曲を仕上げる',   desc: '曲の個人練習と合奏を、交互に'},
+  {id: 'easy',   name: '無理をさせない', desc: '体力が半分を切ったら休む。それ以外はおまかせと同じ'},
+];
+const POLICY_BY = Object.fromEntries(POLICIES.map(p => [p.id, p]));
+const DRILL = {pitch: 'tune', rhythm: 'metro', tone: 'long', expr: 'phrase'};
 
 const EVENTS = {
   1:  {kind: 'concert', id: 'shinkan', title: '新入生歓迎演奏', venue: 'gym', nerves: 3,
-       text: '体育館で部活動紹介の演奏をする。演奏の出来しだいで、入部する1年生の数が変わる。'},
-  2:  {kind: 'mod', title: '仮入部', morale: 6, text: '1年生が音楽室をのぞきに来た。先輩としての自覚で、やる気が上がった。'},
-  3:  {kind: 'assign', title: '本入部・楽器決め', text: '1年生が正式に入部した。担当する楽器を決めよう。希望どおりだとやる気が上がる。'},
+       text: '体育館で部活動紹介の演奏をする。演奏の出来しだいで、入部する1年生の数が変わる。',
+       t0: '体育館で部活動紹介の演奏をする。できたばかりの小さな部。演奏しだいで、仲間が増えるかもしれない。'},
+  2:  {kind: 'mod', title: '仮入部', morale: 6, text: '1年生が音楽室をのぞきに来た。先輩としての自覚で、やる気が上がった。',
+       t0: '入部を迷っている1年生が、音楽室をのぞきに来た。仲間が増えるかもしれないと、やる気が上がった。'},
+  3:  {kind: 'assign', title: '本入部・楽器決め', text: '1年生が正式に入部した。担当する楽器を決めよう。希望どおりだとやる気が上がる。',
+       t0: '部活動紹介を見た1年生が、正式に入部してくれた。担当する楽器を決めよう。希望どおりだとやる気が上がる。'},
   4:  {kind: 'mod', title: 'GW一日練習', mult: 1.5, costMult: 1.25, text: '朝から夕方まで練習できる。練習の効果が1.5倍、体力の消費も増える。'},
   6:  {kind: 'concert', id: 'matsuri', title: 'みなと祭りステージ', venue: 'outdoor', nerves: 2,
        text: '商店街のお祭りで、屋外ステージに出演する。響きがないので、ごまかしがきかない。'},
   7:  {kind: 'forced', title: '中間テスト', text: 'テスト期間で部活は停止。練習はできないが、体力は戻る。'},
-  10: {kind: 'mod', title: 'パート内のもめごと', morale: -12, text: '誰が1stを吹くかで、トランペットパートがぎくしゃくしている。やる気が下がった。'},
+  10: {kind: 'mod', title: 'パート内のもめごと', morale: -12, text: '誰が1stを吹くかで、トランペットパートがぎくしゃくしている。やる気が下がった。',
+       when: s => s.members.filter(m => secOf(m) === 'tp').length >= 2},
   11: {kind: 'concert', id: 'joint', title: '合同演奏会', venue: 'civic', nerves: 4,
        text: '市民会館で近くの高校と合同演奏会。よその学校の先生が講評をくれる。'},
   13: {kind: 'mod', title: '夏合宿', mult: 1.6, costMult: 1.3, venue: 'camp', text: '合宿所のホールで朝から晩まで合奏。練習の効果が1.6倍、体力の消費も1.3倍。'},
@@ -36,17 +53,29 @@ const EVENTS = {
   [BLOCK_WEEK]:    {kind: 'contest', level: 'block', title: '吹奏楽コンクール 支部大会', venue: 'grand', nerves: 8},
   [NATIONAL_WEEK]: {kind: 'contest', level: 'national', title: '全日本吹奏楽コンクール', venue: 'grand', nerves: 10},
 };
-// 3年生の最後の本番。コンクールが終わったあと、日にちはコンクールをどこまで勝ち進んだかで決まる（s.finalWeek）
+// 年度の最後の本番（3年生がいれば引退公演）。コンクールが終わったあと、日にちはコンクールをどこまで勝ち進んだかで決まる（s.finalWeek）
 const FINAL_EVENT = {kind: 'concert', id: 'teien', title: '定期演奏会（3年生の引退公演）', venue: 'civic', nerves: 4, final: true,
   text: '3年生にとって最後の本番。市民会館の大ホールに、家族や卒業生、近所の人たちが聴きに来る。'};
-// コンクールで負けたあとの週には、その先の大会はない
-const eventAt = (s, w) => w === s.finalWeek ? FINAL_EVENT : s.finalWeek && w > s.autumnFrom && EVENTS[w]?.kind === 'contest' ? null : EVENTS[w];
+const FINAL_EVENT_JR = {...FINAL_EVENT, title: '定期演奏会',
+  text: 'この1年の練習の成果を聴いてもらう、年度で最後の本番。市民会館の大ホールに、家族や近所の人たちが聴きに来る。'};
+const hasSeniors = s => s.members.some(m => m.grade === 3);
+// 部ができた最初の年（1年生だけで始めた年）
+const foundingYear = s => !!s.founding && s.year === s.startYear;
+function eventAt(s, w){
+  if(w === s.finalWeek) return hasSeniors(s) ? FINAL_EVENT : FINAL_EVENT_JR;
+  const ev = EVENTS[w];
+  if(!ev) return null;
+  // コンクールで負けたあとの週には、その先の大会はない
+  if(s.finalWeek && w > s.autumnFrom && ev.kind === 'contest') return null;
+  if(ev.when && !ev.when(s)) return null;
+  return ev.t0 && foundingYear(s) ? {...ev, text: ev.t0} : ev;
+}
 const MILESTONES = [
   {k: 'tone',   at: 40, text: '音の出だしが安定してきた。音が裏返ることが減った。'},
   {k: 'pitch',  at: 50, text: 'ユニゾンのうなりがゆっくりになってきた。'},
   {k: 'rhythm', at: 50, text: '長い音を最後まで伸ばせるようになってきた。'},
   {k: 'expr',   at: 40, text: 'フレーズの山をどこに作るか、みんなで話し合うようになった。'},
-  {k: 'pitch',  at: 72, text: 'ハーモニー練習で、和音がふっと「鳴った」。第3音を少し低めに取ると響くらしい。'},
+  {k: 'pitch',  at: 72, text: '合奏で、和音がふっと「鳴った」。第3音を少し低めに取ると響くらしい。'},
   {k: 'rhythm', at: 75, text: 'テンポが走らなくなった。縦の線がそろってきた。'},
   {k: 'tone',   at: 75, text: '柔らかくて芯のある音になってきた。'},
   {k: 'expr',   at: 75, text: '指揮を見なくても、全員で自然にテンポを揺らせるようになった。'},
@@ -61,12 +90,13 @@ const freshFam = () => Object.fromEntries(PIECE_IDS.map(id => [id, 0]));
 const PIECE_MOVED = {march: 'radetzky', wa: 'galop', stars: 'radetzky', jupiter: 'pomp', mountain: 'galop'};
 function freshState(year = 2026){
   const s = {
-    v: 2, year, startYear: year, week: 0, phase: 'choose', pieceId: null, interp: {tempo: 1, dyn: 1, rub: 1},
-    members: initialRoster(year), recruits: null,
-    cohesion: 25, stamina: 100, morale: 70, fam: freshFam(), hallExp: 0, focus: null,
+    v: 2, year, startYear: year, founding: true, week: 0, phase: 'choose', pieceId: null, interp: {tempo: 1, dyn: 1, rub: 1},
+    members: [], recruits: null, plan: {}, rep: 5, seq: 0,
+    cohesion: 20, stamina: 100, morale: 75, fam: freshFam(), hallExp: 0,
     log: [], recs: [], history: [], season: [], flags: {}, pending: null, lastDelta: {},
   };
-  addLog(s, `${year}年度がはじまった。部員は${s.members.length}人。まずはコンクールの自由曲を決めよう。`);
+  s.recruits = makeRecruits(s, 5, {founders: true});
+  addLog(s, `${year}年度、県立みなと高校吹奏楽部の顧問になった。部員がいなくなって休部していた部に、1年生が5人入部してきた。まずは担当する楽器を決めよう。`);
   return s;
 }
 function addLog(s, text){ s.log.push({y: s.year, w: s.week, text}); if(s.log.length > 160) s.log.splice(0, s.log.length - 160); }
@@ -75,6 +105,11 @@ const seated = s => s.members.filter(m => m.seat);
 const bandAvg = (s, k) => { const ms = seated(s); return ms.length ? ms.reduce((a, m) => a + m.stats[k], 0) / ms.length : 0; };
 const secMembers = (s, secId) => seated(s).filter(m => SEAT[m.seat].sec === secId);
 const fatigueOf = s => s.stamina < 30 ? 8 : s.stamina < 50 ? 3 : 0;
+// 体力は部員ひとりずつ。部の体力はその平均
+function syncSta(s){
+  for(const m of s.members) m.sta = clamp(m.sta ?? s.stamina ?? 100, 0, 100);
+  s.stamina = s.members.length ? s.members.reduce((a, m) => a + m.sta, 0) / s.members.length : 100;
+}
 function nervesFor(s, ev){
   let n = ev?.nerves ?? 0;
   n *= s.morale < 45 ? 1.6 : s.morale < 65 ? 1.2 : 0.8;
@@ -118,60 +153,122 @@ function choosePiece(s0, pid){
 }
 function clone(s){ return JSON.parse(JSON.stringify(s)); }
 
-/* ===== 練習 ===== */
-function practiceWeek(s0, id){
+/* ===== 練習 =====
+   毎週、部員ひとりずつに練習を指示する。指示しなかった部員は、その人の方針（m.policy）で自分の練習を決める。 */
+const statOrder = (m, keys = STAT_KEYS) => keys.slice().sort((a, b) => m.stats[a] - m.stats[b]);
+const basicsOf = m => (m.stats.pitch + m.stats.rhythm + m.stats.tone) / 3;
+// 次の本番まで何週か（今週が本番なら0）
+function stageIn(s, within){
+  for(let w = s.week; w <= s.week + within; w++){ const ev = eventAt(s, w); if(ev && (ev.kind === 'concert' || ev.kind === 'contest')) return {w: w - s.week, ev}; }
+  return null;
+}
+// 方針どおりなら、この部員は今週なにをするか
+function decideMenu(s, m){
+  const pol = m.policy || 'auto';
+  if((m.sta ?? 100) < (pol === 'easy' ? 50 : 30)) return 'rest';
+  // 表現は、音程・リズム・音色の基礎がないと伸びない。基礎が足りないうちは基礎から
+  const drill = k => k === 'expr' && basicsOf(m) < 30 ? DRILL[statOrder(m, ['pitch', 'rhythm', 'tone'])[0]] : DRILL[k];
+  const soon = s.pieceId ? stageIn(s, 1) : null;
+  if(pol === 'basics') return DRILL[statOrder(m, ['pitch', 'rhythm', 'tone'])[0]];
+  if(pol === 'weak') return drill(statOrder(m)[0]);
+  if(pol === 'strong') return drill(statOrder(m).reverse().find(k => m.stats[k] < 92) || statOrder(m)[0]);
+  if(pol === 'piece') return soon || s.week % 2 ? 'tutti' : 'piece';
+  // おまかせ：本番の前の週は合奏（大会の前でホールを借りられるなら会場で）。曲がまだ手に入っていなければ個人練習。3週に1回は合奏
+  if(soon) return soon.ev.kind === 'contest' && menuOpen(s, 'hall') ? 'hall' : 'tutti';
+  if(s.pieceId && (s.fam[s.pieceId] || 0) < 30 && s.week % 3 === 1) return 'piece';
+  if(s.pieceId && s.week % 3 === 2) return 'tutti';
+  return drill(statOrder(m)[0]);
+}
+// 今週の指示：顧問が個別に出した指示（s.plan）が優先、なければ方針どおり
+const planFor = (s, m) => (s.plan && MENU_BY[s.plan[m.id]] && menuOpen(s, s.plan[m.id])) ? s.plan[m.id] : decideMenu(s, m);
+function setPlan(s0, mid, menu){
+  const s = clone(s0);
+  s.plan ||= {};
+  if(menu) s.plan[mid] = menu; else delete s.plan[mid];
+  return s;
+}
+function setPolicy(s0, mid, pol){
+  const s = clone(s0);
+  for(const m of s.members) if(mid === '*' || m.id === mid){ m.policy = pol; if(s.plan) delete s.plan[m.id]; }
+  return s;
+}
+// plan：{部員id: メニュー} の個別指示（ほかの部員は方針どおり）。'test' はテスト期間、メニューidの文字列なら全員その練習
+function practiceWeek(s0, plan){
   const s = clone(s0);
   s.lastEpisode = null;
   const ev = eventAt(s, s.week) || {};
-  if(id === 'test'){
-    s.stamina += 30; s.morale += 2; s.lastDelta = {};
-    for(const m of seated(s)) m.stats.pitch = Math.max(0, m.stats.pitch - 1);
+  syncSta(s);
+  if(plan === 'test'){
+    for(const m of s.members) m.sta = clamp(m.sta + 30, 0, 100);
+    s.morale += 2; s.lastDelta = {};
+    for(const m of s.members){ m.stats.pitch = Math.max(0, m.stats.pitch - 1); m.last = {menu: 'test', d: {pitch: -1}}; }
     addLog(s, 'テスト期間。楽器に触れない日が続いて、少し音程の感覚が鈍った。');
-  } else {
-    const m = MENU_BY[id];
-    const tired = s.stamina < 30;
-    const eff = (0.6 + 0.4 * s.morale / 100) * (tired ? 0.5 : 1) * (ev.mult || 1);
-    const sum = {}, cnt = {};
-    for(const mem of seated(s)){
-      const sec = SEAT[mem.seat].sec;
-      const focus = s.focus && s.focus === sec ? 1.6 : s.focus ? 0.92 : 1;
-      const basics = (mem.stats.pitch + mem.stats.rhythm + mem.stats.tone) / 300;
-      for(const [k, g] of Object.entries(m.gain)){
-        let x = 1.25 * g * eff * focus * (1 - mem.stats[k] / 190) * (0.85 + 0.3 * hash(mem.id, s.year, s.week, id, k)) * (mem.grade === 1 ? 1.15 : 1);
-        if(m.basics) x *= clamp((basics - 0.1) / 0.5, 0.1, 1);
-        const before = mem.stats[k];
-        mem.stats[k] = Math.round(clamp(before + x, 0, 100) * 10) / 10;
-        sum[k] = (sum[k] || 0) + (mem.stats[k] - before); cnt[k] = (cnt[k] || 0) + 1;
-      }
-    }
-    s.lastDelta = {};
-    for(const k of Object.keys(sum)) s.lastDelta[k] = Math.round(sum[k] / cnt[k] * 10) / 10;
-    if(m.coh){ const d = m.coh * eff * (1 - s.cohesion / 150); s.cohesion = clamp(s.cohesion + d, 0, 100); s.lastDelta.coh = Math.round(d * 10) / 10; }
-    if(s.pieceId){
-      const df = ((m.fam || 0) * eff + (id === 'rest' ? 0 : 4)) * (1 - s.fam[s.pieceId] / 130);
-      s.fam[s.pieceId] = clamp(s.fam[s.pieceId] + df, 0, 100);
-      s.lastDelta.fam = Math.round(df * 10) / 10;
-    }
-    if(m.hallExp){ s.hallExp = clamp(s.hallExp + m.hallExp, 0, 100); for(const x of seated(s)) x.mental = clamp((x.mental ?? 40) + 1.5, 0, 100); }
-    s.stamina -= m.cost > 0 ? m.cost * (ev.costMult || 1) : m.cost;
-    s.morale += (m.morale || 0) - (id === 'rest' ? 0 : tired ? 8 : 3);
-    const focusTxt = s.focus && id !== 'rest' ? `（${SEC[s.focus].name}を重点的に）` : '';
-    const gains = Object.entries(s.lastDelta).filter(([k, v]) => v > 0 && STAT_LABEL[k]).map(([k, v]) => `${STAT_LABEL[k]}+${v.toFixed(1)}`).join('　');
-    addLog(s, id === 'rest' ? 'オフ。しっかり休んだ。' : `${m.name}${focusTxt}。部の平均 ${gains || '変化なし'}`);
-    if(tired && id !== 'rest') addLog(s, '疲れがたまっていて、身が入らなかった。');
-    if(m.basics){
-      const low = seated(s).filter(x => (x.stats.pitch + x.stats.rhythm + x.stats.tone) / 300 < 0.35).length;
-      if(low > seated(s).length / 2) addLog(s, '歌ってはみたけれど、楽器を持つと音程とリズムで手一杯な部員が多い。基礎がもう少し要りそうだ。');
-    }
-    for(const ms of MILESTONES){
-      const f = `${s.year}:${ms.k}${ms.at}`;
-      if(!s.flags[f] && bandAvg(s, ms.k) >= ms.at){ s.flags[f] = true; addLog(s, ms.text); }
-    }
+    s.plan = {};
+    return nextWeek(s);
   }
+  if(typeof plan === 'string') s.plan = Object.fromEntries(s.members.map(m => [m.id, plan]));
+  else if(plan) s.plan = {...s.plan, ...plan};
+  const ms = s.members, n = ms.length || 1;
+  const pick = Object.fromEntries(ms.map(m => [m.id, planFor(s, m)]));
+  const count = id => ms.filter(m => pick[m.id] === id).length;
+  // 合奏は2人以上いないとできない。出た人の割合だけ、部全体に効く
+  const share = id => count(id) >= 2 ? count(id) / n : 0;
+  const sum = {}, cnt = {};
+  let famSum = 0, moraleSum = 0, tiredN = 0;
+  for(const m of ms){
+    const id = pick[m.id], mu = MENU_BY[id];
+    const tired = m.sta < 30;
+    if(tired && id !== 'rest') tiredN++;
+    const eff = (0.6 + 0.4 * s.morale / 100) * (tired ? 0.5 : 1) * (ev.mult || 1) * (mu.group && !share(id) ? 0.5 : 1);
+    const basics = basicsOf(m) / 100;
+    const d = {};
+    for(const [k, g] of Object.entries(mu.gain)){
+      // 伸びは、うまくなるほど小さくなる（初心者は1年で50ほど、3年間続けると85〜90ほど）
+      let x = 0.72 * g * eff * Math.max(0.12, 1 - m.stats[k] / 125) * (0.85 + 0.3 * hash(m.id, s.year, s.week, id, k)) * (m.grade === 1 ? 1.3 : 1);
+      if(mu.basics) x *= clamp((basics - 0.1) / 0.5, 0.1, 1);
+      const before = m.stats[k];
+      m.stats[k] = Math.round(clamp(before + x, 0, 100) * 10) / 10;
+      d[k] = Math.round((m.stats[k] - before) * 10) / 10;
+      if(m.seat){ sum[k] = (sum[k] || 0) + (m.stats[k] - before); cnt[k] = (cnt[k] || 0) + 1; }
+    }
+    m.last = {menu: id, d};
+    famSum += mu.group ? (mu.fam || 0) * eff * (share(id) ? 1 : 0) : (mu.fam || 0) * eff;
+    if(id !== 'rest') famSum += 4;
+    m.sta = clamp(m.sta - (mu.cost > 0 ? mu.cost * (ev.costMult || 1) : mu.cost), 0, 100);
+    moraleSum += (mu.morale || 0) - (id === 'rest' ? 0 : tired ? 8 : 3);
+    if(mu.hallExp && share(id)) m.mental = clamp((m.mental ?? 40) + 1.5, 0, 100);
+  }
+  s.lastDelta = {};
+  for(const k of Object.keys(sum)) s.lastDelta[k] = Math.round(sum[k] / cnt[k] * 10) / 10;
+  const eff0 = (0.6 + 0.4 * s.morale / 100) * (ev.mult || 1);
+  const coh = MENU.reduce((a, mu) => a + (mu.coh || 0) * share(mu.id), 0);
+  if(coh){ const d = coh * eff0 * (1 - s.cohesion / 150); s.cohesion = clamp(s.cohesion + d, 0, 100); s.lastDelta.coh = Math.round(d * 10) / 10; }
+  if(s.pieceId){
+    const df = famSum / n * (1 - s.fam[s.pieceId] / 130);
+    s.fam[s.pieceId] = clamp(s.fam[s.pieceId] + df, 0, 100);
+    s.lastDelta.fam = Math.round(df * 10) / 10;
+  }
+  const hall = share('hall');
+  if(hall) s.hallExp = clamp(s.hallExp + MENU_BY.hall.hallExp * hall, 0, 100);
+  s.morale += moraleSum / n;
+  syncSta(s);
+  const used = MENU.filter(mu => count(mu.id)).map(mu => `${mu.name}${count(mu.id) < n ? ` ${count(mu.id)}人` : ''}`).join('・');
+  const gains = Object.entries(s.lastDelta).filter(([k, v]) => v > 0 && STAT_LABEL[k]).map(([k, v]) => `${STAT_LABEL[k]}+${v.toFixed(1)}`).join('　');
+  addLog(s, `今週の練習：${used || 'なし'}。部の平均 ${gains || '変化なし'}`);
+  if(tiredN) addLog(s, tiredN >= n / 2 ? '疲れがたまっていて、みんな身が入らなかった。' : `疲れがたまっている部員が${tiredN}人いて、身が入らなかった。`);
+  if(count('tutti') === 1 || count('hall') === 1) addLog(s, '合奏に出たのが1人だけで、合奏にならなかった。');
+  const lowBasics = ms.filter(m => pick[m.id] === 'phrase' && basicsOf(m) < 35);
+  if(lowBasics.length) addLog(s, `${lowBasics.map(m => m.name).join('、')}は歌ってはみたけれど、楽器を持つと音程とリズムで手一杯。基礎がもう少し要りそうだ。`);
+  for(const st of MILESTONES){
+    const f = `${s.year}:${st.k}${st.at}`;
+    if(!s.flags[f] && bandAvg(s, st.k) >= st.at){ s.flags[f] = true; addLog(s, st.text); }
+  }
+  s.plan = {};
   return nextWeek(s);
 }
 function nextWeek(s){
-  s.stamina = clamp(s.stamina + 6, 0, 100);
+  for(const m of s.members) m.sta = clamp((m.sta ?? s.stamina) + 6, 0, 100);
+  syncSta(s);
   s.morale = clamp(s.morale, 0, 100);
   s.hallExp = Math.max(0, s.hallExp - 4);
   s.week++;
@@ -181,7 +278,6 @@ function nextWeek(s){
     if(ev.morale) s.morale = clamp(s.morale + ev.morale, 0, 100);
     if(ev.kind !== 'contest') addLog(s, `【${ev.title}】${ev.text}`);
     else addLog(s, `いよいよ${ev.title}の週。`);
-    if(ev.kind === 'assign') s.recruits = s.recruits || makeRecruits(s, 9);
   }
   s.episode = pickEpisode(s);
   // 本番の週になったら、その日の部員の調子を決めておく（読み込み直しても変わらない）
@@ -204,9 +300,13 @@ function remember(s, m, t){
   (m.story ||= []).push({y: s.year, w: s.week, t});
   if(m.story.length > 10) m.story.splice(0, m.story.length - 10);
 }
-const adj = (s, k, d) => { s[k] = clamp(s[k] + d, 0, 100); };
+// 部全体の値を動かす（体力は部員全員ぶん）
+const adj = (s, k, d) => {
+  if(k === 'stamina'){ for(const m of s.members) m.sta = clamp((m.sta ?? s.stamina) + d, 0, 100); syncSta(s); return; }
+  s[k] = clamp(s[k] + d, 0, 100);
+};
 const senpai = (s, m) => s.members.filter(x => x.seat && x.id !== m.id && x.grade > m.grade && secOf(x) === secOf(m)).sort((a, b) => b.grade - a.grade)[0]
-  || s.members.filter(x => x.seat && x.grade === 3)[0];
+  || s.members.filter(x => x.seat && x.grade === 3 && x.grade > m.grade)[0];
 const contestAhead = s => eventAt(s, s.week + 1)?.kind === 'contest' ? eventAt(s, s.week + 1) : null;
 
 // who：その出来事の主役になれる部員（2人必要なものは pair で相手を選ぶ）
@@ -216,7 +316,7 @@ const EPISODES = [
    choices: [
      {label: 'いっしょにロングトーンをする', go: (s, m) => { bump(m, 'tone', 4); bump(m, 'pitch', 2); adj(s, 'stamina', -3);
        remember(s, m, '自信をなくした日に、顧問とふたりでロングトーンをした。'); return `しばらく二人でロングトーンをした。帰りぎわ、${m.name}は「また明日も来ます」と言った。`; }},
-     {label: '同じパートの先輩に話を聞いてもらう', go: (s, m) => { const o = senpai(s, m); bump(m, 'expr', 3); adj(s, 'cohesion', 3); m.mental = clamp((m.mental ?? 40) + 4, 0, 100);
+     {label: '同じパートの先輩に話を聞いてもらう', if: (s, m) => !!senpai(s, m), go: (s, m) => { const o = senpai(s, m); bump(m, 'expr', 3); adj(s, 'cohesion', 3); m.mental = clamp((m.mental ?? 40) + 4, 0, 100);
        remember(s, m, `自信をなくした日に、先輩の${o ? o.name : ''}が話を聞いてくれた。`); remember(s, o, `後輩の${m.name}の相談に乗った。`);
        return `${o ? o.name : '先輩'}が、自分も1年生のころは同じだったと話してくれたらしい。次の日、二人で個人練習をしていた。`; }},
      {label: '「あせらなくていい」と伝える', go: (s, m) => { adj(s, 'morale', 2);
@@ -240,7 +340,7 @@ const EPISODES = [
        remember(s, m, '大事なリードが割れた日、新しい箱から一緒に選んでもらった。'); return `新しい箱から、よく鳴るリードを${m.name}と一緒に選んだ。`; }},
      {label: '残りのリードを調整して育てる', go: (s, m) => { bump(m, 'tone', 2); bump(m, 'pitch', 2);
        remember(s, m, 'リードを削って調整するやり方を覚えた。'); return 'リードを少しずつ削って調整するやり方を覚えた。手間はかかるが、音が安定してきた。'; }},
-     {label: '先輩に分けてもらう', go: (s, m) => { const o = senpai(s, m); bump(m, 'tone', 1); adj(s, 'cohesion', 2);
+     {label: '先輩に分けてもらう', if: (s, m) => !!senpai(s, m), go: (s, m) => { const o = senpai(s, m); bump(m, 'tone', 1); adj(s, 'cohesion', 2);
        remember(s, m, `${o ? o.name : '先輩'}にリードを分けてもらった。`); return `${o ? o.name : '先輩'}が「これ、よく鳴るよ」と1枚くれた。`; }},
    ]},
   {id: 'lip', who: s => seated(s).filter(m => LIP.has(SEAT[m.seat].inst)),
@@ -368,7 +468,9 @@ const episodeView = s => {
   if(!ep) return null;
   const m = s.members.find(x => x.id === e.mid), o = e.oid ? s.members.find(x => x.id === e.oid) : null;
   if(!m || (e.oid && !o)) return null;
-  return {ep, m, o, text: ep.text(s, m, o), choices: ep.choices.map(c => c.label)};
+  // 選べる対応（先輩がいないと選べないもの、など）。k はもとの番号
+  const choices = ep.choices.map((c, k) => ({k, label: c.label})).filter(c => !ep.choices[c.k].if || ep.choices[c.k].if(s, m, o));
+  return {ep, m, o, text: ep.text(s, m, o), choices};
 };
 function resolveEpisode(s0, k){
   const s = clone(s0);
@@ -437,8 +539,9 @@ function conductStage(s0, conduct){
 }
 function concertOutcome(s, ev, q, perf, a){
   if(ev.id === 'shinkan'){
+    // 入部する1年生の数は、部の評判と今日の演奏しだい（席が足りなければ控えに入る）
     const empty = SEATS.filter(x => !s.members.some(m => m.seat === x.id)).length;
-    const n = clamp(Math.round(empty * (0.5 + 0.5 * q / 100)) + (s.morale > 70 ? 1 : 0), 5, Math.max(5, empty + 1));
+    const n = clamp(Math.round(1.5 + (s.rep ?? 30) / 8 + (q - 40) / 12 + (s.morale > 70 ? 1 : 0)), 1, Math.max(1, empty + 2));
     return {recruits: n, text: q >= 60 ? `演奏が終わると大きな拍手が起きた。${n}人の1年生が入部を考えてくれているらしい。`
       : q >= 35 ? `拍手はまばらだったが、${n}人の1年生が興味を持ってくれたようだ。` : `体育館の響きにのまれて、何をやっているのか伝わらなかった。それでも${n}人の1年生が見学に来てくれそうだ。`};
   }
@@ -449,6 +552,9 @@ function concertOutcome(s, ev, q, perf, a){
   if(ev.id === 'bunkasai'){
     const dm = Math.round(q / 10) - 1;
     return {morale: dm, text: q >= 60 ? '体育館がいっぱいになり、アンコールの声がかかった。クラスの友だちが「すごかった」と言いに来た。' : q >= 35 ? '家族やクラスの友だちが、あたたかい拍手をくれた。' : '体育館の響きにのまれてしまったが、来てくれた人たちは最後まで聴いてくれた。'};
+  }
+  if(ev.id === 'teien' && !hasSeniors(s)){
+    return {morale: 0, text: q >= 60 ? '満員の客席から、いつまでも拍手が鳴りやまなかった。来年が楽しみだ、という声が聞こえた。' : q >= 35 ? '客席から大きな拍手が送られた。みんな晴れやかな顔でステージを降りた。' : '思うようにはいかなかったが、最後まで吹ききった。客席からあたたかい拍手が送られた。'};
   }
   if(ev.id === 'teien'){
     return {morale: 0, text: q >= 60 ? '満員の客席から、いつまでも拍手が鳴りやまなかった。3年生の目が赤かった。' : q >= 35 ? '客席から大きな拍手が送られた。3年生は晴れやかな顔でステージを降りた。' : '思うようにはいかなかったが、3年生は最後まで吹ききった。客席からあたたかい拍手が送られた。'};
@@ -504,6 +610,32 @@ function stageAftermath(s, ev, p){
   if(names('zone').length) addLog(s, `${names('zone').join('、')}は、本番でいつも以上の音を出した。`);
 }
 
+/* ===== 評判 =====
+   演奏会やコンクールの結果で、学校や町での評判（s.rep、0〜100）が上がり下がりする。
+   評判が節目を越えると「私も入りたい」という生徒が入部してくる。新入生歓迎演奏で入部する1年生の数も、評判しだい。 */
+const REP_STEPS = [8, 12, 16, 20, 25, 30, 36, 42, 50, 58, 66, 75, 85, 95];
+const REP_CONCERT = {shinkan: .6, matsuri: 1, joint: 1, bunkasai: 1.2, teien: 1.5};
+const REP_AWARD = {gold: 6, silver: 3, bronze: 1};
+const REP_LEVEL = {pref: 1, block: 1.6, national: 2.4};
+const nextRepStep = s => REP_STEPS.find(x => x > s.rep) ?? null;
+function gainRep(s, d){
+  const before = s.rep ?? 30;
+  s.rep = Math.round(clamp(before + d, 0, 100) * 10) / 10;
+  if(Math.abs(s.rep - before) >= 0.5) addLog(s, `部の評判が${s.rep > before ? '上がった' : '下がった'}（${Math.round(before)}→${Math.round(s.rep)}）。`);
+  let n = 0;
+  for(const x of REP_STEPS){
+    const f = `rep:${s.year}:${x}`;
+    if(before < x && s.rep >= x && !s.flags[f]){ s.flags[f] = true; n += 1 + (hash(s.year, x, 'join') < 0.45 ? 1 : 0) + (x >= 50 && hash(s.year, x, 'join2') < 0.35 ? 1 : 0); }
+  }
+  // 席が足りないときは、控えとして入る（多くても3人まで）
+  n = Math.min(n, Math.max(0, SEATS.length + 3 - s.members.length - (s.recruits || []).length));
+  if(n){
+    const rs = makeRecruits(s, n, {joiners: true});
+    s.recruits = [...(s.recruits || []), ...rs];
+    s.recruitWhen = Math.max(s.recruitWhen ?? 0, s.week + 1);
+    addLog(s, `演奏を聴いた${rs.map(r => `${r.grade}年生の${r.name}`).join('、')}が、「私も入りたいです」と音楽室に来た。`);
+  }
+}
 function finishStage(s0){
   const s = clone(s0);
   const p = s.pending;
@@ -511,10 +643,11 @@ function finishStage(s0){
   if(!p) return s;
   stageAftermath(s, ev, p);
   if(p.kind === 'concert'){
-    if(p.recruits) s.recruits = makeRecruits(s, p.recruits);
+    if(p.recruits){ s.recruits = [...(s.recruits || []), ...makeRecruits(s, p.recruits)]; s.recruitWhen = Math.max(s.recruitWhen ?? 0, 3); }
     if(p.morale) s.morale = clamp(s.morale + p.morale, 0, 100);
     addLog(s, `${ev.title}：${p.text}`);
-    s.stamina = clamp(s.stamina - 8, 0, 100);
+    gainRep(s, (REP_CONCERT[ev.id] ?? 1) * (1 + clamp((p.q - 25) / 8, -2, 6)));
+    adj(s, 'stamina', -8);
     if(ev.final) s.finalResult = {piece: PIECES[s.pieceId].title, q: Math.round(p.q)};
     return ev.final ? endSeason(s) : nextWeek(s);
   }
@@ -523,6 +656,7 @@ function finishStage(s0){
   const nm = {gold: '金賞', silver: '銀賞', bronze: '銅賞'}[j.award];
   s.season.push({level: ev.level, award: j.award, rep: j.rep, avg: Math.round(j.avg * 10) / 10});
   addLog(s, `${L.name}の結果は${nm}${j.rep ? `。${L.rep}への代表に選ばれた！` : j.award === 'gold' && L.rep ? '。代表には届かなかった。' : '。'}`);
+  gainRep(s, (REP_AWARD[j.award] + (j.rep ? 4 : 0)) * REP_LEVEL[ev.level]);
   if(j.rep){
     s.morale = clamp(s.morale + 10, 0, 100);
     return nextWeek(s);
@@ -550,12 +684,12 @@ function endSeason(s){
   s.phase = 'end';
   s.pending = null;
   const seniors = s.members.filter(m => m.grade === 3);
-  addLog(s, `定期演奏会が終わり、3年生${seniors.length}人が引退した。`);
+  addLog(s, seniors.length ? `定期演奏会が終わり、3年生${seniors.length}人が引退した。` : '定期演奏会が終わり、この1年がしめくくられた。');
   return s;
 }
 // 顧問になった年に、1年生として入部してきた部員（いちばん最初に一から育てた代）
 const startYearOf = s => s.startYear ?? (s.history[0]?.year ?? s.year);
-const isFirstClass = (s, m) => m.joined === startYearOf(s) && m.first?.y === m.joined;
+const isFirstClass = (s, m) => m.joined === startYearOf(s) && m.first?.y === m.joined && (m.joinGrade ?? 1) === 1;
 function newYear(s0){
   const s = clone(s0);
   const pid = s.contestPiece || s.pieceId, pieceTitle = pid ? PIECES[pid].title : '';
@@ -566,41 +700,67 @@ function newYear(s0){
   s.finalResult = null;
   s.members = s.members.filter(m => m.grade < 3).map(m => ({...m, grade: m.grade + 1}));
   assignTitles(s.members);
-  s.year++; s.week = 0; s.phase = 'choose'; s.pieceId = null; s.season = []; s.pending = null; s.recruits = null;
+  // 年度の終わりに入部を決めた生徒は、新しい年度の最初に担当を決める（学年は1つ上がる）
+  for(const r of s.recruits || []) r.grade = Math.min(3, (r.grade || 1) + 1);
+  s.year++; s.week = 0; s.phase = 'choose'; s.pieceId = null; s.season = []; s.pending = null;
   s.finalWeek = null; s.autumnFrom = null; s.contestPiece = null; s.chooseFinal = false;
-  s.cohesion = Math.round(s.cohesion * 0.6); s.fam = freshFam(); s.stamina = 100; s.morale = 70; s.hallExp = 0; s.focus = null; s.lastDelta = {};
-  for(const m of s.members) for(const k of STAT_KEYS) m.stats[k] = Math.round(Math.max(0, m.stats[k] - 2) * 10) / 10;
+  s.cohesion = Math.round(s.cohesion * 0.6); s.fam = freshFam(); s.morale = 70; s.hallExp = 0; s.lastDelta = {}; s.plan = {}; s.recruitWhen = null;
+  // 評判は、年が変わると少しだけ忘れられる
+  s.rep = Math.round((s.rep ?? 30) * 0.9 * 10) / 10;
+  for(const m of s.members){ m.sta = 100; for(const k of STAT_KEYS) m.stats[k] = Math.round(Math.max(0, m.stats[k] - 2) * 10) / 10; }
+  syncSta(s);
   addLog(s, `${s.year}年度がはじまった。部員は${s.members.length}人。自由曲を決めよう。`);
   return s;
 }
 
 /* ===== 1年生と楽器決め ===== */
-function makeRecruits(s, n){
-  const used = new Set(s.members.map(m => m.name));
+// 部をつくった最初の5人は、旋律・金管・低音がそろうように希望の楽器をばらけさせる
+const FOUNDER_HOPES = [['fl', 'cl', 'asax', 'ob'], ['tp', 'hn'], ['tb', 'euph', 'tuba'], ['fl', 'cl', 'asax', 'tp', 'tsax', 'hn', 'tb', 'euph', 'tuba', 'timp', 'bsax']];
+// opts.founders：最初の5人、opts.joiners：評判を聞いて途中から入ってくる生徒（2年生のこともある）
+function makeRecruits(s, n, opts = {}){
+  const used = new Set([...s.members, ...(s.recruits || [])].map(m => m.name));
   const empty = SEATS.filter(x => !s.members.some(m => m.seat === x.id));
   const insts = [...new Set(empty.map(x => x.inst))];
   const all = Object.keys(PART_INST).map(p => PART_INST[p]).filter((v, i, a) => a.indexOf(v) === i);
-  const out = [];
+  const out = [], hopes = [];
   for(let i = 0; i < n; i++){
-    const seed = ['recruit', s.year, i];
-    const exp = hash(...seed, 'exp') < 0.35;
-    const pool = hash(...seed, 'pool') < 0.75 && insts.length ? insts : all;
-    const hope = pool[Math.floor(hash(...seed, 'hope') * pool.length)];
-    out.push({id: `m${s.year}-n${i}`, name: makeName(used, ...seed), hope, exp, trait: pickTrait(...seed)});
+    s.seq = (s.seq || 0) + 1;
+    const id = `m${s.year}-${opts.joiners ? 'j' : 'n'}${s.seq}`, seed = ['recruit', s.year, s.seq];
+    let hope;
+    if(opts.founders){
+      const pool = FOUNDER_HOPES[Math.min(i, FOUNDER_HOPES.length - 1)].filter(x => !hopes.includes(x));
+      hope = pool[Math.floor(hash(...seed, 'hope') * pool.length)];
+    } else {
+      const pool = hash(...seed, 'pool') < 0.75 && insts.length ? insts : all;
+      hope = pool[Math.floor(hash(...seed, 'hope') * pool.length)];
+    }
+    hopes.push(hope);
+    // 経験者の割合：最初の5人は2人ほど。評判が上がると、経験者も入ってきやすくなる
+    const exp = opts.founders ? i === 1 || i === 3 : hash(...seed, 'exp') < 0.3 + (s.rep ?? 30) / 250;
+    const grade = opts.joiners && s.week > 0 && s.week < 20 && hash(...seed, 'grade') < 0.25 ? 2 : 1;
+    out.push({id, name: makeName(used, ...seed), hope, exp, grade, trait: pickTrait(...seed)});
   }
   return out;
 }
+// その楽器の空いている席のうち、どこに座ってもらうのがよいか：誰もいないパート → 1stの席 → 和音が欠けやすい席の順
+function seatRank(s, taken){
+  const covered = new Set([...s.members.filter(m => m.seat).map(m => SEAT[m.seat].part), ...[...taken].map(id => SEAT[id].part)]);
+  return id => (covered.has(SEAT[id].part) ? 100 : 0) + (PRINCIPAL.includes(id) ? 0 : 50) + FILL_ORDER.indexOf(id) / 100;
+}
+const PRINCIPAL = ['cl1a', 'fl1a', 'tp1a', 'asax1', 'tuba1', 'euph1', 'hn1', 'tb1', 'ob1', 'perc1', 'tsax1', 'bsax1', 'fg1', 'bcl1', 'picc1', 'ebcl1', 'btb1', 'cb1'];
 function autoAssign(s){
   const free = FILL_ORDER.filter(id => !s.members.some(m => m.seat === id));
-  const map = {};
+  const map = {}, taken = new Set();
+  const best = ids => { const r = seatRank(s, taken); return ids.slice().sort((a, b) => r(a) - r(b))[0]; };
   for(const r of s.recruits || []){
-    const want = free.find(id => SEAT[id].inst === r.hope && !Object.values(map).includes(id));
-    if(want) map[r.id] = want;
+    const want = best(free.filter(id => SEAT[id].inst === r.hope && !taken.has(id)));
+    if(want){ map[r.id] = want; taken.add(want); }
   }
   for(const r of s.recruits || []){
-    if(map[r.id]) continue;
-    const id = free.find(x => !Object.values(map).includes(x));
+    if(map[r.id] !== undefined) continue;
+    const id = best(free.filter(x => !taken.has(x)));
     map[r.id] = id || null;
+    if(id) taken.add(id);
   }
   return map;
 }
@@ -611,25 +771,30 @@ function assignRecruits(s0, map){
     const seat = map[r.id] || null;
     const match = seat && SEAT[seat].inst === r.hope;
     if(match) happy++;
-    const base = r.exp && match ? 26 : r.exp ? 14 : 6;
+    const g = r.grade || 1;
+    // 中学で同じ楽器を吹いていた部員は、はじめから少し吹ける
+    const base = (r.exp && match ? 30 : r.exp ? 16 : 6) + (g - 1) * (r.exp ? 8 : 4);
     const stats = makeStats(base, r.exp ? 5 : 3, 'stat', r.id);
-    s.members.push({id: r.id, name: r.name, grade: 1, seat, trait: r.trait, joined: s.year, exp: !!r.exp, mental: mentalInit(r.trait, 1, 'stat', r.id) + (r.exp ? 6 : 0),
-      stats, first: {y: s.year, w: s.week, stats: {...stats}}, hope: r.hope});
+    s.members.push({id: r.id, name: r.name, grade: g, joinGrade: g, seat, trait: r.trait, joined: s.year, exp: !!r.exp, mental: mentalInit(r.trait, g, 'stat', r.id) + (r.exp ? 6 : 0),
+      stats, first: {y: s.year, w: s.week, stats: {...stats}}, hope: r.hope, sta: Math.round(s.members.length ? s.stamina : 100), policy: 'auto'});
   }
   const n = (s.recruits || []).length;
   s.morale = clamp(s.morale + happy * 1.5 - (n - happy), 0, 100);
-  s.cohesion = clamp(s.cohesion - n * 0.8, 0, 100);
-  addLog(s, `1年生${n}人の担当が決まった。希望どおりの楽器になったのは${happy}人。`);
-  s.recruits = null;
+  if(s.members.length > n) s.cohesion = clamp(s.cohesion - n * 0.8, 0, 100);
+  addLog(s, `${n === 1 ? s.recruits[0].name : `新しい部員${n}人`}の担当が決まった。希望どおりの楽器になったのは${happy}人。`);
+  s.recruits = null; s.recruitWhen = null;
   assignTitles(s.members);
-  // 1年生が入って最初の合奏を残しておく（引退のとき、入部したころの音として聴ける）
-  if(n && s.pieceId){
-    const rec = addRec(s, `${s.year}年 1年生が入って最初の合奏`, {venue: 'room'});
+  syncSta(s);
+  // 新しい部員が入って最初の合奏を残しておく（引退のとき、入部したころの音として聴ける）
+  if(n && s.pieceId && s.week <= 3){
+    const rec = addRec(s, `${s.year}年 新しい部員が入って最初の合奏`, {venue: 'room'});
     rec.keep = true;
-    addLog(s, '新しい1年生も入って、最初の合奏を録音した。');
+    addLog(s, '新しい部員も入って、最初の合奏を録音した。');
   }
   return s;
 }
+// 新しく入った部員の担当を決める画面を出すか（新入生は本入部の週、途中入部はすぐ）
+const recruitsDue = s => !!(s.recruits && s.recruits.length && (s.phase === 'choose' || s.week >= (s.recruitWhen ?? 0)));
 function moveMember(s0, memberId, seatId){
   const s = clone(s0);
   const m = s.members.find(x => x.id === memberId);
@@ -660,6 +825,16 @@ function load(){
       s.fam = {...freshFam(), ...s.fam};   // あとから増えた曲
       s.startYear ??= s.history[0]?.year ?? s.year;
       for(const m of s.members) m.mental ??= mentalInit(m.trait, m.grade, 'mig', m.id);
+      // 部員ひとりずつの体力・方針と、部の評判（2026年10月に、練習を一人ずつ指示する形にした）
+      for(const m of s.members){ m.sta ??= s.stamina ?? 100; m.policy ||= 'auto'; }
+      syncSta(s);
+      if(s.rep == null){
+        const golds = [...(s.history || []).flatMap(h => h.results || []), ...(s.season || [])].filter(r => r.award === 'gold').length;
+        s.rep = Math.min(70, 30 + 4 * golds);
+      }
+      s.plan ||= {}; s.seq ??= 100;
+      if(s.recruits && s.recruitWhen == null) s.recruitWhen = 3;
+      delete s.focus;
       return s;
     }
   }catch(e){}

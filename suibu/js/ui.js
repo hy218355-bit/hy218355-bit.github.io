@@ -497,17 +497,19 @@ function statRow(name, v, desc, delta, cls){
 }
 function renderStats(){
   const ms = seated(S);
-  $('#memberCount').textContent = `${ms.length}人／39席`;
+  $('#memberCount').textContent = `${S.members.length}人${S.members.length > ms.length ? `（控え${S.members.length - ms.length}人）` : ''}／${SEATS.length}席`;
   const d = S.lastDelta || {};
   const pid = S.pieceId || playPiece();
   $('#stats').innerHTML = STAT_KEYS.map(k => statRow(STAT_LABEL[k], bandAvg(S, k), STAT_DESC[k], d[k] > 0 ? d[k].toFixed(1) : '')).join('')
-    + statRow('まとまり', S.cohesion, '互いを聴き合う力。合奏・ハーモニー練習で育つ', d.coh > 0 ? d.coh.toFixed(1) : '')
+    + statRow('まとまり', S.cohesion, '互いを聴き合う力。合奏に出る人が多いほど育つ', d.coh > 0 ? d.coh.toFixed(1) : '')
     + statRow('仕上がり', S.fam[pid] ?? 0, `${PIECES[pid].title}の譜読みと曲づくり。低いと音を間違える`, d.fam > 0 ? d.fam.toFixed(1) : '');
   const vital = (nm, v) => {
     const c = v >= 60 ? 'good' : v >= 30 ? 'warn' : 'bad';
     return `<div class="vital"><span class="row"><span>${nm}</span><b>${Math.round(v)}</b></span><span class="track"><span class="fill ${c}" style="width:${clamp(v, 0, 100)}%"></span></span></div>`;
   };
-  $('#vitals').innerHTML = vital('体力', S.stamina) + vital('やる気', S.morale) + vital('会場慣れ', S.hallExp);
+  const nx = nextRepStep(S);
+  $('#vitals').innerHTML = vital('体力', S.stamina) + vital('やる気', S.morale) + vital('会場慣れ', S.hallExp)
+    + `<div class="vital rep"><span class="row"><span>評判</span><b>${Math.round(S.rep ?? 0)}</b></span><span class="track"><span class="fill" style="width:${clamp(S.rep ?? 0, 0, 100)}%"></span></span><small>${nx ? `${nx}をこえると、入部したい生徒が来る` : '県内に知られた部'}</small></div>`;
 }
 function renderDiag(){
   const a = U.diag;
@@ -555,6 +557,10 @@ function moodText(n){
 function renderWeek(){
   const w = $('#week'), ev = eventAt(S, S.week);
   const head = $('#h-week');
+  if(recruitsDue(S) && !S.pending){
+    head.textContent = S.phase === 'choose' ? (foundingYear(S) && !S.members.length ? '最初の部員' : '新しい部員') : `${wkLabel(S.week)}`;
+    return renderAssign(w, ev);
+  }
   if(S.phase === 'choose'){
     head.textContent = '選曲会議';
     w.innerHTML = `<p class="small">コンクールの自由曲を決めよう。試しに聴くと、まだ譜読みをしていない状態の音が聞ける。</p>`
@@ -568,8 +574,8 @@ function renderWeek(){
     const seniors = S.members.filter(m => m.grade === 3);
     const april = S.recs.find(r => r.year === S.year && r.keep && r.week === 0);
     const lastStage = S.recs.slice().reverse().find(r => r.year === S.year && r.final) || S.recs.slice().reverse().find(r => r.year === S.year && r.result);
-    w.innerHTML = `<div class="stagecard"><h3>3年生が引退します</h3><ol class="small" style="padding-left:1.2em">${res}</ol>
-      <p class="txt">${seniors.map(m => esc(m.name)).join('、')}（${seniors.length}人）が引退する。4月の録音と最後の本番を聴き比べてみよう。</p>
+    w.innerHTML = `<div class="stagecard"><h3>${seniors.length ? '3年生が引退します' : 'この1年をふり返る'}</h3><ol class="small" style="padding-left:1.2em">${res}</ol>
+      <p class="txt">${seniors.length ? `${seniors.map(m => esc(m.name)).join('、')}（${seniors.length}人）が引退する。` : `部員は${S.members.length}人になった。引退する3年生はまだいない。`}4月の録音と最後の本番を聴き比べてみよう。</p>
       <div class="transport">${april ? `<button class="btn small" type="button" data-act="playrec" data-id="${april.id}">▶ 4月の録音</button>` : ''}${lastStage ? `<button class="btn small" type="button" data-act="playrec" data-id="${lastStage.id}">▶ 最後の本番</button><button class="btn small" type="button" data-act="saverec" data-id="${lastStage.id}">⤓ 最後の本番を保存</button>` : ''}</div></div>
       ${firstClassEpilogue(seniors)}
       ${seniors.length ? `<div class="seniors"><h3>引退する3年生</h3><p class="small">名前をタップすると、入部したころと最後の本番を、その人の音だけで聴き比べられる。</p>${seniors.map(m => seniorCard(m, lastStage)).join('')}</div>` : ''}
@@ -586,21 +592,12 @@ function renderWeek(){
       <p class="txt">${moodText(n)}（緊張 −${n}）${v.play.hall ? `会場慣れ ${Math.round(S.hallExp)}。` : ''}</p>
       ${wingsHtml()}
       <div class="transport"><button class="btn primary" type="button" data-act="stage">本番の演奏をはじめる</button><button class="btn brass" type="button" data-act="stageconduct">自分で指揮する</button></div>
-      <p class="small">自分で指揮すると、その指揮で演奏した結果が審査される。テンポが大きく揺れると、リズムの苦手な部員ほどついてこられない。</p></div>`;
+      <p class="small">自分で指揮すると、その指揮で演奏した結果が審査される。テンポが大きく揺れると、リズムの苦手な部員ほどついてこられない。</p>
+      ${ev.kind === 'contest' ? '<p class="small">コンクールに出るのは、席についている部員だけ。まだ吹けない部員を控えに回すと、人数は減るが音はそろう（部員を選んで「席を移す」）。</p>' : ''}</div>`;
     return;
   }
   if(ev?.kind === 'forced'){
     w.innerHTML = `<div class="event"><span class="tag">${ev.title}</span><span>${ev.text}</span></div><div class="menu"><button class="mbtn wide" type="button" data-act="test"><b>テスト勉強に集中する</b><span>1週すすむ・体力が回復</span></button></div>`;
-    return;
-  }
-  if(ev?.kind === 'assign' && S.recruits){
-    const map = autoAssign(S);
-    const free = FILL_ORDER.filter(id => !S.members.some(m => m.seat === id));
-    w.innerHTML = `<div class="event"><span class="tag">${ev.title}</span><span>${ev.text}</span></div>
-      <div class="assign">${S.recruits.map(r => `<div class="row"><span class="who">${esc(r.name)}<small>希望：${INST[r.hope].name}${r.exp ? '・中学で経験あり' : '・初心者'}${r.trait ? '・' + TRAITS[r.trait].name : ''}</small></span>
-        <select id="as-${r.id}" aria-label="${esc(r.name)}の担当"><option value="">控え（席なし）</option>${free.map(id => `<option value="${id}"${map[r.id] === id ? ' selected' : ''}>${PART_LABEL[SEAT[id].part]}</option>`).join('')}</select></div>`).join('')}</div>
-      <p class="small" id="assignErr"></p>
-      <button class="btn primary" type="button" data-act="assign">この担当で決める</button>`;
     return;
   }
   if(S.chooseFinal){
@@ -616,18 +613,69 @@ function renderWeek(){
   if(epv){
     const who = [epv.m, epv.o].filter(Boolean).map(x => `${x.grade}年・${esc(instOf(x))}・${esc(x.name)}`).join('　');
     parts.push(`<div class="episode"><div class="head"><span class="tag">できごと</span><span class="who">${who}</span></div><p class="txt">${esc(epv.text)}</p>
-      <p class="small">顧問として、どうする？</p><div class="choices">${epv.choices.map((c, k) => `<button class="mbtn" type="button" data-ep="${k}"><b>${esc(c)}</b></button>`).join('')}</div></div>`);
+      <p class="small">顧問として、どうする？</p><div class="choices">${epv.choices.map(c => `<button class="mbtn" type="button" data-ep="${c.k}"><b>${esc(c.label)}</b></button>`).join('')}</div></div>`);
     w.innerHTML = parts.join('');
     return;
   }
   if(S.lastEpisode) parts.push(`<p class="epres"><b>${esc(S.lastEpisode.choice)}</b>${esc(S.lastEpisode.result)}</p>`);
-  parts.push(`<div class="focus"><span>重点を置くパート（そのパートの伸びが1.6倍、ほかは少し下がる）</span><div class="chips">
-    <button class="chip" type="button" data-focus="" aria-pressed="${!S.focus}">なし</button>${SECTIONS.map(s => `<button class="chip" type="button" data-focus="${s.id}" aria-pressed="${S.focus === s.id}">${s.name}</button>`).join('')}</div></div>`);
-  const cm = ev?.costMult || 1;
-  parts.push(`<div class="menu">${MENU.filter(m => !m.from || S.week >= m.from).map(m => `<button class="mbtn${m.id === 'rest' ? ' rest' : ''}" type="button" data-menu="${m.id}"><b>${m.name}</b><span>${m.hint}</span><span class="cost">体力 ${m.cost > 0 ? '−' + Math.round(m.cost * cm) : '+' + (-m.cost)}</span></button>`).join('')}</div>`);
-  if(S.stamina < 30) parts.push(`<p class="small">体力が30を切っている。練習の効果が半分になる。</p>`);
+  parts.push(planHtml(ev));
   if(!tuneDone(S)) parts.push(`<div class="tgrow"><button class="btn small" type="button" data-act="tunegame">♪ 耳でチューニング</button><span class="small">部員の音とチューナーの音のうなりを聴いて合わせる（週に1回・合わせた部員の音程が上がる）</span></div>`);
   w.innerHTML = parts.join('');
+}
+// 新しく入った部員の担当を決める（部をつくった最初の5人・本入部の1年生・途中から入ってきた部員）
+function renderAssign(w, ev){
+  const map = autoAssign(S);
+  const free = SEATS.map(x => x.id).filter(id => !S.members.some(m => m.seat === id));
+  const first = foundingYear(S) && !S.members.length;
+  const intro = first ? `部員がいなくなって休部していた吹奏楽部に、1年生が${S.recruits.length}人入部してきた。担当する楽器を決めよう。希望どおりだとやる気が上がる。人数が少ないうちは、いる人で旋律・低音・和音を分けて吹く。`
+    : ev?.kind === 'assign' ? ev.text : '新しく入部してきた部員の担当を決めよう。希望どおりだとやる気が上がる。';
+  w.innerHTML = `<div class="event"><span class="tag">${first ? '入部' : ev?.kind === 'assign' ? ev.title : '入部'}</span><span>${intro}</span></div>
+    <div class="assign">${S.recruits.map(r => `<div class="row"><span class="who">${esc(r.name)}<small>${(r.grade || 1)}年・希望：${INST[r.hope].name}${r.exp ? '・中学で経験あり' : '・初心者'}${r.trait ? '・' + TRAITS[r.trait].name : ''}</small></span>
+      <select id="as-${r.id}" aria-label="${esc(r.name)}の担当"><option value="">控え（席なし）</option>${free.map(id => `<option value="${id}"${map[r.id] === id ? ' selected' : ''}>${PART_LABEL[SEAT[id].part]}</option>`).join('')}</select></div>`).join('')}</div>
+    <p class="small" id="assignErr"></p>
+    <button class="btn primary" type="button" data-act="assign">この担当で決める</button>`;
+}
+// 今週の練習：部員ひとりずつに、方針と今週の指示
+const menuLabel = (id, cm = 1) => { const m = MENU_BY[id]; return `${m.name}：${m.hint.replace(/　/g, ' ')}（体力${m.cost > 0 ? '−' + Math.round(m.cost * cm) : '+' + (-m.cost)}）`; };
+const lastText = m => {
+  if(!m.last) return '';
+  if(m.last.menu === 'test') return '先週：テスト期間';
+  const d = Object.entries(m.last.d || {}).filter(([, v]) => v >= 0.1).sort((a, b) => b[1] - a[1]).slice(0, 2).map(([k, v]) => `${STAT_LABEL[k]}+${v.toFixed(1)}`).join(' ');
+  return `先週：${MENU_BY[m.last.menu]?.name || ''}${d ? ' ' + d : ''}`;
+};
+function planHtml(ev){
+  const cm = ev?.costMult || 1;
+  const menus = MENU.filter(m => menuOpen(S, m.id));
+  const order = m => m.seat ? SEATS.findIndex(x => x.id === m.seat) : 999;
+  const ms = S.members.slice().sort((a, b) => order(a) - order(b));
+  const count = {};
+  for(const m of ms){ const id = planFor(S, m); count[id] = (count[id] || 0) + 1; }
+  const tired = ms.filter(m => m.sta < 30).length;
+  const allPol = ms.length && ms.every(m => (m.policy || 'auto') === (ms[0].policy || 'auto')) ? (ms[0].policy || 'auto') : null;
+  let sec = null;
+  const rows = ms.map(m => {
+    const s = m.seat ? SEAT[m.seat].sec : 'bench';
+    const head = s !== sec ? `<li class="psec">${s === 'bench' ? '控え' : SEC[s].name}</li>` : '';
+    sec = s;
+    const auto = decideMenu(S, m), own = S.plan?.[m.id] && menuOpen(S, S.plan[m.id]) ? S.plan[m.id] : '';
+    const c = m.sta >= 60 ? 'good' : m.sta >= 30 ? 'warn' : 'bad';
+    return `${head}<li class="pm${own ? ' own' : ''}"><span class="who"><b>${esc(m.name)}</b><small>${m.grade}年・${m.seat ? esc(PART_LABEL[SEAT[m.seat].part]) : '控え'}</small></span>
+      <span class="sta" title="体力 ${Math.round(m.sta)}"><span class="track"><span class="fill ${c}" style="width:${clamp(m.sta, 0, 100)}%"></span></span><b>${Math.round(m.sta)}</b></span>
+      <label class="pol"><span>方針</span><select data-pol="${m.id}" aria-label="${esc(m.name)}の方針">${POLICIES.map(p => `<option value="${p.id}"${(m.policy || 'auto') === p.id ? ' selected' : ''}>${p.name}</option>`).join('')}</select></label>
+      <label class="pw"><span>今週</span><select data-plan="${m.id}" aria-label="${esc(m.name)}の今週の練習"><option value="">方針どおり（${MENU_BY[auto].name}）</option>${menus.map(x => `<option value="${x.id}"${own === x.id ? ' selected' : ''}>${menuLabel(x.id, cm)}</option>`).join('')}</select></label>
+      ${m.last ? `<small class="last">${esc(lastText(m))}</small>` : ''}</li>`;
+  }).join('');
+  const sum = MENU.filter(m => count[m.id]).map(m => `${m.name} ${count[m.id]}人`).join('・');
+  const tutti = (count.tutti || 0) + (count.hall || 0);
+  return `<div class="plan">
+    <p class="small">部員ひとりずつに今週の練習を指示する。「方針どおり」のままにすると、その人の方針で自分の練習を決める。合奏は出た人が多いほど、部のまとまりと曲の仕上がりが伸びる。</p>
+    <div class="focus"><span>全員の方針をまとめて変える</span><div class="chips">${POLICIES.map(p => `<button class="chip" type="button" data-polall="${p.id}" aria-pressed="${allPol === p.id}" title="${esc(p.desc)}">${p.name}</button>`).join('')}</div>
+    <span class="small">${allPol ? `${POLICY_BY[allPol].name}：${POLICY_BY[allPol].desc}` : '方針は部員ごとにちがう。'}</span></div>
+    <ul class="plist">${rows}</ul>
+    <p class="small plan-sum">今週の予定：${sum}${tutti === 1 ? '（合奏は2人以上いないとできない）' : ''}</p>
+    ${tired ? `<p class="small">体力が30を切っている部員が${tired}人。休ませないと、練習の効果が半分になる。</p>` : ''}
+    <button class="btn primary" type="button" data-act="practice">この内容で1週間すすめる</button>
+  </div>`;
 }
 // 顧問になって最初に入部してきた代が卒業するとき：3年間をふり返る
 function firstClassEpilogue(seniors){
@@ -681,7 +729,7 @@ function renderStageResult(w, ev){
   }
   if(p.kind === 'concert'){
     w.innerHTML = `<div class="stagecard"><span class="tag">本番</span><h3>${ev.title}</h3><p class="small">演奏の出来 ${Math.round(p.q)}点（緊張 −${p.nerves}）${conductNote(p)}</p>${mentalNote(p)}<p class="txt">${esc(p.text)}</p>
-      <div class="transport"><button class="btn small" type="button" data-act="playrec" data-id="${p.recId}">▶ もう一度聴く</button><button class="btn small" type="button" data-act="saverec" data-id="${p.recId}">⤓ 保存</button><button class="btn primary" type="button" data-act="next">${ev.final ? '3年生の引退へ' : '次の週へ'}</button></div></div>`;
+      <div class="transport"><button class="btn small" type="button" data-act="playrec" data-id="${p.recId}">▶ もう一度聴く</button><button class="btn small" type="button" data-act="saverec" data-id="${p.recId}">⤓ 保存</button><button class="btn primary" type="button" data-act="next">${ev.final ? (hasSeniors(S) ? '3年生の引退へ' : '1年のふり返りへ') : '次の週へ'}</button></div></div>`;
     return;
   }
   const j = p.judge, L = LEVELS[j.level];
@@ -930,14 +978,7 @@ function bind(){
   });
   $('#week').addEventListener('click', e => {
     const b = e.target.closest('button'); if(!b || b.disabled) return;
-    if(b.dataset.menu){
-      if(busy()) return;
-      haptic('tap');
-      commit(practiceWeek(S, b.dataset.menu));
-      renderAll(); refreshNow();
-      return;
-    }
-    if(b.dataset.focus !== undefined){ S.focus = b.dataset.focus || null; commit(S); renderWeek(); return; }
+    if(b.dataset.polall){ commit(setPolicy(S, '*', b.dataset.polall)); renderWeek(); return; }
     if(b.dataset.ep !== undefined){ haptic('tap'); commit(resolveEpisode(S, +b.dataset.ep)); renderAll(); refreshNow(); return; }
     const act = b.dataset.act;
     if(act === 'preview'){ U.piece = b.dataset.pid; U.range = 'all'; renderPiece(); renderInterp(); U.perfNow = perform(currentCtx()); U.diag = analyze(U.perfNow); renderDiag(); playPerf(U.perfNow, `試聴：${PIECES[b.dataset.pid].title}${(S.fam[b.dataset.pid] || 0) < 5 ? '（譜読み前）' : ''}`); }
@@ -947,6 +988,7 @@ function bind(){
     else if(act === 'huddle'){ haptic('tap'); commit(huddle(S)); renderWeek(); }
     else if(act === 'choosefinal'){ stopPlay(); commit(chooseFinalPiece(S, b.dataset.pid)); U.piece = null; renderAll(); refreshNow(); }
     else if(act === 'test'){ commit(practiceWeek(S, 'test')); renderAll(); refreshNow(); }
+    else if(act === 'practice'){ if(busy()) return; haptic('tap'); commit(practiceWeek(S)); renderAll(); refreshNow(); }
     else if(act === 'assign'){
       const map = {}, used = new Set();
       for(const r of S.recruits){
@@ -970,6 +1012,11 @@ function bind(){
       if(act === 'memsave') saveRecording(rec, m);
       else playMemberRec(rec, m, `${m.name}の音だけ：${rec.label}`);
     }
+  });
+  $('#week').addEventListener('change', e => {
+    const t = e.target;
+    if(t.dataset.pol){ commit(setPolicy(S, t.dataset.pol, t.value)); renderWeek(); }
+    else if(t.dataset.plan){ commit(setPlan(S, t.dataset.plan, t.value || null)); renderWeek(); }
   });
   $('#interp').addEventListener('click', e => {
     const b = e.target.closest('[data-interp]'); if(!b || b.disabled) return;

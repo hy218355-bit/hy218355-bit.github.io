@@ -47,9 +47,6 @@ SEAT_ROWS.forEach((row, r) => {
   });
 });
 const SEAT = Object.fromEntries(SEATS.map(s => [s.id, s]));
-// 1年生が入るまでの空席
-const EMPTY_START = ['fl2a', 'ebcl1', 'cl2b', 'cl3a', 'cl3b', 'asax2', 'tp3a', 'hn3', 'hn4', 'tb2', 'euph2', 'tuba2', 'perc4'];
-const SENIOR_START = ['cl1a', 'fl1a', 'ob1', 'tp1a', 'hn1', 'tb1', 'euph1', 'tuba1', 'asax1', 'perc1', 'cl2a', 'bsax1'];
 // 空席を埋める順番（和音が欠けやすいところから）
 const FILL_ORDER = ['tp3a', 'hn3', 'cl3a', 'cl2b', 'hn4', 'euph2', 'tuba2', 'tb2', 'asax2', 'cl3b', 'fl2a', 'perc4', 'ebcl1',
   'picc1', 'fl1b', 'cl1b', 'cl1c', 'fg1', 'bcl1', 'tsax1', 'hn2', 'tp1b', 'tp2a', 'btb1', 'cb1', 'perc2', 'perc3',
@@ -83,34 +80,17 @@ function pickTrait(...seed){
   return h < 0.12 ? null : TRAIT_IDS[Math.floor(hash(...seed, 'tr2') * TRAIT_IDS.length)];
 }
 
-// 4月最初の部員（2・3年生）
-function initialRoster(year){
-  const used = new Set();
-  const members = [];
-  let n = 0;
-  for(const s of SEATS){
-    if(EMPTY_START.includes(s.id)) continue;
-    const grade = SENIOR_START.includes(s.id) ? 3 : 2;
-    const seed = ['roster', year, s.id];
-    members.push({
-      id: `m${year}-${n++}`, name: makeName(used, ...seed), grade, seat: s.id,
-      stats: makeStats(grade === 3 ? 42 : 28, 7, ...seed), trait: pickTrait(...seed), joined: year - grade + 1,
-    });
-    members[members.length - 1].mental = mentalInit(members[members.length - 1].trait, grade, ...seed);
-    members[members.length - 1].first = {y: year, w: 0, stats: {...members[members.length - 1].stats}};
-  }
-  assignTitles(members);
-  return members;
-}
+// 役職：部長・副部長・学生指揮はいちばん上の学年から（3年生がいない年は2年生、部ができた年は1年生から）
 function assignTitles(members){
   for(const m of members) delete m.title;
-  const by = id => members.find(m => m.seat === id && m.grade === 3);
-  const third = members.filter(m => m.grade === 3).sort((a, b) => avgStat(b) - avgStat(a));
+  const top = Math.max(0, ...members.map(m => m.grade));
+  const by = id => members.find(m => m.seat === id && m.grade === top);
+  const third = members.filter(m => m.grade === top).sort((a, b) => avgStat(b) - avgStat(a));
   const boss = by('cl1a') || third[0];
   if(boss) boss.title = '部長';
-  const vice = third.find(m => !m.title);
+  const vice = members.length >= 4 && third.find(m => !m.title);
   if(vice) vice.title = '副部長';
-  const cond = third.find(m => !m.title && SEAT[m.seat]?.sec !== 'cl');
+  const cond = members.length >= 15 && third.find(m => !m.title && SEAT[m.seat]?.sec !== 'cl');
   if(cond) cond.title = '学生指揮';
   for(const sec of SECTIONS){
     const ms = members.filter(m => SEAT[m.seat]?.sec === sec.id && !m.title).sort((a, b) => b.grade - a.grade || avgStat(b) - avgStat(a));
@@ -137,7 +117,7 @@ const RUBATOS = [0.3, 1, 1.6];
 const INTERP_NAMES = {tempo: ['遅め', '標準', '速め'], dyn: ['控えめ', '標準', '大きく'], rub: ['ほぼ一定', '標準', 'たっぷり']};
 
 function perform(ctx){
-  const pc = PIECES[ctx.pieceId], arr = arrangement(ctx.pieceId);
+  const pc = PIECES[ctx.pieceId];
   const seed = ctx.seed || 'band';
   const venue = VENUE[ctx.venue || 'room'];
   const C = clamp01((ctx.cohesion ?? 30) / 100);
@@ -196,18 +176,8 @@ function perform(ctx){
   const off = b2s(from);
   const ideal = b => 0.58 + (interp(pc.dyn, b) - 0.58) * SPREAD;
 
-  // 担当がいないパートの旋律は代わりのパートが吹く
-  const byPart = {};
-  for(const p of players) (byPart[p.part] ||= []).push(p);
-  const extra = {};
-  for(const [part, evs] of Object.entries(arr.parts)){
-    if(byPart[part]?.length) continue;
-    for(const e of evs){
-      if(!e.fb) continue;
-      const alt = e.fb.find(q => byPart[q]?.length);
-      if(alt) (extra[alt] ||= []).push(e);
-    }
-  }
+  // 担当がいないパートの旋律・低音・和音は、いる人が持ち替えて吹く（全員そろっていれば楽譜どおり）
+  const red = reduction(ctx.pieceId, new Set(players.map(p => p.part)));
 
   const notes = [], hits = [], sharedG = {};
   for(const p of players){
@@ -222,7 +192,7 @@ function perform(ctx){
     const nat = 1.5 * clampG(gauss(...pk, 'nat'));
     const loudMul = m.trait === 'loud' ? 1.2 - 0.1 * E : m.trait === 'shy' ? 0.78 + 0.12 * E : 1;
     const jf = clamp01((P - 0.65) / 0.3) * (0.4 + 0.6 * C);
-    const evs = [...(arr.parts[p.part] || []), ...(extra[p.part] || [])].sort((a, b) => a.b - b.b);
+    const evs = red.parts[p.part] || [];
     const mine = [];
     let prevMidi = null, prevEnd = -Infinity;
     evs.forEach(e => {
@@ -329,7 +299,9 @@ function perform(ctx){
   const b2t = b => b2s(b) - off;
   const t2b = t => { let lo = from, hi = to + 8; for(let i = 0; i < 40; i++){ const mid = (lo + hi) / 2; if(b2t(mid) < t) lo = mid; else hi = mid; } return (lo + hi) / 2; };
   const mental = players.filter(p => p.freeze || p.zone).map(p => ({mid: p.m.id, kind: p.freeze ? 'freeze' : 'zone'}));
-  return {pieceId: ctx.pieceId, venue: venue.id, from, to, bpm, notes, hits, bars, ideal: idealLine, total, b2t, t2b, meter: pc.meter, mental,
+  const inSpan = b => b >= from - 1e-6 && b < to - 1e-6;
+  const miss = {mel: red.miss.mel.filter(inSpan).length, bass: red.miss.bass.filter(inSpan).length};
+  return {pieceId: ctx.pieceId, venue: venue.id, from, to, bpm, notes, hits, bars, ideal: idealLine, total, b2t, t2b, meter: pc.meter, mental, miss,
     idealDur: b2sIdeal(to) - b2sIdeal(from), realDur: b2s(to) - off, cohesion: C, fam: FAM, interp: {...ip}, rubUse, spread: SPREAD,
     bandE, bandR, players: players.length};
 }
@@ -417,22 +389,13 @@ function analyze(perf){
     expr: 100 * (eW ? eE / eW : 0) * (0.75 + 0.25 * clamp01(perf.rubUse / Math.max(0.3, RUBATOS[perf.interp.rub ?? 1]))),
     balance: clamp(75 + 8 * (balanceDb - pc.balRef), 0, 100),
   };
-  // 空席で鳴らない旋律・低音
-  const arr = arrangement(perf.pieceId);
-  const played = new Set([...perf.notes.map(n => n.part), ...perf.hits.map(h => SEAT[h.seat].part)]);
-  // ソロが誰にも吹かれない、低音が一人もいない、という欠け方だけを減点する
-  const missingMel = [], missingBass = [];
-  let bassParts = 0, bassPlayed = 0;
-  for(const [part, evs] of Object.entries(arr.parts)){
-    const inR = evs.filter(e => e.b >= perf.from && e.b < perf.to);
-    if(inR.some(e => e.role === 'bass')){ bassParts++; if(played.has(part)) bassPlayed++; }
-    if(played.has(part)) continue;
-    if(inR.some(e => e.solo && !(e.fb || []).some(f => played.has(f)))) missingMel.push(part);
-  }
-  if(bassParts && !bassPlayed) missingBass.push('low');
+  // 誰も吹けない旋律・低音（管楽器が一人もいない、など）
+  const missingMel = perf.miss?.mel ? ['mel'] : [], missingBass = perf.miss?.bass ? ['low'] : [];
   const wrongRate = wrong / Math.max(50, perf.notes.length + perf.hits.length);
-  const penalty = Math.min(25, 200 * wrongRate) + missingMel.length * 8 + missingBass.length * 8;
-  return {score, penalty, pitchDev, spread, rhythmMs, drift, cracks, wrong, balanceDb, sec: secOut, missingMel, missingBass, focus: pc.focus, ceiling: pc.ceiling};
+  // 人数が少ないと響きが薄い（24人より少ないと、少しずつ下がる）
+  const thin = 16 * clamp((24 - (perf.players || 0)) / 20, 0, 1.15);
+  const penalty = Math.min(25, 200 * wrongRate) + missingMel.length * 8 + missingBass.length * 8 + thin;
+  return {score, penalty, thin, pitchDev, spread, rhythmMs, drift, cracks, wrong, balanceDb, sec: secOut, missingMel, missingBass, focus: pc.focus, ceiling: pc.ceiling};
 }
 
 /* ===== 審査 ===== */
@@ -539,6 +502,7 @@ function judge(perf, a, levelId){
     if(i === 1 && it.notes.length) comments.push(it.notes[0]);
     if(i === 2 && a.wrong >= 4) comments.push('まだ譜面が手の内に入っていない箇所が見られます。');
     if(i === 0 && a.missingMel.length) comments.push('人数の少ないパートの旋律が聞こえにくくなっていました。');
+    if(i === 0 && a.thin >= 6) comments.push(a.thin >= 12 ? '少ない人数でよく工夫していますが、響きの厚みはまだこれからです。' : '人数がもう少しそろうと、響きに厚みが出てきそうです。');
     if(i === 0 && perf.conducted && perf.jitter > 0.12) comments.push('指揮の拍が安定せず、合奏が落ち着きませんでした。');
     if(!comments.length) comments.push('全体によくまとまっています。あと一歩の磨き込みを期待します。');
     return {name: j.name, score: sc, grade: sc >= L.A ? 'A' : sc >= L.B ? 'B' : 'C', comment: comments.join('')};

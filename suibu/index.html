@@ -179,7 +179,9 @@ select{background:var(--sheet);border:1.5px solid var(--rule);border-radius:8px;
 .track .fill.good{background:var(--good)} .track .fill.warn{background:var(--warn)} .track .fill.bad{background:var(--bad)}
 .stat .ds{grid-column:2/4;font-size:12px;color:var(--ink-soft);line-height:1.45}
 .delta{color:var(--good);font-family:var(--f-lcd);margin-left:4px}
-.vitals{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+.vitals{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}
+@media (max-width:480px){.vitals{grid-template-columns:repeat(2,minmax(0,1fr))}}
+.vital small{font-size:11px;color:var(--ink-soft);line-height:1.4}
 .vital{display:grid;gap:4px;font-size:12.5px}
 .vital .row{display:flex;justify-content:space-between;gap:4px}
 .vital .row b{font-family:var(--f-lcd);font-weight:400;font-size:14px}
@@ -236,6 +238,24 @@ select{background:var(--sheet);border:1.5px solid var(--rule);border-radius:8px;
 .stagecard{display:grid;gap:12px}
 .stagecard h3{font-family:var(--f-display);font-weight:400;font-size:20px;line-height:1.35}
 .stagecard .txt{font-family:var(--f-hand);font-size:15px;line-height:1.7}
+/* 今週の練習：部員ひとりずつ */
+.plan{display:grid;gap:12px}
+.plist{list-style:none;padding:0;display:grid;gap:0}
+.plist .psec{font-size:12px;font-weight:700;color:var(--ink-soft);letter-spacing:.06em;padding:10px 0 2px;border-bottom:1.5px solid var(--rule)}
+.pm{display:grid;grid-template-columns:minmax(0,1fr) 5.2em;grid-template-areas:"who sta" "pol pol" "pw pw" "last last";gap:4px 10px;padding:8px 0;border-bottom:1px dashed var(--rule);align-items:center}
+@media (min-width:600px){.pm{grid-template-columns:minmax(0,1.1fr) 4.6em minmax(0,.9fr) minmax(0,1.4fr);grid-template-areas:"who sta pol pw" "last last last last"}}
+@media (min-width:961px) and (max-width:1280px){.pm{grid-template-columns:minmax(0,1fr) 5.2em;grid-template-areas:"who sta" "pol pol" "pw pw" "last last"}}
+.pm .who{grid-area:who;font-size:14px;line-height:1.35;min-width:0}
+.pm .who b{font-weight:700}
+.pm .who small{display:block;font-size:11.5px;color:var(--ink-soft)}
+.pm .sta{grid-area:sta;display:grid;grid-template-columns:minmax(0,1fr) 1.8em;gap:6px;align-items:center}
+.pm .sta b{font-family:var(--f-lcd);font-weight:400;font-size:13px;text-align:right}
+.pm label{display:grid;grid-template-columns:2.6em minmax(0,1fr);align-items:center;gap:6px;font-size:12px;color:var(--ink-soft);min-width:0}
+.pm .pol{grid-area:pol} .pm .pw{grid-area:pw}
+.pm select{width:100%;padding:5px 8px;font-size:12.5px}
+.pm.own .pw select{border-color:var(--brass);color:var(--brass);font-weight:700}
+.pm .last{grid-area:last;font-size:11.5px;color:var(--ink-soft)}
+.plan-sum{color:var(--ink)}
 .assign{display:grid;gap:8px}
 .assign .row{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.3fr);gap:6px 10px;align-items:center;padding-bottom:8px;border-bottom:1px dashed var(--rule)}
 .assign .who{font-size:14px;line-height:1.4}
@@ -426,7 +446,7 @@ tr.empty td{color:var(--ink-soft)}
     <h1 class="banner">吹部日誌</h1>
     <div class="top-main">
       <p class="school" id="school">県立みなと高校 吹奏楽部</p>
-      <p class="lede">あなたは吹奏楽部の顧問。毎週の練習を決めると、39の席に座る部員一人ひとりの音が少しずつ変わっていく。同じ演奏でも、音楽室と体育館とホールでは聞こえ方がまるで違う。</p>
+      <p class="lede">あなたは吹奏楽部の顧問。部員はまだ1年生の5人だけ。一人ひとりに毎週の練習を指示すると、その人の音が少しずつ変わっていく。演奏の評判が上がれば、入部したいという生徒も増えていく。同じ演奏でも、音楽室と体育館とホールでは聞こえ方がまるで違う。</p>
       <div class="cal-wrap">
         <div class="cal-head"><b id="weekNow"></b><span id="weeksLeft"></span></div>
         <ol class="cal" id="cal" aria-label="今シーズンの週"></ol>
