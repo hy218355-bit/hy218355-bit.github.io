@@ -533,6 +533,22 @@ function renderDiag(){
   if(a.wrong) notes.push(`まだ譜読みが終わっておらず、${a.wrong}か所で音を間違えている。`);
   $('#diagNote').textContent = notes.join(' ') || '大きな問題はない。ここからは細部の磨き込み。';
 }
+// 舞台袖：部全体の空気と、緊張している部員。声をかける・全員で深呼吸する（あわせて2回まで）
+function wingsHtml(){
+  if(!S.stageDay) return '';
+  const tense = tenseMembers(S), calm = S.stageDay.calm, left = 2 - wingActions(S), zb = bandForm(S);
+  const mood = S.stageDay.huddle ? '全員で深呼吸をして、空気が少しやわらいだ。' : zb > 0.8 ? '部全体が硬くなっている。話し声もほとんどない。' : zb < -0.8 ? 'みんないい顔をしている。小声で冗談を言い合う余裕もある。' : 'みんな静かに出番を待っている。';
+  const rows = tense.map(m => `<li><span>${calm.includes(m.id) ? `${esc(m.name)}（${esc(instOf(m))}）は、深呼吸して少し落ち着いた。` : `${esc(m.name)}（${esc(instOf(m))}）の手が震えている。`}</span>${calm.includes(m.id) ? '' : `<button class="btn small" type="button" data-act="calm" data-mid="${m.id}"${left ? '' : ' disabled'}>声をかける</button>`}</li>`).join('');
+  return `<div class="wings"><span class="tag">舞台袖</span><ul><li><span>${mood}</span>${S.stageDay.huddle ? '' : `<button class="btn small" type="button" data-act="huddle"${left ? '' : ' disabled'}>全員で深呼吸する</button>`}</li>${rows}</ul>
+    <p class="small">できるのはあわせて2回まで。本番の強さ（メンタル）は、場数を踏むほど上がる。</p></div>`;
+}
+// 本番のあと：緊張に飲まれた部員と、いつも以上の音を出した部員
+function mentalNote(p){
+  const nm = kind => (p.mental || []).filter(x => x.kind === kind).map(x => memberById(x.mid)?.name).filter(Boolean).map(esc);
+  const fr = nm('freeze'), zn = nm('zone');
+  if(!fr.length && !zn.length) return '';
+  return `<p class="small mental-note">${fr.length ? `緊張で頭が真っ白に：${fr.join('、')}` : ''}${fr.length && zn.length ? '　' : ''}${zn.length ? `いつも以上の音：${zn.join('、')}` : ''}</p>`;
+}
 function moodText(n){
   return n <= 3 ? 'みんな落ち着いている。いつもどおり吹けそうだ。' : n <= 6 ? '少し緊張している。本番では実力より少し下がりそうだ。' : '緊張と不安で、本番は実力を出しきれないかもしれない。';
 }
@@ -568,6 +584,7 @@ function renderWeek(){
       <p class="small">会場：${v.name}（${v.rt < 0.2 ? '響きはほとんどない' : `残響 約${v.rt.toFixed(1)}秒`}）。${v.desc}</p>
       ${ev.text ? `<p class="txt">${ev.text}</p>` : ''}
       <p class="txt">${moodText(n)}（緊張 −${n}）${v.play.hall ? `会場慣れ ${Math.round(S.hallExp)}。` : ''}</p>
+      ${wingsHtml()}
       <div class="transport"><button class="btn primary" type="button" data-act="stage">本番の演奏をはじめる</button><button class="btn brass" type="button" data-act="stageconduct">自分で指揮する</button></div>
       <p class="small">自分で指揮すると、その指揮で演奏した結果が審査される。テンポが大きく揺れると、リズムの苦手な部員ほどついてこられない。</p></div>`;
     return;
@@ -659,7 +676,7 @@ function renderStageResult(w, ev){
     return;
   }
   if(p.kind === 'concert'){
-    w.innerHTML = `<div class="stagecard"><span class="tag">本番</span><h3>${ev.title}</h3><p class="small">演奏の出来 ${Math.round(p.q)}点（緊張 −${p.nerves}）${conductNote(p)}</p><p class="txt">${esc(p.text)}</p>
+    w.innerHTML = `<div class="stagecard"><span class="tag">本番</span><h3>${ev.title}</h3><p class="small">演奏の出来 ${Math.round(p.q)}点（緊張 −${p.nerves}）${conductNote(p)}</p>${mentalNote(p)}<p class="txt">${esc(p.text)}</p>
       <div class="transport"><button class="btn small" type="button" data-act="playrec" data-id="${p.recId}">▶ もう一度聴く</button><button class="btn small" type="button" data-act="saverec" data-id="${p.recId}">⤓ 保存</button><button class="btn primary" type="button" data-act="next">${ev.final ? '3年生の引退へ' : '次の週へ'}</button></div></div>`;
     return;
   }
@@ -667,7 +684,7 @@ function renderStageResult(w, ev){
   const nm = {gold: '金賞', silver: '銀賞', bronze: '銅賞'}[j.award];
   const headTxt = j.rep ? `${L.rep}への代表に選ばれた！` : j.award === 'gold' && L.rep ? '金賞。でも代表には届かなかった（ダメ金）。' : j.award === 'gold' ? '全国大会で金賞。' : j.award === 'silver' ? '銀賞。手応えはあった。' : '銅賞。来年こそ。';
   w.innerHTML = `<div class="result" style="--award:var(--${j.award})">
-    <div class="award"><span class="stamp">${nm}</span><div><b>${headTxt}</b><p class="small">${L.name}・審査員平均 ${j.avg.toFixed(1)}点・緊張 −${p.nerves}${conductNote(p)}</p></div></div>
+    <div class="award"><span class="stamp">${nm}</span><div><b>${headTxt}</b><p class="small">${L.name}・審査員平均 ${j.avg.toFixed(1)}点・緊張 −${p.nerves}${conductNote(p)}</p>${mentalNote(p)}</div></div>
     <ol class="judges">${j.judges.map(x => `<li><span class="grade">${x.grade}</span><p class="cmt"><small>${esc(x.name)}・${x.score}点</small>${esc(x.comment)}</p></li>`).join('')}</ol>
     <div class="transport"><button class="btn small" type="button" data-act="playrec" data-id="${p.recId}">▶ 本番の録音</button><button class="btn small" type="button" data-act="saverec" data-id="${p.recId}">⤓ 保存</button><button class="btn primary" type="button" data-act="next">${j.rep ? '次の大会に向けて練習を続ける' : 'シーズンを終える'}</button></div></div>`;
 }
@@ -731,7 +748,7 @@ function renderMemberCard(){
   }).join('');
   card.innerHTML = `<div class="mc-head"><h3>${esc(m.name)}</h3>${m.title ? `<span class="tag">${m.title}</span>` : ''}<span class="sub">${m.grade}年・${seat ? PART_LABEL[seat.part] : '控え（席なし）'}</span></div>
     ${tr ? `<p class="mc-trait">癖：${tr.name}。${tr.desc}</p>` : '<p class="mc-trait">目立った癖はない。</p>'}
-    <div class="stats">${STAT_KEYS.map(k => statRow(STAT_LABEL[k], m.stats[k], STAT_DESC[k], '')).join('')}</div>
+    <div class="stats">${STAT_KEYS.map(k => statRow(STAT_LABEL[k], m.stats[k], STAT_DESC[k], '')).join('')}${m.mental != null ? statRow('本番の強さ', m.mental, '本番で実力を出しきれるか。弱いと日によって大きくぶれる。場数を踏むと強くなる', '', 'warn') : ''}</div>
     ${memberStory(m)}
     <div class="mc-actions">
       ${seat ? `<button class="btn small" type="button" data-mact="solo">この人だけ聴く</button><button class="btn small" type="button" data-mact="secsolo">パートだけ聴く</button>` : ''}
@@ -922,6 +939,8 @@ function bind(){
     if(act === 'preview'){ U.piece = b.dataset.pid; U.range = 'all'; renderPiece(); renderInterp(); U.perfNow = perform(currentCtx()); U.diag = analyze(U.perfNow); renderDiag(); playPerf(U.perfNow, `試聴：${PIECES[b.dataset.pid].title}${(S.fam[b.dataset.pid] || 0) < 5 ? '（譜読み前）' : ''}`); }
     else if(act === 'choose'){ stopPlay(); commit(choosePiece(S, b.dataset.pid)); U.piece = null; renderAll(); refreshNow(); }
     else if(act === 'tunegame') openTuneGame();
+    else if(act === 'calm'){ haptic('tap'); commit(calmMember(S, b.dataset.mid)); renderWeek(); }
+    else if(act === 'huddle'){ haptic('tap'); commit(huddle(S)); renderWeek(); }
     else if(act === 'choosefinal'){ stopPlay(); commit(chooseFinalPiece(S, b.dataset.pid)); U.piece = null; renderAll(); refreshNow(); }
     else if(act === 'test'){ commit(practiceWeek(S, 'test')); renderAll(); refreshNow(); }
     else if(act === 'assign'){

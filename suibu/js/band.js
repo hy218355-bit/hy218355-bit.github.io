@@ -73,6 +73,11 @@ function makeStats(base, spread, ...seed){
   }
   return st;
 }
+// 本番の強さ（メンタル）：もとの性格と、それまでの場数で決まる
+function mentalInit(trait, grade, ...seed){
+  const base = {nervous: 18, clutch: 72, steady: 60}[trait] ?? 42;
+  return Math.round(clamp(base + (grade - 1) * 8 + 6 * clampG(gauss(...seed, 'mental')), 5, 95));
+}
 function pickTrait(...seed){
   const h = hash(...seed, 'trait');
   return h < 0.12 ? null : TRAIT_IDS[Math.floor(hash(...seed, 'tr2') * TRAIT_IDS.length)];
@@ -91,6 +96,7 @@ function initialRoster(year){
       id: `m${year}-${n++}`, name: makeName(used, ...seed), grade, seat: s.id,
       stats: makeStats(grade === 3 ? 42 : 28, 7, ...seed), trait: pickTrait(...seed), joined: year - grade + 1,
     });
+    members[members.length - 1].mental = mentalInit(members[members.length - 1].trait, grade, ...seed);
     members[members.length - 1].first = {y: year, w: 0, stats: {...members[members.length - 1].stats}};
   }
   assignTitles(members);
@@ -118,7 +124,7 @@ function fullBand(stats){
   const used = new Set();
   return SEATS.map((s, i) => ({
     id: `lab-${i}`, name: makeName(used, 'lab', s.id), grade: 2, seat: s.id,
-    stats: {...stats}, trait: pickTrait('lab', s.id),
+    stats: {...stats}, trait: pickTrait('lab', s.id), mental: 50,
   }));
 }
 
@@ -146,11 +152,24 @@ function perform(ctx){
   for(const m of ctx.members){
     const seat = SEAT[m.seat];
     if(!seat) continue;
-    const nerveMul = m.trait === 'nervous' ? 1.6 : m.trait === 'clutch' ? 0.3 : m.trait === 'steady' ? 0.7 : 1;
-    const drop = (ctx.nerves || 0) * nerveMul * (m.grade === 1 ? 1.3 : 1) + (ctx.fatigue || 0);
+    let drop, freeze = false, zone = false;
+    const fatigue = ctx.fatigue || 0;
+    if(ctx.form && m.mental != null){
+      // 本番の日の調子：ctx.form[id] は その日の揺れ（大きいほど緊張に飲まれている）。メンタルが弱いほど平均して下がり、振れ幅も大きい
+      const steady = clamp01(m.mental / 100), z = clampG(ctx.form[m.id] ?? 0);
+      const nv = (ctx.nerves || 0) * (m.grade === 1 ? 1.2 : 1);
+      freeze = steady < 0.5 && z > 0.8 + 1.6 * steady;           // 頭が真っ白に（緊張しやすいほど起きやすい）
+      zone = steady > 0.55 && z < -(0.8 + 1.6 * (1 - steady));   // いつも以上の音が出る（落ち着いているほど起きやすい）
+      drop = nv * (1.6 - 1.3 * steady) + nv * (1 - steady) * z + (freeze ? 10 : 0) - (zone ? 4 : 0) + fatigue;
+    } else {
+      const nerveMul = m.trait === 'nervous' ? 1.6 : m.trait === 'clutch' ? 0.3 : m.trait === 'steady' ? 0.7 : 1;
+      drop = (ctx.nerves || 0) * nerveMul * (m.grade === 1 ? 1.3 : 1) + fatigue;
+    }
+    // 緊張は息（音色）にいちばん出る
+    const W = {tone: 1.15, rhythm: 1, pitch: 0.85, expr: 1};
     const st = {};
-    for(const k of STAT_KEYS) st[k] = clamp01((m.stats[k] - drop) / 100);
-    players.push({m, seat, st, part: seat.part, sec: seat.sec});
+    for(const k of STAT_KEYS) st[k] = clamp01((m.stats[k] - drop * W[k]) / 100);
+    players.push({m, seat, st, part: seat.part, sec: seat.sec, freeze, zone});
   }
   const avg = (k, list = players) => list.length ? list.reduce((a, p) => a + p.st[k], 0) / list.length : 0;
   const bandR = avg('rhythm'), bandE = avg('expr');
@@ -196,9 +215,10 @@ function perform(ctx){
     const P = st.pitch, R = st.rhythm, T = st.tone, E = st.expr;
     const iP = 1 - P, iR = 1 - R, iT = 1 - T;
     const pk = [seed, m.id];
-    const tend = clampG(gauss(...pk, 'tend')) + (m.trait === 'sharp' ? 1.2 : m.trait === 'flat' ? -1.2 : 0);
+    // 頭が真っ白になると、音が上ずり、前へ走る
+    const tend = clampG(gauss(...pk, 'tend')) + (m.trait === 'sharp' ? 1.2 : m.trait === 'flat' ? -1.2 : 0) + (p.freeze ? 0.8 : 0);
     const lag = SEC_LAG[p.sec] * (1 - C) + 0.035 * Math.pow(iR, 1.2) * clampG(gauss(...pk, 'lag'))
-      + (m.trait === 'drag' ? 0.03 * iR : m.trait === 'rush' ? -0.03 * iR : 0);
+      + (m.trait === 'drag' ? 0.03 * iR : m.trait === 'rush' ? -0.03 * iR : 0) - (p.freeze ? 0.025 : 0);
     const nat = 1.5 * clampG(gauss(...pk, 'nat'));
     const loudMul = m.trait === 'loud' ? 1.2 - 0.1 * E : m.trait === 'shy' ? 0.78 + 0.12 * E : 1;
     const jf = clamp01((P - 0.65) / 0.3) * (0.4 + 0.6 * C);
@@ -257,7 +277,7 @@ function perform(ctx){
       // 裏返りやすいのは、休みのあとの出だしや大きく跳んだ音。短く切る音（後打ちなど）や同じ音の連打、順次進行は裏返りにくい
       const jump = prevMidi == null || e.b - prevEnd > 1 ? null : Math.abs(midi - prevMidi);
       const leap = jump == null ? 1.3 : jump === 0 ? 0.3 : jump <= 4 ? 0.5 : jump <= 9 ? 1 : 1.4;
-      const crackP = ck ? ck.p * iT * iT * (midi > inst.center + 5 ? 1.5 : 1) * (e.art === 'stac' ? 0.35 : 1) * leap * (d < 0.3 ? 0.6 : 1) : 0;
+      const crackP = ck ? ck.p * iT * iT * (midi > inst.center + 5 ? 1.5 : 1) * (e.art === 'stac' ? 0.35 : 1) * leap * (d < 0.3 ? 0.6 : 1) * (p.freeze ? 2.5 : 1) : 0;
       prevMidi = midi; prevEnd = e.b + e.d;
       let crack = 0;
       if(H('cr') < crackP){
@@ -308,7 +328,8 @@ function perform(ctx){
   // 楽譜の拍 ⇔ この演奏での時刻（指揮で速さを変えるときや、図を描くときに使う）
   const b2t = b => b2s(b) - off;
   const t2b = t => { let lo = from, hi = to + 8; for(let i = 0; i < 40; i++){ const mid = (lo + hi) / 2; if(b2t(mid) < t) lo = mid; else hi = mid; } return (lo + hi) / 2; };
-  return {pieceId: ctx.pieceId, venue: venue.id, from, to, bpm, notes, hits, bars, ideal: idealLine, total, b2t, t2b, meter: pc.meter,
+  const mental = players.filter(p => p.freeze || p.zone).map(p => ({mid: p.m.id, kind: p.freeze ? 'freeze' : 'zone'}));
+  return {pieceId: ctx.pieceId, venue: venue.id, from, to, bpm, notes, hits, bars, ideal: idealLine, total, b2t, t2b, meter: pc.meter, mental,
     idealDur: b2sIdeal(to) - b2sIdeal(from), realDur: b2s(to) - off, cohesion: C, fam: FAM, interp: {...ip}, rubUse, spread: SPREAD,
     bandE, bandR, players: players.length};
 }

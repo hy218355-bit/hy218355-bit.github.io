@@ -89,7 +89,7 @@ function perfCtx(s, o = {}){
 }
 function snapshot(s, extra = {}){
   return {
-    members: seated(s).map(m => ({id: m.id, name: m.name, grade: m.grade, seat: m.seat, trait: m.trait, stats: {...m.stats}})),
+    members: seated(s).map(m => ({id: m.id, name: m.name, grade: m.grade, seat: m.seat, trait: m.trait, mental: m.mental, stats: {...m.stats}})),
     cohesion: s.cohesion, fam: s.fam[extra.pieceId || s.pieceId] ?? 0, interp: {...s.interp}, fatigue: fatigueOf(s), ...extra,
   };
 }
@@ -103,7 +103,7 @@ function addRec(s, label, extra){
 }
 const recCtx = rec => ({
   members: rec.snap.members, pieceId: rec.pieceId, cohesion: rec.snap.cohesion, fam: rec.snap.fam, interp: rec.snap.interp,
-  venue: rec.venue, nerves: rec.snap.nerves || 0, fatigue: rec.snap.fatigue || 0, seed: 'band',
+  venue: rec.venue, nerves: rec.snap.nerves || 0, fatigue: rec.snap.fatigue || 0, seed: 'band', form: rec.snap.form,
 });
 
 function choosePiece(s0, pid){
@@ -150,7 +150,7 @@ function practiceWeek(s0, id){
       s.fam[s.pieceId] = clamp(s.fam[s.pieceId] + df, 0, 100);
       s.lastDelta.fam = Math.round(df * 10) / 10;
     }
-    if(m.hallExp) s.hallExp = clamp(s.hallExp + m.hallExp, 0, 100);
+    if(m.hallExp){ s.hallExp = clamp(s.hallExp + m.hallExp, 0, 100); for(const x of seated(s)) x.mental = clamp((x.mental ?? 40) + 1.5, 0, 100); }
     s.stamina -= m.cost > 0 ? m.cost * (ev.costMult || 1) : m.cost;
     s.morale += (m.morale || 0) - (id === 'rest' ? 0 : tired ? 8 : 3);
     const focusTxt = s.focus && id !== 'rest' ? `（${SEC[s.focus].name}を重点的に）` : '';
@@ -182,6 +182,9 @@ function nextWeek(s){
     if(ev.kind === 'assign') s.recruits = s.recruits || makeRecruits(s, 9);
   }
   s.episode = pickEpisode(s);
+  // 本番の週になったら、その日の部員の調子を決めておく（読み込み直しても変わらない）
+  const sev = eventAt(s, s.week);
+  s.stageDay = sev && (sev.kind === 'concert' || sev.kind === 'contest') ? {seed: Math.floor(Math.random() * 1e9), calm: []} : null;
   return s;
 }
 
@@ -211,7 +214,7 @@ const EPISODES = [
    choices: [
      {label: 'いっしょにロングトーンをする', go: (s, m) => { bump(m, 'tone', 4); bump(m, 'pitch', 2); adj(s, 'stamina', -3);
        remember(s, m, '自信をなくした日に、顧問とふたりでロングトーンをした。'); return `しばらく二人でロングトーンをした。帰りぎわ、${m.name}は「また明日も来ます」と言った。`; }},
-     {label: '同じパートの先輩に話を聞いてもらう', go: (s, m) => { const o = senpai(s, m); bump(m, 'expr', 3); adj(s, 'cohesion', 3);
+     {label: '同じパートの先輩に話を聞いてもらう', go: (s, m) => { const o = senpai(s, m); bump(m, 'expr', 3); adj(s, 'cohesion', 3); m.mental = clamp((m.mental ?? 40) + 4, 0, 100);
        remember(s, m, `自信をなくした日に、先輩の${o ? o.name : ''}が話を聞いてくれた。`); remember(s, o, `後輩の${m.name}の相談に乗った。`);
        return `${o ? o.name : '先輩'}が、自分も1年生のころは同じだったと話してくれたらしい。次の日、二人で個人練習をしていた。`; }},
      {label: '「あせらなくていい」と伝える', go: (s, m) => { adj(s, 'morale', 2);
@@ -287,7 +290,7 @@ const EPISODES = [
   {id: 'firstrun', who: s => seated(s).filter(m => m.grade === 1 && m.exp === false && avgStat(m) >= 24),
    text: (s, m) => `初心者で入ってきた${m.name}（${instOf(m)}）が、はじめて合奏で最後まで落ちずに吹ききった。`,
    choices: [
-     {label: 'みんなの前でほめる', go: (s, m) => { bump(m, 'expr', 3); adj(s, 'morale', 3);
+     {label: 'みんなの前でほめる', go: (s, m) => { bump(m, 'expr', 3); adj(s, 'morale', 3); m.mental = clamp((m.mental ?? 40) + 6, 0, 100);
        remember(s, m, 'はじめて合奏で最後まで吹ききって、みんなに拍手された。'); return `部員から自然に拍手が起きた。${m.name}は真っ赤になっていた。`; }},
      {label: 'あとでこっそり声をかける', go: (s, m) => { bump(m, weakest(m), 3);
        remember(s, m, 'はじめて合奏で最後まで吹ききった日、顧問に声をかけられた。'); return `「ほんとですか！」と、${m.name}はうれしそうに楽器を抱えた。`; }},
@@ -400,7 +403,7 @@ function beginStage(s0){
   const s = clone(s0);
   const ev = eventAt(s, s.week);
   const nerves = nervesFor(s, ev);
-  const rec = addRec(s, `${s.year} ${ev.title}`, {venue: ev.venue, nerves});
+  const rec = addRec(s, `${s.year} ${ev.title}`, {venue: ev.venue, nerves, form: stageForm(s)});
   rec.keep = ev.kind === 'contest' || !!ev.final;
   if(ev.final) rec.final = true;
   const perf = perform(recCtx(rec));
@@ -417,6 +420,7 @@ function stageResult(s, ev, rec, perf, nerves){
     const q = quality(a);
     s.pending = {kind: 'concert', recId: rec.id, q, nerves, revealed: false, ...concertOutcome(s, ev, q, perf, a)};
   }
+  s.pending.mental = perf.mental || [];
 }
 // 本番を自分で指揮したとき：その拍の進み方で演奏し直したものを採点する
 function conductStage(s0, conduct){
@@ -451,11 +455,59 @@ function concertOutcome(s, ev, q, perf, a){
   const dm = Math.round(q / 12) - 2;
   return {morale: dm, text: `よその学校の先生から講評をもらった。「${j.judges[0].comment}」`};
 }
+/* ===== 本番の調子（メンタル） =====
+   本番の日、部員ごとに調子の揺れが決まる。メンタルが弱い部員ほど揺れが大きく、ときどき頭が真っ白になる。
+   強い部員は落ち着いていて、ときどきいつも以上の音が出る。部全体にもその日の空気がある。
+   舞台袖でできることは2回まで（一人に声をかける、全員で深呼吸する）。 */
+// 部全体の空気（やる気が高いと落ち着いている。全員で深呼吸すると少し和らぐ）
+function bandForm(s){
+  if(!s.stageDay) return 0;
+  return clampG(gauss(s.stageDay.seed, 'band')) - (s.morale - 60) / 60 - (s.stageDay.huddle ? 0.7 : 0);
+}
+function stageForm(s){
+  if(!s.stageDay) return null;
+  const f = {}, zb = bandForm(s);
+  for(const m of seated(s)) f[m.id] = Math.round((0.55 * zb + 0.84 * gauss(s.stageDay.seed, m.id, 'form') - (s.stageDay.calm.includes(m.id) ? 0.7 : 0)) * 100) / 100;
+  return f;
+}
+const wingActions = s => s.stageDay ? s.stageDay.calm.length + (s.stageDay.huddle ? 1 : 0) : 0;
+// 舞台袖で、見るからに緊張している部員（メンタルが弱く、今日の揺れが大きい）
+function tenseMembers(s){
+  const f = stageForm(s);
+  if(!f) return [];
+  return seated(s).filter(m => (m.mental ?? 40) < 50 && (f[m.id] > 0.6 || s.stageDay.calm.includes(m.id)))
+    .sort((a, b) => (f[b.id] + (s.stageDay.calm.includes(b.id) ? 0.7 : 0)) - (f[a.id] + (s.stageDay.calm.includes(a.id) ? 0.7 : 0))).slice(0, 3);
+}
+function calmMember(s0, mid){
+  const s = clone(s0);
+  if(s.stageDay && wingActions(s) < 2 && !s.stageDay.calm.includes(mid)) s.stageDay.calm.push(mid);
+  return s;
+}
+function huddle(s0){
+  const s = clone(s0);
+  if(s.stageDay && wingActions(s) < 2) s.stageDay.huddle = true;
+  return s;
+}
+// 本番のあと：場数を踏んだぶんメンタルが強くなる。頭が真っ白になった部員・いつも以上だった部員は思い出に残る
+function stageAftermath(s, ev, p){
+  for(const m of seated(s)) m.mental = clamp((m.mental ?? 40) + (ev.kind === 'contest' ? 4 : 2), 0, 100);
+  for(const x of p.mental || []){
+    const m = s.members.find(y => y.id === x.mid);
+    if(!m) continue;
+    if(x.kind === 'freeze'){ m.mental = clamp(m.mental + 3, 0, 100); remember(s, m, `${ev.title}の本番で、緊張して頭が真っ白になった。`); }
+    else remember(s, m, `${ev.title}の本番で、これまでで一番の音が出た。`);
+  }
+  const names = kind => (p.mental || []).filter(x => x.kind === kind).map(x => s.members.find(y => y.id === x.mid)?.name).filter(Boolean);
+  if(names('freeze').length) addLog(s, `${names('freeze').join('、')}は、本番で緊張に飲まれてしまった。`);
+  if(names('zone').length) addLog(s, `${names('zone').join('、')}は、本番でいつも以上の音を出した。`);
+}
+
 function finishStage(s0){
   const s = clone(s0);
   const p = s.pending;
   const ev = eventAt(s, s.week);
   if(!p) return s;
+  stageAftermath(s, ev, p);
   if(p.kind === 'concert'){
     if(p.recruits) s.recruits = makeRecruits(s, p.recruits);
     if(p.morale) s.morale = clamp(s.morale + p.morale, 0, 100);
@@ -559,7 +611,7 @@ function assignRecruits(s0, map){
     if(match) happy++;
     const base = r.exp && match ? 26 : r.exp ? 14 : 6;
     const stats = makeStats(base, r.exp ? 5 : 3, 'stat', r.id);
-    s.members.push({id: r.id, name: r.name, grade: 1, seat, trait: r.trait, joined: s.year, exp: !!r.exp,
+    s.members.push({id: r.id, name: r.name, grade: 1, seat, trait: r.trait, joined: s.year, exp: !!r.exp, mental: mentalInit(r.trait, 1, 'stat', r.id) + (r.exp ? 6 : 0),
       stats, first: {y: s.year, w: s.week, stats: {...stats}}, hope: r.hope});
   }
   const n = (s.recruits || []).length;
@@ -599,6 +651,7 @@ function load(){
     if(s && s.v === 2 && Array.isArray(s.members)){
       s.fam = {...freshFam(), ...s.fam};   // あとから増えた曲
       s.startYear ??= s.history[0]?.year ?? s.year;
+      for(const m of s.members) m.mental ??= mentalInit(m.trait, m.grade, 'mig', m.id);
       return s;
     }
   }catch(e){}
