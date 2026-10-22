@@ -1,6 +1,6 @@
 'use strict';
 /* 録音サンプル音源
-   VSCO 2 Community Edition（CC0）、Weresax（CC BY 3.0）、FluidR3_GM（CC BY 3.0）の録音を使う。
+   VSCO 2 Community Edition と VCSL（どちらも CC0）、Weresax（CC BY 3.0）の録音を使う。
    音の高さのずれ・ずり上がり・ビブラート・音の裏返りは再生速度で、強弱は音量と録音の強弱段で表す。
    読み込みが終わるまでは合成音で鳴らす。 */
 
@@ -9,7 +9,8 @@ const SAMPLE_BANK = {
   picc: {bank: 'picc', g: 0.85}, fl: {bank: 'flute', g: 1.0}, ob: {bank: 'oboe', g: 1},
   fg: {bank: 'bassoon', g: 1.05}, ebcl: {bank: 'clar', g: 1.2}, cl: {bank: 'clar', g: 1.35},
   bcl: {bank: 'clar', shift: -12, lp: 10, g: 1.75},
-  asax: {bank: 'sax', g: 0.85}, tsax: {bank: 'tsax', g: 0.9}, bsax: {bank: 'bsax', g: 1.0},
+  // バリトンサックスは、テナーサックスの録音を5度下げて使う
+  asax: {bank: 'sax', g: 0.85}, tsax: {bank: 'tsax', g: 0.85}, bsax: {bank: 'tsax', shift: -7, g: 0.86},
   tp: {bank: 'tpt', g: 1}, hn: {bank: 'horn', g: 1.33}, tb: {bank: 'tbn', g: 1.1}, btb: {bank: 'tbn', g: 1.1},
   euph: {bank: 'tbn', lp: 6, g: 1.32}, tuba: {bank: 'tuba', g: 1.35}, cb: {bank: 'cbass', g: 1.3},
   cbpizz: {bank: 'pizz', g: 1.3}, timp: {bank: 'timp', g: 3.1}, sd: {bank: 'sd', g: 2.9}, bd: {bank: 'bd', g: 2.8},
@@ -85,11 +86,15 @@ function pickSample(bank, midi, v, opts = {}){
   return ok[Math.min(r, ok.length - 1)][1];
 }
 
-// 録音を時間 [t0, t1] だけ鳴らす。録音より長ければ、後半をなめらかにつないでくり返す
+// 録音を時間 [t0, t1] だけ鳴らす。録音より長ければ、目録のループ（lp）をなめらかにつないでくり返す。
+// ループの始まりと終わりは、波形がそろう所を書き出し時に選んである（build_samples.py の find_loop）。
+// 重ねる長さ XF は録音の上の長さなので、再生速度 rate で割った時間だけ重ねると、波の山と谷がずれない。
+// 波形がそろわない録音（lc が小さい）は、音量がへこまないように等パワーで重ねる
+const LOOP_XF = 0.2;
+const EQ_POW = (() => { const n = 33, a = new Float32Array(n), b = new Float32Array(n); for(let i = 0; i < n; i++){ const p = i / (n - 1); a[i] = Math.sin(p * Math.PI / 2); b[i] = Math.cos(p * Math.PI / 2); } return {up: a, down: b}; })();
 function playSegments(ac, dest, bank, smp, t0, t1, rate, firstOffset, srcs, onSrc){
-  const XF = 0.15;
-  const usableEnd = smp.start + (smp.lp ? smp.lp[1] : smp.d);
-  const loopA = smp.start + (smp.lp ? smp.lp[0] : smp.d * 0.4), loopB = usableEnd;
+  const xf = LOOP_XF / rate, coherent = (smp.lc ?? 0) >= 0.7;
+  const loopA = smp.start + (smp.lp ? smp.lp[0] : smp.d * 0.4), loopB = smp.start + (smp.lp ? smp.lp[1] : smp.d);
   let off = smp.start + (firstOffset || 0);
   let t = t0, first = true;
   while(t < t1 && srcs.length < 400){
@@ -98,16 +103,20 @@ function playSegments(ac, dest, bank, smp, t0, t1, rate, firstOffset, srcs, onSr
     const src = ac.createBufferSource(); src.buffer = bank.buf;
     const g = ac.createGain();
     src.connect(g); g.connect(dest);
-    if(first){ g.gain.value = 1; }
-    else { g.gain.setValueAtTime(0, t); g.gain.linearRampToValueAtTime(1, t + XF); }
     const more = segEnd < t1;
-    if(more){ g.gain.setValueAtTime(1, segEnd - XF); g.gain.linearRampToValueAtTime(0, segEnd); }
+    if(first) g.gain.value = 1;
+    else if(coherent){ g.gain.setValueAtTime(0, t); g.gain.linearRampToValueAtTime(1, t + xf); }
+    else g.gain.setValueCurveAtTime(EQ_POW.up, t, xf);
+    if(more){
+      if(coherent){ g.gain.setValueAtTime(1, segEnd - xf); g.gain.linearRampToValueAtTime(0, segEnd); }
+      else g.gain.setValueCurveAtTime(EQ_POW.down, segEnd - xf, xf);
+    }
     src.start(t, off);
     src.stop(more ? segEnd + 0.01 : t1 + 0.05);
     srcs.push(src);
     if(onSrc) onSrc(src, t, segEnd);
     if(!more) break;
-    t = segEnd - XF; off = loopA; first = false;
+    t = segEnd - xf; off = loopA; first = false;
   }
 }
 

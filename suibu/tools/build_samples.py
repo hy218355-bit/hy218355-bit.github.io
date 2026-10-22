@@ -4,11 +4,14 @@ sys.path.insert(0, os.path.dirname(__file__))
 from sample_lib import *
 from fill_gaps import fill, measured_pitch
 V = '/home/user/sgossner/vsco-2-ce/'
+VC = '/home/user/sgossner/VCSL/'      # Versilian Community Sample Library（CC0）。音名は C3 が真ん中のド
 T = '/home/user/nbrosowsky/tonejs-instruments/samples/'
-F = '/home/user/gleitz/midi-js-soundfonts/FluidR3_GM/'
 OUT = '/home/user/hy218355-bit.github.io/suibu/snd/'
 os.makedirs(OUT, exist_ok=True)
 GAP = 0.12
+BITRATE = '128k'
+# ループのつなぎ目で重ねる長さ（秒）。再生側の samples.js の XF と同じにする
+XF = 0.2
 # 引数で楽器名を渡すと、その楽器だけ作り直して目録を更新する
 ONLY = set(sys.argv[1:])
 want = lambda bank: not ONLY or bank in ONLY
@@ -20,16 +23,18 @@ WINDS = {
   'bassoon': (V + 'Woodwinds/Bassoon/sus', 12, (30, 70)),
   'clar':    (V + 'Woodwinds/Clarinet/susLong', 12, (48, 94)),
   'sax':     (T + 'saxophone', 0, (45, 84)),
+  'tsax':    (VC + 'Aerophones/Reed Aerophones/Tenor Saxophone/Non-Vibrato', 12, (43, 80)),
   'horn':    (V + 'Brass/F Horn/sus', 12, (44, 78)),
   'tpt':     (V + 'Brass/Trumpet/sus', 12, (55, 87)),
   'tbn':     (V + 'Brass/Tenor Trombone/sus', 12, (30, 70)),
   'tuba':    (V + 'Brass/Tuba/sus', 12, (27, 56)),
   'cbass':   (V + 'Strings/Solo Contrabass/SusNV', 12, (27, 56)),
 }
-KEEP_WIND = 3.0
+KEEP_WIND = 4.5
 # 録音の高さで、どこまで使うか（その録音を使う楽器の音域。SAMPLE_BANK の shift を戻した高さ）
 NEED = {'picc': (74, 108), 'flute': (60, 96), 'oboe': (58, 91), 'bassoon': (34, 75), 'clar': (46, 93),
-        'sax': (49, 81), 'horn': (35, 77), 'tpt': (54, 84), 'tbn': (28, 72), 'tuba': (26, 58), 'cbass': (28, 60)}
+        'sax': (49, 81), 'horn': (35, 77), 'tpt': (54, 84), 'tbn': (28, 72), 'tuba': (26, 58), 'cbass': (28, 60),
+        'tsax': (43, 77)}   # テナーの録音は、5度下げてバリトンサックスにも使う（SAMPLE_BANK の shift）
 
 def fine_midi(x, nominal):
     # 録音の本当の高さを Praat で測る。ファイル名の音名と1音ずれている録音（例：クラリネットの最高音）も直す
@@ -54,6 +59,53 @@ def rms_norm(x, a=0.25, b=1.2, target=0.1):
     r = np.sqrt(np.mean(seg ** 2)) + 1e-9
     return x * (target / r)
 
+def find_loop(x):
+    """長い音をくり返すときのつなぎ目を探す。ループの終わりの直前 XF 秒と、ループの始まりからの XF 秒の波形が
+    いちばん似ている組を、相互相関で選ぶ（波の山と谷がそろうので、重ねても打ち消し合わず、音量もへこまない）。
+    始まりも終わりも、音が安定している区間（いちばん大きい所から 3dB 以内が続く所）の中から選ぶ。
+    録音の後ろが消えかけている短い録音でも、ループに無音の所が入らないようにするため。
+    返り値：[始まり, 終わり]（秒、録音の頭から）と、そのときの相関（1に近いほどなめらか）"""
+    from scipy.signal import fftconvolve
+    n = int(XF * SR); L = len(x)
+    hop = int(0.1 * SR)
+    env = np.array([np.sqrt(np.mean(x[i:i + hop] ** 2)) for i in range(0, L - hop, hop)])
+    first = int(0.3 / 0.1)                         # 出だし（アタック）は使わない
+    ref_lv = np.percentile(env[first:], 80) if len(env) > first else env.max()
+    steady = env > ref_lv * 0.6                    # ビブラートなどの自然な揺れは許す（4.5dB まで）
+    # 出だしのあとで、安定した区間がいちばん長く続く所（0.1秒だけのへこみは続いているとみなす）
+    runs, i = [], first
+    while i < len(steady):
+        if steady[i]:
+            j = i
+            while j < len(steady) and (steady[j] or (j + 1 < len(steady) and steady[j + 1])): j += 1
+            runs.append((i, j)); i = j
+        else: i += 1
+    s0, s1 = max(runs, key=lambda r: r[1] - r[0]) if runs else (first, len(env))
+    s0, s1 = s0 * hop, min(L - int(0.05 * SR), s1 * hop)
+    a_lo = max(s0, min(int(0.8 * SR), s0 + int(0.3 * SR)))
+    a_hi = min(a_lo + int(0.8 * SR), s1 - 2 * n - int(0.5 * SR))
+    if a_hi <= a_lo:
+        # 安定した区間が短い：その区間の中だけで、できるだけ長くつなぐ
+        a_lo = s0; a_hi = max(s0 + 1, min(s0 + int(0.3 * SR), s1 - 2 * n - int(0.2 * SR)))
+    seg = x[a_lo:a_hi + n].astype(np.float64)
+    e = np.concatenate([[0], np.cumsum(seg ** 2)])
+    win = np.sqrt(e[n:] - e[:-n]) + 1e-9          # seg[a:a+n] の大きさ
+    best = None
+    for b in range(s1, a_hi + n + max(n, int(0.2 * SR)), -int(0.006 * SR)):
+        ref = x[b - n:b].astype(np.float64)
+        rn = np.linalg.norm(ref) + 1e-9
+        c = fftconvolve(seg, ref[::-1], mode='valid') / (win[:len(seg) - n + 1] * rn)
+        lv = np.abs(20 * np.log10(win[:len(c)] / rn))
+        # 似ていること、音量が同じこと、ループが長いこと（短いとくり返しが聞こえる。2.5秒まで）を見る
+        score = c - 0.12 * lv + 0.1 * np.minimum(2.5, (b - a_lo - np.arange(len(c))) / SR)
+        k = int(np.argmax(score))
+        if best is None or score[k] > best[0]: best = (float(score[k]), a_lo + k, b)
+    if best is None: best = (0, a_lo, s1)
+    _, a, b = best
+    u, w = x[b - n:b], x[a:a + n]
+    c = float(np.dot(u, w) / (np.linalg.norm(u) * np.linalg.norm(w) + 1e-9))
+    return [round(a / SR, 4), round(b / SR, 4)], round(c, 3)
+
 def peak_norm(x, target=0.7):
     return x * (target / (np.max(np.abs(x)) + 1e-9))
 
@@ -72,7 +124,7 @@ def pack(name, items):
     y = np.concatenate(buf)
     y = np.clip(y, -0.98, 0.98)
     p = subprocess.run(['ffmpeg', '-v', 'error', '-y', '-f', 'f32le', '-ar', str(SR), '-ac', '1', '-i', '-',
-                        '-ar', '44100', '-codec:a', 'libmp3lame', '-b:a', '96k', OUT + name + '.mp3'], input=y.tobytes())
+                        '-ar', '44100', '-codec:a', 'libmp3lame', '-b:a', BITRATE, OUT + name + '.mp3'], input=y.tobytes())
     assert p.returncode == 0
     return meta
 
@@ -98,8 +150,9 @@ for bank, (d, shift, (lo, hi)) in WINDS.items():
             # 長い音は、ここをなめらかにつないでくり返す
             items.append({'x': x, 'm': round(fm, 2), 'l': li if len(pick) > 1 else -1, 'lp': [1.0, round(len(x) / SR - 0.12, 3)]})
     items = fill(items, *NEED[bank], log=print)
+    for it in items: it['lp'], it['lc'] = find_loop(it['x'])
     manifest[bank] = {'kind': 'sus', 'samples': pack(bank, items)}
-    print(bank, len(items), 'samples', sorted(by))
+    print(bank, len(items), 'samples', sorted(by), 'loop corr median', np.median([it['lc'] for it in items]))
 
 # 短い音（スタッカート）：テイク違い2つと強弱2段
 STACS = {
@@ -112,6 +165,7 @@ STACS = {
   'tbn_st':     (V + 'Brass/Tenor Trombone/stac', 12, (30, 70)),
   'tuba_st':    (V + 'Brass/Tuba/stac', 12, (27, 56)),
   'cbass_st':   (V + 'Strings/Solo Contrabass/Spic', 12, (27, 56)),
+  'tsax_st':    (VC + 'Aerophones/Reed Aerophones/Tenor Saxophone/Staccato', 12, (43, 80)),
 }
 for bank, (d, shift, (lo, hi)) in STACS.items():
     if not want(bank): continue
@@ -121,14 +175,15 @@ for bank, (d, shift, (lo, hi)) in STACS.items():
         nn = name_note(f)
         if not nn: continue
         midi = 12 * (nn[1] + 1) + nn[0] + shift
-        if midi < lo or midi > hi or rr(f) > 2: continue
-        by.setdefault(midi, {}).setdefault(layer(f), {})[rr(f)] = f
+        if midi < lo or midi > hi: continue
+        by.setdefault(midi, {}).setdefault(layer(f), []).append(f)
     items = []
     for midi in sorted(by):
         lays = sorted(by[midi])
         pick = [lays[0]] if len(lays) == 1 else [lays[0], lays[-1]]
         for li, lv in enumerate(pick):
-            for r, f in sorted(by[midi][lv].items()):
+            # テイク違いは2つまで（番号の小さい順）
+            for r, f in enumerate(sorted(by[midi][lv], key=rr)[:2], 1):
                 x = load(d + '/' + f)
                 x = rms_norm(prep(x, 0.9, fade=0.12), a=0.0, b=0.2)
                 fm = fine_midi(x[:int(0.6 * SR)], midi)
@@ -136,24 +191,6 @@ for bank, (d, shift, (lo, hi)) in STACS.items():
     items = fill(items, *NEED[bank[:-3]], log=print)
     manifest[bank] = {'kind': 'stac', 'samples': pack(bank, items)}
     print(bank, len(items), 'samples', sorted(by))
-
-# FluidR3_GM（CC BY 3.0）：VSCOにないテナー・バリトンサックスとヴィブラフォン。
-# 半音ごとの録音から短3度おきに選ぶ（ファイル名は実音・♭表記）
-FL_PC = {'C': 0, 'Db': 1, 'D': 2, 'Eb': 3, 'E': 4, 'F': 5, 'Gb': 6, 'G': 7, 'Ab': 8, 'A': 9, 'Bb': 10, 'B': 11}
-def fl_name(midi):
-    pc = [k for k, v in FL_PC.items() if v == midi % 12][0]
-    return pc + str(midi // 12 - 1)
-FLUID = {'tsax': ('tenor_sax', (41, 80)), 'bsax': ('baritone_sax', (33, 72))}
-for bank, (d, (lo, hi)) in FLUID.items():
-    if not want(bank): continue
-    items = []
-    for midi in range(lo, hi + 1, 3):
-        x = load(F + d + '-mp3/' + fl_name(midi) + '.mp3')
-        fm = fine_midi(x[onset(x):], midi)
-        x = rms_norm(prep(x, KEEP_WIND))
-        items.append({'x': x, 'm': round(fm, 2), 'l': -1, 'lp': [1.0, round(len(x) / SR - 0.12, 3)]})
-    manifest[bank] = {'kind': 'sus', 'samples': pack(bank, items)}
-    print(bank, len(items), 'samples', [i['m'] for i in manifest[bank]['samples']])
 
 def hits(bank, specs, keep, pitched=False, norm='peak'):
     if not want(bank): return
@@ -209,7 +246,8 @@ nm = lambda f, sh: 12 * (name_note(f)[1] + 1) + name_note(f)[0] + sh
 hits('glock', [(P + 'Glock/' + f, {'m': nm(f, 12)}) for f in sorted(os.listdir(P + 'Glock'))], 2.5)
 hits('xylo', [(P + 'Xylo/' + f, {'m': nm(f, 12)}) for f in sorted(os.listdir(P + 'Xylo'))], 1.0)
 hits('mrb', [(P + 'Marimba/' + f, {'m': nm(f, 12)}) for f in sorted(os.listdir(P + 'Marimba'))], 1.6)
-hits('vib', [(F + 'vibraphone-mp3/' + fl_name(m) + '.mp3', {'m': m}) for m in range(53, 90, 3)], 3.0)
+VB = VC + 'Idiophones/Struck Idiophones/Vibraphone/Soft Mallets/'
+hits('vib', [(VB + f, {'m': nm(f, 12), 'l': layer(f) - 1}) for f in sorted(os.listdir(VB)) if f.endswith('.wav')], 3.0)
 hits('chime', [(P + f, {'m': nm(f, 0)}) for f in sorted(os.listdir(P)) if f.startswith('TB_hit')], 4.5)
 
 json.dump(manifest, open(OUT + 'manifest.json', 'w'), ensure_ascii=False, separators=(',', ':'))

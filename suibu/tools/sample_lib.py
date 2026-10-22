@@ -10,7 +10,7 @@ def name_note(fname):
     if not m: return None
     return PCS[m.group(1)], int(m.group(2))
 def layer(fname):
-    m = re.search(r'_v(\d)', fname); return int(m.group(1)) if m else 1
+    m = re.search(r'_vl?(\d)', fname); return int(m.group(1)) if m else 1
 def rr(fname):
     m = re.search(r'rr(\d)', fname)
     if m: return int(m.group(1))
