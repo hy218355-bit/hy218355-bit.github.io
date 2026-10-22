@@ -184,7 +184,7 @@ function perform(ctx){
   for(let i = 1; i * STEP <= pc.beats + 8; i++){
     const b = (i - 0.5) * STEP;
     const r = interp(pc.rubato, b) - 1;
-    const tm = sectionAt(pc.tmap, b, 1);   // 序奏だけゆっくり、のような楽譜上のテンポの切り替え
+    const tm = tmAt(pc, b);   // 楽譜の上のテンポの変化（序奏だけゆっくり、だんだん速く、など）
     let m = 1 + rubUse * r;
     m *= 1 - 0.09 * iRb * (1 - 0.6 * C) * Math.min(b, pc.beats) / pc.beats;
     m *= 1 + 0.06 * Math.pow(iRb, 1.2) * (1 - 0.5 * C) * venue.play.timing * clampG(wob[Math.floor(b)] ??= gauss(seed, 'tempo', Math.floor(b)));
@@ -379,13 +379,13 @@ function analyze(perf){
       sec[x.sec].rw += x.weight; sec[x.sec].re += x.weight * dv;
     }
   }
-  // 旋律と伴奏のバランス（0.5秒ごと）
+  // 旋律と伴奏のバランス（0.5秒ごと。短い刻みも拾えるよう、1/8秒ずつ見て足し合わせる）
   const bins = {};
   for(const n of perf.notes){
     const isMel = n.role === 'mel' || n.solo;
-    for(let t = Math.ceil(n.t * 2) / 2; t < n.t + n.d; t += 0.5){
+    for(let t = Math.ceil(n.t * 8) / 8; t < n.t + n.d; t += 0.125){
       const v = interp(n.env, t - n.t);
-      const b = bins[t] ||= {mel: 0, acc: 0};
+      const b = bins[Math.floor(t * 2) / 2] ||= {mel: 0, acc: 0};
       const pw = Math.pow(lv(n.inst, v), 2);
       if(isMel) b.mel += pw; else b.acc += pw;
     }
@@ -393,7 +393,8 @@ function analyze(perf){
   let bSum = 0, bN = 0;
   for(const b of Object.values(bins)){
     if(b.mel <= 0) continue;
-    bSum += 10 * Math.log10(b.mel / Math.max(1e-9, b.acc)) + 3;
+    // 伴奏がほとんど鳴っていない所（全員のユニゾンや、旋律と低音だけの所）は、差が開きすぎないよう頭打ちにする
+    bSum += Math.min(15, 10 * Math.log10(b.mel / Math.max(1e-9, b.acc)) + 3);
     bN++;
   }
   const balanceDb = bN ? bSum / bN : 0;
@@ -495,12 +496,13 @@ function interpNotes(perf){
   if(pc.id === 'largo' && ip.tempo === 0 && perf.bandE < 0.6){ adj -= 3; out.push('遅いテンポを支えきれず、音楽が停滞しました。'); }
   if(pc.id === 'ode' && ip.tempo === 2 && perf.bandR < 0.7){ adj -= 4; out.push('速いテンポに合奏がついていけず、崩れかけていました。'); }
   if(pc.id === 'ode' && ip.tempo === 0){ adj -= 2; out.push('テンポがやや重く感じます。'); }
-  if(pc.id === 'march' && ip.tempo === 0){ adj -= 2; out.push('マーチとしては足取りが重く感じます。'); }
-  if(pc.id === 'march' && ip.tempo === 2 && perf.bandR < 0.72){ adj -= 4; out.push('速いテンポで縦の線が崩れ、行進のリズムが落ち着きません。'); }
-  if(pc.id === 'march' && ip.rub === 2){ adj -= 3; out.push('マーチでテンポを揺らしすぎて、行進の足取りが乱れました。'); }
-  if(pc.id === 'wa' && ip.tempo === 2 && perf.bandR < 0.72){ adj -= 4; out.push('祭りのテンポが速すぎて、打楽器と管楽器がかみ合っていません。'); }
-  if(pc.id === 'wa' && ip.tempo === 0){ adj -= 2; out.push('祭りの部分に、もう少し躍動感がほしいところです。'); }
-  if(pc.id === 'wa' && ip.rub === 0){ adj -= 2; out.push('序奏はもっと自由に、間（ま）を生かして歌ってほしいところです。'); }
+  if(pc.id === 'stars' && ip.tempo === 0){ adj -= 2; out.push('マーチとしては足取りが重く感じます。'); }
+  if(pc.id === 'stars' && ip.tempo === 2 && perf.bandR < 0.72){ adj -= 4; out.push('速いテンポで縦の線が崩れ、行進のリズムが落ち着きません。'); }
+  if(pc.id === 'stars' && ip.rub === 2){ adj -= 3; out.push('マーチでテンポを揺らしすぎて、行進の足取りが乱れました。'); }
+  if(pc.id === 'jupiter' && ip.tempo === 2){ adj -= 3; out.push('急ぎ足に聞こえ、この旋律の雄大さが出ていません。'); }
+  if(pc.id === 'jupiter' && ip.rub === 0){ adj -= 2; out.push('フレーズの終わりで、もう少し息をたっぷり使ってほしいところです。'); }
+  if(pc.id === 'mountain' && ip.tempo === 2 && perf.bandR < 0.74){ adj -= 4; out.push('最後の追い込みでテンポが上がりきり、縦の線がばらばらになりました。'); }
+  if(pc.id === 'mountain' && ip.tempo === 0){ adj -= 2; out.push('後半の加速に、もう少し迫力がほしいところです。'); }
   if(ip.dyn === 2 && perf.bandE < 0.6){ adj -= 4; out.push('強弱をつけようとする意図はわかりますが、大げさに聞こえます。'); }
   if(ip.dyn === 2 && perf.bandE >= 0.75){ adj += 2; }
   if(ip.dyn === 0){ adj -= 2; out.push('強弱の幅が控えめで、もう一歩踏み込んでほしいところです。'); }

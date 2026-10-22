@@ -30,6 +30,7 @@ function openConduct(stage = null){
   const pc = PIECES[CD.perf.pieceId];
   $('#cdTitle').textContent = stage ? `${stage.ev.title}：${pc.title}` : `${pc.title}（${VENUE[U.venue].name}）`;
   $('#cdRef').textContent = bpmAt(pc, CD.perf.interp.tempo ?? 1, CD.perf.from);
+  for(const el of document.querySelectorAll('#conduct .cd-beat')) el.textContent = beatName(pc);
   $('#cdTempo').textContent = '--';
   $('#cdResult').hidden = true; $('#cdPad').hidden = false;
   const n = cdCountN();
@@ -152,14 +153,15 @@ function cdFrame(){
   const t2 = $('#cdTip');
   t2.setAttribute('cx', (x0 + (x1 - x0) * s).toFixed(1));
   t2.setAttribute('cy', (y0 + (y1 - y0) * s - 26 * Math.sin(Math.PI * s)).toFixed(1));
-  // 楽譜の上でテンポが変わる所（序奏から祭りへ、など）の少し前に知らせる
+  // 楽譜の上でテンポが変わる曲（だんだん速くなる、など）は、指定のテンポを表示しなおし、変わり始める少し前に知らせる
   const pc = PIECES[CD.perf.pieceId];
-  if(pc.tmap){
-    const now = b + CD.perf.from;
-    const next = pc.tmap.find(([at]) => at > now + 1e-6 && at - now <= 4);
-    if(next && CD.tmHint !== next[0]){
-      CD.tmHint = next[0];
-      cdMsg(`もうすぐテンポが変わる：♩=${bpmAt(pc, CD.perf.interp.tempo ?? 1, next[0])}。合図に合わせて振る速さを変えよう。`);
+  if(pc.tmap || pc.tcurve){
+    const now = b + CD.perf.from, ti = CD.perf.interp.tempo ?? 1;
+    const ref = bpmAt(pc, ti, now), ahead = bpmAt(pc, ti, now + 4);
+    if(String(ref) !== $('#cdRef').textContent) $('#cdRef').textContent = ref;
+    if(!CD.tmHint && Math.abs(ahead - ref) >= 2){
+      CD.tmHint = true;
+      cdMsg(`ここからテンポがだんだん${ahead > ref ? '速く' : '遅く'}なる。部員の音を聴きながら、振る速さを${ahead > ref ? '上げて' : '落として'}いこう。`);
     }
   }
   if(E.ac.currentTime - (CD.clock.last?.t ?? CD.clock.t0) > 4 * CD.clock.P && !CD.idleHint){
@@ -187,7 +189,7 @@ function cdFinish(natural){
   const c = CD.clock, taps = c.taps, pc = PIECES[CD.perf.pieceId];
   // 拍の間隔（楽譜の上でテンポが変わる曲は、その分をならして比べる）
   const iv = [];
-  for(let i = 1; i < taps.length; i++) if(taps[i].k - taps[i - 1].k === 1) iv.push((taps[i].t - taps[i - 1].t) / sectionAt(pc.tmap, taps[i - 1].k, 1));
+  for(let i = 1; i < taps.length; i++) if(taps[i].k - taps[i - 1].k === 1) iv.push((taps[i].t - taps[i - 1].t) / tmAt(pc, taps[i - 1].k));
   const mean = iv.length ? iv.reduce((a, b) => a + b, 0) / iv.length : c.P;
   const sd = iv.length > 2 ? Math.sqrt(iv.reduce((a, b) => a + (b - mean) ** 2, 0) / iv.length) : 0;
   const bpm = Math.round(60 / mean), ref = CD.perf.bpm;
@@ -210,7 +212,7 @@ function cdFinish(natural){
     $('#cdPad').hidden = true; cdMsg('');
     $('#cdResult').hidden = false;
     $('#cdResult').innerHTML = `<h3>演奏おわり</h3>
-      <p class="cd-num"><span>平均テンポ<b>♩=${bpm}</b></span><span>安定度<b>${followed ? stab + '%' : '—'}</b></span></p>
+      <p class="cd-num"><span>平均テンポ<b>${beatName(pc)}=${bpm}</b></span><span>安定度<b>${followed ? stab + '%' : '—'}</b></span></p>
       ${judgeRow}
       <p>${speed}。${comment}</p>
       <div class="transport"><button class="btn primary" type="button" data-cd="reveal">結果を見る</button></div>`;
@@ -227,7 +229,7 @@ function cdFinish(natural){
   cdMsg('');
   $('#cdResult').hidden = false;
   $('#cdResult').innerHTML = `<h3>演奏おわり</h3>
-    <p class="cd-num"><span>平均テンポ<b>♩=${bpm}</b></span><span>安定度<b>${followed ? stab + '%' : '—'}</b></span></p>
+    <p class="cd-num"><span>平均テンポ<b>${beatName(pc)}=${bpm}</b></span><span>安定度<b>${followed ? stab + '%' : '—'}</b></span></p>
     ${judgeRow}
     <p>${speed}。${comment}</p>
     <p class="small">この演奏は「録音」に残った。会場の響きつきで保存して、何度でも聴き返せる。</p>

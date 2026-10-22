@@ -119,7 +119,7 @@ button,select{font:inherit;color:inherit}
 .seg button[aria-pressed="true"]{background:var(--ink);color:var(--sheet);font-weight:700}
 .seg button:disabled{opacity:.4;cursor:default}
 .venues{display:grid;gap:6px}
-.venues .seg{border-radius:12px}
+.venues .seg,#pieceSel{border-radius:12px}
 .venue-desc{font-size:13px;color:var(--ink-soft);line-height:1.6}
 .venue-desc b{color:var(--ink);font-weight:700}
 .stage-wrap{width:100%;min-width:0;border-radius:8px;overflow:hidden}
@@ -533,7 +533,7 @@ tr.empty td{color:var(--ink-soft)}
     <div class="hist" id="hist"></div>
   </section>
 
-  <p class="foot" data-tab="lab">曲は、パブリックドメインのドヴォルザーク《新世界より》（1893年）とベートーヴェン《第九》（1824年）、そしてこのゲームのために書き下ろしたコンサートマーチ「ひかりの通学路」と吹奏楽のための「月と祭」です。編曲はこのページの中で楽譜データから組み立てています。楽器の音は、Versilian Studios「VSCO 2 Community Edition」（CC0）の録音、Karoryfer「Weresax」のアルトサックスの録音（tonejs-instruments 経由、CC BY 3.0）、Frank Wen「FluidR3_GM」のテナー・バリトンサックスとヴィブラフォン（midi-js-soundfonts 経由、CC BY 3.0）を使っています。E♭クラリネット・バスクラリネットはクラリネット、ユーフォニアム・バストロンボーンはトロンボーンの録音を、高さと明るさを変えて使っています。「合成」を選んだときの音と客席の拍手は、その場で合成しています。和の打楽器は代用で、締太鼓は響き線を外したスネア、拍子木はクラベス、鈴はスレイベルの録音です。会場の響きは、部屋の寸法と壁・床・客席の材質から pyroomacoustics で計算したものです。文字は Zen Kaku Gothic New・Klee One・Dela Gothic One・Share Tech Mono（SIL Open Font License）です。</p>
+  <p class="foot" data-tab="lab">曲は、パブリックドメインのドヴォルザーク《新世界より》（1893年）、ベートーヴェン《第九》（1824年）、スーザ「星条旗よ永遠なれ」（1896年）、ホルスト《惑星》より「木星」（1918年初演）、グリーグ「山の魔王の宮殿にて」（1876年初演）です。旋律・和音・低音は Mutopia Project のパブリックドメインの楽譜で確かめ、編曲はこのページの中で楽譜データから組み立てています。楽器の音は、Versilian Studios「VSCO 2 Community Edition」（CC0）の録音、Karoryfer「Weresax」のアルトサックスの録音（tonejs-instruments 経由、CC BY 3.0）、Frank Wen「FluidR3_GM」のテナー・バリトンサックスとヴィブラフォン（midi-js-soundfonts 経由、CC BY 3.0）を使っています。E♭クラリネット・バスクラリネットはクラリネット、ユーフォニアム・バストロンボーンはトロンボーンの録音を、高さと明るさを変えて使っています。「合成」を選んだときの音と客席の拍手は、その場で合成しています。会場の響きは、部屋の寸法と壁・床・客席の材質から pyroomacoustics で計算したものです。文字は Zen Kaku Gothic New・Klee One・Dela Gothic One・Share Tech Mono（SIL Open Font License）です。</p>
 </div>
 
 <!-- 指揮：拍に合わせてタップ。上ほど大きく、下ほど小さく -->
@@ -548,7 +548,7 @@ tr.empty td{color:var(--ink-soft)}
     <span class="cd-hint top">大きく</span><span class="cd-hint bot">小さく</span>
   </div>
   <div class="cd-result" id="cdResult" hidden></div>
-  <p class="cd-stats"><span>いまのテンポ ♩=<b id="cdTempo">--</b></span><span>指定 ♩=<b id="cdRef"></b></span><span class="combo" id="cdCombo" aria-live="off"></span></p>
+  <p class="cd-stats"><span>いまのテンポ <span class="cd-beat">♩</span>=<b id="cdTempo">--</b></span><span>指定 <span class="cd-beat">♩</span>=<b id="cdRef"></b></span><span class="combo" id="cdCombo" aria-live="off"></span></p>
 </section>
 <section class="conduct tunegame" id="tuneGame" hidden aria-labelledby="tgTitle">
   <div class="cd-top">

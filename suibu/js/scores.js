@@ -1,6 +1,6 @@
 'use strict';
 /* 曲と編曲
-   どちらもハ長調で書き、trans で原調へ移す。
+   ハ長調で書いて trans で原調へ移すか、実音のまま書く（trans 0）。
    旋律・和音・低音だけを手で書き、内声（ホルンやクラリネットの和音）は和音進行から自動で配置する。 */
 
 const PC = {C: 0, D: 2, E: 4, F: 5, G: 7, A: 9, B: 11};
@@ -38,6 +38,8 @@ const CHORD_Q = {
   '5':    {q: 'pow',  iv: [0, 7]},
   'sus4': {q: 'sus4', iv: [0, 5, 7]},
   'sus2': {q: 'sus2', iv: [0, 2, 7]},
+  '+':    {q: 'aug',  iv: [0, 4, 8]},
+  'o7':   {q: 'dim7', iv: [0, 3, 6, 9]},
 };
 function chords(src, from = 0){
   const out = [];
@@ -46,7 +48,7 @@ function chords(src, from = 0){
     if(!tok || tok === '|') continue;
     const [nm, dd] = tok.split(':');
     const d = dd ? +dd : 4;
-    const m = /^([A-G])(#|b)?(m7|m|7|5|sus4|sus2)?(?:\/[A-G])?$/.exec(nm);
+    const m = /^([A-G])(#|b)?(m7|m|7|5|sus4|sus2|\+|o7)?(?:\/[A-G])?$/.exec(nm);
     if(!m) throw new Error('和音が読めません: ' + nm);
     const root = (PC[m[1]] + (m[2] === '#' ? 1 : m[2] === 'b' ? -1 : 0) + 12) % 12;
     const cq = CHORD_Q[m[3] || ''];
@@ -66,13 +68,15 @@ const JI = {
   pow:  {0: 0, 7: 2},
   sus4: {0: 0, 5: -2, 7: 2},
   sus2: {0: 0, 2: 3.9, 7: 2},
+  aug:  {0: 0, 4: -13.7, 8: -27.4},
+  dim7: {0: 0, 3: 15.6, 6: -9.8, 9: -15.6},
 };
-const HAS_THIRD = {maj: 4, min: 3, dom7: 4, min7: 3};
+const HAS_THIRD = {maj: 4, min: 3, dom7: 4, min7: 3, aug: 4, dim7: 3};
 
 /* ===== 自由曲1：ドヴォルザーク《新世界より》第2楽章 Largo ===== */
-const LARGO_MEL = 'E5:1.5 G5:.5 G5:2 | E5:1.5 D5:.5 C5:2 | D5:1.5 E5:.5 G5:1.5 E5:.5 | D5:3 r:1 | E5:1.5 G5:.5 G5:2 | E5:1.5 D5:.5 C5:2 | D5:1.5 E5:.5 D5:1.5 C5:.5 | C5:4';
-const LARGO_CH = 'C:4 | Am:4 | Dm/F:2 G:4 G7:2 | C:4 | Am:2 F:2 | Dm7:2 G7:2 | C:4';
-const LARGO_BASS = 'C3:4 | A2:4 | F2:2 G2:6 | C3:4 | A2:2 F2:2 | D2:2 G2:2 | C2:4';
+const LARGO_MEL = 'E5:1.5 G5:.5 G5:2 | E5:1.5 D5:.5 C5:2 | D5:1.5 E5:.5 G5:1.5 E5:.5 | D5:3 r:1 | E5:1.5 G5:.5 G5:2 | E5:1.5 D5:.5 C5:2 | D5:1 E5:1 D5:1.5 C5:.5 | C5:4';
+const LARGO_CH = 'C:4 | C:4 | G7:8 | C:4 | C:4 | F:2 G7:2 | C:4';
+const LARGO_BASS = 'C3:4 | C3:4 | G2:8 | C3:4 | C3:4 | F2:2 G2:2 | C2:4';
 
 /* ===== 自由曲2：ベートーヴェン《第九》第4楽章より「歓喜の歌」 ===== */
 const ODE_MEL = 'E4 E4 F4 G4 | G4 F4 E4 D4 | C4 C4 D4 E4 | E4:1.5 D4:.5 D4:2 | E4 E4 F4 G4 | G4 F4 E4 D4 | C4 C4 D4 E4 | D4:1.5 C4:.5 C4:2 | D4 D4 E4 C4 | D4 E4:.5 F4:.5 E4 C4 | D4 E4:.5 F4:.5 E4 D4 | C4 D4 G3:2 | E4 E4 F4 G4 | G4 F4 E4 D4 | C4 C4 D4 E4 | D4:1.5 C4:.5 C4:2 | C4:4';
@@ -82,49 +86,79 @@ const ODE_BASS = 'C3:2 C3:2 | G2:2 C3:2 | A2:2 C3:2 | C3:2 G2:2 | C3:2 C3:2 | G2
 // 打楽器の譜を書くための道具：each で同じ型をくり返し、hitsAt で [拍, 強さ] の並びを打つ音にする
 const each = (from, to, step, fn) => { const out = []; for(let b = from, k = 0; b < to - 1e-6; b += step, k++) out.push(...fn(b, k)); return out; };
 const hitsAt = (i, list, b0 = 0) => list.map(([o, v]) => ({i, b: b0 + o, v}));
+// ティンパニは、その拍で鳴っている低音（休みならその前の音）を lo からの1オクターブに移して打つ
+const timpOn = (bass, list, lo = 41) => list.map(([b, v]) => {
+  let m = bass[0].m;
+  for(const e of bass) if(e.b <= b + 1e-6) m = e.m;
+  return {i: 'timp', b, m: lo + ((m - lo) % 12 + 12) % 12, v};
+});
+const rep = (s, n) => Array(n).fill(s).join(' | ');
+const oct = (evs, n) => evs.map(e => ({...e, m: e.m + 12 * n}));
 
-/* ===== 自由曲3：コンサートマーチ「ひかりの通学路」（このゲームのための書き下ろし）=====
-   2/4拍子。序奏 → 第1マーチ → トリオ（下属調）→ ブレイク（低音の掛け合い）→ トリオの再現（対旋律つき）→ 最後の一撃 */
-const MARCH_MEL = [
-  "C5:1> G4:.75 G4:.25 | C5:.5 E5:.5 G5:1> | A5:.75 G5:.25 F5:.5 E5:.5 | D5:1> G4:.5' r:.5",
-  "E5:.75 D5:.25 C5:.5 E5:.5 | G5:1 E5:.5 C5:.5 | D5:.75 C5:.25 B4:.5 C5:.5 | D5:1.5 r:.5",
-  "F5:.75 E5:.25 D5:.5 F5:.5 | A5:1 G5:.5 F5:.5 | E5:.5' G5:.5' C5:.5' E5:.5' | D5:1.5 r:.5",
-  "E5:.75 D5:.25 C5:.5 E5:.5 | G5:1 C6:1> | B5:.75 A5:.25 G5:.5 F5:.5 | E5:1 A5:1",
-  "G5:.75 F5:.25 E5:.5 D5:.5 | C5:.5' E5:.5' A5:.5' G5:.5' | F5:.5' D5:.5' B4:.5' D5:.5' | C5:1> r:1",
+/* ===== 自由曲3：スーザ 行進曲「星条旗よ永遠なれ」=====
+   1拍＝2分音符（2/2拍子）で、実音のまま書く。序奏 → 第1マーチ → トリオ（変イ長調、やわらかく）→ トリオの後半を全員で（グランディオーソ）。
+   音は Mutopia Project のピアノ版（1897年、パブリックドメイン）から写した */
+const STARS_INTRO = 'Eb5:1> D5:.75 Eb5:.25 | C5:.5 Eb5:1> F5:.5 | Gb5:.5> G5:.5> Ab5:.5> A5:.5> | Bb5:.5> r:.5 Bb4:1>';
+const STARS_A = [
+  'G5:.5 r:.25 G5:.25 G5:.5 G5:.5 | G5:.5 r:.25 G5:.25 Ab5:.5 Ab5:.5 | F5:.25 E5:.25 F5:.25\' G5:.25\' F5:.5\' Eb5:.5\' | D5:.5\' C5:.5\' D5:.5\' Bb4:.5\'',
+  'Bb5:.5> r:.25 Bb5:.25 Bb5:.5 Bb5:.5 | Bb5:.5 r:.25 Bb5:.25 B5:.5 B5:.5 | C6:.25> B5:.25 C6:.25\' Eb6:.25\' D6:.5> C6:.5 | B5:1.5 B5:.5',
+  'Bb5:.5 r:.25 Bb5:.25\' Eb6:.5\' r:.25 C6:.25\' | Bb5:.5\' A5:.5\' Bb5:.5\' G5:.5\' | F5:.5> Bb4:.25 A4:.25 Bb4:.25 A4:.25 Bb4:.5 | F5:.5> Bb4:.25 A4:.25 Bb4:.25 A4:.25 Bb4:.5',
+  'Bb5:.5 r:.25 Bb5:.25\' Eb6:.5\' r:.25 C6:.25\' | Bb5:.5\' A5:.5\' Bb5:.5\' Gb5:.5\' | F5:.5> A4:.25 G4:.25 A4:.25 G4:.25 A4:.5 | Bb4:.5 r:.5 Eb5:1',
 ].join(' | ');
-const MARCH_TRIO = 'A4:1.5 C5:.5 | F5:1 E5:.5 D5:.5 | C5:1.5 A4:.5 | Bb4:1 G4:1 | G4:1.5 Bb4:.5 | E5:1 D5:.5 C5:.5 | Bb4:1 A4:.5 G4:.5 | A4:2 | A4:1.5 C5:.5 | F5:1 G5:.5 A5:.5 | Bb5:1 A5:.5 G5:.5 | F5:1 D5:1';
-const MARCH_BREAK = 'C4:.5> C4:.25 C4:.25 Db4:.5> C4:.5 | Eb4:.5> Eb4:.25 Eb4:.25 D4:.5> C4:.5 | F4:.5 G4:.5 Ab4:.5 Bb4:.5 | C5:1> r:1';
-const MARCH_TRIO_CH = 'F:2 | Dm:2 | F:2 | C7:2 | Gm:2 | C7:2 | C7:2 | F:2 | F:2 | F:2 | Gm7:2 | Bb:2 | F:2 | Dm:1 Gm:1 | C7:2 | F:2';
-const MARCH_TRIO_BASS = 'F2 C3 | D3 A2 | F2 C3 | C3 G2 | G2 D3 | C3 G2 | C3 G2 | F2 C3 | F2 C3 | F2 A2 | G2 D3 | Bb2 F2 | C3 F2 | D3 G2 | C3 C2';
-const MARCH_CM = 'C4:.5 D4:.5 E4:.5 F4:.5 | A4:2 | F4:.5 E4:.5 F4:.5 C4:.5 | E4:2 | Bb3:.5 C4:.5 D4:.5 Bb3:.5 | G4:1 E4:1 | C4:.5 D4:.5 E4:.5 C4:.5 | F4:.5 E4:.5 D4:.5 C4:.5 | C4:.5 D4:.5 E4:.5 F4:.5 | A4:2 | D4:.5 E4:.5 F4:.5 G4:.5 | Bb4:1 F4:1 | A4:1 G4:.5 F4:.5 | F4:1 D4:1 | E4:1 C4:1 | A4:1> r:1';
-const MARCH_SD = [[0, .5], [.5, .28], [.75, .28], [1, .42], [1.5, .3]];
-// 区切りの小節：前半2拍たたいて、後半はロールで次の小節へ
-const sdTurn = (b, up = 0) => [{i: 'sd', b, v: .5 + up}, {i: 'sd', b: b + .5, v: .32 + up}, {i: 'sd', b: b + 1, d: 1, roll: true, v: .3 + up, v1: .55 + up}];
-const hnRole = i => [
-  {f: 0, t: 8, r: 'pad', g: 'hnI', i}, {f: 8, t: 40, r: 'pad', g: 'hnAB', i}, {f: 40, t: 72, r: 'pad', g: 'hnTr', i, sc: .6}, {f: 72, t: 80, r: 'pad', g: 'hnBr', i},
-  i < 2 ? {f: 80, t: 112, r: 'cm', sh: 0} : {f: 80, t: 112, r: 'pad', g: 'hnG', i: i - 2},
-  {f: 112, t: 114, r: 'pad', g: 'cdHnA', i}, {f: 114, t: 116, r: 'pad', g: 'cdHnB', i},
-];
-const CODA_A = {pat: [[0, .5, 'stac'], [.5, .5, 'stac'], [1, 1, 'norm', true]]};
-const CODA_B = {pat: [[0, .5, 'stac', true]]};
-
-/* ===== 自由曲4：吹奏楽のための「月と祭」（このゲームのための書き下ろし）=====
-   序奏は都節音階（ミ・ファ・ラ・シ・ド）で、尺八のようなフルートのソロ。拍子木の合図で、民謡音階（ラ・ド・レ・ミ・ソ）の祭りへ */
-const WA_INTRO = 'r:1 B5:2.5 A5:.5 | B5:1 C6:2 B5:.5 A5:.5 | F5:3 E5:1 | E5:4 | r:.5 E6:.5 F6:1.5 E6:.5 C6:1 | B5:2 A5:1 B5:1';
-const WA_MAT = 'A4:.5 C5:.5 D5:1> E5:.5 D5:.5 C5:1 | D5:.5 E5:.5 G5:1 E5:1.5 r:.5 | A5:.5 G5:.5 E5:1> D5:.5 E5:.5 C5:1 | D5:1.5 C5:.5 A4:2 | C5:.5 D5:.5 E5:.5 G5:.5 A5:1> G5:.5 E5:.5 | G5:1 E5:.5 D5:.5 E5:2 | A5:.5> A5:.5 G5:.5 E5:.5 D5:.5 E5:.5 C5:.5 D5:.5';
-const WA_MAT_CH = 'A5:4 | G5:2 Em:2 | Am:2 C:2 | D5:2 A5:2 | Am7:4 | Em:2 C:2 | Am:2 G5:1 Am:1 | A5:4';
-const WA_MAT_BASS = 'A2:1 A2:.5 A2:.5 E2:1 A2:1 | G2:1 G2:.5 G2:.5 E2:1 E2:1 | A2:1 A2:.5 A2:.5 C3:1 C3:1 | D3:1 D3:.5 D3:.5 A2:1 A2:1 | A2:1 A2:.5 A2:.5 G2:1 E2:1 | E2:1 E2:.5 E2:.5 C3:1 C3:1 | A2:1 A2:1 G2:1 A2:1';
-const WA_CM = 'E4:2 D4:1 C4:1 | D4:2 E4:2 | C4:2 E4:1 G4:1 | A3:1 D4:1 E4:2 | E4:.5 D4:.5 C4:1 A3:2 | E4:2 G4:2 | A4:1 G4:1 D4:1 E4:1 | A3:1 C4:1 E4:1 G4:1';
-// 祭りの刻み：2拍目の裏表と4拍目（ホルン・テナー・3番トランペット）
-const WA_STAB = {pat: [[1, .5, 'stac'], [1.5, .5, 'stac'], [3, 1, 'norm', true]]};
-const SHIME_BAR = [[0, .5], [.5, .28], [1, .42], [1.5, .3], [1.75, .25], [2, .48], [2.5, .28], [3, .42], [3.5, .3]];
-const waHn = i => [
-  ...(i < 3 ? [{f: 0, t: 24, r: 'pad', g: 'hnI', i, sc: .7}] : []),
-  {f: 24, t: 56, r: 'pad', g: 'hnP', i}, {f: 56, t: 88, r: 'cm', sh: 0},
-  {f: 88, t: 92, r: 'pad', g: 'cdHnA', i}, {f: 92, t: 96, r: 'pad', g: 'cdHnB', i},
+const STARS_A_CH = 'Eb:1 G7:1 | Cm:1 Fm:1 | Bb:1 F7:1 | Bb:1 Bb7:1 | Eb:1 Bb7:1 | Eb:1 G:1 | Cm:2 | G:2 | Eb:2 | Eb:2 | Bb7:2 | Bb7:2 | Eb:2 | Eb:2 | F7:2 | Bb:1 Eb7:1';
+const STARS_A_BASS = 'Eb3:.5 r:.5 D3:.5 r:.5 | C3:.5 r:.5 F3:.5 r:.5 | D3:.5 r:.5 C3:.5 r:.5 | Bb2:.5 r:.5 Ab3:.5 r:.5 | G3:.5 r:.5 F3:.5 r:.5 | Eb3:.5 r:.5 D3:.5 r:.5 | C3:.5 r:.5 Eb3:.5 r:.5 | G2:.5 r:1.5 | '
+  + rep('Eb3:.5 r:.5 Bb2:.5 r:.5', 2) + ' | ' + rep('D3:.5 r:.5 Bb2:.5 r:.5', 2) + ' | ' + rep('Eb3:.5 r:.5 Bb2:.5 r:.5', 2) + ' | F3:.5 r:.5 F3:.5 r:.5 | Bb2:.5 r:.5 Eb3:.5 r:.5';
+const STARS_TRIO = 'Eb5:1 Db5:.5 C5:.5 | C5:1 B4:.5 C5:.5 | C5:3 B4:.5 C5:.5 | C5:1 B4:.5 C5:.5 | Eb5:1 C5:.75 Eb5:.25 | Db5:2 | Bb4:1 Bb4:1 | Bb4:1 A4:.5 Bb4:.5 | Bb4:1 A4:.5 Bb4:.5 | Db5:3 C5:.5 Bb4:.5 | C5:.5 Eb5:1.5 | F5:1.5 F5:.5 | Bb4:3 Eb5:1';
+const STARS_TRIO_CH = rep('Ab:2', 6) + ' | ' + rep('Eb7:2', 6) + ' | Ab:2 | Db:2 | Eb:2 | Eb:1 Eb7:1';
+const STARS_TRIO_BASS = rep('Ab2:.5 r:.5 Eb3:.5 r:.5', 6) + ' | ' + rep('Bb2:.5 r:.5 Eb3:.5 r:.5', 6) + ' | Ab2:.5 r:.5 Eb3:.5 r:.5 | Db3:.5 r:.5 Ab2:.5 r:.5 | Eb3:.5 r:.5 Bb2:.5 r:.5 | G2:.5 r:.5 Eb3:.5 r:.5';
+const STARS_FIN = 'Eb5:1 Db5:.5 C5:.5 | C5:1 B4:.5 C5:.5 | C5:3 B4:.5 C5:.5 | C5:1 B4:.5 C5:.5 | Db5:.5 C5:.5 Bb4:.75 G5:.25 | Bb4:2 | Ab4:1 Ab4:1 | Ab4:1 G4:.5 Ab4:.5 | Cb5:1 Bb4:.5 Ab4:.5 | Ab5:2.5 Ab4:.5 Bb4:.5 C5:.5 | Eb5:.25 r:.25 Ab4:.5 Bb4:.5 C5:.5 | Eb5:.25 r:.25 Eb4:.5 F4:.5 C5:.5 | Bb4:2 | Ab4:.5> r:.5 Ab5:.5\'> r:.5';
+const STARS_FIN_CH = rep('Ab:2', 4) + ' | C7:2 | C7:2 | Fsus4:2 | Fm:2 | Dbm:2 | Fb:2 | ' + rep('Ab:2', 4) + ' | Eb7:2 | Ab:2';
+const STARS_FIN_BASS = rep('Ab2:.5 r:.5 Eb3:.5 r:.5', 4) + ' | ' + rep('G2:.5 r:.5 C3:.5 r:.5', 2) + ' | ' + rep('F2:.5 r:.5 C3:.5 r:.5', 2)
+  + ' | Fb2:.5 r:.5 Ab2:.5 r:.5 | Fb2:.5 r:.5 Cb3:.5 r:.5 | Eb3:.5 r:.5 Ab2:.5 r:.5 | ' + rep('C3:.5 r:.5 Eb3:.5 r:.5', 2) + ' | Ab2:.5 r:.5 C3:.5 r:.5 | G2:.5 r:.5 Eb3:.5 r:.5 | Ab2:.5> r:.5 Ab2:.5\'> r:.5';
+const STARS_BASS = [...line('Eb2:1> D2:.75 Eb2:.25 | C2:.5> r:.5 C3:1> | Cb3:1> Cb3:1> | Bb2:.5> r:1.5'), ...line(STARS_A_BASS, 8), ...line(STARS_TRIO_BASS, 40), ...line(STARS_FIN_BASS, 72)];
+// 小太鼓の基本の型（1小節＝2拍）
+const STARS_SD = [[0, .5], [.5, .32], [1, .45], [1.5, .32], [1.75, .25]];
+// 最後の小節：1拍目に主音、2拍目に和音
+const STARS_END = {pat: [[0, .5, 'norm', true], [1, .5, 'stac', true]]};
+const starsHn = i => [
+  {f: 0, t: 8, r: 'mel', sh: -12}, {f: 8, t: 40, r: 'pad', g: 'hnA', i}, {f: 40, t: 72, r: 'pad', g: 'hnT', i, sc: .6},
+  {f: 72, t: 102, r: 'pad', g: 'hnG', i}, {f: 102, t: 104, r: 'pad', g: 'cdHn', i},
 ];
 
-const range4 = (g, f, t, extra = {}) => [0, 1, 2, 3].map(i => ({f, t, r: 'pad', g, i, ...extra}));
+/* ===== 自由曲4：ホルスト 組曲《惑星》より「木星」の中間部 =====
+   ハ長調で書いて変ホ長調へ。3拍子。同じ旋律でホルスト自身が作った賛美歌「サクステッド」（1921年、パブリックドメイン）の
+   旋律・和音・低音を Mutopia Project の楽譜から写した。6つのフレーズを、ホルンの歌から全員の歌へ広げていく */
+const JUP_A1 = 'E4:.5 G4:.5 | A4:1.5 C5:.5 B4:.75 G4:.25 | C5:.5 D5:.5 C5:1 B4:1 | A4:.5 B4:.5 A4:1 G4:1 | E4:2';
+const JUP_A2 = 'E4:.5 G4:.5 | A4:1.5 C5:.5 B4:.75 G4:.25 | C5:.5 D5:.5 E5:1 E5:1 | E5:.5 D5:.5 C5:1 D5:1';
+const JUP_B1 = 'G4:.5 E4:.5 | D4:1.5 D4:.5 C4:.5 E4:.5 | D4:1 G4:1 G4:.5 E4:.5 | D4:1.5 D4:.5 E4:.5 G4:.5 | A4:2';
+const JUP_B2 = 'A4:.5 B4:.5 | C5:.75 C5:.25 B4:1 A4:1 | G4:1 C5:1 E4:1 | D4:.5 C4:.5 D4:1 E4:1 | G4:2';
+const JUP_MEL = ['r:5', JUP_A1, JUP_A2 + ' | C5:2', JUP_B1, JUP_B2, JUP_A1, JUP_A2 + ' | C5:6'].join(' | ');
+const JUP_CH = ['C:5', 'C:1 | F:2 Dm:1 | C:3 | F:2 G:1 | Am:2', 'G:1 | F:2 Dm:1 | C:3 | F:3 | C:2',
+  'C/E:1 | G:2 Am:1 | G/B:2 C/E:1 | G:2 C:1 | F:1 F/E:1', 'Dm:1 | Am:1 C/G:1 F:1 | C/E:1 Dm7:1 C:1 | F:1 Dm:1 Am/C:1 | G/B:1 Am7:1',
+  'G:1 | F:2 G7/B:1 | C/E:2 Em:1 | F:2 G:1 | Am:2', 'G:1 | F:2 G7/D:1 | C/E:2 C:1 | F:2 Dm/F:1 | C:6'].join(' | ');
+const JUP_BASS = ['C3:5', 'C3:1 | F3:2 D3:1 | E3:2 E3:1 | F3:2 G3:1 | A3:2', 'G3:1 | F3:2 D3:1 | E3:2 C3:.5 E3:.5 | F3:3 | C3:2',
+  'E2:1 | G2:2 A2:1 | B2:2 E2:1 | G2:2 C3:1 | F3:1 E3:1', 'D3:1 | A3:1 G3:1 F3:1 | E3:1 D3:1 C3:1 | F3:1 D3:1 C3:1 | B2:1 A2:1',
+  'G2:1 | F2:2 D2:1 | E2:2 E2:1 | F2:2 G2:1 | A2:2', 'G2:1 | F2:2 D3:1 | E3:2 C3:.5 E3:.5 | F3:3 | C3:6'].join(' | ');
+const JUP_BASS_EV = line(JUP_BASS);
+
+/* ===== 自由曲5：グリーグ 劇音楽《ペール・ギュント》より「山の魔王の宮殿にて」=====
+   ロ短調、実音のまま。同じ4小節の旋律（A）と、嬰ヘ長調の旋律（B）を、低い楽器から高い楽器へ受け渡しながら、
+   だんだん速く、大きくしていく。音は Mutopia Project のピアノ版（1918年、パブリックドメイン）から写した */
+const HALL_A = line("B2:.5' C#3:.5' D3:.5' E3:.5' F#3:.5'> D3:.5' F#3:1' | E#3:.5'> C#3:.5' E#3:1' E3:.5'> C3:.5' E3:1' | B2:.5' C#3:.5' D3:.5' E3:.5' F#3:.5' D3:.5' F#3:.5' B3:.5' | A3:.5' F#3:.5' D3:.5' F#3:.5' A3:2>");
+const HALL_B = line("F#2:.5' G#2:.5' A#2:.5' B2:.5' C#3:.5'> A#2:.5' C#3:1' | D3:.5'> A#2:.5' D3:1' C#3:.5'> A#2:.5' C#3:1' | F#2:.5' G#2:.5' A#2:.5' B2:.5' C#3:.5'> A#2:.5' C#3:1' | D3:.5'> A#2:.5' D3:1' C#3:2>");
+const HALL_A_CH = 'Bm:4 | B5:4 | Bm:4 | D:4', HALL_B_CH = 'F#:4 | D+:2 F#:2 | F#:4 | D+:2 F#:2';
+// 前半の低音は、ロとファ#（Bの旋律ではファ#とド#）をくり返す。速くなってからは8分音符で下りてくる
+const HALL_A_BASS = rep("B1:1' F#2:1' B1:1' F#2:1'", 3) + " | D2:1' A2:1' D2:1' A2:1'";
+const HALL_B_BASS = rep("F#2:1' C#3:1' F#2:1' C#3:1' | D2:1' A#2:1' F#2:1' C#3:1'", 2);
+const HALL_VIVO_BASS = rep("B1:.5'> A1:.5' G1:.5' F#1:.5' B1:.5'> A1:.5' G1:.5' F#1:.5'", 3) + " | D2:.5'> C#2:.5' B1:.5' A1:.5' D2:.5'> C#2:.5' B1:.5' A1:.5'";
+const HALL_STRETTO_BASS = rep("F#2:.5'> E2:.5' D2:.5' C#2:.5' F#2:.5'> E2:.5' D2:.5' C#2:.5' | D2:.5'> C#2:.5' D2:.5' E2:.5' F#2:.5'> E2:.5' D2:.5' C#2:.5'", 2);
+const HALL_BASS = [...line(HALL_A_BASS, 4), ...line(HALL_A_BASS, 20), ...line(HALL_B_BASS, 36), ...line(HALL_A_BASS, 52), ...line(HALL_A_BASS, 68),
+  ...line(HALL_B_BASS, 84), ...line(HALL_B_BASS, 100), ...line(HALL_VIVO_BASS, 116), ...line(HALL_STRETTO_BASS, 132), ...line("B1:.5'> r:3.5 | r:2 B1:2 | B1:.5'> r:3.5", 148)];
+// 最後の打ち込み：小節の2拍目に和音（あいだの休みの小節は鳴らさない）
+const HALL_HIT = {pat: [[1, .5, 'stac', true]]};
+const hallEnd = (g, i) => [{f: 148, t: 152, r: 'pad', g, i}, {f: 156, t: 160, r: 'pad', g, i}];
+// 旋律を吹く区間を [から, まで, ずらす半音, 音量] で並べる（同じ旋律を区間ごとに別のオクターブで受け渡すため）
+const melIn = (...secs) => secs.map(([f, t, sh, sc]) => ({f, t, r: 'mel', sh, ...(sc ? {sc} : {})}));
 
 const PIECES = {
   largo: {
@@ -132,8 +166,8 @@ const PIECES = {
     title: '《新世界より》第2楽章',
     full: 'ドヴォルザーク 交響曲第9番「新世界より」第2楽章 Largo',
     composer: 'A.ドヴォルザーク（1893年）',
-    key: '変ニ長調', trans: 1, meter: 4, beats: 64,
-    tempi: [52, 60, 68],
+    key: '変ニ長調', trans: 1, meter: 4, beatUnit: .5, beats: 64,
+    tempi: [84, 92, 100],
     desc: 'ゆっくり歌う曲。音程と音色、そして抑揚の差がそのまま聞こえる。前半はオーボエのソロ。',
     asks: '音程・音色・表現',
     focus: {pitch: 1.1, tone: 1.15, expr: 1.2, rhythm: 0.8, balance: 1},
@@ -294,223 +328,288 @@ const PIECES = {
       ],
     },
   },
-  march: {
-    id: 'march',
-    title: 'マーチ「ひかりの通学路」',
-    full: 'コンサートマーチ「ひかりの通学路」',
-    composer: 'このゲームのための書き下ろし（2026年）',
-    key: '変ロ長調', trans: -2, meter: 2, beats: 116,
+  stars: {
+    id: 'stars',
+    title: '「星条旗よ永遠なれ」',
+    full: 'スーザ 行進曲「星条旗よ永遠なれ」',
+    composer: 'J.P.スーザ（1896年）',
+    key: '変ホ長調（トリオは変イ長調）', trans: 0, meter: 2, beatUnit: 2, beats: 104,
     tempi: [112, 120, 128],
-    desc: '課題曲のようなコンサートマーチ。きびきびした行進のリズム、やわらかく歌うトリオ、対旋律が重なる最後の盛り上がり。縦の線のずれがすぐ聞こえる。',
+    desc: 'マーチ王スーザの代表作。きびきびした第1マーチ、やわらかく歌うトリオ、そして全員で鳴らすトリオの後半。縦の線のずれがすぐ聞こえる。',
     asks: 'リズム・バランス・音色',
     focus: {pitch: .95, tone: 1, expr: .85, rhythm: 1.25, balance: 1.05},
-    balRef: 3.7, ceiling: .96,
-    spans: [{name: '前半（序奏〜第1マーチ）', from: 0, to: 40}, {name: 'トリオ', from: 40, to: 72}, {name: '後半（ブレイク〜最後）', from: 72, to: 116}],
-    slur: [[0, 'tongue'], [40, 'bar'], [72, 'tongue'], [80, 'bar'], [112, 'tongue']],
-    scale: [[0, SCALE], [40, [0, 2, 4, 5, 7, 9, 10]], [72, [0, 1, 3, 5, 7, 8, 10]], [80, [0, 2, 4, 5, 7, 9, 10]]],
-    mel: [...line(MARCH_MEL), ...line(MARCH_TRIO + ' | C5:1.5 F5:.5 | A4:1 G4:1 | G4:1 Bb4:.5 E4:.5 | F4:2', 40), ...line(MARCH_BREAK, 72),
-          ...line(MARCH_TRIO + " | C5:1.5 F5:.5 | A5:1 Bb5:1 | C6:1> Bb5:.5 G5:.5 | F5:1> r:.5 C5:.5'", 80), ...line("F5:.5' A5:.5' C6:1> | F5:.5'> r:1.5", 112)],
-    cm: line(MARCH_CM, 80),
-    chords: [...chords('C:2 | C:2 | F:1 C:1 | G:2 | C:2 | C:2 | G7:2 | G:2 | Dm:2 | F:2 | C:2 | G:2 | C:2 | C:1 Am:1 | G7:2 | C:1 F:1 | C:2 | Am:1 F:1 | G7:2 | C:2'),
-             ...chords(MARCH_TRIO_CH, 40), ...chords('C:2 | Ab:2 | Fm:1 Bb7:1 | C7:2', 72), ...chords(MARCH_TRIO_CH, 80), ...chords('F:2 | F:2', 112)],
-    bass: [...line("C3:1> G2:1 | C3:1 E3:1 | F2:1 C3:1 | G2:1> G2:.5' r:.5 | C3 G2 | C3 G2 | G2 D2 | G2 D2 | D3 A2 | F2 C3 | C3 G2 | G2 D2 | C3 G2 | C3 A2 | G2 D2 | C3 F2 | C3 G2 | A2 F2 | G2 B2 | C3:1> r:1"),
-           ...line(MARCH_TRIO_BASS + ' | F2 C3', 40), ...line('C2:2 | Ab1:2 | F2:1 Bb1:1 | C2:1> r:1', 72),
-           ...line(MARCH_TRIO_BASS + " | F2:1> r:.5 C3:.5'", 80), ...line("F2:.5' A2:.5' C3:1> | F2:.5'> r:1.5", 112)],
-    dyn: [[0,.82],[7.9,.82],[8,.55],[23.9,.58],[24,.62],[30,.72],[32,.66],[39.9,.6],
-          [40,.3],[55.9,.34],[56,.36],[62,.46],[64,.4],[71.9,.34],
-          [72,.66],[79.9,.86],[80,.88],[104,.9],[108,.96],[111.9,.94],[112,.9],[116,.95]],
-    rubato: [[0,1],[7,1],[7.9,1.05],[8,1],[38,1],[39.9,1.08],[40,1],[70,1],[71.9,1.06],[72,1],[78,1.02],[79.9,1.12],[80,1],[108,1],[110,1.06],[112,1],[113,1.08],[114,1.12],[116,1.2]],
+    balRef: 6.7, ceiling: .96,
+    spans: [{name: '序奏〜第1マーチ', from: 0, to: 40}, {name: 'トリオ', from: 40, to: 72}, {name: '最後（全員で）', from: 72, to: 104}],
+    slur: [[0, 'tongue'], [40, 'bar']],
+    scale: [[0, [0, 2, 3, 5, 7, 8, 10]], [40, [0, 1, 3, 5, 7, 8, 10]]],
+    mel: [...line(STARS_INTRO), ...line(STARS_A, 8), ...line(STARS_TRIO, 40), ...line(STARS_FIN, 72)],
+    chords: [...chords('Eb:2 | Cm:2 | Cb:2 | Bb:2'), ...chords(STARS_A_CH, 8), ...chords(STARS_TRIO_CH, 40), ...chords(STARS_FIN_CH, 72)],
+    bass: STARS_BASS,
+    dyn: [[0,.86],[7.9,.86],[8,.62],[23.9,.64],[24,.68],[38,.72],[39.9,.6],[40,.34],[56,.38],[69.9,.42],[71.9,.86],[72,.92],[90,.94],[92,.98],[101.9,.96],[102,.95],[104,1]],
+    rubato: [[0,1],[7.5,1],[7.9,1.04],[8,1],[38,1],[39.9,1.05],[40,1],[69,1],[71.9,1.08],[72,1],[100,1],[101.9,1.06],[102,1.08],[104,1.15]],
     groups: {
-      hnI:   {n: 4, lo: 55, hi: 70, rh: 'sus'},
-      tbI:   {n: 3, lo: 43, hi: 62, rh: 'sus'},
-      tpI:   {n: 1, lo: 62, hi: 72, rh: 'sus'},
-      clI:   {n: 1, lo: 55, hi: 67, rh: 'sus'},
-      hnAB:  {n: 4, lo: 55, hi: 70, rh: 'ab8'},
-      saxAB: {n: 2, lo: 58, hi: 72, rh: 'ab8'},
-      clAB:  {n: 1, lo: 60, hi: 72, rh: 'ab8'},
-      midAB: {n: 1, lo: 50, hi: 62, rh: 'ab8'},
-      tp3A:  {n: 1, lo: 60, hi: 70, rh: 'ab8'},
-      tbA:   {n: 3, lo: 46, hi: 62, rh: 'sus'},
-      hnTr:  {n: 4, lo: 53, hi: 69, rh: 'ab8'},
-      clTr:  {n: 1, lo: 55, hi: 67, rh: 'sus'},
-      tenTr: {n: 1, lo: 50, hi: 62, rh: 'sus'},
-      tbTr:  {n: 2, lo: 46, hi: 60, rh: 'sus'},
-      woodBr:{n: 4, lo: 67, hi: 84, rh: 'sus'},
-      clBr:  {n: 2, lo: 57, hi: 69, rh: 'sus'},
-      saxBr: {n: 2, lo: 58, hi: 72, rh: 'sus'},
-      tpBr:  {n: 3, lo: 60, hi: 74, rh: {pat: [[0, .5, 'norm', true]]}},
-      hnBr:  {n: 4, lo: 53, hi: 69, rh: 'sus'},
-      gAB:   {n: 2, lo: 57, hi: 72, rh: 'ab8'},
-      hnG:   {n: 2, lo: 55, hi: 69, rh: 'ab8'},
-      tpG:   {n: 1, lo: 62, hi: 72, rh: 'sus'},
-      cdHnA: {n: 4, lo: 55, hi: 70, rh: CODA_A}, cdHnB: {n: 4, lo: 55, hi: 70, rh: CODA_B},
-      cdTbA: {n: 3, lo: 41, hi: 62, rh: CODA_A}, cdTbB: {n: 3, lo: 41, hi: 62, rh: CODA_B},
-      cdTpA: {n: 1, lo: 62, hi: 74, rh: CODA_A}, cdTpB: {n: 1, lo: 62, hi: 74, rh: CODA_B},
+      hnA:  {n: 4, lo: 55, hi: 70, rh: 'ab8'},
+      saxA: {n: 2, lo: 58, hi: 72, rh: 'ab8'},
+      clA:  {n: 1, lo: 60, hi: 72, rh: 'ab8'},
+      tenA: {n: 1, lo: 50, hi: 62, rh: 'ab8'},
+      tp3A: {n: 1, lo: 62, hi: 72, rh: 'ab8'},
+      tbA:  {n: 2, lo: 50, hi: 64, rh: 'ab8'},
+      hnT:  {n: 4, lo: 55, hi: 70, rh: 'ab8'},
+      clT:  {n: 2, lo: 58, hi: 70, rh: 'ab8'},
+      hnG:  {n: 4, lo: 56, hi: 72, rh: 'ab8'},
+      clG:  {n: 1, lo: 60, hi: 74, rh: 'ab8'},
+      tp3G: {n: 1, lo: 62, hi: 74, rh: 'ab8'},
+      cdHn: {n: 4, lo: 56, hi: 70, rh: STARS_END}, cdW: {n: 1, lo: 60, hi: 75, rh: STARS_END}, cdTp: {n: 1, lo: 62, hi: 74, rh: STARS_END},
     },
     roles: {
-      picc:  [{f: 0, t: 8, r: 'mel', sh: 12, sc: .7}, {f: 24, t: 40, r: 'mel', sh: 12, sc: .6}, {f: 80, t: 116, r: 'mel', sh: 12, sc: .8}],
-      fl1:   [{f: 0, t: 8, r: 'mel', sh: 12}, {f: 8, t: 40, r: 'mel', sh: 12, sc: .75}, {f: 56, t: 72, r: 'mel', sh: 12, sc: .6}, {f: 72, t: 80, r: 'pad', g: 'woodBr', i: 0}, {f: 80, t: 116, r: 'mel', sh: 12}],
-      fl2:   [{f: 0, t: 8, r: 'mel3', sh: 12}, {f: 8, t: 40, r: 'mel3', sh: 12, sc: .7}, {f: 56, t: 72, r: 'mel3', sh: 12, sc: .55}, {f: 72, t: 80, r: 'pad', g: 'woodBr', i: 1}, {f: 80, t: 116, r: 'mel3', sh: 12}],
-      ob:    [{f: 0, t: 8, r: 'mel', sh: 0}, {f: 8, t: 40, r: 'mel', sh: 0, sc: .8}, {f: 56, t: 72, r: 'mel', sh: 0, sc: .7}, {f: 72, t: 80, r: 'pad', g: 'woodBr', i: 2}, {f: 80, t: 116, r: 'mel', sh: 0}],
-      ebcl:  [{f: 0, t: 8, r: 'mel', sh: 0, sc: .7}, {f: 24, t: 40, r: 'mel', sh: 0, sc: .7}, {f: 80, t: 116, r: 'mel', sh: 0, sc: .7}],
-      cl1:   [{f: 0, t: 72, r: 'mel', sh: 0}, {f: 72, t: 80, r: 'pad', g: 'woodBr', i: 3}, {f: 80, t: 116, r: 'mel', sh: 0}],
-      cl2:   [{f: 0, t: 72, r: 'mel3', sh: 0}, {f: 72, t: 80, r: 'pad', g: 'clBr', i: 0}, {f: 80, t: 116, r: 'mel3', sh: 0}],
-      cl3:   [{f: 0, t: 8, r: 'pad', g: 'clI', i: 0}, {f: 8, t: 40, r: 'pad', g: 'clAB', i: 0}, {f: 40, t: 72, r: 'pad', g: 'clTr', i: 0, sc: .7}, {f: 72, t: 80, r: 'pad', g: 'clBr', i: 1}, {f: 80, t: 112, r: 'pad', g: 'gAB', i: 0}, {f: 112, t: 116, r: 'mel3', sh: -12}],
-      bcl:   [{f: 0, t: 40, r: 'bass', sh: 0, rh: 'march'}, {f: 40, t: 72, r: 'bass', sh: 0, rh: 'march', sc: .7}, {f: 72, t: 80, r: 'mel', sh: -12}, {f: 80, t: 116, r: 'bass', sh: 0, rh: 'march'}],
-      fg:    [{f: 0, t: 40, r: 'bass', sh: 0, rh: 'march', sc: .85}, {f: 40, t: 80, r: 'mel', sh: -12, sc: .8}, {f: 80, t: 116, r: 'bass', sh: 0, rh: 'march'}],
-      asax1: [{f: 0, t: 8, r: 'mel', sh: 0}, {f: 8, t: 40, r: 'pad', g: 'saxAB', i: 0}, {f: 40, t: 72, r: 'mel', sh: -12, sc: .7}, {f: 72, t: 80, r: 'pad', g: 'saxBr', i: 0}, {f: 80, t: 112, r: 'cm', sh: 12}, {f: 112, t: 116, r: 'mel3', sh: 0}],
-      asax2: [{f: 0, t: 8, r: 'mel3', sh: 0}, {f: 8, t: 40, r: 'pad', g: 'saxAB', i: 1}, {f: 40, t: 72, r: 'mel3', sh: -12, sc: .65}, {f: 72, t: 80, r: 'pad', g: 'saxBr', i: 1}, {f: 80, t: 112, r: 'pad', g: 'gAB', i: 1}, {f: 112, t: 116, r: 'mel3', sh: -12}],
-      tsax:  [{f: 0, t: 8, r: 'mel', sh: -12}, {f: 8, t: 40, r: 'pad', g: 'midAB', i: 0}, {f: 40, t: 72, r: 'pad', g: 'tenTr', i: 0, sc: .7}, {f: 72, t: 80, r: 'mel', sh: 0}, {f: 80, t: 112, r: 'cm', sh: 0}, {f: 112, t: 116, r: 'mel', sh: -12}],
-      bsax:  [{f: 0, t: 40, r: 'bass', sh: 0, rh: 'march'}, {f: 40, t: 72, r: 'bass', sh: 0, rh: 'march', sc: .7}, {f: 72, t: 80, r: 'mel', sh: -12}, {f: 80, t: 116, r: 'bass', sh: 0, rh: 'march'}],
-      tp1:   [{f: 0, t: 8, r: 'mel', sh: 0}, {f: 8, t: 40, r: 'mel', sh: 0, sc: .85}, {f: 72, t: 80, r: 'pad', g: 'tpBr', i: 0}, {f: 80, t: 116, r: 'mel', sh: 0}],
-      tp2:   [{f: 0, t: 8, r: 'mel3', sh: 0}, {f: 8, t: 40, r: 'mel3', sh: 0, sc: .8}, {f: 72, t: 80, r: 'pad', g: 'tpBr', i: 1}, {f: 80, t: 116, r: 'mel3', sh: 0}],
-      tp3:   [{f: 0, t: 8, r: 'pad', g: 'tpI', i: 0}, {f: 8, t: 40, r: 'pad', g: 'tp3A', i: 0, sc: .7}, {f: 72, t: 80, r: 'pad', g: 'tpBr', i: 2}, {f: 80, t: 112, r: 'pad', g: 'tpG', i: 0}, {f: 112, t: 114, r: 'pad', g: 'cdTpA', i: 0}, {f: 114, t: 116, r: 'pad', g: 'cdTpB', i: 0}],
-      hn1: hnRole(0), hn2: hnRole(1), hn3: hnRole(2), hn4: hnRole(3),
-      tb1:   [{f: 0, t: 8, r: 'pad', g: 'tbI', i: 0}, {f: 24, t: 40, r: 'pad', g: 'tbA', i: 0, sc: .6}, {f: 56, t: 72, r: 'pad', g: 'tbTr', i: 0, sc: .5}, {f: 72, t: 80, r: 'mel', sh: 0}, {f: 80, t: 112, r: 'cm', sh: 0}, {f: 112, t: 114, r: 'pad', g: 'cdTbA', i: 0}, {f: 114, t: 116, r: 'pad', g: 'cdTbB', i: 0}],
-      tb2:   [{f: 0, t: 8, r: 'pad', g: 'tbI', i: 1}, {f: 24, t: 40, r: 'pad', g: 'tbA', i: 1, sc: .6}, {f: 56, t: 72, r: 'pad', g: 'tbTr', i: 1, sc: .5}, {f: 72, t: 80, r: 'mel', sh: -12}, {f: 80, t: 112, r: 'cm', sh: -12}, {f: 112, t: 114, r: 'pad', g: 'cdTbA', i: 1}, {f: 114, t: 116, r: 'pad', g: 'cdTbB', i: 1}],
-      btb:   [{f: 0, t: 8, r: 'pad', g: 'tbI', i: 2}, {f: 8, t: 40, r: 'bass', sh: 0, rh: 'march'}, {f: 40, t: 72, r: 'bass', sh: 0, rh: 'march', sc: .6}, {f: 72, t: 80, r: 'mel', sh: -24}, {f: 80, t: 112, r: 'bass', sh: 0, rh: 'march'}, {f: 112, t: 114, r: 'pad', g: 'cdTbA', i: 2}, {f: 114, t: 116, r: 'pad', g: 'cdTbB', i: 2}],
-      euph:  [{f: 0, t: 8, r: 'mel', sh: -12}, {f: 8, t: 40, r: 'mel', sh: -12, sc: .7}, {f: 40, t: 72, r: 'mel', sh: -12}, {f: 72, t: 80, r: 'mel', sh: 0}, {f: 80, t: 112, r: 'cm', sh: 0}, {f: 112, t: 116, r: 'mel', sh: -12}],
-      tuba:  [{f: 0, t: 40, r: 'bass', sh: 0, rh: 'march'}, {f: 40, t: 72, r: 'bass', sh: 0, rh: 'march', sc: .65}, {f: 72, t: 80, r: 'mel', sh: -24}, {f: 80, t: 116, r: 'bass', sh: 0, rh: 'march'}],
-      cb:    [{f: 0, t: 8, r: 'bass', sh: 0, rh: 'march'}, {f: 8, t: 72, r: 'bass', sh: 0, rh: 'pizz'}, {f: 72, t: 80, r: 'mel', sh: -24}, {f: 80, t: 116, r: 'bass', sh: 0, rh: 'march'}],
-      perc4: [{f: 56, t: 72, r: 'mel', sh: 24, inst: 'glock', sc: .35}],
+      picc:  [{f: 0, t: 8, r: 'mel', sh: 12, sc: .7}, {f: 24, t: 40, r: 'mel', sh: 12, sc: .5}, {f: 72, t: 104, r: 'mel', sh: 12, sc: .8}],
+      fl1:   [{f: 0, t: 8, r: 'mel', sh: 12}, {f: 8, t: 40, r: 'mel', sh: 0}, {f: 56, t: 72, r: 'mel', sh: 12, sc: .5}, {f: 72, t: 104, r: 'mel', sh: 12}],
+      fl2:   [{f: 0, t: 8, r: 'mel', sh: 0}, {f: 8, t: 40, r: 'mel3', sh: 0}, {f: 72, t: 104, r: 'mel3', sh: 12}],
+      ob:    [{f: 0, t: 8, r: 'mel', sh: 0}, {f: 8, t: 40, r: 'mel', sh: 0, sc: .8}, {f: 40, t: 72, r: 'mel', sh: 0, sc: .5}, {f: 72, t: 104, r: 'mel', sh: 0}],
+      ebcl:  [{f: 0, t: 8, r: 'mel', sh: 0, sc: .7}, {f: 24, t: 40, r: 'mel', sh: 0, sc: .6}, {f: 72, t: 104, r: 'mel', sh: 12, sc: .7}],
+      cl1:   [{f: 0, t: 104, r: 'mel', sh: 0}],
+      cl2:   [{f: 0, t: 8, r: 'mel', sh: -12}, {f: 8, t: 40, r: 'mel3', sh: 0}, {f: 40, t: 72, r: 'mel', sh: -12}, {f: 72, t: 104, r: 'mel3', sh: 0}],
+      cl3:   [{f: 0, t: 8, r: 'mel', sh: -12}, {f: 8, t: 40, r: 'pad', g: 'clA', i: 0}, {f: 40, t: 72, r: 'pad', g: 'clT', i: 0}, {f: 72, t: 102, r: 'pad', g: 'clG', i: 0}, {f: 102, t: 104, r: 'pad', g: 'cdW', i: 0}],
+      bcl:   [{f: 0, t: 8, r: 'bass', sh: 0}, {f: 8, t: 40, r: 'bass', sh: 0, rh: 'march'}, {f: 40, t: 72, r: 'bass', sh: 0, rh: 'march', sc: .7}, {f: 72, t: 104, r: 'bass', sh: 0, rh: 'march'}],
+      fg:    [{f: 0, t: 8, r: 'bass', sh: 0}, {f: 8, t: 40, r: 'bass', sh: 0, rh: 'march', sc: .85}, {f: 40, t: 72, r: 'mel', sh: -12, sc: .55}, {f: 72, t: 104, r: 'bass', sh: 0, rh: 'march'}],
+      asax1: [{f: 0, t: 8, r: 'mel', sh: -12}, {f: 8, t: 40, r: 'pad', g: 'saxA', i: 0}, {f: 40, t: 72, r: 'mel', sh: -12, sc: .7}, {f: 72, t: 104, r: 'mel', sh: 0}],
+      asax2: [{f: 0, t: 8, r: 'mel', sh: -12}, {f: 8, t: 40, r: 'pad', g: 'saxA', i: 1}, {f: 40, t: 72, r: 'pad', g: 'clT', i: 1}, {f: 72, t: 104, r: 'mel3', sh: 0}],
+      tsax:  [{f: 0, t: 8, r: 'mel', sh: -12}, {f: 8, t: 40, r: 'pad', g: 'tenA', i: 0}, {f: 40, t: 72, r: 'mel', sh: -12, sc: .6}, {f: 72, t: 104, r: 'mel', sh: -12}],
+      bsax:  [{f: 0, t: 8, r: 'bass', sh: 0}, {f: 8, t: 40, r: 'bass', sh: 0, rh: 'march'}, {f: 40, t: 72, r: 'bass', sh: 0, rh: 'march', sc: .7}, {f: 72, t: 104, r: 'bass', sh: 0, rh: 'march'}],
+      tp1:   [{f: 0, t: 8, r: 'mel', sh: 0}, {f: 8, t: 40, r: 'mel', sh: -12}, {f: 72, t: 104, r: 'mel', sh: 0}],
+      tp2:   [{f: 0, t: 8, r: 'mel', sh: 0}, {f: 8, t: 40, r: 'mel', sh: -12, sc: .75}, {f: 72, t: 104, r: 'mel3', sh: 0}],
+      tp3:   [{f: 0, t: 8, r: 'mel', sh: -12}, {f: 8, t: 40, r: 'pad', g: 'tp3A', i: 0, sc: .7}, {f: 72, t: 102, r: 'pad', g: 'tp3G', i: 0}, {f: 102, t: 104, r: 'pad', g: 'cdTp', i: 0}],
+      hn1: starsHn(0), hn2: starsHn(1), hn3: starsHn(2), hn4: starsHn(3),
+      tb1:   [{f: 0, t: 8, r: 'mel', sh: -12}, {f: 8, t: 40, r: 'pad', g: 'tbA', i: 0, sc: .6}, {f: 72, t: 104, r: 'mel', sh: -12}],
+      tb2:   [{f: 0, t: 8, r: 'mel', sh: -24}, {f: 8, t: 40, r: 'pad', g: 'tbA', i: 1, sc: .6}, {f: 72, t: 104, r: 'mel3', sh: -12}],
+      btb:   [{f: 0, t: 8, r: 'bass', sh: 0}, {f: 8, t: 40, r: 'bass', sh: 0, rh: 'march'}, {f: 72, t: 104, r: 'bass', sh: 0, rh: 'march'}],
+      euph:  [{f: 0, t: 8, r: 'mel', sh: -12}, {f: 8, t: 40, r: 'mel', sh: -24, sc: .7}, {f: 40, t: 72, r: 'mel', sh: -12, sc: .8}, {f: 72, t: 104, r: 'mel', sh: -12}],
+      tuba:  [{f: 0, t: 8, r: 'bass', sh: 0}, {f: 8, t: 40, r: 'bass', sh: -12, rh: 'march'}, {f: 40, t: 72, r: 'bass', sh: -12, rh: 'march', sc: .65}, {f: 72, t: 104, r: 'bass', sh: -12, rh: 'march'}],
+      cb:    [{f: 0, t: 8, r: 'bass', sh: 0}, {f: 8, t: 40, r: 'bass', sh: -12, rh: 'march'}, {f: 40, t: 72, r: 'bass', sh: -12, rh: 'pizz'}, {f: 72, t: 104, r: 'bass', sh: -12, rh: 'march'}],
+      perc4: [{f: 56, t: 72, r: 'mel', sh: 12, inst: 'glock', sc: .35}],
     },
     perc: {
       perc1: [
-        {i: 'timp', b: 0, m: 48, v: .85}, {i: 'timp', b: 2, m: 48, v: .55}, {i: 'timp', b: 3, m: 48, v: .75}, {i: 'timp', b: 4, m: 41, v: .6}, {i: 'timp', b: 5, m: 48, v: .55}, {i: 'timp', b: 6, m: 43, v: .85}, {i: 'timp', b: 7, m: 43, v: .55},
-        {i: 'timp', b: 8, m: 48, v: .45}, {i: 'timp', b: 16, m: 50, v: .4}, {i: 'timp', b: 24, m: 48, v: .5}, {i: 'timp', b: 27, m: 45, v: .6}, {i: 'timp', b: 32, m: 48, v: .5}, {i: 'timp', b: 36, m: 43, v: .5}, {i: 'timp', b: 38, m: 48, v: .7},
-        {i: 'timp', b: 70, d: 2, m: 48, roll: true, v: .2, v1: .55},
-        {i: 'timp', b: 72, m: 48, v: .85}, {i: 'timp', b: 73, m: 48, v: .6}, {i: 'timp', b: 74, m: 44, v: .85}, {i: 'timp', b: 75, m: 44, v: .6},
-        {i: 'timp', b: 76, d: 2, m: 48, roll: true, v: .4, v1: .9}, {i: 'timp', b: 78, m: 48, v: 1},
-        {i: 'timp', b: 80, m: 41, v: .85}, {i: 'timp', b: 84, m: 41, v: .55}, {i: 'timp', b: 88, m: 43, v: .55}, {i: 'timp', b: 92, m: 48, v: .6}, {i: 'timp', b: 96, m: 41, v: .7},
-        {i: 'timp', b: 100, m: 43, v: .6}, {i: 'timp', b: 104, m: 41, v: .65}, {i: 'timp', b: 106, m: 50, v: .7}, {i: 'timp', b: 107, m: 43, v: .75},
-        {i: 'timp', b: 108, d: 2, m: 48, roll: true, v: .7, v1: 1}, {i: 'timp', b: 110, m: 41, v: .95},
-        {i: 'timp', b: 112, m: 41, v: .7}, {i: 'timp', b: 112.5, m: 45, v: .7}, {i: 'timp', b: 113, m: 48, v: .9}, {i: 'timp', b: 114, m: 41, v: 1},
+        ...timpOn(STARS_BASS, [[0,.85],[1,.5],[1.75,.5],[2,.6],[2.5,.85],[4,.8],[5,.8],[6,.95]]),
+        ...timpOn(STARS_BASS, each(8, 40, 2, b => [[b, b % 8 ? .42 : .55]])),
+        ...timpOn(STARS_BASS, each(40, 70, 4, b => [[b, .28]])),
+        {i: 'timp', b: 70, d: 2, m: 51, roll: true, v: .3, v1: .85},
+        ...timpOn(STARS_BASS, each(72, 102, 2, b => [[b, .78], [b + 1, .55]])),
+        ...timpOn(STARS_BASS, [[102, .9], [103, 1]]),
       ],
       perc2: [
-        ...hitsAt('sd', [[0,.85],[1,.5],[1.5,.5],[2,.6],[3,.75],[4,.55],[4.5,.4],[5,.6],[5.5,.4],[6,.8],[7,.6]]),
-        ...each(8, 38, 2, b => [14, 22, 30].includes(b) ? sdTurn(b) : hitsAt('sd', MARCH_SD, b)),
-        {i: 'sd', b: 38, v: .7},
-        ...each(40, 72, 4, b => [{i: 'tri', b, v: b === 56 ? .32 : .22}]),
-        ...hitsAt('sd', [[72,.85],[72.5,.5],[72.75,.5],[73,.8],[73.5,.5],[74,.85],[74.5,.5],[74.75,.5],[75,.8],[75.5,.5]]),
-        {i: 'sd', b: 76, d: 2, roll: true, v: .45, v1: .95}, {i: 'sd', b: 78, v: 1},
-        ...each(80, 108, 2, b => [86, 94, 102].includes(b) ? sdTurn(b, .12) : hitsAt('sd', MARCH_SD.map(([o, v]) => [o, v + .12]), b)),
-        {i: 'sd', b: 108, d: 2, roll: true, v: .6, v1: .92}, {i: 'sd', b: 110, v: .9}, {i: 'sd', b: 111.5, v: .6},
-        ...hitsAt('sd', [[112,.8],[112.5,.7],[113,.9],[114,1]]),
+        ...hitsAt('sd', [[0,.85],[1,.55],[1.75,.5],[2,.6],[2.5,.85],[4,.75],[4.5,.75],[5,.8],[5.5,.85],[6,.95],[7,.5]]),
+        ...each(8, 38, 2, b => hitsAt('sd', STARS_SD, b)),
+        {i: 'sd', b: 38, d: 1, roll: true, v: .35, v1: .6}, {i: 'sd', b: 39, v: .55},
+        ...each(40, 70, 2, b => hitsAt('sd', [[0, .18], [1, .15]], b)),
+        {i: 'sd', b: 70, d: 2, roll: true, v: .22, v1: .85},
+        ...each(72, 102, 2, b => hitsAt('sd', STARS_SD.map(([o, v]) => [o, v + .15]), b)),
+        ...hitsAt('sd', [[102, .85], [103, 1]]),
       ],
       perc3: [
-        ...hitsAt('bd', [[0,.9],[2,.6],[3,.7],[4,.6],[6,.85]]),
-        ...each(8, 38, 2, b => hitsAt('bd', [[0, .45], [1, .35]], b)), {i: 'bd', b: 38, v: .6},
-        ...each(40, 72, 2, b => hitsAt('bd', [[0, .2]], b)),
-        ...hitsAt('bd', [[72,.9],[73,.7],[74,.9],[75,.7]]), {i: 'bd', b: 76, d: 2, roll: true, v: .3, v1: .8}, {i: 'bd', b: 78, v: 1},
-        ...each(80, 110, 2, b => hitsAt('bd', [[0, .58], [1, .45]], b)), {i: 'bd', b: 110, v: .9},
-        ...hitsAt('bd', [[112,.8],[113,.85],[114,1]]),
+        ...hitsAt('bd', [[0,.9],[2.5,.7],[4,.75],[5,.75],[6,.95]]),
+        ...each(8, 40, 2, b => hitsAt('bd', [[0, .48], [1, .4]], b)),
+        ...each(40, 70, 2, b => hitsAt('bd', [[0, .22], [1, .18]], b)),
+        {i: 'bd', b: 70, d: 2, roll: true, v: .2, v1: .6},
+        ...each(72, 102, 2, b => hitsAt('bd', [[0, .62], [1, .52]], b)),
+        ...hitsAt('bd', [[102, .9], [103, 1]]),
       ],
-      perc4: hitsAt('cym', [[0,.85],[6,.7],[8,.55],[16,.45],[24,.55],[27,.5],[32,.5],[38,.6],[72,.8],[74,.8],[78,1],[80,1],[88,.55],[96,.8],[104,.6],[110,.95],[112,.7],[114,1]]),
+      perc4: [
+        ...hitsAt('cym', [[0,.85],[2.5,.6],[6,.85]]),
+        ...each(8, 40, 2, b => hitsAt('cym', [[0, .32], [1, .24]], b)),
+        ...each(40, 72, 4, b => [{i: 'tri', b, v: .22}]),
+        {i: 'cym', b: 72, v: 1},
+        ...each(74, 102, 2, b => hitsAt('cym', b === 92 ? [[0, .9], [1, .4]] : [[0, .45], [1, .35]], b)),
+        ...hitsAt('cym', [[102, .8], [103, 1]]),
+      ],
     },
   },
 
-  wa: {
-    id: 'wa',
-    title: '「月と祭」',
-    full: '吹奏楽のための「月と祭」',
-    composer: 'このゲームのための書き下ろし（2026年）',
-    key: '日本の音階（都節・民謡音階）', trans: -2, meter: 4, beats: 96,
-    tempi: [120, 132, 144],
-    tmap: [[0, 2], [24, 1]],
-    desc: '月夜の序奏は、尺八のように吹くフルートのソロ。拍子木の合図で、太鼓と鈴が鳴る祭りへ駆け出す。日本の音階の歌い回しと、打楽器と管楽器のリズムのキレが問われる。',
-    asks: '表現・リズム・音色',
-    focus: {pitch: .95, tone: 1.05, expr: 1.15, rhythm: 1.1, balance: 1},
-    balRef: 1.5, ceiling: .97,
-    spans: [{name: '序奏（フルートのソロ）', from: 0, to: 24}, {name: '祭り（前半）', from: 24, to: 56}, {name: '祭り（後半〜最後）', from: 56, to: 96}],
-    slur: [[0, 'bar'], [24, 'pairs']],
-    scale: [[0, [0, 4, 5, 9, 11]], [24, [0, 2, 4, 7, 9]]],
-    mel: [...line(WA_INTRO), ...line(WA_MAT + ' | A4:2> r:2', 24), ...line(WA_MAT + ' | A5:3> G5:.5 E5:.5', 56), ...line("E5:.5 G5:.5 A5:3> | A5:.5'> r:3.5", 88)],
-    cm: line(WA_CM, 56),
-    chords: [...chords('E5:4 | E5:2 Am:2 | F:4 | Esus4:2 E5:2 | Am:4 | E5:2 Esus4:1 E5:1'), ...chords(WA_MAT_CH, 24), ...chords(WA_MAT_CH, 56), ...chords('Asus4:2 A5:2 | A5:4', 88)],
-    bass: [...line('E2:4 | E2:2 A2:2 | F2:4 | E2:4 | A2:4 | E2:4'), ...line(WA_MAT_BASS + ' | A2:1> r:3', 24),
-           ...line(WA_MAT_BASS + ' | A2:1 A2:.5 A2:.5 E2:1 A2:1', 56), ...line("A2:4 | A2:.5'> r:3.5", 88)],
-    dyn: [[0,.3],[3,.4],[8,.36],[12,.3],[15.9,.24],[16,.38],[18,.48],[20,.42],[22,.5],[23.9,.55],
-          [24,.62],[38,.66],[40,.6],[48,.7],[52,.74],[55.9,.7],[56,.86],[70,.88],[72,.84],[80,.9],[86,.94],[88,.84],[91,.98],[92,1],[96,.9]],
-    rubato: [[0,1.05],[3,.95],[4,1],[7,1.1],[8,1],[11,1.15],[12,1.08],[15.5,1.3],[16,1],[19,1.1],[20,1],[23.9,1],[24,1],[54,1],[56,1],[84,1],[86,1.06],[88,1],[90,1.08],[92,1.15],[96,1.2]],
+  jupiter: {
+    id: 'jupiter',
+    title: '「木星」',
+    full: 'ホルスト 組曲《惑星》より「木星」',
+    composer: 'G.ホルスト（1918年初演）',
+    key: '変ホ長調', trans: 3, meter: 3, beats: 81,
+    tempi: [66, 74, 82],
+    desc: '「ジュピター」として知られる、あのゆったりした3拍子の旋律。ホルンと低音の歌から始まり、最後は全員で大きく歌い上げる。長い旋律を息でつなぐ音色と、和音の響きがものをいう。',
+    asks: '音色・音程・表現',
+    focus: {pitch: 1.05, tone: 1.15, expr: 1.1, rhythm: .85, balance: 1.05},
+    balRef: 3.1, ceiling: .98,
+    spans: [{name: '前半（ホルンの歌）', from: 0, to: 29}, {name: '中間（木管へ）', from: 29, to: 53}, {name: '最後（全員で）', from: 53, to: 81}],
+    slur: 'bar',
+    mel: line(JUP_MEL),
+    chords: chords(JUP_CH),
+    bass: JUP_BASS_EV,
+    dyn: [[0,.22],[4.9,.3],[5,.34],[11,.42],[16.9,.36],[17,.4],[23,.5],[28.9,.44],[29,.48],[35,.56],[40.9,.52],[41,.58],[47,.68],[52.9,.8],[53,.88],[59,.92],[64.9,.86],[65,.9],[71,.96],[75,1],[81,.94]],
+    rubato: [[0,1.05],[5,1],[15,1],[16.9,1.1],[17,1],[27,1],[28.9,1.12],[29,1],[39,1],[40.9,1.1],[41,1],[51,1.02],[52.9,1.16],[53,1],[63,1],[64.9,1.1],[65,1],[71,1.03],[73,1.12],[75,1.3],[78,1.5],[81,1.6]],
     groups: {
-      hnI:   {n: 3, lo: 52, hi: 66, rh: 'sus'},
-      clI:   {n: 2, lo: 57, hi: 71, rh: 'sus'},
-      hnP:   {n: 4, lo: 55, hi: 69, rh: WA_STAB},
-      tsP:   {n: 1, lo: 50, hi: 62, rh: WA_STAB},
-      tpB:   {n: 1, lo: 60, hi: 70, rh: WA_STAB},
-      tbA:   {n: 2, lo: 45, hi: 57, rh: 'sus'},
-      tbB:   {n: 1, lo: 45, hi: 57, rh: 'sus'},
-      cdHnA: {n: 4, lo: 55, hi: 70, rh: 'sus'}, cdHnB: {n: 4, lo: 55, hi: 70, rh: CODA_B},
-      cdTbA: {n: 3, lo: 41, hi: 60, rh: 'sus'}, cdTbB: {n: 3, lo: 41, hi: 60, rh: CODA_B},
-      cdTpA: {n: 1, lo: 62, hi: 74, rh: 'sus'}, cdTpB: {n: 1, lo: 62, hi: 74, rh: CODA_B},
+      hnI: {n: 4, lo: 48, hi: 62, rh: 'sus'},
+      clI: {n: 3, lo: 52, hi: 67, rh: 'sus'},
+      hnP: {n: 2, lo: 50, hi: 64, rh: 'sus'},
+      clP: {n: 3, lo: 52, hi: 67, rh: 'sus'},
+      tbP: {n: 2, lo: 45, hi: 58, rh: 'sus'},
+      hnB: {n: 4, lo: 50, hi: 66, rh: 'sus'},
+      tbB: {n: 2, lo: 45, hi: 60, rh: 'sus'},
+      midB:{n: 2, lo: 50, hi: 64, rh: 'sus'},
+      hnF: {n: 2, lo: 52, hi: 68, rh: 'sus'},
+      tbF: {n: 1, lo: 45, hi: 60, rh: 'sus'},
+      tpF: {n: 1, lo: 57, hi: 69, rh: 'sus'},
     },
     roles: {
-      fl1:   [{f: 0, t: 24, r: 'mel', sh: 0, solo: true, fb: ['ob', 'cl1']}, {f: 24, t: 56, r: 'mel', sh: 12, sc: .7}, {f: 56, t: 96, r: 'mel', sh: 12}],
-      fl2:   [{f: 24, t: 56, r: 'mel3', sh: 12, sc: .6}, {f: 56, t: 96, r: 'mel3', sh: 12}],
-      picc:  [{f: 56, t: 96, r: 'mel', sh: 12, sc: .75}],
-      ob:    [{f: 24, t: 96, r: 'mel', sh: 0}],
-      ebcl:  [{f: 56, t: 96, r: 'mel', sh: 12, sc: .7}],
-      cl1:   [{f: 16, t: 24, r: 'mel', sh: -12, sc: .6}, {f: 24, t: 56, r: 'mel', sh: 0}, {f: 56, t: 96, r: 'mel', sh: 12}],
-      cl2:   [{f: 0, t: 24, r: 'pad', g: 'clI', i: 0, sc: .7}, {f: 24, t: 56, r: 'mel3', sh: 0}, {f: 56, t: 96, r: 'mel', sh: 0}],
-      cl3:   [{f: 0, t: 24, r: 'pad', g: 'clI', i: 1, sc: .7}, {f: 24, t: 96, r: 'mel3', sh: 0}],
-      bcl:   [{f: 0, t: 24, r: 'bass', sh: 0, sc: .6}, {f: 24, t: 88, r: 'bass', sh: 0, rh: 'march'}, {f: 88, t: 96, r: 'bass', sh: 0}],
-      fg:    [{f: 0, t: 24, r: 'bass', sh: 12, sc: .6}, {f: 24, t: 88, r: 'bass', sh: 0, rh: 'march'}, {f: 88, t: 96, r: 'bass', sh: 0}],
-      asax1: [{f: 24, t: 96, r: 'mel', sh: 0}],
-      asax2: [{f: 24, t: 96, r: 'mel3', sh: 0}],
-      tsax:  [{f: 24, t: 56, r: 'pad', g: 'tsP', i: 0}, {f: 56, t: 88, r: 'cm', sh: 0}, {f: 88, t: 96, r: 'mel', sh: -12}],
-      bsax:  [{f: 0, t: 24, r: 'bass', sh: 0, sc: .6}, {f: 24, t: 88, r: 'bass', sh: 0, rh: 'march'}, {f: 88, t: 96, r: 'bass', sh: 0}],
-      tp1:   [{f: 40, t: 56, r: 'mel', sh: 0, sc: .75}, {f: 56, t: 96, r: 'mel', sh: 0}],
-      tp2:   [{f: 40, t: 56, r: 'mel3', sh: 0, sc: .65}, {f: 56, t: 96, r: 'mel3', sh: 0}],
-      tp3:   [{f: 56, t: 88, r: 'pad', g: 'tpB', i: 0}, {f: 88, t: 92, r: 'pad', g: 'cdTpA', i: 0}, {f: 92, t: 96, r: 'pad', g: 'cdTpB', i: 0}],
-      hn1: waHn(0), hn2: waHn(1), hn3: waHn(2), hn4: waHn(3),
-      tb1:   [{f: 24, t: 56, r: 'pad', g: 'tbA', i: 0, sc: .6}, {f: 56, t: 88, r: 'cm', sh: 0}, {f: 88, t: 92, r: 'pad', g: 'cdTbA', i: 0}, {f: 92, t: 96, r: 'pad', g: 'cdTbB', i: 0}],
-      tb2:   [{f: 24, t: 56, r: 'pad', g: 'tbA', i: 1, sc: .6}, {f: 56, t: 88, r: 'pad', g: 'tbB', i: 0}, {f: 88, t: 92, r: 'pad', g: 'cdTbA', i: 1}, {f: 92, t: 96, r: 'pad', g: 'cdTbB', i: 1}],
-      btb:   [{f: 24, t: 88, r: 'bass', sh: 0, rh: 'march'}, {f: 88, t: 92, r: 'pad', g: 'cdTbA', i: 2}, {f: 92, t: 96, r: 'pad', g: 'cdTbB', i: 2}],
-      euph:  [{f: 16, t: 24, r: 'mel', sh: -12, sc: .5}, {f: 24, t: 56, r: 'mel', sh: -12, sc: .7}, {f: 56, t: 88, r: 'cm', sh: 0}, {f: 88, t: 96, r: 'mel', sh: -12}],
-      tuba:  [{f: 0, t: 24, r: 'bass', sh: 0, sc: .55}, {f: 24, t: 88, r: 'bass', sh: 0, rh: 'march'}, {f: 88, t: 96, r: 'bass', sh: 0}],
-      cb:    [{f: 0, t: 24, r: 'bass', sh: 0, sc: .7}, {f: 24, t: 88, r: 'bass', sh: 0, rh: 'pizz'}, {f: 88, t: 96, r: 'bass', sh: 0}],
+      hn1:   [{f: 0, t: 5, r: 'pad', g: 'hnI', i: 0, sc: .7}, {f: 5, t: 29, r: 'mel', sh: -12}, {f: 29, t: 53, r: 'pad', g: 'hnB', i: 0}, {f: 53, t: 81, r: 'mel', sh: -12}],
+      hn2:   [{f: 0, t: 5, r: 'pad', g: 'hnI', i: 1, sc: .7}, {f: 5, t: 29, r: 'mel', sh: -12}, {f: 29, t: 53, r: 'pad', g: 'hnB', i: 1}, {f: 53, t: 81, r: 'mel', sh: -12}],
+      hn3:   [{f: 0, t: 5, r: 'pad', g: 'hnI', i: 2, sc: .7}, {f: 5, t: 29, r: 'pad', g: 'hnP', i: 0}, {f: 29, t: 53, r: 'pad', g: 'hnB', i: 2}, {f: 53, t: 81, r: 'pad', g: 'hnF', i: 0}],
+      hn4:   [{f: 0, t: 5, r: 'pad', g: 'hnI', i: 3, sc: .7}, {f: 5, t: 29, r: 'pad', g: 'hnP', i: 1}, {f: 29, t: 53, r: 'pad', g: 'hnB', i: 3}, {f: 53, t: 81, r: 'pad', g: 'hnF', i: 1}],
+      euph:  [{f: 5, t: 29, r: 'mel', sh: -12}, {f: 29, t: 53, r: 'mel', sh: -12, sc: .6}, {f: 53, t: 81, r: 'mel', sh: -12}],
+      tsax:  [{f: 5, t: 29, r: 'mel', sh: -12, sc: .8}, {f: 29, t: 53, r: 'pad', g: 'midB', i: 0}, {f: 53, t: 81, r: 'mel', sh: -12}],
+      asax1: [{f: 5, t: 17, r: 'mel', sh: 0, sc: .55}, {f: 17, t: 53, r: 'mel', sh: 0, sc: .8}, {f: 53, t: 81, r: 'mel', sh: 0}],
+      asax2: [{f: 5, t: 29, r: 'pad', g: 'clP', i: 2}, {f: 29, t: 81, r: 'mel3', sh: 0}],
+      ob:    [{f: 17, t: 29, r: 'mel', sh: 0, sc: .6}, {f: 29, t: 81, r: 'mel', sh: 0}],
+      fl1:   [{f: 29, t: 41, r: 'mel', sh: 12, sc: .7}, {f: 41, t: 81, r: 'mel', sh: 12}],
+      fl2:   [{f: 41, t: 81, r: 'mel3', sh: 12}],
+      picc:  [{f: 53, t: 81, r: 'mel', sh: 12, sc: .7}],
+      ebcl:  [{f: 53, t: 81, r: 'mel', sh: 12, sc: .7}],
+      cl1:   [{f: 0, t: 5, r: 'pad', g: 'clI', i: 0, sc: .6}, {f: 17, t: 29, r: 'mel', sh: 0, sc: .7}, {f: 29, t: 53, r: 'mel', sh: 0}, {f: 53, t: 81, r: 'mel', sh: 12}],
+      cl2:   [{f: 0, t: 5, r: 'pad', g: 'clI', i: 1, sc: .6}, {f: 5, t: 29, r: 'pad', g: 'clP', i: 0}, {f: 29, t: 53, r: 'mel3', sh: 0}, {f: 53, t: 81, r: 'mel', sh: 0}],
+      cl3:   [{f: 0, t: 5, r: 'pad', g: 'clI', i: 2, sc: .6}, {f: 5, t: 29, r: 'pad', g: 'clP', i: 1}, {f: 29, t: 53, r: 'pad', g: 'midB', i: 1}, {f: 53, t: 81, r: 'mel3', sh: 0}],
+      tp1:   [{f: 41, t: 53, r: 'mel', sh: 0, sc: .75}, {f: 53, t: 81, r: 'mel', sh: 0}],
+      tp2:   [{f: 41, t: 53, r: 'mel3', sh: 0, sc: .65}, {f: 53, t: 81, r: 'mel3', sh: 0}],
+      tp3:   [{f: 53, t: 81, r: 'pad', g: 'tpF', i: 0}],
+      tb1:   [{f: 17, t: 29, r: 'pad', g: 'tbP', i: 0, sc: .5}, {f: 29, t: 53, r: 'pad', g: 'tbB', i: 0, sc: .7}, {f: 53, t: 81, r: 'mel', sh: -12}],
+      tb2:   [{f: 17, t: 29, r: 'pad', g: 'tbP', i: 1, sc: .5}, {f: 29, t: 53, r: 'pad', g: 'tbB', i: 1, sc: .7}, {f: 53, t: 81, r: 'pad', g: 'tbF', i: 0}],
+      btb:   [{f: 29, t: 53, r: 'bass', sh: -12, sc: .7}, {f: 53, t: 81, r: 'bass', sh: -12}],
+      bcl:   [{f: 0, t: 5, r: 'bass', sh: 0, sc: .6}, {f: 5, t: 81, r: 'bass', sh: 0}],
+      fg:    [{f: 0, t: 81, r: 'bass', sh: 0, sc: .8}],
+      bsax:  [{f: 5, t: 81, r: 'bass', sh: 0}],
+      tuba:  [{f: 0, t: 5, r: 'bass', sh: -12, sc: .5}, {f: 5, t: 29, r: 'bass', sh: -12, sc: .65}, {f: 29, t: 81, r: 'bass', sh: -12}],
+      cb:    [{f: 0, t: 81, r: 'bass', sh: -12}],
+      perc4: [{f: 41, t: 53, r: 'mel', sh: 24, inst: 'glock', sc: .3}],
     },
     perc: {
       perc1: [
-        {i: 'timp', b: 0, d: 4, m: 40, roll: true, v: .08, v1: .22}, {i: 'timp', b: 12, m: 40, v: .3},
-        {i: 'timp', b: 16, d: 8, m: 40, roll: true, v: .12, v1: .55},
-        ...each(24, 52, 4, b => [{i: 'timp', b, m: 45, v: .7}, {i: 'timp', b: b + 1.5, m: 52, v: .45}, {i: 'timp', b: b + 2, m: 45, v: .6}, {i: 'timp', b: b + 3, m: 52, v: .5}]),
-        {i: 'timp', b: 52, m: 45, v: .85},
-        ...each(56, 84, 4, b => [{i: 'timp', b, m: 45, v: .85}, {i: 'timp', b: b + 1.5, m: 52, v: .6}, {i: 'timp', b: b + 2, m: 45, v: .75}, {i: 'timp', b: b + 3, m: 52, v: .65}, {i: 'timp', b: b + 3.5, m: 52, v: .6}]),
-        {i: 'timp', b: 84, m: 45, v: .9}, {i: 'timp', b: 86, d: 2, m: 52, roll: true, v: .55, v1: .9},
-        {i: 'timp', b: 88, d: 4, m: 45, roll: true, v: .55, v1: 1}, {i: 'timp', b: 92, m: 45, v: 1},
+        {i: 'timp', b: 0, d: 5, m: 48, roll: true, v: .12, v1: .3},
+        ...timpOn(JUP_BASS_EV, [[30, .3], [36, .32], [42, .38], [48, .45]], 40),
+        {i: 'timp', b: 50, d: 3, m: 43, roll: true, v: .3, v1: .85},
+        ...timpOn(JUP_BASS_EV, [[54, .8], [57, .6], [60, .65], [63, .6], [66, .75], [69, .6], [72, .7]], 40),
+        {i: 'timp', b: 75, d: 5.5, m: 48, roll: true, v: .5, v1: .95},
       ],
       perc2: [
-        // 拍子木の打ち込み（だんだん間をつめて、祭りの始まりの合図にする）
-        ...[20, 21.25, 22.25, 22.9, 23.35, 23.65, 23.85].map((b, k) => ({i: 'hyoshigi', b, v: .5 + .06 * k})),
-        ...each(24, 52, 4, b => hitsAt('shime', SHIME_BAR, b)),
-        ...hitsAt('shime', [[52,.6],[54,.5],[54.5,.5],[55,.6],[55.5,.7]]),
-        ...each(56, 84, 4, b => hitsAt('shime', [...SHIME_BAR.map(([o, v]) => [o, v + .14]), [3.75, .38]], b)),
-        {i: 'shime', b: 84, v: .7}, {i: 'shime', b: 85, d: 3, roll: true, v: .4, v1: .85},
-        {i: 'shime', b: 88, d: 3.5, roll: true, v: .5, v1: .95}, {i: 'shime', b: 92, v: 1},
-        {i: 'hyoshigi', b: 94, v: .9},
+        {i: 'tri', b: 17, v: .16}, {i: 'tri', b: 29, v: .2},
+        {i: 'sus', b: 50, d: 3, roll: true, v: .08, v1: .6},
+        {i: 'sus', b: 75, d: 5.5, roll: true, v: .3, v1: .85},
       ],
       perc3: [
-        {i: 'taiko', b: 0, v: .4}, {i: 'taiko', b: 8, v: .3}, {i: 'taiko', b: 16, v: .35}, {i: 'taiko', b: 22, d: 2, roll: true, v: .2, v1: .6},
-        ...each(24, 52, 4, b => hitsAt('taiko', [[0, .75], [1.5, .45], [2, .65]], b)),
-        ...hitsAt('taiko', [[52, .9], [53, .5], [53.5, .6], [54, .75], [55, .8], [55.5, .85]]),
-        ...each(56, 84, 4, b => hitsAt('taiko', [[0, .9], [1.5, .55], [2, .8], [3, .6], [3.5, .65]], b)),
-        ...hitsAt('taiko', [[84, .9], [86, .8], [87, .85]]),
-        {i: 'taiko', b: 88, d: 4, roll: true, v: .45, v1: 1}, {i: 'taiko', b: 92, v: 1},
+        {i: 'bd', b: 51, d: 2, roll: true, v: .1, v1: .5},
+        ...hitsAt('bd', [[54, .7], [66, .6], [75, .85]]),
+        {i: 'tamtam', b: 75, v: .35},
+      ],
+      perc4: hitsAt('cym', [[54, .85], [66, .65], [75, .95]]),
+    },
+  },
+
+  mountain: {
+    id: 'mountain',
+    title: '「山の魔王の宮殿にて」',
+    full: 'グリーグ 劇音楽《ペール・ギュント》より「山の魔王の宮殿にて」',
+    composer: 'E.グリーグ（1876年初演）',
+    key: 'ロ短調', trans: 0, meter: 4, beats: 160,
+    tempi: [116, 126, 136],
+    tcurve: [[0, 1], [20, 1], [52, .96], [84, .9], [116, .84], [116.01, .8], [132, .77], [148, .74], [160, .74]],
+    desc: 'ファゴットと低音がひそやかに始める同じ旋律を、楽器を増やしながらくり返し、だんだん速く、大きくしていく。テンポが上がっても縦の線を崩さずにいられるかが勝負。',
+    asks: 'リズム・表現・バランス',
+    focus: {pitch: .9, tone: 1, expr: 1.05, rhythm: 1.25, balance: 1.05},
+    balRef: 10.8, ceiling: .96,
+    spans: [{name: '前半（低音のささやき）', from: 0, to: 52}, {name: '中盤（だんだん大きく）', from: 52, to: 116}, {name: '最後（速く、全員で）', from: 116, to: 160}],
+    slur: 'tongue',
+    scale: [[0, [11, 1, 2, 4, 6, 7, 9]], [36, [6, 8, 10, 11, 1, 2, 4]], [52, [11, 1, 2, 4, 6, 7, 9]], [84, [6, 8, 10, 11, 1, 2, 4]], [116, [11, 1, 2, 4, 6, 7, 9]], [132, [6, 8, 10, 11, 1, 2, 4]], [148, [11, 1, 2, 4, 6, 7, 9]]],
+    mel: [...line('F#3:4'), ...shift(oct(HALL_A, -1), 4), ...shift(HALL_A, 20), ...shift(oct(HALL_B, 1), 36), ...shift(oct(HALL_A, 1), 52), ...shift(oct(HALL_A, 2), 68),
+          ...shift(oct(HALL_B, 2), 84), ...shift(oct(HALL_B, 3), 100), ...shift(oct(HALL_A, 3), 116), ...shift(oct(HALL_B, 3), 132), ...line("r:1 B5:.5'> r:2.5 | r:4 | r:1 B5:.5'> r:2.5", 148)],
+    chords: [...chords('F#5:4'), ...chords(HALL_A_CH, 4), ...chords(HALL_A_CH, 20), ...chords(HALL_B_CH, 36), ...chords(HALL_A_CH, 52), ...chords(HALL_A_CH, 68),
+             ...chords(HALL_B_CH, 84), ...chords(HALL_B_CH, 100), ...chords(HALL_A_CH, 116), ...chords(HALL_B_CH, 132), ...chords('B5:1 Bo7:3 | B5:4 | B5:1 Bm:3', 148)],
+    bass: HALL_BASS,
+    dyn: [[0,.26],[3.9,.22],[4,.2],[19.9,.22],[20,.24],[35.9,.26],[36,.3],[51.9,.34],[52,.4],[67.9,.46],[68,.52],[83.9,.6],[84,.66],[99.9,.74],[100,.8],[115.9,.86],[116,.95],[131.9,.97],[132,.98],[148,1],[152,.42],[154,.45],[155.9,.95],[156,1],[160,1]],
+    rubato: [[0,1.2],[3.9,1.3],[4,1],[147,1],[148,1.05],[152,1.12],[156,1.1],[160,1.2]],
+    groups: {
+      hnS:  {n: 4, lo: 54, hi: 69, rh: 'ab'},
+      tbS:  {n: 2, lo: 47, hi: 62, rh: 'ab'},
+      tpS:  {n: 1, lo: 60, hi: 72, rh: 'ab'},
+      cdHn: {n: 4, lo: 54, hi: 70, rh: HALL_HIT},
+      cdTb: {n: 2, lo: 47, hi: 62, rh: HALL_HIT},
+      cdW:  {n: 3, lo: 60, hi: 76, rh: HALL_HIT},
+      cdTp: {n: 2, lo: 62, hi: 76, rh: HALL_HIT},
+    },
+    roles: {
+      // 0〜4：ホルンのファ#　4〜20：ロから（いちばん低く）　20〜36：1オクターブ上　36〜52：Bの旋律
+      // 52〜68：Aをさらに上で　68〜84：もう1オクターブ上　84〜116：Bの旋律を2回（2回目は高く）　116〜：速く、全員で
+      fg:    [...melIn([4, 20, 0], [20, 36, 0], [36, 52, 0], [52, 68, -12], [68, 84, -24]), {f: 84, t: 116, r: 'bass', sh: 0}, {f: 116, t: 160, r: 'bass', sh: 12}],
+      bcl:   [...melIn([4, 20, 0], [20, 36, 0], [36, 52, -12], [52, 68, -24]), {f: 68, t: 116, r: 'bass', sh: 0}, {f: 116, t: 160, r: 'bass', sh: 12}],
+      cb:    [{f: 4, t: 84, r: 'bass', sh: 0, rh: 'pizz'}, {f: 84, t: 160, r: 'bass', sh: 0, rh: 'march'}],
+      tuba:  [{f: 36, t: 52, r: 'bass', sh: 0, sc: .5}, {f: 52, t: 84, r: 'bass', sh: 0, sc: .65}, {f: 84, t: 160, r: 'bass', sh: 0}],
+      bsax:  [{f: 52, t: 68, r: 'bass', sh: 12, sc: .6}, {f: 68, t: 116, r: 'bass', sh: 12}, {f: 116, t: 160, r: 'bass', sh: 12}],
+      btb:   [{f: 84, t: 160, r: 'bass', sh: 0}],
+      tsax:  [...melIn([20, 36, 0, .5], [36, 52, 0], [52, 68, -12], [68, 84, -24], [84, 100, -12], [100, 116, -24], [116, 132, -36], [132, 148, -24]), ...hallEnd('cdW', 2)],
+      euph:  [...melIn([36, 52, 0, .6], [52, 68, -12, .7], [68, 84, -24, .8], [84, 100, -12], [100, 116, -24], [116, 132, -36], [132, 148, -24]), ...hallEnd('cdTb', 1)],
+      cl1:   [...melIn([52, 68, 0], [68, 84, 0], [84, 100, 0], [100, 116, 0], [116, 132, -12], [132, 148, 0], [148, 160, 0])],
+      cl2:   [...melIn([52, 68, 0], [68, 84, -12], [84, 100, -12], [100, 116, -12], [116, 132, -12], [132, 148, -12]), ...hallEnd('cdW', 0)],
+      cl3:   [...melIn([36, 52, 0, .6], [52, 68, 0, .8], [68, 84, -12], [84, 100, -12], [100, 116, -24], [116, 132, -24], [132, 148, -24]), ...hallEnd('cdW', 1)],
+      asax1: [...melIn([52, 68, 0], [68, 84, -12], [84, 100, 0], [100, 116, -12], [116, 132, -24], [132, 148, -12], [148, 160, -12])],
+      asax2: [...melIn([52, 68, 0, .8], [68, 84, -12], [84, 100, -12], [100, 116, -12], [116, 132, -24], [132, 148, -12]), ...hallEnd('cdW', 2)],
+      ob:    [...melIn([68, 84, 0, .8], [84, 100, 0], [100, 116, 0], [116, 132, -12], [132, 148, 0], [148, 160, 0])],
+      fl1:   [...melIn([68, 84, 0], [84, 100, 12], [100, 116, 0], [116, 132, 0], [132, 148, 0], [148, 160, 0])],
+      fl2:   [...melIn([68, 84, 0, .7], [84, 100, 0], [100, 116, -12], [116, 132, -12], [132, 148, -12], [148, 160, -12])],
+      picc:  [...melIn([100, 116, 12, .7], [116, 132, 0], [132, 148, 12], [148, 160, 12])],
+      ebcl:  [...melIn([84, 100, 12, .6], [100, 116, 0], [116, 132, -12], [132, 148, 0], [148, 160, 0])],
+      tp1:   [...melIn([84, 100, -12, .75], [100, 116, -12], [116, 132, -12], [132, 148, -12], [148, 160, -12])],
+      tp2:   [{f: 84, t: 100, r: 'pad', g: 'tpS', i: 0, sc: .7}, ...melIn([100, 116, -12, .85], [116, 132, -24], [132, 148, -24]), ...hallEnd('cdTp', 0)],
+      tp3:   [{f: 100, t: 116, r: 'pad', g: 'tpS', i: 0}, ...melIn([116, 132, -24], [132, 148, -24]), ...hallEnd('cdTp', 1)],
+      hn1:   [...melIn([0, 4, 12, .8]), {f: 52, t: 116, r: 'pad', g: 'hnS', i: 0}, ...melIn([116, 132, -36], [132, 148, -24]), ...hallEnd('cdHn', 0)],
+      hn2:   [...melIn([0, 4, 0, .8]), {f: 52, t: 116, r: 'pad', g: 'hnS', i: 1}, ...melIn([116, 132, -36], [132, 148, -24]), ...hallEnd('cdHn', 1)],
+      hn3:   [...melIn([0, 4, 12, .8]), {f: 52, t: 148, r: 'pad', g: 'hnS', i: 2}, ...hallEnd('cdHn', 2)],
+      hn4:   [...melIn([0, 4, 0, .8]), {f: 52, t: 148, r: 'pad', g: 'hnS', i: 3}, ...hallEnd('cdHn', 3)],
+      tb1:   [{f: 68, t: 100, r: 'pad', g: 'tbS', i: 0, sc: .55}, ...melIn([100, 116, -24], [116, 132, -36], [132, 148, -24]), ...hallEnd('cdTb', 0)],
+      tb2:   [{f: 68, t: 116, r: 'pad', g: 'tbS', i: 1, sc: .55}, ...melIn([116, 132, -36], [132, 148, -36]), ...hallEnd('cdTb', 1)],
+      perc4: [{f: 84, t: 112, r: 'mel', sh: 12, inst: 'xylo', sc: .35}],
+    },
+    perc: {
+      perc1: [
+        ...timpOn(HALL_BASS, each(52, 84, 1, b => [[b, b < 68 ? .22 : .3]])),
+        ...timpOn(HALL_BASS, each(84, 116, 1, b => [[b, b % 4 ? (b < 100 ? .38 : .48) : (b < 100 ? .5 : .62)]])),
+        ...timpOn(HALL_BASS, each(116, 148, 1, b => [[b, b % 4 ? .62 : .85]])),
+        ...timpOn(HALL_BASS, [[148, .95]]),
+        {i: 'timp', b: 154, d: 2, m: 47, roll: true, v: .4, v1: 1}, {i: 'timp', b: 156, m: 47, v: 1},
+      ],
+      perc2: [
+        ...each(100, 116, 1, b => [{i: 'sd', b, v: b % 4 ? .28 : .38}]),
+        ...each(116, 148, .5, b => [{i: 'sd', b, v: b % 1 ? .32 : b % 4 ? .45 : .6}]),
+        ...hitsAt('sd', [[148, .85], [149, .95]]), {i: 'sd', b: 154, d: 2, roll: true, v: .3, v1: .95}, ...hitsAt('sd', [[156, 1], [157, 1]]),
+      ],
+      perc3: [
+        ...each(84, 100, 4, b => [{i: 'bd', b, v: .35}]),
+        ...each(100, 116, 2, b => [{i: 'bd', b, v: b % 4 ? .38 : .48}]),
+        ...each(116, 148, 1, b => [{i: 'bd', b, v: b % 4 ? .5 : .68}]),
+        ...hitsAt('bd', [[148, 1]]), {i: 'bd', b: 154, d: 2, roll: true, v: .3, v1: .9}, ...hitsAt('bd', [[156, 1], [157, .7]]),
       ],
       perc4: [
-        {i: 'tamtam', b: 0, v: .35}, {i: 'chime', b: 12, m: 76, v: .3}, {i: 'suzu', b: 16, v: .25}, {i: 'suzu', b: 20, v: .3},
-        ...each(24, 52, 4, b => hitsAt('suzu', [[0, .35], [2, .3]], b)), {i: 'suzu', b: 52, v: .45},
-        ...hitsAt('cym', [[56, 1], [64, .6], [72, .8], [80, .6], [84, .75]]),
-        {i: 'sus', b: 88, d: 4, roll: true, v: .3, v1: .9}, {i: 'tamtam', b: 92, v: 1},
+        {i: 'sus', b: 112, d: 4, roll: true, v: .1, v1: .75},
+        {i: 'cym', b: 116, v: 1}, ...each(120, 132, 4, b => [{i: 'cym', b, v: .55}]),
+        ...each(132, 148, 2, b => [{i: 'cym', b, v: b % 4 ? .5 : .75}]),
+        ...hitsAt('cym', [[149, 1], [157, 1]]),
       ],
     },
   },
 };
-const PIECE_IDS = ['largo', 'ode', 'march', 'wa'];
+const PIECE_IDS = ['largo', 'ode', 'stars', 'jupiter', 'mountain'];
 // その拍でのテンポ（序奏だけゆっくり、のような曲は楽譜上の切り替えを反映する）と、表示用の書き方
-const bpmAt = (pc, i, b = 0) => Math.round(pc.tempi[i] / sectionAt(pc.tmap, b, 1));
-const tempoLabel = (pc, i) => pc.tmap ? `♩=${bpmAt(pc, i, 0)}→${pc.tempi[i]}` : `♩=${pc.tempi[i]}`;
+// 楽譜の上のテンポの変わり方：tmap は段階的な切り替え、tcurve はだんだん速く（遅く）。値は1拍の長さの倍率
+const tmAt = (pc, b) => pc.tcurve ? interp(pc.tcurve, b) : sectionAt(pc.tmap, b, 1);
+const bpmAt = (pc, i, b = 0) => Math.round(pc.tempi[i] / tmAt(pc, b));
+// 拍の単位（2分音符で数える行進曲、8分音符で数えるゆっくりした曲など）と、表示用の書き方
+const beatName = pc => pc.beatUnit === 2 ? '2分音符' : pc.beatUnit === .5 ? '♪' : '♩';
+const tempoLabel = (pc, i) => {
+  const a = bpmAt(pc, i, 0), z = bpmAt(pc, i, pc.beats - 0.01);
+  return `${beatName(pc)}=${a}${a !== z ? '→' + z : ''}`;
+};
 
 /* ===== 編曲の組み立て ===== */
 function chordAt(pc, b){

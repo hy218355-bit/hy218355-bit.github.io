@@ -57,6 +57,8 @@ const wkLabel = w => `${wkMonth(w)}月 第${w % 4 + 1}週`;
 const wkShort = w => `${wkMonth(w)}月${w % 4 + 1}週`;
 
 const freshFam = () => Object.fromEntries(PIECE_IDS.map(id => [id, 0]));
+// 以前あった自作曲（2026年10月に有名な曲へ入れ替えた）
+const PIECE_MOVED = {march: 'stars', wa: 'mountain'};
 function freshState(year = 2026){
   const s = {
     v: 2, year, startYear: year, week: 0, phase: 'choose', pieceId: null, interp: {tempo: 1, dyn: 1, rub: 1},
@@ -649,6 +651,12 @@ function load(){
   try{
     const s = JSON.parse(localStorage.getItem(SAVE_KEY) || 'null');
     if(s && s.v === 2 && Array.isArray(s.members)){
+      // 入れ替えた曲は近い曲に置き換える（指揮の記録と区間は、曲の長さが変わるので外す）
+      const mv = id => PIECE_MOVED[id] || id;
+      s.pieceId &&= mv(s.pieceId);
+      s.contestPiece &&= mv(s.contestPiece);
+      for(const [old, nu] of Object.entries(PIECE_MOVED)) if(old in s.fam){ s.fam[nu] = Math.max(s.fam[nu] || 0, s.fam[old]); delete s.fam[old]; }
+      for(const r of s.recs || []) if(PIECE_MOVED[r.pieceId]){ r.pieceId = PIECE_MOVED[r.pieceId]; delete r.conduct; delete r.span; }
       s.fam = {...freshFam(), ...s.fam};   // あとから増えた曲
       s.startYear ??= s.history[0]?.year ?? s.year;
       for(const m of s.members) m.mental ??= mentalInit(m.trait, m.grade, 'mig', m.id);

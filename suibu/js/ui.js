@@ -668,7 +668,11 @@ function seniorCard(m, last){
       <div class="transport">${showFirst ? `<button class="btn small" type="button" data-act="memplay" data-id="${first.id}" data-mid="${m.id}">▶ ${joinedHere ? '入部したころ' : 'いちばん古い録音'}の音</button>` : ''}${last && recHas(last, m) ? `<button class="btn small" type="button" data-act="memplay" data-id="${last.id}" data-mid="${m.id}">▶ 最後の本番の音</button><button class="btn small" type="button" data-act="memsave" data-id="${last.id}" data-mid="${m.id}">⤓ 保存</button>` : ''}</div>
     </div></details>`;
 }
-const conductNote = p => p.conducted ? `・あなたの指揮 ♩=${p.conducted.bpm}、安定度${p.conducted.stab}%` : '';
+const conductNote = p => {
+  if(!p.conducted) return '';
+  const pc = PIECES[S.recs.find(r => r.id === p.recId)?.pieceId];
+  return `・あなたの指揮 ${pc ? beatName(pc) : '♩'}=${p.conducted.bpm}、安定度${p.conducted.stab}%`;
+};
 function renderStageResult(w, ev){
   const p = S.pending;
   if(!p.revealed){
