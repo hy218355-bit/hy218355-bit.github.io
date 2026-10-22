@@ -202,7 +202,7 @@ function remember(s, m, t){
 const adj = (s, k, d) => { s[k] = clamp(s[k] + d, 0, 100); };
 const senpai = (s, m) => s.members.filter(x => x.seat && x.id !== m.id && x.grade > m.grade && secOf(x) === secOf(m)).sort((a, b) => b.grade - a.grade)[0]
   || s.members.filter(x => x.seat && x.grade === 3)[0];
-const contestAhead = s => EVENTS[s.week + 1]?.kind === 'contest' ? EVENTS[s.week + 1] : null;
+const contestAhead = s => eventAt(s, s.week + 1)?.kind === 'contest' ? eventAt(s, s.week + 1) : null;
 
 // who：その出来事の主役になれる部員（2人必要なものは pair で相手を選ぶ）
 const EPISODES = [
