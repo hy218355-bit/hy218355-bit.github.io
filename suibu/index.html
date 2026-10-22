@@ -335,7 +335,32 @@ tr.empty td{color:var(--ink-soft)}
   max-width:calc(100% - 32px);padding:10px 12px 10px 16px;border-radius:14px;background:var(--ink);color:var(--paper);font-size:14px;box-shadow:0 8px 24px var(--shadow)}
 .toast[hidden]{display:none}
 .tabbed .toast{bottom:calc(126px + env(safe-area-inset-bottom,0px))}
-@media (prefers-reduced-motion: reduce){.cd-ripple{animation:none;opacity:0}.cd-judge{animation:none}}
+/* 結果発表：暗いホールで、1校ずつ読み上げる */
+.announce{position:fixed;inset:0;z-index:85;display:flex;flex-direction:column;gap:12px;background:#0E1424;color:#E3E8F2;
+  padding:calc(18px + env(safe-area-inset-top,0px)) max(16px,env(safe-area-inset-right,0px)) calc(14px + env(safe-area-inset-bottom,0px)) max(16px,env(safe-area-inset-left,0px))}
+.announce[hidden]{display:none}
+.announcing body{overflow:hidden}
+.announce .eyebrow{color:#DDAE55}
+.announce h2{font-family:var(--f-display);font-weight:400;font-size:clamp(19px,5vw,26px);line-height:1.35}
+.an-body{flex:1;min-height:0;overflow:auto;max-width:640px;width:100%;margin:0 auto;display:grid;align-content:start;gap:16px}
+.an-list,.an-rep ol{list-style:none;display:grid;gap:4px}
+.an-list li,.an-rep li{display:grid;grid-template-columns:2em minmax(0,1fr) auto;gap:10px;align-items:baseline;padding:6px 10px;border-radius:8px;animation:anin .35s ease-out}
+.an-rep li{grid-template-columns:auto minmax(0,1fr) auto}
+.an-list li.ours,.an-rep li.ours{background:rgba(255,255,255,.07);box-shadow:inset 0 0 0 1.5px #DDAE55}
+.announce .no{font-family:var(--f-lcd);font-size:13px;color:#97A1B6}
+.announce .nm{font-size:15px;line-height:1.45}
+.announce .aw{font-weight:700;white-space:nowrap;opacity:0;transition:opacity .3s}
+.announce .aw.on{opacity:1}
+.announce .aw.gold{color:#E2BC4A}.announce .aw.silver{color:#B4BDC9}.announce .aw.bronze{color:#D08A5A}.announce .aw.rep{color:#0E1424;background:#E2BC4A;border-radius:4px;padding:1px 8px}
+.announce .ours .aw{font-family:var(--f-display);font-weight:400;font-size:20px}
+.announce .aw.stamp-in{animation:stampin .5s cubic-bezier(.2,1.5,.4,1)}
+.an-rep{display:grid;gap:8px}
+.an-rep .lead{font-family:var(--f-hand);font-size:16px;line-height:1.6}
+.an-foot{max-width:640px;width:100%;margin:0 auto;display:flex;justify-content:flex-end;gap:10px}
+.announce .btn.quiet{color:#E3E8F2;border-color:#3A4560;background:transparent}
+@keyframes anin{from{opacity:0;transform:translateY(6px)}}
+@keyframes stampin{from{opacity:0;transform:scale(2.4) rotate(-8deg)}}
+@media (prefers-reduced-motion: reduce){.cd-ripple{animation:none;opacity:0}.cd-judge{animation:none}.an-list li,.an-rep li,.announce .aw.stamp-in{animation:none}}
 
 /* スマホ・タブレット縦：1列になる幅では、画面下のタブで「今週・合奏・部員・日誌・ラボ」を切り替える */
 .tabbar,.mini{display:none}
@@ -493,6 +518,14 @@ tr.empty td{color:var(--ink-soft)}
   <div class="cd-result" id="cdResult" hidden></div>
   <p class="cd-stats"><span>いまのテンポ ♩=<b id="cdTempo">--</b></span><span>指定 ♩=<b id="cdRef"></b></span><span class="combo" id="cdCombo" aria-live="off"></span></p>
 </section>
+<section class="announce" id="announce" hidden aria-labelledby="anTitle">
+  <div class="an-body">
+    <div><p class="eyebrow">ホールの照明が落ちた</p><h2 id="anTitle"></h2></div>
+    <ol class="an-list" id="anList" aria-live="polite"></ol>
+    <div class="an-rep" id="anRep" aria-live="polite"></div>
+  </div>
+  <div class="an-foot"><button class="btn quiet" type="button" id="anSkip">とばす</button><button class="btn primary" type="button" id="anDone" hidden>結果を見る</button></div>
+</section>
 <div class="toast" id="toast" role="status" hidden></div>
 
 <!-- スマホ・タブレット縦：画面下のタブで切り替える -->
@@ -514,6 +547,7 @@ tr.empty td{color:var(--ink-soft)}
 <script src="js/game.js"></script>
 <script src="js/engine.js"></script>
 <script src="js/conduct.js"></script>
+<script src="js/announce.js"></script>
 <script src="js/ui.js"></script>
 </body>
 </html>

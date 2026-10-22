@@ -1,6 +1,46 @@
 'use strict';
 /* 再生エンジン：演奏データを少し先まで順に予約して鳴らす（ソロ・会場・聴く位置は再生中でも切り替えられる） */
 
+/* 拍手：録音は使わず、客席の一人ひとりの手拍子（短い雑音を共鳴させたもの）を重ねて作る。一度作った7秒をくり返し使う */
+let APPLAUSE = null;
+function applauseBuffer(ac){
+  if(APPLAUSE && APPLAUSE.sampleRate === ac.sampleRate) return APPLAUSE;
+  const sr = ac.sampleRate, dur = 7, n = Math.ceil(dur * sr);
+  const buf = ac.createBuffer(2, n, sr), L = buf.getChannelData(0), R = buf.getChannelData(1);
+  let seed = 12345;
+  const rnd = () => (seed = (Math.imul(seed, 1103515245) + 12345) >>> 0) / 4294967296;
+  // 手の形で音色が変わるので、共鳴の高さと鋭さの違う手拍子を何種類か用意する
+  const claps = [];
+  for(let k = 0; k < 12; k++){
+    const len = Math.floor(sr * (0.035 + 0.03 * rnd())), f = 700 + 1900 * rnd(), q = 1.2 + 2.5 * rnd();
+    const w = 2 * Math.PI * f / sr, al = Math.sin(w) / (2 * q), a0 = 1 + al;
+    const b0 = al / a0, b2 = -al / a0, a1 = -2 * Math.cos(w) / a0, a2 = (1 - al) / a0;
+    const x = new Float32Array(len);
+    let x1 = 0, x2 = 0, y1 = 0, y2 = 0;
+    const tau = (0.004 + 0.006 * rnd()) * sr;
+    for(let i = 0; i < len; i++){
+      const v = (rnd() * 2 - 1) * Math.exp(-i / tau);
+      const y = b0 * v + b2 * x2 - a1 * y1 - a2 * y2;
+      x2 = x1; x1 = v; y2 = y1; y1 = y;
+      x[i] = y;
+    }
+    claps.push(x);
+  }
+  const people = 160;
+  for(let p = 0; p < people; p++){
+    const rate = 3 + 2 * rnd(), pan = rnd(), near = 0.25 + 0.75 * rnd() * rnd(), gl = Math.cos(pan * Math.PI / 2) * near, gr = Math.sin(pan * Math.PI / 2) * near;
+    const kind = claps[Math.floor(rnd() * claps.length)];
+    for(let t = rnd() / rate; t < dur - 0.1; t += (1 + 0.18 * (rnd() - 0.5)) / rate){
+      const at = Math.floor(t * sr), a = 0.7 + 0.6 * rnd();
+      for(let i = 0; i < kind.length && at + i < n; i++){ L[at + i] += kind[i] * a * gl; R[at + i] += kind[i] * a * gr; }
+    }
+  }
+  let pk = 0;
+  for(let i = 0; i < n; i++) pk = Math.max(pk, Math.abs(L[i]), Math.abs(R[i]));
+  for(let i = 0; i < n; i++){ L[i] /= pk; R[i] /= pk; }
+  return (APPLAUSE = buf);
+}
+
 class Engine {
   constructor(){
     this.ac = null; this.chain = null; this.pb = null;
@@ -37,7 +77,32 @@ class Engine {
     this.pb = new Playback(this, perf, onEnd, opts);
     return this.pb;
   }
-  stop(){ if(this.pb){ this.pb.stop(); this.pb = null; } }
+  stop(){ if(this.pb){ this.pb.stop(); this.pb = null; } this.stopApplause(); }
+  // 客席の拍手（heat 0〜1：熱いほど大きく長い）。客席は聴き手のまわりなので、ステージの響きの前を通さず、ホールの残響にだけ送る
+  applaud(heat = 0.6, dur = 3 + 3 * heat){
+    if(!this.ensure()) return;
+    this.stopApplause();
+    const ac = this.ac, t = ac.currentTime + 0.05;
+    const src = ac.createBufferSource(); src.buffer = applauseBuffer(ac);
+    const g = ac.createGain(), send = ac.createGain();
+    const peak = 0.09 + 0.2 * clamp01(heat);
+    g.gain.setValueAtTime(0, t);
+    g.gain.linearRampToValueAtTime(peak, t + 0.35);
+    g.gain.setValueAtTime(peak, t + Math.max(0.5, dur - 1.6));
+    g.gain.linearRampToValueAtTime(0, t + dur);
+    send.gain.value = 0.35;
+    src.connect(g); g.connect(this.chain.sum); g.connect(send); send.connect(this.chain.wetIn);
+    src.start(t, Math.random() * 0.6); src.stop(t + dur + 0.05);
+    this.clap = {src, g, send};
+    src.onended = () => { if(this.clap && this.clap.src === src) this.clap = null; try{ g.disconnect(); send.disconnect(); }catch(e){} };
+  }
+  stopApplause(){
+    if(!this.clap) return;
+    const {src, g} = this.clap, t = this.ac.currentTime;
+    g.gain.cancelScheduledValues(t); g.gain.setValueAtTime(g.gain.value, t); g.gain.linearRampToValueAtTime(0, t + 0.3);
+    try{ src.stop(t + 0.35); }catch(e){}
+    this.clap = null;
+  }
   // 再生中の位置（楽譜どおりの速さで数えた秒）。再生していなければ -1
   now(){
     if(!this.pb || !this.ac) return -1;

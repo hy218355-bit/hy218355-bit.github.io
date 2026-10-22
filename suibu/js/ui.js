@@ -425,6 +425,7 @@ function drawIdle(){
 
 /* ===== 上部：カレンダー・曲・会場 ===== */
 function seasonEnd(){
+  if(S.finalWeek) return S.finalWeek;
   const qualified = lvl => S.season.some(r => r.level === lvl && r.rep);
   if(qualified('block') || S.week > BLOCK_WEEK) return NATIONAL_WEEK;
   if(qualified('pref') || S.week > PREF_WEEK) return BLOCK_WEEK;
@@ -437,7 +438,7 @@ function renderHeader(){
   const last = seasonEnd();
   for(let w = 0; w <= last; w++){
     const li = document.createElement('li');
-    const ev = EVENTS[w];
+    const ev = eventAt(S, w);
     if(ev?.kind === 'contest'){ li.className = 'contest'; li.textContent = {pref: '県', block: '支部', national: '全国'}[ev.level]; }
     else if(ev?.kind === 'concert') li.classList.add('show');
     else if(ev) li.classList.add('ev');
@@ -449,15 +450,15 @@ function renderHeader(){
     ol.appendChild(li);
   }
   if(S.phase === 'choose'){ $('#weekNow').textContent = `${S.year}年 4月・選曲会議`; $('#weeksLeft').textContent = '県大会まで16週'; return; }
-  if(S.phase === 'end'){ $('#weekNow').textContent = `${S.year}年度のコンクールが終わった`; $('#weeksLeft').textContent = ''; return; }
+  if(S.phase === 'end'){ $('#weekNow').textContent = `${S.year}年度の本番がすべて終わった`; $('#weeksLeft').textContent = ''; return; }
   $('#weekNow').textContent = wkLabel(S.week);
   let nx = null;
-  for(let w = S.week; w <= last; w++){ const ev = EVENTS[w]; if(ev && (ev.kind === 'concert' || ev.kind === 'contest')){ nx = [w, ev]; break; } }
+  for(let w = S.week; w <= last; w++){ const ev = eventAt(S, w); if(ev && (ev.kind === 'concert' || ev.kind === 'contest')){ nx = [w, ev]; break; } }
   $('#weeksLeft').textContent = nx ? (nx[0] === S.week ? `今週は本番：${nx[1].title}` : `次の本番「${nx[1].title}」まで${nx[0] - S.week}週`) : '';
 }
 function renderPiece(){
   const pid = playPiece(), pc = PIECES[pid];
-  $('#pieceEyebrow').textContent = S.phase === 'choose' ? '試しに聴く曲' : pid === S.pieceId ? '自由曲' : 'もう1曲（初見で吹いてみる）';
+  $('#pieceEyebrow').textContent = S.phase === 'choose' ? '試しに聴く曲' : pid === S.pieceId ? (S.finalWeek ? '定期演奏会の曲' : '自由曲') : 'もう1曲（初見で吹いてみる）';
   $('#piece').textContent = pc.full;
   $('#pieceMeta').textContent = `${pc.composer}｜${pc.key}｜${tempoLabel(pc, S.interp.tempo)}｜問われる力：${pc.asks}`;
   $('#pieceSel').innerHTML = PIECE_IDS.map(id => `<button type="button" data-piece="${id}" aria-pressed="${id === pid}">${PIECES[id].title}</button>`).join('');
@@ -536,7 +537,7 @@ function moodText(n){
   return n <= 3 ? 'みんな落ち着いている。いつもどおり吹けそうだ。' : n <= 6 ? '少し緊張している。本番では実力より少し下がりそうだ。' : '緊張と不安で、本番は実力を出しきれないかもしれない。';
 }
 function renderWeek(){
-  const w = $('#week'), ev = EVENTS[S.week];
+  const w = $('#week'), ev = eventAt(S, S.week);
   const head = $('#h-week');
   if(S.phase === 'choose'){
     head.textContent = '選曲会議';
@@ -550,7 +551,7 @@ function renderWeek(){
     const res = S.season.map(r => `<li>${LEVELS[r.level].name}　${nm[r.award]}${r.rep ? '・代表' : ''}（平均${r.avg}点）</li>`).join('');
     const seniors = S.members.filter(m => m.grade === 3);
     const april = S.recs.find(r => r.year === S.year && r.keep && r.week === 0);
-    const lastStage = S.recs.slice().reverse().find(r => r.year === S.year && r.result);
+    const lastStage = S.recs.slice().reverse().find(r => r.year === S.year && r.final) || S.recs.slice().reverse().find(r => r.year === S.year && r.result);
     w.innerHTML = `<div class="stagecard"><h3>3年生が引退します</h3><ol class="small" style="padding-left:1.2em">${res}</ol>
       <p class="txt">${seniors.map(m => esc(m.name)).join('、')}（${seniors.length}人）が引退する。4月の録音と最後の本番を聴き比べてみよう。</p>
       <div class="transport">${april ? `<button class="btn small" type="button" data-act="playrec" data-id="${april.id}">▶ 4月の録音</button>` : ''}${lastStage ? `<button class="btn small" type="button" data-act="playrec" data-id="${lastStage.id}">▶ 最後の本番</button><button class="btn small" type="button" data-act="saverec" data-id="${lastStage.id}">⤓ 最後の本番を保存</button>` : ''}</div></div>
@@ -582,6 +583,12 @@ function renderWeek(){
         <select id="as-${r.id}" aria-label="${esc(r.name)}の担当"><option value="">控え（席なし）</option>${free.map(id => `<option value="${id}"${map[r.id] === id ? ' selected' : ''}>${PART_LABEL[SEAT[id].part]}</option>`).join('')}</select></div>`).join('')}</div>
       <p class="small" id="assignErr"></p>
       <button class="btn primary" type="button" data-act="assign">この担当で決める</button>`;
+    return;
+  }
+  if(S.chooseFinal){
+    const fam = id => Math.round(S.fam[id] || 0);
+    w.innerHTML = `<div class="event"><span class="tag">定期演奏会の曲</span><span>3年生の最後の本番、${wkLabel(S.finalWeek)}の定期演奏会で演奏する曲を決めよう。コンクールの曲をもう一度でも、新しい曲に挑戦してもいい（仕上がりは低いところから）。</span></div>`
+      + PIECE_IDS.map(id => { const pc = PIECES[id]; return `<div class="pcard"><h3>${pc.full}</h3><p>${id === S.contestPiece ? 'コンクールで演奏した曲・' : ''}仕上がり ${fam(id)}｜問われる力：${pc.asks}</p><div class="row"><button class="btn small" type="button" data-act="preview" data-pid="${id}">▶ 試しに聴く</button><button class="btn small primary" type="button" data-act="choosefinal" data-pid="${id}">この曲にする</button></div></div>`; }).join('');
     return;
   }
   const parts = [];
@@ -637,7 +644,7 @@ function renderStageResult(w, ev){
   }
   if(p.kind === 'concert'){
     w.innerHTML = `<div class="stagecard"><span class="tag">本番</span><h3>${ev.title}</h3><p class="small">演奏の出来 ${Math.round(p.q)}点（緊張 −${p.nerves}）${conductNote(p)}</p><p class="txt">${esc(p.text)}</p>
-      <div class="transport"><button class="btn small" type="button" data-act="playrec" data-id="${p.recId}">▶ もう一度聴く</button><button class="btn small" type="button" data-act="saverec" data-id="${p.recId}">⤓ 保存</button><button class="btn primary" type="button" data-act="next">次の週へ</button></div></div>`;
+      <div class="transport"><button class="btn small" type="button" data-act="playrec" data-id="${p.recId}">▶ もう一度聴く</button><button class="btn small" type="button" data-act="saverec" data-id="${p.recId}">⤓ 保存</button><button class="btn primary" type="button" data-act="next">${ev.final ? '3年生の引退へ' : '次の週へ'}</button></div></div>`;
     return;
   }
   const j = p.judge, L = LEVELS[j.level];
@@ -774,7 +781,8 @@ function startStage(){
   U.piece = null; U.range = 'all';
   setVenue(rec.venue);
   renderAll();
-  playPerf(perform(recCtx(rec)), rec.label, () => reveal());
+  playPerf(perform(recCtx(rec)), rec.label, natural => natural ? applaudThenReveal() : reveal());
+  setTimeout(() => { if(E.ac) applauseBuffer(E.ac); }, 2500);   // 拍手の音は、演奏中に作っておく
 }
 // 本番を自分で指揮する：結果はいったん部員まかせで決め、指揮しきったら指揮の演奏で採点し直す
 function startStageConduct(){
@@ -784,7 +792,7 @@ function startStageConduct(){
   U.piece = null; U.range = 'all';
   setVenue(rec.venue);
   renderAll();
-  openConduct({rec, ev: EVENTS[S.week]});
+  openConduct({rec, ev: eventAt(S, S.week)});
 }
 function reveal(){
   if(!S.pending || S.pending.revealed) return;
@@ -793,7 +801,14 @@ function reveal(){
   renderAll();
   const p = S.pending;
   if(p.kind === 'concert') haptic(p.q >= 60 ? 'success' : 'tap');
-  else if(p.judge) haptic(p.judge.rep || p.judge.award === 'gold' ? 'success' : p.judge.award === 'bronze' ? 'warning' : 'tap');
+  // コンクールは、ホールでの結果発表から
+  else if(p.judge) showAnnounce(p.judge, p.judge.level, () => setTab('week'));
+}
+// 本番が鳴り終わったら、客席から拍手（出来がよいほど大きく長い）。少し聴いてから結果へ
+const stageHeat = p => p.kind === 'concert' ? clamp01((p.q - 20) / 70) : clamp01((p.judge.avg - 45) / 40);
+function applaudThenReveal(){
+  if(S.pending && !S.pending.revealed){ E.applaud(stageHeat(S.pending)); setTimeout(reveal, 1800); }
+  else reveal();
 }
 function playRec(id){
   const rec = S.recs.find(r => r.id === id);
@@ -876,8 +891,9 @@ function bind(){
     if(b.dataset.focus !== undefined){ S.focus = b.dataset.focus || null; commit(S); renderWeek(); return; }
     if(b.dataset.ep !== undefined){ haptic('tap'); commit(resolveEpisode(S, +b.dataset.ep)); renderAll(); refreshNow(); return; }
     const act = b.dataset.act;
-    if(act === 'preview'){ U.piece = b.dataset.pid; U.range = 'all'; renderPiece(); renderInterp(); U.perfNow = perform(currentCtx()); U.diag = analyze(U.perfNow); renderDiag(); playPerf(U.perfNow, `試聴：${PIECES[b.dataset.pid].title}（譜読み前）`); }
+    if(act === 'preview'){ U.piece = b.dataset.pid; U.range = 'all'; renderPiece(); renderInterp(); U.perfNow = perform(currentCtx()); U.diag = analyze(U.perfNow); renderDiag(); playPerf(U.perfNow, `試聴：${PIECES[b.dataset.pid].title}${(S.fam[b.dataset.pid] || 0) < 5 ? '（譜読み前）' : ''}`); }
     else if(act === 'choose'){ stopPlay(); commit(choosePiece(S, b.dataset.pid)); U.piece = null; renderAll(); refreshNow(); }
+    else if(act === 'choosefinal'){ stopPlay(); commit(chooseFinalPiece(S, b.dataset.pid)); U.piece = null; renderAll(); refreshNow(); }
     else if(act === 'test'){ commit(practiceWeek(S, 'test')); renderAll(); refreshNow(); }
     else if(act === 'assign'){
       const map = {}, used = new Set();
@@ -936,6 +952,7 @@ function bind(){
     renderAll(); refreshNow();
   });
   bindConduct();
+  bindAnnounce();
   $('#tabbar').addEventListener('click', e => { const b = e.target.closest('[data-tabgo]'); if(b) setTab(b.dataset.tabgo, true); });
   $('#miniLabel').addEventListener('click', () => setTab('play'));
   $('#miniStop').addEventListener('click', () => stopPlay());

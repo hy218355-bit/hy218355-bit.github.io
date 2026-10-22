@@ -30,10 +30,17 @@ const EVENTS = {
        text: '市民会館で近くの高校と合同演奏会。よその学校の先生が講評をくれる。'},
   13: {kind: 'mod', title: '夏合宿', mult: 1.6, costMult: 1.3, venue: 'camp', text: '合宿所のホールで朝から晩まで合奏。練習の効果が1.6倍、体力の消費も1.3倍。'},
   14: {kind: 'mod', title: '夏合宿・後半', mult: 1.6, costMult: 1.3, venue: 'camp', text: '合宿の後半。疲れはたまるが、音はまとまってくる。'},
+  22: {kind: 'concert', id: 'bunkasai', title: '文化祭ステージ', venue: 'gym', nerves: 2,
+       text: '文化祭で、体育館のステージに立つ。クラスの友だちや家族が聴きに来る。'},
   [PREF_WEEK]:     {kind: 'contest', level: 'pref', title: '吹奏楽コンクール 県大会', venue: 'hall', nerves: 5},
   [BLOCK_WEEK]:    {kind: 'contest', level: 'block', title: '吹奏楽コンクール 支部大会', venue: 'grand', nerves: 8},
   [NATIONAL_WEEK]: {kind: 'contest', level: 'national', title: '全日本吹奏楽コンクール', venue: 'grand', nerves: 10},
 };
+// 3年生の最後の本番。コンクールが終わったあと、日にちはコンクールをどこまで勝ち進んだかで決まる（s.finalWeek）
+const FINAL_EVENT = {kind: 'concert', id: 'teien', title: '定期演奏会（3年生の引退公演）', venue: 'civic', nerves: 4, final: true,
+  text: '3年生にとって最後の本番。市民会館の大ホールに、家族や卒業生、近所の人たちが聴きに来る。'};
+// コンクールで負けたあとの週には、その先の大会はない
+const eventAt = (s, w) => w === s.finalWeek ? FINAL_EVENT : s.finalWeek && w > s.autumnFrom && EVENTS[w]?.kind === 'contest' ? null : EVENTS[w];
 const MILESTONES = [
   {k: 'tone',   at: 40, text: '音の出だしが安定してきた。音が裏返ることが減った。'},
   {k: 'pitch',  at: 50, text: 'ユニゾンのうなりがゆっくりになってきた。'},
@@ -113,7 +120,7 @@ function clone(s){ return JSON.parse(JSON.stringify(s)); }
 function practiceWeek(s0, id){
   const s = clone(s0);
   s.lastEpisode = null;
-  const ev = EVENTS[s.week] || {};
+  const ev = eventAt(s, s.week) || {};
   if(id === 'test'){
     s.stamina += 30; s.morale += 2; s.lastDelta = {};
     for(const m of seated(s)) m.stats.pitch = Math.max(0, m.stats.pitch - 1);
@@ -167,7 +174,7 @@ function nextWeek(s){
   s.hallExp = Math.max(0, s.hallExp - 4);
   s.week++;
   s.pending = null;
-  const ev = EVENTS[s.week];
+  const ev = eventAt(s, s.week);
   if(ev){
     if(ev.morale) s.morale = clamp(s.morale + ev.morale, 0, 100);
     if(ev.kind !== 'contest') addLog(s, `【${ev.title}】${ev.text}`);
@@ -317,13 +324,23 @@ const EPISODES = [
      {label: '今日は早く帰して休ませる', go: (s, m) => { adj(s, 'stamina', 8); adj(s, 'morale', 2);
        remember(s, m, `${contestAhead(s).title}の前の週、「休むのも練習」と言われて早く帰った。`); return '「明日のために休むのも練習」と伝えた。みんな素直に帰っていった。'; }},
    ]},
+  {id: 'lastweek', always: s => s.finalWeek === s.week + 1, who: s => seated(s).filter(m => m.grade === 3),
+   text: (s, m) => `定期演奏会の前の週。3年生の${m.name}たちが、後輩に楽譜の書き込みや練習ノートを渡していた。`,
+   choices: [
+     {label: '3年生と最後の合奏をする', go: (s, m) => { s.fam[s.pieceId] = clamp((s.fam[s.pieceId] || 0) + 3, 0, 100); adj(s, 'morale', 3);
+       for(const x of seated(s)) if(x.grade === 3) remember(s, x, '定期演奏会の前の週、後輩たちと最後の合奏をした。');
+       return '最後の音がホールの残響のように音楽室に残った。誰もすぐには楽器を下ろさなかった。'; }},
+     {label: '3年生にひとことずつ話してもらう', go: (s, m) => { adj(s, 'cohesion', 5); adj(s, 'morale', 5);
+       for(const x of seated(s)) if(x.grade === 3) remember(s, x, '定期演奏会の前の週、後輩たちの前でひとこと話した。');
+       return `${m.name}が最初に話し、途中で声をつまらせた。後輩たちは真剣に聞いていた。`; }},
+   ]},
 ];
 const EPISODE_BY = Object.fromEntries(EPISODES.map(e => [e.id, e]));
 
 // 練習の週に、出来事を起こすかどうかと、どれを誰に起こすかを決める（同じ年に同じ出来事はくり返さない）
 function pickEpisode(s){
   if(s.phase !== 'week') return null;
-  const ev = EVENTS[s.week];
+  const ev = eventAt(s, s.week);
   if(ev && ev.kind !== 'mod') return null;
   const flag = ep => `ep:${s.year}:${ep.id}${ep.always ? ':' + s.week : ''}`;
   const used = ep => s.flags[flag(ep)];
@@ -365,10 +382,11 @@ function resolveEpisode(s0, k){
 // 本番を始めるときの条件をそろえて記録する（音は画面側で鳴らす）
 function beginStage(s0){
   const s = clone(s0);
-  const ev = EVENTS[s.week];
+  const ev = eventAt(s, s.week);
   const nerves = nervesFor(s, ev);
   const rec = addRec(s, `${s.year} ${ev.title}`, {venue: ev.venue, nerves});
-  rec.keep = ev.kind === 'contest';
+  rec.keep = ev.kind === 'contest' || !!ev.final;
+  if(ev.final) rec.final = true;
   const perf = perform(recCtx(rec));
   stageResult(s, ev, rec, perf, nerves);
   return s;
@@ -387,7 +405,7 @@ function stageResult(s, ev, rec, perf, nerves){
 // 本番を自分で指揮したとき：その拍の進み方で演奏し直したものを採点する
 function conductStage(s0, conduct){
   const s = clone(s0);
-  const ev = EVENTS[s.week], p = s.pending;
+  const ev = eventAt(s, s.week), p = s.pending;
   const rec = s.recs.find(r => r.id === p.recId);
   rec.conduct = conduct;
   const perf = warpPerf(perform(recCtx(rec)), BeatClock.fromSaved(conduct.ev, 0));
@@ -406,6 +424,13 @@ function concertOutcome(s, ev, q, perf, a){
     const dm = Math.round(q / 10) - 2;
     return {morale: dm, text: q >= 60 ? '商店街の人たちが手拍子をしてくれた。みんな笑顔で帰ってきた。' : q >= 35 ? 'お客さんは足を止めて聴いてくれた。屋外の難しさも知った。' : '響きのない屋外で、自分たちの粗がまる聞こえだった。'};
   }
+  if(ev.id === 'bunkasai'){
+    const dm = Math.round(q / 10) - 1;
+    return {morale: dm, text: q >= 60 ? '体育館がいっぱいになり、アンコールの声がかかった。クラスの友だちが「すごかった」と言いに来た。' : q >= 35 ? '家族やクラスの友だちが、あたたかい拍手をくれた。' : '体育館の響きにのまれてしまったが、来てくれた人たちは最後まで聴いてくれた。'};
+  }
+  if(ev.id === 'teien'){
+    return {morale: 0, text: q >= 60 ? '満員の客席から、いつまでも拍手が鳴りやまなかった。3年生の目が赤かった。' : q >= 35 ? '客席から大きな拍手が送られた。3年生は晴れやかな顔でステージを降りた。' : '思うようにはいかなかったが、3年生は最後まで吹ききった。客席からあたたかい拍手が送られた。'};
+  }
   const j = judge(perf, a, 'pref');
   const dm = Math.round(q / 12) - 2;
   return {morale: dm, text: `よその学校の先生から講評をもらった。「${j.judges[0].comment}」`};
@@ -413,14 +438,14 @@ function concertOutcome(s, ev, q, perf, a){
 function finishStage(s0){
   const s = clone(s0);
   const p = s.pending;
-  const ev = EVENTS[s.week];
+  const ev = eventAt(s, s.week);
   if(!p) return s;
   if(p.kind === 'concert'){
     if(p.recruits) s.recruits = makeRecruits(s, p.recruits);
     if(p.morale) s.morale = clamp(s.morale + p.morale, 0, 100);
     addLog(s, `${ev.title}：${p.text}`);
     s.stamina = clamp(s.stamina - 8, 0, 100);
-    return nextWeek(s);
+    return ev.final ? endSeason(s) : nextWeek(s);
   }
   const j = p.judge;
   const L = LEVELS[ev.level];
@@ -431,22 +456,40 @@ function finishStage(s0){
     s.morale = clamp(s.morale + 10, 0, 100);
     return nextWeek(s);
   }
-  return endSeason(s);
+  return startAutumn(s);
+}
+// コンクールが終わったら、3年生の最後の本番（定期演奏会）に向けて秋の練習。夏休みのうちに終わったときは2学期から
+function startAutumn(s){
+  s.finalWeek = Math.max(26, s.week + 4);
+  s.autumnFrom = s.week;
+  s.contestPiece = s.pieceId;
+  s.chooseFinal = true;
+  addLog(s, `コンクールが終わった。3年生の最後の本番は、${wkLabel(s.finalWeek)}の定期演奏会。`);
+  if(s.week < 19){ s.week = 19; addLog(s, '夏休みが明けて、2学期が始まった。'); }
+  return nextWeek(s);
+}
+// 定期演奏会で演奏する曲を決める（コンクールの曲をもう一度でも、新しい曲でもよい）
+function chooseFinalPiece(s0, pid){
+  const s = clone(s0);
+  s.pieceId = pid; s.chooseFinal = false;
+  addLog(s, pid === s.contestPiece ? `定期演奏会でも、コンクールで演奏した${PIECES[pid].title}をもう一度演奏することにした。` : `定期演奏会では、新しく${PIECES[pid].full}に挑戦することにした。`);
+  return s;
 }
 function endSeason(s){
   s.phase = 'end';
   s.pending = null;
   const seniors = s.members.filter(m => m.grade === 3);
-  addLog(s, `コンクールが終わり、3年生${seniors.length}人が引退した。`);
+  addLog(s, `定期演奏会が終わり、3年生${seniors.length}人が引退した。`);
   return s;
 }
 function newYear(s0){
   const s = clone(s0);
-  const pieceTitle = s.pieceId ? PIECES[s.pieceId].title : '';
+  const pid = s.contestPiece || s.pieceId, pieceTitle = pid ? PIECES[pid].title : '';
   s.history.push({year: s.year, piece: pieceTitle, results: s.season});
   s.members = s.members.filter(m => m.grade < 3).map(m => ({...m, grade: m.grade + 1}));
   assignTitles(s.members);
   s.year++; s.week = 0; s.phase = 'choose'; s.pieceId = null; s.season = []; s.pending = null; s.recruits = null;
+  s.finalWeek = null; s.autumnFrom = null; s.contestPiece = null; s.chooseFinal = false;
   s.cohesion = Math.round(s.cohesion * 0.6); s.fam = freshFam(); s.stamina = 100; s.morale = 70; s.hallExp = 0; s.focus = null; s.lastDelta = {};
   for(const m of s.members) for(const k of STAT_KEYS) m.stats[k] = Math.round(Math.max(0, m.stats[k] - 2) * 10) / 10;
   addLog(s, `${s.year}年度がはじまった。部員は${s.members.length}人。自由曲を決めよう。`);

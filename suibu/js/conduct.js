@@ -204,6 +204,7 @@ function cdFinish(natural){
   if(CD.stage){
     // 本番：この指揮で演奏した結果で採点し直す
     commit(conductStage(S, conduct));
+    E.applaud(stageHeat(S.pending));
     CD.rec = S.recs.find(r => r.id === S.pending.recId);
     renderAll();
     $('#cdPad').hidden = true; cdMsg('');
