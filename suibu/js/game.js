@@ -49,11 +49,12 @@ const wkMonth = w => 4 + Math.floor(w / 4);
 const wkLabel = w => `${wkMonth(w)}月 第${w % 4 + 1}週`;
 const wkShort = w => `${wkMonth(w)}月${w % 4 + 1}週`;
 
+const freshFam = () => Object.fromEntries(PIECE_IDS.map(id => [id, 0]));
 function freshState(year = 2026){
   const s = {
     v: 2, year, week: 0, phase: 'choose', pieceId: null, interp: {tempo: 1, dyn: 1, rub: 1},
     members: initialRoster(year), recruits: null,
-    cohesion: 25, stamina: 100, morale: 70, fam: {largo: 0, ode: 0}, hallExp: 0, focus: null,
+    cohesion: 25, stamina: 100, morale: 70, fam: freshFam(), hallExp: 0, focus: null,
     log: [], recs: [], history: [], season: [], flags: {}, pending: null, lastDelta: {},
   };
   addLog(s, `${year}年度がはじまった。部員は${s.members.length}人。まずはコンクールの自由曲を決めよう。`);
@@ -261,7 +262,7 @@ function newYear(s0){
   s.members = s.members.filter(m => m.grade < 3).map(m => ({...m, grade: m.grade + 1}));
   assignTitles(s.members);
   s.year++; s.week = 0; s.phase = 'choose'; s.pieceId = null; s.season = []; s.pending = null; s.recruits = null;
-  s.cohesion = Math.round(s.cohesion * 0.6); s.fam = {largo: 0, ode: 0}; s.stamina = 100; s.morale = 70; s.hallExp = 0; s.focus = null; s.lastDelta = {};
+  s.cohesion = Math.round(s.cohesion * 0.6); s.fam = freshFam(); s.stamina = 100; s.morale = 70; s.hallExp = 0; s.focus = null; s.lastDelta = {};
   for(const m of s.members) for(const k of STAT_KEYS) m.stats[k] = Math.round(Math.max(0, m.stats[k] - 2) * 10) / 10;
   addLog(s, `${s.year}年度がはじまった。部員は${s.members.length}人。自由曲を決めよう。`);
   return s;
@@ -336,7 +337,10 @@ function save(s){ try{ localStorage.setItem(SAVE_KEY, JSON.stringify(s)); }catch
 function load(){
   try{
     const s = JSON.parse(localStorage.getItem(SAVE_KEY) || 'null');
-    if(s && s.v === 2 && Array.isArray(s.members)) return s;
+    if(s && s.v === 2 && Array.isArray(s.members)){
+      s.fam = {...freshFam(), ...s.fam};   // あとから増えた曲
+      return s;
+    }
   }catch(e){}
   return null;
 }

@@ -12,9 +12,10 @@ const SAMPLE_BANK = {
   asax: {bank: 'sax', g: 0.85}, tsax: {bank: 'tsax', g: 0.9}, bsax: {bank: 'bsax', g: 1.0},
   tp: {bank: 'tpt', g: 1}, hn: {bank: 'horn', g: 1.33}, tb: {bank: 'tbn', g: 1.1}, btb: {bank: 'tbn', g: 1.1},
   euph: {bank: 'tbn', lp: 6, g: 1.32}, tuba: {bank: 'tuba', g: 1.35}, cb: {bank: 'cbass', g: 1.3},
-  cbpizz: {bank: 'pizz', g: 1.3}, timp: {bank: 'timp', g: 3.1}, sd: {bank: 'sd', g: 2.6}, bd: {bank: 'bd', g: 2.8},
+  cbpizz: {bank: 'pizz', g: 1.3}, timp: {bank: 'timp', g: 3.1}, sd: {bank: 'sd', g: 2.9}, bd: {bank: 'bd', g: 2.8},
   cym: {bank: 'cym', g: 3.6}, sus: {bank: 'sus', g: 4.3}, tri: {bank: 'tri', g: 8}, tamb: {bank: 'tamb', g: 1.2},
-  tamtam: {bank: 'tamtam', g: 1}, glock: {bank: 'glock', g: 5.3}, xylo: {bank: 'xylo', g: 2.4}, mrb: {bank: 'mrb', g: 2.75}, vib: {bank: 'vib', g: 3}, chime: {bank: 'chime', g: 5.3},
+  tamtam: {bank: 'tamtam', g: 1}, shime: {bank: 'shime', g: 2.6}, taiko: {bank: 'bd', g: 2.4, rate: 1.4}, hyoshigi: {bank: 'hyoshigi', g: 2.2}, suzu: {bank: 'suzu', g: 1.2},
+  glock: {bank: 'glock', g: 5.3}, xylo: {bank: 'xylo', g: 2.4}, mrb: {bank: 'mrb', g: 2.75}, vib: {bank: 'vib', g: 3}, chime: {bank: 'chime', g: 5.3},
 };
 const SAMPLES = {ready: false, use: true, banks: {}, loading: null, progress: 0, error: null};
 const SAMPLE_TUNE = A4 / 440;   // 録音はA=440Hz
@@ -270,17 +271,17 @@ function sampleStrike(ac, out, h, T0, srcs){
   g.connect(out);
   if(h.roll){
     const smp = pickSample(bank, pitched ? h.midi : null, Math.max(h.v, h.v1 ?? h.v), {roll: true, key: h.key});
-    const rate = pitched ? Math.pow(2, (h.midi - smp.m) / 12) / SAMPLE_TUNE * Math.pow(2, (h.cents || 0) / 1200) : 1;
+    const rate = pitched ? Math.pow(2, (h.midi - smp.m) / 12) / SAMPLE_TUNE * Math.pow(2, (h.cents || 0) / 1200) : cfg.rate || 1;
     const end = s + h.dur;
     g.gain.setValueAtTime(0, s);
     g.gain.linearRampToValueAtTime(lvl(h.v) * 1.6, s + 0.05);
     g.gain.linearRampToValueAtTime(lvl(h.v1 ?? h.v) * 1.6, end);
-    g.gain.setTargetAtTime(0, end, h.inst === 'sd' ? 0.05 : 0.35);
-    playSegments(ac, g, bank, smp, s, end + (h.inst === 'sd' ? 0.3 : 2.2), rate, 0.03, srcs, src => src.playbackRate.setValueAtTime(rate, s));
+    g.gain.setTargetAtTime(0, end, h.inst === 'sd' || h.inst === 'shime' ? 0.05 : 0.35);
+    playSegments(ac, g, bank, smp, s, end + (h.inst === 'sd' || h.inst === 'shime' ? 0.3 : 2.2), rate, 0.03, srcs, src => src.playbackRate.setValueAtTime(rate, s));
     return end + 2.5;
   }
   const smp = pickSample(bank, pitched ? h.midi : null, h.v, {key: h.key});
-  const rate = pitched ? Math.pow(2, (h.midi - smp.m) / 12) / SAMPLE_TUNE * Math.pow(2, (h.cents || 0) / 1200) : 1 + 0.01 * (hash(h.key, 'p') - 0.5);
+  const rate = pitched ? Math.pow(2, (h.midi - smp.m) / 12) / SAMPLE_TUNE * Math.pow(2, (h.cents || 0) / 1200) : (cfg.rate || 1) * (1 + 0.01 * (hash(h.key, 'p') - 0.5));
   const src = ac.createBufferSource(); src.buffer = bank.buf;
   src.playbackRate.value = rate;
   src.connect(g);

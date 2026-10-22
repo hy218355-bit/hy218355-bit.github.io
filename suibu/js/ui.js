@@ -459,7 +459,7 @@ function renderPiece(){
   const pid = playPiece(), pc = PIECES[pid];
   $('#pieceEyebrow').textContent = S.phase === 'choose' ? '試しに聴く曲' : pid === S.pieceId ? '自由曲' : 'もう1曲（初見で吹いてみる）';
   $('#piece').textContent = pc.full;
-  $('#pieceMeta').textContent = `${pc.composer}｜${pc.key}｜♩=${pc.tempi[S.interp.tempo]}｜問われる力：${pc.asks}`;
+  $('#pieceMeta').textContent = `${pc.composer}｜${pc.key}｜${tempoLabel(pc, S.interp.tempo)}｜問われる力：${pc.asks}`;
   $('#pieceSel').innerHTML = PIECE_IDS.map(id => `<button type="button" data-piece="${id}" aria-pressed="${id === pid}">${PIECES[id].title}</button>`).join('');
   $('#rangeSel').innerHTML = `<option value="all">全部</option>` + pc.spans.map((sp, i) => `<option value="${i}">${sp.name}</option>`).join('');
   $('#rangeSel').value = U.range;
@@ -614,7 +614,7 @@ function renderStageResult(w, ev){
 function renderInterp(){
   const pc = PIECES[playPiece()];
   const rows = [
-    ['tempo', 'テンポ', [0, 1, 2].map(i => `${INTERP_NAMES.tempo[i]} ♩=${pc.tempi[i]}`)],
+    ['tempo', 'テンポ', [0, 1, 2].map(i => `${INTERP_NAMES.tempo[i]} ${tempoLabel(pc, i)}`)],
     ['dyn', '抑揚の幅', INTERP_NAMES.dyn],
     ['rub', 'テンポの揺れ', INTERP_NAMES.rub],
   ];

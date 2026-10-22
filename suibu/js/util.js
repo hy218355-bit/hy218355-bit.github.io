@@ -3,16 +3,23 @@
 
 const A4 = 442;   // 日本の吹奏楽はA=442Hzで合わせることが多い
 
-function hash(...args){
-  const s = args.join('|');
-  let h = 2166136261 >>> 0;
+function fnv(h, s){
   for(let i = 0; i < s.length; i++){ h ^= s.charCodeAt(i); h = Math.imul(h, 16777619); }
+  return h;
+}
+function fnvOut(h){
   h ^= h >>> 16; h = Math.imul(h, 2246822507); h ^= h >>> 13; h = Math.imul(h, 3266489909); h ^= h >>> 16;
   return (h >>> 0) / 4294967296;
 }
-function gauss(...args){
-  const u = Math.max(1e-9, hash(...args, 'u')), v = hash(...args, 'v');
-  return Math.sqrt(-2 * Math.log(u)) * Math.cos(2 * Math.PI * v);
+function hash(...args){ return fnvOut(fnv(2166136261 >>> 0, args.join('|'))); }
+const boxMuller = (u, v) => Math.sqrt(-2 * Math.log(Math.max(1e-9, u))) * Math.cos(2 * Math.PI * v);
+function gauss(...args){ return boxMuller(hash(...args, 'u'), hash(...args, 'v')); }
+// 同じ前置きで何度も引くとき用（1音ごとの乱数など）。前置きまで先に計算しておく。値は hash(...pre, ...rest) と同じ
+function hasher(...pre){
+  const h0 = fnv(2166136261 >>> 0, pre.join('|') + '|');
+  const h = (...rest) => fnvOut(fnv(h0, rest.join('|')));
+  h.gauss = (...rest) => boxMuller(h(...rest, 'u'), h(...rest, 'v'));
+  return h;
 }
 const clamp = (x, a, b) => Math.max(a, Math.min(b, x));
 const clamp01 = x => clamp(x, 0, 1);

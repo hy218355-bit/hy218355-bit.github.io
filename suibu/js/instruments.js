@@ -49,6 +49,11 @@ const INST = {
   mrb:   {name: 'マリンバ',           short: 'Mrb',   sec: 'perc', fam: 'mallet', range: [45, 96],  gain: .072, strike: 'mrb'},
   vib:   {name: 'ヴィブラフォン',     short: 'Vib',   sec: 'perc', fam: 'mallet', range: [53, 89],  gain: .06, strike: 'vib'},
   chime: {name: 'チャイム',           short: 'Chime', sec: 'perc', fam: 'mallet', range: [60, 77],  gain: .05, strike: 'chime'},
+  // 和の打楽器（吹奏楽ではよく代用する：締太鼓＝響き線を外したスネア、和太鼓＝大太鼓を高めに張った音）
+  shime: {name: '締太鼓',             short: 'Shime', sec: 'perc', fam: 'perc', gain: .043, strike: 'shime'},
+  taiko: {name: '和太鼓',             short: 'Taiko', sec: 'perc', fam: 'perc', gain: .134, strike: 'taiko'},
+  hyoshigi: {name: '拍子木',          short: 'Hyoshigi', sec: 'perc', fam: 'perc', gain: .04, strike: 'hyoshigi'},
+  suzu:  {name: '鈴',                 short: 'Suzu',  sec: 'perc', fam: 'perc', gain: .1, strike: 'suzu'},
 };
 for(const v of Object.values(INST)) if(v.range) v.center = (v.range[0] + v.range[1]) / 2;
 
@@ -425,6 +430,32 @@ const STRIKE = {
   chime(ac, out, h, s, srcs, lvl){
     noiseHit(ac, out, s, lvl(h.v) * 0.25, 0.006, [['highpass', 3000]], srcs);
     return partials(ac, out, s, mtof(h.midi), [[1, .28, 4.0], [2, .55, 3.5], [3, .48, 2.8], [4.2, .33, 2.0], [5.4, .2, 1.4], [6.8, .12, 1.0]], lvl(h.v), srcs);
+  },
+  shime(ac, out, h, s, srcs, lvl){
+    if(h.roll) return noiseRoll(ac, out, s, h.dur, h.v, h.v1, v => lvl(v) * 1.5, [['bandpass', 330, 3, 1], ['bandpass', 900, 2, .4]], 17, .35 + h.uneven, 0.05, srcs, h.key);
+    noiseHit(ac, out, s, lvl(h.v) * 0.5, 0.03, [['bandpass', 1200, 1]], srcs);
+    const o = ac.createOscillator(); o.type = 'triangle';
+    o.frequency.setValueAtTime(330, s); o.frequency.exponentialRampToValueAtTime(260, s + 0.06);
+    const g = ac.createGain(); const e = decayEnv(ac, g, s, lvl(h.v), 0.002, 0.07);
+    o.connect(g); g.connect(out); o.start(s); o.stop(e); srcs.push(o);
+    return Math.max(e, s + 0.5);
+  },
+  taiko(ac, out, h, s, srcs, lvl){
+    if(h.roll) return noiseRoll(ac, out, s, h.dur, h.v, h.v1, v => lvl(v) * 6, [['bandpass', 80, 6, 1], ['lowpass', 220, .7, .4]], 12, h.uneven, 0.4, srcs, h.key);
+    const o = ac.createOscillator();
+    o.frequency.setValueAtTime(135, s); o.frequency.exponentialRampToValueAtTime(78, s + 0.08);
+    const g = ac.createGain(); const e = decayEnv(ac, g, s, lvl(h.v), 0.003, 0.3);
+    o.connect(g); g.connect(out); o.start(s); o.stop(e); srcs.push(o);
+    noiseHit(ac, out, s, lvl(h.v) * 0.5, 0.025, [['lowpass', 1200]], srcs);
+    return e;
+  },
+  hyoshigi(ac, out, h, s, srcs, lvl){
+    noiseHit(ac, out, s, lvl(h.v), 0.04, [['bandpass', 2500, 14]], srcs);
+    return noiseHit(ac, out, s, lvl(h.v) * 0.6, 0.03, [['bandpass', 3700, 12]], srcs);
+  },
+  suzu(ac, out, h, s, srcs, lvl){
+    noiseHit(ac, out, s, lvl(h.v), 0.3, [['bandpass', 8000, 3]], srcs, 0.01);
+    return noiseHit(ac, out, s + 0.03, lvl(h.v) * 0.7, 0.25, [['bandpass', 11000, 4]], srcs, 0.01);
   },
   cbpizz(ac, out, h, s, srcs, lvl){
     noiseHit(ac, out, s, lvl(h.v) * 0.25, 0.015, [['lowpass', 400]], srcs);

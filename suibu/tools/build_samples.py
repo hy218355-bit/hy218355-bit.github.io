@@ -185,8 +185,14 @@ for n in range(1, 6):
     rv = 5 if n < 5 else 4
     timp.append((P + f'Timpani/Rolls/Timpani{n}_Roll_v{rv}_rr1_Sum.wav', {'roll': 1, 'm': TIMP_ROLL[n], 'keep': 6.0}))
 hits('timp', timp, 3.0)
-hits('sd', [(P + f'Snare2-HitNS_v{v}_rr{r}_Sum.wav', {'l': i}) for i, v in enumerate((1, 3, 5, 6)) for r in (1, 2)]
+# スネア：SN が響き線（スナッピー）を張った音、NS が外した音。外した音は締太鼓の代わりに使う
+hits('sd', [(P + f'Snare2-HitSN_v{v}_rr{r}_Sum.wav', {'l': i}) for i, v in enumerate((3, 5, 7, 9)) for r in (1, 2)]
+          + [(P + f'Snare2-rollSN_v{v}_rr1_Sum.wav', {'roll': 1, 'l': i, 'keep': 5.0}) for i, v in enumerate((1, 3, 5))], 0.8)
+hits('shime', [(P + f'Snare2-HitNS_v{v}_rr{r}_Sum.wav', {'l': i}) for i, v in enumerate((1, 3, 5, 6)) for r in (1, 2)]
           + [(P + f'Snare2-rollNS_v{v}_rr1_Sum.wav', {'roll': 1, 'l': i, 'keep': 5.0}) for i, v in enumerate((1, 3, 5))], 0.7)
+# 和楽器の代わり：拍子木はクラベス、鈴はスレイベル
+hits('hyoshigi', [(P + f'Claves1_Hit_v{v}_rr{r}_Sum.wav', {'l': i}) for i, v in enumerate((2, 3)) for r in (1, 2)], 0.6)
+hits('suzu', [(P + f'Sleighbells_Hit_v1_rr{r}_Mid.wav', {'l': 0}) for r in (1, 2)], 1.6)
 B1 = V + 'VSCO 1 Percussion/drums/bass/'
 hits('bd', [(P + f'BDrumNewhit_v{v}_rr1_Sum.wav', {'l': i}) for i, v in enumerate((2, 4, 6))]
           + [(B1 + 'bdrum_roll_long1.wav', {'roll': 1, 'keep': 6.0})], 2.5)

@@ -124,7 +124,7 @@ function fullBand(stats){
 /* ===== 演奏の生成 ===== */
 const SEC_LAG = {fl: 0, dr: 0, cl: 0, sax: .005, tp: -.006, hn: .026, tb: .015, low: .034, perc: -.015};
 const CRACK = {brass: {p: .1}, squeak: {p: .07}, over: {p: .05}};
-const ROLE_WEIGHT = {mel: 2, mel3: 1.2, pad: 1, bass: 1.2, hit: .8};
+const ROLE_WEIGHT = {mel: 2, mel3: 1.2, cm: 1.3, pad: 1, bass: 1.2, hit: .8};
 const DYN_SPREADS = [0.65, 1, 1.3];
 const RUBATOS = [0.3, 1, 1.6];
 const INTERP_NAMES = {tempo: ['遅め', '標準', '速め'], dyn: ['控えめ', '標準', '大きく'], rub: ['ほぼ一定', '標準', 'たっぷり']};
@@ -160,15 +160,16 @@ function perform(ctx){
   const SPB = 60 / bpm;
   const rubUse = RUB * clamp01(Math.min(bandE * 1.2, C * 1.2 + 0.2));
   const iRb = 1 - bandR;
-  const STEP = 0.125, cum = [0], cumIdeal = [0];
+  const STEP = 0.125, cum = [0], cumIdeal = [0], wob = {};
   for(let i = 1; i * STEP <= pc.beats + 8; i++){
     const b = (i - 0.5) * STEP;
     const r = interp(pc.rubato, b) - 1;
+    const tm = sectionAt(pc.tmap, b, 1);   // 序奏だけゆっくり、のような楽譜上のテンポの切り替え
     let m = 1 + rubUse * r;
     m *= 1 - 0.09 * iRb * (1 - 0.6 * C) * Math.min(b, pc.beats) / pc.beats;
-    m *= 1 + 0.06 * Math.pow(iRb, 1.2) * (1 - 0.5 * C) * venue.play.timing * clampG(gauss(seed, 'tempo', Math.floor(b)));
-    cum.push(cum[i-1] + SPB * Math.max(0.6, m) * STEP);
-    cumIdeal.push(cumIdeal[i-1] + SPB * (1 + RUB * r) * STEP);
+    m *= 1 + 0.06 * Math.pow(iRb, 1.2) * (1 - 0.5 * C) * venue.play.timing * clampG(wob[Math.floor(b)] ??= gauss(seed, 'tempo', Math.floor(b)));
+    cum.push(cum[i-1] + SPB * tm * Math.max(0.6, m) * STEP);
+    cumIdeal.push(cumIdeal[i-1] + SPB * tm * (1 + RUB * r) * STEP);
   }
   const mapper = c => b => { const x = Math.max(0, b) / STEP, i = Math.min(Math.floor(x), c.length - 2); return c[i] + (c[i+1] - c[i]) * (x - i); };
   const b2s = mapper(cum), b2sIdeal = mapper(cumIdeal);
@@ -188,7 +189,7 @@ function perform(ctx){
     }
   }
 
-  const notes = [], hits = [];
+  const notes = [], hits = [], sharedG = {};
   for(const p of players){
     const {m, st, seat} = p;
     const P = st.pitch, R = st.rhythm, T = st.tone, E = st.expr;
@@ -202,22 +203,23 @@ function perform(ctx){
     const jf = clamp01((P - 0.65) / 0.3) * (0.4 + 0.6 * C);
     const evs = [...(arr.parts[p.part] || []), ...(extra[p.part] || [])].sort((a, b) => a.b - b.b);
     const mine = [];
+    let prevMidi = null, prevEnd = -Infinity;
     evs.forEach(e => {
       if(e.b < from - 1e-6 || e.b >= to - 1e-6) return;
-      const k = [...pk, ctx.pieceId, p.part, e.b, e.role];
-      if(hash(...k, 'miss') < 0.07 * Math.pow(1 - FAM, 2) * (1 - 0.5 * R)) return;
-      const t = Math.max(0, b2s(e.b) - off + lag + 0.07 * Math.pow(iR, 1.2) * venue.play.timing * (1 - 0.35 * C) * clampG(gauss(...k, 't')));
+      const k = [...pk, ctx.pieceId, p.part, e.b, e.role], H = hasher(...k);
+      if(H('miss') < 0.07 * Math.pow(1 - FAM, 2) * (1 - 0.5 * R)) return;
+      const t = Math.max(0, b2s(e.b) - off + lag + 0.07 * Math.pow(iR, 1.2) * venue.play.timing * (1 - 0.35 * C) * clampG(H.gauss('t')));
       const tIdeal = b2sIdeal(e.b) - b2sIdeal(from);
       const vScale = v => clamp(lerp(0.58, v, E) * loudMul, 0.04, 1);
       let wrong = 0;
-      if(e.m != null && hash(...k, 'wr') < 0.16 * Math.pow(1 - FAM, 2) * (1 - 0.5 * P)) wrong = (hash(...k, 'wd') < .5 ? 1 : -1) * (hash(...k, 'ws') < .6 ? 1 : 2);
+      if(e.m != null && H('wr') < 0.16 * Math.pow(1 - FAM, 2) * (1 - 0.5 * P)) wrong = (H('wd') < .5 ? 1 : -1) * (H('ws') < .6 ? 1 : 2);
       const endB = e.b + e.d;
       const fermata = endB >= pc.beats - 1e-6 ? 1.1 * E * RUB : 0;
 
       if(e.kind === 'hit'){
         const inst = e.inst;
         const written = e.role === 'hit' ? 0.58 + (e.v - 0.58) * SPREAD : ideal(e.b) * e.sc;
-        const v = clamp(vScale(written) + 0.2 * iT * clampG(gauss(...k, 'v')) * 0.5, 0.04, 1);
+        const v = clamp(vScale(written) + 0.2 * iT * clampG(H.gauss('v')) * 0.5, 0.04, 1);
         const h = {mid: m.id, seat: seat.id, sec: p.sec, inst, role: e.role, t, tIdeal, v, key: k.join(':'), b: e.b, db: e.d || 0, tg: b2s(e.b) - off, R, weight: ROLE_WEIGHT.hit};
         if(e.roll){
           h.roll = true;
@@ -228,7 +230,7 @@ function perform(ctx){
         if(e.m != null){
           h.midi = e.m + pc.trans + (INST[inst].fam === 'mallet' ? wrong : 0);
           h.cents = inst === 'timp' ? 18 * Math.pow(iP, 1.2) * clampG(gauss(...pk, 'tune', e.m))
-            : inst === 'cbpizz' ? nat + 22 * Math.pow(iP, 1.1) * tend + 28 * Math.pow(iP, 1.4) * clampG(gauss(...k, 'p')) + e.ji * jf : 0;
+            : inst === 'cbpizz' ? nat + 22 * Math.pow(iP, 1.1) * tend + 28 * Math.pow(iP, 1.4) * clampG(H.gauss('p')) + e.ji * jf : 0;
           if(inst === 'cbpizz'){ h.midi = e.m + pc.trans + wrong; h.err = h.cents - e.ji; }
         } else h.cents = 0;
         h.wrong = !!wrong && INST[inst].fam !== 'perc';
@@ -241,39 +243,44 @@ function perform(ctx){
       let d = b2s(endB) - b2s(e.b);
       if(e.art === 'stac') d = Math.min(d * 0.55, 0.32);
       else if(!e.leg) d *= 0.86 + 0.1 * E;
-      if(e.d >= 2) d *= 1 - 0.3 * iR * (0.5 + 0.5 * hash(...k, 'hold'));
+      if(e.d >= 2) d *= 1 - 0.3 * iR * (0.5 + 0.5 * H('hold'));
       d += fermata;
       const midi = e.m + pc.trans + wrong;
       const reg = (midi - inst.center) / 12 * 7 * iP;
-      const shared = clampG(gauss(seed, p.sec, ctx.pieceId, e.b, 'shared')) * 26 * Math.pow(1 - secP[p.sec], 1.4);
-      const indiv = 28 * Math.pow(iP, 1.4) * clampG(gauss(...k, 'p'));
+      const shared = clampG(sharedG[p.sec + ':' + e.b] ??= gauss(seed, p.sec, ctx.pieceId, e.b, 'shared')) * 26 * Math.pow(1 - secP[p.sec], 1.4);
+      const indiv = 28 * Math.pow(iP, 1.4) * clampG(H.gauss('p'));
       const c = 0.55 * C;
       const miss = nat + 22 * Math.pow(iP, 1.1) * tend * venue.play.pitch + reg + (1 - c) * indiv + c * shared;
       const cents = miss + e.ji * jf;
       const ck = tb.crack ? CRACK[tb.crack] : null;
-      const crackP = ck ? ck.p * iT * iT * (midi > inst.center + 5 ? 1.5 : 1) : 0;
+      // 裏返りやすいのは、休みのあとの出だしや大きく跳んだ音。短く切る音（後打ちなど）や同じ音の連打、順次進行は裏返りにくい
+      const jump = prevMidi == null || e.b - prevEnd > 1 ? null : Math.abs(midi - prevMidi);
+      const leap = jump == null ? 1.3 : jump === 0 ? 0.3 : jump <= 4 ? 0.5 : jump <= 9 ? 1 : 1.4;
+      const crackP = ck ? ck.p * iT * iT * (midi > inst.center + 5 ? 1.5 : 1) * (e.art === 'stac' ? 0.35 : 1) * leap * (d < 0.3 ? 0.6 : 1) : 0;
+      prevMidi = midi; prevEnd = e.b + e.d;
       let crack = 0;
-      if(hash(...k, 'cr') < crackP){
-        crack = tb.crack === 'brass' ? (hash(...k, 'cd') < .6 ? 1 : -1) * (320 + 380 * hash(...k, 'ca'))
+      if(H('cr') < crackP){
+        crack = tb.crack === 'brass' ? (H('cd') < .6 ? 1 : -1) * (320 + 380 * H('ca'))
           : tb.crack === 'squeak' ? 1902 : 1200;
       }
-      const vj = 0.1 * iT * clampG(gauss(...k, 'vj'));
+      const vj = 0.1 * iT * clampG(H.gauss('vj'));
       const env = [];
       const pts = Math.max(2, Math.ceil(d / 0.25));
       for(let j = 0; j <= pts; j++){
         const fr = j / pts;
-        let v = vScale(ideal(e.b + e.d * Math.min(1, fr)) * e.sc * (e.solo ? 1.12 : 1));
-        if(e.d >= 2 && (e.role === 'mel' || e.role === 'mel3')) v += 0.07 * E * Math.sin(Math.PI * fr);
+        // アクセントは出だしだけ強く、すぐ元の大きさへ戻す
+        let v = vScale(ideal(e.b + e.d * Math.min(1, fr)) * e.sc * (e.solo ? 1.12 : 1) * (e.acc ? 1 + 0.3 * Math.max(0, 1 - 3 * fr) : 1));
+        if(e.d >= 2 && (e.role === 'mel' || e.role === 'mel3' || e.role === 'cm')) v += 0.07 * E * Math.sin(Math.PI * fr);
         v *= 1 - 0.35 * Math.pow(iT, 1.3) * fr * fr;
         env.push([d * fr, clamp(v + vj, 0.04, 1)]);
       }
       mine.push({
         mid: m.id, seat: seat.id, sec: p.sec, part: p.part, inst: seat.inst, role: e.role, solo: !!e.solo, b: e.b, db: e.d, tg: b2s(e.b) - off, key: k.join(':'),
         midi, t, tIdeal, d, cents, err: wrong ? 100 : cents - e.ji, wrong: !!wrong, T, E, R,
-        scoop: -(0.5 + hash(...k, 'sc')) * 45 * iP * (tb.brass ? 1.2 : 0.6),
+        scoop: -(0.5 + H('sc')) * 45 * iP * (tb.brass ? 1.2 : 0.6),
         settle: 0.03 + 0.16 * iP,
         sag: -(e.d >= 1.5 ? 22 : 7) * Math.pow(iT, 1.2),
-        crack, crackDur: 0.06 + 0.05 * hash(...k, 'cl'),
+        crack, crackDur: 0.06 + 0.05 * H('cl'),
         vib: (inst.vib || 0) * E * Math.sqrt(T),
         att: tb.att * (1 + 0.9 * iT),
         blat: 1 + (tb.brass ? 0.6 : 0.4) * Math.pow(iT, 1.2),
@@ -448,7 +455,7 @@ function commentFor(dim, a, good){
     }
     case 'tone': {
       const s = worstSec(a, 'tone', -1);
-      return a.cracks > 3 ? `音が裏返る場面が${a.cracks}回ありました。${s || ''}は息の支えを見直しましょう。` : `${s || '全体'}の音の出だしが不安定で、響きが薄く感じます。`;
+      return a.cracks > 3 ? `音が裏返る場面が${a.cracks > 20 ? '何度も' : a.cracks + '回'}ありました。${s || ''}は息の支えを見直しましょう。` : `${s || '全体'}の音の出だしが不安定で、響きが薄く感じます。`;
     }
     case 'expr': return '正確ですが、音楽が平板に聞こえます。フレーズの山をどこに作るか、全員で共有しましょう。';
     case 'balance': {
@@ -466,6 +473,12 @@ function interpNotes(perf){
   if(pc.id === 'largo' && ip.tempo === 0 && perf.bandE < 0.6){ adj -= 3; out.push('遅いテンポを支えきれず、音楽が停滞しました。'); }
   if(pc.id === 'ode' && ip.tempo === 2 && perf.bandR < 0.7){ adj -= 4; out.push('速いテンポに合奏がついていけず、崩れかけていました。'); }
   if(pc.id === 'ode' && ip.tempo === 0){ adj -= 2; out.push('テンポがやや重く感じます。'); }
+  if(pc.id === 'march' && ip.tempo === 0){ adj -= 2; out.push('マーチとしては足取りが重く感じます。'); }
+  if(pc.id === 'march' && ip.tempo === 2 && perf.bandR < 0.72){ adj -= 4; out.push('速いテンポで縦の線が崩れ、行進のリズムが落ち着きません。'); }
+  if(pc.id === 'march' && ip.rub === 2){ adj -= 3; out.push('マーチでテンポを揺らしすぎて、行進の足取りが乱れました。'); }
+  if(pc.id === 'wa' && ip.tempo === 2 && perf.bandR < 0.72){ adj -= 4; out.push('祭りのテンポが速すぎて、打楽器と管楽器がかみ合っていません。'); }
+  if(pc.id === 'wa' && ip.tempo === 0){ adj -= 2; out.push('祭りの部分に、もう少し躍動感がほしいところです。'); }
+  if(pc.id === 'wa' && ip.rub === 0){ adj -= 2; out.push('序奏はもっと自由に、間（ま）を生かして歌ってほしいところです。'); }
   if(ip.dyn === 2 && perf.bandE < 0.6){ adj -= 4; out.push('強弱をつけようとする意図はわかりますが、大げさに聞こえます。'); }
   if(ip.dyn === 2 && perf.bandE >= 0.75){ adj += 2; }
   if(ip.dyn === 0){ adj -= 2; out.push('強弱の幅が控えめで、もう一歩踏み込んでほしいところです。'); }

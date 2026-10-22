@@ -13,6 +13,8 @@ const CD_PATTERN = {
   4: [[100, 170], [42, 118], [158, 118], [100, 40]],
 };
 const cdPts = () => CD_PATTERN[CD.perf?.meter] || CD_PATTERN[4];
+// 最初にテンポを示すタップの数（2拍子は2小節ぶん）
+const cdCountN = () => CD.perf.meter <= 2 ? CD.perf.meter * 2 : CD.perf.meter;
 
 // stage を渡すと本番の指揮（{rec, ev}）。終わると、その指揮で演奏した結果が採点される
 function openConduct(stage = null){
@@ -22,13 +24,14 @@ function openConduct(stage = null){
   if(E.ac.state === 'suspended') E.ac.resume();
   CD.stage = stage;
   CD.perf = stage ? perform(recCtx(stage.rec)) : perform(currentCtx());
-  CD.phase = 'count'; CD.count = []; CD.lv = []; CD.level = 1; CD.clock = null; CD.rec = null; CD.lastTap = 0; CD.idleHint = false; CD.beatShown = -1;
+  CD.phase = 'count'; CD.count = []; CD.lv = []; CD.level = 1; CD.clock = null; CD.rec = null; CD.lastTap = 0; CD.idleHint = false; CD.beatShown = -1; CD.tmHint = null;
   const pc = PIECES[CD.perf.pieceId];
   $('#cdTitle').textContent = stage ? `${stage.ev.title}：${pc.title}` : `${pc.title}（${VENUE[U.venue].name}）`;
-  $('#cdRef').textContent = CD.perf.bpm;
+  $('#cdRef').textContent = bpmAt(pc, CD.perf.interp.tempo ?? 1, CD.perf.from);
   $('#cdTempo').textContent = '--';
   $('#cdResult').hidden = true; $('#cdPad').hidden = false;
-  const ready = () => cdMsg(`まず${CD.perf.meter}回（1小節ぶん）、テンポを示すようにタップ。次の拍から部員が入ってくる。`);
+  const n = cdCountN();
+  const ready = () => cdMsg(`まず${n}回（${n / CD.perf.meter}小節ぶん）、テンポを示すようにタップ。次の拍から部員が入ってくる。`);
   if(SAMPLES.use && !SAMPLES.ready && SAMPLES.loading && !SAMPLES.error){
     // 録音を読み込み終わるまでは待ってもらう（合成音で始まらないように）
     CD.phase = 'wait';
@@ -76,7 +79,7 @@ function cdTap(e){
     CD.count.push(now);
     cdClick(now, CD.count.length === 1);
     cdDrawPattern(CD.count.length - 1);
-    if(CD.count.length < CD.perf.meter){ cdMsg(`${CD.count.length}…`); return; }
+    if(CD.count.length < cdCountN()){ cdMsg(`${CD.count.length}…`); return; }
     // 叩いた間隔の中央値をテンポにして、次の拍から始める
     const iv = CD.count.slice(1).map((t, i) => t - CD.count[i]).sort((a, b) => a - b);
     const P = clamp(iv[Math.floor(iv.length / 2)], 0.3, 1.6);
@@ -129,6 +132,16 @@ function cdFrame(){
   const t2 = $('#cdTip');
   t2.setAttribute('cx', (x0 + (x1 - x0) * s).toFixed(1));
   t2.setAttribute('cy', (y0 + (y1 - y0) * s - 26 * Math.sin(Math.PI * s)).toFixed(1));
+  // 楽譜の上でテンポが変わる所（序奏から祭りへ、など）の少し前に知らせる
+  const pc = PIECES[CD.perf.pieceId];
+  if(pc.tmap){
+    const now = b + CD.perf.from;
+    const next = pc.tmap.find(([at]) => at > now + 1e-6 && at - now <= 4);
+    if(next && CD.tmHint !== next[0]){
+      CD.tmHint = next[0];
+      cdMsg(`もうすぐテンポが変わる：♩=${bpmAt(pc, CD.perf.interp.tempo ?? 1, next[0])}。合図に合わせて振る速さを変えよう。`);
+    }
+  }
   if(E.ac.currentTime - (CD.clock.last?.t ?? CD.clock.t0) > 4 * CD.clock.P && !CD.idleHint){
     CD.idleHint = true;
     cdMsg('タップが止まっても、部員は最後のテンポで吹き続ける。');
@@ -151,9 +164,10 @@ function cdFinish(natural){
       <div class="transport"><button class="btn primary" type="button" data-cd="retry">もう一度指揮する</button><button class="btn quiet" type="button" data-cd="close">閉じる</button></div>`;
     return;
   }
-  const c = CD.clock, taps = c.taps;
+  const c = CD.clock, taps = c.taps, pc = PIECES[CD.perf.pieceId];
+  // 拍の間隔（楽譜の上でテンポが変わる曲は、その分をならして比べる）
   const iv = [];
-  for(let i = 1; i < taps.length; i++) if(taps[i].k - taps[i - 1].k === 1) iv.push(taps[i].t - taps[i - 1].t);
+  for(let i = 1; i < taps.length; i++) if(taps[i].k - taps[i - 1].k === 1) iv.push((taps[i].t - taps[i - 1].t) / sectionAt(pc.tmap, taps[i - 1].k, 1));
   const mean = iv.length ? iv.reduce((a, b) => a + b, 0) / iv.length : c.P;
   const sd = iv.length > 2 ? Math.sqrt(iv.reduce((a, b) => a + (b - mean) ** 2, 0) / iv.length) : 0;
   const bpm = Math.round(60 / mean), ref = CD.perf.bpm;
@@ -164,7 +178,6 @@ function cdFinish(natural){
     : stab >= 85 ? 'ぶれない指揮で、部員も安心して吹けた。'
     : stab >= 65 ? 'ところどころテンポが揺れたが、部員はよくついてきた。'
     : 'テンポが大きく揺れ、リズムの苦手な部員ほどついてくるのに苦労した。';
-  const pc = PIECES[CD.perf.pieceId];
   const conduct = {ev: c.saved(), lv: CD.lv, bpm, stab};
   if(CD.stage){
     // 本番：この指揮で演奏した結果で採点し直す
@@ -267,7 +280,7 @@ function toast(text, ms = 0, action = null, onAction = null){
 }
 
 function bindConduct(){
-  $('#btnConduct').addEventListener('click', openConduct);
+  $('#btnConduct').addEventListener('click', () => openConduct());
   $('#btnSave').addEventListener('click', () => { const rec = S.recs.find(r => r.id === $('#recSel').value); if(rec) saveRecording(rec); });
   $('#cdClose').addEventListener('click', closeConduct);
   const pad = $('#cdPad');
