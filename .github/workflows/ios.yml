@@ -42,12 +42,16 @@ jobs:
           echo "IPHONE=$(pick 'iPhone 16 Pro Max' 'iPhone 15 Pro Max' 'iPhone 16 Pro' 'iPhone')" >> "$GITHUB_ENV"
           echo "IPAD=$(pick 'iPad Pro 13-inch' 'iPad Pro (12.9-inch)' 'iPad Pro' 'iPad')" >> "$GITHUB_ENV"
       - name: Boot iPhone
+        timeout-minutes: 16
         run: |
+          limit() { perl -e 'alarm shift; exec @ARGV' "$@"; }   # 固まったら打ち切る
+          # CI のマシンでは、シミュレータが起動しきらない（System App が上がらない）ことや、アプリを入れるところで固まることがある。
+          # そのときはシミュレータの裏方（CoreSimulatorService）を再起動して、もう一度だけやり直す
+          up() { xcrun simctl boot "$1" || true; limit 300 xcrun simctl bootstatus "$1" -b && sleep 15 && limit 180 xcrun simctl install "$1" build-sim/Build/Products/Debug-iphonesimulator/Suibu.app; }
+          restart_sims() { xcrun simctl shutdown all || true; killall -9 com.apple.CoreSimulator.CoreSimulatorService 2>/dev/null || true; sleep 5; }
           xcrun simctl list devices | grep "$IPHONE"
-          xcrun simctl boot "$IPHONE"
-          xcrun simctl bootstatus "$IPHONE" -b
+          if ! up "$IPHONE"; then echo "simulator did not come up; restarting the simulator service and trying once more"; restart_sims; up "$IPHONE"; fi
           xcrun simctl status_bar "$IPHONE" override --time 9:41 --batteryState charged --batteryLevel 100 --cellularBars 4 --wifiBars 3 || true
-          xcrun simctl install "$IPHONE" build-sim/Build/Products/Debug-iphonesimulator/Suibu.app
       - name: Self-test inside the app (WebKit)
         timeout-minutes: 8
         run: |
@@ -78,22 +82,16 @@ jobs:
           shot play-dark play dark
       - name: Self-test and screenshots (iPad)
         if: always()
-        timeout-minutes: 22
+        timeout-minutes: 30
         run: |
           limit() { perl -e 'alarm shift; exec @ARGV' "$@"; }   # 固まったら打ち切る
-          boot_ipad() { xcrun simctl boot "$IPAD" || true; limit 420 xcrun simctl bootstatus "$IPAD" -b; sleep 20; }
-          APP=build-sim/Build/Products/Debug-iphonesimulator/Suibu.app
+          # 起動しきらない・アプリを入れるところで固まるときは、シミュレータの裏方を再起動して、もう一度だけやり直す（iPhone と同じ）
+          up() { xcrun simctl boot "$1" || true; limit 300 xcrun simctl bootstatus "$1" -b && sleep 20 && limit 180 xcrun simctl install "$1" build-sim/Build/Products/Debug-iphonesimulator/Suibu.app; }
+          restart_sims() { xcrun simctl shutdown all || true; killall -9 com.apple.CoreSimulator.CoreSimulatorService 2>/dev/null || true; sleep 5; }
           # CI のマシンはメモリが少ないので、iPhone のシミュレータを止めてから iPad を起動する
           xcrun simctl shutdown "$IPHONE" || true
           xcrun simctl list devices | grep "$IPAD"
-          boot_ipad
-          # 起動した直後の iPad にアプリを入れると固まることがある。そのときはシミュレータを起動し直して、もう一度だけ入れる
-          if ! limit 180 xcrun simctl install "$IPAD" "$APP"; then
-            echo "install hung; rebooting the iPad simulator and trying once more"
-            xcrun simctl shutdown "$IPAD" || true
-            boot_ipad
-            limit 240 xcrun simctl install "$IPAD" "$APP"
-          fi
+          if ! up "$IPAD"; then echo "simulator did not come up; restarting the simulator service and trying once more"; restart_sims; up "$IPAD"; fi
           xcrun simctl status_bar "$IPAD" override --time 9:41 --batteryState charged --batteryLevel 100 --wifiBars 3 || true
           # iPad でも同じセルフテストを通す（初回起動は時間がかかるので、これで温めてから撮る）
           limit 240 xcrun simctl launch "$IPAD" io.github.hy218355-bit.suibu -selftest
