@@ -37,6 +37,7 @@
   - 輸出コンプライアンス：暗号化を使わない（`ITSAppUsesNonExemptEncryption = NO` 設定済み）
 - 上の2つのページは、このブランチを main に入れると GitHub Pages で公開されます。
 - バージョンはターゲットの `MARKETING_VERSION`（1.0）と `CURRENT_PROJECT_VERSION`（1）。
+- 名前・説明・キーワードなど、App Store Connect に貼る文章は `AppStore.md` にまとめてあります。
 
 ## 自動チェック（GitHub Actions）
 
@@ -50,4 +51,4 @@
 
 - 楽器の録音：VSCO 2 Community Edition（CC0）、Weresax（CC BY 3.0）、FluidR3_GM（CC BY 3.0）。詳細は `../suibu/snd/CREDITS.md`
 - フォント：Zen Kaku Gothic New、Klee One、Dela Gothic One、Share Tech Mono（SIL Open Font License 1.1）。`../suibu/fonts/OFL-*.txt`
-- 曲：ドヴォルザーク《新世界より》、ベートーヴェン《第九》（パブリックドメイン）
+- 曲：ドヴォルザーク《新世界より》、ベートーヴェン《第九》（パブリックドメイン）。コンサートマーチ「ひかりの通学路」と吹奏楽のための「月と祭」は、このゲームのための書き下ろし

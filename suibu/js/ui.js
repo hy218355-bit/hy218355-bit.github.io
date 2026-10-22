@@ -555,6 +555,7 @@ function renderWeek(){
     w.innerHTML = `<div class="stagecard"><h3>3年生が引退します</h3><ol class="small" style="padding-left:1.2em">${res}</ol>
       <p class="txt">${seniors.map(m => esc(m.name)).join('、')}（${seniors.length}人）が引退する。4月の録音と最後の本番を聴き比べてみよう。</p>
       <div class="transport">${april ? `<button class="btn small" type="button" data-act="playrec" data-id="${april.id}">▶ 4月の録音</button>` : ''}${lastStage ? `<button class="btn small" type="button" data-act="playrec" data-id="${lastStage.id}">▶ 最後の本番</button><button class="btn small" type="button" data-act="saverec" data-id="${lastStage.id}">⤓ 最後の本番を保存</button>` : ''}</div></div>
+      ${firstClassEpilogue(seniors)}
       ${seniors.length ? `<div class="seniors"><h3>引退する3年生</h3><p class="small">名前をタップすると、入部したころと最後の本番を、その人の音だけで聴き比べられる。</p>${seniors.map(m => seniorCard(m, lastStage)).join('')}</div>` : ''}
       <div class="transport"><button class="btn primary" type="button" data-act="newyear">次の年度へ</button></div>`;
     return;
@@ -608,7 +609,22 @@ function renderWeek(){
   const cm = ev?.costMult || 1;
   parts.push(`<div class="menu">${MENU.filter(m => !m.from || S.week >= m.from).map(m => `<button class="mbtn${m.id === 'rest' ? ' rest' : ''}" type="button" data-menu="${m.id}"><b>${m.name}</b><span>${m.hint}</span><span class="cost">体力 ${m.cost > 0 ? '−' + Math.round(m.cost * cm) : '+' + (-m.cost)}</span></button>`).join('')}</div>`);
   if(S.stamina < 30) parts.push(`<p class="small">体力が30を切っている。練習の効果が半分になる。</p>`);
+  if(!tuneDone(S)) parts.push(`<div class="tgrow"><button class="btn small" type="button" data-act="tunegame">♪ 耳でチューニング</button><span class="small">部員の音とチューナーの音のうなりを聴いて合わせる（週に1回・合わせた部員の音程が上がる）</span></div>`);
   w.innerHTML = parts.join('');
+}
+// 顧問になって最初に入部してきた代が卒業するとき：3年間をふり返る
+function firstClassEpilogue(seniors){
+  const firsts = seniors.filter(m => isFirstClass(S, m));
+  if(!firsts.length) return '';
+  const y0 = startYearOf(S);
+  const years = [...S.history.filter(h => h.year >= y0), {year: S.year, piece: PIECES[S.contestPiece || S.pieceId]?.title, results: S.season, final: null}];
+  const april = S.recs.find(r => r.year === y0 && r.keep && r.week <= 3 && firsts.some(m => recHas(r, m)));
+  const last = S.recs.slice().reverse().find(r => r.year === S.year && r.final);
+  return `<div class="epilogue"><span class="tag">3年間の物語</span><h3>最初の1年生たちが、卒業していく</h3>
+    <p class="txt">${y0}年の春、あなたが顧問になって最初に入部してきた${firsts.length}人。楽器を持つのもはじめての子もいた。</p>
+    <ol>${years.map(h => `<li>${h.year}年度　${esc(h.piece || '')}　${h.results.length ? resultText(h.results) : ''}</li>`).join('')}</ol>
+    <p class="txt">${firsts.map(m => esc(m.name)).join('、')}。今日、この部を引退する。</p>
+    <div class="transport">${april ? `<button class="btn small" type="button" data-act="playrec" data-id="${april.id}">▶ 入部したばかりのころの合奏</button>` : ''}${last ? `<button class="btn small" type="button" data-act="playrec" data-id="${last.id}">▶ 最後の定期演奏会</button>` : ''}</div></div>`;
 }
 // 引退する3年生ひとりずつ：入部したとき（日誌をつけ始めたとき）と今、思い出、その人の音だけの録音
 const recHas = (r, m) => r.snap.members.some(x => x.id === m.id);
@@ -664,6 +680,24 @@ function renderInterp(){
   ];
   const lock = busy();
   $('#interp').innerHTML = rows.map(([k, nm, labels]) => `<div class="row"><span>${nm}</span><div class="seg" role="group" aria-label="${nm}">${labels.map((l, i) => `<button type="button" data-interp="${k}:${i}" aria-pressed="${S.interp[k] === i}"${lock ? ' disabled' : ''}>${l}</button>`).join('')}</div></div>`).join('');
+}
+// 部の歴史：年度ごとの曲・結果・引退した部員と、残してある録音
+const AWARD_NM = {gold: '金賞', silver: '銀賞', bronze: '銅賞'};
+const resultText = results => results.map(r => `${LEVELS[r.level].name}${AWARD_NM[r.award]}${r.rep ? '（代表）' : ''}`).join('→');
+function renderHistory(){
+  const years = (S.history || []).slice().reverse();
+  $('#history').hidden = !years.length;
+  const recBtns = y => S.recs.filter(r => r.year === y && r.keep).map(r => `<button class="btn small" type="button" data-act="playrec" data-id="${r.id}">▶ ${esc(r.label.replace(/^\d+年?\s*/, ''))}</button>`).join('');
+  $('#hist').innerHTML = years.length ? years.map(h => {
+    const best = h.results[h.results.length - 1];
+    return `<details class="hyear"><summary><b>${h.year}</b><span class="pc">${esc(h.piece || '—')}</span><span class="aw ${best?.award || ''}">${best ? resultText([best]) : ''}</span></summary>
+      <div class="body">
+        <p>コンクール：${h.results.length ? resultText(h.results) : '出場なし'}</p>
+        ${h.final ? `<p>定期演奏会：${esc(h.final.piece)}（演奏の出来 ${h.final.q}点）</p>` : ''}
+        ${h.retired?.length ? `<p>引退した3年生${h.firstClass ? '（顧問になって最初の代）' : ''}：${h.retired.map(esc).join('、')}</p>` : ''}
+        <div class="transport">${recBtns(h.year)}</div>
+      </div></details>`;
+  }).join('') : '';
 }
 function renderLog(){
   $('#log').innerHTML = S.log.slice().reverse().slice(0, 80)
@@ -735,12 +769,6 @@ function memberRow(m, part){
   return `<tr class="mem${U.sel === m.id ? ' sel' : ''}" data-mid="${m.id}"><td>${esc(m.name)}${m.title ? ` <span class="tag">${m.title}</span>` : ''}</td><td>${m.grade}年</td><td>${part}</td>`
     + STAT_KEYS.map(k => `<td class="num" style="color:${skillColor(C, m.stats[k])}">${Math.round(m.stats[k])}</td>`).join('')
     + `<td>${m.trait ? TRAITS[m.trait].name : ''}</td></tr>`;
-}
-function renderHistory(){
-  const h = S.history || [];
-  $('#history').hidden = !h.length;
-  const nm = {gold: '金賞', silver: '銀賞', bronze: '銅賞'};
-  $('#histList').innerHTML = h.map(x => `<li>${x.year}年度　${esc(x.piece)}　${x.results.map(r => `${LEVELS[r.level].name} ${nm[r.award]}${r.rep ? '（代表）' : ''}`).join(' → ') || '出場なし'}</li>`).join('');
 }
 
 /* ===== ラボ ===== */
@@ -893,6 +921,7 @@ function bind(){
     const act = b.dataset.act;
     if(act === 'preview'){ U.piece = b.dataset.pid; U.range = 'all'; renderPiece(); renderInterp(); U.perfNow = perform(currentCtx()); U.diag = analyze(U.perfNow); renderDiag(); playPerf(U.perfNow, `試聴：${PIECES[b.dataset.pid].title}${(S.fam[b.dataset.pid] || 0) < 5 ? '（譜読み前）' : ''}`); }
     else if(act === 'choose'){ stopPlay(); commit(choosePiece(S, b.dataset.pid)); U.piece = null; renderAll(); refreshNow(); }
+    else if(act === 'tunegame') openTuneGame();
     else if(act === 'choosefinal'){ stopPlay(); commit(chooseFinalPiece(S, b.dataset.pid)); U.piece = null; renderAll(); refreshNow(); }
     else if(act === 'test'){ commit(practiceWeek(S, 'test')); renderAll(); refreshNow(); }
     else if(act === 'assign'){
@@ -953,6 +982,7 @@ function bind(){
   });
   bindConduct();
   bindAnnounce();
+  bindTuneGame();
   $('#tabbar').addEventListener('click', e => { const b = e.target.closest('[data-tabgo]'); if(b) setTab(b.dataset.tabgo, true); });
   $('#miniLabel').addEventListener('click', () => setTab('play'));
   $('#miniStop').addEventListener('click', () => stopPlay());

@@ -59,7 +59,7 @@ const wkShort = w => `${wkMonth(w)}月${w % 4 + 1}週`;
 const freshFam = () => Object.fromEntries(PIECE_IDS.map(id => [id, 0]));
 function freshState(year = 2026){
   const s = {
-    v: 2, year, week: 0, phase: 'choose', pieceId: null, interp: {tempo: 1, dyn: 1, rub: 1},
+    v: 2, year, startYear: year, week: 0, phase: 'choose', pieceId: null, interp: {tempo: 1, dyn: 1, rub: 1},
     members: initialRoster(year), recruits: null,
     cohesion: 25, stamina: 100, morale: 70, fam: freshFam(), hallExp: 0, focus: null,
     log: [], recs: [], history: [], season: [], flags: {}, pending: null, lastDelta: {},
@@ -378,6 +378,22 @@ function resolveEpisode(s0, k){
   return s;
 }
 
+// 耳でチューニングの結果：合わせられた部員ほど音程が上がる（週に1回）
+function tuneReward(s0, results){
+  const s = clone(s0);
+  s.flags[`tg:${s.year}:${s.week}`] = true;
+  const good = [];
+  for(const r of results){
+    const m = s.members.find(x => x.id === r.mid);
+    if(!m) continue;
+    const a = Math.abs(r.res);
+    bump(m, 'pitch', a <= 3 ? 2 : a <= 8 ? 1 : 0.3);
+    if(a <= 3) good.push(m.name);
+  }
+  addLog(s, `耳でチューニングをした。${good.length ? good.join('、') + 'の音が、うなりなくぴったり合った。' : 'うなりを聴き分けるのは、まだむずかしい。'}`);
+  return s;
+}
+
 /* ===== 演奏会・コンクール ===== */
 // 本番を始めるときの条件をそろえて記録する（音は画面側で鳴らす）
 function beginStage(s0){
@@ -445,6 +461,7 @@ function finishStage(s0){
     if(p.morale) s.morale = clamp(s.morale + p.morale, 0, 100);
     addLog(s, `${ev.title}：${p.text}`);
     s.stamina = clamp(s.stamina - 8, 0, 100);
+    if(ev.final) s.finalResult = {piece: PIECES[s.pieceId].title, q: Math.round(p.q)};
     return ev.final ? endSeason(s) : nextWeek(s);
   }
   const j = p.judge;
@@ -482,10 +499,17 @@ function endSeason(s){
   addLog(s, `定期演奏会が終わり、3年生${seniors.length}人が引退した。`);
   return s;
 }
+// 顧問になった年に、1年生として入部してきた部員（いちばん最初に一から育てた代）
+const startYearOf = s => s.startYear ?? (s.history[0]?.year ?? s.year);
+const isFirstClass = (s, m) => m.joined === startYearOf(s) && m.first?.y === m.joined;
 function newYear(s0){
   const s = clone(s0);
   const pid = s.contestPiece || s.pieceId, pieceTitle = pid ? PIECES[pid].title : '';
-  s.history.push({year: s.year, piece: pieceTitle, results: s.season});
+  const seniors = s.members.filter(m => m.grade === 3);
+  s.history.push({year: s.year, piece: pieceTitle, results: s.season, final: s.finalResult || null,
+    retired: seniors.map(m => m.name), firstClass: seniors.some(m => isFirstClass(s, m))});
+  if(seniors.some(m => isFirstClass(s, m))) addLog(s, '顧問になって最初に入部してきた代が、卒業していった。部の物語は、これからも続く。');
+  s.finalResult = null;
   s.members = s.members.filter(m => m.grade < 3).map(m => ({...m, grade: m.grade + 1}));
   assignTitles(s.members);
   s.year++; s.week = 0; s.phase = 'choose'; s.pieceId = null; s.season = []; s.pending = null; s.recruits = null;
@@ -574,6 +598,7 @@ function load(){
     const s = JSON.parse(localStorage.getItem(SAVE_KEY) || 'null');
     if(s && s.v === 2 && Array.isArray(s.members)){
       s.fam = {...freshFam(), ...s.fam};   // あとから増えた曲
+      s.startYear ??= s.history[0]?.year ?? s.year;
       return s;
     }
   }catch(e){}

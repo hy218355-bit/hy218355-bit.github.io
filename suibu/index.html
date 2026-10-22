@@ -335,6 +335,31 @@ tr.empty td{color:var(--ink-soft)}
   max-width:calc(100% - 32px);padding:10px 12px 10px 16px;border-radius:14px;background:var(--ink);color:var(--paper);font-size:14px;box-shadow:0 8px 24px var(--shadow)}
 .toast[hidden]{display:none}
 .tabbed .toast{bottom:calc(126px + env(safe-area-inset-bottom,0px))}
+/* 部の歴史・最初の代の卒業 */
+.hist{display:grid;gap:8px}
+.hyear{border:1.5px solid var(--rule);border-radius:8px;background:var(--sheet)}
+.hyear summary{list-style:none;cursor:pointer;display:flex;flex-wrap:wrap;align-items:baseline;gap:2px 10px;padding:9px 12px}
+.hyear summary::-webkit-details-marker{display:none}
+.hyear summary b{font-family:var(--f-lcd);font-weight:400;font-size:15px}
+.hyear summary .pc{font-size:13.5px}
+.hyear summary .aw{margin-left:auto;font-size:12.5px;font-weight:700;color:var(--ink-soft)}
+.hyear .aw.gold{color:var(--gold)}
+.hyear .body{display:grid;gap:8px;padding:0 12px 12px;font-size:13px}
+.hyear .body .transport{gap:6px}
+.epilogue{border:2px solid var(--brass);border-radius:10px;padding:14px 16px;display:grid;gap:10px;background:var(--sheet)}
+.epilogue h3{font-family:var(--f-display);font-weight:400;font-size:20px;line-height:1.4}
+.epilogue .txt{font-family:var(--f-hand);font-size:15.5px;line-height:1.8}
+.epilogue ol{list-style:none;display:grid;gap:2px;font-size:13.5px}
+/* 耳でチューニング */
+.tgrow{display:flex;flex-wrap:wrap;gap:6px 10px;align-items:center}
+.tgrow .small{flex:1 1 220px}
+.tg-body{max-width:560px;width:100%;margin:0 auto;display:grid;gap:14px;align-content:start;flex:1}
+.tg-who{font-family:var(--f-display);font-size:20px;line-height:1.4}
+.tg-ctl{display:grid;grid-template-columns:auto minmax(0,1fr) auto;gap:12px;align-items:center}
+.tg-ctl .btn{min-width:52px;font-size:20px}
+#tgSlider{width:100%;height:44px;accent-color:var(--brass)}
+.tg-scale{display:flex;justify-content:space-between;font-size:12.5px;color:var(--ink-soft);margin:-8px 64px 0}
+.tg-res{font-family:var(--f-hand);font-size:16px;line-height:1.7;min-height:3.4em}
 /* 結果発表：暗いホールで、1校ずつ読み上げる */
 .announce{position:fixed;inset:0;z-index:85;display:flex;flex-direction:column;gap:12px;background:#0E1424;color:#E3E8F2;
   padding:calc(18px + env(safe-area-inset-top,0px)) max(16px,env(safe-area-inset-right,0px)) calc(14px + env(safe-area-inset-bottom,0px)) max(16px,env(safe-area-inset-left,0px))}
@@ -498,10 +523,10 @@ tr.empty td{color:var(--ink-soft)}
 
   <section class="history" id="history" data-tab="log" hidden aria-labelledby="h-hist">
     <h2 id="h-hist">部の歴史</h2>
-    <ol id="histList"></ol>
+    <div class="hist" id="hist"></div>
   </section>
 
-  <p class="foot" data-tab="lab">曲はドヴォルザーク《新世界より》（1893年）とベートーヴェン《第九》（1824年）で、どちらもパブリックドメインです。編曲はこのページの中で楽譜データから組み立てています。楽器の音は、Versilian Studios「VSCO 2 Community Edition」（CC0）の録音、Karoryfer「Weresax」のアルトサックスの録音（tonejs-instruments 経由、CC BY 3.0）、Frank Wen「FluidR3_GM」のテナー・バリトンサックスとヴィブラフォン（midi-js-soundfonts 経由、CC BY 3.0）を使っています。E♭クラリネット・バスクラリネットはクラリネット、ユーフォニアム・バストロンボーンはトロンボーンの録音を、高さと明るさを変えて使っています。「合成」を選んだときの音は、倍音と胴の響きと息の雑音からその場で合成しています。会場の響きは、部屋の寸法と壁・床・客席の材質から pyroomacoustics で計算したものです。文字は Zen Kaku Gothic New・Klee One・Dela Gothic One・Share Tech Mono（SIL Open Font License）です。</p>
+  <p class="foot" data-tab="lab">曲は、パブリックドメインのドヴォルザーク《新世界より》（1893年）とベートーヴェン《第九》（1824年）、そしてこのゲームのために書き下ろしたコンサートマーチ「ひかりの通学路」と吹奏楽のための「月と祭」です。編曲はこのページの中で楽譜データから組み立てています。楽器の音は、Versilian Studios「VSCO 2 Community Edition」（CC0）の録音、Karoryfer「Weresax」のアルトサックスの録音（tonejs-instruments 経由、CC BY 3.0）、Frank Wen「FluidR3_GM」のテナー・バリトンサックスとヴィブラフォン（midi-js-soundfonts 経由、CC BY 3.0）を使っています。E♭クラリネット・バスクラリネットはクラリネット、ユーフォニアム・バストロンボーンはトロンボーンの録音を、高さと明るさを変えて使っています。「合成」を選んだときの音と客席の拍手は、その場で合成しています。和の打楽器は代用で、締太鼓は響き線を外したスネア、拍子木はクラベス、鈴はスレイベルの録音です。会場の響きは、部屋の寸法と壁・床・客席の材質から pyroomacoustics で計算したものです。文字は Zen Kaku Gothic New・Klee One・Dela Gothic One・Share Tech Mono（SIL Open Font License）です。</p>
 </div>
 
 <!-- 指揮：拍に合わせてタップ。上ほど大きく、下ほど小さく -->
@@ -517,6 +542,24 @@ tr.empty td{color:var(--ink-soft)}
   </div>
   <div class="cd-result" id="cdResult" hidden></div>
   <p class="cd-stats"><span>いまのテンポ ♩=<b id="cdTempo">--</b></span><span>指定 ♩=<b id="cdRef"></b></span><span class="combo" id="cdCombo" aria-live="off"></span></p>
+</section>
+<section class="conduct tunegame" id="tuneGame" hidden aria-labelledby="tgTitle">
+  <div class="cd-top">
+    <div><p class="eyebrow">合奏の前に <span id="tgStep"></span></p><h2 id="tgTitle">耳でチューニング</h2></div>
+    <button class="btn small quiet" type="button" data-tg="close">やめる</button>
+  </div>
+  <div class="tg-body">
+    <p class="tg-who" id="tgWho"></p>
+    <p class="cd-msg" id="tgMsg"></p>
+    <div class="tg-ctl">
+      <button class="btn" type="button" data-tg="down" aria-label="少し下げる">♭</button>
+      <input type="range" id="tgSlider" min="-50" max="50" step="1" value="0" aria-label="高さ（左ほど低く、右ほど高く）">
+      <button class="btn" type="button" data-tg="up" aria-label="少し上げる">♯</button>
+    </div>
+    <p class="tg-scale"><span>低く</span><span>高く</span></p>
+    <p class="tg-res" id="tgRes" aria-live="polite"></p>
+    <div class="transport"><button class="btn" type="button" id="tgPlay" data-tg="play">■ 止める</button><button class="btn primary" type="button" id="tgOk" data-tg="ok">合った！</button><button class="btn primary" type="button" id="tgNext" data-tg="next" hidden>次の部員へ</button></div>
+  </div>
 </section>
 <section class="announce" id="announce" hidden aria-labelledby="anTitle">
   <div class="an-body">
@@ -548,6 +591,7 @@ tr.empty td{color:var(--ink-soft)}
 <script src="js/engine.js"></script>
 <script src="js/conduct.js"></script>
 <script src="js/announce.js"></script>
+<script src="js/tunegame.js"></script>
 <script src="js/ui.js"></script>
 </body>
 </html>
