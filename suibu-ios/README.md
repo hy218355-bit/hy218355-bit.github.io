@@ -51,4 +51,4 @@
 
 - 楽器の録音：VSCO 2 Community Edition（CC0）、Weresax（CC BY 3.0）、FluidR3_GM（CC BY 3.0）。詳細は `../suibu/snd/CREDITS.md`
 - フォント：Zen Kaku Gothic New、Klee One、Dela Gothic One、Share Tech Mono（SIL Open Font License 1.1）。`../suibu/fonts/OFL-*.txt`
-- 曲：ドヴォルザーク《新世界より》、ベートーヴェン《第九》、スーザ「星条旗よ永遠なれ」、ホルスト《惑星》より「木星」、グリーグ「山の魔王の宮殿にて」（すべてパブリックドメイン。音は Mutopia Project のパブリックドメインの楽譜で確かめています）
+- 曲：ドヴォルザーク《新世界より》、ベートーヴェン《第九》、オッフェンバック《天国と地獄》、エルガー「威風堂々」、ヨハン・シュトラウス1世「ラデツキー行進曲」（すべてパブリックドメイン。音は Mutopia Project と PDMX（CC0）の楽譜データで確かめています）

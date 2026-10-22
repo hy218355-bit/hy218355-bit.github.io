@@ -57,8 +57,8 @@ const wkLabel = w => `${wkMonth(w)}月 第${w % 4 + 1}週`;
 const wkShort = w => `${wkMonth(w)}月${w % 4 + 1}週`;
 
 const freshFam = () => Object.fromEntries(PIECE_IDS.map(id => [id, 0]));
-// 以前あった自作曲（2026年10月に有名な曲へ入れ替えた）
-const PIECE_MOVED = {march: 'stars', wa: 'mountain'};
+// 以前あった曲は、近い曲に置き換える（2026年10月に、だれもが知っている曲へ入れ替えた）
+const PIECE_MOVED = {march: 'radetzky', wa: 'galop', stars: 'radetzky', jupiter: 'pomp', mountain: 'galop'};
 function freshState(year = 2026){
   const s = {
     v: 2, year, startYear: year, week: 0, phase: 'choose', pieceId: null, interp: {tempo: 1, dyn: 1, rub: 1},

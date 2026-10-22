@@ -15,8 +15,8 @@
     const fonts = [...document.fonts].filter(f => f.status === 'loaded').map(f => f.family + ' ' + f.weight);
     log(`loaded in ${Date.now() - t0}ms: ${Object.keys(SAMPLES.banks).length} banks, ${Object.keys(VIR.raw).length} rooms, fonts [${fonts.join(', ')}], save ${localStorage.getItem(SAVE_KEY) ? 'yes' : 'no'}`);
     const members = fullBand({pitch: 90, rhythm: 90, tone: 90, expr: 90});
-    // 「山の魔王の宮殿にて」の速くなる所：ティンパニ・小太鼓・大太鼓・シンバルの録音と、全員の刻みが鳴る所
-    const perf = perform({members, pieceId: 'mountain', cohesion: 90, fam: 100, venue: 'hall', from: 116, to: 124});
+    // 「天国と地獄」の後半の入り：ティンパニ・小太鼓・大太鼓・シンバルの録音と、全員の速い刻みが鳴る所
+    const perf = perform({members, pieceId: 'galop', cohesion: 90, fam: 100, venue: 'hall', from: 58, to: 66});
     const sr = 44100, len = Math.ceil((perf.total + 1.5) * sr);
     const off = new OfflineAudioContext(2, len, sr);
     await new Promise(res => { if(venueIR(off, 'hall', 'center', res)) res(); });

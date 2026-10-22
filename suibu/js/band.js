@@ -496,13 +496,13 @@ function interpNotes(perf){
   if(pc.id === 'largo' && ip.tempo === 0 && perf.bandE < 0.6){ adj -= 3; out.push('遅いテンポを支えきれず、音楽が停滞しました。'); }
   if(pc.id === 'ode' && ip.tempo === 2 && perf.bandR < 0.7){ adj -= 4; out.push('速いテンポに合奏がついていけず、崩れかけていました。'); }
   if(pc.id === 'ode' && ip.tempo === 0){ adj -= 2; out.push('テンポがやや重く感じます。'); }
-  if(pc.id === 'stars' && ip.tempo === 0){ adj -= 2; out.push('マーチとしては足取りが重く感じます。'); }
-  if(pc.id === 'stars' && ip.tempo === 2 && perf.bandR < 0.72){ adj -= 4; out.push('速いテンポで縦の線が崩れ、行進のリズムが落ち着きません。'); }
-  if(pc.id === 'stars' && ip.rub === 2){ adj -= 3; out.push('マーチでテンポを揺らしすぎて、行進の足取りが乱れました。'); }
-  if(pc.id === 'jupiter' && ip.tempo === 2){ adj -= 3; out.push('急ぎ足に聞こえ、この旋律の雄大さが出ていません。'); }
-  if(pc.id === 'jupiter' && ip.rub === 0){ adj -= 2; out.push('フレーズの終わりで、もう少し息をたっぷり使ってほしいところです。'); }
-  if(pc.id === 'mountain' && ip.tempo === 2 && perf.bandR < 0.74){ adj -= 4; out.push('最後の追い込みでテンポが上がりきり、縦の線がばらばらになりました。'); }
-  if(pc.id === 'mountain' && ip.tempo === 0){ adj -= 2; out.push('後半の加速に、もう少し迫力がほしいところです。'); }
+  if(pc.id === 'galop' && ip.tempo === 2 && perf.bandR < 0.74){ adj -= 4; out.push('速さに指がついていかず、細かい音がつぶれて聞こえました。'); }
+  if(pc.id === 'galop' && ip.tempo === 0){ adj -= 2; out.push('この曲にしては足どりが重く、はじけるような勢いがほしいところです。'); }
+  if(pc.id === 'pomp' && ip.tempo === 2){ adj -= 3; out.push('急ぎ足に聞こえ、この旋律の堂々とした感じが出ていません。'); }
+  if(pc.id === 'pomp' && ip.rub === 0){ adj -= 2; out.push('フレーズの終わりで、もう少し息をたっぷり使ってほしいところです。'); }
+  if(pc.id === 'radetzky' && ip.tempo === 0){ adj -= 2; out.push('行進曲としては足取りが重く感じます。'); }
+  if(pc.id === 'radetzky' && ip.tempo === 2 && perf.bandR < 0.72){ adj -= 4; out.push('速いテンポで短い音がそろわず、行進のリズムが落ち着きません。'); }
+  if(pc.id === 'radetzky' && ip.rub === 2){ adj -= 3; out.push('行進曲でテンポを揺らしすぎて、足取りが乱れました。'); }
   if(ip.dyn === 2 && perf.bandE < 0.6){ adj -= 4; out.push('強弱をつけようとする意図はわかりますが、大げさに聞こえます。'); }
   if(ip.dyn === 2 && perf.bandE >= 0.75){ adj += 2; }
   if(ip.dyn === 0){ adj -= 2; out.push('強弱の幅が控えめで、もう一歩踏み込んでほしいところです。'); }
