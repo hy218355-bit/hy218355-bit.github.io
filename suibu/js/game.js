@@ -112,6 +112,7 @@ function clone(s){ return JSON.parse(JSON.stringify(s)); }
 /* ===== 練習 ===== */
 function practiceWeek(s0, id){
   const s = clone(s0);
+  s.lastEpisode = null;
   const ev = EVENTS[s.week] || {};
   if(id === 'test'){
     s.stamina += 30; s.morale += 2; s.lastDelta = {};
@@ -173,6 +174,190 @@ function nextWeek(s){
     else addLog(s, `いよいよ${ev.title}の週。`);
     if(ev.kind === 'assign') s.recruits = s.recruits || makeRecruits(s, 9);
   }
+  s.episode = pickEpisode(s);
+  return s;
+}
+
+/* ===== 部員のできごと =====
+   練習の週に、ときどき部員の出来事が起きる。顧問としての対応を選ぶと、その部員や部の雰囲気が変わる。
+   出来事は部員の「思い出」として残り、引退のときに振り返る。 */
+const instOf = m => INST[SEAT[m.seat].inst].name;
+const secOf = m => SEAT[m.seat]?.sec;
+const REED = new Set(['ob', 'fg', 'ebcl', 'cl', 'bcl', 'asax', 'tsax', 'bsax']);
+const LIP = new Set(['tp', 'hn', 'tb', 'btb', 'euph', 'tuba']);
+const weakest = m => STAT_KEYS.slice().sort((a, b) => m.stats[a] - m.stats[b])[0];
+function bump(m, k, d){ m.stats[k] = Math.round(clamp(m.stats[k] + d, 0, 100) * 10) / 10; }
+function remember(s, m, t){
+  if(!m) return;
+  (m.story ||= []).push({y: s.year, w: s.week, t});
+  if(m.story.length > 10) m.story.splice(0, m.story.length - 10);
+}
+const adj = (s, k, d) => { s[k] = clamp(s[k] + d, 0, 100); };
+const senpai = (s, m) => s.members.filter(x => x.seat && x.id !== m.id && x.grade > m.grade && secOf(x) === secOf(m)).sort((a, b) => b.grade - a.grade)[0]
+  || s.members.filter(x => x.seat && x.grade === 3)[0];
+const contestAhead = s => EVENTS[s.week + 1]?.kind === 'contest' ? EVENTS[s.week + 1] : null;
+
+// who：その出来事の主役になれる部員（2人必要なものは pair で相手を選ぶ）
+const EPISODES = [
+  {id: 'doubt', who: s => seated(s).filter(m => m.grade === 1 && avgStat(m) < 30),
+   text: (s, m) => `練習のあと、1年生の${m.name}（${instOf(m)}）が音楽室に残っていた。「みんなみたいに吹けなくて……。向いてないのかもしれません」`,
+   choices: [
+     {label: 'いっしょにロングトーンをする', go: (s, m) => { bump(m, 'tone', 4); bump(m, 'pitch', 2); adj(s, 'stamina', -3);
+       remember(s, m, '自信をなくした日に、顧問とふたりでロングトーンをした。'); return `しばらく二人でロングトーンをした。帰りぎわ、${m.name}は「また明日も来ます」と言った。`; }},
+     {label: '同じパートの先輩に話を聞いてもらう', go: (s, m) => { const o = senpai(s, m); bump(m, 'expr', 3); adj(s, 'cohesion', 3);
+       remember(s, m, `自信をなくした日に、先輩の${o ? o.name : ''}が話を聞いてくれた。`); remember(s, o, `後輩の${m.name}の相談に乗った。`);
+       return `${o ? o.name : '先輩'}が、自分も1年生のころは同じだったと話してくれたらしい。次の日、二人で個人練習をしていた。`; }},
+     {label: '「あせらなくていい」と伝える', go: (s, m) => { adj(s, 'morale', 2);
+       remember(s, m, '「あせらなくていい」と言われて、少し楽になった。'); return `${m.name}は少しほっとした顔で帰っていった。`; }},
+   ]},
+  {id: 'early', who: s => seated(s).filter(m => m.trait !== 'shy'),
+   text: (s, m) => `${m.name}（${instOf(m)}）が毎朝7時から自主練をしていると、守衛さんが教えてくれた。`,
+   choices: [
+     {label: 'みんなの前でほめる', go: (s, m) => { bump(m, weakest(m), 3); adj(s, 'morale', 2);
+       for(const x of seated(s)) if(x.id !== m.id && secOf(x) === secOf(m)) bump(x, weakest(x), 1);
+       remember(s, m, 'ひとりで続けていた朝練を、みんなの前でほめられた。'); return '照れくさそうにしていたが、次の日から同じパートの朝練に来る部員が増えた。'; }},
+     {label: 'こっそり声をかける', go: (s, m) => { bump(m, weakest(m), 4);
+       remember(s, m, '朝練をしていたら、顧問にこっそり声をかけられた。'); return `「見てたんですか」と、${m.name}は笑っていた。`; }},
+     {label: '無理をしないよう伝える', go: (s, m) => { bump(m, weakest(m), 1); adj(s, 'stamina', 4);
+       remember(s, m, '朝練のしすぎを心配された。'); return '朝練は週3回にすると約束した。'; }},
+   ]},
+  {id: 'reed', who: s => seated(s).filter(m => REED.has(SEAT[m.seat].inst)),
+   text: (s, m) => `${m.name}（${instOf(m)}）のリードが割れてしまった。いちばんよく鳴る1枚だったらしく、落ち込んでいる。`,
+   choices: [
+     {label: '部費で新しい箱を買う', go: (s, m) => { bump(m, 'tone', 3); adj(s, 'morale', 1);
+       remember(s, m, '大事なリードが割れた日、新しい箱から一緒に選んでもらった。'); return `新しい箱から、よく鳴るリードを${m.name}と一緒に選んだ。`; }},
+     {label: '残りのリードを調整して育てる', go: (s, m) => { bump(m, 'tone', 2); bump(m, 'pitch', 2);
+       remember(s, m, 'リードを削って調整するやり方を覚えた。'); return 'リードを少しずつ削って調整するやり方を覚えた。手間はかかるが、音が安定してきた。'; }},
+     {label: '先輩に分けてもらう', go: (s, m) => { const o = senpai(s, m); bump(m, 'tone', 1); adj(s, 'cohesion', 2);
+       remember(s, m, `${o ? o.name : '先輩'}にリードを分けてもらった。`); return `${o ? o.name : '先輩'}が「これ、よく鳴るよ」と1枚くれた。`; }},
+   ]},
+  {id: 'lip', who: s => seated(s).filter(m => LIP.has(SEAT[m.seat].inst)),
+   text: (s, m) => `${m.name}（${instOf(m)}）が唇を痛めたらしい。高い音を吹くと痛むという。`,
+   choices: [
+     {label: '今週は軽めにさせる', go: (s, m) => { bump(m, 'tone', -1); adj(s, 'morale', 1); s.fam[s.pieceId] = clamp((s.fam[s.pieceId] || 0) + 1, 0, 100);
+       remember(s, m, '唇を痛めて、楽譜とにらめっこした週があった。'); return `${m.name}は今週、楽譜を読み込んで過ごした。歌いながら指を動かしている。`; }},
+     {label: '吹き方を基礎から見直す', go: (s, m) => { bump(m, 'tone', 3); bump(m, 'pitch', 2); adj(s, 'stamina', -2);
+       remember(s, m, '唇を痛めたのをきっかけに、吹き方を基礎から見直した。'); return '力まずに吹く練習をした。前より楽に高い音が出るようになった。'; }},
+   ]},
+  {id: 'clash', pair: true, who: s => seated(s).filter(m => m.grade >= 2 && seated(s).some(x => x.id !== m.id && x.grade >= 2 && secOf(x) === secOf(m))),
+   other: (s, m) => seated(s).filter(x => x.id !== m.id && x.grade >= 2 && secOf(x) === secOf(m)),
+   text: (s, m, o) => `${m.name}と${o.name}（${SEC[secOf(m)].name}）が、フレーズの吹き方で言い合いになった。パート練習の空気が重い。`,
+   choices: [
+     {label: '二人で話し合わせる', go: (s, m, o) => { bump(m, 'expr', 2); bump(o, 'expr', 2); adj(s, 'cohesion', 4); adj(s, 'morale', -2);
+       remember(s, m, `${o.name}とフレーズの吹き方でぶつかって、最後は二人でそろえた。`); remember(s, o, `${m.name}とフレーズの吹き方でぶつかって、最後は二人でそろえた。`);
+       return 'しばらく口をきかなかったが、次の合奏では二人の吹き方がぴったりそろっていた。'; }},
+     {label: '合奏で両方を聴き比べる', go: (s, m, o) => { bump(m, 'expr', 1); bump(o, 'expr', 1); adj(s, 'stamina', -4); s.fam[s.pieceId] = clamp((s.fam[s.pieceId] || 0) + 3, 0, 100);
+       const win = avgStat(m) >= avgStat(o) ? m : o, lose = win === m ? o : m;
+       remember(s, win, '合奏で聴き比べて、自分の吹き方が採用された。'); remember(s, lose, `合奏で聴き比べて、${win.name}の吹き方に合わせることにした。`);
+       return `みんなで聴き比べて、${win.name}の吹き方に決まった。${lose.name}も「聴いたら納得した」と言っていた。`; }},
+     {label: '顧問が決める', go: (s, m, o) => { adj(s, 'morale', -1); adj(s, 'cohesion', 1);
+       return 'とりあえず収まったが、二人ともどこか不満そうだ。'; }},
+   ]},
+  {id: 'birthday', who: s => seated(s),
+   text: (s, m) => `今日は${m.name}（${instOf(m)}）の誕生日。パートのみんながこっそりケーキを用意している。`,
+   choices: [
+     {label: '練習の前に少しだけお祝いする', go: (s, m) => { adj(s, 'morale', 5); adj(s, 'cohesion', 2); adj(s, 'stamina', 2);
+       remember(s, m, '誕生日に、パートのみんながハッピーバースデーを吹いてくれた。'); return 'パートのみんながハッピーバースデーを吹いて、音楽室が笑い声でいっぱいになった。'; }},
+     {label: '練習が終わってからにしてもらう', go: (s, m) => { adj(s, 'morale', 2);
+       remember(s, m, '誕生日に、練習のあとでみんなとケーキを分けた。'); return '練習のあと、みんなでケーキを分けた。'; }},
+   ]},
+  {id: 'leader', who: s => seated(s).filter(m => m.title === 'パートリーダー'),
+   text: (s, m) => `パートリーダーの${m.name}（${instOf(m)}）が、パート練習の進め方をノートにまとめてきた。`,
+   choices: [
+     {label: '任せてみる', go: (s, m) => { for(const x of seated(s)) if(secOf(x) === secOf(m)) bump(x, weakest(x), 1.5); bump(m, 'expr', 2); adj(s, 'morale', 2);
+       remember(s, m, 'パートリーダーとして、パート練習を任された。'); return `${m.name}の仕切りで、${SEC[secOf(m)].name}パートの練習が見違えるように引き締まった。`; }},
+     {label: '顧問もいっしょに見る', go: (s, m) => { for(const x of seated(s)) if(secOf(x) === secOf(m)){ bump(x, 'pitch', 1); bump(x, 'rhythm', 1); }
+       remember(s, m, 'パート練習の計画を、顧問と一緒に練った。'); return 'ノートをもとに、二人で練習の順番を組み直した。'; }},
+   ]},
+  {id: 'obog', who: s => s.week >= 4 ? seated(s).filter(m => m.grade === 3) : [],
+   text: (s, m) => '卒業したOB・OGが、差し入れを持って遊びに来てくれた。',
+   choices: [
+     {label: '合奏を聴いてもらう', go: (s, m) => { s.hallExp = clamp(s.hallExp + 15, 0, 100); adj(s, 'morale', 3); adj(s, 'cohesion', 2);
+       remember(s, m, 'OB・OGの前で合奏して、「去年よりまとまってる」と言われた。'); return '「去年より音がまとまってる」と言われて、3年生がうれしそうだった。人前で吹く練習にもなった。'; }},
+     {label: 'パートごとに教えてもらう', go: (s, m) => { for(const x of seated(s)) bump(x, weakest(x), 1);
+       return 'パートごとに、先輩たちが自分のころの練習を教えてくれた。'; }},
+   ]},
+  {id: 'firstrun', who: s => seated(s).filter(m => m.grade === 1 && m.exp === false && avgStat(m) >= 24),
+   text: (s, m) => `初心者で入ってきた${m.name}（${instOf(m)}）が、はじめて合奏で最後まで落ちずに吹ききった。`,
+   choices: [
+     {label: 'みんなの前でほめる', go: (s, m) => { bump(m, 'expr', 3); adj(s, 'morale', 3);
+       remember(s, m, 'はじめて合奏で最後まで吹ききって、みんなに拍手された。'); return `部員から自然に拍手が起きた。${m.name}は真っ赤になっていた。`; }},
+     {label: 'あとでこっそり声をかける', go: (s, m) => { bump(m, weakest(m), 3);
+       remember(s, m, 'はじめて合奏で最後まで吹ききった日、顧問に声をかけられた。'); return `「ほんとですか！」と、${m.name}はうれしそうに楽器を抱えた。`; }},
+   ]},
+  {id: 'exam', who: s => s.week >= 8 ? seated(s).filter(m => m.grade === 3) : [],
+   text: (s, m) => `3年生の${m.name}（${instOf(m)}）が、受験勉強と部活の両立に悩んでいるようだ。`,
+   choices: [
+     {label: 'コンクールまでいっしょにやりきろうと話す', go: (s, m) => { bump(m, 'expr', 3); adj(s, 'morale', 1);
+       remember(s, m, '受験と部活の両立に悩んで、最後までやりきると決めた。'); return `「最後までやりきります」と、${m.name}ははっきり言った。`; }},
+     {label: '練習を早めに切り上げてもいいと伝える', go: (s, m) => { bump(m, 'tone', -1); bump(m, 'rhythm', -1); adj(s, 'morale', 2);
+       remember(s, m, '受験勉強のため、練習を早めに切り上げながら最後まで続けた。'); return `${m.name}は放課後の前半だけ練習に来ることになった。その分、集中して吹いている。`; }},
+   ]},
+  {id: 'timp', who: s => seated(s).filter(m => secOf(m) === 'perc'),
+   text: (s, m) => `${m.name}（パーカッション）が、ティンパニの皮がへたってきていると言ってきた。`,
+   choices: [
+     {label: '思い切って張り替える', go: (s, m) => { bump(m, 'tone', 4); bump(m, 'pitch', 2);
+       remember(s, m, 'ティンパニの皮を張り替えて、音が変わったのに感動した。'); return '張り替えたティンパニは、驚くほど音程がはっきりした。'; }},
+     {label: '耳でチューニングする練習をする', go: (s, m) => { bump(m, 'pitch', 3);
+       remember(s, m, 'ティンパニを耳でチューニングする練習を始めた。'); return `${m.name}は、合奏の前に耳だけでチューニングする練習を始めた。`; }},
+   ]},
+  {id: 'score', who: s => s.pieceId ? seated(s) : [],
+   text: (s, m) => `${m.name}（${instOf(m)}）が、自由曲の楽譜をなくしたと青い顔をしている。`,
+   choices: [
+     {label: 'いっしょに探す', go: (s, m) => { adj(s, 'stamina', -3); adj(s, 'morale', 1);
+       remember(s, m, '自由曲の楽譜をなくして大騒ぎした。楽器ケースのポケットから出てきた。'); return '楽器ケースのポケットから出てきた。二人で大笑いした。'; }},
+     {label: 'コピーを渡して、書き込みを写させる', go: (s, m) => { bump(m, 'expr', 2);
+       remember(s, m, 'なくした楽譜の書き込みを、先輩の楽譜から写した。'); return '先輩の楽譜から書き込みを写しているうちに、フレーズの意味がわかってきたらしい。'; }},
+   ]},
+  {id: 'eve', always: s => !!contestAhead(s), who: s => seated(s).filter(m => m.title === '部長'),
+   text: (s, m) => `${contestAhead(s).title}の前の週。部長の${m.name}が「最後にもう一回、通させてください」と言ってきた。`,
+   choices: [
+     {label: '通してから帰す', go: (s, m) => { s.fam[s.pieceId] = clamp((s.fam[s.pieceId] || 0) + 3, 0, 100); adj(s, 'cohesion', 2); adj(s, 'stamina', -6);
+       remember(s, m, `${contestAhead(s).title}の前の週、部長として「もう一回通させてください」と頼んだ。`); return '通し終わると、誰も何も言わずに楽器を片づけた。いい顔をしていた。'; }},
+     {label: '今日は早く帰して休ませる', go: (s, m) => { adj(s, 'stamina', 8); adj(s, 'morale', 2);
+       remember(s, m, `${contestAhead(s).title}の前の週、「休むのも練習」と言われて早く帰った。`); return '「明日のために休むのも練習」と伝えた。みんな素直に帰っていった。'; }},
+   ]},
+];
+const EPISODE_BY = Object.fromEntries(EPISODES.map(e => [e.id, e]));
+
+// 練習の週に、出来事を起こすかどうかと、どれを誰に起こすかを決める（同じ年に同じ出来事はくり返さない）
+function pickEpisode(s){
+  if(s.phase !== 'week') return null;
+  const ev = EVENTS[s.week];
+  if(ev && ev.kind !== 'mod') return null;
+  const flag = ep => `ep:${s.year}:${ep.id}${ep.always ? ':' + s.week : ''}`;
+  const used = ep => s.flags[flag(ep)];
+  const able = EPISODES.filter(ep => !used(ep) && (!ep.always || ep.always(s)) && ep.who(s).length);
+  const forced = able.filter(ep => ep.always);
+  let pool = forced.length ? forced : able.filter(ep => !ep.always);
+  if(!pool.length) return null;
+  if(!forced.length && (s.episodeWeek === s.week - 1 || hash(s.year, s.week, 'ep') > 0.4)) return null;
+  const ep = pool[Math.floor(hash(s.year, s.week, 'which') * pool.length)];
+  const cands = ep.who(s);
+  const m = cands[Math.floor(hash(s.year, s.week, 'who') * cands.length)];
+  let o = null;
+  if(ep.pair){ const os = ep.other(s, m); o = os[Math.floor(hash(s.year, s.week, 'other') * os.length)]; }
+  s.flags[flag(ep)] = true;
+  s.episodeWeek = s.week;
+  return {id: ep.id, mid: m.id, oid: o ? o.id : null};
+}
+const episodeView = s => {
+  const e = s.episode, ep = e && EPISODE_BY[e.id];
+  if(!ep) return null;
+  const m = s.members.find(x => x.id === e.mid), o = e.oid ? s.members.find(x => x.id === e.oid) : null;
+  if(!m || (e.oid && !o)) return null;
+  return {ep, m, o, text: ep.text(s, m, o), choices: ep.choices.map(c => c.label)};
+};
+function resolveEpisode(s0, k){
+  const s = clone(s0);
+  const v = episodeView(s);
+  s.episode = null;
+  if(!v) return s;
+  const c = v.ep.choices[k];
+  const res = c.go(s, v.m, v.o);
+  addLog(s, `【できごと】${v.text}`);
+  addLog(s, `→ ${c.label}。${res}`);
+  s.lastEpisode = {text: v.text, choice: c.label, result: res};
   return s;
 }
 
@@ -306,8 +491,9 @@ function assignRecruits(s0, map){
     const match = seat && SEAT[seat].inst === r.hope;
     if(match) happy++;
     const base = r.exp && match ? 26 : r.exp ? 14 : 6;
-    s.members.push({id: r.id, name: r.name, grade: 1, seat, trait: r.trait, joined: s.year,
-      stats: makeStats(base, r.exp ? 5 : 3, 'stat', r.id), hope: r.hope});
+    const stats = makeStats(base, r.exp ? 5 : 3, 'stat', r.id);
+    s.members.push({id: r.id, name: r.name, grade: 1, seat, trait: r.trait, joined: s.year, exp: !!r.exp,
+      stats, first: {y: s.year, w: s.week, stats: {...stats}}, hope: r.hope});
   }
   const n = (s.recruits || []).length;
   s.morale = clamp(s.morale + happy * 1.5 - (n - happy), 0, 100);
@@ -315,6 +501,12 @@ function assignRecruits(s0, map){
   addLog(s, `1年生${n}人の担当が決まった。希望どおりの楽器になったのは${happy}人。`);
   s.recruits = null;
   assignTitles(s.members);
+  // 1年生が入って最初の合奏を残しておく（引退のとき、入部したころの音として聴ける）
+  if(n && s.pieceId){
+    const rec = addRec(s, `${s.year}年 1年生が入って最初の合奏`, {venue: 'room'});
+    rec.keep = true;
+    addLog(s, '新しい1年生も入って、最初の合奏を録音した。');
+  }
   return s;
 }
 function moveMember(s0, memberId, seatId){

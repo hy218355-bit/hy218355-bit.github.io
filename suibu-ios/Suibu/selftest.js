@@ -15,7 +15,8 @@
     const fonts = [...document.fonts].filter(f => f.status === 'loaded').map(f => f.family + ' ' + f.weight);
     log(`loaded in ${Date.now() - t0}ms: ${Object.keys(SAMPLES.banks).length} banks, ${Object.keys(VIR.raw).length} rooms, fonts [${fonts.join(', ')}], save ${localStorage.getItem(SAVE_KEY) ? 'yes' : 'no'}`);
     const members = fullBand({pitch: 90, rhythm: 90, tone: 90, expr: 90});
-    const perf = perform({members, pieceId: 'ode', cohesion: 90, fam: 100, venue: 'hall', from: 56, to: 60});
+    // 「月と祭」の祭りの入り：太鼓・締太鼓・鈴・拍子木の録音と、管楽器の刻みが鳴る所
+    const perf = perform({members, pieceId: 'wa', cohesion: 90, fam: 100, venue: 'hall', from: 52, to: 60});
     const sr = 44100, len = Math.ceil((perf.total + 1.5) * sr);
     const off = new OfflineAudioContext(2, len, sr);
     await new Promise(res => { if(venueIR(off, 'hall', 'center', res)) res(); });

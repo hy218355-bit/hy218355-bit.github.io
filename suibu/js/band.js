@@ -91,6 +91,7 @@ function initialRoster(year){
       id: `m${year}-${n++}`, name: makeName(used, ...seed), grade, seat: s.id,
       stats: makeStats(grade === 3 ? 42 : 28, 7, ...seed), trait: pickTrait(...seed), joined: year - grade + 1,
     });
+    members[members.length - 1].first = {y: year, w: 0, stats: {...members[members.length - 1].stats}};
   }
   assignTitles(members);
   return members;

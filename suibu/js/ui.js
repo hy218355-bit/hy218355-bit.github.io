@@ -553,7 +553,9 @@ function renderWeek(){
     const lastStage = S.recs.slice().reverse().find(r => r.year === S.year && r.result);
     w.innerHTML = `<div class="stagecard"><h3>3年生が引退します</h3><ol class="small" style="padding-left:1.2em">${res}</ol>
       <p class="txt">${seniors.map(m => esc(m.name)).join('、')}（${seniors.length}人）が引退する。4月の録音と最後の本番を聴き比べてみよう。</p>
-      <div class="transport">${april ? `<button class="btn small" type="button" data-act="playrec" data-id="${april.id}">▶ 4月の録音</button>` : ''}${lastStage ? `<button class="btn small" type="button" data-act="playrec" data-id="${lastStage.id}">▶ 最後の本番</button><button class="btn small" type="button" data-act="saverec" data-id="${lastStage.id}">⤓ 最後の本番を保存</button>` : ''}<button class="btn small primary" type="button" data-act="newyear">次の年度へ</button></div></div>`;
+      <div class="transport">${april ? `<button class="btn small" type="button" data-act="playrec" data-id="${april.id}">▶ 4月の録音</button>` : ''}${lastStage ? `<button class="btn small" type="button" data-act="playrec" data-id="${lastStage.id}">▶ 最後の本番</button><button class="btn small" type="button" data-act="saverec" data-id="${lastStage.id}">⤓ 最後の本番を保存</button>` : ''}</div></div>
+      ${seniors.length ? `<div class="seniors"><h3>引退する3年生</h3><p class="small">名前をタップすると、入部したころと最後の本番を、その人の音だけで聴き比べられる。</p>${seniors.map(m => seniorCard(m, lastStage)).join('')}</div>` : ''}
+      <div class="transport"><button class="btn primary" type="button" data-act="newyear">次の年度へ</button></div>`;
     return;
   }
   head.textContent = `${wkLabel(S.week)}`;
@@ -584,12 +586,47 @@ function renderWeek(){
   }
   const parts = [];
   if(ev) parts.push(`<div class="event"><span class="tag">${ev.title}</span><span>${ev.text}</span></div>`);
+  // 部員のできごと：対応を選ぶまで、今週の練習は決められない
+  const epv = episodeView(S);
+  if(epv){
+    const who = [epv.m, epv.o].filter(Boolean).map(x => `${x.grade}年・${esc(instOf(x))}・${esc(x.name)}`).join('　');
+    parts.push(`<div class="episode"><div class="head"><span class="tag">できごと</span><span class="who">${who}</span></div><p class="txt">${esc(epv.text)}</p>
+      <p class="small">顧問として、どうする？</p><div class="choices">${epv.choices.map((c, k) => `<button class="mbtn" type="button" data-ep="${k}"><b>${esc(c)}</b></button>`).join('')}</div></div>`);
+    w.innerHTML = parts.join('');
+    return;
+  }
+  if(S.lastEpisode) parts.push(`<p class="epres"><b>${esc(S.lastEpisode.choice)}</b>${esc(S.lastEpisode.result)}</p>`);
   parts.push(`<div class="focus"><span>重点を置くパート（そのパートの伸びが1.6倍、ほかは少し下がる）</span><div class="chips">
     <button class="chip" type="button" data-focus="" aria-pressed="${!S.focus}">なし</button>${SECTIONS.map(s => `<button class="chip" type="button" data-focus="${s.id}" aria-pressed="${S.focus === s.id}">${s.name}</button>`).join('')}</div></div>`);
   const cm = ev?.costMult || 1;
   parts.push(`<div class="menu">${MENU.filter(m => !m.from || S.week >= m.from).map(m => `<button class="mbtn${m.id === 'rest' ? ' rest' : ''}" type="button" data-menu="${m.id}"><b>${m.name}</b><span>${m.hint}</span><span class="cost">体力 ${m.cost > 0 ? '−' + Math.round(m.cost * cm) : '+' + (-m.cost)}</span></button>`).join('')}</div>`);
   if(S.stamina < 30) parts.push(`<p class="small">体力が30を切っている。練習の効果が半分になる。</p>`);
   w.innerHTML = parts.join('');
+}
+// 引退する3年生ひとりずつ：入部したとき（日誌をつけ始めたとき）と今、思い出、その人の音だけの録音
+const recHas = (r, m) => r.snap.members.some(x => x.id === m.id);
+const firstRecOf = m => S.recs.filter(r => r.keep && recHas(r, m)).sort((a, b) => a.year - b.year || a.week - b.week)[0] || null;
+const FAREWELL = ['「この部で吹けて、よかったです」', '「後輩たち、あとはよろしくね」', '「最後の本番が、いちばん楽しかった」', '「3年間、ありがとうございました」', '「次は客席から聴きに来ます」', '「もっと吹いていたかったな」'];
+function farewellLine(m){
+  if(m.title === '部長') return '「みんな、ついてきてくれてありがとう」';
+  if(m.title === '学生指揮') return '「指揮台から見たみんなの顔、忘れません」';
+  if((m.story || []).some(x => x.t.includes('自信をなくした'))) return '「あのとき、やめなくてよかったです」';
+  return FAREWELL[Math.floor(hash(m.id, 'bye') * FAREWELL.length)];
+}
+function seniorCard(m, last){
+  const f = m.first, first = firstRecOf(m);
+  const grow = f ? STAT_KEYS.map(k => [k, m.stats[k] - f.stats[k]]).sort((a, b) => b[1] - a[1])[0] : null;
+  const joinedHere = f && f.y === m.joined;
+  const bars = f ? STAT_KEYS.map(k => `<div class="gb"><span class="nm">${STAT_LABEL[k]}</span><span class="track"><span class="fill was" style="width:${clamp(f.stats[k], 0, 100)}%"></span><span class="fill" style="width:${clamp(m.stats[k], 0, 100)}%"></span></span><span class="val">${Math.round(f.stats[k])}→${Math.round(m.stats[k])}</span></div>`).join('') : '';
+  const inst = m.seat ? INST[SEAT[m.seat].inst].name : '控え';
+  const showFirst = first && (!last || first.id !== last.id);
+  return `<details class="senior"><summary><span class="nm">${esc(m.name)}</span><span class="sub">${esc(inst)}${m.title ? '・' + m.title : ''}</span>${grow && grow[1] >= 1 ? `<span class="grow">${STAT_LABEL[grow[0]]} +${Math.round(grow[1])}</span>` : ''}</summary>
+    <div class="body">
+      ${f ? `<p class="small">${ymLabel(f.y, f.w)}${joinedHere ? 'に入部したころ' : '（この日誌をつけ始めたころ）'}と、いま</p><div class="gbars">${bars}</div>` : ''}
+      ${(m.story || []).length ? `<ul class="mem">${m.story.map(x => `<li><time>${ymLabel(x.y, x.w)}</time>${esc(x.t)}</li>`).join('')}</ul>` : ''}
+      <p class="bye">${farewellLine(m)}</p>
+      <div class="transport">${showFirst ? `<button class="btn small" type="button" data-act="memplay" data-id="${first.id}" data-mid="${m.id}">▶ ${joinedHere ? '入部したころ' : 'いちばん古い録音'}の音</button>` : ''}${last && recHas(last, m) ? `<button class="btn small" type="button" data-act="memplay" data-id="${last.id}" data-mid="${m.id}">▶ 最後の本番の音</button><button class="btn small" type="button" data-act="memsave" data-id="${last.id}" data-mid="${m.id}">⤓ 保存</button>` : ''}</div>
+    </div></details>`;
 }
 const conductNote = p => p.conducted ? `・あなたの指揮 ♩=${p.conducted.bpm}、安定度${p.conducted.stab}%` : '';
 function renderStageResult(w, ev){
@@ -627,6 +664,19 @@ function renderLog(){
 }
 
 /* ===== 部員カード・名簿 ===== */
+// 入部したとき（またはこの日誌をつけ始めたとき）からの伸びと、思い出
+const ymLabel = (y, w) => `${y}年${wkMonth(w)}月`;
+function growthText(m){
+  if(!m.first) return '';
+  return STAT_KEYS.map(k => { const d = Math.round(m.stats[k] - m.first.stats[k]); return `${STAT_LABEL[k]}${d >= 0 ? '+' : '−'}${Math.abs(d)}`; }).join('　');
+}
+function memberStory(m){
+  const g = growthText(m);
+  const st = (m.story || []).slice(-5).reverse();
+  if(!g && !st.length) return '';
+  return `<div class="mc-story">${g ? `<p class="small">${ymLabel(m.first.y, m.first.w)}${m.first.y === m.joined ? 'の入部' : 'に日誌をつけ始めて'}から：${g}</p>` : ''}
+    ${st.length ? `<ul>${st.map(x => `<li><time>${ymLabel(x.y, x.w)}</time>${esc(x.t)}</li>`).join('')}</ul>` : ''}</div>`;
+}
 function renderMemberCard(){
   const card = $('#memberCard');
   const m = U.sel && memberById(U.sel);
@@ -641,6 +691,7 @@ function renderMemberCard(){
   card.innerHTML = `<div class="mc-head"><h3>${esc(m.name)}</h3>${m.title ? `<span class="tag">${m.title}</span>` : ''}<span class="sub">${m.grade}年・${seat ? PART_LABEL[seat.part] : '控え（席なし）'}</span></div>
     ${tr ? `<p class="mc-trait">癖：${tr.name}。${tr.desc}</p>` : '<p class="mc-trait">目立った癖はない。</p>'}
     <div class="stats">${STAT_KEYS.map(k => statRow(STAT_LABEL[k], m.stats[k], STAT_DESC[k], '')).join('')}</div>
+    ${memberStory(m)}
     <div class="mc-actions">
       ${seat ? `<button class="btn small" type="button" data-mact="solo">この人だけ聴く</button><button class="btn small" type="button" data-mact="secsolo">パートだけ聴く</button>` : ''}
       <button class="btn small quiet" type="button" data-mact="all">全員で聴く</button>
@@ -823,6 +874,7 @@ function bind(){
       return;
     }
     if(b.dataset.focus !== undefined){ S.focus = b.dataset.focus || null; commit(S); renderWeek(); return; }
+    if(b.dataset.ep !== undefined){ haptic('tap'); commit(resolveEpisode(S, +b.dataset.ep)); renderAll(); refreshNow(); return; }
     const act = b.dataset.act;
     if(act === 'preview'){ U.piece = b.dataset.pid; U.range = 'all'; renderPiece(); renderInterp(); U.perfNow = perform(currentCtx()); U.diag = analyze(U.perfNow); renderDiag(); playPerf(U.perfNow, `試聴：${PIECES[b.dataset.pid].title}（譜読み前）`); }
     else if(act === 'choose'){ stopPlay(); commit(choosePiece(S, b.dataset.pid)); U.piece = null; renderAll(); refreshNow(); }
@@ -844,6 +896,12 @@ function bind(){
     else if(act === 'newyear'){ stopPlay(); commit(newYear(S)); U.sel = null; U.piece = null; renderAll(); refreshNow(); }
     else if(act === 'playrec') playRec(b.dataset.id);
     else if(act === 'saverec'){ const rec = S.recs.find(r => r.id === b.dataset.id); if(rec) saveRecording(rec); }
+    else if(act === 'memplay' || act === 'memsave'){
+      const rec = S.recs.find(r => r.id === b.dataset.id), m = memberById(b.dataset.mid);
+      if(!rec || !m) return;
+      if(act === 'memsave') saveRecording(rec, m);
+      else playMemberRec(rec, m, `${m.name}の音だけ：${rec.label}`);
+    }
   });
   $('#interp').addEventListener('click', e => {
     const b = e.target.closest('[data-interp]'); if(!b || b.disabled) return;

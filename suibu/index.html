@@ -201,6 +201,33 @@ select{background:var(--sheet);border:1.5px solid var(--rule);border-radius:8px;
 .mbtn .cost{font-family:var(--f-lcd);font-size:12px}
 .mbtn.wide{grid-column:1/-1}
 .mbtn.rest{border-style:dashed}
+.seniors{display:grid;gap:8px}
+.seniors h3{font-family:var(--f-display);font-weight:400;font-size:18px}
+.senior{border:1.5px solid var(--rule);border-radius:8px;background:var(--sheet)}
+.senior[open]{border-color:var(--brass)}
+.senior summary{list-style:none;cursor:pointer;display:flex;flex-wrap:wrap;align-items:baseline;gap:2px 10px;padding:10px 14px}
+.senior summary::-webkit-details-marker{display:none}
+.senior summary .nm{font-weight:700;font-size:15px}
+.senior summary .sub{font-size:12.5px;color:var(--ink-soft)}
+.senior summary .grow{margin-left:auto;font-family:var(--f-lcd);font-size:13px;color:var(--good)}
+.senior .body{display:grid;gap:10px;padding:0 14px 14px}
+.gbars{display:grid;gap:5px}
+.gb{display:grid;grid-template-columns:4em minmax(0,1fr) 4.6em;gap:8px;align-items:center;font-size:12.5px}
+.gb .val{font-family:var(--f-lcd);text-align:right;font-variant-numeric:tabular-nums}
+.gb .track .fill.was{background:var(--ink-soft);opacity:.55;z-index:1}
+.senior .mem{list-style:none;display:grid;gap:4px;font-family:var(--f-hand);font-size:14px;line-height:1.6}
+.senior .mem time{font-family:var(--f-body);font-size:11.5px;color:var(--ink-soft);margin-right:8px}
+.senior .bye{font-family:var(--f-hand);font-size:16px;line-height:1.6}
+.mc-story{display:grid;gap:6px}
+.mc-story ul{list-style:none;display:grid;gap:4px;font-family:var(--f-hand);font-size:14px;line-height:1.6}
+.mc-story time{font-family:var(--f-body);font-size:11.5px;color:var(--ink-soft);margin-right:8px}
+.episode{border:1.5px solid var(--brass);border-radius:8px;padding:12px 14px;display:grid;gap:8px;background:var(--sheet)}
+.episode .head{display:flex;flex-wrap:wrap;align-items:center;gap:4px 10px}
+.episode .who{font-size:12.5px;color:var(--ink-soft)}
+.episode .txt{font-family:var(--f-hand);font-size:15.5px;line-height:1.75}
+.episode .choices{display:grid;gap:8px}
+.epres{font-family:var(--f-hand);font-size:14.5px;line-height:1.7;border-left:3px solid var(--brass);padding:2px 0 2px 10px}
+.epres b{font-family:var(--f-body);font-size:12.5px;display:block;color:var(--ink-soft);font-weight:700}
 .pcard{border:1.5px solid var(--rule);border-radius:8px;padding:12px 14px;display:grid;gap:6px;background:var(--sheet)}
 .pcard h3{font-family:var(--f-display);font-weight:400;font-size:18px;line-height:1.35}
 .pcard p{font-size:13px;color:var(--ink-soft)}
@@ -294,6 +321,11 @@ tr.empty td{color:var(--ink-soft)}
 .cd-hint.top{top:12px}.cd-hint.bot{bottom:12px}
 .cd-ripple{position:absolute;width:20px;height:20px;margin:-10px 0 0 -10px;border-radius:50%;border:3px solid var(--brass);pointer-events:none;animation:cdr .55s ease-out forwards}
 @keyframes cdr{to{transform:scale(7);opacity:0}}
+.cd-judge{position:absolute;transform:translate(-50%,-150%);font-weight:700;font-size:17px;white-space:nowrap;pointer-events:none;animation:cdj .7s ease-out forwards;text-shadow:0 1px 0 var(--sheet)}
+.cd-judge.p{color:var(--brass);font-size:19px}.cd-judge.g{color:var(--good)}.cd-judge.e,.cd-judge.l{color:var(--ink-soft)}
+@keyframes cdj{to{transform:translate(-50%,-300%);opacity:0}}
+.cd-stats .combo{margin-left:auto;font-weight:700;color:var(--brass)}
+.cd-num.judge b{font-size:24px}
 .cd-stats{max-width:720px;width:100%;margin:0 auto;display:flex;gap:18px;font-size:14px;color:var(--ink-soft);font-variant-numeric:tabular-nums}
 .cd-stats b{font-family:var(--f-lcd);font-size:22px;color:var(--ink);margin-left:2px}
 .cd-result{max-width:720px;width:100%;margin:0 auto;display:grid;gap:12px;align-content:start;flex:1}
@@ -303,7 +335,7 @@ tr.empty td{color:var(--ink-soft)}
   max-width:calc(100% - 32px);padding:10px 12px 10px 16px;border-radius:14px;background:var(--ink);color:var(--paper);font-size:14px;box-shadow:0 8px 24px var(--shadow)}
 .toast[hidden]{display:none}
 .tabbed .toast{bottom:calc(126px + env(safe-area-inset-bottom,0px))}
-@media (prefers-reduced-motion: reduce){.cd-ripple{animation:none;opacity:0}}
+@media (prefers-reduced-motion: reduce){.cd-ripple{animation:none;opacity:0}.cd-judge{animation:none}}
 
 /* スマホ・タブレット縦：1列になる幅では、画面下のタブで「今週・合奏・部員・日誌・ラボ」を切り替える */
 .tabbar,.mini{display:none}
@@ -459,7 +491,7 @@ tr.empty td{color:var(--ink-soft)}
     <span class="cd-hint top">大きく</span><span class="cd-hint bot">小さく</span>
   </div>
   <div class="cd-result" id="cdResult" hidden></div>
-  <p class="cd-stats"><span>いまのテンポ ♩=<b id="cdTempo">--</b></span><span>指定 ♩=<b id="cdRef"></b></span></p>
+  <p class="cd-stats"><span>いまのテンポ ♩=<b id="cdTempo">--</b></span><span>指定 ♩=<b id="cdRef"></b></span><span class="combo" id="cdCombo" aria-live="off"></span></p>
 </section>
 <div class="toast" id="toast" role="status" hidden></div>
 

@@ -253,7 +253,7 @@ class Playback {
 /* ===== 録音を音声ファイルに書き出す =====
    会場の響きもつけて、実際の再生と同じしくみで（ただし速く）鳴らし、WAV にまとめる。
    指揮した演奏は、保存してある拍の進み方（conduct.ev）と振りの大きさ（conduct.lv）で鳴らす。 */
-async function renderPerf(perf, {venue = 'hall', pos = 'center', conduct = null, onProgress = null} = {}){
+async function renderPerf(perf, {venue = 'hall', pos = 'center', conduct = null, solo = null, onProgress = null} = {}){
   const sr = 44100;
   const clock = conduct ? BeatClock.fromSaved(conduct.ev, 0.5) : null;
   const dur = clock ? clock.timeOf(perf.to) - clock.t0 + 1.5 : perf.total;
@@ -264,7 +264,7 @@ async function renderPerf(perf, {venue = 'hall', pos = 'center', conduct = null,
   if(VIR.man) await new Promise(res => { if(venueIR(off, venue, pos, res)) res(); setTimeout(res, 6000); });
   const chain = new VenueChain(off);
   chain.set(venue, pos, 0);
-  const pb = new Playback({ac: off, chain, posId: pos, solo: {type: 'all'}}, perf, null, {clock, lv: conduct?.lv});
+  const pb = new Playback({ac: off, chain, posId: pos, solo: solo || {type: 'all'}}, perf, null, {clock, lv: conduct?.lv});
   clearInterval(pb.timer);
   const total = len / sr;
   for(let t = 0.5; t < total; t += 0.5){

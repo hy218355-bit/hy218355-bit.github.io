@@ -25,6 +25,8 @@ function openConduct(stage = null){
   CD.stage = stage;
   CD.perf = stage ? perform(recCtx(stage.rec)) : perform(currentCtx());
   CD.phase = 'count'; CD.count = []; CD.lv = []; CD.level = 1; CD.clock = null; CD.rec = null; CD.lastTap = 0; CD.idleHint = false; CD.beatShown = -1; CD.tmHint = null;
+  CD.judge = {p: 0, g: 0, e: 0, l: 0}; CD.combo = 0; CD.best = 0;
+  $('#cdCombo').textContent = '';
   const pc = PIECES[CD.perf.pieceId];
   $('#cdTitle').textContent = stage ? `${stage.ev.title}：${pc.title}` : `${pc.title}（${VENUE[U.venue].name}）`;
   $('#cdRef').textContent = bpmAt(pc, CD.perf.interp.tempo ?? 1, CD.perf.from);
@@ -93,6 +95,7 @@ function cdTap(e){
     return;
   }
   CD.clock.tap(now);
+  cdJudge(e, pad, CD.clock.taps[CD.clock.taps.length - 1].off);
   CD.idleHint = false;
   $('#cdTempo').textContent = Math.round(60 / CD.clock.P);
   if(Math.abs(level - CD.level) > 0.04){
@@ -108,6 +111,23 @@ function cdRipple(e, pad){
   r.style.top = `${(e.clientY ?? pad.top + pad.height / 2) - pad.top}px`;
   $('#cdPad').appendChild(r);
   setTimeout(() => r.remove(), 600);
+}
+
+// 1打ごとの判定：部員がちょうどその拍にいたか（叩くのが早いとテンポが前へ、遅いと後ろへ引っぱられる）
+const CD_JUDGE = {p: 'ぴったり', g: 'いい感じ', e: '早い', l: '遅い'};
+function cdJudge(e, pad, off){
+  const a = Math.abs(off), kind = a <= 0.07 ? 'p' : a <= 0.15 ? 'g' : off < 0 ? 'e' : 'l';
+  CD.judge[kind]++;
+  CD.combo = kind === 'p' || kind === 'g' ? CD.combo + 1 : 0;
+  CD.best = Math.max(CD.best, CD.combo);
+  const el = document.createElement('span');
+  el.className = 'cd-judge ' + kind;
+  el.textContent = CD_JUDGE[kind];
+  el.style.left = `${(e.clientX ?? pad.left + pad.width / 2) - pad.left}px`;
+  el.style.top = `${(e.clientY ?? pad.top + pad.height / 2) - pad.top}px`;
+  $('#cdPad').appendChild(el);
+  setTimeout(() => el.remove(), 700);
+  $('#cdCombo').textContent = CD.combo >= 4 ? `${CD.combo}連続` : '';
 }
 
 // 拍の図：点と、指揮棒の先（いまの拍の位置へなめらかに動く）
@@ -178,7 +198,9 @@ function cdFinish(natural){
     : stab >= 85 ? 'ぶれない指揮で、部員も安心して吹けた。'
     : stab >= 65 ? 'ところどころテンポが揺れたが、部員はよくついてきた。'
     : 'テンポが大きく揺れ、リズムの苦手な部員ほどついてくるのに苦労した。';
-  const conduct = {ev: c.saved(), lv: CD.lv, bpm, stab};
+  const J = CD.judge;
+  const judgeRow = `<p class="cd-num judge"><span>ぴったり<b>${J.p}</b></span><span>いい感じ<b>${J.g}</b></span><span>早い・遅い<b>${J.e + J.l}</b></span><span>最大連続<b>${CD.best}</b></span></p>`;
+  const conduct = {ev: c.saved(), lv: CD.lv, bpm, stab, judge: {...J, best: CD.best}};
   if(CD.stage){
     // 本番：この指揮で演奏した結果で採点し直す
     commit(conductStage(S, conduct));
@@ -188,6 +210,7 @@ function cdFinish(natural){
     $('#cdResult').hidden = false;
     $('#cdResult').innerHTML = `<h3>演奏おわり</h3>
       <p class="cd-num"><span>平均テンポ<b>♩=${bpm}</b></span><span>安定度<b>${followed ? stab + '%' : '—'}</b></span></p>
+      ${judgeRow}
       <p>${speed}。${comment}</p>
       <div class="transport"><button class="btn primary" type="button" data-cd="reveal">結果を見る</button></div>`;
     haptic(stab >= 85 ? 'success' : 'tap');
@@ -204,6 +227,7 @@ function cdFinish(natural){
   $('#cdResult').hidden = false;
   $('#cdResult').innerHTML = `<h3>演奏おわり</h3>
     <p class="cd-num"><span>平均テンポ<b>♩=${bpm}</b></span><span>安定度<b>${followed ? stab + '%' : '—'}</b></span></p>
+    ${judgeRow}
     <p>${speed}。${comment}</p>
     <p class="small">この演奏は「録音」に残った。会場の響きつきで保存して、何度でも聴き返せる。</p>
     <div class="transport"><button class="btn primary" type="button" data-cd="again">▶ もう一度聴く</button><button class="btn" type="button" data-cd="save">⤓ 保存する</button><button class="btn" type="button" data-cd="retry">もう一度指揮する</button><button class="btn quiet" type="button" data-cd="close">閉じる</button></div>`;
@@ -212,27 +236,35 @@ function cdFinish(natural){
 
 /* ===== 録音の再生（指揮した録音は、そのときの拍の進み方で）と保存 ===== */
 const recPerf = rec => perform({...recCtx(rec), ...(rec.span || {})});
-function playRecording(rec, label){
+function playRecording(rec, label, onEnd = null){
   if(!E.ensure()) return;
   const perf = recPerf(rec);
   const opts = rec.conduct ? {clock: BeatClock.fromSaved(rec.conduct.ev, E.ac.currentTime + 0.3), lv: rec.conduct.lv} : {};
-  playPerf(perf, label, null, opts);
+  playPerf(perf, label, onEnd, opts);
+}
+// 録音の中の、ひとりの部員の音だけを聴く（鳴り終わったら全員に戻す）
+function playMemberRec(rec, m, label){
+  stopPlay();
+  U.solo = `member:${m.id}`;
+  E.setSolo({type: 'member', id: m.id});
+  playRecording(rec, label, () => { U.solo = 'all'; E.setSolo({type: 'all'}); renderSelectors(); });
 }
 
 const recFileName = rec => `吹部日誌_${rec.year}年度_${rec.label.replace(/[\\/:*?"<>|（）()・]/g, '_').replace(/_+/g, '_').replace(/_$/, '')}`;
-async function saveRecording(rec){
+// who を渡すと、その部員の音だけを書き出す
+async function saveRecording(rec, who = null){
   if(U.saving) return;
   U.saving = true;
   toast('録音を書き出しています… 0%');
   try{
     if(SAMPLES.loading) await SAMPLES.loading.catch(() => {});
     if(VIR.loading) await VIR.loading;
-    const buf = await renderPerf(recPerf(rec), {venue: rec.venue, pos: U.pos, conduct: rec.conduct,
+    const buf = await renderPerf(recPerf(rec), {venue: rec.venue, pos: U.pos, conduct: rec.conduct, solo: who ? {type: 'member', id: who.id} : null,
       onProgress: p => toast(`録音を書き出しています… ${Math.round(p * 100)}%`)});
     const school = $('#school').textContent.replace(/\s*\d+年度.*$/, '').replace(/\s+/g, '');
-    const meta = {title: rec.label, artist: school, album: `吹部日誌 ${rec.year}年度`, comment: `${VENUE[rec.venue].name}で録音`};
+    const meta = {title: rec.label + (who ? `（${who.name}）` : ''), artist: school, album: `吹部日誌 ${rec.year}年度`, comment: `${VENUE[rec.venue].name}で録音`};
     const wav = encodeWav(buf, meta);
-    await deliverFile(wav, recFileName(rec) + '.wav', meta);
+    await deliverFile(wav, recFileName(rec) + (who ? '_' + who.name.replace(/\s+/g, '') : '') + '.wav', meta);
   }catch(e){
     toast('書き出せませんでした。もう一度試してください。', 4000);
   }
