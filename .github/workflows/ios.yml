@@ -78,16 +78,23 @@ jobs:
           shot play-dark play dark
       - name: Self-test and screenshots (iPad)
         if: always()
-        timeout-minutes: 14
+        timeout-minutes: 22
         run: |
+          limit() { perl -e 'alarm shift; exec @ARGV' "$@"; }   # 固まったら打ち切る
+          boot_ipad() { xcrun simctl boot "$IPAD" || true; limit 420 xcrun simctl bootstatus "$IPAD" -b; sleep 20; }
+          APP=build-sim/Build/Products/Debug-iphonesimulator/Suibu.app
           # CI のマシンはメモリが少ないので、iPhone のシミュレータを止めてから iPad を起動する
           xcrun simctl shutdown "$IPHONE" || true
           xcrun simctl list devices | grep "$IPAD"
-          xcrun simctl boot "$IPAD"
-          xcrun simctl bootstatus "$IPAD" -b
+          boot_ipad
+          # 起動した直後の iPad にアプリを入れると固まることがある。そのときはシミュレータを起動し直して、もう一度だけ入れる
+          if ! limit 180 xcrun simctl install "$IPAD" "$APP"; then
+            echo "install hung; rebooting the iPad simulator and trying once more"
+            xcrun simctl shutdown "$IPAD" || true
+            boot_ipad
+            limit 240 xcrun simctl install "$IPAD" "$APP"
+          fi
           xcrun simctl status_bar "$IPAD" override --time 9:41 --batteryState charged --batteryLevel 100 --wifiBars 3 || true
-          limit() { perl -e 'alarm shift; exec @ARGV' "$@"; }   # 固まったら打ち切る
-          limit 240 xcrun simctl install "$IPAD" build-sim/Build/Products/Debug-iphonesimulator/Suibu.app
           # iPad でも同じセルフテストを通す（初回起動は時間がかかるので、これで温めてから撮る）
           limit 240 xcrun simctl launch "$IPAD" io.github.hy218355-bit.suibu -selftest
           DATA=$(xcrun simctl get_app_container "$IPAD" io.github.hy218355-bit.suibu data)
