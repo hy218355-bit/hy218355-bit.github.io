@@ -6,7 +6,10 @@ const fs = require('fs'), vm = require('vm'), path = require('path');
 const [YEARS = '3', POL = 'auto', PIECE = 'radetzky', LINEUP = 'all'] = process.argv.slice(2);
 const ctx = vm.createContext({console, Math, JSON, Object, Array, Set, Map, WeakMap, Float32Array, Number, String, Error, Infinity, NaN, setTimeout,
   YEARS: +YEARS, POL, PIECE, LINEUP});
-for(const f of ['util', 'instruments', 'venues', 'scores', 'band', 'game'])
+// 曲（js/pieces/*.js）は index.html に書いた順に読む
+const html = fs.readFileSync(path.join(__dirname, '..', 'index.html'), 'utf8');
+const pieces = [...html.matchAll(/src="js\/(pieces\/[^"]+)\.js"/g)].map(m => m[1]);
+for(const f of ['util', 'instruments', 'venues', 'scores', ...pieces, 'band', 'game'])
   vm.runInContext(fs.readFileSync(path.join(__dirname, '..', 'js', f + '.js'), 'utf8'), ctx, {filename: f + '.js'});
 
 vm.runInContext(`

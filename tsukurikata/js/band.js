@@ -490,17 +490,8 @@ function interpNotes(perf){
   const out = [];
   const ip = perf.interp, pc = PIECES[perf.pieceId];
   let adj = 0;
-  if(pc.id === 'largo' && ip.tempo === 2){ adj -= 3; out.push('Largoとしてはテンポが速く、落ち着きに欠けます。'); }
-  if(pc.id === 'largo' && ip.tempo === 0 && perf.bandE < 0.6){ adj -= 3; out.push('遅いテンポを支えきれず、音楽が停滞しました。'); }
-  if(pc.id === 'ode' && ip.tempo === 2 && perf.bandR < 0.7){ adj -= 4; out.push('速いテンポに合奏がついていけず、崩れかけていました。'); }
-  if(pc.id === 'ode' && ip.tempo === 0){ adj -= 2; out.push('テンポがやや重く感じます。'); }
-  if(pc.id === 'galop' && ip.tempo === 2 && perf.bandR < 0.74){ adj -= 4; out.push('速さに指がついていかず、細かい音がつぶれて聞こえました。'); }
-  if(pc.id === 'galop' && ip.tempo === 0){ adj -= 2; out.push('この曲にしては足どりが重く、はじけるような勢いがほしいところです。'); }
-  if(pc.id === 'pomp' && ip.tempo === 2){ adj -= 3; out.push('急ぎ足に聞こえ、この旋律の堂々とした感じが出ていません。'); }
-  if(pc.id === 'pomp' && ip.rub === 0){ adj -= 2; out.push('フレーズの終わりで、もう少し息をたっぷり使ってほしいところです。'); }
-  if(pc.id === 'radetzky' && ip.tempo === 0){ adj -= 2; out.push('行進曲としては足取りが重く感じます。'); }
-  if(pc.id === 'radetzky' && ip.tempo === 2 && perf.bandR < 0.72){ adj -= 4; out.push('速いテンポで短い音がそろわず、行進のリズムが落ち着きません。'); }
-  if(pc.id === 'radetzky' && ip.rub === 2){ adj -= 3; out.push('行進曲でテンポを揺らしすぎて、足取りが乱れました。'); }
+  // 曲ごとのルール（js/pieces/<曲>.js の interpRules）
+  for(const r of pc.interpRules?.(perf, ip) || []) if(r){ adj += r[0]; if(r[1]) out.push(r[1]); }
   if(ip.dyn === 2 && perf.bandE < 0.6){ adj -= 4; out.push('強弱をつけようとする意図はわかりますが、大げさに聞こえます。'); }
   if(ip.dyn === 2 && perf.bandE >= 0.75){ adj += 2; }
   if(ip.dyn === 0){ adj -= 2; out.push('強弱の幅が控えめで、もう一歩踏み込んでほしいところです。'); }

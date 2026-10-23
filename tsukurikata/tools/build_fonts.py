@@ -5,7 +5,7 @@ import sys, os, glob, subprocess
 ROOT = os.path.join(os.path.dirname(os.path.abspath(__file__)), '..')
 OFL = sys.argv[1] if len(sys.argv) > 1 else '/tmp/google-fonts/ofl'
 src = open(os.path.join(ROOT, 'index.html'), encoding='utf-8').read()
-src += ''.join(open(f, encoding='utf-8').read() for f in sorted(glob.glob(os.path.join(ROOT, 'js/*.js'))))
+src += ''.join(open(f, encoding='utf-8').read() for f in sorted(glob.glob(os.path.join(ROOT, 'js/**/*.js'), recursive=True)))
 chars = set(src)
 chars |= {chr(c) for c in range(0x20, 0x7f)}                                                # ASCII
 chars |= {chr(c) for c in range(0x3000, 0x3040)}                                            # 和文の記号
