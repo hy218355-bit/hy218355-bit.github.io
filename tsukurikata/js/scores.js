@@ -177,19 +177,58 @@ const RAD_B_BASS = ['D2:.5 r:.5 G2:.5 r:.5', 'B2:.5 r:.5 D3:.5 r:.5', 'D2:.5 r:.
   rep('F#2:.5 r:.5 B2:.5 r:.5', 2), rep('F#2:.5 B2:.5 F#2:.5 B2:.5', 2), 'F#2:.5 F#2:.25 E#2:.25 F#2:.5 r:.5', 'F#2:.5 r:1.5'].join(' | ');
 const RAD_BASS = [...line('D3:.25 D3:.25 D3:.25 r:.25 D3:.25 D3:.25 D3:.25 r:.25 | D3:.5 C#3:.5 B2:.75 A2:.25 | G#2:1.5 E2:.5 | A2:.5 r:1.5'),
   ...line(RAD_A_BASS, 8), ...line(RAD_B_BASS, 40), ...line(RAD_A_BASS, 72)];
-// 第1部の終わり：4分音符の和音を3つ
-const RAD_END = {pat: [[0, .5, 'norm', true], [.5, .5, 'norm', true], [1, .5, 'norm', true]], len: 2};
-const radPads = (fam, i, sc = 1) => [
-  {f: 8, t: 38, r: 'pad', g: fam + 'A', i, sc: .7 * sc}, {f: 38, t: 40, r: 'pad', g: fam + 'E', i, sc: .8 * sc}, {f: 40, t: 72, r: 'pad', g: fam + 'B', i, sc},
-  {f: 72, t: 102, r: 'pad', g: fam + 'A2', i, sc}, {f: 102, t: 104, r: 'pad', g: fam + 'E2', i, sc},
-];
+const RAD_CH = [...chords('D:2 | D:.5 A:.5 Bm:1 | E7:2 | A7:2'), ...chords(RAD_A_CH, 8),
+  ...chords('G:2 | G:2 | D:2 | D:2 | A7:2 | D:2 | A7:2 | D:2 | A7:2 | D:2 | F#:1 Bm:1 | F#:1 Bm:1 | F#:.5 Bm:.5 F#:.5 Bm:.5 | F#:.5 Bm:.5 F#:.5 Bm:.5 | F#:2 | F#:2', 40),
+  ...chords(RAD_A_CH, 72)];
+
+/* 楽器の受け持ち（伴奏の刻み方・対旋律・強弱）は、ヴェニンガー編曲のオーケストラ譜（1914年。パブリックドメイン、IMSLP #88461）を
+   吹奏楽の席に移した。弦の役目は、第1ヴァイオリン → アルトサックス1st、第2ヴァイオリンとヴィオラ → クラ3rd・アルト2nd・テナー、
+   チェロ → ユーフォニアム（ピチカートの刻みはファゴットも）、コントラバス → 弦バス・チューバ・バリトンサックス・バスクラ */
+// 伴奏の刻み方（1小節＝2拍）
+const RAD_END = {pat: [[0, .5, 'norm', true], [.5, .5, 'norm', true], [1, .5, 'norm', true]], len: 2};   // 第1部の終わり：4分音符の和音を3つ
+const RAD_ON = {pat: [[0, .5, 'stac'], [1, .5, 'stac']], len: 2};                                       // 1・3拍目（p の第1部のトランペット・トロンボーン）
+const RAD_M8 = {pat: [[0, .5, 'stac'], [.5, .25, 'stac'], [.75, .25, 'stac'], [1, .5, 'stac'], [1.5, .25, 'stac'], [1.75, .25, 'stac']], len: 2};  // ズン・チャチャ（f のホルン・トロンボーン）
+const RAD_234 = {pat: [[.5, .5, 'stac'], [1, .5, 'stac'], [1.5, .5, 'stac']], len: 2};                 // 2・3・4拍目（第2部の p）
+const RAD_Q4 = {pat: [[0, .5, 'stac'], [.5, .5, 'stac'], [1, .5, 'stac'], [1.5, .5, 'stac']], len: 2}; // 4分音符で刻む（第2部の山場）
+// 区間：前半 p（Ap）→ 後半 f（Af）→ 終わりの和音（E）→ 第2部の ff（B1）→ p（Bp）→ だんだん大きく（Bc）→ 山場（Bf）→ 第1部へのつなぎ（Bl）→ くり返し
+const RS = {Ap: [8, 24], Af: [24, 38], E: [38, 40], B1: [40, 48], Bp: [48, 60], Bc: [60, 64], Bf: [64, 68], Bl: [68, 72], A2p: [72, 88], A2f: [88, 102], E2: [102, 104]};
 const radGroups = () => {
   const out = {};
-  for(const [fam, n, lo, hi] of [['hn', 4, 55, 70], ['w', 2, 58, 74], ['ts', 1, 50, 62], ['tb', 2, 48, 62], ['tp', 1, 62, 74]]){
-    for(const [sec, rh] of [['A', 'ab8'], ['E', RAD_END], ['B', 'ab8'], ['A2', 'ab8'], ['E2', RAD_END]]) out[fam + sec] = {n, lo, hi, rh};
+  const add = (fam, n, lo, hi, list) => { for(const [sec, rh] of list) out[fam + sec] = {n, lo, hi, rh}; };
+  add('hn', 4, 55, 70, [['Ap', 'ab8'], ['Af', RAD_M8], ['E', RAD_END], ['B1', RAD_M8], ['Ba', 'ab8'], ['Bs', 'sus'], ['Bc', RAD_M8], ['Bf', RAD_Q4], ['Bl', RAD_ON],
+    ['A2p', 'ab8'], ['A2f', RAD_M8], ['E2', RAD_END]]);
+  add('tp', 3, 58, 74, [['B1', 'sus']]);
+  add('tpo', 2, 58, 72, [['Ap', RAD_ON], ['A2p', RAD_ON]]);
+  add('tpf', 2, 58, 72, [['Af', RAD_M8], ['E', RAD_END], ['Bf', RAD_M8], ['A2f', RAD_M8], ['E2', RAD_END]]);
+  add('tb', 2, 48, 62, [['Ap', RAD_ON], ['Af', RAD_M8], ['E', RAD_END], ['Bp', RAD_234], ['Bc', RAD_M8], ['Bf', RAD_M8], ['A2p', RAD_ON], ['A2f', RAD_M8], ['E2', RAD_END]]);
+  const inner = [['Ap', 'ab8'], ['Af', 'ab8'], ['E', RAD_END], ['B1', 'ab8'], ['Bp', RAD_234], ['Bc', 'ab8'], ['Bf', RAD_Q4], ['A2p', 'ab8'], ['A2f', 'ab8'], ['E2', RAD_END]];
+  add('w', 2, 58, 74, inner);
+  add('ts', 1, 50, 62, inner);
+  add('fg', 2, 43, 60, [['B1', 'sus'], ['Bp', 'sus'], ['Bf', RAD_M8]]);
+  return out;
+};
+// 区間ごとの受け持ちを書くための道具：rp は和音、rm は旋律（mel・mel3）
+const rp = (fam, sec, i, sc) => ({f: RS[sec][0], t: RS[sec][1], r: 'pad', g: fam + sec, i, ...(sc ? {sc} : {})});
+const rm = (secs, r = 'mel', sh = 0, sc) => secs.map(sec => ({f: RS[sec][0], t: RS[sec][1], r, sh, ...(sc ? {sc} : {})}));
+// チェロのピチカート：根音と、その4度下（5度）を4分音符で交互に
+const altBass = (chs, from, to) => {
+  const out = [];
+  for(const c of chs){
+    const r = 45 + ((c.root - 45) % 12 + 12) % 12;
+    for(let b = Math.max(c.b, from), k = 0; b < Math.min(c.b + c.d, to) - 1e-6; b += .5, k++) out.push({m: k % 2 ? r - 5 : r, b, d: .5, st: true});
   }
   return out;
 };
+// 第2部の p で、ホルンが4人で吹く呼びかけ（8分音符2つと、アクセントのついた2分音符）。A7 → D の2小節を2回
+const radCall = (top1, top2) => [...line(`r:.5 A3:.25 A3:.25 ${top1}:1> | r:.5 A3:.25 A3:.25 ${top2}:1>`, 48), ...line(`r:.5 A3:.25 A3:.25 ${top1}:1> | r:.5 A3:.25 A3:.25 ${top2}:1>`, 56)];
+const radHorn = i => [{f: 0, t: 8, r: 'mel', sh: -24}, rp('hn', 'Ap', i, .8), rp('hn', 'Af', i), rp('hn', 'E', i), rp('hn', 'B1', i),
+  {f: 48, t: 52, r: 'cm', line: 'call' + i, sh: 0, sc: .9}, {f: 52, t: 56, r: 'pad', g: i < 2 ? 'hnBa' : 'hnBs', i}, {f: 56, t: 60, r: 'cm', line: 'call' + i, sh: 0, sc: .9},
+  rp('hn', 'Bc', i), rp('hn', 'Bf', i), rp('hn', 'Bl', i, .8), rp('hn', 'A2p', i, .8), rp('hn', 'A2f', i), rp('hn', 'E2', i)];
+// 内声（クラ3rd・アルト2nd・テナー）：第2部の山場の前後以外は和音を受け持つ
+const radInner = (fam, i, secs) => secs.map(sec => rp(fam, sec, i, sec.endsWith('p') ? .8 : undefined));
+// スネア：p は「タン・タン・タン・トロロ」、f は「タン・トロロ・タン・トロロ」（4拍目・2拍目と4拍目がロール）
+const sdP = (from, to, v) => each(from, to, 2, b => [{i: 'sd', b, v}, {i: 'sd', b: b + .5, v: v * .8}, {i: 'sd', b: b + 1, v}, {i: 'sd', b: b + 1.5, d: .5, roll: true, v: v * .6, v1: v * .9}]);
+const sdF = (from, to, v) => each(from, to, 2, b => [{i: 'sd', b, v}, {i: 'sd', b: b + .5, d: .5, roll: true, v: v * .6, v1: v * .9}, {i: 'sd', b: b + 1, v}, {i: 'sd', b: b + 1.5, d: .5, roll: true, v: v * .6, v1: v * .9}]);
 
 const PIECES = {
   largo: {
@@ -509,69 +548,87 @@ const PIECES = {
     composer: 'J.シュトラウス1世（1848年）',
     key: 'ニ長調', trans: 0, meter: 2, beatUnit: 2, beats: 104,
     tempi: [76, 80, 84],
-    desc: '客席の手拍子でおなじみの行進曲。はずむような短い音を全員でそろえ、くり返しでは一段と元気よく。音の短さと縦の線がそろわないと、すぐに重たく聞こえる。',
+    desc: '客席の手拍子でおなじみの行進曲。はずむような短い音を全員でそろえ、小さく始めて後半で一気に大きく。音の短さと縦の線がそろわないと、すぐに重たく聞こえる。',
     asks: 'リズム・バランス・表現',
     focus: {pitch: .95, tone: 1, expr: .95, rhythm: 1.2, balance: 1.05},
-    balRef: 4.8, ceiling: .96,
+    balRef: 2.7, ceiling: .96,
     spans: [{name: '前奏〜第1部', from: 0, to: 40}, {name: '第2部', from: 40, to: 72}, {name: '第1部（くり返し）', from: 72, to: 104}],
     slur: 'tongue',
     scale: [[0, [1, 2, 4, 6, 7, 9, 11]]],
     mel: RAD_MEL,
-    chords: [...chords('D:2 | D:.5 A:.5 Bm:1 | E7:2 | A7:2'), ...chords(RAD_A_CH, 8), ...chords('G:2 | G:2 | D:2 | D:2 | A7:2 | D:2 | A7:2 | D:2 | A7:2 | D:2 | F#:1 Bm:1 | F#:1 Bm:1 | F#:.5 Bm:.5 F#:.5 Bm:.5 | F#:.5 Bm:.5 F#:.5 Bm:.5 | F#:2 | F#:2', 40), ...chords(RAD_A_CH, 72)],
+    chords: RAD_CH,
     bass: RAD_BASS,
-    dyn: [[0,.9],[7.9,.9],[8,.5],[37.9,.58],[38,.62],[39.9,.66],[40,.72],[71.9,.8],[72,.92],[101.9,.96],[102,1],[104,1]],
+    lines: {alt: altBass(RAD_CH, 8, 104), call0: radCall('E4', 'F#4'), call1: radCall('G3', 'A3'), call2: radCall('C#4', 'D4'), call3: radCall('G3', 'A3')},
+    // 第1部は p で始まり、後半（ゲームの24拍目）から f、終わりの4小節は ff。第2部は ff → p → だんだん大きく → ff。くり返しも同じ形で、少し大きく
+    dyn: [[0,.9],[7.9,.9],[8,.45],[16,.45],[20,.6],[22,.65],[23.9,.72],[24,.82],[30,.82],[31.9,.88],[32,.92],[39.9,.92],[40,.92],[47.9,.92],[48,.5],[59.9,.52],[63.9,.78],
+      [64,.95],[67.9,.95],[68,.5],[71.9,.5],[72,.5],[80,.5],[87.9,.75],[88,.88],[95.9,.9],[96,.96],[101.9,.96],[102,1],[104,1]],
     rubato: [[0,1],[6,1],[7.9,1.06],[8,1],[38,1],[39.9,1.05],[40,1],[70,1],[71.9,1.05],[72,1],[101,1],[102,1.05],[104,1.15]],
     groups: radGroups(),
     roles: {
-      picc:  [{f: 0, t: 8, r: 'mel', sh: 0, sc: .7}, {f: 72, t: 104, r: 'mel', sh: 12, sc: .7}],
+      picc:  [{f: 0, t: 8, r: 'mel', sh: 0, sc: .7}, ...rm(['Af', 'E', 'B1', 'Bf', 'A2f', 'E2'], 'mel', 12, .7)],
       fl1:   [{f: 0, t: 104, r: 'mel', sh: 0}],
-      fl2:   [{f: 0, t: 8, r: 'mel', sh: -12}, {f: 8, t: 104, r: 'mel3', sh: 0}],
-      ob:    [{f: 0, t: 8, r: 'mel', sh: 0}, {f: 8, t: 40, r: 'mel', sh: 0, sc: .8}, {f: 40, t: 104, r: 'mel', sh: 0}],
-      ebcl:  [{f: 0, t: 8, r: 'mel', sh: 0, sc: .7}, {f: 72, t: 104, r: 'mel', sh: 0, sc: .7}],
-      cl1:   [{f: 0, t: 8, r: 'mel', sh: -12}, {f: 8, t: 40, r: 'mel', sh: 0}, {f: 40, t: 72, r: 'mel', sh: -12}, {f: 72, t: 104, r: 'mel', sh: 0}],
-      cl2:   [{f: 0, t: 8, r: 'mel', sh: -12}, {f: 8, t: 40, r: 'mel3', sh: 0}, {f: 40, t: 72, r: 'mel3', sh: -12}, {f: 72, t: 104, r: 'mel3', sh: 0}],
-      cl3:   [{f: 0, t: 8, r: 'mel', sh: -24}, ...radPads('w', 0)],
+      fl2:   [{f: 0, t: 8, r: 'mel', sh: -12}, ...rm(['Ap', 'Bl', 'A2p']), ...rm(['Af', 'E', 'B1', 'Bp', 'Bc', 'Bf', 'A2f', 'E2'], 'mel3')],
+      ob:    [{f: 0, t: 8, r: 'mel', sh: 0}, ...rm(['Af', 'E', 'A2f', 'E2'], 'mel3'), ...rm(['B1', 'Bf']), ...rm(['Bp', 'Bc'], 'mel', 0, .8)],
+      ebcl:  [{f: 0, t: 8, r: 'mel', sh: 0, sc: .7}, ...rm(['Af', 'E', 'B1', 'Bf', 'A2f', 'E2'], 'mel', 0, .7)],
+      cl1:   [{f: 0, t: 8, r: 'mel', sh: -12}, {f: 8, t: 104, r: 'mel', sh: 0}],
+      cl2:   [{f: 0, t: 8, r: 'mel', sh: -12}, {f: 8, t: 104, r: 'mel3', sh: 0}],
+      cl3:   [{f: 0, t: 8, r: 'mel', sh: -24}, ...radInner('w', 0, ['Ap', 'Af', 'E', 'B1', 'Bp', 'Bc', 'Bf', 'A2p', 'A2f', 'E2'])],
       asax1: [{f: 0, t: 104, r: 'mel', sh: -12}],
-      asax2: [{f: 0, t: 8, r: 'mel', sh: -12}, ...radPads('w', 1)],
-      tsax:  [{f: 0, t: 8, r: 'mel', sh: -24}, {f: 8, t: 40, r: 'pad', g: 'tsA', i: 0, sc: .7}, {f: 40, t: 104, r: 'mel', sh: -24}],
+      asax2: [{f: 0, t: 8, r: 'mel', sh: -12}, ...radInner('w', 1, ['Ap', 'Af', 'E', 'B1', 'Bp', 'Bc', 'Bf', 'A2p', 'A2f', 'E2'])],
+      // テナーは第2部の頭だけ、チェロと一緒に旋律を2オクターブ下で
+      tsax:  [{f: 0, t: 8, r: 'mel', sh: -24}, ...radInner('ts', 0, ['Ap', 'Af', 'E']), ...rm(['B1'], 'mel', -24), ...radInner('ts', 0, ['Bp', 'Bc', 'Bf', 'A2p', 'A2f', 'E2'])],
       bsax:  [{f: 0, t: 104, r: 'bass', sh: 0, rh: 'march'}],
       bcl:   [{f: 0, t: 104, r: 'bass', sh: 0, rh: 'march'}],
-      fg:    [{f: 0, t: 104, r: 'bass', sh: 0, rh: 'march', sc: .85}],
-      tp1:   [{f: 0, t: 8, r: 'mel', sh: -12}, {f: 8, t: 40, r: 'mel', sh: -12, sc: .8}, {f: 40, t: 104, r: 'mel', sh: -12}],
-      tp2:   [{f: 0, t: 8, r: 'mel', sh: -12}, {f: 40, t: 104, r: 'mel3', sh: -12}],
-      tp3:   [{f: 0, t: 8, r: 'mel', sh: -24}, {f: 40, t: 72, r: 'pad', g: 'tpB', i: 0}, {f: 72, t: 102, r: 'pad', g: 'tpA2', i: 0}, {f: 102, t: 104, r: 'pad', g: 'tpE2', i: 0}],
-      hn1: [{f: 0, t: 8, r: 'mel', sh: -24}, ...radPads('hn', 0)], hn2: [{f: 0, t: 8, r: 'mel', sh: -24}, ...radPads('hn', 1)],
-      hn3: [{f: 0, t: 8, r: 'mel', sh: -24}, ...radPads('hn', 2)], hn4: [{f: 0, t: 8, r: 'mel', sh: -24}, ...radPads('hn', 3)],
-      tb1:   [{f: 0, t: 8, r: 'mel', sh: -24}, ...radPads('tb', 0, .7).filter(s => s.f < 72), {f: 72, t: 102, r: 'mel', sh: -24}, {f: 102, t: 104, r: 'pad', g: 'tbE2', i: 0}],
-      tb2:   [{f: 0, t: 8, r: 'mel', sh: -36}, ...radPads('tb', 1, .7)],
-      btb:   [{f: 0, t: 8, r: 'bass', sh: 0}, {f: 40, t: 104, r: 'bass', sh: 0, rh: 'march'}],
-      euph:  [{f: 0, t: 8, r: 'mel', sh: -24}, {f: 8, t: 40, r: 'mel', sh: -24, sc: .7}, {f: 40, t: 104, r: 'mel', sh: -24}],
-      tuba:  [{f: 0, t: 8, r: 'bass', sh: 0}, {f: 8, t: 104, r: 'bass', sh: -12, rh: 'march'}],
-      cb:    [{f: 0, t: 8, r: 'bass', sh: 0}, {f: 8, t: 40, r: 'bass', sh: -12, rh: 'pizz'}, {f: 40, t: 104, r: 'bass', sh: -12, rh: 'march'}],
-      perc4: [{f: 40, t: 72, r: 'mel', sh: 12, inst: 'glock', sc: .3}],
+      fg:    [{f: 0, t: 8, r: 'bass', sh: 0}, {f: 8, t: 24, r: 'bass', line: 'alt', sh: 0, rh: 'march', sc: .85}, {f: 24, t: 40, r: 'bass', sh: 0, rh: 'march', sc: .85},
+        rp('fg', 'B1', 1), rp('fg', 'Bp', 1, .8), {f: 60, t: 64, r: 'bass', sh: 0, rh: 'march', sc: .85}, rp('fg', 'Bf', 1), {f: 68, t: 72, r: 'bass', sh: 0, rh: 'march', sc: .85},
+        {f: 72, t: 88, r: 'bass', line: 'alt', sh: 0, rh: 'march', sc: .85}, {f: 88, t: 104, r: 'bass', sh: 0, rh: 'march', sc: .85}],
+      // トランペット：1st は吹奏楽のソロ・コルネットと同じく旋律（第1部の p は少し控えめに）。2nd・3rd は p の第1部で1・3拍目の和音、f で「ズン・チャチャ」。
+      // 第2部の頭は3人で和音をのばし、p では1st・2nd が旋律と3度下
+      tp1:   [{f: 0, t: 8, r: 'mel', sh: -12}, ...rm(['Ap'], 'mel', -12, .8), ...rm(['Af', 'E'], 'mel', -12), rp('tp', 'B1', 0), ...rm(['Bp', 'Bc'], 'mel', -12, .85), ...rm(['Bf'], 'mel', -12),
+        ...rm(['A2p'], 'mel', -12, .8), ...rm(['A2f', 'E2'], 'mel', -12)],
+      tp2:   [{f: 0, t: 8, r: 'mel', sh: -12}, rp('tpo', 'Ap', 0, .8), rp('tpf', 'Af', 0), rp('tpf', 'E', 0), rp('tp', 'B1', 1), ...rm(['Bp', 'Bc'], 'mel3', -12, .85), rp('tpf', 'Bf', 0),
+        rp('tpo', 'A2p', 0, .8), rp('tpf', 'A2f', 0), rp('tpf', 'E2', 0)],
+      tp3:   [{f: 0, t: 8, r: 'mel', sh: -24}, rp('tpo', 'Ap', 1, .8), rp('tpf', 'Af', 1), rp('tpf', 'E', 1), rp('tp', 'B1', 2), ...rm(['Bp', 'Bc'], 'mel3', -12, .7), rp('tpf', 'Bf', 1),
+        rp('tpo', 'A2p', 1, .8), rp('tpf', 'A2f', 1), rp('tpf', 'E2', 1)],
+      hn1: radHorn(0), hn2: radHorn(1), hn3: radHorn(2), hn4: radHorn(3),
+      // トロンボーン：p は1・3拍目、f は「ズン・チャチャ」。第2部の頭は1番が低音の動きを2分音符で上に重ねる
+      tb1:   [{f: 0, t: 8, r: 'mel', sh: -24}, rp('tb', 'Ap', 0, .8), rp('tb', 'Af', 0), rp('tb', 'E', 0), {f: 40, t: 48, r: 'bass', sh: 12, rh: 'half'},
+        rp('tb', 'Bp', 0, .8), rp('tb', 'Bc', 0), rp('tb', 'Bf', 0), rp('tb', 'A2p', 0, .8), rp('tb', 'A2f', 0), rp('tb', 'E2', 0)],
+      tb2:   [{f: 0, t: 8, r: 'mel', sh: -36}, rp('tb', 'Ap', 1, .8), rp('tb', 'Af', 1), rp('tb', 'E', 1), rp('tb', 'Bp', 1, .8), rp('tb', 'Bc', 1), rp('tb', 'Bf', 1),
+        rp('tb', 'A2p', 1, .8), rp('tb', 'A2f', 1), rp('tb', 'E2', 1)],
+      btb:   [{f: 0, t: 8, r: 'bass', sh: 0}, {f: 8, t: 104, r: 'bass', sh: 0, rh: 'march'}],
+      // ユーフォニアム：p のところは、吹奏楽のマーチでよくあるように旋律を2オクターブ下で。f ではチェロと同じく根音と5度を刻む。
+      // 第2部の頭はチェロと一緒に旋律
+      euph:  [{f: 0, t: 8, r: 'mel', sh: -24}, ...rm(['Ap'], 'mel', -24, .7), {f: 24, t: 38, r: 'bass', line: 'alt', sh: 0, rh: 'march'}, {f: 38, t: 40, r: 'bass', sh: 12, rh: 'march'},
+        ...rm(['B1'], 'mel', -24), ...rm(['Bp', 'Bc'], 'mel', -24, .7), {f: 64, t: 72, r: 'bass', sh: 12, rh: 'march'}, ...rm(['A2p'], 'mel', -24, .7), {f: 88, t: 102, r: 'bass', line: 'alt', sh: 0, rh: 'march'},
+        {f: 102, t: 104, r: 'bass', sh: 12, rh: 'march'}],
+      tuba:  [{f: 0, t: 8, r: 'bass', sh: 0}, {f: 8, t: 40, r: 'bass', sh: -12, rh: 'march'}, {f: 40, t: 48, r: 'bass', sh: 0, rh: 'half'}, {f: 48, t: 104, r: 'bass', sh: -12, rh: 'march'}],
+      cb:    [{f: 0, t: 8, r: 'bass', sh: 0}, {f: 8, t: 24, r: 'bass', sh: -12, rh: 'pizz'}, {f: 24, t: 72, r: 'bass', sh: -12, rh: 'march'}, {f: 72, t: 88, r: 'bass', sh: -12, rh: 'pizz'},
+        {f: 88, t: 104, r: 'bass', sh: -12, rh: 'march'}],
     },
     perc: {
       perc1: [
         ...timpOn(RAD_BASS, [[0,.85],[.25,.6],[.5,.8],[1,.85],[1.25,.6],[1.5,.8],[4,.7],[5.5,.75],[6,.9]]),
-        ...timpOn(RAD_BASS, each(8, 38, 1, b => [[b, .45]])), ...timpOn(RAD_BASS, [[38, .7], [38.5, .7], [39, .8]]),
-        ...timpOn(RAD_BASS, each(40, 72, 1, b => [[b, .55]])), ...timpOn(RAD_BASS, each(72, 102, 1, b => [[b, .7]])),
-        ...timpOn(RAD_BASS, [[102, .9], [102.5, .9], [103, 1]]),
+        ...timpOn(RAD_BASS, each(8, 24, 1, b => [[b, .3]])), ...timpOn(RAD_BASS, each(24, 38, 1, b => [[b, .55]])), ...timpOn(RAD_BASS, [[38, .7], [38.5, .7], [39, .8]]),
+        ...timpOn(RAD_BASS, each(40, 48, 1, b => [[b, .65]])), ...timpOn(RAD_BASS, each(48, 60, 1, b => [[b, .3]])), ...timpOn(RAD_BASS, each(60, 64, 1, b => [[b, .45]])),
+        ...timpOn(RAD_BASS, each(64, 68, .5, b => [[b, .7]])), ...timpOn(RAD_BASS, [[68, .5]]),
+        ...timpOn(RAD_BASS, each(72, 88, 1, b => [[b, .35]])), ...timpOn(RAD_BASS, each(88, 102, 1, b => [[b, .65]])), ...timpOn(RAD_BASS, [[102, .9], [102.5, .9], [103, 1]]),
       ],
       perc2: [
         ...hitsAt('sd', [[0,.8],[.25,.5],[.5,.7],[1,.8],[1.25,.5],[1.5,.7],[4,.6],[5.5,.6],[6,.85],[7.5,.5],[7.75,.5]]),
-        ...each(8, 38, 1, b => hitsAt('sd', [[0, .28], [.25, .18], [.5, .25], [.75, .18]], b)), ...hitsAt('sd', [[38, .6], [38.5, .6], [39, .7]]),
-        ...each(40, 72, 1, b => hitsAt('sd', [[0, .4], [.25, .28], [.5, .35], [.75, .28]], b)),
-        ...each(72, 102, 1, b => hitsAt('sd', [[0, .5], [.25, .36], [.5, .45], [.75, .36]], b)), ...hitsAt('sd', [[102, .9], [102.5, .9], [103, 1]]),
+        ...sdP(8, 24, .3), ...sdF(24, 38, .5), ...hitsAt('sd', [[38, .6], [38.5, .6], [39, .7]]),
+        ...sdF(40, 48, .6), ...sdP(48, 60, .3), ...sdF(60, 64, .45), ...sdF(64, 68, .65), ...hitsAt('sd', [[68, .5]]), {i: 'sd', b: 71.5, d: .5, roll: true, v: .15, v1: .3},
+        ...sdP(72, 88, .35), ...sdF(88, 102, .6), ...hitsAt('sd', [[102, .9], [102.5, .9], [103, 1]]),
       ],
       perc3: [
         ...hitsAt('bd', [[0, .9], [1, .8], [4, .7], [6, .9]]),
-        ...each(8, 38, 1, b => [{i: 'bd', b, v: .4}]), ...hitsAt('bd', [[38, .7], [38.5, .7], [39, .8]]),
-        ...each(40, 72, 1, b => [{i: 'bd', b, v: .5}]), ...each(72, 102, 1, b => [{i: 'bd', b, v: .65}]), ...hitsAt('bd', [[102, 1], [102.5, 1], [103, 1]]),
+        ...each(8, 24, 1, b => [{i: 'bd', b, v: .35}]), ...each(24, 38, 1, b => [{i: 'bd', b, v: .5}]), ...hitsAt('bd', [[38, .7], [38.5, .7], [39, .8]]),
+        ...each(40, 48, 1, b => [{i: 'bd', b, v: .55}]), ...each(48, 60, 1, b => [{i: 'bd', b, v: .35}]), ...each(60, 64, 1, b => [{i: 'bd', b, v: .45}]),
+        ...each(64, 68, 1, b => [{i: 'bd', b, v: .65}]), {i: 'bd', b: 68, v: .5},
+        ...each(72, 88, 1, b => [{i: 'bd', b, v: .4}]), ...each(88, 102, 1, b => [{i: 'bd', b, v: .6}]), ...hitsAt('bd', [[102, 1], [102.5, 1], [103, 1]]),
       ],
-      perc4: [
-        ...hitsAt('cym', [[0, .8], [6, .8]]), ...hitsAt('cym', [[38, .6], [39, .7]]),
-        {i: 'cym', b: 72, v: 1}, ...each(74, 102, 2, b => [{i: 'cym', b, v: .5}]), ...hitsAt('cym', [[102, .9], [103, 1]]),
-      ],
+      // ヴェニンガーの譜にシンバルはない。大きくなるところの頭だけ、大太鼓に重ねて打つ
+      perc4: hitsAt('cym', [[0, .8], [6, .8], [24, .55], [32, .65], [38, .6], [39, .7], [40, .75], [64, .75], [66, .7], [88, .6], [96, .7], [102, .9], [103, 1]]),
     },
   },
 };
@@ -711,7 +768,8 @@ function arrangement(pid){
           push(part, {...base, m: m0 + sg.sh, b: e.b, d: e.d, ji: jiOf(m0 + sg.sh, c), ...marks(e)});
         }
       } else if(sg.r === 'cm'){
-        for(const e of pc.cm.filter(e => inRange(e, sg))){
+        // 対旋律：line があれば pc.lines の中のその線（パートごとに別の線を吹ける）
+        for(const e of (sg.line ? pc.lines[sg.line] : pc.cm).filter(e => inRange(e, sg))){
           const c = chordAt(pc, e.b);
           push(part, {...base, m: e.m + sg.sh, b: e.b, d: e.d, ji: jiOf(e.m, c), ...marks(e)});
         }
@@ -725,11 +783,13 @@ function arrangement(pid){
           for(const r of padRhythm(g.rh, c, pc.meter)) push(part, {...base, m, b: r.b, d: r.d, ji: jiOf(m, c), ...(r.art ? {art: r.art} : {}), ...(r.acc ? {acc: true} : {})});
         });
       } else if(sg.r === 'bass'){
-        const evs = pc.bass.filter(e => inRange(e, sg));
+        // 低音：line があれば pc.lines の中のその線（根音と5度を交互に刻む線など）。rh は march（短く）、pizz、half（2分音符にのばす）
+        const evs = (sg.line ? pc.lines[sg.line] : pc.bass).filter(e => inRange(e, sg));
         for(const e of evs){
           const c = chordAt(pc, e.b);
           const m = e.m + sg.sh;
           if(sg.rh === 'march') push(part, {...base, m, b: e.b, d: Math.min(e.d, .8), ji: jiOf(e.m, c), art: e.st ? 'stac' : 'norm', ...(e.acc ? {acc: true} : {})});
+          else if(sg.rh === 'half') push(part, {...base, m, b: e.b, d: 1, ji: jiOf(e.m, c), art: 'norm', ...(e.acc ? {acc: true} : {})});
           else if(sg.rh === 'pizz') push(part, {...base, m, b: e.b, d: 1, ji: jiOf(e.m, c), inst: 'cbpizz', kind: 'hit'});
           else push(part, {...base, m, b: e.b, d: e.d, ji: jiOf(e.m, c), ...marks(e)});
         }

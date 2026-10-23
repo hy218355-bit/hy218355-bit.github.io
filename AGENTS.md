@@ -48,6 +48,7 @@ GitHub Pages のサイト。いまの中心は、高校吹奏楽部の顧問に�
 - ブラウザで遊ぶ：`cd tsukurikata && python3 -m http.server 8000` → http://localhost:8000/
 - 何年分かを画面なしで早送りして、バランスを見る：`node tsukurikata/tools/sim.js 5 auto radetzky best`
   - 引数は年数・方針・曲・オーディション（`best` でおすすめのメンバー、`all` で全員）
+  - 出来事などで毎回少しずつ結果が変わる。直す前とくらべるときは、10回ほど回した平均でくらべる
 - iPhone に入れる：`bash tsukurikata-ios/run-on-iphone.sh`
   - チームは Mac の開発用証明書から見つける
   - シミュレータは選ばず、ケーブルか同じ Wi-Fi の実機に入れて起動する
