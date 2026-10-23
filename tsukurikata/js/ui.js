@@ -583,8 +583,8 @@ function renderWeek(){
   }
   if(S.phase === 'choose'){
     head.textContent = '選曲会議';
-    w.innerHTML = `<p class="small">コンクールの自由曲を決めよう。試しに聴くと、まだ譜読みをしていない状態の音が聞ける。</p>`
-      + PIECE_IDS.map(id => { const pc = PIECES[id]; return `<div class="pcard"><h3>${pc.full}</h3><p>${pc.composer}｜${pc.key}｜問われる力：${pc.asks}</p><p>${pc.desc}</p><div class="row"><button class="btn small" type="button" data-act="preview" data-pid="${id}">▶ 試しに聴く</button><button class="btn small primary" type="button" data-act="choose" data-pid="${id}">この曲に決める</button></div></div>`; }).join('');
+    w.innerHTML = `<p class="small">コンクールの自由曲を決めよう。「お手本」は全員がうまい部がホールで吹いた音、「いまの部で」はいまの部員がまだ譜読みをしていない状態で吹いた音。</p>`
+      + PIECE_IDS.map(id => { const pc = PIECES[id]; return `<div class="pcard"><h3>${pc.full}</h3><p>${pc.composer}｜${pc.key}｜問われる力：${pc.asks}</p><p>${pc.desc}</p><div class="row">${listenBtns(id)}<button class="btn small primary" type="button" data-act="choose" data-pid="${id}">この曲に決める</button></div></div>`; }).join('');
     return;
   }
   if(S.phase === 'end'){
@@ -625,7 +625,7 @@ function renderWeek(){
   if(S.chooseFinal){
     const fam = id => Math.round(S.fam[id] || 0);
     w.innerHTML = `<div class="event"><span class="tag">定期演奏会の曲</span><span>3年生の最後の本番、${wkLabel(S.finalWeek)}の定期演奏会で演奏する曲を決めよう。コンクールの曲をもう一度でも、新しい曲に挑戦してもいい（仕上がりも、部員の譜読みも低いところから）。</span></div>`
-      + PIECE_IDS.map(id => { const pc = PIECES[id]; return `<div class="pcard"><h3>${pc.full}</h3><p>${id === S.contestPiece ? 'コンクールで演奏した曲・' : ''}仕上がり ${fam(id)}・譜読み ${Math.round(readAvg(S, id))}｜問われる力：${pc.asks}</p><div class="row"><button class="btn small" type="button" data-act="preview" data-pid="${id}">▶ 試しに聴く</button><button class="btn small primary" type="button" data-act="choosefinal" data-pid="${id}">この曲にする</button></div></div>`; }).join('');
+      + PIECE_IDS.map(id => { const pc = PIECES[id]; return `<div class="pcard"><h3>${pc.full}</h3><p>${id === S.contestPiece ? 'コンクールで演奏した曲・' : ''}仕上がり ${fam(id)}・譜読み ${Math.round(readAvg(S, id))}｜問われる力：${pc.asks}</p><div class="row">${listenBtns(id)}<button class="btn small primary" type="button" data-act="choosefinal" data-pid="${id}">この曲にする</button></div></div>`; }).join('');
     return;
   }
   const parts = [];
@@ -933,6 +933,11 @@ function renderLab(){
   $('#presets').innerHTML = LAB_PRESETS.map((p, i) => `<button class="chip" type="button" data-p="${i}" aria-pressed="${U.labPreset === i}">${p.name}</button>`).join('');
   $('#sliders').innerHTML = LAB_KEYS.map(([k, nm]) => `<div class="sl"><label for="lab-${k}">${nm}<output id="out-${k}" for="lab-${k}">${U.lab[k]}</output></label><input type="range" id="lab-${k}" min="0" max="100" step="1" value="${U.lab[k]}"></div>`).join('');
 }
+// 曲を選ぶときのお手本：全員の能力・譜読み・まとまりが100の部が、ホールでふつうの解釈で吹いた演奏
+function modelPerf(pid){
+  return perform({members: fullBand({pitch: 100, rhythm: 100, tone: 100, expr: 100}), pieceId: pid, cohesion: 100, fam: 100, interp: {tempo: 1, dyn: 1, rub: 1}, venue: 'hall', seed: 'band'});
+}
+const listenBtns = id => `<button class="btn small" type="button" data-act="model" data-pid="${id}">▶ お手本を聴く</button><button class="btn small" type="button" data-act="preview" data-pid="${id}">▶ いまの部で聴く</button>`;
 function labPerf(){
   const pid = playPiece(), span = rangeSpan(pid);
   const pre = LAB_PRESETS[U.labPreset];
@@ -1079,7 +1084,12 @@ function bind(){
     }
     if(b.dataset.ep !== undefined){ haptic('tap'); commit(resolveEpisode(S, +b.dataset.ep)); renderAll(); refreshNow(); return; }
     const act = b.dataset.act;
-    if(act === 'preview'){ U.piece = b.dataset.pid; U.range = 'all'; renderPiece(); renderInterp(); U.perfNow = perform(currentCtx()); U.diag = analyze(U.perfNow); renderDiag(); playPerf(U.perfNow, `試聴：${PIECES[b.dataset.pid].title}${(S.fam[b.dataset.pid] || 0) < 5 ? '（譜読み前）' : ''}`); }
+    if(act === 'preview' || act === 'model'){
+      const pid = b.dataset.pid;
+      U.piece = pid; U.range = 'all'; renderPiece(); renderInterp(); U.perfNow = perform(currentCtx()); U.diag = analyze(U.perfNow); renderDiag();
+      if(act === 'model') playPerf(modelPerf(pid), `お手本：${PIECES[pid].title}（全員がうまい部・${VENUE.hall.name}）`);
+      else playPerf(U.perfNow, `いまの部で：${PIECES[pid].title}${(S.fam[pid] || 0) < 5 ? '（譜読み前）' : ''}`);
+    }
     else if(act === 'choose'){ stopPlay(); commit(choosePiece(S, b.dataset.pid)); U.piece = null; renderAll(); refreshNow(); }
     else if(act === 'tunegame') openTuneGame();
     else if(act === 'calm'){ haptic('tap'); commit(calmMember(S, b.dataset.mid)); renderWeek(); }
