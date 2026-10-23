@@ -1,10 +1,10 @@
 import WebKit
 
-/// app://suibu/… のURLで、アプリに同梱したゲームのファイルを返す。
+/// app://tsukurikata/… のURLで、アプリに同梱したゲームのファイルを返す。
 /// file:// で開くと fetch() で録音や響きを読めないので、自前のURLスキームで配る。
 final class BundleSchemeHandler: NSObject, WKURLSchemeHandler {
     static let scheme = "app"
-    static let startURL = URL(string: "app://suibu/index.html")!
+    static let startURL = URL(string: "app://tsukurikata/index.html")!
 
     private let root: URL
 

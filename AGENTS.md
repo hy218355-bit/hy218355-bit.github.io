@@ -1,20 +1,20 @@
 # hy218355-bit.github.io
 
-GitHub Pages のサイト。いまの中心は、高校吹奏楽部の顧問になって部員を育てるゲーム「吹部日誌」。
+GitHub Pages のサイト。いまの中心は、高校吹奏楽部の顧問になって部員を育てるゲーム「吹奏楽部のつくりかた」。
 
-## 吹部日誌の場所
+## ゲームの場所
 
 | 場所 | 中身 |
 | --- | --- |
-| `suibu/` | ゲーム本体（HTML・JavaScript だけ。ビルドなし） |
-| `suibu-ios/` | iPhone / iPad アプリ（SwiftUI＋WKWebView）。ビルド時に `../suibu` を丸ごと同梱する |
-| `suibu-support/`・`suibu-privacy/` | App Store 用のサポート・プライバシーポリシーのページ |
+| `tsukurikata/` | ゲーム本体（HTML・JavaScript だけ。ビルドなし） |
+| `tsukurikata-ios/` | iPhone / iPad アプリ（SwiftUI＋WKWebView）。ビルド時に `../tsukurikata` を丸ごと同梱する |
+| `tsukurikata-support/`・`tsukurikata-privacy/` | App Store 用のサポート・プライバシーポリシーのページ |
 | `.github/workflows/ios.yml` | push のたびに、ビルドとシミュレータでのセルフテスト・スクリーンショット |
 | `.github/workflows/testflight.yml` | 署名して TestFlight に上げる（App Store Connect の API キーが要る） |
 
 作業ブランチは `claude/high-school-music-sim-game-nof0pm`（PR #1）。
 
-## ゲームの組み立て（`suibu/js/`）
+## ゲームの組み立て（`tsukurikata/js/`）
 
 `index.html` が次の順に `<script>` で読み込む。モジュールではなく、すべてグローバル。
 
@@ -45,10 +45,10 @@ GitHub Pages のサイト。いまの中心は、高校吹奏楽部の顧問に�
 
 ## 確かめ方
 
-- ブラウザで遊ぶ：`cd suibu && python3 -m http.server 8000` → http://localhost:8000/
-- 何年分かを画面なしで早送りして、バランスを見る：`node suibu/tools/sim.js 5 auto radetzky best`
+- ブラウザで遊ぶ：`cd tsukurikata && python3 -m http.server 8000` → http://localhost:8000/
+- 何年分かを画面なしで早送りして、バランスを見る：`node tsukurikata/tools/sim.js 5 auto radetzky best`
   - 引数は年数・方針・曲・オーディション（`best` でおすすめのメンバー、`all` で全員）
-- iPhone に入れる：`bash suibu-ios/run-on-iphone.sh`
+- iPhone に入れる：`bash tsukurikata-ios/run-on-iphone.sh`
   - チームは Mac の開発用証明書から見つける
   - シミュレータは選ばず、ケーブルか同じ Wi-Fi の実機に入れて起動する
 - iOS の CI：push すると `ios.yml` が走る

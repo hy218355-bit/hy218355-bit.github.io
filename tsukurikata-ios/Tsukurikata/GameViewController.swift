@@ -15,7 +15,7 @@ final class GameViewController: UIViewController {
 
     override func loadView() {
         let config = WKWebViewConfiguration()
-        config.setURLSchemeHandler(BundleSchemeHandler(folder: "Game/suibu"), forURLScheme: BundleSchemeHandler.scheme)
+        config.setURLSchemeHandler(BundleSchemeHandler(folder: "Game/tsukurikata"), forURLScheme: BundleSchemeHandler.scheme)
         config.mediaTypesRequiringUserActionForPlayback = []
         config.allowsInlineMediaPlayback = true
 
@@ -173,7 +173,7 @@ final class GameViewController: UIViewController {
     private static func launchScript() -> String {
         let tab = UserDefaults.standard.string(forKey: "tab") ?? ""
         let safe = tab.filter { $0.isLetter }
-        return "window.SUIBU_NATIVE = true; window.SUIBU_LAUNCH = {tab: '\(safe)'};"
+        return "window.TSUKURIKATA_NATIVE = true; window.TSUKURIKATA_LAUNCH = {tab: '\(safe)'};"
     }
 
     /// ページで起きたエラーをアプリのログに出す

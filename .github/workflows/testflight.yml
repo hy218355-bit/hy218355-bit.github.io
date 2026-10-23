@@ -1,4 +1,4 @@
-# 吹部日誌 iOSアプリを署名して TestFlight に上げる。Actions の画面から手動で実行する
+# 吹奏楽部のつくりかた iOSアプリを署名して TestFlight に上げる。Actions の画面から手動で実行する
 #
 # 先にやっておくこと（一度だけ）
 # 1. App Store Connect でこのアプリを作る（Bundle ID は下の BUNDLE_ID と同じもの）
@@ -6,7 +6,7 @@
 #    （Admin でないと、署名に使う証明書とプロファイルを Apple 側で作れない）
 # 3. GitHub のリポジトリ → Settings → Secrets and variables → Actions に入れる
 #      Secrets：ASC_KEY_ID（キーID）、ASC_ISSUER_ID（発行者ID）、ASC_KEY_P8（.p8 ファイルの中身）、APPLE_TEAM_ID（チームID）
-#      Variables（任意）：SUIBU_BUNDLE_ID（Bundle ID を変えるとき）
+#      Variables（任意）：TSUKURIKATA_BUNDLE_ID（Bundle ID を変えるとき）
 # 実行のしかた（どれか）
 #   - Actions →「TestFlight」→ Run workflow（main に入ってから）
 #   - testflight- で始まるタグを push する
@@ -31,7 +31,7 @@ jobs:
       ASC_ISSUER_ID: ${{ secrets.ASC_ISSUER_ID }}
       ASC_KEY_P8: ${{ secrets.ASC_KEY_P8 }}
       TEAM_ID: ${{ secrets.APPLE_TEAM_ID }}
-      BUNDLE_ID: ${{ vars.SUIBU_BUNDLE_ID || 'io.github.hy218355-bit.suibu' }}
+      BUNDLE_ID: ${{ vars.TSUKURIKATA_BUNDLE_ID || 'io.github.hy218355-bit.tsukurikata' }}
     steps:
       - uses: actions/checkout@v4
       - name: Check settings
@@ -51,8 +51,8 @@ jobs:
       - name: Archive
         run: |
           set -o pipefail
-          xcodebuild -project suibu-ios/Suibu.xcodeproj -scheme Suibu -configuration Release \
-            -destination 'generic/platform=iOS' -archivePath "$RUNNER_TEMP/Suibu.xcarchive" \
+          xcodebuild -project tsukurikata-ios/Tsukurikata.xcodeproj -scheme Tsukurikata -configuration Release \
+            -destination 'generic/platform=iOS' -archivePath "$RUNNER_TEMP/Tsukurikata.xcarchive" \
             -allowProvisioningUpdates -authenticationKeyPath "$KEY_PATH" \
             -authenticationKeyID "$ASC_KEY_ID" -authenticationKeyIssuerID "$ASC_ISSUER_ID" \
             DEVELOPMENT_TEAM="$TEAM_ID" PRODUCT_BUNDLE_IDENTIFIER="$BUNDLE_ID" CODE_SIGN_STYLE=Automatic \
@@ -74,12 +74,12 @@ jobs:
           </dict>
           </plist>
           EOF
-          xcodebuild -exportArchive -archivePath "$RUNNER_TEMP/Suibu.xcarchive" -exportPath "$RUNNER_TEMP/export" \
+          xcodebuild -exportArchive -archivePath "$RUNNER_TEMP/Tsukurikata.xcarchive" -exportPath "$RUNNER_TEMP/export" \
             -exportOptionsPlist "$RUNNER_TEMP/ExportOptions.plist" \
             -allowProvisioningUpdates -authenticationKeyPath "$KEY_PATH" \
             -authenticationKeyID "$ASC_KEY_ID" -authenticationKeyIssuerID "$ASC_ISSUER_ID" | tail -80
-          ver=$(/usr/libexec/PlistBuddy -c 'Print :ApplicationProperties:CFBundleShortVersionString' "$RUNNER_TEMP/Suibu.xcarchive/Info.plist")
-          echo "吹部日誌 $ver を TestFlight に送りました。App Store Connect での処理が終わると、TestFlight アプリに出ます（数分〜30分ほど）。" >> "$GITHUB_STEP_SUMMARY"
+          ver=$(/usr/libexec/PlistBuddy -c 'Print :ApplicationProperties:CFBundleShortVersionString' "$RUNNER_TEMP/Tsukurikata.xcarchive/Info.plist")
+          echo "吹奏楽部のつくりかた $ver を TestFlight に送りました。App Store Connect での処理が終わると、TestFlight アプリに出ます（数分〜30分ほど）。" >> "$GITHUB_STEP_SUMMARY"
       - name: Remove key
         if: always()
         run: rm -rf "$RUNNER_TEMP/keys"

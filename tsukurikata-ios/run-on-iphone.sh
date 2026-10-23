@@ -1,11 +1,11 @@
 #!/bin/bash
-# 吹部日誌をビルドして、つないだ iPhone（ケーブルか同じ Wi-Fi）に入れて起動する
-#   bash suibu-ios/run-on-iphone.sh
+# 吹奏楽部のつくりかたをビルドして、つないだ iPhone（ケーブルか同じ Wi-Fi）に入れて起動する
+#   bash tsukurikata-ios/run-on-iphone.sh
 # チームは Mac にある開発用の証明書から見つける（TEAM=XXXXXXXXXX で指定もできる）。CONFIG=Debug にすると Debug ビルド
 set -eo pipefail
 cd "$(dirname "$0")/.."
 CONFIG=${CONFIG:-Release}
-DD=${DERIVED:-/tmp/suibu-dd}
+DD=${DERIVED:-/tmp/tsukurikata-dd}
 TEAM=${TEAM:-$(security find-certificate -a -c "Apple Development" -p | openssl x509 -noout -subject -nameopt multiline | awk -F' = ' '/organizationalUnitName/{print $2; exit}')}
 [ -n "$TEAM" ] || { echo "Apple Development の証明書が見つからない（Xcode → Settings → Accounts でサインインして）"; exit 1; }
 echo "チーム: $TEAM"
@@ -28,10 +28,10 @@ rm -f "$J" "$J.dev"
 echo "iPhone: $DEV_NAME"
 
 echo "ビルド中…"
-xcodebuild -project suibu-ios/Suibu.xcodeproj -scheme Suibu -configuration "$CONFIG" \
+xcodebuild -project tsukurikata-ios/Tsukurikata.xcodeproj -scheme Tsukurikata -configuration "$CONFIG" \
   -destination 'generic/platform=iOS' -derivedDataPath "$DD" -allowProvisioningUpdates \
   DEVELOPMENT_TEAM="$TEAM" CODE_SIGN_STYLE=Automatic build 2>&1 | tail -25
-xcrun devicectl device install app --device "$DEV_ID" "$DD/Build/Products/$CONFIG-iphoneos/Suibu.app"
-xcrun devicectl device process launch --device "$DEV_ID" io.github.hy218355-bit.suibu >/dev/null \
+xcrun devicectl device install app --device "$DEV_ID" "$DD/Build/Products/$CONFIG-iphoneos/Tsukurikata.app"
+xcrun devicectl device process launch --device "$DEV_ID" io.github.hy218355-bit.tsukurikata >/dev/null \
   && echo "iPhone に入れて起動しました" \
   || echo "iPhone に入れました（自動で起動できなかったので、ロックを解除してアイコンから開いてください）"

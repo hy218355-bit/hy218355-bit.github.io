@@ -7,19 +7,19 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		74038DACAA624679510DD39A /* SuibuApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0954C1C463DD50734E6B23B3 /* SuibuApp.swift */; };
+		74038DACAA624679510DD39A /* TsukurikataApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0954C1C463DD50734E6B23B3 /* TsukurikataApp.swift */; };
 		E487C65D2C93F1E0DBC75D0F /* GameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CCD53E53DB90A37F51F9967 /* GameViewController.swift */; };
 		5695C18EDF2D8E1DAB5957EB /* BundleSchemeHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 027B47F768806E66DAD803A7 /* BundleSchemeHandler.swift */; };
 		3A457334CEE1714E2BE3FB7B /* SaveStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5FBBB6199F62168C6AE9DCA /* SaveStore.swift */; };
 		A6070B9CF28E71610AA267AE /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A790BB479B2477E3A634A1EB /* Assets.xcassets */; };
 		0B986C876E3EC44800452396 /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = C45E8EE69BEC76964CA40C2E /* PrivacyInfo.xcprivacy */; };
 		CBF6B15AEA2443D97859AA5F /* selftest.js in Resources */ = {isa = PBXBuildFile; fileRef = C896D4AB6BD132EC9030910A /* selftest.js */; };
-		416A0C80D41785D1EBB407D1 /* suibu in Copy Game Files */ = {isa = PBXBuildFile; fileRef = 2FE820D3446FF5F947D2F604 /* suibu */; };
+		416A0C80D41785D1EBB407D1 /* tsukurikata in Copy Game Files */ = {isa = PBXBuildFile; fileRef = 2FE820D3446FF5F947D2F604 /* tsukurikata */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		DDB40E7284BFA805CEC421A1 /* Suibu.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Suibu.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		0954C1C463DD50734E6B23B3 /* SuibuApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuibuApp.swift; sourceTree = "<group>"; };
+		DDB40E7284BFA805CEC421A1 /* Tsukurikata.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Tsukurikata.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		0954C1C463DD50734E6B23B3 /* TsukurikataApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TsukurikataApp.swift; sourceTree = "<group>"; };
 		8CCD53E53DB90A37F51F9967 /* GameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameViewController.swift; sourceTree = "<group>"; };
 		027B47F768806E66DAD803A7 /* BundleSchemeHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BundleSchemeHandler.swift; sourceTree = "<group>"; };
 		D5FBBB6199F62168C6AE9DCA /* SaveStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaveStore.swift; sourceTree = "<group>"; };
@@ -27,7 +27,7 @@
 		C45E8EE69BEC76964CA40C2E /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
 		C896D4AB6BD132EC9030910A /* selftest.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = selftest.js; sourceTree = "<group>"; };
 		B15A13ACECE86FF5B996CE6C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		2FE820D3446FF5F947D2F604 /* suibu */ = {isa = PBXFileReference; lastKnownFileType = folder; name = suibu; path = ../suibu; sourceTree = SOURCE_ROOT; };
+		2FE820D3446FF5F947D2F604 /* tsukurikata */ = {isa = PBXFileReference; lastKnownFileType = folder; name = tsukurikata; path = ../tsukurikata; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -47,7 +47,7 @@
 			dstPath = Game;
 			dstSubfolderSpec = 7;
 			files = (
-				416A0C80D41785D1EBB407D1 /* suibu in Copy Game Files */,
+				416A0C80D41785D1EBB407D1 /* tsukurikata in Copy Game Files */,
 			);
 			name = "Copy Game Files";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -58,8 +58,8 @@
 		518DA81DB9B99529C0C0AEBE = {
 			isa = PBXGroup;
 			children = (
-				82CF2A43A7100F086D7FCFDD /* Suibu */,
-				2FE820D3446FF5F947D2F604 /* suibu */,
+				82CF2A43A7100F086D7FCFDD /* Tsukurikata */,
+				2FE820D3446FF5F947D2F604 /* tsukurikata */,
 				547D009064F7C3F13BEF3460 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -67,15 +67,15 @@
 		547D009064F7C3F13BEF3460 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				DDB40E7284BFA805CEC421A1 /* Suibu.app */,
+				DDB40E7284BFA805CEC421A1 /* Tsukurikata.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		82CF2A43A7100F086D7FCFDD /* Suibu */ = {
+		82CF2A43A7100F086D7FCFDD /* Tsukurikata */ = {
 			isa = PBXGroup;
 			children = (
-				0954C1C463DD50734E6B23B3 /* SuibuApp.swift */,
+				0954C1C463DD50734E6B23B3 /* TsukurikataApp.swift */,
 				8CCD53E53DB90A37F51F9967 /* GameViewController.swift */,
 				027B47F768806E66DAD803A7 /* BundleSchemeHandler.swift */,
 				D5FBBB6199F62168C6AE9DCA /* SaveStore.swift */,
@@ -84,15 +84,15 @@
 				C896D4AB6BD132EC9030910A /* selftest.js */,
 				B15A13ACECE86FF5B996CE6C /* Info.plist */,
 			);
-			path = Suibu;
+			path = Tsukurikata;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		42AEFBAE01D2DFD981F7DA7D /* Suibu */ = {
+		42AEFBAE01D2DFD981F7DA7D /* Tsukurikata */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = DD7B903BF5B76A92FBB9FF44 /* Build configuration list for PBXNativeTarget "Suibu" */;
+			buildConfigurationList = DD7B903BF5B76A92FBB9FF44 /* Build configuration list for PBXNativeTarget "Tsukurikata" */;
 			buildPhases = (
 				7A70D71C385290AF96BF1031 /* Sources */,
 				424153ED3CD079DB4DB459AF /* Frameworks */,
@@ -103,9 +103,9 @@
 			);
 			dependencies = (
 			);
-			name = Suibu;
-			productName = Suibu;
-			productReference = DDB40E7284BFA805CEC421A1 /* Suibu.app */;
+			name = Tsukurikata;
+			productName = Tsukurikata;
+			productReference = DDB40E7284BFA805CEC421A1 /* Tsukurikata.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -123,7 +123,7 @@
 					};
 				};
 			};
-			buildConfigurationList = F9FBB92E94E3EF23FA14607F /* Build configuration list for PBXProject "Suibu" */;
+			buildConfigurationList = F9FBB92E94E3EF23FA14607F /* Build configuration list for PBXProject "Tsukurikata" */;
 			compatibilityVersion = "Xcode 14.0";
 			developmentRegion = ja;
 			hasScannedForEncodings = 0;
@@ -136,7 +136,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				42AEFBAE01D2DFD981F7DA7D /* Suibu */,
+				42AEFBAE01D2DFD981F7DA7D /* Tsukurikata */,
 			);
 		};
 /* End PBXProject section */
@@ -159,7 +159,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				74038DACAA624679510DD39A /* SuibuApp.swift in Sources */,
+				74038DACAA624679510DD39A /* TsukurikataApp.swift in Sources */,
 				E487C65D2C93F1E0DBC75D0F /* GameViewController.swift in Sources */,
 				5695C18EDF2D8E1DAB5957EB /* BundleSchemeHandler.swift in Sources */,
 				3A457334CEE1714E2BE3FB7B /* SaveStore.swift in Sources */,
@@ -230,8 +230,8 @@
 				DEVELOPMENT_TEAM = "";
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = Suibu/Info.plist;
-				INFOPLIST_KEY_CFBundleDisplayName = "吹部日誌";
+				INFOPLIST_FILE = Tsukurikata/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = "吹奏楽部";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
@@ -241,7 +241,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "io.github.hy218355-bit.suibu";
+				PRODUCT_BUNDLE_IDENTIFIER = "io.github.hy218355-bit.tsukurikata";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -259,8 +259,8 @@
 				DEVELOPMENT_TEAM = "";
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = Suibu/Info.plist;
-				INFOPLIST_KEY_CFBundleDisplayName = "吹部日誌";
+				INFOPLIST_FILE = Tsukurikata/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = "吹奏楽部";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
@@ -270,7 +270,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "io.github.hy218355-bit.suibu";
+				PRODUCT_BUNDLE_IDENTIFIER = "io.github.hy218355-bit.tsukurikata";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -281,7 +281,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		F9FBB92E94E3EF23FA14607F /* Build configuration list for PBXProject "Suibu" */ = {
+		F9FBB92E94E3EF23FA14607F /* Build configuration list for PBXProject "Tsukurikata" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				06DB87319F2818D2126BDA3E /* Debug */,
@@ -290,7 +290,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		DD7B903BF5B76A92FBB9FF44 /* Build configuration list for PBXNativeTarget "Suibu" */ = {
+		DD7B903BF5B76A92FBB9FF44 /* Build configuration list for PBXNativeTarget "Tsukurikata" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				968426D8A36492C5C326175F /* Debug */,

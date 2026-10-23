@@ -15,9 +15,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "42AEFBAE01D2DFD981F7DA7D"
-               BuildableName = "Suibu.app"
-               BlueprintName = "Suibu"
-               ReferencedContainer = "container:Suibu.xcodeproj">
+               BuildableName = "Tsukurikata.app"
+               BlueprintName = "Tsukurikata"
+               ReferencedContainer = "container:Tsukurikata.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -43,9 +43,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "42AEFBAE01D2DFD981F7DA7D"
-            BuildableName = "Suibu.app"
-            BlueprintName = "Suibu"
-            ReferencedContainer = "container:Suibu.xcodeproj">
+            BuildableName = "Tsukurikata.app"
+            BlueprintName = "Tsukurikata"
+            ReferencedContainer = "container:Tsukurikata.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </LaunchAction>
@@ -60,9 +60,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "42AEFBAE01D2DFD981F7DA7D"
-            BuildableName = "Suibu.app"
-            BlueprintName = "Suibu"
-            ReferencedContainer = "container:Suibu.xcodeproj">
+            BuildableName = "Tsukurikata.app"
+            BlueprintName = "Tsukurikata"
+            ReferencedContainer = "container:Tsukurikata.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>

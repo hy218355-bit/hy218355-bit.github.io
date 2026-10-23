@@ -349,7 +349,7 @@ function encodeWav(buf, info = {}){
   while(n > buf.sampleRate && Math.abs(L[n - 1]) * g < 3e-5 && Math.abs(R[n - 1]) * g < 3e-5) n--;
   n = Math.min(L.length, n + Math.floor(0.3 * buf.sampleRate));
   const enc = new TextEncoder();
-  const tags = Object.entries({INAM: info.title, IART: info.artist, IPRD: info.album, ICMT: info.comment, ISFT: '吹部日誌'})
+  const tags = Object.entries({INAM: info.title, IART: info.artist, IPRD: info.album, ICMT: info.comment, ISFT: '吹奏楽部のつくりかた'})
     .filter(([, v]) => v).map(([k, v]) => { const b = enc.encode(v + '\0'); return [k, b.length % 2 ? new Uint8Array([...b, 0]) : b, b.length]; });
   const listLen = 4 + tags.reduce((a, [, b]) => a + 8 + b.length, 0);
   const dataLen = n * 4;

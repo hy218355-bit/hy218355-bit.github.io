@@ -6,7 +6,7 @@ from fill_gaps import fill, measured_pitch
 V = '/home/user/sgossner/vsco-2-ce/'
 VC = '/home/user/sgossner/VCSL/'      # Versilian Community Sample Library（CC0）。音名は C3 が真ん中のド
 T = '/home/user/nbrosowsky/tonejs-instruments/samples/'
-OUT = '/home/user/hy218355-bit.github.io/suibu/snd/'
+OUT = '/home/user/hy218355-bit.github.io/tsukurikata/snd/'
 os.makedirs(OUT, exist_ok=True)
 GAP = 0.12
 BITRATE = '128k'

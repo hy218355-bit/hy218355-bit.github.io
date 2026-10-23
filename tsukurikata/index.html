@@ -3,12 +3,12 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>吹部日誌</title>
+<title>吹奏楽部のつくりかた</title>
 <meta name="claude:viewport-fit-sides" content="cover">
 <meta name="description" content="高校吹奏楽部の育成シミュレーション。全楽器の部員一人ひとりの音が、練習で少しずつ変わっていく。音楽室・体育館・ホールで響きも変わる。">
 <link rel="icon" href="icon-64.png">
 <link rel="apple-touch-icon" href="icon-180.png">
-<meta name="apple-mobile-web-app-title" content="吹部日誌">
+<meta name="apple-mobile-web-app-title" content="吹奏楽部">
 <style>
 /* フォントは同梱（このゲームに出てくる文字だけに絞ったもの。作り方は tools/build_fonts.py、ライセンスは fonts/OFL-*.txt） */
 @font-face{font-family:"Zen Kaku Gothic New";font-weight:400;font-display:swap;src:url(fonts/zen-kaku-gothic-new-400.woff2) format("woff2")}
@@ -81,7 +81,7 @@ button,select{font:inherit;color:inherit}
 
 /* 垂れ幕と週カレンダー */
 .top{display:grid;grid-template-columns:auto minmax(0,1fr);gap:clamp(14px,3vw,28px);align-items:start}
-.banner{writing-mode:vertical-rl;font-family:var(--f-display);font-weight:400;font-size:clamp(30px,5.4vw,46px);letter-spacing:.16em;line-height:1;color:var(--on-brass);background:var(--brass);padding:16px 12px 34px;clip-path:polygon(0 0,100% 0,100% 100%,50% calc(100% - 16px),0 100%)}
+.banner{writing-mode:vertical-rl;font-family:var(--f-display);font-weight:400;font-size:clamp(26px,5.4vw,46px);letter-spacing:.16em;line-height:1.12;color:var(--on-brass);background:var(--brass);padding:16px 12px 34px;clip-path:polygon(0 0,100% 0,100% 100%,50% calc(100% - 16px),0 100%)}
 .top-main{display:grid;gap:12px;min-width:0;padding-top:2px}
 .school{font-size:13px;letter-spacing:.14em;color:var(--ink-soft)}
 .lede{font-size:clamp(17px,2.2vw,21px);font-weight:500;line-height:1.6;max-width:36em;text-wrap:pretty}
@@ -458,7 +458,7 @@ tr.empty td{color:var(--ink-soft)}
 <body>
 <div class="app">
   <header class="top" data-tab="week">
-    <h1 class="banner">吹部日誌</h1>
+    <h1 class="banner">吹奏楽部の<br>つくりかた</h1>
     <div class="top-main">
       <p class="school" id="school">県立みなと高校 吹奏楽部</p>
       <p class="lede">あなたは吹奏楽部の顧問。部員はまだ1年生の5人だけ。一人ひとりに毎週の練習を指示すると、その人の音が少しずつ変わっていく。演奏の評判が上がれば、入部したいという生徒も増えていく。同じ演奏でも、音楽室と体育館とホールでは聞こえ方がまるで違う。</p>

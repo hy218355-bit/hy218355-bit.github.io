@@ -11,7 +11,7 @@ const U = {
   tab: 'week', tabScroll: {},
   lineup: false, draft: null, pred: null, predKey: '', predT: 0,
 };
-const UI_KEY = 'suibu-ui-v2';
+const UI_KEY = 'suibu-ui-v2';  // 前の名前のころからの保存先（SAVE_KEY と同じ理由でこのまま）
 
 /* ===== 小道具 ===== */
 function tok(){
@@ -1147,13 +1147,13 @@ function bind(){
 }
 
 function start(data){
-  if(window.SUIBU_NATIVE) document.documentElement.classList.add('native');
+  if(window.TSUKURIKATA_NATIVE) document.documentElement.classList.add('native');
   S = (data && data.S && data.S.v === 2) ? data.S : (load() || freshState(2026));
   loadUI();
   E.venueId = U.venue; E.posId = U.pos;
   renderAll(); renderLab();
   bind();
-  setTab(window.SUIBU_LAUNCH?.tab || 'week');
+  setTab(window.TSUKURIKATA_LAUNCH?.tab || 'week');
   renderSnd();
   loadSamples('snd/', renderSnd).then(renderSnd, renderSnd);
   // 響きの読み込みが再生より後になったら、読み込めた時点で計算した響きに切り替える

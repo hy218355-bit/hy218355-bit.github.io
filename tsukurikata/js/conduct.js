@@ -253,7 +253,7 @@ function playMemberRec(rec, m, label){
   playRecording(rec, label, () => { U.solo = 'all'; E.setSolo({type: 'all'}); renderSelectors(); });
 }
 
-const recFileName = rec => `吹部日誌_${rec.year}年度_${rec.label.replace(/[\\/:*?"<>|（）()・]/g, '_').replace(/_+/g, '_').replace(/_$/, '')}`;
+const recFileName = rec => `吹奏楽部のつくりかた_${rec.year}年度_${rec.label.replace(/[\\/:*?"<>|（）()・]/g, '_').replace(/_+/g, '_').replace(/_$/, '')}`;
 // who を渡すと、その部員の音だけを書き出す
 async function saveRecording(rec, who = null){
   if(U.saving) return;
@@ -265,7 +265,7 @@ async function saveRecording(rec, who = null){
     const buf = await renderPerf(recPerf(rec), {venue: rec.venue, pos: U.pos, conduct: rec.conduct, solo: who ? {type: 'member', id: who.id} : null,
       onProgress: p => toast(`録音を書き出しています… ${Math.round(p * 100)}%`)});
     const school = $('#school').textContent.replace(/\s*\d+年度.*$/, '').replace(/\s+/g, '');
-    const meta = {title: rec.label + (who ? `（${who.name}）` : ''), artist: school, album: `吹部日誌 ${rec.year}年度`, comment: `${VENUE[rec.venue].name}で録音`};
+    const meta = {title: rec.label + (who ? `（${who.name}）` : ''), artist: school, album: `吹奏楽部のつくりかた ${rec.year}年度`, comment: `${VENUE[rec.venue].name}で録音`};
     const wav = encodeWav(buf, meta);
     await deliverFile(wav, recFileName(rec) + (who ? '_' + who.name.replace(/\s+/g, '') : '') + '.wav', meta);
   }catch(e){
@@ -274,7 +274,7 @@ async function saveRecording(rec, who = null){
   U.saving = false;
 }
 async function deliverFile(buf, name, meta){
-  if(window.SUIBU_NATIVE){
+  if(window.TSUKURIKATA_NATIVE){
     // アプリ：少しずつ渡し、アプリ側で m4a にして共有シートを出す
     toast('保存の準備をしています…');
     const u8 = new Uint8Array(buf), CH = 393216, n = Math.ceil(u8.length / CH), id = 'f' + Date.now();
