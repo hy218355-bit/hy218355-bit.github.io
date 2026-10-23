@@ -90,8 +90,8 @@ const wkLabel = w => `${wkMonth(w)}月 第${w % 4 + 1}週`;
 const wkShort = w => `${wkMonth(w)}月${w % 4 + 1}週`;
 
 const freshFam = () => Object.fromEntries(PIECE_IDS.map(id => [id, 0]));
-// 以前あった曲は、近い曲に置き換える（2026年10月に、だれもが知っている曲へ入れ替えた）
-const PIECE_MOVED = {march: 'radetzky', wa: 'galop', stars: 'radetzky', jupiter: 'pomp', mountain: 'galop'};
+// 以前あった曲は、近い曲に置き換える（2026年10月に、だれもが知っている曲へ入れ替えた。ラデツキー行進曲は外して、同じ行進曲の「凱旋行進曲」へ）
+const PIECE_MOVED = {march: 'aida', wa: 'galop', stars: 'aida', jupiter: 'holst', mountain: 'galop', radetzky: 'aida'};
 function freshState(year = 2026){
   const s = {
     v: 2, year, startYear: year, founding: true, week: 0, phase: 'choose', pieceId: null, interp: {tempo: 1, dyn: 1, rub: 1},
@@ -952,10 +952,20 @@ function load(){
     if(s && s.v === 2 && Array.isArray(s.members)){
       // 入れ替えた曲は近い曲に置き換える（指揮の記録と区間は、曲の長さが変わるので外す）
       const mv = id => PIECE_MOVED[id] || id;
+      if(PIECE_MOVED[s.pieceId]) s.planSpan = {};   // 練習する区間の番号は、曲が変わると意味がなくなる
       s.pieceId &&= mv(s.pieceId);
       s.contestPiece &&= mv(s.contestPiece);
       for(const [old, nu] of Object.entries(PIECE_MOVED)) if(old in s.fam){ s.fam[nu] = Math.max(s.fam[nu] || 0, s.fam[old]); delete s.fam[old]; }
-      for(const r of s.recs || []) if(PIECE_MOVED[r.pieceId]){ r.pieceId = PIECE_MOVED[r.pieceId]; delete r.conduct; delete r.span; }
+      // 部員ひとりずつの譜読みと録音の控えは区間の数が曲ごとにちがうので、曲全体の平均（どの区間も同じ値）にして移す
+      const meanOf = v => Array.isArray(v) ? (v.length ? v.reduce((a, x) => a + (x || 0), 0) / v.length : 0) : v || 0;
+      for(const m of s.members) for(const [old, nu] of Object.entries(PIECE_MOVED)) if(m.fam && old in m.fam){
+        if(!(nu in m.fam)) m.fam[nu] = Math.round(meanOf(m.fam[old]) * 10) / 10;
+        delete m.fam[old];
+      }
+      for(const r of s.recs || []) if(PIECE_MOVED[r.pieceId]){
+        r.pieceId = PIECE_MOVED[r.pieceId]; delete r.conduct; delete r.span;
+        for(const x of r.snap?.members || []) if(x.pfams){ x.pfam = meanOf(x.pfams); delete x.pfams; }
+      }
       s.fam = {...freshFam(), ...s.fam};   // あとから増えた曲
       s.startYear ??= s.history[0]?.year ?? s.year;
       for(const m of s.members) m.mental ??= mentalInit(m.trait, m.grade, 'mig', m.id);

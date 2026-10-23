@@ -1,7 +1,7 @@
 #!/bin/bash
 # 3年分の早送りを何回か回して、春の演奏会の出来・県大会の平均点・部員数の平均を出す（毎回少しずつ結果が変わるため）
 #   bash tsukurikata/tools/sim_avg.sh <曲のid...>   回数は N=10（既定）
-#   例：bash tsukurikata/tools/sim_avg.sh radetzky galop
+#   例：bash tsukurikata/tools/sim_avg.sh galop aida
 cd "$(dirname "$0")/../.."
 N=${N:-10}
 for pc in "$@"; do

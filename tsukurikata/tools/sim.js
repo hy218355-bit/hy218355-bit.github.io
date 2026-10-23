@@ -1,9 +1,9 @@
 // 部の何年分かを、画面なしで早送りする（育成・評判・オーディションのバランスを見る）
 //   node tsukurikata/tools/sim.js [年数] [方針] [曲] [メンバー]
-//   例：node tsukurikata/tools/sim.js 5 auto radetzky best
+//   例：node tsukurikata/tools/sim.js 5 auto galop best
 // 方針は auto / basics / weak / strong / piece / easy、メンバーは all（全員出る）か best（オーディションでおすすめを選ぶ）
 const fs = require('fs'), vm = require('vm'), path = require('path');
-const [YEARS = '3', POL = 'auto', PIECE = 'radetzky', LINEUP = 'all'] = process.argv.slice(2);
+const [YEARS = '3', POL = 'auto', PIECE = 'galop', LINEUP = 'all'] = process.argv.slice(2);
 const ctx = vm.createContext({console, Math, JSON, Object, Array, Set, Map, WeakMap, Float32Array, Number, String, Error, Infinity, NaN, setTimeout,
   YEARS: +YEARS, POL, PIECE, LINEUP});
 // 曲（js/pieces/*.js）は index.html に書いた順に読む
