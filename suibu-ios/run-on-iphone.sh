@@ -13,7 +13,8 @@ echo "チーム: $TEAM"
 # 入れられる実機を探す（sameMachine はシミュレータなので除く。ケーブル → Wi-Fi の順）
 J=$(mktemp)
 xcrun devicectl list devices --json-output "$J" >/dev/null
-read -r DEV_ID DEV_NAME < <(python3 - "$J" <<'PY'
+# Mac の /bin/bash（3.2）は <( ) の中のヒアドキュメントを読み違えるので、いったんファイルに書き出す
+python3 - "$J" > "$J.dev" <<'PY'
 import json, sys
 ds = json.load(open(sys.argv[1]))['result']['devices']
 can = lambda d: 'com.apple.coredevice.feature.installapp' in {c.get('featureIdentifier') for c in d.get('capabilities', [])}
@@ -21,8 +22,8 @@ ok = [d for d in ds if can(d) and d.get('connectionProperties', {}).get('transpo
 ok.sort(key=lambda d: d['connectionProperties']['transportType'] != 'wired')
 if ok: print(ok[0]['identifier'], ok[0].get('deviceProperties', {}).get('name', '').strip() or '(名前なし)')
 PY
-) || true
-rm -f "$J"
+read -r DEV_ID DEV_NAME < "$J.dev" || true
+rm -f "$J" "$J.dev"
 [ -n "$DEV_ID" ] || { echo "アプリを入れられる iPhone が見つからない。ロック解除・「このコンピュータを信頼」・デベロッパモード（設定 → プライバシーとセキュリティ）を確かめて、もう一度"; exit 1; }
 echo "iPhone: $DEV_NAME"
 
