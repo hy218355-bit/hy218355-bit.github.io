@@ -25,6 +25,21 @@
 3. 必要なら Bundle Identifier（いまは `io.github.hy218355-bit.suibu`）を自分のものに変える
 4. iPhone をつないで ▶︎ で実行
 
+## TestFlight に上げる（GitHub Actions から）
+
+`../.github/workflows/testflight.yml` を Actions の画面から手動で実行すると、署名して TestFlight に上げます。Mac がなくても、iPhone の TestFlight アプリから入れられます。
+
+1. App Store Connect でアプリを作る（Bundle ID は `io.github.hy218355-bit.suibu`。変えるときはリポジトリの Variables に `SUIBU_BUNDLE_ID` を入れる）
+2. App Store Connect →「ユーザとアクセス」→「統合」→ App Store Connect API で、アクセスが Admin のキーを作る
+3. リポジトリの Settings → Secrets and variables → Actions の Secrets に入れる
+   - `ASC_KEY_ID`：キーID
+   - `ASC_ISSUER_ID`：発行者ID
+   - `ASC_KEY_P8`：ダウンロードした `.p8` ファイルの中身（テキストのまま）
+   - `APPLE_TEAM_ID`：チームID（10文字）
+4. Actions →「TestFlight」→ Run workflow。main に入る前は、`testflight-` で始まるタグ（例：`testflight-1`）を push すると動く
+
+署名は Xcode の自動署名にまかせ、ビルド番号はアップロードのときに Xcode が重ならないよう決めます。
+
 ## App Store に出すとき
 
 - Product → Archive → Distribute App → App Store Connect
