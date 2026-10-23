@@ -99,8 +99,9 @@ function playSegments(ac, dest, bank, smp, t0, t1, rate, firstOffset, srcs, onSr
   const xf = LOOP_XF / rate, coherent = (smp.lc ?? 0) >= 0.7;
   const loopA = smp.start + (smp.lp ? smp.lp[0] : smp.d * 0.4), loopB = smp.start + (smp.lp ? smp.lp[1] : smp.d);
   let off = smp.start + (firstOffset || 0);
-  let t = t0, first = true;
-  while(t < t1 && srcs.length < 400){
+  // くり返しの上限は1音ぶんで数える（奏者の srcs は400〜600本に保たれるので、全体で数えると400本を超えた奏者の音が鳴らなくなる）
+  let t = t0, first = true, made = 0;
+  while(t < t1 && made++ < 400){
     const avail = (loopB - off) / rate;
     const segEnd = Math.min(t1, t + avail);
     const src = ac.createBufferSource(); src.buffer = bank.buf;
