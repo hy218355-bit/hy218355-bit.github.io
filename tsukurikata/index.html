@@ -17,7 +17,7 @@
 @font-face{font-family:"Klee One";font-weight:600;font-display:swap;src:url(fonts/klee-one-600.woff2) format("woff2")}
 @font-face{font-family:"Dela Gothic One";font-weight:400;font-display:swap;src:url(fonts/dela-gothic-one-400.woff2) format("woff2")}
 @font-face{font-family:"Share Tech Mono";font-weight:400;font-display:swap;src:url(fonts/share-tech-mono-400.ttf) format("truetype")}
-/* Layout: 合奏室。上に部の垂れ幕と週カレンダー、左にステージ（座席・譜面台・チューナー）、右にホワイトボード（実力・診断・今週・解釈・日誌）、下に名簿とラボ */
+/* Layout: 合奏室。上に部の垂れ幕と週カレンダー、左にステージ（座席・譜面台）、右にホワイトボード（実力・診断・今週・解釈・日誌）、下に名簿と部の歴史 */
 :root{
   --paper:#ECEFF3;
   --sheet:#FAFBFC;
@@ -118,10 +118,6 @@ button,select{font:inherit;color:inherit}
 .seg button{border:0;background:transparent;border-radius:999px;padding:5px 12px;font-size:13px;line-height:1.4;cursor:pointer;color:var(--ink-soft)}
 .seg button[aria-pressed="true"]{background:var(--ink);color:var(--sheet);font-weight:700}
 .seg button:disabled{opacity:.4;cursor:default}
-.venues{display:grid;gap:6px}
-.venues .seg,#pieceSel{border-radius:12px}
-.venue-desc{font-size:13px;color:var(--ink-soft);line-height:1.6}
-.venue-desc b{color:var(--ink);font-weight:700}
 .stage-wrap{width:100%;min-width:0;border-radius:8px;overflow:hidden}
 #stage{display:block;width:100%;cursor:pointer;touch-action:manipulation}
 .transport{display:flex;flex-wrap:wrap;align-items:center;gap:8px 10px}
@@ -134,10 +130,12 @@ button,select{font:inherit;color:inherit}
 .btn:disabled{opacity:.4;cursor:default}
 .btn:disabled:hover{border-color:var(--rule);color:var(--ink-soft)}
 select{background:var(--sheet);border:1.5px solid var(--rule);border-radius:8px;padding:7px 10px;font-size:13px;max-width:100%;min-width:0}
-#recSel{max-width:min(100%,260px)}
-.options{display:flex;flex-wrap:wrap;gap:8px 16px;font-size:13px;color:var(--ink-soft)}
-.options label{display:flex;align-items:center;gap:6px;min-width:0}
-.snd{display:flex;align-items:center;gap:6px;flex-wrap:wrap}
+.options{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:8px 16px;font-size:13px;color:var(--ink-soft)}
+.options label{display:grid;grid-template-columns:5.2em minmax(0,1fr);align-items:center;gap:6px;min-width:0;white-space:nowrap}
+.options select{width:100%}
+.recrow{display:flex;align-items:center;gap:8px}
+.recrow select{flex:1;min-width:0}
+.recrow .btn{flex:none}
 #sndStatus{font-size:12px}
 .now-playing{font-size:13px;color:var(--ink-soft);min-height:1.7em}
 .now-playing b{color:var(--brass)}
@@ -151,13 +149,13 @@ select{background:var(--sheet);border:1.5px solid var(--rule);border-radius:8px;
 .k-dash{height:0;border-top:2px dashed var(--brass);border-radius:0;background:none}
 .dot{display:inline-block;width:8px;height:8px;border-radius:50%}
 .dot.good{background:var(--good)} .dot.warn{background:var(--warn)} .dot.bad{background:var(--bad)}
-.tuner{background:var(--lcd);border-radius:12px;padding:4px 6px}
-#tuner{display:block;width:100%;height:124px}
-.tuner-cap{font-size:12px;color:var(--ink-soft);margin-top:-6px}
 
 /* 部員カード */
 .member-card{background:var(--sheet);border:1px solid var(--rule);border-radius:6px;padding:16px clamp(14px,2.4vw,22px);display:grid;gap:10px}
 .mc-head{display:flex;flex-wrap:wrap;align-items:baseline;gap:4px 12px}
+.mc-close{margin-left:auto;font-size:13px}
+.mc-move summary{cursor:pointer;font-size:13px;color:var(--ink-soft);padding:4px 0}
+.mc-move .mc-actions{margin-top:6px}
 .mc-head h3{font-size:19px;font-weight:700}
 .mc-head .sub{font-size:13px;color:var(--ink-soft)}
 .tag{font-size:12px;font-weight:700;letter-spacing:.06em;color:var(--on-brass);background:var(--brass);border-radius:3px;padding:1px 8px;white-space:nowrap}
@@ -180,6 +178,7 @@ select{background:var(--sheet);border:1.5px solid var(--rule);border-radius:8px;
 .track .fill.good{background:var(--good)} .track .fill.warn{background:var(--warn)} .track .fill.bad{background:var(--bad)}
 .stat .ds{grid-column:2/4;font-size:12px;color:var(--ink-soft);line-height:1.45}
 .delta{color:var(--good);font-family:var(--f-lcd);margin-left:4px}
+.stat .nm .delta{display:block;margin:0;font-size:11px;font-weight:400;line-height:1.2}
 .vitals{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}
 @media (max-width:480px){.vitals{grid-template-columns:repeat(2,minmax(0,1fr))}}
 .vital small{font-size:11px;color:var(--ink-soft);line-height:1.4}
@@ -271,7 +270,9 @@ select{background:var(--sheet);border:1.5px solid var(--rule);border-radius:8px;
 .am .sc b{font-family:var(--f-lcd);font-weight:400;font-size:14px;text-align:right}
 .am .btn.small{padding:4px 10px}
 .am.off .who,.am.off .sc{opacity:.45}
-#rosterTable td small{font-size:11px;color:var(--ink-soft)}
+#rosterTable td small{display:block;font-size:11px;color:var(--ink-soft);white-space:normal;line-height:1.4}
+#rosterTable td:first-child{white-space:normal}
+th.num{text-align:right}
 .assign{display:grid;gap:8px}
 .assign .row{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.3fr);gap:6px 10px;align-items:center;padding-bottom:8px;border-bottom:1px dashed var(--rule)}
 .assign .who{font-size:14px;line-height:1.4}
@@ -287,6 +288,9 @@ select{background:var(--sheet);border:1.5px solid var(--rule);border-radius:8px;
 .cmt small{display:block;font-family:var(--f-body);font-size:12px;color:var(--ink-soft);line-height:1.4}
 .interp{display:grid;gap:8px}
 .interp .row{display:grid;grid-template-columns:6.5em minmax(0,1fr);align-items:center;gap:8px;font-size:13px}
+.interp .seg{display:flex;flex-wrap:nowrap}
+.interp .seg button{flex:1;padding:5px 6px;white-space:nowrap}
+@media (max-width:480px){.interp .row{grid-template-columns:minmax(0,1fr);gap:4px}}
 .log{list-style:none;padding:0;display:grid;max-height:340px;overflow:auto;font-family:var(--f-hand);font-size:15px;line-height:1.7}
 .log li{padding:7px 0;border-bottom:1px dashed var(--rule);display:grid;grid-template-columns:4.6em minmax(0,1fr);gap:8px}
 .log time{font-family:var(--f-lcd);font-size:12px;color:var(--ink-soft);padding-top:3px}
@@ -297,8 +301,8 @@ select{background:var(--sheet);border:1.5px solid var(--rule);border-radius:8px;
 /* 名簿 */
 .roster{display:grid;gap:16px;border-top:2px solid var(--ink);padding-top:16px}
 .roster-head{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:baseline;gap:6px 16px}
-.roster-head h2,.lab-head h2,.history h2{font-family:var(--f-display);font-weight:400;font-size:22px}
-.table-wrap{overflow:auto;max-height:520px;border:1px solid var(--rule);border-radius:6px;background:var(--sheet)}
+.roster-head h2,.history h2{font-family:var(--f-display);font-weight:400;font-size:22px}
+.table-wrap{overflow:auto;border:1px solid var(--rule);border-radius:6px;background:var(--sheet)}
 table{border-collapse:collapse;width:100%;font-size:13px;font-variant-numeric:tabular-nums}
 th,td{padding:7px 10px;text-align:left;white-space:nowrap;border-bottom:1px solid var(--rule)}
 th{font-size:12px;color:var(--ink-soft);font-weight:700;background:var(--paper);position:sticky;top:0;z-index:1}
@@ -319,20 +323,18 @@ tr.empty td{color:var(--ink-soft)}
 .sec-tile .bars i span{position:absolute;inset:auto 0 0 0;background:var(--brass)}
 .sec-tile small{font-size:11px;color:var(--ink-soft);line-height:1.4}
 
-/* ラボ・歴史 */
-.lab{border-top:2px solid var(--ink);padding-top:16px;display:grid;gap:16px}
-.lab-head{display:grid;gap:4px}
-.lab-head p{color:var(--ink-soft);font-size:14px;max-width:48em}
-.sliders{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px 24px}
-@media (max-width:760px){.sliders{grid-template-columns:repeat(2,minmax(0,1fr))}}
-.sl{display:grid;gap:2px}
-.sl label{display:flex;justify-content:space-between;font-weight:700;font-size:14px}
-.sl output{font-family:var(--f-lcd);font-weight:400}
-.sl input{width:100%;accent-color:var(--brass)}
-.lab .btn{justify-self:start}
+/* 歴史 */
 .history{display:grid;gap:10px;border-top:2px solid var(--ink);padding-top:16px}
 .history ol{list-style:none;padding:0;display:grid;gap:6px;font-family:var(--f-hand);font-size:15px}
 .foot{font-size:12px;color:var(--ink-soft);max-width:64em;line-height:1.8}
+.foot summary{cursor:pointer;font-size:13px;padding:6px 0}
+.foot p{margin-top:6px}
+.help{font-size:13px;color:var(--ink-soft)}
+.help summary{cursor:pointer;padding:4px 0}
+.help dl{display:grid;grid-template-columns:auto 1fr;gap:4px 12px;margin:6px 0 0;line-height:1.6}
+.help dt{font-weight:700;color:var(--ink);white-space:nowrap}
+.help dd{margin:0}
+.vitals .help{grid-column:1/-1}
 .btn.brass{background:var(--brass);border-color:var(--brass);color:var(--on-brass)}
 .btn.brass:hover{filter:brightness(1.08)}
 .btn:disabled{opacity:.45;cursor:default}
@@ -430,17 +432,20 @@ tr.empty td{color:var(--ink-soft)}
 @keyframes stampin{from{opacity:0;transform:scale(2.4) rotate(-8deg)}}
 @media (prefers-reduced-motion: reduce){.cd-ripple{animation:none;opacity:0}.cd-judge{animation:none}.an-list li,.an-rep li,.announce .aw.stamp-in{animation:none}}
 
-/* スマホ・タブレット縦：1列になる幅では、画面下のタブで「今週・合奏・部員・日誌・ラボ」を切り替える */
+/* スマホ・タブレット縦：1列になる幅では、画面下のタブで「今週・合奏・部員・日誌」を切り替える */
 .tabbar,.mini{display:none}
 @media (max-width:960px){
   .tabbed [data-tab]:not(.tab-on){display:none!important}
   .tabbed .app{padding-bottom:calc(92px + env(safe-area-inset-bottom,0px))}
   .tabbed .member-card{scroll-margin-top:calc(14px + env(safe-area-inset-top,0px))}
+  /* タブの先頭に来る区切り線と、日誌の中だけのスクロールはいらない */
+  .tabbed .roster{border-top:0;padding-top:0}
+  .tabbed .log{max-height:none;overflow:visible}
 }
 .native,.native body{-webkit-user-select:none;user-select:none;-webkit-touch-callout:none}
 .native select,.native input{-webkit-user-select:auto;user-select:auto}
 @media (max-width:960px){
-  .tabbar{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));position:fixed;left:0;right:0;bottom:0;z-index:60;
+  .tabbar{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));position:fixed;left:0;right:0;bottom:0;z-index:60;
     padding:4px max(6px,env(safe-area-inset-left,0px)) calc(4px + env(safe-area-inset-bottom,0px)) max(6px,env(safe-area-inset-right,0px));
     background:var(--sheet);background:color-mix(in srgb,var(--sheet) 88%,transparent);-webkit-backdrop-filter:blur(16px) saturate(1.4);backdrop-filter:blur(16px) saturate(1.4);border-top:1px solid var(--rule)}
   .tabbar button{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1px;min-height:50px;border:0;background:none;color:var(--ink-soft);
@@ -471,7 +476,7 @@ tr.empty td{color:var(--ink-soft)}
     </div>
   </header>
 
-  <main class="grid">
+  <main class="grid" data-tab="week play log">
     <div class="col-stage" data-tab="play">
       <section class="stand" aria-labelledby="piece">
         <div class="stand-head">
@@ -480,39 +485,30 @@ tr.empty td{color:var(--ink-soft)}
             <h2 id="piece"></h2>
             <p class="meta" id="pieceMeta"></p>
           </div>
-          <div class="seg" id="pieceSel" role="group" aria-label="演奏する曲"></div>
-        </div>
-        <div class="venues">
-          <div class="seg" id="venueSel" role="group" aria-label="会場"></div>
-          <p class="venue-desc" id="venueDesc"></p>
         </div>
         <div class="stage-wrap"><canvas id="stage" role="img" aria-label="ステージの座席。色が部員の実力、演奏中は音量に合わせて光る。席を押すと部員の詳しい情報が出る。"></canvas></div>
         <div class="transport">
           <button class="btn primary" id="btnNow" type="button">▶ いまの音で合奏</button>
+          <button class="btn quiet" id="btnStop" type="button" hidden>■ 止める</button>
           <button class="btn brass" id="btnConduct" type="button">指揮する</button>
-          <button class="btn quiet" id="btnStop" type="button" disabled>■ 止める</button>
         </div>
-        <div class="transport">
-          <button class="btn" id="btnRec" type="button">▶ 録音を聴く</button>
+        <div class="recrow">
           <select id="recSel" aria-label="録音を選ぶ"></select>
-          <button class="btn" id="btnSave" type="button" title="会場の響きつきで音声ファイルに書き出す">⤓ 保存</button>
+          <button class="btn small" id="btnRec" type="button">▶ 聴く</button>
+          <button class="btn small" id="btnSave" type="button" title="会場の響きつきで音声ファイルに書き出す">⤓ 保存</button>
         </div>
         <div class="options">
+          <label>会場 <select id="venueSel"></select></label>
           <label>範囲 <select id="rangeSel"></select></label>
-          <label>聴く位置 <select id="posSel"></select></label>
           <label>聴くパート <select id="soloSel"></select></label>
-          <span class="snd"><span>音源</span><span class="seg" id="sndSel" role="group" aria-label="音源"><button type="button" data-snd="rec" aria-pressed="true">録音</button><button type="button" data-snd="synth" aria-pressed="false">合成</button></span><span id="sndStatus" aria-live="polite"></span></span>
         </div>
-        <p class="now-playing" id="nowPlaying" aria-live="polite"></p>
-        <div class="view-head"><span id="viewTitle"></span><label>表示 <select id="viewSel" aria-label="表示するパート"></select></label></div>
+        <p class="now-playing"><span id="nowPlaying" aria-live="polite"></span> <span id="sndStatus" aria-live="polite"></span></p>
+        <div class="view-head"><label>表示 <select id="viewSel" aria-label="表示するパート"></select></label></div>
         <div class="roll-wrap"><canvas id="roll" role="img" aria-label="演奏の見える化。横が時間、縦が音の高さ、下段が抑揚。"></canvas></div>
         <ul class="legend">
-          <li>上下のずれ＝音程のずれ（拡大表示）</li>
           <li><i class="dot good"></i>合っている <i class="dot warn"></i>少しずれ <i class="dot bad"></i>ずれ・間違い</li>
-          <li><i class="k k-dash"></i>指揮者が考える理想の抑揚</li>
+          <li><i class="k k-dash"></i>目指す抑揚</li>
         </ul>
-        <div class="tuner"><canvas id="tuner" role="img" aria-label="チューナー。同じ音を吹く2人の音程のずれを表示。"></canvas></div>
-        <p class="tuner-cap">チューナーは、表示中のパートで同じ音を吹いている2人の音程（太い針と細い針）。2人のずれが大きいほど「うなり」が速くなる。</p>
       </section>
       <section class="member-card" id="memberCard" hidden aria-live="polite"></section>
     </div>
@@ -548,20 +544,10 @@ tr.empty td{color:var(--ink-soft)}
   <section class="roster" data-tab="members" aria-labelledby="h-roster">
     <div class="roster-head">
       <h2 id="h-roster">パートと部員</h2>
-      <p class="small">パートを押すと、その音だけを図とチューナーで追える。部員を押すと詳しい情報が出る。</p>
+      <p class="small">棒は左から音程・リズム・音色・表現。部員を押すと、くわしい様子と、その人だけの音を聴ける。</p>
     </div>
     <div class="sec-grid" id="secGrid"></div>
     <div class="table-wrap"><table id="rosterTable"></table></div>
-  </section>
-
-  <section class="lab" data-tab="lab" aria-labelledby="h-lab">
-    <div class="lab-head">
-      <h2 id="h-lab">聴き比べラボ</h2>
-      <p>ゲームの進行とは別に、39席すべてがうまった部で鳴らせます。部員の癖はそのままで、数値だけが変わります。会場と聴く位置は上のステージで切り替えられます。</p>
-    </div>
-    <div class="chips" id="presets"></div>
-    <div class="sliders" id="sliders"></div>
-    <button class="btn primary" id="btnLab" type="button">▶ この設定で鳴らす</button>
   </section>
 
   <section class="history" id="history" data-tab="log" hidden aria-labelledby="h-hist">
@@ -569,7 +555,7 @@ tr.empty td{color:var(--ink-soft)}
     <div class="hist" id="hist"></div>
   </section>
 
-  <p class="foot" data-tab="lab">曲は、パブリックドメインのドヴォルザーク《新世界より》（1893年）、ベートーヴェン《第九》（1824年）、オッフェンバック《天国と地獄》（1858年）、エルガー「威風堂々」第1番（1901年）、ヴェルディ《アイーダ》（1871年）、ヘンデル《ユダス・マカベウス》（1747年）、ホルスト《惑星》（1916年）、ブラームス「ハンガリー舞曲第5番」（1869年）、チャイコフスキー《くるみ割り人形》（1892年）・《白鳥の湖》（1876年）、ロッシーニ《ウィリアム・テル》（1829年）、ビゼー《カルメン》（1875年）、ヴィヴァルディ《四季》（1725年）、パッヘルベル「カノン」（1680年ごろ）です。編曲は、原曲の総譜（できるだけ作曲者のころの版）など、パブリックドメインの楽譜（IMSLP）で楽器ごとの受け持ちを読んで吹奏楽の席に移したもので、一部の曲は PDMX（CC0）の楽譜データも使っています。演奏は、その楽譜からこのページの中で組み立てて鳴らしています。楽器の音は、Versilian Studios「VSCO 2 Community Edition」（CC0）の録音、Karoryfer「Weresax」のアルトサックスの録音（tonejs-instruments 経由、CC BY 3.0）、Versilian Studios「VCSL」のテナーサックスとヴィブラフォンの録音（CC0）を使っています。E♭クラリネット・バスクラリネットはクラリネット、ユーフォニアム・バストロンボーンはトロンボーン、バリトンサックスはテナーサックスの録音を、高さと明るさを変えて使っています。「合成」を選んだときの音と客席の拍手は、その場で合成しています。会場の響きは、部屋の寸法と壁・床・客席の材質から pyroomacoustics で計算したものです。文字は Zen Kaku Gothic New・Klee One・Dela Gothic One・Share Tech Mono（SIL Open Font License）です。</p>
+  <details class="foot" data-tab="log"><summary>この作品について（曲・楽器の音・文字の出典）</summary><p>曲は、パブリックドメインのドヴォルザーク《新世界より》（1893年）、ベートーヴェン《第九》（1824年）、オッフェンバック《天国と地獄》（1858年）、エルガー「威風堂々」第1番（1901年）、ヴェルディ《アイーダ》（1871年）、ヘンデル《ユダス・マカベウス》（1747年）、ホルスト《惑星》（1916年）、ブラームス「ハンガリー舞曲第5番」（1869年）、チャイコフスキー《くるみ割り人形》（1892年）・《白鳥の湖》（1876年）、ロッシーニ《ウィリアム・テル》（1829年）、ビゼー《カルメン》（1875年）、ヴィヴァルディ《四季》（1725年）、パッヘルベル「カノン」（1680年ごろ）です。編曲は、原曲の総譜（できるだけ作曲者のころの版）など、パブリックドメインの楽譜（IMSLP）で楽器ごとの受け持ちを読んで吹奏楽の席に移したもので、一部の曲は PDMX（CC0）の楽譜データも使っています。演奏は、その楽譜からこのページの中で組み立てて鳴らしています。楽器の音は、Versilian Studios「VSCO 2 Community Edition」（CC0）の録音、Karoryfer「Weresax」のアルトサックスの録音（tonejs-instruments 経由、CC BY 3.0）、Versilian Studios「VCSL」のテナーサックスとヴィブラフォンの録音（CC0）を使っています。E♭クラリネット・バスクラリネットはクラリネット、ユーフォニアム・バストロンボーンはトロンボーン、バリトンサックスはテナーサックスの録音を、高さと明るさを変えて使っています。客席の拍手と、録音を読み込めなかったときの楽器の音は、その場で合成しています。会場の響きは、部屋の寸法と壁・床・客席の材質から pyroomacoustics で計算したものです。文字は Zen Kaku Gothic New・Klee One・Dela Gothic One・Share Tech Mono（SIL Open Font License）です。</p></details>
 </div>
 
 <!-- 指揮：拍に合わせてタップ。上ほど大きく、下ほど小さく -->
@@ -621,7 +607,6 @@ tr.empty td{color:var(--ink-soft)}
   <button type="button" data-tabgo="play"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 18V6l10-2v12"/><circle cx="6.5" cy="18" r="2.5"/><circle cx="16.5" cy="16" r="2.5"/></svg><span>合奏</span></button>
   <button type="button" data-tabgo="members"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="9" cy="8" r="3.2"/><path d="M3 20c0-3.3 2.7-6 6-6s6 2.7 6 6"/><circle cx="17" cy="9" r="2.6"/><path d="M15.5 14.2c3 .2 5.5 2.6 5.5 5.8"/></svg><span>部員</span></button>
   <button type="button" data-tabgo="log"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 5.5C4 4.7 4.7 4 5.5 4H11v16H5.5c-.8 0-1.5-.7-1.5-1.5z"/><path d="M20 5.5c0-.8-.7-1.5-1.5-1.5H13v16h5.5c.8 0 1.5-.7 1.5-1.5z"/></svg><span>日誌</span></button>
-  <button type="button" data-tabgo="lab"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h10M18 7h2M4 17h4M12 17h8"/><circle cx="16" cy="7" r="2"/><circle cx="10" cy="17" r="2"/></svg><span>ラボ</span></button>
 </nav>
 
 <script src="js/util.js"></script>

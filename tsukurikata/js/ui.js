@@ -1,13 +1,12 @@
 'use strict';
-/* 画面：ステージ・譜面台・チューナー・ホワイトボード・名簿・ラボ */
+/* 画面：ステージ・譜面台・ホワイトボード・名簿 */
 
 const $ = s => document.querySelector(s);
 const E = new Engine();
 let S = null;
 const U = {
   venue: 'room', pos: 'center', range: 'all', view: 'mel', sel: null, piece: null, solo: 'all',
-  shown: null, shownLabel: '', perfNow: null, diag: null, ptr: null, raf: 0, onEnd: null, playing: false,
-  lab: {pitch: 100, rhythm: 100, tone: 100, expr: 0, cohesion: 100, fam: 100}, labPreset: 1, refreshT: 0,
+  shown: null, shownLabel: '', perfNow: null, diag: null, ptr: null, raf: 0, onEnd: null, playing: false, refreshT: 0,
   tab: 'week', tabScroll: {},
   lineup: false, draft: null, pred: null, predKey: '', predT: 0,
 };
@@ -33,7 +32,7 @@ function mix(a, b, t){
 const skillColor = (C, v) => v < 50 ? mix(C.bad, C.warn, clamp01(v / 50)) : mix(C.warn, C.good, clamp01((v - 50) / 40));
 const errColor = (C, e, wrong) => wrong ? C.bad : Math.abs(e) < 5 ? C.good : Math.abs(e) < 15 ? C.warn : C.bad;
 function fitCanvas(cv, H){
-  const W = Math.max(240, cv.parentElement.clientWidth - (cv.id === 'tuner' ? 12 : 0));
+  const W = Math.max(240, cv.parentElement.clientWidth);
   const dpr = Math.min(2, window.devicePixelRatio || 1);
   cv.style.height = H + 'px';
   if(cv.width !== Math.round(W * dpr) || cv.height !== Math.round(H * dpr)){ cv.width = Math.round(W * dpr); cv.height = Math.round(H * dpr); }
@@ -54,15 +53,14 @@ function rangeSpan(pid){
 }
 const nowLabel = () => `いまの音（${S.phase === 'choose' ? '選曲前' : wkLabel(S.week)}・${VENUE[U.venue].name}）`;
 const busy = () => !!(S.pending && !S.pending.revealed);
-function saveUI(){ try{ localStorage.setItem(UI_KEY, JSON.stringify({venue: U.venue, pos: U.pos, snd: SAMPLES.use ? 'rec' : 'synth'})); }catch(e){} }
-function loadUI(){ try{ const x = JSON.parse(localStorage.getItem(UI_KEY) || 'null'); if(x){ if(VENUE[x.venue]) U.venue = x.venue; if(POSITION[x.pos]) U.pos = x.pos; if(x.snd === 'synth') SAMPLES.use = false; } }catch(e){} }
+// 画面の設定は会場だけ残す（聴く位置は客席の中央、音はいつも楽器の録音で鳴らす）
+function saveUI(){ try{ localStorage.setItem(UI_KEY, JSON.stringify({venue: U.venue})); }catch(e){} }
+function loadUI(){ try{ const x = JSON.parse(localStorage.getItem(UI_KEY) || 'null'); if(x && VENUE[x.venue]) U.venue = x.venue; }catch(e){} }
 // 録音音源の読み込み状況
 function renderSnd(){
-  document.querySelectorAll('#sndSel [data-snd]').forEach(b => b.setAttribute('aria-pressed', String((b.dataset.snd === 'rec') === SAMPLES.use)));
   const st = $('#sndStatus');
-  if(!SAMPLES.use) st.textContent = '';
-  else if(SAMPLES.error) st.textContent = '録音を読み込めなかったので、合成音で鳴らします';
-  else if(!SAMPLES.ready) st.textContent = `読み込み中 ${Math.round(SAMPLES.progress * 100)}%（それまでは合成音）`;
+  if(SAMPLES.error) st.textContent = '楽器の録音を読み込めなかったので、合成音で鳴らします';
+  else if(!SAMPLES.ready) st.textContent = `楽器の音を読み込み中 ${Math.round(SAMPLES.progress * 100)}%`;
   else st.textContent = '';
 }
 function commit(next){ S = next; save(S); }
@@ -88,7 +86,7 @@ function setNowPlaying(){
 }
 
 /* ===== スマホ・タブレット縦：画面下のタブ ===== */
-const TABS = ['week', 'play', 'members', 'log', 'lab'];
+const TABS = ['week', 'play', 'members', 'log'];
 const narrow = window.matchMedia('(max-width: 960px)');
 const tabHidden = t => narrow.matches && U.tab !== t;
 function setTab(t, keep){
@@ -125,13 +123,13 @@ function playPerf(perf, label, onEnd, opts = {}){
   U.shown = perf; U.shownLabel = label; U.playing = true; U.onEnd = onEnd || null;
   nativePost({type: 'playing', on: true});
   U.ptr = buildPtr(perf);
-  $('#btnStop').disabled = false;
+  $('#btnStop').hidden = false; $('#btnNow').hidden = true;
   setNowPlaying();
   cancelAnimationFrame(U.raf);
   const tick = () => {
     if(!E.pb) return;
     const t = E.now();
-    if(!tabHidden('play')){ drawStage(t); drawRoll(U.shown, t); drawTuner(tunerPair(U.shown, t)); }
+    if(!tabHidden('play')){ drawStage(t); drawRoll(U.shown, t); }
     if(t > U.shown.total + 0.8){
       const p = E.pb; E.pb = null; p.finish();
       endPlay(true);
@@ -146,7 +144,7 @@ function endPlay(natural = false){
   U.playing = false;
   nativePost({type: 'playing', on: false});
   cancelAnimationFrame(U.raf);
-  $('#btnStop').disabled = true;
+  $('#btnStop').hidden = true; $('#btnNow').hidden = false;
   setNowPlaying();
   drawIdle();
   const cb = U.onEnd; U.onEnd = null;
@@ -172,7 +170,7 @@ function stageGeom(W){
   return {W, H, cx: W / 2, baseY: H - 28, R, r: clamp(R * 0.038, 6, 13)};
 }
 const seatXY = (s, G) => [G.cx + s.x * G.R, G.baseY - s.y * G.R * 0.95];
-// 席ごとに音を並べておく（ラボや昔の録音でも、座っていた席が光るように）
+// 席ごとに音を並べておく（昔の録音やお手本でも、座っていた席が光るように）
 function buildPtr(perf){
   const m = {};
   for(const n of perf.notes) (m[n.seat] ||= {mid: n.mid, notes: [], hits: [], i: 0, j: 0}).notes.push(n);
@@ -294,11 +292,13 @@ function drawRoll(perf, t = -1){
       g.fillStyle = C.soft; g.textAlign = 'left'; g.fillText(NAME_DE[m % 12] + (m % 12 === 0 ? Math.floor(m / 12) - 1 : ''), 2, Y(m));
     }
   }
+  const barW = (W - L - Rm) / Math.max(1, perf.bars.length), every = barW >= 18 ? 1 : barW >= 9 ? 2 : barW >= 4.5 ? 4 : 8;
   perf.bars.forEach((s, i) => {
     const x = Math.round(X(s)) + .5;
     g.strokeStyle = C.rule;
     g.beginPath(); g.moveTo(x, MA.y - 6); g.lineTo(x, DY.y + DY.h); g.stroke();
-    if(i < perf.bars.length - 1){ g.fillStyle = C.soft; g.textAlign = 'left'; g.fillText(String(Math.round(perf.from / 4) + i + 1), x + 3, MA.y - 11); }
+    const no = Math.round(perf.from / 4) + i + 1;
+    if(i < perf.bars.length - 1 && (no === 1 || no % every === 0)){ g.fillStyle = C.soft; g.textAlign = 'left'; g.fillText(String(no), x + 3, MA.y - 11); }
   });
   g.fillStyle = C.soft; g.textAlign = 'left'; g.fillText('抑揚', 2, DY.y + 8);
   g.strokeStyle = C.rule; g.beginPath(); g.moveTo(L, DY.y + DY.h + .5); g.lineTo(W - Rm, DY.y + DY.h + .5); g.stroke();
@@ -315,7 +315,7 @@ function drawRoll(perf, t = -1){
       const x0 = X(perf.b2t(a)), x1 = X(perf.b2t(b)), v = rd[i];
       if(v < 85){ g.fillStyle = v < 50 ? C.bad : C.warn; g.globalAlpha = 0.06 + 0.12 * (1 - v / 85); g.fillRect(x0, MA.y - 2, x1 - x0, MA.h + 4); }
       g.globalAlpha = 1; g.fillStyle = v < 50 ? C.bad : v < 85 ? C.warn : C.soft;
-      g.fillText(`${sp.name} 譜読み${Math.round(v)}`, x0 + 4, MA.y + 8);
+      if(x1 - x0 > 40) g.fillText(x1 - x0 > 110 ? `${spanShort(sp)} 譜読み${Math.round(v)}` : `譜読み${Math.round(v)}`, x0 + 4, MA.y + 8);
     });
     g.globalAlpha = 1;
   }
@@ -369,76 +369,10 @@ function rrect(g, x, y, w, h, r){
   g.arcTo(x, y + h, x, y, r); g.arcTo(x, y, x + w, y, r); g.closePath();
 }
 
-/* ===== チューナー ===== */
-function centsAt(n, x){
-  if(n.crack && x < n.crackDur + 0.02) return n.cents + n.crack;
-  const x0 = n.crack ? n.crackDur + 0.02 : 0;
-  const from = n.cents + (n.crack ? n.scoop * 0.4 : n.scoop);
-  const xs = x0 + n.settle;
-  let v = x < xs ? from + (n.cents - from) * (x - x0) / n.settle : n.cents;
-  if(Math.abs(n.sag) > 3 && n.d > 0.5){ if(x > n.d * 0.85) v = n.cents + n.sag; else if(x > n.d * 0.6) v = n.cents + n.sag * 0.45; }
-  if(n.vib > 0.5 && n.d > 0.6){ const on = Math.min(0.35, n.d * 0.3); if(x > on) v += n.vib * Math.min(1, (x - on) / 0.4) * Math.sin(2 * Math.PI * 5.2 * x); }
-  return v;
-}
-function tunerPair(perf, t){
-  if(!perf || t < 0) return null;
-  const act = viewNotes(perf).filter(n => t >= n.t && t < n.t + n.d);
-  if(!act.length) return null;
-  const groups = {};
-  for(const n of act) (groups[n.midi] ||= []).push(n);
-  const best = Object.values(groups).sort((a, b) => b.length - a.length)[0];
-  const n1 = best[0], n2 = best.find(n => n.mid !== n1.mid);
-  return {n1, n2, c1: centsAt(n1, t - n1.t), c2: n2 ? centsAt(n2, t - n2.t) : null};
-}
-function drawTuner(a){
-  const {g, W, H} = fitCanvas($('#tuner'), 124);
-  const C = tok();
-  const cx = W / 2, cy = H - 10, R = Math.min(W / 2 - 34, H - 30);
-  const ang = c => (-90 + clamp(c, -50, 50) * 0.9) * Math.PI / 180;
-  for(let c = -50; c <= 50; c += 5){
-    const a = ang(c), r0 = R - (c % 10 === 0 ? 12 : 6);
-    g.strokeStyle = c === 0 ? C.lcdInk : C.lcdDim; g.lineWidth = c === 0 ? 2 : 1.2;
-    g.beginPath(); g.moveTo(cx + Math.cos(a) * r0, cy + Math.sin(a) * r0); g.lineTo(cx + Math.cos(a) * R, cy + Math.sin(a) * R); g.stroke();
-  }
-  g.fillStyle = C.lcdDim; g.font = `11px ${C.fLcd}`; g.textAlign = 'center'; g.textBaseline = 'middle';
-  for(const c of [-50, 50]){ const a = ang(c); g.fillText(c > 0 ? '+50' : '-50', cx + Math.cos(a) * (R + 14), cy + Math.sin(a) * (R + 14) + 4); }
-  g.fillText('0', cx, cy - R - 10);
-  const needle = (c, width, len, alpha) => {
-    const a = ang(c ?? 0);
-    g.globalAlpha = c == null ? 0.25 : alpha;
-    g.strokeStyle = C.lcdInk; g.lineWidth = width; g.lineCap = 'round';
-    g.beginPath(); g.moveTo(cx, cy); g.lineTo(cx + Math.cos(a) * len, cy + Math.sin(a) * len); g.stroke();
-    g.globalAlpha = 1;
-  };
-  needle(a?.c2, 1.5, R * 0.86, 0.75);
-  needle(a?.c1, 3, R - 2, 1);
-  g.fillStyle = C.lcdInk; g.beginPath(); g.arc(cx, cy, 4, 0, Math.PI * 2); g.fill();
-  const midi = a?.n1?.midi;
-  g.textAlign = 'left';
-  g.font = `30px ${C.fLcd}`; g.fillStyle = a ? C.lcdInk : C.lcdDim;
-  g.fillText(midi != null ? NAME_DE[midi % 12] : 'B', 10, 26);
-  g.font = `11px ${C.fLcd}`; g.fillText('A4=442Hz', 10, 50);
-  const fmt = c => c == null ? '  --' : `${c >= 0 ? '+' : '-'}${String(Math.round(Math.abs(c))).padStart(3, ' ')}`;
-  const who = n => n ? (memberById(n.mid)?.name.split(' ')[0] || INST[n.inst].short) : '';
-  g.textAlign = 'right'; g.font = `14px ${C.fLcd}`; g.fillStyle = C.lcdInk;
-  g.fillText(`${fmt(a?.c1)}c`, W - 10, 18);
-  g.fillText(`${fmt(a?.c2)}c`, W - 10, 36);
-  g.font = `500 11px ${C.fBody}`;
-  g.fillText(a ? `${who(a.n1)}${a.n2 ? '・' + who(a.n2) : ''}` : '', W - 64, 27);
-  let beat = '';
-  if(a?.n1 && a?.n2){
-    const f = mtof(a.n1.midi);
-    const hz = Math.abs(f * Math.pow(2, a.c1 / 1200) - f * Math.pow(2, a.c2 / 1200));
-    beat = hz < 0.8 ? 'うなり ほぼなし' : `うなり ${hz.toFixed(1)}回/秒`;
-  }
-  g.font = `500 12px ${C.fBody}`;
-  g.fillText(beat, W - 10, 56);
-}
 function drawIdle(){
   if(U.playing) return;
   drawStage(-1);
   drawRoll(U.shown, -1);
-  drawTuner(null);
 }
 
 /* ===== 上部：カレンダー・曲・会場 ===== */
@@ -451,6 +385,7 @@ function seasonEnd(){
 }
 function renderHeader(){
   $('#school').textContent = `県立みなと高校 吹奏楽部　${S.year}年度`;
+  $('.lede').hidden = !(foundingYear(S) && S.phase === 'choose');
   const ol = $('#cal');
   ol.innerHTML = '';
   const last = seasonEnd();
@@ -476,24 +411,20 @@ function renderHeader(){
 }
 function renderPiece(){
   const pid = playPiece(), pc = PIECES[pid];
-  $('#pieceEyebrow').textContent = S.phase === 'choose' ? '試しに聴く曲' : pid === S.pieceId ? (S.finalWeek ? '定期演奏会の曲' : '自由曲') : 'もう1曲（初見で吹いてみる）';
+  $('#pieceEyebrow').textContent = S.phase === 'choose' || pid !== S.pieceId ? '試しに聴く曲' : S.finalWeek ? '定期演奏会の曲' : '自由曲';
   $('#piece').textContent = pc.full;
-  $('#pieceMeta').textContent = `${pc.composer}｜${pc.key}｜${tempoLabel(pc, S.interp.tempo)}｜問われる力：${pc.asks}`;
-  $('#pieceSel').innerHTML = PIECE_IDS.map(id => `<button type="button" data-piece="${id}" aria-pressed="${id === pid}">${PIECES[id].title}</button>`).join('');
+  $('#pieceMeta').textContent = `${pc.composer}｜問われる力：${pc.asks}`;
   const rd = pid === S.pieceId && S.phase !== 'choose' ? spanReadAvg(S, pid) : null;
   $('#rangeSel').innerHTML = `<option value="all">全部</option>` + pc.spans.map((sp, i) => `<option value="${i}">${sp.name}${rd ? `（譜読み${Math.round(rd[i])}）` : ''}</option>`).join('');
   $('#rangeSel').value = U.range;
 }
 function renderVenues(){
-  $('#venueSel').innerHTML = VENUES.map(v => `<button type="button" data-venue="${v.id}" aria-pressed="${v.id === U.venue}">${v.name}</button>`).join('');
-  const v = VENUE[U.venue];
-  $('#venueDesc').innerHTML = `<b>${v.name}</b>（${v.size}・${v.rt < 0.2 ? '響きはほとんどない' : `残響 約${v.rt.toFixed(1)}秒`}）${v.desc}`;
-  $('#posSel').innerHTML = POSITIONS.map(p => `<option value="${p.id}">${p.name}</option>`).join('');
-  $('#posSel').value = U.pos;
+  $('#venueSel').innerHTML = VENUES.map(v => `<option value="${v.id}">${v.name}</option>`).join('');
+  $('#venueSel').value = U.venue;
 }
 function renderSelectors(){
   const recs = S.recs.slice().reverse();
-  $('#recSel').innerHTML = recs.length ? recs.map(r => `<option value="${r.id}">${esc(r.label)}（${VENUE[r.venue].name}）</option>`).join('') : '<option value="">録音はまだない</option>';
+  $('#recSel').innerHTML = recs.length ? recs.map(r => `<option value="${r.id}">${esc(r.label)}</option>`).join('') : '<option value="">録音はまだない</option>';
   $('#btnRec').disabled = !recs.length;
   $('#btnSave').disabled = !recs.length;
   const sel = U.sel && memberById(U.sel);
@@ -501,9 +432,8 @@ function renderSelectors(){
     + (sel ? `<option value="member:${sel.id}">${esc(sel.name)}だけ</option>` : '');
   if(![...$('#soloSel').options].some(o => o.value === U.solo)) U.solo = 'all';
   $('#soloSel').value = U.solo;
-  $('#viewSel').innerHTML = `<option value="mel">旋律（メロディを吹いている全員）</option>` + SECTIONS.map(s => `<option value="${s.id}">${s.name}パート</option>`).join('');
+  $('#viewSel').innerHTML = `<option value="mel">旋律を吹いている部員</option>` + SECTIONS.map(s => `<option value="${s.id}">${s.name}パート</option>`).join('');
   $('#viewSel').value = U.view;
-  $('#viewTitle').textContent = U.view === 'mel' ? '旋律を吹いている部員の音' : `${SEC[U.view].name}パートの音`;
 }
 function applySolo(){
   const [type, id] = U.solo.split(':');
@@ -512,39 +442,37 @@ function applySolo(){
 
 /* ===== ホワイトボード ===== */
 function statRow(name, v, desc, delta, cls){
-  return `<div class="stat"><span class="nm">${name}</span><span class="track"><span class="fill${cls ? ' ' + cls : ''}" style="width:${clamp(v, 0, 100)}%"></span></span><span class="val">${Math.round(v)}</span><span class="ds">${desc}${delta ? `<span class="delta">+${delta}</span>` : ''}</span></div>`;
+  const up = delta ? `<span class="delta">+${delta}</span>` : '';
+  return `<div class="stat"><span class="nm">${name}${desc ? '' : up}</span><span class="track"><span class="fill${cls ? ' ' + cls : ''}" style="width:${clamp(v, 0, 100)}%"></span></span><span class="val">${Math.round(v)}</span>${desc ? `<span class="ds">${desc}${up}</span>` : ''}</div>`;
 }
+const helpBox = (rows, open) => `<details class="help"${open ? ' open' : ''}><summary>数字の見かた</summary><dl>${rows.map(([k, v]) => `<dt>${k}</dt><dd>${v}</dd>`).join('')}</dl></details>`;
 function renderStats(){
   const ms = seated(S);
   $('#memberCount').textContent = `${S.members.length}人${S.members.length > ms.length ? `（控え${S.members.length - ms.length}人）` : ''}／${SEATS.length}席`;
   const d = S.lastDelta || {};
   const pid = S.pieceId || playPiece();
-  $('#stats').innerHTML = STAT_KEYS.map(k => statRow(STAT_LABEL[k], bandAvg(S, k), STAT_DESC[k], d[k] > 0 ? d[k].toFixed(1) : '')).join('')
-    + statRow('まとまり', S.cohesion, '互いを聴き合う力。合奏に出る人が多いほど育つ', d.coh > 0 ? d.coh.toFixed(1) : '')
-    + statRow('仕上がり', S.fam[pid] ?? 0, `${PIECES[pid].title}の合奏での曲づくり。低いとテンポの揺れがそろわない`, d.fam > 0 ? d.fam.toFixed(1) : '')
-    + statRow('譜読み', readAvg(S, pid), `一人ひとりが${PIECES[pid].title}の自分の楽譜をどれだけ吹けるか（平均）。低いと音を間違え、歌いきれず、出だしが揺れる`, d.read > 0 ? d.read.toFixed(1) : '');
+  const up = v => v > 0 ? v.toFixed(1) : '';
+  $('#stats').innerHTML = STAT_KEYS.map(k => statRow(STAT_LABEL[k], bandAvg(S, k), '', up(d[k]))).join('')
+    + statRow('まとまり', S.cohesion, '', up(d.coh))
+    + (S.pieceId ? statRow('仕上がり', S.fam[pid] ?? 0, '', up(d.fam)) + statRow('譜読み', readAvg(S, pid), '', up(d.read)) : '');
   const vital = (nm, v) => {
     const c = v >= 60 ? 'good' : v >= 30 ? 'warn' : 'bad';
     return `<div class="vital"><span class="row"><span>${nm}</span><b>${Math.round(v)}</b></span><span class="track"><span class="fill ${c}" style="width:${clamp(v, 0, 100)}%"></span></span></div>`;
   };
-  const nx = nextRepStep(S);
+  const nx = nextRepStep(S), helpOpen = $('#vitals .help')?.open;
   $('#vitals').innerHTML = vital('体力', S.stamina) + vital('やる気', S.morale) + vital('会場慣れ', S.hallExp)
-    + `<div class="vital rep"><span class="row"><span>評判</span><b>${Math.round(S.rep ?? 0)}</b></span><span class="track"><span class="fill" style="width:${clamp(S.rep ?? 0, 0, 100)}%"></span></span><small>${nx ? `${nx}をこえると、入部したい生徒が来る` : '県内に知られた部'}</small></div>`;
+    + `<div class="vital rep"><span class="row"><span>評判</span><b>${Math.round(S.rep ?? 0)}</b></span><span class="track"><span class="fill" style="width:${clamp(S.rep ?? 0, 0, 100)}%"></span></span><small>${nx ? `${nx}をこえると、入部したい生徒が来る` : '県内に知られた部'}</small></div>`
+    + helpBox([...STAT_KEYS.map(k => [STAT_LABEL[k], STAT_DESC[k]]), ['まとまり', '互いを聴き合う力。合奏に出る人が多いほど育つ'],
+      ['仕上がり', '自由曲の合奏での曲づくり。低いとテンポの揺れがそろわない'], ['譜読み', '一人ひとりが自分の楽譜をどれだけ吹けるか（平均）。低いと音を間違え、出だしが揺れる'],
+      ['会場慣れ', 'ホールで吹いた経験。高いほど、大きな会場で緊張しにくい'], ['評判', '演奏会やコンクールで上がる。上がるほど入部したい生徒が来る']], helpOpen);
 }
 function renderDiag(){
   const a = U.diag;
   $('#diagVenue').textContent = `${VENUE[U.venue].name}・${PIECES[playPiece()].title}`;
   if(!a){ $('#diag').innerHTML = ''; return; }
-  const desc = {
-    pitch: `平均のずれ ${a.pitchDev.toFixed(1)}セント・ユニゾンのばらつき ${a.spread.toFixed(1)}`,
-    rhythm: `出だしのずれ 平均${Math.round(a.rhythmMs)}ミリ秒・テンポの流れ ${(a.drift * 100).toFixed(1)}%`,
-    tone: `音の裏返り ${a.cracks}回`,
-    expr: '強弱とテンポの揺れが、指揮者の解釈どおりに出ているか',
-    balance: `旋律と伴奏の音量差 ${a.balanceDb >= 0 ? '+' : ''}${a.balanceDb.toFixed(1)}dB`,
-  };
   $('#diag').innerHTML = Object.keys(DIM_LABEL).map(k => {
     const v = a.score[k], c = v >= 70 ? 'good' : v >= 45 ? 'warn' : 'bad';
-    return statRow(DIM_LABEL[k], v, desc[k], '', c);
+    return statRow(DIM_LABEL[k], v, k === 'tone' && a.cracks ? `音の裏返り ${a.cracks}回` : '', '', c);
   }).join('');
   const dims = Object.keys(DIM_LABEL);
   const weak = dims.reduce((x, y) => a.score[x] <= a.score[y] ? x : y);
@@ -578,12 +506,12 @@ function renderWeek(){
   const w = $('#week'), ev = eventAt(S, S.week);
   const head = $('#h-week');
   if(recruitsDue(S) && !S.pending){
-    head.textContent = S.phase === 'choose' ? (foundingYear(S) && !S.members.length ? '最初の部員' : '新しい部員') : `${wkLabel(S.week)}`;
+    head.textContent = S.phase === 'choose' && foundingYear(S) && !S.members.length ? '最初の部員' : '新しい部員';
     return renderAssign(w, ev);
   }
   if(S.phase === 'choose'){
     head.textContent = '選曲会議';
-    w.innerHTML = `<p class="small">コンクールの自由曲を決めよう。「お手本」は全員がうまい部がホールで吹いた音、「いまの部で」はいまの部員がまだ譜読みをしていない状態で吹いた音。</p>`
+    w.innerHTML = `<p class="small">コンクールの自由曲を決めよう。「お手本」は全員がうまい部の演奏、「いまの部で」はいまの部員が初めて吹いた音。</p>`
       + PIECE_IDS.map(id => { const pc = PIECES[id]; return `<div class="pcard"><h3>${pc.full}</h3><p>${pc.composer}｜${pc.key}｜問われる力：${pc.asks}</p><p>${pc.desc}</p><div class="row">${listenBtns(id)}<button class="btn small primary" type="button" data-act="choose" data-pid="${id}">この曲に決める</button></div></div>`; }).join('');
     return;
   }
@@ -602,7 +530,9 @@ function renderWeek(){
       <div class="transport"><button class="btn primary" type="button" data-act="newyear">次の年度へ</button></div>`;
     return;
   }
-  head.textContent = `${wkLabel(S.week)}`;
+  const stage = ev?.kind === 'contest' ? 'コンクール' : '本番';
+  head.textContent = S.pending ? stage : U.lineup || (ev?.kind === 'audition' && S.audition?.y === S.year && !S.audition.decided) ? 'オーディション'
+    : ev?.kind === 'concert' || ev?.kind === 'contest' ? stage : ev?.kind === 'forced' ? ev.title : S.chooseFinal ? '定期演奏会の曲' : episodeView(S) ? 'できごと' : '今週の練習';
   if(S.pending) return renderStageResult(w, ev);
   // オーディション：その週に入ったら、メンバーを決めるまで先へ進めない（コンクールの前に見直すこともできる）
   if(U.lineup || (ev?.kind === 'audition' && S.audition?.y === S.year && !S.audition.decided)) return renderAudition(w, ev);
@@ -641,7 +571,7 @@ function renderWeek(){
   }
   if(S.lastEpisode) parts.push(`<p class="epres"><b>${esc(S.lastEpisode.choice)}</b>${esc(S.lastEpisode.result)}</p>`);
   parts.push(planHtml(ev));
-  if(!tuneDone(S)) parts.push(`<div class="tgrow"><button class="btn small" type="button" data-act="tunegame">♪ 耳でチューニング</button><span class="small">部員の音とチューナーの音のうなりを聴いて合わせる（週に1回・合わせた部員の音程が上がる）</span></div>`);
+  if(!tuneDone(S)) parts.push(`<div class="tgrow"><button class="btn small" type="button" data-act="tunegame">♪ 耳でチューニング</button><span class="small">週に1回。合わせた部員の音程が上がる</span></div>`);
   w.innerHTML = parts.join('');
 }
 // 新しく入った部員の担当を決める（部をつくった最初の5人・本入部の1年生・途中から入ってきた部員）
@@ -745,7 +675,7 @@ function planHtml(ev){
   const sum = MENU.filter(m => count[m.id]).map(m => `${m.name} ${count[m.id]}人`).join('・');
   const tutti = (count.tutti || 0) + (count.hall || 0);
   return `<div class="plan">
-    <p class="small">部員ひとりずつに今週の練習を指示する。「方針どおり」のままにすると、その人の方針で自分の練習を決める。合奏は出た人が多いほど、部のまとまりと曲の仕上がりが伸びる。</p>
+    ${foundingYear(S) && S.week < 4 ? '<p class="small">部員ひとりずつに今週の練習を指示する。「方針どおり」のままにすると、その人の方針で自分の練習を決める。合奏は出た人が多いほど、部のまとまりと曲の仕上がりが伸びる。</p>' : ''}
     <div class="focus"><span>全員の方針をまとめて変える</span><div class="chips">${POLICIES.map(p => `<button class="chip" type="button" data-polall="${p.id}" aria-pressed="${allPol === p.id}" title="${esc(p.desc)}">${p.name}</button>`).join('')}</div>
     <span class="small">${allPol ? `${POLICY_BY[allPol].name}：${POLICY_BY[allPol].desc}` : '方針は部員ごとにちがう。'}</span></div>
     <ul class="plist">${rows}</ul>
@@ -865,6 +795,12 @@ function memberStory(m){
   return `<div class="mc-story">${g ? `<p class="small">${ymLabel(m.first.y, m.first.w)}${m.first.y === m.joined ? 'の入部' : 'に日誌をつけ始めて'}から：${g}</p>` : ''}
     ${st.length ? `<ul>${st.map(x => `<li><time>${ymLabel(x.y, x.w)}</time>${esc(x.t)}</li>`).join('')}</ul>` : ''}</div>`;
 }
+// 部員カードは、押したところ（合奏のステージか、部員の名簿）の近くに出す
+function placeCard(where){
+  const card = $('#memberCard');
+  if(where === 'roster') $('.roster').insertBefore(card, $('.roster .sec-grid'));
+  else $('.col-stage').appendChild(card);
+}
 function renderMemberCard(){
   const card = $('#memberCard');
   const m = U.sel && memberById(U.sel);
@@ -876,17 +812,14 @@ function renderMemberCard(){
     const o = S.members.find(x => x.seat === s.id);
     return `<option value="${s.id}">${PART_LABEL[s.part]}${o ? `（${esc(o.name)}と交代）` : '（空席）'}</option>`;
   }).join('');
-  card.innerHTML = `<div class="mc-head"><h3>${esc(m.name)}</h3>${m.title ? `<span class="tag">${m.title}</span>` : ''}<span class="sub">${m.grade}年・${seat ? PART_LABEL[seat.part] : '控え（席なし）'}</span></div>
+  card.innerHTML = `<div class="mc-head"><h3>${esc(m.name)}</h3>${m.title ? `<span class="tag">${m.title}</span>` : ''}<span class="sub">${m.grade}年・${seat ? PART_LABEL[seat.part] : '控え（席なし）'}</span><button class="link mc-close" type="button" data-mact="close">閉じる</button></div>
     ${tr ? `<p class="mc-trait">癖：${tr.name}。${tr.desc}</p>` : '<p class="mc-trait">目立った癖はない。</p>'}
-    <div class="stats">${STAT_KEYS.map(k => statRow(STAT_LABEL[k], m.stats[k], STAT_DESC[k], '')).join('')}${S.pieceId ? `<p class="mc-sub">譜読み（${PIECES[S.pieceId].title}）：自分の楽譜を区間ごとにどれだけ吹けるか。曲の個人練習でいちばん伸びる</p>`
-      + readUnits(S.pieceId).map(u => statRow(spanShort(u), readOf(m, S.pieceId)[u.i], u.name !== spanShort(u) ? u.name : '', '')).join('') : ''}${m.mental != null ? statRow('本番の強さ', m.mental, '本番で実力を出しきれるか。弱いと日によって大きくぶれる。場数を踏むと強くなる', '', 'warn') : ''}</div>
+    <div class="stats">${STAT_KEYS.map(k => statRow(STAT_LABEL[k], m.stats[k], '', '')).join('')}${m.mental != null ? statRow('本番の強さ', m.mental, '', '', 'warn') : ''}${S.pieceId ? `<p class="mc-sub">譜読み（${PIECES[S.pieceId].title}）</p>`
+      + readUnits(S.pieceId).map(u => statRow(spanShort(u), readOf(m, S.pieceId)[u.i], '', '')).join('') : ''}</div>
     ${memberStory(m)}
-    <div class="mc-actions">
-      ${seat ? `<button class="btn small" type="button" data-mact="solo">この人だけ聴く</button><button class="btn small" type="button" data-mact="secsolo">パートだけ聴く</button>` : ''}
-      <button class="btn small quiet" type="button" data-mact="all">全員で聴く</button>
-    </div>
-    <div class="mc-actions"><label class="small" for="moveSel">席を移す</label><select id="moveSel"><option value="">控え（席なし）</option>${seats}</select><button class="btn small" type="button" data-mact="move"${busy() ? ' disabled' : ''}>移す</button></div>
-    <p class="small">楽器が変わると、その楽器での音程と音色は基礎からやり直しになる。</p>`;
+    ${seat ? `<div class="mc-actions"><button class="btn small" type="button" data-mact="solo">▶ この人だけ聴く</button><button class="btn small" type="button" data-mact="secsolo">▶ パートだけ聴く</button>${U.solo !== 'all' ? '<button class="btn small quiet" type="button" data-mact="all">全員の音にもどす</button>' : ''}</div>` : ''}
+    <details class="mc-move"><summary>席を移す</summary><div class="mc-actions"><select id="moveSel" aria-label="移す先"><option value="">控え（席なし）</option>${seats}</select><button class="btn small" type="button" data-mact="move"${busy() ? ' disabled' : ''}>移す</button></div>
+    <p class="small">楽器が変わると、その楽器での音程と音色は基礎からやり直しになる。</p></details>`;
 }
 function renderRoster(){
   $('#secGrid').innerHTML = SECTIONS.map(s => {
@@ -894,57 +827,34 @@ function renderRoster(){
     const av = k => ms.length ? ms.reduce((a, m) => a + m.stats[k], 0) / ms.length : 0;
     return `<button class="sec-tile" type="button" data-sec="${s.id}" aria-pressed="${U.view === s.id}"><b>${s.name}</b>
       <span class="bars">${STAT_KEYS.map(k => `<i title="${STAT_LABEL[k]} ${Math.round(av(k))}"><span style="height:${av(k)}%"></span></i>`).join('')}</span>
-      <small>${ms.length}/${seats}人・音程 リズム 音色 表現</small></button>`;
+      <small>${ms.length}/${seats}人</small></button>`;
   }).join('');
   const rows = [];
   for(const sec of SECTIONS){
-    rows.push(`<tr class="sec-row"><td colspan="8">${sec.name}</td></tr>`);
-    for(const s of SEATS.filter(x => x.sec === sec.id)){
-      const m = S.members.find(x => x.seat === s.id);
-      if(!m){ rows.push(`<tr class="empty"><td>空席</td><td></td><td>${PART_LABEL[s.part]}</td><td colspan="5"></td></tr>`); continue; }
-      rows.push(memberRow(m, PART_LABEL[s.part]));
-    }
+    const ms = SEATS.filter(x => x.sec === sec.id).map(s => [s, S.members.find(x => x.seat === s.id)]).filter(([, m]) => m);
+    if(!ms.length) continue;
+    rows.push(`<tr class="sec-row"><td colspan="5">${sec.name}</td></tr>`);
+    for(const [s, m] of ms) rows.push(memberRow(m, PART_LABEL[s.part]));
   }
   const bench = S.members.filter(m => !m.seat);
   if(bench.length){
-    rows.push(`<tr class="sec-row"><td colspan="8">控え</td></tr>`);
+    rows.push(`<tr class="sec-row"><td colspan="5">控え</td></tr>`);
     for(const m of bench) rows.push(memberRow(m, '席なし'));
   }
-  $('#rosterTable').innerHTML = `<thead><tr><th>名前</th><th>学年</th><th>担当</th><th>音程</th><th>リズム</th><th>音色</th><th>表現</th><th>癖</th></tr></thead><tbody>${rows.join('')}</tbody>`;
+  $('#rosterTable').innerHTML = `<thead><tr><th>名前</th>${STAT_KEYS.map(k => `<th class="num">${STAT_LABEL[k]}</th>`).join('')}</tr></thead><tbody>${rows.join('') || '<tr class="empty"><td colspan="5">部員はまだいない</td></tr>'}</tbody>`;
 }
 function memberRow(m, part){
   const C = tok();
-  return `<tr class="mem${U.sel === m.id ? ' sel' : ''}" data-mid="${m.id}"><td>${esc(m.name)}${m.title ? ` <span class="tag">${m.title}</span>` : ''}</td><td>${m.grade}年</td><td>${part}${m.out && m.seat ? '<small>（コンクール控え）</small>' : ''}</td>`
-    + STAT_KEYS.map(k => `<td class="num" style="color:${skillColor(C, m.stats[k])}">${Math.round(m.stats[k])}</td>`).join('')
-    + `<td>${m.trait ? TRAITS[m.trait].name : ''}</td></tr>`;
+  const sub = [`${m.grade}年`, part + (m.out && m.seat ? '（コンクール控え）' : ''), m.trait ? TRAITS[m.trait].name : ''].filter(Boolean).join('・');
+  return `<tr class="mem${U.sel === m.id ? ' sel' : ''}" data-mid="${m.id}"><td><b>${esc(m.name)}</b>${m.title ? ` <span class="tag">${m.title}</span>` : ''}<small>${sub}</small></td>`
+    + STAT_KEYS.map(k => `<td class="num" style="color:${skillColor(C, m.stats[k])}">${Math.round(m.stats[k])}</td>`).join('') + '</tr>';
 }
 
-/* ===== ラボ ===== */
-const LAB_PRESETS = [
-  {name: '入部直後', st: {pitch: 12, rhythm: 18, tone: 10, expr: 4, cohesion: 15, fam: 10}},
-  {name: '正確だけど棒読み', st: {pitch: 100, rhythm: 100, tone: 100, expr: 0, cohesion: 100, fam: 100}},
-  {name: '気持ちだけ先走り', st: {pitch: 25, rhythm: 30, tone: 35, expr: 90, cohesion: 40, fam: 70}},
-  {name: '金管だけうまい', st: {pitch: 25, rhythm: 30, tone: 25, expr: 30, cohesion: 60, fam: 80}, special: s => ['tp', 'hn', 'tb', 'low'].includes(s.sec) && s.inst !== 'cb' ? 90 : null},
-  {name: '低音が弱い', st: {pitch: 85, rhythm: 85, tone: 85, expr: 80, cohesion: 70, fam: 90}, special: s => s.sec === 'low' ? 15 : null},
-  {name: '全国大会レベル', st: {pitch: 100, rhythm: 100, tone: 100, expr: 100, cohesion: 100, fam: 100}},
-];
-const LAB_KEYS = [['pitch', '音程'], ['rhythm', 'リズム'], ['tone', '音色'], ['expr', '表現'], ['cohesion', 'まとまり'], ['fam', '仕上がり']];
-function renderLab(){
-  $('#presets').innerHTML = LAB_PRESETS.map((p, i) => `<button class="chip" type="button" data-p="${i}" aria-pressed="${U.labPreset === i}">${p.name}</button>`).join('');
-  $('#sliders').innerHTML = LAB_KEYS.map(([k, nm]) => `<div class="sl"><label for="lab-${k}">${nm}<output id="out-${k}" for="lab-${k}">${U.lab[k]}</output></label><input type="range" id="lab-${k}" min="0" max="100" step="1" value="${U.lab[k]}"></div>`).join('');
-}
 // 曲を選ぶときのお手本：全員の能力・譜読み・まとまりが100の部が、ホールでふつうの解釈で吹いた演奏
 function modelPerf(pid){
   return perform({members: fullBand({pitch: 100, rhythm: 100, tone: 100, expr: 100}), pieceId: pid, cohesion: 100, fam: 100, interp: {tempo: 1, dyn: 1, rub: 1}, venue: 'hall', seed: 'band'});
 }
 const listenBtns = id => `<button class="btn small" type="button" data-act="model" data-pid="${id}">▶ お手本を聴く</button><button class="btn small" type="button" data-act="preview" data-pid="${id}">▶ いまの部で聴く</button>`;
-function labPerf(){
-  const pid = playPiece(), span = rangeSpan(pid);
-  const pre = LAB_PRESETS[U.labPreset];
-  const members = fullBand({pitch: U.lab.pitch, rhythm: U.lab.rhythm, tone: U.lab.tone, expr: U.lab.expr});
-  if(pre?.special) for(const m of members){ const v = pre.special(SEAT[m.seat]); if(v != null) for(const k of STAT_KEYS) m.stats[k] = v; }
-  return perform({members, pieceId: pid, cohesion: U.lab.cohesion, fam: U.lab.fam, interp: S.interp, venue: U.venue, from: span.from, to: span.to, seed: 'band'});
-}
 
 /* ===== まとめて描く ===== */
 function renderAll(){
@@ -1004,25 +914,9 @@ function bind(){
   });
   $('#btnRec').addEventListener('click', () => playRec($('#recSel').value));
   $('#btnStop').addEventListener('click', stopPlay);
-  $('#sndSel').addEventListener('click', e => {
-    const b = e.target.closest('[data-snd]'); if(!b) return;
-    SAMPLES.use = b.dataset.snd === 'rec';
-    saveUI(); renderSnd();
-  });
-  $('#btnLab').addEventListener('click', () => {
-    const pre = LAB_PRESETS[U.labPreset];
-    playPerf(labPerf(), `ラボ：${pre ? pre.name : `音程${U.lab.pitch}・リズム${U.lab.rhythm}・音色${U.lab.tone}・表現${U.lab.expr}`}（${VENUE[U.venue].name}）`);
-  });
-  $('#pieceSel').addEventListener('click', e => {
-    const b = e.target.closest('[data-piece]'); if(!b) return;
-    U.piece = b.dataset.piece === S.pieceId ? null : b.dataset.piece;
-    U.range = 'all';
-    renderPiece(); renderInterp(); renderStats(); refreshNow();
-  });
-  $('#venueSel').addEventListener('click', e => { const b = e.target.closest('[data-venue]'); if(b) setVenue(b.dataset.venue); });
-  $('#posSel').addEventListener('change', e => { U.pos = e.target.value; saveUI(); E.setPosition(U.pos); });
+  $('#venueSel').addEventListener('change', e => setVenue(e.target.value));
   $('#rangeSel').addEventListener('change', e => { U.range = e.target.value; refreshNow(); });
-  $('#soloSel').addEventListener('change', e => { U.solo = e.target.value; applySolo(); });
+  $('#soloSel').addEventListener('change', e => { U.solo = e.target.value; applySolo(); renderMemberCard(); });
   $('#viewSel').addEventListener('change', e => { U.view = e.target.value; renderSelectors(); renderRoster(); drawIdle(); if(U.playing) drawRoll(U.shown, E.now()); });
   $('#stage').addEventListener('click', e => {
     const s = seatAt(e);
@@ -1030,6 +924,7 @@ function bind(){
     const m = S.members.find(x => x.seat === s.id);
     U.sel = m ? m.id : null;
     U.view = s.sec;
+    placeCard('stage');
     renderSelectors(); renderMemberCard(); renderRoster(); drawIdle();
     if(m) $('#memberCard').scrollIntoView({block: narrow.matches ? 'start' : 'nearest', behavior: 'smooth'});
   });
@@ -1044,7 +939,7 @@ function bind(){
     U.sel = tr.dataset.mid;
     const m = memberById(U.sel);
     if(m?.seat) U.view = SEAT[m.seat].sec;
-    if(tabHidden('play')) setTab('play');
+    if(narrow.matches) placeCard('roster');
     renderSelectors(); renderMemberCard(); renderRoster(); drawIdle();
     $('#memberCard').scrollIntoView({block: narrow.matches ? 'start' : 'nearest', behavior: 'smooth'});
   });
@@ -1052,9 +947,10 @@ function bind(){
     const b = e.target.closest('[data-mact]'); if(!b) return;
     const m = memberById(U.sel); if(!m) return;
     const act = b.dataset.mact;
-    if(act === 'solo'){ U.solo = `member:${m.id}`; renderSelectors(); applySolo(); if(!U.playing) $('#btnNow').click(); }
-    else if(act === 'secsolo'){ U.solo = `sec:${SEAT[m.seat].sec}`; renderSelectors(); applySolo(); if(!U.playing) $('#btnNow').click(); }
-    else if(act === 'all'){ U.solo = 'all'; renderSelectors(); applySolo(); }
+    if(act === 'close'){ U.sel = null; renderSelectors(); renderMemberCard(); renderRoster(); drawIdle(); return; }
+    if(act === 'solo'){ U.solo = `member:${m.id}`; renderSelectors(); applySolo(); renderMemberCard(); if(!U.playing) $('#btnNow').click(); }
+    else if(act === 'secsolo'){ U.solo = `sec:${SEAT[m.seat].sec}`; renderSelectors(); applySolo(); renderMemberCard(); if(!U.playing) $('#btnNow').click(); }
+    else if(act === 'all'){ U.solo = 'all'; renderSelectors(); applySolo(); renderMemberCard(); }
     else if(act === 'move'){
       commit(moveMember(S, m.id, $('#moveSel').value || null));
       renderAll(); refreshNow();
@@ -1144,20 +1040,6 @@ function bind(){
     S.interp[k] = +i; commit(S);
     renderInterp(); renderPiece(); refreshNow();
   });
-  $('#presets').addEventListener('click', e => {
-    const b = e.target.closest('[data-p]'); if(!b) return;
-    U.labPreset = +b.dataset.p;
-    U.lab = {...LAB_PRESETS[U.labPreset].st};
-    renderLab();
-  });
-  $('#sliders').addEventListener('input', e => {
-    const k = e.target.id.replace('lab-', '');
-    if(!(k in U.lab)) return;
-    U.lab[k] = +e.target.value;
-    $(`#out-${k}`).textContent = U.lab[k];
-    U.labPreset = -1;
-    document.querySelectorAll('#presets .chip').forEach(c => c.setAttribute('aria-pressed', 'false'));
-  });
   const rs = $('#btnReset');
   rs.addEventListener('click', () => {
     if(!rs.classList.contains('armed')){
@@ -1190,7 +1072,7 @@ function start(data){
   S = (data && data.S && data.S.v === 2) ? data.S : (load() || freshState(2026));
   loadUI();
   E.venueId = U.venue; E.posId = U.pos;
-  renderAll(); renderLab();
+  renderAll();
   bind();
   setTab(window.TSUKURIKATA_LAUNCH?.tab || 'week');
   renderSnd();
