@@ -5,22 +5,25 @@
    読み込みが終わるまでは合成音で鳴らす。 */
 
 // 楽器 → 使う録音。shift は「何半音上の録音を下げて使うか」（音色を大きく・暗くする）、lp は明るさの上限（基音の何倍まで）
+// g は録音ごとの音量の差をならす係数。管楽器と弦バスは、5曲を楽器ごとに響きなしで書き出し、
+// 耳に近い重み（K特性）で測った大きさが INST の gain（採点のバランスでも使う大きさ）どおりになるよう合わせてある
 const SAMPLE_BANK = {
-  picc: {bank: 'picc', g: 0.85}, fl: {bank: 'flute', g: 1.0}, ob: {bank: 'oboe', g: 1},
-  fg: {bank: 'bassoon', g: 1.05}, ebcl: {bank: 'clar', g: 1.2}, cl: {bank: 'clar', g: 1.35},
-  bcl: {bank: 'clar', shift: -12, lp: 10, g: 1.75},
+  picc: {bank: 'picc', g: 1.2}, fl: {bank: 'flute', g: 1.04}, ob: {bank: 'oboe', g: 1.01},
+  fg: {bank: 'bassoon', g: 1.13}, ebcl: {bank: 'clar', g: 0.92}, cl: {bank: 'clar', g: 1.04},
+  bcl: {bank: 'clar', shift: -12, lp: 10, g: 1.27},
   // バリトンサックスは、テナーサックスの録音を5度下げて使う
-  asax: {bank: 'sax', g: 0.85}, tsax: {bank: 'tsax', g: 0.85}, bsax: {bank: 'tsax', shift: -7, g: 0.86},
-  tp: {bank: 'tpt', g: 1}, hn: {bank: 'horn', g: 1.33}, tb: {bank: 'tbn', g: 1.1}, btb: {bank: 'tbn', g: 1.1},
-  euph: {bank: 'tbn', lp: 6, g: 1.32}, tuba: {bank: 'tuba', g: 1.35}, cb: {bank: 'cbass', g: 1.3},
-  cbpizz: {bank: 'pizz', g: 1.3}, timp: {bank: 'timp', g: 3.1}, sd: {bank: 'sd', g: 2.9}, bd: {bank: 'bd', g: 2.8},
+  asax: {bank: 'sax', g: 1.07}, tsax: {bank: 'tsax', g: 1.06}, bsax: {bank: 'tsax', shift: -7, g: 1.13},
+  tp: {bank: 'tpt', g: 1.05}, hn: {bank: 'horn', g: 1.08}, tb: {bank: 'tbn', g: 1.11}, btb: {bank: 'tbn', g: 1.1},
+  euph: {bank: 'tbn', lp: 6, g: 1.07}, tuba: {bank: 'tuba', g: 1.04}, cb: {bank: 'cbass', g: 1.11},
+  // 大太鼓は1打がトランペット1音より10dBほど大きく、マーチで全体をおおっていたので下げた。スネアは短い音で埋もれていたので上げた
+  cbpizz: {bank: 'pizz', g: 1.3}, timp: {bank: 'timp', g: 3.1}, sd: {bank: 'sd', g: 4.6}, bd: {bank: 'bd', g: 1.57},
   cym: {bank: 'cym', g: 3.6}, sus: {bank: 'sus', g: 4.3}, tri: {bank: 'tri', g: 8}, tamb: {bank: 'tamb', g: 1.2},
   tamtam: {bank: 'tamtam', g: 1},
   glock: {bank: 'glock', g: 5.3}, xylo: {bank: 'xylo', g: 2.4}, mrb: {bank: 'mrb', g: 2.75}, vib: {bank: 'vib', g: 3}, chime: {bank: 'chime', g: 5.3},
 };
 const SAMPLES = {ready: false, use: true, banks: {}, loading: null, progress: 0, error: null};
 const SAMPLE_TUNE = A4 / 440;   // 録音はA=440Hz
-const SUS_GAIN = 4.2, HIT_GAIN = 1.1;
+const SUS_GAIN = 5, HIT_GAIN = 1.31;
 
 function decodeBuf(ac, ab){
   return new Promise((res, rej) => {

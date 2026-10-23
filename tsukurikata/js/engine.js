@@ -178,15 +178,16 @@ class BeatClock {
   saved(){ const t0 = this.t0; return this.ev.map(e => ({b: +e.b.toFixed(4), t: +(e.t - t0).toFixed(4), P: +e.P.toFixed(4), jolt: +(e.jolt || 0).toFixed(3)})); }
 }
 
-// ステージの奥行き：後ろの列ほど音が遅れて届き、高音が減り、響きの割合が増える。
-// ホルンはベルが後ろを向いているので、こもった間接音が多い
+// ステージの奥行き：後ろの列ほど音が遅れて届き、高音が減り、直接届く音（dir）が小さくなる。
+// 響きの量は席によらず同じにする（響きに送る量を 1 - dir だけ足す）ので、奥の列は少し小さく、響きがちに聞こえる。
+// ホルンはベルが後ろを向いているので、直接届く音が少なく、こもった間接音が多い
 const ROW_DEPTH = [
-  {lp: 0,     delay: 0,      send: 0},
-  {lp: 14000, delay: 0.0015, send: 0.12},
-  {lp: 11000, delay: 0.003,  send: 0.25},
-  {lp: 9500,  delay: 0.0045, send: 0.35},
+  {lp: 0,     delay: 0,      dir: 1},
+  {lp: 14000, delay: 0.0015, dir: 0.93},
+  {lp: 11000, delay: 0.003,  dir: 0.85},
+  {lp: 9500,  delay: 0.0045, dir: 0.8},
 ];
-const HORN_DEPTH = {lp: 5500, delay: 0.002, send: 0.5};
+const HORN_DEPTH = {lp: 5500, delay: 0.002, dir: 0.7};
 
 class Playback {
   constructor(engine, perf, onEnd, opts = {}){
@@ -224,8 +225,11 @@ class Playback {
       if(rd.lp){ const f = ac.createBiquadFilter(); f.type = 'lowpass'; f.frequency.value = rd.lp; f.Q.value = 0.5; node.connect(f); node = f; }
       if(rd.delay){ const d = ac.createDelay(0.05); d.delayTime.value = rd.delay; node.connect(d); node = d; }
       const p = makePan(ac, st.pan * width);
-      node.connect(p); p.connect(this.bus);
-      if(rd.send){ const s = ac.createGain(); s.gain.value = rd.send; p.connect(s); s.connect(this.wet); }
+      node.connect(p);
+      if(rd.dir < 1){
+        const d = ac.createGain(); d.gain.value = rd.dir; p.connect(d); d.connect(this.bus);
+        const s = ac.createGain(); s.gain.value = 1 - rd.dir; p.connect(s); s.connect(this.wet);
+      } else p.connect(this.bus);
       this.mem[mid] = {g, p, seat};
     }
     this.applySolo(engine.solo, true);

@@ -177,8 +177,8 @@ class VenueChain {
     if(ir){
       // 直接音と響きの量の比は計算のまま。全体の大きさは会場・位置によらずそろえる（屋外だけは離れると小さくなる）
       const info = VIR.man.venues[venueId][posId];
-      // 1.4 はステージ奥の列から響きへ多めに送るぶん
-      const g = 1.1 * (v.irLvl ? v.irLvl[posId] : 1) / Math.sqrt(1 + 1.4 * info.mus);
+      // 0.8 は、奥の列ほど直接届く音が小さいぶん（engine.js の ROW_DEPTH の dir の2乗を、全39席で平均したもの）
+      const g = 1.1 * (v.irLvl ? v.irLvl[posId] : 1) / Math.sqrt(0.8 + info.mus);
       st.lp.frequency.value = p.hfIR;
       st.dry.gain.value = g;
       st.wet.gain.value = g * info.wetGain;
