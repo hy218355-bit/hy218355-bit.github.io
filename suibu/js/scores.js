@@ -815,7 +815,12 @@ function reduction(pid, present){
   const wind = [...present].filter(p => instOfPart(p) && instOfPart(p).sec !== 'perc').sort();
   const median = xs => { const v = xs.slice().sort((a, b) => a - b); return v.length ? v[Math.floor(v.length / 2)] : 60; };
   const melMed = median(pc.mel.map(e => e.m)) + pc.trans, bassMed = median(pc.bass.map(e => e.m)) + pc.trans;
-  const shiftTo = (p, med, aim) => 12 * Math.round((instOfPart(p).center + aim - med) / 12);
+  // 代わりに吹く音の高さ：もとの高さのまま楽器の吹きやすい音域に入るなら移さず、入らないときだけオクターブで近い方へ移す
+  const shiftTo = (p, med, lo, hi) => {
+    const r = instOfPart(p).range;
+    for(const sh of [0, 12, -12, 24, -24]) if(med + sh >= r[0] + lo && med + sh <= r[1] - hi) return sh;
+    return 12 * Math.round((instOfPart(p).center - med) / 12);
+  };
   const melBy = bars(), bassBy = bars();
   for(const e of pc.mel) melBy[barOf(e.b)]?.push(e);
   for(const e of pc.bass) bassBy[barOf(e.b)]?.push(e);
@@ -838,21 +843,21 @@ function reduction(pid, present){
     if(need[bar].mel && !has('mel')){
       const p = wind.filter(q => !busy.has(q)).sort(byPref)[0];
       if(p){
-        const sh = shiftTo(p, melMed, 0);
+        const sh = shiftTo(p, melMed, 6, 4);
         give(p, melBy[bar].map(e => ({role: 'mel', sc: ROLE_SCALE.mel, m: e.m + sh, b: e.b, d: e.d, ji: jiOf(e.m + sh, chordAt(pc, e.b)), ...marks(e)})));
       } else miss.mel.push(bar * M);
     }
     if(need[bar].bass && !has('bass')){
       const p = wind.filter(free).sort((a, b) => instOfPart(a).center - instOfPart(b).center)[0];
       if(p){
-        const sh = shiftTo(p, bassMed, -6);
+        const sh = shiftTo(p, bassMed, 2, 8);
         give(p, bassBy[bar].map(e => ({role: 'bass', sc: ROLE_SCALE.bass, m: e.m + sh, b: e.b, d: e.d, ji: jiOf(e.m, chordAt(pc, e.b)), ...marks(e)})));
       } else if(!wind.length) miss.bass.push(bar * M);
     }
     if(need[bar].harm && !has('harm') && wind.length >= 3){
       const p = wind.filter(free).sort((a, b) => Math.abs(instOfPart(a).center - 62) - Math.abs(instOfPart(b).center - 62))[0];
       if(p){
-        const center = instOfPart(p).center - pc.trans, sh = shiftTo(p, melMed - 4, 0);
+        const center = instOfPart(p).center - pc.trans, sh = shiftTo(p, melMed - 4, 6, 4);
         give(p, melBy[bar].length
           ? melBy[bar].map(e => { const c = chordAt(pc, e.b), m = thirdBelow(e.m, c, sectionAt(pc.scale, e.b, SCALE)) + sh;
             return {role: 'mel3', sc: ROLE_SCALE.mel3 * .8, m, b: e.b, d: e.d, ji: jiOf(m, c), ...marks(e)}; })
@@ -876,7 +881,7 @@ function reduction(pid, present){
       for(let k = bar + 1; k <= barOf(e.b + e.d - 1e-6); k++) if(tk[k]){ cut = k * M; break; }
       keep.push({...e, leg: false, ...(cut != null ? {d: cut - e.b} : {})});
     }
-    const evs = [...keep, ...Object.values(tk).flat().map(e => ({...e, leg: false}))].sort((a, b) => a.b - b.b);
+    const evs = [...keep, ...Object.values(tk).flat().map(e => ({...e, leg: false, sub: true}))].sort((a, b) => a.b - b.b);
     // 一人で吹くので、次の音にかかる音はその手前で切る
     for(let i = 0; i < evs.length - 1; i++) if(evs[i + 1].b < evs[i].b + evs[i].d - 1e-6) evs[i].d = Math.max(.125, evs[i + 1].b - evs[i].b);
     out[p] = finishPart(pc, p, evs);
