@@ -552,7 +552,7 @@ const PIECES = {
     asks: 'リズム・バランス・表現',
     focus: {pitch: .95, tone: 1, expr: .95, rhythm: 1.2, balance: 1.05},
     balRef: 2.7, ceiling: .96,
-    spans: [{name: '前奏〜第1部', from: 0, to: 40}, {name: '第2部', from: 40, to: 72}, {name: '第1部（くり返し）', from: 72, to: 104}],
+    spans: [{name: '前奏〜第1部', short: '第1部', from: 0, to: 40}, {name: '第2部', from: 40, to: 72}, {name: '第1部（くり返し）', from: 72, to: 104, same: 0}],
     slur: 'tongue',
     scale: [[0, [1, 2, 4, 6, 7, 9, 11]]],
     mel: RAD_MEL,

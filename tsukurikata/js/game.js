@@ -4,15 +4,16 @@
 const SAVE_KEY = 'suibu-nisshi-v2';  // 前の名前（吹部日誌）のころからの保存先。変えるとセーブが読めなくなるので、このままにする
 const PREF_WEEK = 16, BLOCK_WEEK = 20, NATIONAL_WEEK = 26;
 
-// 部員ひとりずつに、週に1つ出す練習の指示。合奏と会場練習は、出た人の割合だけ部全体（まとまり・仕上がり・会場慣れ）に効く
+// 部員ひとりずつに、週に1つ出す練習の指示。合奏と会場練習は、出た人の割合だけ部全体（まとまり・仕上がり・会場慣れ）に効く。
+// read は、その人の譜読み（今の曲の自分の楽譜をどれだけ吹けるか）の伸び
 const MENU = [
-  {id: 'long',   name: 'ロングトーン',           hint: '音色↑↑　音程↑',               cost: 14, gain: {tone: 20, pitch: 5}},
-  {id: 'tune',   name: 'チューニング練習',       hint: '音程↑↑',                       cost: 12, gain: {pitch: 20, tone: 3}},
-  {id: 'metro',  name: 'メトロノーム練習',       hint: 'リズム↑↑',                     cost: 13, gain: {rhythm: 20, pitch: 3}},
-  {id: 'phrase', name: '歌ってからフレーズ練習', hint: '表現↑↑（基礎が要る）',         cost: 12, gain: {expr: 22}, basics: true, fam: 6},
-  {id: 'piece',  name: '曲の個人練習',           hint: '曲の仕上がり↑↑　リズム・表現↑', cost: 12, gain: {rhythm: 4, expr: 4, pitch: 2}, fam: 20},
-  {id: 'tutti',  name: '合奏',                   hint: '全部↑　まとまり↑↑　仕上がり↑', cost: 18, gain: {pitch: 5, rhythm: 6, tone: 5, expr: 6}, coh: 12, fam: 16, morale: 5, group: true},
-  {id: 'hall',   name: '会場を借りて合奏',       hint: '会場慣れ↑↑　まとまり↑',        cost: 16, gain: {pitch: 3, rhythm: 3, tone: 3, expr: 3}, coh: 6, fam: 6, hallExp: 45, morale: 3, from: 12, group: true},
+  {id: 'long',   name: 'ロングトーン',           hint: '音色↑↑　音程↑',               cost: 14, gain: {tone: 20, pitch: 5}, read: 4},
+  {id: 'tune',   name: 'チューニング練習',       hint: '音程↑↑',                       cost: 12, gain: {pitch: 20, tone: 3}, read: 4},
+  {id: 'metro',  name: 'メトロノーム練習',       hint: 'リズム↑↑',                     cost: 13, gain: {rhythm: 20, pitch: 3}, read: 4},
+  {id: 'phrase', name: '歌ってからフレーズ練習', hint: '表現↑↑（基礎が要る）',         cost: 12, gain: {expr: 22}, basics: true, fam: 6, read: 10},
+  {id: 'piece',  name: '曲の個人練習',           hint: '譜読み↑↑　曲の仕上がり↑',     cost: 12, gain: {rhythm: 4, expr: 4, pitch: 2}, fam: 20, read: 28},
+  {id: 'tutti',  name: '合奏',                   hint: '全部↑　まとまり↑↑　仕上がり↑', cost: 18, gain: {pitch: 5, rhythm: 6, tone: 5, expr: 6}, coh: 12, fam: 16, read: 18, morale: 5, group: true},
+  {id: 'hall',   name: '会場を借りて合奏',       hint: '会場慣れ↑↑　まとまり↑',        cost: 16, gain: {pitch: 3, rhythm: 3, tone: 3, expr: 3}, coh: 6, fam: 6, read: 10, hallExp: 45, morale: 3, from: 12, group: true},
   {id: 'rest',   name: '休ませる',               hint: '体力とやる気が回復',            cost: -38, gain: {}, morale: 12},
 ];
 const MENU_BY = Object.fromEntries(MENU.map(m => [m.id, m]));
@@ -108,6 +109,9 @@ const seated = s => s.members.filter(m => m.seat);
 // 本番の舞台に上がる部員（コンクールの週は、オーディションで選んだメンバーだけ）
 const stagers = s => eventAt(s, s.week)?.kind === 'contest' ? seated(s).filter(m => !m.out) : seated(s);
 const bandAvg = (s, k) => { const ms = seated(s); return ms.length ? ms.reduce((a, m) => a + m.stats[k], 0) / ms.length : 0; };
+// 席についている部員の、その曲の譜読みの平均（曲全体と、区間ごと）
+const readAvg = (s, pid) => { const ms = seated(s); return ms.length ? ms.reduce((a, m) => a + readMean(m, pid), 0) / ms.length : 0; };
+const spanReadAvg = (s, pid) => { const ms = seated(s); return PIECES[pid].spans.map((_, i) => ms.length ? ms.reduce((a, m) => a + readOf(m, pid)[i], 0) / ms.length : 0); };
 const secMembers = (s, secId) => seated(s).filter(m => SEAT[m.seat].sec === secId);
 const fatigueOf = s => s.stamina < 30 ? 8 : s.stamina < 50 ? 3 : 0;
 // 体力は部員ひとりずつ。部の体力はその平均
@@ -131,7 +135,8 @@ function perfCtx(s, o = {}){
 }
 function snapshot(s, extra = {}){
   return {
-    members: stagers(s).map(m => ({id: m.id, name: m.name, grade: m.grade, seat: m.seat, trait: m.trait, mental: m.mental, stats: {...m.stats}})),
+    members: stagers(s).map(m => ({id: m.id, name: m.name, grade: m.grade, seat: m.seat, trait: m.trait, mental: m.mental, stats: {...m.stats},
+      pfams: readOf(m, extra.pieceId || s.pieceId)})),
     cohesion: s.cohesion, fam: s.fam[extra.pieceId || s.pieceId] ?? 0, interp: {...s.interp}, fatigue: fatigueOf(s), ...extra,
   };
 }
@@ -178,9 +183,12 @@ function decideMenu(s, m){
   if(pol === 'weak') return drill(statOrder(m)[0]);
   if(pol === 'strong') return drill(statOrder(m).reverse().find(k => m.stats[k] < 92) || statOrder(m)[0]);
   if(pol === 'piece') return soon || s.week % 2 ? 'tutti' : 'piece';
-  // おまかせ：本番の前の週は合奏（大会の前でホールを借りられるなら会場で）。曲がまだ手に入っていなければ個人練習。3週に1回は合奏
+  // おまかせ：本番の前の週は合奏（大会の前でホールを借りられるなら会場で）。自分の譜読みがまだ浅ければ個人練習
+  // （入ったばかりでほとんど吹けないなら合奏の週以外はずっと、まだ6割に届かないなら1週おき）。3週に1回は合奏
   if(soon) return soon.ev.kind === 'contest' && menuOpen(s, 'hall') ? 'hall' : 'tutti';
-  if(s.pieceId && (s.fam[s.pieceId] || 0) < 30 && s.week % 3 === 1) return 'piece';
+  const rd = s.pieceId ? readMean(m, s.pieceId) : 100;
+  if(rd < 20 && s.week % 3 !== 2) return 'piece';
+  if(rd < 60 && s.week % 2 === 1 && s.week % 3 !== 2) return 'piece';
   if(s.pieceId && s.week % 3 === 2) return 'tutti';
   return drill(statOrder(m)[0]);
 }
@@ -190,6 +198,19 @@ function setPlan(s0, mid, menu){
   const s = clone(s0);
   s.plan ||= {};
   if(menu) s.plan[mid] = menu; else delete s.plan[mid];
+  return s;
+}
+// 曲の個人練習で打ちこむ区間（指示がなければ、いちばん吹けていない区間）
+function practiceSpan(s, m){
+  const units = readUnits(s.pieceId), want = s.planSpan?.[m.id];
+  if(units.some(u => u.i === want)) return want;
+  const v = readOf(m, s.pieceId);
+  return units.reduce((a, u) => v[u.i] < v[a.i] ? u : a).i;
+}
+function setPlanSpan(s0, mid, i){
+  const s = clone(s0);
+  s.planSpan ||= {};
+  if(i == null) delete s.planSpan[mid]; else s.planSpan[mid] = i;
   return s;
 }
 function setPolicy(s0, mid, pol){
@@ -208,7 +229,7 @@ function practiceWeek(s0, plan){
     s.morale += 2; s.lastDelta = {};
     for(const m of s.members){ m.stats.pitch = Math.max(0, m.stats.pitch - 1); m.last = {menu: 'test', d: {pitch: -1}}; }
     addLog(s, 'テスト期間。楽器に触れない日が続いて、少し音程の感覚が鈍った。');
-    s.plan = {};
+    s.plan = {}; s.planSpan = {};
     return nextWeek(s);
   }
   if(typeof plan === 'string') s.plan = Object.fromEntries(s.members.map(m => [m.id, plan]));
@@ -236,7 +257,24 @@ function practiceWeek(s0, plan){
       d[k] = Math.round((m.stats[k] - before) * 10) / 10;
       if(m.seat){ sum[k] = (sum[k] || 0) + (m.stats[k] - before); cnt[k] = (cnt[k] || 0) + 1; }
     }
-    m.last = {menu: id, d};
+    // 譜読み：その人が今の曲の自分の楽譜を、区間ごとにどれだけ吹けるか。うまい人ほど早く読める（全体の力が0なら半分の速さ、100なら1.5倍）。
+    // 曲の個人練習は1つの区間に打ちこむ（ほかの区間も少しは進む）。合奏などは曲全体が少しずつ進む
+    let span = null;
+    if(s.pieceId && mu.read){
+      const pid = s.pieceId, units = readUnits(pid), cur = readOf(m, pid), before = readMean(m, pid);
+      span = id === 'piece' ? practiceSpan(s, m) : null;
+      const rate = mu.read * eff * (0.5 + avgStat(m) / 100);
+      // 1週間に覚えられる量は同じなので、打ちこんだ区間が短いほど大きく進む（くり返しの区間は数えない）
+      const len = u => u.to - u.from, total = units.reduce((a, u) => a + len(u), 0);
+      const next = cur.slice();
+      for(const u of units){
+        const g = span == null ? rate : u.i === span ? rate * 0.85 * total / len(u) : rate * 0.15;
+        next[u.i] = Math.round(clamp(cur[u.i] + g * (1 - cur[u.i] / 130), 0, 100) * 10) / 10;
+      }
+      (m.fam ||= {})[pid] = next;
+      d.fam = Math.round((readMean(m, pid) - before) * 10) / 10;
+    }
+    m.last = {menu: id, d, ...(span != null ? {span} : {})};
     famSum += mu.group ? (mu.fam || 0) * eff * (share(id) ? 1 : 0) : (mu.fam || 0) * eff;
     if(id !== 'rest') famSum += 4;
     m.sta = clamp(m.sta - (mu.cost > 0 ? mu.cost * (ev.costMult || 1) : mu.cost), 0, 100);
@@ -245,6 +283,7 @@ function practiceWeek(s0, plan){
   }
   s.lastDelta = {};
   for(const k of Object.keys(sum)) s.lastDelta[k] = Math.round(sum[k] / cnt[k] * 10) / 10;
+  if(s.pieceId){ const ms = seated(s); if(ms.length) s.lastDelta.read = Math.round(ms.reduce((a, m) => a + (m.last?.d?.fam || 0), 0) / ms.length * 10) / 10; }
   const eff0 = (0.6 + 0.4 * s.morale / 100) * (ev.mult || 1);
   const coh = MENU.reduce((a, mu) => a + (mu.coh || 0) * share(mu.id), 0);
   if(coh){ const d = coh * eff0 * (1 - s.cohesion / 150); s.cohesion = clamp(s.cohesion + d, 0, 100); s.lastDelta.coh = Math.round(d * 10) / 10; }
@@ -268,7 +307,7 @@ function practiceWeek(s0, plan){
     const f = `${s.year}:${st.k}${st.at}`;
     if(!s.flags[f] && bandAvg(s, st.k) >= st.at){ s.flags[f] = true; addLog(s, st.text); }
   }
-  s.plan = {};
+  s.plan = {}; s.planSpan = {};
   return nextWeek(s);
 }
 function nextWeek(s){
@@ -791,7 +830,13 @@ function newYear(s0){
   s.finalWeek = null; s.autumnFrom = null; s.contestPiece = null; s.chooseFinal = false;
   for(const m of s.members) delete m.out;
   s.audition = null;
-  s.cohesion = Math.round(s.cohesion * 0.6); s.fam = freshFam(); s.morale = 70; s.hallExp = 0; s.lastDelta = {}; s.plan = {}; s.recruitWhen = null;
+  // 去年までの曲の譜読みは、半分くらい覚えている
+  for(const m of s.members) for(const k of Object.keys(m.fam || {})){
+    if(!PIECES[k]){ delete m.fam[k]; continue; }
+    m.fam[k] = readOf(m, k).map(v => Math.round(v * 0.5));
+    if(m.fam[k].every(v => !v)) delete m.fam[k];
+  }
+  s.cohesion = Math.round(s.cohesion * 0.6); s.fam = freshFam(); s.morale = 70; s.hallExp = 0; s.lastDelta = {}; s.plan = {}; s.planSpan = {}; s.recruitWhen = null;
   // 評判は、年が変わると少しだけ忘れられる
   s.rep = Math.round((s.rep ?? 30) * 0.9 * 10) / 10;
   for(const m of s.members){ m.sta = 100; for(const k of STAT_KEYS) m.stats[k] = Math.round(Math.max(0, m.stats[k] - 2) * 10) / 10; }
@@ -863,7 +908,7 @@ function assignRecruits(s0, map){
     const base = (r.exp && match ? 30 : r.exp ? 16 : 6) + (g - 1) * (r.exp ? 8 : 4);
     const stats = makeStats(base, r.exp ? 5 : 3, 'stat', r.id);
     s.members.push({id: r.id, name: r.name, grade: g, joinGrade: g, seat, trait: r.trait, joined: s.year, exp: !!r.exp, mental: mentalInit(r.trait, g, 'stat', r.id) + (r.exp ? 6 : 0),
-      stats, first: {y: s.year, w: s.week, stats: {...stats}}, hope: r.hope, sta: Math.round(s.members.length ? s.stamina : 100), policy: 'auto',
+      stats, first: {y: s.year, w: s.week, stats: {...stats}}, hope: r.hope, sta: Math.round(s.members.length ? s.stamina : 100), policy: 'auto', fam: {},
       // コンクールのメンバーが決まったあとに入った部員は、今年のコンクールには出ない
       ...(lineupSet(s) ? {out: true} : {})});
   }
@@ -916,6 +961,8 @@ function load(){
       for(const m of s.members) m.mental ??= mentalInit(m.trait, m.grade, 'mig', m.id);
       // 部員ひとりずつの体力・方針と、部の評判（2026年10月に、練習を一人ずつ指示する形にした）
       for(const m of s.members){ m.sta ??= s.stamina ?? 100; m.policy ||= 'auto'; }
+      // 部員ひとりずつの譜読み（2026年10月）：それまでの部全体の仕上がりを、全員の譜読みとして引きつぐ
+      for(const m of s.members) m.fam ??= Object.fromEntries(Object.entries(s.fam).filter(([, v]) => v > 0));
       syncSta(s);
       if(s.rep == null){
         const golds = [...(s.history || []).flatMap(h => h.results || []), ...(s.season || [])].filter(r => r.award === 'gold').length;

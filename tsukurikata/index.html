@@ -162,6 +162,7 @@ select{background:var(--sheet);border:1.5px solid var(--rule);border-radius:8px;
 .mc-head .sub{font-size:13px;color:var(--ink-soft)}
 .tag{font-size:12px;font-weight:700;letter-spacing:.06em;color:var(--on-brass);background:var(--brass);border-radius:3px;padding:1px 8px;white-space:nowrap}
 .mc-trait{font-family:var(--f-hand);font-size:15px}
+.mc-sub{margin:6px 0 -4px;font-size:12px;color:var(--ink-soft);line-height:1.5}
 .mc-actions{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
 
 /* ホワイトボード */
@@ -242,16 +243,16 @@ select{background:var(--sheet);border:1.5px solid var(--rule);border-radius:8px;
 .plan{display:grid;gap:12px}
 .plist{list-style:none;padding:0;display:grid;gap:0}
 .plist .psec{font-size:12px;font-weight:700;color:var(--ink-soft);letter-spacing:.06em;padding:10px 0 2px;border-bottom:1.5px solid var(--rule)}
-.pm{display:grid;grid-template-columns:minmax(0,1fr) 5.2em;grid-template-areas:"who sta" "pol pol" "pw pw" "last last";gap:4px 10px;padding:8px 0;border-bottom:1px dashed var(--rule);align-items:center}
-@media (min-width:600px){.pm{grid-template-columns:minmax(0,1.1fr) 4.6em minmax(0,.9fr) minmax(0,1.4fr);grid-template-areas:"who sta pol pw" "last last last last"}}
-@media (min-width:961px) and (max-width:1280px){.pm{grid-template-columns:minmax(0,1fr) 5.2em;grid-template-areas:"who sta" "pol pol" "pw pw" "last last"}}
+.pm{display:grid;grid-template-columns:minmax(0,1fr) 5.2em;grid-template-areas:"who sta" "pol pol" "pw pw" "ps ps" "last last";gap:4px 10px;padding:8px 0;border-bottom:1px dashed var(--rule);align-items:center}
+@media (min-width:600px){.pm{grid-template-columns:minmax(0,1.1fr) 4.6em minmax(0,.9fr) minmax(0,1.4fr);grid-template-areas:"who sta pol pw" ". . ps ps" "last last last last"}}
+@media (min-width:961px) and (max-width:1280px){.pm{grid-template-columns:minmax(0,1fr) 5.2em;grid-template-areas:"who sta" "pol pol" "pw pw" "ps ps" "last last"}}
 .pm .who{grid-area:who;font-size:14px;line-height:1.35;min-width:0}
 .pm .who b{font-weight:700}
 .pm .who small{display:block;font-size:11.5px;color:var(--ink-soft)}
 .pm .sta{grid-area:sta;display:grid;grid-template-columns:minmax(0,1fr) 1.8em;gap:6px;align-items:center}
 .pm .sta b{font-family:var(--f-lcd);font-weight:400;font-size:13px;text-align:right}
 .pm label{display:grid;grid-template-columns:2.6em minmax(0,1fr);align-items:center;gap:6px;font-size:12px;color:var(--ink-soft);min-width:0}
-.pm .pol{grid-area:pol} .pm .pw{grid-area:pw}
+.pm .pol{grid-area:pol} .pm .pw{grid-area:pw} .pm .ps{grid-area:ps;grid-template-columns:auto minmax(0,1fr)} .pm .ps>span{white-space:nowrap}
 .pm select{width:100%;padding:5px 8px;font-size:12.5px}
 .pm.own .pw select{border-color:var(--brass);color:var(--brass);font-weight:700}
 .pm .last{grid-area:last;font-size:11.5px;color:var(--ink-soft)}

@@ -44,6 +44,8 @@ function fitCanvas(cv, H){
 }
 const memberById = id => S.members.find(m => m.id === id);
 const playPiece = () => U.piece || S.pieceId || 'largo';
+// 区間の短い名前（short があればそれ、なければ「前半（オーボエのソロ）」→「前半」）
+const spanShort = sp => sp.short || sp.name.replace(/（.*?）$/, '');
 const avgStats = m => STAT_KEYS.reduce((a, k) => a + m.stats[k], 0) / 4;
 function rangeSpan(pid){
   const pc = PIECES[pid];
@@ -302,6 +304,21 @@ function drawRoll(perf, t = -1){
   g.strokeStyle = C.rule; g.beginPath(); g.moveTo(L, DY.y + DY.h + .5); g.lineTo(W - Rm, DY.y + DY.h + .5); g.stroke();
 
   const selId = U.sel;
+  // 譜読みの浅い区間に色をしく（部員を選んでいればその人、いなければ席についている部員の平均）
+  if(perf.pieceId === S.pieceId && S.phase !== 'choose' && perf.b2t){
+    const pc = PIECES[perf.pieceId], who = selId && memberById(selId);
+    const rd = who ? readOf(who, perf.pieceId) : spanReadAvg(S, perf.pieceId);
+    g.font = `500 10px ${C.fBody}`; g.textAlign = 'left';
+    pc.spans.forEach((sp, i) => {
+      const a = Math.max(sp.from, perf.from), b = Math.min(sp.to, perf.to);
+      if(b <= a) return;
+      const x0 = X(perf.b2t(a)), x1 = X(perf.b2t(b)), v = rd[i];
+      if(v < 85){ g.fillStyle = v < 50 ? C.bad : C.warn; g.globalAlpha = 0.06 + 0.12 * (1 - v / 85); g.fillRect(x0, MA.y - 2, x1 - x0, MA.h + 4); }
+      g.globalAlpha = 1; g.fillStyle = v < 50 ? C.bad : v < 85 ? C.warn : C.soft;
+      g.fillText(`${sp.name} 譜読み${Math.round(v)}`, x0 + 4, MA.y + 8);
+    });
+    g.globalAlpha = 1;
+  }
   const bh = clamp(MA.h / (hi - lo) * 0.7, 3, 8);
   for(const n of notes){
     const x0 = X(n.t), w = Math.max(2, X(n.t + n.d) - x0), y = Y(n.midi + (n.wrong ? 0 : n.err) * EX / 100);
@@ -463,7 +480,8 @@ function renderPiece(){
   $('#piece').textContent = pc.full;
   $('#pieceMeta').textContent = `${pc.composer}｜${pc.key}｜${tempoLabel(pc, S.interp.tempo)}｜問われる力：${pc.asks}`;
   $('#pieceSel').innerHTML = PIECE_IDS.map(id => `<button type="button" data-piece="${id}" aria-pressed="${id === pid}">${PIECES[id].title}</button>`).join('');
-  $('#rangeSel').innerHTML = `<option value="all">全部</option>` + pc.spans.map((sp, i) => `<option value="${i}">${sp.name}</option>`).join('');
+  const rd = pid === S.pieceId && S.phase !== 'choose' ? spanReadAvg(S, pid) : null;
+  $('#rangeSel').innerHTML = `<option value="all">全部</option>` + pc.spans.map((sp, i) => `<option value="${i}">${sp.name}${rd ? `（譜読み${Math.round(rd[i])}）` : ''}</option>`).join('');
   $('#rangeSel').value = U.range;
 }
 function renderVenues(){
@@ -503,7 +521,8 @@ function renderStats(){
   const pid = S.pieceId || playPiece();
   $('#stats').innerHTML = STAT_KEYS.map(k => statRow(STAT_LABEL[k], bandAvg(S, k), STAT_DESC[k], d[k] > 0 ? d[k].toFixed(1) : '')).join('')
     + statRow('まとまり', S.cohesion, '互いを聴き合う力。合奏に出る人が多いほど育つ', d.coh > 0 ? d.coh.toFixed(1) : '')
-    + statRow('仕上がり', S.fam[pid] ?? 0, `${PIECES[pid].title}の譜読みと曲づくり。低いと音を間違える`, d.fam > 0 ? d.fam.toFixed(1) : '');
+    + statRow('仕上がり', S.fam[pid] ?? 0, `${PIECES[pid].title}の合奏での曲づくり。低いとテンポの揺れがそろわない`, d.fam > 0 ? d.fam.toFixed(1) : '')
+    + statRow('譜読み', readAvg(S, pid), `一人ひとりが${PIECES[pid].title}の自分の楽譜をどれだけ吹けるか（平均）。低いと音を間違え、歌いきれず、出だしが揺れる`, d.read > 0 ? d.read.toFixed(1) : '');
   const vital = (nm, v) => {
     const c = v >= 60 ? 'good' : v >= 30 ? 'warn' : 'bad';
     return `<div class="vital"><span class="row"><span>${nm}</span><b>${Math.round(v)}</b></span><span class="track"><span class="fill ${c}" style="width:${clamp(v, 0, 100)}%"></span></span></div>`;
@@ -605,8 +624,8 @@ function renderWeek(){
   }
   if(S.chooseFinal){
     const fam = id => Math.round(S.fam[id] || 0);
-    w.innerHTML = `<div class="event"><span class="tag">定期演奏会の曲</span><span>3年生の最後の本番、${wkLabel(S.finalWeek)}の定期演奏会で演奏する曲を決めよう。コンクールの曲をもう一度でも、新しい曲に挑戦してもいい（仕上がりは低いところから）。</span></div>`
-      + PIECE_IDS.map(id => { const pc = PIECES[id]; return `<div class="pcard"><h3>${pc.full}</h3><p>${id === S.contestPiece ? 'コンクールで演奏した曲・' : ''}仕上がり ${fam(id)}｜問われる力：${pc.asks}</p><div class="row"><button class="btn small" type="button" data-act="preview" data-pid="${id}">▶ 試しに聴く</button><button class="btn small primary" type="button" data-act="choosefinal" data-pid="${id}">この曲にする</button></div></div>`; }).join('');
+    w.innerHTML = `<div class="event"><span class="tag">定期演奏会の曲</span><span>3年生の最後の本番、${wkLabel(S.finalWeek)}の定期演奏会で演奏する曲を決めよう。コンクールの曲をもう一度でも、新しい曲に挑戦してもいい（仕上がりも、部員の譜読みも低いところから）。</span></div>`
+      + PIECE_IDS.map(id => { const pc = PIECES[id]; return `<div class="pcard"><h3>${pc.full}</h3><p>${id === S.contestPiece ? 'コンクールで演奏した曲・' : ''}仕上がり ${fam(id)}・譜読み ${Math.round(readAvg(S, id))}｜問われる力：${pc.asks}</p><div class="row"><button class="btn small" type="button" data-act="preview" data-pid="${id}">▶ 試しに聴く</button><button class="btn small primary" type="button" data-act="choosefinal" data-pid="${id}">この曲にする</button></div></div>`; }).join('');
     return;
   }
   const parts = [];
@@ -690,8 +709,16 @@ const menuLabel = (id, cm = 1) => { const m = MENU_BY[id]; return `${m.name}：$
 const lastText = m => {
   if(!m.last) return '';
   if(m.last.menu === 'test') return '先週：テスト期間';
-  const d = Object.entries(m.last.d || {}).filter(([, v]) => v >= 0.1).sort((a, b) => b[1] - a[1]).slice(0, 2).map(([k, v]) => `${STAT_LABEL[k]}+${v.toFixed(1)}`).join(' ');
-  return `先週：${MENU_BY[m.last.menu]?.name || ''}${d ? ' ' + d : ''}`;
+  const d = Object.entries(m.last.d || {}).filter(([, v]) => v >= 0.1).sort((a, b) => b[1] - a[1]).slice(0, 2).map(([k, v]) => `${k === 'fam' ? '譜読み' : STAT_LABEL[k]}+${v.toFixed(1)}`).join(' ');
+  const sp = m.last.span != null && S.pieceId && PIECES[S.pieceId].spans[m.last.span] ? `（${spanShort(PIECES[S.pieceId].spans[m.last.span])}）` : '';
+  return `先週：${MENU_BY[m.last.menu]?.name || ''}${sp}${d ? ' ' + d : ''}`;
+};
+// 曲の個人練習で打ちこむ区間を選ぶ欄（選ばなければ、いちばん吹けていない区間）
+const spanSelect = m => {
+  const pid = S.pieceId, v = readOf(m, pid), want = S.planSpan?.[m.id], weak = practiceSpan({...S, planSpan: {}}, m);
+  return `<label class="ps"><span>練習するところ</span><select data-span="${m.id}" aria-label="${esc(m.name)}が練習するところ">`
+    + `<option value="">いちばん吹けていないところ（${spanShort(PIECES[pid].spans[weak])}）</option>`
+    + readUnits(pid).map(u => `<option value="${u.i}"${want === u.i ? ' selected' : ''}>${spanShort(u)}（譜読み${Math.round(v[u.i])}）</option>`).join('') + '</select></label>';
 };
 function planHtml(ev){
   const cm = ev?.costMult || 1;
@@ -709,10 +736,10 @@ function planHtml(ev){
     sec = s;
     const auto = decideMenu(S, m), own = S.plan?.[m.id] && menuOpen(S, S.plan[m.id]) ? S.plan[m.id] : '';
     const c = m.sta >= 60 ? 'good' : m.sta >= 30 ? 'warn' : 'bad';
-    return `${head}<li class="pm${own ? ' own' : ''}"><span class="who"><b>${esc(m.name)}</b><small>${m.grade}年・${m.seat ? esc(PART_LABEL[SEAT[m.seat].part]) : '控え'}${m.out && m.seat ? '・コンクール控え' : ''}</small></span>
+    return `${head}<li class="pm${own ? ' own' : ''}"><span class="who"><b>${esc(m.name)}</b><small>${m.grade}年・${m.seat ? esc(PART_LABEL[SEAT[m.seat].part]) : '控え'}${m.out && m.seat ? '・コンクール控え' : ''}${S.pieceId ? `・譜読み${Math.round(readMean(m, S.pieceId))}` : ''}</small></span>
       <span class="sta" title="体力 ${Math.round(m.sta)}"><span class="track"><span class="fill ${c}" style="width:${clamp(m.sta, 0, 100)}%"></span></span><b>${Math.round(m.sta)}</b></span>
       <label class="pol"><span>方針</span><select data-pol="${m.id}" aria-label="${esc(m.name)}の方針">${POLICIES.map(p => `<option value="${p.id}"${(m.policy || 'auto') === p.id ? ' selected' : ''}>${p.name}</option>`).join('')}</select></label>
-      <label class="pw"><span>今週</span><select data-plan="${m.id}" aria-label="${esc(m.name)}の今週の練習"><option value="">方針どおり（${MENU_BY[auto].name}）</option>${menus.map(x => `<option value="${x.id}"${own === x.id ? ' selected' : ''}>${menuLabel(x.id, cm)}</option>`).join('')}</select></label>
+      <label class="pw"><span>今週</span><select data-plan="${m.id}" aria-label="${esc(m.name)}の今週の練習"><option value="">方針どおり（${MENU_BY[auto].name}）</option>${menus.map(x => `<option value="${x.id}"${own === x.id ? ' selected' : ''}>${menuLabel(x.id, cm)}</option>`).join('')}</select></label>${(own || auto) === 'piece' && S.pieceId ? spanSelect(m) : ''}
       ${m.last ? `<small class="last">${esc(lastText(m))}</small>` : ''}</li>`;
   }).join('');
   const sum = MENU.filter(m => count[m.id]).map(m => `${m.name} ${count[m.id]}人`).join('・');
@@ -851,7 +878,8 @@ function renderMemberCard(){
   }).join('');
   card.innerHTML = `<div class="mc-head"><h3>${esc(m.name)}</h3>${m.title ? `<span class="tag">${m.title}</span>` : ''}<span class="sub">${m.grade}年・${seat ? PART_LABEL[seat.part] : '控え（席なし）'}</span></div>
     ${tr ? `<p class="mc-trait">癖：${tr.name}。${tr.desc}</p>` : '<p class="mc-trait">目立った癖はない。</p>'}
-    <div class="stats">${STAT_KEYS.map(k => statRow(STAT_LABEL[k], m.stats[k], STAT_DESC[k], '')).join('')}${m.mental != null ? statRow('本番の強さ', m.mental, '本番で実力を出しきれるか。弱いと日によって大きくぶれる。場数を踏むと強くなる', '', 'warn') : ''}</div>
+    <div class="stats">${STAT_KEYS.map(k => statRow(STAT_LABEL[k], m.stats[k], STAT_DESC[k], '')).join('')}${S.pieceId ? `<p class="mc-sub">譜読み（${PIECES[S.pieceId].title}）：自分の楽譜を区間ごとにどれだけ吹けるか。曲の個人練習でいちばん伸びる</p>`
+      + readUnits(S.pieceId).map(u => statRow(spanShort(u), readOf(m, S.pieceId)[u.i], u.name !== spanShort(u) ? u.name : '', '')).join('') : ''}${m.mental != null ? statRow('本番の強さ', m.mental, '本番で実力を出しきれるか。弱いと日によって大きくぶれる。場数を踏むと強くなる', '', 'warn') : ''}</div>
     ${memberStory(m)}
     <div class="mc-actions">
       ${seat ? `<button class="btn small" type="button" data-mact="solo">この人だけ聴く</button><button class="btn small" type="button" data-mact="secsolo">パートだけ聴く</button>` : ''}
@@ -1098,6 +1126,7 @@ function bind(){
     }
     if(t.dataset.pol){ commit(setPolicy(S, t.dataset.pol, t.value)); renderWeek(); }
     else if(t.dataset.plan){ commit(setPlan(S, t.dataset.plan, t.value || null)); renderWeek(); }
+    else if(t.dataset.span){ commit(setPlanSpan(S, t.dataset.span, t.value === '' ? null : +t.value)); renderWeek(); }
   });
   $('#interp').addEventListener('click', e => {
     const b = e.target.closest('[data-interp]'); if(!b || b.disabled) return;

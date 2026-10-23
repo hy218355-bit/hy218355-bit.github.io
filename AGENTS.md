@@ -25,7 +25,7 @@ GitHub Pages のサイト。いまの中心は、高校吹奏楽部の顧問に�
 - `scores.js`：5曲の楽譜と編曲。`arrangement()` が全39席ぶんの楽譜を作り、`reduction()` が少人数のとき、いない人の旋律・低音・内声を、いる人に小節ごとに持ち替えさせる
 - `band.js`：部員と席、`perform()`（部員一人ずつの実力から1音ずつのずれを決める）、`analyze()`・`judge()`（採点と講評）
 - `game.js`：1年間の流れ
-  - 毎週の個別練習と方針（`practiceWeek`・`decideMenu`）
+  - 毎週の個別練習と方針（`practiceWeek`・`decideMenu`）。部員ごとの曲の譜読み（`m.fam`）と、部全体の合奏の仕上がり（`s.fam`）
   - 評判と入部（`gainRep`）
   - オーディション（`runAudition`・`setLineup`）
   - 演奏会・コンクール・引退・新年度

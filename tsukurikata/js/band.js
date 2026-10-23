@@ -99,6 +99,24 @@ function assignTitles(members){
 }
 const avgStat = m => STAT_KEYS.reduce((a, k) => a + m.stats[k], 0) / 4;
 
+/* ===== 曲の区間ごとの譜読み =====
+   部員は曲の区間（PIECES[].spans）ごとに譜読みを持つ（m.fam[曲] は区間ごとの配列）。くり返しの区間（same）は、もとの区間と同じ譜読みを使う */
+const readUnit = (pid, i) => PIECES[pid].spans[i]?.same ?? i;
+// 練習で選べる区間（くり返しの区間は除く）
+const readUnits = pid => PIECES[pid].spans.map((sp, i) => ({...sp, i})).filter(sp => sp.same == null);
+// 部員の、区間ごとの譜読み（0〜100）。前の形（曲全体で1つの数）は、どの区間も同じ値とみなす
+function readOf(m, pid){
+  const v = m.fam?.[pid];
+  return PIECES[pid].spans.map((_, i) => Array.isArray(v) ? v[readUnit(pid, i)] ?? 0 : typeof v === 'number' ? v : 0);
+}
+// 曲全体の譜読み（区間の長さで重みをつけた平均）
+function readMean(m, pid){
+  const sp = PIECES[pid].spans, v = readOf(m, pid);
+  return sp.reduce((a, x, i) => a + v[i] * (x.to - x.from), 0) / sp.reduce((a, x) => a + x.to - x.from, 0);
+}
+// その拍がどの区間か
+const spanAt = (pc, b) => { let k = 0; pc.spans.forEach((x, i) => { if(b >= x.from - 1e-6) k = i; }); return k; };
+
 // ラボ用：全席がうまった仮想の部
 function fullBand(stats){
   const used = new Set();
@@ -136,6 +154,12 @@ function perform(ctx){
   const RUB = RUBATOS[ip.rub ?? 1];
   const from = ctx.from ?? 0, to = ctx.to ?? pc.beats;
 
+  // 部員ひとりずつの、区間ごとの譜読み（この曲の自分の楽譜をどれだけ吹けるか、0〜1）。録音の控え（pfams、前の形は pfam）→ 部員の記録（m.fam）の順に見る。
+  // どちらもない仮想の部員（ラボ）や昔の録音は、部全体の仕上がりで代える
+  const pfsOf = m => (m.pfams || (m.pfam != null ? pc.spans.map(() => m.pfam) : m.fam ? readOf(m, ctx.pieceId) : pc.spans.map(() => ctx.fam ?? 0))).map(v => clamp01(v / 100));
+  // 演奏する範囲での平均（区間と重なる長さで重みをつける）
+  const overlap = pc.spans.map(x => Math.max(0, Math.min(x.to, to) - Math.max(x.from, from)));
+  const meanIn = pfs => { const w = overlap.reduce((a, x) => a + x, 0) || 1; return pfs.reduce((a, v, i) => a + v * overlap[i], 0) / w; };
   const players = [];
   for(const m of ctx.members){
     const seat = SEAT[m.seat];
@@ -152,7 +176,10 @@ function perform(ctx){
     const W = {tone: 1.15, rhythm: 1, pitch: 0.85, expr: 1};
     const st = {};
     for(const k of STAT_KEYS) st[k] = clamp01((m.stats[k] - drop * W[k]) / 100);
-    players.push({m, seat, st, part: seat.part, sec: seat.sec, freeze, zone});
+    // 譜読みが浅いうちは、うまい人でもフレーズを歌いきれない（全体のテンポの揺れには範囲での平均、1音ずつにはその区間の譜読みが効く）
+    const pfs = pfsOf(m), E0 = st.expr;
+    st.expr *= lerp(0.4, 1, meanIn(pfs));
+    players.push({m, seat, st, pfs, E0, part: seat.part, sec: seat.sec, freeze, zone});
   }
   const avg = (k, list = players) => list.length ? list.reduce((a, p) => a + p.st[k], 0) / list.length : 0;
   const bandR = avg('rhythm'), bandE = avg('expr');
@@ -161,7 +188,8 @@ function perform(ctx){
 
   // テンポ：指揮の揺れ（ついてこられるかは表現とまとまり次第）、だんだん走る、拍ごとのむら
   const SPB = 60 / bpm;
-  const rubUse = RUB * clamp01(Math.min(bandE * 1.2, C * 1.2 + 0.2));
+  // 合奏の仕上がり（FAM）が低いうちは、指揮の揺れに全員でついていけず、テンポもそろわない
+  const rubUse = RUB * clamp01(Math.min(bandE * 1.2, C * 1.2 + 0.2)) * lerp(0.6, 1, FAM);
   const iRb = 1 - bandR;
   const STEP = 0.125, cum = [0], cumIdeal = [0], wob = {};
   for(let i = 1; i * STEP <= pc.beats + 8; i++){
@@ -170,7 +198,7 @@ function perform(ctx){
     const tm = tmAt(pc, b);   // 楽譜の上のテンポの変化（序奏だけゆっくり、だんだん速く、など）
     let m = 1 + rubUse * r;
     m *= 1 - 0.09 * iRb * (1 - 0.6 * C) * Math.min(b, pc.beats) / pc.beats;
-    m *= 1 + 0.06 * Math.pow(iRb, 1.2) * (1 - 0.5 * C) * venue.play.timing * clampG(wob[Math.floor(b)] ??= gauss(seed, 'tempo', Math.floor(b)));
+    m *= 1 + (0.06 * Math.pow(iRb, 1.2) * (1 - 0.5 * C) + 0.025 * Math.pow(1 - FAM, 1.5)) * venue.play.timing * clampG(wob[Math.floor(b)] ??= gauss(seed, 'tempo', Math.floor(b)));
     cum.push(cum[i-1] + SPB * tm * Math.max(0.6, m) * STEP);
     cumIdeal.push(cumIdeal[i-1] + SPB * tm * (1 + RUB * r) * STEP);
   }
@@ -184,7 +212,7 @@ function perform(ctx){
 
   const notes = [], hits = [], sharedG = {};
   for(const p of players){
-    const {m, st, seat} = p;
+    const {m, st, seat, pfs, E0} = p;
     const P = st.pitch, R = st.rhythm, T = st.tone, E = st.expr;
     const iP = 1 - P, iR = 1 - R, iT = 1 - T;
     const pk = [seed, m.id];
@@ -194,21 +222,25 @@ function perform(ctx){
       + (m.trait === 'drag' ? 0.03 * iR : m.trait === 'rush' ? -0.03 * iR : 0) - (p.freeze ? 0.025 : 0);
     const nat = 1.5 * clampG(gauss(...pk, 'nat'));
     const loudMul = m.trait === 'loud' ? 1.2 - 0.1 * E : m.trait === 'shy' ? 0.78 + 0.12 * E : 1;
-    const jf = clamp01((P - 0.65) / 0.3) * (0.4 + 0.6 * C);
+    const jf0 = clamp01((P - 0.65) / 0.3) * (0.4 + 0.6 * C);
     const evs = red.parts[p.part] || [];
     const mine = [];
     let prevMidi = null, prevEnd = -Infinity;
     evs.forEach(e => {
       if(e.b < from - 1e-6 || e.b >= to - 1e-6) return;
       const k = [...pk, ctx.pieceId, p.part, e.b, e.role], H = hasher(...k);
-      if(H('miss') < 0.07 * Math.pow(1 - FAM, 2) * (1 - 0.5 * R)) return;
-      const t = Math.max(0, b2s(e.b) - off + lag + 0.07 * Math.pow(iR, 1.2) * venue.play.timing * (1 - 0.35 * C) * clampG(H.gauss('t')));
+      // この音のある区間の譜読み。浅いと歌いきれず、和音のどの音を吹いているか分からないので音程をはめきれない
+      const pf = pfs[spanAt(pc, e.b)], En = E0 * lerp(0.4, 1, pf), jf = jf0 * lerp(0.3, 1, pf);
+      // 譜読みが浅いと、音が抜け、出だしが揺れる（うまい人ほど揺れは小さい）
+      if(H('miss') < 0.07 * Math.pow(1 - pf, 2) * (1 - 0.5 * R)) return;
+      const t = Math.max(0, b2s(e.b) - off + lag + 0.07 * Math.pow(iR, 1.2) * venue.play.timing * (1 - 0.35 * C) * clampG(H.gauss('t'))
+        + 0.03 * Math.pow(1 - pf, 1.5) * (1 - 0.4 * R) * clampG(H.gauss('ft')));
       const tIdeal = b2sIdeal(e.b) - b2sIdeal(from);
-      const vScale = v => clamp(lerp(0.58, v, E) * loudMul, 0.04, 1);
+      const vScale = v => clamp(lerp(0.58, v, En) * loudMul, 0.04, 1);
       let wrong = 0;
-      if(e.m != null && H('wr') < 0.16 * Math.pow(1 - FAM, 2) * (1 - 0.5 * P)) wrong = (H('wd') < .5 ? 1 : -1) * (H('ws') < .6 ? 1 : 2);
+      if(e.m != null && H('wr') < 0.16 * Math.pow(1 - pf, 2) * (1 - 0.5 * P)) wrong = (H('wd') < .5 ? 1 : -1) * (H('ws') < .6 ? 1 : 2);
       const endB = e.b + e.d;
-      const fermata = endB >= pc.beats - 1e-6 ? 1.1 * E * RUB : 0;
+      const fermata = endB >= pc.beats - 1e-6 ? 1.1 * En * RUB : 0;
 
       if(e.kind === 'hit'){
         const inst = e.inst;
@@ -236,13 +268,13 @@ function perform(ctx){
       const tb = TIMBRE[inst.timbre];
       let d = b2s(endB) - b2s(e.b);
       if(e.art === 'stac') d = Math.min(d * 0.55, 0.32);
-      else if(!e.leg) d *= 0.86 + 0.1 * E;
+      else if(!e.leg) d *= 0.86 + 0.1 * En;
       if(e.d >= 2) d *= 1 - 0.3 * iR * (0.5 + 0.5 * H('hold'));
       d += fermata;
       const midi = e.m + pc.trans + wrong;
       const reg = (midi - inst.center) / 12 * 7 * iP;
       const shared = clampG(sharedG[p.sec + ':' + e.b] ??= gauss(seed, p.sec, ctx.pieceId, e.b, 'shared')) * 26 * Math.pow(1 - secP[p.sec], 1.4);
-      const indiv = 28 * Math.pow(iP, 1.4) * clampG(H.gauss('p'));
+      const indiv = 28 * Math.pow(iP, 1.4) * clampG(H.gauss('p')) + 6 * Math.pow(1 - pf, 1.5) * clampG(H.gauss('fp'));
       const c = 0.55 * C;
       const miss = nat + 22 * Math.pow(iP, 1.1) * tend * venue.play.pitch + reg + (1 - c) * indiv + c * shared;
       const cents = miss + e.ji * jf;
@@ -264,18 +296,18 @@ function perform(ctx){
         const fr = j / pts;
         // アクセントは出だしだけ強く、すぐ元の大きさへ戻す
         let v = vScale(ideal(e.b + e.d * Math.min(1, fr)) * e.sc * (e.solo ? 1.12 : 1) * (e.acc ? 1 + 0.3 * Math.max(0, 1 - 3 * fr) : 1));
-        if(e.d >= 2 && (e.role === 'mel' || e.role === 'mel3' || e.role === 'cm')) v += 0.07 * E * Math.sin(Math.PI * fr);
+        if(e.d >= 2 && (e.role === 'mel' || e.role === 'mel3' || e.role === 'cm')) v += 0.07 * En * Math.sin(Math.PI * fr);
         v *= 1 - 0.35 * Math.pow(iT, 1.3) * fr * fr;
         env.push([d * fr, clamp(v + vj, 0.04, 1)]);
       }
       mine.push({
         mid: m.id, seat: seat.id, sec: p.sec, part: p.part, inst: seat.inst, role: e.role, solo: !!e.solo, b: e.b, db: e.d, tg: b2s(e.b) - off, key: k.join(':'),
-        midi, t, tIdeal, d, cents, err: wrong ? 100 : cents - e.ji, wrong: !!wrong, T, E, R,
+        midi, t, tIdeal, d, cents, err: wrong ? 100 : cents - e.ji, wrong: !!wrong, T, E: En, R,
         scoop: -(0.5 + H('sc')) * 45 * iP * (tb.brass ? 1.2 : 0.6),
         settle: 0.03 + 0.16 * iP,
         sag: -(e.d >= 1.5 ? 22 : 7) * Math.pow(iT, 1.2),
         crack, crackDur: 0.06 + 0.05 * H('cl'),
-        vib: (inst.vib || 0) * E * Math.sqrt(T),
+        vib: (inst.vib || 0) * En * Math.sqrt(T),
         att: tb.att * (1 + 0.9 * iT),
         blat: 1 + (tb.brass ? 0.6 : 0.4) * Math.pow(iT, 1.2),
         bright: 1 + 0.4 * iT,
