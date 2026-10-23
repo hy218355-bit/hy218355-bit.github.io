@@ -116,6 +116,14 @@ const DYN_SPREADS = [0.65, 1, 1.3];
 const RUBATOS = [0.3, 1, 1.6];
 const INTERP_NAMES = {tempo: ['遅め', '標準', '速め'], dyn: ['控えめ', '標準', '大きく'], rub: ['ほぼ一定', '標準', 'たっぷり']};
 
+// 本番の日の調子：z はその日の揺れ（大きいほど緊張に飲まれている）。メンタルが弱いほど平均して下がり、振れ幅も大きい
+function stageDrop(m, nerves, z, fatigue = 0){
+  const steady = clamp01((m.mental ?? 40) / 100);
+  const nv = nerves * (m.grade === 1 ? 1.2 : 1);
+  const freeze = steady < 0.5 && z > 0.8 + 1.6 * steady;           // 頭が真っ白に（緊張しやすいほど起きやすい）
+  const zone = steady > 0.55 && z < -(0.8 + 1.6 * (1 - steady));   // いつも以上の音が出る（落ち着いているほど起きやすい）
+  return {drop: nv * (1.6 - 1.3 * steady) + nv * (1 - steady) * z + (freeze ? 10 : 0) - (zone ? 4 : 0) + fatigue, freeze, zone};
+}
 function perform(ctx){
   const pc = PIECES[ctx.pieceId];
   const seed = ctx.seed || 'band';
@@ -135,12 +143,7 @@ function perform(ctx){
     let drop, freeze = false, zone = false;
     const fatigue = ctx.fatigue || 0;
     if(ctx.form && m.mental != null){
-      // 本番の日の調子：ctx.form[id] は その日の揺れ（大きいほど緊張に飲まれている）。メンタルが弱いほど平均して下がり、振れ幅も大きい
-      const steady = clamp01(m.mental / 100), z = clampG(ctx.form[m.id] ?? 0);
-      const nv = (ctx.nerves || 0) * (m.grade === 1 ? 1.2 : 1);
-      freeze = steady < 0.5 && z > 0.8 + 1.6 * steady;           // 頭が真っ白に（緊張しやすいほど起きやすい）
-      zone = steady > 0.55 && z < -(0.8 + 1.6 * (1 - steady));   // いつも以上の音が出る（落ち着いているほど起きやすい）
-      drop = nv * (1.6 - 1.3 * steady) + nv * (1 - steady) * z + (freeze ? 10 : 0) - (zone ? 4 : 0) + fatigue;
+      ({drop, freeze, zone} = stageDrop(m, ctx.nerves || 0, clampG(ctx.form[m.id] ?? 0), fatigue));
     } else {
       const nerveMul = m.trait === 'nervous' ? 1.6 : m.trait === 'clutch' ? 0.3 : m.trait === 'steady' ? 0.7 : 1;
       drop = (ctx.nerves || 0) * nerveMul * (m.grade === 1 ? 1.3 : 1) + fatigue;
@@ -392,8 +395,8 @@ function analyze(perf){
   // 誰も吹けない旋律・低音（管楽器が一人もいない、など）
   const missingMel = perf.miss?.mel ? ['mel'] : [], missingBass = perf.miss?.bass ? ['low'] : [];
   const wrongRate = wrong / Math.max(50, perf.notes.length + perf.hits.length);
-  // 人数が少ないと響きが薄い（24人より少ないと、少しずつ下がる）
-  const thin = 16 * clamp((24 - (perf.players || 0)) / 20, 0, 1.15);
+  // 人数が少ないと響きが薄い（30人より少ないと、少しずつ下がる）
+  const thin = 16 * clamp((30 - (perf.players || 0)) / 25, 0, 1.15);
   const penalty = Math.min(25, 200 * wrongRate) + missingMel.length * 8 + missingBass.length * 8 + thin;
   return {score, penalty, thin, pitchDev, spread, rhythmMs, drift, cracks, wrong, balanceDb, sec: secOut, missingMel, missingBass, focus: pc.focus, ceiling: pc.ceiling};
 }

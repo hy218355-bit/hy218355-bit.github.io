@@ -45,6 +45,9 @@ const EVENTS = {
        when: s => s.members.filter(m => secOf(m) === 'tp').length >= 2},
   11: {kind: 'concert', id: 'joint', title: '合同演奏会', venue: 'civic', nerves: 4,
        text: '市民会館で近くの高校と合同演奏会。よその学校の先生が講評をくれる。'},
+  12: {kind: 'audition', title: 'コンクールメンバーのオーディション',
+       text: 'コンクールに出るメンバーを決める。自由曲の一節を、一人ずつ吹いてもらった。人数が多いほど響きは厚くなるが、まだ吹けない部員が入ると音がそろわない。',
+       when: s => seated(s).length >= 12},
   13: {kind: 'mod', title: '夏合宿', mult: 1.6, costMult: 1.3, venue: 'camp', text: '合宿所のホールで朝から晩まで合奏。練習の効果が1.6倍、体力の消費も1.3倍。'},
   14: {kind: 'mod', title: '夏合宿・後半', mult: 1.6, costMult: 1.3, venue: 'camp', text: '合宿の後半。疲れはたまるが、音はまとまってくる。'},
   22: {kind: 'concert', id: 'bunkasai', title: '文化祭ステージ', venue: 'gym', nerves: 2,
@@ -102,6 +105,8 @@ function freshState(year = 2026){
 function addLog(s, text){ s.log.push({y: s.year, w: s.week, text}); if(s.log.length > 160) s.log.splice(0, s.log.length - 160); }
 
 const seated = s => s.members.filter(m => m.seat);
+// 本番の舞台に上がる部員（コンクールの週は、オーディションで選んだメンバーだけ）
+const stagers = s => eventAt(s, s.week)?.kind === 'contest' ? seated(s).filter(m => !m.out) : seated(s);
 const bandAvg = (s, k) => { const ms = seated(s); return ms.length ? ms.reduce((a, m) => a + m.stats[k], 0) / ms.length : 0; };
 const secMembers = (s, secId) => seated(s).filter(m => SEAT[m.seat].sec === secId);
 const fatigueOf = s => s.stamina < 30 ? 8 : s.stamina < 50 ? 3 : 0;
@@ -119,14 +124,14 @@ function nervesFor(s, ev){
 function perfCtx(s, o = {}){
   const pid = o.pieceId || s.pieceId || 'largo';
   return {
-    members: o.members || seated(s), pieceId: pid, cohesion: o.cohesion ?? s.cohesion, fam: o.fam ?? s.fam[pid] ?? 0,
+    members: o.members || stagers(s), pieceId: pid, cohesion: o.cohesion ?? s.cohesion, fam: o.fam ?? s.fam[pid] ?? 0,
     interp: o.interp || s.interp, venue: o.venue || 'room', nerves: o.nerves || 0, fatigue: o.fatigue ?? fatigueOf(s),
     seed: 'band', from: o.from, to: o.to,
   };
 }
 function snapshot(s, extra = {}){
   return {
-    members: seated(s).map(m => ({id: m.id, name: m.name, grade: m.grade, seat: m.seat, trait: m.trait, mental: m.mental, stats: {...m.stats}})),
+    members: stagers(s).map(m => ({id: m.id, name: m.name, grade: m.grade, seat: m.seat, trait: m.trait, mental: m.mental, stats: {...m.stats}})),
     cohesion: s.cohesion, fam: s.fam[extra.pieceId || s.pieceId] ?? 0, interp: {...s.interp}, fatigue: fatigueOf(s), ...extra,
   };
 }
@@ -278,6 +283,7 @@ function nextWeek(s){
     if(ev.morale) s.morale = clamp(s.morale + ev.morale, 0, 100);
     if(ev.kind !== 'contest') addLog(s, `【${ev.title}】${ev.text}`);
     else addLog(s, `いよいよ${ev.title}の週。`);
+    if(ev.kind === 'audition') runAudition(s);
   }
   s.episode = pickEpisode(s);
   // 本番の週になったら、その日の部員の調子を決めておく（読み込み直しても変わらない）
@@ -501,6 +507,83 @@ function tuneReward(s0, results){
   return s;
 }
 
+/* ===== コンクールメンバーのオーディション =====
+   コンクールに出るメンバーを選ぶ。一人ずつ自由曲の一節を吹いてもらい（その日の緊張で崩れることもある）、点をつける。
+   選ばなかった部員は控え（m.out）になり、コンクールの舞台には上がらない。秋からはまた全員で吹く。 */
+const AUD_NERVES = 3;
+const audBeats = pc => Math.min(pc.beats, pc.meter >= 4 ? 16 : pc.meter >= 2 ? 16 : 12);
+// 次のコンクール（なければ県大会）
+function nextContest(s){
+  for(let w = s.week; w <= NATIONAL_WEEK; w++){ const ev = eventAt(s, w); if(ev?.kind === 'contest') return {w, ev}; }
+  return {w: PREF_WEEK, ev: EVENTS[PREF_WEEK]};
+}
+const lineupSet = s => !!(s.audition && s.audition.y === s.year && s.audition.decided && !s.finalWeek);
+function auditionScore(s, m){
+  const pc = PIECES[s.pieceId];
+  const z = clampG(gauss(s.audition.seed, m.id, 'aud'));
+  const r = stageDrop(m, AUD_NERVES, z);
+  // 自由曲で問われる力ほど重く見る
+  let sum = 0, wt = 0;
+  for(const k of STAT_KEYS){ const w = pc.focus[k] || 1; sum += w * (m.stats[k] - r.drop * ({tone: 1.15, rhythm: 1, pitch: 0.85, expr: 1}[k])); wt += w; }
+  return {score: Math.round(clamp(sum / wt, 0, 100)), freeze: r.freeze, zone: r.zone};
+}
+// オーディションでその部員が吹いた一節（聴き返す用）
+function auditionCtx(s, m){
+  const pc = PIECES[s.pieceId];
+  return {members: [m], pieceId: s.pieceId, cohesion: s.cohesion, fam: s.fam[s.pieceId] ?? 0, interp: s.interp, venue: 'room',
+    nerves: AUD_NERVES, fatigue: 0, form: {[m.id]: clampG(gauss(s.audition.seed, m.id, 'aud'))}, seed: 'aud', from: 0, to: audBeats(pc)};
+}
+function runAudition(s){
+  if(!s.pieceId) return s;
+  s.audition = {y: s.year, w: s.week, seed: Math.floor(hash(s.year, s.week, s.members.length, 'aud') * 1e9), scores: {}, decided: false};
+  for(const m of seated(s)) s.audition.scores[m.id] = auditionScore(s, m);
+  return s;
+}
+const startAudition = s0 => runAudition(clone(s0));
+// このメンバーで次のコンクールに出たときの目安（その日の調子は入れない）
+function predictContest(s, outIds){
+  const {ev} = nextContest(s);
+  const L = LEVELS[ev.level];
+  const members = seated(s).filter(m => !outIds.has(m.id));
+  if(!members.length) return {avg: 0, award: 'bronze', level: ev.level, n: 0};
+  const perf = perform(perfCtx(s, {members, venue: L.venue, nerves: nervesFor(s, ev), fatigue: 0}));
+  const a = analyze(perf), j = judge(perf, a, ev.level);
+  return {avg: j.avg, award: j.award, level: ev.level, n: members.length, thin: a.thin};
+}
+// おすすめ：オーディションの点が低い順に何人か控えに回して、いちばん点が上がる人数を探す
+function recommendLineup(s){
+  const ms = seated(s).slice().sort((a, b) => (s.audition.scores[a.id]?.score ?? 0) - (s.audition.scores[b.id]?.score ?? 0));
+  let best = {out: new Set(), avg: -1};
+  const tried = new Set();
+  for(const f of [0, 0.1, 0.2, 0.3, 0.4, 0.5]){
+    const k = Math.round(ms.length * f);
+    if(tried.has(k) || ms.length - k < 1) continue;
+    tried.add(k);
+    const out = new Set(ms.slice(0, k).map(m => m.id));
+    const p = predictContest(s, out);
+    if(p.avg > best.avg + 0.3) best = {out, avg: p.avg};
+  }
+  return best.out;
+}
+function setLineup(s0, outIds){
+  const s = clone(s0);
+  const {ev} = nextContest(s);
+  let dm = 0;
+  for(const m of seated(s)){
+    const out = outIds.has(m.id);
+    if(out && !m.out){ remember(s, m, `${s.year}年のコンクールメンバーのオーディションで、選ばれなかった。`); dm -= m.grade === 3 ? 2 : 0.5; }
+    if(!out && m.out) remember(s, m, `${s.year}年のコンクールメンバーに、あとから選ばれた。`);
+    if(!out && !m.out && !s.audition.decided && m.grade === 1) remember(s, m, `1年生で、${s.year}年のコンクールメンバーに選ばれた。`);
+    if(out) m.out = true; else delete m.out;
+  }
+  for(const m of s.members) if(!m.seat) delete m.out;
+  s.morale = clamp(s.morale + Math.max(-8, dm), 0, 100);
+  const n = seated(s).filter(m => !m.out).length, off = seated(s).length - n;
+  addLog(s, `${ev.title}に出るメンバーが決まった。${n}人で出場する${off ? `（控え${off}人）` : '（全員で出る）'}。`);
+  s.audition.decided = true;
+  return s;
+}
+
 /* ===== 演奏会・コンクール ===== */
 // 本番を始めるときの条件をそろえて記録する（音は画面側で鳴らす）
 function beginStage(s0){
@@ -575,7 +658,7 @@ function bandForm(s){
 function stageForm(s){
   if(!s.stageDay) return null;
   const f = {}, zb = bandForm(s);
-  for(const m of seated(s)) f[m.id] = Math.round((0.55 * zb + 0.84 * gauss(s.stageDay.seed, m.id, 'form') - (s.stageDay.calm.includes(m.id) ? 0.7 : 0)) * 100) / 100;
+  for(const m of stagers(s)) f[m.id] = Math.round((0.55 * zb + 0.84 * gauss(s.stageDay.seed, m.id, 'form') - (s.stageDay.calm.includes(m.id) ? 0.7 : 0)) * 100) / 100;
   return f;
 }
 const wingActions = s => s.stageDay ? s.stageDay.calm.length + (s.stageDay.huddle ? 1 : 0) : 0;
@@ -583,7 +666,7 @@ const wingActions = s => s.stageDay ? s.stageDay.calm.length + (s.stageDay.huddl
 function tenseMembers(s){
   const f = stageForm(s);
   if(!f) return [];
-  return seated(s).filter(m => (m.mental ?? 40) < 50 && (f[m.id] > 0.6 || s.stageDay.calm.includes(m.id)))
+  return stagers(s).filter(m => (m.mental ?? 40) < 50 && (f[m.id] > 0.6 || s.stageDay.calm.includes(m.id)))
     .sort((a, b) => (f[b.id] + (s.stageDay.calm.includes(b.id) ? 0.7 : 0)) - (f[a.id] + (s.stageDay.calm.includes(a.id) ? 0.7 : 0))).slice(0, 3);
 }
 function calmMember(s0, mid){
@@ -598,7 +681,7 @@ function huddle(s0){
 }
 // 本番のあと：場数を踏んだぶんメンタルが強くなる。頭が真っ白になった部員・いつも以上だった部員は思い出に残る
 function stageAftermath(s, ev, p){
-  for(const m of seated(s)) m.mental = clamp((m.mental ?? 40) + (ev.kind === 'contest' ? 4 : 2), 0, 100);
+  for(const m of stagers(s)) m.mental = clamp((m.mental ?? 40) + (ev.kind === 'contest' ? 4 : 2), 0, 100);
   for(const x of p.mental || []){
     const m = s.members.find(y => y.id === x.mid);
     if(!m) continue;
@@ -669,6 +752,8 @@ function startAutumn(s){
   s.autumnFrom = s.week;
   s.contestPiece = s.pieceId;
   s.chooseFinal = true;
+  if(s.members.some(m => m.out)) addLog(s, 'コンクールの控えだった部員も、秋からはまた全員で吹く。');
+  for(const m of s.members) delete m.out;
   addLog(s, `コンクールが終わった。3年生の最後の本番は、${wkLabel(s.finalWeek)}の定期演奏会。`);
   if(s.week < 19){ s.week = 19; addLog(s, '夏休みが明けて、2学期が始まった。'); }
   return nextWeek(s);
@@ -704,6 +789,8 @@ function newYear(s0){
   for(const r of s.recruits || []) r.grade = Math.min(3, (r.grade || 1) + 1);
   s.year++; s.week = 0; s.phase = 'choose'; s.pieceId = null; s.season = []; s.pending = null;
   s.finalWeek = null; s.autumnFrom = null; s.contestPiece = null; s.chooseFinal = false;
+  for(const m of s.members) delete m.out;
+  s.audition = null;
   s.cohesion = Math.round(s.cohesion * 0.6); s.fam = freshFam(); s.morale = 70; s.hallExp = 0; s.lastDelta = {}; s.plan = {}; s.recruitWhen = null;
   // 評判は、年が変わると少しだけ忘れられる
   s.rep = Math.round((s.rep ?? 30) * 0.9 * 10) / 10;
@@ -776,7 +863,9 @@ function assignRecruits(s0, map){
     const base = (r.exp && match ? 30 : r.exp ? 16 : 6) + (g - 1) * (r.exp ? 8 : 4);
     const stats = makeStats(base, r.exp ? 5 : 3, 'stat', r.id);
     s.members.push({id: r.id, name: r.name, grade: g, joinGrade: g, seat, trait: r.trait, joined: s.year, exp: !!r.exp, mental: mentalInit(r.trait, g, 'stat', r.id) + (r.exp ? 6 : 0),
-      stats, first: {y: s.year, w: s.week, stats: {...stats}}, hope: r.hope, sta: Math.round(s.members.length ? s.stamina : 100), policy: 'auto'});
+      stats, first: {y: s.year, w: s.week, stats: {...stats}}, hope: r.hope, sta: Math.round(s.members.length ? s.stamina : 100), policy: 'auto',
+      // コンクールのメンバーが決まったあとに入った部員は、今年のコンクールには出ない
+      ...(lineupSet(s) ? {out: true} : {})});
   }
   const n = (s.recruits || []).length;
   s.morale = clamp(s.morale + happy * 1.5 - (n - happy), 0, 100);

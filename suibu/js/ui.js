@@ -9,6 +9,7 @@ const U = {
   shown: null, shownLabel: '', perfNow: null, diag: null, ptr: null, raf: 0, onEnd: null, playing: false,
   lab: {pitch: 100, rhythm: 100, tone: 100, expr: 0, cohesion: 100, fam: 100}, labPreset: 1, refreshT: 0,
   tab: 'week', tabScroll: {},
+  lineup: false, draft: null, pred: null, predKey: '', predT: 0,
 };
 const UI_KEY = 'suibu-ui-v2';
 
@@ -584,6 +585,8 @@ function renderWeek(){
   }
   head.textContent = `${wkLabel(S.week)}`;
   if(S.pending) return renderStageResult(w, ev);
+  // オーディション：その週に入ったら、メンバーを決めるまで先へ進めない（コンクールの前に見直すこともできる）
+  if(U.lineup || (ev?.kind === 'audition' && S.audition?.y === S.year && !S.audition.decided)) return renderAudition(w, ev);
   if(ev && (ev.kind === 'concert' || ev.kind === 'contest')){
     const n = nervesFor(S, ev), v = VENUE[ev.venue];
     w.innerHTML = `<div class="stagecard"><span class="tag">${ev.kind === 'contest' ? 'コンクール' : '本番'}</span><h3>${ev.title}</h3>
@@ -593,7 +596,7 @@ function renderWeek(){
       ${wingsHtml()}
       <div class="transport"><button class="btn primary" type="button" data-act="stage">本番の演奏をはじめる</button><button class="btn brass" type="button" data-act="stageconduct">自分で指揮する</button></div>
       <p class="small">自分で指揮すると、その指揮で演奏した結果が審査される。テンポが大きく揺れると、リズムの苦手な部員ほどついてこられない。</p>
-      ${ev.kind === 'contest' ? '<p class="small">コンクールに出るのは、席についている部員だけ。まだ吹けない部員を控えに回すと、人数は減るが音はそろう（部員を選んで「席を移す」）。</p>' : ''}</div>`;
+      ${ev.kind === 'contest' ? lineupLine() : ''}</div>`;
     return;
   }
   if(ev?.kind === 'forced'){
@@ -635,6 +638,53 @@ function renderAssign(w, ev){
     <p class="small" id="assignErr"></p>
     <button class="btn primary" type="button" data-act="assign">この担当で決める</button>`;
 }
+// コンクールに出るメンバーの人数と、決め直すボタン
+function lineupLine(){
+  const ms = seated(S), off = ms.filter(m => m.out).length;
+  const set = lineupSet(S);
+  return `<div class="lineup-line"><span class="small">コンクールの出場メンバー：${set ? `${ms.length - off}人${off ? `（控え${off}人）` : '（全員）'}` : `まだ決めていない（このままだと全員の${ms.length}人）`}</span>
+    <button class="btn small" type="button" data-act="lineupopen">${set ? 'メンバーを変える' : 'メンバーを決める'}</button></div>`;
+}
+// オーディションの画面：一人ずつの点と、選んだメンバーで出たときの点の目安
+const audScore = m => (S.audition.scores[m.id] || auditionScore(S, m));
+function renderAudition(w, ev){
+  if(!S.audition || S.audition.y !== S.year){ commit(startAudition(S)); }
+  if(!U.draft) U.draft = new Set(seated(S).filter(m => m.out).map(m => m.id));
+  const {ev: cev} = nextContest(S);
+  const order = m => SEATS.findIndex(x => x.id === m.seat);
+  const secs = SECTIONS.map(sec => [sec, seated(S).filter(m => SEAT[m.seat].sec === sec.id).sort((a, b) => audScore(b).score - audScore(a).score || order(a) - order(b))]).filter(([, ms]) => ms.length);
+  const C = tok();
+  const rows = secs.map(([sec, ms]) => `<li class="psec">${sec.name}</li>` + ms.map(m => {
+    const a = audScore(m), inn = !U.draft.has(m.id);
+    return `<li class="am${inn ? '' : ' off'}"><label><input type="checkbox" data-aout="${m.id}"${inn ? ' checked' : ''}><span class="who"><b>${esc(m.name)}</b><small>${m.grade}年・${esc(PART_LABEL[SEAT[m.seat].part])}${a.freeze ? '・緊張で崩れた' : a.zone ? '・いつも以上の出来' : ''}</small></span></label>
+      <span class="sc"><span class="track"><span class="fill" style="width:${a.score}%;background:${skillColor(C, a.score)}"></span></span><b>${a.score}</b></span>
+      <button class="btn small" type="button" data-audplay="${m.id}" aria-label="${esc(m.name)}のオーディションを聴く">▶</button></li>`;
+  }).join('')).join('');
+  const intro = ev?.kind === 'audition' && !S.audition.decided ? ev.text : `${cev.title}に出るメンバーを決める。オーディションの点を見て、出る人にチェックを入れよう。`;
+  w.innerHTML = `<div class="event"><span class="tag">オーディション</span><span>${intro}</span></div>
+    <p class="small">点は、自由曲で問われる力（${PIECES[S.pieceId].asks}）と、その日の緊張で決まる。メンタルの弱い部員は、緊張で崩れることもある。チェックを外した部員は控えになり、コンクールの舞台には上がらない（練習はいつもどおり。秋からはまた全員で吹く）。</p>
+    <div class="aud-pred" id="audPred" aria-live="polite"></div>
+    <div class="chips"><button class="chip" type="button" data-aud="all">全員出る</button><button class="chip" type="button" data-aud="best">おすすめのメンバーにする</button><button class="chip" type="button" data-aud="listen">▶ このメンバーで聴く</button></div>
+    <ul class="plist alist">${rows}</ul>
+    <div class="transport"><button class="btn primary" type="button" data-act="lineup">このメンバーで決める</button>${S.audition.decided ? '<button class="btn quiet" type="button" data-aud="cancel">変えずにもどる</button>' : ''}</div>`;
+  updatePred(true);
+}
+// 選んだメンバーで出たときの点の目安（メンバーを変えるたびに計算し直す）
+function updatePred(soon){
+  const el = $('#audPred'); if(!el) return;
+  const out = U.draft || new Set();
+  const n = seated(S).length - [...out].filter(id => memberById(id)?.seat).length;
+  const {ev} = nextContest(S), L = LEVELS[ev.level];
+  const key = S.year + ':' + S.week + ':' + [...out].sort().join(',');
+  const show = p => {
+    const nm = {gold: '金賞', silver: '銀賞', bronze: '銅賞'}[p.award];
+    el.innerHTML = `<b>${n}人で出ると、${L.name}で審査員平均 ${p.avg.toFixed(1)}点（${nm}）くらい</b><span class="small">金賞の目安は${L.gold}点、${L.rep ? `代表は3人ともA（${L.A}点）。` : ''}${p.thin >= 6 ? '人数が少ないぶん、響きが薄いと見られる。' : ''}本番の日の調子で、上下する。</span>`;
+  };
+  if(U.predKey === key && U.pred){ show(U.pred); return; }
+  el.innerHTML = `<b>${n}人で出ると……</b><span class="small">計算中</span>`;
+  clearTimeout(U.predT);
+  U.predT = setTimeout(() => { U.pred = predictContest(S, out); U.predKey = key; if($('#audPred')) show(U.pred); }, soon ? 30 : 120);
+}
 // 今週の練習：部員ひとりずつに、方針と今週の指示
 const menuLabel = (id, cm = 1) => { const m = MENU_BY[id]; return `${m.name}：${m.hint.replace(/　/g, ' ')}（体力${m.cost > 0 ? '−' + Math.round(m.cost * cm) : '+' + (-m.cost)}）`; };
 const lastText = m => {
@@ -659,7 +709,7 @@ function planHtml(ev){
     sec = s;
     const auto = decideMenu(S, m), own = S.plan?.[m.id] && menuOpen(S, S.plan[m.id]) ? S.plan[m.id] : '';
     const c = m.sta >= 60 ? 'good' : m.sta >= 30 ? 'warn' : 'bad';
-    return `${head}<li class="pm${own ? ' own' : ''}"><span class="who"><b>${esc(m.name)}</b><small>${m.grade}年・${m.seat ? esc(PART_LABEL[SEAT[m.seat].part]) : '控え'}</small></span>
+    return `${head}<li class="pm${own ? ' own' : ''}"><span class="who"><b>${esc(m.name)}</b><small>${m.grade}年・${m.seat ? esc(PART_LABEL[SEAT[m.seat].part]) : '控え'}${m.out && m.seat ? '・コンクール控え' : ''}</small></span>
       <span class="sta" title="体力 ${Math.round(m.sta)}"><span class="track"><span class="fill ${c}" style="width:${clamp(m.sta, 0, 100)}%"></span></span><b>${Math.round(m.sta)}</b></span>
       <label class="pol"><span>方針</span><select data-pol="${m.id}" aria-label="${esc(m.name)}の方針">${POLICIES.map(p => `<option value="${p.id}"${(m.policy || 'auto') === p.id ? ' selected' : ''}>${p.name}</option>`).join('')}</select></label>
       <label class="pw"><span>今週</span><select data-plan="${m.id}" aria-label="${esc(m.name)}の今週の練習"><option value="">方針どおり（${MENU_BY[auto].name}）</option>${menus.map(x => `<option value="${x.id}"${own === x.id ? ' selected' : ''}>${menuLabel(x.id, cm)}</option>`).join('')}</select></label>
@@ -672,6 +722,7 @@ function planHtml(ev){
     <div class="focus"><span>全員の方針をまとめて変える</span><div class="chips">${POLICIES.map(p => `<button class="chip" type="button" data-polall="${p.id}" aria-pressed="${allPol === p.id}" title="${esc(p.desc)}">${p.name}</button>`).join('')}</div>
     <span class="small">${allPol ? `${POLICY_BY[allPol].name}：${POLICY_BY[allPol].desc}` : '方針は部員ごとにちがう。'}</span></div>
     <ul class="plist">${rows}</ul>
+    ${S.pieceId && !S.finalWeek && S.week >= 8 && nextContest(S).w > S.week ? lineupLine() : ''}
     <p class="small plan-sum">今週の予定：${sum}${tutti === 1 ? '（合奏は2人以上いないとできない）' : ''}</p>
     ${tired ? `<p class="small">体力が30を切っている部員が${tired}人。休ませないと、練習の効果が半分になる。</p>` : ''}
     <button class="btn primary" type="button" data-act="practice">この内容で1週間すすめる</button>
@@ -835,7 +886,7 @@ function renderRoster(){
 }
 function memberRow(m, part){
   const C = tok();
-  return `<tr class="mem${U.sel === m.id ? ' sel' : ''}" data-mid="${m.id}"><td>${esc(m.name)}${m.title ? ` <span class="tag">${m.title}</span>` : ''}</td><td>${m.grade}年</td><td>${part}</td>`
+  return `<tr class="mem${U.sel === m.id ? ' sel' : ''}" data-mid="${m.id}"><td>${esc(m.name)}${m.title ? ` <span class="tag">${m.title}</span>` : ''}</td><td>${m.grade}年</td><td>${part}${m.out && m.seat ? '<small>（コンクール控え）</small>' : ''}</td>`
     + STAT_KEYS.map(k => `<td class="num" style="color:${skillColor(C, m.stats[k])}">${Math.round(m.stats[k])}</td>`).join('')
     + `<td>${m.trait ? TRAITS[m.trait].name : ''}</td></tr>`;
 }
@@ -979,6 +1030,25 @@ function bind(){
   $('#week').addEventListener('click', e => {
     const b = e.target.closest('button'); if(!b || b.disabled) return;
     if(b.dataset.polall){ commit(setPolicy(S, '*', b.dataset.polall)); renderWeek(); return; }
+    if(b.dataset.audplay){
+      const m = memberById(b.dataset.audplay); if(!m) return;
+      setVenue('room');
+      playPerf(perform(auditionCtx(S, m)), `オーディション：${m.name}（${instOf(m)}）`);
+      return;
+    }
+    if(b.dataset.aud){
+      const a = b.dataset.aud;
+      if(a === 'all'){ U.draft = new Set(); renderWeek(); }
+      else if(a === 'best'){ $('#audPred').innerHTML = '<b>おすすめのメンバーを探しています……</b>'; setTimeout(() => { U.draft = recommendLineup(S); renderWeek(); }, 30); }
+      else if(a === 'listen'){
+        const {ev} = nextContest(S);
+        setVenue(LEVELS[ev.level].venue);
+        const members = seated(S).filter(m => !U.draft.has(m.id));
+        playPerf(perform(perfCtx(S, {members, venue: LEVELS[ev.level].venue, fatigue: 0})), `オーディションで選んだ${members.length}人（${VENUE[LEVELS[ev.level].venue].name}）`);
+      }
+      else if(a === 'cancel'){ U.lineup = false; U.draft = null; renderWeek(); }
+      return;
+    }
     if(b.dataset.ep !== undefined){ haptic('tap'); commit(resolveEpisode(S, +b.dataset.ep)); renderAll(); refreshNow(); return; }
     const act = b.dataset.act;
     if(act === 'preview'){ U.piece = b.dataset.pid; U.range = 'all'; renderPiece(); renderInterp(); U.perfNow = perform(currentCtx()); U.diag = analyze(U.perfNow); renderDiag(); playPerf(U.perfNow, `試聴：${PIECES[b.dataset.pid].title}${(S.fam[b.dataset.pid] || 0) < 5 ? '（譜読み前）' : ''}`); }
@@ -989,6 +1059,11 @@ function bind(){
     else if(act === 'choosefinal'){ stopPlay(); commit(chooseFinalPiece(S, b.dataset.pid)); U.piece = null; renderAll(); refreshNow(); }
     else if(act === 'test'){ commit(practiceWeek(S, 'test')); renderAll(); refreshNow(); }
     else if(act === 'practice'){ if(busy()) return; haptic('tap'); commit(practiceWeek(S)); renderAll(); refreshNow(); }
+    else if(act === 'lineupopen'){ if(!S.audition || S.audition.y !== S.year) commit(startAudition(S)); U.lineup = true; U.draft = null; renderWeek(); $('#week').scrollIntoView({block: 'start'}); }
+    else if(act === 'lineup'){
+      if(seated(S).every(m => U.draft.has(m.id))){ $('#audPred').innerHTML = '<b>だれも出ないことになってしまう。1人以上は選ぼう。</b>'; return; }
+      haptic('tap'); commit(setLineup(S, U.draft)); U.lineup = false; U.draft = null; renderAll(); refreshNow();
+    }
     else if(act === 'assign'){
       const map = {}, used = new Set();
       for(const r of S.recruits){
@@ -1015,6 +1090,12 @@ function bind(){
   });
   $('#week').addEventListener('change', e => {
     const t = e.target;
+    if(t.dataset.aout){
+      if(t.checked) U.draft.delete(t.dataset.aout); else U.draft.add(t.dataset.aout);
+      t.closest('.am')?.classList.toggle('off', !t.checked);
+      updatePred();
+      return;
+    }
     if(t.dataset.pol){ commit(setPolicy(S, t.dataset.pol, t.value)); renderWeek(); }
     else if(t.dataset.plan){ commit(setPlan(S, t.dataset.plan, t.value || null)); renderWeek(); }
   });
@@ -1047,7 +1128,7 @@ function bind(){
     }
     rs.classList.remove('armed'); rs.textContent = '最初からやり直す';
     stopPlay();
-    commit(freshState(2026)); U.sel = null; U.piece = null; U.view = 'mel';
+    commit(freshState(2026)); U.sel = null; U.piece = null; U.view = 'mel'; U.lineup = false; U.draft = null;
     renderAll(); refreshNow();
   });
   bindConduct();
