@@ -11,25 +11,31 @@ function nn(name){
   if(!m) throw new Error('音名が読めません: ' + name);
   return 12 * (+m[3] + 1) + PC[m[1]] + (m[2] === '#' ? 1 : m[2] === 'b' ? -1 : 0);
 }
-// "E4:1.5 G4:.5 | r:1" → [{m, b, d}]（拍単位、":"がなければ1拍）。末尾の ' はスタッカート、> はアクセント
+// "E4:1.5 G4:.5 | r:1" → [{m, b, d}]（拍単位、":"がなければ1拍）。末尾の ' はスタッカート、> はアクセント、
+// ~ はトリル（その調の1つ上の音と交互に）、* はトレモロ（同じ音をすばやくくり返す）。頭の (A5) は前打音（(A5,B5) で2つ）
 function line(src, from = 0){
   const out = [];
   let b = from;
   for(const tok of src.split(/\s+/)){
     if(!tok || tok === '|') continue;
-    const mk = /^([^:'>]+)(?::([\d.]+))?(['>]*)$/.exec(tok);
+    const mk = /^(?:\(([^)]+)\))?([^:'>~*()]+)(?::([\d.]+))?(['>~*]*)$/.exec(tok);
     if(!mk) throw new Error('音符が読めません: ' + tok);
-    const d = mk[2] ? +mk[2] : 1;
-    if(mk[1] !== 'r'){
-      const e = {m: nn(mk[1]), b, d};
-      if(mk[3].includes("'")) e.st = true;
-      if(mk[3].includes('>')) e.acc = true;
+    const d = mk[3] ? +mk[3] : 1;
+    if(mk[2] !== 'r'){
+      const e = {m: nn(mk[2]), b, d};
+      if(mk[4].includes("'")) e.st = true;
+      if(mk[4].includes('>')) e.acc = true;
+      if(mk[4].includes('~')) e.tr = true;
+      if(mk[4].includes('*')) e.trem = true;
+      if(mk[1]) e.gr = mk[1].split(',').map(nn);
       out.push(e);
     }
     b += d;
   }
   return out;
 }
+// 装飾音（前打音・トリル・トレモロ）を、音の高さを sh だけ移して写す
+const ornOf = (e, sh = 0) => ({...(e.gr ? {gr: e.gr.map(g => g + sh)} : {}), ...(e.tr ? {tr: true} : {}), ...(e.trem ? {trem: true} : {})});
 const CHORD_Q = {
   '':   {q: 'maj',  iv: [0, 4, 7]},
   'm':  {q: 'min',  iv: [0, 3, 7]},
@@ -236,13 +242,13 @@ function arrangement(pid){
         for(const e of pc.mel.filter(e => inRange(e, sg))){
           const c = chordAt(pc, e.b);
           const m0 = sg.r === 'mel' ? e.m : thirdBelow(e.m, c, sectionAt(pc.scale, e.b, SCALE));
-          push(part, {...base, m: m0 + sg.sh, b: e.b, d: e.d, ji: jiOf(m0 + sg.sh, c), ...marks(e)});
+          push(part, {...base, m: m0 + sg.sh, b: e.b, d: e.d, ji: jiOf(m0 + sg.sh, c), ...marks(e), ...ornOf(e, m0 + sg.sh - e.m)});
         }
       } else if(sg.r === 'cm'){
         // 対旋律：line があれば pc.lines の中のその線（パートごとに別の線を吹ける）
         for(const e of (sg.line ? pc.lines[sg.line] : pc.cm).filter(e => inRange(e, sg))){
           const c = chordAt(pc, e.b);
-          push(part, {...base, m: e.m + sg.sh, b: e.b, d: e.d, ji: jiOf(e.m, c), ...marks(e)});
+          push(part, {...base, m: e.m + sg.sh, b: e.b, d: e.d, ji: jiOf(e.m, c), ...marks(e), ...ornOf(e, sg.sh)});
         }
       } else if(sg.r === 'pad'){
         const g = pc.groups[sg.g];
@@ -262,7 +268,7 @@ function arrangement(pid){
           if(sg.rh === 'march') push(part, {...base, m, b: e.b, d: Math.min(e.d, .8), ji: jiOf(e.m, c), art: e.st ? 'stac' : 'norm', ...(e.acc ? {acc: true} : {})});
           else if(sg.rh === 'half') push(part, {...base, m, b: e.b, d: 1, ji: jiOf(e.m, c), art: 'norm', ...(e.acc ? {acc: true} : {})});
           else if(sg.rh === 'pizz') push(part, {...base, m, b: e.b, d: 1, ji: jiOf(e.m, c), inst: 'cbpizz', kind: 'hit'});
-          else push(part, {...base, m, b: e.b, d: e.d, ji: jiOf(e.m, c), ...marks(e)});
+          else push(part, {...base, m, b: e.b, d: e.d, ji: jiOf(e.m, c), ...marks(e), ...ornOf(e, sg.sh)});
         }
       }
     }
@@ -284,8 +290,8 @@ function finishPart(pc, part, evs){
     const inst = INST[e.inst || PART_INST[part]];
     if(!inst || !inst.range) continue;
     const s = e.m + pc.trans;
-    if(s < inst.range[0]) e.m += 12 * Math.ceil((inst.range[0] - s) / 12);
-    else if(s > inst.range[1]) e.m -= 12 * Math.ceil((s - inst.range[1]) / 12);
+    const mv = s < inst.range[0] ? 12 * Math.ceil((inst.range[0] - s) / 12) : s > inst.range[1] ? -12 * Math.ceil((s - inst.range[1]) / 12) : 0;
+    if(mv){ e.m += mv; if(e.gr) e.gr = e.gr.map(g => g + mv); }
   }
   // つなぎ方：スラー／やわらかいタンギング／普通のタンギング（曲や区間ごとの slur で決める）
   for(let i = 0; i < evs.length; i++){
@@ -375,14 +381,14 @@ function reduction(pid, present){
       const p = wind.filter(q => !busy.has(q)).sort(byPref)[0];
       if(p){
         const sh = shiftTo(p, melMed, 6, 4);
-        give(p, melBy[bar].map(e => ({role: 'mel', sc: ROLE_SCALE.mel, m: e.m + sh, b: e.b, d: e.d, ji: jiOf(e.m + sh, chordAt(pc, e.b)), ...marks(e)})));
+        give(p, melBy[bar].map(e => ({role: 'mel', sc: ROLE_SCALE.mel, m: e.m + sh, b: e.b, d: e.d, ji: jiOf(e.m + sh, chordAt(pc, e.b)), ...marks(e), ...ornOf(e, sh)})));
       } else miss.mel.push(bar * M);
     }
     if(need[bar].bass && !has('bass')){
       const p = wind.filter(free).sort((a, b) => instOfPart(a).center - instOfPart(b).center)[0];
       if(p){
         const sh = shiftTo(p, bassMed, 2, 8);
-        give(p, bassBy[bar].map(e => ({role: 'bass', sc: ROLE_SCALE.bass, m: e.m + sh, b: e.b, d: e.d, ji: jiOf(e.m, chordAt(pc, e.b)), ...marks(e)})));
+        give(p, bassBy[bar].map(e => ({role: 'bass', sc: ROLE_SCALE.bass, m: e.m + sh, b: e.b, d: e.d, ji: jiOf(e.m, chordAt(pc, e.b)), ...marks(e), ...ornOf(e, sh)})));
       } else if(!wind.length) miss.bass.push(bar * M);
     }
     if(need[bar].harm && !has('harm') && wind.length >= 3){
