@@ -142,6 +142,11 @@ function stageDrop(m, nerves, z, fatigue = 0){
   const zone = steady > 0.55 && z < -(0.8 + 1.6 * (1 - steady));   // いつも以上の音が出る（落ち着いているほど起きやすい）
   return {drop: nv * (1.6 - 1.3 * steady) + nv * (1 - steady) * z + (freeze ? 10 : 0) - (zone ? 4 : 0) + fatigue, freeze, zone};
 }
+// トリルの上の音までの幅（半音いくつ）。その拍の音階（pc.scale、書いた音の高さで）の1つ上の音
+function trillStep(pc, m, b){
+  const sc = sectionAt(pc.scale, b, SCALE);
+  return sc.includes((m + 1) % 12) ? 1 : 2;
+}
 function perform(ctx){
   const pc = PIECES[ctx.pieceId];
   const seed = ctx.seed || 'band';
@@ -300,7 +305,7 @@ function perform(ctx){
         v *= 1 - 0.35 * Math.pow(iT, 1.3) * fr * fr;
         env.push([d * fr, clamp(v + vj, 0.04, 1)]);
       }
-      mine.push({
+      const note = {
         mid: m.id, seat: seat.id, sec: p.sec, part: p.part, inst: seat.inst, role: e.role, solo: !!e.solo, b: e.b, db: e.d, tg: b2s(e.b) - off, key: k.join(':'),
         midi, t, tIdeal, d, cents, err: wrong ? 100 : cents - e.ji, wrong: !!wrong, T, E: En, R,
         scoop: -(0.5 + H('sc')) * 45 * iP * (tb.brass ? 1.2 : 0.6),
@@ -313,7 +318,24 @@ function perform(ctx){
         bright: 1 + 0.4 * iT,
         art: e.art, slur: !!e.slur, leg: !!e.leg, env,
         weight: (ROLE_WEIGHT[e.role] || 1) * (e.solo ? 1.5 : 1),
-      });
+      };
+      // 前打音：拍の少し前に短く入れる（リズムの力があるほど短く、はっきり）
+      if(e.gr?.length){
+        const gd = 0.05 + 0.04 * iR, v0 = env[0][1] * 0.9;
+        e.gr.forEach((g, i) => mine.push({...note, midi: g + pc.trans + wrong, t: Math.max(0, t - gd * (e.gr.length - i)), d: gd, env: [[0, v0], [gd, v0]],
+          orn: true, art: 'slur', slur: true, leg: true, crack: 0, weight: note.weight * 0.3}));
+      }
+      // トリル（その調の1つ上の音と交互に）・トレモロ（同じ音をくり返す）：うまい人ほど速く、粒がそろう
+      if(e.tr || e.trem){
+        const step = 1 / (e.tr ? 9 + 5 * R : 7 + 4 * R);
+        const up = e.tr ? trillStep(pc, e.m, e.b) : 0, n = Math.max(2, Math.floor(d / step));
+        for(let j = 0; j < n; j++){
+          const o = j * step, tj = t + o + 0.3 * step * Math.pow(iR, 1.2) * clampG(H.gauss('tr' + j));
+          const dj = j === n - 1 ? d - o : step * (e.tr ? 1 : 0.55);
+          mine.push({...note, midi: midi + (j % 2 ? up : 0), t: tj, d: dj, env: [[0, interp(env, o)], [dj, interp(env, Math.min(d, o + dj))]],
+            orn: j > 0, art: j && e.tr ? 'slur' : e.tr ? note.art : 'stac', slur: j ? !!e.tr : note.slur, leg: !!e.tr && j < n - 1, ...(j ? {crack: 0} : {})});
+        }
+      } else mine.push(note);
     });
     mine.sort((a, b) => a.t - b.t);
     for(let i = 0; i < mine.length; i++){
@@ -365,7 +387,7 @@ function analyze(perf){
   for(const h of perf.hits){ if(h.wrong) wrong++; }
   // ユニゾンのばらつき（同じパートの同じ音どうし）
   const groups = {};
-  for(const n of perf.notes){ if(!n.wrong) (groups[n.part + ':' + n.b] ||= []).push(n); }
+  for(const n of perf.notes){ if(!n.wrong && !n.orn) (groups[n.part + ':' + n.b] ||= []).push(n); }
   let sW = 0, sE = 0;
   for(const g of Object.values(groups)){
     if(g.length < 2) continue;
@@ -374,7 +396,7 @@ function analyze(perf){
   }
   // 縦の線：同じ拍に出る音どうしの出だしのずれ
   const beats = {};
-  for(const x of [...perf.notes, ...perf.hits]) (beats[Math.round(x.b * 4)] ||= []).push(x);
+  for(const x of [...perf.notes, ...perf.hits]) if(!x.orn) (beats[Math.round(x.b * 4)] ||= []).push(x);
   let rW = 0, rE = 0;
   for(const g of Object.values(beats)){
     if(g.length < 2) continue;
