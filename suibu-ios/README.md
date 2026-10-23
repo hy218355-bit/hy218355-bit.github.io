@@ -36,7 +36,7 @@
    - `ASC_ISSUER_ID`：発行者ID
    - `ASC_KEY_P8`：ダウンロードした `.p8` ファイルの中身（テキストのまま）
    - `APPLE_TEAM_ID`：チームID（10文字）
-4. Actions →「TestFlight」→ Run workflow。main に入る前は、`testflight-` で始まるタグ（例：`testflight-1`）を push すると動く
+4. Actions →「TestFlight」→ Run workflow。main に入る前は、`testflight-` で始まるタグ（例：`testflight-1`）を push するか、`claude/` のブランチにメッセージに `[testflight]` を含むコミットを push すると動く
 
 署名は Xcode の自動署名にまかせ、ビルド番号はアップロードのときに Xcode が重ならないよう決めます。
 

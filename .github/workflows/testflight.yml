@@ -7,15 +7,20 @@
 # 3. GitHub のリポジトリ → Settings → Secrets and variables → Actions に入れる
 #      Secrets：ASC_KEY_ID（キーID）、ASC_ISSUER_ID（発行者ID）、ASC_KEY_P8（.p8 ファイルの中身）、APPLE_TEAM_ID（チームID）
 #      Variables（任意）：SUIBU_BUNDLE_ID（Bundle ID を変えるとき）
-# 実行のしかた：Actions →「TestFlight」→ Run workflow（main に入ってから）、または testflight- で始まるタグを push する（どのブランチでも）
+# 実行のしかた（どれか）
+#   - Actions →「TestFlight」→ Run workflow（main に入ってから）
+#   - testflight- で始まるタグを push する
+#   - claude/ のブランチに、メッセージに [testflight] を含むコミットを push する
 # 署名は Xcode の自動署名にまかせる。ビルド番号は Xcode がアップロードのときに重ならないよう決める
 name: TestFlight
 on:
   workflow_dispatch:
   push:
     tags: ['testflight-*']
+    branches: ['claude/**']
 jobs:
   upload:
+    if: github.event_name == 'workflow_dispatch' || startsWith(github.ref, 'refs/tags/testflight-') || contains(github.event.head_commit.message, '[testflight]')
     runs-on: macos-15
     timeout-minutes: 45
     defaults:
