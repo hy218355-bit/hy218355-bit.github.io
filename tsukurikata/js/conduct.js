@@ -23,7 +23,10 @@ function openConduct(stage = null){
   if(!E.ensure()) return;
   if(E.ac.state === 'suspended') E.ac.resume();
   CD.stage = stage;
+  soloAll();   // 指揮するときは、全員の音で
   CD.perf = stage ? perform(recCtx(stage.rec)) : perform(currentCtx());
+  // 舞台にいる部員（本番ならオーディションで選んだメンバー）を、指揮台から見えるように描く
+  CD.who = new Set([...CD.perf.notes, ...CD.perf.hits].map(n => n.mid));
   CD.phase = 'count'; CD.count = []; CD.lv = []; CD.level = 1; CD.clock = null; CD.rec = null; CD.lastTap = 0; CD.idleHint = false; CD.beatShown = -1; CD.tmHint = null;
   CD.judge = {p: 0, g: 0, e: 0, l: 0}; CD.combo = 0; CD.best = 0;
   $('#cdCombo').textContent = '';
@@ -44,6 +47,7 @@ function openConduct(stage = null){
   cdDrawPattern(-1);
   $('#conduct').hidden = false;
   document.documentElement.classList.add('conducting');
+  drawStage(-1, $('#cdStage'), CD.who);
   $('#cdPad').focus({preventScroll: true});
   cancelAnimationFrame(CD.raf);
   CD.raf = requestAnimationFrame(cdFrame);

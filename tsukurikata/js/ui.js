@@ -130,6 +130,7 @@ function playPerf(perf, label, onEnd, opts = {}){
     if(!E.pb) return;
     const t = E.now();
     if(!tabHidden('play')){ drawStage(t); drawRoll(U.shown, t); }
+    if(!$('#conduct').hidden) drawStage(t, $('#cdStage'), CD.who);
     if(t > U.shown.total + 0.8){
       const p = E.pb; E.pb = null; p.finish();
       endPlay(true);
@@ -190,8 +191,9 @@ function levelAt(p, t){
   }
   return {lv, err, wrong};
 }
-function drawStage(t = -1){
-  const cv = $('#stage');
+// cv を渡すと、そのキャンバス（指揮の画面）に描く。who を渡すと、その部員だけが舞台にいる（本番の出場メンバー）
+function drawStage(t = -1, cv = $('#stage'), who = null){
+  const main = cv.id === 'stage';
   const G = stageGeom(Math.max(240, cv.parentElement.clientWidth));
   const {g, W, H} = fitCanvas(cv, G.H);
   const C = tok();
@@ -209,11 +211,11 @@ function drawStage(t = -1){
   g.globalAlpha = 1; g.fillStyle = C.sheet; g.font = `700 9px ${C.fBody}`; g.textAlign = 'center'; g.textBaseline = 'middle';
   g.fillText('指揮', G.cx, G.baseY + 8.5);
 
-  const viewSec = U.view !== 'mel' ? U.view : null;
-  const sel = U.sel && memberById(U.sel);
+  const viewSec = main && U.view !== 'mel' ? U.view : null;
+  const sel = main && U.sel && memberById(U.sel);
   for(const s of SEATS){
     const [x, y] = seatXY(s, G);
-    const m = S.members.find(mm => mm.seat === s.id);
+    const m = S.members.find(mm => mm.seat === s.id && (!who || who.has(mm.id)));
     const dim = viewSec && s.sec !== viewSec;
     g.globalAlpha = dim ? 0.3 : 1;
     const p = t >= 0 && U.ptr?.[s.id];
@@ -430,7 +432,7 @@ function renderSelectors(){
   const sel = U.sel && memberById(U.sel);
   $('#soloSel').innerHTML = `<option value="all">全員</option>` + SECTIONS.map(s => `<option value="sec:${s.id}">${s.name}だけ</option>`).join('')
     + (sel ? `<option value="member:${sel.id}">${esc(sel.name)}だけ</option>` : '');
-  if(![...$('#soloSel').options].some(o => o.value === U.solo)) U.solo = 'all';
+  if(![...$('#soloSel').options].some(o => o.value === U.solo)){ U.solo = 'all'; applySolo(); }
   $('#soloSel').value = U.solo;
   $('#viewSel').innerHTML = `<option value="mel">旋律を吹いている部員</option>` + SECTIONS.map(s => `<option value="${s.id}">${s.name}パート</option>`).join('');
   $('#viewSel').value = U.view;
@@ -865,8 +867,11 @@ function renderAll(){
 }
 
 /* ===== 操作 ===== */
+// 「この人だけ聴く」「パートだけ」を、全員の音にもどす
+function soloAll(){ const was = U.solo !== 'all'; U.solo = 'all'; applySolo(); if(was){ renderSelectors(); renderMemberCard(); } }
 function startStage(){
   stopPlay();
+  soloAll();
   commit(beginStage(S));
   const rec = S.recs.find(r => r.id === S.pending.recId);
   U.piece = null; U.range = 'all';
@@ -878,6 +883,7 @@ function startStage(){
 // 本番を自分で指揮する：結果はいったん部員まかせで決め、指揮しきったら指揮の演奏で採点し直す
 function startStageConduct(){
   stopPlay();
+  soloAll();
   commit(beginStage(S));
   const rec = S.recs.find(r => r.id === S.pending.recId);
   U.piece = null; U.range = 'all';

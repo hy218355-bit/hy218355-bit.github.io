@@ -346,6 +346,9 @@ tr.empty td{color:var(--ink-soft)}
 .cd-top{display:flex;justify-content:space-between;align-items:flex-start;gap:12px;max-width:720px;width:100%;margin:0 auto}
 .cd-top h2{font-family:var(--f-display);font-weight:400;font-size:clamp(17px,4.6vw,22px);line-height:1.35}
 .cd-msg{max-width:720px;width:100%;margin:0 auto;min-height:3.4em;font-size:14px;color:var(--ink-soft)}
+.cd-band{max-width:720px;width:100%;margin:0 auto;flex:none;border-radius:12px;overflow:hidden}
+#cdStage{display:block;width:100%}
+.conduct:has(.cd-result:not([hidden])) .cd-band{display:none}
 .cd-pad{position:relative;flex:1;min-height:0;max-width:720px;width:100%;margin:0 auto;border-radius:22px;overflow:hidden;cursor:pointer;
   touch-action:none;-webkit-user-select:none;user-select:none;-webkit-touch-callout:none;outline-offset:4px;
   background:linear-gradient(180deg,color-mix(in srgb,var(--brass) 26%,var(--sheet)),var(--sheet) 60%,color-mix(in srgb,var(--navy) 10%,var(--sheet)));border:1.5px solid var(--rule)}
@@ -565,6 +568,7 @@ tr.empty td{color:var(--ink-soft)}
     <button class="btn small quiet" type="button" id="cdClose">やめる</button>
   </div>
   <p class="cd-msg" id="cdMsg" aria-live="polite"></p>
+  <div class="cd-band"><canvas id="cdStage" role="img" aria-label="舞台の部員。音を出している部員が光る。"></canvas></div>
   <div class="cd-pad" id="cdPad" role="button" tabindex="0" aria-label="拍に合わせてここをタップ（上ほど大きく、下ほど小さく）">
     <svg class="cd-pattern" id="cdPattern" viewBox="0 0 200 210" aria-hidden="true"></svg>
     <span class="cd-hint top">大きく</span><span class="cd-hint bot">小さく</span>
