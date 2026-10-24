@@ -46,6 +46,15 @@ function findStart(d, sr, o, pk){
   for(let i = a; i < b; i++) if(Math.abs(d[i]) > thr) return Math.max(0, i / sr - 0.006);
   return o;
 }
+// 音の出はじめの遅さ：録音の頭から、聞こえはじめる（いちばん大きいところの25%）までの時間を、録音ごとに測る。
+// クラリネットののばす音は90ミリ秒ほど、トランペットは18ミリ秒ほどかかる。奏者は鳴りの遅い楽器ほど少し早めに吹いてそろえるので、
+// トランペットとサックス（18ミリ秒）にそろうよう、そのぶん早く鳴らしはじめる（75ミリ秒まで。打楽器はしない）
+function speakLead(d, sr, s){
+  const W = Math.floor(sr * 0.002), a = Math.floor(s.start * sr), n = Math.floor(Math.min(0.4, s.d) * sr / W), env = [];
+  for(let k = 0; k < n; k++){ let e = 0; for(let i = a + k * W; i < a + (k + 1) * W && i < d.length; i++) e += d[i] * d[i]; env.push(e); }
+  const pk = Math.max(...env), i = env.findIndex(v => v >= pk * 0.0625);   // 振幅で25%（エネルギーで1/16）
+  return clamp(i * 0.002 - 0.018, 0, 0.075);
+}
 function loadSamples(base, onProgress){
   if(SAMPLES.loading) return SAMPLES.loading;
   SAMPLES.loading = (async () => {
@@ -58,7 +67,8 @@ function loadSamples(base, onProgress){
       const ab = await (await fetch(base + n + '.mp3')).arrayBuffer();
       const buf = await decodeBuf(dec, ab);
       const d = buf.getChannelData(0);
-      const samples = man[n].samples.map(s => ({...s, start: findStart(d, buf.sampleRate, s.o, s.pk)}));
+      const speaks = man[n].kind === 'sus' || man[n].kind === 'stac';
+      const samples = man[n].samples.map(s => ({...s, start: findStart(d, buf.sampleRate, s.o, s.pk)})).map(s => speaks ? {...s, lead: speakLead(d, buf.sampleRate, s)} : s);
       const layers = [...new Set(samples.filter(s => !s.roll && s.l != null && s.l >= 0).map(s => s.l))].sort((a, b) => a - b);
       SAMPLES.banks[n] = {buf, kind: man[n].kind, samples, layers};
       done++;
@@ -171,26 +181,27 @@ class SampleVoice {
   play(n, next, T0){
     const ac = this.ac, tb = this.tb, cfg = this.cfg;
     T0 += this.dt;
-    const s = T0 + n.t;
-    const nextS = next ? T0 + next.t : Infinity;
     const joined = !!n.join && !!this.prev;
+    const smooth = joined && (n.slur || n.art === 'tie');
+    // 短い音はスタッカートの録音をそのまま鳴らす
+    const short = this.stac && !smooth && (n.art === 'stac' || n.d < 0.3);
+    const env = n.env, vMax = env.reduce((a, [, v]) => Math.max(a, v), 0);
+    const smp = short ? pickSample(this.stac, n.midi - (cfg.shift || 0), vMax, {key: n.key}) : pickSample(this.bank, n.midi - (cfg.shift || 0), vMax, {rank: this.rank});
+    // 鳴りの遅い録音は、そのぶん早く吹きはじめる（つないだ音は録音の途中から鳴らすので、早めない）。音の終わりは楽譜どおり
+    const s = T0 + n.t - (smooth ? 0 : smp.lead || 0);
+    const nextS = next ? T0 + next.t : Infinity;
     const legNext = !!(next && next.join);
     const endT = Math.max(s + 0.03, Math.min(T0 + n.t + n.d, nextS - 0.004));
-    const env = n.env, v0 = env[0][1], vEnd = env[env.length - 1][1];
-    const vMax = env.reduce((a, [, v]) => Math.max(a, v), 0);
+    const v0 = env[0][1], vEnd = env[env.length - 1][1];
     const lv = v => this.gain * (0.03 + 0.97 * Math.pow(v, 1.8));
-    const smooth = joined && (n.slur || n.art === 'tie');
     const f = mtof(n.midi);
     // 明るさ：弱い音・音色の育っていない奏者ほどこもる。低く下げて使う録音（バスクラなど）は lp で丸める
     const cut = clamp(f * (cfg.lp || 40) * lerp(0.55, 1, vMax) * (0.45 + 0.55 * (n.T ?? 1)), 300, 16000);
     this.lp.frequency.setValueAtTime(cut, s);
 
-    // 短い音はスタッカートの録音をそのまま鳴らす
-    const short = this.stac && !smooth && (n.art === 'stac' || n.d < 0.3);
     // 出だしの張り（金管のアタック）。録音を借りている楽器は、その楽器らしい強さに（cfg.blat）
     const blat = 1 + (n.blat - 1) * (cfg.blat ?? 1);
     if(short){
-      const smp = pickSample(this.stac, n.midi - (cfg.shift || 0), vMax, {key: n.key});
       const rate = Math.pow(2, (n.midi - smp.m) / 12) * smpTune(smp) * Math.pow(2, (n.cents + this.det + (n.crack ? n.crack : 0)) / 1200);
       const src = ac.createBufferSource(); src.buffer = this.stac.buf;
       src.playbackRate.setValueAtTime(rate, s);
@@ -208,7 +219,6 @@ class SampleVoice {
       return end;
     }
 
-    const smp = pickSample(this.bank, n.midi - (cfg.shift || 0), vMax, {rank: this.rank});
     const base = Math.pow(2, (n.midi - smp.m) / 12) * smpTune(smp);
     const R = c => base * Math.pow(2, (c + this.det) / 1200);
     const relEnd = legNext ? nextS + 0.06 : endT + tb.rel;

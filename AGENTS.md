@@ -54,7 +54,7 @@ GitHub Pages のサイト。いまの中心は、高校吹奏楽部の顧問に�
 
 - 画面の文章とコードのコメントは日本語。画面の文章は、ゲームを知らない人にも分かる、ふつうの言葉で書く。
 - セーブの形を変えたら、`game.js` の `load()` に、前のセーブを新しい形へ移す処理を足す（前のセーブがそのまま続けられること）。
-- 楽器の録音（`snd/`）は `tools/build_samples.py` で作ったもの（E♭クラ・バスクラ・バストロンボーン・バリトンサックスは `tools/build_extra_samples.py`。出典は `snd/CREDITS.md`）。気軽に作り直さない。目録（`snd/manifest.json`）の `c` は、録音ごとの音程のくせ（何セント高いか）を測ったもので、再生のときに打ち消す。録音を作り直したら `tools/sample_tune_console.js` で測り直す。
+- 楽器の録音（`snd/`）は `tools/build_samples.py` で作ったもの（E♭クラ・バスクラ・バストロンボーン・バリトンサックスは `tools/build_extra_samples.py`。出典は `snd/CREDITS.md`）。気軽に作り直さない。目録（`snd/manifest.json`）の `c` は、録音ごとの音程のくせ（何セント高いか）を測ったもので、再生のときに打ち消す。録音を作り直したら `tools/sample_tune_console.js` で測り直す。また、鳴りの遅い録音（クラリネットののばす音など）は、読み込むときに録音ごとの出はじめの遅さを測って、そのぶん早く鳴らす（`samples.js` の `speakLead`）。
 
 ### オーナーの好み（どちらのエージェントも守る）
 
