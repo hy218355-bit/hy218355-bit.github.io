@@ -408,6 +408,14 @@ function renderHeader(){
     if(w % 4 === 0){ const mo = document.createElement('span'); mo.className = 'mo'; mo.textContent = `${wkMonth(w)}月`; li.appendChild(mo); }
     ol.appendChild(li);
   }
+  // 冬（11月 新体制・1月 アンサンブルコンテスト・3月 卒業式）。月ごとにまとめて進むので、1マスずつ
+  WINTER_STEPS.forEach((st, k) => {
+    const li = document.createElement('li'), step = S.phase === 'winter' ? S.winter.step : -1;
+    li.className = 'wint' + (st.id !== 'plan' ? ' ev' : '') + (step > k ? ' done' : '') + (step === k ? ' now' : '');
+    li.title = `${st.m}月：${st.title}`;
+    if(!k){ const mo = document.createElement('span'); mo.className = 'mo'; mo.textContent = '冬'; li.appendChild(mo); }
+    ol.appendChild(li);
+  });
   if(S.phase === 'choose' || S.phase === 'chooseSet'){ $('#weekNow').textContent = `${S.year}年 4月・選曲会議`; $('#weeksLeft').textContent = '県大会まで16週'; return; }
   if(S.phase === 'end'){ $('#weekNow').textContent = `${S.year}年度の本番がすべて終わった`; $('#weeksLeft').textContent = ''; return; }
   if(S.phase === 'winter'){ const st = winterStep(S); $('#weekNow').textContent = `${S.year}年度 ${st.m}月`; $('#weeksLeft').textContent = `冬のあいだ（${S.winter.step + 1}／${WINTER_STEPS.length}）`; return; }
