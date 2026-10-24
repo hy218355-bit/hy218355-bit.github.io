@@ -779,6 +779,71 @@ function weekResHtml(){
 // 同じ受け持ちに席がいくつかあるときは、2つ目からの席に「2人目」「3人目」をつける（トランペット 1st は2人、クラリネット 1st は3人で吹く）
 const seatNth = id => { const p = SEAT[id].part, k = SEATS.filter(x => x.part === p).findIndex(x => x.id === id); return k > 0 ? `（${k + 1}人目）` : ''; };
 const seatLabel = id => PART_LABEL[SEAT[id].part] + seatNth(id);
+/* ===== 卒業式：卒業していく3年生それぞれの3年間を、1人ずつ流す =====
+   入部したとき・力の伸び・思い出・毎年のコンクール・スキル・最後のひとこと。後ろでは、その年の定期演奏会の録音を流す。
+   9秒ごとに次の人へ（たたくとすぐ次へ）。最後まで見ると新年度へ */
+const GR = {i: 0, slides: [], timer: 0, raf: 0};
+function gradYears(m){
+  const out = [];
+  for(let y = m.joined ?? S.year; y <= S.year; y++){
+    const g = (m.joinGrade ?? 1) + (y - (m.joined ?? S.year));
+    const h = y === S.year ? {results: S.season} : (S.history || []).find(x => x.year === y);
+    const r = h?.results?.[h.results.length - 1];
+    out.push(`${g}年 ${r ? `${LEVELS[r.level].name}${AWARD_NM[r.award]}${r.rep ? '（代表）' : ''}` : '出場なし'}`);
+  }
+  return out.join(' → ');
+}
+function gradSlide(m){
+  const f = m.first, inst = m.seat ? INST[SEAT[m.seat].inst].name : '控え', joinedHere = f && f.y === m.joined;
+  // 思い出は、学年ごとに1つずつ選んでから、新しいものを足して4つまで（年の順に）
+  const all = (m.story || []).filter(x => !/^スキル/.test(x.t)), pick = [];
+  for(const y of [...new Set(all.map(x => x.y))]) pick.push(all.find(x => x.y === y));
+  for(const x of all.slice().reverse()) if(pick.length < 4 && !pick.includes(x)) pick.push(x);
+  const mem = pick.slice(0, 4).sort((a, b) => a.y - b.y || a.w - b.w);
+  // 部にいた年数と、思い出のころの学年（「3年生の7月」）
+  const joined = m.joined ?? S.year, years = S.year - joined + 1, when = x => `${(m.joinGrade ?? 1) + (x.y - joined)}年生の${wkMonth(x.w)}月`;
+  const sk = skillsOf(m).map(x => x.name + skillMark(x.lv)).join('・');
+  return `<span class="gr-tag">${years}年間</span><b class="gr-name">${esc(m.name)}</b><small class="gr-sub">${esc(inst)}${m.title ? '・' + m.title : ''}</small>
+    ${joinedHere ? `<p class="gr-line">${f.y}年${wkMonth(f.w)}月、${(m.joinGrade ?? 1) > 1 ? `${m.joinGrade}年生の途中で` : '1年生で'}入部。${m.exp ? '中学から吹いていた。' : '楽器ははじめてだった。'}</p>` : ''}
+    ${f ? `<div class="gbars">${STAT_KEYS.map(k => `<div class="gb"><span class="nm">${STAT_LABEL[k]}</span><span class="track"><span class="fill was" style="width:${clamp(f.stats[k], 0, 100)}%"></span><span class="fill" data-to="${clamp(m.stats[k], 0, 100)}" style="width:${clamp(f.stats[k], 0, 100)}%"></span></span><span class="val">${Math.round(f.stats[k])}→${Math.round(m.stats[k])}</span></div>`).join('')}</div>` : ''}
+    ${mem.length ? `<ul class="gr-mem">${mem.map(x => `<li><time>${when(x)}</time>${esc(x.t)}</li>`).join('')}</ul>` : ''}
+    <p class="gr-res">コンクール：${gradYears(m)}</p>
+    ${sk ? `<p class="gr-res">スキル：${sk}</p>` : ''}
+    <p class="gr-bye">${farewellLine(m)}</p>`;
+}
+function openGradRoll(){
+  const ms = (S.gradMembers || []).slice().sort((a, b) => SEATS.findIndex(x => x.id === a.seat) - SEATS.findIndex(x => x.id === b.seat));
+  if(!ms.length) return;
+  stopPlay();
+  GR.slides = [`<span class="gr-tag">卒業式</span><b class="gr-name">${S.year}年度の卒業生</b><p class="gr-line">${ms.length}人の3年間を、ふり返ろう。</p>`,
+    ...ms.map(gradSlide),
+    `<span class="gr-tag">卒業おめでとう</span><b class="gr-name">ありがとう、先輩たち</b><p class="gr-line">${ms.map(m => esc(m.name)).join('　')}</p><p class="gr-res">1・2年生が演奏で送り出した。春から、新しい部がはじまる。</p>`];
+  GR.i = 0;
+  $('#gradRoll').hidden = false;
+  document.documentElement.classList.add('conducting');
+  if(!fxCalm() && U.fxMode === 'full') fxSky($('#gradRoll .fx-sky'), 'sakura', GR);
+  // 後ろで、その年の定期演奏会の録音を流す
+  const fin = S.recs.slice().reverse().find(r => r.year === S.year && r.final);
+  if(fin) playRecording(fin, `${fin.label}（卒業式で）`);
+  grShow();
+}
+function grShow(){
+  clearTimeout(GR.timer);
+  const card = $('#grCard'), last = GR.i >= GR.slides.length - 1;
+  card.classList.remove('in'); card.innerHTML = GR.slides[GR.i]; card.scrollTop = 0; void card.offsetWidth; card.classList.add('in');
+  requestAnimationFrame(() => requestAnimationFrame(() => card.querySelectorAll('.fill[data-to]').forEach(f => { f.style.width = f.dataset.to + '%'; })));
+  $('#grNext').textContent = last ? '4月へ（新年度）' : '次へ';
+  $('#grStep').textContent = `${GR.i + 1}／${GR.slides.length}`;
+  if(!last) GR.timer = setTimeout(grNext, GR.i === 0 ? 3500 : 9000);
+}
+function grNext(){ if(GR.i < GR.slides.length - 1){ GR.i++; grShow(); } else closeGradRoll(true); }
+function closeGradRoll(done){
+  clearTimeout(GR.timer); cancelAnimationFrame(GR.raf);
+  $('#gradRoll').hidden = true;
+  document.documentElement.classList.remove('conducting');
+  stopPlay();
+  if(done){ commit(winterNext(S)); U.sel = null; U.piece = null; renderAll(); refreshNow(); scrollTo(0, 0); }
+}
 /* ===== 冬（11月 新体制 → 1月 アンサンブルコンテスト → 3月 卒業式） ===== */
 function renderWinter(w){
   const st = winterStep(S), names = S.retiredNow?.names || [];
@@ -813,8 +878,9 @@ function renderWinter(w){
       <div class="transport"><button class="btn small" type="button" data-act="playrec" data-id="${e.recId}">▶ 聴く</button><button class="btn primary" type="button" data-act="wnext">3月へ</button></div></div>`;
     return;
   }
+  const grads = S.gradMembers || [];
   w.innerHTML = `<div class="event"><span class="tag">3月・卒業式</span><span>${names.length ? `卒業式の日。${names.map(esc).join('、')}を、1・2年生の演奏で送ろう。` : '3月。春休みの音楽室で、新しい1年に向けて準備をしよう。'}</span></div>
-    <div class="transport"><button class="btn primary" type="button" data-act="wnext">${names.length ? '演奏で送って、4月へ' : '4月へ（新年度）'}</button></div>`;
+    <div class="transport">${grads.length ? `<button class="btn primary" type="button" data-act="gradroll">${grads.length}人の3年間をふり返って、送る</button><button class="btn quiet" type="button" data-act="wnext">ふり返らずに4月へ</button>` : `<button class="btn primary" type="button" data-act="wnext">${names.length ? '演奏で送って、4月へ' : '4月へ（新年度）'}</button>`}</div>`;
 }
 /* ===== 新しく入った部員の担当を決める（部をつくった最初の5人・本入部の1年生・途中から入ってきた部員） =====
    上の札で部員を選び、舞台の空いている席をタップして座らせる。選んだ部員の希望の楽器の席は光る。
@@ -1410,6 +1476,9 @@ function bind(){
   });
   $('#btnRec').addEventListener('click', () => playRec($('#recSel').value));
   $('#btnStop').addEventListener('click', stopPlay);
+  $('#grNext').addEventListener('click', e => { e.stopPropagation(); grNext(); });
+  $('#grSkip').addEventListener('click', e => { e.stopPropagation(); closeGradRoll(false); });
+  $('#grCard').addEventListener('click', () => grNext());
   $('#prefBox').addEventListener('click', e => {
     const b = e.target.closest('[data-pref]'); if(!b) return;
     const [k, v] = b.dataset.pref.split(':');
@@ -1554,6 +1623,7 @@ function bind(){
     else if(act === 'reveal'){ stopPlay(); reveal(); }
     else if(act === 'next'){ stopPlay(); commit(finishStage(S)); renderAll(); refreshNow(); }
     else if(act === 'newyear'){ stopPlay(); commit(newYear(S)); U.sel = null; U.piece = null; renderAll(); refreshNow(); }
+    else if(act === 'gradroll') openGradRoll();
     else if(act === 'winter'){ stopPlay(); commit(startWinter(S)); U.sel = null; renderAll(); scrollTo(0, 0); }
     else if(act === 'ensgo'){ haptic('tap'); commit(runEnsemble(S, [...U.ensPick])); renderAll(); }
     else if(act === 'ensskip'){ commit(skipEnsemble(S)); renderAll(); }

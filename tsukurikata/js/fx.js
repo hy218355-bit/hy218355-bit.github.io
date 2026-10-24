@@ -96,7 +96,8 @@ function fxYearEnd(s){
     html: `<span class="fx-tag">${s.year}年度</span><b class="fx-title">この1年の本番が、すべて終わった</b><p class="fx-desc">${hasSeniors(s) ? '3年生が引退する。' : ''}1年をふり返ろう。</p>`});
 }
 // 舞う花びら・葉・雨・夏のきらめき
-function fxSky(cv, season){
+// holder：動きを止めるための番号の置き場（ほかの重ね画面と取り合わないように）
+function fxSky(cv, season, holder = FX){
   const dpr = window.devicePixelRatio || 1, W = cv.clientWidth * dpr, H = cv.clientHeight * dpr;
   cv.width = W; cv.height = H;
   const g = cv.getContext('2d');
@@ -130,9 +131,9 @@ function fxSky(cv, season){
       if(p.y < -20){ p.y = H + 20; p.x = Math.random() * W; }
     }
     g.globalAlpha = 1;
-    FX.raf = requestAnimationFrame(step);
+    holder.raf = requestAnimationFrame(step);
   };
-  FX.raf = requestAnimationFrame(step);
+  holder.raf = requestAnimationFrame(step);
 }
 
 /* ----- 数え上げ ----- */

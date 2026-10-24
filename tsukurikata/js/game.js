@@ -465,7 +465,7 @@ function remember(s, m, t, kind){
   if(!m) return;
   if(kind) m.story = (m.story || []).filter(x => x.k !== kind);
   (m.story ||= []).push(kind ? {y: s.year, w: s.week, t, k: kind} : {y: s.year, w: s.week, t});
-  if(m.story.length > 10) m.story.splice(0, m.story.length - 10);
+  if(m.story.length > 14) m.story.splice(0, m.story.length - 14);
 }
 // 部全体の値を動かす（体力は部員全員ぶん）
 const adj = (s, k, d) => {
@@ -1667,6 +1667,8 @@ function startWinter(s0){
   const seniors = s.members.filter(m => m.grade === 3);
   s.retiredNow = {names: seniors.map(m => m.name), firstClass: seniors.some(m => isFirstClass(s, m))};
   if(s.retiredNow.firstClass) addLog(s, '顧問になって最初に入部してきた代が、引退していった。部の物語は、これからも続く。');
+  // 3月の卒業式で3年間をふり返るので、引退した3年生の記録を取っておく（新年度で消す）
+  s.gradMembers = seniors;
   s.members = s.members.filter(m => m.grade < 3);
   assignTitles(s.members);
   s.phase = 'winter'; s.winter = {step: 0};
@@ -1789,7 +1791,7 @@ function newYear(s0){
   s.history.push({year: s.year, piece: pieceTitle, ...(s.division ? {div: s.division} : {}), ...(s.setPiece ? {set: PIECES[s.setPiece]?.title} : {}), results: s.season, final: s.finalResult || null,
     retired: ret.names, firstClass: ret.firstClass, ...(s.winter?.ens?.award ? {ens: {award: s.winter.ens.award, score: s.winter.ens.score, names: s.winter.ens.names, rep: !!s.winter.ens.rep}} : {})});
   if(!s.retiredNow && ret.firstClass) addLog(s, '顧問になって最初に入部してきた代が、卒業していった。部の物語は、これからも続く。');
-  delete s.retiredNow; delete s.winter;
+  delete s.retiredNow; delete s.winter; delete s.gradMembers;
   // 1年をやりきった経験（この年の最初の週の記録より前に入れる。最初の1年を終えると Lv2 になるくらい）
   gainCoach(s, 10);
   s.finalResult = null;
