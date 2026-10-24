@@ -27,7 +27,10 @@ const SAMPLE_BANK = {
   glock: {bank: 'glock', g: 5.3}, xylo: {bank: 'xylo', g: 2.4}, mrb: {bank: 'mrb', g: 2.75}, vib: {bank: 'vib', g: 3}, chime: {bank: 'chime', g: 5.3},
 };
 const SAMPLES = {ready: false, use: true, banks: {}, loading: null, progress: 0, error: null};
-const SAMPLE_TUNE = A4 / 440;   // 録音はA=440Hz
+// 録音はA=440Hz。ゲームの A4（442Hz）にそろえるには、再生速度を A4/440 倍にする（2026年10月まで割っていて、全体が16セント低かった）
+const SAMPLE_TUNE = A4 / 440;
+// 録音ごとの音程のくせ（目録の c：その録音が名目の高さより何セント高いか。ゆっくり吹いた部分を測った）を打ち消す倍率
+const smpTune = smp => SAMPLE_TUNE * Math.pow(2, -(smp.c || 0) / 1200);
 const SUS_GAIN = 5, HIT_GAIN = 1.31;
 
 function decodeBuf(ac, ab){
@@ -188,7 +191,7 @@ class SampleVoice {
     const blat = 1 + (n.blat - 1) * (cfg.blat ?? 1);
     if(short){
       const smp = pickSample(this.stac, n.midi - (cfg.shift || 0), vMax, {key: n.key});
-      const rate = Math.pow(2, (n.midi - smp.m) / 12) / SAMPLE_TUNE * Math.pow(2, (n.cents + this.det + (n.crack ? n.crack : 0)) / 1200);
+      const rate = Math.pow(2, (n.midi - smp.m) / 12) * smpTune(smp) * Math.pow(2, (n.cents + this.det + (n.crack ? n.crack : 0)) / 1200);
       const src = ac.createBufferSource(); src.buffer = this.stac.buf;
       src.playbackRate.setValueAtTime(rate, s);
       if(n.crack) src.playbackRate.setValueAtTime(rate * Math.pow(2, -n.crack / 1200), s + n.crackDur);
@@ -206,7 +209,7 @@ class SampleVoice {
     }
 
     const smp = pickSample(this.bank, n.midi - (cfg.shift || 0), vMax, {rank: this.rank});
-    const base = Math.pow(2, (n.midi - smp.m) / 12) / SAMPLE_TUNE;
+    const base = Math.pow(2, (n.midi - smp.m) / 12) * smpTune(smp);
     const R = c => base * Math.pow(2, (c + this.det) / 1200);
     const relEnd = legNext ? nextS + 0.06 : endT + tb.rel;
 
@@ -296,7 +299,7 @@ function sampleStrike(ac, out, h, T0, srcs){
   g.connect(out);
   if(h.roll){
     const smp = pickSample(bank, pitched ? h.midi : null, Math.max(h.v, h.v1 ?? h.v), {roll: true, key: h.key});
-    const rate = pitched ? Math.pow(2, (h.midi - smp.m) / 12) / SAMPLE_TUNE * Math.pow(2, (h.cents || 0) / 1200) : 1;
+    const rate = pitched ? Math.pow(2, (h.midi - smp.m) / 12) * smpTune(smp) * Math.pow(2, (h.cents || 0) / 1200) : 1;
     const end = s + h.dur;
     g.gain.setValueAtTime(0, s);
     g.gain.linearRampToValueAtTime(lvl(h.v) * 1.6, s + 0.05);
@@ -306,7 +309,7 @@ function sampleStrike(ac, out, h, T0, srcs){
     return end + 2.5;
   }
   const smp = pickSample(bank, pitched ? h.midi : null, h.v, {key: h.key});
-  const rate = pitched ? Math.pow(2, (h.midi - smp.m) / 12) / SAMPLE_TUNE * Math.pow(2, (h.cents || 0) / 1200) : 1 + 0.01 * (hash(h.key, 'p') - 0.5);
+  const rate = pitched ? Math.pow(2, (h.midi - smp.m) / 12) * smpTune(smp) * Math.pow(2, (h.cents || 0) / 1200) : 1 + 0.01 * (hash(h.key, 'p') - 0.5);
   const src = ac.createBufferSource(); src.buffer = bank.buf;
   src.playbackRate.value = rate;
   src.connect(g);
