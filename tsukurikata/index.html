@@ -108,7 +108,7 @@ button,select{font:inherit;color:inherit}
 .col-stage{display:grid;gap:18px;min-width:0}
 
 /* ステージと譜面台 */
-.stand{background:var(--sheet);border:1px solid var(--rule);border-radius:6px;padding:20px clamp(14px,2.4vw,24px) 22px;display:grid;gap:14px;min-width:0;box-shadow:0 18px 34px -26px var(--shadow)}
+.stand{background:var(--sheet);border:1px solid var(--rule);border-radius:6px;padding:20px clamp(14px,2.4vw,24px) 22px;display:grid;grid-template-columns:minmax(0,1fr);gap:14px;min-width:0;box-shadow:0 18px 34px -26px var(--shadow)}
 .stand-head{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:flex-end;gap:10px 16px}
 .piece{min-width:0}
 .eyebrow{font-size:12px;letter-spacing:.2em;color:var(--brass);font-weight:700}
@@ -134,7 +134,7 @@ select{background:var(--sheet);border:1.5px solid var(--rule);border-radius:8px;
 .options label{display:grid;grid-template-columns:5.2em minmax(0,1fr);align-items:center;gap:6px;min-width:0;white-space:nowrap}
 .options select{width:100%}
 .recrow{display:flex;align-items:center;gap:8px}
-.recrow select{flex:1;min-width:0}
+.recrow select{flex:1;width:0;min-width:0}
 .recrow .btn{flex:none}
 #sndStatus{font-size:12px}
 .now-playing{font-size:13px;color:var(--ink-soft);min-height:1.7em}
