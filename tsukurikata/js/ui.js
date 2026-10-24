@@ -591,7 +591,7 @@ function renderWeek(){
       + PIECE_IDS.map(id => { const pc = PIECES[id]; return `<div class="pcard"><h3>${pc.full}</h3><p>${id === S.contestPiece ? 'コンクールで演奏した曲・' : ''}仕上がり ${fam(id)}・譜読み ${Math.round(readAvg(S, id))}｜問われる力：${pc.asks}</p><div class="row">${listenBtns(id)}<button class="btn small primary" type="button" data-act="choosefinal" data-pid="${id}">この曲にする</button></div></div>`; }).join('');
     return;
   }
-  const parts = [];
+  const parts = [weekResHtml()];
   if(ev) parts.push(`<div class="event"><span class="tag">${ev.title}</span><span>${ev.text}</span></div>`);
   // 部員のできごと：対応を選ぶまで、今週の練習は決められない
   const epv = episodeView(S);
@@ -600,6 +600,7 @@ function renderWeek(){
     parts.push(`<div class="episode"><div class="head"><span class="tag">できごと</span><span class="who">${who}</span></div><p class="txt">${esc(epv.text)}</p>
       <p class="small">顧問として、どうする？</p><div class="choices">${epv.choices.map(c => `<button class="mbtn" type="button" data-ep="${c.k}"><b>${esc(c.label)}</b></button>`).join('')}</div></div>`);
     w.innerHTML = parts.join('');
+    weekResAnimate(w);
     return;
   }
   // 決めたあとの様子と、何が変わったか
@@ -633,6 +634,7 @@ function renderWeek(){
   w.innerHTML = parts.join('');
   w.querySelector('[data-outmore]')?.addEventListener('toggle', e => { U.outMore = e.target.open; });
   w.querySelectorAll('details.psecd').forEach(d => d.addEventListener('toggle', () => { (U.openSecs ||= new Set())[d.open ? 'add' : 'delete'](d.dataset.sec); }));
+  weekResAnimate(w);
 }
 // 曲の中での受け持ち：パートごとに、旋律・ソロ・対旋律・低音・和音をどれだけ吹くか（曲の長さに対する割合）
 const NEED_CACHE = {};
@@ -680,6 +682,68 @@ function yearMembersHtml(){
   const rows = [grow.length && ['いちばん伸びた', grow.map(x => `${x.m.name} +${Math.round(x.d)}`).join('・')],
     skills.length && ['身につけたスキル', skills.join('／')], outs.length && ['行事', more(outs, 4)]].filter(Boolean);
   return rows.length ? `<dl class="yr-mem">${rows.map(([k, v]) => `<dt>${k}</dt><dd>${esc(v)}</dd>`).join('')}</dl>` : '';
+}
+/* ===== 演出のきっかけ =====
+   月・年度が変わったら場面の扉、スキル・顧問の指導力・部の節目はカットインで（同じスキルはまとめて）。
+   ページを開いたときは、いまの月と年度を覚えるだけで出さない */
+function fxMoments(){
+  const m = wkMonth(S.week), first = U.fxYear == null;
+  document.documentElement.dataset.season = SEASON_OF(m);
+  if(!first){
+    if(U.fxYear !== S.year) fxYearStart(S);
+    else if(U.fxMonth !== m && S.phase === 'week') fxMonth(S);
+    if(S.phase === 'end' && U.fxEnd !== S.year) fxYearEnd(S);
+  }
+  // 新しくゲームを始めたときは、最初に一度だけ年度のはじまりを見せる
+  else if(S.founding && S.year === S.startYear && S.week === 0 && !S.members.length && !S.flags.fxIntro){ S.flags.fxIntro = true; save(S); fxYearStart(S); }
+  if(S.phase === 'end') U.fxEnd = S.year;
+  U.fxYear = S.year; U.fxMonth = m;
+  if(S.skillUp?.length){
+    const ups = S.skillUp, by = new Map();
+    delete S.skillUp; save(S);
+    for(const u of ups){ const x = S.members.find(y => y.id === u.mid); if(!x) continue;
+      const k = `${u.id}:${u.lv}`; by.set(k, [...(by.get(k) || []), x.name]); }
+    const groups = [...by];
+    for(const [k, ns] of groups.slice(0, 3)){ const [id, lv] = k.split(':');
+      fxShow({kind: 'cut', sound: 'skill', html: fxCutHtml('スキルを身につけた', `${SKILLS[id].name}${skillMark(+lv)}`, ns.slice(0, 3).join('・') + (ns.length > 3 ? ` ほか${ns.length - 3}人` : ''), SKILLS[id].desc)}); }
+    if(groups.length > 3) toast(`ほかにも${groups.length - 3}つのスキルを身につけた部員がいる（日誌に）`, 4000);
+  }
+  if(S.coachUp){
+    const lv = S.coachUp; delete S.coachUp; save(S);
+    fxShow({kind: 'cut', sound: 'level', ms: 2800, html: fxCutHtml('顧問の指導力', `Lv${lv}　${coachTitle(lv)}`, '', `部員の練習の効果が +${Math.round((coachMult(S) - 1) * 100)}% になった`)});
+  }
+  if(S.mileUp?.length){
+    const ms = S.mileUp; delete S.mileUp; save(S);
+    for(const x of ms) fxShow({kind: 'cut', sound: 'mile', html: fxCutHtml('部の節目', `部の${STAT_LABEL[x.k]}が${x.at}に`, '', x.text)});
+  }
+}
+// 練習の結果：すすめる前の部の様子を写しておき、週のはじめに「先週の練習の成果」として、伸びたぶんを数え上げて見せる
+function weekSnap(s){
+  return {pitch: bandAvg(s, 'pitch'), rhythm: bandAvg(s, 'rhythm'), tone: bandAvg(s, 'tone'), expr: bandAvg(s, 'expr'), coh: s.cohesion,
+    fam: s.pieceId ? s.fam[s.pieceId] || 0 : null, pid: s.pieceId, ms: Object.fromEntries(s.members.map(m => [m.id, avgStat(m)]))};
+}
+// 一度だけ、棒を前の長さから伸ばし、数字を数え上げる（描き直しが続いても、最後に描いたものを動かす）
+function weekResAnimate(w){
+  const r = U.weekRes;
+  if(!r || r.done || !w.querySelector('.weekres')) return;
+  requestAnimationFrame(() => requestAnimationFrame(() => {
+    if(r.done) return;
+    r.done = true;
+    w.querySelectorAll('.weekres .fill').forEach(f => { f.style.width = f.dataset.to + '%'; });
+    fxCountUps(w);
+  }));
+}
+function weekResHtml(){
+  const r = U.weekRes;
+  if(!r || r.key !== `${S.year}:${S.week}` || S.phase !== 'week') return '';
+  const b = r.b, start = !r.done;
+  const rows = [...STAT_KEYS.map(k => [STAT_LABEL[k], b[k], bandAvg(S, k)]), ['まとまり', b.coh, S.cohesion],
+    ...(b.fam != null && b.pid === S.pieceId ? [['仕上がり', b.fam, S.fam[S.pieceId] || 0]] : [])];
+  const top = S.members.filter(m => b.ms[m.id] != null).map(m => ({m, d: avgStat(m) - b.ms[m.id]})).filter(x => x.d >= 0.5).sort((x, y) => y.d - x.d).slice(0, 3);
+  return `<div class="weekres"><b>${r.n > 1 ? `この${r.n}週の練習の成果` : '先週の練習の成果'}</b>
+    ${rows.map(([nm, a, v]) => { const d = v - a;
+      return `<div class="wr"><span class="nm">${nm}</span><span class="track"><span class="fill" style="width:${clamp(start ? a : v, 0, 100)}%" data-to="${clamp(v, 0, 100)}"></span></span><b class="countup" data-key="wr:${r.key}:${nm}" data-from="${a.toFixed(1)}" data-to="${v.toFixed(1)}">${Math.round(start ? a : v)}</b><span class="d${d < 0 ? ' minus' : ''}">${Math.abs(d) >= 0.05 ? `${d > 0 ? '+' : '−'}${Math.abs(d).toFixed(1)}` : ''}</span></div>`; }).join('')}
+    ${top.length ? `<p class="small">よく伸びた：${top.map(x => `${esc(x.m.name)} +${x.d.toFixed(1)}`).join('・')}</p>` : ''}</div>`;
 }
 // 楽器の中での受け持ち（1st・2nd など。打楽器はかっこの中）
 const partShort = p => { const l = PART_LABEL[p], q = l.match(/（(.+)）/); if(q) return q[1]; const i = l.lastIndexOf(' '); return i > 0 ? l.slice(i + 1) : l; };
@@ -905,8 +969,10 @@ function renderStageResult(w, ev){
     return;
   }
   if(p.kind === 'concert'){
-    w.innerHTML = `<div class="stagecard"><span class="tag">本番</span><h3>${ev.title}</h3><p class="small">演奏の出来 ${Math.round(p.q)}点（緊張 −${p.nerves}）${conductNote(p)}</p>${mentalNote(p)}<p class="txt">${esc(p.text)}</p>${foundingYear(S) && p.q < 10 ? '<p class="small">できたばかりの部の、最初の音。ここから練習を重ねていく。年度の終わりに、4月の録音と最後の本番を聴き比べられる。</p>' : ''}
+    w.innerHTML = `<div class="stagecard"><span class="tag">本番</span><h3>${ev.title}</h3><p class="small">演奏の出来 <b class="countup" data-key="q:${p.recId}" data-to="${Math.round(p.q)}" data-ms="1200">${FX.done.has(`q:${p.recId}`) ? Math.round(p.q) : 0}</b>点（緊張 −${p.nerves}）${conductNote(p)}</p>${mentalNote(p)}<p class="txt">${esc(p.text)}</p>${foundingYear(S) && p.q < 10 ? '<p class="small">できたばかりの部の、最初の音。ここから練習を重ねていく。年度の終わりに、4月の録音と最後の本番を聴き比べられる。</p>' : ''}
       <div class="transport"><button class="btn small" type="button" data-act="playrec" data-id="${p.recId}">▶ もう一度聴く</button><button class="btn small" type="button" data-act="saverec" data-id="${p.recId}">⤓ 保存</button><button class="btn primary" type="button" data-act="next">${ev.final ? (hasSeniors(S) ? '3年生の引退へ' : '1年のふり返りへ') : '次の週へ'}</button></div></div>`;
+    // コンクールは結果発表の読み上げがあるので、数え上げは演奏会だけ
+    requestAnimationFrame(() => fxCountUps(w));
     return;
   }
   const j = p.judge, L = LEVELS[j.level];
@@ -1075,15 +1141,7 @@ const listenBtns = id => `<button class="btn small" type="button" data-act="mode
 
 /* ===== まとめて描く ===== */
 function renderAll(){
-  // スキルを身につけた部員がいたら知らせる（同じスキルはまとめて）
-  if(S.skillUp?.length){ const ups = S.skillUp; delete S.skillUp; save(S);
-    const by = new Map();
-    for(const u of ups){ const m = S.members.find(x => x.id === u.mid); if(!m) continue;
-      const k = `${SKILLS[u.id].name}${skillMark(u.lv)}`; by.set(k, [...(by.get(k) || []), m.name]); }
-    const parts = [...by].map(([k, ns]) => `「${k}」${ns.slice(0, 2).join('・')}${ns.length > 2 ? ` ほか${ns.length - 2}人` : ''}`);
-    if(parts.length) setTimeout(() => toast(`スキルを身につけた：${parts.slice(0, 2).join('／')}${parts.length > 2 ? ' など' : ''}`, 4500), S.coachUp ? 5000 : 300); }
-  // 顧問の指導力が上がったら知らせる
-  if(S.coachUp){ const lv = S.coachUp; delete S.coachUp; save(S); setTimeout(() => toast(`顧問の指導力が Lv${lv}（${coachTitle(lv)}）に上がった！ 練習の効果 +${Math.round((coachMult(S) - 1) * 100)}%`, 4500), 300); }
+  fxMoments();
   renderHeader(); renderPiece(); renderVenues(); renderSelectors();
   renderStats(); renderWeek(); renderInterp(); renderLog();
   renderMemberCard(); renderRoster(); renderHistory();
@@ -1104,7 +1162,9 @@ function startStage(){
   // 指揮しないときも、舞台の部員が見えるように
   const perf = perform(recCtx(rec)), ev = eventAt(S, S.week);
   openWatch(perf, `${ev.title}：${PIECES[rec.pieceId].title}`);
-  playPerf(perf, rec.label, natural => natural ? applaudThenReveal() : reveal());
+  // 幕の前で会場と曲を紹介し、幕が開いて部員が席についてから演奏
+  const go = () => playPerf(perf, rec.label, natural => natural ? applaudThenReveal() : reveal());
+  if(fxCalm()) go(); else stageIntro(perf, ev, rec, go);
   setTimeout(() => { if(E.ac) applauseBuffer(E.ac); }, 2500);   // 拍手の音は、演奏中に作っておく
 }
 // 本番を自分で指揮する：結果はいったん部員まかせで決め、指揮しきったら指揮の演奏で採点し直す
@@ -1132,7 +1192,7 @@ function reveal(){
 // 本番が鳴り終わったら、客席から拍手（出来がよいほど大きく長い）。少し聴いてから結果へ
 const stageHeat = p => p.kind === 'concert' ? clamp01((p.q - 20) / 70) : clamp01((p.judge.avg - 45) / 40);
 function applaudThenReveal(){
-  if(S.pending && !S.pending.revealed){ E.applaud(stageHeat(S.pending)); setTimeout(reveal, 1800); }
+  if(S.pending && !S.pending.revealed){ E.applaud(stageHeat(S.pending)); stageCurtainClose(); setTimeout(reveal, 2300); }
   else reveal();
 }
 function playRec(id){
@@ -1233,12 +1293,14 @@ function bind(){
     else if(act === 'huddle'){ haptic('tap'); commit(huddle(S)); renderWeek(); }
     else if(act === 'choosefinal'){ stopPlay(); commit(chooseFinalPiece(S, b.dataset.pid)); U.piece = null; renderAll(); refreshNow(); }
     else if(act === 'test'){ commit(practiceWeek(S, 'test')); renderAll(); refreshNow(); }
-    else if(act === 'practice'){ if(busy()) return; haptic('tap'); commit(practiceWeek(S)); renderAll(); refreshNow(); }
+    else if(act === 'practice'){ if(busy()) return; haptic('tap'); const b0 = weekSnap(S); commit(practiceWeek(S)); U.weekRes = {key: `${S.year}:${S.week}`, b: b0, n: 1}; renderAll(); refreshNow(); }
     else if(act === 'practicemany'){
       // 今週はいまの指示で、2週目からは部の方針どおりに、何か決めることがある週まで進める
       if(busy()) return; haptic('tap');
       let n = 0;
+      const b0 = weekSnap(S);
       do { commit(practiceWeek(S)); n++; } while(n < 12 && quietWeek(S));
+      U.weekRes = {key: `${S.year}:${S.week}`, b: b0, n};
       const ev = eventAt(S, S.week);
       const why = episodeView(S) ? '部員のできごとが起きた' : outingView(S) ? `行事のおさそいが来た（${outingView(S).o.title}）` : recruitsDue(S) ? '新しい部員が来た' : S.chooseFinal ? '定期演奏会の曲を決める' : ev && ev.kind !== 'mod' ? ev.title : '';
       renderAll(); refreshNow(); setTab('week'); scrollTo(0, 0);

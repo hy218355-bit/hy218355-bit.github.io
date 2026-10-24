@@ -71,12 +71,14 @@ function openWatch(perf, title){
 function closeWatch(){
   if(CD.phase !== 'watch') return;
   CD.phase = 'idle';
+  clearTimeout(CD.intro); CD.intro = 0;
+  document.querySelector('.cd-curtain')?.classList.remove('shut');
   $('#conduct').hidden = true; $('#conduct').classList.remove('watch'); $('#cdClose').textContent = 'やめる'; $('#cdEyebrow').textContent = '指揮';
   document.documentElement.classList.remove('conducting');
 }
 function closeConduct(){
-  // 見ているだけの本番は、止めて結果へ
-  if(CD.phase === 'watch'){ stopPlay(); closeWatch(); return; }
+  // 見ているだけの本番は、止めて結果へ（入場の途中なら、まだ鳴らしていないので、そのまま結果へ）
+  if(CD.phase === 'watch'){ const intro = !!CD.intro; stopPlay(); closeWatch(); if(intro) reveal(); return; }
   cancelAnimationFrame(CD.raf);
   const playing = CD.phase === 'play';
   CD.phase = 'idle';

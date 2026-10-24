@@ -364,7 +364,7 @@ function practiceWeek(s0, plan){
   gainCoach(s, 1);
   for(const st of MILESTONES){
     const f = `${s.year}:${st.k}${st.at}`;
-    if(!s.flags[f] && bandAvg(s, st.k) >= st.at){ s.flags[f] = true; addLog(s, st.text); }
+    if(!s.flags[f] && bandAvg(s, st.k) >= st.at){ s.flags[f] = true; addLog(s, st.text); (s.mileUp ||= []).push({k: st.k, at: st.at, text: st.text}); }
   }
   s.plan = {}; s.planSpan = {};
   return nextWeek(s);
