@@ -419,12 +419,17 @@ tr.empty td{color:var(--ink-soft)}
 .foot{font-size:12px;color:var(--ink-soft);max-width:64em;line-height:1.8}
 .foot summary{cursor:pointer;font-size:13px;padding:6px 0}
 .foot p{margin-top:6px}
-.help{font-size:13px;color:var(--ink-soft)}
-.help summary{cursor:pointer;padding:4px 0}
-.help dl{display:grid;grid-template-columns:auto 1fr;gap:4px 12px;margin:6px 0 0;line-height:1.6}
-.help dt{font-weight:700;color:var(--ink);white-space:nowrap}
-.help dd{margin:0}
-.vitals .help,.vitals .trend,.vitals .coach{grid-column:1/-1}
+.vitals .trend,.vitals .coach{grid-column:1/-1}
+/* 数字を押すと出る説明 */
+[data-tip]{cursor:pointer;-webkit-tap-highlight-color:transparent;border-radius:6px}
+[data-tip]:focus-visible{outline:2px solid var(--brass);outline-offset:2px}
+.stat[data-tip] .nm,.vital[data-tip] .row>span:first-child,.trend[data-tip] .tr-t{text-decoration:underline dotted color-mix(in srgb,var(--ink-soft) 70%,transparent);text-underline-offset:4px}
+.tip{position:absolute;z-index:58;width:min(300px,calc(100vw - 32px));padding:10px 12px;border-radius:10px;background:var(--sheet);color:var(--ink);border:1px solid var(--rule);
+  box-shadow:0 8px 24px var(--shadow);font-size:13px;line-height:1.6;opacity:0;transform:translateY(-6px) scale(.97);transform-origin:top left;transition:opacity .2s ease,transform .2s ease}
+.tip.up{transform:translateY(6px) scale(.97);transform-origin:bottom left}
+.tip.on{opacity:1;transform:none}
+.tip b{display:block;color:var(--brass);font-size:12px;margin-bottom:2px}
+@media (prefers-reduced-motion: reduce){.tip,.tip.up{transform:none;transition:opacity .12s}}
 .vital.coach .fill{background:var(--brass)}
 .trend{margin:4px 0 0}
 .trend figcaption{font-size:12px;color:var(--ink-soft);display:flex;flex-wrap:wrap;gap:4px 10px;align-items:baseline}
@@ -862,5 +867,6 @@ html[data-season="snow"]{--season-band:linear-gradient(90deg,#DDE8F3,#FFFFFF,#B9
 <script src="js/tunegame.js"></script>
 <script src="js/fx.js"></script>
 <script src="js/ui.js"></script>
+<div class="tip" id="tip" role="tooltip" hidden></div>
 </body>
 </html>

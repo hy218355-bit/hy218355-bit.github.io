@@ -462,18 +462,38 @@ function applySolo(){
 }
 
 /* ===== ホワイトボード ===== */
-function statRow(name, v, desc, delta, cls){
+// 数字を押すと出る説明（ふわっと出る吹き出し）。キーは画面に出ている名前
+const TIPS = {
+  '音程': '音の高さが合っているか。合わないと和音がにごり、うなりが出る。チューニングの練習で伸びる',
+  'リズム': '拍どおりに吹けるか。出だしやテンポがそろう。メトロノームの練習で伸びる',
+  '音色': '息の支えと、音のきれいさ。低いと音が裏返る。ロングトーンで伸びる',
+  '表現': '強弱やフレーズの歌い方。フレーズ練習で伸びる（音程・リズム・音色の基礎が要る）',
+  'まとまり': 'みんなで合わせる力。パートどうしの出だしがそろい、指揮についていける。合奏でしか伸びない',
+  '譜読み': '一人ひとりが、この曲の自分の楽譜をどれだけ吹けるか（平均）。低いと音を間違え、テンポが揺れる。曲の練習と合奏で伸びる',
+  '課題曲の譜読み': '課題曲の楽譜をどれだけ吹けるか（平均）。曲の練習の配分で、自由曲と分けて伸びる',
+  '体力': '練習で減って、休むと戻る。30を切った部員は、練習の効果が半分になる',
+  'やる気': '高いほど練習の効果が上がる。休む・合奏・本番の成功で上がる',
+  '会場慣れ': 'ホールで吹いた経験。高いほど大きな会場で緊張しにくい。「会場で合奏」で上がり、週ごとに少し下がる',
+  '評判': '演奏会やコンクールで上がる。上がるほど入部したい生徒が来る',
+  '顧問の指導力': 'あなたの指導の経験。練習・本番・できごとでたまり、レベルが上がると練習の効果が上がって、本番の緊張も少しやわらぐ',
+  '部員の力の平均': '席についている部員の、音程・リズム・音色・表現の平均。点線は去年の同じころ。春は1年生が入るので、いったん下がる',
+};
+TIPS['自由曲の譜読み'] = TIPS['譜読み'];
+// 合奏の診断（いまの演奏の点）
+const DIAG_TIPS = {...Object.fromEntries(STAT_KEYS.map(k => [k, `いまの演奏の${STAT_LABEL[k]}の点。${STAT_DESC[k]}を聴いている`])),
+  balance: 'いまの演奏のバランスの点。旋律が伴奏に埋もれずに聞こえるか、パートの音量がつり合っているか'};
+const tipAttr = (name, text = TIPS[name]) => text ? ` data-tip="${esc(text)}" data-tipname="${esc(name)}" role="button" tabindex="0"` : '';
+function statRow(name, v, desc, delta, cls, tip){
   const up = delta ? `<span class="delta">+${delta}</span>` : '';
-  return `<div class="stat"><span class="nm">${name}${desc ? '' : up}</span><span class="track"><span class="fill${cls ? ' ' + cls : ''}" style="width:${clamp(v, 0, 100)}%"></span></span><span class="val">${Math.round(v)}</span>${desc ? `<span class="ds">${desc}${up}</span>` : ''}</div>`;
+  return `<div class="stat"${tipAttr(name, tip)}><span class="nm">${name}${desc ? '' : up}</span><span class="track"><span class="fill${cls ? ' ' + cls : ''}" style="width:${clamp(v, 0, 100)}%"></span></span><span class="val">${Math.round(v)}</span>${desc ? `<span class="ds">${desc}${up}</span>` : ''}</div>`;
 }
 // 顧問の指導力：レベル・呼び名・練習の効果と、次のレベルまでの経験
 function coachHtml(){
   const lv = coachLevel(S), xp = S.coach?.xp || 0, a = coachNeed(lv), b = coachNeed(lv + 1);
   const pct = lv >= 12 ? 100 : clamp((xp - a) / (b - a) * 100, 0, 100);
-  return `<div class="vital coach"><span class="row"><span>顧問の指導力</span><b>Lv${lv}</b></span><span class="track"><span class="fill" style="width:${pct}%"></span></span>
+  return `<div class="vital coach"${tipAttr('顧問の指導力')}><span class="row"><span>顧問の指導力</span><b>Lv${lv}</b></span><span class="track"><span class="fill" style="width:${pct}%"></span></span>
     <small>${coachTitle(lv)}・練習の効果 +${Math.round((coachMult(S) - 1) * 100)}%${lv < 12 ? `・次のレベルまで ${Math.ceil(b - xp)}` : ''}</small></div>`;
 }
-// この1年の部の実力の伸び（週ごと）。去年の同じ週の線をうすく重ねる
 // 部員の力の平均（音程・リズム・音色・表現）の、今年と去年の週ごとの線。下に月、県大会の週に印
 function trendSvg(){
   const tr = S.trend || [], now = tr.filter(x => x.y === S.year), prev = tr.filter(x => x.y === S.year - 1);
@@ -485,7 +505,7 @@ function trendSvg(){
   const cur = now[now.length - 1], was = cur && prev.filter(x => x.w <= cur.w).pop();
   const months = [];
   for(let w = 0; w <= last; w += 4) months.push(`<span style="left:${pct(w)}%">${wkMonth(w)}月</span>`);
-  return `<figure class="trend"><figcaption><span class="tr-t">部員の力の平均</span>${cur ? `<b>${Math.round(cur.a)}</b>` : ''}${was ? `<small>去年のいまごろ ${Math.round(was.a)}</small>` : ''}
+  return `<figure class="trend"${tipAttr('部員の力の平均')}><figcaption><span class="tr-t">部員の力の平均</span>${cur ? `<b>${Math.round(cur.a)}</b>` : ''}${was ? `<small>去年のいまごろ ${Math.round(was.a)}</small>` : ''}
     <span class="tr-k"><span class="k-avg">今年</span>${prev.length > 1 ? '<span class="k-prev">去年</span>' : ''}</span></figcaption>
     <div class="tr-plot"><span class="tr-ev" style="left:${pct(PREF_WEEK)}%">県大会</span>
     <svg viewBox="0 0 ${W} ${H}" preserveAspectRatio="none" role="img" aria-label="部員の力の平均の、今年と去年の伸び">
@@ -495,7 +515,6 @@ function trendSvg(){
       ${now.length > 1 ? `<path d="${line(now)}" class="avg"/>` : ''}
     </svg><div class="tr-x">${months.join('')}</div></div></figure>`;
 }
-const helpBox = (rows, open) => `<details class="help"${open ? ' open' : ''}><summary>数字の見かた</summary><dl>${rows.map(([k, v]) => `<dt>${k}</dt><dd>${v}</dd>`).join('')}</dl></details>`;
 function renderStats(){
   const ms = seated(S);
   $('#memberCount').textContent = `${S.members.length}人${S.members.length > ms.length ? `（控え${S.members.length - ms.length}人）` : ''}／${SEATS.length}席`;
@@ -508,18 +527,13 @@ function renderStats(){
     + (setActive(S) ? statRow('課題曲の譜読み', readAvg(S, S.setPiece), '', up(d.setRead)) : '');
   const vital = (nm, v) => {
     const c = v >= 60 ? 'good' : v >= 30 ? 'warn' : 'bad';
-    return `<div class="vital"><span class="row"><span>${nm}</span><b>${Math.round(v)}</b></span><span class="track"><span class="fill ${c}" style="width:${clamp(v, 0, 100)}%"></span></span></div>`;
+    return `<div class="vital"${tipAttr(nm)}><span class="row"><span>${nm}</span><b>${Math.round(v)}</b></span><span class="track"><span class="fill ${c}" style="width:${clamp(v, 0, 100)}%"></span></span></div>`;
   };
-  const nx = nextRepStep(S), helpOpen = $('#vitals .help')?.open;
+  const nx = nextRepStep(S);
   $('#vitals').innerHTML = vital('体力', S.stamina) + vital('やる気', S.morale) + vital('会場慣れ', S.hallExp)
-    + `<div class="vital rep"><span class="row"><span>評判</span><b>${Math.round(S.rep ?? 0)}</b></span><span class="track"><span class="fill" style="width:${clamp(S.rep ?? 0, 0, 100)}%"></span></span><small>${nx ? `${nx}をこえると、入部したい生徒が来る` : '県内に知られた部'}</small></div>`
+    + `<div class="vital rep"${tipAttr('評判')}><span class="row"><span>評判</span><b>${Math.round(S.rep ?? 0)}</b></span><span class="track"><span class="fill" style="width:${clamp(S.rep ?? 0, 0, 100)}%"></span></span><small>${nx ? `${nx}をこえると、入部したい生徒が来る` : '県内に知られた部'}</small></div>`
     + coachHtml()
-    + trendSvg()
-    + helpBox([...STAT_KEYS.map(k => [STAT_LABEL[k], STAT_DESC[k]]), ['まとまり', '互いを聴き合う力。合奏に出る人が多いほど育つ'],
-      ['譜読み', '一人ひとりが自分の楽譜をどれだけ吹けるか（平均）。低いと音を間違え、出だしやテンポが揺れる'],
-      ['部員の力の平均（グラフ）', '席についている部員の、音程・リズム・音色・表現の平均。点線は去年の同じころ。春は1年生が入るので、いったん下がる'],
-      ['会場慣れ', 'ホールで吹いた経験。高いほど、大きな会場で緊張しにくい'], ['評判', '演奏会やコンクールで上がる。上がるほど入部したい生徒が来る'],
-      ['顧問の指導力', 'あなたの指導の経験。毎週の練習・本番・コンクール・部員のできごとでたまり、レベルが上がると部員の練習の効果が上がり、本番の緊張も少しやわらぐ']], helpOpen);
+    + trendSvg();
 }
 function renderDiag(){
   const a = U.diag;
@@ -527,7 +541,7 @@ function renderDiag(){
   if(!a){ $('#diag').innerHTML = ''; return; }
   $('#diag').innerHTML = Object.keys(DIM_LABEL).map(k => {
     const v = a.score[k], c = v >= 70 ? 'good' : v >= 45 ? 'warn' : 'bad';
-    return statRow(DIM_LABEL[k], v, k === 'tone' && a.cracks ? `音の裏返り ${a.cracks}回` : '', '', c);
+    return statRow(DIM_LABEL[k], v, k === 'tone' && a.cracks ? `音の裏返り ${a.cracks}回` : '', '', c, DIAG_TIPS[k]);
   }).join('');
   const dims = Object.keys(DIM_LABEL);
   const weak = dims.reduce((x, y) => a.score[x] <= a.score[y] ? x : y);
@@ -1402,8 +1416,27 @@ function pieceCard(id, {tag = '', note = '', act, label}){
 }
 const listenBtns = id => `<button class="btn small" type="button" data-act="model" data-pid="${id}">▶ お手本を聴く</button><button class="btn small" type="button" data-act="preview" data-pid="${id}">▶ いまの部で聴く</button>`;
 
+/* ===== 数字の説明の吹き出し ===== */
+function showTip(el){
+  const tip = $('#tip');
+  if(tip.dataset.for === el.dataset.tipname && !tip.hidden){ hideTip(); return; }
+  tip.innerHTML = `<b>${esc(el.dataset.tipname)}</b>${esc(el.dataset.tip)}`;
+  tip.dataset.for = el.dataset.tipname;
+  tip.hidden = false; tip.classList.remove('on');
+  const r = el.getBoundingClientRect(), w = tip.offsetWidth, h = tip.offsetHeight;
+  const left = clamp(r.left, 16, innerWidth - 16 - w);
+  const below = r.bottom + 8 + h < innerHeight - 70;   // 下のタブにかからないように
+  tip.style.left = `${left + scrollX}px`;
+  tip.style.top = `${(below ? r.bottom + 6 : r.top - 6 - h) + scrollY}px`;
+  tip.classList.toggle('up', !below);
+  requestAnimationFrame(() => tip.classList.add('on'));
+  haptic('tap');
+}
+function hideTip(){ const tip = $('#tip'); if(tip){ tip.hidden = true; tip.classList.remove('on'); delete tip.dataset.for; } }
+
 /* ===== まとめて描く ===== */
 function renderAll(){
+  hideTip();
   fxMoments();
   renderHeader(); renderPiece(); renderVenues(); renderSelectors();
   renderStats(); renderWeek(); renderLog();
@@ -1501,6 +1534,17 @@ function bind(){
   $('#saveBox').addEventListener('click', e => { const b = e.target.closest('[data-sv]'); if(b){ haptic('tap'); saveAction(b.dataset.sv); } });
   $('#svFile').addEventListener('change', async e => { const f = e.target.files?.[0]; if(f){ $('#svCode').value = (await f.text()).trim(); $('#svMsg').textContent = 'ファイルを読んだ。「このセーブで続ける」を押そう。'; } });
   $('#svCode').addEventListener('input', () => { const b = document.querySelector('[data-sv="load"]'); b.dataset.armed = ''; b.textContent = 'このセーブで続ける'; });
+  // 数字を押すと説明が出る。ほかの所を押すと消える
+  document.addEventListener('click', e => {
+    const el = e.target.closest('[data-tip]');
+    if(el) showTip(el); else if(!e.target.closest('#tip')) hideTip();
+  });
+  document.addEventListener('keydown', e => {
+    const el = e.target.closest?.('[data-tip]');
+    if(el && (e.key === 'Enter' || e.key === ' ')){ e.preventDefault(); showTip(el); }
+    else if(e.key === 'Escape') hideTip();
+  });
+  addEventListener('resize', hideTip);
   $('#pieceSwitch').addEventListener('click', e => {
     const b = e.target.closest('[data-pswitch]'); if(!b) return;
     stopPlay(); haptic('tap');
