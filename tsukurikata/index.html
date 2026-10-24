@@ -242,7 +242,8 @@ select{background:var(--sheet);border:1.5px solid var(--rule);border-radius:8px;
 /* 今週の練習：部員ひとりずつ */
 .plan{display:grid;gap:12px}
 .plist{list-style:none;padding:0;display:grid;gap:0}
-.plist .psec{font-size:12px;font-weight:700;color:var(--ink-soft);letter-spacing:.06em;padding:10px 0 2px;border-bottom:1.5px solid var(--rule)}
+.plist .psec{font-size:12px;font-weight:700;color:var(--ink-soft);letter-spacing:.06em;padding:10px 0 4px;border-bottom:1.5px solid var(--rule);display:flex;align-items:center;justify-content:space-between;gap:8px}
+.plist .psec select{font-size:12px;padding:3px 6px;font-weight:400;max-width:62%}
 .pm{display:grid;grid-template-columns:minmax(0,1fr) 5.2em;grid-template-areas:"who sta" "pw pw" "ps ps" "last last";gap:4px 10px;padding:8px 0;border-bottom:1px dashed var(--rule);align-items:center}
 @media (min-width:600px){.pm{grid-template-columns:minmax(0,1.1fr) 4.6em minmax(0,1.6fr);grid-template-areas:"who sta pw" ". . ps" "last last last"}}
 @media (min-width:961px) and (max-width:1280px){.pm{grid-template-columns:minmax(0,1fr) 5.2em;grid-template-areas:"who sta" "pw pw" "ps ps" "last last"}}

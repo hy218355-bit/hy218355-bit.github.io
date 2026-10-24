@@ -683,7 +683,11 @@ function planHtml(ev){
   let sec = null;
   const rows = ms.map(m => {
     const s = m.seat ? SEAT[m.seat].sec : 'bench';
-    const head = s !== sec ? `<li class="psec">${s === 'bench' ? '控え' : SEC[s].name}</li>` : '';
+    // パートの見出し：2人以上いるパートは、全員の今週の練習をまとめて選べる
+    const inSec = ms.filter(x => (x.seat ? SEAT[x.seat].sec : 'bench') === s);
+    const same = inSec.every(x => (S.plan?.[x.id] || '') === (S.plan?.[inSec[0].id] || '')) ? (S.plan?.[inSec[0].id] || '') : '-';
+    const secSel = inSec.length >= 2 ? `<select data-secplan="${s}" aria-label="${s === 'bench' ? '控え' : SEC[s].name}の全員の今週の練習"><option value="-"${same === '-' ? ' selected' : ''}>このパート全員：…</option><option value=""${same === '' ? ' selected' : ''}>全員おまかせ</option>${menus.map(x => `<option value="${x.id}"${same === x.id ? ' selected' : ''}>全員 ${menuLabel(x.id)}</option>`).join('')}</select>` : '';
+    const head = s !== sec ? `<li class="psec"><span>${s === 'bench' ? '控え' : SEC[s].name}</span>${secSel}</li>` : '';
     sec = s;
     const auto = decideMenu(S, m), own = S.plan?.[m.id] && menuOpen(S, S.plan[m.id]) ? S.plan[m.id] : '';
     const c = m.sta >= 60 ? 'good' : m.sta >= 30 ? 'warn' : 'bad';
@@ -1082,6 +1086,11 @@ function bind(){
       return;
     }
     if(t.dataset.plan){ commit(setPlan(S, t.dataset.plan, t.value || null)); renderWeek(); }
+    else if(t.dataset.secplan && t.value !== '-'){
+      let s2 = S;
+      for(const m of S.members) if((m.seat ? SEAT[m.seat].sec : 'bench') === t.dataset.secplan) s2 = setPlan(s2, m.id, t.value || null);
+      commit(s2); renderWeek();
+    }
     else if(t.dataset.span){ commit(setPlanSpan(S, t.dataset.span, t.value === '' ? null : +t.value)); renderWeek(); }
   });
   $('#interp').addEventListener('click', e => {
