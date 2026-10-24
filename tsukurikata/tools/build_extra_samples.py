@@ -107,6 +107,19 @@ def drop_bad_loops(items):
         keep.append(it)
     return keep
 
+# 半音ごとに全部持つと、展開したときの大きさ（iPhone のメモリ）がほかの楽器の2〜3倍になる。
+# ほかの楽器と同じく、だいたい全音おきに残す（再生で高さをずらすのは1半音まで）
+def thin(items):
+    keep = []
+    for l in sorted({it['l'] for it in items}):
+        lay = sorted((it for it in items if it['l'] == l), key=lambda it: it['m'])
+        kept = []
+        for it in lay:
+            if not kept or it['m'] - kept[-1]['m'] >= 1.8: kept.append(it)
+        if lay and lay[-1] is not kept[-1] and lay[-1]['m'] - kept[-1]['m'] > 1.2: kept.append(lay[-1])
+        keep += kept
+    return sorted(keep, key=lambda it: (it['m'], it['l']))
+
 # ---- 読み込み ----
 def load_aiff(path):
     a = aifc.open(path)
@@ -170,7 +183,7 @@ for head, (bank, (lo, hi)) in IOWA_BANKS.items():
             items.append({'x': rms_norm(prep(x, KEEP_WIND)), 'm': round(fm, 2), 'l': li if len(lays) > 1 else -1})
     items = fill(items, lo, hi, log=print)
     for it in items: it['lp'], it['lc'] = find_loop(it['x'])
-    items = drop_bad_loops(items)
+    items = thin(drop_bad_loops(items))
     manifest[bank] = {'kind': 'sus', 'samples': pack(bank, items)}
     print(bank, len(items), 'samples', sorted(by)[0], '-', sorted(by)[-1], 'loop corr median', np.median([it['lc'] for it in items]))
 
@@ -185,10 +198,12 @@ for f in sorted(os.listdir(BEAR)):
     x = load_wav(os.path.join(BEAR, f))
     fm = fine_midi(x[onset(x):], nominal)
     if not lo - 1 <= fm <= hi + 1: continue
-    items.append({'x': rms_norm(prep(x, KEEP_WIND)), 'm': round(fm, 2), 'l': 0 if m.group(2) == 'p' else 1})
+    # Bear Sax ののばす音は1音5〜7秒あるが、3秒あればループでいくらでものばせる
+    items.append({'x': rms_norm(prep(x, 3.0)), 'm': round(fm, 2), 'l': 0 if m.group(2) == 'p' else 1})
 items.sort(key=lambda it: (it['m'], it['l']))
 items = fill(items, lo, hi, log=print)
 for it in items: it['lp'], it['lc'] = find_loop(it['x'])
+items = thin(items)
 manifest['bsax'] = {'kind': 'sus', 'samples': pack('bsax', items)}
 print('bsax', len(items), 'samples', 'loop corr median', np.median([it['lc'] for it in manifest['bsax']['samples']]))
 items = []
@@ -200,7 +215,7 @@ for f in sorted(os.listdir(BEAR)):
     fm = fine_midi(x[:int(0.6 * SR)], bear(m.group(1)))
     items.append({'x': x, 'm': round(fm, 2), 'l': 0 if m.group(2) == '2' else 1, 'rr': 1})
 items.sort(key=lambda it: (it['m'], it['l']))
-items = fill(items, lo, hi, log=print)
+items = thin(fill(items, lo, hi, log=print))
 manifest['bsax_st'] = {'kind': 'stac', 'samples': pack('bsax_st', items)}
 print('bsax_st', len(items), 'samples')
 
