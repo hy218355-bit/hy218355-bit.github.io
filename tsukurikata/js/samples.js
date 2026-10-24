@@ -48,12 +48,12 @@ function findStart(d, sr, o, pk){
 }
 // 音の出はじめの遅さ：録音の頭から、聞こえはじめる（いちばん大きいところの25%）までの時間を、録音ごとに測る。
 // クラリネットののばす音は90ミリ秒ほど、トランペットは18ミリ秒ほどかかる。奏者は鳴りの遅い楽器ほど少し早めに吹いてそろえるので、
-// トランペットとサックス（18ミリ秒）にそろうよう、そのぶん早く鳴らしはじめる（75ミリ秒まで。打楽器はしない）
-function speakLead(d, sr, s){
+// トランペットとサックス（18ミリ秒）にそろうよう、そのぶん早く鳴らしはじめる（lead。75ミリ秒まで。打楽器はしない）
+function speakInfo(d, sr, s){
   const W = Math.floor(sr * 0.002), a = Math.floor(s.start * sr), n = Math.floor(Math.min(0.4, s.d) * sr / W), env = [];
   for(let k = 0; k < n; k++){ let e = 0; for(let i = a + k * W; i < a + (k + 1) * W && i < d.length; i++) e += d[i] * d[i]; env.push(e); }
-  const pk = Math.max(...env), i = env.findIndex(v => v >= pk * 0.0625);   // 振幅で25%（エネルギーで1/16）
-  return clamp(i * 0.002 - 0.018, 0, 0.075);
+  const pk = Math.max(...env), i25 = env.findIndex(v => v >= pk * 0.0625);   // 振幅で25%（エネルギーで1/16）
+  return {lead: clamp(i25 * 0.002 - 0.018, 0, 0.075)};
 }
 function loadSamples(base, onProgress){
   if(SAMPLES.loading) return SAMPLES.loading;
@@ -68,7 +68,7 @@ function loadSamples(base, onProgress){
       const buf = await decodeBuf(dec, ab);
       const d = buf.getChannelData(0);
       const speaks = man[n].kind === 'sus' || man[n].kind === 'stac';
-      const samples = man[n].samples.map(s => ({...s, start: findStart(d, buf.sampleRate, s.o, s.pk)})).map(s => speaks ? {...s, lead: speakLead(d, buf.sampleRate, s)} : s);
+      const samples = man[n].samples.map(s => ({...s, start: findStart(d, buf.sampleRate, s.o, s.pk)})).map(s => speaks ? {...s, ...speakInfo(d, buf.sampleRate, s)} : s);
       const layers = [...new Set(samples.filter(s => !s.roll && s.l != null && s.l >= 0).map(s => s.l))].sort((a, b) => a - b);
       SAMPLES.banks[n] = {buf, kind: man[n].kind, samples, layers};
       done++;
@@ -112,6 +112,7 @@ function pickSample(bank, midi, v, opts = {}){
 // 重ねる長さ XF は録音の上の長さなので、再生速度 rate で割った時間だけ重ねると、波の山と谷がずれない。
 // 波形がそろわない録音（lc が小さい）は、音量がへこまないように等パワーで重ねる
 const LOOP_XF = 0.2;
+const LEG_XF = 0.06;
 const EQ_POW = (() => { const n = 33, a = new Float32Array(n), b = new Float32Array(n); for(let i = 0; i < n; i++){ const p = i / (n - 1); a[i] = Math.sin(p * Math.PI / 2); b[i] = Math.cos(p * Math.PI / 2); } return {up: a, down: b}; })();
 function playSegments(ac, dest, bank, smp, t0, t1, rate, firstOffset, srcs, onSrc){
   const xf = LOOP_XF / rate, coherent = (smp.lc ?? 0) >= 0.7;
@@ -221,16 +222,20 @@ class SampleVoice {
 
     const base = Math.pow(2, (n.midi - smp.m) / 12) * smpTune(smp);
     const R = c => base * Math.pow(2, (c + this.det) / 1200);
-    const relEnd = legNext ? nextS + 0.06 : endT + tb.rel;
+    const relEnd = legNext ? nextS + LEG_XF : endT + tb.rel;
 
     // 1音ぶんの音量（強弱の流れ）
     const g = ac.createGain();
     g.connect(this.in);
     const G = g.gain;
-    const att = smooth ? 0.05 : joined ? Math.max(0.02, cfg.att || 0) : cfg.att || 0.008;
-    G.setValueAtTime(0, s);
-    G.linearRampToValueAtTime(lv(v0) * (smooth ? 1 : blat), s + att);
-    if(!smooth && blat > 1.02) G.linearRampToValueAtTime(lv(v0), s + att + n.att * 2);
+    // スラーでつなぐ音は、前の音と同じ長さ（LEG_XF）で、合わせた大きさが変わらない形（等パワー）で入れかえる
+    const att = smooth ? LEG_XF : joined ? Math.max(0.02, cfg.att || 0) : cfg.att || 0.008;
+    if(smooth) G.setValueCurveAtTime(EQ_POW.up.map(x => x * lv(v0)), s, LEG_XF);
+    else {
+      G.setValueAtTime(0, s);
+      G.linearRampToValueAtTime(lv(v0) * blat, s + att);
+      if(blat > 1.02) G.linearRampToValueAtTime(lv(v0), s + att + n.att * 2);
+    }
     const after = s + att + n.att * 2 + 0.03;
     let k = 0;
     for(const [dt, v] of env){
@@ -238,8 +243,11 @@ class SampleVoice {
       if(tt <= after || tt >= endT - 0.002 || (k++ % 2)) continue;
       G.linearRampToValueAtTime(lv(v), tt);
     }
-    G.linearRampToValueAtTime(lv(vEnd), Math.max(endT, after + 0.002));
-    if(legNext){ G.setValueAtTime(lv(vEnd), nextS); G.linearRampToValueAtTime(0, nextS + (next.slur ? 0.06 : 0.03)); }
+    const tEnd = Math.max(endT, after + 0.002);
+    G.linearRampToValueAtTime(lv(vEnd), tEnd);
+    const nextSmooth = legNext && (next.slur || next.art === 'tie');
+    if(nextSmooth && tEnd < nextS - 0.001) G.setValueCurveAtTime(EQ_POW.down.map(x => x * lv(vEnd)), nextS, LEG_XF);
+    else if(legNext){ G.setValueAtTime(lv(vEnd), nextS); G.linearRampToValueAtTime(0, nextS + (next.slur ? LEG_XF : 0.03)); }
     else G.linearRampToValueAtTime(0, endT + tb.rel);
 
     // 再生速度で音程を動かす（ずり上がり → 落ち着く → 息が続かず下がる、音の裏返り）
