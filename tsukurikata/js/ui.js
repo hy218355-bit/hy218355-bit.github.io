@@ -531,8 +531,9 @@ function renderWeek(){
   }
   if(S.phase === 'choose'){
     head.textContent = '選曲会議';
-    w.innerHTML = `<p class="small">コンクールの自由曲を決めよう。「お手本」は全員がうまい部の演奏、「いまの部で」はいまの部員が初めて吹いた音。</p>`
-      + PIECE_IDS.map(id => { const pc = PIECES[id]; return `<div class="pcard"><h3>${pc.full}</h3><p>${pc.composer}｜${pc.key}｜問われる力：${pc.asks}</p><p>${pc.desc}</p><div class="row">${listenBtns(id)}<button class="btn small primary" type="button" data-act="choose" data-pid="${id}">この曲に決める</button></div></div>`; }).join('');
+    const fit = pieceFit();
+    w.innerHTML = `<p class="small">コンクールの自由曲を決めよう。「お手本」は全員がうまい部の演奏、「いまの部で」はいまの部員が初めて吹いた音。「部の得意に合う」は、いまの部員の得意な力が採点で重く見られる曲。</p>`
+      + PIECE_IDS.map(id => { const pc = PIECES[id], f = fit[id]; return `<div class="pcard">${f ? `<span class="tag fit">部の得意に合う（${f}）</span>` : ''}<h3>${pc.full}</h3><p>${pc.composer}｜${pc.key}｜問われる力：${pc.asks}</p><p>${pc.desc}</p><div class="row">${listenBtns(id)}<button class="btn small primary" type="button" data-act="choose" data-pid="${id}">この曲に決める</button></div></div>`; }).join('');
     return;
   }
   if(S.phase === 'end'){
@@ -870,6 +871,18 @@ function memberRow(m, part){
     + STAT_KEYS.map(k => `<td class="num" style="color:${skillColor(C, m.stats[k])}">${Math.round(m.stats[k])}</td>`).join('') + '</tr>';
 }
 
+// 選曲会議：いまの部の得意（4つの力のうち平均より高いもの）が、曲の採点で重く見られる曲を3つ選ぶ。{曲: '音色・表現'}
+function pieceFit(){
+  const ms = S.members.filter(m => m.seat);
+  if(!ms.length) return {};
+  const av = Object.fromEntries(STAT_KEYS.map(k => [k, ms.reduce((a, m) => a + m.stats[k], 0) / ms.length]));
+  const mean = STAT_KEYS.reduce((a, k) => a + av[k], 0) / STAT_KEYS.length;
+  const strong = STAT_KEYS.filter(k => av[k] > mean + 1).sort((a, b) => av[b] - av[a]);
+  if(!strong.length) return {};
+  const score = id => STAT_KEYS.reduce((a, k) => a + (PIECES[id].focus?.[k] ?? 1) * (av[k] - mean), 0);
+  const top = PIECE_IDS.slice().sort((a, b) => score(b) - score(a)).slice(0, 3).filter(id => score(id) > 0);
+  return Object.fromEntries(top.map(id => [id, strong.filter(k => (PIECES[id].focus?.[k] ?? 1) >= 1).map(k => STAT_LABEL[k]).slice(0, 2).join('・') || STAT_LABEL[strong[0]]]));
+}
 // 曲を選ぶときのお手本：全員の能力・譜読み・まとまりが100の部が、ホールでふつうの解釈で、ぴったりの指揮で吹いた演奏
 function modelPerf(pid){
   return perform({members: fullBand({pitch: 100, rhythm: 100, tone: 100, expr: 100}), pieceId: pid, cohesion: 100, fam: 100, interp: {tempo: 1, dyn: 1, rub: 1}, venue: 'hall', seed: 'band', lead: () => 1});
