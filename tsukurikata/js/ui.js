@@ -1540,7 +1540,7 @@ function bind(){
   $('#svFile').addEventListener('change', async e => { const f = e.target.files?.[0]; if(f){ $('#svCode').value = (await f.text()).trim(); $('#svMsg').textContent = 'ファイルを読んだ。「このセーブで続ける」を押そう。'; } });
   $('#svCode').addEventListener('input', () => { const b = document.querySelector('[data-sv="load"]'); b.dataset.armed = ''; b.textContent = 'このセーブで続ける'; });
   // 画面に触れたら、音を出せる状態にしておく（iPhone は、タップの中でしか鳴らし始められない）
-  for(const ev of ['pointerdown', 'touchend']) document.addEventListener(ev, () => E.unlock(), {capture: true, passive: true});
+  for(const ev of ['touchend', 'click', 'keydown']) document.addEventListener(ev, () => E.unlock(), {capture: true, passive: true});
   // 数字を押すと説明が出る。ほかの所を押すと消える
   document.addEventListener('click', e => {
     const el = e.target.closest('[data-tip]');

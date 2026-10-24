@@ -62,10 +62,12 @@ class Engine {
     this.chain.set(this.venueId, this.posId, 0);
     return true;
   }
-  // iPhone では、タップの中でしか音を出し始められない。タップのたびに呼んで、あとから鳴らす音（録音の読み込み待ちなど）も出るようにしておく
+  // iPhone では、タップの中でしか音を出し始められない。タップのたびに呼んで、あとから鳴らす音（録音の読み込み待ちなど）も出るようにしておく。
+  // 音のしくみ（AudioContext）は、指を離したとき・タップしたときに作る（触れた瞬間（pointerdown）はまだ操作と見なされず、
+  // そこで作ると、止まったままになって音が出なかった）
   unlock(){
     if(!this.ensure()) return;
-    if(this.ac.state === 'suspended') this.ac.resume();
+    if(this.ac.state !== 'running') this.ac.resume();
     if(this.unlocked) return;
     this.unlocked = true;
     const src = this.ac.createBufferSource(); src.buffer = this.ac.createBuffer(1, 1, this.ac.sampleRate);
