@@ -18,11 +18,11 @@ const MENU = [
 ];
 const MENU_BY = Object.fromEntries(MENU.map(m => [m.id, m]));
 const menuOpen = (s, id) => !MENU_BY[id].from || s.week >= MENU_BY[id].from;
-// 部の方針：顧問が指示を出さなかった部員は、この方針で自分の練習を決める（部全体で1つ）
+// 部の方針：顧問が指示を出さなかった部員は、この方針で自分の練習を決める（部全体で1つ）。
+// 曲はおまかせでも、譜読みの浅い部員は曲の練習をし、3週に1回と本番の前は合奏するので、「曲を仕上げる」は外した
 const POLICIES = [
   {id: 'auto',   name: 'おまかせ',       desc: '苦手なところを中心に。3週に1回は合奏、本番の前は合奏'},
   {id: 'basics', name: '基礎を固める',   desc: 'ロングトーン・チューニング・メトロノームを、低いものから'},
-  {id: 'piece',  name: '曲を仕上げる',   desc: '曲の練習と合奏を、交互に'},
   {id: 'easy',   name: '無理をさせない', desc: '体力が半分を切ったら休む。それ以外はおまかせと同じ'},
 ];
 const POLICY_BY = Object.fromEntries(POLICIES.map(p => [p.id, p]));
@@ -178,7 +178,6 @@ function decideMenu(s, m){
   const drill = k => k === 'expr' && basicsOf(m) < 30 ? DRILL[statOrder(m, ['pitch', 'rhythm', 'tone'])[0]] : DRILL[k];
   const soon = s.pieceId ? stageIn(s, 1) : null;
   if(pol === 'basics') return DRILL[statOrder(m, ['pitch', 'rhythm', 'tone'])[0]];
-  if(pol === 'piece') return soon || s.week % 2 ? 'tutti' : 'piece';
   // おまかせ：本番の前の週は合奏（大会の前でホールを借りられるなら会場で）。自分の譜読みがまだ浅ければ個人練習
   // （入ったばかりでほとんど吹けないなら合奏の週以外はずっと、まだ6割に届かないなら1週おき）。3週に1回は合奏
   if(soon) return soon.ev.kind === 'contest' && menuOpen(s, 'hall') ? 'hall' : 'tutti';
