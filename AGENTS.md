@@ -56,6 +56,33 @@ GitHub Pages のサイト。いまの中心は、高校吹奏楽部の顧問に�
 - セーブの形を変えたら、`game.js` の `load()` に、前のセーブを新しい形へ移す処理を足す（前のセーブがそのまま続けられること）。
 - 楽器の録音（`snd/`）は `tools/build_samples.py` で作ったもの（E♭クラ・バスクラ・バストロンボーン・バリトンサックスは `tools/build_extra_samples.py`。出典は `snd/CREDITS.md`）。気軽に作り直さない。
 
+### オーナーの好み（どちらのエージェントも守る）
+
+- 画面の文字は少なく。文字を並べるより、見て・さわって分かる形にする。くわしい説明は、押すとふわっと出る吹き出し（`ui.js` の `TIPS`・`showTip`）か、たたむ（`<details>`）。
+- 途中経過の数字（「スキルまで○％」など）は出さない。身についた・かなった、そのときだけ知らせる。
+- 画面を作ったり直したりしたら、スマホの幅（375px）で見る：横にはみ出さない、押すボタンが遠くない、同じ文がくり返されていない。ライトとダークの両方で。
+- コミットの説明は、件名も本文も日本語で書く。
+- GitHub に push するのは、オーナーに言われたときだけ。
+- ファイルを落とす前に、ファイル名・どこから・大きさを伝えて、オーナーにたずねる。
+- 指揮は演奏の補助。うまく振っても大きな差がつかないようにする。
+- 文章を足したら `python3 tsukurikata/tools/check_glyphs.py` で、フォントに足りない字がないか見る。足りなければ `tools/build_fonts.py` でフォントを作り直す（元のフォントは google/fonts の `ofl/` の `zenkakugothicnew`・`kleeone`・`delagothicone`・`sharetechmono` の4つ。落とす前にオーナーにたずねる）。
+- 点数や伸び方を変えたら、全15曲で `sim_avg.sh` を回して、下の「確かめること」の目標に入っているか見る。
+
+## デザイン（絵・アイコン・画面の見た目）を入れるとき
+
+- **置き場所**：絵は `tsukurikata/img/` に置く（なければ作る）。iOS アプリはビルドのときに `tsukurikata/` を丸ごと同梱するので、ここに置けばアプリにも入る。ネットから読み込まない（アプリはオフラインで動く）。アプリのアイコンは `tsukurikata/icon-180.png`・`icon-64.png` と、`tsukurikata-ios/Tsukurikata/Assets.xcassets/AppIcon.appiconset`。
+- **形式と大きさ**：線や面の絵は SVG（色は `currentColor` か CSS の色の名前で）、それ以外は PNG か WebP。表示する大きさの2倍で作る。1枚 200KB くらいまで。
+- **色**：`index.html` の `:root` にある色の名前（`--paper` 背景・`--sheet` 紙・`--ink` 文字・`--ink-soft` うすい文字・`--rule` 線・`--brass` 金・`--good`/`--warn`/`--bad` など）を使い、色を直に書かない。ダークモードは、端末の設定（`prefers-color-scheme`）と `data-theme` の両方で色が入れかわる。ライトとダークの両方で見えること。
+- **字**：見出しは Dela Gothic One（`--f-display`）、本文は Zen Kaku Gothic New（`--f-body`）、手書きの日誌は Klee One（`--f-hand`）、数字の表示は Share Tech Mono（`--f-lcd`）。同梱のフォントは使う字だけに絞ってあるので、新しい字を出したらフォントを作り直す。
+- **どこに描いているか**：
+  - 画面の見た目（CSS）は `index.html`、画面の中身は `ui.js`
+  - 舞台と部員の点は canvas（`ui.js` の `stageGeom`・`drawStage`）
+  - 部員カードは `renderMemberCard`、卒業式のふり返りは `grShow`
+  - カットインや季節の演出は `fx.js` の `fxShow`・`fxCutHtml`。動きを減らす端末の設定（`prefers-reduced-motion`）と、日誌の設定「演出：ふつう／短く／なし」（`U.fxMode`）に合わせる
+- **部員ごとの絵**（顔など）を入れるときは、部員の `id` から決まるようにする（`util.js` の `hash` を使う）。セーブに絵を入れない。部員は架空の人物。
+- **権利**：自分で作ったもの、または CC0・パブリックドメインのものだけ。出典は `tsukurikata/img/CREDITS.md` に書く。
+- **確かめ方**：ブラウザ（下の「確かめ方」）でスマホの幅・ライト・ダークを見て、iPhone に入れて実機でも見る。
+
 ## 確かめ方
 
 - ブラウザで遊ぶ：`cd tsukurikata && python3 -m http.server 8000` → http://localhost:8000/
