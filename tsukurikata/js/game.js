@@ -483,6 +483,83 @@ const EPISODES = [
        for(const x of seated(s)) if(x.grade === 3) remember(s, x, '定期演奏会の前の週、後輩たちの前でひとこと話した。');
        return `${m.name}が最初に話し、途中で声をつまらせた。後輩たちは真剣に聞いていた。`; }},
    ]},
+  // ---- 2026年10月に足した出来事（2年目・3年目も同じ出来事ばかりにならないように）。late：顧問になって最初の年には起きない ----
+  {id: 'rush', late: true, who: s => seated(s).filter(m => m.trait === 'rush' || m.trait === 'drag'),
+   text: (s, m) => `${m.name}（${instOf(m)}）が、合奏のたびにテンポが${m.trait === 'rush' ? '前に行ってしまう' : '遅れてしまう'}のを気にしている。「メトロノームと合わせると、自分がずれているのがわかって怖いんです」`,
+   choices: [
+     {label: 'メトロノーム練習に付き合う', go: (s, m) => { bump(m, 'rhythm', 4); adj(s, 'stamina', -2);
+       remember(s, m, 'テンポのずれが怖かったころ、顧問がメトロノーム練習に付き合ってくれた。'); return 'ゆっくりのテンポから、少しずつ上げていった。最後は「合ってる音」が自分でもわかるようになった。'; }},
+     {label: '歌ってリズムを体に入れさせる', go: (s, m) => { bump(m, 'rhythm', 2); bump(m, 'expr', 2);
+       remember(s, m, 'リズムを、まず歌って体に入れるようにした。'); return `${m.name}は手をたたきながら旋律を歌い、それから楽器で吹いた。前より自然に拍に乗れている。`; }},
+     {label: '隣の人の音を聴くように言う', go: (s, m) => { bump(m, 'rhythm', 1); adj(s, 'cohesion', 3);
+       remember(s, m, '「メトロノームより、隣の音を聴いて」と言われた。'); return 'パートのみんなで、お互いの音を聴いて出だしをそろえる練習をした。'; }},
+   ]},
+  {id: 'teach', late: true, pair: true, who: s => seated(s).filter(m => m.grade >= 2 && seated(s).some(x => x.grade === 1 && secOf(x) === secOf(m))),
+   other: (s, m) => seated(s).filter(x => x.grade === 1 && secOf(x) === secOf(m)),
+   text: (s, m, o) => `${m.grade}年生の${m.name}が、1年生の${o.name}（${instOf(o)}）に、自分の練習時間を使って基礎を教えている。`,
+   choices: [
+     {label: 'そのまま任せる', go: (s, m, o) => { bump(o, weakest(o), 4); bump(m, 'expr', 2); adj(s, 'cohesion', 3);
+       remember(s, m, `後輩の${o.name}に、基礎を教えた。`); remember(s, o, `先輩の${m.name}に、基礎を教えてもらった。`);
+       return `教えるうちに、${m.name}自身も自分の吹き方を見直したらしい。二人の音が少し似てきた。`; }},
+     {label: '先輩の練習時間も守るよう伝える', go: (s, m, o) => { bump(o, weakest(o), 2); bump(m, weakest(m), 2);
+       remember(s, m, '後輩に教えながら、自分の練習もきちんと続けた。'); return '教えるのは練習の最初の15分だけにして、残りはそれぞれの練習をすることにした。'; }},
+   ]},
+  {id: 'tired', late: true, who: s => s.members.filter(m => m.seat && (m.sta ?? 100) < 35),
+   text: (s, m) => `${m.name}（${instOf(m)}）の顔色が悪い。家でも夜遅くまで練習しているらしい。`,
+   choices: [
+     {label: '今週は休ませる', go: (s, m) => { m.sta = clamp((m.sta ?? 50) + 35, 0, 100); syncSta(s); adj(s, 'morale', 1);
+       remember(s, m, '無理をしすぎて、顧問に「今週は休んで」と言われた。'); return `「休むのも練習のうち」と伝えた。翌週の${m.name}は、すっきりした顔で楽器を出していた。`; }},
+     {label: '練習の量を一緒に決め直す', go: (s, m) => { m.sta = clamp((m.sta ?? 50) + 18, 0, 100); syncSta(s); bump(m, weakest(m), 1);
+       remember(s, m, '練習の量を、顧問と一緒に決め直した。'); return '家での練習は30分までと約束した。そのぶん音楽室での練習に集中している。'; }},
+   ]},
+  {id: 'tuner', late: true, who: s => seated(s).filter(m => m.stats.pitch < 55 && !['perc'].includes(secOf(m))),
+   text: (s, m) => `${m.name}（${instOf(m)}）が、吹いているあいだずっとチューナーの針ばかり見ている。`,
+   choices: [
+     {label: 'チューナーを伏せて、耳で合わせさせる', go: (s, m) => { bump(m, 'pitch', 3); adj(s, 'morale', -1);
+       remember(s, m, 'チューナーを伏せて、耳だけで音を合わせる練習をした。'); return 'はじめは不安そうだったが、だんだん隣の音とのうなりが聴こえるようになってきた。'; }},
+     {label: '和音で合わせる練習をパートでする', go: (s, m) => { for(const x of seated(s)) if(secOf(x) === secOf(m)) bump(x, 'pitch', 1.5); adj(s, 'cohesion', 2);
+       remember(s, m, 'パートのみんなで、和音をのばして合わせる練習をした。'); return `${SEC[secOf(m)].name}パートで和音をのばした。響きが合った瞬間、みんなの顔がぱっと明るくなった。`; }},
+   ]},
+  {id: 'repair', late: true, who: s => seated(s).filter(m => REED.has(SEAT[m.seat].inst) || LIP.has(SEAT[m.seat].inst)),
+   text: (s, m) => `${m.name}（${instOf(m)}）の楽器の調子が悪い。${LIP.has(SEAT[m.seat].inst) ? 'ピストンの動きが重く' : 'キーから息がもれて'}、低い音が出にくいという。`,
+   choices: [
+     {label: '修理に出す（その間は予備の楽器）', go: (s, m) => { bump(m, 'tone', 3); adj(s, 'stamina', -1);
+       remember(s, m, '楽器を修理に出して、戻ってきた音に驚いた。'); return `一週間後、戻ってきた楽器を吹いた${m.name}は「こんなに楽に鳴るんだ」と驚いていた。`; }},
+     {label: '自分たちで手入れのしかたを覚える', go: (s, m) => { bump(m, 'tone', 1); for(const x of seated(s)) if(secOf(x) === secOf(m)) bump(x, 'tone', 0.5);
+       remember(s, m, 'パートのみんなで、楽器の手入れのしかたを覚えた。'); return 'パートのみんなで、楽器の手入れのしかたを覚えた。ほかの楽器の調子もよくなった。'; }},
+   ]},
+  {id: 'nerve', late: true, who: s => seated(s).filter(m => m.grade >= 2 && (m.mental ?? 40) < 40),
+   text: (s, m) => `${m.name}（${instOf(m)}）が、「本番になると頭が真っ白になるんです」と相談に来た。`,
+   choices: [
+     {label: '部員の前で一人ずつ吹く練習をする', go: (s, m) => { m.mental = clamp((m.mental ?? 40) + 7, 0, 100); adj(s, 'cohesion', 2); adj(s, 'stamina', -2);
+       remember(s, m, '本番が怖くて、部員の前で一人ずつ吹く練習をした。'); return `一人ずつ順番に吹いた。${m.name}の番のあと、自然に拍手が起きた。`; }},
+     {label: '本番の前にすることを決めておく', go: (s, m) => { m.mental = clamp((m.mental ?? 40) + 4, 0, 100); adj(s, 'morale', 1);
+       remember(s, m, '本番の前は、深呼吸をして最初の音だけを思い浮かべると決めた。'); return '「深呼吸をして、最初の音だけ思い浮かべる」と決めた。少し安心したようだ。'; }},
+   ]},
+  {id: 'original', late: true, who: s => s.pieceId ? seated(s).filter(m => m.stats.expr >= 30) : [],
+   text: (s, m) => `${m.name}（${instOf(m)}）が、自由曲の${PIECES[s.pieceId].title}の原曲を、毎日聴きこんでいるらしい。`,
+   choices: [
+     {label: '原曲を部のみんなで聴く', go: (s, m) => { for(const x of seated(s)) bump(x, 'expr', 1); s.fam[s.pieceId] = clamp((s.fam[s.pieceId] || 0) + 2, 0, 100);
+       remember(s, m, '自由曲の原曲を、部のみんなで聴いた。'); return '原曲を聴いたあとの合奏は、どこを歌えばいいかが前よりはっきりしていた。'; }},
+     {label: '原曲で自分の受け持ちの楽器を調べさせる', go: (s, m) => { bump(m, 'expr', 3);
+       remember(s, m, '自由曲で、自分の音を原曲ではどの楽器が弾いているのか調べた。'); return `${m.name}は、自分の音を原曲でどの楽器が弾いているかを、楽譜の上に書き込んでいた。`; }},
+   ]},
+  {id: 'baton', late: true, who: s => seated(s).filter(m => m.title === '学生指揮'),
+   text: (s, m) => `学生指揮の${m.name}が、「パート練習で指揮を振ってみたいので、見てもらえませんか」と言ってきた。`,
+   choices: [
+     {label: '振り方を教える', go: (s, m) => { adj(s, 'cohesion', 3); bump(m, 'rhythm', 2);
+       remember(s, m, '学生指揮として、顧問に振り方を教わった。'); return '拍の点をはっきり見せる振り方を練習した。パート練習の出だしがそろうようになった。'; }},
+     {label: '合奏の基礎練習を任せる', go: (s, m) => { adj(s, 'cohesion', 2); for(const x of seated(s)) bump(x, 'rhythm', 0.8); adj(s, 'morale', 1);
+       remember(s, m, '学生指揮として、合奏の基礎練習を任された。'); return `${m.name}の指揮で基礎合奏をした。部員たちはいつもより真剣な顔をしていた。`; }},
+   ]},
+  {id: 'concert', late: true, who: s => s.week >= 3 ? seated(s).filter(m => m.grade >= 2) : [],
+   text: (s, m) => `近くのホールで、プロの吹奏楽団の演奏会がある。${m.name}たち${m.grade}年生が行きたがっている。`,
+   choices: [
+     {label: '部のみんなで聴きに行く', go: (s, m) => { for(const x of seated(s)) bump(x, 'expr', 1); adj(s, 'morale', 4); adj(s, 'stamina', -2);
+       remember(s, m, 'みんなでプロの吹奏楽団の演奏会を聴きに行った。'); return '帰りの電車で、誰かが聴いたばかりの旋律を口ずさんでいた。次の日の練習は、みんな音が明るかった。'; }},
+     {label: '行きたい人だけ行かせる', go: (s, m) => { for(const x of seated(s)) if(x.grade === m.grade) bump(x, 'expr', 1.5); adj(s, 'morale', 1);
+       remember(s, m, 'プロの吹奏楽団の演奏会を聴きに行った。'); return `${m.name}たちは、次の日の練習で聴いてきた音の話ばかりしていた。`; }},
+   ]},
 ];
 const EPISODE_BY = Object.fromEntries(EPISODES.map(e => [e.id, e]));
 
@@ -493,7 +570,7 @@ function pickEpisode(s){
   if(ev && ev.kind !== 'mod') return null;
   const flag = ep => `ep:${s.year}:${ep.id}${ep.always ? ':' + s.week : ''}`;
   const used = ep => s.flags[flag(ep)];
-  const able = EPISODES.filter(ep => !used(ep) && (!ep.always || ep.always(s)) && ep.who(s).length);
+  const able = EPISODES.filter(ep => !used(ep) && !(ep.late && foundingYear(s)) && (!ep.always || ep.always(s)) && ep.who(s).length);
   const forced = able.filter(ep => ep.always);
   let pool = forced.length ? forced : able.filter(ep => !ep.always);
   if(!pool.length) return null;

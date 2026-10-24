@@ -668,7 +668,7 @@ function planHtml(ev){
     sec = s;
     const auto = decideMenu(S, m), own = S.plan?.[m.id] && menuOpen(S, S.plan[m.id]) ? S.plan[m.id] : '';
     const c = m.sta >= 60 ? 'good' : m.sta >= 30 ? 'warn' : 'bad';
-    return `${head}<li class="pm${own ? ' own' : ''}"><span class="who"><b>${esc(m.name)}</b><small>${m.grade}年・${m.seat ? esc(PART_LABEL[SEAT[m.seat].part]) : '控え'}${m.out && m.seat ? '・コンクール控え' : ''}${S.pieceId ? `・譜読み${Math.round(readMean(m, S.pieceId))}` : ''}</small></span>
+    return `${head}<li class="pm${own ? ' own' : ''}"><span class="who"><b>${esc(m.name)}</b><small>${m.grade}年・${m.seat ? esc(PART_LABEL[SEAT[m.seat].part]) : '控え'}${m.out && m.seat ? '・コンクール控え' : ''}${S.pieceId ? `・譜読み${Math.round(readMean(m, S.pieceId))}` : ''}・苦手：${STAT_LABEL[weakest(m)]}</small></span>
       <span class="sta" title="体力 ${Math.round(m.sta)}"><span class="track"><span class="fill ${c}" style="width:${clamp(m.sta, 0, 100)}%"></span></span><b>${Math.round(m.sta)}</b></span>
       <label class="pw"><span>今週</span><select data-plan="${m.id}" aria-label="${esc(m.name)}の今週の練習"><option value="">おまかせ（${MENU_BY[auto].name}）</option>${menus.map(x => `<option value="${x.id}"${own === x.id ? ' selected' : ''}>${menuLabel(x.id)}</option>`).join('')}</select></label>${(own || auto) === 'piece' && S.pieceId ? spanSelect(m) : ''}
       ${m.last ? `<small class="last">${esc(lastText(m))}</small>` : ''}</li>`;
