@@ -23,6 +23,7 @@ function openConduct(stage = null){
   if(!E.ensure()) return;
   if(E.ac.state === 'suspended') E.ac.resume();
   CD.stage = stage;
+  $('#conduct').classList.remove('watch'); $('#cdClose').textContent = 'やめる'; $('#cdEyebrow').textContent = '指揮';
   soloAll();   // 指揮するときは、全員の音で
   CD.perf = stage ? perform(recCtx(stage.rec)) : perform(currentCtx());
   // 舞台にいる部員（本番ならオーディションで選んだメンバー）を、指揮台から見えるように描く
@@ -52,7 +53,30 @@ function openConduct(stage = null){
   cancelAnimationFrame(CD.raf);
   CD.raf = requestAnimationFrame(cdFrame);
 }
+// 指揮しないで本番を聴くとき：タップする所は出さず、舞台の部員だけを大きく見せる
+function openWatch(perf, title){
+  cancelAnimationFrame(CD.raf);
+  CD.phase = 'watch'; CD.stage = null; CD.perf = perf;
+  CD.who = new Set([...perf.notes, ...perf.hits].map(n => n.mid));
+  $('#cdTitle').textContent = title;
+  $('#cdEyebrow').textContent = '本番';
+  $('#cdClose').textContent = 'とばす';
+  cdMsg(`${VENUE[perf.venue].name}で演奏中。鳴っている部員が光る。`);
+  $('#cdResult').hidden = true; $('#cdPad').hidden = true;
+  $('#conduct').classList.add('watch');
+  $('#conduct').hidden = false;
+  document.documentElement.classList.add('conducting');
+  drawStage(-1, $('#cdStage'), CD.who);
+}
+function closeWatch(){
+  if(CD.phase !== 'watch') return;
+  CD.phase = 'idle';
+  $('#conduct').hidden = true; $('#conduct').classList.remove('watch'); $('#cdClose').textContent = 'やめる'; $('#cdEyebrow').textContent = '指揮';
+  document.documentElement.classList.remove('conducting');
+}
 function closeConduct(){
+  // 見ているだけの本番は、止めて結果へ
+  if(CD.phase === 'watch'){ stopPlay(); closeWatch(); return; }
   cancelAnimationFrame(CD.raf);
   const playing = CD.phase === 'play';
   CD.phase = 'idle';
@@ -206,7 +230,7 @@ function cdFinish(natural){
     : 'テンポが大きく揺れ、リズムの苦手な部員ほどついてくるのに苦労した。';
   const J = CD.judge;
   const judgeRow = `<p class="cd-num judge"><span>ぴったり<b>${J.p}</b></span><span>いい感じ<b>${J.g}</b></span><span>早い・遅い<b>${J.e + J.l}</b></span><span>最大連続<b>${CD.best}</b></span></p>`;
-  const conduct = {ev: c.saved(), lv: CD.lv, bpm, stab, judge: {...J, best: CD.best}};
+  const conduct = {ev: c.saved(), lv: CD.lv, bpm, stab, judge: {...J, best: CD.best}, taps: c.savedTaps()};
   if(CD.stage){
     // 本番：この指揮で演奏した結果で採点し直す
     commit(conductStage(S, conduct));
@@ -246,7 +270,7 @@ const recPerf = rec => perform({...recCtx(rec), ...(rec.span || {})});
 function playRecording(rec, label, onEnd = null){
   if(!E.ensure()) return;
   const perf = recPerf(rec);
-  const opts = rec.conduct ? {clock: BeatClock.fromSaved(rec.conduct.ev, E.ac.currentTime + 0.3), lv: rec.conduct.lv} : {};
+  const opts = rec.conduct ? {clock: BeatClock.fromSaved(rec.conduct.ev, E.ac.currentTime + 0.3, rec.conduct.taps), lv: rec.conduct.lv} : {};
   playPerf(perf, label, onEnd, opts);
 }
 // 録音の中の、ひとりの部員の音だけを聴く（鳴り終わったら全員に戻す）

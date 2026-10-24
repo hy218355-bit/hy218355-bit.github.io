@@ -151,6 +151,7 @@ function addRec(s, label, extra){
 const recCtx = rec => ({
   members: rec.snap.members, pieceId: rec.pieceId, cohesion: rec.snap.cohesion, fam: rec.snap.fam, interp: rec.snap.interp,
   venue: rec.venue, nerves: rec.snap.nerves || 0, fatigue: rec.snap.fatigue || 0, seed: 'band', take: rec.snap.take, form: rec.snap.form,
+  lead: rec.conduct?.taps ? (taps => b => leadAtTaps(taps, b))(rec.conduct.taps.map(([k, off]) => ({k, off}))) : undefined,
 });
 
 function choosePiece(s0, pid){
@@ -652,7 +653,7 @@ function conductStage(s0, conduct){
   const ev = eventAt(s, s.week), p = s.pending;
   const rec = s.recs.find(r => r.id === p.recId);
   rec.conduct = conduct;
-  const perf = warpPerf(perform(recCtx(rec)), BeatClock.fromSaved(conduct.ev, 0));
+  const perf = warpPerf(perform(recCtx(rec)), BeatClock.fromSaved(conduct.ev, 0, conduct.taps));
   stageResult(s, ev, rec, perf, p.nerves);
   s.pending.conducted = {bpm: conduct.bpm, stab: conduct.stab};
   return s;

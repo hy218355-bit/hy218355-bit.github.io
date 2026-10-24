@@ -147,12 +147,26 @@ function trillStep(pc, m, b){
   const sc = sectionAt(pc.scale, b, SCALE);
   return sc.includes((m + 1) % 12) ? 1 : 2;
 }
+/* ===== 指揮の効き =====
+   自分で指揮すると、1タップごとの正確さが部員に伝わる。ぴったり（1）・いい感じ（0.8）なら、おまかせ（0.5）より出だしがそろい、
+   歌い方も大きくなる。早い・遅い（0.35）と、おまかせより乱れる。2拍より長くタップがないと、部員は自分たちだけで吹く（おまかせと同じ） */
+const LEAD_AUTO = 0.5;
+const tapLead = x => { const a = Math.abs(x.off); return a <= 0.07 ? 1 : a <= 0.15 ? 0.8 : 0.35; };
+function leadAtTaps(taps, b){
+  let i = taps.length - 1;
+  while(i >= 0 && taps[i].k > b) i--;
+  if(i < 0 || b - taps[i].k > 2) return LEAD_AUTO;
+  // 直前の2打をならす（1打だけ外しても、すぐには崩れない）
+  return i > 0 && taps[i].k - taps[i - 1].k <= 2 ? (2 * tapLead(taps[i]) + tapLead(taps[i - 1])) / 3 : tapLead(taps[i]);
+}
 function perform(ctx){
   const pc = PIECES[ctx.pieceId];
   const seed = ctx.seed || 'band';
   // take：この演奏ごとのさいころ（どの音を外すか・出だしやテンポの揺れ方）。部員の癖（音程の高さ・遅れ方）は seed と部員で決まり、演奏ごとには変わらない。
   // take のない演奏（前の録音・お手本）は、前と同じ音になる
   const take = ctx.take != null ? [ctx.take] : [];
+  // 指揮の効き（拍ごと）。指揮しない演奏はおまかせのまま
+  const leadAt = typeof ctx.lead === 'function' ? ctx.lead : () => LEAD_AUTO;
   const venue = VENUE[ctx.venue || 'room'];
   const C = clamp01((ctx.cohesion ?? 30) / 100);
   const FAM = clamp01((ctx.fam ?? 0) / 100);
@@ -238,7 +252,9 @@ function perform(ctx){
       if(e.b < from - 1e-6 || e.b >= to - 1e-6) return;
       const k = [...pk, ctx.pieceId, p.part, e.b, e.role, ...take], H = hasher(...k);
       // この音のある区間の譜読み。浅いと歌いきれず、和音のどの音を吹いているか分からないので音程をはめきれない
-      const pf = pfs[spanAt(pc, e.b)], En = E0 * lerp(0.4, 1, pf), jf = jf0 * lerp(0.3, 1, pf);
+      const pf = pfs[spanAt(pc, e.b)], jf = jf0 * lerp(0.3, 1, pf);
+      // 歌い方：指揮が正確なほど、部員は指揮者の歌い方に乗れる
+      const Ld = leadAt(e.b) - LEAD_AUTO, En0 = E0 * lerp(0.4, 1, pf), En = clamp01(Ld > 0 ? En0 + (1 - En0) * 0.7 * Ld : En0 * (1 + 0.6 * Ld));
       // 譜読みが浅いと、音が抜け、出だしが揺れる（うまい人ほど揺れは小さい）
       if(H('miss') < 0.07 * Math.pow(1 - pf, 2) * (1 - 0.5 * R)) return;
       const t = Math.max(0, b2s(e.b) - off + lag + 0.07 * Math.pow(iR, 1.2) * venue.play.timing * (1 - 0.35 * C) * clampG(H.gauss('t'))
@@ -444,7 +460,8 @@ function analyze(perf){
   const score = {
     pitch: 100 * Math.exp(-(0.7 * pitchDev + 0.45 * spread) / 18),
     // 指揮した演奏は、拍ごとにテンポががたつくほど落ち着かない演奏になる
-    rhythm: 100 * Math.exp(-(rhythmMs / 55 + drift * 3 + (perf.conducted ? 5 * Math.max(0, (perf.jitter || 0) - 0.04) : 0))),
+    // 指揮した演奏の拍のがたつき：人が振る1拍ごとの±5%くらいの揺れは減点しない
+    rhythm: 100 * Math.exp(-(rhythmMs / 55 + drift * 3 + (perf.conducted ? 4 * Math.max(0, (perf.jitter || 0) - 0.12) : 0))),
     tone: clamp(100 * (tW ? tE / tW : 0) - 250 * cracks / Math.max(50, perf.notes.length), 0, 100),
     expr: 100 * (eW ? eE / eW : 0) * (0.75 + 0.25 * clamp01(perf.rubUse / Math.max(0.3, RUBATOS[perf.interp.rub ?? 1]))),
     balance: clamp(75 + 8 * (balanceDb - pc.balRef), 0, 100),
@@ -554,7 +571,7 @@ function judge(perf, a, levelId){
     if(i === 2 && a.wrong >= 4) comments.push('まだ譜面が手の内に入っていない箇所が見られます。');
     if(i === 0 && a.missingMel.length) comments.push('人数の少ないパートの旋律が聞こえにくくなっていました。');
     if(i === 0 && a.thin >= 6) comments.push(a.thin >= 12 ? '少ない人数でよく工夫していますが、響きの厚みはまだこれからです。' : '人数がもう少しそろうと、響きに厚みが出てきそうです。');
-    if(i === 0 && perf.conducted && perf.jitter > 0.12) comments.push('指揮の拍が安定せず、合奏が落ち着きませんでした。');
+    if(i === 0 && perf.conducted && perf.jitter > 0.2) comments.push('指揮の拍が安定せず、合奏が落ち着きませんでした。');
     if(!comments.length) comments.push('全体によくまとまっています。あと一歩の磨き込みを期待します。');
     return {name: j.name, score: sc, grade: sc >= L.A ? 'A' : sc >= L.B ? 'B' : 'C', comment: comments.join('')};
   });

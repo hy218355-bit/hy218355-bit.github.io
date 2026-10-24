@@ -118,7 +118,9 @@ function warpNote(n, c, pf, T0){
   const ref = pf.b2t(n.b + span) - pf.b2t(n.b);
   const real = c.timeOf(n.b + span) - c.timeOf(n.b);
   const k = ref > 1e-4 ? real / ref : 1;
-  const dev = (n.t - n.tg) * k + 0.22 * Math.min(0.6, c.joltAt(n.b)) * (1 - 0.7 * (n.R ?? 0.5)) * clampG(gauss(n.key, 'cond'));
+  // 正確な指揮ほど、部員の出だしのずれ（遅れ・ばらつき）が小さくなる
+  const tight = 1 - 0.9 * ((c.leadAt ? c.leadAt(n.b) : LEAD_AUTO) - LEAD_AUTO);
+  const dev = ((n.t - n.tg) * k + 0.22 * Math.min(0.6, c.joltAt(n.b)) * (1 - 0.7 * (n.R ?? 0.5)) * clampG(gauss(n.key, 'cond'))) * tight;
   const w = {...n, t: Math.max(0, c.timeOf(n.b) - T0 + dev)};
   if(n.d != null){ w.d = n.d * k; if(n.env) w.env = n.env.map(([x, v]) => [x * k, v]); }
   if(n.dur != null) w.dur = n.dur * k;
@@ -141,12 +143,14 @@ function warpPerf(perf, clock){
 /* ===== 指揮の拍 =====
    タップのたびに速さを決め直し、次の拍で指揮に追いつく。拍の進み方は途切れず、逆戻りもしない。
    ev は「拍 b の時刻 t から、1拍 P 秒で進む」という区切りの並び（jolt は速さの変わり方の大きさ） */
+const CD_FOLLOW = 0.35;
 class BeatClock {
-  constructor(ev){ this.ev = ev; this.P = ev[ev.length - 1].P; this.last = null; this.taps = []; }
+  constructor(ev, taps = []){ this.ev = ev; this.P = ev[ev.length - 1].P; this.last = null; this.taps = taps; }
   // 入りの合図の最後のタップが b0 の1拍前（t0 - P）。次のタップが b0 になる
   static start(t0, b0, P){ const c = new BeatClock([{b: b0, t: t0, P, jolt: 0}]); c.last = {k: b0 - 1, t: t0 - P}; return c; }
   // 保存した拍の進み方（t は演奏の始まりからの秒）から作り直す
-  static fromSaved(ev, t0){ return new BeatClock(ev.map(e => ({...e, t: e.t + t0}))); }
+  static fromSaved(ev, t0, taps = []){ return new BeatClock(ev.map(e => ({...e, t: e.t + t0})), taps.map(([k, off]) => ({k, off}))); }
+  leadAt(b){ return leadAtTaps(this.taps, b); }
   get t0(){ return this.ev[0].t; }
   seg(b){ let i = this.ev.length - 1; while(i > 0 && this.ev[i].b > b) i--; return this.ev[i]; }
   segT(t){ let i = this.ev.length - 1; while(i > 0 && this.ev[i].t > t) i--; return this.ev[i]; }
@@ -162,7 +166,8 @@ class BeatClock {
       const gap = tau - this.last.t;
       const nb = gap >= 1.6 * P ? Math.max(1, Math.round(gap / P)) : 1;
       k = this.last.k + nb;
-      if(nb <= 4) P = clamp(P + 0.6 * (clamp(gap / nb, 0.6 * P, 1.6 * P) - P), 0.25, 2.0);
+      // 1打のずれでテンポががたつかないよう、部員は速さの変化に少しずつついていく
+      if(nb <= 4) P = clamp(P + CD_FOLLOW * (clamp(gap / nb, 0.6 * P, 1.6 * P) - P), 0.25, 2.0);
     } else k = Math.round(bp);
     // 部員は「いま k 拍目」にいるはず。ずれていれば次の拍までに追いつく／待つ（行きすぎても戻らない）
     const ahead = clamp(bp - k, -0.75, 0.75);
@@ -176,6 +181,8 @@ class BeatClock {
   }
   // 保存用（時刻は演奏の始まりからの秒）
   saved(){ const t0 = this.t0; return this.ev.map(e => ({b: +e.b.toFixed(4), t: +(e.t - t0).toFixed(4), P: +e.P.toFixed(4), jolt: +(e.jolt || 0).toFixed(3)})); }
+  // タップごとの拍と正確さ（指揮の効きを、聴き返すときにも同じにするため）
+  savedTaps(){ return this.taps.map(x => [x.k, +x.off.toFixed(3)]); }
 }
 
 // ステージの奥行き：後ろの列ほど音が遅れて届き、高音が減り、直接届く音（dir）が小さくなる。
@@ -324,7 +331,7 @@ class Playback {
    指揮した演奏は、保存してある拍の進み方（conduct.ev）と振りの大きさ（conduct.lv）で鳴らす。 */
 async function renderPerf(perf, {venue = 'hall', pos = 'center', conduct = null, solo = null, onProgress = null} = {}){
   const sr = 44100;
-  const clock = conduct ? BeatClock.fromSaved(conduct.ev, 0.5) : null;
+  const clock = conduct ? BeatClock.fromSaved(conduct.ev, 0.5, conduct.taps) : null;
   const dur = clock ? clock.timeOf(perf.to) - clock.t0 + 1.5 : perf.total;
   const len = Math.ceil((dur + 3.5) * sr);
   const OAC = window.OfflineAudioContext || window.webkitOfflineAudioContext;

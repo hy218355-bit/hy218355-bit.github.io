@@ -875,7 +875,10 @@ function startStage(){
   U.piece = null; U.range = 'all';
   setVenue(rec.venue);
   renderAll();
-  playPerf(perform(recCtx(rec)), rec.label, natural => natural ? applaudThenReveal() : reveal());
+  // 指揮しないときも、舞台の部員が見えるように
+  const perf = perform(recCtx(rec)), ev = eventAt(S, S.week);
+  openWatch(perf, `${ev.title}：${PIECES[rec.pieceId].title}`);
+  playPerf(perf, rec.label, natural => natural ? applaudThenReveal() : reveal());
   setTimeout(() => { if(E.ac) applauseBuffer(E.ac); }, 2500);   // 拍手の音は、演奏中に作っておく
 }
 // 本番を自分で指揮する：結果はいったん部員まかせで決め、指揮しきったら指揮の演奏で採点し直す
@@ -890,6 +893,7 @@ function startStageConduct(){
   openConduct({rec, ev: eventAt(S, S.week)});
 }
 function reveal(){
+  closeWatch();
   if(!S.pending || S.pending.revealed) return;
   S.pending.revealed = true;
   commit(S);
