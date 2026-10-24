@@ -39,6 +39,8 @@ while(guard++ < 2000 && done < YEARS){
   if(ev && ev.kind === 'forced'){ s = practiceWeek(s, 'test'); continue; }
   if(s.chooseFinal){ s = chooseFinalPiece(s, s.pieceId); continue; }
   if(s.episode){ s = resolveEpisode(s, episodeView(s)?.choices[0]?.k ?? 0); continue; }
+  // 相談には、ふつうの顧問のように、どれかの答えを選ぶ
+  if(s.consult){ const v = consultView(s); s = v ? resolveConsult(s, Math.floor(Math.random() * v.choices.length)) : {...s, consult: null}; continue; }
   s.policy = POL;
   s = practiceWeek(s);
 }

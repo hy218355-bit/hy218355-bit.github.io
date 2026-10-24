@@ -25,6 +25,49 @@ const TRAITS = {
 };
 const TRAIT_IDS = Object.keys(TRAITS);
 
+/* ===== スキル =====
+   部員の得意わざ。○（Lv1）と◎（Lv2）がある。生まれつき持っている子もいれば、練習を続けたり、相談への答え方で身につく子もいる。
+   m.sp[スキル] に育ち具合をためる（1で○、2.5で◎）。効き目は数点ずつ（出来を決めるのは練習で育てた力）
+   grow：その力の練習の伸び（Lv1 あたり）、play：本番の音での力（Lv1 あたり、0〜100 の点）、
+   aura：同じパートのほかの部員の本番の音（Lv1 あたり）、auraGrow：同じパートのほかの部員の練習の伸び（Lv1 あたり） */
+const SKILLS = {
+  sense:  {name: 'センス',         desc: '何を練習しても、少し伸びやすい',               grow: {pitch: .03, rhythm: .03, tone: .03, expr: .03}},
+  ear:    {name: 'いい耳',         desc: '音程が伸びやすく、本番でも音程がぶれにくい',   grow: {pitch: .06}, play: {pitch: 1.5}},
+  groove: {name: 'リズム感',       desc: 'リズムが伸びやすく、本番でも走らない',         grow: {rhythm: .06}, play: {rhythm: 1.5}},
+  breath: {name: '息が長い',       desc: '音色が伸びやすく、長い音がやせない',           grow: {tone: .06}, play: {tone: 1.5}},
+  song:   {name: '歌心',           desc: '表現が伸びやすく、フレーズをよく歌う',         grow: {expr: .06}, play: {expr: 1.5}},
+  reader: {name: '譜読みが速い',   desc: '新しい曲の楽譜を早く覚える',                   read: .2},
+  nerve:  {name: '度胸',           desc: '本番の緊張に強い',                             calm: .1},
+  tough:  {name: '体力自慢',       desc: '練習で疲れにくい',                             cost: .15},
+  pillar: {name: 'パートの柱',     desc: 'この子がいると、同じパートの音色がよくなる',   aura: {tone: 1.2}, auraGrow: .03},
+  center: {name: '音程の要',       desc: 'この子がいると、同じパートの音程がそろう',     aura: {pitch: 1.2}},
+  mentor: {name: '面倒見がいい',   desc: '同じパートの部員が、練習で伸びやすくなる',     auraGrow: .04},
+  mood:   {name: 'ムードメーカー', desc: '部のやる気とまとまりを支える',                 mood: 1},
+};
+const SKILL_IDS = Object.keys(SKILLS);
+const skillLv = (m, id) => { const v = m.sp?.[id] || 0; return v >= 2.5 ? 2 : v >= 1 ? 1 : 0; };
+const skillMark = lv => lv >= 2 ? '◎' : '○';
+const skillsOf = m => SKILL_IDS.filter(id => skillLv(m, id)).map(id => ({id, lv: skillLv(m, id), ...SKILLS[id]}));
+// 生まれつきのスキル（入部したときに決まる。中学で吹いていた子は少し多い）
+function innateSkills(id, exp){
+  const sp = {}, h = hash(id, 'skill');
+  const pool = ['sense', 'ear', 'groove', 'breath', 'song', 'reader', 'nerve', 'tough', 'mood'];
+  const n = h < (exp ? 0.12 : 0.06) ? 2 : h < (exp ? 0.4 : 0.3) ? 1 : 0;
+  for(let i = 0; i < n; i++){
+    const k = pool[Math.floor(hash(id, 'skill', i) * pool.length)];
+    sp[k] = hash(id, 'skillLv', i) < 0.12 ? 2.5 : 1;
+  }
+  return sp;
+}
+// 同じパートのほかの部員から受ける効き目（いちばん強い1人ぶん）
+function sectionAura(members, m, key){
+  const sec = SEAT[m.seat]?.sec;
+  let best = 0;
+  for(const x of members) if(x.id !== m.id && x.seat && SEAT[x.seat]?.sec === sec)
+    for(const id of SKILL_IDS){ const lv = skillLv(x, id), v = key === 'grow' ? SKILLS[id].auraGrow : SKILLS[id].aura?.[key]; if(lv && v) best = Math.max(best, v * lv); }
+  return best;
+}
+
 /* ===== 座席（ステージ配置） ===== */
 const SEAT_ROWS = [
   [['picc1','picc','picc'], ['fl1a','fl','fl1'], ['fl1b','fl','fl1'], ['fl2a','fl','fl2'], ['ob1','ob','ob'], ['cl1a','cl','cl1'], ['cl1b','cl','cl1'], ['cl1c','cl','cl1'], ['asax1','asax','asax1'], ['asax2','asax','asax2']],
@@ -193,7 +236,7 @@ function perform(ctx){
     let drop, freeze = false, zone = false;
     const fatigue = ctx.fatigue || 0;
     if(ctx.form && m.mental != null){
-      ({drop, freeze, zone} = stageDrop(m, ctx.nerves || 0, clampG(ctx.form[m.id] ?? 0), fatigue));
+      ({drop, freeze, zone} = stageDrop(m, (ctx.nerves || 0) * (1 - SKILLS.nerve.calm * skillLv(m, 'nerve')), clampG(ctx.form[m.id] ?? 0), fatigue));
     } else {
       const nerveMul = m.trait === 'nervous' ? 1.6 : m.trait === 'clutch' ? 0.3 : m.trait === 'steady' ? 0.7 : 1;
       drop = (ctx.nerves || 0) * nerveMul * (m.grade === 1 ? 1.3 : 1) + fatigue;
@@ -201,7 +244,9 @@ function perform(ctx){
     // 緊張は息（音色）にいちばん出る
     const W = {tone: 1.15, rhythm: 1, pitch: 0.85, expr: 1};
     const st = {};
-    for(const k of STAT_KEYS) st[k] = clamp01((m.stats[k] - drop * W[k]) / 100);
+    // スキル：自分の得意（play）と、同じパートの柱・要（aura）が、本番の音での力を数点上げる
+    const plus = k => skillsOf(m).reduce((a, x) => a + (x.play?.[k] || 0) * x.lv, 0) + sectionAura(ctx.members, m, k);
+    for(const k of STAT_KEYS) st[k] = clamp01((m.stats[k] + plus(k) - drop * W[k]) / 100);
     // 譜読みが浅いうちは、うまい人でもフレーズを歌いきれない（全体のテンポの揺れには範囲での平均、1音ずつにはその区間の譜読みが効く）
     const pfs = pfsOf(m), E0 = st.expr;
     st.expr *= lerp(0.4, 1, meanIn(pfs));

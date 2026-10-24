@@ -603,6 +603,11 @@ function renderWeek(){
     return;
   }
   if(S.lastEpisode) parts.push(`<p class="epres"><b>${esc(S.lastEpisode.choice)}</b>${esc(S.lastEpisode.result)}</p>`);
+  const cv = consultView(S);
+  if(cv) parts.push(`<div class="episode consult"><div class="head"><span class="tag">相談</span><span class="who">${cv.m.grade}年・${esc(instOf(cv.m))}・${esc(cv.m.name)}${skillChips(cv.m)}</span></div><p class="txt">${esc(cv.text)}</p>
+    <div class="choices">${cv.choices.map(c => `<button class="mbtn" type="button" data-cs="${c.k}"><b>${esc(c.label)}</b></button>`).join('')}</div>
+    <p class="small">答え方で、${esc(kun(cv.m))}の育ち方が変わる。答えずに練習を進めると、この相談は流れる。</p></div>`);
+  if(S.lastConsult) parts.push(`<p class="epres"><b>${esc(S.lastConsult.choice)}</b>${esc(S.lastConsult.result)}</p>`);
   parts.push(planHtml(ev));
   if(!tuneDone(S)) parts.push(`<div class="tgrow"><button class="btn small" type="button" data-act="tunegame">♪ 耳でチューニング</button><span class="small">週に1回。合わせた部員の音程が上がる</span></div>`);
   w.innerHTML = parts.join('');
@@ -615,7 +620,7 @@ function renderAssign(w, ev){
   const intro = first ? `部員がいなくなって休部していた吹奏楽部に、1年生が${S.recruits.length}人入部してきた。担当する楽器を決めよう。希望どおりだとやる気が上がる。人数が少ないうちは、いる人で旋律・低音・和音を分けて吹く。`
     : ev?.kind === 'assign' ? ev.text : '新しく入部してきた部員の担当を決めよう。希望どおりだとやる気が上がる。';
   w.innerHTML = `<div class="event"><span class="tag">${first ? '入部' : ev?.kind === 'assign' ? ev.title : '入部'}</span><span>${intro}</span></div>
-    <div class="assign">${S.recruits.map(r => `<div class="row"><span class="who">${esc(r.name)}<small>${(r.grade || 1)}年・希望：${INST[r.hope].name}${r.exp ? '・中学で経験あり' : '・初心者'}${r.trait ? '・' + TRAITS[r.trait].name : ''}</small></span>
+    <div class="assign">${S.recruits.map(r => `<div class="row"><span class="who">${esc(r.name)}<small>${(r.grade || 1)}年・希望：${INST[r.hope].name}${r.exp ? '・中学で経験あり' : '・初心者'}${r.trait ? '・' + TRAITS[r.trait].name : ''}${Object.entries(innateSkills(r.id, r.exp)).map(([id, v]) => '・' + SKILLS[id].name + skillMark(v >= 2.5 ? 2 : 1)).join('')}</small></span>
       <select id="as-${r.id}" aria-label="${esc(r.name)}の担当"><option value="">控え（席なし）</option>${free.map(id => `<option value="${id}"${map[r.id] === id ? ' selected' : ''}>${PART_LABEL[SEAT[id].part]}</option>`).join('')}</select></div>`).join('')}</div>
     <p class="small" id="assignErr"></p>
     <button class="btn primary" type="button" data-act="assign">この担当で決める</button>`;
@@ -843,6 +848,15 @@ function placeCard(where){
   if(where === 'roster') $('.roster').insertBefore(card, $('.roster .sec-grid'));
   else $('.col-stage').appendChild(card);
 }
+// スキル：小さな札（名前の横）と、部員カードの一覧（説明と、もうすぐ身につきそうなもの・育ち方）
+const skillChips = m => skillsOf(m).map(x => ` <span class="sk">${x.name}${skillMark(x.lv)}</span>`).join('');
+function skillList(m){
+  const have = skillsOf(m);
+  const near = SKILL_IDS.filter(id => { const v = m.sp?.[id] || 0; return (v >= 0.6 && v < 1) || (v >= 2 && v < 2.5); }).map(id => SKILLS[id].name + skillMark(skillLv(m, id) + 1));
+  const bent = STAT_KEYS.filter(k => (m.bent?.[k] || 0) >= 0.04).sort((a, b) => m.bent[b] - m.bent[a]).map(k => STAT_LABEL[k]);
+  return `<div class="mc-skills">${have.length ? `<ul>${have.map(x => `<li><b>${x.name}${skillMark(x.lv)}</b>${esc(x.desc)}</li>`).join('')}</ul>` : '<p class="small">スキルはまだない。練習を続けたり、相談に乗ったりすると身につくことがある。</p>'}
+    ${near.length ? `<p class="small">もうすぐ：${near.join('・')}</p>` : ''}${bent.length ? `<p class="small">伸びやすい力：${bent.join('・')}（相談への答え方で育った）</p>` : ''}</div>`;
+}
 // 部員のひとこと：いまの様子（体力・最近の伸び・苦手・癖・学年・役）に合うものから、週ごとに1つ
 function memberSays(m){
   const lines = [], wk = STAT_LABEL[weakest(m)], up = m.last?.d ? Math.max(0, ...STAT_KEYS.map(k => m.last.d[k] || 0)) : 0;
@@ -876,6 +890,7 @@ function renderMemberCard(){
   }).join('');
   card.innerHTML = `<div class="mc-head"><h3>${esc(m.name)}</h3>${m.title ? `<span class="tag">${m.title}</span>` : ''}<span class="sub">${m.grade}年・${seat ? PART_LABEL[seat.part] : '控え（席なし）'}</span><button class="link mc-close" type="button" data-mact="close">閉じる</button></div>
     <p class="mc-say">${esc(memberSays(m))}</p>
+    ${skillList(m)}
     ${tr ? `<p class="mc-trait">癖：${tr.name}。${tr.desc}</p>` : '<p class="mc-trait">目立った癖はない。</p>'}
     <div class="stats">${STAT_KEYS.map(k => statRow(STAT_LABEL[k], m.stats[k], '', '')).join('')}${m.mental != null ? statRow('本番の強さ', m.mental, '', '', 'warn') : ''}${S.pieceId ? `<p class="mc-sub">譜読み（${PIECES[S.pieceId].title}）</p>`
       + readUnits(S.pieceId).map(u => statRow(spanShort(u), readOf(m, S.pieceId)[u.i], '', '')).join('') : ''}</div>
@@ -908,7 +923,7 @@ function renderRoster(){
 }
 function memberRow(m, part){
   const C = tok();
-  const sub = [`${m.grade}年`, part + (m.out && m.seat ? '（コンクール控え）' : ''), m.trait ? TRAITS[m.trait].name : ''].filter(Boolean).join('・');
+  const sub = [`${m.grade}年`, part + (m.out && m.seat ? '（コンクール控え）' : ''), m.trait ? TRAITS[m.trait].name : '', ...skillsOf(m).map(x => x.name + skillMark(x.lv))].filter(Boolean).join('・');
   return `<tr class="mem${U.sel === m.id ? ' sel' : ''}" data-mid="${m.id}"><td><b>${esc(m.name)}</b>${m.title ? ` <span class="tag">${m.title}</span>` : ''}<small>${sub}</small></td>`
     + STAT_KEYS.map(k => `<td class="num" style="color:${skillColor(C, m.stats[k])}">${Math.round(m.stats[k])}</td>`).join('') + '</tr>';
 }
@@ -933,6 +948,13 @@ const listenBtns = id => `<button class="btn small" type="button" data-act="mode
 
 /* ===== まとめて描く ===== */
 function renderAll(){
+  // スキルを身につけた部員がいたら知らせる（同じスキルはまとめて）
+  if(S.skillUp?.length){ const ups = S.skillUp; delete S.skillUp; save(S);
+    const by = new Map();
+    for(const u of ups){ const m = S.members.find(x => x.id === u.mid); if(!m) continue;
+      const k = `${SKILLS[u.id].name}${skillMark(u.lv)}`; by.set(k, [...(by.get(k) || []), m.name]); }
+    const parts = [...by].map(([k, ns]) => `「${k}」${ns.slice(0, 2).join('・')}${ns.length > 2 ? ` ほか${ns.length - 2}人` : ''}`);
+    if(parts.length) setTimeout(() => toast(`スキルを身につけた：${parts.slice(0, 2).join('／')}${parts.length > 2 ? ' など' : ''}`, 4500), S.coachUp ? 5000 : 300); }
   // 顧問の指導力が上がったら知らせる
   if(S.coachUp){ const lv = S.coachUp; delete S.coachUp; save(S); setTimeout(() => toast(`顧問の指導力が Lv${lv}（${coachTitle(lv)}）に上がった！ 練習の効果 +${Math.round((coachMult(S) - 1) * 100)}%`, 4500), 300); }
   renderHeader(); renderPiece(); renderVenues(); renderSelectors();
@@ -1064,6 +1086,7 @@ function bind(){
       return;
     }
     if(b.dataset.ep !== undefined){ haptic('tap'); commit(resolveEpisode(S, +b.dataset.ep)); renderAll(); refreshNow(); return; }
+    if(b.dataset.cs !== undefined){ haptic('tap'); commit(resolveConsult(S, +b.dataset.cs)); renderAll(); return; }
     const act = b.dataset.act;
     if(act === 'preview' || act === 'model'){
       const pid = b.dataset.pid;
