@@ -235,6 +235,7 @@ function cdFinish(natural){
     // 本番：この指揮で演奏した結果で採点し直す
     commit(conductStage(S, conduct));
     E.applaud(stageHeat(S.pending));
+    const g = S.pending.conducted?.gain;
     CD.rec = S.recs.find(r => r.id === S.pending.recId);
     renderAll();
     $('#cdPad').hidden = true; cdMsg('');
@@ -243,6 +244,7 @@ function cdFinish(natural){
       <p class="cd-num"><span>平均テンポ<b>${beatName(pc)}=${bpm}</b></span><span>安定度<b>${followed ? stab + '%' : '—'}</b></span></p>
       ${judgeRow}
       <p>${speed}。${comment}</p>
+      ${g != null ? `<p class="cd-gain">${g >= 0.05 ? `あなたの指揮で、おまかせより <b>+${g.toFixed(1)}点</b>` : g <= -0.05 ? `おまかせより <b>−${Math.abs(g).toFixed(1)}点</b>。タップを拍にぴったり合わせると、部員の出だしがそろう` : 'おまかせとほぼ同じ出来'}</p>` : ''}
       <div class="transport"><button class="btn primary" type="button" data-cd="reveal">結果を見る</button></div>`;
     haptic(stab >= 85 ? 'success' : 'tap');
     return;

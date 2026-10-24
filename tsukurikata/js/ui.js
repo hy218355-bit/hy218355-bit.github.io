@@ -728,7 +728,8 @@ function seniorCard(m, last){
 const conductNote = p => {
   if(!p.conducted) return '';
   const pc = PIECES[S.recs.find(r => r.id === p.recId)?.pieceId];
-  return `・あなたの指揮 ${pc ? beatName(pc) : '♩'}=${p.conducted.bpm}、安定度${p.conducted.stab}%`;
+  const g = p.conducted.gain;
+  return `・あなたの指揮 ${pc ? beatName(pc) : '♩'}=${p.conducted.bpm}、安定度${p.conducted.stab}%${g != null ? `（おまかせより${g >= 0 ? '+' : '−'}${Math.abs(g).toFixed(1)}点）` : ''}`;
 };
 function renderStageResult(w, ev){
   const p = S.pending;

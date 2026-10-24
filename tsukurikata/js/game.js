@@ -674,9 +674,11 @@ function conductStage(s0, conduct){
   const ev = eventAt(s, s.week), p = s.pending;
   const rec = s.recs.find(r => r.id === p.recId);
   rec.conduct = conduct;
+  // 同じ日の同じ調子で、指揮しなかった（おまかせの）ときの点。指揮でどれだけ変わったかを見せる
+  const scoreOf = x => x.kind === 'concert' ? x.q : x.judge.avg, before = scoreOf(p);
   const perf = warpPerf(perform(recCtx(rec)), BeatClock.fromSaved(conduct.ev, 0, conduct.taps));
   stageResult(s, ev, rec, perf, p.nerves);
-  s.pending.conducted = {bpm: conduct.bpm, stab: conduct.stab};
+  s.pending.conducted = {bpm: conduct.bpm, stab: conduct.stab, gain: Math.round((scoreOf(s.pending) - before) * 10) / 10};
   return s;
 }
 function concertOutcome(s, ev, q, perf, a){
