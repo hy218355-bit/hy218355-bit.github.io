@@ -629,7 +629,7 @@ function updatePred(soon){
   const key = S.year + ':' + S.week + ':' + [...out].sort().join(',');
   const show = p => {
     const nm = {gold: '金賞', silver: '銀賞', bronze: '銅賞'}[p.award];
-    // 目安は、いまの方針のまま本番の週まで練習を続けたときの姿で出す（自分で指揮すると、ここから上がる）
+    // 目安は、いまの方針のまま本番の週まで練習を続けたときの部で出す（自分で指揮すると、ここから上がる）
     el.innerHTML = `<b>${n}人で出ると、${L.name}で審査員平均 ${p.avg.toFixed(1)}点（${nm}）くらい</b><span class="small">${left > 0 ? `本番まであと${left}週、いまの方針で練習を続けたときの目安。` : ''}金賞の目安は${L.gold}点、${L.rep ? `代表は3人ともA（${L.A}点）。` : ''}${p.thin >= 6 ? '人数が少ないぶん、響きが薄いと見られる。' : ''}本番の日の調子や指揮でも上下する。</span>`;
   };
   if(U.predKey === key && U.pred){ show(U.pred); return; }
