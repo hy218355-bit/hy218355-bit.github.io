@@ -386,7 +386,9 @@ tr.empty td{color:var(--ink-soft)}
 /* 歴史 */
 .history{display:grid;gap:10px;border-top:2px solid var(--ink);padding-top:16px}
 .hist-best{font-weight:700;font-size:14px;color:var(--brass);margin-bottom:4px}
-.savebox .svin{display:grid;gap:8px}
+.savebox .svin,.prefbox .svin{display:grid;gap:8px}
+.prefbox .prow{display:flex;align-items:center;gap:12px;font-size:13px;color:var(--ink)}
+.prefbox .prow > span{min-width:4em}
 .savebox .row{display:flex;flex-wrap:wrap;gap:8px}
 .savebox textarea{width:100%;font:12px/1.4 var(--f-lcd);padding:6px 8px;border:1.5px solid var(--rule);border-radius:6px;background:var(--sheet);color:var(--ink);resize:vertical;word-break:break-all}
 .savebox input[type=file]{font-size:12px;color:var(--ink-soft)}
@@ -734,6 +736,11 @@ html[data-season="snow"]{--season-band:linear-gradient(90deg,#DDE8F3,#FFFFFF,#B9
     <div class="hist" id="hist"></div>
   </section>
 
+  <details class="foot prefbox" id="prefBox" data-tab="log"><summary>設定（効果音・演出）</summary><div class="svin">
+    <div class="prow"><span>効果音</span><div class="seg" id="prefSfx"></div></div>
+    <div class="prow"><span>演出</span><div class="seg" id="prefFx"></div></div>
+    <p>演出：「短く」は、カットインや月の扉を短く出し、本番の幕と入場をはぶく。「なし」は、カットインを小さな知らせにして、場面の演出をすべてはぶく。この端末だけの設定。</p>
+  </div></details>
   <details class="foot savebox" id="saveBox" data-tab="log"><summary>セーブの書き出し・読み込み</summary><div class="svin">
     <p>アプリを消す前や、ほかの端末で続けたいときに。いまのセーブをファイルに保存（またはコードをコピー）しておけば、あとで読み込んで続きから遊べる。</p>
     <div class="row"><button class="btn small" type="button" data-sv="file">ファイルに保存</button><button class="btn small" type="button" data-sv="copy">コードをコピー</button></div>

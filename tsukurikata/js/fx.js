@@ -8,7 +8,7 @@ const fxCalm = () => matchMedia('(prefers-reduced-motion: reduce)').matches;
 /* ----- 効果音 ----- */
 // kind：skill（きらっと上がる）・mile（2音）・month（扉の音）・level（ファンファーレ）・year（年度の音）
 function sfx(kind){
-  if(!E.ensure()) return;
+  if(U.sfx === false || !E.ensure()) return;
   const ac = E.ac;
   if(ac.state === 'suspended') ac.resume();
   const t0 = ac.currentTime + 0.03, out = ac.createGain();
@@ -38,7 +38,15 @@ function sfx(kind){
 
 /* ----- 順番に出す（カットインと場面） ----- */
 // it：{kind: 'cut'|'scene', html, sound, season, ms}
-function fxShow(it){ FX.q.push(it); if(!FX.on) fxNext(); }
+// 設定で演出が「なし」なら、カットインは短い知らせにして、場面（月の扉など）は出さない。「短く」なら短い時間で、舞う花びらなどもなし
+function fxShow(it){
+  if(U.fxMode === 'off'){
+    if(it.kind === 'cut'){ const d = document.createElement('div'); d.innerHTML = it.html; if(it.sound) sfx(it.sound); toast([...d.querySelectorAll('.fx-tag, .fx-title, .fx-who')].map(e => e.textContent).join('　'), 3500); }
+    return;
+  }
+  if(U.fxMode === 'short') it = {...it, ms: Math.min(it.ms || 2400, 1300), season: null};
+  FX.q.push(it); if(!FX.on) fxNext();
+}
 function fxNext(){
   clearTimeout(FX.timer); cancelAnimationFrame(FX.raf);
   const el = document.getElementById('fx'), it = FX.q.shift();
@@ -134,7 +142,7 @@ function fxCountUps(root = document){
     const key = el.dataset.key, to = +el.dataset.to, dec = +(el.dataset.dec || 0);
     if(FX.done.has(key)){ el.textContent = to.toFixed(dec); continue; }
     FX.done.add(key);
-    if(fxCalm()){ el.textContent = to.toFixed(dec); continue; }
+    if(fxCalm() || U.fxMode === 'off'){ el.textContent = to.toFixed(dec); continue; }
     const from = +(el.dataset.from || 0), t0 = performance.now(), dur = +(el.dataset.ms || 900);
     const tick = now => {
       const k = Math.min(1, (now - t0) / dur), e = 1 - Math.pow(1 - k, 3);
@@ -174,7 +182,7 @@ function stageIntro(perf, ev, rec, go, pieceText = null){
 // 演奏が終わったら幕を下ろす（客席の拍手の間に）
 function stageCurtainClose(){
   const cur = document.querySelector('.cd-curtain');
-  if(!cur || fxCalm()) return;
+  if(!cur || fxCalm() || U.fxMode !== 'full') return;
   cur.querySelector('.cd-intro').innerHTML = '';
   cur.classList.add('shut');
   cdMsg('演奏が終わった。客席から拍手が起きる。');

@@ -9,6 +9,7 @@ const U = {
   shown: null, shownLabel: '', perfNow: null, diag: null, ptr: null, raf: 0, onEnd: null, playing: false, refreshT: 0,
   tab: 'week', tabScroll: {},
   lineup: false, draft: null, pred: null, predKey: '', predT: 0, outKey: '', outPick: new Set(),
+  sfx: true, fxMode: 'full',
 };
 const UI_KEY = 'suibu-ui-v2';  // 前の名前のころからの保存先（SAVE_KEY と同じ理由でこのまま）
 
@@ -54,8 +55,9 @@ function rangeSpan(pid){
 const nowLabel = () => `いまの音（${S.phase === 'choose' || S.phase === 'chooseSet' ? '選曲前' : wkLabel(S.week)}・${VENUE[U.venue].name}）`;
 const busy = () => !!(S.pending && !S.pending.revealed);
 // 画面の設定は会場だけ残す（聴く位置は客席の中央、音はいつも楽器の録音で鳴らす）
-function saveUI(){ try{ localStorage.setItem(UI_KEY, JSON.stringify({venue: U.venue})); }catch(e){} }
-function loadUI(){ try{ const x = JSON.parse(localStorage.getItem(UI_KEY) || 'null'); if(x && VENUE[x.venue]) U.venue = x.venue; }catch(e){} }
+// 端末ごとの設定：聴く会場、効果音（sfx）、演出（fxMode：full ふつう／short 短く／off なし）
+function saveUI(){ try{ localStorage.setItem(UI_KEY, JSON.stringify({venue: U.venue, sfx: U.sfx, fxMode: U.fxMode})); }catch(e){} }
+function loadUI(){ try{ const x = JSON.parse(localStorage.getItem(UI_KEY) || 'null'); if(x && VENUE[x.venue]) U.venue = x.venue; if(x && x.sfx === false) U.sfx = false; if(x && ['full', 'short', 'off'].includes(x.fxMode)) U.fxMode = x.fxMode; }catch(e){} }
 // 録音音源の読み込み状況
 function renderSnd(){
   const st = $('#sndStatus');
@@ -1140,6 +1142,12 @@ async function saveAction(kind){
     save(s); location.reload();
   }
 }
+// 設定（効果音・演出）
+function renderPrefs(){
+  const seg = (k, opts, cur) => opts.map(([v, nm]) => `<button type="button" data-pref="${k}:${v}" aria-pressed="${cur === v}">${nm}</button>`).join('');
+  $('#prefSfx').innerHTML = seg('sfx', [['on', 'オン'], ['off', 'オフ']], U.sfx ? 'on' : 'off');
+  $('#prefFx').innerHTML = seg('fx', [['full', 'ふつう'], ['short', '短く'], ['off', 'なし']], U.fxMode);
+}
 // 実績の一覧（達成したものは年度つき、まだのものは目標として薄く）
 function renderAch(){
   const el = $('#achList'); if(!el) return;
@@ -1149,7 +1157,7 @@ function renderAch(){
     return `<li class="${g ? 'got' : ''}"><b>${a.name}</b><small>${g ? (g.old ? 'それまでに達成' : `${g.y}年度 ${g.w >= 100 ? WINTER_STEPS[g.w - 100]?.m ?? 3 : wkMonth(g.w)}月`) : 'まだ'}・${a.desc}</small></li>`; }).join('');
 }
 function renderHistory(){
-  renderAch();
+  renderAch(); renderPrefs();
   const years = (S.history || []).slice().reverse();
   $('#history').hidden = !years.length;
   const recBtns = y => S.recs.filter(r => r.year === y && r.keep).map(r => `<button class="btn small" type="button" data-act="playrec" data-id="${r.id}">▶ ${esc(r.label.replace(/^\d+年?\s*/, ''))}</button>`).join('');
@@ -1348,7 +1356,7 @@ function startStage(){
   });
   // 幕の前で会場と曲を紹介し、幕が開いて部員が席についてから演奏
   const go = () => playAt(0);
-  if(fxCalm()) go(); else stageIntro(perfs[0], ev, rec, go, setRec ? `課題曲 ${PIECES[setRec.pieceId].title}・自由曲 ${PIECES[rec.pieceId].title}` : null);
+  if(fxCalm() || U.fxMode !== 'full') go(); else stageIntro(perfs[0], ev, rec, go, setRec ? `課題曲 ${PIECES[setRec.pieceId].title}・自由曲 ${PIECES[rec.pieceId].title}` : null);
   setTimeout(() => { if(E.ac) applauseBuffer(E.ac); }, 2500);   // 拍手の音は、演奏中に作っておく
 }
 // 本番を自分で指揮する：結果はいったん部員まかせで決め、指揮しきったら指揮の演奏で採点し直す
@@ -1370,7 +1378,7 @@ function startStageConduct(){
     cdMsg('課題曲が終わった。続けて、自由曲を指揮する。');
     setTimeout(() => { if(CD.phase === 'watch'){ closeWatch(); openConduct({rec, ev}); } }, 1600);
   });
-  if(fxCalm()) go(); else stageIntro(perf, ev, rec, go, `課題曲 ${PIECES[setRec.pieceId].title}・自由曲 ${PIECES[rec.pieceId].title}`);
+  if(fxCalm() || U.fxMode !== 'full') go(); else stageIntro(perf, ev, rec, go, `課題曲 ${PIECES[setRec.pieceId].title}・自由曲 ${PIECES[rec.pieceId].title}`);
 }
 function reveal(){
   closeWatch();
@@ -1402,6 +1410,13 @@ function bind(){
   });
   $('#btnRec').addEventListener('click', () => playRec($('#recSel').value));
   $('#btnStop').addEventListener('click', stopPlay);
+  $('#prefBox').addEventListener('click', e => {
+    const b = e.target.closest('[data-pref]'); if(!b) return;
+    const [k, v] = b.dataset.pref.split(':');
+    if(k === 'sfx') U.sfx = v === 'on'; else U.fxMode = v;
+    saveUI(); renderPrefs(); haptic('tap');
+    if(k === 'sfx' && U.sfx) sfx('skill');
+  });
   $('#saveBox').addEventListener('click', e => { const b = e.target.closest('[data-sv]'); if(b){ haptic('tap'); saveAction(b.dataset.sv); } });
   $('#svFile').addEventListener('change', async e => { const f = e.target.files?.[0]; if(f){ $('#svCode').value = (await f.text()).trim(); $('#svMsg').textContent = 'ファイルを読んだ。「このセーブで続ける」を押そう。'; } });
   $('#svCode').addEventListener('input', () => { const b = document.querySelector('[data-sv="load"]'); b.dataset.armed = ''; b.textContent = 'このセーブで続ける'; });
