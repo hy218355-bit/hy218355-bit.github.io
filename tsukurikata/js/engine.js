@@ -211,8 +211,10 @@ class Playback {
     this.engine = engine; this.perf = perf; this.onEnd = onEnd;
     this.clock = opts.clock || null;
     this.T0 = this.clock ? this.clock.t0 : ac.currentTime + 0.25;
-    // 静かな曲（春・カノンなど）は、聴くときだけ少し大きく（採点には関わらない）
-    this.out = PIECES[perf.pieceId]?.outGain ?? 1;
+    // 聴くときの音量（採点には関わらない）：曲ごとの大きさをそろえる倍率（outGain）と、人数の少ない部の上乗せ。
+    // 5人の部は39人の部より 9dB ほど小さいが、録音のマイクを近づけるように、差を 4dB ほどにして聴かせる（部が大きくなると音も大きくなるのは残す）
+    const players = new Set([...perf.notes.map(x => x.mid), ...perf.hits.map(h => h.mid)]).size;
+    this.out = (PIECES[perf.pieceId]?.outGain ?? 1) * Math.pow(SEATS.length / clamp(players, 1, SEATS.length), 0.15);
     this.bus = ac.createGain();
     this.bus.gain.value = this.out;
     this.bus.connect(engine.chain.input);
