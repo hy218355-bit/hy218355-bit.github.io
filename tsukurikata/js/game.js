@@ -1717,7 +1717,8 @@ function runEnsemble(s0, ids){
   const rec = addRec(s, `${s.year} アンサンブルコンテスト`, {pieceId: pid, venue: 'civic', nerves: 3, only: ms.map(m => m.id)});
   rec.keep = true;
   const perf = perform(recCtx(rec)), score = ensembleScore(s, analyze(perf));
-  const award = score >= 80 ? 'gold' : score >= 64 ? 'silver' : 'bronze', rep = score >= 88;
+  // 少人数でうまい子を集めるぶん、部全体の大会より点が出やすいので、賞の線は高め（金賞85・銀賞70・県代表92）
+  const award = score >= 85 ? 'gold' : score >= 70 ? 'silver' : 'bronze', rep = score >= 92;
   const nm = {gold: '金賞', silver: '銀賞', bronze: '銅賞'}[award];
   rec.result = {award, avg: score};
   for(const m of ms){
