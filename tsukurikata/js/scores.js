@@ -114,8 +114,8 @@ function addPiece(pc){ PIECES[pc.id] = pc; PIECE_IDS.push(pc.id); }
 // 楽譜の上のテンポの変わり方：tmap は段階的な切り替え、tcurve はだんだん速く（遅く）。値は1拍の長さの倍率
 const tmAt = (pc, b) => pc.tcurve ? interp(pc.tcurve, b) : sectionAt(pc.tmap, b, 1);
 const bpmAt = (pc, i, b = 0) => Math.round(pc.tempi[i] / tmAt(pc, b));
-// 拍の単位（2分音符で数える行進曲、8分音符で数えるゆっくりした曲など）と、表示用の書き方
-const beatName = pc => pc.beatUnit === 2 ? '2分音符' : pc.beatUnit === .5 ? '♪' : '♩';
+// 拍の単位（2分音符で数える行進曲、付点4分音符で数える8分の9拍子、8分音符で数えるゆっくりした曲など）と、表示用の書き方
+const beatName = pc => pc.beatUnit === 2 ? '2分音符' : pc.beatUnit === 1.5 ? '付点4分音符' : pc.beatUnit === .5 ? '♪' : '♩';
 const tempoLabel = (pc, i) => {
   const a = bpmAt(pc, i, 0), z = bpmAt(pc, i, pc.beats - 0.01);
   return `${beatName(pc)}=${a}${a !== z ? '→' + z : ''}`;

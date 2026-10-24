@@ -394,9 +394,9 @@ function analyze(perf){
     const mean = g.reduce((a, n) => a + n.err, 0) / g.length;
     for(const n of g){ const dv = Math.abs(n.err - mean); sW += n.weight; sE += n.weight * dv; sec[n.sec].sp += dv * n.weight; sec[n.sec].spw += n.weight; }
   }
-  // 縦の線：同じ拍に出る音どうしの出だしのずれ
-  const beats = {};
-  for(const x of [...perf.notes, ...perf.hits]) if(!x.orn) (beats[Math.round(x.b * 4)] ||= []).push(x);
+  // 縦の線：同じ拍に出る音どうしの出だしのずれ（拍の4分の1ごとにまとめる。5連符や32分音符の多い曲は pc.grid で細かくする）
+  const beats = {}, grid = pc.grid || 4;
+  for(const x of [...perf.notes, ...perf.hits]) if(!x.orn) (beats[Math.round(x.b * grid)] ||= []).push(x);
   let rW = 0, rE = 0;
   for(const g of Object.values(beats)){
     if(g.length < 2) continue;
