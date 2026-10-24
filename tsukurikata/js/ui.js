@@ -701,7 +701,7 @@ function planHtml(ev){
     ${S.pieceId && !S.finalWeek && S.week >= 8 && nextContest(S).w > S.week ? lineupLine() : ''}
     <p class="small plan-sum">今週の予定：${sum}${tutti === 1 ? '（合奏は2人以上いないとできない）' : ''}</p>
     ${tired ? `<p class="small">体力が30を切っている部員が${tired}人。休ませないと、練習の効果が半分になる。</p>` : ''}
-    <button class="btn primary" type="button" data-act="practice">この内容で1週間すすめる</button>
+    <div class="transport"><button class="btn primary" type="button" data-act="practice">この内容で1週間すすめる</button><button class="btn" type="button" data-act="practicemany">次の予定まで進める</button></div>
   </div>`;
 }
 // 顧問になって最初に入部してきた代が卒業するとき：3年間をふり返る
@@ -1021,6 +1021,16 @@ function bind(){
     else if(act === 'choosefinal'){ stopPlay(); commit(chooseFinalPiece(S, b.dataset.pid)); U.piece = null; renderAll(); refreshNow(); }
     else if(act === 'test'){ commit(practiceWeek(S, 'test')); renderAll(); refreshNow(); }
     else if(act === 'practice'){ if(busy()) return; haptic('tap'); commit(practiceWeek(S)); renderAll(); refreshNow(); }
+    else if(act === 'practicemany'){
+      // 今週はいまの指示で、2週目からは部の方針どおりに、何か決めることがある週まで進める
+      if(busy()) return; haptic('tap');
+      let n = 0;
+      do { commit(practiceWeek(S)); n++; } while(n < 12 && quietWeek(S));
+      const ev = eventAt(S, S.week);
+      const why = episodeView(S) ? '部員のできごとが起きた' : recruitsDue(S) ? '新しい部員が来た' : S.chooseFinal ? '定期演奏会の曲を決める' : ev && ev.kind !== 'mod' ? ev.title : '';
+      renderAll(); refreshNow(); setTab('week'); scrollTo(0, 0);
+      toast(`${n}週すすめた${why ? `。${why}` : ''}`, 3500);
+    }
     else if(act === 'lineupopen'){ if(!S.audition || S.audition.y !== S.year) commit(startAudition(S)); U.lineup = true; U.draft = null; renderWeek(); $('#week').scrollIntoView({block: 'start'}); }
     else if(act === 'lineup'){
       if(seated(S).every(m => U.draft.has(m.id))){ $('#audPred').innerHTML = '<b>だれも出ないことになってしまう。1人以上は選ぼう。</b>'; return; }

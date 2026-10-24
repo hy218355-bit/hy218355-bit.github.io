@@ -190,6 +190,10 @@ function decideMenu(s, m){
   if(s.pieceId && s.week % 3 === 2) return 'tutti';
   return drill(statOrder(m)[0]);
 }
+// 何も決めることのない練習の週か（「次の予定まで進める」が止まらずに進めてよい週）
+// 本番・オーディション・テスト・入部・できごと・定期演奏会の曲決めがある週は止まる。GW や合宿などの週は進める
+const quietWeek = s => s.phase === 'week' && !s.pending && !s.chooseFinal && !recruitsDue(s) && !episodeView(s)
+  && (!eventAt(s, s.week) || eventAt(s, s.week).kind === 'mod');
 // 今週の指示：顧問が個別に出した指示（s.plan）が優先、なければ方針どおり
 const planFor = (s, m) => (s.plan && MENU_BY[s.plan[m.id]] && menuOpen(s, s.plan[m.id])) ? s.plan[m.id] : decideMenu(s, m);
 function setPlan(s0, mid, menu){
