@@ -7,24 +7,22 @@ const PREF_WEEK = 16, BLOCK_WEEK = 20, NATIONAL_WEEK = 26;
 // 部員ひとりずつに、週に1つ出す練習の指示。合奏と会場練習は、出た人の割合だけ部全体（まとまり・仕上がり・会場慣れ）に効く。
 // read は、その人の譜読み（今の曲の自分の楽譜をどれだけ吹けるか）の伸び
 const MENU = [
-  {id: 'long',   name: 'ロングトーン',           hint: '音色↑↑　音程↑',               cost: 14, gain: {tone: 20, pitch: 5}, read: 4},
-  {id: 'tune',   name: 'チューニング練習',       hint: '音程↑↑',                       cost: 12, gain: {pitch: 20, tone: 3}, read: 4},
-  {id: 'metro',  name: 'メトロノーム練習',       hint: 'リズム↑↑',                     cost: 13, gain: {rhythm: 20, pitch: 3}, read: 4},
-  {id: 'phrase', name: '歌ってからフレーズ練習', hint: '表現↑↑（基礎が要る）',         cost: 12, gain: {expr: 22}, basics: true, fam: 6, read: 10},
-  {id: 'piece',  name: '曲の個人練習',           hint: '譜読み↑↑　曲の仕上がり↑',     cost: 12, gain: {rhythm: 4, expr: 4, pitch: 2}, fam: 20, read: 28},
-  {id: 'tutti',  name: '合奏',                   hint: '全部↑　まとまり↑↑　仕上がり↑', cost: 18, gain: {pitch: 5, rhythm: 6, tone: 5, expr: 6}, coh: 12, fam: 16, read: 18, morale: 5, group: true},
-  {id: 'hall',   name: '会場を借りて合奏',       hint: '会場慣れ↑↑　まとまり↑',        cost: 16, gain: {pitch: 3, rhythm: 3, tone: 3, expr: 3}, coh: 6, fam: 6, read: 10, hallExp: 45, morale: 3, from: 12, group: true},
-  {id: 'rest',   name: '休ませる',               hint: '体力とやる気が回復',            cost: -38, gain: {}, morale: 12},
+  {id: 'long',   name: 'ロングトーン',   up: '音色',   hint: '音色↑↑　音程↑',               cost: 14, gain: {tone: 20, pitch: 5}, read: 4},
+  {id: 'tune',   name: 'チューニング',   up: '音程',   hint: '音程↑↑',                       cost: 12, gain: {pitch: 20, tone: 3}, read: 4},
+  {id: 'metro',  name: 'メトロノーム',   up: 'リズム', hint: 'リズム↑↑',                     cost: 13, gain: {rhythm: 20, pitch: 3}, read: 4},
+  {id: 'phrase', name: 'フレーズ練習',   up: '表現',   hint: '表現↑↑（基礎が要る）',         cost: 12, gain: {expr: 22}, basics: true, fam: 6, read: 10},
+  {id: 'piece',  name: '曲の練習',       up: '譜読み', hint: '譜読み↑↑　曲の仕上がり↑',     cost: 12, gain: {rhythm: 4, expr: 4, pitch: 2}, fam: 20, read: 28},
+  {id: 'tutti',  name: '合奏',                         hint: '全部↑　まとまり↑↑　仕上がり↑', cost: 18, gain: {pitch: 5, rhythm: 6, tone: 5, expr: 6}, coh: 12, fam: 16, read: 18, morale: 5, group: true},
+  {id: 'hall',   name: '会場で合奏',                   hint: '会場慣れ↑↑　まとまり↑',        cost: 16, gain: {pitch: 3, rhythm: 3, tone: 3, expr: 3}, coh: 6, fam: 6, read: 10, hallExp: 45, morale: 3, from: 12, group: true},
+  {id: 'rest',   name: '休む',                         hint: '体力とやる気が回復',            cost: -38, gain: {}, morale: 12},
 ];
 const MENU_BY = Object.fromEntries(MENU.map(m => [m.id, m]));
 const menuOpen = (s, id) => !MENU_BY[id].from || s.week >= MENU_BY[id].from;
-// 方針：顧問が毎週指示を出さなくても、部員はこの方針で自分の練習を決める
+// 部の方針：顧問が指示を出さなかった部員は、この方針で自分の練習を決める（部全体で1つ）
 const POLICIES = [
   {id: 'auto',   name: 'おまかせ',       desc: '苦手なところを中心に。3週に1回は合奏、本番の前は合奏'},
   {id: 'basics', name: '基礎を固める',   desc: 'ロングトーン・チューニング・メトロノームを、低いものから'},
-  {id: 'weak',   name: '苦手をなくす',   desc: 'いちばん低い力を、ひたすら伸ばす'},
-  {id: 'strong', name: '得意を伸ばす',   desc: 'いちばん高い力を、さらに伸ばす'},
-  {id: 'piece',  name: '曲を仕上げる',   desc: '曲の個人練習と合奏を、交互に'},
+  {id: 'piece',  name: '曲を仕上げる',   desc: '曲の練習と合奏を、交互に'},
   {id: 'easy',   name: '無理をさせない', desc: '体力が半分を切ったら休む。それ以外はおまかせと同じ'},
 ];
 const POLICY_BY = Object.fromEntries(POLICIES.map(p => [p.id, p]));
@@ -94,7 +92,7 @@ const freshFam = () => Object.fromEntries(PIECE_IDS.map(id => [id, 0]));
 const PIECE_MOVED = {march: 'aida', wa: 'galop', stars: 'aida', jupiter: 'holst', mountain: 'galop', radetzky: 'aida'};
 function freshState(year = 2026){
   const s = {
-    v: 2, year, startYear: year, founding: true, week: 0, phase: 'choose', pieceId: null, interp: {tempo: 1, dyn: 1, rub: 1},
+    v: 2, year, startYear: year, founding: true, week: 0, phase: 'choose', pieceId: null, interp: {tempo: 1, dyn: 1, rub: 1}, policy: 'auto',
     members: [], recruits: null, plan: {}, rep: 5, seq: 0,
     cohesion: 20, stamina: 100, morale: 75, fam: freshFam(), hallExp: 0,
     log: [], recs: [], history: [], season: [], flags: {}, pending: null, lastDelta: {},
@@ -164,7 +162,7 @@ function choosePiece(s0, pid){
 function clone(s){ return JSON.parse(JSON.stringify(s)); }
 
 /* ===== 練習 =====
-   毎週、部員ひとりずつに練習を指示する。指示しなかった部員は、その人の方針（m.policy）で自分の練習を決める。 */
+   毎週、部員ひとりずつに練習を指示する。指示しなかった部員は、部の方針（s.policy）で自分の練習を決める。 */
 const statOrder = (m, keys = STAT_KEYS) => keys.slice().sort((a, b) => m.stats[a] - m.stats[b]);
 const basicsOf = m => (m.stats.pitch + m.stats.rhythm + m.stats.tone) / 3;
 // 次の本番まで何週か（今週が本番なら0）
@@ -174,14 +172,12 @@ function stageIn(s, within){
 }
 // 方針どおりなら、この部員は今週なにをするか
 function decideMenu(s, m){
-  const pol = m.policy || 'auto';
+  const pol = POLICY_BY[s.policy] ? s.policy : 'auto';
   if((m.sta ?? 100) < (pol === 'easy' ? 50 : 30)) return 'rest';
   // 表現は、音程・リズム・音色の基礎がないと伸びない。基礎が足りないうちは基礎から
   const drill = k => k === 'expr' && basicsOf(m) < 30 ? DRILL[statOrder(m, ['pitch', 'rhythm', 'tone'])[0]] : DRILL[k];
   const soon = s.pieceId ? stageIn(s, 1) : null;
   if(pol === 'basics') return DRILL[statOrder(m, ['pitch', 'rhythm', 'tone'])[0]];
-  if(pol === 'weak') return drill(statOrder(m)[0]);
-  if(pol === 'strong') return drill(statOrder(m).reverse().find(k => m.stats[k] < 92) || statOrder(m)[0]);
   if(pol === 'piece') return soon || s.week % 2 ? 'tutti' : 'piece';
   // おまかせ：本番の前の週は合奏（大会の前でホールを借りられるなら会場で）。自分の譜読みがまだ浅ければ個人練習
   // （入ったばかりでほとんど吹けないなら合奏の週以外はずっと、まだ6割に届かないなら1週おき）。3週に1回は合奏
@@ -213,9 +209,10 @@ function setPlanSpan(s0, mid, i){
   if(i == null) delete s.planSpan[mid]; else s.planSpan[mid] = i;
   return s;
 }
-function setPolicy(s0, mid, pol){
+// 部の方針を変えると、部員ごとに出していた今週の指示は取り消す
+function setPolicy(s0, pol){
   const s = clone(s0);
-  for(const m of s.members) if(mid === '*' || m.id === mid){ m.policy = pol; if(s.plan) delete s.plan[m.id]; }
+  s.policy = pol; s.plan = {};
   return s;
 }
 // plan：{部員id: メニュー} の個別指示（ほかの部員は方針どおり）。'test' はテスト期間、メニューidの文字列なら全員その練習
@@ -908,7 +905,7 @@ function assignRecruits(s0, map){
     const base = (r.exp && match ? 30 : r.exp ? 16 : 6) + (g - 1) * (r.exp ? 8 : 4);
     const stats = makeStats(base, r.exp ? 5 : 3, 'stat', r.id);
     s.members.push({id: r.id, name: r.name, grade: g, joinGrade: g, seat, trait: r.trait, joined: s.year, exp: !!r.exp, mental: mentalInit(r.trait, g, 'stat', r.id) + (r.exp ? 6 : 0),
-      stats, first: {y: s.year, w: s.week, stats: {...stats}}, hope: r.hope, sta: Math.round(s.members.length ? s.stamina : 100), policy: 'auto', fam: {},
+      stats, first: {y: s.year, w: s.week, stats: {...stats}}, hope: r.hope, sta: Math.round(s.members.length ? s.stamina : 100), fam: {},
       // コンクールのメンバーが決まったあとに入った部員は、今年のコンクールには出ない
       ...(lineupSet(s) ? {out: true} : {})});
   }
@@ -970,7 +967,11 @@ function load(){
       s.startYear ??= s.history[0]?.year ?? s.year;
       for(const m of s.members) m.mental ??= mentalInit(m.trait, m.grade, 'mig', m.id);
       // 部員ひとりずつの体力・方針と、部の評判（2026年10月に、練習を一人ずつ指示する形にした）
-      for(const m of s.members){ m.sta ??= s.stamina ?? 100; m.policy ||= 'auto'; }
+      for(const m of s.members) m.sta ??= s.stamina ?? 100;
+      // 方針は部全体で1つに（2026年10月）：部員ごとの方針がそろっていればそれを、ばらばらならおまかせ。なくした方針もおまかせに
+      if(s.policy == null){ const ps = [...new Set(s.members.map(m => m.policy || 'auto'))]; s.policy = ps.length === 1 ? ps[0] : 'auto'; }
+      if(!POLICY_BY[s.policy]) s.policy = 'auto';
+      for(const m of s.members) delete m.policy;
       // 部員ひとりずつの譜読み（2026年10月）：それまでの部全体の仕上がりを、全員の譜読みとして引きつぐ
       for(const m of s.members) m.fam ??= Object.fromEntries(Object.entries(s.fam).filter(([, v]) => v > 0));
       syncSta(s);

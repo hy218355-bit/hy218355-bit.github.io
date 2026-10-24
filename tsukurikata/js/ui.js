@@ -636,8 +636,8 @@ function updatePred(soon){
   clearTimeout(U.predT);
   U.predT = setTimeout(() => { U.pred = predictContest(S, out); U.predKey = key; if($('#audPred')) show(U.pred); }, soon ? 30 : 120);
 }
-// 今週の練習：部員ひとりずつに、方針と今週の指示
-const menuLabel = (id, cm = 1) => { const m = MENU_BY[id]; return `${m.name}：${m.hint.replace(/　/g, ' ')}（体力${m.cost > 0 ? '−' + Math.round(m.cost * cm) : '+' + (-m.cost)}）`; };
+// 今週の練習：部の方針（全員で1つ）と、部員ひとりずつの今週の練習
+const menuLabel = id => { const m = MENU_BY[id]; return m.up ? `${m.name}（${m.up}）` : m.name; };
 const lastText = m => {
   if(!m.last) return '';
   if(m.last.menu === 'test') return '先週：テスト期間';
@@ -653,14 +653,13 @@ const spanSelect = m => {
     + readUnits(pid).map(u => `<option value="${u.i}"${want === u.i ? ' selected' : ''}>${spanShort(u)}（譜読み${Math.round(v[u.i])}）</option>`).join('') + '</select></label>';
 };
 function planHtml(ev){
-  const cm = ev?.costMult || 1;
   const menus = MENU.filter(m => menuOpen(S, m.id));
   const order = m => m.seat ? SEATS.findIndex(x => x.id === m.seat) : 999;
   const ms = S.members.slice().sort((a, b) => order(a) - order(b));
   const count = {};
   for(const m of ms){ const id = planFor(S, m); count[id] = (count[id] || 0) + 1; }
   const tired = ms.filter(m => m.sta < 30).length;
-  const allPol = ms.length && ms.every(m => (m.policy || 'auto') === (ms[0].policy || 'auto')) ? (ms[0].policy || 'auto') : null;
+  const pol = POLICY_BY[S.policy] ? S.policy : 'auto';
   let sec = null;
   const rows = ms.map(m => {
     const s = m.seat ? SEAT[m.seat].sec : 'bench';
@@ -670,16 +669,15 @@ function planHtml(ev){
     const c = m.sta >= 60 ? 'good' : m.sta >= 30 ? 'warn' : 'bad';
     return `${head}<li class="pm${own ? ' own' : ''}"><span class="who"><b>${esc(m.name)}</b><small>${m.grade}年・${m.seat ? esc(PART_LABEL[SEAT[m.seat].part]) : '控え'}${m.out && m.seat ? '・コンクール控え' : ''}${S.pieceId ? `・譜読み${Math.round(readMean(m, S.pieceId))}` : ''}</small></span>
       <span class="sta" title="体力 ${Math.round(m.sta)}"><span class="track"><span class="fill ${c}" style="width:${clamp(m.sta, 0, 100)}%"></span></span><b>${Math.round(m.sta)}</b></span>
-      <label class="pol"><span>方針</span><select data-pol="${m.id}" aria-label="${esc(m.name)}の方針">${POLICIES.map(p => `<option value="${p.id}"${(m.policy || 'auto') === p.id ? ' selected' : ''}>${p.name}</option>`).join('')}</select></label>
-      <label class="pw"><span>今週</span><select data-plan="${m.id}" aria-label="${esc(m.name)}の今週の練習"><option value="">方針どおり（${MENU_BY[auto].name}）</option>${menus.map(x => `<option value="${x.id}"${own === x.id ? ' selected' : ''}>${menuLabel(x.id, cm)}</option>`).join('')}</select></label>${(own || auto) === 'piece' && S.pieceId ? spanSelect(m) : ''}
+      <label class="pw"><span>今週</span><select data-plan="${m.id}" aria-label="${esc(m.name)}の今週の練習"><option value="">おまかせ（${MENU_BY[auto].name}）</option>${menus.map(x => `<option value="${x.id}"${own === x.id ? ' selected' : ''}>${menuLabel(x.id)}</option>`).join('')}</select></label>${(own || auto) === 'piece' && S.pieceId ? spanSelect(m) : ''}
       ${m.last ? `<small class="last">${esc(lastText(m))}</small>` : ''}</li>`;
   }).join('');
   const sum = MENU.filter(m => count[m.id]).map(m => `${m.name} ${count[m.id]}人`).join('・');
   const tutti = (count.tutti || 0) + (count.hall || 0);
   return `<div class="plan">
-    ${foundingYear(S) && S.week < 4 ? '<p class="small">部員ひとりずつに今週の練習を指示する。「方針どおり」のままにすると、その人の方針で自分の練習を決める。合奏は出た人が多いほど、部のまとまりと曲の仕上がりが伸びる。</p>' : ''}
-    <div class="focus"><span>全員の方針をまとめて変える</span><div class="chips">${POLICIES.map(p => `<button class="chip" type="button" data-polall="${p.id}" aria-pressed="${allPol === p.id}" title="${esc(p.desc)}">${p.name}</button>`).join('')}</div>
-    <span class="small">${allPol ? `${POLICY_BY[allPol].name}：${POLICY_BY[allPol].desc}` : '方針は部員ごとにちがう。'}</span></div>
+    ${foundingYear(S) && S.week < 4 ? '<p class="small">「おまかせ」のままの部員は、部の方針で自分の練習を決める。指示したい部員だけ、今週の練習を選ぼう。合奏は出た人が多いほど、部のまとまりと曲の仕上がりが伸びる。</p>' : ''}
+    <div class="focus"><span>部の方針</span><div class="chips">${POLICIES.map(p => `<button class="chip" type="button" data-polall="${p.id}" aria-pressed="${pol === p.id}">${p.name}</button>`).join('')}</div>
+    <span class="small">${POLICY_BY[pol].desc}</span></div>
     <ul class="plist">${rows}</ul>
     ${S.pieceId && !S.finalWeek && S.week >= 8 && nextContest(S).w > S.week ? lineupLine() : ''}
     <p class="small plan-sum">今週の予定：${sum}${tutti === 1 ? '（合奏は2人以上いないとできない）' : ''}</p>
@@ -964,7 +962,7 @@ function bind(){
   });
   $('#week').addEventListener('click', e => {
     const b = e.target.closest('button'); if(!b || b.disabled) return;
-    if(b.dataset.polall){ commit(setPolicy(S, '*', b.dataset.polall)); renderWeek(); return; }
+    if(b.dataset.polall){ commit(setPolicy(S, b.dataset.polall)); renderWeek(); return; }
     if(b.dataset.audplay){
       const m = memberById(b.dataset.audplay); if(!m) return;
       setVenue('room');
@@ -1036,8 +1034,7 @@ function bind(){
       updatePred();
       return;
     }
-    if(t.dataset.pol){ commit(setPolicy(S, t.dataset.pol, t.value)); renderWeek(); }
-    else if(t.dataset.plan){ commit(setPlan(S, t.dataset.plan, t.value || null)); renderWeek(); }
+    if(t.dataset.plan){ commit(setPlan(S, t.dataset.plan, t.value || null)); renderWeek(); }
     else if(t.dataset.span){ commit(setPlanSpan(S, t.dataset.span, t.value === '' ? null : +t.value)); renderWeek(); }
   });
   $('#interp').addEventListener('click', e => {

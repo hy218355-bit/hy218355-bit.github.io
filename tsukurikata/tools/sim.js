@@ -1,7 +1,7 @@
 // 部の何年分かを、画面なしで早送りする（育成・評判・オーディションのバランスを見る）
 //   node tsukurikata/tools/sim.js [年数] [方針] [曲] [メンバー]
 //   例：node tsukurikata/tools/sim.js 5 auto galop best
-// 方針は auto / basics / weak / strong / piece / easy、メンバーは all（全員出る）か best（オーディションでおすすめを選ぶ）
+// 方針は auto / basics / piece / easy、メンバーは all（全員出る）か best（オーディションでおすすめを選ぶ）
 const fs = require('fs'), vm = require('vm'), path = require('path');
 const [YEARS = '3', POL = 'auto', PIECE = 'galop', LINEUP = 'all'] = process.argv.slice(2);
 const ctx = vm.createContext({console, Math, JSON, Object, Array, Set, Map, WeakMap, Float32Array, Number, String, Error, Infinity, NaN, setTimeout,
@@ -20,8 +20,8 @@ const stat = () => ({部員: s.members.length, 評判: Math.round(s.rep), 平均
 const grades = () => [1, 2, 3].map(g => { const ms = s.members.filter(m => m.grade === g); return g + '年' + ms.length + '人' + (ms.length ? '（平均' + Math.round(ms.reduce((a, m) => a + avgStat(m), 0) / ms.length) + '）' : ''); }).join(' ');
 while(guard++ < 2000 && done < YEARS){
   if(recruitsDue(s) && !s.pending){ s = assignRecruits(s, autoAssign(s)); continue; }
-  if(s.phase === 'choose'){ s = choosePiece(s, PIECE); s = setPolicy(s, '*', POL); continue; }
-  if(s.phase === 'end'){ console.log('== ' + s.year + '年度の終わり ' + grades() + ' ' + JSON.stringify(stat())); s = newYear(s); s = setPolicy(s, '*', POL); done++; continue; }
+  if(s.phase === 'choose'){ s = choosePiece(s, PIECE); s = setPolicy(s, POL); continue; }
+  if(s.phase === 'end'){ console.log('== ' + s.year + '年度の終わり ' + grades() + ' ' + JSON.stringify(stat())); s = newYear(s); s = setPolicy(s, POL); done++; continue; }
   if(s.pending){ s = finishStage(s); continue; }
   const ev = eventAt(s, s.week);
   if(ev && ev.kind === 'audition' && s.audition && !s.audition.decided){
@@ -39,7 +39,7 @@ while(guard++ < 2000 && done < YEARS){
   if(ev && ev.kind === 'forced'){ s = practiceWeek(s, 'test'); continue; }
   if(s.chooseFinal){ s = chooseFinalPiece(s, s.pieceId); continue; }
   if(s.episode){ s = resolveEpisode(s, episodeView(s)?.choices[0]?.k ?? 0); continue; }
-  for(const m of s.members) m.policy ||= POL;
+  s.policy = POL;
   s = practiceWeek(s);
 }
 `, ctx);
