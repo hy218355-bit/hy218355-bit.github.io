@@ -70,7 +70,7 @@ function commit(next){ S = next; save(S); }
 /* ===== いまの演奏を作り直す ===== */
 function currentCtx(){
   const pid = playPiece(), span = rangeSpan(pid);
-  return perfCtx(S, {pieceId: pid, venue: U.venue, from: span.from, to: span.to, fam: S.fam[pid] ?? 0});
+  return perfCtx(S, {pieceId: pid, venue: U.venue, from: span.from, to: span.to});
 }
 function refreshNow(){
   clearTimeout(U.refreshT);
@@ -482,8 +482,8 @@ function trendSvg(){
   const line = (pts, k) => pts.map((x, i) => `${i ? 'L' : 'M'}${X(x.w).toFixed(1)},${Y(x[k]).toFixed(1)}`).join('');
   const marks = [];
   for(let w = 0; w <= last; w++){ const ev = eventAt(S, w); if(ev?.kind === 'contest' || ev?.kind === 'concert') marks.push(`<line x1="${X(w).toFixed(1)}" x2="${X(w).toFixed(1)}" y1="${H - (ev.kind === 'contest' ? 11 : 8)}" y2="${H - 3}" class="mk ${ev.kind}"/>`); }
-  return `<figure class="trend"><figcaption>この1年の伸び <span class="k-avg">部の平均</span> <span class="k-fam">仕上がり</span>${prev.length > 1 ? ' <span class="k-prev">去年の部の平均</span>' : ''}</figcaption>
-    <svg viewBox="0 0 ${W} ${H}" preserveAspectRatio="none" role="img" aria-label="この1年の、部の平均と自由曲の仕上がりの伸び">
+  return `<figure class="trend"><figcaption>この1年の伸び <span class="k-avg">部の平均</span> <span class="k-fam">譜読み</span>${prev.length > 1 ? ' <span class="k-prev">去年の部の平均</span>' : ''}</figcaption>
+    <svg viewBox="0 0 ${W} ${H}" preserveAspectRatio="none" role="img" aria-label="この1年の、部の平均と自由曲の譜読みの伸び">
       ${[25, 50, 75].map(v => `<line x1="6" x2="${W - 6}" y1="${Y(v)}" y2="${Y(v)}" class="grid"/>`).join('')}
       ${prev.length > 1 ? `<path d="${line(prev, 'a')}" class="prev"/>` : ''}
       ${now.length > 1 ? `<path d="${line(now, 'f')}" class="fam"/><path d="${line(now, 'a')}" class="avg"/>` : ''}
@@ -499,8 +499,8 @@ function renderStats(){
   const up = v => v > 0 ? v.toFixed(1) : '';
   $('#stats').innerHTML = STAT_KEYS.map(k => statRow(STAT_LABEL[k], bandAvg(S, k), '', up(d[k]))).join('')
     + statRow('まとまり', S.cohesion, '', up(d.coh))
-    + (S.pieceId ? statRow(setActive(S) ? '自由曲の仕上がり' : '仕上がり', S.fam[pid] ?? 0, '', up(d.fam)) + statRow('譜読み', readAvg(S, pid), '', up(d.read)) : '')
-    + (setActive(S) ? statRow('課題曲の仕上がり', S.fam[S.setPiece] ?? 0, '', up(d.setFam)) + statRow('課題曲の譜読み', readAvg(S, S.setPiece), '') : '');
+    + (S.pieceId ? statRow(setActive(S) ? '自由曲の譜読み' : '譜読み', readAvg(S, pid), '', up(d.read)) : '')
+    + (setActive(S) ? statRow('課題曲の譜読み', readAvg(S, S.setPiece), '', up(d.setRead)) : '');
   const vital = (nm, v) => {
     const c = v >= 60 ? 'good' : v >= 30 ? 'warn' : 'bad';
     return `<div class="vital"><span class="row"><span>${nm}</span><b>${Math.round(v)}</b></span><span class="track"><span class="fill ${c}" style="width:${clamp(v, 0, 100)}%"></span></span></div>`;
@@ -511,7 +511,7 @@ function renderStats(){
     + coachHtml()
     + trendSvg()
     + helpBox([...STAT_KEYS.map(k => [STAT_LABEL[k], STAT_DESC[k]]), ['まとまり', '互いを聴き合う力。合奏に出る人が多いほど育つ'],
-      ['仕上がり', '自由曲の合奏での曲づくり。低いとテンポの揺れがそろわない'], ['譜読み', '一人ひとりが自分の楽譜をどれだけ吹けるか（平均）。低いと音を間違え、出だしが揺れる'],
+      ['譜読み', '一人ひとりが自分の楽譜をどれだけ吹けるか（平均）。低いと音を間違え、出だしやテンポが揺れる'],
       ['会場慣れ', 'ホールで吹いた経験。高いほど、大きな会場で緊張しにくい'], ['評判', '演奏会やコンクールで上がる。上がるほど入部したい生徒が来る'],
       ['顧問の指導力', 'あなたの指導の経験。毎週の練習・本番・コンクール・部員のできごとでたまり、レベルが上がると部員の練習の効果が上がり、本番の緊張も少しやわらぐ']], helpOpen);
 }
@@ -620,9 +620,8 @@ function renderWeek(){
     return;
   }
   if(S.chooseFinal){
-    const fam = id => Math.round(S.fam[id] || 0);
-    w.innerHTML = `<div class="event"><span class="tag">定期演奏会の曲</span><span>3年生の最後の本番、${wkLabel(S.finalWeek)}の定期演奏会で演奏する曲を決めよう。コンクールの曲をもう一度でも、新しい曲に挑戦してもいい（仕上がりも、部員の譜読みも低いところから）。</span></div>`
-      + PIECE_IDS.map(id => pieceCard(id, {tag: id === S.contestPiece ? 'コンクールで演奏した曲' : '', note: `仕上がり ${fam(id)}・譜読み ${Math.round(readAvg(S, id))}`, act: 'choosefinal', label: '決める'})).join('');
+    w.innerHTML = `<div class="event"><span class="tag">定期演奏会の曲</span><span>3年生の最後の本番、${wkLabel(S.finalWeek)}の定期演奏会で演奏する曲を決めよう。コンクールの曲をもう一度でも、新しい曲に挑戦してもいい（新しい曲は、譜読みが低いところから）。</span></div>`
+      + PIECE_IDS.map(id => pieceCard(id, {tag: id === S.contestPiece ? 'コンクールで演奏した曲' : '', note: `譜読み ${Math.round(readAvg(S, id))}`, act: 'choosefinal', label: '決める'})).join('');
     return;
   }
   const parts = [weekResHtml()];
@@ -764,7 +763,7 @@ function fxMoments(){
 // 練習の結果：すすめる前の部の様子を写しておき、週のはじめに「先週の練習の成果」として、伸びたぶんを数え上げて見せる
 function weekSnap(s){
   return {pitch: bandAvg(s, 'pitch'), rhythm: bandAvg(s, 'rhythm'), tone: bandAvg(s, 'tone'), expr: bandAvg(s, 'expr'), coh: s.cohesion,
-    fam: s.pieceId ? s.fam[s.pieceId] || 0 : null, pid: s.pieceId, ms: Object.fromEntries(s.members.map(m => [m.id, avgStat(m)]))};
+    read: s.pieceId ? readAvg(s, s.pieceId) : null, pid: s.pieceId, ms: Object.fromEntries(s.members.map(m => [m.id, avgStat(m)]))};
 }
 // 一度だけ、棒を前の長さから伸ばし、数字を数え上げる（描き直しが続いても、最後に描いたものを動かす）
 function weekResAnimate(w){
@@ -782,7 +781,7 @@ function weekResHtml(){
   if(!r || r.key !== `${S.year}:${S.week}` || S.phase !== 'week') return '';
   const b = r.b, start = !r.done;
   const rows = [...STAT_KEYS.map(k => [STAT_LABEL[k], b[k], bandAvg(S, k)]), ['まとまり', b.coh, S.cohesion],
-    ...(b.fam != null && b.pid === S.pieceId ? [['仕上がり', b.fam, S.fam[S.pieceId] || 0]] : [])];
+    ...(b.read != null && b.pid === S.pieceId ? [['譜読み', b.read, readAvg(S, S.pieceId)]] : [])];
   const top = S.members.filter(m => b.ms[m.id] != null).map(m => ({m, d: avgStat(m) - b.ms[m.id]})).filter(x => x.d >= 0.5).sort((x, y) => y.d - x.d).slice(0, 3);
   return `<div class="weekres"><b>${r.n > 1 ? `この${r.n}週の練習の成果` : '先週の練習の成果'}</b>
     ${rows.map(([nm, a, v]) => { const d = v - a;
@@ -1087,11 +1086,11 @@ function planHtml(ev){
   const sum = MENU.filter(m => count[m.id]).map(m => `${m.name} ${count[m.id]}人`).join('・');
   const tutti = (count.tutti || 0) + (count.hall || 0);
   return `<div class="plan">
-    ${foundingYear(S) && S.week < 4 ? '<p class="small">「おまかせ」のままの部員は、部の方針で自分の練習を決める。指示したい部員だけ、今週の練習を選ぼう。合奏は出た人が多いほど、部のまとまりと曲の仕上がりが伸びる。</p>' : ''}
+    ${foundingYear(S) && S.week < 4 ? '<p class="small">「おまかせ」のままの部員は、部の方針で自分の練習を決める。指示したい部員だけ、今週の練習を選ぼう。合奏は出た人が多いほど、部のまとまりが伸びる。</p>' : ''}
     <div class="focus"><span>部の方針</span><div class="chips">${POLICIES.map(p => `<button class="chip" type="button" data-polall="${p.id}" aria-pressed="${pol === p.id}">${p.name}</button>`).join('')}</div>
     <span class="small">${POLICY_BY[pol].desc}</span></div>
     ${setActive(S) ? `<div class="focus"><span>曲の練習の配分（自由曲 ${esc(PIECES[S.pieceId].title)}・課題曲 ${esc(PIECES[S.setPiece].title)}）</span><div class="chips">${Object.keys(SPLIT).map(k => `<button class="chip" type="button" data-split="${k}" aria-pressed="${(S.split || 'auto') === k}">${SPLIT_NAME[k]}</button>`).join('')}</div>
-      <span class="small">仕上がり：自由曲 ${Math.round(S.fam[S.pieceId] || 0)}・課題曲 ${Math.round(S.fam[S.setPiece] || 0)}。曲の練習・合奏の伸びを、この配分で2曲に分ける${(S.split || 'auto') === 'auto' ? `（おまかせ：いまは自由曲 ${Math.round(pieceShares(S)[0][1] * 10)}割・課題曲 ${Math.round(pieceShares(S)[1][1] * 10)}割）` : ''}</span></div>` : ''}
+      <span class="small">譜読み：自由曲 ${Math.round(readAvg(S, S.pieceId))}・課題曲 ${Math.round(readAvg(S, S.setPiece))}。曲の練習・合奏の伸びを、この配分で2曲に分ける${(S.split || 'auto') === 'auto' ? `（おまかせ：いまは自由曲 ${Math.round(pieceShares(S)[0][1] * 10)}割・課題曲 ${Math.round(pieceShares(S)[1][1] * 10)}割）` : ''}</span></div>` : ''}
     <div class="psecs">${ms.length > 8 ? '<p class="small">部員ごとの練習（パートを押すと開く。数字は人数）</p>' : ''}${rows}</div>
     ${S.pieceId && !S.finalWeek && S.week >= 8 && nextContest(S).w > S.week ? lineupLine() : ''}
     <p class="small plan-sum">今週の予定：${sum}${tutti === 1 ? '（合奏は2人以上いないとできない）' : ''}</p>
@@ -1595,7 +1594,7 @@ function bind(){
       const pid = b.dataset.pid;
       U.piece = pid; U.range = 'all'; renderPiece(); U.perfNow = perform(currentCtx()); U.diag = analyze(U.perfNow); renderDiag();
       if(act === 'model') playPerf(modelPerf(pid), `お手本：${PIECES[pid].title}（全員がうまい部・${VENUE.hall.name}）`);
-      else playPerf(U.perfNow, `いまの部で：${PIECES[pid].title}${(S.fam[pid] || 0) < 5 ? '（譜読み前）' : ''}`);
+      else playPerf(U.perfNow, `いまの部で：${PIECES[pid].title}${readAvg(S, pid) < 5 ? '（譜読み前）' : ''}`);
     }
     else if(act === 'choose'){ stopPlay(); commit(choosePiece(S, b.dataset.pid)); U.piece = null; renderAll(); refreshNow(); scrollTo(0, 0); }
     else if(act === 'chooseset'){ stopPlay(); commit(chooseSetPiece(S, b.dataset.pid)); U.piece = null; renderAll(); refreshNow(); scrollTo(0, 0); }

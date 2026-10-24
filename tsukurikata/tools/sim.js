@@ -1,7 +1,7 @@
 // 部の何年分かを、画面なしで早送りする（育成・評判・オーディションのバランスを見る）
 //   node tsukurikata/tools/sim.js [年数] [方針] [曲] [メンバー]
 //   例：node tsukurikata/tools/sim.js 5 auto galop best
-// 方針は auto / basics / easy、メンバーは all（全員出る）か best（オーディションでおすすめを選ぶ）
+// 方針は auto / basics、メンバーは all（全員出る）か best（オーディションでおすすめを選ぶ）
 const fs = require('fs'), vm = require('vm'), path = require('path');
 const [YEARS = '3', POL = 'auto', PIECE = 'galop', LINEUP = 'all'] = process.argv.slice(2);
 const ctx = vm.createContext({console, Math, JSON, Object, Array, Set, Map, WeakMap, Float32Array, Number, String, Error, Infinity, NaN, setTimeout,
@@ -15,7 +15,7 @@ for(const f of ['util', 'instruments', 'venues', 'scores', ...pieces, 'band', 'g
 vm.runInContext(`
 let s = freshState(2026), guard = 0, done = 0;
 const stat = () => ({部員: s.members.length, 評判: Math.round(s.rep), 平均: Math.round(STAT_KEYS.reduce((a, k) => a + bandAvg(s, k), 0) / 4),
-  まとまり: Math.round(s.cohesion), 仕上がり: Math.round(s.fam[s.pieceId] || 0),
+  まとまり: Math.round(s.cohesion),
   譜読み: Math.round(s.pieceId ? readAvg(s, s.pieceId) : 0), 体力: Math.round(s.stamina), やる気: Math.round(s.morale), 顧問Lv: coachLevel(s)});
 const grades = () => [1, 2, 3].map(g => { const ms = s.members.filter(m => m.grade === g); return g + '年' + ms.length + '人' + (ms.length ? '（平均' + Math.round(ms.reduce((a, m) => a + avgStat(m), 0) / ms.length) + '）' : ''); }).join(' ');
 while(guard++ < 2000 && done < YEARS){

@@ -1,6 +1,6 @@
 'use strict';
 /* 部員と演奏
-   部員一人ひとりが自分の楽譜を吹く。音程・リズム・音色・表現の力と、本人の癖、部のまとまり、曲の仕上がり、
+   部員一人ひとりが自分の楽譜を吹く。音程・リズム・音色・表現の力と、本人の癖、部のまとまり、譜読み、
    会場、本番の緊張から、1音ずつの「ずれ」を決める。審査はそのずれを測って行う。 */
 
 const STAT_KEYS = ['pitch', 'rhythm', 'tone', 'expr'];
@@ -234,7 +234,6 @@ function perform(ctx){
   const leadAt = typeof ctx.lead === 'function' ? ctx.lead : () => LEAD_AUTO;
   const venue = VENUE[ctx.venue || 'room'];
   const C = clamp01((ctx.cohesion ?? 30) / 100);
-  const FAM = clamp01((ctx.fam ?? 0) / 100);
   const ip = ctx.interp || {tempo: 1, dyn: 1, rub: 1};
   const bpm = pc.tempi[ip.tempo ?? 1];
   const SPREAD = DYN_SPREADS[ip.dyn ?? 1];
@@ -242,7 +241,7 @@ function perform(ctx){
   const from = ctx.from ?? 0, to = ctx.to ?? pc.beats;
 
   // 部員ひとりずつの、区間ごとの譜読み（この曲の自分の楽譜をどれだけ吹けるか、0〜1）。録音の控え（pfams、前の形は pfam）→ 部員の記録（m.fam）の順に見る。
-  // どちらもない仮想の部員（ラボ）や昔の録音は、部全体の仕上がりで代える
+  // どちらもない仮想の部員（ラボ）や昔の録音は、ctx.fam（昔の録音は部全体の仕上がり）で代える
   const pfsOf = m => (m.pfams || (m.pfam != null ? pc.spans.map(() => m.pfam) : m.fam ? readOf(m, ctx.pieceId) : pc.spans.map(() => ctx.fam ?? 0))).map(v => clamp01(v / 100));
   // 演奏する範囲での平均（区間と重なる長さで重みをつける）
   const overlap = pc.spans.map(x => Math.max(0, Math.min(x.to, to) - Math.max(x.from, from)));
@@ -271,13 +270,14 @@ function perform(ctx){
     players.push({m, seat, st, pfs, E0, part: seat.part, sec: seat.sec, freeze, zone});
   }
   const avg = (k, list = players) => list.length ? list.reduce((a, p) => a + p.st[k], 0) / list.length : 0;
+  // 部員の譜読みの平均（低いうちは、指揮の揺れに全員でついていけず、テンポもそろわない）
+  const FAM = players.length ? players.reduce((a, p) => a + meanIn(p.pfs), 0) / players.length : 0;
   const bandR = avg('rhythm'), bandE = avg('expr');
   const secP = {};
   for(const s of SECTIONS) secP[s.id] = avg('pitch', players.filter(p => p.sec === s.id));
 
   // テンポ：指揮の揺れ（ついてこられるかは表現とまとまり次第）、だんだん走る、拍ごとのむら
   const SPB = 60 / bpm;
-  // 合奏の仕上がり（FAM）が低いうちは、指揮の揺れに全員でついていけず、テンポもそろわない
   const rubUse = RUB * clamp01(Math.min(bandE * 1.2, C * 1.2 + 0.2)) * lerp(0.6, 1, FAM);
   const iRb = 1 - bandR;
   const STEP = 0.125, cum = [0], cumIdeal = [0], wob = {};
