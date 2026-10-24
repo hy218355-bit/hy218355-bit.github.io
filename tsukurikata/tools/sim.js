@@ -16,7 +16,7 @@ vm.runInContext(`
 let s = freshState(2026), guard = 0, done = 0;
 const stat = () => ({部員: s.members.length, 評判: Math.round(s.rep), 平均: Math.round(STAT_KEYS.reduce((a, k) => a + bandAvg(s, k), 0) / 4),
   まとまり: Math.round(s.cohesion), 仕上がり: Math.round(s.fam[s.pieceId] || 0),
-  譜読み: Math.round(s.pieceId ? readAvg(s, s.pieceId) : 0), 体力: Math.round(s.stamina), やる気: Math.round(s.morale)});
+  譜読み: Math.round(s.pieceId ? readAvg(s, s.pieceId) : 0), 体力: Math.round(s.stamina), やる気: Math.round(s.morale), 顧問Lv: coachLevel(s)});
 const grades = () => [1, 2, 3].map(g => { const ms = s.members.filter(m => m.grade === g); return g + '年' + ms.length + '人' + (ms.length ? '（平均' + Math.round(ms.reduce((a, m) => a + avgStat(m), 0) / ms.length) + '）' : ''); }).join(' ');
 while(guard++ < 2000 && done < YEARS){
   if(recruitsDue(s) && !s.pending){ s = assignRecruits(s, autoAssign(s)); continue; }

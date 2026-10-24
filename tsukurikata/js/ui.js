@@ -447,6 +447,13 @@ function statRow(name, v, desc, delta, cls){
   const up = delta ? `<span class="delta">+${delta}</span>` : '';
   return `<div class="stat"><span class="nm">${name}${desc ? '' : up}</span><span class="track"><span class="fill${cls ? ' ' + cls : ''}" style="width:${clamp(v, 0, 100)}%"></span></span><span class="val">${Math.round(v)}</span>${desc ? `<span class="ds">${desc}${up}</span>` : ''}</div>`;
 }
+// 顧問の指導力：レベル・呼び名・練習の効果と、次のレベルまでの経験
+function coachHtml(){
+  const lv = coachLevel(S), xp = S.coach?.xp || 0, a = coachNeed(lv), b = coachNeed(lv + 1);
+  const pct = lv >= 12 ? 100 : clamp((xp - a) / (b - a) * 100, 0, 100);
+  return `<div class="vital coach"><span class="row"><span>顧問の指導力</span><b>Lv${lv}</b></span><span class="track"><span class="fill" style="width:${pct}%"></span></span>
+    <small>${coachTitle(lv)}・練習の効果 +${Math.round((coachMult(S) - 1) * 100)}%${lv < 12 ? `・次のレベルまで ${Math.ceil(b - xp)}` : ''}</small></div>`;
+}
 // この1年の部の実力の伸び（週ごと）。去年の同じ週の線をうすく重ねる
 function trendSvg(){
   const tr = S.trend || [], now = tr.filter(x => x.y === S.year), prev = tr.filter(x => x.y === S.year - 1);
@@ -481,10 +488,12 @@ function renderStats(){
   const nx = nextRepStep(S), helpOpen = $('#vitals .help')?.open;
   $('#vitals').innerHTML = vital('体力', S.stamina) + vital('やる気', S.morale) + vital('会場慣れ', S.hallExp)
     + `<div class="vital rep"><span class="row"><span>評判</span><b>${Math.round(S.rep ?? 0)}</b></span><span class="track"><span class="fill" style="width:${clamp(S.rep ?? 0, 0, 100)}%"></span></span><small>${nx ? `${nx}をこえると、入部したい生徒が来る` : '県内に知られた部'}</small></div>`
+    + coachHtml()
     + trendSvg()
     + helpBox([...STAT_KEYS.map(k => [STAT_LABEL[k], STAT_DESC[k]]), ['まとまり', '互いを聴き合う力。合奏に出る人が多いほど育つ'],
       ['仕上がり', '自由曲の合奏での曲づくり。低いとテンポの揺れがそろわない'], ['譜読み', '一人ひとりが自分の楽譜をどれだけ吹けるか（平均）。低いと音を間違え、出だしが揺れる'],
-      ['会場慣れ', 'ホールで吹いた経験。高いほど、大きな会場で緊張しにくい'], ['評判', '演奏会やコンクールで上がる。上がるほど入部したい生徒が来る']], helpOpen);
+      ['会場慣れ', 'ホールで吹いた経験。高いほど、大きな会場で緊張しにくい'], ['評判', '演奏会やコンクールで上がる。上がるほど入部したい生徒が来る'],
+      ['顧問の指導力', 'あなたの指導の経験。毎週の練習・本番・コンクール・部員のできごとでたまり、レベルが上がると部員の練習の効果が上がり、本番の緊張も少しやわらぐ']], helpOpen);
 }
 function renderDiag(){
   const a = U.diag;
@@ -895,6 +904,8 @@ const listenBtns = id => `<button class="btn small" type="button" data-act="mode
 
 /* ===== まとめて描く ===== */
 function renderAll(){
+  // 顧問の指導力が上がったら知らせる
+  if(S.coachUp){ const lv = S.coachUp; delete S.coachUp; save(S); setTimeout(() => toast(`顧問の指導力が Lv${lv}（${coachTitle(lv)}）に上がった！ 練習の効果 +${Math.round((coachMult(S) - 1) * 100)}%`, 4500), 300); }
   renderHeader(); renderPiece(); renderVenues(); renderSelectors();
   renderStats(); renderWeek(); renderInterp(); renderLog();
   renderMemberCard(); renderRoster(); renderHistory();

@@ -93,7 +93,7 @@ const PIECE_MOVED = {march: 'aida', wa: 'galop', stars: 'aida', jupiter: 'holst'
 function freshState(year = 2026){
   const s = {
     v: 2, year, startYear: year, founding: true, week: 0, phase: 'choose', pieceId: null, interp: {tempo: 1, dyn: 1, rub: 1}, policy: 'auto',
-    members: [], recruits: null, plan: {}, rep: 5, seq: 0, trend: [],
+    members: [], recruits: null, plan: {}, rep: 5, seq: 0, trend: [], coach: {xp: 0},
     cohesion: 20, stamina: 100, morale: 75, fam: freshFam(), hallExp: 0,
     log: [], recs: [], history: [], season: [], flags: {}, pending: null, lastDelta: {},
   };
@@ -121,6 +121,8 @@ function nervesFor(s, ev){
   let n = ev?.nerves ?? 0;
   n *= s.morale < 45 ? 1.6 : s.morale < 65 ? 1.2 : 0.8;
   if(VENUE[ev?.venue]?.play.hall) n *= 1.3 - 0.6 * clamp01(s.hallExp / 100);
+  // 本番を何度も経験した顧問だと、部員も落ち着いて舞台に上がれる（レベルごとに4%、Lv7 で24%まで）
+  n *= 1 - Math.min(0.24, 0.04 * (coachLevel(s) - 1));
   return Math.round(n * 10) / 10;
 }
 // 練習の音のさいころは週ごとに変わる（同じ週なら、何度聴いても同じ音）
@@ -190,6 +192,30 @@ function decideMenu(s, m){
   if(s.pieceId && s.week % 3 === 2) return 'tutti';
   return drill(statOrder(m)[0]);
 }
+/* ===== 顧問の指導力 =====
+   顧問（あなた）も、部活を続けるほど指導がうまくなる。毎週の練習・本番・コンクール・部員のできごとで経験がたまり、
+   レベルが上がるごとに、部員の練習の伸び（力・譜読み・仕上がり・まとまり）が大きくなる。
+   本番の緊張も、レベルごとに少しずつやわらぐ。最初の数年はほとんど効かず、何年も続けた部ほど全国大会が見えてくる */
+const COACH_TITLES = ['新米顧問', '部活に慣れてきた顧問', '部員に頼られる顧問', '指導に定評のある顧問', '県内で知られた指導者', '他校からも相談される指導者', '全国を知る指導者', '名指導者'];
+const coachNeed = lv => 45 * (lv - 1) + 5 * (lv - 1) * (lv - 2);   // そのレベルになるまでの経験の合計
+function coachLevel(s){
+  const xp = s.coach?.xp || 0;
+  let lv = 1;
+  while(lv < 12 && xp >= coachNeed(lv + 1)) lv++;
+  return lv;
+}
+// 効き目は、はじめはゆっくり、レベルが上がるほど大きく（Lv2 +4%・Lv3 +10%・Lv4 +18%・Lv5 +28%・Lv6 +40%・Lv7 +54%）
+const coachMult = s => { const d = coachLevel(s) - 1; return 1 + 0.03 * d + 0.01 * d * d; };
+const coachTitle = lv => COACH_TITLES[Math.min(lv, COACH_TITLES.length) - 1];
+function gainCoach(s, xp){
+  const before = coachLevel(s);
+  (s.coach ||= {xp: 0}).xp += xp;
+  const lv = coachLevel(s);
+  if(lv > before){
+    addLog(s, `顧問の指導力が Lv${lv}（${coachTitle(lv)}）に上がった。部員の練習の効果が +${Math.round((coachMult(s) - 1) * 100)}% になった。`);
+    s.coachUp = lv;
+  }
+}
 // 何も決めることのない練習の週か（「次の予定まで進める」が止まらずに進めてよい週）
 // 本番・オーディション・テスト・入部・できごと・定期演奏会の曲決めがある週は止まる。GW や合宿などの週は進める
 const quietWeek = s => s.phase === 'week' && !s.pending && !s.chooseFinal && !recruitsDue(s) && !episodeView(s)
@@ -237,7 +263,7 @@ function practiceWeek(s0, plan){
   }
   if(typeof plan === 'string') s.plan = Object.fromEntries(s.members.map(m => [m.id, plan]));
   else if(plan) s.plan = {...s.plan, ...plan};
-  const ms = s.members, n = ms.length || 1;
+  const ms = s.members, n = ms.length || 1, cmul = coachMult(s);
   const pick = Object.fromEntries(ms.map(m => [m.id, planFor(s, m)]));
   const count = id => ms.filter(m => pick[m.id] === id).length;
   // 合奏は2人以上いないとできない。出た人の割合だけ、部全体に効く
@@ -248,7 +274,7 @@ function practiceWeek(s0, plan){
     const id = pick[m.id], mu = MENU_BY[id];
     const tired = m.sta < 30;
     if(tired && id !== 'rest') tiredN++;
-    const eff = (0.6 + 0.4 * s.morale / 100) * (tired ? 0.5 : 1) * (ev.mult || 1) * (mu.group && !share(id) ? 0.5 : 1);
+    const eff = (0.6 + 0.4 * s.morale / 100) * (tired ? 0.5 : 1) * (ev.mult || 1) * (mu.group && !share(id) ? 0.5 : 1) * cmul;
     const basics = basicsOf(m) / 100;
     const d = {};
     for(const [k, g] of Object.entries(mu.gain)){
@@ -287,7 +313,7 @@ function practiceWeek(s0, plan){
   s.lastDelta = {};
   for(const k of Object.keys(sum)) s.lastDelta[k] = Math.round(sum[k] / cnt[k] * 10) / 10;
   if(s.pieceId){ const ms = seated(s); if(ms.length) s.lastDelta.read = Math.round(ms.reduce((a, m) => a + (m.last?.d?.fam || 0), 0) / ms.length * 10) / 10; }
-  const eff0 = (0.6 + 0.4 * s.morale / 100) * (ev.mult || 1);
+  const eff0 = (0.6 + 0.4 * s.morale / 100) * (ev.mult || 1) * cmul;
   const coh = MENU.reduce((a, mu) => a + (mu.coh || 0) * share(mu.id), 0);
   if(coh){ const d = coh * eff0 * (1 - s.cohesion / 150); s.cohesion = clamp(s.cohesion + d, 0, 100); s.lastDelta.coh = Math.round(d * 10) / 10; }
   if(s.pieceId){
@@ -306,6 +332,7 @@ function practiceWeek(s0, plan){
   if(count('tutti') === 1 || count('hall') === 1) addLog(s, '合奏に出たのが1人だけで、合奏にならなかった。');
   const lowBasics = ms.filter(m => pick[m.id] === 'phrase' && basicsOf(m) < 35);
   if(lowBasics.length) addLog(s, `${lowBasics.map(m => m.name).join('、')}は歌ってはみたけれど、楽器を持つと音程とリズムで手一杯。基礎がもう少し要りそうだ。`);
+  gainCoach(s, 1);
   for(const st of MILESTONES){
     const f = `${s.year}:${st.k}${st.at}`;
     if(!s.flags[f] && bandAvg(s, st.k) >= st.at){ s.flags[f] = true; addLog(s, st.text); }
@@ -614,6 +641,7 @@ function resolveEpisode(s0, k){
   const res = c.go(s, v.m, v.o);
   addLog(s, `【できごと】${v.text}`);
   addLog(s, `→ ${c.label}。${res}`);
+  gainCoach(s, 1);
   s.lastEpisode = {text: v.text, choice: c.label, result: res};
   return s;
 }
@@ -875,6 +903,7 @@ function finishStage(s0){
   const ev = eventAt(s, s.week);
   if(!p) return s;
   stageAftermath(s, ev, p);
+  gainCoach(s, p.kind === 'concert' ? 3 : 5 + (p.judge?.award === 'gold' ? 3 : 0) + (p.judge?.rep ? 4 : 0));
   if(p.kind === 'concert'){
     if(p.recruits){ s.recruits = [...(s.recruits || []), ...makeRecruits(s, p.recruits)]; s.recruitWhen = Math.max(s.recruitWhen ?? 0, 3); }
     if(p.morale) s.morale = clamp(s.morale + p.morale, 0, 100);
@@ -1095,6 +1124,8 @@ function load(){
       }
       s.plan ||= {}; s.seq ??= 100;
       s.trend ||= [];   // 部の実力のグラフ（2026年10月）。前のセーブは、ここから記録を始める
+      // 顧問の指導力（2026年10月）：前のセーブは、顧問になってからの年数と週から経験を見積もる
+      s.coach ||= {xp: Math.round(50 * (s.year - (s.startYear ?? s.year)) + 1.5 * s.week)};
       if(s.recruits && s.recruitWhen == null) s.recruitWhen = 3;
       delete s.focus;
       return s;
