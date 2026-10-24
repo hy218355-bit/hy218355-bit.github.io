@@ -631,6 +631,21 @@ function renderWeek(){
   w.innerHTML = parts.join('');
   w.querySelector('[data-outmore]')?.addEventListener('toggle', e => { U.outMore = e.target.open; });
 }
+// 楽器の中での受け持ち（1st・2nd など。打楽器はかっこの中）
+const partShort = p => { const l = PART_LABEL[p], q = l.match(/（(.+)）/); if(q) return q[1]; const i = l.lastIndexOf(' '); return i > 0 ? l.slice(i + 1) : l; };
+const assignPicks = () => Object.fromEntries(S.recruits.map(r => [r.id, $(`#as-${r.id}`)?.value || null]).filter(([, v]) => v));
+// パートごとの顔ぶれ：いまいる部員と、選んでいる担当（新しく入る部員は「新」）
+function assignSecs(picks){
+  const order = id => SEATS.findIndex(x => x.id === id);
+  return SECTIONS.map(sec => {
+    const seats = SEATS.filter(x => x.sec === sec.id).length;
+    const now = S.members.filter(m => m.seat && SEAT[m.seat].sec === sec.id).sort((a, b) => order(a.seat) - order(b.seat));
+    const add = S.recruits.filter(r => picks[r.id] && SEAT[picks[r.id]].sec === sec.id);
+    const chips = now.map(m => `<span class="mchip">${esc(m.name)}<small>${m.grade}年・${esc(partShort(SEAT[m.seat].part))}</small></span>`)
+      .concat(add.map(r => `<span class="mchip new">${esc(r.name)}<small>新・${esc(partShort(SEAT[picks[r.id]].part))}</small></span>`));
+    return `<div class="asec"><b>${sec.name}<small>${now.length + add.length}人／${seats}席</small></b><div class="chips">${chips.join('') || '<span class="small">まだだれもいない</span>'}</div></div>`;
+  }).join('');
+}
 // 新しく入った部員の担当を決める（部をつくった最初の5人・本入部の1年生・途中から入ってきた部員）
 function renderAssign(w, ev){
   const map = autoAssign(S);
@@ -640,7 +655,14 @@ function renderAssign(w, ev){
     : ev?.kind === 'assign' ? ev.text : '新しく入部してきた部員の担当を決めよう。希望どおりだとやる気が上がる。';
   w.innerHTML = `<div class="event"><span class="tag">${first ? '入部' : ev?.kind === 'assign' ? ev.title : '入部'}</span><span>${intro}</span></div>
     <div class="assign">${S.recruits.map(r => `<div class="row"><span class="who">${esc(r.name)}<small>${(r.grade || 1)}年・希望：${INST[r.hope].name}${r.exp ? '・中学で経験あり' : '・初心者'}${r.trait ? '・' + TRAITS[r.trait].name : ''}${Object.entries(innateSkills(r.id, r.exp)).map(([id, v]) => '・' + SKILLS[id].name + skillMark(v >= 2.5 ? 2 : 1)).join('')}</small></span>
-      <select id="as-${r.id}" aria-label="${esc(r.name)}の担当"><option value="">控え（席なし）</option>${free.map(id => `<option value="${id}"${map[r.id] === id ? ' selected' : ''}>${PART_LABEL[SEAT[id].part]}</option>`).join('')}</select></div>`).join('')}</div>
+      <select id="as-${r.id}" aria-label="${esc(r.name)}の担当"><option value="">控え（席なし）</option>${SECTIONS.map(sec => {
+        const ids = free.filter(id => SEAT[id].sec === sec.id);
+        if(!ids.length) return '';
+        const n = S.members.filter(m => m.seat && SEAT[m.seat].sec === sec.id).length;
+        return `<optgroup label="${sec.name}（いま${n}人）">${ids.map(id => `<option value="${id}"${map[r.id] === id ? ' selected' : ''}>${PART_LABEL[SEAT[id].part]}${SEAT[id].inst === r.hope ? '（希望）' : ''}</option>`).join('')}</optgroup>`;
+      }).join('')}</select></div>`).join('')}</div>
+    <h3 class="asec-h">パートの顔ぶれ<small>選んだ担当も入れて。「新」が新しく入る部員</small></h3>
+    <div class="asecs" id="assignSecs">${assignSecs(map)}</div>
     <p class="small" id="assignErr"></p>
     <button class="btn primary" type="button" data-act="assign">この担当で決める</button>`;
 }
@@ -1167,6 +1189,7 @@ function bind(){
   });
   $('#week').addEventListener('change', e => {
     const t = e.target;
+    if(t.id?.startsWith('as-')){ $('#assignSecs').innerHTML = assignSecs(assignPicks()); $('#assignErr').textContent = ''; return; }
     if(t.dataset.aout){
       if(t.checked) U.draft.delete(t.dataset.aout); else U.draft.add(t.dataset.aout);
       t.closest('.am')?.classList.toggle('off', !t.checked);
