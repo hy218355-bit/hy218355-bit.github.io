@@ -17,7 +17,7 @@
 @font-face{font-family:"Klee One";font-weight:600;font-display:swap;src:url(fonts/klee-one-600.woff2) format("woff2")}
 @font-face{font-family:"Dela Gothic One";font-weight:400;font-display:swap;src:url(fonts/dela-gothic-one-400.woff2) format("woff2")}
 @font-face{font-family:"Share Tech Mono";font-weight:400;font-display:swap;src:url(fonts/share-tech-mono-400.ttf) format("truetype")}
-/* Layout: 合奏室。上に部の垂れ幕と週カレンダー、左にステージ（座席・譜面台）、右にホワイトボード（実力・診断・今週・解釈・日誌）、下に名簿と部の歴史 */
+/* Layout: 合奏室。上に部の垂れ幕と週カレンダー、左にステージ（座席・譜面台）、右にホワイトボード（実力・診断・今週・日誌）、下に名簿と部の歴史 */
 :root{
   --paper:#ECEFF3;
   --sheet:#FAFBFC;
@@ -365,11 +365,6 @@ th.num{text-align:right}
 .grade{font-family:var(--f-display);font-size:22px;line-height:1.3;text-align:center}
 .cmt{font-family:var(--f-hand);font-size:15px;line-height:1.7}
 .cmt small{display:block;font-family:var(--f-body);font-size:12px;color:var(--ink-soft);line-height:1.4}
-.interp{display:grid;gap:8px}
-.interp .row{display:grid;grid-template-columns:6.5em minmax(0,1fr);align-items:center;gap:8px;font-size:13px}
-.interp .seg{display:flex;flex-wrap:nowrap}
-.interp .seg button{flex:1;padding:5px 6px;white-space:nowrap}
-@media (max-width:480px){.interp .row{grid-template-columns:minmax(0,1fr);gap:4px}}
 .log{list-style:none;padding:0;display:grid;max-height:340px;overflow:auto;font-family:var(--f-hand);font-size:15px;line-height:1.7}
 .log li{padding:7px 0;border-bottom:1px dashed var(--rule);display:grid;grid-template-columns:4.6em minmax(0,1fr);gap:8px}
 .log time{font-family:var(--f-lcd);font-size:12px;color:var(--ink-soft);padding-top:3px}
@@ -725,11 +720,6 @@ html[data-season="snow"]{--season-band:linear-gradient(90deg,#DDE8F3,#FFFFFF,#B9
         <h2 id="h-diag">いまの合奏の診断 <small id="diagVenue"></small></h2>
         <div class="stats" id="diag"></div>
         <p class="diag-note" id="diagNote"></p>
-      </section>
-      <section class="panel" data-tab="play" aria-labelledby="h-interp">
-        <h2 id="h-interp">指揮者の解釈</h2>
-        <div class="interp" id="interp"></div>
-        <p class="small">部の実力に見合わない解釈は、審査で「大げさ」と言われる。</p>
       </section>
       <section class="panel" data-tab="log" aria-labelledby="h-log">
         <h2 id="h-log">部活日誌</h2>

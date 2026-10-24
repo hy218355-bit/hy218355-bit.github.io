@@ -190,7 +190,10 @@ const CRACK = {brass: {p: .1}, squeak: {p: .07}, over: {p: .05}};
 const ROLE_WEIGHT = {mel: 2, mel3: 1.2, cm: 1.3, pad: 1, bass: 1.2, hit: .8};
 const DYN_SPREADS = [0.65, 1, 1.3];
 const RUBATOS = [0.3, 1, 1.6];
-const INTERP_NAMES = {tempo: ['遅め', '標準', '速め'], dyn: ['控えめ', '標準', '大きく'], rub: ['ほぼ一定', '標準', 'たっぷり']};
+
+// 練習で育てた力を、演奏での力に直す。60から上は少し上乗せする（60から上は伸びにくくしたぶん。100はそのまま100）
+const PLAY_LIFT = 5;
+const playOf = x => x <= 60 || x >= 100 ? x : x + PLAY_LIFT * (x - 60) * (100 - x) / 400;
 
 // 本番の日の調子：z はその日の揺れ（大きいほど緊張に飲まれている）。メンタルが弱いほど平均して下がり、振れ幅も大きい
 function stageDrop(m, nerves, z, fatigue = 0){
@@ -261,7 +264,7 @@ function perform(ctx){
     const st = {};
     // スキル：自分の得意（play）と、同じパートの柱・要（aura）が、本番の音での力を数点上げる
     const plus = k => skillsOf(m).reduce((a, x) => a + (x.play?.[k] || 0) * x.lv, 0) + sectionAura(ctx.members, m, k);
-    for(const k of STAT_KEYS) st[k] = clamp01((m.stats[k] + plus(k) - drop * W[k]) / 100);
+    for(const k of STAT_KEYS) st[k] = clamp01(playOf(m.stats[k] + plus(k) - drop * W[k]) / 100);
     // 譜読みが浅いうちは、うまい人でもフレーズを歌いきれない（全体のテンポの揺れには範囲での平均、1音ずつにはその区間の譜読みが効く）
     const pfs = pfsOf(m), E0 = st.expr;
     st.expr *= lerp(0.4, 1, meanIn(pfs));

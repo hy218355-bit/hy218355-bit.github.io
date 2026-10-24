@@ -1165,16 +1165,6 @@ function renderStageResult(w, ev){
     <ol class="judges">${j.judges.map(x => `<li><span class="grade">${x.grade}</span><p class="cmt"><small>${esc(x.name)}・${x.score}点</small>${esc(x.comment)}</p></li>`).join('')}</ol>
     <div class="transport">${p.setRecId ? `<button class="btn small" type="button" data-act="playrec" data-id="${p.setRecId}">▶ 課題曲</button>` : ''}<button class="btn small" type="button" data-act="playrec" data-id="${p.recId}">▶ ${p.setRecId ? '自由曲' : '本番の録音'}</button><button class="btn small" type="button" data-act="saverec" data-id="${p.recId}">⤓ 保存</button><button class="btn primary" type="button" data-act="next">${j.rep ? '次の大会に向けて練習を続ける' : 'シーズンを終える'}</button></div></div>`;
 }
-function renderInterp(){
-  const pc = PIECES[playPiece()];
-  const rows = [
-    ['tempo', 'テンポ', [0, 1, 2].map(i => `${INTERP_NAMES.tempo[i]} ${tempoLabel(pc, i)}`)],
-    ['dyn', '抑揚の幅', INTERP_NAMES.dyn],
-    ['rub', 'テンポの揺れ', INTERP_NAMES.rub],
-  ];
-  const lock = busy();
-  $('#interp').innerHTML = rows.map(([k, nm, labels]) => `<div class="row"><span>${nm}</span><div class="seg" role="group" aria-label="${nm}">${labels.map((l, i) => `<button type="button" data-interp="${k}:${i}" aria-pressed="${S.interp[k] === i}"${lock ? ' disabled' : ''}>${l}</button>`).join('')}</div></div>`).join('');
-}
 // 部の歴史：年度ごとの曲・結果・引退した部員と、残してある録音
 const AWARD_NM = {gold: '金賞', silver: '銀賞', bronze: '銅賞'};
 const resultText = results => results.map(r => `${LEVELS[r.level].name}${AWARD_NM[r.award]}${r.rep ? '（代表）' : ''}`).join('→');
@@ -1284,16 +1274,15 @@ function placeCard(where){
   if(where === 'roster') $('.roster').insertBefore(card, $('.roster .sec-grid'));
   else $('.col-stage').appendChild(card);
 }
-// スキル：小さな札（名前の横）と、部員カードの一覧（説明と、もうすぐ身につきそうなもの・育ち方）
+// スキル：小さな札（名前の横）と、部員カードの一覧（説明と育ち方）
 const skillChips = m => skillsOf(m).map(x => ` <span class="sk">${x.name}${skillMark(x.lv)}</span>`).join('');
 // 部員の夢（かなったら年月つき）
 const dreamLine = m => m.dream ? `<p class="mc-dream">夢：${DREAMS[m.dream].text}${m.dreamDone ? `<b>かなった！（${m.dreamDone.y}年${m.dreamDone.w >= 100 ? WINTER_STEPS[m.dreamDone.w - 100]?.m ?? 3 : wkMonth(m.dreamDone.w)}月）</b>` : ''}</p>` : '';
 function skillList(m){
   const have = skillsOf(m);
-  const near = SKILL_IDS.filter(id => { const v = m.sp?.[id] || 0; return (v >= 0.6 && v < 1) || (v >= 2 && v < 2.5); }).map(id => SKILLS[id].name + skillMark(skillLv(m, id) + 1));
   const bent = STAT_KEYS.filter(k => (m.bent?.[k] || 0) >= 0.04).sort((a, b) => m.bent[b] - m.bent[a]).map(k => STAT_LABEL[k]);
   return `<div class="mc-skills">${have.length ? `<ul>${have.map(x => `<li><b>${x.name}${skillMark(x.lv)}</b>${esc(x.desc)}</li>`).join('')}</ul>` : '<p class="small">スキルはまだない。練習を続けたり、相談に乗ったりすると身につくことがある。</p>'}
-    ${near.length ? `<p class="small">もうすぐ：${near.join('・')}</p>` : ''}${bent.length ? `<p class="small">伸びやすい力：${bent.join('・')}（相談への答え方で育った）</p>` : ''}</div>`;
+    ${bent.length ? `<p class="small">伸びやすい力：${bent.join('・')}（相談への答え方で育った）</p>` : ''}</div>`;
 }
 // 部員のひとこと：いまの様子（体力・最近の伸び・苦手・癖・学年・役）に合うものから、週ごとに1つ
 // 本番を見ているときに部員をタップしたら、その子の様子（力・本番の強さ・今日の調子・スキル）を舞台の下に出す
@@ -1412,7 +1401,7 @@ const listenBtns = id => `<button class="btn small" type="button" data-act="mode
 function renderAll(){
   fxMoments();
   renderHeader(); renderPiece(); renderVenues(); renderSelectors();
-  renderStats(); renderWeek(); renderInterp(); renderLog();
+  renderStats(); renderWeek(); renderLog();
   renderMemberCard(); renderRoster(); renderHistory();
   $('#btnNow').disabled = busy();
 }
@@ -1511,7 +1500,7 @@ function bind(){
     const b = e.target.closest('[data-pswitch]'); if(!b) return;
     stopPlay(); haptic('tap');
     U.piece = b.dataset.pswitch === S.pieceId ? null : b.dataset.pswitch; U.range = 'all';
-    renderPiece(); renderInterp(); refreshNow();
+    renderPiece(); refreshNow();
   });
   $('#venueSel').addEventListener('change', e => setVenue(e.target.value));
   $('#rangeSel').addEventListener('change', e => { U.range = e.target.value; refreshNow(); });
@@ -1604,7 +1593,7 @@ function bind(){
     const act = b.dataset.act;
     if(act === 'preview' || act === 'model'){
       const pid = b.dataset.pid;
-      U.piece = pid; U.range = 'all'; renderPiece(); renderInterp(); U.perfNow = perform(currentCtx()); U.diag = analyze(U.perfNow); renderDiag();
+      U.piece = pid; U.range = 'all'; renderPiece(); U.perfNow = perform(currentCtx()); U.diag = analyze(U.perfNow); renderDiag();
       if(act === 'model') playPerf(modelPerf(pid), `お手本：${PIECES[pid].title}（全員がうまい部・${VENUE.hall.name}）`);
       else playPerf(U.perfNow, `いまの部で：${PIECES[pid].title}${(S.fam[pid] || 0) < 5 ? '（譜読み前）' : ''}`);
     }
@@ -1672,12 +1661,6 @@ function bind(){
       commit(s2); renderWeek();
     }
     else if(t.dataset.span){ commit(setPlanSpan(S, t.dataset.span, t.value === '' ? null : +t.value)); renderWeek(); }
-  });
-  $('#interp').addEventListener('click', e => {
-    const b = e.target.closest('[data-interp]'); if(!b || b.disabled) return;
-    const [k, i] = b.dataset.interp.split(':');
-    S.interp[k] = +i; commit(S);
-    renderInterp(); renderPiece(); refreshNow();
   });
   const rs = $('#btnReset');
   rs.addEventListener('click', () => {

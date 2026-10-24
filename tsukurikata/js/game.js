@@ -284,6 +284,10 @@ function addSkill(s, m, id, d, quiet){
   return true;
 }
 function bend(m, k, d){ (m.bent ||= {})[k] = Math.round(clamp((m.bent[k] || 0) + d, 0, 0.2) * 100) / 100; }
+// 練習の伸びの残り：うまくなるほど伸びにくい。60を越えると急に伸びにくくなり、90から上はなかなか上がらない
+// （初心者は1年で50ほど、2年で70ほど、3年の夏で80ほど。いちばんうまい子でも3年の夏で90ほど）
+const GROW_TOP = 38;
+const growRoom = x => Math.max(0, (1 - x / 125) * clamp((100 - x) / GROW_TOP, 0, 1));
 // 練習の伸びの倍率：その子の育ち方・スキルと、同じパートの面倒見のいい部員・柱
 const growMult = (s, m, k) => 1 + (m.bent?.[k] || 0) + skillsOf(m).reduce((a, x) => a + (x.grow?.[k] || 0) * x.lv, 0) + sectionAura(s.members, m, 'grow');
 // 練習の種類ごとに、少しずつ育つスキル（17回ほどで○、40回ほどで◎）
@@ -352,8 +356,7 @@ function practiceWeek(s0, plan){
     const basics = basicsOf(m) / 100;
     const d = {};
     for(const [k, g] of Object.entries(mu.gain)){
-      // 伸びは、うまくなるほど小さくなる（初心者は1年で50ほど、3年間続けると85〜90ほど）
-      let x = 0.72 * g * eff * Math.max(0.12, 1 - m.stats[k] / 125) * (0.85 + 0.3 * hash(m.id, s.year, s.week, id, k)) * (m.grade === 1 ? 1.3 : 1) * growMult(s, m, k);
+      let x = 0.72 * g * eff * growRoom(m.stats[k]) * (0.85 + 0.3 * hash(m.id, s.year, s.week, id, k)) * (m.grade === 1 ? 1.3 : 1) * growMult(s, m, k);
       if(mu.basics) x *= clamp((basics - 0.1) / 0.5, 0.1, 1);
       const before = m.stats[k];
       m.stats[k] = Math.round(clamp(before + x, 0, 100) * 10) / 10;
@@ -503,7 +506,6 @@ function effectList(a, s){
       if(v - v0 < 0.001) continue;
       const lv0 = v0 >= 2.5 ? 2 : v0 >= 1 ? 1 : 0, lv = skillLv(m, id);
       if(lv > lv0) g.push(`スキル「${SKILLS[id].name}${skillMark(lv)}」を身につけた`);
-      else if(lv < 2){ const from = lv ? 1 : 0, need = lv ? 2.5 : 1; g.push(`「${SKILLS[id].name}${skillMark(lv + 1)}」まで${Math.round((v - from) / (need - from) * 100)}%`); }
     }
     if(m.trait && m.trait !== b.trait) g.push(`癖が「${TRAITS[m.trait].name}」に`);
     if(g.length) rows.push(`${m.name} ${g.join(' ')}`);
@@ -2056,6 +2058,8 @@ function load(){
         m.story = m.story.filter((x, i) => !x.k || last[x.k] === i);
       }
       if(s.recruits && s.recruitWhen == null) s.recruitWhen = 3;
+      // 指揮者の解釈（テンポ・抑揚・揺れ）を選ぶのはやめた（2026年10月）。選んでいたセーブも標準にもどす
+      s.interp = {tempo: 1, dyn: 1, rub: 1};
       delete s.focus;
       return s;
     }

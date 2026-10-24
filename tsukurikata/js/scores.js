@@ -116,10 +116,6 @@ const tmAt = (pc, b) => pc.tcurve ? interp(pc.tcurve, b) : sectionAt(pc.tmap, b,
 const bpmAt = (pc, i, b = 0) => Math.round(pc.tempi[i] / tmAt(pc, b));
 // 拍の単位（2分音符で数える行進曲、付点4分音符で数える8分の9拍子、8分音符で数えるゆっくりした曲など）と、表示用の書き方
 const beatName = pc => pc.beatUnit === 2 ? '2分音符' : pc.beatUnit === 1.5 ? '付点4分音符' : pc.beatUnit === .5 ? '♪' : '♩';
-const tempoLabel = (pc, i) => {
-  const a = bpmAt(pc, i, 0), z = bpmAt(pc, i, pc.beats - 0.01);
-  return `${beatName(pc)}=${a}${a !== z ? '→' + z : ''}`;
-};
 
 /* ===== 編曲の組み立て ===== */
 function chordAt(pc, b){
