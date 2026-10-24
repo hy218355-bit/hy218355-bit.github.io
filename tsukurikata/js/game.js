@@ -289,7 +289,8 @@ const READ_SOLO = 70;
 const GROW_TOP = 38;
 const growRoom = x => Math.max(0, (1 - x / 125) * clamp((100 - x) / GROW_TOP, 0, 1));
 // 練習の伸びの倍率：その子の育ち方・スキルと、同じパートの面倒見のいい部員・柱
-const growMult = (s, m, k) => 1 + (m.bent?.[k] || 0) + skillsOf(m).reduce((a, x) => a + (x.grow?.[k] || 0) * x.lv, 0) + sectionAura(s.members, m, 'grow');
+// 付き合っている相手が部にいると、いいところを見せたくて少し身が入る
+const growMult = (s, m, k) => 1 + (m.bent?.[k] || 0) + skillsOf(m).reduce((a, x) => a + (x.grow?.[k] || 0) * x.lv, 0) + sectionAura(s.members, m, 'grow') + (partnerOf(s, m) ? 0.04 : 0);
 // 練習の種類ごとに、少しずつ育つスキル（17回ほどで○、40回ほどで◎）
 const PRACTICE_SKILL = {long: 'breath', tune: 'ear', metro: 'groove', phrase: 'song', piece: 'reader'};
 // 何も決めることのない練習の週か（「次の予定まで進める」が止まらずに進めてよい週）
@@ -422,6 +423,7 @@ function practiceWeek(s0, plan){
   if(s.policy === 'rest') s.policy = 'auto';
   // 夢：パートリーダー・◎のスキル・うまくなる（練習のあと）
   fulfillDreams(s);
+  loveWeek(s);
   return nextWeek(s);
 }
 // 週ごとの部の力の記録（部の実力のグラフ用）：その週の練習のあとの、席についている部員の力の平均
@@ -734,16 +736,104 @@ const EPISODE_BY = Object.fromEntries(EPISODES.map(e => [e.id, e]));
    答えずに練習を進めてもよい（その相談は流れる）。同じ相談は6週のあいだ出さず、最近相談に来ていない部員を選びやすくする */
 const ss = s => seated(s);
 const kun = m => m.name.split(' ')[1] || m.name;
+
+/* ===== 恋 =====
+   部員どうしの片思い（m.crush：相手の id）と、付き合っている相手（m.partner：{id, name, since}）。
+   片思いは相談（crush）か、夢が「好きな人に気持ちを伝えたい」の子に自然に生まれ、告白の相談（confess）で気持ちを伝える。
+   「コンクールが終わってから」と決めた子（m.crushHold）は、コンクールが終わると自分で伝える。卒業式の日に、卒業する先輩に伝える子もいる。
+   付き合っている子は、いいところを見せたくて練習に身が入る（growMult）。けんか（quarrel）で別れることもある */
+const partnerOf = (s, m) => (m.partner && s.members.find(x => x.id === m.partner.id)) || null;
+// 呼び方：名字に「先輩」か「さん」
+const sanOf = (m, o) => `${o.name.split(' ')[0]}${o.grade > m.grade ? '先輩' : 'さん'}`;
+const weeksSince = (s, at) => (s.year - at.y) * 30 + s.week - at.w;
+// 気持ちを伝える。boost：うまくいきやすさの上乗せ。相手も同じ気持ちなら、ずっとうまくいきやすい。quiet：日誌には書かない（相談の答えに書く）
+function confess(s, m, o, boost = 0, quiet = false){
+  delete m.crushAt;
+  const p = clamp(0.45 + boost + (o.crush === m.id ? 0.35 : 0) - (o.partner ? 0.5 : 0), 0.05, 0.9);
+  const ok = hash(m.id, o.id, s.year, s.week, 'love') < p;
+  m.confessed = true; delete m.crush; delete m.crushHold;
+  if(ok){
+    const since = {y: s.year, w: s.week};
+    m.partner = {id: o.id, name: o.name, since}; o.partner = {id: m.id, name: m.name, since};
+    if(o.crush === m.id){ delete o.crush; delete o.crushHold; }
+    remember(s, m, `${sanOf(m, o)}に気持ちを伝えて、付き合うことになった。`);
+    remember(s, o, `${sanOf(o, m)}に気持ちを伝えられて、付き合うことになった。`);
+    if(!quiet) addLog(s, `${m.name}が${o.name}に気持ちを伝えて、ふたりは付き合うことになった。`);
+    (s.loveUp ||= []).push({a: m.id, b: o.id});
+    adj(s, 'morale', 2);
+  } else {
+    m.mental = clamp((m.mental ?? 40) - 3, 0, 100);
+    m.heartbreak = {y: s.year, w: s.week, kind: 'no'};
+    remember(s, m, `${sanOf(m, o)}に気持ちを伝えた。返事は「ごめんね」だった。`);
+    if(!quiet) addLog(s, `${m.name}は${o.name}に気持ちを伝えたが、ふられてしまった。`);
+  }
+  return ok;
+}
+function breakUp(s, a, b){
+  for(const [x, y] of [[a, b], [b, a]]){
+    delete x.partner; x.heartbreak = {y: s.year, w: s.week, kind: 'break'};
+    x.mental = clamp((x.mental ?? 40) - 3, 0, 100);
+    remember(s, x, `${sanOf(x, y)}と別れた。`);
+  }
+  adj(s, 'cohesion', -2);
+  addLog(s, `${a.name}と${b.name}が、別れたらしい。`);
+}
+// 毎週の恋のうごき（練習の週のおわり）
+function loveWeek(s){
+  const ms = ss(s);
+  for(const m of ms){
+    // 相手が部にいなくなった片思いは、そのまま思い出に
+    if(m.crush && !s.members.some(x => x.id === m.crush)){ delete m.crush; delete m.crushHold; }
+    // ときどき、気になる人ができる（夢が「気持ちを伝えたい」の子は、できやすい）。同じパートの人を好きになりやすい
+    if(!m.crush && !m.partner && hash(m.id, s.year, s.week, 'crush') < (m.dream === 'love' ? 0.08 : 0.004)){
+      const os = ms.filter(x => x.id !== m.id && !x.partner && Math.abs(x.grade - m.grade) <= 1);
+      const near = os.filter(x => secOf(x) === secOf(m)), pool = near.length && hash(m.id, s.year, 'near') < 0.5 ? near : os;
+      if(pool.length){ m.crush = pool[Math.floor(hash(m.id, s.year, s.week, 'who') * pool.length)].id; m.crushAt = {y: s.year, w: s.week}; }
+    }
+  }
+  // 2か月ほど片思いが続いた子は、相談に来なくても、自分で気持ちを伝える
+  for(const m of ms) if(m.crush && !m.crushHold && !m.partner && m.crushAt && weeksSince(s, m.crushAt) >= 8){
+    const o = ms.find(x => x.id === m.crush);
+    if(o && !o.partner) confess(s, m, o); else { delete m.crush; delete m.crushAt; }
+  }
+  // コンクールが終わったら、待っていた子が自分で気持ちを伝える（代表になっていたら、その先の大会のあと）
+  const last = s.season?.[s.season.length - 1];
+  if(s.week > PREF_WEEK && !(last && last.rep && s.week <= NATIONAL_WEEK)) for(const m of ms) if(m.crushHold){
+    const o = ms.find(x => x.id === m.crush);
+    if(o && !o.partner) confess(s, m, o, 0.05); else { delete m.crush; delete m.crushHold; }
+  }
+  // 夏祭り（8月の終わり）
+  if(s.week === 19 && !s.flags[`fest:${s.year}`]){
+    s.flags[`fest:${s.year}`] = true;
+    const done = new Set();
+    for(const m of ms){
+      const o = partnerOf(s, m);
+      if(!o || done.has(m.id)) continue;
+      done.add(m.id); done.add(o.id);
+      remember(s, m, `夏祭りに、${sanOf(m, o)}と浴衣で出かけた。`); remember(s, o, `夏祭りに、${sanOf(o, m)}と浴衣で出かけた。`);
+      addLog(s, `夏祭りの夜、浴衣姿の${m.name}と${o.name}を見かけた。`);
+    }
+  }
+}
+// 卒業式の日：卒業する先輩に片思いしていた子が、気持ちを伝える
+function gradConfess(s){
+  for(const m of s.members){
+    const o = (s.gradMembers || []).find(x => x.id === m.crush);
+    if(!o) continue;
+    addLog(s, `卒業式のあと、${m.name}が${o.name}を呼びとめた。`);
+    confess(s, m, o, 0.1);
+  }
+}
 const CONSULTS = [
-  {id: 'crush', pair: true, who: s => ss(s).filter(m => m.grade >= 1 && ss(s).some(x => x.id !== m.id && Math.abs(x.grade - m.grade) <= 1)),
-   other: (s, m) => ss(s).filter(x => x.id !== m.id && Math.abs(x.grade - m.grade) <= 1),
+  {id: 'crush', pair: true, who: s => ss(s).filter(m => !m.partner && !m.crush && ss(s).some(x => x.id !== m.id && !x.partner && Math.abs(x.grade - m.grade) <= 1)),
+   other: (s, m) => ss(s).filter(x => x.id !== m.id && !x.partner && Math.abs(x.grade - m.grade) <= 1),
    text: (s, m, o) => `${m.name}（${instOf(m)}）が、小さな声で言った。「${o.name}${o.grade > m.grade ? '先輩' : 'さん'}のことが、なんだか気になっちゃって……。合奏のとき、つい目で追っちゃうんです」`,
    choices: [
-     {label: 'その気持ち、音にしてみたら', go: (s, m) => { bend(m, 'expr', 0.06); addSkill(s, m, 'song', 0.5);
+     {label: 'その気持ち、音にしてみたら', go: (s, m, o) => { m.crush = o.id; m.crushAt = {y: s.year, w: s.week}; bend(m, 'expr', 0.06); addSkill(s, m, 'song', 0.5);
        remember(s, m, '気になる人ができた。その気持ちを、旋律にのせて吹いてみた。'); return `${kun(m)}は赤くなってうなずいた。その日の旋律は、いつもより少しやさしかった。`; }},
-     {label: '今は練習に集中しよう', go: (s, m) => { bend(m, 'rhythm', 0.04); m.mental = clamp((m.mental ?? 40) + 3, 0, 100);
+     {label: '今は練習に集中しよう', go: (s, m, o) => { m.crush = o.id; m.crushAt = {y: s.year, w: s.week}; m.crushHold = true; bend(m, 'rhythm', 0.04); m.mental = clamp((m.mental ?? 40) + 3, 0, 100);
        return `「……ですよね」と、${kun(m)}は笑ってメトロノームを鳴らしはじめた。`; }},
-     {label: '大事な仲間として、そばにいればいい', go: (s, m) => { adj(s, 'cohesion', 2); adj(s, 'morale', 2);
+     {label: '大事な仲間として、そばにいればいい', go: (s, m, o) => { m.crush = o.id; m.crushAt = {y: s.year, w: s.week}; adj(s, 'cohesion', 2); adj(s, 'morale', 2);
        return `${kun(m)}はほっとした顔をした。帰りは、パートのみんなと一緒に帰っていった。`; }},
    ]},
   {id: 'future', who: s => ss(s).filter(m => m.grade === 3),
@@ -837,13 +927,52 @@ const CONSULTS = [
      {label: '顧問から家族に話してみる', go: (s, m) => { adj(s, 'morale', 2); m.mental = clamp((m.mental ?? 40) + 2, 0, 100);
        return `電話で、${kun(m)}が毎日どれだけがんばっているかを伝えた。部活は続けていいことになった。`; }},
    ]},
-  {id: 'heartbreak', who: s => ss(s).filter(m => m.grade >= 2),
-   text: (s, m) => `${m.name}（${instOf(m)}）の元気がない。聞いてみると、「ふられちゃいました……」と小さく笑った。`,
+  {id: 'heartbreak', who: s => { const r = ss(s).filter(m => m.heartbreak && weeksSince(s, m.heartbreak) <= 8); return r.length ? r : ss(s).filter(m => m.grade >= 2 && !m.partner); },
+   text: (s, m) => `${m.name}（${instOf(m)}）の元気がない。聞いてみると、「${m.heartbreak?.kind === 'break' ? '別れちゃいました' : 'ふられちゃいました'}……」と小さく笑った。`,
    choices: [
      {label: '切ない曲、今なら吹けるかもね', go: (s, m) => { addSkill(s, m, 'song', 0.6); bend(m, 'expr', 0.04);
        remember(s, m, '失恋した週、その気持ちのまま旋律を吹いた。'); return `${kun(m)}は少し泣いて、それから自由曲のゆっくりなところを何度も吹いた。音が前より深くなった。`; }},
      {label: 'みんなとカラオケに行っておいで', go: (s, m) => { adj(s, 'morale', 3); adj(s, 'cohesion', 2);
        return `パートのみんなと出かけて、大声で歌ってきたらしい。次の日はすっきりした顔をしていた。`; }},
+   ]},
+  {id: 'confess', pair: true, who: s => ss(s).filter(m => m.crush && !m.partner && !m.crushHold && ss(s).some(x => x.id === m.crush && !x.partner)),
+   other: (s, m) => ss(s).filter(x => x.id === m.crush),
+   text: (s, m, o) => `${m.name}（${instOf(m)}）が、まっ赤な顔で来た。「${sanOf(m, o)}に、気持ちを伝えようと思うんです。……先生、どう思いますか」`,
+   choices: [
+     {label: '思いきって伝えておいで', go: (s, m, o) => confess(s, m, o, 0.05, true)
+       ? `次の日、${kun(m)}と${kun(o)}が並んで楽器を運んでいた。ふたりとも、少し照れくさそうだった。`
+       : `${kun(m)}は「ふられちゃいました」と笑った。でも、合奏ではいつもどおり吹いていた。`},
+     {label: '手紙にしてみたら', go: (s, m, o) => confess(s, m, o, 0.1, true)
+       ? `手紙の返事は「わたしも」だったらしい。${kun(m)}は一日じゅう、楽譜に何かを書きこんでいた。`
+       : `返事は「ごめんね、でもうれしかった」。${kun(m)}は手紙の下書きを、そっと楽譜ケースにしまった。`},
+     {label: 'コンクールが終わってからにしたら', if: s => s.phase === 'week' && s.week < PREF_WEEK, go: (s, m) => { m.crushHold = true; bend(m, 'rhythm', 0.03);
+       return `${kun(m)}は「……そうします。それまでは練習に集中します」と言った。`; }},
+   ]},
+  {id: 'couple', pair: true, who: s => ss(s).filter(m => { const o = partnerOf(s, m); return o?.seat && m.id < o.id; }),
+   other: (s, m) => [partnerOf(s, m)],
+   text: (s, m, o) => `合奏のあいだ、${m.name}と${o.name}が目で合図を送り合っているのに気づいた。ふたりが付き合っていることは、もう部のみんなが知っている。`,
+   choices: [
+     {label: 'ほほえましく見守る', go: (s, m, o) => { adj(s, 'morale', 2); bend(m, 'expr', 0.03); bend(o, 'expr', 0.03);
+       return 'ふたりの音は、どこか楽しそうだった。部の空気も、少しやわらかくなった。'; }},
+     {label: '部活のあいだは、けじめをつけよう', go: (s, m, o) => { adj(s, 'cohesion', 2); for(const x of [m, o]) x.mental = clamp((x.mental ?? 40) + 2, 0, 100);
+       return '「はい」とふたりはそろって返事をした。練習中は、前よりしゃきっとしていた。'; }},
+     {label: 'ふたりで二重奏をしてみたら', go: (s, m, o) => { addSkill(s, m, 'song', 0.4); addSkill(s, o, 'song', 0.4);
+       remember(s, m, `${sanOf(m, o)}と、二人だけの二重奏を練習した。`); remember(s, o, `${sanOf(o, m)}と、二人だけの二重奏を練習した。`);
+       return 'ふたりは放課後、音楽室の隅で二重奏を合わせはじめた。息がぴったりだった。'; }},
+   ]},
+  {id: 'quarrel', pair: true, who: s => ss(s).filter(m => { const o = partnerOf(s, m); return o?.seat && m.id < o.id && weeksSince(s, m.partner.since) >= 6; }),
+   other: (s, m) => [partnerOf(s, m)],
+   text: (s, m, o) => `${m.name}と${o.name}が、けんかしたらしい。目も合わせないので、まわりの部員が気をつかっている。`,
+   choices: [
+     {label: 'ふたりの話を、別々に聞く', go: (s, m, o) => {
+       if(hash(m.id, s.year, s.week, 'qr') < 0.25){ breakUp(s, m, o); return 'じっくり話を聞いたが、ふたりは別々の道を選んだ。それでも、合奏ではきちんと吹いていた。'; }
+       adj(s, 'cohesion', 1); return '話を聞いたあと、ふたりは仲直りしたらしい。次の日には並んで帰っていった。'; }},
+     {label: '部活には持ちこまないように言う', go: (s, m, o) => { adj(s, 'cohesion', 2);
+       if(hash(m.id, s.year, s.week, 'qr') < 0.45){ breakUp(s, m, o); return '部活では元どおりに吹くようになったが、ふたりは別れてしまったらしい。'; }
+       return 'ふたりは練習中はふだんどおりにふるまった。帰り道に、仲直りしたらしい。'; }},
+     {label: '時間が解決するのを待つ', go: (s, m, o) => { adj(s, 'cohesion', -2);
+       if(hash(m.id, s.year, s.week, 'qr') < 0.4){ breakUp(s, m, o); return 'しばらくぎくしゃくしたあと、ふたりは別れた。'; }
+       return '1週間ほどぎくしゃくしたが、いつのまにか元にもどっていた。'; }},
    ]},
   {id: 'polish', who: s => ss(s).filter(m => !['perc'].includes(secOf(m))),
    text: (s, m) => `${m.name}（${instOf(m)}）は、楽器を磨くのが好きらしい。「ついつい時間を忘れちゃうんです」`,
@@ -1096,7 +1225,7 @@ const consultView = s => {
   if(!c) return null;
   const m = s.members.find(x => x.id === e.mid), o = e.oid ? s.members.find(x => x.id === e.oid) : null;
   if(!m || (e.oid && !o)) return null;
-  return {c, m, o, text: c.text(s, m, o), choices: c.choices.map((x, k) => ({k, label: x.label}))};
+  return {c, m, o, text: c.text(s, m, o), choices: c.choices.map((x, k) => ({k, label: x.label, ok: !x.if || x.if(s, m, o)})).filter(x => x.ok)};
 };
 function resolveConsult(s0, k){
   const s = clone(s0);
@@ -1758,6 +1887,7 @@ function winterNext(s0){
     return newYear(s);
   }
   s.winter.step++;
+  if(winterStep(s).id === 'grad') gradConfess(s);
   return s;
 }
 // 早送り（sim.js）や「冬をおまかせで」：方針は基礎、アンサンブルはおまかせの5人
@@ -1786,16 +1916,17 @@ const DREAMS = {
   senpai:   {text: 'あこがれの先輩みたいに、うまくなりたい'},
   calm:     {text: '本番で、緊張に負けないようになりたい'},
   mentor:   {text: '後輩に教えられる先輩になりたい'},
+  love:     {text: '好きな人に、気持ちを伝えたい'},
 };
 const DREAM_IDS = Object.keys(DREAMS);
 const dreamText = (m, id = m.dream) => id === 'senpai' && m.dreamArg ? `あこがれの${m.dreamArg.name}先輩みたいに、うまくなりたい` : DREAMS[id]?.text || '';
 // 夢の決め方：経験者は大きな夢を、はじめての子は身近な夢を持ちやすい
 function pickDream(id, exp){
-  const pool = exp ? ['gold', 'national', 'solo', 'leader', 'skill', 'gold', 'national'] : ['stage', 'stage', 'gold', 'solo', 'leader', 'ensemble', 'good', 'good'];
+  const pool = exp ? ['gold', 'national', 'solo', 'leader', 'skill', 'gold', 'national', 'love'] : ['stage', 'stage', 'gold', 'solo', 'leader', 'ensemble', 'good', 'good', 'love'];
   return pool[Math.floor(hash(id, 'dream') * pool.length)];
 }
 // かなったあとの次の夢：その夢の続きになりやすいもの
-const DREAM_NEXT = {stage: ['gold', 'solo', 'senpai'], gold: ['block', 'solo', 'mentor'], block: ['national', 'calm'], national: ['mentor', 'calm'],
+const DREAM_NEXT = {love: ['gold', 'solo', 'senpai'], stage: ['gold', 'solo', 'senpai'], gold: ['block', 'solo', 'mentor'], block: ['national', 'calm'], national: ['mentor', 'calm'],
   solo: ['gold', 'calm', 'senpai'], leader: ['mentor', 'gold'], ensemble: ['gold', 'senpai', 'solo'], skill: ['senpai', 'leader', 'calm'],
   good: ['senpai', 'skill', 'gold'], senpai: ['skill', 'leader', 'senpai', 'gold'], calm: ['solo', 'gold', 'block'], mentor: ['gold', 'calm', 'block']};
 // あこがれの先輩：上の学年で、自分よりずっとうまい部員（同じパートの人から）
@@ -1811,12 +1942,13 @@ function dreamMet(s, m, id){
   if(id === 'good') return avgStat(m) >= 80;
   if(id === 'senpai') return !!m.dreamArg && avgStat(m) >= m.dreamArg.goal;
   if(id === 'calm') return (m.mental ?? 40) >= 75;
+  if(id === 'love') return !!m.confessed;
   if(id === 'mentor') return skillLv(m, 'mentor') >= 1 || (m.grade >= 2 && avgStat(m) >= 60 && s.members.some(x => x.grade === 1 && x.seat && secOf(x) === secOf(m)));
   return false;
 }
 function nextDream(s, m){
   const had = new Set((m.dreams || []).map(x => x.id)), hero = senpaiFor(s, m);
-  const ok = id => (id === 'senpai' ? !!hero : !had.has(id)) && (id === 'senpai' || !dreamMet(s, m, id))
+  const ok = id => (id === 'senpai' ? !!hero : !had.has(id)) && (id === 'senpai' || !dreamMet(s, m, id)) && !(id === 'love' && m.partner)
     && !(m.grade === 3 && ['stage', 'ensemble'].includes(id));
   const last = m.dreams?.[m.dreams.length - 1]?.id;
   const cand = (DREAM_NEXT[last] || []).filter(ok), pool = cand.length ? cand : DREAM_IDS.filter(id => id !== 'good' && ok(id));

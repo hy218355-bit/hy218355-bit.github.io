@@ -754,6 +754,11 @@ function fxMoments(){
     for(const [t, xs] of by) fxShow({kind: 'cut', sound: 'skill', ms: 3000, html: fxCutHtml('夢がかなった', `「${t}」`,
       xs.slice(0, 3).map(x => x.name).join('・') + (xs.length > 3 ? ` ほか${xs.length - 3}人` : ''), xs.length === 1 && xs[0].next ? `次の夢：${xs[0].next}` : '')});
   }
+  if(S.loveUp?.length){
+    const ups = S.loveUp; delete S.loveUp; save(S);
+    const who = id => memberById(id) || (S.gradMembers || []).find(m => m.id === id);
+    for(const u of ups){ const a = who(u.a), b = who(u.b); if(a && b) fxShow({kind: 'cut', sound: 'skill', ms: 2800, html: fxCutHtml('恋のゆくえ', 'ふたりは付き合うことになった', `${a.name} と ${b.name}`, '')}); }
+  }
   if(S.mileUp?.length){
     const ms = S.mileUp; delete S.mileUp; save(S);
     for(const x of ms) fxShow({kind: 'cut', sound: 'mile', html: fxCutHtml('部の節目', `部の${STAT_LABEL[x.k]}が${x.at}に`, '', x.text)});
@@ -1287,6 +1292,8 @@ function placeCard(where){
 const skillChips = m => skillsOf(m).map(x => ` <span class="sk">${x.name}${skillMark(x.lv)}</span>`).join('');
 // 部員の夢（かなったら年月つき）
 const dreamWhen = x => `${x.y}年${x.w >= 100 ? WINTER_STEPS[x.w - 100]?.m ?? 3 : wkMonth(x.w)}月`;
+// 付き合っている相手（卒業した先輩なら、そう書く）
+const loveLine = m => m.partner ? `<p class="mc-love">付き合っている：${esc(m.partner.name)}${S.members.some(x => x.id === m.partner.id) ? '' : '（卒業した先輩）'}</p>` : '';
 const dreamLine = m => (m.dream || m.dreams?.length) ? `<p class="mc-dream">${m.dream ? `夢：${esc(dreamText(m))}` : '夢：ぜんぶかなえた！'}</p>
   ${m.dreams?.length ? `<ul class="mc-dreams">${m.dreams.map(x => `<li><b>かなった</b>${esc(x.t)}<small>${dreamWhen(x)}</small></li>`).join('')}</ul>` : ''}` : '';
 function skillList(m){
@@ -1343,7 +1350,7 @@ function renderMemberCard(){
   }).join('');
   card.innerHTML = `<div class="mc-head"><h3>${esc(m.name)}</h3>${m.title ? `<span class="tag">${m.title}</span>` : ''}<span class="sub">${m.grade}年・${seat ? PART_LABEL[seat.part] : '控え（席なし）'}</span><button class="link mc-close" type="button" data-mact="close">閉じる</button></div>
     <p class="mc-say">${esc(memberSays(m))}</p>
-    ${dreamLine(m)}
+    ${dreamLine(m)}${loveLine(m)}
     ${skillList(m)}
     ${tr ? `<p class="mc-trait">癖：${tr.name}。${tr.desc}</p>` : '<p class="mc-trait">目立った癖はない。</p>'}
     <div class="stats">${STAT_KEYS.map(k => statRow(STAT_LABEL[k], m.stats[k], '', '')).join('')}${m.mental != null ? statRow('本番の強さ', m.mental, '', '', 'warn') : ''}${S.pieceId ? `<p class="mc-sub">譜読み（${PIECES[S.pieceId].title}）</p>`
