@@ -905,21 +905,30 @@ function renderAudition(w, ev){
   const order = m => SEATS.findIndex(x => x.id === m.seat);
   const secs = SECTIONS.map(sec => [sec, seated(S).filter(m => SEAT[m.seat].sec === sec.id).sort((a, b) => audScore(b).score - audScore(a).score || order(a) - order(b))]).filter(([, ms]) => ms.length);
   const C = tok();
-  const rows = secs.map(([sec, ms]) => `<li class="psec">${sec.name}</li>` + ms.map(m => {
+  // 人数が多いときは、パートごとにたたむ（見出しに「出る人数／パートの人数」）
+  const fold = seated(S).length > 12;
+  const rowsOf = ms => ms.map(m => {
     const a = audScore(m), inn = !U.draft.has(m.id);
     return `<li class="am${inn ? '' : ' off'}"><label><input type="checkbox" data-aout="${m.id}"${inn ? ' checked' : ''}><span class="who"><b>${esc(m.name)}</b><small>${m.grade}年・${esc(PART_LABEL[SEAT[m.seat].part])}${a.freeze ? '・緊張で崩れた' : a.zone ? '・いつも以上の出来' : ''}</small></span></label>
       <span class="sc"><span class="track"><span class="fill" style="width:${a.score}%;background:${skillColor(C, a.score)}"></span></span><b>${a.score}</b></span>
       <button class="btn small" type="button" data-audplay="${m.id}" aria-label="${esc(m.name)}のオーディションを聴く">▶</button></li>`;
-  }).join('')).join('');
+  }).join('');
+  const rows = secs.map(([sec, ms]) => fold
+    ? `<details class="psecd" data-asec="${sec.id}"${U.openAud?.has(sec.id) ? ' open' : ''}><summary><b>${sec.name}<small>${ms.length}人</small></b><span class="what" data-acnt="${sec.id}">${audCount(ms)}</span></summary><ul class="plist alist">${rowsOf(ms)}</ul></details>`
+    : `<ul class="plist alist"><li class="psec">${sec.name}</li>${rowsOf(ms)}</ul>`).join('');
   const intro = ev?.kind === 'audition' && !S.audition.decided ? ev.text : `${cev.title}に出るメンバーを決める。オーディションの点を見て、出る人にチェックを入れよう。`;
   w.innerHTML = `<div class="event"><span class="tag">オーディション</span><span>${intro}</span></div>
     <p class="small">点は、自由曲で問われる力（${PIECES[S.pieceId].asks}）と、その日の緊張で決まる。チェックを外した部員は控え（練習はいつもどおり。秋からはまた全員で吹く）。</p>
     <div class="aud-pred" id="audPred" aria-live="polite"></div>
     <div class="chips"><button class="chip" type="button" data-aud="all">全員出る</button><button class="chip" type="button" data-aud="best">おすすめのメンバーにする</button><button class="chip" type="button" data-aud="listen">▶ このメンバーで聴く</button></div>
-    <ul class="plist alist">${rows}</ul>
+    ${fold ? `<div class="transport"><button class="btn primary" type="button" data-act="lineup">このメンバーで決める</button></div><p class="small">パートを押すと、一人ずつの点と、出る・控えを選べる。</p>` : ''}
+    <div class="psecs">${rows}</div>
     <div class="transport"><button class="btn primary" type="button" data-act="lineup">このメンバーで決める</button>${S.audition.decided ? '<button class="btn quiet" type="button" data-aud="cancel">変えずにもどる</button>' : ''}</div>`;
   updatePred(true);
+  w.querySelectorAll('details[data-asec]').forEach(d => d.addEventListener('toggle', () => { (U.openAud ||= new Set())[d.open ? 'add' : 'delete'](d.dataset.asec); }));
 }
+// パートの見出しの「出る 7／9人」
+const audCount = ms => { const n = ms.filter(m => !U.draft.has(m.id)).length; return n === ms.length ? '全員出る' : `出る ${n}人・控え ${ms.length - n}人`; };
 // 選んだメンバーで出たときの点の目安（メンバーを変えるたびに計算し直す）
 function updatePred(soon){
   const el = $('#audPred'); if(!el) return;
@@ -1469,6 +1478,8 @@ function bind(){
     if(t.dataset.aout){
       if(t.checked) U.draft.delete(t.dataset.aout); else U.draft.add(t.dataset.aout);
       t.closest('.am')?.classList.toggle('off', !t.checked);
+      const sec = SEAT[memberById(t.dataset.aout)?.seat]?.sec, cnt = sec && $("#week").querySelector(`[data-acnt="${sec}"]`);
+      if(cnt) cnt.textContent = audCount(seated(S).filter(m => SEAT[m.seat].sec === sec));
       updatePred();
       return;
     }
