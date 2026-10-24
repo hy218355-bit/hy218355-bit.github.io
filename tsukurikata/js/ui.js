@@ -633,6 +633,9 @@ function renderWeek(){
 }
 // 楽器の中での受け持ち（1st・2nd など。打楽器はかっこの中）
 const partShort = p => { const l = PART_LABEL[p], q = l.match(/（(.+)）/); if(q) return q[1]; const i = l.lastIndexOf(' '); return i > 0 ? l.slice(i + 1) : l; };
+// 同じ受け持ちに席がいくつかあるときは「1人目」「2人目」をつける（トランペット 1st は2人、クラリネット 1st は3人で吹く）
+const seatNth = id => { const p = SEAT[id].part, same = SEATS.filter(x => x.part === p); return same.length > 1 ? `（${same.findIndex(x => x.id === id) + 1}人目）` : ''; };
+const seatLabel = id => PART_LABEL[SEAT[id].part] + seatNth(id);
 const assignPicks = () => Object.fromEntries(S.recruits.map(r => [r.id, $(`#as-${r.id}`)?.value || null]).filter(([, v]) => v));
 // パートごとの顔ぶれ：いまいる部員と、選んでいる担当（新しく入る部員は「新」）
 function assignSecs(picks){
@@ -641,8 +644,8 @@ function assignSecs(picks){
     const seats = SEATS.filter(x => x.sec === sec.id).length;
     const now = S.members.filter(m => m.seat && SEAT[m.seat].sec === sec.id).sort((a, b) => order(a.seat) - order(b.seat));
     const add = S.recruits.filter(r => picks[r.id] && SEAT[picks[r.id]].sec === sec.id);
-    const chips = now.map(m => `<span class="mchip">${esc(m.name)}<small>${m.grade}年・${esc(partShort(SEAT[m.seat].part))}</small></span>`)
-      .concat(add.map(r => `<span class="mchip new">${esc(r.name)}<small>新・${esc(partShort(SEAT[picks[r.id]].part))}</small></span>`));
+    const chips = now.map(m => `<span class="mchip">${esc(m.name)}<small>${m.grade}年・${esc(partShort(SEAT[m.seat].part) + seatNth(m.seat))}</small></span>`)
+      .concat(add.map(r => `<span class="mchip new">${esc(r.name)}<small>新・${esc(partShort(SEAT[picks[r.id]].part) + seatNth(picks[r.id]))}</small></span>`));
     return `<div class="asec"><b>${sec.name}<small>${now.length + add.length}人／${seats}席</small></b><div class="chips">${chips.join('') || '<span class="small">まだだれもいない</span>'}</div></div>`;
   }).join('');
 }
@@ -659,12 +662,30 @@ function renderAssign(w, ev){
         const ids = free.filter(id => SEAT[id].sec === sec.id);
         if(!ids.length) return '';
         const n = S.members.filter(m => m.seat && SEAT[m.seat].sec === sec.id).length;
-        return `<optgroup label="${sec.name}（いま${n}人）">${ids.map(id => `<option value="${id}"${map[r.id] === id ? ' selected' : ''}>${PART_LABEL[SEAT[id].part]}${SEAT[id].inst === r.hope ? '（希望）' : ''}</option>`).join('')}</optgroup>`;
+        return `<optgroup label="${sec.name}（いま${n}人）">${ids.map(id => { const l = seatLabel(id) + (SEAT[id].inst === r.hope ? '・希望' : '');
+          return `<option value="${id}" data-l="${l}"${map[r.id] === id ? ' selected' : ''}>${l}</option>`; }).join('')}</optgroup>`;
       }).join('')}</select></div>`).join('')}</div>
     <h3 class="asec-h">パートの顔ぶれ<small>選んだ担当も入れて。「新」が新しく入る部員</small></h3>
     <div class="asecs" id="assignSecs">${assignSecs(map)}</div>
     <p class="small" id="assignErr"></p>
     <button class="btn primary" type="button" data-act="assign">この担当で決める</button>`;
+  syncAssign();
+}
+// ほかの新入部員が選んでいる席は、選べないようにする（だれが選んだかも出す）。顔ぶれも描き直す
+function syncAssign(){
+  const picks = assignPicks();
+  const who = Object.fromEntries(Object.entries(picks).map(([rid, sid]) => [sid, rid]));
+  for(const r of S.recruits){
+    const sel = $(`#as-${r.id}`);
+    if(!sel) continue;
+    for(const o of sel.options){
+      if(!o.value) continue;
+      const other = who[o.value] && who[o.value] !== r.id ? S.recruits.find(x => x.id === who[o.value]) : null;
+      o.disabled = !!other;
+      o.textContent = o.dataset.l + (other ? `（${other.name}）` : '');
+    }
+  }
+  $('#assignSecs').innerHTML = assignSecs(picks);
 }
 // コンクールに出るメンバーの人数と、決め直すボタン
 function lineupLine(){
@@ -927,7 +948,7 @@ function renderMemberCard(){
   const tr = m.trait && TRAITS[m.trait];
   const seats = SEATS.filter(s => s.id !== m.seat).map(s => {
     const o = S.members.find(x => x.seat === s.id);
-    return `<option value="${s.id}">${PART_LABEL[s.part]}${o ? `（${esc(o.name)}と交代）` : '（空席）'}</option>`;
+    return `<option value="${s.id}">${seatLabel(s.id)}${o ? `・${esc(o.name)}と交代` : '・空席'}</option>`;
   }).join('');
   card.innerHTML = `<div class="mc-head"><h3>${esc(m.name)}</h3>${m.title ? `<span class="tag">${m.title}</span>` : ''}<span class="sub">${m.grade}年・${seat ? PART_LABEL[seat.part] : '控え（席なし）'}</span><button class="link mc-close" type="button" data-mact="close">閉じる</button></div>
     <p class="mc-say">${esc(memberSays(m))}</p>
@@ -1189,7 +1210,7 @@ function bind(){
   });
   $('#week').addEventListener('change', e => {
     const t = e.target;
-    if(t.id?.startsWith('as-')){ $('#assignSecs').innerHTML = assignSecs(assignPicks()); $('#assignErr').textContent = ''; return; }
+    if(t.id?.startsWith('as-')){ syncAssign(); $('#assignErr').textContent = ''; return; }
     if(t.dataset.aout){
       if(t.checked) U.draft.delete(t.dataset.aout); else U.draft.add(t.dataset.aout);
       t.closest('.am')?.classList.toggle('off', !t.checked);
