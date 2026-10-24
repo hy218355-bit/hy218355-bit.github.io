@@ -11,7 +11,7 @@ const MENU = [
   {id: 'tune',   name: 'チューニング',   up: '音程',   hint: '音程↑↑',                       cost: 12, gain: {pitch: 20, tone: 3}, read: 4},
   {id: 'metro',  name: 'メトロノーム',   up: 'リズム', hint: 'リズム↑↑',                     cost: 13, gain: {rhythm: 20, pitch: 3}, read: 4},
   {id: 'phrase', name: 'フレーズ練習',   up: '表現',   hint: '表現↑↑（基礎が要る）',         cost: 12, gain: {expr: 22}, basics: true, read: 10},
-  {id: 'piece',  name: '曲の練習',       up: '譜読み', hint: '譜読み↑↑',                   cost: 12, gain: {rhythm: 4, expr: 4, pitch: 2}, read: 28},
+  {id: 'piece',  name: '曲の練習',       up: '譜読み', hint: '譜読み↑↑（7割まで）',         cost: 12, gain: {rhythm: 4, expr: 4, pitch: 2}, read: 28},
   {id: 'tutti',  name: '合奏',                         hint: '全部↑　まとまり↑↑　譜読み↑',   cost: 18, gain: {pitch: 5, rhythm: 6, tone: 5, expr: 6}, coh: 12, read: 18, morale: 5, group: true},
   {id: 'hall',   name: '会場で合奏',                   hint: '会場慣れ↑↑　まとまり↑',        cost: 16, gain: {pitch: 3, rhythm: 3, tone: 3, expr: 3}, coh: 6, read: 10, hallExp: 45, morale: 3, from: 12, group: true},
   {id: 'rest',   name: '休む',                         hint: '体力とやる気が回復',            cost: -38, gain: {}, morale: 12},
@@ -283,6 +283,7 @@ function addSkill(s, m, id, d, quiet){
   return true;
 }
 function bend(m, k, d){ (m.bent ||= {})[k] = Math.round(clamp((m.bent[k] || 0) + d, 0, 0.2) * 100) / 100; }
+const READ_SOLO = 70;
 // 練習の伸びの残り：うまくなるほど伸びにくい。60を越えると急に伸びにくくなり、90から上はなかなか上がらない
 // （初心者は1年で50ほど、2年で70ほど、3年の夏で80ほど。いちばんうまい子でも3年の夏で90ほど）
 const GROW_TOP = 38;
@@ -366,6 +367,8 @@ function practiceWeek(s0, plan){
     // 譜読み：その人が今の曲の自分の楽譜を、区間ごとにどれだけ吹けるか。うまい人ほど早く読める（全体の力が0なら半分の速さ、100なら1.5倍）。
     // 曲の個人練習は1つの区間に打ちこむ（ほかの区間も少しは進む）。合奏などは曲全体が少しずつ進む。音が多い区間ほどゆっくり（readEase）
     // A部門は、課題曲と自由曲に配分どおり分ける（pieceShares）
+    // 一人の練習で吹けるようになるのは READ_SOLO まで。そこから先（ほかのパートとの合わせ方・入りどころ）は、合奏をしないと身につかない
+    const top = mu.group && share(id) ? 100 : READ_SOLO;
     let span = null;
     if(mu.read) for(const [pid, sh] of pieceShares(s)){
       const units = readUnits(pid), cur = readOf(m, pid), before = readMean(m, pid);
@@ -377,7 +380,7 @@ function practiceWeek(s0, plan){
       const next = cur.slice(), ease = readEase(pid, m.seat ? SEAT[m.seat].part : null);
       for(const u of units){
         const g = (sp == null ? rate : u.i === sp ? rate * 0.85 * total / len(u) : rate * 0.15) * (ease[u.i] ?? 1);
-        next[u.i] = Math.round(clamp(cur[u.i] + g * (1 - cur[u.i] / 130), 0, 100) * 10) / 10;
+        next[u.i] = cur[u.i] >= top ? cur[u.i] : Math.round(clamp(cur[u.i] + g * (1 - cur[u.i] / 130), 0, top) * 10) / 10;
       }
       (m.fam ||= {})[pid] = next;
       if(pid === s.pieceId) d.fam = Math.round((readMean(m, pid) - before) * 10) / 10;
@@ -1767,47 +1770,84 @@ function autoWinter(s){
 }
 
 /* ===== 部員の夢 =====
-   入部したときに、1人ひとつ夢を持つ（m.dream）。かなうと、その子の思い出に残り、本番の強さが上がる（m.dreamDone）。
-   本番・アンサンブル・練習のあとに確かめる（fulfillDreams）。かなった瞬間は、画面でカットイン（s.dreamUp） */
+   入部したときに、1人ひとつ夢を持つ（m.dream）。かなうと、その子の思い出に残り、本番の強さが上がる（かなった夢は m.dreams に残る）。
+   かなったら、その子の次の夢が出てくる（nextDream）。本番・アンサンブル・練習のあとに確かめる（fulfillDreams）。かなった瞬間は、画面でカットイン（s.dreamUp） */
 const DREAMS = {
   stage:    {text: 'コンクールの舞台に立ちたい'},
   gold:     {text: 'コンクールで金賞をとりたい'},
+  block:    {text: '支部大会に出たい'},
   national: {text: '全国大会に行きたい'},
   solo:     {text: 'ソロを吹きたい'},
   leader:   {text: 'パートリーダーになりたい'},
   ensemble: {text: 'アンサンブルコンテストに出たい'},
   skill:    {text: '得意わざ（スキル）を2つ持ちたい'},
   good:     {text: 'あこがれの先輩みたいに、うまくなりたい'},
+  // 名前のついた先輩（m.dreamArg：{name, goal}）。その先輩の、夢を持ったときのうまさ（4つの力の平均）に届いたらかなう
+  senpai:   {text: 'あこがれの先輩みたいに、うまくなりたい'},
+  calm:     {text: '本番で、緊張に負けないようになりたい'},
+  mentor:   {text: '後輩に教えられる先輩になりたい'},
 };
 const DREAM_IDS = Object.keys(DREAMS);
+const dreamText = (m, id = m.dream) => id === 'senpai' && m.dreamArg ? `あこがれの${m.dreamArg.name}先輩みたいに、うまくなりたい` : DREAMS[id]?.text || '';
 // 夢の決め方：経験者は大きな夢を、はじめての子は身近な夢を持ちやすい
 function pickDream(id, exp){
   const pool = exp ? ['gold', 'national', 'solo', 'leader', 'skill', 'gold', 'national'] : ['stage', 'stage', 'gold', 'solo', 'leader', 'ensemble', 'good', 'good'];
   return pool[Math.floor(hash(id, 'dream') * pool.length)];
 }
+// かなったあとの次の夢：その夢の続きになりやすいもの
+const DREAM_NEXT = {stage: ['gold', 'solo', 'senpai'], gold: ['block', 'solo', 'mentor'], block: ['national', 'calm'], national: ['mentor', 'calm'],
+  solo: ['gold', 'calm', 'senpai'], leader: ['mentor', 'gold'], ensemble: ['gold', 'senpai', 'solo'], skill: ['senpai', 'leader', 'calm'],
+  good: ['senpai', 'skill', 'gold'], senpai: ['skill', 'leader', 'senpai', 'gold'], calm: ['solo', 'gold', 'block'], mentor: ['gold', 'calm', 'block']};
+// あこがれの先輩：上の学年で、自分よりずっとうまい部員（同じパートの人から）
+function senpaiFor(s, m){
+  const up = s.members.filter(x => x.id !== m.id && x.seat && x.grade > m.grade && avgStat(x) >= avgStat(m) + 8);
+  const pool = up.filter(x => secOf(x) === secOf(m)).length ? up.filter(x => secOf(x) === secOf(m)) : up;
+  return pool.sort((a, b) => avgStat(b) - avgStat(a))[0] || null;
+}
+// 本番を待たずに、いまの様子だけでかなっているか
+function dreamMet(s, m, id){
+  if(id === 'leader') return m.title === 'パートリーダー' || m.title === '部長';
+  if(id === 'skill') return skillsOf(m).length >= 2 || SKILL_IDS.some(k => skillLv(m, k) >= 2);
+  if(id === 'good') return avgStat(m) >= 80;
+  if(id === 'senpai') return !!m.dreamArg && avgStat(m) >= m.dreamArg.goal;
+  if(id === 'calm') return (m.mental ?? 40) >= 75;
+  if(id === 'mentor') return skillLv(m, 'mentor') >= 1 || (m.grade >= 2 && avgStat(m) >= 60 && s.members.some(x => x.grade === 1 && x.seat && secOf(x) === secOf(m)));
+  return false;
+}
+function nextDream(s, m){
+  const had = new Set((m.dreams || []).map(x => x.id)), hero = senpaiFor(s, m);
+  const ok = id => (id === 'senpai' ? !!hero : !had.has(id)) && (id === 'senpai' || !dreamMet(s, m, id))
+    && !(m.grade === 3 && ['stage', 'ensemble'].includes(id));
+  const last = m.dreams?.[m.dreams.length - 1]?.id;
+  const cand = (DREAM_NEXT[last] || []).filter(ok), pool = cand.length ? cand : DREAM_IDS.filter(id => id !== 'good' && ok(id));
+  if(!pool.length){ m.dream = null; delete m.dreamArg; return; }
+  m.dream = pool[Math.floor(hash(m.id, 'dream', (m.dreams || []).length) * pool.length)];
+  // 先輩は名字で呼ぶ（「小野先輩」）
+  if(m.dream === 'senpai') m.dreamArg = {name: hero.name.split(' ')[0], goal: Math.round(avgStat(hero))}; else delete m.dreamArg;
+}
 const soloSeat = (pid, m) => !!(pid && m.seat && (PIECES[pid].roles[SEAT[m.seat].part] || []).some(x => x.solo));
 // ctx：{stage: ev, award, onStage: Set} … 本番のあと、{ens: Set} … アンサンブルのあと、なし … 練習のあと
 function fulfillDreams(s, ctx = {}){
   for(const m of s.members){
-    if(!m.dream || m.dreamDone) continue;
+    if(!m.dream) continue;
     const on = ctx.onStage?.has(m.id), ev = ctx.stage;
     const ok = {
       stage: on && ev?.kind === 'contest',
       gold: on && ev?.kind === 'contest' && ctx.award === 'gold',
+      block: on && (ev?.level === 'block' || ev?.level === 'national'),
       national: on && ev?.level === 'national',
       // ソロのある席で吹くか、3年生の最後の定期演奏会でソロを任される
       solo: on && (soloSeat(ctx.pieceId, m) || (ev?.final && m.grade === 3)),
-      leader: m.title === 'パートリーダー' || m.title === '部長',
       ensemble: !!ctx.ens?.has(m.id),
-      skill: skillsOf(m).length >= 2 || SKILL_IDS.some(id => skillLv(m, id) >= 2),
-      good: avgStat(m) >= 80,
-    }[m.dream];
+    }[m.dream] || dreamMet(s, m, m.dream);
     if(!ok) continue;
-    m.dreamDone = s.phase === 'winter' ? {y: s.year, w: 100 + s.winter.step} : {y: s.year, w: s.week};
+    const t = dreamText(m), when = s.phase === 'winter' ? {y: s.year, w: 100 + s.winter.step} : {y: s.year, w: s.week};
+    (m.dreams ||= []).push({id: m.dream, t, ...when});
     m.mental = clamp((m.mental ?? 40) + 5, 0, 100);
-    remember(s, m, `夢だった「${DREAMS[m.dream].text}」が、かなった。`);
-    addLog(s, `${m.name}の夢「${DREAMS[m.dream].text}」が、かなった。`);
-    (s.dreamUp ||= []).push(m.id);
+    remember(s, m, `夢だった「${t}」が、かなった。`);
+    nextDream(s, m);
+    addLog(s, `${m.name}の夢「${t}」が、かなった。${m.dream ? `次の夢は「${dreamText(m)}」。` : ''}`);
+    (s.dreamUp ||= []).push({mid: m.id, t, next: m.dream ? dreamText(m) : ''});
   }
 }
 
@@ -2053,6 +2093,12 @@ function load(){
       s.coach ||= {xp: Math.round(50 * (s.year - (s.startYear ?? s.year)) + 1.5 * s.week)};
       // スキルと育ち方（2026年10月）：前のセーブの部員にも、生まれつきのスキルを決める
       for(const m of s.members){ m.sp ??= innateSkills(m.id, m.exp); m.bent ??= {}; m.dream ??= pickDream(m.id, m.exp); }
+      // かなった夢は、次の夢へ（2026年10月から）。前のセーブで、かなったままの夢は m.dreams に移して、次の夢を決める
+      for(const m of [...s.members, ...(s.gradMembers || [])]) if(m.dreamDone){
+        m.dreams = [...(m.dreams || []), {id: m.dream, t: DREAMS[m.dream]?.text || '', ...m.dreamDone}];
+        delete m.dreamDone;
+        if(s.members.includes(m)) nextDream(s, m); else m.dream = null;
+      }
       // 本番の「一番の音」「頭が真っ白」の思い出は、同じ種類のいちばん新しいものだけ残す（2026年10月から）
       for(const m of s.members) if(m.story){
         for(const x of m.story) if(!x.k){ const k = /これまでで一番の音/.test(x.t) ? 'zone' : /頭が真っ白/.test(x.t) ? 'freeze' : null; if(k) x.k = k; }

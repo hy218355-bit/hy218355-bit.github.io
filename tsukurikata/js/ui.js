@@ -106,8 +106,8 @@ function setTab(t, keep){
 // 合奏の画面以外で鳴っているときは、下に小さく「再生中」と止めるボタンを出す
 function updateMini(){
   const mini = $('#mini'); if(!mini) return;
-  mini.hidden = !(U.playing && tabHidden('play'));
-  if(!mini.hidden) $('#miniLabel').textContent = `♪ ${U.shownLabel}`;
+  mini.hidden = !((U.playing || U.waitPlay) && tabHidden('play'));
+  if(!mini.hidden) $('#miniLabel').textContent = U.waitPlay && !U.playing ? '♪ 楽器の録音を読み込んでいます…（読み込めたら鳴ります）' : `♪ ${U.shownLabel}`;
 }
 
 /* ===== 再生 ===== */
@@ -115,6 +115,7 @@ function playPerf(perf, label, onEnd, opts = {}){
   if(SAMPLES.use && !SAMPLES.ready && SAMPLES.loading && !SAMPLES.error){
     const token = U.waitPlay = {};
     $('#nowPlaying').textContent = '録音を読み込んでいます…（読み込めたら鳴ります）';
+    E.unlock(); updateMini();
     const go = () => { if(U.waitPlay === token){ U.waitPlay = null; playPerf(perf, label, onEnd, opts); } };
     SAMPLES.loading.then(go, go);
     return;
@@ -154,7 +155,7 @@ function endPlay(natural = false){
   if(cb) cb(natural);
 }
 function stopPlay(){
-  U.waitPlay = null;
+  U.waitPlay = null; updateMini();
   if(!U.playing) return;
   E.stop();
   endPlay();
@@ -469,7 +470,7 @@ const TIPS = {
   '音色': '息の支えと、音のきれいさ。低いと音が裏返る。ロングトーンで伸びる',
   '表現': '強弱やフレーズの歌い方。フレーズ練習で伸びる（音程・リズム・音色の基礎が要る）',
   'まとまり': 'みんなで合わせる力。パートどうしの出だしがそろい、指揮についていける。合奏でしか伸びない',
-  '譜読み': '一人ひとりが、この曲の自分の楽譜をどれだけ吹けるか（平均）。低いと音を間違え、テンポが揺れる。曲の練習と合奏で伸びる',
+  '譜読み': '一人ひとりが、この曲の自分の楽譜をどれだけ吹けるか（平均）。低いと音を間違え、テンポが揺れる。曲の練習で7割まで、そこから先は合奏でしか伸びない',
   '課題曲の譜読み': '課題曲の楽譜をどれだけ吹けるか（平均）。曲の練習の配分で、自由曲と分けて伸びる',
   '体力': '練習で減って、休むと戻る。30を切った部員は、練習の効果が半分になる',
   'やる気': '高いほど練習の効果が上がる。休む・合奏・本番の成功で上がる',
@@ -746,11 +747,12 @@ function fxMoments(){
     fxShow({kind: 'cut', sound: r.win ? 'level' : 'mile', ms: 2800, html: fxCutHtml(`ライバル校との勝負（${LEVELS[r.level].name}）`, r.win ? '勝った！' : 'まだ届かない', `こちら ${r.ours}点 ／ ${rivalShort(S)} ${r.theirs}点`, r.win ? '練習してきたことが、結果になった。' : '来年こそ。差は確実に縮まっている。')});
   }
   if(S.dreamUp?.length){
-    const ids = S.dreamUp; delete S.dreamUp; save(S);
-    // 同じ夢は1枚にまとめる
+    const ups = S.dreamUp; delete S.dreamUp; save(S);
+    // 同じ夢は1枚にまとめる。1人だけなら、次の夢も見せる
     const by = new Map();
-    for(const id of ids){ const m = memberById(id); if(m) by.set(m.dream, [...(by.get(m.dream) || []), m.name]); }
-    for(const [d, ns] of by) fxShow({kind: 'cut', sound: 'skill', ms: 2800, html: fxCutHtml('夢がかなった', `「${DREAMS[d].text}」`, ns.slice(0, 3).join('・') + (ns.length > 3 ? ` ほか${ns.length - 3}人` : ''), '')});
+    for(const u of ups){ const m = memberById(u.mid ?? u); if(m && u.t) by.set(u.t, [...(by.get(u.t) || []), {name: m.name, next: u.next}]); }
+    for(const [t, xs] of by) fxShow({kind: 'cut', sound: 'skill', ms: 3000, html: fxCutHtml('夢がかなった', `「${t}」`,
+      xs.slice(0, 3).map(x => x.name).join('・') + (xs.length > 3 ? ` ほか${xs.length - 3}人` : ''), xs.length === 1 && xs[0].next ? `次の夢：${xs[0].next}` : '')});
   }
   if(S.mileUp?.length){
     const ms = S.mileUp; delete S.mileUp; save(S);
@@ -818,7 +820,8 @@ function gradSlide(m){
     ${mem.length ? `<ul class="gr-mem">${mem.map(x => `<li><time>${when(x)}</time>${esc(x.t)}</li>`).join('')}</ul>` : ''}
     <p class="gr-res">コンクール：${gradYears(m)}</p>
     ${sk ? `<p class="gr-res">スキル：${sk}</p>` : ''}
-    ${m.dream ? `<p class="gr-res">夢：${DREAMS[m.dream].text}${m.dreamDone ? `<b class="gr-done">かなった</b>` : '（夢のつづきは、この先へ）'}</p>` : ''}
+    ${m.dreams?.length ? `<p class="gr-res">かなえた夢：${m.dreams.map(x => esc(x.t)).join('・')}<b class="gr-done">${m.dreams.length}つ</b></p>` : ''}
+    ${m.dream ? `<p class="gr-res">夢：${esc(dreamText(m))}（夢のつづきは、この先へ）</p>` : ''}
     <p class="gr-bye">${farewellLine(m)}</p>`;
 }
 function openGradRoll(){
@@ -1093,6 +1096,7 @@ function planHtml(ev){
   const tutti = (count.tutti || 0) + (count.hall || 0);
   return `<div class="plan">
     ${foundingYear(S) && S.week < 4 ? '<p class="small">「おまかせ」のままの部員は、部の方針で自分の練習を決める。指示したい部員だけ、今週の練習を選ぼう。合奏は出た人が多いほど、部のまとまりが伸びる。</p>' : ''}
+    ${S.pieceId && !setActive(S) ? `<p class="plan-piece">練習している曲：<b>${esc(PIECES[S.pieceId].title)}</b><small>譜読み ${Math.round(readAvg(S, S.pieceId))}</small></p>` : ''}
     <div class="focus"><span>部の方針</span><div class="chips">${POLICIES.map(p => `<button class="chip" type="button" data-polall="${p.id}" aria-pressed="${pol === p.id}">${p.name}</button>`).join('')}</div>
     <span class="small">${POLICY_BY[pol].desc}</span></div>
     ${setActive(S) ? `<div class="focus"><span>曲の練習の配分（自由曲 ${esc(PIECES[S.pieceId].title)}・課題曲 ${esc(PIECES[S.setPiece].title)}）</span><div class="chips">${Object.keys(SPLIT).map(k => `<button class="chip" type="button" data-split="${k}" aria-pressed="${(S.split || 'auto') === k}">${SPLIT_NAME[k]}</button>`).join('')}</div>
@@ -1282,7 +1286,9 @@ function placeCard(where){
 // スキル：小さな札（名前の横）と、部員カードの一覧（説明と育ち方）
 const skillChips = m => skillsOf(m).map(x => ` <span class="sk">${x.name}${skillMark(x.lv)}</span>`).join('');
 // 部員の夢（かなったら年月つき）
-const dreamLine = m => m.dream ? `<p class="mc-dream">夢：${DREAMS[m.dream].text}${m.dreamDone ? `<b>かなった！（${m.dreamDone.y}年${m.dreamDone.w >= 100 ? WINTER_STEPS[m.dreamDone.w - 100]?.m ?? 3 : wkMonth(m.dreamDone.w)}月）</b>` : ''}</p>` : '';
+const dreamWhen = x => `${x.y}年${x.w >= 100 ? WINTER_STEPS[x.w - 100]?.m ?? 3 : wkMonth(x.w)}月`;
+const dreamLine = m => (m.dream || m.dreams?.length) ? `<p class="mc-dream">${m.dream ? `夢：${esc(dreamText(m))}` : '夢：ぜんぶかなえた！'}</p>
+  ${m.dreams?.length ? `<ul class="mc-dreams">${m.dreams.map(x => `<li><b>かなった</b>${esc(x.t)}<small>${dreamWhen(x)}</small></li>`).join('')}</ul>` : ''}` : '';
 function skillList(m){
   const have = skillsOf(m);
   const bent = STAT_KEYS.filter(k => (m.bent?.[k] || 0) >= 0.04).sort((a, b) => m.bent[b] - m.bent[a]).map(k => STAT_LABEL[k]);
@@ -1526,6 +1532,8 @@ function bind(){
   $('#saveBox').addEventListener('click', e => { const b = e.target.closest('[data-sv]'); if(b){ haptic('tap'); saveAction(b.dataset.sv); } });
   $('#svFile').addEventListener('change', async e => { const f = e.target.files?.[0]; if(f){ $('#svCode').value = (await f.text()).trim(); $('#svMsg').textContent = 'ファイルを読んだ。「このセーブで続ける」を押そう。'; } });
   $('#svCode').addEventListener('input', () => { const b = document.querySelector('[data-sv="load"]'); b.dataset.armed = ''; b.textContent = 'このセーブで続ける'; });
+  // 画面に触れたら、音を出せる状態にしておく（iPhone は、タップの中でしか鳴らし始められない）
+  for(const ev of ['pointerdown', 'touchend']) document.addEventListener(ev, () => E.unlock(), {capture: true, passive: true});
   // 数字を押すと説明が出る。ほかの所を押すと消える
   document.addEventListener('click', e => {
     const el = e.target.closest('[data-tip]');

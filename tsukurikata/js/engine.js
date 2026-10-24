@@ -62,6 +62,15 @@ class Engine {
     this.chain.set(this.venueId, this.posId, 0);
     return true;
   }
+  // iPhone では、タップの中でしか音を出し始められない。タップのたびに呼んで、あとから鳴らす音（録音の読み込み待ちなど）も出るようにしておく
+  unlock(){
+    if(!this.ensure()) return;
+    if(this.ac.state === 'suspended') this.ac.resume();
+    if(this.unlocked) return;
+    this.unlocked = true;
+    const src = this.ac.createBufferSource(); src.buffer = this.ac.createBuffer(1, 1, this.ac.sampleRate);
+    src.connect(this.ac.destination); src.start(0);
+  }
   setVenue(id){ this.venueId = id; if(this.chain) this.chain.set(id, this.posId); }
   setPosition(id){
     this.posId = id;
