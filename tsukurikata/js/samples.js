@@ -17,7 +17,9 @@ const SAMPLE_BANK = {
   tp: {bank: 'tpt', g: 1.05}, hn: {bank: 'horn', g: 1.08}, tb: {bank: 'tbn', g: 1.11}, btb: {bank: 'btbn', g: 0.95},
   // ユーフォニアムは自由に使える録音がないので、トロンボーンの録音を暗くして使う。
   // 円錐管のユーフォはトロンボーンより出だしが丸いので、立ち上がりをゆっくりに（att 秒）、出だしの張り（blat）を半分にする
-  euph: {bank: 'tbn', lp: 6, g: 1.07, att: 0.025, blat: 0.5}, tuba: {bank: 'tuba', g: 1.04}, cb: {bank: 'cbass', g: 1.11},
+  // 中低音の響きの山（form：[周波数, dB, Q]。合成音の TIMBRE.euph と同じ）を足して、あたたかい音に。
+  // そのぶん大きくなった 1.75dB を g で下げて、前と同じ大きさ（採点のバランス）にしてある
+  euph: {bank: 'tbn', lp: 6, g: 0.875, att: 0.025, blat: 0.5, form: [480, 3, 1]}, tuba: {bank: 'tuba', g: 1.04}, cb: {bank: 'cbass', g: 1.11},
   // 大太鼓は1打がトランペット1音より10dBほど大きく、マーチで全体をおおっていたので下げた。スネアは短い音で埋もれていたので上げた
   cbpizz: {bank: 'pizz', g: 1.3}, timp: {bank: 'timp', g: 3.1}, sd: {bank: 'sd', g: 4.6}, bd: {bank: 'bd', g: 1.57},
   cym: {bank: 'cym', g: 3.6}, sus: {bank: 'sus', g: 4.3}, tri: {bank: 'tri', g: 8}, tamb: {bank: 'tamb', g: 1.2},
@@ -147,6 +149,11 @@ class SampleVoice {
     this.lp = ac.createBiquadFilter(); this.lp.type = 'lowpass'; this.lp.Q.value = 0.5; this.lp.frequency.value = 16000;
     this.in.connect(this.lp);
     let node = this.lp;
+    if(this.cfg.form){
+      const [f, db, q] = this.cfg.form, pk = ac.createBiquadFilter();
+      pk.type = 'peaking'; pk.frequency.value = f; pk.gain.value = db; pk.Q.value = q;
+      node.connect(pk); node = pk;
+    }
     if(opts.trem > 0.05){
       this.wob = ac.createGain(); this.trem = opts.trem * 0.6;
       node.connect(this.wob); node = this.wob;
