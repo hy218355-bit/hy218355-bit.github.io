@@ -162,6 +162,8 @@ function choosePiece(s0, pid){
   addLog(s, `自由曲は${PIECES[pid].full}に決まった。最初の合奏を録音した。`);
   const rec = addRec(s, `${s.year}年4月の録音`, {pieceId: pid, venue: 'room'});
   rec.keep = true;
+  // 年度の最初の週にも、だれかが相談に来る
+  if(!s.episode && !s.consult) s.consult = pickConsult(s);
   return s;
 }
 function clone(s){ return JSON.parse(JSON.stringify(s)); }
@@ -237,8 +239,8 @@ const growMult = (s, m, k) => 1 + (m.bent?.[k] || 0) + skillsOf(m).reduce((a, x)
 // 練習の種類ごとに、少しずつ育つスキル（17回ほどで○、40回ほどで◎）
 const PRACTICE_SKILL = {long: 'breath', tune: 'ear', metro: 'groove', phrase: 'song', piece: 'reader'};
 // 何も決めることのない練習の週か（「次の予定まで進める」が止まらずに進めてよい週）
-// 本番・オーディション・テスト・入部・できごと・定期演奏会の曲決めがある週は止まる。GW や合宿などの週は進める
-const quietWeek = s => s.phase === 'week' && !s.pending && !s.chooseFinal && !recruitsDue(s) && !episodeView(s)
+// 本番・オーディション・テスト・入部・できごと・行事のおさそい・定期演奏会の曲決めがある週は止まる。GW や合宿などの週と、相談だけの週は進める
+const quietWeek = s => s.phase === 'week' && !s.pending && !s.chooseFinal && !recruitsDue(s) && !episodeView(s) && !s.outing
   && (!eventAt(s, s.week) || eventAt(s, s.week).kind === 'mod');
 // 今週の指示：顧問が個別に出した指示（s.plan）が優先、なければ方針どおり
 const planFor = (s, m) => (s.plan && MENU_BY[s.plan[m.id]] && menuOpen(s, s.plan[m.id])) ? s.plan[m.id] : decideMenu(s, m);
@@ -985,7 +987,8 @@ function pickOuting(s){
   const ev = eventAt(s, s.week);
   if(ev && ev.kind !== 'mod') return null;
   if(s.year * 100 + s.week - (s.outingAt ?? -99) < 3 || hash(s.year, s.week, 'outing') > 0.45) return null;
-  const able = OUTINGS.filter(o => !s.flags[`out:${s.year}:${o.id}`] && (!o.when || o.when(s)));
+  // ★の子（行くと特に伸びる子）が1人もいない行事は出さない
+  const able = OUTINGS.filter(o => !s.flags[`out:${s.year}:${o.id}`] && (!o.when || o.when(s)) && ss(s).some(o.fit));
   if(!able.length || ss(s).length < 2) return null;
   const o = able[Math.floor(hash(s.year, s.week, 'outwhich') * able.length)];
   s.flags[`out:${s.year}:${o.id}`] = true;
@@ -1020,6 +1023,8 @@ function resolveOuting(s0, ids){
   addLog(s, `【${v.o.title}】${v.o.text}`);
   addLog(s, `→ ${res}（${gains.join('／')}）`);
   s.lastOuting = {title: v.o.title, who: names, result: res, gains};
+  // 年度末のふり返り用（去年と今年の分だけ残す）
+  s.outLog = [...(s.outLog || []).filter(x => x.y >= s.year - 1), {y: s.year, title: v.o.title, who: names}];
   gainCoach(s, 1);
   return s;
 }
@@ -1404,6 +1409,8 @@ function newYear(s0){
   // 評判は、年が変わると少しだけ忘れられる
   s.rep = Math.round((s.rep ?? 30) * 0.9 * 10) / 10;
   for(const m of s.members){ m.sta = 100; for(const k of STAT_KEYS) m.stats[k] = Math.round(Math.max(0, m.stats[k] - 2) * 10) / 10; }
+  // 年度のはじめの力（年度末のふり返りで、この1年の伸びを出す）
+  for(const m of s.members) m.y0 = {y: s.year, a: Math.round(avgStat(m) * 10) / 10};
   syncSta(s);
   addLog(s, `${s.year}年度がはじまった。部員は${s.members.length}人。自由曲を決めよう。`);
   return s;

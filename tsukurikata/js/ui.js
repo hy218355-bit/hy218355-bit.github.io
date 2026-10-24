@@ -555,7 +555,7 @@ function renderWeek(){
     // この1年の伸び（部の実力のグラフと同じ記録から）
     const yr = (S.trend || []).filter(x => x.y === S.year), grow = yr.length > 1 ? Math.round(yr[yr.length - 1].a - yr[0].a) : null;
     const yearLine = `<p class="small year-sum">${grow != null ? `部の平均 ${Math.round(yr[0].a)} → ${Math.round(yr[yr.length - 1].a)}（${grow >= 0 ? '+' : ''}${grow}）・` : ''}部員 ${S.members.length}人・顧問の指導力 Lv${coachLevel(S)}（${coachTitle(coachLevel(S))}）</p>`;
-    w.innerHTML = `<div class="stagecard"><h3>${seniors.length ? '3年生が引退します' : 'この1年をふり返る'}</h3><ol class="small" style="padding-left:1.2em">${res}</ol>${yearLine}
+    w.innerHTML = `<div class="stagecard"><h3>${seniors.length ? '3年生が引退します' : 'この1年をふり返る'}</h3><ol class="small" style="padding-left:1.2em">${res}</ol>${yearLine}${yearMembersHtml()}
       <p class="txt">${seniors.length ? `${seniors.map(m => esc(m.name)).join('、')}（${seniors.length}人）が引退する。` : `部員は${S.members.length}人になった。引退する3年生はまだいない。`}4月の録音と最後の本番を聴き比べてみよう。</p>
       <div class="transport">${april ? `<button class="btn small" type="button" data-act="playrec" data-id="${april.id}">▶ 4月の録音</button>` : ''}${lastStage ? `<button class="btn small" type="button" data-act="playrec" data-id="${lastStage.id}">▶ 最後の本番</button><button class="btn small" type="button" data-act="saverec" data-id="${lastStage.id}">⤓ 最後の本番を保存</button>` : ''}</div></div>
       ${firstClassEpilogue(seniors)}
@@ -631,23 +631,40 @@ function renderWeek(){
   w.innerHTML = parts.join('');
   w.querySelector('[data-outmore]')?.addEventListener('toggle', e => { U.outMore = e.target.open; });
 }
+// この1年の部員：いちばん伸びた子・身につけたスキル・行事に行った子
+function yearMembersHtml(){
+  const y = S.year;
+  const base = m => m.y0?.y === y ? m.y0.a : m.first?.y === y ? STAT_KEYS.reduce((a, k) => a + m.first.stats[k], 0) / 4 : null;
+  const grow = S.members.map(m => ({m, d: base(m) == null ? 0 : avgStat(m) - base(m)})).filter(x => x.d >= 1).sort((a, b) => b.d - a.d).slice(0, 3);
+  // 同じスキルは、まとめて「度胸○：A・B ほか2人」
+  const sk = new Map();
+  for(const m of S.members) for(const x of m.story || []){ const t = x.y === y && x.t.match(/スキル「(.+?)」を身につけた/)?.[1]; if(t) sk.set(t, [...(sk.get(t) || []), m.name]); }
+  const skills = [...sk].map(([t, ns]) => `${t}：${ns.slice(0, 3).join('・')}${ns.length > 3 ? ` ほか${ns.length - 3}人` : ''}`);
+  const outs = (S.outLog || []).filter(x => x.y === y).map(x => `${x.title}（${x.who}）`);
+  const more = (l, n) => l.slice(0, n).join('・') + (l.length > n ? ` ほか${l.length - n}件` : '');
+  const rows = [grow.length && ['いちばん伸びた', grow.map(x => `${x.m.name} +${Math.round(x.d)}`).join('・')],
+    skills.length && ['身につけたスキル', skills.join('／')], outs.length && ['行事', more(outs, 4)]].filter(Boolean);
+  return rows.length ? `<dl class="yr-mem">${rows.map(([k, v]) => `<dt>${k}</dt><dd>${esc(v)}</dd>`).join('')}</dl>` : '';
+}
 // 楽器の中での受け持ち（1st・2nd など。打楽器はかっこの中）
 const partShort = p => { const l = PART_LABEL[p], q = l.match(/（(.+)）/); if(q) return q[1]; const i = l.lastIndexOf(' '); return i > 0 ? l.slice(i + 1) : l; };
-// 同じ受け持ちに席がいくつかあるときは「1人目」「2人目」をつける（トランペット 1st は2人、クラリネット 1st は3人で吹く）
-const seatNth = id => { const p = SEAT[id].part, same = SEATS.filter(x => x.part === p); return same.length > 1 ? `（${same.findIndex(x => x.id === id) + 1}人目）` : ''; };
+// 同じ受け持ちに席がいくつかあるときは、2つ目からの席に「2人目」「3人目」をつける（トランペット 1st は2人、クラリネット 1st は3人で吹く）
+const seatNth = id => { const p = SEAT[id].part, k = SEATS.filter(x => x.part === p).findIndex(x => x.id === id); return k > 0 ? `（${k + 1}人目）` : ''; };
 const seatLabel = id => PART_LABEL[SEAT[id].part] + seatNth(id);
 const assignPicks = () => Object.fromEntries(S.recruits.map(r => [r.id, $(`#as-${r.id}`)?.value || null]).filter(([, v]) => v));
 // パートごとの顔ぶれ：いまいる部員と、選んでいる担当（新しく入る部員は「新」）
 function assignSecs(picks){
   const order = id => SEATS.findIndex(x => x.id === id);
+  const used = new Set([...S.members.filter(m => m.seat).map(m => SEAT[m.seat].sec), ...Object.values(picks).filter(Boolean).map(id => SEAT[id].sec)]);
+  const empty = SECTIONS.filter(x => !used.has(x.id));
   return SECTIONS.map(sec => {
     const seats = SEATS.filter(x => x.sec === sec.id).length;
     const now = S.members.filter(m => m.seat && SEAT[m.seat].sec === sec.id).sort((a, b) => order(a.seat) - order(b.seat));
     const add = S.recruits.filter(r => picks[r.id] && SEAT[picks[r.id]].sec === sec.id);
     const chips = now.map(m => `<span class="mchip">${esc(m.name)}<small>${m.grade}年・${esc(partShort(SEAT[m.seat].part) + seatNth(m.seat))}</small></span>`)
       .concat(add.map(r => `<span class="mchip new">${esc(r.name)}<small>新・${esc(partShort(SEAT[picks[r.id]].part) + seatNth(picks[r.id]))}</small></span>`));
-    return `<div class="asec"><b>${sec.name}<small>${now.length + add.length}人／${seats}席</small></b><div class="chips">${chips.join('') || '<span class="small">まだだれもいない</span>'}</div></div>`;
-  }).join('');
+    return chips.length ? `<div class="asec"><b>${sec.name}<small>${now.length + add.length}人／${seats}席</small></b><div class="chips">${chips.join('')}</div></div>` : '';
+  }).join('') + (empty.length ? `<p class="small">まだだれもいないパート：${empty.map(x => x.name).join('・')}</p>` : '');
 }
 // 新しく入った部員の担当を決める（部をつくった最初の5人・本入部の1年生・途中から入ってきた部員）
 function renderAssign(w, ev){
@@ -840,7 +857,7 @@ function renderStageResult(w, ev){
     return;
   }
   if(p.kind === 'concert'){
-    w.innerHTML = `<div class="stagecard"><span class="tag">本番</span><h3>${ev.title}</h3><p class="small">演奏の出来 ${Math.round(p.q)}点（緊張 −${p.nerves}）${conductNote(p)}</p>${mentalNote(p)}<p class="txt">${esc(p.text)}</p>
+    w.innerHTML = `<div class="stagecard"><span class="tag">本番</span><h3>${ev.title}</h3><p class="small">演奏の出来 ${Math.round(p.q)}点（緊張 −${p.nerves}）${conductNote(p)}</p>${mentalNote(p)}<p class="txt">${esc(p.text)}</p>${foundingYear(S) && p.q < 10 ? '<p class="small">できたばかりの部の、最初の音。ここから練習を重ねていく。年度の終わりに、4月の録音と最後の本番を聴き比べられる。</p>' : ''}
       <div class="transport"><button class="btn small" type="button" data-act="playrec" data-id="${p.recId}">▶ もう一度聴く</button><button class="btn small" type="button" data-act="saverec" data-id="${p.recId}">⤓ 保存</button><button class="btn primary" type="button" data-act="next">${ev.final ? (hasSeniors(S) ? '3年生の引退へ' : '1年のふり返りへ') : '次の週へ'}</button></div></div>`;
     return;
   }
@@ -1175,7 +1192,7 @@ function bind(){
       let n = 0;
       do { commit(practiceWeek(S)); n++; } while(n < 12 && quietWeek(S));
       const ev = eventAt(S, S.week);
-      const why = episodeView(S) ? '部員のできごとが起きた' : recruitsDue(S) ? '新しい部員が来た' : S.chooseFinal ? '定期演奏会の曲を決める' : ev && ev.kind !== 'mod' ? ev.title : '';
+      const why = episodeView(S) ? '部員のできごとが起きた' : outingView(S) ? `行事のおさそいが来た（${outingView(S).o.title}）` : recruitsDue(S) ? '新しい部員が来た' : S.chooseFinal ? '定期演奏会の曲を決める' : ev && ev.kind !== 'mod' ? ev.title : '';
       renderAll(); refreshNow(); setTab('week'); scrollTo(0, 0);
       toast(`${n}週すすめた${why ? `。${why}` : ''}`, 3500);
     }
