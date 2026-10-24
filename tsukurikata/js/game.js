@@ -93,7 +93,7 @@ const PIECE_MOVED = {march: 'aida', wa: 'galop', stars: 'aida', jupiter: 'holst'
 function freshState(year = 2026){
   const s = {
     v: 2, year, startYear: year, founding: true, week: 0, phase: 'choose', pieceId: null, interp: {tempo: 1, dyn: 1, rub: 1}, policy: 'auto',
-    members: [], recruits: null, plan: {}, rep: 5, seq: 0,
+    members: [], recruits: null, plan: {}, rep: 5, seq: 0, trend: [],
     cohesion: 20, stamina: 100, morale: 75, fam: freshFam(), hallExp: 0,
     log: [], recs: [], history: [], season: [], flags: {}, pending: null, lastDelta: {},
   };
@@ -309,7 +309,15 @@ function practiceWeek(s0, plan){
   s.plan = {}; s.planSpan = {};
   return nextWeek(s);
 }
+// 週ごとの部の力の記録（部の実力のグラフ用）：その週の練習のあとの、席についている部員の平均と、自由曲の仕上がり
+function recordTrend(s){
+  if(!seated(s).length) return;
+  const avg = STAT_KEYS.reduce((a, k) => a + bandAvg(s, k), 0) / STAT_KEYS.length;
+  (s.trend ||= []).push({y: s.year, w: s.week, a: Math.round(avg * 10) / 10, f: Math.round((s.pieceId ? s.fam[s.pieceId] || 0 : 0) * 10) / 10});
+  if(s.trend.length > 120) s.trend.splice(0, s.trend.length - 120);
+}
 function nextWeek(s){
+  recordTrend(s);
   for(const m of s.members) m.sta = clamp((m.sta ?? s.stamina) + 6, 0, 100);
   syncSta(s);
   s.morale = clamp(s.morale, 0, 100);
@@ -1082,6 +1090,7 @@ function load(){
         s.rep = Math.min(70, 30 + 4 * golds);
       }
       s.plan ||= {}; s.seq ??= 100;
+      s.trend ||= [];   // 部の実力のグラフ（2026年10月）。前のセーブは、ここから記録を始める
       if(s.recruits && s.recruitWhen == null) s.recruitWhen = 3;
       delete s.focus;
       return s;

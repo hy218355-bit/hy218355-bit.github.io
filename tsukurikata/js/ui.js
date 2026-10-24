@@ -447,6 +447,23 @@ function statRow(name, v, desc, delta, cls){
   const up = delta ? `<span class="delta">+${delta}</span>` : '';
   return `<div class="stat"><span class="nm">${name}${desc ? '' : up}</span><span class="track"><span class="fill${cls ? ' ' + cls : ''}" style="width:${clamp(v, 0, 100)}%"></span></span><span class="val">${Math.round(v)}</span>${desc ? `<span class="ds">${desc}${up}</span>` : ''}</div>`;
 }
+// この1年の部の実力の伸び（週ごと）。去年の同じ週の線をうすく重ねる
+function trendSvg(){
+  const tr = S.trend || [], now = tr.filter(x => x.y === S.year), prev = tr.filter(x => x.y === S.year - 1);
+  if(now.length < 2 && prev.length < 2) return '';
+  const last = Math.max(PREF_WEEK + 2, ...tr.filter(x => x.y >= S.year - 1).map(x => x.w));
+  const W = 300, H = 90, X = w => 6 + (W - 12) * w / last, Y = v => H - 14 - (H - 24) * clamp(v, 0, 100) / 100;
+  const line = (pts, k) => pts.map((x, i) => `${i ? 'L' : 'M'}${X(x.w).toFixed(1)},${Y(x[k]).toFixed(1)}`).join('');
+  const marks = [];
+  for(let w = 0; w <= last; w++){ const ev = eventAt(S, w); if(ev?.kind === 'contest' || ev?.kind === 'concert') marks.push(`<line x1="${X(w).toFixed(1)}" x2="${X(w).toFixed(1)}" y1="${H - (ev.kind === 'contest' ? 11 : 8)}" y2="${H - 3}" class="mk ${ev.kind}"/>`); }
+  return `<figure class="trend"><figcaption>この1年の伸び <span class="k-avg">部の平均</span> <span class="k-fam">仕上がり</span>${prev.length > 1 ? ' <span class="k-prev">去年の部の平均</span>' : ''}</figcaption>
+    <svg viewBox="0 0 ${W} ${H}" preserveAspectRatio="none" role="img" aria-label="この1年の、部の平均と自由曲の仕上がりの伸び">
+      ${[25, 50, 75].map(v => `<line x1="6" x2="${W - 6}" y1="${Y(v)}" y2="${Y(v)}" class="grid"/>`).join('')}
+      ${prev.length > 1 ? `<path d="${line(prev, 'a')}" class="prev"/>` : ''}
+      ${now.length > 1 ? `<path d="${line(now, 'f')}" class="fam"/><path d="${line(now, 'a')}" class="avg"/>` : ''}
+      ${marks.join('')}
+    </svg></figure>`;
+}
 const helpBox = (rows, open) => `<details class="help"${open ? ' open' : ''}><summary>数字の見かた</summary><dl>${rows.map(([k, v]) => `<dt>${k}</dt><dd>${v}</dd>`).join('')}</dl></details>`;
 function renderStats(){
   const ms = seated(S);
@@ -464,6 +481,7 @@ function renderStats(){
   const nx = nextRepStep(S), helpOpen = $('#vitals .help')?.open;
   $('#vitals').innerHTML = vital('体力', S.stamina) + vital('やる気', S.morale) + vital('会場慣れ', S.hallExp)
     + `<div class="vital rep"><span class="row"><span>評判</span><b>${Math.round(S.rep ?? 0)}</b></span><span class="track"><span class="fill" style="width:${clamp(S.rep ?? 0, 0, 100)}%"></span></span><small>${nx ? `${nx}をこえると、入部したい生徒が来る` : '県内に知られた部'}</small></div>`
+    + trendSvg()
     + helpBox([...STAT_KEYS.map(k => [STAT_LABEL[k], STAT_DESC[k]]), ['まとまり', '互いを聴き合う力。合奏に出る人が多いほど育つ'],
       ['仕上がり', '自由曲の合奏での曲づくり。低いとテンポの揺れがそろわない'], ['譜読み', '一人ひとりが自分の楽譜をどれだけ吹けるか（平均）。低いと音を間違え、出だしが揺れる'],
       ['会場慣れ', 'ホールで吹いた経験。高いほど、大きな会場で緊張しにくい'], ['評判', '演奏会やコンクールで上がる。上がるほど入部したい生徒が来る']], helpOpen);
