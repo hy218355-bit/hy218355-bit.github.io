@@ -426,10 +426,14 @@ function renderHeader(){
 }
 function renderPiece(){
   const pid = playPiece(), pc = PIECES[pid];
-  $('#pieceEyebrow').textContent = S.phase === 'choose' || S.phase === 'chooseSet' || pid !== S.pieceId ? '試しに聴く曲' : S.finalWeek ? '定期演奏会の曲' : '自由曲';
+  // A部門でコンクールまでは、自由曲と課題曲を切りかえて聴ける
+  const two = setActive(S) && S.phase === 'week';
+  $('#pieceSwitch').hidden = !two;
+  if(two) $('#pieceSwitch').innerHTML = [[S.pieceId, '自由曲'], [S.setPiece, '課題曲']].map(([id, nm]) => `<button type="button" data-pswitch="${id}" aria-pressed="${pid === id}">${nm}：${esc(PIECES[id].title)}</button>`).join('');
+  $('#pieceEyebrow').textContent = two && pid === S.setPiece ? '課題曲' : S.phase === 'choose' || S.phase === 'chooseSet' || pid !== S.pieceId ? '試しに聴く曲' : S.finalWeek ? '定期演奏会の曲' : '自由曲';
   $('#piece').textContent = pc.full;
   $('#pieceMeta').textContent = `${pc.composer}｜問われる力：${pc.asks}`;
-  const rd = pid === S.pieceId && S.phase !== 'choose' ? spanReadAvg(S, pid) : null;
+  const rd = (pid === S.pieceId || (two && pid === S.setPiece)) && S.phase !== 'choose' ? spanReadAvg(S, pid) : null;
   $('#rangeSel').innerHTML = `<option value="all">全部</option>` + pc.spans.map((sp, i) => `<option value="${i}">${sp.name}${rd ? `（譜読み${Math.round(rd[i])}）` : ''}</option>`).join('');
   $('#rangeSel').value = U.range;
 }
@@ -1344,6 +1348,12 @@ function bind(){
   });
   $('#btnRec').addEventListener('click', () => playRec($('#recSel').value));
   $('#btnStop').addEventListener('click', stopPlay);
+  $('#pieceSwitch').addEventListener('click', e => {
+    const b = e.target.closest('[data-pswitch]'); if(!b) return;
+    stopPlay(); haptic('tap');
+    U.piece = b.dataset.pswitch === S.pieceId ? null : b.dataset.pswitch; U.range = 'all';
+    renderPiece(); renderInterp(); refreshNow();
+  });
   $('#venueSel').addEventListener('change', e => setVenue(e.target.value));
   $('#rangeSel').addEventListener('change', e => { U.range = e.target.value; refreshNow(); });
   $('#soloSel').addEventListener('change', e => { U.solo = e.target.value; applySolo(); renderMemberCard(); });
