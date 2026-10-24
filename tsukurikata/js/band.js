@@ -449,10 +449,51 @@ function perform(ctx){
   const miss = {mel: red.miss.mel.filter(inSpan).length, bass: red.miss.bass.filter(inSpan).length};
   return {pieceId: ctx.pieceId, venue: venue.id, from, to, bpm, notes, hits, bars, ideal: idealLine, total, b2t, t2b, meter: pc.meter, mental, miss,
     idealDur: b2sIdeal(to) - b2sIdeal(from), realDur: b2s(to) - off, cohesion: C, fam: FAM, interp: {...ip}, rubUse, spread: SPREAD,
-    bandE, bandR, players: players.length};
+    bandE, bandR, players: players.length, secs: [...new Set(players.map(p => p.sec))]};
 }
 
 /* ===== 演奏を測る ===== */
+// 曲の中での受け持ち：パートごとに、旋律・ソロ・対旋律・低音・和音をどれだけ吹くか（曲の長さに対する割合）
+const NEED_CACHE = {};
+function pieceNeeds(pid){
+  if(NEED_CACHE[pid]) return NEED_CACHE[pid];
+  const pc = PIECES[pid], L = pc.spans[pc.spans.length - 1].to;
+  const cover = segs => { let sum = 0, end = -1e9; for(const x of segs.slice().sort((a, b) => a.f - b.f)){ if(x.t <= end) continue; sum += x.t - Math.max(x.f, end); end = x.t; } return sum / L; };
+  const KINDS = {mel: ['mel'], cm: ['cm', 'mel3'], bass: ['bass'], pad: ['pad']};
+  const part = {}, segsBySec = {}, sec = {};
+  for(const [p, segs] of Object.entries(pc.roles)){
+    const sc = INST[PART_INST[p]]?.sec;
+    if(!sc) continue;
+    part[p] = {solo: segs.some(x => x.solo), ...Object.fromEntries(Object.entries(KINDS).map(([k, rs]) => [k, cover(segs.filter(x => rs.includes(x.r)))]))};
+    (segsBySec[sc] ||= []).push(...segs);
+    if(part[p].solo) (sec[sc] ||= {}).soloPart = p;
+  }
+  for(const [sc, segs] of Object.entries(segsBySec)) sec[sc] = {...sec[sc], solo: !!sec[sc]?.soloPart, ...Object.fromEntries(Object.entries(KINDS).map(([k, rs]) => [k, cover(segs.filter(x => rs.includes(x.r)))]))};
+  if(pc.perc && Object.keys(pc.perc).length) sec.perc = {...(sec.perc || {}), perc: true};
+  return NEED_CACHE[pid] = {part, sec};
+}
+// 受け持ちの印（和音は、ほかの受け持ちがないときだけ）
+const needTags = r => {
+  if(!r) return [];
+  const t = [r.solo && 'ソロ', r.mel >= 0.3 && '旋律', r.cm >= 0.3 && '対旋律', r.bass >= 0.4 && 'ベース', r.perc && '打楽器'].filter(Boolean);
+  return t.length ? t : r.pad >= 0.3 ? ['和音'] : [];
+};
+// 曲がその楽器（セクション）をどれだけ必要とするか：旋律・ソロ・低音を受け持つ楽器ほど重い（曲の長さに対する受け持ちの割合から）
+const LACK_MAX = 12, NEED_W = {};
+function needWeight(pid){
+  return NEED_W[pid] ||= Object.fromEntries(Object.entries(pieceNeeds(pid).sec)
+    .map(([id, r]) => [id, (r.solo ? 1.5 : 0) + 3 * (r.mel || 0) + 1.5 * (r.cm || 0) + 2 * (r.bass || 0) + 0.5 * (r.pad || 0) + (r.perc ? 1.5 : 0)])
+    .filter(([, w]) => w > 0.2));
+}
+// この曲で、一人もいない楽器と、審査での減点（必要な楽器が欠けているほど、最大 LACK_MAX 点）。secs は演奏する部員のセクション
+function lackOf(pid, secs){
+  const w = needWeight(pid), have = new Set(secs), tot = Object.values(w).reduce((a, x) => a + x, 0) || 1;
+  const miss = Object.keys(w).filter(id => !have.has(id)).sort((a, b) => w[b] - w[a]);
+  return {miss, pts: Math.round(LACK_MAX * miss.reduce((a, id) => a + w[id], 0) / tot * 10) / 10};
+}
+const lackNames = miss => miss.map(id => SEC[id].name);
+
+const THIN_MAX = 12;
 function analyze(perf){
   const pc = PIECES[perf.pieceId];
   const lv = (inst, v) => INST[inst].gain * (0.03 + 0.97 * Math.pow(v, 1.8));
@@ -540,9 +581,11 @@ function analyze(perf){
   const missingMel = perf.miss?.mel ? ['mel'] : [], missingBass = perf.miss?.bass ? ['low'] : [];
   const wrongRate = wrong / Math.max(50, perf.notes.length + perf.hits.length);
   // 人数が少ないと響きが薄い（30人より少ないと、少しずつ下がる）
-  const thin = 16 * clamp((30 - (perf.players || 0)) / 25, 0, 1.15);
-  const penalty = Math.min(25, 200 * wrongRate) + missingMel.length * 8 + missingBass.length * 8 + thin;
-  return {score, penalty, thin, pitchDev, spread, rhythmMs, drift, cracks, wrong, balanceDb, sec: secOut, missingMel, missingBass, focus: pc.focus, ceiling: pc.ceiling};
+  const thin = THIN_MAX * clamp((30 - (perf.players || 0)) / 25, 0, 1.15);
+  // この曲で受け持ちのある楽器が、一人もいない（旋律やソロの楽器ほど大きい）
+  const lack = lackOf(perf.pieceId, perf.secs || SECTIONS.map(s => s.id));
+  const penalty = Math.min(25, 200 * wrongRate) + missingMel.length * 8 + missingBass.length * 8 + thin + lack.pts;
+  return {score, penalty, thin, lack, pitchDev, spread, rhythmMs, drift, cracks, wrong, balanceDb, sec: secOut, missingMel, missingBass, focus: pc.focus, ceiling: pc.ceiling};
 }
 
 /* ===== 審査 ===== */
@@ -640,7 +683,8 @@ function judge(perf, a, levelId){
     if(i === 1 && it.notes.length) comments.push(it.notes[0]);
     if(i === 2 && a.wrong >= 4) comments.push('まだ譜面が手の内に入っていない箇所が見られます。');
     if(i === 0 && a.missingMel.length) comments.push('人数の少ないパートの旋律が聞こえにくくなっていました。');
-    if(i === 0 && a.thin >= 6) comments.push(a.thin >= 12 ? '少ない人数でよく工夫していますが、響きの厚みはまだこれからです。' : '人数がもう少しそろうと、響きに厚みが出てきそうです。');
+    if(i === 0 && a.lack.pts >= 1) comments.push(`${lackNames(a.lack.miss.slice(0, 2)).join('と')}${a.lack.miss.length > 2 ? 'など' : ''}がいないため、その受け持ちをほかの楽器で補っていました。この曲本来の響きには、まだ届いていません。`);
+    else if(i === 0 && a.thin >= 4) comments.push(a.thin >= 7 ? '少ない人数でよく工夫していますが、響きの厚みはまだこれからです。' : '人数がもう少しそろうと、響きに厚みが出てきそうです。');
     if(i === 0 && perf.conducted && perf.jitter > 0.2) comments.push('指揮の拍が安定せず、合奏が落ち着きませんでした。');
     if(!comments.length) comments.push('全体によくまとまっています。あと一歩の磨き込みを期待します。');
     return {name: j.name, score: sc, grade: sc >= L.A ? 'A' : sc >= L.B ? 'B' : 'C', comment: comments.join('')};

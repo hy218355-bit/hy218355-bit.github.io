@@ -550,6 +550,7 @@ function renderDiag(){
   if(a.score[weak] < 72) notes.push(commentFor(weak, a, false));
   if(a.score[strong] >= 70) notes.push(commentFor(strong, a, true));
   if(a.wrong) notes.push(`まだ譜読みが終わっておらず、${a.wrong}か所で音を間違えている。`);
+  if(a.lack.miss.length) notes.push(`この曲でいない楽器：${lackNames(a.lack.miss).join('・')}${lackPts(a.lack)}。`);
   $('#diagNote').textContent = notes.join(' ') || '大きな問題はない。ここからは細部の磨き込み。';
 }
 // 舞台袖：部全体の空気と、緊張している部員。声をかける・全員で深呼吸する（あわせて2回まで）
@@ -689,31 +690,6 @@ function renderWeek(){
   w.querySelectorAll('details.psecd').forEach(d => d.addEventListener('toggle', () => { (U.openSecs ||= new Set())[d.open ? 'add' : 'delete'](d.dataset.sec); }));
   weekResAnimate(w);
 }
-// 曲の中での受け持ち：パートごとに、旋律・ソロ・対旋律・低音・和音をどれだけ吹くか（曲の長さに対する割合）
-const NEED_CACHE = {};
-function pieceNeeds(pid){
-  if(NEED_CACHE[pid]) return NEED_CACHE[pid];
-  const pc = PIECES[pid], L = pc.spans[pc.spans.length - 1].to;
-  const cover = segs => { let sum = 0, end = -1e9; for(const x of segs.slice().sort((a, b) => a.f - b.f)){ if(x.t <= end) continue; sum += x.t - Math.max(x.f, end); end = x.t; } return sum / L; };
-  const KINDS = {mel: ['mel'], cm: ['cm', 'mel3'], bass: ['bass'], pad: ['pad']};
-  const part = {}, segsBySec = {}, sec = {};
-  for(const [p, segs] of Object.entries(pc.roles)){
-    const sc = INST[PART_INST[p]]?.sec;
-    if(!sc) continue;
-    part[p] = {solo: segs.some(x => x.solo), ...Object.fromEntries(Object.entries(KINDS).map(([k, rs]) => [k, cover(segs.filter(x => rs.includes(x.r)))]))};
-    (segsBySec[sc] ||= []).push(...segs);
-    if(part[p].solo) (sec[sc] ||= {}).soloPart = p;
-  }
-  for(const [sc, segs] of Object.entries(segsBySec)) sec[sc] = {...sec[sc], solo: !!sec[sc]?.soloPart, ...Object.fromEntries(Object.entries(KINDS).map(([k, rs]) => [k, cover(segs.filter(x => rs.includes(x.r)))]))};
-  if(pc.perc && Object.keys(pc.perc).length) sec.perc = {...(sec.perc || {}), perc: true};
-  return NEED_CACHE[pid] = {part, sec};
-}
-// 受け持ちの印（和音は、ほかの受け持ちがないときだけ）
-const needTags = r => {
-  if(!r) return [];
-  const t = [r.solo && 'ソロ', r.mel >= 0.3 && '旋律', r.cm >= 0.3 && '対旋律', r.bass >= 0.4 && 'ベース', r.perc && '打楽器'].filter(Boolean);
-  return t.length ? t : r.pad >= 0.3 ? ['和音'] : [];
-};
 // この1年の部員：いちばん伸びた子・身につけたスキル・行事に行った子
 function yearMembersHtml(){
   const y = S.year;
@@ -931,10 +907,13 @@ function renderAssign(w, ev){
     <div class="rchips" id="asgList"></div>
     <div class="stage-wrap"><canvas id="asgStage" role="img" aria-label="舞台の席。部員を選んでから、空いている席をタップすると座る。"></canvas></div>
     <p class="legend" id="asgLegend"></p>
+    <p class="asg-lack" id="asgLack"></p>
     <div class="transport"><button class="btn small" type="button" data-asg="bench">選んでいる部員を控え（席なし）に</button><button class="btn primary" type="button" data-act="assign">この配置で決める</button></div>`;
   $('#asgStage').addEventListener('click', asgTap);
   asgUpdate();
 }
+// いない楽器の減点の目安
+const lackPts = lk => lk.pts >= 1 ? `（審査で −${Math.round(lk.pts)}点ほど）` : '（出番が少ないので、審査にはほぼ響かない）';
 // 札・説明・舞台を描き直す
 function asgUpdate(){
   const A = U.asg, list = $('#asgList');
@@ -947,6 +926,12 @@ function asgUpdate(){
   }).join('');
   const r = S.recruits.find(x => x.id === A.sel);
   $('#asgLegend').innerHTML = `${r ? `<span><i class="sw sw-hope"></i>光る席：${esc(r.name)}の希望（${INST[r.hope].name}）</span>` : ''}<span><i class="sw sw-new"></i>新しい部員</span><span><i class="sw sw-old"></i>いまの部員</span>${S.pieceId ? '<span>♪：この曲で旋律を吹く席</span>' : ''}`;
+  // この配置で、曲に受け持ちがあるのに一人もいない楽器
+  if(S.pieceId){
+    const secs = [...S.members.filter(m => m.seat).map(m => SEAT[m.seat].sec), ...Object.values(A.picks).filter(Boolean).map(id => SEAT[id].sec)];
+    const lk = lackOf(S.pieceId, secs);
+    $('#asgLack').innerHTML = lk.miss.length ? `この曲でいない楽器：<b>${lackNames(lk.miss).join('・')}</b>${lackPts(lk)}` : '<b>この曲の楽器は、全部そろっている</b>';
+  }
   drawAssignStage();
 }
 function drawAssignStage(){
