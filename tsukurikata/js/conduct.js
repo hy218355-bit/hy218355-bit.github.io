@@ -73,6 +73,8 @@ function closeWatch(){
   CD.phase = 'idle';
   clearTimeout(CD.intro); CD.intro = 0;
   document.querySelector('.cd-curtain')?.classList.remove('shut');
+  // 見ているあいだに選んだ部員と「この子の音だけ」は、本番が終わったらもどす
+  CD.sel = null; $('#cdMember').hidden = true; soloAll();
   $('#conduct').hidden = true; $('#conduct').classList.remove('watch'); $('#cdClose').textContent = 'やめる'; $('#cdEyebrow').textContent = '指揮';
   document.documentElement.classList.remove('conducting');
 }

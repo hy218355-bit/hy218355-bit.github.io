@@ -212,7 +212,7 @@ function drawStage(t = -1, cv = $('#stage'), who = null){
   g.fillText('指揮', G.cx, G.baseY + 8.5);
 
   const viewSec = main && U.view !== 'mel' ? U.view : null;
-  const sel = main && U.sel && memberById(U.sel);
+  const sel = main ? U.sel && memberById(U.sel) : CD.sel && memberById(CD.sel);
   for(const s of SEATS){
     const [x, y] = seatXY(s, G);
     const m = S.members.find(mm => mm.seat === s.id && (!who || who.has(mm.id)));
@@ -249,9 +249,9 @@ function drawStage(t = -1, cv = $('#stage'), who = null){
     g.globalAlpha = 1;
   }
 }
-function seatAt(ev){
-  const cv = $('#stage'), rect = cv.getBoundingClientRect();
-  const G = stageGeom(rect.width);
+function seatAt(ev, cv = $('#stage')){
+  const rect = cv.getBoundingClientRect();
+  const G = stageGeom(Math.max(240, rect.width));
   const px = ev.clientX - rect.left, py = ev.clientY - rect.top;
   let best = null, bd = Infinity;
   for(const s of SEATS){
@@ -1051,6 +1051,21 @@ function skillList(m){
     ${near.length ? `<p class="small">もうすぐ：${near.join('・')}</p>` : ''}${bent.length ? `<p class="small">伸びやすい力：${bent.join('・')}（相談への答え方で育った）</p>` : ''}</div>`;
 }
 // 部員のひとこと：いまの様子（体力・最近の伸び・苦手・癖・学年・役）に合うものから、週ごとに1つ
+// 本番を見ているときに部員をタップしたら、その子の様子（力・本番の強さ・今日の調子・スキル）を舞台の下に出す
+function showCdMember(id){
+  const el = $('#cdMember'), m = id && memberById(id);
+  CD.sel = m ? m.id : null;
+  if(!m){ el.hidden = true; drawStage(-1, $('#cdStage'), CD.who); return; }
+  const C = tok(), mood = (CD.perf?.mental || []).find(x => x.mid === m.id)?.kind;
+  const plays = CD.who?.has(m.id), solo = U.solo === `member:${m.id}`;
+  el.innerHTML = `<div class="cm-head"><span><b>${esc(m.name)}</b><small>${m.grade}年・${esc(PART_LABEL[SEAT[m.seat].part])}${m.title ? '・' + esc(m.title) : ''}</small></span><button class="btn small quiet" type="button" data-cdm="close">閉じる</button></div>
+    <p class="cm-say">${esc(memberSays(m))}</p>
+    <div class="cm-stats">${STAT_KEYS.map(k => `<span class="cm-st">${STAT_LABEL[k]}<span class="track"><span class="fill" style="width:${clamp(m.stats[k], 0, 100)}%;background:${skillColor(C, m.stats[k])}"></span></span><b>${Math.round(m.stats[k])}</b></span>`).join('')}</div>
+    <p class="cm-note">本番の強さ ${Math.round(m.mental ?? 40)}${mood === 'zone' ? '・今日は、いつも以上の音が出ている' : mood === 'freeze' ? '・今日は、緊張で頭が真っ白になっている' : ''}${plays ? '' : '・この本番には出ていない'}${skillChips(m)}</p>
+    ${plays ? `<div class="row"><button class="btn small" type="button" data-cdm="solo">${solo ? '全員の音にもどす' : 'この子の音だけ聴く'}</button></div>` : ''}`;
+  el.hidden = false;
+  if(!U.playing) drawStage(-1, $('#cdStage'), CD.who);
+}
 function memberSays(m){
   const lines = [], wk = STAT_LABEL[weakest(m)], up = m.last?.d ? Math.max(0, ...STAT_KEYS.map(k => m.last.d[k] || 0)) : 0;
   if((m.sta ?? 100) < 30) lines.push('「ちょっと、疲れがたまってるかもしれません……」', '「体が重くて、思うように息が入らないです」');
@@ -1212,6 +1227,17 @@ function bind(){
   $('#rangeSel').addEventListener('change', e => { U.range = e.target.value; refreshNow(); });
   $('#soloSel').addEventListener('change', e => { U.solo = e.target.value; applySolo(); renderMemberCard(); });
   $('#viewSel').addEventListener('change', e => { U.view = e.target.value; renderSelectors(); renderRoster(); drawIdle(); if(U.playing) drawRoll(U.shown, E.now()); });
+  // 本番を見ているあいだ：舞台の部員をタップすると、その子の様子
+  $('#cdStage').addEventListener('click', e => {
+    if(CD.phase !== 'watch' || CD.intro) return;
+    const s = seatAt(e, $('#cdStage')), m = s && S.members.find(x => x.seat === s.id && CD.who.has(x.id));
+    haptic('tap'); showCdMember(m && m.id !== CD.sel ? m.id : null);
+  });
+  $('#cdMember').addEventListener('click', e => {
+    const b = e.target.closest('[data-cdm]'); if(!b) return;
+    if(b.dataset.cdm === 'close') showCdMember(null);
+    else if(b.dataset.cdm === 'solo'){ U.solo = U.solo === `member:${CD.sel}` ? 'all' : `member:${CD.sel}`; applySolo(); showCdMember(CD.sel); }
+  });
   $('#stage').addEventListener('click', e => {
     const s = seatAt(e);
     if(!s) return;
