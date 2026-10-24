@@ -935,6 +935,136 @@ const CONSULTS = [
      {label: 'みんなの前で吹く練習を重ねよう', go: (s, m) => { m.mental = clamp((m.mental ?? 40) + 5, 0, 100); adj(s, 'cohesion', 1);
        return `パートのみんなの前で、毎日1回ずつ吹くことにした。三日目には、もう手は震えていなかった。`; }},
    ]},
+  // ---- 立場・時期・部の強さで出る相談 ----
+  {id: 'captain', who: s => ss(s).filter(m => m.title === '部長'),
+   text: (s, m) => `部長の${m.name}（${instOf(m)}）が、練習のあと残っていた。「部長なのに、みんなをうまくまとめられなくて……」`,
+   choices: [
+     {label: '一人で抱えないで、副部長やパートリーダーと分けよう', go: (s, m) => { adj(s, 'cohesion', 3); addSkill(s, m, 'mentor', 0.4); m.mental = clamp((m.mental ?? 40) + 3, 0, 100);
+       remember(s, m, '部長の仕事を一人で抱えこまず、みんなで分けることにした。'); return `次の日、${kun(m)}は副部長とパートリーダーを集めて、役割を分けた。部の空気が少し軽くなった。`; }},
+     {label: 'まずは自分の音で、みんなを引っぱろう', go: (s, m) => { bend(m, 'tone', 0.05); addSkill(s, m, 'pillar', 0.5);
+       return `${kun(m)}は、だれよりも早く音楽室に来て、ロングトーンを始めた。`; }},
+   ]},
+  {id: 'leader', who: s => ss(s).filter(m => m.title === 'パートリーダー'),
+   text: (s, m) => `パートリーダーの${m.name}（${instOf(m)}）が言った。「パートの音がそろわなくて。わたしの教え方が悪いのかな」`,
+   choices: [
+     {label: 'パートだけで、ゆっくり音を合わせる時間を作ろう', go: (s, m) => { for(const x of ss(s)) if(secOf(x) === secOf(m)) bump(x, 'pitch', 0.8); addSkill(s, m, 'center', 0.4);
+       return `${kun(m)}のパートは、音楽室のすみで、チューナーを見ずに耳だけで音を合わせる練習を始めた。`; }},
+     {label: 'できていることも、ちゃんとほめよう', go: (s, m) => { adj(s, 'morale', 3); addSkill(s, m, 'mentor', 0.4);
+       return `${kun(m)}が後輩の音をほめると、後輩の顔がぱっと明るくなった。`; }},
+   ]},
+  {id: 'newbie', who: s => ss(s).filter(m => m.grade === 1 && s.week <= 8),
+   text: (s, m) => `入部したばかりの${m.name}（${instOf(m)}）が、小さな声で言った。「高校の部活って、思ってたより大変で……。ついていけるかな」`,
+   choices: [
+     {label: '最初はだれでもそう。慣れるまで、ゆっくりでいいよ', go: (s, m) => { m.sta = 100; m.mental = clamp((m.mental ?? 40) + 4, 0, 100);
+       remember(s, m, '入部したてのころ、「ゆっくりでいいよ」と言われてほっとした。'); return `${kun(m)}は、少し肩の力が抜けたようだった。`; }},
+     {label: '同じパートの先輩に、いろいろ聞いてみよう', go: (s, m) => { adj(s, 'cohesion', 2); bend(m, weakest(m), 0.04);
+       return `先輩が楽器の組み立てから教えてくれた。帰りは、パートのみんなで駅まで歩いた。`; }},
+   ]},
+  {id: 'solo', who: s => s.pieceId ? ss(s).filter(m => Object.entries(PIECES[s.pieceId].roles).some(([p, segs]) => p === SEAT[m.seat].part && segs.some(x => x.solo))) : [],
+   text: (s, m) => `${m.name}（${instOf(m)}）が、自由曲の楽譜を見つめていた。「ここ、ソロなんですよね……。わたしに吹けるかな」`,
+   choices: [
+     {label: 'いっしょに、少しずつ練習しよう', go: (s, m) => { bend(m, 'expr', 0.05); addSkill(s, m, 'song', 0.4);
+       remember(s, m, '自由曲のソロを、顧問といっしょに少しずつ練習した。'); return `放課後、${kun(m)}はソロのところだけを、何度もゆっくり吹いた。`; }},
+     {label: '本番の舞台を思い浮かべて吹いてみよう', go: (s, m) => { addSkill(s, m, 'nerve', 0.5); m.mental = clamp((m.mental ?? 40) + 4, 0, 100);
+       return `${kun(m)}は目をつむって、ホールの客席を思い浮かべながら吹いた。音が少し大きくなった。`; }},
+   ]},
+  {id: 'benched', who: s => ss(s).filter(m => m.grade === 3 && m.out),
+   text: (s, m) => `オーディションで控えになった3年生の${m.name}（${instOf(m)}）が、静かに言った。「最後のコンクール、出たかったな……」`,
+   choices: [
+     {label: '定期演奏会で、いちばんいい音を聴かせよう', go: (s, m) => { bend(m, 'expr', 0.06); m.mental = clamp((m.mental ?? 40) + 5, 0, 100);
+       remember(s, m, '最後のコンクールには出られなかった。でも、定期演奏会でいちばんいい音を聴かせると決めた。'); return `${kun(m)}は、その日から定期演奏会の曲を練習しはじめた。`; }},
+     {label: '舞台袖から、みんなを支えてほしい', go: (s, m) => { addSkill(s, m, 'mood', 0.6); adj(s, 'cohesion', 3);
+       remember(s, m, 'コンクールでは、舞台袖からみんなを支えた。'); return `${kun(m)}は「楽器運びと声かけ、まかせてください」と笑った。`; }},
+   ]},
+  {id: 'regret', who: s => s.finalWeek && s.season.length && s.season[s.season.length - 1].award !== 'gold' ? ss(s).filter(m => m.grade === 3) : [],
+   text: (s, m) => `コンクールのあと、3年生の${m.name}（${instOf(m)}）が言った。「来年はもういないのに、悔しくて……」`,
+   choices: [
+     {label: 'その思いを、後輩に伝えていこう', go: (s, m) => { addSkill(s, m, 'mentor', 0.6); for(const x of ss(s)) if(x.grade < 3 && secOf(x) === secOf(m)) bend(x, weakest(x), 0.02);
+       remember(s, m, 'コンクールの悔しさを、後輩に託した。'); return `${kun(m)}は後輩を集めて、コンクールで気づいたことを話した。後輩たちは真剣に聞いていた。`; }},
+     {label: '定期演奏会で、悔しさを晴らそう', go: (s, m) => { bend(m, 'expr', 0.05); adj(s, 'morale', 3);
+       return `「定演では、絶対いい演奏にします」と、${kun(m)}は前を向いた。`; }},
+   ]},
+  {id: 'national', who: s => (s.rep ?? 0) >= 50 ? ss(s).filter(m => m.grade >= 2) : [],
+   text: (s, m) => `${m.name}（${instOf(m)}）が、まっすぐな目で聞いてきた。「先生、この部で本気で全国、目指せますか？」`,
+   choices: [
+     {label: '目指そう。そのための練習をしよう', go: (s, m) => { for(const x of ss(s)) bend(x, weakest(x), 0.02); adj(s, 'morale', 4);
+       remember(s, m, '「本気で全国を目指そう」と、顧問と約束した。'); return `その話は部じゅうに広がり、次の日の合奏はいつもより引きしまった。`; }},
+     {label: '一つずつ、目の前の本番を大事にしよう', go: (s, m) => { m.mental = clamp((m.mental ?? 40) + 4, 0, 100); adj(s, 'cohesion', 2);
+       return `${kun(m)}は「まずは次の本番ですね」とうなずいた。`; }},
+   ]},
+  {id: 'ob', who: s => s.year - (s.startYear ?? s.year) >= 4 ? ss(s).filter(m => m.grade >= 2) : [],
+   text: (s, m) => `${m.name}（${instOf(m)}）が言った。「この前、卒業した先輩が来て、『この部、ずいぶん変わったね』って言ってました」`,
+   choices: [
+     {label: 'みんなで作ってきた部だね', go: (s, m) => { adj(s, 'morale', 3); adj(s, 'cohesion', 2);
+       return `${kun(m)}はうれしそうに、部の古い写真を部室の壁に貼った。`; }},
+     {label: '次は、あなたたちの代で変えていこう', go: (s, m) => { addSkill(s, m, 'mentor', 0.3); bend(m, 'expr', 0.04);
+       return `「わたしたちの代の音、残したいです」と${kun(m)}は言った。`; }},
+   ]},
+  {id: 'lowpart', who: s => ss(s).filter(m => ['tuba', 'cb', 'bsax', 'bcl', 'btb'].includes(SEAT[m.seat].inst)),
+   text: (s, m) => `${m.name}（${instOf(m)}）がぽつりと言った。「低い音って、目立たないですよね……」`,
+   choices: [
+     {label: '低い音は、部の音の土台なんだよ', go: (s, m) => { addSkill(s, m, 'pillar', 0.5); bend(m, 'tone', 0.04);
+       remember(s, m, '「低い音は部の土台」と言われて、自分の音が好きになった。'); return `合奏で${kun(m)}の音を抜いてみると、部の音がふわふわと頼りなくなった。${kun(m)}は少し胸を張った。`; }},
+     {label: '旋律を吹かせてもらえる曲を探してみよう', go: (s, m) => { bend(m, 'expr', 0.05); adj(s, 'morale', 2);
+       return `${kun(m)}は、低音が旋律を吹く曲を探して、休み時間に吹いていた。`; }},
+   ]},
+  {id: 'perc', who: s => ss(s).filter(m => secOf(m) === 'perc'),
+   text: (s, m) => `${m.name}（パーカッション）がため息をついた。「打楽器って、曲ごとに持ちかえる楽器が多くて、覚えることだらけで……」`,
+   choices: [
+     {label: '楽器ごとに、ノートにまとめていこう', go: (s, m) => { addSkill(s, m, 'reader', 0.5); bend(m, 'rhythm', 0.03);
+       return `${kun(m)}のノートには、楽器ごとのたたき方と、楽譜のどこで持ちかえるかが、びっしり書きこまれた。`; }},
+     {label: 'まずは、テンポを体に入れることから', go: (s, m) => { addSkill(s, m, 'groove', 0.5);
+       return `${kun(m)}は、メトロノームに合わせて、机をたたいて練習した。`; }},
+   ]},
+  {id: 'duet', pair: true, who: s => ss(s).filter(m => m.grade >= 1 && ss(s).some(x => x.id !== m.id && secOf(x) !== secOf(m))),
+   other: (s, m) => ss(s).filter(x => x.id !== m.id && secOf(x) !== secOf(m) && Math.abs(avgStat(x) - avgStat(m)) < 20),
+   text: (s, m, o) => `${m.name}（${instOf(m)}）が、${o.name}（${instOf(o)}）といっしょに来た。「ふたりで二重奏をやってみたいんです」`,
+   choices: [
+     {label: 'いいね。聴き合いながら合わせてみよう', go: (s, m, o) => { addSkill(s, m, 'ear', 0.4); addSkill(s, o, 'ear', 0.4); bump(m, 'pitch', 1); bump(o, 'pitch', 1);
+       remember(s, m, `${o.name}と二重奏をした。`); remember(s, o, `${m.name}と二重奏をした。`); return `ふたりの二重奏は、昼休みの音楽室で何度も聞こえてきた。`; }},
+     {label: '文化祭で、みんなの前で吹いてみよう', go: (s, m, o) => { addSkill(s, m, 'nerve', 0.4); addSkill(s, o, 'nerve', 0.4); adj(s, 'morale', 2);
+       return `ふたりは、文化祭に向けて練習を始めた。`; }},
+   ]},
+  {id: 'lesson', who: s => ss(s).filter(m => m.exp && m.grade >= 2),
+   text: (s, m) => `${m.name}（${instOf(m)}）が相談に来た。「中学のときの先生に、個人レッスンを受けないかって言われて……」`,
+   choices: [
+     {label: 'いい機会だね。応援するよ', go: (s, m) => { bump(m, weakest(m), 2); addSkill(s, m, 'sense', 0.3);
+       return `${kun(m)}は月に一度、レッスンに通うことになった。教わったことを、パートのみんなにも教えていた。`; }},
+     {label: 'まずは部の練習を大事にしよう', go: (s, m) => { adj(s, 'cohesion', 2); m.mental = clamp((m.mental ?? 40) + 2, 0, 100);
+       return `${kun(m)}は「部で教わることも多いですもんね」と笑った。`; }},
+   ]},
+  {id: 'goodstage', who: s => ss(s).filter(m => (m.story || []).some(x => x.k === 'zone' && x.y === s.year)),
+   text: (s, m) => `${m.name}（${instOf(m)}）がうれしそうに来た。「この前の本番、いままででいちばんいい音が出たんです！」`,
+   choices: [
+     {label: 'すごかったね。その感じを覚えておこう', go: (s, m) => { m.mental = clamp((m.mental ?? 40) + 5, 0, 100); addSkill(s, m, 'nerve', 0.3);
+       return `${kun(m)}は、その日の感じをノートに書きとめていた。`; }},
+     {label: '次は、もっと上を目指そう', go: (s, m) => { bend(m, weakest(m), 0.05);
+       return `「次は、苦手なところもなくします」と${kun(m)}は言った。`; }},
+   ]},
+  {id: 'otherclub', who: s => ss(s).filter(m => m.grade === 1 && (m.mental ?? 40) < 55),
+   text: (s, m) => `${m.name}（${instOf(m)}）が言いにくそうに言った。「クラスの友だちに、ほかの部に入らないかって誘われていて……」`,
+   choices: [
+     {label: 'ここで、もう少しいっしょに吹いてみない？', go: (s, m) => { adj(s, 'cohesion', 2); m.mental = clamp((m.mental ?? 40) + 3, 0, 100);
+       remember(s, m, 'ほかの部に誘われたけれど、吹奏楽部に残ることにした。'); return `${kun(m)}は少し考えて、「やっぱり、ここで吹きたいです」と言った。`; }},
+     {label: 'どちらも見学してから決めていいよ', go: (s, m) => { adj(s, 'morale', 1); bend(m, 'expr', 0.03);
+       return `${kun(m)}はほかの部を見学して、次の週、「やっぱり楽器が好きです」と戻ってきた。`; }},
+   ]},
+  {id: 'family', who: s => ss(s).filter(m => m.grade >= 1),
+   text: (s, m) => `${m.name}（${instOf(m)}）が言った。「次の本番、家族がはじめて聴きに来るんです。ちょっと緊張します」`,
+   choices: [
+     {label: '家族に、いちばんいい音を聴かせよう', go: (s, m) => { bend(m, 'tone', 0.04); m.mental = clamp((m.mental ?? 40) + 2, 0, 100);
+       return `${kun(m)}は、毎日のロングトーンをいつもより丁寧にしていた。`; }},
+     {label: 'いつもどおりでいいよ。楽しんで', go: (s, m) => { addSkill(s, m, 'nerve', 0.3); adj(s, 'morale', 1);
+       return `${kun(m)}は「楽しみます」と笑った。`; }},
+   ]},
+  {id: 'tune_part', who: s => ss(s).filter(m => m.grade >= 2 && m.stats.pitch >= 65),
+   text: (s, m) => `${m.name}（${instOf(m)}）が言った。「チューナーで合わせても、和音がきれいに鳴らないことがあるんです」`,
+   choices: [
+     {label: '和音の中での音の高さは、耳で少し動かすんだよ', go: (s, m) => { addSkill(s, m, 'center', 0.5); addSkill(s, m, 'ear', 0.3);
+       remember(s, m, '和音の中では、音の高さを耳で少し動かすと響くことを知った。'); return `${kun(m)}はパートのみんなと、和音をのばしながら少しずつ高さを動かしてみた。和音が「鳴った」瞬間、みんなで顔を見合わせた。`; }},
+     {label: 'ほかのパートの音もよく聴いてみよう', go: (s, m) => { bend(m, 'pitch', 0.04); adj(s, 'cohesion', 1);
+       return `合奏で、${kun(m)}はほかのパートの音に耳をすませるようになった。`; }},
+   ]},
 ];
 const CONSULT_BY = Object.fromEntries(CONSULTS.map(c => [c.id, c]));
 // 練習の週の相談を決める（大きな出来事がある週は出さない）
@@ -1069,6 +1199,43 @@ const OUTINGS = [
    go: (s, m, f) => { m.mental = clamp((m.mental ?? 40) + (f ? 6 : 3), 0, 100); addSkill(s, m, 'nerve', f ? 0.5 : 0.3); bump(m, 'tone', 1); },
    mem: 'コンクールの会場になるホールを見学した。舞台に立って、客席を見わたした。',
    res: n => `${n}は「本番、あの舞台に立つんだ」と、少し顔つきが変わった。`},
+  {id: 'masterclass', n: 2, title: '音楽大学の公開レッスン', when: s => wkMonth(s.week) >= 6,
+   text: '近くの音楽大学で、高校生向けの公開レッスンがある。2人まで受けられる。',
+   fitText: 'もう力のある子ほど、細かいところまで教われる',
+   fit: m => avgStat(m) >= 60,
+   go: (s, m, f) => { bump(m, 'expr', f ? 3 : 1.5); bump(m, 'tone', f ? 2 : 1); addSkill(s, m, 'sense', f ? 0.4 : 0.2); },
+   mem: '音楽大学の公開レッスンを受けた。大学の先生に、フレーズの作り方を教わった。',
+   res: n => `${n}は、教わったことを合奏でさっそく試していた。`},
+  {id: 'otherschool', n: 4, title: 'よその学校の定期演奏会',
+   text: '近くの高校の定期演奏会に招待された。4人まで連れて行ける。',
+   fitText: '1年生には、ほかの学校の音がいい刺激になる',
+   fit: m => m.grade === 1,
+   go: (s, m, f) => { bump(m, 'tone', f ? 2 : 1); bump(m, 'expr', f ? 2 : 1); },
+   after: s => adj(s, 'morale', 2),
+   mem: 'よその学校の定期演奏会を聴きに行った。',
+   res: n => `${n}は、「あの学校の低音、すごかったです」と目をかがやかせていた。`},
+  {id: 'jointpart', n: 3, title: '他校との合同パート練習',
+   text: '近くの高校から、合同でパート練習をしないかと誘われた。3人まで行ける。',
+   fitText: '人数の少ないパートの子は、同じ楽器の仲間とじっくり練習できる',
+   fit: (m, s) => ss(s).filter(x => secOf(x) === secOf(m)).length <= 2,
+   go: (s, m, f) => { bump(m, 'pitch', f ? 2.5 : 1.5); bump(m, 'rhythm', f ? 2 : 1); addSkill(s, m, 'ear', 0.2); },
+   mem: '他校との合同パート練習に行った。同じ楽器の仲間がたくさんできた。',
+   res: n => `${n}は、他校の生徒と連絡先を交換して帰ってきた。`},
+  {id: 'instfair', n: 2, title: '楽器フェアの試奏会',
+   text: '駅前で楽器フェアがあり、高校生も楽器を試奏できる。2人まで行ける。',
+   fitText: '中学から吹いている経験者は、楽器のちがいがよく分かる',
+   fit: m => !!m.exp,
+   go: (s, m, f) => { bump(m, 'tone', f ? 3 : 1.5); addSkill(s, m, 'breath', 0.3); },
+   mem: '楽器フェアで、いろいろな楽器を試奏した。',
+   res: n => `${n}は、「楽器によって、こんなに音がちがうんですね」と話していた。`},
+  {id: 'carehome', n: 5, title: '老人ホームの訪問演奏',
+   text: '近くの老人ホームから、訪問演奏をしてほしいと頼まれた。5人で行ける。',
+   fitText: '本番で緊張しやすい子には、あたたかい客席がいい経験になる',
+   fit: m => (m.mental ?? 40) < 50,
+   go: (s, m, f) => { m.mental = clamp((m.mental ?? 40) + (f ? 6 : 3), 0, 100); addSkill(s, m, 'nerve', f ? 0.4 : 0.2); bump(m, 'expr', 1); },
+   after: s => adj(s, 'morale', 2),
+   mem: '老人ホームで演奏した。おじいさんやおばあさんが、手拍子をしてくれた。',
+   res: n => `演奏のあと、${n}は「ありがとう」と何度も声をかけられて、うれしそうだった。`},
 ];
 const OUTING_BY = Object.fromEntries(OUTINGS.map(o => [o.id, o]));
 // 練習の週に、行事の誘いを出すかどうか（月に1回ほど。続けては出さない）
@@ -1078,7 +1245,7 @@ function pickOuting(s){
   if(ev && ev.kind !== 'mod') return null;
   if(s.year * 100 + s.week - (s.outingAt ?? -99) < 3 || hash(s.year, s.week, 'outing') > 0.45) return null;
   // ★の子（行くと特に伸びる子）が1人もいない行事は出さない
-  const able = OUTINGS.filter(o => !s.flags[`out:${s.year}:${o.id}`] && (!o.when || o.when(s)) && ss(s).some(o.fit));
+  const able = OUTINGS.filter(o => !s.flags[`out:${s.year}:${o.id}`] && (!o.when || o.when(s)) && ss(s).some(m => o.fit(m, s)));
   if(!able.length || ss(s).length < 2) return null;
   const o = able[Math.floor(hash(s.year, s.week, 'outwhich') * able.length)];
   s.flags[`out:${s.year}:${o.id}`] = true;
@@ -1089,7 +1256,7 @@ const outingView = s => {
   const o = s.outing && OUTING_BY[s.outing.id];
   if(!o) return null;
   const n = Math.min(o.n, ss(s).length);
-  return {o, n, fit: new Set(ss(s).filter(o.fit).map(m => m.id))};
+  return {o, n, fit: new Set(ss(s).filter(m => o.fit(m, s)).map(m => m.id))};
 };
 // 連れて行く部員を決める（ids は部員の id。n 人をこえる分は使わない）
 function resolveOuting(s0, ids){
