@@ -61,8 +61,8 @@ const fxCutHtml = (tag, title, who, desc) => `<div class="fx-rays" aria-hidden="
   <b class="fx-title">${esc(title)}</b>${who ? `<span class="fx-who">${esc(who)}</span>` : ''}${desc ? `<p class="fx-desc">${esc(desc)}</p>` : ''}`;
 
 /* ----- 季節 ----- */
-const SEASON_OF = m => m <= 4 ? 'sakura' : m === 5 ? 'green' : m === 6 ? 'rain' : m <= 8 ? 'summer' : 'autumn';
-const MONTH_WORD = {4: 'はじまりの春', 5: '新緑の5月', 6: '梅雨の音楽室', 7: '夏、コンクールへ', 8: 'コンクールの夏', 9: '2学期がはじまる', 10: '実りの秋', 11: '冬のはじまり'};
+const SEASON_OF = m => m === 12 || m <= 2 ? 'snow' : m <= 4 ? 'sakura' : m === 5 ? 'green' : m === 6 ? 'rain' : m <= 8 ? 'summer' : 'autumn';
+const MONTH_WORD = {4: 'はじまりの春', 5: '新緑の5月', 6: '梅雨の音楽室', 7: '夏、コンクールへ', 8: 'コンクールの夏', 9: '2学期がはじまる', 10: '実りの秋', 11: '冬のはじまり', 1: '冬の音楽室', 3: '旅立ちの春'};
 // 月が変わったときの扉：その月の行事も出す
 function fxMonth(s){
   const m = wkMonth(s.week), w0 = (m - 4) * 4, evs = [];
@@ -77,6 +77,12 @@ function fxYearStart(s){
       <b class="fx-title">${s.members.length ? '春。新しい1年がはじまる' : '春。吹奏楽部が、また動きだす'}</b>
       <p class="fx-desc">${s.members.length ? `部員${s.members.length}人で、新しい1年生を待つ` : '休部していた音楽室に、1年生がやってくる'}</p>`});
 }
+// 冬の場面（11月 新体制・1月 アンサンブルコンテスト・3月 卒業式）
+function fxWinter(s){
+  const st = WINTER_STEPS[s.winter.step];
+  fxShow({kind: 'scene', season: SEASON_OF(st.m), sound: 'month', ms: 2200,
+    html: `<span class="fx-month">${st.m}<small>月</small></span><b class="fx-title">${MONTH_WORD[st.m] || ''}</b><p class="fx-desc">${esc(st.title)}</p>`});
+}
 function fxYearEnd(s){
   fxShow({kind: 'scene', season: 'autumn', sound: 'year', ms: 2800,
     html: `<span class="fx-tag">${s.year}年度</span><b class="fx-title">この1年の本番が、すべて終わった</b><p class="fx-desc">${hasSeniors(s) ? '3年生が引退する。' : ''}1年をふり返ろう。</p>`});
@@ -86,7 +92,7 @@ function fxSky(cv, season){
   const dpr = window.devicePixelRatio || 1, W = cv.clientWidth * dpr, H = cv.clientHeight * dpr;
   cv.width = W; cv.height = H;
   const g = cv.getContext('2d');
-  const COL = {sakura: ['#F6C1D1', '#F9D7E2', '#EFA3BC'], green: ['#8FC98A', '#B5DB8E', '#6DB36B'], rain: ['#9DB8D6', '#B9CDE4'],
+  const COL = {sakura: ['#F6C1D1', '#F9D7E2', '#EFA3BC'], green: ['#8FC98A', '#B5DB8E', '#6DB36B'], rain: ['#9DB8D6', '#B9CDE4'], snow: ['#FFFFFF', '#EAF2FA', '#DDE8F3'],
     summer: ['#FFD86B', '#FFF1B0', '#FFB84D'], autumn: ['#E8893A', '#D9542C', '#F0B04A']}[season];
   const n = season === 'rain' ? 70 : 36;
   const ps = Array.from({length: n}, () => ({x: Math.random() * W, y: (Math.random() * 2 - 1) * H, v: 0.6 + Math.random(),
@@ -100,6 +106,9 @@ function fxSky(cv, season){
       if(season === 'rain'){
         p.y += p.v * dt * 1.2 * dpr; p.x -= p.v * dt * 0.2 * dpr;
         g.globalAlpha = 0.6; g.lineWidth = 1.2 * dpr; g.beginPath(); g.moveTo(p.x, p.y); g.lineTo(p.x + 3 * dpr, p.y - 14 * dpr); g.stroke();
+      } else if(season === 'snow'){
+        p.y += p.v * dt * 0.04 * dpr; p.x += Math.sin(now / 900 + p.a) * 0.35 * dpr;
+        g.globalAlpha = 0.85; g.beginPath(); g.arc(p.x, p.y, p.r * 0.5, 0, 6.29); g.fill();
       } else if(season === 'summer'){
         p.y -= p.v * dt * 0.03 * dpr;
         g.globalAlpha = 0.35 + 0.65 * Math.abs(Math.sin(now / 260 + p.a));

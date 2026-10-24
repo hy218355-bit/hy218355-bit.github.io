@@ -137,7 +137,7 @@ function perfCtx(s, o = {}){
 }
 function snapshot(s, extra = {}){
   return {
-    members: stagers(s).map(m => ({id: m.id, name: m.name, grade: m.grade, seat: m.seat, trait: m.trait, mental: m.mental, stats: {...m.stats},
+    members: stagers(s).filter(m => !extra.only || extra.only.includes(m.id)).map(m => ({id: m.id, name: m.name, grade: m.grade, seat: m.seat, trait: m.trait, mental: m.mental, stats: {...m.stats},
       pfams: readOf(m, extra.pieceId || s.pieceId), sp: {...(m.sp || {})}})),
     cohesion: s.cohesion, fam: s.fam[extra.pieceId || s.pieceId] ?? 0, interp: {...s.interp}, fatigue: fatigueOf(s), take: weekTake(s), ...extra,
   };
@@ -1471,16 +1471,115 @@ function endSeason(s){
   addLog(s, seniors.length ? `定期演奏会が終わり、3年生${seniors.length}人が引退した。` : '定期演奏会が終わり、この1年がしめくくられた。');
   return s;
 }
+/* ===== 冬（11月〜3月） =====
+   定期演奏会のあと、3年生が引退して1・2年生の新体制になる。冬は月ごとにまとめて進める：
+   11月 新体制と冬の練習の方針 → 1月 アンサンブルコンテスト（3〜8人で出る冬の大会） → 3月 卒業式で3年生を送る → 新年度 */
+const WINTER_STEPS = [{m: 11, id: 'plan', title: '新体制'}, {m: 1, id: 'ens', title: 'アンサンブルコンテスト'}, {m: 3, id: 'grad', title: '卒業式'}];
+const WINTER_PLANS = {
+  kiso:  {name: '基礎をじっくり', desc: 'ロングトーンとスケールを冬じゅう続ける。部員それぞれの苦手な力が伸びる'},
+  ens:   {name: 'アンサンブルに力を入れる', desc: '少人数で合わせる練習を多くする。アンサンブルコンテストに強くなり、聴き合う耳も育つ'},
+  study: {name: '勉強と両立させる', desc: 'テストや進級に配慮して、練習は短めに。やる気と体力がしっかり戻る'},
+};
+const ENS_MIN = 3, ENS_MAX = 8;
+const winterStep = s => WINTER_STEPS[s.winter?.step ?? 0];
+function startWinter(s0){
+  const s = clone(s0);
+  const seniors = s.members.filter(m => m.grade === 3);
+  s.retiredNow = {names: seniors.map(m => m.name), firstClass: seniors.some(m => isFirstClass(s, m))};
+  if(s.retiredNow.firstClass) addLog(s, '顧問になって最初に入部してきた代が、引退していった。部の物語は、これからも続く。');
+  s.members = s.members.filter(m => m.grade < 3);
+  assignTitles(s.members);
+  s.phase = 'winter'; s.winter = {step: 0};
+  const boss = s.members.find(m => m.title === '部長');
+  addLog(s, `${seniors.length ? `3年生${seniors.length}人が引退し、` : ''}1・2年生${s.members.length}人の新しい部になった。${boss ? `部長は${boss.name}。` : ''}`);
+  return s;
+}
+// 11月：冬の練習の方針（苦手な力・聴き合う耳・やる気と体力）
+function chooseWinterPlan(s0, k){
+  const s = clone(s0);
+  if(!WINTER_PLANS[k]) return s;
+  for(const m of s.members){
+    if(k === 'kiso'){ const [a, b] = statOrder(m); bump(m, a, 3); bump(m, b, 2); }
+    else if(k === 'ens'){ bump(m, 'pitch', 1); bump(m, 'expr', 1.5); }
+    else m.sta = 100;
+  }
+  if(k === 'study') s.morale = clamp(s.morale + 12, 0, 100);
+  s.winter.plan = k; s.winter.step = 1;
+  addLog(s, `冬の練習は「${WINTER_PLANS[k].name}」。${WINTER_PLANS[k].desc}。`);
+  return s;
+}
+// アンサンブルの採点：少人数なので、人数の少なさや抜けた声部では減点しない。一人ひとりの音程・リズム・音色・表現を見る
+function ensembleScore(s, a){
+  const sc = 0.3 * a.score.pitch + 0.25 * a.score.rhythm + 0.25 * a.score.tone + 0.2 * a.score.expr - 0.6 * Math.min(10, a.wrong || 0);
+  return Math.round(clamp(sc + (s.winter?.plan === 'ens' ? 5 : 0), 0, 100) * 10) / 10;
+}
+// 1月：アンサンブルコンテスト（選んだ3〜8人で、今年の自由曲を少人数用に吹く）
+function runEnsemble(s0, ids){
+  const s = clone(s0);
+  const ms = ids.map(id => seated(s).find(m => m.id === id)).filter(Boolean).slice(0, ENS_MAX);
+  if(ms.length < ENS_MIN) return s;
+  const pid = s.contestPiece || s.pieceId || 'largo';
+  const rec = addRec(s, `${s.year} アンサンブルコンテスト`, {pieceId: pid, venue: 'civic', nerves: 3, only: ms.map(m => m.id)});
+  rec.keep = true;
+  const perf = perform(recCtx(rec)), score = ensembleScore(s, analyze(perf));
+  const award = score >= 80 ? 'gold' : score >= 64 ? 'silver' : 'bronze', rep = score >= 88;
+  const nm = {gold: '金賞', silver: '銀賞', bronze: '銅賞'}[award];
+  rec.result = {award, avg: score};
+  for(const m of ms){
+    bump(m, 'pitch', 1.5); bump(m, 'tone', 1); m.mental = clamp((m.mental ?? 40) + 5, 0, 100); addSkill(s, m, 'nerve', 0.25);
+    remember(s, m, `${s.year}年度のアンサンブルコンテストに出て、${nm}${rep ? '（県代表）' : ''}をとった。`);
+  }
+  gainRep(s, {gold: 3, silver: 1.5, bronze: 0.5}[award] + (rep ? 2 : 0));
+  s.morale = clamp(s.morale + (award === 'gold' ? 6 : 2), 0, 100);
+  s.winter.ens = {ids: ms.map(m => m.id), names: ms.map(m => m.name), score, award, rep, recId: rec.id};
+  addLog(s, `アンサンブルコンテストに、${ms.map(m => m.name).join('・')}の${ms.length}人で出た。${nm}${rep ? '。県の代表に選ばれた！' : '。'}（${score}点）`);
+  gainCoach(s, 3);
+  return s;
+}
+function skipEnsemble(s0){ const s = clone(s0); s.winter.ens = {skipped: true}; addLog(s, '今年のアンサンブルコンテストには出なかった。'); return s; }
+// おまかせで出る人：いちばんうまい部員がいるパートの仲間を中心に、うまい順に5人
+function autoEnsemble(s){
+  const ms = seated(s).slice().sort((a, b) => avgStat(b) - avgStat(a));
+  if(ms.length < ENS_MIN) return [];
+  const sec = secOf(ms[0]), same = ms.filter(m => secOf(m) === sec);
+  return [...same, ...ms.filter(m => secOf(m) !== sec)].slice(0, Math.min(5, ms.length)).map(m => m.id);
+}
+// 3月：卒業式で3年生を送る。そのあと新年度へ
+function winterNext(s0){
+  const s = clone(s0);
+  const st = winterStep(s);
+  if(st.id === 'ens' && !s.winter.ens) return s;
+  if(st.id === 'grad'){
+    const names = s.retiredNow?.names || [];
+    for(const m of s.members) if(names.length) remember(s, m, '卒業式で、先輩たちを演奏で送った。');
+    s.morale = clamp(s.morale + 4, 0, 100);
+    addLog(s, names.length ? `卒業式。${names.join('、')}を、1・2年生が演奏で送った。` : '3月。春休みの音楽室で、新しい1年に向けて準備をした。');
+    return newYear(s);
+  }
+  s.winter.step++;
+  return s;
+}
+// 早送り（sim.js）や「冬をおまかせで」：方針は基礎、アンサンブルはおまかせの5人
+function autoWinter(s){
+  if(s.phase === 'end') s = startWinter(s);
+  if(s.phase === 'winter' && winterStep(s).id === 'plan') s = chooseWinterPlan(s, 'kiso');
+  if(s.phase === 'winter' && winterStep(s).id === 'ens'){ const ids = autoEnsemble(s); s = ids.length ? runEnsemble(s, ids) : skipEnsemble(s); s = winterNext(s); }
+  if(s.phase === 'winter' && winterStep(s).id === 'grad') s = winterNext(s);
+  return s;
+}
+
 // 顧問になった年に、1年生として入部してきた部員（いちばん最初に一から育てた代）
 const startYearOf = s => s.startYear ?? (s.history[0]?.year ?? s.year);
 const isFirstClass = (s, m) => m.joined === startYearOf(s) && m.first?.y === m.joined && (m.joinGrade ?? 1) === 1;
 function newYear(s0){
   const s = clone(s0);
   const pid = s.contestPiece || s.pieceId, pieceTitle = pid ? PIECES[pid].title : '';
-  const seniors = s.members.filter(m => m.grade === 3);
+  // 3年生は、冬のはじめ（startWinter）に引退している。冬を通らなかった前のセーブは、ここで引退する
+  const seniors = s.members.filter(m => m.grade === 3), ret = s.retiredNow || {names: seniors.map(m => m.name), firstClass: seniors.some(m => isFirstClass(s, m))};
   s.history.push({year: s.year, piece: pieceTitle, ...(s.division ? {div: s.division} : {}), ...(s.setPiece ? {set: PIECES[s.setPiece]?.title} : {}), results: s.season, final: s.finalResult || null,
-    retired: seniors.map(m => m.name), firstClass: seniors.some(m => isFirstClass(s, m))});
-  if(seniors.some(m => isFirstClass(s, m))) addLog(s, '顧問になって最初に入部してきた代が、卒業していった。部の物語は、これからも続く。');
+    retired: ret.names, firstClass: ret.firstClass, ...(s.winter?.ens?.award ? {ens: {award: s.winter.ens.award, score: s.winter.ens.score, names: s.winter.ens.names}} : {})});
+  if(!s.retiredNow && ret.firstClass) addLog(s, '顧問になって最初に入部してきた代が、卒業していった。部の物語は、これからも続く。');
+  delete s.retiredNow; delete s.winter;
   // 1年をやりきった経験（この年の最初の週の記録より前に入れる。最初の1年を終えると Lv2 になるくらい）
   gainCoach(s, 10);
   s.finalResult = null;

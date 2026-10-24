@@ -22,7 +22,7 @@ while(guard++ < 2000 && done < YEARS){
   if(recruitsDue(s) && !s.pending){ s = assignRecruits(s, autoAssign(s)); continue; }
   if(s.phase === 'choose'){ s = choosePiece(s, PIECE); s = setPolicy(s, POL); continue; }
   if(s.phase === 'chooseSet'){ s = chooseSetPiece(s, setOffer(s)[0]); continue; }
-  if(s.phase === 'end'){ console.log('== ' + s.year + '年度の終わり ' + grades() + ' ' + JSON.stringify(stat())); s = newYear(s); s = setPolicy(s, POL); done++; continue; }
+  if(s.phase === 'end'){ console.log('== ' + s.year + '年度の終わり ' + grades() + ' ' + JSON.stringify(stat())); s = autoWinter(s); s = setPolicy(s, POL); done++; continue; }
   if(s.pending){ s = finishStage(s); continue; }
   const ev = eventAt(s, s.week);
   if(ev && ev.kind === 'audition' && s.audition && !s.audition.decided){

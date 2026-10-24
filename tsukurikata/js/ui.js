@@ -410,6 +410,7 @@ function renderHeader(){
   }
   if(S.phase === 'choose' || S.phase === 'chooseSet'){ $('#weekNow').textContent = `${S.year}年 4月・選曲会議`; $('#weeksLeft').textContent = '県大会まで16週'; return; }
   if(S.phase === 'end'){ $('#weekNow').textContent = `${S.year}年度の本番がすべて終わった`; $('#weeksLeft').textContent = ''; return; }
+  if(S.phase === 'winter'){ const st = winterStep(S); $('#weekNow').textContent = `${S.year}年度 ${st.m}月`; $('#weeksLeft').textContent = `冬のあいだ（${S.winter.step + 1}／${WINTER_STEPS.length}）`; return; }
   $('#weekNow').textContent = wkLabel(S.week);
   let nx = null;
   for(let w = S.week; w <= last; w++){ const ev = eventAt(S, w); if(ev && (ev.kind === 'concert' || ev.kind === 'contest')){ nx = [w, ev]; break; } }
@@ -543,6 +544,7 @@ function renderWeek(){
     head.textContent = S.phase === 'choose' && foundingYear(S) && !S.members.length ? '最初の部員' : '新しい部員';
     return renderAssign(w, ev);
   }
+  if(S.phase === 'winter'){ head.textContent = `${winterStep(S).m}月・${winterStep(S).title}`; return renderWinter(w); }
   if(S.phase === 'choose'){
     head.textContent = '選曲会議';
     const fit = pieceFit();
@@ -574,7 +576,7 @@ function renderWeek(){
       <div class="transport">${april ? `<button class="btn small" type="button" data-act="playrec" data-id="${april.id}">▶ 4月の録音</button>` : ''}${lastStage ? `<button class="btn small" type="button" data-act="playrec" data-id="${lastStage.id}">▶ 最後の本番</button><button class="btn small" type="button" data-act="saverec" data-id="${lastStage.id}">⤓ 最後の本番を保存</button>` : ''}</div></div>
       ${firstClassEpilogue(seniors)}
       ${seniors.length ? `<div class="seniors"><h3>引退する3年生</h3><p class="small">名前をタップすると、入部したころと最後の本番を、その人の音だけで聴き比べられる。</p>${seniors.map(m => seniorCard(m, lastStage)).join('')}</div>` : ''}
-      <div class="transport"><button class="btn primary" type="button" data-act="newyear">次の年度へ</button></div>`;
+      <div class="transport"><button class="btn primary" type="button" data-act="winter">${seniors.length ? '冬へ（3年生が引退する）' : '冬へ'}</button></div>`;
     return;
   }
   const stage = ev?.kind === 'contest' ? 'コンクール' : '本番';
@@ -696,15 +698,18 @@ function yearMembersHtml(){
    月・年度が変わったら場面の扉、スキル・顧問の指導力・部の節目はカットインで（同じスキルはまとめて）。
    ページを開いたときは、いまの月と年度を覚えるだけで出さない */
 function fxMoments(){
-  const m = wkMonth(S.week), first = U.fxYear == null;
+  const m = S.phase === 'winter' ? winterStep(S).m : wkMonth(S.week), first = U.fxYear == null;
   document.documentElement.dataset.season = SEASON_OF(m);
+  const wk = S.phase === 'winter' ? `${S.year}:${S.winter.step}` : null;
   if(!first){
     if(U.fxYear !== S.year) fxYearStart(S);
     else if(U.fxMonth !== m && S.phase === 'week') fxMonth(S);
     if(S.phase === 'end' && U.fxEnd !== S.year) fxYearEnd(S);
+    if(wk && U.fxWinter !== wk) fxWinter(S);
   }
   // 新しくゲームを始めたときは、最初に一度だけ年度のはじまりを見せる
   else if(S.founding && S.year === S.startYear && S.week === 0 && !S.members.length && !S.flags.fxIntro){ S.flags.fxIntro = true; save(S); fxYearStart(S); }
+  U.fxWinter = wk;
   if(S.phase === 'end') U.fxEnd = S.year;
   U.fxYear = S.year; U.fxMonth = m;
   if(S.skillUp?.length){
@@ -757,6 +762,43 @@ function weekResHtml(){
 // 同じ受け持ちに席がいくつかあるときは、2つ目からの席に「2人目」「3人目」をつける（トランペット 1st は2人、クラリネット 1st は3人で吹く）
 const seatNth = id => { const p = SEAT[id].part, k = SEATS.filter(x => x.part === p).findIndex(x => x.id === id); return k > 0 ? `（${k + 1}人目）` : ''; };
 const seatLabel = id => PART_LABEL[SEAT[id].part] + seatNth(id);
+/* ===== 冬（11月 新体制 → 1月 アンサンブルコンテスト → 3月 卒業式） ===== */
+function renderWinter(w){
+  const st = winterStep(S), names = S.retiredNow?.names || [];
+  if(st.id === 'plan'){
+    const boss = S.members.find(m => m.title === '部長');
+    w.innerHTML = `<div class="event"><span class="tag">11月・新体制</span><span>${names.length ? `3年生${names.length}人が引退した。` : ''}1・2年生${S.members.length}人の新しい部。${boss ? `部長は${esc(boss.name)}。` : ''}冬のあいだ、どんな練習をしようか。</span></div>
+      <div class="choices wplans">${Object.entries(WINTER_PLANS).map(([k, p]) => `<button class="mbtn" type="button" data-wplan="${k}"><b>${p.name}</b><span>${p.desc}</span></button>`).join('')}</div>`;
+    return;
+  }
+  if(st.id === 'ens'){
+    const e = S.winter.ens;
+    const intro = `<div class="event"><span class="tag">1月・アンサンブルコンテスト</span><span>3〜8人の少人数で出る、冬の大会。今年の自由曲を、選んだ人数で吹く。少人数なので、一人ひとりの音程・リズム・音色・表現がそのまま聞こえる。出た部員は、聴き合う耳と度胸が育つ。</span></div>`;
+    if(!e){
+      const key = `${S.year}:ens`;
+      if(U.ensKey !== key){ U.ensKey = key; U.ensPick = new Set(autoEnsemble(S)); }
+      const k = U.ensPick.size, ok = k >= ENS_MIN && k <= ENS_MAX;
+      const chip = m => `<button class="chip" type="button" data-ens="${m.id}" aria-pressed="${U.ensPick.has(m.id)}">${esc(m.name)}<small>${m.grade}年・${Math.round(avgStat(m))}</small></button>`;
+      const secs = SECTIONS.map(sc => [sc, seated(S).filter(m => secOf(m) === sc.id)]).filter(([, l]) => l.length)
+        .map(([sc, l]) => `<div class="chips opsec"><span class="oplab">${sc.name}</span>${l.map(chip).join('')}</div>`).join('');
+      w.innerHTML = `${intro}<p class="small">出る部員を${ENS_MIN}〜${ENS_MAX}人選ぶ（名前の横の数字は、力の平均）。はじめは、うまい部員のパートを中心に5人を選んである。</p>
+        <div class="episode ensp">${secs}</div>
+        <div class="transport"><button class="btn primary" type="button" data-act="ensgo"${ok ? '' : ' disabled'}>${ok ? `この${k}人で出る` : `${ENS_MIN}〜${ENS_MAX}人を選ぶ（いま${k}人）`}</button><button class="btn quiet" type="button" data-act="ensskip">今年は出ない</button></div>`;
+      return;
+    }
+    if(e.skipped){
+      w.innerHTML = `${intro}<p class="txt">今年のアンサンブルコンテストには出なかった。</p><div class="transport"><button class="btn primary" type="button" data-act="wnext">3月へ</button></div>`;
+      return;
+    }
+    const nm = {gold: '金賞', silver: '銀賞', bronze: '銅賞'}[e.award];
+    w.innerHTML = `${intro}<div class="result" style="--award:var(--${e.award})"><div class="award"><span class="stamp">${nm}</span><div><b>${e.rep ? '県の代表に選ばれた！' : {gold: 'アンサンブルで金賞！', silver: '銀賞。少人数でもよく合っていた。', bronze: '銅賞。少人数のむずかしさを知った。'}[e.award]}</b>
+      <p class="small">${e.names.map(esc).join('・')}（${e.names.length}人）・${e.score}点</p></div></div>
+      <div class="transport"><button class="btn small" type="button" data-act="playrec" data-id="${e.recId}">▶ 聴く</button><button class="btn primary" type="button" data-act="wnext">3月へ</button></div></div>`;
+    return;
+  }
+  w.innerHTML = `<div class="event"><span class="tag">3月・卒業式</span><span>${names.length ? `卒業式の日。${names.map(esc).join('、')}を、1・2年生の演奏で送ろう。` : '3月。春休みの音楽室で、新しい1年に向けて準備をしよう。'}</span></div>
+    <div class="transport"><button class="btn primary" type="button" data-act="wnext">${names.length ? '演奏で送って、4月へ' : '4月へ（新年度）'}</button></div>`;
+}
 /* ===== 新しく入った部員の担当を決める（部をつくった最初の5人・本入部の1年生・途中から入ってきた部員） =====
    上の札で部員を選び、舞台の空いている席をタップして座らせる。選んだ部員の希望の楽器の席は光る。
    この曲で旋律やソロを吹く空き席には ♪ をつける */
@@ -1045,6 +1087,7 @@ function renderHistory(){
       <div class="body">
         <p>コンクール${h.div ? `（${h.div}部門${h.set ? `・課題曲 ${esc(h.set)}` : ''}）` : ''}：${h.results.length ? resultText(h.results) : '出場なし'}</p>
         ${h.final ? `<p>定期演奏会：${esc(h.final.piece)}（演奏の出来 ${h.final.q}点）</p>` : ''}
+        ${h.ens ? `<p>アンサンブルコンテスト：${AWARD_NM[h.ens.award]}（${h.ens.names.map(esc).join('・')}）</p>` : ''}
         ${h.retired?.length ? `<p>引退した3年生${h.firstClass ? '（顧問になって最初の代）' : ''}：${h.retired.map(esc).join('、')}</p>` : ''}
         <div class="transport">${recBtns(h.year)}</div>
       </div></details>`;
@@ -1341,6 +1384,8 @@ function bind(){
     }
     if(b.dataset.ep !== undefined){ haptic('tap'); commit(resolveEpisode(S, +b.dataset.ep)); renderAll(); refreshNow(); return; }
     if(b.dataset.cs !== undefined){ haptic('tap'); commit(resolveConsult(S, +b.dataset.cs)); renderAll(); return; }
+    if(b.dataset.wplan){ haptic('tap'); commit(chooseWinterPlan(S, b.dataset.wplan)); renderAll(); scrollTo(0, 0); return; }
+    if(b.dataset.ens){ const id = b.dataset.ens; if(U.ensPick.has(id)) U.ensPick.delete(id); else if(U.ensPick.size < ENS_MAX) U.ensPick.add(id); else return; haptic('tap'); renderWeek(); return; }
     if(b.dataset.split){ haptic('tap'); commit(setSplit(S, b.dataset.split)); renderWeek(); return; }
     if(b.dataset.rid){ U.asg.sel = b.dataset.rid; haptic('tap'); asgUpdate(); return; }
     if(b.dataset.asg === 'bench'){ if(U.asg?.sel){ U.asg.picks[U.asg.sel] = null; asgUpdate(); } return; }
@@ -1390,6 +1435,10 @@ function bind(){
     else if(act === 'reveal'){ stopPlay(); reveal(); }
     else if(act === 'next'){ stopPlay(); commit(finishStage(S)); renderAll(); refreshNow(); }
     else if(act === 'newyear'){ stopPlay(); commit(newYear(S)); U.sel = null; U.piece = null; renderAll(); refreshNow(); }
+    else if(act === 'winter'){ stopPlay(); commit(startWinter(S)); U.sel = null; renderAll(); scrollTo(0, 0); }
+    else if(act === 'ensgo'){ haptic('tap'); commit(runEnsemble(S, [...U.ensPick])); renderAll(); }
+    else if(act === 'ensskip'){ commit(skipEnsemble(S)); renderAll(); }
+    else if(act === 'wnext'){ stopPlay(); const ny = winterStep(S).id === 'grad'; commit(winterNext(S)); if(ny){ U.sel = null; U.piece = null; } renderAll(); refreshNow(); scrollTo(0, 0); }
     else if(act === 'playrec') playRec(b.dataset.id);
     else if(act === 'saverec'){ const rec = S.recs.find(r => r.id === b.dataset.id); if(rec) saveRecording(rec); }
     else if(act === 'memplay' || act === 'memsave'){
