@@ -140,7 +140,7 @@
      ③和音が小節の途中で変わる小節（15・22・39小節目）の弦の細かい形と、木管のトリルの音は、総譜の刷りが込み入っているので和音から決めた
      ④小節0は弱起だけなので、頭に2秒ほど音のない時間がある */
   // 受け持ちを書くための道具
-  const SF = .85, ST = .7;   // 弦の音型（immer f）、トリル
+  const SF = .85, ST = .6;   // 弦の音型（immer f）、トリル
   const cm = (ln, f, t, sh = 0, sc = 1) => ({f, t, r: 'cm', line: ln, sh, sc});
   const melSeg = (f, t, sh = 0, sc = 1) => ({f, t, r: 'mel', sh, sc});
   const MEL_AS_CM = ROLE_SCALE.mel / ROLE_SCALE.cm;
@@ -149,7 +149,7 @@
   const callSegs = (mk, from = 15, to = 90) => CALL_SC.slice(0, -1).map(([f, s], k) => [Math.max(f, from), Math.min(CALL_SC[k + 1][0], to), s])
     .filter(([f, t]) => f < t).map(([f, t, s]) => mk(f, t, s));
   const bassCall = sh => callSegs((f, t, s) => ({f, t, r: 'bass', sh, sc: s}));
-  const hornCall = (ln, from, to) => callSegs((f, t, s) => cm(ln, f, t, 0, .9 * s), from, to);
+  const hornCall = (ln, from, to, k = 1) => callSegs((f, t, s) => cm(ln, f, t, 0, .9 * s * k), from, to);
 
   addPiece({
     id: 'valkyrie',
@@ -163,7 +163,7 @@
     desc: '映画やテレビでもよく使われる、勇ましく空を駆けるような曲。木管がトリル（2つの音をすばやく行き来する音）を受け渡し、クラリネットやサックスが細かく駆け上がる音を休まず回し続ける。その上で、付点のリズムの主題が、ホルンとトロンボーン、ホルンとトランペット、トロンボーンの順に受け渡されていく。細かい音がそろわないと、ただのざわめきに聞こえてしまう。',
     asks: 'リズム・バランス・音色',
     focus: {pitch: .9, tone: 1.05, expr: .95, rhythm: 1.25, balance: 1.05},
-    balRef: 4.05, ceiling: .96,
+    balRef: 4.4, ceiling: .96,
     spans: [{name: '前奏（トリルと駆け上がり）', short: '前奏', from: 0, to: 39}, {name: '主題（ホルンからトランペットへ）', short: '主題', from: 39, to: 78},
       {name: 'トロンボーンの主題と終わり', short: '終わり', from: 78, to: 94}],
     slur: 'bar',
@@ -208,9 +208,9 @@
       tp3:   [melSeg(59.5, 76, 0, .9), fin('tp3')],
       // ホルン：1st・2nd は前奏と主題3で合いの手、主題1・2で主題（原曲のホルン5〜8番）。3rd・4th はずっと合いの手（原曲のホルン1〜4番）
       hn1:   [...hornCall('h13', 15, 36), melSeg(38.5, 55), cm('hnX1', 54, 58, 0, MEL_AS_CM * .9), melSeg(59.5, 76), cm('hnX2', 75, 78, 0, MEL_AS_CM * .8),
-        ...hornCall('h13', 78, 90), fin('hn1')],
+        ...hornCall('h13', 78, 90, .65), fin('hn1')],
       hn2:   [...hornCall('h24', 15, 39), melSeg(38.5, 55), cm('hnX1', 54, 58, 0, MEL_AS_CM * .9), melSeg(59.5, 76), cm('hnX2', 75, 78, 0, MEL_AS_CM * .8),
-        ...hornCall('h24', 78, 90), fin('hn2')],
+        ...hornCall('h24', 78, 90, .65), fin('hn2')],
       hn3:   [...hornCall('h13', 15, 90), fin('hn3')],
       hn4:   [...hornCall('h24', 15, 90), fin('hn4')],
       // トロンボーン：主題1（バストランペットの受け持ち。演奏会用の総譜ではトロンボーン1・2番）と主題3
