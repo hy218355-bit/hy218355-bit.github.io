@@ -119,7 +119,7 @@ function warpNote(n, c, pf, T0){
   const real = c.timeOf(n.b + span) - c.timeOf(n.b);
   const k = ref > 1e-4 ? real / ref : 1;
   // 正確な指揮ほど、部員の出だしのずれ（遅れ・ばらつき）が小さくなる
-  const tight = 1 - 0.9 * ((c.leadAt ? c.leadAt(n.b) : LEAD_AUTO) - LEAD_AUTO);
+  const tight = 1 - LEAD_TIGHT * ((c.leadAt ? c.leadAt(n.b) : LEAD_AUTO) - LEAD_AUTO);
   const dev = ((n.t - n.tg) * k + 0.22 * Math.min(0.6, c.joltAt(n.b)) * (1 - 0.7 * (n.R ?? 0.5)) * clampG(gauss(n.key, 'cond'))) * tight;
   const w = {...n, t: Math.max(0, c.timeOf(n.b) - T0 + dev)};
   if(n.d != null){ w.d = n.d * k; if(n.env) w.env = n.env.map(([x, v]) => [x * k, v]); }

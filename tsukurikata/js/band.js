@@ -149,10 +149,12 @@ function trillStep(pc, m, b){
 }
 /* ===== 指揮の効き =====
    自分で指揮すると、1タップごとの正確さが部員に伝わる。ぴったり（1）・いい感じ（0.8）なら、おまかせ（0.5）より出だしがそろい、
-   歌い方も大きくなる。早い・遅い（0.35）と、おまかせより乱れる。2拍より長くタップがないと、部員は自分たちだけで吹く（おまかせと同じ） */
+   歌い方も少し大きくなる。早い・遅い（0.35）と、おまかせより少し乱れる。2拍より長くタップがないと、部員は自分たちだけで吹く（おまかせと同じ）。
+   指揮はあくまで演奏の補助：ぴったり振っても数点（ふつうの部で +2点ほど）。出来を決めるのは、練習で育てた部員の力 */
 const LEAD_AUTO = 0.5;
-// 指揮者がいないと、部員だけで歌える大きさには上限がある（強い部でも、おまかせは「良い」まで）。指揮が正確なほど上限が外れる
-const AUTO_E_CAP = 0.7;
+// 指揮者がいないと、部員だけで歌える大きさには少しだけ上限がある。指揮が正確なほど上限が外れる
+// LEAD_LIFT・LEAD_DROP：歌い方への効き、LEAD_TIGHT：出だしのそろい方への効き（engine.js）、JIT_K：指揮の拍のがたつきの減点
+const AUTO_E_CAP = 0.85, LEAD_LIFT = 0.25, LEAD_DROP = 0.25, LEAD_TIGHT = 0.35, JIT_K = 1;
 const tapLead = x => { const a = Math.abs(x.off); return a <= 0.07 ? 1 : a <= 0.15 ? 0.8 : 0.35; };
 function leadAtTaps(taps, b){
   let i = taps.length - 1;
@@ -258,7 +260,7 @@ function perform(ctx){
       // 歌い方：指揮が正確なほど、部員は指揮者の歌い方に乗れる
       // 上限は歌い方（表現）だけにかける。旋律と伴奏の音量の関係（バランス）は、上限なしの値で決める
       const Ld = leadAt(e.b) - LEAD_AUTO, cap = AUTO_E_CAP + (1 - AUTO_E_CAP) * clamp01(Ld / (1 - LEAD_AUTO));
-      const lift = (x, top) => clamp01(Ld > 0 ? x + (top - x) * 0.7 * Ld : x * (1 + 0.6 * Ld));
+      const lift = (x, top) => clamp01(Ld > 0 ? x + (top - x) * LEAD_LIFT * Ld : x * (1 + LEAD_DROP * Ld));
       const Ef = E0 * lerp(0.4, 1, pf), EnD = lift(Ef, 1), En = lift(Math.min(cap, Ef), cap);
       // 譜読みが浅いと、音が抜け、出だしが揺れる（うまい人ほど揺れは小さい）
       if(H('miss') < 0.07 * Math.pow(1 - pf, 2) * (1 - 0.5 * R)) return;
@@ -466,7 +468,7 @@ function analyze(perf){
     pitch: 100 * Math.exp(-(0.7 * pitchDev + 0.45 * spread) / 18),
     // 指揮した演奏は、拍ごとにテンポががたつくほど落ち着かない演奏になる
     // 指揮した演奏の拍のがたつき：人が振る1拍ごとの±5%くらいの揺れは減点しない
-    rhythm: 100 * Math.exp(-(rhythmMs / 55 + drift * 3 + (perf.conducted ? 4 * Math.max(0, (perf.jitter || 0) - 0.12) : 0))),
+    rhythm: 100 * Math.exp(-(rhythmMs / 55 + drift * 3 + (perf.conducted ? JIT_K * Math.max(0, (perf.jitter || 0) - 0.12) : 0))),
     tone: clamp(100 * (tW ? tE / tW : 0) - 250 * cracks / Math.max(50, perf.notes.length), 0, 100),
     expr: 100 * (eW ? eE / eW : 0) * (0.75 + 0.25 * clamp01(perf.rubUse / Math.max(0.3, RUBATOS[perf.interp.rub ?? 1]))),
     balance: clamp(75 + 8 * (balanceDb - pc.balRef), 0, 100),
