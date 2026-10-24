@@ -221,17 +221,18 @@ function gainCoach(s, xp){
 /* ===== スキルと育ち方 =====
    addSkill：スキルの育ち具合を足す（練習なら少しずつ、相談への答えなら一度に）。○・◎になったら日誌と思い出に残して知らせる
    bend：その子の育ち方（その力が練習で伸びやすくなる。1つの力につき +20% まで） */
-function addSkill(s, m, id, d){
-  if(!m || !SKILLS[id]) return;
+// quiet：日誌には書かない（呼んだ側でまとめて書く）。レベルが上がったら true を返す
+function addSkill(s, m, id, d, quiet){
+  if(!m || !SKILLS[id]) return false;
   const before = skillLv(m, id);
   (m.sp ||= {})[id] = Math.round(Math.min(3, (m.sp[id] || 0) + d) * 100) / 100;
   const lv = skillLv(m, id);
-  if(lv > before){
-    const nm = `${SKILLS[id].name}${skillMark(lv)}`;
-    addLog(s, `${m.name}が、スキル「${nm}」を身につけた。${SKILLS[id].desc}。`);
-    remember(s, m, `スキル「${nm}」を身につけた。`);
-    (s.skillUp ||= []).push({mid: m.id, id, lv});
-  }
+  if(lv <= before) return false;
+  const nm = `${SKILLS[id].name}${skillMark(lv)}`;
+  if(!quiet) addLog(s, `${m.name}が、スキル「${nm}」を身につけた。${SKILLS[id].desc}。`);
+  remember(s, m, `スキル「${nm}」を身につけた。`);
+  (s.skillUp ||= []).push({mid: m.id, id, lv});
+  return true;
 }
 function bend(m, k, d){ (m.bent ||= {})[k] = Math.round(clamp((m.bent[k] || 0) + d, 0, 0.2) * 100) / 100; }
 // 練習の伸びの倍率：その子の育ち方・スキルと、同じパートの面倒見のいい部員・柱
@@ -409,9 +410,11 @@ const REED = new Set(['ob', 'fg', 'ebcl', 'cl', 'bcl', 'asax', 'tsax', 'bsax']);
 const LIP = new Set(['tp', 'hn', 'tb', 'btb', 'euph', 'tuba']);
 const weakest = m => STAT_KEYS.slice().sort((a, b) => m.stats[a] - m.stats[b])[0];
 function bump(m, k, d){ m.stats[k] = Math.round(clamp(m.stats[k] + d, 0, 100) * 10) / 10; }
-function remember(s, m, t){
+// kind をつけた思い出は、同じ種類の古いものを消して、いちばん新しいものだけ残す（本番の「一番の音」がくり返し並ばないように）
+function remember(s, m, t, kind){
   if(!m) return;
-  (m.story ||= []).push({y: s.year, w: s.week, t});
+  if(kind) m.story = (m.story || []).filter(x => x.k !== kind);
+  (m.story ||= []).push(kind ? {y: s.year, w: s.week, t, k: kind} : {y: s.year, w: s.week, t});
   if(m.story.length > 10) m.story.splice(0, m.story.length - 10);
 }
 // 部全体の値を動かす（体力は部員全員ぶん）
@@ -1286,12 +1289,15 @@ function huddle(s0){
 }
 // 本番のあと：場数を踏んだぶんメンタルが強くなる。頭が真っ白になった部員・いつも以上だった部員は思い出に残る
 function stageAftermath(s, ev, p){
-  for(const m of stagers(s)){ m.mental = clamp((m.mental ?? 40) + (ev.kind === 'contest' ? 4 : 2), 0, 100); addSkill(s, m, 'nerve', ev.kind === 'contest' ? 0.12 : 0.08); }
+  // 本番を重ねて「度胸」を身につけた部員は、日誌に1行でまとめる
+  const brave = [];
+  for(const m of stagers(s)){ m.mental = clamp((m.mental ?? 40) + (ev.kind === 'contest' ? 4 : 2), 0, 100); if(addSkill(s, m, 'nerve', ev.kind === 'contest' ? 0.12 : 0.08, true)) brave.push(m); }
+  for(const lv of [1, 2]){ const ms = brave.filter(m => skillLv(m, 'nerve') === lv); if(ms.length) addLog(s, `${ms.map(m => m.name).join('、')}が、本番を重ねてスキル「${SKILLS.nerve.name}${skillMark(lv)}」を身につけた。${SKILLS.nerve.desc}。`); }
   for(const x of p.mental || []){
     const m = s.members.find(y => y.id === x.mid);
     if(!m) continue;
-    if(x.kind === 'freeze'){ m.mental = clamp(m.mental + 3, 0, 100); remember(s, m, `${ev.title}の本番で、緊張して頭が真っ白になった。`); }
-    else remember(s, m, `${ev.title}の本番で、これまでで一番の音が出た。`);
+    if(x.kind === 'freeze'){ m.mental = clamp(m.mental + 3, 0, 100); remember(s, m, `${ev.title}の本番で、緊張して頭が真っ白になった。`, 'freeze'); }
+    else remember(s, m, `${ev.title}の本番で、これまでで一番の音が出た。`, 'zone');
   }
   const names = kind => (p.mental || []).filter(x => x.kind === kind).map(x => s.members.find(y => y.id === x.mid)?.name).filter(Boolean);
   if(names('freeze').length) addLog(s, `${names('freeze').join('、')}は、本番で緊張に飲まれてしまった。`);
@@ -1560,6 +1566,12 @@ function load(){
       s.coach ||= {xp: Math.round(50 * (s.year - (s.startYear ?? s.year)) + 1.5 * s.week)};
       // スキルと育ち方（2026年10月）：前のセーブの部員にも、生まれつきのスキルを決める
       for(const m of s.members){ m.sp ??= innateSkills(m.id, m.exp); m.bent ??= {}; }
+      // 本番の「一番の音」「頭が真っ白」の思い出は、同じ種類のいちばん新しいものだけ残す（2026年10月から）
+      for(const m of s.members) if(m.story){
+        for(const x of m.story) if(!x.k){ const k = /これまでで一番の音/.test(x.t) ? 'zone' : /頭が真っ白/.test(x.t) ? 'freeze' : null; if(k) x.k = k; }
+        const last = {}; m.story.forEach((x, i) => { if(x.k) last[x.k] = i; });
+        m.story = m.story.filter((x, i) => !x.k || last[x.k] === i);
+      }
       if(s.recruits && s.recruitWhen == null) s.recruitWhen = 3;
       delete s.focus;
       return s;
