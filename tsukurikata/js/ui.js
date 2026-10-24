@@ -630,6 +630,7 @@ function renderWeek(){
   if(!tuneDone(S)) parts.push(`<div class="tgrow"><button class="btn small" type="button" data-act="tunegame">♪ 耳でチューニング</button><span class="small">週に1回。合わせた部員の音程が上がる</span></div>`);
   w.innerHTML = parts.join('');
   w.querySelector('[data-outmore]')?.addEventListener('toggle', e => { U.outMore = e.target.open; });
+  w.querySelectorAll('details.psecd').forEach(d => d.addEventListener('toggle', () => { (U.openSecs ||= new Set())[d.open ? 'add' : 'delete'](d.dataset.sec); }));
 }
 // この1年の部員：いちばん伸びた子・身につけたスキル・行事に行った子
 function yearMembersHtml(){
@@ -776,21 +777,30 @@ function planHtml(ev){
   for(const m of ms){ const id = planFor(S, m); count[id] = (count[id] || 0) + 1; }
   const tired = ms.filter(m => m.sta < 30).length;
   const pol = POLICY_BY[S.policy] ? S.policy : 'auto';
-  let sec = null;
-  const rows = ms.map(m => {
-    const s = m.seat ? SEAT[m.seat].sec : 'bench';
-    // パートの見出し：2人以上いるパートは、全員の今週の練習をまとめて選べる
-    const inSec = ms.filter(x => (x.seat ? SEAT[x.seat].sec : 'bench') === s);
-    const same = inSec.every(x => (S.plan?.[x.id] || '') === (S.plan?.[inSec[0].id] || '')) ? (S.plan?.[inSec[0].id] || '') : '-';
-    const secSel = inSec.length >= 2 ? `<select data-secplan="${s}" aria-label="${s === 'bench' ? '控え' : SEC[s].name}の全員の今週の練習"><option value="-"${same === '-' ? ' selected' : ''}>このパート全員：…</option><option value=""${same === '' ? ' selected' : ''}>全員おまかせ</option>${menus.map(x => `<option value="${x.id}"${same === x.id ? ' selected' : ''}>全員 ${menuLabel(x.id)}</option>`).join('')}</select>` : '';
-    const head = s !== sec ? `<li class="psec"><span>${s === 'bench' ? '控え' : SEC[s].name}</span>${secSel}</li>` : '';
-    sec = s;
+  // 部員はパートごとにたたむ（部員が多いと「すすめる」ボタンがずっと下になるので）。見出しに、そのパートの今週の練習をまとめて出す
+  const groups = [];
+  for(const m of ms){ const k = m.seat ? SEAT[m.seat].sec : 'bench'; let g = groups.find(x => x.k === k); if(!g) groups.push(g = {k, ms: []}); g.ms.push(m); }
+  const rowOf = m => {
     const auto = decideMenu(S, m), own = S.plan?.[m.id] && menuOpen(S, S.plan[m.id]) ? S.plan[m.id] : '';
     const c = m.sta >= 60 ? 'good' : m.sta >= 30 ? 'warn' : 'bad';
-    return `${head}<li class="pm${own ? ' own' : ''}"><span class="who"><b>${esc(m.name)}</b><small>${m.grade}年・${m.seat ? esc(PART_LABEL[SEAT[m.seat].part]) : '控え'}${m.out && m.seat ? '・コンクール控え' : ''}${S.pieceId ? `・譜読み${Math.round(readMean(m, S.pieceId))}` : ''}・苦手：${STAT_LABEL[weakest(m)]}</small></span>
+    return `<li class="pm${own ? ' own' : ''}"><span class="who"><b>${esc(m.name)}</b><small>${m.grade}年・${m.seat ? esc(PART_LABEL[SEAT[m.seat].part]) : '控え'}${m.out && m.seat ? '・コンクール控え' : ''}${S.pieceId ? `・譜読み${Math.round(readMean(m, S.pieceId))}` : ''}・苦手：${STAT_LABEL[weakest(m)]}</small></span>
       <span class="sta" title="体力 ${Math.round(m.sta)}"><span class="track"><span class="fill ${c}" style="width:${clamp(m.sta, 0, 100)}%"></span></span><b>${Math.round(m.sta)}</b></span>
       <label class="pw"><span>今週</span><select data-plan="${m.id}" aria-label="${esc(m.name)}の今週の練習"><option value="">おまかせ（${MENU_BY[auto].name}）</option>${menus.map(x => `<option value="${x.id}"${own === x.id ? ' selected' : ''}>${menuLabel(x.id)}</option>`).join('')}</select></label>${(own || auto) === 'piece' && S.pieceId ? spanSelect(m) : ''}
       ${m.last ? `<small class="last">${esc(lastText(m))}</small>` : ''}</li>`;
+  };
+  const rows = groups.map(({k, ms: gm}) => {
+    const name = k === 'bench' ? '控え' : SEC[k].name;
+    // 2人以上いるパートは、全員の今週の練習をまとめて選べる
+    const same = gm.every(x => (S.plan?.[x.id] || '') === (S.plan?.[gm[0].id] || '')) ? (S.plan?.[gm[0].id] || '') : '-';
+    const secSel = gm.length >= 2 ? `<select data-secplan="${k}" aria-label="${name}の全員の今週の練習"><option value="-"${same === '-' ? ' selected' : ''}>このパート全員：…</option><option value=""${same === '' ? ' selected' : ''}>全員おまかせ</option>${menus.map(x => `<option value="${x.id}"${same === x.id ? ' selected' : ''}>全員 ${menuLabel(x.id)}</option>`).join('')}</select>` : '';
+    const cnt = {};
+    for(const m of gm){ const id = planFor(S, m); cnt[id] = (cnt[id] || 0) + 1; }
+    const what = MENU.filter(x => cnt[x.id]).map(x => `${x.name}${gm.length > 1 ? ` ${cnt[x.id]}` : ''}`).join('・');
+    const own = gm.some(m => S.plan?.[m.id] && menuOpen(S, S.plan[m.id]));
+    const low = gm.filter(m => m.sta < 30).length;
+    const open = ms.length <= 8 || U.openSecs?.has(k);
+    return `<details class="psecd" data-sec="${k}"${open ? ' open' : ''}><summary><b>${name}<small>${gm.length}人</small></b><span class="what">${what}${own ? '・指示あり' : ''}${low ? `<em>疲れ ${low}人</em>` : ''}</span></summary>
+      ${secSel ? `<div class="secall">${secSel}</div>` : ''}<ul class="plist">${gm.map(rowOf).join('')}</ul></details>`;
   }).join('');
   const sum = MENU.filter(m => count[m.id]).map(m => `${m.name} ${count[m.id]}人`).join('・');
   const tutti = (count.tutti || 0) + (count.hall || 0);
@@ -798,7 +808,7 @@ function planHtml(ev){
     ${foundingYear(S) && S.week < 4 ? '<p class="small">「おまかせ」のままの部員は、部の方針で自分の練習を決める。指示したい部員だけ、今週の練習を選ぼう。合奏は出た人が多いほど、部のまとまりと曲の仕上がりが伸びる。</p>' : ''}
     <div class="focus"><span>部の方針</span><div class="chips">${POLICIES.map(p => `<button class="chip" type="button" data-polall="${p.id}" aria-pressed="${pol === p.id}">${p.name}</button>`).join('')}</div>
     <span class="small">${POLICY_BY[pol].desc}</span></div>
-    <ul class="plist">${rows}</ul>
+    <div class="psecs">${ms.length > 8 ? '<p class="small">部員ごとの練習（パートを押すと開く。数字は人数）</p>' : ''}${rows}</div>
     ${S.pieceId && !S.finalWeek && S.week >= 8 && nextContest(S).w > S.week ? lineupLine() : ''}
     <p class="small plan-sum">今週の予定：${sum}${tutti === 1 ? '（合奏は2人以上いないとできない）' : ''}</p>
     ${tired ? `<p class="small">体力が30を切っている部員が${tired}人。休ませないと、練習の効果が半分になる。</p>` : ''}
