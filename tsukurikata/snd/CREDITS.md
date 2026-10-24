@@ -9,8 +9,14 @@
 - **Versilian Studios「Versilian Community Sample Library（VCSL）」**（CC0 1.0）
   https://github.com/sgossner/VCSL
   テナーサックス（のばす音・スタッカート）、ヴィブラフォン
+- **University of Iowa Electronic Music Studios「Musical Instrument Samples」**（「どんな用途にも制限なく使える」と公開されているもの）
+  https://theremin.music.uiowa.edu/MIS.html
+  E♭クラリネット・バスクラリネット・バストロンボーン（mf と ff。半音ずつ続けて吹いた録音を1音ずつに切り分けたもの。作り方は `../tools/build_extra_samples.py`）
+- **Karoryfer Samples「Bear Sax」**（CC0 1.0。1926年のコーンのバリトンサックス）
+  https://github.com/sfzinstruments/karoryfer.bear-sax
+  バリトンサックス（のばす音・短い音）
 
-E♭クラリネット・バスクラリネットはクラリネット、ユーフォニアム・バストロンボーンはトロンボーン、バリトンサックスはテナーサックスの録音を、高さと明るさを変えて使っています。
+ユーフォニアムだけは自由に使える録音が見つからなかったので、トロンボーンの録音を明るさを変えて使っています。
 
 録音のない高さ（ホルンの中音域など）は、いちばん近い録音から作っています。Praat（parselmouth）の PSOLA で音色の山を保ったまま高さだけを変え、倍音の強さを両どなりの本物の録音のあいだに合わせています（`../tools/fill_gaps.py`、目録では `gen: 1`）。どの楽器・どの高さでも、再生時に高さをずらす幅は2半音以内です（ホルンの最低音域だけ4半音）。
 

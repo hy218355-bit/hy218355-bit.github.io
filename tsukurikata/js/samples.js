@@ -9,11 +9,13 @@
 // 耳に近い重み（K特性）で測った大きさが INST の gain（採点のバランスでも使う大きさ）どおりになるよう合わせてある
 const SAMPLE_BANK = {
   picc: {bank: 'picc', g: 1.2}, fl: {bank: 'flute', g: 1.04}, ob: {bank: 'oboe', g: 1.01},
-  fg: {bank: 'bassoon', g: 1.13}, ebcl: {bank: 'clar', g: 0.92}, cl: {bank: 'clar', g: 1.04},
-  bcl: {bank: 'clar', shift: -12, lp: 10, g: 1.27},
-  // バリトンサックスは、テナーサックスの録音を5度下げて使う
-  asax: {bank: 'sax', g: 1.07}, tsax: {bank: 'tsax', g: 1.06}, bsax: {bank: 'tsax', shift: -7, g: 1.13},
-  tp: {bank: 'tpt', g: 1.05}, hn: {bank: 'horn', g: 1.08}, tb: {bank: 'tbn', g: 1.11}, btb: {bank: 'tbn', g: 1.1},
+  // E♭クラ・バスクラ・バストロンボーン（アイオワ大）とバリトンサックス（Bear Sax）は、2026年10月に自分の録音にした。
+  // g は、前の代わりの録音（クラリネット・トロンボーン・テナーサックスを高さを変えて使ったもの）と同じ大きさになるよう測って合わせた
+  fg: {bank: 'bassoon', g: 1.13}, ebcl: {bank: 'ebclar', g: 1.18}, cl: {bank: 'clar', g: 1.04},
+  bcl: {bank: 'bclar', g: 1.61},
+  asax: {bank: 'sax', g: 1.07}, tsax: {bank: 'tsax', g: 1.06}, bsax: {bank: 'bsax', g: 1.0},
+  tp: {bank: 'tpt', g: 1.05}, hn: {bank: 'horn', g: 1.08}, tb: {bank: 'tbn', g: 1.11}, btb: {bank: 'btbn', g: 0.95},
+  // ユーフォニアムは自由に使える録音がないので、トロンボーンの録音を暗くして使う
   euph: {bank: 'tbn', lp: 6, g: 1.07}, tuba: {bank: 'tuba', g: 1.04}, cb: {bank: 'cbass', g: 1.11},
   // 大太鼓は1打がトランペット1音より10dBほど大きく、マーチで全体をおおっていたので下げた。スネアは短い音で埋もれていたので上げた
   cbpizz: {bank: 'pizz', g: 1.3}, timp: {bank: 'timp', g: 3.1}, sd: {bank: 'sd', g: 4.6}, bd: {bank: 'bd', g: 1.57},

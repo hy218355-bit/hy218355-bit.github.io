@@ -69,7 +69,7 @@
 ・耳でチューニング：部員の音とチューナーの音の「うなり」を聴いて合わせるミニゲーム
 ・通信なしで遊べます。広告・課金・アカウント登録はありません
 
-楽器の録音は VSCO 2 Community Edition と VCSL（CC0）、Weresax（CC BY 3.0）を使っています。
+楽器の録音は VSCO 2 Community Edition・VCSL・Bear Sax（CC0）、Weresax（CC BY 3.0）、アイオワ大学 Musical Instrument Samples を使っています。
 
 ## キーワード（100文字まで・カンマ区切り）
 
