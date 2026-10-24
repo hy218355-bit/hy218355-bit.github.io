@@ -156,16 +156,51 @@ const recCtx = rec => ({
   lead: rec.conduct?.taps ? (taps => b => leadAtTaps(taps, b))(rec.conduct.taps.map(([k, off]) => ({k, off}))) : undefined,
 });
 
+/* ===== コンクールの部門 =====
+   年度のはじめに部員が A_MIN 人より少なければ B部門（自由曲だけ。県大会まで）。A_MIN 人以上なら A部門（課題曲＋自由曲。支部大会・全国大会へつながる）。
+   課題曲は、毎年 SET_POOL から3曲が発表され、その中から1曲を選ぶ（本物の課題曲は今の作曲家の作品なので、パブリックドメインの曲で代わりにする）。
+   A部門の本番は課題曲・自由曲の順に続けて吹き、審査員ごとに課題曲 SET_W・自由曲 1−SET_W の重みで合わせて採点する。
+   division がない（前の形の）セーブは、これまでどおり1曲で全国大会まで */
+const A_MIN = 15;
+const SET_POOL = ['aida', 'pomp', 'hero', 'galop', 'ode', 'hungarian'];
+const SET_W = 0.4;
+const SPLIT = {free: [0.7, 0.3], both: [0.5, 0.5], set: [0.3, 0.7]};   // 曲の練習の配分［自由曲, 課題曲］
+const SPLIT_NAME = {free: '自由曲中心', both: '半分ずつ', set: '課題曲中心'};
+const isB = s => s.division === 'B';
+const divisionFor = s => s.members.length >= A_MIN ? 'A' : 'B';
+const setOffer = s => SET_POOL.filter(id => PIECES[id] && id !== s.pieceId).sort((a, b) => hash(s.year, a, 'set') - hash(s.year, b, 'set')).slice(0, 3);
+// 課題曲を練習する時期か（A部門で課題曲を決めていて、コンクールが終わる前）
+const setActive = s => !!(s.setPiece && !s.finalWeek);
+// 今週の曲の練習を、どの曲にどれだけ向けるか
+function pieceShares(s){
+  if(!s.pieceId) return [];
+  if(!setActive(s)) return [[s.pieceId, 1]];
+  const [f, t] = SPLIT[s.split] || SPLIT.both;
+  return [[s.pieceId, f], [s.setPiece, t]];
+}
 function choosePiece(s0, pid){
   const s = clone(s0);
   s.pieceId = pid; s.phase = 'week';
+  s.division = divisionFor(s);
   addLog(s, `自由曲は${PIECES[pid].full}に決まった。最初の合奏を録音した。`);
+  addLog(s, s.division === 'A' ? `部員が${A_MIN}人以上いるので、今年はA部門に出る。課題曲と自由曲の2曲で、支部大会・全国大会を目指せる。`
+    : `部員が${A_MIN}人より少ないので、今年はB部門に出る。自由曲だけで、県大会まで。${A_MIN}人以上になればA部門に出られる。`);
   const rec = addRec(s, `${s.year}年4月の録音`, {pieceId: pid, venue: 'room'});
   rec.keep = true;
+  // A部門は、続けて課題曲を選ぶ
+  if(s.division === 'A'){ s.phase = 'chooseSet'; return s; }
   // 年度の最初の週にも、だれかが相談に来る
   if(!s.episode && !s.consult) s.consult = pickConsult(s);
   return s;
 }
+function chooseSetPiece(s0, pid){
+  const s = clone(s0);
+  s.setPiece = pid; s.split = 'both'; s.phase = 'week';
+  addLog(s, `課題曲は${PIECES[pid].full}に決めた。`);
+  if(!s.episode && !s.consult) s.consult = pickConsult(s);
+  return s;
+}
+function setSplit(s0, k){ const s = clone(s0); if(SPLIT[k]) s.split = k; return s; }
 function clone(s){ return JSON.parse(JSON.stringify(s)); }
 
 /* ===== 練習 =====
@@ -188,7 +223,7 @@ function decideMenu(s, m){
   // おまかせ：本番の前の週は合奏（大会の前でホールを借りられるなら会場で）。自分の譜読みがまだ浅ければ個人練習
   // （入ったばかりでほとんど吹けないなら合奏の週以外はずっと、まだ6割に届かないなら1週おき）。3週に1回は合奏
   if(soon) return soon.ev.kind === 'contest' && menuOpen(s, 'hall') ? 'hall' : 'tutti';
-  const rd = s.pieceId ? readMean(m, s.pieceId) : 100;
+  const rd = s.pieceId ? pieceShares(s).reduce((a, [pid, sh]) => a + sh * readMean(m, pid), 0) : 100;
   if(rd < 20 && s.week % 3 !== 2) return 'piece';
   if(rd < 60 && s.week % 2 === 1 && s.week % 3 !== 2) return 'piece';
   if(s.pieceId && s.week % 3 === 2) return 'tutti';
@@ -251,11 +286,11 @@ function setPlan(s0, mid, menu){
   if(menu) s.plan[mid] = menu; else delete s.plan[mid];
   return s;
 }
-// 曲の個人練習で打ちこむ区間（指示がなければ、いちばん吹けていない区間）
-function practiceSpan(s, m){
-  const units = readUnits(s.pieceId), want = s.planSpan?.[m.id];
+// 曲の個人練習で打ちこむ区間（指示がなければ、いちばん吹けていない区間。指示は自由曲だけ）
+function practiceSpan(s, m, pid = s.pieceId){
+  const units = readUnits(pid), want = pid === s.pieceId ? s.planSpan?.[m.id] : null;
   if(units.some(u => u.i === want)) return want;
-  const v = readOf(m, s.pieceId);
+  const v = readOf(m, pid);
   return units.reduce((a, u) => v[u.i] < v[a.i] ? u : a).i;
 }
 function setPlanSpan(s0, mid, i){
@@ -313,20 +348,22 @@ function practiceWeek(s0, plan){
     }
     // 譜読み：その人が今の曲の自分の楽譜を、区間ごとにどれだけ吹けるか。うまい人ほど早く読める（全体の力が0なら半分の速さ、100なら1.5倍）。
     // 曲の個人練習は1つの区間に打ちこむ（ほかの区間も少しは進む）。合奏などは曲全体が少しずつ進む。音が多い区間ほどゆっくり（readEase）
+    // A部門は、課題曲と自由曲に配分どおり分ける（pieceShares）
     let span = null;
-    if(s.pieceId && mu.read){
-      const pid = s.pieceId, units = readUnits(pid), cur = readOf(m, pid), before = readMean(m, pid);
-      span = id === 'piece' ? practiceSpan(s, m) : null;
-      const rate = mu.read * eff * (0.5 + avgStat(m) / 100) * (1 + SKILLS.reader.read * skillLv(m, 'reader'));
+    if(mu.read) for(const [pid, sh] of pieceShares(s)){
+      const units = readUnits(pid), cur = readOf(m, pid), before = readMean(m, pid);
+      const sp = id === 'piece' ? practiceSpan(s, m, pid) : null;
+      if(pid === s.pieceId) span = sp;
+      const rate = sh * mu.read * eff * (0.5 + avgStat(m) / 100) * (1 + SKILLS.reader.read * skillLv(m, 'reader'));
       // 1週間に覚えられる量は同じなので、打ちこんだ区間が短いほど大きく進む（くり返しの区間は数えない）
       const len = u => u.to - u.from, total = units.reduce((a, u) => a + len(u), 0);
       const next = cur.slice(), ease = readEase(pid, m.seat ? SEAT[m.seat].part : null);
       for(const u of units){
-        const g = (span == null ? rate : u.i === span ? rate * 0.85 * total / len(u) : rate * 0.15) * (ease[u.i] ?? 1);
+        const g = (sp == null ? rate : u.i === sp ? rate * 0.85 * total / len(u) : rate * 0.15) * (ease[u.i] ?? 1);
         next[u.i] = Math.round(clamp(cur[u.i] + g * (1 - cur[u.i] / 130), 0, 100) * 10) / 10;
       }
       (m.fam ||= {})[pid] = next;
-      d.fam = Math.round((readMean(m, pid) - before) * 10) / 10;
+      if(pid === s.pieceId) d.fam = Math.round((readMean(m, pid) - before) * 10) / 10;
     }
     m.last = {menu: id, d, ...(span != null ? {span} : {})};
     // 同じ練習を続けると、それに合ったスキルが育つ。合奏を重ねた2・3年生のうまい部員は、パートの柱になっていく
@@ -345,10 +382,10 @@ function practiceWeek(s0, plan){
   const eff0 = (0.6 + 0.4 * s.morale / 100) * (ev.mult || 1) * cmul * (1 + 0.08 * moodLv);
   const coh = MENU.reduce((a, mu) => a + (mu.coh || 0) * share(mu.id), 0);
   if(coh){ const d = coh * eff0 * (1 - s.cohesion / 150); s.cohesion = clamp(s.cohesion + d, 0, 100); s.lastDelta.coh = Math.round(d * 10) / 10; }
-  if(s.pieceId){
-    const df = famSum / n * (1 - s.fam[s.pieceId] / 130);
-    s.fam[s.pieceId] = clamp(s.fam[s.pieceId] + df, 0, 100);
-    s.lastDelta.fam = Math.round(df * 10) / 10;
+  for(const [pid, sh] of pieceShares(s)){
+    const df = sh * famSum / n * (1 - (s.fam[pid] || 0) / 130);
+    s.fam[pid] = clamp((s.fam[pid] || 0) + df, 0, 100);
+    if(pid === s.pieceId) s.lastDelta.fam = Math.round(df * 10) / 10; else s.lastDelta.setFam = Math.round(df * 10) / 10;
   }
   const hall = share('hall');
   if(hall) s.hallExp = clamp(s.hallExp + MENU_BY.hall.hallExp * hall, 0, 100);
@@ -1185,8 +1222,11 @@ function predictContest(s0, outIds){
   const L = LEVELS[ev.level];
   const members = seated(s).filter(m => !outIds.has(m.id));
   if(!members.length) return {avg: 0, award: 'bronze', level: ev.level, n: 0};
-  const perf = perform(perfCtx(s, {members, venue: L.venue, nerves: nervesFor(s, ev), fatigue: 0}));
-  const a = analyze(perf), j = judge(perf, a, ev.level);
+  const ctx = {members, venue: L.venue, nerves: nervesFor(s, ev), fatigue: 0};
+  const perf = perform(perfCtx(s, ctx));
+  const a = analyze(perf);
+  let j = judge(perf, a, ev.level);
+  if(setActive(s)){ const ps = perform(perfCtx(s, {...ctx, pieceId: s.setPiece})); j = mergeJudges(judge(ps, analyze(ps), ev.level), j, ev.level, SET_W); }
   return {avg: j.avg, award: j.award, level: ev.level, n: members.length, thin: a.thin};
 }
 // おすすめ：オーディションの点が低い順に何人か控えに回して、いちばん点が上がる人数を探す
@@ -1229,19 +1269,33 @@ function beginStage(s0){
   const s = clone(s0);
   const ev = eventAt(s, s.week);
   const nerves = nervesFor(s, ev);
-  const rec = addRec(s, `${s.year} ${ev.title}`, {venue: ev.venue, nerves, form: stageForm(s), take: `stage-${s.stageDay?.seed ?? weekTake(s)}`});
+  const two = ev.kind === 'contest' && setActive(s);
+  const o = {venue: ev.venue, nerves, form: stageForm(s), take: `stage-${s.stageDay?.seed ?? weekTake(s)}`};
+  // A部門：先に課題曲、続けて自由曲（同じ日・同じ調子）
+  const setRec = two ? addRec(s, `${s.year} ${ev.title}（課題曲）`, {...o, pieceId: s.setPiece}) : null;
+  const rec = addRec(s, `${s.year} ${ev.title}${two ? '（自由曲）' : ''}`, o);
   rec.keep = ev.kind === 'contest' || !!ev.final;
+  if(setRec) setRec.keep = true;
   if(ev.final) rec.final = true;
   const perf = perform(recCtx(rec));
-  stageResult(s, ev, rec, perf, nerves);
+  stageResult(s, ev, rec, perf, nerves, setRec);
   return s;
 }
-function stageResult(s, ev, rec, perf, nerves){
+// 本番の採点。setRec があれば課題曲も吹いて、審査員ごとに合わせる。B部門は代表に選ばれない
+function stageResult(s, ev, rec, perf, nerves, setRec = null){
   const a = analyze(perf);
   if(ev.kind === 'contest'){
-    const j = judge(perf, a, ev.level);
+    let j = judge(perf, a, ev.level), parts = null;
+    if(setRec){
+      const ps = perform(recCtx(setRec)), js = judge(ps, analyze(ps), ev.level);
+      parts = {set: Math.round(js.avg * 10) / 10, free: Math.round(j.avg * 10) / 10};
+      j = mergeJudges(js, j, ev.level, SET_W);
+      perf.mental = [...(perf.mental || []), ...(ps.mental || []).filter(x => !(perf.mental || []).some(y => y.mid === x.mid))];
+      setRec.result = {award: j.award, rep: j.rep, avg: j.avg};
+    }
+    if(isB(s)) j.rep = false;
     rec.result = {award: j.award, rep: j.rep, avg: j.avg};
-    s.pending = {kind: 'contest', recId: rec.id, judge: j, nerves, revealed: false};
+    s.pending = {kind: 'contest', recId: rec.id, ...(setRec ? {setRecId: setRec.id, parts} : {}), division: s.division || null, judge: j, nerves, revealed: false};
   } else {
     const q = quality(a);
     s.pending = {kind: 'concert', recId: rec.id, q, nerves, revealed: false, ...concertOutcome(s, ev, q, perf, a)};
@@ -1257,7 +1311,7 @@ function conductStage(s0, conduct){
   // 同じ日の同じ調子で、指揮しなかった（おまかせの）ときの点。指揮でどれだけ変わったかを見せる
   const scoreOf = x => x.kind === 'concert' ? x.q : x.judge.avg, before = scoreOf(p);
   const perf = warpPerf(perform(recCtx(rec)), BeatClock.fromSaved(conduct.ev, 0, conduct.taps));
-  stageResult(s, ev, rec, perf, p.nerves);
+  stageResult(s, ev, rec, perf, p.nerves, p.setRecId ? s.recs.find(r => r.id === p.setRecId) : null);
   s.pending.conducted = {bpm: conduct.bpm, stab: conduct.stab, gain: Math.round((scoreOf(s.pending) - before) * 10) / 10};
   return s;
 }
@@ -1382,8 +1436,8 @@ function finishStage(s0){
   const j = p.judge;
   const L = LEVELS[ev.level];
   const nm = {gold: '金賞', silver: '銀賞', bronze: '銅賞'}[j.award];
-  s.season.push({level: ev.level, award: j.award, rep: j.rep, avg: Math.round(j.avg * 10) / 10});
-  addLog(s, `${L.name}の結果は${nm}${j.rep ? `。${L.rep}への代表に選ばれた！` : j.award === 'gold' && L.rep ? '。代表には届かなかった。' : '。'}`);
+  s.season.push({level: ev.level, award: j.award, rep: j.rep, avg: Math.round(j.avg * 10) / 10, ...(p.division ? {div: p.division} : {}), ...(p.parts ? {parts: p.parts} : {})});
+  addLog(s, `${L.name}${p.division === 'B' ? '（B部門）' : p.division === 'A' ? '（A部門）' : ''}の結果は${nm}${p.parts ? `（課題曲 ${p.parts.set}・自由曲 ${p.parts.free}）` : ''}${j.rep ? `。${L.rep}への代表に選ばれた！` : p.division === 'B' ? '。B部門は県大会まで。' : j.award === 'gold' && L.rep ? '。代表には届かなかった。' : '。'}`);
   gainRep(s, (REP_AWARD[j.award] + (j.rep ? 4 : 0)) * REP_LEVEL[ev.level]);
   if(j.rep){
     s.morale = clamp(s.morale + 10, 0, 100);
@@ -1424,7 +1478,7 @@ function newYear(s0){
   const s = clone(s0);
   const pid = s.contestPiece || s.pieceId, pieceTitle = pid ? PIECES[pid].title : '';
   const seniors = s.members.filter(m => m.grade === 3);
-  s.history.push({year: s.year, piece: pieceTitle, results: s.season, final: s.finalResult || null,
+  s.history.push({year: s.year, piece: pieceTitle, ...(s.division ? {div: s.division} : {}), ...(s.setPiece ? {set: PIECES[s.setPiece]?.title} : {}), results: s.season, final: s.finalResult || null,
     retired: seniors.map(m => m.name), firstClass: seniors.some(m => isFirstClass(s, m))});
   if(seniors.some(m => isFirstClass(s, m))) addLog(s, '顧問になって最初に入部してきた代が、卒業していった。部の物語は、これからも続く。');
   // 1年をやりきった経験（この年の最初の週の記録より前に入れる。最初の1年を終えると Lv2 になるくらい）
@@ -1434,7 +1488,7 @@ function newYear(s0){
   assignTitles(s.members);
   // 年度の終わりに入部を決めた生徒は、新しい年度の最初に担当を決める（学年は1つ上がる）
   for(const r of s.recruits || []) r.grade = Math.min(3, (r.grade || 1) + 1);
-  s.year++; s.week = 0; s.phase = 'choose'; s.pieceId = null; s.season = []; s.pending = null;
+  s.year++; s.week = 0; s.phase = 'choose'; s.pieceId = null; s.setPiece = null; s.split = null; s.division = null; s.season = []; s.pending = null;
   s.finalWeek = null; s.autumnFrom = null; s.contestPiece = null; s.chooseFinal = false;
   for(const m of s.members) delete m.out;
   s.audition = null;

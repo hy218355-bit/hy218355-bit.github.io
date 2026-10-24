@@ -139,10 +139,10 @@ function fxCountUps(root = document){
 
 /* ----- 本番の入場と幕 ----- */
 // 幕の前に会場と曲を出し、客席の拍手のあと幕が開いて、部員が席につく。そのあと演奏をはじめる（go）
-function stageIntro(perf, ev, rec, go){
+function stageIntro(perf, ev, rec, go, pieceText = null){
   const cur = document.querySelector('.cd-curtain'), cv = document.getElementById('cdStage');
   const ids = SEATS.map(x => S.members.find(m => m.seat === x.id)?.id).filter(id => id && CD.who.has(id));
-  cur.querySelector('.cd-intro').innerHTML = `<small>${esc(VENUE[rec.venue].name)}</small><b>${esc(ev.title)}</b><span>県立みなと高校 吹奏楽部</span><span>${esc(PIECES[rec.pieceId].full)}</span>`;
+  cur.querySelector('.cd-intro').innerHTML = `<small>${esc(VENUE[rec.venue].name)}</small><b>${esc(ev.title)}</b><span>県立みなと高校 吹奏楽部</span><span>${esc(pieceText || PIECES[rec.pieceId].full)}</span>`;
   const msg0 = $('#cdMsg').textContent;
   cur.classList.add('shut');
   cdMsg('客席が静かになっていく。もうすぐ幕が上がる。');

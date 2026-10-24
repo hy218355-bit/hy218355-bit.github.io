@@ -642,10 +642,24 @@ function judge(perf, a, levelId){
     if(!comments.length) comments.push('全体によくまとまっています。あと一歩の磨き込みを期待します。');
     return {name: j.name, score: sc, grade: sc >= L.A ? 'A' : sc >= L.B ? 'B' : 'C', comment: comments.join('')};
   });
+  return {judges, ...awardOf(judges, levelId), level: levelId};
+}
+// 審査員の点から、平均・賞・代表を決める
+function awardOf(judges, levelId){
+  const L = LEVELS[levelId] || LEVELS.pref;
   const avg = judges.reduce((s, j) => s + j.score, 0) / judges.length;
   const award = avg >= L.gold && judges.every(j => j.grade !== 'C') ? 'gold' : avg >= L.B - 4 ? 'silver' : 'bronze';
   const rep = !!L.rep && award === 'gold' && judges.every(j => j.grade === 'A');
-  return {judges, avg, award, rep, level: levelId};
+  return {avg, award, rep};
+}
+// A部門：課題曲（js）と自由曲（jf）の採点を、審査員ごとに w：1−w で合わせる。講評は自由曲から（2人目の審査員は課題曲にもふれる）
+function mergeJudges(js, jf, levelId, w){
+  const L = LEVELS[levelId] || LEVELS.pref;
+  const judges = jf.judges.map((x, i) => {
+    const sc = Math.round(w * js.judges[i].score + (1 - w) * x.score);
+    return {name: x.name, score: sc, grade: sc >= L.A ? 'A' : sc >= L.B ? 'B' : 'C', comment: i === 1 ? `課題曲は、${js.judges[i].comment}自由曲は、${x.comment}` : x.comment};
+  });
+  return {judges, ...awardOf(judges, levelId), level: levelId};
 }
 // 演奏会（コンクール以外）の出来：0〜100
 function quality(a){

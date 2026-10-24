@@ -79,8 +79,8 @@ function closeWatch(){
   document.documentElement.classList.remove('conducting');
 }
 function closeConduct(){
-  // 見ているだけの本番は、止めて結果へ（入場の途中なら、まだ鳴らしていないので、そのまま結果へ）
-  if(CD.phase === 'watch'){ const intro = !!CD.intro; stopPlay(); closeWatch(); if(intro) reveal(); return; }
+  // 見ているだけの本番は、止めて結果へ（入場の途中や、課題曲と自由曲のあいだなら、鳴っていないので、そのまま結果へ）
+  if(CD.phase === 'watch'){ const idle = !!CD.intro || !U.playing; stopPlay(); closeWatch(); if(idle) reveal(); return; }
   cancelAnimationFrame(CD.raf);
   const playing = CD.phase === 'play';
   CD.phase = 'idle';
