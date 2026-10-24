@@ -569,8 +569,9 @@ function mentalNote(p){
   if(!fr.length && !zn.length) return '';
   return `<p class="small mental-note">${fr.length ? `緊張で頭が真っ白に：${fr.join('、')}` : ''}${fr.length && zn.length ? '　' : ''}${zn.length ? `いつも以上の音：${zn.join('、')}` : ''}</p>`;
 }
+// 本番の大きさ（緊張のしやすさ）。その日の部員の様子は舞台袖（wingsHtml）に出す
 function moodText(n){
-  return n <= 3 ? 'みんな落ち着いている。いつもどおり吹けそうだ。' : n <= 6 ? '少し緊張している。本番では実力より少し下がりそうだ。' : '緊張と不安で、本番は実力を出しきれないかもしれない。';
+  return n <= 3 ? '気楽な本番。いつもの力を出しやすい。' : n <= 6 ? '大事な本番。緊張で、実力より少し下がりそうだ。' : '大きな本番。緊張で、実力を出しきれないかもしれない。';
 }
 function renderWeek(){
   const w = $('#week'), ev = eventAt(S, S.week);
@@ -629,7 +630,7 @@ function renderWeek(){
       ${ev.kind === 'contest' ? `<p class="small">${two ? `課題曲 ${esc(PIECES[S.setPiece].title)} → 自由曲 ${esc(PIECES[S.pieceId].title)}（続けて吹く）` : `自由曲 ${esc(PIECES[S.pieceId].title)}`}${isB(S) ? '。B部門は県大会まで' : ''}</p>` : ''}
       <p class="small">会場：${v.name}（${v.rt < 0.2 ? '響きはほとんどない' : `残響 約${v.rt.toFixed(1)}秒`}）。${v.desc}</p>
       ${ev.text ? `<p class="txt">${ev.text}</p>` : ''}
-      <p class="txt">${moodText(n)}（緊張 −${n}）${v.play.hall ? `会場慣れ ${Math.round(S.hallExp)}。` : ''}</p>
+      <p class="txt">${moodText(n)}${v.play.hall ? `会場慣れ ${Math.round(S.hallExp)}。` : ''}</p>
       ${wingsHtml()}
       <div class="transport"><button class="btn primary" type="button" data-act="stage">本番の演奏をはじめる</button><button class="btn brass" type="button" data-act="stageconduct">自分で指揮する</button></div>
       <p class="small">自分で指揮すると、その指揮で演奏した結果が審査される。テンポが大きく揺れると、リズムの苦手な部員ほどついてこられない。</p>
@@ -1394,8 +1395,11 @@ function modelPerf(pid){
 // 曲のカード（選曲・課題曲・定期演奏会の曲）：短い曲名・作曲者・問われる力と、聴く・決めるボタン。曲の説明は「どんな曲？」で開く
 function pieceCard(id, {tag = '', note = '', act, label}){
   const pc = PIECES[id];
+  // いまの部員で吹くと、いない楽器（審査で減点になる）
+  const lk = seated(S).length ? lackOf(id, seated(S).map(m => SEAT[m.seat].sec)) : null;
   return `<div class="pcard">${tag ? `<span class="tag fit">${tag}</span>` : ''}<h3>${pc.title}</h3><p>${pc.composer}${note ? `・${note}` : ''}</p>
     <p class="asks">問われる力：<b>${pc.asks}</b></p>
+    ${lk ? `<p class="asks">${lk.pts >= 1 ? `いない楽器で <b>−${Math.round(lk.pts)}点</b>ほど（とくに${lackNames(lk.miss.slice(0, 2)).join('・')}）` : lk.miss.length ? `いない楽器：${lackNames(lk.miss).join('・')}（審査にはほぼ響かない）` : 'いまの部で、楽器はそろっている'}</p>` : ''}
     <details class="pdesc"><summary>どんな曲？</summary><p>${pc.full}。${pc.desc}</p></details>
     <div class="row"><button class="btn small" type="button" data-act="model" data-pid="${id}">▶ お手本</button><button class="btn small" type="button" data-act="preview" data-pid="${id}">▶ いまの部で</button><button class="btn small primary" type="button" data-act="${act}" data-pid="${id}">${label}</button></div></div>`;
 }

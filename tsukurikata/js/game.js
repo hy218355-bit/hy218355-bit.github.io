@@ -826,7 +826,7 @@ const CONSULTS = [
      {label: 'コンクールまでは部活に集中してほしい', go: (s, m) => { bend(m, weakest(m), 0.05); adj(s, 'morale', -1);
        return `${kun(m)}は少し残念そうだったが、「コンクールが終わったら始めます」と言った。`; }},
    ]},
-  {id: 'grades', who: s => ss(s),
+  {id: 'grades', who: s => s.week > 7 ? ss(s) : [],   // 中間テストのあと
    text: (s, m) => `${m.name}（${instOf(m)}）が青い顔で来た。「テストの点が悪くて、親に部活をやめろって言われて……」`,
    choices: [
      {label: '部で勉強会をしよう', go: (s, m) => { adj(s, 'cohesion', 3); adj(s, 'stamina', -2);
@@ -890,7 +890,7 @@ const CONSULTS = [
      {label: '一本早い電車にしてみる？', go: (s, m) => { addSkill(s, m, 'tough', 0.4); bend(m, weakest(m), 0.03);
        return `${kun(m)}は一本早い電車で来るようになった。朝の静かな音楽室で、ひとりでロングトーンをしている。`; }},
    ]},
-  {id: 'both', who: s => ss(s),
+  {id: 'both', who: s => s.week >= 18 && s.week < 22 ? ss(s) : [],   // 文化祭（9月3週）の前
    text: (s, m) => `${m.name}（${instOf(m)}）が「クラスの出し物と部活、どっちも手を抜きたくないんです」と言ってきた。`,
    choices: [
      {label: '両方やりきろう', go: (s, m) => { addSkill(s, m, 'tough', 0.5); adj(s, 'stamina', -1);
@@ -1019,7 +1019,7 @@ const CONSULTS = [
      {label: 'まずは、テンポを体に入れることから', go: (s, m) => { addSkill(s, m, 'groove', 0.5);
        return `${kun(m)}は、メトロノームに合わせて、机をたたいて練習した。`; }},
    ]},
-  {id: 'duet', pair: true, who: s => ss(s).filter(m => m.grade >= 1 && ss(s).some(x => x.id !== m.id && secOf(x) !== secOf(m))),
+  {id: 'duet', pair: true, who: s => s.week >= 22 ? [] : ss(s).filter(m => m.grade >= 1 && ss(s).some(x => x.id !== m.id && secOf(x) !== secOf(m))),
    other: (s, m) => ss(s).filter(x => x.id !== m.id && secOf(x) !== secOf(m) && Math.abs(avgStat(x) - avgStat(m)) < 20),
    text: (s, m, o) => `${m.name}（${instOf(m)}）が、${o.name}（${instOf(o)}）といっしょに来た。「ふたりで二重奏をやってみたいんです」`,
    choices: [
@@ -1072,7 +1072,8 @@ const CONSULTS = [
 const CONSULT_BY = Object.fromEntries(CONSULTS.map(c => [c.id, c]));
 // 練習の週の相談を決める（大きな出来事がある週は出さない）
 function pickConsult(s){
-  if(s.phase !== 'week' || s.episode) return null;
+  // 4月のはじめの2週は、入部や曲決めで忙しいので相談は来ない
+  if(s.phase !== 'week' || s.episode || s.week < 2) return null;
   const ev = eventAt(s, s.week);
   if(ev && ev.kind !== 'mod') return null;
   const recent = s.consultLog || [];
@@ -1243,7 +1244,7 @@ const OUTINGS = [
 const OUTING_BY = Object.fromEntries(OUTINGS.map(o => [o.id, o]));
 // 練習の週に、行事の誘いを出すかどうか（月に1回ほど。続けては出さない）
 function pickOuting(s){
-  if(s.phase !== 'week' || s.episode) return null;
+  if(s.phase !== 'week' || s.episode || s.week < 2) return null;
   const ev = eventAt(s, s.week);
   if(ev && ev.kind !== 'mod') return null;
   if(s.year * 100 + s.week - (s.outingAt ?? -99) < 3 || hash(s.year, s.week, 'outing') > 0.45) return null;
