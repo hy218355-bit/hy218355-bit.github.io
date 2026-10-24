@@ -603,6 +603,8 @@ function renderWeek(){
     const n = nervesFor(S, ev), v = VENUE[ev.venue];
     const two = ev.kind === 'contest' && setActive(S);
     w.innerHTML = `<div class="stagecard"><span class="tag">${ev.kind === 'contest' ? 'コンクール' : '本番'}</span><h3>${ev.title}${ev.kind === 'contest' && S.division ? `（${S.division}部門）` : ''}</h3>
+      ${ev.kind === 'contest' && !isB(S) ? (() => { const rv = rivalResult(S, S.year, ev.level), ly = rivalSeason(S, S.year - 1);
+        return rv ? `<p class="small rivalline">ライバル：${esc(rivalShort(S))}${ly && S.year > (S.startYear ?? S.year) ? `（去年は${LEVELS[ly.level].name}${AWARD_NM[ly.award]}）` : ''}も、この大会に出る。</p>` : ''; })() : ''}
       ${ev.kind === 'contest' ? `<p class="small">${two ? `課題曲 ${esc(PIECES[S.setPiece].title)} → 自由曲 ${esc(PIECES[S.pieceId].title)}（続けて吹く）` : `自由曲 ${esc(PIECES[S.pieceId].title)}`}${isB(S) ? '。B部門は県大会まで' : ''}</p>` : ''}
       <p class="small">会場：${v.name}（${v.rt < 0.2 ? '響きはほとんどない' : `残響 約${v.rt.toFixed(1)}秒`}）。${v.desc}</p>
       ${ev.text ? `<p class="txt">${ev.text}</p>` : ''}
@@ -743,6 +745,10 @@ function fxMoments(){
   // 実績：ページを開いたときは、記録するだけ（前のセーブの分をまとめて出さない）
   const got = checkAch(S, first);
   if(got.length){ save(S); if(!first) for(const a of got) fxShow({kind: 'cut', sound: 'level', ms: 2800, html: fxCutHtml('実績を達成', a.name, '', a.desc)}); }
+  if(S.rivalUp){
+    const r = S.rivalUp; delete S.rivalUp; save(S);
+    fxShow({kind: 'cut', sound: r.win ? 'level' : 'mile', ms: 2800, html: fxCutHtml(`ライバル校との勝負（${LEVELS[r.level].name}）`, r.win ? '勝った！' : 'まだ届かない', `こちら ${r.ours}点 ／ ${rivalShort(S)} ${r.theirs}点`, r.win ? '練習してきたことが、結果になった。' : '来年こそ。差は確実に縮まっている。')});
+  }
   if(S.dreamUp?.length){
     const ids = S.dreamUp; delete S.dreamUp; save(S);
     // 同じ夢は1枚にまとめる
@@ -1246,6 +1252,7 @@ function renderHistory(){
       <div class="body">
         <p>コンクール${h.div ? `（${h.div}部門${h.set ? `・課題曲 ${esc(h.set)}` : ''}）` : ''}：${h.results.length ? resultText(h.results) : '出場なし'}</p>
         ${h.final ? `<p>定期演奏会：${esc(h.final.piece)}（演奏の出来 ${h.final.q}点）</p>` : ''}
+        ${(S.rivalLog || []).filter(x => x.y === h.year).map(x => `<p>ライバル（${esc(rivalShort(S))}）：${LEVELS[x.level].name}で ${x.ours}点 対 ${x.theirs}点。${x.win ? '勝ち' : '負け'}</p>`).join('')}
         ${h.ens ? `<p>アンサンブルコンテスト：${AWARD_NM[h.ens.award]}（${h.ens.names.map(esc).join('・')}）</p>` : ''}
         ${h.retired?.length ? `<p>引退した3年生${h.firstClass ? '（顧問になって最初の代）' : ''}：${h.retired.map(esc).join('、')}</p>` : ''}
         <div class="transport">${recBtns(h.year)}</div>

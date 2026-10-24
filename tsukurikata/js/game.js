@@ -180,6 +180,7 @@ const SPLIT = {auto: null, free: [0.7, 0.3], both: [0.5, 0.5], set: [0.3, 0.7]};
 const SPLIT_NAME = {auto: 'おまかせ', free: '自由曲中心', both: '半分ずつ', set: '課題曲中心'};
 const autoSplit = s => { const t = clamp(0.5 + ((s.fam[s.pieceId] || 0) - (s.fam[s.setPiece] || 0)) / 100, 0.3, 0.7); return [1 - t, t]; };
 const isB = s => s.division === 'B';
+const AWARD_JA = {gold: '金賞', silver: '銀賞', bronze: '銅賞'};
 const divisionFor = s => s.members.length >= A_MIN ? 'A' : 'B';
 const setOffer = s => SET_POOL.filter(id => PIECES[id] && id !== s.pieceId).sort((a, b) => hash(s.year, a, 'set') - hash(s.year, b, 'set')).slice(0, 3);
 // 課題曲を練習する時期か（A部門で課題曲を決めていて、コンクールが終わる前）
@@ -850,7 +851,7 @@ const CONSULTS = [
        return `${kun(m)}がパートの楽器の手入れのしかたを教えて回った。みんなの楽器の鳴りがよくなった。`; }},
    ]},
   {id: 'rival', who: s => ss(s).filter(m => m.grade >= 1),
-   text: (s, m) => `${m.name}（${instOf(m)}）が言った。「となりの高校の吹奏楽部に中学の友だちがいて、コンクールで絶対に負けたくないんです」`,
+   text: (s, m) => `${m.name}（${instOf(m)}）が言った。「${rivalShort(s)}の吹奏楽部に中学の友だちがいて、コンクールで絶対に負けたくないんです」`,
    choices: [
      {label: 'いい目標だね。いっしょに練習計画を立てよう', go: (s, m) => { bend(m, weakest(m), 0.06); m.mental = clamp((m.mental ?? 40) + 2, 0, 100);
        return `${kun(m)}は、苦手なところから毎日少しずつ練習する計画を立てた。`; }},
@@ -1623,6 +1624,14 @@ function finishStage(s0){
   s.season.push({level: ev.level, award: j.award, rep: j.rep, avg: Math.round(j.avg * 10) / 10, ...(p.division ? {div: p.division} : {}), ...(p.parts ? {parts: p.parts} : {})});
   addLog(s, `${L.name}${p.division === 'B' ? '（B部門）' : p.division === 'A' ? '（A部門）' : ''}の結果は${nm}${p.parts ? `（課題曲 ${p.parts.set}・自由曲 ${p.parts.free}）` : ''}${j.rep ? `。${L.rep}への代表に選ばれた！` : p.division === 'B' ? '。B部門は県大会まで。' : j.award === 'gold' && L.rep ? '。代表には届かなかった。' : '。'}`);
   gainRep(s, (REP_AWARD[j.award] + (j.rep ? 4 : 0)) * REP_LEVEL[ev.level]);
+  // ライバル校：同じ大会に出ていれば点をくらべる。B部門の年は、相手のA部門の結果だけ
+  const rv = rivalResult(s, s.year, ev.level);
+  if(rv && !isB(s)){
+    const win = j.avg > rv.avg;
+    (s.rivalLog ||= []).push({y: s.year, level: ev.level, ours: Math.round(j.avg * 10) / 10, theirs: rv.avg, win});
+    addLog(s, `ライバルの${rivalShort(s)}は${AWARD_JA[rv.award]}（平均${rv.avg}点）。${win ? '今年は、こちらが上だった！' : 'まだ届かなかった。'}`);
+    s.rivalUp = {win, ours: Math.round(j.avg * 10) / 10, theirs: rv.avg, level: ev.level};
+  } else if(rv && ev.level === 'pref') addLog(s, `ライバルの${rivalShort(s)}は、A部門の県大会で${AWARD_JA[rv.award]}${rv.rep ? '（代表）' : ''}だった。`);
   if(j.rep){
     s.morale = clamp(s.morale + 10, 0, 100);
     return nextWeek(s);
@@ -1800,6 +1809,31 @@ function fulfillDreams(s, ctx = {}){
   }
 }
 
+/* ===== ライバル校 =====
+   毎年A部門のコンクールで競う、県内の強い学校（名前はセーブごとに決まる）。はじめはこちらよりずっと強く、年ごとに少しずつ強くなる。
+   こちらがA部門（または部門のない前の形）で出る年は、同じ大会で点をくらべる（s.rivalLog）。B部門の年は、相手の結果だけを知らせる */
+const RIVAL_NAMES = ['県立風川高等学校', '市立桜ヶ丘高等学校', '県立青浜高等学校', '私立白鷺学園高等学校', '県立月見台高等学校'];
+const rivalName = s => RIVAL_NAMES[Math.floor(hash(s.startYear ?? 0, 'rival') * RIVAL_NAMES.length)];
+const rivalShort = s => rivalName(s).replace(/^(県立|市立|私立)/, '').replace(/高等学校$/, '高校');
+function rivalAvg(s, y, level){
+  const y0 = s.startYear ?? y, t = y - y0;
+  const base = Math.min(85, 76 + 1.0 * t) + 3.5 * clampG(gauss('rival', y0, y));
+  return Math.round((base + {pref: 0, block: -1, national: -2}[level] + 1.5 * clampG(gauss('rival', y0, y, level))) * 10) / 10;
+}
+// その年、ライバル校がいちばん先まで進んだ大会の結果
+function rivalSeason(s, y){
+  let last = null;
+  for(const lv of ['pref', 'block', 'national']){ const r = rivalResult(s, y, lv); if(!r) break; last = {...r, level: lv}; if(!r.rep) break; }
+  return last;
+}
+// その年・その大会のライバル校の結果。代表に選ばれなければ、その先の大会には出ない
+function rivalResult(s, y, level){
+  if(level !== 'pref' && !rivalResult(s, y, level === 'block' ? 'pref' : 'block')?.rep) return null;
+  const L = LEVELS[level], avg = rivalAvg(s, y, level);
+  const award = avg >= L.gold ? 'gold' : avg >= L.B - 4 ? 'silver' : 'bronze';
+  return {name: rivalName(s), avg, award, rep: !!L.rep && award === 'gold' && avg >= L.A + 1};
+}
+
 /* ===== 実績 =====
    部を続けていくうちの節目。達成した年度と週を s.ach に残す（日誌に一覧、達成した瞬間はカットイン） */
 const allResults = s => [...(s.history || []).flatMap(h => (h.results || []).map(r => ({...r, y: h.year}))), ...(s.season || []).map(r => ({...r, y: s.year}))];
@@ -1818,6 +1852,7 @@ const ACHIEVEMENTS = [
   {id: 'skill2',     name: '◎の部員',              desc: 'スキル◎を持つ部員がいる',                        test: s => s.members.some(m => SKILL_IDS.some(id => skillLv(m, id) >= 2))},
   {id: 'coach5',     name: '定評のある顧問',       desc: '顧問の指導力が Lv5 になる',                      test: s => coachLevel(s) >= 5},
   {id: 'firstclass', name: '最初の代の引退',       desc: '顧問になって最初に入部した代が引退する',         test: s => !!s.retiredNow?.firstClass || (s.history || []).some(h => h.firstClass)},
+  {id: 'rivalwin',   name: 'ライバルに勝つ',       desc: 'コンクールで、ライバル校より高い点をとる',       test: s => (s.rivalLog || []).some(x => x.win)},
   {id: 'years10',    name: '10年目の顧問',         desc: '顧問を10年続ける',                               test: s => s.year - (s.startYear ?? s.year) >= 9},
 ];
 // まだの実績のうち、いま当てはまるものを記録して返す

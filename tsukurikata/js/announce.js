@@ -25,15 +25,18 @@ function rivalSchools(year, level, n){
 function contestBoard(year, levelId, j, div = null){
   const L = LEVELS[levelId], key = div === 'B' ? levelId + 'B' : levelId;
   const n = levelId === 'pref' ? 12 : 10;
-  const rivals = rivalSchools(year, key, n - 1).map(name => {
+  const rv = div !== 'B' ? rivalResult(S, year, levelId) : null;
+  const rivals = rivalSchools(year, key, n).filter(name => name !== rv?.name).slice(0, n - 1).map(name => {
     const h = hash(year, key, name, 'aw');
     return {name, award: h < 0.3 ? 'gold' : h < 0.72 ? 'silver' : 'bronze'};
   });
+  // ライバル校は、決まった結果で出る（代表かどうかも）
+  if(rv) rivals[Math.floor(hash(year, key, 'rivalpos') * rivals.length)] = {name: rv.name, award: rv.award, rep: rv.rep, rival: true};
   const nRep = L.rep && div !== 'B' ? 3 : 0;
-  const need = nRep - (j.rep ? 1 : 0);
-  const golds = () => rivals.filter(r => r.award === 'gold');
+  const need = Math.max(0, nRep - (j.rep ? 1 : 0) - (rv?.rep ? 1 : 0));
+  const golds = () => rivals.filter(r => r.award === 'gold' && !r.rival);
   const byH = (a, b) => hash(year, levelId, a.name, 'up') - hash(year, levelId, b.name, 'up');
-  for(const r of rivals.filter(r => r.award === 'silver').sort(byH)){ if(golds().length >= need) break; r.award = 'gold'; }
+  for(const r of rivals.filter(r => r.award === 'silver' && !r.rival).sort(byH)){ if(golds().length >= need) break; r.award = 'gold'; }
   golds().sort((a, b) => hash(year, levelId, a.name, 'rep') - hash(year, levelId, b.name, 'rep')).slice(0, need).forEach(r => { r.rep = true; });
   const pos = Math.floor(hash(year, levelId, 'pos') * n);
   const list = [...rivals.slice(0, pos), {name: SCHOOL_FULL, award: j.award, rep: j.rep, ours: true}, ...rivals.slice(pos)];
@@ -55,8 +58,8 @@ function showAnnounce(j, levelId, onDone, div = null){
   const steps = [];
   const row = r => {
     const li = document.createElement('li');
-    li.className = r.ours ? 'ours' : '';
-    li.innerHTML = `<span class="no">${r.no}</span><span class="nm">${esc(r.name)}</span><span class="aw ${r.award}"></span>`;
+    li.className = r.ours ? 'ours' : r.rival ? 'rival' : '';
+    li.innerHTML = `<span class="no">${r.no}</span><span class="nm">${esc(r.name)}${r.rival ? '<small class="rtag">ライバル</small>' : ''}</span><span class="aw ${r.award}"></span>`;
     return li;
   };
   const say = (el, text) => { el.textContent = text; el.classList.add('on'); };
