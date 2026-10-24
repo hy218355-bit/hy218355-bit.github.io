@@ -130,7 +130,7 @@ function playPerf(perf, label, onEnd, opts = {}){
     if(!E.pb) return;
     const t = E.now();
     if(!tabHidden('play')){ drawStage(t); drawRoll(U.shown, t); }
-    if(!$('#conduct').hidden) drawStage(t, $('#cdStage'), CD.who);
+    if(!$('#conduct').hidden){ drawStage(t, $('#cdStage'), CD.who); $('#cdProg').style.width = `${clamp01(t / U.shown.total) * 100}%`; }
     if(t > U.shown.total + 0.8){
       const p = E.pb; E.pb = null; p.finish();
       endPlay(true);

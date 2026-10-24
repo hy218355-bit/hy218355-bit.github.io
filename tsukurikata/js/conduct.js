@@ -48,7 +48,7 @@ function openConduct(stage = null){
   cdDrawPattern(-1);
   $('#conduct').hidden = false;
   document.documentElement.classList.add('conducting');
-  drawStage(-1, $('#cdStage'), CD.who);
+  drawStage(-1, $('#cdStage'), CD.who); $('#cdProg').style.width = '0';
   $('#cdPad').focus({preventScroll: true});
   cancelAnimationFrame(CD.raf);
   CD.raf = requestAnimationFrame(cdFrame);
@@ -66,7 +66,7 @@ function openWatch(perf, title){
   $('#conduct').classList.add('watch');
   $('#conduct').hidden = false;
   document.documentElement.classList.add('conducting');
-  drawStage(-1, $('#cdStage'), CD.who);
+  drawStage(-1, $('#cdStage'), CD.who); $('#cdProg').style.width = '0';
 }
 function closeWatch(){
   if(CD.phase !== 'watch') return;
