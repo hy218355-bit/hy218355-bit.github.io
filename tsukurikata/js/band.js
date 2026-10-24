@@ -151,6 +151,8 @@ function trillStep(pc, m, b){
    自分で指揮すると、1タップごとの正確さが部員に伝わる。ぴったり（1）・いい感じ（0.8）なら、おまかせ（0.5）より出だしがそろい、
    歌い方も大きくなる。早い・遅い（0.35）と、おまかせより乱れる。2拍より長くタップがないと、部員は自分たちだけで吹く（おまかせと同じ） */
 const LEAD_AUTO = 0.5;
+// 指揮者がいないと、部員だけで歌える大きさには上限がある（強い部でも、おまかせは「良い」まで）。指揮が正確なほど上限が外れる
+const AUTO_E_CAP = 0.7;
 const tapLead = x => { const a = Math.abs(x.off); return a <= 0.07 ? 1 : a <= 0.15 ? 0.8 : 0.35; };
 function leadAtTaps(taps, b){
   let i = taps.length - 1;
@@ -254,13 +256,16 @@ function perform(ctx){
       // この音のある区間の譜読み。浅いと歌いきれず、和音のどの音を吹いているか分からないので音程をはめきれない
       const pf = pfs[spanAt(pc, e.b)], jf = jf0 * lerp(0.3, 1, pf);
       // 歌い方：指揮が正確なほど、部員は指揮者の歌い方に乗れる
-      const Ld = leadAt(e.b) - LEAD_AUTO, En0 = E0 * lerp(0.4, 1, pf), En = clamp01(Ld > 0 ? En0 + (1 - En0) * 0.7 * Ld : En0 * (1 + 0.6 * Ld));
+      // 上限は歌い方（表現）だけにかける。旋律と伴奏の音量の関係（バランス）は、上限なしの値で決める
+      const Ld = leadAt(e.b) - LEAD_AUTO, cap = AUTO_E_CAP + (1 - AUTO_E_CAP) * clamp01(Ld / (1 - LEAD_AUTO));
+      const lift = (x, top) => clamp01(Ld > 0 ? x + (top - x) * 0.7 * Ld : x * (1 + 0.6 * Ld));
+      const Ef = E0 * lerp(0.4, 1, pf), EnD = lift(Ef, 1), En = lift(Math.min(cap, Ef), cap);
       // 譜読みが浅いと、音が抜け、出だしが揺れる（うまい人ほど揺れは小さい）
       if(H('miss') < 0.07 * Math.pow(1 - pf, 2) * (1 - 0.5 * R)) return;
       const t = Math.max(0, b2s(e.b) - off + lag + 0.07 * Math.pow(iR, 1.2) * venue.play.timing * (1 - 0.35 * C) * clampG(H.gauss('t'))
         + 0.03 * Math.pow(1 - pf, 1.5) * (1 - 0.4 * R) * clampG(H.gauss('ft')));
       const tIdeal = b2sIdeal(e.b) - b2sIdeal(from);
-      const vScale = v => clamp(lerp(0.58, v, En) * loudMul, 0.04, 1);
+      const vScale = v => clamp(lerp(0.58, v, EnD) * loudMul, 0.04, 1);
       let wrong = 0;
       if(e.m != null && H('wr') < 0.16 * Math.pow(1 - pf, 2) * (1 - 0.5 * P)) wrong = (H('wd') < .5 ? 1 : -1) * (H('ws') < .6 ? 1 : 2);
       const endB = e.b + e.d;

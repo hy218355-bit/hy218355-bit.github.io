@@ -202,7 +202,10 @@ class Playback {
     this.engine = engine; this.perf = perf; this.onEnd = onEnd;
     this.clock = opts.clock || null;
     this.T0 = this.clock ? this.clock.t0 : ac.currentTime + 0.25;
+    // 静かな曲（春・カノンなど）は、聴くときだけ少し大きく（採点には関わらない）
+    this.out = PIECES[perf.pieceId]?.outGain ?? 1;
     this.bus = ac.createGain();
+    this.bus.gain.value = this.out;
     this.bus.connect(engine.chain.input);
     this.mem = {};
     this.srcs = [];
@@ -223,6 +226,7 @@ class Playback {
     for(const n of perf.notes) seatOf[n.mid] = n.seat;
     for(const h of perf.hits) seatOf[h.mid] ||= h.seat;
     this.wet = ac.createGain();
+    this.wet.gain.value = this.out;
     if(engine.chain.wetIn) this.wet.connect(engine.chain.wetIn);
     for(const [mid, seat] of Object.entries(seatOf)){
       const st = SEAT[seat];
@@ -249,8 +253,8 @@ class Playback {
   warp(n){ return n && this.clock ? warpNote(n, this.clock, this.perf, this.T0) : n; }
   // 指揮の振りの大きさ（全体の音量）
   setLevel(g, at = this.ac.currentTime){
-    this.bus.gain.setTargetAtTime(g, at, 0.12);
-    this.wet.gain.setTargetAtTime(g, at, 0.12);
+    this.bus.gain.setTargetAtTime(g * this.out, at, 0.12);
+    this.wet.gain.setTargetAtTime(g * this.out, at, 0.12);
   }
   pump(until = this.ac.currentTime + (this.clock ? 0.3 : 1.4)){
     const W = n => this.warp(n);

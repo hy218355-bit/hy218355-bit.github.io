@@ -850,9 +850,9 @@ function memberRow(m, part){
     + STAT_KEYS.map(k => `<td class="num" style="color:${skillColor(C, m.stats[k])}">${Math.round(m.stats[k])}</td>`).join('') + '</tr>';
 }
 
-// 曲を選ぶときのお手本：全員の能力・譜読み・まとまりが100の部が、ホールでふつうの解釈で吹いた演奏
+// 曲を選ぶときのお手本：全員の能力・譜読み・まとまりが100の部が、ホールでふつうの解釈で、ぴったりの指揮で吹いた演奏
 function modelPerf(pid){
-  return perform({members: fullBand({pitch: 100, rhythm: 100, tone: 100, expr: 100}), pieceId: pid, cohesion: 100, fam: 100, interp: {tempo: 1, dyn: 1, rub: 1}, venue: 'hall', seed: 'band'});
+  return perform({members: fullBand({pitch: 100, rhythm: 100, tone: 100, expr: 100}), pieceId: pid, cohesion: 100, fam: 100, interp: {tempo: 1, dyn: 1, rub: 1}, venue: 'hall', seed: 'band', lead: () => 1});
 }
 const listenBtns = id => `<button class="btn small" type="button" data-act="model" data-pid="${id}">▶ お手本を聴く</button><button class="btn small" type="button" data-act="preview" data-pid="${id}">▶ いまの部で聴く</button>`;
 
