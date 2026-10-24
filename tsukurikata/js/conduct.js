@@ -322,7 +322,7 @@ async function deliverFile(buf, name, meta){
     return;
   }
   // ブラウザ：書き出しに時間がかかると共有の許可が切れるので、ボタンを押してもらってから共有・ダウンロードする
-  const file = new File([buf], name, {type: 'audio/wav'});
+  const file = new File([buf], name, {type: meta.type || 'audio/wav'});
   toast('書き出しました', 0, '保存する', async () => {
     if(navigator.canShare && navigator.canShare({files: [file]})){
       try{ await navigator.share({files: [file], title: meta.title}); toast(''); return; }catch(e){ if(e.name === 'AbortError'){ toast(''); return; } }

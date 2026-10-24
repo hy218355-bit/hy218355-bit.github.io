@@ -78,7 +78,7 @@ final class GameViewController: UIViewController {
         }
     }
 
-    // MARK: 録音の保存（WAV を受け取り、m4a にして共有シートを出す）
+    // MARK: ファイルの保存（録音の WAV は m4a にして、セーブの書き出しはそのまま、共有シートを出す）
 
     private func receiveFile(_ msg: [String: Any]) {
         guard let id = msg["id"] as? String, let i = msg["i"] as? Int, let n = msg["n"] as? Int,
@@ -100,7 +100,12 @@ final class GameViewController: UIViewController {
         guard i == n - 1 else { return }
         try? file.handle.close()
         incoming = nil
-        exportM4A(wav: file.url, title: msg["title"] as? String, artist: msg["artist"] as? String, album: msg["album"] as? String)
+        // 録音（WAV）は m4a にしてから、それ以外（セーブの書き出しなど）はそのまま共有シートへ
+        if file.url.pathExtension.lowercased() == "wav" {
+            exportM4A(wav: file.url, title: msg["title"] as? String, artist: msg["artist"] as? String, album: msg["album"] as? String)
+        } else {
+            deliver(file.url)
+        }
     }
 
     /// AAC（m4a）にすると WAV の5分の1ほどの大きさになる。題名・学校名・年度も書き込む

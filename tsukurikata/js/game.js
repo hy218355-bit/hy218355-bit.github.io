@@ -142,14 +142,23 @@ function snapshot(s, extra = {}){
     cohesion: s.cohesion, fam: s.fam[extra.pieceId || s.pieceId] ?? 0, interp: {...s.interp}, fatigue: fatigueOf(s), take: weekTake(s), ...extra,
   };
 }
+// 録音の整理（セーブが年々大きくならないように）。いま録ったものは必ず残る
+// ・残す録音（コンクール・定期演奏会・4月・アンサンブルなど）：直近3年はすべて。それより前の年は、定期演奏会と、その年の最後のコンクールだけ
+// ・それ以外（ふだんの合奏など）：新しい8件
+//（以前は残す録音が18件を超えると、録ったばかりの録音まで消えて、本番の画面が開けなくなっていた）
+function pruneRecs(s){
+  const old = r => r.year < s.year - 2;
+  const lastContest = {};
+  for(const r of s.recs) if(r.keep && old(r) && r.result && !/アンサンブル|課題曲/.test(r.label)) lastContest[r.year] = r;
+  const keepOld = r => r.final || lastContest[r.year] === r;
+  const keep = new Set(s.recs.filter(r => r.keep && (!old(r) || keepOld(r))).slice(-60)), loose = new Set(s.recs.filter(r => !r.keep).slice(-8));
+  s.recs = s.recs.filter(r => keep.has(r) || loose.has(r));
+}
 function addRec(s, label, extra){
   const rec = {id: `r${s.year}-${s.week}-${s.recs.length}-${Math.floor(hash(label, s.log.length) * 1e6)}`, label, year: s.year, week: s.week,
     pieceId: extra.pieceId || s.pieceId, venue: extra.venue || 'room', snap: snapshot(s, extra), result: extra.result || null};
   s.recs.push(rec);
-  // 残す録音（コンクール・定期演奏会・4月など）は新しい60件、それ以外は新しい12件。いま録ったものは必ず残る
-  //（以前は残す録音が18件を超えると、録ったばかりの録音まで消えて、本番の画面が開けなくなっていた）
-  const keep = new Set(s.recs.filter(r => r.keep).slice(-60)), loose = new Set(s.recs.filter(r => !r.keep).slice(-12));
-  s.recs = s.recs.filter(r => keep.has(r) || loose.has(r));
+  pruneRecs(s);
   return rec;
 }
 const recCtx = rec => ({

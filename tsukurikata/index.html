@@ -386,6 +386,10 @@ tr.empty td{color:var(--ink-soft)}
 /* 歴史 */
 .history{display:grid;gap:10px;border-top:2px solid var(--ink);padding-top:16px}
 .hist-best{font-weight:700;font-size:14px;color:var(--brass);margin-bottom:4px}
+.savebox .svin{display:grid;gap:8px}
+.savebox .row{display:flex;flex-wrap:wrap;gap:8px}
+.savebox textarea{width:100%;font:12px/1.4 var(--f-lcd);padding:6px 8px;border:1.5px solid var(--rule);border-radius:6px;background:var(--sheet);color:var(--ink);resize:vertical;word-break:break-all}
+.savebox input[type=file]{font-size:12px;color:var(--ink-soft)}
 #h-ach small{font-family:var(--f-body);font-size:13px;color:var(--ink-soft);margin-left:10px}
 .achlist{list-style:none;padding:0;display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:8px}
 .achlist li{display:grid;gap:2px;padding:8px 10px;border:1.5px dashed var(--rule);border-radius:8px;opacity:.55}
@@ -730,6 +734,15 @@ html[data-season="snow"]{--season-band:linear-gradient(90deg,#DDE8F3,#FFFFFF,#B9
     <div class="hist" id="hist"></div>
   </section>
 
+  <details class="foot savebox" id="saveBox" data-tab="log"><summary>セーブの書き出し・読み込み</summary><div class="svin">
+    <p>アプリを消す前や、ほかの端末で続けたいときに。いまのセーブをファイルに保存（またはコードをコピー）しておけば、あとで読み込んで続きから遊べる。</p>
+    <div class="row"><button class="btn small" type="button" data-sv="file">ファイルに保存</button><button class="btn small" type="button" data-sv="copy">コードをコピー</button></div>
+    <p>読み込む：保存したファイルを選ぶか、コードを貼りつける。いまのセーブは上書きされる。</p>
+    <input type="file" id="svFile" accept=".txt,text/plain">
+    <textarea id="svCode" rows="3" placeholder="SUIBU1:… で始まるコードを貼りつける"></textarea>
+    <div class="row"><button class="btn small primary" type="button" data-sv="load">このセーブで続ける</button></div>
+    <p class="small" id="svMsg" aria-live="polite"></p>
+  </div></details>
   <details class="foot" data-tab="log"><summary>この作品について（曲・楽器の音・文字の出典）</summary><p>曲は、パブリックドメインのドヴォルザーク《新世界より》（1893年）、ベートーヴェン《第九》（1824年）、オッフェンバック《天国と地獄》（1858年）、エルガー「威風堂々」第1番（1901年）、ヴェルディ《アイーダ》（1871年）、ヘンデル《ユダス・マカベウス》（1747年）、ホルスト《惑星》（1916年）、ブラームス「ハンガリー舞曲第5番」（1869年）、チャイコフスキー《くるみ割り人形》（1892年）・《白鳥の湖》（1876年）、ロッシーニ《ウィリアム・テル》（1829年）、ビゼー《カルメン》（1875年）、ワーグナー《ワルキューレ》（1856年）、ヴィヴァルディ《四季》（1725年）、パッヘルベル「カノン」（1680年ごろ）です。編曲は、原曲の総譜（できるだけ作曲者のころの版）など、パブリックドメインの楽譜（IMSLP）で楽器ごとの受け持ちを読んで吹奏楽の席に移したもので、一部の曲は PDMX（CC0）の楽譜データも使っています。演奏は、その楽譜からこのページの中で組み立てて鳴らしています。楽器の音は、Versilian Studios「VSCO 2 Community Edition」（CC0）の録音、Karoryfer「Weresax」のアルトサックスの録音（tonejs-instruments 経由、CC BY 3.0）、Versilian Studios「VCSL」のテナーサックスとヴィブラフォンの録音（CC0）、アイオワ大学 Electronic Music Studios「Musical Instrument Samples」の E♭クラリネット・バスクラリネット・バストロンボーンの録音、Karoryfer「Bear Sax」のバリトンサックスの録音（CC0）を使っています。ユーフォニアムはトロンボーンの録音を、明るさを変えて使っています。客席の拍手と、録音を読み込めなかったときの楽器の音は、その場で合成しています。会場の響きは、部屋の寸法と壁・床・客席の材質から pyroomacoustics で計算したものです。文字は Zen Kaku Gothic New・Klee One・Dela Gothic One・Share Tech Mono（SIL Open Font License）です。</p></details>
 </div>
 

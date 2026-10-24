@@ -1096,6 +1096,50 @@ function renderInterp(){
 // 部の歴史：年度ごとの曲・結果・引退した部員と、残してある録音
 const AWARD_NM = {gold: '金賞', silver: '銀賞', bronze: '銅賞'};
 const resultText = results => results.map(r => `${LEVELS[r.level].name}${AWARD_NM[r.award]}${r.rep ? '（代表）' : ''}`).join('→');
+/* ===== セーブの書き出し・読み込み =====
+   アプリを消す前や、ほかの端末で続けたいときに。セーブを文字（コード）にして、ファイルに保存したりコピーしたりできる。
+   SUIBU1: は gzip で縮めたもの、SUIBU0: は縮めていないもの（縮められない端末用） */
+const b64enc = u8 => { let s = ''; for(let i = 0; i < u8.length; i += 8192) s += String.fromCharCode.apply(null, u8.subarray(i, i + 8192)); return btoa(s); };
+const b64dec = str => Uint8Array.from(atob(str), c => c.charCodeAt(0));
+const pipeBytes = async (bytes, stream) => new Uint8Array(await new Response(new Blob([bytes]).stream().pipeThrough(stream)).arrayBuffer());
+async function saveCode(){
+  const raw = new TextEncoder().encode(JSON.stringify(S));
+  return typeof CompressionStream === 'function' ? 'SUIBU1:' + b64enc(await pipeBytes(raw, new CompressionStream('gzip'))) : 'SUIBU0:' + b64enc(raw);
+}
+async function readSaveCode(code){
+  const m = code.replace(/\s+/g, '').match(/^SUIBU([01]):(.+)$/);
+  if(!m) throw new Error('「SUIBU1:」か「SUIBU0:」で始まるコードではありません。');
+  let bytes;
+  try{ bytes = b64dec(m[2]); }catch(e){ throw new Error('コードが途中で切れているようです。'); }
+  if(m[1] === '1' && typeof DecompressionStream !== 'function') throw new Error('この端末では、縮めたセーブを読めません。');
+  let s;
+  try{ s = JSON.parse(new TextDecoder().decode(m[1] === '1' ? await pipeBytes(bytes, new DecompressionStream('gzip')) : bytes)); }
+  catch(e){ throw new Error('コードが途中で切れているか、こわれているようです。'); }
+  if(!s || s.v !== 2 || !Array.isArray(s.members)) throw new Error('吹奏楽部のつくりかたのセーブではないようです。');
+  return s;
+}
+async function saveAction(kind){
+  const msg = t => { $('#svMsg').textContent = t; };
+  if(kind === 'file' || kind === 'copy'){
+    const code = await saveCode();
+    if(kind === 'file'){ await deliverFile(new TextEncoder().encode(code + '\n'), `吹奏楽部のつくりかた_セーブ_${S.year}年度.txt`, {title: 'セーブ', type: 'text/plain'}); msg(`${S.year}年度（${S.phase === 'winter' ? `${winterStep(S).m}月` : wkLabel(S.week)}）のセーブを書き出した。`); return; }
+    let ok = false;
+    try{ await navigator.clipboard.writeText(code); ok = true; }catch(e){}
+    if(!ok){ const t = $('#svCode'); t.value = code; t.select(); try{ ok = document.execCommand('copy'); }catch(e){} }
+    msg(ok ? `コードをコピーした（${Math.round(code.length / 1024)}KB）。メモなどに貼りつけて取っておこう。` : 'コピーできなかった。下の欄のコードを選んでコピーしよう。');
+    return;
+  }
+  if(kind === 'load'){
+    const code = $('#svCode').value.trim();
+    if(!code){ msg('ファイルを選ぶか、コードを貼りつけてから押そう。'); return; }
+    let s;
+    try{ s = await readSaveCode(code); }catch(e){ msg(e.message || '読み込めなかった。'); return; }
+    // アプリでは確認の窓が出せないので、ボタンを2回押して上書きする
+    const b = document.querySelector('[data-sv="load"]');
+    if(b.dataset.armed !== '1'){ b.dataset.armed = '1'; b.textContent = 'もう一度押すと、いまのセーブを上書きする'; msg(`${s.year}年度・部員${s.members.length}人のセーブ。`); return; }
+    save(s); location.reload();
+  }
+}
 // 実績の一覧（達成したものは年度つき、まだのものは目標として薄く）
 function renderAch(){
   const el = $('#achList'); if(!el) return;
@@ -1358,6 +1402,9 @@ function bind(){
   });
   $('#btnRec').addEventListener('click', () => playRec($('#recSel').value));
   $('#btnStop').addEventListener('click', stopPlay);
+  $('#saveBox').addEventListener('click', e => { const b = e.target.closest('[data-sv]'); if(b){ haptic('tap'); saveAction(b.dataset.sv); } });
+  $('#svFile').addEventListener('change', async e => { const f = e.target.files?.[0]; if(f){ $('#svCode').value = (await f.text()).trim(); $('#svMsg').textContent = 'ファイルを読んだ。「このセーブで続ける」を押そう。'; } });
+  $('#svCode').addEventListener('input', () => { const b = document.querySelector('[data-sv="load"]'); b.dataset.armed = ''; b.textContent = 'このセーブで続ける'; });
   $('#pieceSwitch').addEventListener('click', e => {
     const b = e.target.closest('[data-pswitch]'); if(!b) return;
     stopPlay(); haptic('tap');
