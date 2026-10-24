@@ -2,7 +2,15 @@
 /* 耳でチューニング：部員の B♭（ホルンは F）と、チューナーの基準音を同時に鳴らす。
    部員の音は少しずれているので「うわんうわん」とうなる。うなりが消えるところまで高さを動かす。
    3人ぶんで1回。週に1回まで。合わせられた部員は音程が少し上がる。 */
-const TG = {rounds: [], i: 0, snd: null, val: 0};
+const TG = {rounds: [], i: 0, snd: null, val: 0, raf: 0};
+
+// 音の名前：英語（ドイツ語／ドレミ）。吹奏楽部では、実音をドイツ語で呼ぶことが多い（B♭ はベー）
+const NOTE_EN = ['C', 'C♯', 'D', 'E♭', 'E', 'F', 'F♯', 'G', 'A♭', 'A', 'B♭', 'B'];
+const NOTE_DE = ['ツェー', 'ツィス', 'デー', 'エス', 'エー', 'エフ', 'フィス', 'ゲー', 'アス', 'アー', 'ベー', 'ハー'];
+const NOTE_DO = ['ド', 'ド♯', 'レ', 'ミ♭', 'ミ', 'ファ', 'ファ♯', 'ソ', 'ラ♭', 'ラ', 'シ♭', 'シ'];
+const noteName = midi => { const k = ((midi % 12) + 12) % 12; return `${NOTE_EN[k]}（${NOTE_DE[k]}／${NOTE_DO[k]}）`; };
+// 移調楽器：楽譜に書く音は、実音より何半音上か（クラリネット・トランペットは B♭ 管、アルト・バリトンサックスと E♭ クラは E♭ 管、ホルンは F 管）
+const TRANSPOSE = {cl: 2, bcl: 14, tp: 2, tsax: 14, asax: 9, bsax: 21, ebcl: -3, hn: 7, picc: -12};
 
 // 楽器の音域のまん中に近い、チューニングの音（実音）
 function tuneMidi(inst, sec){
@@ -29,7 +37,7 @@ function openTuneGame(){
     const inst = INST[SEAT[m.seat].inst], h = hash(S.year, S.week, 'tgoff', k);
     // 音程が苦手な部員ほど大きくずれている
     const size = 8 + 24 * (1 - m.stats.pitch / 100) * (0.6 + 0.4 * h);
-    return {m, inst, midi: tuneMidi(inst, SEAT[m.seat].sec), off: (hash(S.year, S.week, 'tgsg', k) < 0.5 ? -1 : 1) * Math.round(size), res: null};
+    return {m, inst, iid: SEAT[m.seat].inst, midi: tuneMidi(inst, SEAT[m.seat].sec), off: (hash(S.year, S.week, 'tgsg', k) < 0.5 ? -1 : 1) * Math.round(size), res: null};
   });
   TG.i = 0;
   $('#tuneGame').hidden = false;
@@ -42,11 +50,37 @@ function tgRound(){
   $('#tgSlider').value = 0;
   $('#tgStep').textContent = `${TG.i + 1} / ${TG.rounds.length}`;
   $('#tgWho').textContent = `${r.m.name}（${r.inst.name}）`;
-  $('#tgMsg').textContent = 'チューナーの基準音と重ねて鳴らす。うなり（音量の波）がゆっくりになったら近い。消えたらぴったり。';
+  // 合わせる音の名前。移調楽器は、その楽器の楽譜での名前も
+  const t = TRANSPOSE[r.iid] || 0;
+  $('#tgNote').innerHTML = `合わせる音：実音 <b>${noteName(r.midi)}</b>${t % 12 ? `。${r.inst.name}の楽譜では <b>${noteName(r.midi + t)}</b>` : ''}`;
+  $('#tgMsg').textContent = 'チューナーの基準音と重ねて鳴らす。下の波（うなり）がゆっくりになったら近い。波が消えて平らになったらぴったり。';
   $('#tgRes').textContent = '';
   $('#tgOk').hidden = false; $('#tgNext').hidden = true; $('#tgSlider').disabled = false;
   for(const b of document.querySelectorAll('#tuneGame [data-tg="down"], #tuneGame [data-tg="up"]')) b.disabled = false;
   tgSound(true);
+  tgDraw();
+}
+// うなりの絵：基準音と部員の音を重ねた音の大きさの波（2秒ぶん）。ずれが小さいほど波がゆっくり、ぴったりなら平ら
+function tgDraw(){
+  cancelAnimationFrame(TG.raf);
+  const cv = $('#tgWave'), r = TG.rounds[TG.i];
+  if(!cv || !r || $('#tuneGame').hidden) return;
+  const dpr = window.devicePixelRatio || 1, W = cv.clientWidth * dpr, H = cv.clientHeight * dpr;
+  if(cv.width !== W || cv.height !== H){ cv.width = W; cv.height = H; }
+  const c = r.res != null ? 0 : r.off + TG.val, f = mtof(r.midi), bps = Math.abs(f * (Math.pow(2, c / 1200) - 1));
+  const ctx = cv.getContext('2d'), C = tok(), mid = H / 2, a = 1, b = 0.8, span = 2;
+  const ph = TG.snd ? performance.now() / 1000 : 0;
+  ctx.clearRect(0, 0, W, H);
+  ctx.strokeStyle = C.rule; ctx.lineWidth = dpr; ctx.beginPath(); ctx.moveTo(0, mid); ctx.lineTo(W, mid); ctx.stroke();
+  const env = x => Math.sqrt(a * a + b * b + 2 * a * b * Math.cos(2 * Math.PI * bps * (x / W * span + ph))) / (a + b) * (mid - 4 * dpr);
+  ctx.beginPath();
+  for(let x = 0; x <= W; x += 2 * dpr) ctx.lineTo(x, mid - env(x));
+  for(let x = W; x >= 0; x -= 2 * dpr) ctx.lineTo(x, mid + env(x));
+  ctx.closePath();
+  ctx.fillStyle = C.brass; ctx.globalAlpha = 0.35; ctx.fill(); ctx.globalAlpha = 1;
+  ctx.strokeStyle = C.brass; ctx.lineWidth = 1.5 * dpr; ctx.stroke();
+  $('#tgBeat').textContent = r.res != null ? '合わせたあとの音（うなりなし）' : bps < 0.25 ? 'うなりは、ほとんど聞こえない' : `うなり：1秒に約${bps < 2 ? bps.toFixed(1) : Math.round(bps)}回`;
+  if(TG.snd) TG.raf = requestAnimationFrame(tgDraw);
 }
 function tgSound(on){
   const ac = E.ac;
@@ -57,7 +91,7 @@ function tgSound(on){
     TG.snd = null;
   }
   $('#tgPlay').textContent = on ? '■ 止める' : '▶ 鳴らす';
-  if(!on) return;
+  if(!on){ tgDraw(); return; }
   const r = TG.rounds[TG.i], t = ac.currentTime + 0.03, f = mtof(r.midi);
   const g = ac.createGain();
   g.gain.setValueAtTime(0, t); g.gain.linearRampToValueAtTime(1, t + 0.25);
@@ -73,6 +107,7 @@ function tgSound(on){
   pl.connect(pg); pg.connect(g);
   ref.start(t); pl.start(t);
   TG.snd = {ref, pl, g};
+  tgDraw();
   // 30秒で自動で止める
   const snd = TG.snd;
   setTimeout(() => { if(TG.snd === snd) tgSound(false); }, 30000);
@@ -81,6 +116,7 @@ function tgSet(v){
   TG.val = clamp(v, -50, 50);
   $('#tgSlider').value = TG.val;
   if(TG.snd) TG.snd.pl.detune.setTargetAtTime(TG.rounds[TG.i].off + TG.val, E.ac.currentTime, 0.03);
+  tgDraw();
 }
 function tgAnswer(){
   const r = TG.rounds[TG.i];
@@ -95,6 +131,7 @@ function tgAnswer(){
   // 答えを聴けるように、ずれを直した音を少し鳴らす
   if(!TG.snd) tgSound(true);
   TG.snd.pl.detune.setTargetAtTime(0, E.ac.currentTime + 0.6, 0.15);
+  tgDraw();
 }
 function tgNext(){
   if(TG.i + 1 < TG.rounds.length){ TG.i++; tgSound(false); tgRound(); return; }
@@ -102,6 +139,7 @@ function tgNext(){
 }
 function closeTuneGame(finished){
   tgSound(false);
+  cancelAnimationFrame(TG.raf);
   $('#tuneGame').hidden = true;
   document.documentElement.classList.remove('conducting');
   const done = TG.rounds.filter(r => r.res != null);

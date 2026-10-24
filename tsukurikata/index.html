@@ -314,6 +314,11 @@ th.num{text-align:right}
 .assign .who{font-size:14px;line-height:1.4}
 .assign .who small{display:block;font-size:12px;color:var(--ink-soft)}
 .asec-h{font-size:14px;display:grid;gap:2px;margin-top:4px}
+.ntag{display:inline-block;font-size:10.5px;font-weight:700;color:var(--brass);border:1px solid var(--brass);border-radius:3px;padding:0 4px;margin-left:5px;line-height:1.5;letter-spacing:0}
+.asec.missing > b{color:var(--bad)}
+.asec.missing .small{color:var(--bad)}
+.needs{display:grid;gap:6px;border:1.5px solid var(--rule);border-radius:8px;padding:10px 12px;background:var(--sheet)}
+.needs > b{font-size:13px}
 .yr-mem{display:grid;grid-template-columns:auto minmax(0,1fr);gap:6px 12px;font-size:13px;line-height:1.6;margin:0}
 .yr-mem dt{color:var(--ink-soft);white-space:nowrap}
 .yr-mem dd{margin:0}
@@ -469,6 +474,10 @@ tr.empty td{color:var(--ink-soft)}
 .tgrow .small{flex:1 1 220px}
 .tg-body{max-width:560px;width:100%;margin:0 auto;display:grid;gap:14px;align-content:start;flex:1}
 .tg-who{font-family:var(--f-display);font-size:20px;line-height:1.4}
+.tg-note{font-size:14px;line-height:1.6}
+.tg-note b{color:var(--brass)}
+.tg-wave{display:grid;gap:4px}
+.tg-wave canvas{width:100%;height:84px;border:1.5px solid var(--rule);border-radius:8px;background:var(--sheet)}
 .tg-ctl{display:grid;grid-template-columns:auto minmax(0,1fr) auto;gap:12px;align-items:center}
 .tg-ctl .btn{min-width:52px;font-size:20px}
 #tgSlider{width:100%;height:44px;accent-color:var(--brass)}
@@ -649,7 +658,9 @@ tr.empty td{color:var(--ink-soft)}
   </div>
   <div class="tg-body">
     <p class="tg-who" id="tgWho"></p>
+    <p class="tg-note" id="tgNote"></p>
     <p class="cd-msg" id="tgMsg"></p>
+    <div class="tg-wave"><canvas id="tgWave" aria-hidden="true"></canvas><p class="small" id="tgBeat" aria-live="off"></p></div>
     <div class="tg-ctl">
       <button class="btn" type="button" data-tg="down" aria-label="少し下げる">♭</button>
       <input type="range" id="tgSlider" min="-50" max="50" step="1" value="0" aria-label="高さ（左ほど低く、右ほど高く）">

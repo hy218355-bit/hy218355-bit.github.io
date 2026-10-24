@@ -312,7 +312,7 @@ function practiceWeek(s0, plan){
       if(m.seat){ sum[k] = (sum[k] || 0) + (m.stats[k] - before); cnt[k] = (cnt[k] || 0) + 1; }
     }
     // 譜読み：その人が今の曲の自分の楽譜を、区間ごとにどれだけ吹けるか。うまい人ほど早く読める（全体の力が0なら半分の速さ、100なら1.5倍）。
-    // 曲の個人練習は1つの区間に打ちこむ（ほかの区間も少しは進む）。合奏などは曲全体が少しずつ進む
+    // 曲の個人練習は1つの区間に打ちこむ（ほかの区間も少しは進む）。合奏などは曲全体が少しずつ進む。音が多い区間ほどゆっくり（readEase）
     let span = null;
     if(s.pieceId && mu.read){
       const pid = s.pieceId, units = readUnits(pid), cur = readOf(m, pid), before = readMean(m, pid);
@@ -320,9 +320,9 @@ function practiceWeek(s0, plan){
       const rate = mu.read * eff * (0.5 + avgStat(m) / 100) * (1 + SKILLS.reader.read * skillLv(m, 'reader'));
       // 1週間に覚えられる量は同じなので、打ちこんだ区間が短いほど大きく進む（くり返しの区間は数えない）
       const len = u => u.to - u.from, total = units.reduce((a, u) => a + len(u), 0);
-      const next = cur.slice();
+      const next = cur.slice(), ease = readEase(pid, m.seat ? SEAT[m.seat].part : null);
       for(const u of units){
-        const g = span == null ? rate : u.i === span ? rate * 0.85 * total / len(u) : rate * 0.15;
+        const g = (span == null ? rate : u.i === span ? rate * 0.85 * total / len(u) : rate * 0.15) * (ease[u.i] ?? 1);
         next[u.i] = Math.round(clamp(cur[u.i] + g * (1 - cur[u.i] / 130), 0, 100) * 10) / 10;
       }
       (m.fam ||= {})[pid] = next;
@@ -422,6 +422,43 @@ const adj = (s, k, d) => {
   if(k === 'stamina'){ for(const m of s.members) m.sta = clamp((m.sta ?? s.stamina) + d, 0, 100); syncSta(s); return; }
   s[k] = clamp(s[k] + d, 0, 100);
 };
+/* ===== 出来事・相談・行事のあとに、何が変わったか =====
+   決める前の様子を写しておき（effectSnap）、決めたあとと比べて、ふつうの言葉で並べる（effectList） */
+const clubNow = s => ({morale: s.morale, cohesion: s.cohesion, rep: s.rep ?? 30, stamina: s.stamina, fam: s.pieceId ? s.fam[s.pieceId] || 0 : 0, hall: s.hallExp || 0});
+function effectSnap(s){
+  return {club: clubNow(s), ms: Object.fromEntries(s.members.map(m => [m.id, {st: {...m.stats}, mental: m.mental ?? 40, sta: m.sta ?? 100,
+    bent: {...(m.bent || {})}, sp: {...(m.sp || {})}, trait: m.trait, read: s.pieceId ? readMean(m, s.pieceId) : 0}]))};
+}
+const sgn = (d, f = 0) => `${d > 0 ? '+' : '−'}${Math.abs(d).toFixed(f)}`;
+function effectList(a, s){
+  const out = [], c = a.club, now = clubNow(s);
+  const cl = [['morale', 'やる気'], ['cohesion', 'まとまり'], ['rep', '評判'], ['stamina', '体力'], ['fam', '曲の仕上がり'], ['hall', '会場慣れ']]
+    .filter(([k]) => Math.abs(now[k] - c[k]) >= 0.5).map(([k, l]) => `${l}${sgn(now[k] - c[k])}`);
+  if(cl.length) out.push(`部の${cl.join(' ')}`);
+  const staClub = Math.abs(now.stamina - c.stamina) >= 0.5, rows = [];
+  for(const m of s.members){
+    const b = a.ms[m.id];
+    if(!b) continue;
+    const g = [];
+    for(const k of STAT_KEYS){ const d = m.stats[k] - b.st[k]; if(Math.abs(d) >= 0.1) g.push(`${STAT_LABEL[k]}${sgn(d, 1)}`); }
+    const dm = (m.mental ?? 40) - b.mental; if(Math.abs(dm) >= 1) g.push(`本番の強さ${sgn(dm)}`);
+    const ds = (m.sta ?? 100) - b.sta; if(!staClub && Math.abs(ds) >= 1) g.push(`体力${sgn(ds)}`);
+    if(s.pieceId){ const dr = readMean(m, s.pieceId) - b.read; if(Math.abs(dr) >= 0.5) g.push(`譜読み${sgn(dr)}`); }
+    for(const k of STAT_KEYS){ const d = (m.bent?.[k] || 0) - (b.bent[k] || 0); if(d > 0.001) g.push(`${STAT_LABEL[k]}の伸び+${Math.round(d * 100)}%`); }
+    for(const id of SKILL_IDS){
+      const v0 = b.sp[id] || 0, v = m.sp?.[id] || 0;
+      if(v - v0 < 0.001) continue;
+      const lv0 = v0 >= 2.5 ? 2 : v0 >= 1 ? 1 : 0, lv = skillLv(m, id);
+      if(lv > lv0) g.push(`スキル「${SKILLS[id].name}${skillMark(lv)}」を身につけた`);
+      else if(lv < 2){ const from = lv ? 1 : 0, need = lv ? 2.5 : 1; g.push(`「${SKILLS[id].name}${skillMark(lv + 1)}」まで${Math.round((v - from) / (need - from) * 100)}%`); }
+    }
+    if(m.trait && m.trait !== b.trait) g.push(`癖が「${TRAITS[m.trait].name}」に`);
+    if(g.length) rows.push(`${m.name} ${g.join(' ')}`);
+  }
+  out.push(...rows.slice(0, 5));
+  if(rows.length > 5) out.push(`ほか${rows.length - 5}人も`);
+  return out;
+}
 const senpai = (s, m) => s.members.filter(x => x.seat && x.id !== m.id && x.grade > m.grade && secOf(x) === secOf(m)).sort((a, b) => b.grade - a.grade)[0]
   || s.members.filter(x => x.seat && x.grade === 3 && x.grade > m.grade)[0];
 const contestAhead = s => eventAt(s, s.week + 1)?.kind === 'contest' ? eventAt(s, s.week + 1) : null;
@@ -879,12 +916,12 @@ function resolveConsult(s0, k){
   const v = consultView(s);
   s.consult = null;
   if(!v) return s;
-  const ch = v.c.choices[k];
-  const res = ch.go(s, v.m, v.o);
+  const ch = v.c.choices[k], before = effectSnap(s);
+  const res = ch.go(s, v.m, v.o), effects = effectList(before, s);
   v.m.lastConsult = s.year * 100 + s.week;
   addLog(s, `【相談】${v.text}`);
-  addLog(s, `→ ${ch.label}。${res}`);
-  s.lastConsult = {who: v.m.name, choice: ch.label, result: res};
+  addLog(s, `→ ${ch.label}。${res}${effects.length ? `（${effects.join('／')}）` : ''}`);
+  s.lastConsult = {who: v.m.name, choice: ch.label, result: res, effects};
   gainCoach(s, 1);
   return s;
 }
@@ -1013,14 +1050,10 @@ function resolveOuting(s0, ids){
   const ms = ids.map(id => ss(s).find(m => m.id === id)).filter(Boolean).slice(0, v.n);
   if(!ms.length) return s;
   // 行った子ごとに、伸びたところを書きとめる
-  const gains = ms.map(m => {
-    const st0 = {...m.stats}, mn0 = m.mental ?? 40;
-    v.o.go(s, m, v.fit.has(m.id)); remember(s, m, v.o.mem);
-    const g = STAT_KEYS.filter(k => m.stats[k] > st0[k]).map(k => `${STAT_LABEL[k]}+${(m.stats[k] - st0[k]).toFixed(1)}`);
-    if((m.mental ?? 40) > mn0) g.push((m.mental - mn0) >= 6 ? '本番にかなり強くなった' : '本番に少し強くなった');
-    return `${m.name} ${g.join(' ')}`;
-  });
+  const before = effectSnap(s);
+  for(const m of ms){ v.o.go(s, m, v.fit.has(m.id)); remember(s, m, v.o.mem); }
   v.o.after?.(s);
+  const gains = effectList(before, s);
   const names = ms.map(m => m.name).join('・');
   const res = v.o.res(names);
   addLog(s, `【${v.o.title}】${v.o.text}`);
@@ -1067,12 +1100,12 @@ function resolveEpisode(s0, k){
   const v = episodeView(s);
   s.episode = null;
   if(!v) return s;
-  const c = v.ep.choices[k];
-  const res = c.go(s, v.m, v.o);
+  const c = v.ep.choices[k], before = effectSnap(s);
+  const res = c.go(s, v.m, v.o), effects = effectList(before, s);
   addLog(s, `【できごと】${v.text}`);
-  addLog(s, `→ ${c.label}。${res}`);
+  addLog(s, `→ ${c.label}。${res}${effects.length ? `（${effects.join('／')}）` : ''}`);
   gainCoach(s, 1);
-  s.lastEpisode = {text: v.text, choice: c.label, result: res};
+  s.lastEpisode = {text: v.text, choice: c.label, result: res, effects};
   return s;
 }
 

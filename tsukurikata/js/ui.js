@@ -602,12 +602,14 @@ function renderWeek(){
     w.innerHTML = parts.join('');
     return;
   }
-  if(S.lastEpisode) parts.push(`<p class="epres"><b>${esc(S.lastEpisode.choice)}</b>${esc(S.lastEpisode.result)}</p>`);
+  // 決めたあとの様子と、何が変わったか
+  const effHtml = x => (x.effects || x.gains || []).map(g => `<span class="gain">${esc(g)}</span>`).join('');
+  if(S.lastEpisode) parts.push(`<p class="epres"><b>${esc(S.lastEpisode.choice)}</b>${esc(S.lastEpisode.result)}${effHtml(S.lastEpisode)}</p>`);
   const cv = consultView(S);
   if(cv) parts.push(`<div class="episode consult"><div class="head"><span class="tag">相談</span><span class="who">${cv.m.grade}年・${esc(instOf(cv.m))}・${esc(cv.m.name)}${skillChips(cv.m)}</span></div><p class="txt">${esc(cv.text)}</p>
     <div class="choices">${cv.choices.map(c => `<button class="mbtn" type="button" data-cs="${c.k}"><b>${esc(c.label)}</b></button>`).join('')}</div>
     <p class="small">答え方で、${esc(kun(cv.m))}の育ち方が変わる。答えずに練習を進めると、この相談は流れる。</p></div>`);
-  if(S.lastConsult) parts.push(`<p class="epres"><b>${esc(S.lastConsult.choice)}</b>${esc(S.lastConsult.result)}</p>`);
+  if(S.lastConsult) parts.push(`<p class="epres"><b>${esc(S.lastConsult.choice)}</b>${esc(S.lastConsult.result)}${effHtml(S.lastConsult)}</p>`);
   // 行事の誘い：連れて行く部員を選ぶ（★は、行くと特に伸びる子）
   const ov = outingView(S);
   if(ov){
@@ -625,12 +627,44 @@ function renderWeek(){
       <button class="mbtn" type="button" data-act="outing"${k ? '' : ' disabled'}><b>${k ? `この${k}人で行く` : `連れて行く部員を${ov.n}人まで選ぶ`}</b></button>
       <p class="small">選ばずに練習を進めると、この話は流れる。</p></div>`);
   }
-  if(S.lastOuting) parts.push(`<p class="epres"><b>${esc(S.lastOuting.title)}（${esc(S.lastOuting.who)}）</b>${esc(S.lastOuting.result)}${(S.lastOuting.gains || []).map(g => `<span class="gain">${esc(g)}</span>`).join('')}</p>`);
+  if(S.lastOuting) parts.push(`<p class="epres"><b>${esc(S.lastOuting.title)}（${esc(S.lastOuting.who)}）</b>${esc(S.lastOuting.result)}${effHtml(S.lastOuting)}</p>`);
   parts.push(planHtml(ev));
-  if(!tuneDone(S)) parts.push(`<div class="tgrow"><button class="btn small" type="button" data-act="tunegame">♪ 耳でチューニング</button><span class="small">週に1回。合わせた部員の音程が上がる</span></div>`);
+  if(!tuneDone(S)) parts.push(`<div class="tgrow"><button class="btn small" type="button" data-act="tunegame">♪ 耳でチューニング</button><span class="small">週に1回。チューナーの音と部員の音を重ねて、うなりが消えるところまで高さを合わせる。合わせた部員の音程が上がる</span></div>`);
   w.innerHTML = parts.join('');
   w.querySelector('[data-outmore]')?.addEventListener('toggle', e => { U.outMore = e.target.open; });
   w.querySelectorAll('details.psecd').forEach(d => d.addEventListener('toggle', () => { (U.openSecs ||= new Set())[d.open ? 'add' : 'delete'](d.dataset.sec); }));
+}
+// 曲の中での受け持ち：パートごとに、旋律・ソロ・対旋律・低音・和音をどれだけ吹くか（曲の長さに対する割合）
+const NEED_CACHE = {};
+function pieceNeeds(pid){
+  if(NEED_CACHE[pid]) return NEED_CACHE[pid];
+  const pc = PIECES[pid], L = pc.spans[pc.spans.length - 1].to;
+  const cover = segs => { let sum = 0, end = -1e9; for(const x of segs.slice().sort((a, b) => a.f - b.f)){ if(x.t <= end) continue; sum += x.t - Math.max(x.f, end); end = x.t; } return sum / L; };
+  const KINDS = {mel: ['mel'], cm: ['cm', 'mel3'], bass: ['bass'], pad: ['pad']};
+  const part = {}, segsBySec = {}, sec = {};
+  for(const [p, segs] of Object.entries(pc.roles)){
+    const sc = INST[PART_INST[p]]?.sec;
+    if(!sc) continue;
+    part[p] = {solo: segs.some(x => x.solo), ...Object.fromEntries(Object.entries(KINDS).map(([k, rs]) => [k, cover(segs.filter(x => rs.includes(x.r)))]))};
+    (segsBySec[sc] ||= []).push(...segs);
+    if(part[p].solo) (sec[sc] ||= {}).soloPart = p;
+  }
+  for(const [sc, segs] of Object.entries(segsBySec)) sec[sc] = {...sec[sc], solo: !!sec[sc]?.soloPart, ...Object.fromEntries(Object.entries(KINDS).map(([k, rs]) => [k, cover(segs.filter(x => rs.includes(x.r)))]))};
+  if(pc.perc && Object.keys(pc.perc).length) sec.perc = {...(sec.perc || {}), perc: true};
+  return NEED_CACHE[pid] = {part, sec};
+}
+// 受け持ちの印（和音は、ほかの受け持ちがないときだけ）
+const needTags = r => {
+  if(!r) return [];
+  const t = [r.solo && 'ソロ', r.mel >= 0.3 && '旋律', r.cm >= 0.3 && '対旋律', r.bass >= 0.4 && 'ベース', r.perc && '打楽器'].filter(Boolean);
+  return t.length ? t : r.pad >= 0.3 ? ['和音'] : [];
+};
+// 楽器決めの画面の上に出す、この曲で大事なパートのまとめ
+function needsSummary(pid){
+  const {sec} = pieceNeeds(pid);
+  const by = tag => SECTIONS.filter(x => needTags(sec[x.id]).includes(tag)).map(x => tag === 'ソロ' ? INST[PART_INST[sec[x.id].soloPart]].name : x.name);
+  const rows = [['旋律', by('旋律')], ['ソロ', by('ソロ')], ['対旋律', by('対旋律')], ['ベース', by('ベース')]].filter(([, l]) => l.length);
+  return `<div class="needs"><b>この曲（${esc(PIECES[pid].title)}）で大事なパート</b><dl class="yr-mem">${rows.map(([k, l]) => `<dt>${k}</dt><dd>${l.join('・')}</dd>`).join('')}</dl></div>`;
 }
 // この1年の部員：いちばん伸びた子・身につけたスキル・行事に行った子
 function yearMembersHtml(){
@@ -657,14 +691,16 @@ const assignPicks = () => Object.fromEntries(S.recruits.map(r => [r.id, $(`#as-$
 function assignSecs(picks){
   const order = id => SEATS.findIndex(x => x.id === id);
   const used = new Set([...S.members.filter(m => m.seat).map(m => SEAT[m.seat].sec), ...Object.values(picks).filter(Boolean).map(id => SEAT[id].sec)]);
-  const empty = SECTIONS.filter(x => !used.has(x.id));
+  const need = S.pieceId ? pieceNeeds(S.pieceId).sec : {}, tags = id => needTags(need[id]).map(t => `<span class="ntag">${t}</span>`).join('');
+  const empty = SECTIONS.filter(x => !used.has(x.id) && !needTags(need[x.id]).length);
   return SECTIONS.map(sec => {
     const seats = SEATS.filter(x => x.sec === sec.id).length;
     const now = S.members.filter(m => m.seat && SEAT[m.seat].sec === sec.id).sort((a, b) => order(a.seat) - order(b.seat));
     const add = S.recruits.filter(r => picks[r.id] && SEAT[picks[r.id]].sec === sec.id);
     const chips = now.map(m => `<span class="mchip">${esc(m.name)}<small>${m.grade}年・${esc(partShort(SEAT[m.seat].part) + seatNth(m.seat))}</small></span>`)
       .concat(add.map(r => `<span class="mchip new">${esc(r.name)}<small>新・${esc(partShort(SEAT[picks[r.id]].part) + seatNth(picks[r.id]))}</small></span>`));
-    return chips.length ? `<div class="asec"><b>${sec.name}<small>${now.length + add.length}人／${seats}席</small></b><div class="chips">${chips.join('')}</div></div>` : '';
+    if(chips.length) return `<div class="asec"><b>${sec.name}<small>${now.length + add.length}人／${seats}席</small>${tags(sec.id)}</b><div class="chips">${chips.join('')}</div></div>`;
+    return needTags(need[sec.id]).length ? `<div class="asec missing"><b>${sec.name}<small>0人／${seats}席</small>${tags(sec.id)}</b><span class="small">この曲で受け持ちがあるのに、まだだれもいない</span></div>` : '';
   }).join('') + (empty.length ? `<p class="small">まだだれもいないパート：${empty.map(x => x.name).join('・')}</p>` : '');
 }
 // 新しく入った部員の担当を決める（部をつくった最初の5人・本入部の1年生・途中から入ってきた部員）
@@ -680,9 +716,11 @@ function renderAssign(w, ev){
         const ids = free.filter(id => SEAT[id].sec === sec.id);
         if(!ids.length) return '';
         const n = S.members.filter(m => m.seat && SEAT[m.seat].sec === sec.id).length;
-        return `<optgroup label="${sec.name}（いま${n}人）">${ids.map(id => { const l = seatLabel(id) + (SEAT[id].inst === r.hope ? '・希望' : '');
+        const pn = S.pieceId ? pieceNeeds(S.pieceId).part : {};
+        return `<optgroup label="${sec.name}（いま${n}人）">${ids.map(id => { const l = seatLabel(id) + needTags(pn[SEAT[id].part]).filter(t => t !== '和音').map(t => '・' + t).join('') + (SEAT[id].inst === r.hope ? '・希望' : '');
           return `<option value="${id}" data-l="${l}"${map[r.id] === id ? ' selected' : ''}>${l}</option>`; }).join('')}</optgroup>`;
       }).join('')}</select></div>`).join('')}</div>
+    ${S.pieceId ? needsSummary(S.pieceId) : ''}
     <h3 class="asec-h">パートの顔ぶれ<small>選んだ担当も入れて。「新」が新しく入る部員</small></h3>
     <div class="asecs" id="assignSecs">${assignSecs(map)}</div>
     <p class="small" id="assignErr"></p>

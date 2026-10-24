@@ -147,6 +147,21 @@ const avgStat = m => STAT_KEYS.reduce((a, k) => a + m.stats[k], 0) / 4;
 const readUnit = (pid, i) => PIECES[pid].spans[i]?.same ?? i;
 // 練習で選べる区間（くり返しの区間は除く）
 const readUnits = pid => PIECES[pid].spans.map((sp, i) => ({...sp, i})).filter(sp => sp.same == null);
+// 区間ごとの覚えやすさ：その人の楽譜で音が多い区間（速いパッセージなど）ほど、譜読みに時間がかかる。
+// 区間の長さで重みをつけた平均が1になるようにする（曲全体の譜読みの速さは変えない）。part がなければどの区間も1
+const READ_EASE = {};
+function readEase(pid, part){
+  const key = `${pid}:${part}`;
+  if(READ_EASE[key]) return READ_EASE[key];
+  const units = readUnits(pid), evs = (part && arrangement(pid).parts[part]) || [];
+  const len = u => u.to - u.from, total = units.reduce((a, u) => a + len(u), 0);
+  const dens = units.map(u => evs.filter(e => e.b >= u.from - 1e-6 && e.b < u.to - 1e-6).length / len(u) + 0.25);
+  const mean = units.reduce((a, u, k) => a + dens[k] * len(u), 0) / total;
+  let f = dens.map(d => evs.length ? clamp(Math.pow(d / mean, -0.7), 0.55, 1.6) : 1);
+  const fm = units.reduce((a, u, k) => a + f[k] * len(u), 0) / total;
+  f = f.map(x => x / fm);
+  return READ_EASE[key] = Object.fromEntries(units.map((u, k) => [u.i, f[k]]));
+}
 // 部員の、区間ごとの譜読み（0〜100）。前の形（曲全体で1つの数）は、どの区間も同じ値とみなす
 function readOf(m, pid){
   const v = m.fam?.[pid];
