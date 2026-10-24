@@ -961,6 +961,8 @@ function newYear(s0){
   s.history.push({year: s.year, piece: pieceTitle, results: s.season, final: s.finalResult || null,
     retired: seniors.map(m => m.name), firstClass: seniors.some(m => isFirstClass(s, m))});
   if(seniors.some(m => isFirstClass(s, m))) addLog(s, '顧問になって最初に入部してきた代が、卒業していった。部の物語は、これからも続く。');
+  // 1年をやりきった経験（この年の最初の週の記録より前に入れる。最初の1年を終えると Lv2 になるくらい）
+  gainCoach(s, 10);
   s.finalResult = null;
   s.members = s.members.filter(m => m.grade < 3).map(m => ({...m, grade: m.grade + 1}));
   assignTitles(s.members);

@@ -552,7 +552,10 @@ function renderWeek(){
     const seniors = S.members.filter(m => m.grade === 3);
     const april = S.recs.find(r => r.year === S.year && r.keep && r.week === 0);
     const lastStage = S.recs.slice().reverse().find(r => r.year === S.year && r.final) || S.recs.slice().reverse().find(r => r.year === S.year && r.result);
-    w.innerHTML = `<div class="stagecard"><h3>${seniors.length ? '3年生が引退します' : 'この1年をふり返る'}</h3><ol class="small" style="padding-left:1.2em">${res}</ol>
+    // この1年の伸び（部の実力のグラフと同じ記録から）
+    const yr = (S.trend || []).filter(x => x.y === S.year), grow = yr.length > 1 ? Math.round(yr[yr.length - 1].a - yr[0].a) : null;
+    const yearLine = `<p class="small year-sum">${grow != null ? `部の平均 ${Math.round(yr[0].a)} → ${Math.round(yr[yr.length - 1].a)}（${grow >= 0 ? '+' : ''}${grow}）・` : ''}部員 ${S.members.length}人・顧問の指導力 Lv${coachLevel(S)}（${coachTitle(coachLevel(S))}）</p>`;
+    w.innerHTML = `<div class="stagecard"><h3>${seniors.length ? '3年生が引退します' : 'この1年をふり返る'}</h3><ol class="small" style="padding-left:1.2em">${res}</ol>${yearLine}
       <p class="txt">${seniors.length ? `${seniors.map(m => esc(m.name)).join('、')}（${seniors.length}人）が引退する。` : `部員は${S.members.length}人になった。引退する3年生はまだいない。`}4月の録音と最後の本番を聴き比べてみよう。</p>
       <div class="transport">${april ? `<button class="btn small" type="button" data-act="playrec" data-id="${april.id}">▶ 4月の録音</button>` : ''}${lastStage ? `<button class="btn small" type="button" data-act="playrec" data-id="${lastStage.id}">▶ 最後の本番</button><button class="btn small" type="button" data-act="saverec" data-id="${lastStage.id}">⤓ 最後の本番を保存</button>` : ''}</div></div>
       ${firstClassEpilogue(seniors)}
