@@ -474,21 +474,26 @@ function coachHtml(){
     <small>${coachTitle(lv)}・練習の効果 +${Math.round((coachMult(S) - 1) * 100)}%${lv < 12 ? `・次のレベルまで ${Math.ceil(b - xp)}` : ''}</small></div>`;
 }
 // この1年の部の実力の伸び（週ごと）。去年の同じ週の線をうすく重ねる
+// 部員の力の平均（音程・リズム・音色・表現）の、今年と去年の週ごとの線。下に月、県大会の週に印
 function trendSvg(){
   const tr = S.trend || [], now = tr.filter(x => x.y === S.year), prev = tr.filter(x => x.y === S.year - 1);
   if(now.length < 2 && prev.length < 2) return '';
   const last = Math.max(PREF_WEEK + 2, ...tr.filter(x => x.y >= S.year - 1).map(x => x.w));
-  const W = 300, H = 90, X = w => 6 + (W - 12) * w / last, Y = v => H - 14 - (H - 24) * clamp(v, 0, 100) / 100;
-  const line = (pts, k) => pts.map((x, i) => `${i ? 'L' : 'M'}${X(x.w).toFixed(1)},${Y(x[k]).toFixed(1)}`).join('');
-  const marks = [];
-  for(let w = 0; w <= last; w++){ const ev = eventAt(S, w); if(ev?.kind === 'contest' || ev?.kind === 'concert') marks.push(`<line x1="${X(w).toFixed(1)}" x2="${X(w).toFixed(1)}" y1="${H - (ev.kind === 'contest' ? 11 : 8)}" y2="${H - 3}" class="mk ${ev.kind}"/>`); }
-  return `<figure class="trend"><figcaption>この1年の伸び <span class="k-avg">部の平均</span> <span class="k-fam">譜読み</span>${prev.length > 1 ? ' <span class="k-prev">去年の部の平均</span>' : ''}</figcaption>
-    <svg viewBox="0 0 ${W} ${H}" preserveAspectRatio="none" role="img" aria-label="この1年の、部の平均と自由曲の譜読みの伸び">
+  const W = 300, H = 80, X = w => 6 + (W - 12) * w / last, Y = v => H - 6 - (H - 12) * clamp(v, 0, 100) / 100;
+  const pct = w => (X(w) / W * 100).toFixed(1);
+  const line = pts => pts.map((x, i) => `${i ? 'L' : 'M'}${X(x.w).toFixed(1)},${Y(x.a).toFixed(1)}`).join('');
+  const cur = now[now.length - 1], was = cur && prev.filter(x => x.w <= cur.w).pop();
+  const months = [];
+  for(let w = 0; w <= last; w += 4) months.push(`<span style="left:${pct(w)}%">${wkMonth(w)}月</span>`);
+  return `<figure class="trend"><figcaption><span class="tr-t">部員の力の平均</span>${cur ? `<b>${Math.round(cur.a)}</b>` : ''}${was ? `<small>去年のいまごろ ${Math.round(was.a)}</small>` : ''}
+    <span class="tr-k"><span class="k-avg">今年</span>${prev.length > 1 ? '<span class="k-prev">去年</span>' : ''}</span></figcaption>
+    <div class="tr-plot"><span class="tr-ev" style="left:${pct(PREF_WEEK)}%">県大会</span>
+    <svg viewBox="0 0 ${W} ${H}" preserveAspectRatio="none" role="img" aria-label="部員の力の平均の、今年と去年の伸び">
       ${[25, 50, 75].map(v => `<line x1="6" x2="${W - 6}" y1="${Y(v)}" y2="${Y(v)}" class="grid"/>`).join('')}
-      ${prev.length > 1 ? `<path d="${line(prev, 'a')}" class="prev"/>` : ''}
-      ${now.length > 1 ? `<path d="${line(now, 'f')}" class="fam"/><path d="${line(now, 'a')}" class="avg"/>` : ''}
-      ${marks.join('')}
-    </svg></figure>`;
+      <line x1="${X(PREF_WEEK).toFixed(1)}" x2="${X(PREF_WEEK).toFixed(1)}" y1="0" y2="${H}" class="mk"/>
+      ${prev.length > 1 ? `<path d="${line(prev)}" class="prev"/>` : ''}
+      ${now.length > 1 ? `<path d="${line(now)}" class="avg"/>` : ''}
+    </svg><div class="tr-x">${months.join('')}</div></div></figure>`;
 }
 const helpBox = (rows, open) => `<details class="help"${open ? ' open' : ''}><summary>数字の見かた</summary><dl>${rows.map(([k, v]) => `<dt>${k}</dt><dd>${v}</dd>`).join('')}</dl></details>`;
 function renderStats(){
@@ -512,6 +517,7 @@ function renderStats(){
     + trendSvg()
     + helpBox([...STAT_KEYS.map(k => [STAT_LABEL[k], STAT_DESC[k]]), ['まとまり', '互いを聴き合う力。合奏に出る人が多いほど育つ'],
       ['譜読み', '一人ひとりが自分の楽譜をどれだけ吹けるか（平均）。低いと音を間違え、出だしやテンポが揺れる'],
+      ['部員の力の平均（グラフ）', '席についている部員の、音程・リズム・音色・表現の平均。点線は去年の同じころ。春は1年生が入るので、いったん下がる'],
       ['会場慣れ', 'ホールで吹いた経験。高いほど、大きな会場で緊張しにくい'], ['評判', '演奏会やコンクールで上がる。上がるほど入部したい生徒が来る'],
       ['顧問の指導力', 'あなたの指導の経験。毎週の練習・本番・コンクール・部員のできごとでたまり、レベルが上がると部員の練習の効果が上がり、本番の緊張も少しやわらぐ']], helpOpen);
 }

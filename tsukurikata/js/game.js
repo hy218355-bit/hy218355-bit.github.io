@@ -421,11 +421,11 @@ function practiceWeek(s0, plan){
   fulfillDreams(s);
   return nextWeek(s);
 }
-// 週ごとの部の力の記録（部の実力のグラフ用）：その週の練習のあとの、席についている部員の平均と、自由曲の譜読み
+// 週ごとの部の力の記録（部の実力のグラフ用）：その週の練習のあとの、席についている部員の力の平均
 function recordTrend(s){
   if(!seated(s).length) return;
   const avg = STAT_KEYS.reduce((a, k) => a + bandAvg(s, k), 0) / STAT_KEYS.length;
-  (s.trend ||= []).push({y: s.year, w: s.week, a: Math.round(avg * 10) / 10, f: Math.round((s.pieceId ? readAvg(s, s.pieceId) : 0) * 10) / 10});
+  (s.trend ||= []).push({y: s.year, w: s.week, a: Math.round(avg * 10) / 10});
   if(s.trend.length > 120) s.trend.splice(0, s.trend.length - 120);
 }
 function nextWeek(s){
