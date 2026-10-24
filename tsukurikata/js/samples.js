@@ -107,6 +107,12 @@ function pickSample(bank, midi, v, opts = {}){
   return ok[Math.min(r, ok.length - 1)][1];
 }
 
+// 直前と同じ録音の代わり：同じ高さの別テイク・2半音以内の録音（同じ強弱段から）。どれにするかは音ごとに決まる
+function altSample(bank, cur, midi, key){
+  const cands = bank.samples.filter(s => s !== cur && !s.roll && s.m != null && Math.abs(s.m - midi) <= 2.01);
+  const same = cands.filter(s => s.l === cur.l), pool = same.length ? same : cands;
+  return pool.length ? pool[Math.floor(hash(key || '', 'alt') * pool.length)] : null;
+}
 // 録音を時間 [t0, t1] だけ鳴らす。録音より長ければ、目録のループ（lp）をなめらかにつないでくり返す。
 // ループの始まりと終わりは、波形がそろう所を書き出し時に選んである（build_samples.py の find_loop）。
 // 重ねる長さ XF は録音の上の長さなので、再生速度 rate で割った時間だけ重ねると、波の山と谷がずれない。
@@ -187,7 +193,10 @@ class SampleVoice {
     // 短い音はスタッカートの録音をそのまま鳴らす
     const short = this.stac && !smooth && (n.art === 'stac' || n.d < 0.3);
     const env = n.env, vMax = env.reduce((a, [, v]) => Math.max(a, v), 0);
-    const smp = short ? pickSample(this.stac, n.midi - (cfg.shift || 0), vMax, {key: n.key}) : pickSample(this.bank, n.midi - (cfg.shift || 0), vMax, {rank: this.rank});
+    let smp = short ? pickSample(this.stac, n.midi - (cfg.shift || 0), vMax, {key: n.key}) : pickSample(this.bank, n.midi - (cfg.shift || 0), vMax, {rank: this.rank});
+    // 同じ高さの短い音が続くとき、同じ録音をくり返すと機械的に聞こえる（マシンガン）。直前と同じ録音なら、近くの別の録音にかえる
+    if(short && this.lastShort?.midi === n.midi && this.lastShort.smp === smp) smp = altSample(this.stac, smp, n.midi - (cfg.shift || 0), n.key) || smp;
+    this.lastShort = short ? {midi: n.midi, smp} : null;
     // 鳴りの遅い録音は、そのぶん早く吹きはじめる（つないだ音は録音の途中から鳴らすので、早めない）。音の終わりは楽譜どおり
     const s = T0 + n.t - (smooth ? 0 : smp.lead || 0);
     const nextS = next ? T0 + next.t : Infinity;
