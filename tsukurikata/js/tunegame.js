@@ -1,6 +1,6 @@
 'use strict';
 /* 耳でチューニング：部員の B♭（ホルンは F）と、チューナーの基準音を同時に鳴らす。
-   部員の音は少しずれているので「うわんうわん」とうなる。うなりが消えるところまで高さを動かす。
+   部員の音は少しずれているので「うわんうわん」とうなる。うなりが消えるところまで高さを動かす（画面では2本の波が重なって1本になる）。
    3人ぶんで1回。週に1回まで。合わせられた部員は音程が少し上がる。 */
 const TG = {rounds: [], i: 0, snd: null, val: 0, raf: 0};
 
@@ -53,14 +53,15 @@ function tgRound(){
   // 合わせる音の名前。移調楽器は、その楽器の楽譜での名前も
   const t = TRANSPOSE[r.iid] || 0;
   $('#tgNote').innerHTML = `合わせる音：実音 <b>${noteName(r.midi)}</b>${t % 12 ? `。${r.inst.name}の楽譜では <b>${noteName(r.midi + t)}</b>` : ''}`;
-  $('#tgMsg').textContent = 'チューナーの基準音と重ねて鳴らす。下の波（うなり）がゆっくりになったら近い。波が消えて平らになったらぴったり。';
+  $('#tgMsg').textContent = 'チューナーの基準音と重ねて鳴らす。うなりがゆっくりになるほど近い。下の2本の波が重なって1本になったらぴったり。';
   $('#tgRes').textContent = '';
   $('#tgOk').hidden = false; $('#tgNext').hidden = true; $('#tgSlider').disabled = false;
   for(const b of document.querySelectorAll('#tuneGame [data-tg="down"], #tuneGame [data-tg="up"]')) b.disabled = false;
   tgSound(true);
   tgDraw();
 }
-// うなりの絵：基準音と部員の音を重ねた音の大きさの波（2秒ぶん）。ずれが小さいほど波がゆっくり、ぴったりなら平ら
+// 波の絵：チューナーの音（灰色）と部員の音（金色）を重ねる。高さがずれているほど部員の波が詰まったり伸びたりして2本に分かれ、
+// ぴったり合うと重なって1本になる（ずれは見やすいように大きくして描く）。鳴っている間は、波がゆっくり流れる
 function tgDraw(){
   cancelAnimationFrame(TG.raf);
   const cv = $('#tgWave'), r = TG.rounds[TG.i];
@@ -68,18 +69,18 @@ function tgDraw(){
   const dpr = window.devicePixelRatio || 1, W = cv.clientWidth * dpr, H = cv.clientHeight * dpr;
   if(cv.width !== W || cv.height !== H){ cv.width = W; cv.height = H; }
   const c = r.res != null ? 0 : r.off + TG.val, f = mtof(r.midi), bps = Math.abs(f * (Math.pow(2, c / 1200) - 1));
-  const ctx = cv.getContext('2d'), C = tok(), mid = H / 2, a = 1, b = 0.8, span = 2;
-  const ph = TG.snd ? performance.now() / 1000 : 0;
+  const ctx = cv.getContext('2d'), C = tok(), mid = H / 2, amp = mid - 8 * dpr, N = 4;
+  const ph = TG.snd ? performance.now() / 1000 * 0.5 : 0;
   ctx.clearRect(0, 0, W, H);
-  ctx.strokeStyle = C.rule; ctx.lineWidth = dpr; ctx.beginPath(); ctx.moveTo(0, mid); ctx.lineTo(W, mid); ctx.stroke();
-  const env = x => Math.sqrt(a * a + b * b + 2 * a * b * Math.cos(2 * Math.PI * bps * (x / W * span + ph))) / (a + b) * (mid - 4 * dpr);
-  ctx.beginPath();
-  for(let x = 0; x <= W; x += 2 * dpr) ctx.lineTo(x, mid - env(x));
-  for(let x = W; x >= 0; x -= 2 * dpr) ctx.lineTo(x, mid + env(x));
-  ctx.closePath();
-  ctx.fillStyle = C.brass; ctx.globalAlpha = 0.35; ctx.fill(); ctx.globalAlpha = 1;
-  ctx.strokeStyle = C.brass; ctx.lineWidth = 1.5 * dpr; ctx.stroke();
-  $('#tgBeat').textContent = r.res != null ? '合わせたあとの音（うなりなし）' : bps < 0.25 ? 'うなりは、ほとんど聞こえない' : `うなり：1秒に約${bps < 2 ? bps.toFixed(1) : Math.round(bps)}回`;
+  const wave = (cyc, color, lw, alpha) => {
+    ctx.beginPath();
+    for(let x = 0; x <= W; x += dpr){ const y = mid - amp * Math.sin(2 * Math.PI * (cyc * x / W - ph)); x ? ctx.lineTo(x, y) : ctx.moveTo(x, y); }
+    ctx.strokeStyle = color; ctx.lineWidth = lw; ctx.globalAlpha = alpha; ctx.stroke(); ctx.globalAlpha = 1;
+  };
+  wave(N, C.soft, 4 * dpr, 0.5);
+  wave(N * (1 + 0.005 * c), Math.abs(c) <= 3 ? C.good : C.brass, 2 * dpr, 1);
+  $('#tgBeat').textContent = r.res != null ? '合わせたあとの音：2本が重なって1本に' : Math.abs(c) <= 3 ? '2本が重なって1本に。うなりは、ほとんど聞こえない'
+    : `灰色＝チューナー　金色＝${r.m.name}。うなり：1秒に約${bps < 2 ? bps.toFixed(1) : Math.round(bps)}回`;
   if(TG.snd) TG.raf = requestAnimationFrame(tgDraw);
 }
 function tgSound(on){
