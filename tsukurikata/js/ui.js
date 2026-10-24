@@ -1008,8 +1008,8 @@ function planHtml(ev){
     ${foundingYear(S) && S.week < 4 ? '<p class="small">「おまかせ」のままの部員は、部の方針で自分の練習を決める。指示したい部員だけ、今週の練習を選ぼう。合奏は出た人が多いほど、部のまとまりと曲の仕上がりが伸びる。</p>' : ''}
     <div class="focus"><span>部の方針</span><div class="chips">${POLICIES.map(p => `<button class="chip" type="button" data-polall="${p.id}" aria-pressed="${pol === p.id}">${p.name}</button>`).join('')}</div>
     <span class="small">${POLICY_BY[pol].desc}</span></div>
-    ${setActive(S) ? `<div class="focus"><span>曲の練習の配分（自由曲 ${esc(PIECES[S.pieceId].title)}・課題曲 ${esc(PIECES[S.setPiece].title)}）</span><div class="chips">${Object.keys(SPLIT).map(k => `<button class="chip" type="button" data-split="${k}" aria-pressed="${(S.split || 'both') === k}">${SPLIT_NAME[k]}</button>`).join('')}</div>
-      <span class="small">仕上がり：自由曲 ${Math.round(S.fam[S.pieceId] || 0)}・課題曲 ${Math.round(S.fam[S.setPiece] || 0)}。曲の練習・合奏の伸びを、この配分で2曲に分ける</span></div>` : ''}
+    ${setActive(S) ? `<div class="focus"><span>曲の練習の配分（自由曲 ${esc(PIECES[S.pieceId].title)}・課題曲 ${esc(PIECES[S.setPiece].title)}）</span><div class="chips">${Object.keys(SPLIT).map(k => `<button class="chip" type="button" data-split="${k}" aria-pressed="${(S.split || 'auto') === k}">${SPLIT_NAME[k]}</button>`).join('')}</div>
+      <span class="small">仕上がり：自由曲 ${Math.round(S.fam[S.pieceId] || 0)}・課題曲 ${Math.round(S.fam[S.setPiece] || 0)}。曲の練習・合奏の伸びを、この配分で2曲に分ける${(S.split || 'auto') === 'auto' ? `（おまかせ：いまは自由曲 ${Math.round(pieceShares(S)[0][1] * 10)}割・課題曲 ${Math.round(pieceShares(S)[1][1] * 10)}割）` : ''}</span></div>` : ''}
     <div class="psecs">${ms.length > 8 ? '<p class="small">部員ごとの練習（パートを押すと開く。数字は人数）</p>' : ''}${rows}</div>
     ${S.pieceId && !S.finalWeek && S.week >= 8 && nextContest(S).w > S.week ? lineupLine() : ''}
     <p class="small plan-sum">今週の予定：${sum}${tutti === 1 ? '（合奏は2人以上いないとできない）' : ''}</p>
@@ -1312,11 +1312,21 @@ function startStageConduct(){
   stopPlay();
   soloAll();
   commit(beginStage(S));
-  const rec = S.recs.find(r => r.id === S.pending.recId);
+  const rec = S.recs.find(r => r.id === S.pending.recId), setRec = S.pending.setRecId ? S.recs.find(r => r.id === S.pending.setRecId) : null;
   U.piece = null; U.range = 'all';
   setVenue(rec.venue);
   renderAll();
-  openConduct({rec, ev: eventAt(S, S.week)});
+  const ev = eventAt(S, S.week);
+  if(!setRec) return openConduct({rec, ev});
+  // A部門：課題曲は部員まかせで吹くのを聴いてから、続けて自由曲を指揮する（とばすと、指揮せずに結果へ）
+  const perf = perform(recCtx(setRec));
+  openWatch(perf, `${ev.title}：${PIECES[setRec.pieceId].title}（課題曲）`);
+  const go = () => playPerf(perf, setRec.label, natural => {
+    if(!natural) return reveal();
+    cdMsg('課題曲が終わった。続けて、自由曲を指揮する。');
+    setTimeout(() => { if(CD.phase === 'watch'){ closeWatch(); openConduct({rec, ev}); } }, 1600);
+  });
+  if(fxCalm()) go(); else stageIntro(perf, ev, rec, go, `課題曲 ${PIECES[setRec.pieceId].title}・自由曲 ${PIECES[rec.pieceId].title}`);
 }
 function reveal(){
   closeWatch();

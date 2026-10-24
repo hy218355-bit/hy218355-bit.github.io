@@ -146,8 +146,10 @@ function addRec(s, label, extra){
   const rec = {id: `r${s.year}-${s.week}-${s.recs.length}-${Math.floor(hash(label, s.log.length) * 1e6)}`, label, year: s.year, week: s.week,
     pieceId: extra.pieceId || s.pieceId, venue: extra.venue || 'room', snap: snapshot(s, extra), result: extra.result || null};
   s.recs.push(rec);
-  const keep = s.recs.filter(r => r.keep);
-  if(s.recs.length > 18) s.recs = [...keep, ...s.recs.filter(r => !r.keep).slice(-(18 - keep.length))];
+  // 残す録音（コンクール・定期演奏会・4月など）は新しい60件、それ以外は新しい12件。いま録ったものは必ず残る
+  //（以前は残す録音が18件を超えると、録ったばかりの録音まで消えて、本番の画面が開けなくなっていた）
+  const keep = new Set(s.recs.filter(r => r.keep).slice(-60)), loose = new Set(s.recs.filter(r => !r.keep).slice(-12));
+  s.recs = s.recs.filter(r => keep.has(r) || loose.has(r));
   return rec;
 }
 const recCtx = rec => ({
@@ -164,8 +166,10 @@ const recCtx = rec => ({
 const A_MIN = 15;
 const SET_POOL = ['aida', 'pomp', 'hero', 'galop', 'ode', 'hungarian'];
 const SET_W = 0.4;
-const SPLIT = {free: [0.7, 0.3], both: [0.5, 0.5], set: [0.3, 0.7]};   // 曲の練習の配分［自由曲, 課題曲］
-const SPLIT_NAME = {free: '自由曲中心', both: '半分ずつ', set: '課題曲中心'};
+// 曲の練習の配分［自由曲, 課題曲］。おまかせは、仕上がりが遅れているほうを多めに（3割〜7割）
+const SPLIT = {auto: null, free: [0.7, 0.3], both: [0.5, 0.5], set: [0.3, 0.7]};
+const SPLIT_NAME = {auto: 'おまかせ', free: '自由曲中心', both: '半分ずつ', set: '課題曲中心'};
+const autoSplit = s => { const t = clamp(0.5 + ((s.fam[s.pieceId] || 0) - (s.fam[s.setPiece] || 0)) / 100, 0.3, 0.7); return [1 - t, t]; };
 const isB = s => s.division === 'B';
 const divisionFor = s => s.members.length >= A_MIN ? 'A' : 'B';
 const setOffer = s => SET_POOL.filter(id => PIECES[id] && id !== s.pieceId).sort((a, b) => hash(s.year, a, 'set') - hash(s.year, b, 'set')).slice(0, 3);
@@ -175,7 +179,7 @@ const setActive = s => !!(s.setPiece && !s.finalWeek);
 function pieceShares(s){
   if(!s.pieceId) return [];
   if(!setActive(s)) return [[s.pieceId, 1]];
-  const [f, t] = SPLIT[s.split] || SPLIT.both;
+  const [f, t] = SPLIT[s.split] || autoSplit(s);
   return [[s.pieceId, f], [s.setPiece, t]];
 }
 function choosePiece(s0, pid){
@@ -195,12 +199,12 @@ function choosePiece(s0, pid){
 }
 function chooseSetPiece(s0, pid){
   const s = clone(s0);
-  s.setPiece = pid; s.split = 'both'; s.phase = 'week';
+  s.setPiece = pid; s.split = 'auto'; s.phase = 'week';
   addLog(s, `課題曲は${PIECES[pid].full}に決めた。`);
   if(!s.episode && !s.consult) s.consult = pickConsult(s);
   return s;
 }
-function setSplit(s0, k){ const s = clone(s0); if(SPLIT[k]) s.split = k; return s; }
+function setSplit(s0, k){ const s = clone(s0); if(k in SPLIT) s.split = k; return s; }
 function clone(s){ return JSON.parse(JSON.stringify(s)); }
 
 /* ===== 練習 =====
