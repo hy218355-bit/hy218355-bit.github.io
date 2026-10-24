@@ -1413,10 +1413,11 @@ function pieceCard(id, {tag = '', note = '', act, label}){
   const pc = PIECES[id];
   // いまの部員で吹くと、いない楽器（審査で減点になる）
   const lk = seated(S).length ? lackOf(id, seated(S).map(m => SEAT[m.seat].sec)) : null;
-  return `<div class="pcard">${tag ? `<span class="tag fit">${tag}</span>` : ''}<h3>${pc.title}</h3><p>${pc.composer}${note ? `・${note}` : ''}</p>
+  // 作曲者は「どんな曲？」の中に。いない楽器は、いちばん大事なものだけ
+  return `<div class="pcard">${tag ? `<span class="tag fit">${tag}</span>` : ''}<h3>${pc.title}</h3>${note ? `<p>${note}</p>` : ''}
     <p class="asks">問われる力：<b>${pc.asks}</b></p>
-    ${lk ? `<p class="asks">${lk.pts >= 1 ? `いない楽器で <b>−${Math.round(lk.pts)}点</b>ほど（とくに${lackNames(lk.miss.slice(0, 2)).join('・')}）` : lk.miss.length ? `いない楽器：${lackNames(lk.miss).join('・')}（審査にはほぼ響かない）` : 'いまの部で、楽器はそろっている'}</p>` : ''}
-    <details class="pdesc"><summary>どんな曲？</summary><p>${pc.full}。${pc.desc}</p></details>
+    ${lk ? `<p class="asks">${lk.pts >= 1 ? `いない楽器で <b>−${Math.round(lk.pts)}点</b>（とくに${lackNames(lk.miss.slice(0, 1))[0]}）` : lk.miss.length ? 'いない楽器は、審査にほぼ響かない' : 'いまの部で、楽器はそろっている'}</p>` : ''}
+    <details class="pdesc"><summary>どんな曲？</summary><p>${pc.composer}。${pc.full}。${pc.desc}</p></details>
     <div class="row"><button class="btn small" type="button" data-act="model" data-pid="${id}">▶ お手本</button><button class="btn small" type="button" data-act="preview" data-pid="${id}">▶ いまの部で</button><button class="btn small primary" type="button" data-act="${act}" data-pid="${id}">${label}</button></div></div>`;
 }
 const listenBtns = id => `<button class="btn small" type="button" data-act="model" data-pid="${id}">▶ お手本を聴く</button><button class="btn small" type="button" data-act="preview" data-pid="${id}">▶ いまの部で聴く</button>`;
