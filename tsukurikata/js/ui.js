@@ -550,15 +550,15 @@ function renderWeek(){
     const fit = pieceFit();
     const A = divisionFor(S) === 'A';
     w.innerHTML = `<div class="event"><span class="tag">${A ? 'A部門' : 'B部門'}</span><span>${A ? `部員が${A_MIN}人以上いるので、今年はA部門。自由曲のあと、課題曲も選ぶ。2曲で、支部大会・全国大会を目指せる。` : `部員が${A_MIN}人より少ないので、今年はB部門。自由曲だけで、県大会まで。年度のはじめに${A_MIN}人以上いれば、A部門で全国大会を目指せる。`}</span></div>
-      <p class="small">コンクールの自由曲を決めよう。「お手本」は全員がうまい部の演奏、「いまの部で」はいまの部員が初めて吹いた音。「部の得意に合う」は、いまの部員の得意な力が採点で重く見られる曲。</p>`
-      + PIECE_IDS.map(id => { const pc = PIECES[id], f = fit[id]; return `<div class="pcard">${f ? `<span class="tag fit">部の得意に合う（${f}）</span>` : ''}<h3>${pc.full}</h3><p>${pc.composer}｜${pc.key}｜問われる力：${pc.asks}</p><p>${pc.desc}</p><div class="row">${listenBtns(id)}<button class="btn small primary" type="button" data-act="choose" data-pid="${id}">この曲に決める</button></div></div>`; }).join('');
+      <p class="small">コンクールの自由曲を決めよう。「お手本」はうまい部の演奏、「いまの部で」はいまの部員の音。「部の得意に合う」曲は、部員の得意な力が採点で重く見られる。</p>`
+      + PIECE_IDS.map(id => pieceCard(id, {tag: fit[id] ? `部の得意に合う（${fit[id]}）` : '', act: 'choose', label: '決める'})).join('');
     return;
   }
   // A部門：その年に発表された3曲から、課題曲を選ぶ
   if(S.phase === 'chooseSet'){
     head.textContent = '課題曲';
     w.innerHTML = `<div class="event"><span class="tag">A部門</span><span>今年の課題曲が発表された。3曲から1曲を選ぼう。本番では課題曲・自由曲（${esc(PIECES[S.pieceId].title)}）の順に続けて吹き、審査員は課題曲を${Math.round(SET_W * 10)}割、自由曲を${10 - Math.round(SET_W * 10)}割の重みで見る。</span></div>`
-      + setOffer(S).map(id => { const pc = PIECES[id]; return `<div class="pcard"><h3>${pc.full}</h3><p>${pc.composer}｜問われる力：${pc.asks}</p><p>${pc.desc}</p><div class="row">${listenBtns(id)}<button class="btn small primary" type="button" data-act="chooseset" data-pid="${id}">この曲を課題曲にする</button></div></div>`; }).join('');
+      + setOffer(S).map(id => pieceCard(id, {act: 'chooseset', label: '課題曲にする'})).join('');
     return;
   }
   if(S.phase === 'end'){
@@ -606,7 +606,7 @@ function renderWeek(){
   if(S.chooseFinal){
     const fam = id => Math.round(S.fam[id] || 0);
     w.innerHTML = `<div class="event"><span class="tag">定期演奏会の曲</span><span>3年生の最後の本番、${wkLabel(S.finalWeek)}の定期演奏会で演奏する曲を決めよう。コンクールの曲をもう一度でも、新しい曲に挑戦してもいい（仕上がりも、部員の譜読みも低いところから）。</span></div>`
-      + PIECE_IDS.map(id => { const pc = PIECES[id]; return `<div class="pcard"><h3>${pc.full}</h3><p>${id === S.contestPiece ? 'コンクールで演奏した曲・' : ''}仕上がり ${fam(id)}・譜読み ${Math.round(readAvg(S, id))}｜問われる力：${pc.asks}</p><div class="row">${listenBtns(id)}<button class="btn small primary" type="button" data-act="choosefinal" data-pid="${id}">この曲にする</button></div></div>`; }).join('');
+      + PIECE_IDS.map(id => pieceCard(id, {tag: id === S.contestPiece ? 'コンクールで演奏した曲' : '', note: `仕上がり ${fam(id)}・譜読み ${Math.round(readAvg(S, id))}`, act: 'choosefinal', label: '決める'})).join('');
     return;
   }
   const parts = [weekResHtml()];
@@ -1229,6 +1229,14 @@ function pieceFit(){
 function modelPerf(pid){
   return perform({members: fullBand({pitch: 100, rhythm: 100, tone: 100, expr: 100}), pieceId: pid, cohesion: 100, fam: 100, interp: {tempo: 1, dyn: 1, rub: 1}, venue: 'hall', seed: 'band', lead: () => 1});
 }
+// 曲のカード（選曲・課題曲・定期演奏会の曲）：短い曲名・作曲者・問われる力と、聴く・決めるボタン。曲の説明は「どんな曲？」で開く
+function pieceCard(id, {tag = '', note = '', act, label}){
+  const pc = PIECES[id];
+  return `<div class="pcard">${tag ? `<span class="tag fit">${tag}</span>` : ''}<h3>${pc.title}</h3><p>${pc.composer}${note ? `・${note}` : ''}</p>
+    <p class="asks">問われる力：<b>${pc.asks}</b></p>
+    <details class="pdesc"><summary>どんな曲？</summary><p>${pc.full}。${pc.desc}</p></details>
+    <div class="row"><button class="btn small" type="button" data-act="model" data-pid="${id}">▶ お手本</button><button class="btn small" type="button" data-act="preview" data-pid="${id}">▶ いまの部で</button><button class="btn small primary" type="button" data-act="${act}" data-pid="${id}">${label}</button></div></div>`;
+}
 const listenBtns = id => `<button class="btn small" type="button" data-act="model" data-pid="${id}">▶ お手本を聴く</button><button class="btn small" type="button" data-act="preview" data-pid="${id}">▶ いまの部で聴く</button>`;
 
 /* ===== まとめて描く ===== */
@@ -1286,7 +1294,7 @@ function reveal(){
   const p = S.pending;
   if(p.kind === 'concert') haptic(p.q >= 60 ? 'success' : 'tap');
   // コンクールは、ホールでの結果発表から
-  else if(p.judge) showAnnounce(p.judge, p.judge.level, () => setTab('week'));
+  else if(p.judge) showAnnounce(p.judge, p.judge.level, () => setTab('week'), p.division);
 }
 // 本番が鳴り終わったら、客席から拍手（出来がよいほど大きく長い）。少し聴いてから結果へ
 const stageHeat = p => p.kind === 'concert' ? clamp01((p.q - 20) / 70) : clamp01((p.judge.avg - 45) / 40);

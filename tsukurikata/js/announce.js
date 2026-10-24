@@ -21,14 +21,15 @@ function rivalSchools(year, level, n){
   return out;
 }
 // 出場校の並び（プログラム順）と、それぞれの賞・代表。自分の学校の結果に合うように、ほかの学校の金賞と代表を決める
-function contestBoard(year, levelId, j){
-  const L = LEVELS[levelId];
+// B部門（div === 'B'）は、出場校がA部門と別で、代表校の発表はない
+function contestBoard(year, levelId, j, div = null){
+  const L = LEVELS[levelId], key = div === 'B' ? levelId + 'B' : levelId;
   const n = levelId === 'pref' ? 12 : 10;
-  const rivals = rivalSchools(year, levelId, n - 1).map(name => {
-    const h = hash(year, levelId, name, 'aw');
+  const rivals = rivalSchools(year, key, n - 1).map(name => {
+    const h = hash(year, key, name, 'aw');
     return {name, award: h < 0.3 ? 'gold' : h < 0.72 ? 'silver' : 'bronze'};
   });
-  const nRep = L.rep ? 3 : 0;
+  const nRep = L.rep && div !== 'B' ? 3 : 0;
   const need = nRep - (j.rep ? 1 : 0);
   const golds = () => rivals.filter(r => r.award === 'gold');
   const byH = (a, b) => hash(year, levelId, a.name, 'up') - hash(year, levelId, b.name, 'up');
@@ -40,12 +41,12 @@ function contestBoard(year, levelId, j){
   return {L, list, nRep};
 }
 
-function showAnnounce(j, levelId, onDone){
-  const {L, list, nRep} = contestBoard(S.year, levelId, j);
+function showAnnounce(j, levelId, onDone, div = null){
+  const {L, list, nRep} = contestBoard(S.year, levelId, j, div);
   const ours = list.find(r => r.ours);
   AN.onDone = onDone;
   const token = AN.token = {};
-  $('#anTitle').textContent = `${L.name}　審査結果発表`;
+  $('#anTitle').textContent = `${L.name}${div ? `（${div}部門）` : ''}　審査結果発表`;
   $('#anList').innerHTML = '';
   $('#anRep').innerHTML = '';
   $('#anSkip').hidden = false; $('#anDone').hidden = true;
