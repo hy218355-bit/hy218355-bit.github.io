@@ -417,6 +417,8 @@ function practiceWeek(s0, plan){
     if(!s.flags[f] && bandAvg(s, st.k) >= st.at){ s.flags[f] = true; addLog(s, st.text); (s.mileUp ||= []).push({k: st.k, at: st.at, text: st.text}); }
   }
   s.plan = {}; s.planSpan = {};
+  // 夢：パートリーダー・◎のスキル・うまくなる（練習のあと）
+  fulfillDreams(s);
   return nextWeek(s);
 }
 // 週ごとの部の力の記録（部の実力のグラフ用）：その週の練習のあとの、席についている部員の平均と、自由曲の仕上がり
@@ -1556,6 +1558,8 @@ function huddle(s0){
 }
 // 本番のあと：場数を踏んだぶんメンタルが強くなる。頭が真っ白になった部員・いつも以上だった部員は思い出に残る
 function stageAftermath(s, ev, p){
+  // 夢：コンクールの舞台・金賞・全国・ソロ（そのとき舞台にいた部員）
+  fulfillDreams(s, {stage: ev, award: p.judge?.award, onStage: new Set(stagers(s).map(m => m.id)), pieceId: s.pieceId});
   // 本番を重ねて「度胸」を身につけた部員は、日誌に1行でまとめる
   const brave = [];
   for(const m of stagers(s)){ m.mental = clamp((m.mental ?? 40) + (ev.kind === 'contest' ? 4 : 2), 0, 100); if(addSkill(s, m, 'nerve', ev.kind === 'contest' ? 0.12 : 0.08, true)) brave.push(m); }
@@ -1714,6 +1718,7 @@ function runEnsemble(s0, ids){
   gainRep(s, {gold: 3, silver: 1.5, bronze: 0.5}[award] + (rep ? 2 : 0));
   s.morale = clamp(s.morale + (award === 'gold' ? 6 : 2), 0, 100);
   s.winter.ens = {ids: ms.map(m => m.id), names: ms.map(m => m.name), score, award, rep, recId: rec.id};
+  fulfillDreams(s, {ens: new Set(ms.map(m => m.id))});
   addLog(s, `アンサンブルコンテストに、${ms.map(m => m.name).join('・')}の${ms.length}人で出た。${nm}${rep ? '。県の代表に選ばれた！' : '。'}（${score}点）`);
   gainCoach(s, 3);
   return s;
@@ -1748,6 +1753,51 @@ function autoWinter(s){
   if(s.phase === 'winter' && winterStep(s).id === 'ens'){ const ids = autoEnsemble(s); s = ids.length ? runEnsemble(s, ids) : skipEnsemble(s); s = winterNext(s); }
   if(s.phase === 'winter' && winterStep(s).id === 'grad') s = winterNext(s);
   return s;
+}
+
+/* ===== 部員の夢 =====
+   入部したときに、1人ひとつ夢を持つ（m.dream）。かなうと、その子の思い出に残り、本番の強さが上がる（m.dreamDone）。
+   本番・アンサンブル・練習のあとに確かめる（fulfillDreams）。かなった瞬間は、画面でカットイン（s.dreamUp） */
+const DREAMS = {
+  stage:    {text: 'コンクールの舞台に立ちたい'},
+  gold:     {text: 'コンクールで金賞をとりたい'},
+  national: {text: '全国大会に行きたい'},
+  solo:     {text: 'ソロを吹きたい'},
+  leader:   {text: 'パートリーダーになりたい'},
+  ensemble: {text: 'アンサンブルコンテストに出たい'},
+  skill:    {text: '得意わざ（スキル）を2つ持ちたい'},
+  good:     {text: 'あこがれの先輩みたいに、うまくなりたい'},
+};
+const DREAM_IDS = Object.keys(DREAMS);
+// 夢の決め方：経験者は大きな夢を、はじめての子は身近な夢を持ちやすい
+function pickDream(id, exp){
+  const pool = exp ? ['gold', 'national', 'solo', 'leader', 'skill', 'gold', 'national'] : ['stage', 'stage', 'gold', 'solo', 'leader', 'ensemble', 'good', 'good'];
+  return pool[Math.floor(hash(id, 'dream') * pool.length)];
+}
+const soloSeat = (pid, m) => !!(pid && m.seat && (PIECES[pid].roles[SEAT[m.seat].part] || []).some(x => x.solo));
+// ctx：{stage: ev, award, onStage: Set} … 本番のあと、{ens: Set} … アンサンブルのあと、なし … 練習のあと
+function fulfillDreams(s, ctx = {}){
+  for(const m of s.members){
+    if(!m.dream || m.dreamDone) continue;
+    const on = ctx.onStage?.has(m.id), ev = ctx.stage;
+    const ok = {
+      stage: on && ev?.kind === 'contest',
+      gold: on && ev?.kind === 'contest' && ctx.award === 'gold',
+      national: on && ev?.level === 'national',
+      // ソロのある席で吹くか、3年生の最後の定期演奏会でソロを任される
+      solo: on && (soloSeat(ctx.pieceId, m) || (ev?.final && m.grade === 3)),
+      leader: m.title === 'パートリーダー' || m.title === '部長',
+      ensemble: !!ctx.ens?.has(m.id),
+      skill: skillsOf(m).length >= 2 || SKILL_IDS.some(id => skillLv(m, id) >= 2),
+      good: avgStat(m) >= 80,
+    }[m.dream];
+    if(!ok) continue;
+    m.dreamDone = s.phase === 'winter' ? {y: s.year, w: 100 + s.winter.step} : {y: s.year, w: s.week};
+    m.mental = clamp((m.mental ?? 40) + 5, 0, 100);
+    remember(s, m, `夢だった「${DREAMS[m.dream].text}」が、かなった。`);
+    addLog(s, `${m.name}の夢「${DREAMS[m.dream].text}」が、かなった。`);
+    (s.dreamUp ||= []).push(m.id);
+  }
 }
 
 /* ===== 実績 =====
@@ -1884,7 +1934,7 @@ function assignRecruits(s0, map){
     const stats = makeStats(base, r.exp ? 5 : 3, 'stat', r.id);
     s.members.push({id: r.id, name: r.name, grade: g, joinGrade: g, seat, trait: r.trait, joined: s.year, exp: !!r.exp, mental: mentalInit(r.trait, g, 'stat', r.id) + (r.exp ? 6 : 0),
       stats, first: {y: s.year, w: s.week, stats: {...stats}}, hope: r.hope, sta: Math.round(s.members.length ? s.stamina : 100), fam: {},
-      sp: innateSkills(r.id, r.exp), bent: {},
+      sp: innateSkills(r.id, r.exp), bent: {}, dream: pickDream(r.id, r.exp),
       // コンクールのメンバーが決まったあとに入った部員は、今年のコンクールには出ない
       ...(lineupSet(s) ? {out: true} : {})});
   }
@@ -1963,7 +2013,7 @@ function load(){
       // 顧問の指導力（2026年10月）：前のセーブは、顧問になってからの年数と週から経験を見積もる
       s.coach ||= {xp: Math.round(50 * (s.year - (s.startYear ?? s.year)) + 1.5 * s.week)};
       // スキルと育ち方（2026年10月）：前のセーブの部員にも、生まれつきのスキルを決める
-      for(const m of s.members){ m.sp ??= innateSkills(m.id, m.exp); m.bent ??= {}; }
+      for(const m of s.members){ m.sp ??= innateSkills(m.id, m.exp); m.bent ??= {}; m.dream ??= pickDream(m.id, m.exp); }
       // 本番の「一番の音」「頭が真っ白」の思い出は、同じ種類のいちばん新しいものだけ残す（2026年10月から）
       for(const m of s.members) if(m.story){
         for(const x of m.story) if(!x.k){ const k = /これまでで一番の音/.test(x.t) ? 'zone' : /頭が真っ白/.test(x.t) ? 'freeze' : null; if(k) x.k = k; }

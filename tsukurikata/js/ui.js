@@ -743,6 +743,13 @@ function fxMoments(){
   // 実績：ページを開いたときは、記録するだけ（前のセーブの分をまとめて出さない）
   const got = checkAch(S, first);
   if(got.length){ save(S); if(!first) for(const a of got) fxShow({kind: 'cut', sound: 'level', ms: 2800, html: fxCutHtml('実績を達成', a.name, '', a.desc)}); }
+  if(S.dreamUp?.length){
+    const ids = S.dreamUp; delete S.dreamUp; save(S);
+    // 同じ夢は1枚にまとめる
+    const by = new Map();
+    for(const id of ids){ const m = memberById(id); if(m) by.set(m.dream, [...(by.get(m.dream) || []), m.name]); }
+    for(const [d, ns] of by) fxShow({kind: 'cut', sound: 'skill', ms: 2800, html: fxCutHtml('夢がかなった', `「${DREAMS[d].text}」`, ns.slice(0, 3).join('・') + (ns.length > 3 ? ` ほか${ns.length - 3}人` : ''), '')});
+  }
   if(S.mileUp?.length){
     const ms = S.mileUp; delete S.mileUp; save(S);
     for(const x of ms) fxShow({kind: 'cut', sound: 'mile', html: fxCutHtml('部の節目', `部の${STAT_LABEL[x.k]}が${x.at}に`, '', x.text)});
@@ -809,6 +816,7 @@ function gradSlide(m){
     ${mem.length ? `<ul class="gr-mem">${mem.map(x => `<li><time>${when(x)}</time>${esc(x.t)}</li>`).join('')}</ul>` : ''}
     <p class="gr-res">コンクール：${gradYears(m)}</p>
     ${sk ? `<p class="gr-res">スキル：${sk}</p>` : ''}
+    ${m.dream ? `<p class="gr-res">夢：${DREAMS[m.dream].text}${m.dreamDone ? `<b class="gr-done">かなった</b>` : '（夢のつづきは、この先へ）'}</p>` : ''}
     <p class="gr-bye">${farewellLine(m)}</p>`;
 }
 function openGradRoll(){
@@ -1271,6 +1279,8 @@ function placeCard(where){
 }
 // スキル：小さな札（名前の横）と、部員カードの一覧（説明と、もうすぐ身につきそうなもの・育ち方）
 const skillChips = m => skillsOf(m).map(x => ` <span class="sk">${x.name}${skillMark(x.lv)}</span>`).join('');
+// 部員の夢（かなったら年月つき）
+const dreamLine = m => m.dream ? `<p class="mc-dream">夢：${DREAMS[m.dream].text}${m.dreamDone ? `<b>かなった！（${m.dreamDone.y}年${m.dreamDone.w >= 100 ? WINTER_STEPS[m.dreamDone.w - 100]?.m ?? 3 : wkMonth(m.dreamDone.w)}月）</b>` : ''}</p>` : '';
 function skillList(m){
   const have = skillsOf(m);
   const near = SKILL_IDS.filter(id => { const v = m.sp?.[id] || 0; return (v >= 0.6 && v < 1) || (v >= 2 && v < 2.5); }).map(id => SKILLS[id].name + skillMark(skillLv(m, id) + 1));
@@ -1326,6 +1336,7 @@ function renderMemberCard(){
   }).join('');
   card.innerHTML = `<div class="mc-head"><h3>${esc(m.name)}</h3>${m.title ? `<span class="tag">${m.title}</span>` : ''}<span class="sub">${m.grade}年・${seat ? PART_LABEL[seat.part] : '控え（席なし）'}</span><button class="link mc-close" type="button" data-mact="close">閉じる</button></div>
     <p class="mc-say">${esc(memberSays(m))}</p>
+    ${dreamLine(m)}
     ${skillList(m)}
     ${tr ? `<p class="mc-trait">癖：${tr.name}。${tr.desc}</p>` : '<p class="mc-trait">目立った癖はない。</p>'}
     <div class="stats">${STAT_KEYS.map(k => statRow(STAT_LABEL[k], m.stats[k], '', '')).join('')}${m.mental != null ? statRow('本番の強さ', m.mental, '', '', 'warn') : ''}${S.pieceId ? `<p class="mc-sub">譜読み（${PIECES[S.pieceId].title}）</p>`
