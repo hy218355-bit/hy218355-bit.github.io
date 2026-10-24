@@ -313,24 +313,21 @@ th.num{text-align:right}
 .assign .row{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.3fr);gap:6px 10px;align-items:center;padding-bottom:8px;border-bottom:1px dashed var(--rule)}
 .assign .who{font-size:14px;line-height:1.4}
 .assign .who small{display:block;font-size:12px;color:var(--ink-soft)}
-.asec-h{font-size:14px;display:grid;gap:2px;margin-top:4px}
-.ntag{display:inline-block;font-size:10.5px;font-weight:700;color:var(--brass);border:1px solid var(--brass);border-radius:3px;padding:0 4px;margin-left:5px;line-height:1.5;letter-spacing:0}
-.asec.missing > b{color:var(--bad)}
-.asec.missing .small{color:var(--bad)}
-.needs{display:grid;gap:6px;border:1.5px solid var(--rule);border-radius:8px;padding:10px 12px;background:var(--sheet)}
-.needs > b{font-size:13px}
+.rchips{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:8px}
+.rchip{text-align:left;display:grid;gap:2px;align-content:start;padding:8px 10px;border:1.5px solid var(--rule);border-radius:8px;background:var(--sheet);color:var(--ink);cursor:pointer;font:inherit}
+.rchip[aria-pressed="true"]{border-color:var(--brass);box-shadow:inset 0 0 0 1px var(--brass)}
+.rchip b{font-size:14px}
+.rchip small{font-size:11.5px;color:var(--ink-soft);line-height:1.4}
+.rchip .sks .sk{margin-left:0;margin-right:4px}
+.rchip .where{font-size:12px;font-weight:700;margin-top:2px}
+.rchip .where.happy{color:var(--good)}
+.rchip .where.none{color:var(--bad)}
+.sw-hope{border:2px solid var(--good)}
+.sw-new{background:var(--brass)}
+.sw-old{background:var(--good);opacity:.45}
 .yr-mem{display:grid;grid-template-columns:auto minmax(0,1fr);gap:6px 12px;font-size:13px;line-height:1.6;margin:0}
 .yr-mem dt{color:var(--ink-soft);white-space:nowrap}
 .yr-mem dd{margin:0}
-.asec-h small{font-size:12px;font-weight:400;color:var(--ink-soft)}
-.asecs{display:grid;gap:10px}
-.asec{display:grid;gap:5px}
-.asec > b{font-size:12.5px;display:flex;gap:8px;align-items:baseline}
-.asec > b small{font-weight:400;color:var(--ink-soft);font-size:11.5px}
-.mchip{font-size:12.5px;line-height:1.4;padding:3px 9px;border:1px solid var(--rule);border-radius:999px;background:var(--sheet)}
-.mchip small{font-size:11px;color:var(--ink-soft);margin-left:5px}
-.mchip.new{border-color:var(--brass);color:var(--brass);font-weight:700}
-.mchip.new small{color:var(--brass);font-weight:400}
 .result{display:grid;gap:14px}
 .award{display:flex;align-items:center;gap:18px}
 .stamp{flex:none;font-family:var(--f-display);font-size:34px;line-height:1;padding:14px 14px 12px;border:3px double var(--award);color:var(--award);border-radius:10px;transform:rotate(-5deg)}

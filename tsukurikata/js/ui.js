@@ -192,11 +192,8 @@ function levelAt(p, t){
   return {lv, err, wrong};
 }
 // cv を渡すと、そのキャンバス（指揮の画面）に描く。who を渡すと、その部員だけが舞台にいる（本番の出場メンバー）
-function drawStage(t = -1, cv = $('#stage'), who = null){
-  const main = cv.id === 'stage';
-  const G = stageGeom(Math.max(240, cv.parentElement.clientWidth));
-  const {g, W, H} = fitCanvas(cv, G.H);
-  const C = tok();
+// 舞台の床とひな壇、指揮台
+function stageFloor(g, G, C){
   // 床とひな壇
   g.fillStyle = C.floor;
   g.beginPath(); g.moveTo(G.cx - G.R * 0.95, G.baseY + 18); g.lineTo(G.cx - G.R * 1.0, G.baseY - G.R * 0.62);
@@ -210,6 +207,13 @@ function drawStage(t = -1, cv = $('#stage'), who = null){
   g.fillRect(G.cx - 18, G.baseY + 2, 36, 12);
   g.globalAlpha = 1; g.fillStyle = C.sheet; g.font = `700 9px ${C.fBody}`; g.textAlign = 'center'; g.textBaseline = 'middle';
   g.fillText('指揮', G.cx, G.baseY + 8.5);
+}
+function drawStage(t = -1, cv = $('#stage'), who = null){
+  const main = cv.id === 'stage';
+  const G = stageGeom(Math.max(240, cv.parentElement.clientWidth));
+  const {g, W, H} = fitCanvas(cv, G.H);
+  const C = tok();
+  stageFloor(g, G, C);
 
   const viewSec = main && U.view !== 'mel' ? U.view : null;
   const sel = main ? U.sel && memberById(U.sel) : CD.sel && memberById(CD.sel);
@@ -661,13 +665,6 @@ const needTags = r => {
   const t = [r.solo && 'ソロ', r.mel >= 0.3 && '旋律', r.cm >= 0.3 && '対旋律', r.bass >= 0.4 && 'ベース', r.perc && '打楽器'].filter(Boolean);
   return t.length ? t : r.pad >= 0.3 ? ['和音'] : [];
 };
-// 楽器決めの画面の上に出す、この曲で大事なパートのまとめ
-function needsSummary(pid){
-  const {sec} = pieceNeeds(pid);
-  const by = tag => SECTIONS.filter(x => needTags(sec[x.id]).includes(tag)).map(x => tag === 'ソロ' ? INST[PART_INST[sec[x.id].soloPart]].name : x.name);
-  const rows = [['旋律', by('旋律')], ['ソロ', by('ソロ')], ['対旋律', by('対旋律')], ['ベース', by('ベース')]].filter(([, l]) => l.length);
-  return `<div class="needs"><b>この曲（${esc(PIECES[pid].title)}）で大事なパート</b><dl class="yr-mem">${rows.map(([k, l]) => `<dt>${k}</dt><dd>${l.join('・')}</dd>`).join('')}</dl></div>`;
-}
 // この1年の部員：いちばん伸びた子・身につけたスキル・行事に行った子
 function yearMembersHtml(){
   const y = S.year;
@@ -745,67 +742,90 @@ function weekResHtml(){
       return `<div class="wr"><span class="nm">${nm}</span><span class="track"><span class="fill" style="width:${clamp(start ? a : v, 0, 100)}%" data-to="${clamp(v, 0, 100)}"></span></span><b class="countup" data-key="wr:${r.key}:${nm}" data-from="${a.toFixed(1)}" data-to="${v.toFixed(1)}">${Math.round(start ? a : v)}</b><span class="d${d < 0 ? ' minus' : ''}">${Math.abs(d) >= 0.05 ? `${d > 0 ? '+' : '−'}${Math.abs(d).toFixed(1)}` : ''}</span></div>`; }).join('')}
     ${top.length ? `<p class="small">よく伸びた：${top.map(x => `${esc(x.m.name)} +${x.d.toFixed(1)}`).join('・')}</p>` : ''}</div>`;
 }
-// 楽器の中での受け持ち（1st・2nd など。打楽器はかっこの中）
-const partShort = p => { const l = PART_LABEL[p], q = l.match(/（(.+)）/); if(q) return q[1]; const i = l.lastIndexOf(' '); return i > 0 ? l.slice(i + 1) : l; };
 // 同じ受け持ちに席がいくつかあるときは、2つ目からの席に「2人目」「3人目」をつける（トランペット 1st は2人、クラリネット 1st は3人で吹く）
 const seatNth = id => { const p = SEAT[id].part, k = SEATS.filter(x => x.part === p).findIndex(x => x.id === id); return k > 0 ? `（${k + 1}人目）` : ''; };
 const seatLabel = id => PART_LABEL[SEAT[id].part] + seatNth(id);
-const assignPicks = () => Object.fromEntries(S.recruits.map(r => [r.id, $(`#as-${r.id}`)?.value || null]).filter(([, v]) => v));
-// パートごとの顔ぶれ：いまいる部員と、選んでいる担当（新しく入る部員は「新」）
-function assignSecs(picks){
-  const order = id => SEATS.findIndex(x => x.id === id);
-  const used = new Set([...S.members.filter(m => m.seat).map(m => SEAT[m.seat].sec), ...Object.values(picks).filter(Boolean).map(id => SEAT[id].sec)]);
-  const need = S.pieceId ? pieceNeeds(S.pieceId).sec : {}, tags = id => needTags(need[id]).map(t => `<span class="ntag">${t}</span>`).join('');
-  const empty = SECTIONS.filter(x => !used.has(x.id) && !needTags(need[x.id]).length);
-  return SECTIONS.map(sec => {
-    const seats = SEATS.filter(x => x.sec === sec.id).length;
-    const now = S.members.filter(m => m.seat && SEAT[m.seat].sec === sec.id).sort((a, b) => order(a.seat) - order(b.seat));
-    const add = S.recruits.filter(r => picks[r.id] && SEAT[picks[r.id]].sec === sec.id);
-    const chips = now.map(m => `<span class="mchip">${esc(m.name)}<small>${m.grade}年・${esc(partShort(SEAT[m.seat].part) + seatNth(m.seat))}</small></span>`)
-      .concat(add.map(r => `<span class="mchip new">${esc(r.name)}<small>新・${esc(partShort(SEAT[picks[r.id]].part) + seatNth(picks[r.id]))}</small></span>`));
-    if(chips.length) return `<div class="asec"><b>${sec.name}<small>${now.length + add.length}人／${seats}席</small>${tags(sec.id)}</b><div class="chips">${chips.join('')}</div></div>`;
-    return needTags(need[sec.id]).length ? `<div class="asec missing"><b>${sec.name}<small>0人／${seats}席</small>${tags(sec.id)}</b><span class="small">この曲で受け持ちがあるのに、まだだれもいない</span></div>` : '';
-  }).join('') + (empty.length ? `<p class="small">まだだれもいないパート：${empty.map(x => x.name).join('・')}</p>` : '');
+/* ===== 新しく入った部員の担当を決める（部をつくった最初の5人・本入部の1年生・途中から入ってきた部員） =====
+   上の札で部員を選び、舞台の空いている席をタップして座らせる。選んだ部員の希望の楽器の席は光る。
+   この曲で旋律やソロを吹く空き席には ♪ をつける */
+function asgState(){
+  const key = `${S.year}:${S.week}:${S.recruits.map(r => r.id).join(',')}`;
+  if(U.asg?.key !== key){ const map = autoAssign(S); U.asg = {key, picks: Object.fromEntries(S.recruits.map(r => [r.id, map[r.id] || null])), sel: S.recruits[0]?.id}; }
+  return U.asg;
 }
-// 新しく入った部員の担当を決める（部をつくった最初の5人・本入部の1年生・途中から入ってきた部員）
 function renderAssign(w, ev){
-  const map = autoAssign(S);
-  const free = SEATS.map(x => x.id).filter(id => !S.members.some(m => m.seat === id));
+  asgState();
   const first = foundingYear(S) && !S.members.length;
-  const intro = first ? `部員がいなくなって休部していた吹奏楽部に、1年生が${S.recruits.length}人入部してきた。担当する楽器を決めよう。希望どおりだとやる気が上がる。人数が少ないうちは、いる人で旋律・低音・和音を分けて吹く。`
-    : ev?.kind === 'assign' ? ev.text : '新しく入部してきた部員の担当を決めよう。希望どおりだとやる気が上がる。';
-  w.innerHTML = `<div class="event"><span class="tag">${first ? '入部' : ev?.kind === 'assign' ? ev.title : '入部'}</span><span>${intro}</span></div>
-    <div class="assign">${S.recruits.map(r => `<div class="row"><span class="who">${esc(r.name)}<small>${(r.grade || 1)}年・希望：${INST[r.hope].name}${r.exp ? '・中学で経験あり' : '・初心者'}${r.trait ? '・' + TRAITS[r.trait].name : ''}${Object.entries(innateSkills(r.id, r.exp)).map(([id, v]) => '・' + SKILLS[id].name + skillMark(v >= 2.5 ? 2 : 1)).join('')}</small></span>
-      <select id="as-${r.id}" aria-label="${esc(r.name)}の担当"><option value="">控え（席なし）</option>${SECTIONS.map(sec => {
-        const ids = free.filter(id => SEAT[id].sec === sec.id);
-        if(!ids.length) return '';
-        const n = S.members.filter(m => m.seat && SEAT[m.seat].sec === sec.id).length;
-        const pn = S.pieceId ? pieceNeeds(S.pieceId).part : {};
-        return `<optgroup label="${sec.name}（いま${n}人）">${ids.map(id => { const l = seatLabel(id) + needTags(pn[SEAT[id].part]).filter(t => t !== '和音').map(t => '・' + t).join('') + (SEAT[id].inst === r.hope ? '・希望' : '');
-          return `<option value="${id}" data-l="${l}"${map[r.id] === id ? ' selected' : ''}>${l}</option>`; }).join('')}</optgroup>`;
-      }).join('')}</select></div>`).join('')}</div>
-    ${S.pieceId ? needsSummary(S.pieceId) : ''}
-    <h3 class="asec-h">パートの顔ぶれ<small>選んだ担当も入れて。「新」が新しく入る部員</small></h3>
-    <div class="asecs" id="assignSecs">${assignSecs(map)}</div>
-    <p class="small" id="assignErr"></p>
-    <button class="btn primary" type="button" data-act="assign">この担当で決める</button>`;
-  syncAssign();
+  const intro = first ? `休部していた吹奏楽部に、1年生が${S.recruits.length}人入部してきた。` : ev?.kind === 'assign' ? '1年生が正式に入部した。' : '新しい部員が入ってきた。';
+  w.innerHTML = `<div class="event"><span class="tag">${first ? '入部' : ev?.kind === 'assign' ? ev.title : '入部'}</span><span>${intro}部員を選んでから、舞台の空いている席をタップして座らせよう。希望の楽器だとやる気が上がる。</span></div>
+    <div class="rchips" id="asgList"></div>
+    <div class="stage-wrap"><canvas id="asgStage" role="img" aria-label="舞台の席。部員を選んでから、空いている席をタップすると座る。"></canvas></div>
+    <p class="legend" id="asgLegend"></p>
+    <div class="transport"><button class="btn small" type="button" data-asg="bench">選んでいる部員を控え（席なし）に</button><button class="btn primary" type="button" data-act="assign">この配置で決める</button></div>`;
+  $('#asgStage').addEventListener('click', asgTap);
+  asgUpdate();
 }
-// ほかの新入部員が選んでいる席は、選べないようにする（だれが選んだかも出す）。顔ぶれも描き直す
-function syncAssign(){
-  const picks = assignPicks();
-  const who = Object.fromEntries(Object.entries(picks).map(([rid, sid]) => [sid, rid]));
-  for(const r of S.recruits){
-    const sel = $(`#as-${r.id}`);
-    if(!sel) continue;
-    for(const o of sel.options){
-      if(!o.value) continue;
-      const other = who[o.value] && who[o.value] !== r.id ? S.recruits.find(x => x.id === who[o.value]) : null;
-      o.disabled = !!other;
-      o.textContent = o.dataset.l + (other ? `（${other.name}）` : '');
+// 札・説明・舞台を描き直す
+function asgUpdate(){
+  const A = U.asg, list = $('#asgList');
+  if(!A || !list) return;
+  list.innerHTML = S.recruits.map(r => {
+    const seat = A.picks[r.id], happy = seat && SEAT[seat].inst === r.hope;
+    const sk = Object.entries(innateSkills(r.id, r.exp)).map(([id, v]) => `<span class="sk">${SKILLS[id].name}${skillMark(v >= 2.5 ? 2 : 1)}</span>`).join('');
+    return `<button class="rchip" type="button" data-rid="${r.id}" aria-pressed="${A.sel === r.id}"><b>${esc(r.name)}</b><small>${r.grade || 1}年・希望：${INST[r.hope].name}・${r.exp ? '経験あり' : '初心者'}</small>${sk ? `<span class="sks">${sk}</span>` : ''}
+      <span class="where${happy ? ' happy' : seat ? '' : ' none'}">${seat ? `→ ${seatLabel(seat)}${happy ? '・希望どおり' : ''}` : '→ まだ席がない（控え）'}</span></button>`;
+  }).join('');
+  const r = S.recruits.find(x => x.id === A.sel);
+  $('#asgLegend').innerHTML = `${r ? `<span><i class="sw sw-hope"></i>光る席：${esc(r.name)}の希望（${INST[r.hope].name}）</span>` : ''}<span><i class="sw sw-new"></i>新しい部員</span><span><i class="sw sw-old"></i>いまの部員</span>${S.pieceId ? '<span>♪：この曲で旋律を吹く席</span>' : ''}`;
+  drawAssignStage();
+}
+function drawAssignStage(){
+  const cv = $('#asgStage');
+  if(!cv) return;
+  const A = U.asg, G = stageGeom(Math.max(240, cv.parentElement.clientWidth));
+  const {g} = fitCanvas(cv, G.H);
+  const C = tok(), r = S.recruits.find(x => x.id === A.sel);
+  const need = S.pieceId ? pieceNeeds(S.pieceId).part : {};
+  const by = Object.fromEntries(Object.entries(A.picks).filter(([, v]) => v).map(([k, v]) => [v, k]));
+  stageFloor(g, G, C);
+  const dot = (x, y, fill, alpha = 1) => { g.globalAlpha = alpha; g.fillStyle = fill; g.beginPath(); g.arc(x, y, G.r, 0, Math.PI * 2); g.fill(); g.globalAlpha = 1; };
+  const label = (s, x, y, col) => { if(G.r < 10) return; g.fillStyle = col; g.font = `700 ${G.r >= 13 ? 9 : 8}px ${C.fBody}`; g.textAlign = 'center'; g.textBaseline = 'middle'; g.fillText(s.sec === 'perc' ? 'Perc' : INST[s.inst].short.replace('Sax', 'S'), x, y + 0.5); };
+  for(const s of SEATS){
+    const [x, y] = seatXY(s, G);
+    const m = S.members.find(mm => mm.seat === s.id), rid = by[s.id];
+    if(m){ dot(x, y, skillColor(C, avgStats(m)), 0.45); label(s, x, y, 'rgba(255,255,255,.8)'); continue; }
+    if(rid){
+      dot(x, y, C.brass); label(s, x, y, '#fff');
+      if(rid === A.sel){ g.strokeStyle = C.ink; g.lineWidth = 3; g.beginPath(); g.arc(x, y, G.r + 3.5, 0, Math.PI * 2); g.stroke(); }
+      continue;
     }
+    const hope = r && s.inst === r.hope;
+    if(hope){ g.fillStyle = C.good; g.globalAlpha = 0.3; g.beginPath(); g.arc(x, y, G.r + 4, 0, Math.PI * 2); g.fill(); g.globalAlpha = 1; }
+    g.setLineDash([3, 3]); g.strokeStyle = hope ? C.good : C.soft; g.lineWidth = hope ? 2 : 1.2;
+    g.beginPath(); g.arc(x, y, G.r - 1, 0, Math.PI * 2); g.stroke(); g.setLineDash([]);
+    label(s, x, y, hope ? C.good : C.soft);
+    // 希望の楽器の空き席は、席が小さくても分かるように上に楽器名を出す
+    if(hope){ g.fillStyle = C.good; g.font = `700 9px ${C.fBody}`; g.textAlign = 'center'; g.textBaseline = 'alphabetic'; g.fillText(INST[s.inst].short, x, y - G.r - 4); g.textBaseline = 'middle'; }
+    if(needTags(need[s.part]).some(t => t === '旋律' || t === 'ソロ')){ g.fillStyle = C.brass; g.font = `700 ${G.r >= 10 ? 11 : 9}px ${C.fBody}`; g.fillText('♪', x + G.r * 0.9, y - G.r * 0.9); }
   }
-  $('#assignSecs').innerHTML = assignSecs(picks);
+}
+// 舞台をタップ：いまの部員の席ならその子の名前、新しい部員の席ならその子を選ぶ、空いている席なら選んでいる部員を座らせる
+function asgTap(e){
+  const A = U.asg, s = seatAt(e, $('#asgStage'));
+  if(!A || !s) return;
+  const m = S.members.find(x => x.seat === s.id);
+  if(m){ toast(`${m.name}（${m.grade}年・${seatLabel(s.id)}）の席`, 1800); return; }
+  const rid = Object.keys(A.picks).find(k => A.picks[k] === s.id);
+  if(rid){ A.sel = rid; asgUpdate(); return; }
+  if(!A.sel) return;
+  haptic('tap');
+  A.picks[A.sel] = s.id;
+  const who = S.recruits.find(x => x.id === A.sel);
+  toast(`${who.name} → ${seatLabel(s.id)}${s.inst === who.hope ? '（希望どおり）' : ''}`, 1800);
+  // 席のない部員がほかにいれば、次はその子を選んでおく
+  const next = S.recruits.find(x => !A.picks[x.id]);
+  if(next) A.sel = next.id;
+  asgUpdate();
 }
 // コンクールに出るメンバーの人数と、決め直すボタン
 function lineupLine(){
@@ -1300,6 +1320,8 @@ function bind(){
     }
     if(b.dataset.ep !== undefined){ haptic('tap'); commit(resolveEpisode(S, +b.dataset.ep)); renderAll(); refreshNow(); return; }
     if(b.dataset.cs !== undefined){ haptic('tap'); commit(resolveConsult(S, +b.dataset.cs)); renderAll(); return; }
+    if(b.dataset.rid){ U.asg.sel = b.dataset.rid; haptic('tap'); asgUpdate(); return; }
+    if(b.dataset.asg === 'bench'){ if(U.asg?.sel){ U.asg.picks[U.asg.sel] = null; asgUpdate(); } return; }
     if(b.dataset.op !== undefined){
       const id = b.dataset.op, v = outingView(S);
       if(U.outPick.has(id)) U.outPick.delete(id); else if(v && U.outPick.size < v.n) U.outPick.add(id); else return;
@@ -1338,14 +1360,7 @@ function bind(){
       haptic('tap'); commit(setLineup(S, U.draft)); U.lineup = false; U.draft = null; renderAll(); refreshNow();
     }
     else if(act === 'assign'){
-      const map = {}, used = new Set();
-      for(const r of S.recruits){
-        const v = $(`#as-${r.id}`).value || null;
-        if(v && used.has(v)){ $('#assignErr').textContent = '同じ席に2人は座れない。担当を選び直そう。'; return; }
-        if(v) used.add(v);
-        map[r.id] = v;
-      }
-      commit(assignRecruits(S, map)); renderAll(); refreshNow();
+      haptic('tap'); commit(assignRecruits(S, {...U.asg.picks})); U.asg = null; renderAll(); refreshNow();
     }
     else if(act === 'stage') startStage();
     else if(act === 'stageconduct') startStageConduct();
@@ -1363,7 +1378,6 @@ function bind(){
   });
   $('#week').addEventListener('change', e => {
     const t = e.target;
-    if(t.id?.startsWith('as-')){ syncAssign(); $('#assignErr').textContent = ''; return; }
     if(t.dataset.aout){
       if(t.checked) U.draft.delete(t.dataset.aout); else U.draft.add(t.dataset.aout);
       t.closest('.am')?.classList.toggle('off', !t.checked);
