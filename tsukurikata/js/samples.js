@@ -107,6 +107,17 @@ function pickSample(bank, midi, v, opts = {}){
   return ok[Math.min(r, ok.length - 1)][1];
 }
 
+// 強弱の段が2つある録音は、強さ 0.35〜0.75（mp〜f のあたり）で弱い段と強い段を混ぜる。
+// 段の境目（強さ 0.5）で、音色がいきなり変わっていた（トランペットは音の明るさが2倍以上に）。等パワーで混ぜるので、大きさは変わらない
+function blendLayers(bank, midi, v, rank){
+  if(bank.layers.length !== 2) return null;
+  const w0 = clamp01((v - 0.35) / 0.4);
+  if(w0 <= 0 || w0 >= 1) return null;
+  const w = w0 * w0 * (3 - 2 * w0);
+  const soft = pickSample(bank, midi, 0, {rank}), loud = pickSample(bank, midi, 1, {rank});
+  if(soft === loud) return null;
+  return [[soft, Math.cos(w * Math.PI / 2)], [loud, Math.sin(w * Math.PI / 2)]];
+}
 // 直前と同じ録音の代わり：同じ高さの別テイク・2半音以内の録音（同じ強弱段から）。どれにするかは音ごとに決まる
 function altSample(bank, cur, midi, key){
   const cands = bank.samples.filter(s => s !== cur && !s.roll && s.m != null && Math.abs(s.m - midi) <= 2.01);
@@ -198,7 +209,7 @@ class SampleVoice {
     if(short && this.lastShort?.midi === n.midi && this.lastShort.smp === smp) smp = altSample(this.stac, smp, n.midi - (cfg.shift || 0), n.key) || smp;
     this.lastShort = short ? {midi: n.midi, smp} : null;
     // 鳴りの遅い録音は、そのぶん早く吹きはじめる（つないだ音は録音の途中から鳴らすので、早めない）。音の終わりは楽譜どおり
-    const s = T0 + n.t - (smooth ? 0 : smp.lead || 0);
+    const s = Math.max(0, T0 + n.t - (smooth ? 0 : smp.lead || 0));   // 時計の0より前には置けない（音声の時計が動きだした直後）
     const nextS = next ? T0 + next.t : Infinity;
     const legNext = !!(next && next.join);
     const endT = Math.max(s + 0.03, Math.min(T0 + n.t + n.d, nextS - 0.004));
@@ -229,8 +240,6 @@ class SampleVoice {
       return end;
     }
 
-    const base = Math.pow(2, (n.midi - smp.m) / 12) * smpTune(smp);
-    const R = c => base * Math.pow(2, (c + this.det) / 1200);
     const relEnd = legNext ? nextS + LEG_XF : endT + tb.rel;
 
     // 1音ぶんの音量（強弱の流れ）
@@ -262,46 +271,58 @@ class SampleVoice {
     // 再生速度で音程を動かす（ずり上がり → 落ち着く → 息が続かず下がる、音の裏返り）
     const firstOffset = smooth ? 0.08 : 0;
     const vib = n.vib > 0.5 && endT - s > 0.6 ? n.vib : 0;
-    let vg = null;
+    let lfo = null, vibOn = 0;
     if(vib){
-      const on = s + Math.min(0.35, (endT - s) * 0.3);
-      const lfo = ac.createOscillator(); lfo.frequency.value = this.vibRate;
-      vg = ac.createGain();
-      vg.gain.setValueAtTime(0, on);
-      vg.gain.linearRampToValueAtTime(base * (Math.pow(2, vib / 1200) - 1), Math.min(endT, on + 0.4));
-      lfo.connect(vg);
-      lfo.start(on); lfo.stop(relEnd + 0.05);
+      vibOn = s + Math.min(0.35, (endT - s) * 0.3);
+      lfo = ac.createOscillator(); lfo.frequency.value = this.vibRate;
+      lfo.start(vibOn); lfo.stop(relEnd + 0.05);
       this.srcs.push(lfo);
     }
     const sagAt1 = s + (endT - s) * 0.6, sagAt2 = s + (endT - s) * 0.85;
     const useSag = Math.abs(n.sag) > 3 && endT - s > 0.5;
-    playSegments(ac, g, this.bank, smp, s, relEnd, base, firstOffset, this.srcs, (src, t0, t1) => {
-      const P = src.playbackRate;
-      if(t0 <= s + 0.001){
-        let ts = s;
-        if(n.art === 'tie' && joined){
-          P.setValueAtTime(R(this.lastCents ?? n.cents), s);
-          ts = Math.min(s + 0.1, endT);
-          P.linearRampToValueAtTime(R(n.cents), ts);
-        } else if(n.crack){
-          P.setValueAtTime(R(n.cents + n.crack), s);
-          P.setValueAtTime(R(n.cents + n.crack), s + n.crackDur);
-          ts = s + n.crackDur + 0.02;
-          P.linearRampToValueAtTime(R(n.cents + n.scoop * 0.4), ts);
+    // 録音1つぶんを鳴らす（高さの動きは、その録音の元の高さから計算する）
+    const voice = (sm, out) => {
+      const base = Math.pow(2, (n.midi - sm.m) / 12) * smpTune(sm);
+      const R = c => base * Math.pow(2, (c + this.det) / 1200);
+      let vg = null;
+      if(lfo){
+        vg = ac.createGain();
+        vg.gain.setValueAtTime(0, vibOn);
+        vg.gain.linearRampToValueAtTime(base * (Math.pow(2, vib / 1200) - 1), Math.min(endT, vibOn + 0.4));
+        lfo.connect(vg);
+      }
+      playSegments(ac, out, this.bank, sm, s, relEnd, base, firstOffset, this.srcs, (src, t0, t1) => {
+        const P = src.playbackRate;
+        if(t0 <= s + 0.001){
+          let ts = s;
+          if(n.art === 'tie' && joined){
+            P.setValueAtTime(R(this.lastCents ?? n.cents), s);
+            ts = Math.min(s + 0.1, endT);
+            P.linearRampToValueAtTime(R(n.cents), ts);
+          } else if(n.crack){
+            P.setValueAtTime(R(n.cents + n.crack), s);
+            P.setValueAtTime(R(n.cents + n.crack), s + n.crackDur);
+            ts = s + n.crackDur + 0.02;
+            P.linearRampToValueAtTime(R(n.cents + n.scoop * 0.4), ts);
+          } else {
+            P.setValueAtTime(R(n.cents + (smooth ? n.scoop * 0.3 : n.scoop)), s);
+          }
+          const tSet = Math.min(ts + n.settle, endT - 0.002);
+          if(tSet > ts) P.linearRampToValueAtTime(R(n.cents), tSet);
         } else {
-          P.setValueAtTime(R(n.cents + (smooth ? n.scoop * 0.3 : n.scoop)), s);
+          P.setValueAtTime(R(n.cents + (useSag && t0 > sagAt2 ? n.sag : useSag && t0 > sagAt1 ? n.sag * 0.45 : 0)), t0);
         }
-        const tSet = Math.min(ts + n.settle, endT - 0.002);
-        if(tSet > ts) P.linearRampToValueAtTime(R(n.cents), tSet);
-      } else {
-        P.setValueAtTime(R(n.cents + (useSag && t0 > sagAt2 ? n.sag : useSag && t0 > sagAt1 ? n.sag * 0.45 : 0)), t0);
-      }
-      if(useSag){
-        if(sagAt1 > t0 && sagAt1 < t1) P.setValueAtTime(R(n.cents + n.sag * 0.45), sagAt1);
-        if(sagAt2 > t0 && sagAt2 < t1) P.setValueAtTime(R(n.cents + n.sag), sagAt2);
-      }
-      if(vg) vg.connect(P);
-    });
+        if(useSag){
+          if(sagAt1 > t0 && sagAt1 < t1) P.setValueAtTime(R(n.cents + n.sag * 0.45), sagAt1);
+          if(sagAt2 > t0 && sagAt2 < t1) P.setValueAtTime(R(n.cents + n.sag), sagAt2);
+        }
+        if(vg) vg.connect(P);
+      });
+    };
+    // 強弱の段（弱い録音・強い録音）を、強さにつれてなめらかに混ぜる
+    const mix = blendLayers(this.bank, n.midi - (cfg.shift || 0), vMax, this.rank);
+    if(mix) for(const [sm, w] of mix){ const gg = ac.createGain(); gg.gain.value = w; gg.connect(g); voice(sm, gg); }
+    else voice(smp, g);
     // 息の支えが弱い奏者は、音量がゆっくり揺れる
     if(this.wob){
       const W = this.wob.gain;
