@@ -150,6 +150,9 @@ function trillStep(pc, m, b){
 function perform(ctx){
   const pc = PIECES[ctx.pieceId];
   const seed = ctx.seed || 'band';
+  // take：この演奏ごとのさいころ（どの音を外すか・出だしやテンポの揺れ方）。部員の癖（音程の高さ・遅れ方）は seed と部員で決まり、演奏ごとには変わらない。
+  // take のない演奏（前の録音・お手本）は、前と同じ音になる
+  const take = ctx.take != null ? [ctx.take] : [];
   const venue = VENUE[ctx.venue || 'room'];
   const C = clamp01((ctx.cohesion ?? 30) / 100);
   const FAM = clamp01((ctx.fam ?? 0) / 100);
@@ -203,7 +206,7 @@ function perform(ctx){
     const tm = tmAt(pc, b);   // 楽譜の上のテンポの変化（序奏だけゆっくり、だんだん速く、など）
     let m = 1 + rubUse * r;
     m *= 1 - 0.09 * iRb * (1 - 0.6 * C) * Math.min(b, pc.beats) / pc.beats;
-    m *= 1 + (0.06 * Math.pow(iRb, 1.2) * (1 - 0.5 * C) + 0.025 * Math.pow(1 - FAM, 1.5)) * venue.play.timing * clampG(wob[Math.floor(b)] ??= gauss(seed, 'tempo', Math.floor(b)));
+    m *= 1 + (0.06 * Math.pow(iRb, 1.2) * (1 - 0.5 * C) + 0.025 * Math.pow(1 - FAM, 1.5)) * venue.play.timing * clampG(wob[Math.floor(b)] ??= gauss(seed, 'tempo', Math.floor(b), ...take));
     cum.push(cum[i-1] + SPB * tm * Math.max(0.6, m) * STEP);
     cumIdeal.push(cumIdeal[i-1] + SPB * tm * (1 + RUB * r) * STEP);
   }
@@ -233,7 +236,7 @@ function perform(ctx){
     let prevMidi = null, prevEnd = -Infinity;
     evs.forEach(e => {
       if(e.b < from - 1e-6 || e.b >= to - 1e-6) return;
-      const k = [...pk, ctx.pieceId, p.part, e.b, e.role], H = hasher(...k);
+      const k = [...pk, ctx.pieceId, p.part, e.b, e.role, ...take], H = hasher(...k);
       // この音のある区間の譜読み。浅いと歌いきれず、和音のどの音を吹いているか分からないので音程をはめきれない
       const pf = pfs[spanAt(pc, e.b)], En = E0 * lerp(0.4, 1, pf), jf = jf0 * lerp(0.3, 1, pf);
       // 譜読みが浅いと、音が抜け、出だしが揺れる（うまい人ほど揺れは小さい）
@@ -278,7 +281,7 @@ function perform(ctx){
       d += fermata;
       const midi = e.m + pc.trans + wrong;
       const reg = (midi - inst.center) / 12 * 7 * iP;
-      const shared = clampG(sharedG[p.sec + ':' + e.b] ??= gauss(seed, p.sec, ctx.pieceId, e.b, 'shared')) * 26 * Math.pow(1 - secP[p.sec], 1.4);
+      const shared = clampG(sharedG[p.sec + ':' + e.b] ??= gauss(seed, p.sec, ctx.pieceId, e.b, 'shared', ...take)) * 26 * Math.pow(1 - secP[p.sec], 1.4);
       const indiv = 28 * Math.pow(iP, 1.4) * clampG(H.gauss('p')) + 6 * Math.pow(1 - pf, 1.5) * clampG(H.gauss('fp'));
       const c = 0.55 * C;
       const miss = nat + 22 * Math.pow(iP, 1.1) * tend * venue.play.pitch + reg + (1 - c) * indiv + c * shared;

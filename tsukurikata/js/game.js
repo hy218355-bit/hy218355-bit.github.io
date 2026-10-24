@@ -123,19 +123,21 @@ function nervesFor(s, ev){
   if(VENUE[ev?.venue]?.play.hall) n *= 1.3 - 0.6 * clamp01(s.hallExp / 100);
   return Math.round(n * 10) / 10;
 }
+// 練習の音のさいころは週ごとに変わる（同じ週なら、何度聴いても同じ音）
+const weekTake = s => `${s.year}-${s.phase === 'choose' ? 'c' : s.week}`;
 function perfCtx(s, o = {}){
   const pid = o.pieceId || s.pieceId || 'largo';
   return {
     members: o.members || stagers(s), pieceId: pid, cohesion: o.cohesion ?? s.cohesion, fam: o.fam ?? s.fam[pid] ?? 0,
     interp: o.interp || s.interp, venue: o.venue || 'room', nerves: o.nerves || 0, fatigue: o.fatigue ?? fatigueOf(s),
-    seed: 'band', from: o.from, to: o.to,
+    seed: 'band', take: o.take ?? weekTake(s), from: o.from, to: o.to,
   };
 }
 function snapshot(s, extra = {}){
   return {
     members: stagers(s).map(m => ({id: m.id, name: m.name, grade: m.grade, seat: m.seat, trait: m.trait, mental: m.mental, stats: {...m.stats},
       pfams: readOf(m, extra.pieceId || s.pieceId)})),
-    cohesion: s.cohesion, fam: s.fam[extra.pieceId || s.pieceId] ?? 0, interp: {...s.interp}, fatigue: fatigueOf(s), ...extra,
+    cohesion: s.cohesion, fam: s.fam[extra.pieceId || s.pieceId] ?? 0, interp: {...s.interp}, fatigue: fatigueOf(s), take: weekTake(s), ...extra,
   };
 }
 function addRec(s, label, extra){
@@ -148,7 +150,7 @@ function addRec(s, label, extra){
 }
 const recCtx = rec => ({
   members: rec.snap.members, pieceId: rec.pieceId, cohesion: rec.snap.cohesion, fam: rec.snap.fam, interp: rec.snap.interp,
-  venue: rec.venue, nerves: rec.snap.nerves || 0, fatigue: rec.snap.fatigue || 0, seed: 'band', form: rec.snap.form,
+  venue: rec.venue, nerves: rec.snap.nerves || 0, fatigue: rec.snap.fatigue || 0, seed: 'band', take: rec.snap.take, form: rec.snap.form,
 });
 
 function choosePiece(s0, pid){
@@ -625,7 +627,7 @@ function beginStage(s0){
   const s = clone(s0);
   const ev = eventAt(s, s.week);
   const nerves = nervesFor(s, ev);
-  const rec = addRec(s, `${s.year} ${ev.title}`, {venue: ev.venue, nerves, form: stageForm(s)});
+  const rec = addRec(s, `${s.year} ${ev.title}`, {venue: ev.venue, nerves, form: stageForm(s), take: `stage-${s.stageDay?.seed ?? weekTake(s)}`});
   rec.keep = ev.kind === 'contest' || !!ev.final;
   if(ev.final) rec.final = true;
   const perf = perform(recCtx(rec));
