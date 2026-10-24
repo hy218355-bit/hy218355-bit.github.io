@@ -8,7 +8,7 @@ const U = {
   venue: 'room', pos: 'center', range: 'all', view: 'mel', sel: null, piece: null, solo: 'all',
   shown: null, shownLabel: '', perfNow: null, diag: null, ptr: null, raf: 0, onEnd: null, playing: false, refreshT: 0,
   tab: 'week', tabScroll: {},
-  lineup: false, draft: null, pred: null, predKey: '', predT: 0,
+  lineup: false, draft: null, pred: null, predKey: '', predT: 0, outKey: '', outPick: new Set(),
 };
 const UI_KEY = 'suibu-ui-v2';  // 前の名前のころからの保存先（SAVE_KEY と同じ理由でこのまま）
 
@@ -608,9 +608,28 @@ function renderWeek(){
     <div class="choices">${cv.choices.map(c => `<button class="mbtn" type="button" data-cs="${c.k}"><b>${esc(c.label)}</b></button>`).join('')}</div>
     <p class="small">答え方で、${esc(kun(cv.m))}の育ち方が変わる。答えずに練習を進めると、この相談は流れる。</p></div>`);
   if(S.lastConsult) parts.push(`<p class="epres"><b>${esc(S.lastConsult.choice)}</b>${esc(S.lastConsult.result)}</p>`);
+  // 行事の誘い：連れて行く部員を選ぶ（★は、行くと特に伸びる子）
+  const ov = outingView(S);
+  if(ov){
+    const key = `${S.year}:${S.week}:${S.outing.id}`;
+    if(U.outKey !== key){ U.outKey = key; U.outPick = new Set(); U.outMore = false; }
+    // ★の子はパートごとに並べて見せ、ほかの部員はたたんでおく（部員が多いと長くなるので）
+    const chip = m => `<button class="chip" type="button" data-op="${m.id}" aria-pressed="${U.outPick.has(m.id)}">${ov.fit.has(m.id) ? '<span class="fitmark">★</span>' : ''}${esc(m.name)}<small>${m.grade}年</small></button>`;
+    const bySec = ms => SECTIONS.map(sc => [sc, ms.filter(m => secOf(m) === sc.id)]).filter(([, l]) => l.length)
+      .map(([sc, l]) => `<div class="chips opsec"><span class="oplab">${sc.name}</span>${l.map(chip).join('')}</div>`).join('');
+    const fitMs = seated(S).filter(m => ov.fit.has(m.id)), rest = seated(S).filter(m => !ov.fit.has(m.id));
+    const k = U.outPick.size;
+    parts.push(`<div class="episode outing"><div class="head"><span class="tag">行事</span><span class="who">${esc(ov.o.title)}</span></div><p class="txt">${esc(ov.o.text)}</p>
+      <p class="small"><span class="fitmark">★</span>${esc(ov.o.fitText)}</p>
+      ${bySec(fitMs)}${rest.length ? `<details class="opmore" data-outmore${U.outMore || !fitMs.length ? ' open' : ''}><summary>${fitMs.length ? 'ほかの部員から選ぶ' : '部員から選ぶ'}（${rest.length}人）</summary>${bySec(rest)}</details>` : ''}
+      <button class="mbtn" type="button" data-act="outing"${k ? '' : ' disabled'}><b>${k ? `この${k}人で行く` : `連れて行く部員を${ov.n}人まで選ぶ`}</b></button>
+      <p class="small">選ばずに練習を進めると、この話は流れる。</p></div>`);
+  }
+  if(S.lastOuting) parts.push(`<p class="epres"><b>${esc(S.lastOuting.title)}（${esc(S.lastOuting.who)}）</b>${esc(S.lastOuting.result)}${(S.lastOuting.gains || []).map(g => `<span class="gain">${esc(g)}</span>`).join('')}</p>`);
   parts.push(planHtml(ev));
   if(!tuneDone(S)) parts.push(`<div class="tgrow"><button class="btn small" type="button" data-act="tunegame">♪ 耳でチューニング</button><span class="small">週に1回。合わせた部員の音程が上がる</span></div>`);
   w.innerHTML = parts.join('');
+  w.querySelector('[data-outmore]')?.addEventListener('toggle', e => { U.outMore = e.target.open; });
 }
 // 新しく入った部員の担当を決める（部をつくった最初の5人・本入部の1年生・途中から入ってきた部員）
 function renderAssign(w, ev){
@@ -1087,6 +1106,12 @@ function bind(){
     }
     if(b.dataset.ep !== undefined){ haptic('tap'); commit(resolveEpisode(S, +b.dataset.ep)); renderAll(); refreshNow(); return; }
     if(b.dataset.cs !== undefined){ haptic('tap'); commit(resolveConsult(S, +b.dataset.cs)); renderAll(); return; }
+    if(b.dataset.op !== undefined){
+      const id = b.dataset.op, v = outingView(S);
+      if(U.outPick.has(id)) U.outPick.delete(id); else if(v && U.outPick.size < v.n) U.outPick.add(id); else return;
+      haptic('tap'); renderWeek(); return;
+    }
+    if(b.dataset.act === 'outing'){ haptic('tap'); commit(resolveOuting(S, [...U.outPick])); U.outPick = new Set(); renderAll(); return; }
     const act = b.dataset.act;
     if(act === 'preview' || act === 'model'){
       const pid = b.dataset.pid;

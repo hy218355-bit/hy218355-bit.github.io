@@ -271,8 +271,8 @@ function setPolicy(s0, pol){
 function practiceWeek(s0, plan){
   const s = clone(s0);
   s.lastEpisode = null;
-  // 答えなかった相談は、そのまま流れる
-  s.consult = null; s.lastConsult = null;
+  // 答えなかった相談や、だれも行かなかった行事は、そのまま流れる
+  s.consult = null; s.lastConsult = null; s.outing = null; s.lastOuting = null;
   const ev = eventAt(s, s.week) || {};
   syncSta(s);
   if(plan === 'test'){
@@ -389,7 +389,9 @@ function nextWeek(s){
     if(ev.kind === 'audition') runAudition(s);
   }
   s.episode = pickEpisode(s);
-  s.consult = pickConsult(s);
+  s.outing = pickOuting(s);
+  // 行事の誘いがある週は、相談は来ない
+  s.consult = s.outing ? null : pickConsult(s);
   // 本番の週になったら、その日の部員の調子を決めておく（読み込み直しても変わらない）
   const sev = eventAt(s, s.week);
   s.stageDay = sev && (sev.kind === 'concert' || sev.kind === 'contest') ? {seed: Math.floor(Math.random() * 1e9), calm: []} : null;
@@ -878,6 +880,146 @@ function resolveConsult(s0, k){
   addLog(s, `【相談】${v.text}`);
   addLog(s, `→ ${ch.label}。${res}`);
   s.lastConsult = {who: v.m.name, choice: ch.label, result: res};
+  gainCoach(s, 1);
+  return s;
+}
+
+/* ===== 行事のおさそい =====
+   ときどき、部の外から誘いが来る（演奏会のチケット・講習会・体験会など）。連れて行く部員を n 人まで選ぶと、行った子が上達する。
+   fit に当てはまる子は、得るものが大きい。選ばずに練習を進めると、その話は流れる。同じ行事は1年に1回まで
+   go(s, m, fit)：行った部員1人ぶんの効き目、mem：その子の思い出、res(名前)：行ったあとのようす */
+const OUTINGS = [
+  {id: 'orch', n: 3, title: 'オーケストラの演奏会',
+   text: '商店街の福引きで、プロのオーケストラの演奏会のチケットが3枚当たった。部員を3人まで連れて行ける。',
+   fitText: 'フルート・オーボエ・ファゴット・クラリネット・ホルンの子は、自分と同じ楽器の音をじっくり聴ける',
+   fit: m => ['fl', 'dr', 'cl', 'hn'].includes(secOf(m)),
+   go: (s, m, f) => { bump(m, 'expr', f ? 4 : 2.5); bump(m, 'tone', f ? 1.5 : 1); addSkill(s, m, 'song', f ? 0.5 : 0.3); },
+   mem: 'オーケストラの演奏会に連れて行ってもらった。弦の響きの中で、自分の楽器がどう歌うかを聴いた。',
+   res: n => `${n}は、帰りの電車でずっと演奏会の話をしていた。次の日の合奏から、フレーズの歌い方が少し変わった。`},
+  {id: 'brass5', n: 2, title: '金管五重奏のコンサート',
+   text: 'プロの金管五重奏のコンサートの招待券が2枚届いた。部員を2人まで連れて行ける。',
+   fitText: 'トランペット・ホルン・トロンボーン・低音の子は、音色のお手本をすぐ近くで聴ける',
+   fit: m => ['tp', 'hn', 'tb', 'low'].includes(secOf(m)),
+   go: (s, m, f) => { bump(m, 'tone', f ? 4 : 2); addSkill(s, m, 'breath', f ? 0.5 : 0.3); },
+   mem: 'プロの金管五重奏を聴きに行った。あんな音を出してみたいと思った。',
+   res: n => `${n}は、次の日からロングトーンの時間が長くなった。`},
+  {id: 'lesson', n: 1, title: 'プロのワンポイントレッスン',
+   text: '楽器店で、プロの奏者のワンポイントレッスンがある。申し込めるのは1人だけ。',
+   fitText: 'まだ伸びしろの大きい子ほど、得るものが大きい',
+   fit: m => avgStat(m) < 50,
+   go: (s, m, f) => { bump(m, weakest(m), f ? 6 : 4); addSkill(s, m, 'sense', 0.3); },
+   mem: 'プロの奏者にレッスンをしてもらった。苦手なところを、ていねいに見てもらった。',
+   res: n => `${n}は、教わったことを楽譜にびっしり書きこんでいた。`},
+  {id: 'repair', n: 3, title: '楽器の調整会',
+   text: '楽器店の調整会がある。3人まで、楽器を見てもらえる。',
+   fitText: '音がまだ出にくい子の楽器を見てもらうと、ぐっと楽に鳴るようになる',
+   fit: m => m.stats.tone < 50,
+   go: (s, m, f) => { bump(m, 'tone', f ? 4 : 2); bump(m, 'pitch', 1); },
+   mem: '楽器を調整してもらった。息がすっと入るようになった。',
+   res: n => `「こんなに楽に鳴るんだ」と、${n}は驚いていた。`},
+  {id: 'kids', n: 2, title: '小学校の楽器体験会',
+   text: '近くの小学校から、楽器体験会の手伝いを頼まれた。2人行ける。',
+   fitText: '2・3年生は、教えることで自分の音も見直せる',
+   fit: m => m.grade >= 2,
+   go: (s, m, f) => { addSkill(s, m, 'mentor', f ? 0.6 : 0.3); bump(m, 'expr', 1.5); },
+   after: s => adj(s, 'morale', 1),
+   mem: '小学校の楽器体験会で、子どもたちに楽器を教えた。',
+   res: n => `${n}が教えた子が、初めて音を出せて飛びはねて喜んだ。帰り道、「教えるのって難しいけど楽しい」と話していた。`},
+  {id: 'jazz', n: 3, title: 'ジャズのライブ',
+   text: '駅前のライブハウスで、高校生も入れるジャズのライブがある。3人まで連れて行ける。',
+   fitText: 'サックス・トランペット・トロンボーン・低音・打楽器の子は、本物のノリを体で覚えられる',
+   fit: m => ['sax', 'tp', 'tb', 'low', 'perc'].includes(secOf(m)),
+   go: (s, m, f) => { bump(m, 'rhythm', f ? 4 : 2); addSkill(s, m, 'groove', f ? 0.5 : 0.3); },
+   mem: 'ジャズのライブを聴きに行った。体じゅうでリズムを感じた。',
+   res: n => `${n}は、帰り道ずっと手でリズムをとっていた。`},
+  {id: 'choir', n: 4, title: '合唱部との合同練習',
+   text: '合唱部が、いっしょに歌の練習をしないかと誘ってくれた。4人まで行ける。',
+   fitText: '音程が苦手な子は、自分の声で音の高さをつかめる',
+   fit: m => m.stats.pitch < 55,
+   go: (s, m, f) => { bump(m, 'pitch', f ? 3.5 : 2); bump(m, 'expr', 1); addSkill(s, m, 'ear', f ? 0.4 : 0.2); },
+   after: s => adj(s, 'cohesion', 1),
+   mem: '合唱部といっしょに歌った。自分の声で、音の高さをつかんだ。',
+   res: n => `${n}は、和音の中で自分の音を聴けるようになってきた。`},
+  {id: 'radio', n: 2, title: 'ラジオの取材',
+   text: '地元のラジオ局が、部の紹介番組で2人に話を聞きたいと言ってきた。',
+   fitText: '人前が苦手な子には、いい経験になる',
+   fit: m => (m.mental ?? 40) < 45,
+   go: (s, m, f) => { m.mental = clamp((m.mental ?? 40) + (f ? 8 : 4), 0, 100); addSkill(s, m, 'nerve', f ? 0.6 : 0.3); },
+   after: s => adj(s, 'morale', 2),
+   mem: 'ラジオで部の紹介をした。緊張したけれど、ちゃんと話せた。',
+   res: n => `放送の日、部のみんなで音楽室のラジオを囲んだ。${n}の声が流れると、拍手が起きた。`},
+  {id: 'campus', n: 2, title: '音楽大学のオープンキャンパス', when: s => wkMonth(s.week) >= 7,
+   text: '音楽大学のオープンキャンパスがある。見学に2人連れて行ける。',
+   fitText: '進路を考える3年生には、特に大きな一日になる',
+   fit: m => m.grade === 3,
+   go: (s, m, f) => { for(const k of STAT_KEYS) bump(m, k, f ? 1.5 : 1); addSkill(s, m, 'sense', f ? 0.4 : 0.2); m.mental = clamp((m.mental ?? 40) + 3, 0, 100); },
+   mem: '音楽大学を見学した。毎日何時間も練習する人たちを見た。',
+   res: n => `${n}は、帰ってくるなり音楽室にこもった。「あの人たち、毎日何時間も吹いてるんです」`},
+  {id: 'obog', n: 3, title: '卒業した先輩の演奏会', when: s => !s.founding || s.year >= s.startYear + 3,
+   text: '卒業した先輩から、大学の吹奏楽部の演奏会に招待された。3人まで行ける。',
+   fitText: '1年生には、先輩たちの音がいいお手本になる',
+   fit: m => m.grade === 1,
+   go: (s, m, f) => { bump(m, 'tone', f ? 2.5 : 1.5); bump(m, 'expr', f ? 2 : 1); },
+   after: s => adj(s, 'morale', 1),
+   mem: '卒業した先輩の、大学での演奏会を聴きに行った。',
+   res: n => `${n}は、先輩に「がんばってるね」と声をかけられて、うれしそうだった。`},
+  {id: 'perc', n: 2, title: '打楽器の講習会',
+   text: '市民会館で、打楽器の講習会がある。2人まで参加できる。',
+   fitText: '打楽器の子はもちろん、ほかの楽器の子もリズムの感じ方が変わる',
+   fit: m => secOf(m) === 'perc',
+   go: (s, m, f) => { bump(m, 'rhythm', f ? 4.5 : 2.5); addSkill(s, m, 'groove', f ? 0.4 : 0.3); },
+   mem: '打楽器の講習会に行った。拍の「点」ではなく「流れ」を感じる練習をした。',
+   res: n => `${n}は、メトロノームに合わせて手拍子をしながら、拍の流れを体で覚えようとしていた。`},
+  {id: 'hall', n: 3, title: 'コンクール会場の見学', when: s => s.week < PREF_WEEK && !s.finalWeek,
+   text: 'コンクールの会場になるホールの、見学ツアーがある。3人まで参加できる。',
+   fitText: '本番で緊張しやすい子は、舞台を先に見ておくと落ち着ける',
+   fit: m => (m.mental ?? 40) < 50,
+   go: (s, m, f) => { m.mental = clamp((m.mental ?? 40) + (f ? 6 : 3), 0, 100); addSkill(s, m, 'nerve', f ? 0.5 : 0.3); bump(m, 'tone', 1); },
+   mem: 'コンクールの会場になるホールを見学した。舞台に立って、客席を見わたした。',
+   res: n => `${n}は「本番、あの舞台に立つんだ」と、少し顔つきが変わった。`},
+];
+const OUTING_BY = Object.fromEntries(OUTINGS.map(o => [o.id, o]));
+// 練習の週に、行事の誘いを出すかどうか（月に1回ほど。続けては出さない）
+function pickOuting(s){
+  if(s.phase !== 'week' || s.episode) return null;
+  const ev = eventAt(s, s.week);
+  if(ev && ev.kind !== 'mod') return null;
+  if(s.year * 100 + s.week - (s.outingAt ?? -99) < 3 || hash(s.year, s.week, 'outing') > 0.45) return null;
+  const able = OUTINGS.filter(o => !s.flags[`out:${s.year}:${o.id}`] && (!o.when || o.when(s)));
+  if(!able.length || ss(s).length < 2) return null;
+  const o = able[Math.floor(hash(s.year, s.week, 'outwhich') * able.length)];
+  s.flags[`out:${s.year}:${o.id}`] = true;
+  s.outingAt = s.year * 100 + s.week;
+  return {id: o.id};
+}
+const outingView = s => {
+  const o = s.outing && OUTING_BY[s.outing.id];
+  if(!o) return null;
+  const n = Math.min(o.n, ss(s).length);
+  return {o, n, fit: new Set(ss(s).filter(o.fit).map(m => m.id))};
+};
+// 連れて行く部員を決める（ids は部員の id。n 人をこえる分は使わない）
+function resolveOuting(s0, ids){
+  const s = clone(s0);
+  const v = outingView(s);
+  s.outing = null;
+  if(!v) return s;
+  const ms = ids.map(id => ss(s).find(m => m.id === id)).filter(Boolean).slice(0, v.n);
+  if(!ms.length) return s;
+  // 行った子ごとに、伸びたところを書きとめる
+  const gains = ms.map(m => {
+    const st0 = {...m.stats}, mn0 = m.mental ?? 40;
+    v.o.go(s, m, v.fit.has(m.id)); remember(s, m, v.o.mem);
+    const g = STAT_KEYS.filter(k => m.stats[k] > st0[k]).map(k => `${STAT_LABEL[k]}+${(m.stats[k] - st0[k]).toFixed(1)}`);
+    if((m.mental ?? 40) > mn0) g.push((m.mental - mn0) >= 6 ? '本番にかなり強くなった' : '本番に少し強くなった');
+    return `${m.name} ${g.join(' ')}`;
+  });
+  v.o.after?.(s);
+  const names = ms.map(m => m.name).join('・');
+  const res = v.o.res(names);
+  addLog(s, `【${v.o.title}】${v.o.text}`);
+  addLog(s, `→ ${res}（${gains.join('／')}）`);
+  s.lastOuting = {title: v.o.title, who: names, result: res, gains};
   gainCoach(s, 1);
   return s;
 }

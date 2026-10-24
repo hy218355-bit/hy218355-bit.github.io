@@ -39,6 +39,9 @@ while(guard++ < 2000 && done < YEARS){
   if(ev && ev.kind === 'forced'){ s = practiceWeek(s, 'test'); continue; }
   if(s.chooseFinal){ s = chooseFinalPiece(s, s.pieceId); continue; }
   if(s.episode){ s = resolveEpisode(s, episodeView(s)?.choices[0]?.k ?? 0); continue; }
+  // 行事には、★のついた（行くと特に伸びる）部員から先に、選べるだけ連れて行く
+  if(s.outing){ const v = outingView(s); const ms = v ? ss(s).slice().sort((a, b) => v.fit.has(b.id) - v.fit.has(a.id) || Math.random() - 0.5) : [];
+    s = v ? resolveOuting(s, ms.slice(0, v.n).map(m => m.id)) : {...s, outing: null}; continue; }
   // 相談には、ふつうの顧問のように、どれかの答えを選ぶ
   if(s.consult){ const v = consultView(s); s = v ? resolveConsult(s, Math.floor(Math.random() * v.choices.length)) : {...s, consult: null}; continue; }
   s.policy = POL;
