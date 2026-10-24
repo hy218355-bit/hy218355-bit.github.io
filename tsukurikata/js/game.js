@@ -1568,6 +1568,36 @@ function autoWinter(s){
   return s;
 }
 
+/* ===== 実績 =====
+   部を続けていくうちの節目。達成した年度と週を s.ach に残す（日誌に一覧、達成した瞬間はカットイン） */
+const allResults = s => [...(s.history || []).flatMap(h => (h.results || []).map(r => ({...r, y: h.year}))), ...(s.season || []).map(r => ({...r, y: s.year}))];
+const ACHIEVEMENTS = [
+  {id: 'gold',       name: 'はじめての金賞',       desc: 'コンクールで金賞をとる',                         test: s => allResults(s).some(r => r.award === 'gold')},
+  {id: 'rep',        name: 'はじめての代表',       desc: '県大会で、支部大会への代表に選ばれる',           test: s => allResults(s).some(r => r.rep)},
+  {id: 'adiv',       name: 'A部門へ',              desc: '部員15人以上で、A部門に出る',                    test: s => s.division === 'A' || (s.history || []).some(h => h.div === 'A')},
+  {id: 'block',      name: '支部大会のステージ',   desc: '支部大会に出る',                                 test: s => allResults(s).some(r => r.level === 'block')},
+  {id: 'national',   name: '全国大会のステージ',   desc: '全国大会に出る',                                 test: s => allResults(s).some(r => r.level === 'national')},
+  {id: 'ngold',      name: '全国大会で金賞',       desc: '全国大会で金賞をとる',                           test: s => allResults(s).some(r => r.level === 'national' && r.award === 'gold')},
+  {id: 'allgold',    name: '金賞の夏',             desc: '1年に出たコンクールが2つ以上、すべて金賞',       test: s => [...(s.history || []).map(h => h.results || []), s.season || []].some(rs => rs.length >= 2 && rs.every(r => r.award === 'gold'))},
+  {id: 'full',       name: '39の席がうまる',       desc: 'すべての席に部員がそろう',                       test: s => SEATS.every(x => s.members.some(m => m.seat === x.id))},
+  {id: 'ensgold',    name: 'アンサンブルで金賞',   desc: 'アンサンブルコンテストで金賞をとる',             test: s => s.winter?.ens?.award === 'gold' || (s.history || []).some(h => h.ens?.award === 'gold')},
+  {id: 'ensrep',     name: 'アンサンブルで県代表', desc: 'アンサンブルコンテストで県の代表に選ばれる',     test: s => !!s.winter?.ens?.rep || (s.history || []).some(h => h.ens?.rep)},
+  {id: 'teien',      name: '満員の定期演奏会',     desc: '定期演奏会で、演奏の出来80点以上',               test: s => (s.finalResult?.q ?? 0) >= 80 || (s.history || []).some(h => (h.final?.q ?? 0) >= 80)},
+  {id: 'skill2',     name: '◎の部員',              desc: 'スキル◎を持つ部員がいる',                        test: s => s.members.some(m => SKILL_IDS.some(id => skillLv(m, id) >= 2))},
+  {id: 'coach5',     name: '定評のある顧問',       desc: '顧問の指導力が Lv5 になる',                      test: s => coachLevel(s) >= 5},
+  {id: 'firstclass', name: '最初の代の引退',       desc: '顧問になって最初に入部した代が引退する',         test: s => !!s.retiredNow?.firstClass || (s.history || []).some(h => h.firstClass)},
+  {id: 'years10',    name: '10年目の顧問',         desc: '顧問を10年続ける',                               test: s => s.year - (s.startYear ?? s.year) >= 9},
+];
+// まだの実績のうち、いま当てはまるものを記録して返す
+// old：ページを開いたときに見つかった分（前のセーブで、それまでに達成していたもの）
+function checkAch(s, old = false){
+  const got = [];
+  s.ach ||= {};
+  // 冬（月ごとに進む）は、w を 100＋場面の番号で残す
+  for(const a of ACHIEVEMENTS) if(!s.ach[a.id] && a.test(s)){ s.ach[a.id] = old ? {old: true} : {y: s.year, w: s.phase === 'winter' ? 100 + s.winter.step : s.week}; got.push(a); }
+  return got;
+}
+
 // 顧問になった年に、1年生として入部してきた部員（いちばん最初に一から育てた代）
 const startYearOf = s => s.startYear ?? (s.history[0]?.year ?? s.year);
 const isFirstClass = (s, m) => m.joined === startYearOf(s) && m.first?.y === m.joined && (m.joinGrade ?? 1) === 1;
@@ -1577,7 +1607,7 @@ function newYear(s0){
   // 3年生は、冬のはじめ（startWinter）に引退している。冬を通らなかった前のセーブは、ここで引退する
   const seniors = s.members.filter(m => m.grade === 3), ret = s.retiredNow || {names: seniors.map(m => m.name), firstClass: seniors.some(m => isFirstClass(s, m))};
   s.history.push({year: s.year, piece: pieceTitle, ...(s.division ? {div: s.division} : {}), ...(s.setPiece ? {set: PIECES[s.setPiece]?.title} : {}), results: s.season, final: s.finalResult || null,
-    retired: ret.names, firstClass: ret.firstClass, ...(s.winter?.ens?.award ? {ens: {award: s.winter.ens.award, score: s.winter.ens.score, names: s.winter.ens.names}} : {})});
+    retired: ret.names, firstClass: ret.firstClass, ...(s.winter?.ens?.award ? {ens: {award: s.winter.ens.award, score: s.winter.ens.score, names: s.winter.ens.names, rep: !!s.winter.ens.rep}} : {})});
   if(!s.retiredNow && ret.firstClass) addLog(s, '顧問になって最初に入部してきた代が、卒業していった。部の物語は、これからも続く。');
   delete s.retiredNow; delete s.winter;
   // 1年をやりきった経験（この年の最初の週の記録より前に入れる。最初の1年を終えると Lv2 になるくらい）

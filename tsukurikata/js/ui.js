@@ -734,6 +734,9 @@ function fxMoments(){
     const lv = S.coachUp; delete S.coachUp; save(S);
     fxShow({kind: 'cut', sound: 'level', ms: 2800, html: fxCutHtml('顧問の指導力', `Lv${lv}　${coachTitle(lv)}`, '', `部員の練習の効果が +${Math.round((coachMult(S) - 1) * 100)}% になった`)});
   }
+  // 実績：ページを開いたときは、記録するだけ（前のセーブの分をまとめて出さない）
+  const got = checkAch(S, first);
+  if(got.length){ save(S); if(!first) for(const a of got) fxShow({kind: 'cut', sound: 'level', ms: 2800, html: fxCutHtml('実績を達成', a.name, '', a.desc)}); }
   if(S.mileUp?.length){
     const ms = S.mileUp; delete S.mileUp; save(S);
     for(const x of ms) fxShow({kind: 'cut', sound: 'mile', html: fxCutHtml('部の節目', `部の${STAT_LABEL[x.k]}が${x.at}に`, '', x.text)});
@@ -1089,7 +1092,16 @@ function renderInterp(){
 // 部の歴史：年度ごとの曲・結果・引退した部員と、残してある録音
 const AWARD_NM = {gold: '金賞', silver: '銀賞', bronze: '銅賞'};
 const resultText = results => results.map(r => `${LEVELS[r.level].name}${AWARD_NM[r.award]}${r.rep ? '（代表）' : ''}`).join('→');
+// 実績の一覧（達成したものは年度つき、まだのものは目標として薄く）
+function renderAch(){
+  const el = $('#achList'); if(!el) return;
+  const ach = S.ach || {}, n = ACHIEVEMENTS.filter(a => ach[a.id]).length;
+  $('#achCount').textContent = `${n}／${ACHIEVEMENTS.length}`;
+  el.innerHTML = ACHIEVEMENTS.map(a => { const g = ach[a.id];
+    return `<li class="${g ? 'got' : ''}"><b>${a.name}</b><small>${g ? (g.old ? 'それまでに達成' : `${g.y}年度 ${g.w >= 100 ? WINTER_STEPS[g.w - 100]?.m ?? 3 : wkMonth(g.w)}月`) : 'まだ'}・${a.desc}</small></li>`; }).join('');
+}
 function renderHistory(){
+  renderAch();
   const years = (S.history || []).slice().reverse();
   $('#history').hidden = !years.length;
   const recBtns = y => S.recs.filter(r => r.year === y && r.keep).map(r => `<button class="btn small" type="button" data-act="playrec" data-id="${r.id}">▶ ${esc(r.label.replace(/^\d+年?\s*/, ''))}</button>`).join('');

@@ -384,6 +384,13 @@ tr.empty td{color:var(--ink-soft)}
 /* 歴史 */
 .history{display:grid;gap:10px;border-top:2px solid var(--ink);padding-top:16px}
 .hist-best{font-weight:700;font-size:14px;color:var(--brass);margin-bottom:4px}
+#h-ach small{font-family:var(--f-body);font-size:13px;color:var(--ink-soft);margin-left:10px}
+.achlist{list-style:none;padding:0;display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:8px}
+.achlist li{display:grid;gap:2px;padding:8px 10px;border:1.5px dashed var(--rule);border-radius:8px;opacity:.55}
+.achlist li.got{border-style:solid;border-color:var(--brass);background:var(--sheet);opacity:1}
+.achlist li b{font-size:13.5px}
+.achlist li.got b{color:var(--brass)}
+.achlist li small{font-size:11.5px;color:var(--ink-soft);line-height:1.45}
 .history ol{list-style:none;padding:0;display:grid;gap:6px;font-family:var(--f-hand);font-size:15px}
 .foot{font-size:12px;color:var(--ink-soft);max-width:64em;line-height:1.8}
 .foot summary{cursor:pointer;font-size:13px;padding:6px 0}
@@ -711,6 +718,10 @@ html[data-season="snow"]{--season-band:linear-gradient(90deg,#DDE8F3,#FFFFFF,#B9
     <div class="table-wrap"><table id="rosterTable"></table></div>
   </section>
 
+  <section class="achv" data-tab="log" aria-labelledby="h-ach">
+    <h2 id="h-ach">実績<small id="achCount"></small></h2>
+    <ol class="achlist" id="achList"></ol>
+  </section>
   <section class="history" id="history" data-tab="log" hidden aria-labelledby="h-hist">
     <h2 id="h-hist">部の歴史</h2>
     <div class="hist" id="hist"></div>
