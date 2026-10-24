@@ -15,8 +15,9 @@ const SAMPLE_BANK = {
   bcl: {bank: 'bclar', g: 1.61},
   asax: {bank: 'sax', g: 1.07}, tsax: {bank: 'tsax', g: 1.06}, bsax: {bank: 'bsax', g: 1.0},
   tp: {bank: 'tpt', g: 1.05}, hn: {bank: 'horn', g: 1.08}, tb: {bank: 'tbn', g: 1.11}, btb: {bank: 'btbn', g: 0.95},
-  // ユーフォニアムは自由に使える録音がないので、トロンボーンの録音を暗くして使う
-  euph: {bank: 'tbn', lp: 6, g: 1.07}, tuba: {bank: 'tuba', g: 1.04}, cb: {bank: 'cbass', g: 1.11},
+  // ユーフォニアムは自由に使える録音がないので、トロンボーンの録音を暗くして使う。
+  // 円錐管のユーフォはトロンボーンより出だしが丸いので、立ち上がりをゆっくりに（att 秒）、出だしの張り（blat）を半分にする
+  euph: {bank: 'tbn', lp: 6, g: 1.07, att: 0.025, blat: 0.5}, tuba: {bank: 'tuba', g: 1.04}, cb: {bank: 'cbass', g: 1.11},
   // 大太鼓は1打がトランペット1音より10dBほど大きく、マーチで全体をおおっていたので下げた。スネアは短い音で埋もれていたので上げた
   cbpizz: {bank: 'pizz', g: 1.3}, timp: {bank: 'timp', g: 3.1}, sd: {bank: 'sd', g: 4.6}, bd: {bank: 'bd', g: 1.57},
   cym: {bank: 'cym', g: 3.6}, sus: {bank: 'sus', g: 4.3}, tri: {bank: 'tri', g: 8}, tamb: {bank: 'tamb', g: 1.2},
@@ -176,6 +177,8 @@ class SampleVoice {
 
     // 短い音はスタッカートの録音をそのまま鳴らす
     const short = this.stac && !smooth && (n.art === 'stac' || n.d < 0.3);
+    // 出だしの張り（金管のアタック）。録音を借りている楽器は、その楽器らしい強さに（cfg.blat）
+    const blat = 1 + (n.blat - 1) * (cfg.blat ?? 1);
     if(short){
       const smp = pickSample(this.stac, n.midi - (cfg.shift || 0), vMax, {key: n.key});
       const rate = Math.pow(2, (n.midi - smp.m) / 12) / SAMPLE_TUNE * Math.pow(2, (n.cents + this.det + (n.crack ? n.crack : 0)) / 1200);
@@ -186,7 +189,7 @@ class SampleVoice {
       src.connect(g); g.connect(this.in);
       const end = Math.min(s + smp.d / rate, nextS + 0.03);
       g.gain.setValueAtTime(0, s);
-      g.gain.linearRampToValueAtTime(lv(vMax) * n.blat, s + 0.004);
+      g.gain.linearRampToValueAtTime(lv(vMax) * blat, s + (cfg.att ? cfg.att * 0.5 : 0.004));
       if(nextS < s + smp.d / rate){ g.gain.setValueAtTime(lv(vMax), nextS - 0.002); g.gain.linearRampToValueAtTime(0, nextS + 0.03); }
       src.start(s, smp.start);
       src.stop(end + 0.01);
@@ -204,10 +207,10 @@ class SampleVoice {
     const g = ac.createGain();
     g.connect(this.in);
     const G = g.gain;
-    const att = smooth ? 0.05 : joined ? 0.02 : 0.008;
+    const att = smooth ? 0.05 : joined ? Math.max(0.02, cfg.att || 0) : cfg.att || 0.008;
     G.setValueAtTime(0, s);
-    G.linearRampToValueAtTime(lv(v0) * (smooth ? 1 : n.blat), s + att);
-    if(!smooth && n.blat > 1.02) G.linearRampToValueAtTime(lv(v0), s + att + n.att * 2);
+    G.linearRampToValueAtTime(lv(v0) * (smooth ? 1 : blat), s + att);
+    if(!smooth && blat > 1.02) G.linearRampToValueAtTime(lv(v0), s + att + n.att * 2);
     const after = s + att + n.att * 2 + 0.03;
     let k = 0;
     for(const [dt, v] of env){
