@@ -1348,12 +1348,15 @@ function renderMemberCard(){
     <p class="small">楽器が変わると、その楽器での音程と音色は基礎からやり直しになる。</p></details>`;
 }
 function renderRoster(){
+  // だれもいないパートが、いまの曲でどれだけ減点になるか
+  const pid = S.pieceId, w = pid ? needWeight(pid) : {}, tot = Object.values(w).reduce((a, x) => a + x, 0) || 1;
   $('#secGrid').innerHTML = SECTIONS.map(s => {
     const ms = secMembers(S, s.id), seats = SEATS.filter(x => x.sec === s.id).length;
     const av = k => ms.length ? ms.reduce((a, m) => a + m.stats[k], 0) / ms.length : 0;
+    const lose = !ms.length && w[s.id] ? LACK_MAX * w[s.id] / tot : 0;
     return `<button class="sec-tile" type="button" data-sec="${s.id}" aria-pressed="${U.view === s.id}"><b>${s.name}</b>
       <span class="bars">${STAT_KEYS.map(k => `<i title="${STAT_LABEL[k]} ${Math.round(av(k))}"><span style="height:${av(k)}%"></span></i>`).join('')}</span>
-      <small>${ms.length}/${seats}人</small></button>`;
+      <small>${ms.length}/${seats}人${lose ? `<em class="lose">${lose >= 1 ? `いない・この曲で −${Math.round(lose)}点` : 'いない'}</em>` : ''}</small></button>`;
   }).join('');
   const rows = [];
   for(const sec of SECTIONS){
