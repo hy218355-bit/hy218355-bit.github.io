@@ -843,6 +843,26 @@ function placeCard(where){
   if(where === 'roster') $('.roster').insertBefore(card, $('.roster .sec-grid'));
   else $('.col-stage').appendChild(card);
 }
+// 部員のひとこと：いまの様子（体力・最近の伸び・苦手・癖・学年・役）に合うものから、週ごとに1つ
+function memberSays(m){
+  const lines = [], wk = STAT_LABEL[weakest(m)], up = m.last?.d ? Math.max(0, ...STAT_KEYS.map(k => m.last.d[k] || 0)) : 0;
+  if((m.sta ?? 100) < 30) lines.push('「ちょっと、疲れがたまってるかもしれません……」', '「体が重くて、思うように息が入らないです」');
+  if(up >= 4) lines.push('「最近、音がよく出るようになってきました！」', '「先週の練習、手ごたえがありました」');
+  if(m.stats[weakest(m)] < 50) lines.push(`「${wk}がどうしても苦手で……」`, `「${wk}、もう少しなんとかしたいです」`);
+  if(m.trait === 'nervous') lines.push('「本番のことを考えると、今から緊張します」');
+  if(m.trait === 'clutch') lines.push('「本番、早く来ないかなあ」');
+  if(m.trait === 'loud') lines.push('「気づくと、自分の音だけ大きくなってるんです」');
+  if(m.trait === 'shy') lines.push('「もっと自信を持って吹けたらいいんですけど」');
+  if(m.grade === 3 && S.week >= 8) lines.push('「最後の年だから、悔いのないように吹きたいです」');
+  if(m.grade === 1 && S.week < 10) lines.push('「早く先輩たちみたいに吹けるようになりたいです」');
+  if(m.title === '部長') lines.push('「みんなが同じ方を向けるように、がんばります」');
+  if(m.title === '学生指揮') lines.push('「合奏の前に、スコアをもう一回見ておきます」');
+  if(m.title === 'パートリーダー') lines.push('「パートの音が、少しずつそろってきました」');
+  if(S.pieceId && readMean(m, S.pieceId) < 40) lines.push('「自由曲、まだ楽譜を追うので精一杯です」');
+  if(S.pieceId && readMean(m, S.pieceId) >= 90) lines.push('「自由曲、だいぶ歌えるようになってきました」');
+  if(!lines.length) lines.push('「今日もよろしくお願いします」', '「合奏、楽しいです」');
+  return lines[Math.floor(hash(m.id, S.year, S.week, 'say') * lines.length)];
+}
 function renderMemberCard(){
   const card = $('#memberCard');
   const m = U.sel && memberById(U.sel);
@@ -855,6 +875,7 @@ function renderMemberCard(){
     return `<option value="${s.id}">${PART_LABEL[s.part]}${o ? `（${esc(o.name)}と交代）` : '（空席）'}</option>`;
   }).join('');
   card.innerHTML = `<div class="mc-head"><h3>${esc(m.name)}</h3>${m.title ? `<span class="tag">${m.title}</span>` : ''}<span class="sub">${m.grade}年・${seat ? PART_LABEL[seat.part] : '控え（席なし）'}</span><button class="link mc-close" type="button" data-mact="close">閉じる</button></div>
+    <p class="mc-say">${esc(memberSays(m))}</p>
     ${tr ? `<p class="mc-trait">癖：${tr.name}。${tr.desc}</p>` : '<p class="mc-trait">目立った癖はない。</p>'}
     <div class="stats">${STAT_KEYS.map(k => statRow(STAT_LABEL[k], m.stats[k], '', '')).join('')}${m.mental != null ? statRow('本番の強さ', m.mental, '', '', 'warn') : ''}${S.pieceId ? `<p class="mc-sub">譜読み（${PIECES[S.pieceId].title}）</p>`
       + readUnits(S.pieceId).map(u => statRow(spanShort(u), readOf(m, S.pieceId)[u.i], '', '')).join('') : ''}</div>
