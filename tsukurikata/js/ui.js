@@ -802,7 +802,12 @@ function renderHistory(){
   const years = (S.history || []).slice().reverse();
   $('#history').hidden = !years.length;
   const recBtns = y => S.recs.filter(r => r.year === y && r.keep).map(r => `<button class="btn small" type="button" data-act="playrec" data-id="${r.id}">▶ ${esc(r.label.replace(/^\d+年?\s*/, ''))}</button>`).join('');
-  $('#hist').innerHTML = years.length ? years.map(h => {
+  // これまでの最高：いちばん先まで進んだ大会と、そのときの賞・点（同じ大会なら点の高いほう）
+  const all = [...(S.history || []).flatMap(h => (h.results || []).map(r => ({...r, year: h.year}))), ...(S.season || []).map(r => ({...r, year: S.year}))];
+  const rank = r => ['pref', 'block', 'national'].indexOf(r.level) * 1000 + ({gold: 300, silver: 200, bronze: 100}[r.award] || 0) + (r.avg || 0);
+  const best = all.slice().sort((a, b) => rank(b) - rank(a))[0];
+  const bestLine = best ? `<p class="hist-best">これまでの最高：${best.year}年度 ${LEVELS[best.level].name}${AWARD_NM[best.award]}${best.rep ? '（代表）' : ''}・審査員平均 ${(+best.avg).toFixed(1)}点</p>` : '';
+  $('#hist').innerHTML = bestLine + (years.length ? years.map(h => {
     const best = h.results[h.results.length - 1];
     return `<details class="hyear"><summary><b>${h.year}</b><span class="pc">${esc(h.piece || '—')}</span><span class="aw ${best?.award || ''}">${best ? resultText([best]) : ''}</span></summary>
       <div class="body">
@@ -811,7 +816,7 @@ function renderHistory(){
         ${h.retired?.length ? `<p>引退した3年生${h.firstClass ? '（顧問になって最初の代）' : ''}：${h.retired.map(esc).join('、')}</p>` : ''}
         <div class="transport">${recBtns(h.year)}</div>
       </div></details>`;
-  }).join('') : '';
+  }).join('') : '');
 }
 function renderLog(){
   $('#log').innerHTML = S.log.slice().reverse().slice(0, 80)
