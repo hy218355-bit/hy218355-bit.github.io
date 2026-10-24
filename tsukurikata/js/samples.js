@@ -109,12 +109,12 @@ function pickSample(bank, midi, v, opts = {}){
 
 // 強弱の段が2つある録音は、強さ 0.35〜0.75（mp〜f のあたり）で弱い段と強い段を混ぜる。
 // 段の境目（強さ 0.5）で、音色がいきなり変わっていた（トランペットは音の明るさが2倍以上に）。等パワーで混ぜるので、大きさは変わらない
-function blendLayers(bank, midi, v, rank){
+function blendLayers(bank, midi, v, opts){
   if(bank.layers.length !== 2) return null;
   const w0 = clamp01((v - 0.35) / 0.4);
   if(w0 <= 0 || w0 >= 1) return null;
   const w = w0 * w0 * (3 - 2 * w0);
-  const soft = pickSample(bank, midi, 0, {rank}), loud = pickSample(bank, midi, 1, {rank});
+  const soft = pickSample(bank, midi, 0, opts), loud = pickSample(bank, midi, 1, opts);
   if(soft === loud) return null;
   return [[soft, Math.cos(w * Math.PI / 2)], [loud, Math.sin(w * Math.PI / 2)]];
 }
@@ -205,9 +205,11 @@ class SampleVoice {
     const short = this.stac && !smooth && (n.art === 'stac' || n.d < 0.3);
     const env = n.env, vMax = env.reduce((a, [, v]) => Math.max(a, v), 0);
     let smp = short ? pickSample(this.stac, n.midi - (cfg.shift || 0), vMax, {key: n.key}) : pickSample(this.bank, n.midi - (cfg.shift || 0), vMax, {rank: this.rank});
-    // 同じ高さの短い音が続くとき、同じ録音をくり返すと機械的に聞こえる（マシンガン）。直前と同じ録音なら、近くの別の録音にかえる
-    if(short && this.lastShort?.midi === n.midi && this.lastShort.smp === smp) smp = altSample(this.stac, smp, n.midi - (cfg.shift || 0), n.key) || smp;
-    this.lastShort = short ? {midi: n.midi, smp} : null;
+    // 短い音で鳴らす録音（強弱の段を混ぜるときは2つ）。同じ高さの短い音が続くとき、同じ録音をくり返すと機械的に聞こえる（マシンガン）。
+    // 直前に使った録音なら、近くの別の録音にかえる
+    let picks = short ? blendLayers(this.stac, n.midi - (cfg.shift || 0), vMax, {key: n.key}) || [[smp, 1]] : null;
+    if(short && this.lastShort?.midi === n.midi) picks = picks.map(([sm, w]) => [this.lastShort.used.has(sm) ? altSample(this.stac, sm, n.midi - (cfg.shift || 0), n.key) || sm : sm, w]);
+    this.lastShort = short ? {midi: n.midi, used: new Set(picks.map(([sm]) => sm))} : null;
     // 鳴りの遅い録音は、そのぶん早く吹きはじめる（つないだ音は録音の途中から鳴らすので、早めない）。音の終わりは楽譜どおり
     const s = Math.max(0, T0 + n.t - (smooth ? 0 : smp.lead || 0));   // 時計の0より前には置けない（音声の時計が動きだした直後）
     const nextS = next ? T0 + next.t : Infinity;
@@ -223,19 +225,23 @@ class SampleVoice {
     // 出だしの張り（金管のアタック）。録音を借りている楽器は、その楽器らしい強さに（cfg.blat）
     const blat = 1 + (n.blat - 1) * (cfg.blat ?? 1);
     if(short){
-      const rate = Math.pow(2, (n.midi - smp.m) / 12) * smpTune(smp) * Math.pow(2, (n.cents + this.det + (n.crack ? n.crack : 0)) / 1200);
-      const src = ac.createBufferSource(); src.buffer = this.stac.buf;
-      src.playbackRate.setValueAtTime(rate, s);
-      if(n.crack) src.playbackRate.setValueAtTime(rate * Math.pow(2, -n.crack / 1200), s + n.crackDur);
-      const g = ac.createGain();
-      src.connect(g); g.connect(this.in);
-      const end = Math.min(s + smp.d / rate, nextS + 0.03);
-      g.gain.setValueAtTime(0, s);
-      g.gain.linearRampToValueAtTime(lv(vMax) * blat, s + (cfg.att ? cfg.att * 0.5 : 0.004));
-      if(nextS < s + smp.d / rate){ g.gain.setValueAtTime(lv(vMax), nextS - 0.002); g.gain.linearRampToValueAtTime(0, nextS + 0.03); }
-      src.start(s, smp.start);
-      src.stop(end + 0.01);
-      this.srcs.push(src);
+      const one = (sm, w) => {
+        const rate = Math.pow(2, (n.midi - sm.m) / 12) * smpTune(sm) * Math.pow(2, (n.cents + this.det + (n.crack ? n.crack : 0)) / 1200);
+        const src = ac.createBufferSource(); src.buffer = this.stac.buf;
+        src.playbackRate.setValueAtTime(rate, s);
+        if(n.crack) src.playbackRate.setValueAtTime(rate * Math.pow(2, -n.crack / 1200), s + n.crackDur);
+        const g = ac.createGain();
+        src.connect(g); g.connect(this.in);
+        const end = Math.min(s + sm.d / rate, nextS + 0.03);
+        g.gain.setValueAtTime(0, s);
+        g.gain.linearRampToValueAtTime(lv(vMax) * blat * w, s + (cfg.att ? cfg.att * 0.5 : 0.004));
+        if(nextS < s + sm.d / rate){ g.gain.setValueAtTime(lv(vMax) * w, nextS - 0.002); g.gain.linearRampToValueAtTime(0, nextS + 0.03); }
+        src.start(s, sm.start);
+        src.stop(end + 0.01);
+        this.srcs.push(src);
+        return end;
+      };
+      const end = Math.max(...picks.map(([sm, w]) => one(sm, w)));
       this.prev = n; this.lastCents = n.cents;
       return end;
     }
@@ -320,7 +326,7 @@ class SampleVoice {
       });
     };
     // 強弱の段（弱い録音・強い録音）を、強さにつれてなめらかに混ぜる
-    const mix = blendLayers(this.bank, n.midi - (cfg.shift || 0), vMax, this.rank);
+    const mix = blendLayers(this.bank, n.midi - (cfg.shift || 0), vMax, {rank: this.rank});
     if(mix) for(const [sm, w] of mix){ const gg = ac.createGain(); gg.gain.value = w; gg.connect(g); voice(sm, gg); }
     else voice(smp, g);
     // 息の支えが弱い奏者は、音量がゆっくり揺れる
