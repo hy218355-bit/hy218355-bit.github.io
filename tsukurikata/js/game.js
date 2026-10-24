@@ -579,7 +579,28 @@ function runAudition(s){
 }
 const startAudition = s0 => runAudition(clone(s0));
 // このメンバーで次のコンクールに出たときの目安（その日の調子は入れない）
-function predictContest(s, outIds){
+// 本番のころの部：いまの練習の仕方（部の方針）のまま、コンクールの週まで練習を進めた姿。オーディションの目安とおすすめのメンバーに使う
+// （オーディションの週の力のままだと、本番までに進む譜読みと仕上がりのぶん、ずっと低く出てしまうため）
+let projMemo = null;
+function projectToContest(s0){
+  const {w} = nextContest(s0);
+  const key = [s0.year, s0.week, s0.seq, s0.policy, w, s0.members.length].join(':');
+  if(projMemo?.key === key) return projMemo.s;
+  let s = clone(s0), guard = 0;
+  s.plan = {};
+  while(s.week < w && guard++ < 24){
+    if(recruitsDue(s) && !s.pending){ s = assignRecruits(s, autoAssign(s)); continue; }
+    if(episodeView(s)){ s = resolveEpisode(s, 0); continue; }
+    const ev = eventAt(s, s.week);
+    if(ev?.kind === 'forced'){ s = practiceWeek(s, 'test'); continue; }
+    if(ev && (ev.kind === 'concert' || ev.kind === 'contest')) break;
+    s = practiceWeek(s);
+  }
+  projMemo = {key, s};
+  return s;
+}
+function predictContest(s0, outIds){
+  const s = projectToContest(s0);
   const {ev} = nextContest(s);
   const L = LEVELS[ev.level];
   const members = seated(s).filter(m => !outIds.has(m.id));

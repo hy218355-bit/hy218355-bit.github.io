@@ -95,6 +95,18 @@ def pack(name, items):
     open(OUT + name + '.mp3', 'wb').write(data)
     return meta
 
+# アイオワ大の録音は1音が2秒ほどで、短い音や高い音ではループのつなぎ目がうまく合わないことがある。
+# つなぎ目の相関が低い（のばすと「ぼこっ」と聞こえる）音は使わず、2半音までとなりの録音で鳴らす（同じ強弱の段に、となりがあるときだけ）
+LOOP_MIN = 0.8
+def drop_bad_loops(items):
+    keep = []
+    for it in items:
+        if it['lc'] >= LOOP_MIN: keep.append(it); continue
+        near = [o for o in items if o is not it and o['l'] == it['l'] and o['lc'] >= LOOP_MIN and abs(o['m'] - it['m']) <= 2.5]
+        if near: print(f"  - {it['m']} (段 {it['l']}) はつなぎ目の相関 {it['lc']} なので使わない"); continue
+        keep.append(it)
+    return keep
+
 # ---- 読み込み ----
 def load_aiff(path):
     a = aifc.open(path)
@@ -158,6 +170,7 @@ for head, (bank, (lo, hi)) in IOWA_BANKS.items():
             items.append({'x': rms_norm(prep(x, KEEP_WIND)), 'm': round(fm, 2), 'l': li if len(lays) > 1 else -1})
     items = fill(items, lo, hi, log=print)
     for it in items: it['lp'], it['lc'] = find_loop(it['x'])
+    items = drop_bad_loops(items)
     manifest[bank] = {'kind': 'sus', 'samples': pack(bank, items)}
     print(bank, len(items), 'samples', sorted(by)[0], '-', sorted(by)[-1], 'loop corr median', np.median([it['lc'] for it in items]))
 

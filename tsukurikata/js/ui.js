@@ -613,7 +613,7 @@ function renderAudition(w, ev){
   }).join('')).join('');
   const intro = ev?.kind === 'audition' && !S.audition.decided ? ev.text : `${cev.title}に出るメンバーを決める。オーディションの点を見て、出る人にチェックを入れよう。`;
   w.innerHTML = `<div class="event"><span class="tag">オーディション</span><span>${intro}</span></div>
-    <p class="small">点は、自由曲で問われる力（${PIECES[S.pieceId].asks}）と、その日の緊張で決まる。メンタルの弱い部員は、緊張で崩れることもある。チェックを外した部員は控えになり、コンクールの舞台には上がらない（練習はいつもどおり。秋からはまた全員で吹く）。</p>
+    <p class="small">点は、自由曲で問われる力（${PIECES[S.pieceId].asks}）と、その日の緊張で決まる。チェックを外した部員は控え（練習はいつもどおり。秋からはまた全員で吹く）。</p>
     <div class="aud-pred" id="audPred" aria-live="polite"></div>
     <div class="chips"><button class="chip" type="button" data-aud="all">全員出る</button><button class="chip" type="button" data-aud="best">おすすめのメンバーにする</button><button class="chip" type="button" data-aud="listen">▶ このメンバーで聴く</button></div>
     <ul class="plist alist">${rows}</ul>
@@ -625,11 +625,12 @@ function updatePred(soon){
   const el = $('#audPred'); if(!el) return;
   const out = U.draft || new Set();
   const n = seated(S).length - [...out].filter(id => memberById(id)?.seat).length;
-  const {ev} = nextContest(S), L = LEVELS[ev.level];
+  const {ev, w} = nextContest(S), L = LEVELS[ev.level], left = w - S.week;
   const key = S.year + ':' + S.week + ':' + [...out].sort().join(',');
   const show = p => {
     const nm = {gold: '金賞', silver: '銀賞', bronze: '銅賞'}[p.award];
-    el.innerHTML = `<b>${n}人で出ると、${L.name}で審査員平均 ${p.avg.toFixed(1)}点（${nm}）くらい</b><span class="small">金賞の目安は${L.gold}点、${L.rep ? `代表は3人ともA（${L.A}点）。` : ''}${p.thin >= 6 ? '人数が少ないぶん、響きが薄いと見られる。' : ''}本番の日の調子で、上下する。</span>`;
+    // 目安は、いまの方針のまま本番の週まで練習を続けたときの姿で出す（自分で指揮すると、ここから上がる）
+    el.innerHTML = `<b>${n}人で出ると、${L.name}で審査員平均 ${p.avg.toFixed(1)}点（${nm}）くらい</b><span class="small">${left > 0 ? `本番まであと${left}週、いまの方針で練習を続けたときの目安。` : ''}金賞の目安は${L.gold}点、${L.rep ? `代表は3人ともA（${L.A}点）。` : ''}${p.thin >= 6 ? '人数が少ないぶん、響きが薄いと見られる。' : ''}本番の日の調子や指揮でも上下する。</span>`;
   };
   if(U.predKey === key && U.pred){ show(U.pred); return; }
   el.innerHTML = `<b>${n}人で出ると……</b><span class="small">計算中</span>`;
