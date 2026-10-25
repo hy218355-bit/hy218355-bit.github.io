@@ -65,6 +65,7 @@ GitHub Pages のサイト。いまの中心は、高校吹奏楽部の顧問に�
 - GitHub に push するのは、オーナーに言われたときだけ。
 - ファイルを落とす前に、ファイル名・どこから・大きさを伝えて、オーナーにたずねる。
 - 指揮は演奏の補助。うまく振っても大きな差がつかないようにする。
+- 部員は辞めない（退部の仕組みは入れない）。
 - 文章を足したら `python3 tsukurikata/tools/check_glyphs.py` で、フォントに足りない字がないか見る。足りなければ `tools/build_fonts.py` でフォントを作り直す（元のフォントは google/fonts の `ofl/` の `zenkakugothicnew`・`kleeone`・`delagothicone`・`sharetechmono` の4つ。落とす前にオーナーにたずねる）。
 - 点数や伸び方を変えたら、全15曲で `sim_avg.sh` を回して、下の「確かめること」の目標に入っているか見る。
 
