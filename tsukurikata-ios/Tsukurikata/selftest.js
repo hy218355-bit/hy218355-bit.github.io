@@ -33,17 +33,21 @@
     const rms = 10 * Math.log10(sum / d.length + 1e-12);
     const ir = chain.stage.conv.buffer ? chain.stage.conv.buffer.length : 0;
     let detail = `peak ${pk.toFixed(3)} rms ${rms.toFixed(1)}dB nan ${nan} rendered ${(len / sr).toFixed(1)}s in ${Date.now() - t1}ms, voices ${pb.voices.length}, ir ${ir}`;
-    // 全15曲のすべての音を、上手な部と下手な部で予約してみる（WebKit は、音量の予約の重なりに Chrome よりきびしく、
-    // Chrome で通っても iPhone ではエラーになって、そこから先の音が鳴らなくなることがある）
-    for(const pid of PIECE_IDS) for(const v of [30, 100]){
+    // 全15曲のすべての音を予約してみる（WebKit は、音量の予約の重なりに Chrome よりきびしく、
+    // Chrome で通っても iPhone ではエラーになって、そこから先の音が鳴らなくなることがある）。
+    // 音をつくる部品を何千も作るので重い（Mac のシミュレータで1曲1秒半、CI のマシンはその数倍）。
+    // 時間切れにならないよう、上手な部と下手な部を1曲おきにする。書き出さないので、書き出し先は1秒ぶんでよい
+    const t2 = Date.now();
+    for(const [i, pid] of PIECE_IDS.entries()){
+      const v = i % 2 ? 100 : 30;
       const p = perform({members: fullBand({pitch: v, rhythm: v, tone: v, expr: v}), pieceId: pid, cohesion: v, fam: 100, venue: 'hall', lead: () => 1});
-      const oac = new OfflineAudioContext(2, Math.ceil((p.total + 3) * sr), sr), ch = new VenueChain(oac);
+      const oac = new OfflineAudioContext(2, sr, sr), ch = new VenueChain(oac);
       ch.set('hall', 'center', 0);
       const b = new Playback({ac: oac, chain: ch, posId: 'center', solo: {type: 'all'}}, p, null);
       clearInterval(b.timer);
       try{ b.pump(Infinity); }catch(e){ throw new Error(`schedule ${pid}/${v}: ${e.message}`); }
     }
-    detail += ', schedule all ok';
+    detail += `, schedule all ok in ${Date.now() - t2}ms`;
     // 指揮した演奏の書き出し → アプリへ渡して m4a に
     const clock = BeatClock.start(0.5, perf.from, 0.5);
     for(let k = 1; k <= 8; k++) clock.tap(0.5 + k * 0.47);

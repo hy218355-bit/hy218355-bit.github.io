@@ -49,7 +49,7 @@ final class GameViewController: UIViewController {
         super.viewDidLoad()
         webView.load(URLRequest(url: BundleSchemeHandler.startURL))
         if selfTest {
-            DispatchQueue.main.asyncAfter(deadline: .now() + 240) { Self.finishSelfTest(ok: false, detail: "timeout") }
+            DispatchQueue.main.asyncAfter(deadline: .now() + 420) { Self.finishSelfTest(ok: false, detail: "timeout") }
         }
     }
 

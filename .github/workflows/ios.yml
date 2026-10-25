@@ -53,12 +53,12 @@ jobs:
           if ! up "$IPHONE"; then echo "simulator did not come up; restarting the simulator service and trying once more"; restart_sims; up "$IPHONE"; fi
           xcrun simctl status_bar "$IPHONE" override --time 9:41 --batteryState charged --batteryLevel 100 --cellularBars 4 --wifiBars 3 || true
       - name: Self-test inside the app (WebKit)
-        timeout-minutes: 8
+        timeout-minutes: 10
         run: |
           # アプリが自分で数小節を書き出して、結果を書類フォルダの selftest.txt に書く
           xcrun simctl launch --stdout="$PWD/app-stdout.txt" --stderr="$PWD/app-stderr.txt" "$IPHONE" io.github.hy218355-bit.tsukurikata -selftest
           DATA=$(xcrun simctl get_app_container "$IPHONE" io.github.hy218355-bit.tsukurikata data)
-          for i in $(seq 1 120); do
+          for i in $(seq 1 150); do
             grep -q "^SELFTEST" "$DATA/Documents/selftest.txt" 2>/dev/null && break
             sleep 3
           done
@@ -96,7 +96,7 @@ jobs:
           # iPad でも同じセルフテストを通す（初回起動は時間がかかるので、これで温めてから撮る）
           limit 240 xcrun simctl launch "$IPAD" io.github.hy218355-bit.tsukurikata -selftest
           DATA=$(xcrun simctl get_app_container "$IPAD" io.github.hy218355-bit.tsukurikata data)
-          for i in $(seq 1 120); do
+          for i in $(seq 1 150); do
             grep -q "^SELFTEST" "$DATA/Documents/selftest.txt" 2>/dev/null && break
             sleep 3
           done
