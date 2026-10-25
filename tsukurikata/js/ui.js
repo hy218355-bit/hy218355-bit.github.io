@@ -584,7 +584,17 @@ function mentalNote(p){
 function moodText(n){
   return n <= 3 ? '気楽な本番。いつもの力を出しやすい。' : n <= 6 ? '大事な本番。緊張で、実力より少し下がりそうだ。' : '大きな本番。緊張で、実力を出しきれないかもしれない。';
 }
+// はじめての人への案内：顧問になった最初の1か月だけ、次に押すボタンを光らせる（文字は足さない）
+const GUIDE_WEEKS = 3, GUIDE_ACTS = ['assign', 'reveal', 'next', 'stage', 'practice'];
 function renderWeek(){
+  renderWeekBody();
+  if(!foundingYear(S) || S.week > GUIDE_WEEKS) return;
+  const w = $('#week');
+  const b = GUIDE_ACTS.map(a => w.querySelector(`[data-act="${a}"]:not([disabled])`)).find(Boolean)
+    || w.querySelector('.tag.fit ~ .row [data-act="choose"]') || w.querySelector('[data-act="choose"]');
+  b?.classList.add('guide');
+}
+function renderWeekBody(){
   const w = $('#week'), ev = eventAt(S, S.week);
   const head = $('#h-week');
   if(recruitsDue(S) && !S.pending){

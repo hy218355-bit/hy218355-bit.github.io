@@ -220,6 +220,10 @@ select{background:var(--sheet);border:1.5px solid var(--rule);border-radius:8px;
 .chip:hover{border-color:var(--brass)}
 .chip[aria-pressed="true"]{border-color:var(--brass);color:var(--brass);font-weight:700}
 .chip.none{border-style:dashed}
+/* はじめての人への案内：次に押すボタンがゆっくり光る */
+.btn.guide{outline:2px solid var(--brass);outline-offset:2px;animation:guide 1.8s ease-in-out infinite}
+@keyframes guide{0%,100%{box-shadow:0 0 0 0 color-mix(in srgb,var(--brass) 75%,transparent)}60%{box-shadow:0 0 0 9px color-mix(in srgb,var(--brass) 0%,transparent)}}
+@media (prefers-reduced-motion:reduce){.btn.guide{animation:none}}
 .showinst{margin:10px 0}
 .showinst > .small{display:block;margin-bottom:6px}
 .week{display:grid;gap:12px}
