@@ -525,7 +525,7 @@ function renderStats(){
   $('#memberCount').textContent = `${S.members.length}人${S.members.length > ms.length ? `（控え${S.members.length - ms.length}人）` : ''}／${SEATS.length}席`;
   const d = S.lastDelta || {};
   const pid = S.pieceId || playPiece();
-  const up = v => v > 0 ? v.toFixed(1) : '';
+  const up = v => v > 0 ? (v >= 1 ? String(Math.round(v)) : v.toFixed(1)) : '';
   $('#stats').innerHTML = STAT_KEYS.map(k => statRow(STAT_LABEL[k], bandAvg(S, k), '', up(d[k]))).join('')
     + statRow('まとまり', S.cohesion, '', up(d.coh))
     + (S.pieceId ? statRow(setActive(S) ? '自由曲の譜読み' : '譜読み', readAvg(S, pid), '', up(d.read)) : '')
@@ -817,8 +817,8 @@ function weekResHtml(){
   const top = S.members.filter(m => b.ms[m.id] != null).map(m => ({m, d: avgStat(m) - b.ms[m.id]})).filter(x => x.d >= 0.5).sort((x, y) => y.d - x.d).slice(0, 3);
   return `<div class="weekres"><b>${r.n > 1 ? `この${r.n}週の練習の成果` : '先週の練習の成果'}</b>
     ${rows.map(([nm, a, v]) => { const d = v - a;
-      return `<div class="wr"><span class="nm">${nm}</span><span class="track"><span class="fill" style="width:${clamp(start ? a : v, 0, 100)}%" data-to="${clamp(v, 0, 100)}"></span></span><b class="countup" data-key="wr:${r.key}:${nm}" data-from="${a.toFixed(1)}" data-to="${v.toFixed(1)}">${Math.round(start ? a : v)}</b><span class="d${d < 0 ? ' minus' : ''}">${Math.abs(d) >= 0.05 ? `${d > 0 ? '+' : '−'}${Math.abs(d).toFixed(1)}` : ''}</span></div>`; }).join('')}
-    ${top.length ? `<p class="small">よく伸びた：${top.map(x => `${esc(x.m.name)} +${x.d.toFixed(1)}`).join('・')}</p>` : ''}</div>`;
+      return `<div class="wr"><span class="nm">${nm}</span><span class="track"><span class="fill" style="width:${clamp(start ? a : v, 0, 100)}%" data-to="${clamp(v, 0, 100)}"></span></span><b class="countup" data-key="wr:${r.key}:${nm}" data-from="${a.toFixed(1)}" data-to="${v.toFixed(1)}">${Math.round(start ? a : v)}</b><span class="d${d < 0 ? ' minus' : ''}">${Math.abs(d) >= 0.05 ? `${d > 0 ? '+' : '−'}${Math.abs(d) >= 1 ? Math.round(Math.abs(d)) : Math.abs(d).toFixed(1)}` : ''}</span></div>`; }).join('')}
+    ${top.length ? `<p class="small">よく伸びた：${top.map(x => `${esc(x.m.name)} +${Math.round(x.d)}`).join('・')}</p>` : ''}</div>`;
 }
 // 同じ受け持ちに席がいくつかあるときは、2つ目からの席に「2人目」「3人目」をつける（トランペット 1st は2人、クラリネット 1st は3人で吹く）
 const seatNth = id => { const p = SEAT[id].part, k = SEATS.filter(x => x.part === p).findIndex(x => x.id === id); return k > 0 ? `（${k + 1}人目）` : ''; };
@@ -1087,23 +1087,33 @@ function updatePred(soon){
   U.predT = setTimeout(() => { U.pred = predictContest(S, out); U.predKey = key; if($('#audPred')) show(U.pred); }, soon ? 30 : 120);
 }
 // 今週の練習：部の方針（全員で1つ）と、部員ひとりずつの今週の練習
-const menuLabel = id => { const m = MENU_BY[id]; return m.up ? `${m.name}（${m.up}）` : m.name; };
-const lastText = m => {
-  if(!m.last) return '';
-  if(m.last.menu === 'test') return '先週：テスト期間';
-  const d = Object.entries(m.last.d || {}).filter(([, v]) => v >= 0.1).sort((a, b) => b[1] - a[1]).slice(0, 2).map(([k, v]) => `${k === 'fam' ? '譜読み' : STAT_LABEL[k]}+${v.toFixed(1)}`).join(' ');
-  const sp = m.last.span != null && S.pieceId && PIECES[S.pieceId].spans[m.last.span] ? `（${spanShort(PIECES[S.pieceId].spans[m.last.span])}）` : '';
-  return `先週：${MENU_BY[m.last.menu]?.name || ''}${sp}${d ? ' ' + d : ''}`;
-};
-// 曲の個人練習で打ちこむ区間を選ぶ欄（選ばなければ、いちばん吹けていない区間）
-const spanSelect = m => {
+// 練習で伸びるもの（練習を選ぶボタンに小さく出す）
+const menuUp = id => MENU_BY[id].up || {tutti: 'まとまり', hall: '会場慣れ', rest: '体力'}[id] || '';
+const ownPlan = m => S.plan?.[m.id] && menuOpen(S, S.plan[m.id]) ? S.plan[m.id] : '';
+// 部員の力の帯：音程・リズム・音色・表現（と譜読み）。先週の練習で伸びたぶんを明るく出す（「先週の練習の成果」が出ている週だけ）。
+// いちばん低い力（苦手）は色を変える
+function statStrip(m){
+  const fresh = U.weekRes?.key === `${S.year}:${S.week}` && m.last && m.last.menu !== 'test';
+  const d = fresh ? m.last.d || {} : {}, weak = weakest(m);
+  const cols = STAT_KEYS.map(k => [k, STAT_LABEL[k], m.stats[k], d[k] || 0]);
+  if(S.pieceId) cols.push(['fam', '譜読み', readMean(m, S.pieceId), d.fam || 0]);
+  return `<div class="pst">${cols.map(([k, nm, v, g]) => { const up = g >= 0.5 ? Math.min(g, v) : 0;
+    return `<span class="c${k === weak ? ' weak' : ''}${k === 'fam' ? ' fam' : ''}"><span class="l">${nm}<b>${Math.round(v)}</b></span>`
+      + `<span class="bar"><span class="track"><span class="fill" style="width:${clamp(v - up, 0, 100)}%"></span>${up ? `<span class="fill new" style="left:${clamp(v - up, 0, 100)}%;width:${clamp(up, 0, 100)}%"></span>` : ''}</span><em>${up ? `+${Math.round(g)}` : ''}</em></span></span>`; }).join('')}</div>`;
+}
+// 練習を選ぶ一覧（部員ひとり、またはパート全員。key は部員の id か「sec:パート」）。cur は選んである練習（'' はおまかせ、'-' はばらばら）
+const pickGrid = (key, cur, auto) => `<div class="pgrid" role="group" aria-label="今週の練習">`
+  + `<button class="pchip" type="button" data-pset="${key}" data-menu="" aria-pressed="${cur === ''}"><b>おまかせ</b><small>${auto ? MENU_BY[auto].name : '部員ごと'}</small></button>`
+  + MENU.filter(x => menuOpen(S, x.id)).map(x => `<button class="pchip" type="button" data-pset="${key}" data-menu="${x.id}" aria-pressed="${cur === x.id}"><b>${x.name}</b><small>${menuUp(x.id)}</small></button>`).join('') + '</div>';
+// 曲の個人練習で打ちこむところ（選ばなければ、いちばん吹けていないところ）
+const spanChips = m => {
   const pid = S.pieceId, v = readOf(m, pid), want = S.planSpan?.[m.id], weak = practiceSpan({...S, planSpan: {}}, m);
-  return `<label class="ps"><span>練習するところ</span><select data-span="${m.id}" aria-label="${esc(m.name)}が練習するところ">`
-    + `<option value="">いちばん吹けていないところ（${spanShort(PIECES[pid].spans[weak])}）</option>`
-    + readUnits(pid).map(u => `<option value="${u.i}"${want === u.i ? ' selected' : ''}>${spanShort(u)}（譜読み${Math.round(v[u.i])}）</option>`).join('') + '</select></label>';
+  return `<div class="pspan chips"><button class="chip" type="button" data-spanset="${m.id}" data-i="" aria-pressed="${want == null}">吹けていないところ<small>${esc(spanShort(PIECES[pid].spans[weak]))}</small></button>`
+    + readUnits(pid).map(u => `<button class="chip" type="button" data-spanset="${m.id}" data-i="${u.i}" aria-pressed="${want === u.i}">${esc(spanShort(u))}<small>${Math.round(v[u.i])}</small></button>`).join('') + '</div>';
 };
 function planHtml(ev){
-  const menus = MENU.filter(m => menuOpen(S, m.id));
+  // 開いていた練習の一覧は、週が変わったら閉じる
+  if(U.pickAt !== `${S.year}:${S.week}`){ U.pick = null; U.pickAt = `${S.year}:${S.week}`; }
   const order = m => m.seat ? SEATS.findIndex(x => x.id === m.seat) : 999;
   const ms = S.members.slice().sort((a, b) => order(a) - order(b));
   const count = {};
@@ -1113,19 +1123,21 @@ function planHtml(ev){
   // 部員はパートごとにたたむ（部員が多いと「すすめる」ボタンがずっと下になるので）。見出しに、そのパートの今週の練習をまとめて出す
   const groups = [];
   for(const m of ms){ const k = m.seat ? SEAT[m.seat].sec : 'bench'; let g = groups.find(x => x.k === k); if(!g) groups.push(g = {k, ms: []}); g.ms.push(m); }
+  // 部員の行：名前と体力・力の帯・今週の練習のボタン（押すと練習の一覧が開く）
   const rowOf = m => {
-    const auto = decideMenu(S, m), own = S.plan?.[m.id] && menuOpen(S, S.plan[m.id]) ? S.plan[m.id] : '';
+    const auto = decideMenu(S, m), own = ownPlan(m), id = own || auto, open = U.pick === m.id;
     const c = m.sta >= 60 ? 'good' : m.sta >= 30 ? 'warn' : 'bad';
-    return `<li class="pm${own ? ' own' : ''}"><span class="who"><b>${esc(m.name)}</b><small>${m.grade}年・${m.seat ? esc(PART_LABEL[SEAT[m.seat].part]) : '控え'}${m.out && m.seat ? '・コンクール控え' : ''}${S.pieceId ? `・譜読み${Math.round(readMean(m, S.pieceId))}` : ''}・苦手：${STAT_LABEL[weakest(m)]}</small></span>
+    return `<li class="pm${own ? ' own' : ''}"><span class="who"><b>${esc(m.name)}</b><small>${m.grade}年・${m.seat ? esc(PART_LABEL[SEAT[m.seat].part]) : '控え'}${m.out && m.seat ? '・コンクール控え' : ''}</small></span>
       <span class="sta" title="体力 ${Math.round(m.sta)}"><span class="track"><span class="fill ${c}" style="width:${clamp(m.sta, 0, 100)}%"></span></span><b>${Math.round(m.sta)}</b></span>
-      <label class="pw"><span>今週</span><select data-plan="${m.id}" aria-label="${esc(m.name)}の今週の練習"><option value="">おまかせ（${MENU_BY[auto].name}）</option>${menus.map(x => `<option value="${x.id}"${own === x.id ? ' selected' : ''}>${menuLabel(x.id)}</option>`).join('')}</select></label>${(own || auto) === 'piece' && S.pieceId ? spanSelect(m) : ''}
-      ${m.last ? `<small class="last">${esc(lastText(m))}</small>` : ''}</li>`;
+      ${statStrip(m)}
+      <button class="pick" type="button" data-pick="${m.id}" aria-expanded="${open}" aria-label="${esc(m.name)}の今週の練習"><span class="pk">${own ? '今週' : 'おまかせ'}</span><b>${MENU_BY[id].name}</b><small>${menuUp(id)}</small></button>
+      ${open ? pickGrid(m.id, own, auto) : ''}${id === 'piece' && S.pieceId ? spanChips(m) : ''}</li>`;
   };
   const rows = groups.map(({k, ms: gm}) => {
     const name = k === 'bench' ? '控え' : SEC[k].name;
     // 2人以上いるパートは、全員の今週の練習をまとめて選べる
-    const same = gm.every(x => (S.plan?.[x.id] || '') === (S.plan?.[gm[0].id] || '')) ? (S.plan?.[gm[0].id] || '') : '-';
-    const secSel = gm.length >= 2 ? `<select data-secplan="${k}" aria-label="${name}の全員の今週の練習"><option value="-"${same === '-' ? ' selected' : ''}>このパート全員：…</option><option value=""${same === '' ? ' selected' : ''}>全員おまかせ</option>${menus.map(x => `<option value="${x.id}"${same === x.id ? ' selected' : ''}>全員 ${menuLabel(x.id)}</option>`).join('')}</select>` : '';
+    const same = gm.every(x => ownPlan(x) === ownPlan(gm[0])) ? ownPlan(gm[0]) : '-', key = `sec:${k}`;
+    const secSel = gm.length >= 2 ? `<button class="chip" type="button" data-pick="${key}" aria-expanded="${U.pick === key}">${name}をまとめて選ぶ</button>${U.pick === key ? pickGrid(key, same, '') : ''}` : '';
     const cnt = {};
     for(const m of gm){ const id = planFor(S, m); cnt[id] = (cnt[id] || 0) + 1; }
     const what = MENU.filter(x => cnt[x.id]).map(x => `${x.name}${gm.length > 1 ? ` ${cnt[x.id]}` : ''}`).join('・');
@@ -1667,6 +1679,17 @@ function bind(){
   $('#week').addEventListener('click', e => {
     const b = e.target.closest('button'); if(!b || b.disabled) return;
     if(b.dataset.polall){ commit(setPolicy(S, b.dataset.polall)); renderWeek(); return; }
+    // 今週の練習：ボタンで一覧を開き、選ぶと閉じる（パートの「まとめて選ぶ」は、そのパートの全員に）
+    if(b.dataset.pick){ haptic('tap'); U.pick = U.pick === b.dataset.pick ? null : b.dataset.pick; renderWeek(); return; }
+    if(b.dataset.pset){
+      haptic('tap');
+      const key = b.dataset.pset, v = b.dataset.menu || null, sec = key.startsWith('sec:') ? key.slice(4) : null;
+      let s2 = S;
+      if(sec){ for(const m of S.members) if((m.seat ? SEAT[m.seat].sec : 'bench') === sec) s2 = setPlan(s2, m.id, v); }
+      else s2 = setPlan(S, key, v);
+      U.pick = null; commit(s2); renderWeek(); return;
+    }
+    if(b.dataset.spanset){ haptic('tap'); commit(setPlanSpan(S, b.dataset.spanset, b.dataset.i === '' ? null : +b.dataset.i)); renderWeek(); return; }
     if(b.dataset.audplay){
       const m = memberById(b.dataset.audplay); if(!m) return;
       setVenue('room');
@@ -1767,13 +1790,6 @@ function bind(){
       updatePred();
       return;
     }
-    if(t.dataset.plan){ commit(setPlan(S, t.dataset.plan, t.value || null)); renderWeek(); }
-    else if(t.dataset.secplan && t.value !== '-'){
-      let s2 = S;
-      for(const m of S.members) if((m.seat ? SEAT[m.seat].sec : 'bench') === t.dataset.secplan) s2 = setPlan(s2, m.id, t.value || null);
-      commit(s2); renderWeek();
-    }
-    else if(t.dataset.span){ commit(setPlanSpan(S, t.dataset.span, t.value === '' ? null : +t.value)); renderWeek(); }
   });
   const rs = $('#btnReset');
   rs.addEventListener('click', () => {
