@@ -219,6 +219,9 @@ select{background:var(--sheet);border:1.5px solid var(--rule);border-radius:8px;
 .chip{font-size:12.5px;line-height:1.4;padding:5px 10px;border-radius:999px;border:1.5px solid var(--rule);background:var(--sheet);color:var(--ink);cursor:pointer}
 .chip:hover{border-color:var(--brass)}
 .chip[aria-pressed="true"]{border-color:var(--brass);color:var(--brass);font-weight:700}
+.chip.none{border-style:dashed}
+.showinst{margin:10px 0}
+.showinst > .small{display:block;margin-bottom:6px}
 .week{display:grid;gap:12px}
 .menu{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
 @media (max-width:340px){.menu{grid-template-columns:minmax(0,1fr)}}

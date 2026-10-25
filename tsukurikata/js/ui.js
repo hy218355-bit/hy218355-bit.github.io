@@ -483,6 +483,7 @@ const TIPS = {
   '部員の力の平均': '席についている部員の、音程・リズム・音色・表現の平均。点線は去年の同じころ。春は1年生が入るので、いったん下がる',
 };
 TIPS['自由曲の譜読み'] = TIPS['譜読み'];
+TIPS['見せる楽器'] = `演奏で目立たせる楽器（${SHOW_MAX}つまで）。入部する1年生は、見せた楽器を吹きたがりやすい。点線の楽器は、部にまだ一人もいない`;
 // 合奏の診断（いまの演奏の点）
 const DIAG_TIPS = {...Object.fromEntries(STAT_KEYS.map(k => [k, `いまの演奏の${STAT_LABEL[k]}の点。${STAT_DESC[k]}を聴いている`])),
   balance: 'いまの演奏のバランスの点。旋律が伴奏に埋もれずに聞こえるか、パートの音量がつり合っているか'};
@@ -566,6 +567,12 @@ function wingsHtml(){
   return `<div class="wings"><span class="tag">舞台袖</span><ul><li><span>${mood}</span>${S.stageDay.huddle ? '' : `<button class="btn small" type="button" data-act="huddle"${left ? '' : ' disabled'}>全員で深呼吸する</button>`}</li>${rows}</ul>
     <p class="small">できるのはあわせて2回まで。本番の強さ（メンタル）は、場数を踏むほど上がる。</p></div>`;
 }
+// 新入生歓迎演奏で見せる楽器（押して選ぶ）。席の空いている楽器だけ。点線は、部にまだいない楽器
+function showHtml(){
+  const on = showSecs(S), n = sec => S.members.filter(m => m.seat && SEAT[m.seat].sec === sec).length;
+  const secs = SECTIONS.filter(x => SEATS.filter(y => y.sec === x.id).length > n(x.id));
+  return `<div class="showinst"><span class="small"${tipAttr('見せる楽器')}>見せる楽器</span><div class="chips">${secs.map(x => `<button class="chip${n(x.id) ? '' : ' none'}" type="button" data-act="show" data-sec="${x.id}" aria-pressed="${on.includes(x.id)}">${x.name}</button>`).join('')}</div></div>`;
+}
 // 本番のあと：緊張に飲まれた部員と、いつも以上の音を出した部員
 function mentalNote(p){
   const nm = kind => (p.mental || []).filter(x => x.kind === kind).map(x => memberById(x.mid)?.name).filter(Boolean).map(esc);
@@ -627,6 +634,7 @@ function renderWeek(){
       ${ev.kind === 'contest' ? `<p class="small">${two ? `課題曲 ${esc(PIECES[S.setPiece].title)} → 自由曲 ${esc(PIECES[S.pieceId].title)}（続けて吹く）` : `自由曲 ${esc(PIECES[S.pieceId].title)}`}${isB(S) ? '。B部門は県大会まで' : ''}</p>` : ''}
       <p class="small">会場：${v.name}（${v.rt < 0.2 ? '響きはほとんどない' : `残響 約${v.rt.toFixed(1)}秒`}）。${v.desc}</p>
       ${ev.text ? `<p class="txt">${ev.text}</p>` : ''}
+      ${ev.id === 'shinkan' ? showHtml() : ''}
       <p class="txt">${moodText(n)}${v.play.hall ? `会場慣れ ${Math.round(S.hallExp)}。` : ''}</p>
       ${wingsHtml()}
       <div class="transport"><button class="btn primary" type="button" data-act="stage">本番の演奏をはじめる</button><button class="btn brass" type="button" data-act="stageconduct">自分で指揮する</button></div>
@@ -1716,6 +1724,7 @@ function bind(){
     else if(act === 'assign'){
       haptic('tap'); commit(assignRecruits(S, {...U.asg.picks})); U.asg = null; renderAll(); refreshNow();
     }
+    else if(act === 'show'){ haptic('tap'); commit(toggleShow(S, b.dataset.sec)); renderWeek(); }
     else if(act === 'stage') startStage();
     else if(act === 'stageconduct') startStageConduct();
     else if(act === 'reveal'){ stopPlay(); reveal(); }

@@ -30,7 +30,7 @@ const DRILL = {pitch: 'tune', rhythm: 'metro', tone: 'long', expr: 'phrase'};
 
 const EVENTS = {
   1:  {kind: 'concert', id: 'shinkan', title: '新入生歓迎演奏', venue: 'gym', nerves: 3,
-       text: '体育館で部活動紹介の演奏をする。演奏の出来しだいで、入部する1年生の数が変わる。',
+       text: '体育館で部活動紹介の演奏をする。演奏の出来しだいで、入部する1年生の数が変わる。見せた楽器を吹きたい子が来やすい。',
        t0: '体育館で部活動紹介の演奏をする。できたばかりの小さな部。演奏しだいで、仲間が増えるかもしれない。'},
   2:  {kind: 'mod', title: '仮入部', morale: 6, text: '1年生が音楽室をのぞきに来た。先輩としての自覚で、やる気が上がった。',
        t0: '入部を迷っている1年生が、音楽室をのぞきに来た。仲間が増えるかもしれないと、やる気が上がった。'},
@@ -1636,8 +1636,9 @@ function concertOutcome(s, ev, q, perf, a){
     // 入部する1年生の数は、部の評判と今日の演奏しだい（席が足りなければ控えに入る）
     const empty = SEATS.filter(x => !s.members.some(m => m.seat === x.id)).length;
     const n = clamp(Math.round(1.5 + (s.rep ?? 30) / 8 + (q - 40) / 12 + (s.morale > 70 ? 1 : 0)), 1, Math.max(1, empty + 2));
-    return {recruits: n, text: q >= 60 ? `演奏が終わると大きな拍手が起きた。${n}人の1年生が入部を考えてくれているらしい。`
-      : q >= 35 ? `拍手はまばらだったが、${n}人の1年生が興味を持ってくれたようだ。` : `体育館の響きにのまれて、何をやっているのか伝わらなかった。それでも${n}人の1年生が見学に来てくれそうだ。`};
+    const show = showSecs(s), shown = show.length ? `${show.map(x => SEC[x].name).join('や')}を見て、目をかがやかせている子もいた。` : '';
+    return {recruits: n, show, text: (q >= 60 ? `演奏が終わると大きな拍手が起きた。${n}人の1年生が入部を考えてくれているらしい。`
+      : q >= 35 ? `拍手はまばらだったが、${n}人の1年生が興味を持ってくれたようだ。` : `体育館の響きにのまれて、何をやっているのか伝わらなかった。それでも${n}人の1年生が見学に来てくれそうだ。`) + shown};
   }
   if(ev.id === 'matsuri'){
     const dm = Math.round(q / 10) - 2;
@@ -1743,7 +1744,7 @@ function finishStage(s0){
   stageAftermath(s, ev, p);
   gainCoach(s, p.kind === 'concert' ? 3 : 5 + (p.judge?.award === 'gold' ? 3 : 0) + (p.judge?.rep ? 4 : 0));
   if(p.kind === 'concert'){
-    if(p.recruits){ s.recruits = [...(s.recruits || []), ...makeRecruits(s, p.recruits)]; s.recruitWhen = Math.max(s.recruitWhen ?? 0, 3); }
+    if(p.recruits){ s.recruits = [...(s.recruits || []), ...makeRecruits(s, p.recruits, {show: p.show})]; s.recruitWhen = Math.max(s.recruitWhen ?? 0, 3); }
     if(p.morale) s.morale = clamp(s.morale + p.morale, 0, 100);
     addLog(s, `${ev.title}：${p.text}`);
     gainRep(s, (REP_CONCERT[ev.id] ?? 1) * (1 + clamp((p.q - 25) / 8, -2, 6)));
@@ -2082,7 +2083,24 @@ function newYear(s0){
 /* ===== 1年生と楽器決め ===== */
 // 部をつくった最初の5人は、旋律・金管・低音がそろうように希望の楽器をばらけさせる
 const FOUNDER_HOPES = [['fl', 'cl', 'asax', 'ob'], ['tp', 'hn'], ['tb', 'euph', 'tuba'], ['fl', 'cl', 'asax', 'tp', 'tsax', 'hn', 'tb', 'euph', 'tuba', 'timp', 'bsax']];
-// opts.founders：最初の5人、opts.joiners：評判を聞いて途中から入ってくる生徒（2年生のこともある）
+// 新入生歓迎演奏で見せる楽器（セクション、SHOW_MAX まで）。新入生は SHOW_P の割合で、見せた楽器を希望する
+// 何も選ばなければ、いない楽器のうち、いまの曲で受け持ちの重いものから
+const SHOW_MAX = 2, SHOW_P = 0.6;
+function showDefault(s){
+  const w = s.pieceId ? needWeight(s.pieceId) : {};
+  const have = sec => s.members.filter(m => m.seat && SEAT[m.seat].sec === sec).length;
+  const room = sec => { const n = SEATS.filter(x => x.sec === sec).length; return n ? 1 - have(sec) / n : 0; };
+  const score = sec => (have(sec) ? 0 : 10) + (w[sec] || 0) + room(sec);
+  return SECTIONS.map(x => x.id).filter(sec => room(sec) > 0).sort((a, b) => score(b) - score(a)).slice(0, SHOW_MAX);
+}
+const showSecs = s => s.show?.y === s.year ? s.show.secs : showDefault(s);
+function toggleShow(s0, sec){
+  const s = clone(s0), cur = showSecs(s);
+  const secs = cur.includes(sec) ? cur.filter(x => x !== sec) : [...cur, sec].slice(-SHOW_MAX);
+  s.show = {y: s.year, secs};
+  return s;
+}
+// opts.founders：最初の5人、opts.joiners：評判を聞いて途中から入ってくる生徒（2年生のこともある）、opts.show：見せた楽器
 function makeRecruits(s, n, opts = {}){
   const used = new Set([...s.members, ...(s.recruits || [])].map(m => m.name));
   const empty = SEATS.filter(x => !s.members.some(m => m.seat === x.id));
@@ -2095,6 +2113,10 @@ function makeRecruits(s, n, opts = {}){
     let hope;
     if(opts.founders){
       const pool = FOUNDER_HOPES[Math.min(i, FOUNDER_HOPES.length - 1)].filter(x => !hopes.includes(x));
+      hope = pool[Math.floor(hash(...seed, 'hope') * pool.length)];
+    } else if(opts.show?.length && hash(...seed, 'show') < SHOW_P){
+      const sec = all.filter(x => opts.show.includes(INST[x].sec)), open = sec.filter(x => insts.includes(x));
+      const pool = open.length ? open : sec;
       hope = pool[Math.floor(hash(...seed, 'hope') * pool.length)];
     } else {
       const pool = hash(...seed, 'pool') < 0.75 && insts.length ? insts : all;
