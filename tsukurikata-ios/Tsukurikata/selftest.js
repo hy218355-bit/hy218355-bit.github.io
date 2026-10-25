@@ -33,6 +33,17 @@
     const rms = 10 * Math.log10(sum / d.length + 1e-12);
     const ir = chain.stage.conv.buffer ? chain.stage.conv.buffer.length : 0;
     let detail = `peak ${pk.toFixed(3)} rms ${rms.toFixed(1)}dB nan ${nan} rendered ${(len / sr).toFixed(1)}s in ${Date.now() - t1}ms, voices ${pb.voices.length}, ir ${ir}`;
+    // 全15曲のすべての音を、上手な部と下手な部で予約してみる（WebKit は、音量の予約の重なりに Chrome よりきびしく、
+    // Chrome で通っても iPhone ではエラーになって、そこから先の音が鳴らなくなることがある）
+    for(const pid of PIECE_IDS) for(const v of [30, 100]){
+      const p = perform({members: fullBand({pitch: v, rhythm: v, tone: v, expr: v}), pieceId: pid, cohesion: v, fam: 100, venue: 'hall', lead: () => 1});
+      const oac = new OfflineAudioContext(2, Math.ceil((p.total + 3) * sr), sr), ch = new VenueChain(oac);
+      ch.set('hall', 'center', 0);
+      const b = new Playback({ac: oac, chain: ch, posId: 'center', solo: {type: 'all'}}, p, null);
+      clearInterval(b.timer);
+      try{ b.pump(Infinity); }catch(e){ throw new Error(`schedule ${pid}/${v}: ${e.message}`); }
+    }
+    detail += ', schedule all ok';
     // 指揮した演奏の書き出し → アプリへ渡して m4a に
     const clock = BeatClock.start(0.5, perf.from, 0.5);
     for(let k = 1; k <= 8; k++) clock.tap(0.5 + k * 0.47);
@@ -42,6 +53,6 @@
     detail += `, wav ${(wav.byteLength / 1e6).toFixed(2)}MB -> file ${fileOk ? 'ok' : 'FAILED'}`;
     post({type: 'selftest', ok: nan === 0 && pk > 0.05 && pk <= 1.0 && rms > -40 && ir > 0 && fileOk, detail});
   }catch(e){
-    post({type: 'selftest', ok: false, detail: String(e && e.stack || e)});
+    post({type: 'selftest', ok: false, detail: `${e && e.message || e} ${e && e.stack || ''}`});
   }
 })();

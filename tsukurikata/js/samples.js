@@ -253,12 +253,17 @@ class SampleVoice {
     g.connect(this.in);
     const G = g.gain;
     // スラーでつなぐ音は、前の音と同じ長さ（LEG_XF）で、合わせた大きさが変わらない形（等パワー）で入れかえる
-    const att = smooth ? LEG_XF : joined ? Math.max(0.02, cfg.att || 0) : cfg.att || 0.008;
-    if(smooth) G.setValueCurveAtTime(EQ_POW.up.map(x => x * lv(v0)), s, LEG_XF);
-    else {
+    // iPhone（WebKit）は、曲線（setValueCurveAtTime）の時間の中にほかの変化を予約するとエラーにし、そこから先の音が鳴らなくなる。
+    // 曲線は、その音が曲線より長いときだけ使い、曲線が終わったところに一度値を置いてから次の変化を予約する。短い音は直線で
+    const curve = smooth && Math.min(endT, nextS) > s + LEG_XF + 0.01;
+    const att = smooth ? (curve ? LEG_XF : 0.02) : joined ? Math.max(0.02, cfg.att || 0) : cfg.att || 0.008;
+    if(curve){
+      G.setValueCurveAtTime(EQ_POW.up.map(x => x * lv(v0)), s, LEG_XF);
+      G.setValueAtTime(lv(v0), s + LEG_XF + 0.001);
+    } else {
       G.setValueAtTime(0, s);
-      G.linearRampToValueAtTime(lv(v0) * blat, s + att);
-      if(blat > 1.02) G.linearRampToValueAtTime(lv(v0), s + att + n.att * 2);
+      G.linearRampToValueAtTime(lv(v0) * (smooth ? 1 : blat), s + att);
+      if(!smooth && blat > 1.02) G.linearRampToValueAtTime(lv(v0), s + att + n.att * 2);
     }
     const after = s + att + n.att * 2 + 0.03;
     let k = 0;
