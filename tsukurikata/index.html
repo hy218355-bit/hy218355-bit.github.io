@@ -39,6 +39,8 @@
   --silver:#6F7A88;
   --bronze:#985628;
   --shadow:rgba(20,30,60,.28);
+  /* 力のランク（G〜S。パワプロのように色で分かる）。文字は --rk-ink */
+  --rk-g:#C3C8D1; --rk-f:#8DB6EA; --rk-e:#7CCAA6; --rk-d:#B5D66A; --rk-c:#F0D257; --rk-b:#F3A64B; --rk-a:#EE7380; --rk-s:#E3AE2A; --rk-s2:#FFE79A; --rk-ink:#1A1305;
   --f-display:"Dela Gothic One","Hiragino Sans","Yu Gothic",sans-serif;
   --f-body:"Zen Kaku Gothic New","Hiragino Sans","Yu Gothic","Noto Sans JP",system-ui,sans-serif;
   --f-hand:"Klee One","Hiragino Mincho ProN","Yu Mincho",serif;
@@ -51,6 +53,7 @@
     --lcd:#152117; --lcd-ink:#A4E287; --lcd-dim:rgba(164,226,135,.22);
     --good:#55C287; --warn:#E2B23F; --bad:#EF6A5F;
     --gold:#E2BC4A; --silver:#B4BDC9; --bronze:#D08A5A; --shadow:rgba(0,0,0,.5);
+    --rk-g:#7A8293; --rk-f:#5E91D8; --rk-e:#45B083; --rk-d:#9CC24D; --rk-c:#E5C443; --rk-b:#EE9440; --rk-a:#E85E6E; --rk-s:#E7B436; --rk-s2:#FFEAA8; --rk-ink:#10131A;
     color-scheme:dark;
   }
 }
@@ -60,6 +63,7 @@
   --lcd:#152117; --lcd-ink:#A4E287; --lcd-dim:rgba(164,226,135,.22);
   --good:#55C287; --warn:#E2B23F; --bad:#EF6A5F;
   --gold:#E2BC4A; --silver:#B4BDC9; --bronze:#D08A5A; --shadow:rgba(0,0,0,.5);
+  --rk-g:#7A8293; --rk-f:#5E91D8; --rk-e:#45B083; --rk-d:#9CC24D; --rk-c:#E5C443; --rk-b:#EE9440; --rk-a:#E85E6E; --rk-s:#E7B436; --rk-s2:#FFEAA8; --rk-ink:#10131A;
   color-scheme:dark;
 }
 *{box-sizing:border-box}
@@ -198,6 +202,7 @@ select{background:var(--sheet);border:1.5px solid var(--rule);border-radius:8px;
 .stat{display:grid;grid-template-columns:5.4em minmax(0,1fr) 2.6em;align-items:center;gap:2px 10px}
 .stat .nm{font-weight:700;font-size:14px}
 .stat .val{font-family:var(--f-lcd);font-size:17px;text-align:right;font-variant-numeric:tabular-nums}
+.stat.rkrow .val{line-height:0}
 .track{height:10px;background:var(--rule);border-radius:2px;position:relative;overflow:hidden}
 .track .fill{position:absolute;inset:0 auto 0 0;background:var(--brass);transition:width .5s ease}
 .track::after{content:"";position:absolute;inset:0;background:repeating-linear-gradient(90deg,transparent 0 calc(10% - 1px),var(--sheet) calc(10% - 1px) 10%);opacity:.75}
@@ -244,7 +249,7 @@ select{background:var(--sheet);border:1.5px solid var(--rule);border-radius:8px;
 .senior summary::-webkit-details-marker{display:none}
 .senior summary .nm{font-weight:700;font-size:15px}
 .senior summary .sub{font-size:12.5px;color:var(--ink-soft)}
-.senior summary .grow{margin-left:auto;font-family:var(--f-lcd);font-size:13px;color:var(--good)}
+.senior summary .grow{margin-left:auto;display:inline-flex;align-items:center;gap:3px;font-size:12px;color:var(--ink-soft)}
 .senior .body{display:grid;gap:10px;padding:0 14px 14px}
 .gbars{display:grid;gap:5px}
 /* 卒業式：3年間のふり返り */
@@ -264,8 +269,9 @@ select{background:var(--sheet);border:1.5px solid var(--rule);border-radius:8px;
 .gradroll .gbars .fill:not(.was){transition:width 1.8s ease .3s}
 .gr-ctl{position:relative;display:flex;justify-content:space-between;align-items:center;gap:10px;max-width:560px;width:100%;margin:0 auto;padding-top:10px}
 @media (prefers-reduced-motion: reduce){.gr-card{transition:none;transform:none}}
-.gb{display:grid;grid-template-columns:4em minmax(0,1fr) 4.6em;gap:8px;align-items:center;font-size:12.5px}
-.gb .val{font-family:var(--f-lcd);text-align:right;font-variant-numeric:tabular-nums}
+.gb{display:grid;grid-template-columns:4em minmax(0,1fr) auto;gap:8px;align-items:center;font-size:12.5px}
+.gb .val{display:inline-flex;align-items:center;gap:3px;color:var(--ink-soft)}
+.gb .val .rk,.senior .grow .rk{width:1.5rem;height:1.15rem;font-size:10.5px}
 .gb .track .fill.was{background:var(--ink-soft);opacity:.55;z-index:1}
 .senior .mem{list-style:none;display:grid;gap:4px;font-family:var(--f-hand);font-size:14px;line-height:1.6}
 .senior .mem time{font-family:var(--f-body);font-size:11.5px;color:var(--ink-soft);margin-right:8px}
@@ -315,35 +321,38 @@ select{background:var(--sheet);border:1.5px solid var(--rule);border-radius:8px;
 .psecd .plist{border-top:1px dashed var(--rule)}
 .psecd .plist .pm:last-child{border-bottom:0}
 .plist .psec{font-size:12px;font-weight:700;color:var(--ink-soft);letter-spacing:.06em;padding:10px 0 4px;border-bottom:1.5px solid var(--rule);display:flex;align-items:center;justify-content:space-between;gap:8px}
-/* 部員の行：名前と体力・力の帯・今週の練習のボタン（押すと一覧が開く） */
-.pm{display:grid;grid-template-columns:minmax(0,1fr) 5.2em;grid-template-areas:"who sta" "pst pst" "pick pick" "pgrid pgrid" "pspan pspan";gap:6px 10px;padding:10px 0;border-bottom:1px dashed var(--rule);align-items:center}
-@media (min-width:600px){.pm{grid-template-columns:minmax(0,1fr) 4.6em minmax(0,1.3fr);grid-template-areas:"who sta pick" "pst pst pst" "pgrid pgrid pgrid" "pspan pspan pspan"}}
-@media (min-width:961px) and (max-width:1280px){.pm{grid-template-columns:minmax(0,1fr) 5.2em;grid-template-areas:"who sta" "pst pst" "pick pick" "pgrid pgrid" "pspan pspan"}}
-.pm .who{grid-area:who;font-size:14px;line-height:1.35;min-width:0}
-.pm .who b{font-weight:700}
-.pm .who small{display:block;font-size:11.5px;color:var(--ink-soft)}
-.pm .sta{grid-area:sta;display:grid;grid-template-columns:minmax(0,1fr) 1.8em;gap:6px;align-items:center}
-.pm .sta b{font-family:var(--f-lcd);font-weight:400;font-size:13px;text-align:right}
-.pst{grid-area:pst;display:grid;grid-auto-flow:column;grid-auto-columns:minmax(0,1fr);gap:8px;min-width:0}
-.pst .c{display:block;min-width:0}
-.pst .l{display:flex;align-items:baseline;gap:2px;font-size:11px;line-height:1.3;color:var(--ink-soft);white-space:nowrap}
-.pst .l b{margin-left:auto;font-family:var(--f-lcd);font-weight:400;font-size:12.5px;color:var(--ink)}
-.pst .bar{display:flex;align-items:center;gap:3px;margin-top:3px}
-.pst .bar em{flex:none;width:2em;font-style:normal;font-family:var(--f-lcd);font-size:10.5px;line-height:1;color:var(--good)}
-.pst .c.weak .l{color:var(--bad);font-weight:700}
-.pst .track{display:block;flex:1;min-width:0;height:6px}
-.pst .track::after{display:none}
-.pst .fill.new{background:var(--good)}
-.pst .c.fam .fill:not(.new){background:var(--ink-soft)}
-.pick{grid-area:pick;display:flex;align-items:baseline;gap:8px;width:100%;min-width:0;padding:7px 12px;border:1.5px solid var(--rule);border-radius:10px;background:var(--sheet);color:var(--ink);font:inherit;text-align:left;cursor:pointer}
+/* 部員の行：名前・体力・力のランク（G〜S）と、今週の練習のボタン（押すと一覧が開く）。列の名前は上の見出し（.rkhead）に1回だけ */
+.pm,.rkhead{display:grid;grid-template-columns:minmax(0,1fr) 2.4em auto;column-gap:8px;align-items:center}
+.pm{grid-template-areas:"who sta rks" "pick pick pick" "pgrid pgrid pgrid" "pspan pspan pspan";row-gap:7px;padding:9px 0;border-bottom:1px dashed var(--rule)}
+@media (min-width:600px){.pm,.rkhead{grid-template-columns:minmax(0,1fr) 2.4em auto minmax(0,12em)}.pm{grid-template-areas:"who sta rks pick" "pgrid pgrid pgrid pgrid" "pspan pspan pspan pspan"}}
+@media (min-width:961px) and (max-width:1280px){.pm,.rkhead{grid-template-columns:minmax(0,1fr) 2.4em auto}.pm{grid-template-areas:"who sta rks" "pick pick pick" "pgrid pgrid pgrid" "pspan pspan pspan"}}
+.pm .who{grid-area:who;display:flex;align-items:baseline;gap:6px;min-width:0;font-size:14px;line-height:1.3}
+.pm .who b{font-weight:700;overflow-wrap:anywhere}
+.pm .who small{font-size:11px;color:var(--ink-soft);white-space:nowrap}
+.pm.out .who b{color:var(--ink-soft)}
+.pm .sta{grid-area:sta}
+.pm .sta .track{display:block;height:8px}
+.pm .rks{grid-area:rks}
+.rks{display:grid;grid-auto-flow:column;grid-auto-columns:1.9rem;gap:3px}
+.rkhead{position:sticky;top:0;z-index:2;padding:6px 0 5px;background:var(--paper);border-bottom:1.5px solid var(--rule);font-size:9.5px;line-height:1.2;color:var(--ink-soft);cursor:help}
+.rkhead > span:nth-child(2){text-align:center;font-size:10px}
+.rkhead .rks i{font-style:normal;text-align:center;letter-spacing:-.04em;white-space:nowrap}
+/* ランクの文字：ランクの色の札に1文字（S は金色に光る）。up はその週に上がった力 */
+.rk{position:relative;display:inline-grid;place-items:center;width:1.9rem;height:1.45rem;border-radius:5px;font-family:var(--f-display);font-style:normal;font-weight:400;font-size:13px;line-height:1;color:var(--rk-ink)}
+.rk-g{background:var(--rk-g)} .rk-f{background:var(--rk-f)} .rk-e{background:var(--rk-e)} .rk-d{background:var(--rk-d)}
+.rk-c{background:var(--rk-c)} .rk-b{background:var(--rk-b)} .rk-a{background:var(--rk-a)}
+.rk-s{background:linear-gradient(135deg,var(--rk-s) 0 45%,var(--rk-s2) 60%,var(--rk-s) 75%)}
+.rk.up{box-shadow:0 0 0 2px var(--sheet),0 0 0 3.5px var(--good)}
+.rk.up::after{content:'▲';position:absolute;top:-8px;right:-5px;font-family:var(--f-body);font-size:9px;color:var(--good)}
+.chip .rk{width:1.6rem;height:1.2rem;font-size:11px;margin-left:6px;vertical-align:-2px}
+.pick{grid-area:pick;display:flex;align-items:baseline;gap:8px;width:100%;min-width:0;padding:6px 12px;border:1.5px solid var(--rule);border-radius:10px;background:var(--sheet);color:var(--ink);font:inherit;text-align:left;cursor:pointer}
 .pick .pk{font-size:11px;color:var(--ink-soft);white-space:nowrap}
 .pick b{font-size:14px;white-space:nowrap}
-.pick small{font-size:11.5px;color:var(--ink-soft);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .pick::after{content:'▼';margin-left:auto;font-size:9px;color:var(--ink-soft);transition:transform .15s}
 .pick[aria-expanded="true"]::after{transform:rotate(180deg)}
 .pick:hover{border-color:var(--brass)}
 .pm.own .pick{border-color:var(--brass)}
-.pm.own .pick b,.pm.own .pick .pk{color:var(--brass)}
+.pm.own .pick b{color:var(--brass)}
 .pgrid{grid-area:pgrid;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:6px}
 .pchip{display:grid;gap:1px;padding:7px 4px;border:1.5px solid var(--rule);border-radius:10px;background:var(--sheet);color:var(--ink);font:inherit;font-size:12.5px;line-height:1.3;text-align:center;cursor:pointer;min-width:0}
 .pchip b{font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
@@ -353,6 +362,7 @@ select{background:var(--sheet);border:1.5px solid var(--rule);border-radius:8px;
 .pchip[aria-pressed="true"] small{color:var(--brass)}
 .pspan{grid-area:pspan}
 .pspan .chip small{margin-left:5px;font-size:11px;color:var(--ink-soft)}
+.pspan .chip{display:inline-flex;align-items:center}
 .plan-sum{color:var(--ink)}
 /* オーディション */
 .lineup-line{display:flex;flex-wrap:wrap;align-items:center;gap:6px 10px}
@@ -370,7 +380,7 @@ select{background:var(--sheet);border:1.5px solid var(--rule);border-radius:8px;
 .am.off .who,.am.off .sc{opacity:.45}
 #rosterTable td small{display:block;font-size:11px;color:var(--ink-soft);white-space:normal;line-height:1.4}
 #rosterTable td:first-child{white-space:normal}
-th.num{text-align:right}
+th.num{text-align:center}
 .assign{display:grid;gap:8px}
 .assign .row{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.3fr);gap:6px 10px;align-items:center;padding-bottom:8px;border-bottom:1px dashed var(--rule)}
 .assign .who{font-size:14px;line-height:1.4}
@@ -414,7 +424,7 @@ th.num{text-align:right}
 table{border-collapse:collapse;width:100%;font-size:13px;font-variant-numeric:tabular-nums}
 th,td{padding:7px 10px;text-align:left;white-space:nowrap;border-bottom:1px solid var(--rule)}
 th{font-size:12px;color:var(--ink-soft);font-weight:700;background:var(--paper);position:sticky;top:0;z-index:1}
-td.num{text-align:right;font-family:var(--f-lcd);font-size:14px}
+td.num{text-align:center;font-family:var(--f-lcd);font-size:14px}
 tr.sec-row td{background:var(--paper);font-weight:700;font-size:12px;letter-spacing:.06em;color:var(--ink-soft)}
 tbody tr.mem{cursor:pointer}
 tbody tr.mem:hover td{background:var(--paper)}
@@ -460,6 +470,7 @@ tr.empty td{color:var(--ink-soft)}
 [data-tip]:focus-visible{outline:2px solid var(--brass);outline-offset:2px}
 .stat[data-tip] .nm,.vital[data-tip] .row>span:first-child,.trend[data-tip] .tr-t{text-decoration:underline dotted color-mix(in srgb,var(--ink-soft) 70%,transparent);text-underline-offset:4px}
 .plan-piece{margin:0 0 8px;font-size:14px}.plan-piece b{color:var(--brass)}.plan-piece small{margin-left:8px;color:var(--ink-soft);font-size:12px}
+.plan-piece .rk,.focus .small .rk{width:1.6rem;height:1.2rem;font-size:11px;margin-left:4px;vertical-align:-3px}
 .asg-lack{font-size:13px;line-height:1.6;color:var(--ink-soft);margin:0}.asg-lack b{color:var(--brass)}
 .tip{position:absolute;z-index:58;width:min(300px,calc(100vw - 32px));padding:10px 12px;border-radius:10px;background:var(--sheet);color:var(--ink);border:1px solid var(--rule);
   box-shadow:0 8px 24px var(--shadow);font-size:13px;line-height:1.6;opacity:0;transform:translateY(-6px) scale(.97);transform-origin:top left;transition:opacity .2s ease,transform .2s ease}
@@ -546,7 +557,7 @@ html[data-season="snow"]{--season-band:linear-gradient(90deg,#DDE8F3,#FFFFFF,#B9
 /* 練習の結果（週のはじめに出す） */
 .weekres{display:grid;gap:5px;border:1.5px solid var(--rule);border-radius:8px;padding:10px 12px;background:var(--sheet)}
 .weekres > b{font-size:13px}
-.weekres .wr{display:grid;grid-template-columns:4.6em minmax(0,1fr) 2.2em 3.6em;gap:8px;align-items:center;font-size:12.5px}
+.weekres .wr{display:grid;grid-template-columns:4.6em minmax(0,1fr) auto;gap:8px;align-items:center;font-size:12.5px}
 .weekres .wr .nm{color:var(--ink-soft)}
 .weekres .wr .fill{transition:width .9s cubic-bezier(.3,.8,.3,1)}
 .weekres .wr b{font-family:var(--f-lcd);font-weight:400;font-size:13px;text-align:right}
@@ -563,7 +574,11 @@ html[data-season="snow"]{--season-band:linear-gradient(90deg,#DDE8F3,#FFFFFF,#B9
 .legend{display:flex;flex-wrap:wrap;gap:4px 12px;font-size:11.5px;color:var(--ink-soft);line-height:1.5}
 .legend span{display:inline-flex;align-items:center;gap:5px}
 .legend .sw{display:inline-block;width:12px;height:12px;border-radius:50%;flex:none}
-.sw-skill{background:linear-gradient(90deg,var(--bad),var(--warn),var(--good))}
+.rkscale{display:inline-flex;gap:2px;font-style:normal}
+.grow-rk{display:flex;flex-wrap:wrap;align-items:center;gap:4px 12px}
+.grk{display:inline-flex;align-items:center;gap:3px;white-space:nowrap}
+.grk .rk{width:1.5rem;height:1.15rem;font-size:10.5px}
+.rkscale .rk{width:1.05rem;height:1.05rem;border-radius:3px;font-size:9px}
 .sw-ring{background:var(--good);box-shadow:inset 0 0 0 2px var(--good),inset 0 0 0 3.5px var(--sheet)}
 .sw-glow{background:var(--good);box-shadow:0 0 0 3px color-mix(in srgb,var(--brass) 55%,transparent)}
 .sw-empty{border:1.2px dashed var(--ink-soft)}
@@ -576,7 +591,7 @@ html[data-season="snow"]{--season-band:linear-gradient(90deg,#DDE8F3,#FFFFFF,#B9
 .cd-member .cm-head small{font-size:12px;color:var(--ink-soft)}
 .cd-member .cm-say{font-family:var(--f-hand);font-size:14px;line-height:1.5}
 .cd-member .cm-stats{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:4px 14px}
-.cd-member .cm-st{display:grid;grid-template-columns:3.6em minmax(0,1fr) 2em;gap:6px;align-items:center;font-size:12px;color:var(--ink-soft)}
+.cd-member .cm-st{display:grid;grid-template-columns:3.6em minmax(0,1fr) auto;gap:6px;align-items:center;font-size:12px;color:var(--ink-soft)}
 .cd-member .cm-st b{font-family:var(--f-lcd);font-weight:400;font-size:13px;color:var(--ink);text-align:right}
 .cd-member .cm-note{font-size:12.5px;color:var(--ink-soft);line-height:1.5}
 .cd-member .row{display:flex;flex-wrap:wrap;gap:8px}
@@ -729,7 +744,7 @@ html[data-season="snow"]{--season-band:linear-gradient(90deg,#DDE8F3,#FFFFFF,#B9
           </div>
         </div>
         <div class="stage-wrap"><canvas id="stage" role="img" aria-label="ステージの座席。色が部員の実力、演奏中は音量に合わせて光る。席を押すと部員の詳しい情報が出る。"></canvas></div>
-        <p class="legend"><span><i class="sw sw-skill"></i>色：部員の力（赤→黄→緑ほどうまい）</span><span><i class="sw sw-ring"></i>内側の輪：1年生</span><span><i class="sw sw-glow"></i>光る：いま音を出している（赤く光ったら音を外した）</span><span><i class="sw sw-empty"></i>点線：空いている席</span></p>
+        <p class="legend"><span data-tip="力は G・F・E・D・C・B・A・S の8段階。右ほどうまい" data-tipname="ランク" role="button" tabindex="0">色：部員の力<i class="rkscale"><i class="rk rk-g">G</i><i class="rk rk-f">F</i><i class="rk rk-e">E</i><i class="rk rk-d">D</i><i class="rk rk-c">C</i><i class="rk rk-b">B</i><i class="rk rk-a">A</i><i class="rk rk-s">S</i></i></span><span><i class="sw sw-ring"></i>内側の輪：1年生</span><span><i class="sw sw-glow"></i>光る：いま音を出している（赤く光ったら音を外した）</span><span><i class="sw sw-empty"></i>点線：空いている席</span></p>
         <div class="transport">
           <button class="btn primary" id="btnNow" type="button">▶ いまの音で合奏</button>
           <button class="btn quiet" id="btnStop" type="button" hidden>■ 止める</button>
@@ -828,7 +843,7 @@ html[data-season="snow"]{--season-band:linear-gradient(90deg,#DDE8F3,#FFFFFF,#B9
   </div>
   <p class="cd-msg" id="cdMsg" aria-live="polite"></p>
   <div class="cd-band"><div class="cd-stagewrap"><canvas id="cdStage" role="img" aria-label="舞台の部員。音を出している部員が光る。"></canvas><div class="cd-curtain" aria-hidden="true"><i></i><i></i><div class="cd-intro"></div></div></div><div class="cd-prog" aria-hidden="true"><i id="cdProg"></i></div></div>
-  <p class="legend cd-legend"><span><i class="sw sw-skill"></i>色：部員の力（赤→黄→緑ほどうまい）</span><span><i class="sw sw-ring"></i>内側の輪：1年生</span><span><i class="sw sw-glow"></i>光る：いま音を出している（赤く光ったら音を外した）</span><span><i class="sw sw-empty"></i>点線：空いている席</span><span>部員をタップすると、その子の様子が出る</span></p>
+  <p class="legend cd-legend"><span data-tip="力は G・F・E・D・C・B・A・S の8段階。右ほどうまい" data-tipname="ランク" role="button" tabindex="0">色：部員の力<i class="rkscale"><i class="rk rk-g">G</i><i class="rk rk-f">F</i><i class="rk rk-e">E</i><i class="rk rk-d">D</i><i class="rk rk-c">C</i><i class="rk rk-b">B</i><i class="rk rk-a">A</i><i class="rk rk-s">S</i></i></span><span><i class="sw sw-ring"></i>内側の輪：1年生</span><span><i class="sw sw-glow"></i>光る：いま音を出している（赤く光ったら音を外した）</span><span><i class="sw sw-empty"></i>点線：空いている席</span><span>部員をタップすると、その子の様子が出る</span></p>
   <div class="cd-member" id="cdMember" hidden></div>
   <div class="cd-pad" id="cdPad" role="button" tabindex="0" aria-label="拍に合わせてここをタップ（上ほど大きく、下ほど小さく）">
     <svg class="cd-pattern" id="cdPattern" viewBox="0 0 200 210" aria-hidden="true"></svg>

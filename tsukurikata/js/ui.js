@@ -14,12 +14,23 @@ const U = {
 const UI_KEY = 'suibu-ui-v2';  // 前の名前のころからの保存先（SAVE_KEY と同じ理由でこのまま）
 
 /* ===== 小道具 ===== */
+/* ===== 力のランク =====
+   パワプロのように、力を G〜S の8段階の色と1文字で見せる（数字は出さない）。
+   入部したては G〜F、1年で D ほど、3年生のふつうの子で B、いちばんうまい子で S */
+const RANKS = [[90, 'S'], [80, 'A'], [70, 'B'], [60, 'C'], [50, 'D'], [40, 'E'], [20, 'F'], [0, 'G']];
+const rankOf = v => RANKS.find(([t]) => v >= t - 1e-9)[1];
+// up：この週にランクが上がった（光らせて ▲ をつける）
+const rankBadge = (v, up) => `<i class="rk rk-${rankOf(v).toLowerCase()}${up ? ' up' : ''}">${rankOf(v)}</i>`;
+const rankFill = v => `background:var(--rk-${rankOf(v).toLowerCase()})`;
+// 力の行（名前・ランクの色の棒・ランク）。部員カードと部の実力で使う
+const rankRow = (name, v, up, tip) => `<div class="stat rkrow"${tipAttr(name, tip)}><span class="nm">${name}</span><span class="track"><span class="fill" style="width:${clamp(v, 0, 100)}%;${rankFill(v)}"></span></span><span class="val">${rankBadge(v, up)}</span></div>`;
 function tok(){
   const cs = getComputedStyle(document.documentElement), g = n => cs.getPropertyValue(n).trim();
   return {
     ink: g('--ink'), soft: g('--ink-soft'), rule: g('--rule'), sheet: g('--sheet'), paper: g('--paper'), brass: g('--brass'),
     floor: g('--floor'), floorLine: g('--floor-line'), good: g('--good'), warn: g('--warn'), bad: g('--bad'),
     lcdInk: g('--lcd-ink'), lcdDim: g('--lcd-dim'), fBody: g('--f-body'), fLcd: g('--f-lcd'), fHand: g('--f-hand'),
+    rk: Object.fromEntries(RANKS.map(([, r]) => [r, g(`--rk-${r.toLowerCase()}`)])),
   };
 }
 function rgb(hex){
@@ -30,7 +41,8 @@ function mix(a, b, t){
   const x = rgb(a), y = rgb(b);
   return `rgb(${x.map((v, i) => Math.round(v + (y[i] - v) * t)).join(',')})`;
 }
-const skillColor = (C, v) => v < 50 ? mix(C.bad, C.warn, clamp01(v / 50)) : mix(C.warn, C.good, clamp01((v - 50) / 40));
+// 部員の力の色：ランク（G〜S）ごとの色。舞台の点・部員の一覧・オーディションの点でも同じ色
+const skillColor = (C, v) => C.rk[rankOf(v)];
 const errColor = (C, e, wrong) => wrong ? C.bad : Math.abs(e) < 5 ? C.good : Math.abs(e) < 15 ? C.warn : C.bad;
 function fitCanvas(cv, H){
   const W = Math.max(240, cv.parentElement.clientWidth);
@@ -468,6 +480,7 @@ function applySolo(){
 /* ===== ホワイトボード ===== */
 // 数字を押すと出る説明（ふわっと出る吹き出し）。キーは画面に出ている名前
 const TIPS = {
+  'ランク': '力は G・F・E・D・C・B・A・S の8段階。右ほどうまい。入部したては G か F、3年生でふつうは B、いちばんうまい子で S。ランクが上がった週は光る',
   '音程': '音の高さが合っているか。合わないと和音がにごり、うなりが出る。チューニングの練習で伸びる',
   'リズム': '拍どおりに吹けるか。出だしやテンポがそろう。メトロノームの練習で伸びる',
   '音色': '息の支えと、音のきれいさ。低いと音が裏返る。ロングトーンで伸びる',
@@ -525,11 +538,11 @@ function renderStats(){
   $('#memberCount').textContent = `${S.members.length}人${S.members.length > ms.length ? `（控え${S.members.length - ms.length}人）` : ''}／${SEATS.length}席`;
   const d = S.lastDelta || {};
   const pid = S.pieceId || playPiece();
-  const up = v => v > 0 ? (v >= 1 ? String(Math.round(v)) : v.toFixed(1)) : '';
-  $('#stats').innerHTML = STAT_KEYS.map(k => statRow(STAT_LABEL[k], bandAvg(S, k), '', up(d[k]))).join('')
-    + statRow('まとまり', S.cohesion, '', up(d.coh))
-    + (S.pieceId ? statRow(setActive(S) ? '自由曲の譜読み' : '譜読み', readAvg(S, pid), '', up(d.read)) : '')
-    + (setActive(S) ? statRow('課題曲の譜読み', readAvg(S, S.setPiece), '', up(d.setRead)) : '');
+  const row = (nm, v, dv) => rankRow(nm, v, dv > 0 && rankOf(v - dv) !== rankOf(v));
+  $('#stats').innerHTML = STAT_KEYS.map(k => row(STAT_LABEL[k], bandAvg(S, k), d[k])).join('')
+    + row('まとまり', S.cohesion, d.coh)
+    + (S.pieceId ? row(setActive(S) ? '自由曲の譜読み' : '譜読み', readAvg(S, pid), d.read) : '')
+    + (setActive(S) ? row('課題曲の譜読み', readAvg(S, S.setPiece), d.setRead) : '');
   const vital = (nm, v) => {
     const c = v >= 60 ? 'good' : v >= 30 ? 'warn' : 'bad';
     return `<div class="vital"${tipAttr(nm)}><span class="row"><span>${nm}</span><b>${Math.round(v)}</b></span><span class="track"><span class="fill ${c}" style="width:${clamp(v, 0, 100)}%"></span></span></div>`;
@@ -816,9 +829,8 @@ function weekResHtml(){
     ...(b.read != null && b.pid === S.pieceId ? [['譜読み', b.read, readAvg(S, S.pieceId)]] : [])];
   const top = S.members.filter(m => b.ms[m.id] != null).map(m => ({m, d: avgStat(m) - b.ms[m.id]})).filter(x => x.d >= 0.5).sort((x, y) => y.d - x.d).slice(0, 3);
   return `<div class="weekres"><b>${r.n > 1 ? `この${r.n}週の練習の成果` : '先週の練習の成果'}</b>
-    ${rows.map(([nm, a, v]) => { const d = v - a;
-      return `<div class="wr"><span class="nm">${nm}</span><span class="track"><span class="fill" style="width:${clamp(start ? a : v, 0, 100)}%" data-to="${clamp(v, 0, 100)}"></span></span><b class="countup" data-key="wr:${r.key}:${nm}" data-from="${a.toFixed(1)}" data-to="${v.toFixed(1)}">${Math.round(start ? a : v)}</b><span class="d${d < 0 ? ' minus' : ''}">${Math.abs(d) >= 0.05 ? `${d > 0 ? '+' : '−'}${Math.abs(d) >= 1 ? Math.round(Math.abs(d)) : Math.abs(d).toFixed(1)}` : ''}</span></div>`; }).join('')}
-    ${top.length ? `<p class="small">よく伸びた：${top.map(x => `${esc(x.m.name)} +${Math.round(x.d)}`).join('・')}</p>` : ''}</div>`;
+    ${rows.map(([nm, a, v]) => `<div class="wr"><span class="nm">${nm}</span><span class="track"><span class="fill" style="width:${clamp(start ? a : v, 0, 100)}%;${rankFill(v)}" data-to="${clamp(v, 0, 100)}"></span></span>${rankBadge(v, v > a && rankOf(a) !== rankOf(v))}</div>`).join('')}
+    ${top.length ? `<p class="small">よく伸びた：${top.map(x => esc(x.m.name)).join('・')}</p>` : ''}</div>`;
 }
 // 同じ受け持ちに席がいくつかあるときは、2つ目からの席に「2人目」「3人目」をつける（トランペット 1st は2人、クラリネット 1st は3人で吹く）
 const seatNth = id => { const p = SEAT[id].part, k = SEATS.filter(x => x.part === p).findIndex(x => x.id === id); return k > 0 ? `（${k + 1}人目）` : ''; };
@@ -849,7 +861,7 @@ function gradSlide(m){
   const sk = skillsOf(m).map(x => x.name + skillMark(x.lv)).join('・');
   return `<span class="gr-tag">${years}年間</span><b class="gr-name">${esc(m.name)}</b><small class="gr-sub">${esc(inst)}${m.title ? '・' + m.title : ''}</small>
     ${joinedHere ? `<p class="gr-line">${f.y}年${wkMonth(f.w)}月、${(m.joinGrade ?? 1) > 1 ? `${m.joinGrade}年生の途中で` : '1年生で'}入部。${m.exp ? '中学から吹いていた。' : '楽器ははじめてだった。'}</p>` : ''}
-    ${f ? `<div class="gbars">${STAT_KEYS.map(k => `<div class="gb"><span class="nm">${STAT_LABEL[k]}</span><span class="track"><span class="fill was" style="width:${clamp(f.stats[k], 0, 100)}%"></span><span class="fill" data-to="${clamp(m.stats[k], 0, 100)}" style="width:${clamp(f.stats[k], 0, 100)}%"></span></span><span class="val">${Math.round(f.stats[k])}→${Math.round(m.stats[k])}</span></div>`).join('')}</div>` : ''}
+    ${f ? `<div class="gbars">${STAT_KEYS.map(k => `<div class="gb"><span class="nm">${STAT_LABEL[k]}</span><span class="track"><span class="fill was" style="width:${clamp(f.stats[k], 0, 100)}%"></span><span class="fill" data-to="${clamp(m.stats[k], 0, 100)}" style="width:${clamp(f.stats[k], 0, 100)}%"></span></span><span class="val">${rankBadge(f.stats[k])}→${rankBadge(m.stats[k])}</span></div>`).join('')}</div>` : ''}
     ${mem.length ? `<ul class="gr-mem">${mem.map(x => `<li><time>${when(x)}</time>${esc(x.t)}</li>`).join('')}</ul>` : ''}
     <p class="gr-res">コンクール：${gradYears(m)}</p>
     ${sk ? `<p class="gr-res">スキル：${sk}</p>` : ''}
@@ -1090,17 +1102,16 @@ function updatePred(soon){
 // 練習で伸びるもの（練習を選ぶボタンに小さく出す）
 const menuUp = id => MENU_BY[id].up || {tutti: 'まとまり', hall: '会場慣れ', rest: '体力'}[id] || '';
 const ownPlan = m => S.plan?.[m.id] && menuOpen(S, S.plan[m.id]) ? S.plan[m.id] : '';
-// 部員の力の帯：音程・リズム・音色・表現（と譜読み）。先週の練習で伸びたぶんを明るく出す（「先週の練習の成果」が出ている週だけ）。
-// いちばん低い力（苦手）は色を変える
-function statStrip(m){
-  const fresh = U.weekRes?.key === `${S.year}:${S.week}` && m.last && m.last.menu !== 'test';
-  const d = fresh ? m.last.d || {} : {}, weak = weakest(m);
-  const cols = STAT_KEYS.map(k => [k, STAT_LABEL[k], m.stats[k], d[k] || 0]);
-  if(S.pieceId) cols.push(['fam', '譜読み', readMean(m, S.pieceId), d.fam || 0]);
-  return `<div class="pst">${cols.map(([k, nm, v, g]) => { const up = g >= 0.5 ? Math.min(g, v) : 0;
-    return `<span class="c${k === weak ? ' weak' : ''}${k === 'fam' ? ' fam' : ''}"><span class="l">${nm}<b>${Math.round(v)}</b></span>`
-      + `<span class="bar"><span class="track"><span class="fill" style="width:${clamp(v - up, 0, 100)}%"></span>${up ? `<span class="fill new" style="left:${clamp(v - up, 0, 100)}%;width:${clamp(up, 0, 100)}%"></span>` : ''}</span><em>${up ? `+${Math.round(g)}` : ''}</em></span></span>`; }).join('')}</div>`;
+// 部員の力：音程・リズム・音色・表現（と譜読み）を、ランクの色と1文字で並べる（数字は出さない）。
+// 「先週の練習の成果」が出ている週は、ランクが上がった力を光らせる
+const planCols = () => [...STAT_KEYS.map(k => [k, STAT_LABEL[k]]), ...(S.pieceId ? [['fam', '譜読み']] : [])];
+function rankStrip(m){
+  const fresh = U.weekRes?.key === `${S.year}:${S.week}` && m.last && m.last.menu !== 'test', d = fresh ? m.last.d || {} : {};
+  return `<span class="rks">${planCols().map(([k]) => { const v = k === 'fam' ? readMean(m, S.pieceId) : m.stats[k];
+    return rankBadge(v, d[k] > 0 && rankOf(v - d[k]) !== rankOf(v)); }).join('')}</span>`;
 }
+// 体力：色だけの小さな棒（緑・黄・赤）
+const staBar = m => `<span class="sta" title="体力 ${Math.round(m.sta)}"><span class="track"><span class="fill ${m.sta >= 60 ? 'good' : m.sta >= 30 ? 'warn' : 'bad'}" style="width:${clamp(m.sta, 0, 100)}%"></span></span></span>`;
 // 練習を選ぶ一覧（部員ひとり、またはパート全員。key は部員の id か「sec:パート」）。cur は選んである練習（'' はおまかせ、'-' はばらばら）
 const pickGrid = (key, cur, auto) => `<div class="pgrid" role="group" aria-label="今週の練習">`
   + `<button class="pchip" type="button" data-pset="${key}" data-menu="" aria-pressed="${cur === ''}"><b>おまかせ</b><small>${auto ? MENU_BY[auto].name : '部員ごと'}</small></button>`
@@ -1109,7 +1120,7 @@ const pickGrid = (key, cur, auto) => `<div class="pgrid" role="group" aria-label
 const spanChips = m => {
   const pid = S.pieceId, v = readOf(m, pid), want = S.planSpan?.[m.id], weak = practiceSpan({...S, planSpan: {}}, m);
   return `<div class="pspan chips"><button class="chip" type="button" data-spanset="${m.id}" data-i="" aria-pressed="${want == null}">吹けていないところ<small>${esc(spanShort(PIECES[pid].spans[weak]))}</small></button>`
-    + readUnits(pid).map(u => `<button class="chip" type="button" data-spanset="${m.id}" data-i="${u.i}" aria-pressed="${want === u.i}">${esc(spanShort(u))}<small>${Math.round(v[u.i])}</small></button>`).join('') + '</div>';
+    + readUnits(pid).map(u => `<button class="chip" type="button" data-spanset="${m.id}" data-i="${u.i}" aria-pressed="${want === u.i}">${esc(spanShort(u))}${rankBadge(v[u.i])}</button>`).join('') + '</div>';
 };
 function planHtml(ev){
   // 開いていた練習の一覧は、週が変わったら閉じる
@@ -1126,11 +1137,9 @@ function planHtml(ev){
   // 部員の行：名前と体力・力の帯・今週の練習のボタン（押すと練習の一覧が開く）
   const rowOf = m => {
     const auto = decideMenu(S, m), own = ownPlan(m), id = own || auto, open = U.pick === m.id;
-    const c = m.sta >= 60 ? 'good' : m.sta >= 30 ? 'warn' : 'bad';
-    return `<li class="pm${own ? ' own' : ''}"><span class="who"><b>${esc(m.name)}</b><small>${m.grade}年・${m.seat ? esc(PART_LABEL[SEAT[m.seat].part]) : '控え'}${m.out && m.seat ? '・コンクール控え' : ''}</small></span>
-      <span class="sta" title="体力 ${Math.round(m.sta)}"><span class="track"><span class="fill ${c}" style="width:${clamp(m.sta, 0, 100)}%"></span></span><b>${Math.round(m.sta)}</b></span>
-      ${statStrip(m)}
-      <button class="pick" type="button" data-pick="${m.id}" aria-expanded="${open}" aria-label="${esc(m.name)}の今週の練習"><span class="pk">${own ? '今週' : 'おまかせ'}</span><b>${MENU_BY[id].name}</b><small>${menuUp(id)}</small></button>
+    return `<li class="pm${own ? ' own' : ''}${m.out && m.seat ? ' out' : ''}"><span class="who"><b>${esc(m.name)}</b><small>${m.grade}年</small></span>
+      ${staBar(m)}${rankStrip(m)}
+      <button class="pick" type="button" data-pick="${m.id}" aria-expanded="${open}" aria-label="${esc(m.name)}の今週の練習">${own ? '' : '<span class="pk">おまかせ</span>'}<b>${MENU_BY[id].name}</b></button>
       ${open ? pickGrid(m.id, own, auto) : ''}${id === 'piece' && S.pieceId ? spanChips(m) : ''}</li>`;
   };
   const rows = groups.map(({k, ms: gm}) => {
@@ -1151,12 +1160,12 @@ function planHtml(ev){
   const tutti = (count.tutti || 0) + (count.hall || 0);
   return `<div class="plan">
     ${foundingYear(S) && S.week < 4 ? '<p class="small">「おまかせ」のままの部員は、部の方針で自分の練習を決める。指示したい部員だけ、今週の練習を選ぼう。合奏は出た人が多いほど、部のまとまりが伸びる。</p>' : ''}
-    ${S.pieceId && !setActive(S) ? `<p class="plan-piece">練習している曲：<b>${esc(PIECES[S.pieceId].title)}</b><small>譜読み ${Math.round(readAvg(S, S.pieceId))}</small></p>` : ''}
+    ${S.pieceId && !setActive(S) ? `<p class="plan-piece">練習している曲：<b>${esc(PIECES[S.pieceId].title)}</b><small>譜読み</small>${rankBadge(readAvg(S, S.pieceId))}</p>` : ''}
     <div class="focus"><span>部の方針</span><div class="chips">${POLICIES.map(p => `<button class="chip" type="button" data-polall="${p.id}" aria-pressed="${pol === p.id}">${p.name}</button>`).join('')}</div>
     <span class="small">${POLICY_BY[pol].desc}</span></div>
     ${setActive(S) ? `<div class="focus"><span>曲の練習の配分（自由曲 ${esc(PIECES[S.pieceId].title)}・課題曲 ${esc(PIECES[S.setPiece].title)}）</span><div class="chips">${Object.keys(SPLIT).map(k => `<button class="chip" type="button" data-split="${k}" aria-pressed="${(S.split || 'auto') === k}">${SPLIT_NAME[k]}</button>`).join('')}</div>
-      <span class="small">譜読み：自由曲 ${Math.round(readAvg(S, S.pieceId))}・課題曲 ${Math.round(readAvg(S, S.setPiece))}。曲の練習・合奏の伸びを、この配分で2曲に分ける${(S.split || 'auto') === 'auto' ? `（おまかせ：いまは自由曲 ${Math.round(pieceShares(S)[0][1] * 10)}割・課題曲 ${Math.round(pieceShares(S)[1][1] * 10)}割）` : ''}</span></div>` : ''}
-    <div class="psecs">${ms.length > 8 ? '<p class="small">部員ごとの練習（パートを押すと開く。数字は人数）</p>' : ''}${rows}</div>
+      <span class="small">譜読み：自由曲 ${rankBadge(readAvg(S, S.pieceId))}・課題曲 ${rankBadge(readAvg(S, S.setPiece))}。曲の練習・合奏の伸びを、この配分で2曲に分ける${(S.split || 'auto') === 'auto' ? `（おまかせ：いまは自由曲 ${Math.round(pieceShares(S)[0][1] * 10)}割・課題曲 ${Math.round(pieceShares(S)[1][1] * 10)}割）` : ''}</span></div>` : ''}
+    <div class="psecs"><div class="rkhead"${tipAttr('ランク')}><span></span><span>体力</span><span class="rks">${planCols().map(([, nm]) => `<i>${nm}</i>`).join('')}</span></div>${rows}</div>
     ${S.pieceId && !S.finalWeek && S.week >= 8 && nextContest(S).w > S.week ? lineupLine() : ''}
     <p class="small plan-sum">今週の予定：${sum}${tutti === 1 ? '（合奏は2人以上いないとできない）' : ''}</p>
     ${tired ? `<p class="small">体力が30を切っている部員が${tired}人。休ませないと、練習の効果が半分になる。</p>` : ''}
@@ -1191,10 +1200,10 @@ function seniorCard(m, last){
   const f = m.first, first = firstRecOf(m);
   const grow = f ? STAT_KEYS.map(k => [k, m.stats[k] - f.stats[k]]).sort((a, b) => b[1] - a[1])[0] : null;
   const joinedHere = f && f.y === m.joined;
-  const bars = f ? STAT_KEYS.map(k => `<div class="gb"><span class="nm">${STAT_LABEL[k]}</span><span class="track"><span class="fill was" style="width:${clamp(f.stats[k], 0, 100)}%"></span><span class="fill" style="width:${clamp(m.stats[k], 0, 100)}%"></span></span><span class="val">${Math.round(f.stats[k])}→${Math.round(m.stats[k])}</span></div>`).join('') : '';
+  const bars = f ? STAT_KEYS.map(k => `<div class="gb"><span class="nm">${STAT_LABEL[k]}</span><span class="track"><span class="fill was" style="width:${clamp(f.stats[k], 0, 100)}%"></span><span class="fill" style="width:${clamp(m.stats[k], 0, 100)}%"></span></span><span class="val">${rankBadge(f.stats[k])}→${rankBadge(m.stats[k])}</span></div>`).join('') : '';
   const inst = m.seat ? INST[SEAT[m.seat].inst].name : '控え';
   const showFirst = first && (!last || first.id !== last.id);
-  return `<details class="senior"><summary><span class="nm">${esc(m.name)}</span><span class="sub">${esc(inst)}${m.title ? '・' + m.title : ''}</span>${grow && grow[1] >= 1 ? `<span class="grow">${STAT_LABEL[grow[0]]} +${Math.round(grow[1])}</span>` : ''}</summary>
+  return `<details class="senior"><summary><span class="nm">${esc(m.name)}</span><span class="sub">${esc(inst)}${m.title ? '・' + m.title : ''}</span>${grow && rankOf(f.stats[grow[0]]) !== rankOf(m.stats[grow[0]]) ? `<span class="grow">${STAT_LABEL[grow[0]]}${rankBadge(f.stats[grow[0]])}→${rankBadge(m.stats[grow[0]])}</span>` : ''}</summary>
     <div class="body">
       ${f ? `<p class="small">${ymLabel(f.y, f.w)}${joinedHere ? 'に入部したころ' : '（この日誌をつけ始めたころ）'}と、いま</p><div class="gbars">${bars}</div>` : ''}
       ${(m.story || []).length ? `<ul class="mem">${m.story.map(x => `<li><time>${ymLabel(x.y, x.w)}</time>${esc(x.t)}</li>`).join('')}</ul>` : ''}
@@ -1321,15 +1330,17 @@ function renderLog(){
 /* ===== 部員カード・名簿 ===== */
 // 入部したとき（またはこの日誌をつけ始めたとき）からの伸びと、思い出
 const ymLabel = (y, w) => `${y}年${wkMonth(w)}月`;
+// 入部したときのランク → いまのランク（ランクが変わった力だけ）
 function growthText(m){
   if(!m.first) return '';
-  return STAT_KEYS.map(k => { const d = Math.round(m.stats[k] - m.first.stats[k]); return `${STAT_LABEL[k]}${d >= 0 ? '+' : '−'}${Math.abs(d)}`; }).join('　');
+  return STAT_KEYS.filter(k => rankOf(m.first.stats[k]) !== rankOf(m.stats[k]))
+    .map(k => `<span class="grk">${STAT_LABEL[k]}${rankBadge(m.first.stats[k])}→${rankBadge(m.stats[k])}</span>`).join('');
 }
 function memberStory(m){
   const g = growthText(m);
   const st = (m.story || []).slice(-5).reverse();
   if(!g && !st.length) return '';
-  return `<div class="mc-story">${g ? `<p class="small">${ymLabel(m.first.y, m.first.w)}${m.first.y === m.joined ? 'の入部' : 'に日誌をつけ始めて'}から：${g}</p>` : ''}
+  return `<div class="mc-story">${g ? `<p class="small grow-rk">${ymLabel(m.first.y, m.first.w)}${m.first.y === m.joined ? 'の入部' : 'に日誌をつけ始めて'}から${g}</p>` : ''}
     ${st.length ? `<ul>${st.map(x => `<li><time>${ymLabel(x.y, x.w)}</time>${esc(x.t)}</li>`).join('')}</ul>` : ''}</div>`;
 }
 // 部員カードは、押したところ（合奏のステージか、部員の名簿）の近くに出す
@@ -1362,7 +1373,7 @@ function showCdMember(id){
   const plays = CD.who?.has(m.id), solo = U.solo === `member:${m.id}`;
   el.innerHTML = `<div class="cm-head"><span><b>${esc(m.name)}</b><small>${m.grade}年・${esc(PART_LABEL[SEAT[m.seat].part])}${m.title ? '・' + esc(m.title) : ''}</small></span><button class="btn small quiet" type="button" data-cdm="close">閉じる</button></div>
     <p class="cm-say">${esc(memberSays(m))}</p>
-    <div class="cm-stats">${STAT_KEYS.map(k => `<span class="cm-st">${STAT_LABEL[k]}<span class="track"><span class="fill" style="width:${clamp(m.stats[k], 0, 100)}%;background:${skillColor(C, m.stats[k])}"></span></span><b>${Math.round(m.stats[k])}</b></span>`).join('')}</div>
+    <div class="cm-stats">${STAT_KEYS.map(k => `<span class="cm-st">${STAT_LABEL[k]}<span class="track"><span class="fill" style="width:${clamp(m.stats[k], 0, 100)}%;background:${skillColor(C, m.stats[k])}"></span></span>${rankBadge(m.stats[k])}</span>`).join('')}</div>
     <p class="cm-note">本番の強さ ${Math.round(m.mental ?? 40)}${mood === 'zone' ? '・今日は、いつも以上の音が出ている' : mood === 'freeze' ? '・今日は、緊張で頭が真っ白になっている' : ''}${plays ? '' : '・この本番には出ていない'}${skillChips(m)}</p>
     ${plays ? `<div class="row"><button class="btn small" type="button" data-cdm="solo">${solo ? '全員の音にもどす' : 'この子の音だけ聴く'}</button></div>` : ''}`;
   el.hidden = false;
@@ -1403,8 +1414,8 @@ function renderMemberCard(){
     ${dreamLine(m)}${loveLine(m)}
     ${skillList(m)}
     ${tr ? `<p class="mc-trait">癖：${tr.name}。${tr.desc}</p>` : '<p class="mc-trait">目立った癖はない。</p>'}
-    <div class="stats">${STAT_KEYS.map(k => statRow(STAT_LABEL[k], m.stats[k], '', '')).join('')}${m.mental != null ? statRow('本番の強さ', m.mental, '', '', 'warn') : ''}${S.pieceId ? `<p class="mc-sub">譜読み（${PIECES[S.pieceId].title}）</p>`
-      + readUnits(S.pieceId).map(u => statRow(spanShort(u), readOf(m, S.pieceId)[u.i], '', '')).join('') : ''}</div>
+    <div class="stats">${STAT_KEYS.map(k => rankRow(STAT_LABEL[k], m.stats[k])).join('')}${m.mental != null ? rankRow('本番の強さ', m.mental) : ''}${S.pieceId ? `<p class="mc-sub">譜読み（${PIECES[S.pieceId].title}）</p>`
+      + readUnits(S.pieceId).map(u => rankRow(spanShort(u), readOf(m, S.pieceId)[u.i])).join('') : ''}</div>
     ${memberStory(m)}
     ${seat ? `<div class="mc-actions"><button class="btn small" type="button" data-mact="solo">▶ この人だけ聴く</button><button class="btn small" type="button" data-mact="secsolo">▶ パートだけ聴く</button>${U.solo !== 'all' ? '<button class="btn small quiet" type="button" data-mact="all">全員の音にもどす</button>' : ''}</div>` : ''}
     <details class="mc-move"><summary>席を移す</summary><div class="mc-actions"><select id="moveSel" aria-label="移す先"><option value="">控え（席なし）</option>${seats}</select><button class="btn small" type="button" data-mact="move"${busy() ? ' disabled' : ''}>移す</button></div>
@@ -1418,7 +1429,7 @@ function renderRoster(){
     const av = k => ms.length ? ms.reduce((a, m) => a + m.stats[k], 0) / ms.length : 0;
     const lose = !ms.length && w[s.id] ? LACK_MAX * w[s.id] / tot : 0;
     return `<button class="sec-tile" type="button" data-sec="${s.id}" aria-pressed="${U.view === s.id}"><b>${s.name}</b>
-      <span class="bars">${STAT_KEYS.map(k => `<i title="${STAT_LABEL[k]} ${Math.round(av(k))}"><span style="height:${av(k)}%"></span></i>`).join('')}</span>
+      <span class="bars">${STAT_KEYS.map(k => `<i title="${STAT_LABEL[k]} ${rankOf(av(k))}"><span style="height:${av(k)}%;${rankFill(av(k))}"></span></i>`).join('')}</span>
       <small>${ms.length}/${seats}人${lose ? `<em class="lose">${lose >= 1 ? `いない・この曲で −${Math.round(lose)}点` : 'いない'}</em>` : ''}</small></button>`;
   }).join('');
   const rows = [];
@@ -1436,10 +1447,9 @@ function renderRoster(){
   $('#rosterTable').innerHTML = `<thead><tr><th>名前</th>${STAT_KEYS.map(k => `<th class="num">${STAT_LABEL[k]}</th>`).join('')}</tr></thead><tbody>${rows.join('') || '<tr class="empty"><td colspan="5">部員はまだいない</td></tr>'}</tbody>`;
 }
 function memberRow(m, part){
-  const C = tok();
   const sub = [`${m.grade}年`, part + (m.out && m.seat ? '（コンクール控え）' : ''), m.trait ? TRAITS[m.trait].name : '', ...skillsOf(m).map(x => x.name + skillMark(x.lv))].filter(Boolean).join('・');
   return `<tr class="mem${U.sel === m.id ? ' sel' : ''}" data-mid="${m.id}"><td><b>${esc(m.name)}</b>${m.title ? ` <span class="tag">${m.title}</span>` : ''}<small>${sub}</small></td>`
-    + STAT_KEYS.map(k => `<td class="num" style="color:${skillColor(C, m.stats[k])}">${Math.round(m.stats[k])}</td>`).join('') + '</tr>';
+    + STAT_KEYS.map(k => `<td class="num">${rankBadge(m.stats[k])}</td>`).join('') + '</tr>';
 }
 
 // 選曲会議：いまの部の得意（4つの力のうち平均より高いもの）が、曲の採点で重く見られる曲を3つ選ぶ。{曲: '音色・表現'}
