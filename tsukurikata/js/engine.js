@@ -58,6 +58,8 @@ class Engine {
     // iPhoneのSafari：マナーモードでも音が出るように、音楽再生として扱ってもらう
     try{ if(navigator.audioSession) navigator.audioSession.type = 'playback'; }catch(e){}
     this.ac = new AC({latencyHint: 'playback'});
+    // アプリでは、音のしくみが止まった・動いたをログに出す（実機で音が止まる原因を調べるため。画面には出さない）
+    if(window.TSUKURIKATA_NATIVE) this.ac.onstatechange = () => nativePost({type: 'log', msg: `audio ${this.ac.state} t=${this.ac.currentTime.toFixed(2)}`});
     this.chain = new VenueChain(this.ac);
     this.chain.set(this.venueId, this.posId, 0);
     return true;

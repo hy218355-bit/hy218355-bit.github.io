@@ -124,6 +124,8 @@ function playPerf(perf, label, onEnd, opts = {}){
   const pb = E.play(perf, null, opts);
   if(!pb){ $('#nowPlaying').textContent = 'このブラウザでは音を鳴らせません。'; return; }
   U.shown = perf; U.shownLabel = label; U.playing = true; U.onEnd = onEnd || null;
+  U.lastT = 0;
+  if(window.TSUKURIKATA_NATIVE) nativePost({type: 'log', msg: `play start "${label}" ${perf.notes.length} notes, ${perf.total.toFixed(1)}s, audio ${E.ac.state}`});
   nativePost({type: 'playing', on: true});
   U.ptr = buildPtr(perf);
   $('#btnStop').hidden = false; $('#btnNow').hidden = true;
@@ -131,7 +133,7 @@ function playPerf(perf, label, onEnd, opts = {}){
   cancelAnimationFrame(U.raf);
   const tick = () => {
     if(!E.pb) return;
-    const t = E.now();
+    const t = U.lastT = E.now();
     if(!tabHidden('play')){ drawStage(t); drawRoll(U.shown, t); }
     if(!$('#conduct').hidden){ drawStage(t, $('#cdStage'), CD.who); $('#cdProg').style.width = `${clamp01(t / U.shown.total) * 100}%`; }
     if(t > U.shown.total + 0.8){
@@ -145,6 +147,7 @@ function playPerf(perf, label, onEnd, opts = {}){
 }
 // natural：最後まで鳴り終わったとき（止めるボタンなら false）
 function endPlay(natural = false){
+  if(window.TSUKURIKATA_NATIVE) nativePost({type: 'log', msg: `play end ${natural ? 'natural' : 'stopped'} at ${(U.lastT ?? -1).toFixed(2)}s / ${U.shown?.total?.toFixed(1)}s, audio ${E.ac?.state}`});
   U.playing = false;
   nativePost({type: 'playing', on: false});
   cancelAnimationFrame(U.raf);
@@ -599,18 +602,11 @@ function renderWeek(){
     return;
   }
   if(S.phase === 'end'){
-    head.textContent = `${S.year}年度のおわり`;
-    const nm = {gold: '金賞', silver: '銀賞', bronze: '銅賞'};
-    const res = S.season.map(r => `<li>${LEVELS[r.level].name}${r.div ? `（${r.div}部門）` : ''}　${nm[r.award]}${r.rep ? '・代表' : ''}（平均${r.avg}点${r.parts ? `：課題曲 ${r.parts.set}・自由曲 ${r.parts.free}` : ''}）</li>`).join('');
+    head.textContent = '定期演奏会のあと';
     const seniors = S.members.filter(m => m.grade === 3);
-    const april = S.recs.find(r => r.year === S.year && r.keep && r.week === 0);
     const lastStage = S.recs.slice().reverse().find(r => r.year === S.year && r.final) || S.recs.slice().reverse().find(r => r.year === S.year && r.result);
-    // この1年の伸び（部の実力のグラフと同じ記録から）
-    const yr = (S.trend || []).filter(x => x.y === S.year), grow = yr.length > 1 ? Math.round(yr[yr.length - 1].a - yr[0].a) : null;
-    const yearLine = `<p class="small year-sum">${grow != null ? `部の平均 ${Math.round(yr[0].a)} → ${Math.round(yr[yr.length - 1].a)}（${grow >= 0 ? '+' : ''}${grow}）・` : ''}部員 ${S.members.length}人・顧問の指導力 Lv${coachLevel(S)}（${coachTitle(coachLevel(S))}）</p>`;
-    w.innerHTML = `<div class="stagecard"><h3>${seniors.length ? '3年生が引退します' : 'この1年をふり返る'}</h3><ol class="small" style="padding-left:1.2em">${res}</ol>${yearLine}${yearMembersHtml()}
-      <p class="txt">${seniors.length ? `${seniors.map(m => esc(m.name)).join('、')}（${seniors.length}人）が引退する。` : `部員は${S.members.length}人になった。引退する3年生はまだいない。`}4月の録音と最後の本番を聴き比べてみよう。</p>
-      <div class="transport">${april ? `<button class="btn small" type="button" data-act="playrec" data-id="${april.id}">▶ 4月の録音</button>` : ''}${lastStage ? `<button class="btn small" type="button" data-act="playrec" data-id="${lastStage.id}">▶ 最後の本番</button><button class="btn small" type="button" data-act="saverec" data-id="${lastStage.id}">⤓ 最後の本番を保存</button>` : ''}</div></div>
+    w.innerHTML = `<div class="stagecard"><h3>${seniors.length ? '3年生が引退します' : 'この1年の本番が終わった'}</h3>
+      <p class="txt">${seniors.length ? `${seniors.map(m => esc(m.name)).join('、')}（${seniors.length}人）が、この演奏会で引退する。` : `部員は${S.members.length}人。引退する3年生はまだいない。`}冬には新しい部でアンサンブルコンテストに出て、3月に1年をふり返る。</p></div>
       ${firstClassEpilogue(seniors)}
       ${seniors.length ? `<div class="seniors"><h3>引退する3年生</h3><p class="small">名前をタップすると、入部したころと最後の本番を、その人の音だけで聴き比べられる。</p>${seniors.map(m => seniorCard(m, lastStage)).join('')}</div>` : ''}
       <div class="transport"><button class="btn primary" type="button" data-act="winter">${seniors.length ? '冬へ（3年生が引退する）' : '冬へ'}</button></div>`;
@@ -693,13 +689,27 @@ function renderWeek(){
   weekResAnimate(w);
 }
 // この1年の部員：いちばん伸びた子・身につけたスキル・行事に行った子
+// 1年のまとめ（3月の卒業式のあと）：大会の結果・アンサンブル・部の伸び・この1年の部員・4月と最後の本番の聴き比べ
+function yearSummaryHtml(){
+  const nm = {gold: '金賞', silver: '銀賞', bronze: '銅賞'};
+  const res = (S.season || []).map(r => `<li>${LEVELS[r.level].name}${r.div ? `（${r.div}部門）` : ''}　${nm[r.award]}${r.rep ? '・代表' : ''}（平均${r.avg}点${r.parts ? `：課題曲 ${r.parts.set}・自由曲 ${r.parts.free}` : ''}）</li>`);
+  const e = S.winter?.ens;
+  if(e && !e.skipped) res.push(`<li>アンサンブルコンテスト　${nm[e.award]}${e.rep ? '・県代表' : ''}（${e.score}点・${e.names.length}人）</li>`);
+  const april = S.recs.find(r => r.year === S.year && r.keep && r.week === 0);
+  const lastStage = S.recs.slice().reverse().find(r => r.year === S.year && r.final) || S.recs.slice().reverse().find(r => r.year === S.year && r.result);
+  // この1年の伸び（部の実力のグラフと同じ記録から）
+  const yr = (S.trend || []).filter(x => x.y === S.year), grow = yr.length > 1 ? Math.round(yr[yr.length - 1].a - yr[0].a) : null;
+  const yearLine = `<p class="small year-sum">${grow != null ? `部の平均 ${Math.round(yr[0].a)} → ${Math.round(yr[yr.length - 1].a)}（${grow >= 0 ? '+' : ''}${grow}）・` : ''}顧問の指導力 Lv${coachLevel(S)}（${coachTitle(coachLevel(S))}）</p>`;
+  return `<div class="stagecard"><h3>${S.year}年度のまとめ</h3>${res.length ? `<ol class="small" style="padding-left:1.2em">${res.join('')}</ol>` : ''}${yearLine}${yearMembersHtml()}
+    <div class="transport">${april ? `<button class="btn small" type="button" data-act="playrec" data-id="${april.id}">▶ 4月の録音</button>` : ''}${lastStage ? `<button class="btn small" type="button" data-act="playrec" data-id="${lastStage.id}">▶ 最後の本番</button><button class="btn small" type="button" data-act="saverec" data-id="${lastStage.id}">⤓ 保存</button>` : ''}</div></div>`;
+}
 function yearMembersHtml(){
-  const y = S.year;
+  const y = S.year, all = [...S.members, ...(S.gradMembers || [])];
   const base = m => m.y0?.y === y ? m.y0.a : m.first?.y === y ? STAT_KEYS.reduce((a, k) => a + m.first.stats[k], 0) / 4 : null;
-  const grow = S.members.map(m => ({m, d: base(m) == null ? 0 : avgStat(m) - base(m)})).filter(x => x.d >= 1).sort((a, b) => b.d - a.d).slice(0, 3);
+  const grow = all.map(m => ({m, d: base(m) == null ? 0 : avgStat(m) - base(m)})).filter(x => x.d >= 1).sort((a, b) => b.d - a.d).slice(0, 3);
   // 同じスキルは、まとめて「度胸○：A・B ほか2人」
   const sk = new Map();
-  for(const m of S.members) for(const x of m.story || []){ const t = x.y === y && x.t.match(/スキル「(.+?)」を身につけた/)?.[1]; if(t) sk.set(t, [...(sk.get(t) || []), m.name]); }
+  for(const m of all) for(const x of m.story || []){ const t = x.y === y && x.t.match(/スキル「(.+?)」を身につけた/)?.[1]; if(t) sk.set(t, [...(sk.get(t) || []), m.name]); }
   const skills = [...sk].map(([t, ns]) => `${t}：${ns.slice(0, 3).join('・')}${ns.length > 3 ? ` ほか${ns.length - 3}人` : ''}`);
   const outs = (S.outLog || []).filter(x => x.y === y).map(x => `${x.title}（${x.who}）`);
   const more = (l, n) => l.slice(0, n).join('・') + (l.length > n ? ` ほか${l.length - n}件` : '');
@@ -717,13 +727,13 @@ function fxMoments(){
   if(!first){
     if(U.fxYear !== S.year) fxYearStart(S);
     else if(U.fxMonth !== m && S.phase === 'week') fxMonth(S);
-    if(S.phase === 'end' && U.fxEnd !== S.year) fxYearEnd(S);
+    if(S.phase === 'winter' && winterStep(S).id === 'grad' && S.winter.gradDone && U.fxEnd !== S.year) fxYearEnd(S);
     if(wk && U.fxWinter !== wk) fxWinter(S);
   }
   // 新しくゲームを始めたときは、最初に一度だけ年度のはじまりを見せる
   else if(S.founding && S.year === S.startYear && S.week === 0 && !S.members.length && !S.flags.fxIntro){ S.flags.fxIntro = true; save(S); fxYearStart(S); }
   U.fxWinter = wk;
-  if(S.phase === 'end') U.fxEnd = S.year;
+  if(S.phase === 'winter' && winterStep(S).id === 'grad' && S.winter.gradDone) U.fxEnd = S.year;
   U.fxYear = S.year; U.fxMonth = m;
   if(S.skillUp?.length){
     const ups = S.skillUp, by = new Map();
@@ -860,7 +870,7 @@ function closeGradRoll(done){
   $('#gradRoll').hidden = true;
   document.documentElement.classList.remove('conducting');
   stopPlay();
-  if(done){ commit(winterNext(S)); U.sel = null; U.piece = null; renderAll(); refreshNow(); scrollTo(0, 0); }
+  if(done){ commit({...S, winter: {...S.winter, gradDone: true}}); renderAll(); scrollTo(0, 0); }
 }
 /* ===== 冬（11月 新体制 → 1月 アンサンブルコンテスト → 3月 卒業式） ===== */
 function renderWinter(w){
@@ -890,6 +900,11 @@ function renderWinter(w){
       w.innerHTML = `${intro}<p class="txt">今年のアンサンブルコンテストには出なかった。</p><div class="transport"><button class="btn primary" type="button" data-act="wnext">3月へ</button></div>`;
       return;
     }
+    // 演奏を聴き終わるまでは、結果を伏せておく
+    if(U.ensHide === S.year){
+      w.innerHTML = `${intro}<p class="txt">${e.names.map(esc).join('・')}の${e.names.length}人が、舞台に立っている。</p><div class="transport"><button class="btn primary" type="button" data-act="enswatch">演奏を聴く</button><button class="btn quiet" type="button" data-act="ensreveal">結果を見る</button></div>`;
+      return;
+    }
     const nm = {gold: '金賞', silver: '銀賞', bronze: '銅賞'}[e.award];
     w.innerHTML = `${intro}<div class="result" style="--award:var(--${e.award})"><div class="award"><span class="stamp">${nm}</span><div><b>${e.rep ? '県の代表に選ばれた！' : {gold: 'アンサンブルで金賞！', silver: '銀賞。少人数でもよく合っていた。', bronze: '銅賞。少人数のむずかしさを知った。'}[e.award]}</b>
       <p class="small">${e.names.map(esc).join('・')}（${e.names.length}人）・${e.score}点</p></div></div>
@@ -897,8 +912,13 @@ function renderWinter(w){
     return;
   }
   const grads = S.gradMembers || [];
+  // 3月の終わり：卒業式で送ったあとに、1年のまとめ
+  if(S.winter.gradDone){
+    w.innerHTML = yearSummaryHtml() + `<div class="transport"><button class="btn primary" type="button" data-act="wnext">4月へ（新年度）</button></div>`;
+    return;
+  }
   w.innerHTML = `<div class="event"><span class="tag">3月・卒業式</span><span>${names.length ? `卒業式の日。${names.map(esc).join('、')}を、1・2年生の演奏で送ろう。` : '3月。春休みの音楽室で、新しい1年に向けて準備をしよう。'}</span></div>
-    <div class="transport">${grads.length ? `<button class="btn primary" type="button" data-act="gradroll">${grads.length}人の3年間をふり返って、送る</button><button class="btn quiet" type="button" data-act="wnext">ふり返らずに4月へ</button>` : `<button class="btn primary" type="button" data-act="wnext">${names.length ? '演奏で送って、4月へ' : '4月へ（新年度）'}</button>`}</div>`;
+    <div class="transport">${grads.length ? `<button class="btn primary" type="button" data-act="gradroll">${grads.length}人の3年間をふり返って、送る</button><button class="btn quiet" type="button" data-act="graddone">ふり返らずに送る</button>` : `<button class="btn primary" type="button" data-act="graddone">${names.length ? '演奏で送る' : '1年をふり返る'}</button>`}</div>`;
 }
 /* ===== 新しく入った部員の担当を決める（部をつくった最初の5人・本入部の1年生・途中から入ってきた部員） =====
    上の札で部員を選び、舞台の空いている席をタップして座らせる。選んだ部員の希望の楽器の席は光る。
@@ -1166,7 +1186,7 @@ function renderStageResult(w, ev){
   }
   if(p.kind === 'concert'){
     w.innerHTML = `<div class="stagecard"><span class="tag">本番</span><h3>${ev.title}</h3><p class="small">演奏の出来 <b class="countup" data-key="q:${p.recId}" data-to="${Math.round(p.q)}" data-ms="1200">${FX.done.has(`q:${p.recId}`) ? Math.round(p.q) : 0}</b>点（緊張 −${p.nerves}）${conductNote(p)}</p>${mentalNote(p)}<p class="txt">${esc(p.text)}</p>${foundingYear(S) && p.q < 10 ? '<p class="small">できたばかりの部の、最初の音。ここから練習を重ねていく。年度の終わりに、4月の録音と最後の本番を聴き比べられる。</p>' : ''}
-      <div class="transport"><button class="btn small" type="button" data-act="playrec" data-id="${p.recId}">▶ もう一度聴く</button><button class="btn small" type="button" data-act="saverec" data-id="${p.recId}">⤓ 保存</button><button class="btn primary" type="button" data-act="next">${ev.final ? (hasSeniors(S) ? '3年生の引退へ' : '1年のふり返りへ') : '次の週へ'}</button></div></div>`;
+      <div class="transport"><button class="btn small" type="button" data-act="playrec" data-id="${p.recId}">▶ もう一度聴く</button><button class="btn small" type="button" data-act="saverec" data-id="${p.recId}">⤓ 保存</button><button class="btn primary" type="button" data-act="next">${ev.final ? (hasSeniors(S) ? '3年生の引退へ' : '冬へ') : '次の週へ'}</button></div></div>`;
     // コンクールは結果発表の読み上げがあるので、数え上げは演奏会だけ
     requestAnimationFrame(() => fxCountUps(w));
     return;
@@ -1514,6 +1534,20 @@ function applaudThenReveal(){
   if(S.pending && !S.pending.revealed){ E.applaud(stageHeat(S.pending)); stageCurtainClose(); setTimeout(reveal, 2300); }
   else reveal();
 }
+// アンサンブルコンテストの本番：幕が上がって、選んだ部員だけが舞台で吹く。鳴り終わったら拍手、それから結果
+function playEnsemble(){
+  const e = S.winter?.ens, rec = e && S.recs.find(r => r.id === e.recId);
+  if(!rec) return;
+  stopPlay(); soloAll(); setVenue(rec.venue);
+  const perf = perform(recCtx(rec));
+  const done = () => { closeWatch(); if(U.ensHide === S.year){ U.ensHide = null; renderAll(); haptic(e.award === 'gold' ? 'success' : 'tap'); } };
+  openWatch(perf, `アンサンブルコンテスト：${PIECES[rec.pieceId].title}（${e.names.length}人）`);
+  const go = () => playPerf(perf, rec.label, natural => {
+    if(!natural) return done();
+    E.applaud(clamp01((e.score - 45) / 40)); stageCurtainClose(); setTimeout(done, 2300);
+  });
+  if(fxCalm() || U.fxMode !== 'full') go(); else stageIntro(perf, {title: 'アンサンブルコンテスト'}, rec, go, `${e.names.length}人で「${PIECES[rec.pieceId].title}」`);
+}
 function playRec(id){
   const rec = S.recs.find(r => r.id === id);
   if(!rec) return;
@@ -1689,9 +1723,12 @@ function bind(){
     else if(act === 'newyear'){ stopPlay(); commit(newYear(S)); U.sel = null; U.piece = null; renderAll(); refreshNow(); }
     else if(act === 'gradroll') openGradRoll();
     else if(act === 'winter'){ stopPlay(); commit(startWinter(S)); U.sel = null; renderAll(); scrollTo(0, 0); }
-    else if(act === 'ensgo'){ haptic('tap'); commit(runEnsemble(S, [...U.ensPick])); renderAll(); }
+    else if(act === 'ensgo'){ haptic('tap'); commit(runEnsemble(S, [...U.ensPick])); U.ensHide = S.year; renderAll(); playEnsemble(); }
     else if(act === 'ensskip'){ commit(skipEnsemble(S)); renderAll(); }
     else if(act === 'wnext'){ stopPlay(); const ny = winterStep(S).id === 'grad'; commit(winterNext(S)); if(ny){ U.sel = null; U.piece = null; } renderAll(); refreshNow(); scrollTo(0, 0); }
+    else if(act === 'enswatch') playEnsemble();
+    else if(act === 'graddone'){ haptic('tap'); commit({...S, winter: {...S.winter, gradDone: true}}); renderAll(); scrollTo(0, 0); }
+    else if(act === 'ensreveal'){ stopPlay(); closeWatch(); U.ensHide = null; renderAll(); }
     else if(act === 'playrec') playRec(b.dataset.id);
     else if(act === 'saverec'){ const rec = S.recs.find(r => r.id === b.dataset.id); if(rec) saveRecording(rec); }
     else if(act === 'memplay' || act === 'memsave'){

@@ -93,7 +93,7 @@ function fxWinter(s){
 }
 function fxYearEnd(s){
   fxShow({kind: 'scene', season: 'autumn', sound: 'year', ms: 2800,
-    html: `<span class="fx-tag">${s.year}年度</span><b class="fx-title">この1年の本番が、すべて終わった</b><p class="fx-desc">${hasSeniors(s) ? '3年生が引退する。' : ''}1年をふり返ろう。</p>`});
+    html: `<span class="fx-tag">${s.year}年度</span><b class="fx-title">1年が、もうすぐ終わる</b><p class="fx-desc">この1年をふり返ろう。</p>`});
 }
 // 舞う花びら・葉・雨・夏のきらめき
 // holder：動きを止めるための番号の置き場（ほかの重ね画面と取り合わないように）
