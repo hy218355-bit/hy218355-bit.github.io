@@ -108,6 +108,7 @@ function record(){
  report.assignOpen=Array.from(U.asg?.openParts||[]);
  report.recruits=(S.recruits||[]).map(r=>({id:r.id,name:r.name,hope:r.hope,exp:!!r.exp,talent:!!r.talent}));
  report.memberSeats=S.members.map(m=>({id:m.id,name:m.name,seat:m.seat,hope:m.hope}));
+ report.roster={filter:{...rosterFilter()},picker:!!U.rosterPick,count:$('#rosterCount').textContent,rows:[...document.querySelectorAll('#rosterTable tr[data-mid]')].map(el=>({id:el.dataset.mid,name:el.querySelector('b')?.textContent})),members:S.members.map(m=>({id:m.id,name:m.name,grade:m.grade,sec:m.seat?SEAT[m.seat].sec:'bench',face:Faces.fingerprint(m)})),partsOpen:$('#rosterParts').open};
  if(U.asg){
   report.autoPicks=autoAssign(S);report.occupiedSeats=S.members.map(m=>m.seat).filter(Boolean);
   report.assignExpected=assignRecruits(S,U.asg.picks).members.map(m=>({id:m.id,name:m.name,seat:m.seat,hope:m.hope}));
@@ -116,7 +117,7 @@ function record(){
 }
 async function show(next){
  view=next;report={view,errors:[],steps:0};
- U.asg=null;U.weekRes=null;U.pick=null;U.pickReturn=null;
+ U.asg=null;U.weekRes=null;U.pick=null;U.pickReturn=null;U.rosterAt=null;$('#rosterParts').open=false;
  stopPlay();if(releaseSamples){releaseSamples();releaseSamples=null;}U.range='all';U.solo='all';U.view='mel';U.piece=null;U.venue='room';E.setSolo({type:'all'});E.setVenue('room');
  for(const id of ['rollPanel','listenSettings','recordingPanel'])$('#'+id).open=false;
  clearTimeout(GR.timer);clearTimeout(AN.timer);cancelAnimationFrame(CD.raf);CD.phase='idle';
@@ -220,6 +221,11 @@ async function show(next){
  if(!['year','renamed-year','reading-year-hard'].includes(view)){checkAch(s,true);for(const key of ['skillUp','coachUp','mileUp','loveUp','dreamUp','rivalUp'])delete s[key];}
  if(view==='member-old')delete s.members[0].first;
  if(view==='member-bench')s.members[0].seat=null;
+ if(view==='members'){
+  if(q.has('rosterBench'))s.members.at(-1).seat=null;
+  if(q.has('rosterNames')){s=renameMember(s,s.members[0].id,'さとう はる');s=renameMember(s,s.members[1].id,'Ａｋｉ　あおい');}
+  if(q.has('rosterEmpty'))s.members=[];
+ }
  if(view==='journal-ambiguous'){s.members=[...s.members,{...s.members[0],id:'different-person'}];s.log=[{y:s.year,w:0,text:s.members[0].name+'が、スキルを身につけた。'}];}
  if(view==='journal-empty')s.log=[];
  if(view==='grad-old')s.members.forEach(m=>{delete m.first;m.story=[];});
@@ -264,6 +270,8 @@ new MutationObserver(()=>setTimeout(record,0)).observe($('#grCard'),{childList:t
 new MutationObserver(()=>setTimeout(record,0)).observe($('#nowPlaying'),{childList:true,subtree:true});
 for(const event of ['click','submit','change'])$('#memberCard').addEventListener(event,()=>setTimeout(record,0));
 $('#rosterTable').addEventListener('click',()=>setTimeout(record,0));
+for(const event of ['click','input','change','keydown','compositionend','submit'])$('#rosterFind').addEventListener(event,()=>setTimeout(record,0));
+$('#rosterParts').addEventListener('toggle',()=>setTimeout(record,0));
 $('#tabbar').addEventListener('click',()=>setTimeout(record,0));
 for(const event of ['click','change','toggle'])$('.col-stage').addEventListener(event,()=>setTimeout(record,0),true);
 $('#sndStatus').addEventListener('click',e=>{if(e.target.closest('[data-sndretry]'))audioBeforeRetry=Object.entries(SAMPLES.banks);setTimeout(record,0);},true);

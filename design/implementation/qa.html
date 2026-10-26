@@ -947,6 +947,42 @@ button.wr-person:focus-visible{outline:2px solid var(--brass);outline-offset:2px
 /* 名簿は顔と名前、カードはひとことと育った力から見える順にする。 */
 .roster .roster-head{display:flex;align-items:center;justify-content:space-between;gap:12px}
 .roster-head .help-button{width:44px;height:44px;flex:none}
+.roster-find{display:grid;gap:9px;margin:4px 0 12px;min-width:0}
+.roster-search{position:relative;display:flex;min-width:0;margin:0}
+.roster-search-icon{position:absolute;left:12px;top:13px;pointer-events:none;color:var(--ink-soft)}
+.roster-search-icon>.ui-icon{width:18px;height:18px}
+#rosterSearch{width:100%;min-width:0;min-height:46px;padding:10px 44px 10px 38px;border:1px solid var(--rule);border-radius:9px;background:var(--paper);color:var(--ink);font:16px var(--f-body);appearance:none;-webkit-appearance:none}
+#rosterSearch::placeholder{color:var(--ink-soft);opacity:1}
+#rosterSearch::-webkit-search-cancel-button{display:none}
+#rosterSearch:focus-visible{outline:2px solid var(--brass);outline-offset:1px}
+#rosterSearchClear{position:absolute;right:1px;top:1px;display:grid;place-items:center;width:44px;height:44px;border:0;border-radius:8px;background:transparent;color:var(--ink-soft);cursor:pointer}
+#rosterSearchClear>.ui-icon{width:17px;height:17px}
+.roster-grades{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:6px}
+.roster-grades>button,.roster-instrument,.roster-instruments>button{position:relative;min-width:0;min-height:44px;padding:8px 7px;border:1px solid var(--rule);border-radius:8px;background:var(--sheet);color:var(--ink);font:12px var(--f-body);cursor:pointer}
+.roster-grades>button[aria-pressed="true"],.roster-instruments>button[aria-pressed="true"]{border-color:var(--brass);background:color-mix(in srgb,var(--brass) 13%,var(--sheet));box-shadow:inset 0 0 0 1px var(--brass);font-weight:700}
+.roster-grades>button[aria-pressed="true"]::after,.roster-instruments>button[aria-pressed="true"]::after{content:'';position:absolute;right:6px;bottom:6px;width:6px;height:3px;border-left:1.5px solid var(--brass);border-bottom:1.5px solid var(--brass);transform:rotate(-45deg)}
+.roster-filter-line{display:grid;grid-template-columns:minmax(0,1fr) auto auto;gap:8px;align-items:center}
+.roster-filter-line:has(#rosterReset[hidden]){grid-template-columns:minmax(0,1fr) auto}
+.roster-instrument{display:flex;align-items:center;gap:7px;text-align:left}
+.roster-instrument>span{min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.roster-instrument>.ui-icon,.roster-instrument>.instrument-icon{flex:none;width:18px;height:18px;color:var(--brass)}
+.roster-instrument>.ui-icon:last-child{width:13px;height:13px;margin-left:auto;color:var(--ink-soft)}
+.roster-instrument[aria-expanded="true"]>.ui-icon:last-child{transform:rotate(180deg)}
+#rosterCount{white-space:nowrap;font:12px var(--f-lcd);color:var(--ink-soft)}
+#rosterReset{min-height:44px;padding:8px;font-size:11px;white-space:nowrap}
+.roster-instruments{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:7px;max-height:288px;overflow:auto;padding:2px}
+.roster-instruments>button{display:grid;justify-items:center;align-content:center;gap:6px;min-height:65px;padding:9px 3px;font-size:10px}
+.roster-instruments>button>.instrument-icon,.roster-instruments>button>.ui-icon{width:23px;height:23px;color:var(--brass)}
+.roster-instruments>button,.roster-open{scroll-margin-top:14px;scroll-margin-bottom:calc(80px + env(safe-area-inset-bottom,0px))}
+.tabbed:has(.mini:not([hidden])) .roster-instruments>button,.tabbed:has(.mini:not([hidden])) .roster-open{scroll-margin-bottom:calc(144px + env(safe-area-inset-bottom,0px))}
+.roster-find button:focus-visible{outline:2px solid var(--brass);outline-offset:1px}
+.roster-parts{margin:0 0 8px;border-block:1px solid var(--rule)}
+.roster-parts>summary{display:flex;align-items:center;gap:8px;min-height:44px;list-style:none;cursor:pointer;font-size:12px;color:var(--ink-soft)}
+.roster-parts>summary::-webkit-details-marker{display:none}
+.roster-parts>summary::after{content:'';width:7px;height:7px;margin:0 5px 4px auto;border-right:1.5px solid currentColor;border-bottom:1.5px solid currentColor;transform:rotate(45deg)}
+.roster-parts[open]>summary::after{transform:rotate(225deg);margin-bottom:0}
+.roster-parts>#secGrid{margin:4px 0 12px}
+#rosterTable .empty td{padding:24px 8px;text-align:center;font-size:12px;color:var(--ink-soft)}
 #secGrid{grid-template-columns:repeat(3,minmax(0,1fr));gap:7px}
 #secGrid .sec-tile{min-width:0;min-height:86px;gap:5px;padding:9px 8px;color:var(--ink)}
 #secGrid .sec-tile b{font-size:11px;letter-spacing:0;white-space:nowrap}
@@ -1455,7 +1491,15 @@ button.wr-person:focus-visible{outline:2px solid var(--brass);outline-offset:2px
       <h2 id="h-roster">パートと部員</h2>
       <button class="help-button" type="button" aria-label="パートと部員" data-tipname="パートと部員" data-tip="左から音程・リズム・音色・表現のランク。部員を押すと、くわしい様子と、その人だけの音を聴ける。">?</button>
     </div>
-    <div class="sec-grid" id="secGrid"></div>
+    <div class="roster-find" id="rosterFind">
+      <form class="roster-search" id="rosterSearchForm" role="search" aria-label="部員を探す">
+        <label for="rosterSearch" class="roster-search-icon" aria-hidden="true"></label><input id="rosterSearch" type="search" maxlength="48" placeholder="名前で探す" aria-label="部員の名前で探す" autocomplete="off" autocapitalize="off" spellcheck="false" enterkeyhint="search"><button type="button" id="rosterSearchClear" aria-label="名前を消す" hidden></button>
+      </form>
+      <div class="roster-grades" id="rosterGrades" role="group" aria-label="学年"></div>
+      <div class="roster-filter-line"><button class="roster-instrument" id="rosterInstrument" type="button" aria-expanded="false" aria-controls="rosterInstruments"></button><span id="rosterCount" role="status" aria-live="polite" aria-atomic="true"></span><button class="btn small quiet" id="rosterReset" type="button" hidden>すべて表示</button></div>
+      <div class="roster-instruments" id="rosterInstruments" role="group" aria-label="楽器で絞り込む" hidden></div>
+    </div>
+    <details class="roster-parts" id="rosterParts"><summary>パートのようす</summary><div class="sec-grid" id="secGrid"></div></details>
     <div class="table-wrap"><table id="rosterTable"></table></div>
   </section>
 
@@ -1547,39 +1591,39 @@ button.wr-person:focus-visible{outline:2px solid var(--brass);outline-offset:2px
   <button type="button" data-tabgo="log"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 5.5C4 4.7 4.7 4 5.5 4H11v16H5.5c-.8 0-1.5-.7-1.5-1.5z"/><path d="M20 5.5c0-.8-.7-1.5-1.5-1.5H13v16h5.5c.8 0 1.5-.7 1.5-1.5z"/></svg><span>日誌</span></button>
 </nav>
 
-<script src="js/util.js?v=qa-practice-faces-3"></script>
-<script src="js/icons.js?v=qa-practice-faces-3"></script>
-<script src="js/instrument-icons.js?v=qa-practice-faces-3"></script>
-<script src="js/face-cast.js?v=qa-practice-faces-3"></script>
-<script src="js/faces.js?v=qa-practice-faces-3"></script>
-<script src="js/instruments.js?v=qa-practice-faces-3"></script>
-<script src="js/venues.js?v=qa-practice-faces-3"></script>
-<script src="js/samples.js?v=qa-practice-faces-3"></script>
-<script src="js/scores.js?v=qa-practice-faces-3"></script>
-<script src="js/pieces/largo.js?v=qa-practice-faces-3"></script>
-<script src="js/pieces/ode.js?v=qa-practice-faces-3"></script>
-<script src="js/pieces/galop.js?v=qa-practice-faces-3"></script>
-<script src="js/pieces/pomp.js?v=qa-practice-faces-3"></script>
-<script src="js/pieces/aida.js?v=qa-practice-faces-3"></script>
-<script src="js/pieces/hero.js?v=qa-practice-faces-3"></script>
-<script src="js/pieces/holst.js?v=qa-practice-faces-3"></script>
-<script src="js/pieces/hungarian.js?v=qa-practice-faces-3"></script>
-<script src="js/pieces/flowers.js?v=qa-practice-faces-3"></script>
-<script src="js/pieces/tell.js?v=qa-practice-faces-3"></script>
-<script src="js/pieces/carmen.js?v=qa-practice-faces-3"></script>
-<script src="js/pieces/valkyrie.js?v=qa-practice-faces-3"></script>
-<script src="js/pieces/swan.js?v=qa-practice-faces-3"></script>
-<script src="js/pieces/spring.js?v=qa-practice-faces-3"></script>
-<script src="js/pieces/canon.js?v=qa-practice-faces-3"></script>
-<script src="js/band.js?v=qa-practice-faces-3"></script>
-<script src="js/game.js?v=qa-practice-faces-3"></script>
-<script src="js/engine.js?v=qa-practice-faces-3"></script>
-<script src="js/conduct.js?v=qa-practice-faces-3"></script>
-<script src="js/announce.js?v=qa-practice-faces-3"></script>
-<script src="js/tunegame.js?v=qa-practice-faces-3"></script>
-<script src="js/fx.js?v=qa-practice-faces-3"></script>
-<script src="js/ui.js?v=qa-practice-faces-3"></script>
+<script src="js/util.js?v=qa-roster-find-4"></script>
+<script src="js/icons.js?v=qa-roster-find-4"></script>
+<script src="js/instrument-icons.js?v=qa-roster-find-4"></script>
+<script src="js/face-cast.js?v=qa-roster-find-4"></script>
+<script src="js/faces.js?v=qa-roster-find-4"></script>
+<script src="js/instruments.js?v=qa-roster-find-4"></script>
+<script src="js/venues.js?v=qa-roster-find-4"></script>
+<script src="js/samples.js?v=qa-roster-find-4"></script>
+<script src="js/scores.js?v=qa-roster-find-4"></script>
+<script src="js/pieces/largo.js?v=qa-roster-find-4"></script>
+<script src="js/pieces/ode.js?v=qa-roster-find-4"></script>
+<script src="js/pieces/galop.js?v=qa-roster-find-4"></script>
+<script src="js/pieces/pomp.js?v=qa-roster-find-4"></script>
+<script src="js/pieces/aida.js?v=qa-roster-find-4"></script>
+<script src="js/pieces/hero.js?v=qa-roster-find-4"></script>
+<script src="js/pieces/holst.js?v=qa-roster-find-4"></script>
+<script src="js/pieces/hungarian.js?v=qa-roster-find-4"></script>
+<script src="js/pieces/flowers.js?v=qa-roster-find-4"></script>
+<script src="js/pieces/tell.js?v=qa-roster-find-4"></script>
+<script src="js/pieces/carmen.js?v=qa-roster-find-4"></script>
+<script src="js/pieces/valkyrie.js?v=qa-roster-find-4"></script>
+<script src="js/pieces/swan.js?v=qa-roster-find-4"></script>
+<script src="js/pieces/spring.js?v=qa-roster-find-4"></script>
+<script src="js/pieces/canon.js?v=qa-roster-find-4"></script>
+<script src="js/band.js?v=qa-roster-find-4"></script>
+<script src="js/game.js?v=qa-roster-find-4"></script>
+<script src="js/engine.js?v=qa-roster-find-4"></script>
+<script src="js/conduct.js?v=qa-roster-find-4"></script>
+<script src="js/announce.js?v=qa-roster-find-4"></script>
+<script src="js/tunegame.js?v=qa-roster-find-4"></script>
+<script src="js/fx.js?v=qa-roster-find-4"></script>
+<script src="js/ui.js?v=qa-roster-find-4"></script>
 <div class="tip" id="tip" role="tooltip" hidden></div>
-<script src="/design/implementation/qa.js?v=qa-practice-faces-3"></script>
+<script src="/design/implementation/qa.js?v=qa-roster-find-4"></script>
 </body>
 </html>

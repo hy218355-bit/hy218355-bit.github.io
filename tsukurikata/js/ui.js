@@ -1686,7 +1686,7 @@ function placeCard(where){
   const card = $('#memberCard');
   card.dataset.origin=where;
   if(where!=='roster')U.cardReturn=null;
-  if(where === 'roster') $('.roster').insertBefore(card, $('.roster .sec-grid'));
+  if(where === 'roster') $('.roster').insertBefore(card, $('#rosterFind'));
   else $('.stand').insertBefore(card, $('.rehearsal-actions'));
 }
 // スキル：小さな札（名前の横）と、部員カードの一覧（説明と育ち方）
@@ -1843,7 +1843,42 @@ function renderMemberCard(){
     ${memberStory(m)}`;
   for(const name of openDetails){ const detail=card.querySelector('details.'+name);if(detail)detail.open=true; }
 }
+// 名簿の条件は画面だけに持つ。新しい部や新年度では、全員が見える状態へ戻す。
+function rosterFilter(){
+  const key = `${S.recruitSeed || 0}:${S.year}`;
+  if(U.rosterAt !== key){ U.rosterAt = key; U.rosterFilter = {name:'',grade:'all',sec:'all'}; U.rosterPick = false; }
+  return U.rosterFilter;
+}
+// 空白や文字の表記の違いを吸収する。名前の読み方は推測しない。
+const rosterName = value => String(value || '').normalize('NFKC').toLowerCase().replace(/\s+/gu,'').replace(/[ァ-ヶ]/gu,c=>String.fromCharCode(c.charCodeAt(0)-0x60));
+function rosterMatches(m, f){
+  return (f.grade === 'all' || String(m.grade) === f.grade) && (f.sec === 'all' || (m.seat ? SEAT[m.seat].sec : 'bench') === f.sec) && rosterName(m.name).includes(rosterName(f.name));
+}
+function renderRosterFilters(f, count){
+  const input=$('#rosterSearch');
+  if(input.dataset.composing !== 'true' && input.value !== f.name) input.value=f.name;
+  $('#rosterSearchClear').hidden=!input.value;
+  if(!$('#rosterSearchClear').firstChild){$('#rosterSearchClear').innerHTML=uiIcon('close');$('.roster-search-icon').innerHTML=uiIcon('search');}
+  const grades=$('#rosterGrades');
+  if(!grades.firstChild) grades.innerHTML=[['all','全学年'],['1','1年'],['2','2年'],['3','3年']].map(([key,name])=>`<button type="button" data-roster-grade="${key}">${name}</button>`).join('');
+  for(const b of grades.children)b.setAttribute('aria-pressed',String(b.dataset.rosterGrade===f.grade));
+  const sec=f.sec==='bench'?{name:'控え'}:SEC[f.sec],button=$('#rosterInstrument');
+  button.innerHTML=`${sec&&f.sec!=='bench'?instrumentIcon(SEATS.find(s=>s.sec===f.sec).inst):uiIcon('members')}<span>${sec?sec.name:'楽器：すべて'}</span>${uiIcon('chevron')}`;
+  button.setAttribute('aria-label',`楽器で絞り込む：${sec?sec.name:'すべて'}`);button.setAttribute('aria-expanded',String(!!U.rosterPick));
+  const grid=$('#rosterInstruments');grid.hidden=!U.rosterPick;
+  if(!grid.firstChild)grid.innerHTML=[{id:'all',name:'すべて'},...SECTIONS,{id:'bench',name:'控え'}].map(s=>`<button type="button" data-roster-sec="${s.id}">${s.id==='all'||s.id==='bench'?uiIcon('members'):instrumentIcon(SEATS.find(x=>x.sec===s.id).inst)}<span>${s.name}</span></button>`).join('');
+  for(const b of grid.children)b.setAttribute('aria-pressed',String(b.dataset.rosterSec===f.sec));
+  const text=`${count}／${S.members.length}人`;if($('#rosterCount').textContent!==text)$('#rosterCount').textContent=text;
+  $('#rosterReset').hidden=!(f.name || f.grade!=='all' || f.sec!=='all');
+}
+function rosterSearchInput(e){
+  const input=$('#rosterSearch');if(e?.isComposing || input.dataset.composing==='true')return;
+  const f=rosterFilter();if(f.name===input.value)return;
+  f.name=input.value;renderRoster();
+}
 function renderRoster(){
+  const f=rosterFilter(),visible=new Set(S.members.filter(m=>rosterMatches(m,f)).map(m=>m.id));
+  renderRosterFilters(f,visible.size);
   // だれもいないパートが、いまの曲でどれだけ減点になるか
   const pid = S.pieceId, w = pid ? needWeight(pid) : {}, tot = Object.values(w).reduce((a, x) => a + x, 0) || 1;
   $('#secGrid').innerHTML = SECTIONS.map(s => {
@@ -1857,17 +1892,17 @@ function renderRoster(){
   }).join('');
   const rows = [];
   for(const sec of SECTIONS){
-    const ms = SEATS.filter(x => x.sec === sec.id).map(s => [s, S.members.find(x => x.seat === s.id)]).filter(([, m]) => m);
+    const ms = SEATS.filter(x => x.sec === sec.id).map(s => [s, S.members.find(x => x.seat === s.id)]).filter(([, m]) => m && visible.has(m.id));
     if(!ms.length) continue;
     rows.push(`<tr class="sec-row"><td colspan="5">${sec.name}</td></tr>`);
     for(const [s, m] of ms) rows.push(memberRow(m, PART_LABEL[s.part]));
   }
-  const bench = S.members.filter(m => !m.seat);
+  const bench = S.members.filter(m => !m.seat && visible.has(m.id));
   if(bench.length){
     rows.push(`<tr class="sec-row"><td colspan="5">控え</td></tr>`);
     for(const m of bench) rows.push(memberRow(m, '席なし'));
   }
-  $('#rosterTable').innerHTML = `<thead><tr><th>名前</th>${STAT_KEYS.map(k => `<th class="num">${STAT_LABEL[k]}</th>`).join('')}</tr></thead><tbody>${rows.join('') || '<tr class="empty"><td colspan="5">部員はまだいない</td></tr>'}</tbody>`;
+  $('#rosterTable').innerHTML = `<thead><tr><th>名前</th>${STAT_KEYS.map(k => `<th class="num">${STAT_LABEL[k]}</th>`).join('')}</tr></thead><tbody>${rows.join('') || `<tr class="empty"><td colspan="5">${S.members.length?'条件に合う部員はいない':'部員はまだいない'}</td></tr>`}</tbody>`;
 }
 function memberRow(m, part){
   const sub=`${m.grade}年・${part}${m.out&&m.seat?'（コンクール控え）':''}`;
@@ -2123,6 +2158,28 @@ function bind(){
     renderSelectors(); renderRoster(); drawIdle();
     if(tabHidden('play') && U.view !== 'mel'){ setTab('play'); $('#rollPanel').open = true; drawRoll(U.shown); $('.roll-wrap').scrollIntoView({block: 'center'}); }
   });
+  $('#rosterSearch').addEventListener('input',rosterSearchInput);
+  $('#rosterSearch').addEventListener('search',rosterSearchInput);
+  $('#rosterSearch').addEventListener('compositionstart',()=>{$('#rosterSearch').dataset.composing='true';});
+  $('#rosterSearch').addEventListener('compositionend',()=>{$('#rosterSearch').dataset.composing='false';rosterSearchInput();});
+  $('#rosterSearchForm').addEventListener('submit',e=>{
+    e.preventDefault();if($('#rosterSearch').dataset.composing==='true')return;
+    const first=$('#rosterTable .roster-open');if(first){first.focus({preventScroll:true});first.scrollIntoView({block:'nearest'});}else $('#rosterSearch').blur();
+  });
+  $('#rosterFind').addEventListener('click',e=>{
+    const b=e.target.closest('button');if(!b)return;
+    const f=rosterFilter();
+    if(b.id==='rosterSearchClear'){f.name='';renderRoster();$('#rosterSearch').focus({preventScroll:true});}
+    else if(b.id==='rosterReset'){f.name='';f.grade='all';f.sec='all';U.rosterPick=false;renderRoster();$('#rosterSearch').focus({preventScroll:true});}
+    else if(b.dataset.rosterGrade){f.grade=b.dataset.rosterGrade;renderRoster();}
+    else if(b.id==='rosterInstrument'){U.rosterPick=!U.rosterPick;renderRoster();if(U.rosterPick){const chosen=$('#rosterInstruments [aria-pressed="true"]');chosen.focus({preventScroll:true});chosen.scrollIntoView({block:'nearest'});}}
+    else if(b.dataset.rosterSec){f.sec=b.dataset.rosterSec;U.rosterPick=false;renderRoster();$('#rosterInstrument').focus({preventScroll:true});}
+  });
+  $('#rosterFind').addEventListener('keydown',e=>{
+    if(e.key!=='Escape'||e.isComposing||$('#rosterSearch').dataset.composing==='true')return;
+    if(U.rosterPick){e.preventDefault();U.rosterPick=false;renderRoster();$('#rosterInstrument').focus({preventScroll:true});}
+    else if(e.target.id==='rosterSearch' && e.target.value){e.preventDefault();rosterFilter().name='';renderRoster();}
+  });
   $('#rosterTable').addEventListener('click', e => {
     const tr = e.target.closest('[data-mid]'); if(!tr) return;
     clearRecordedMember();
@@ -2146,7 +2203,7 @@ function bind(){
       const fromStage = $('#memberCard').dataset.origin === 'stage';
       const back=$('#memberCard').dataset.origin==='roster'&&U.cardReturn;
       U.recordMember=null;U.recordPerf=null;U.sel=null;renderSelectors();renderMemberCard();renderRoster();drawIdle();
-      if(back){document.querySelector(`[data-mid="${back.id}"] .roster-open`)?.focus({preventScroll:true});window.scrollTo(0,back.top);}
+      if(back){const row=document.querySelector(`[data-mid="${back.id}"] .roster-open`);if(row){row.focus({preventScroll:true});window.scrollTo(0,back.top);}else{$('#rosterSearch').focus({preventScroll:true});$('#rosterFind').scrollIntoView({block:'nearest'});}}
       else if(fromStage && narrow.matches) $('#stage').scrollIntoView({block:'start'});
       U.cardReturn=null;return;
     }
