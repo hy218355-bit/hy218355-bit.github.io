@@ -1,0 +1,20 @@
+{
+  "built": true,
+  "installed": true,
+  "launched": false,
+  "launchReason": "device_locked",
+  "matchedFiles": [
+    {
+      "file": "index.html",
+      "sha256": "b224661044d35ca2663ad645d9ff76eaae25512fb9eb42f93b04465de00448a8"
+    },
+    {
+      "file": "js/ui.js",
+      "sha256": "4fd4a07e228aafefef00a2ca1c014810446a672022454496c12678898425ff66"
+    },
+    {
+      "file": "js/conduct.js",
+      "sha256": "b91a16ba13d08141230550eb8e15848bd5b6f2d55f91062c3f73793cf25a920d"
+    }
+  ]
+}

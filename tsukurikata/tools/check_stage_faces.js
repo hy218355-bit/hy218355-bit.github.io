@@ -34,6 +34,10 @@ if(stageMembers(first).get('tuba1')?.id!=='quiet')throw Error('録音の範囲�
 if(stageMembers(later).get('picc1').name!=='佐藤 葵')throw Error('別の録音の部員情報が混ざった');
 if(stageMembers({notes:[{seat:'picc1',mid:'new'}],hits:[]}).get('picc1').name!=='佐藤 結衣')throw Error('現在の合奏に昔の名前が混ざった');
 if(JSON.stringify(S)!==saved||JSON.stringify(first)!==sound)throw Error('顔の表示でセーブや演奏の音が変わった');
+const U={playing:true,shown:first};if(!recordingPlayback())throw Error('録音を現在の合奏と混ぜた');
+const live=rememberStageMembers({notes:[],hits:[]},[{id:'quiet',name:'佐藤 紬',seat:'tuba1',stats:{pitch:60}}],false);
+U.shown=live;if(recordingPlayback())throw Error('現在の合奏を録音と混ぜた');
+if(stageMembers(live).get('tuba1')?.id!=='quiet')throw Error('現在の合奏で休みの部員が消えた');
 `,ctx);
 // 全座席の楽器に絵があり、同じ輪郭を毎フレーム作り直さない。
 let paths=0,strokes=0;

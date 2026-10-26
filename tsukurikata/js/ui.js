@@ -86,10 +86,14 @@ function currentCtx(){
   const pid = playPiece(), span = rangeSpan(pid);
   return perfCtx(S, {pieceId: pid, venue: U.venue, from: span.from, to: span.to});
 }
+function currentPerformance(){
+  const ctx=currentCtx();
+  return rememberStageMembers(perform(ctx),ctx.members,false);
+}
 function refreshNow(){
   clearTimeout(U.refreshT);
   U.refreshT = setTimeout(() => {
-    U.perfNow = perform(currentCtx());
+    U.perfNow = currentPerformance();
     U.diag = analyze(U.perfNow);
     if(!U.playing){ U.shown = U.perfNow; U.shownLabel = nowLabel(); setNowPlaying(); }
     renderDiag();
@@ -214,8 +218,8 @@ const seatXY = (s, G) => {
 };
 // 再生する録音そのものの部員情報を、演奏の音やセーブとは別に覚える。
 const STAGE_PERFORMERS = new WeakMap();
-function rememberStageMembers(perf, members){ STAGE_PERFORMERS.set(perf, members || []); return perf; }
-function recordingPlayback(){ return !!(U.playing && U.shown && STAGE_PERFORMERS.has(U.shown)); }
+function rememberStageMembers(perf, members, recorded=true){ STAGE_PERFORMERS.set(perf,{members:members || [],recorded}); return perf; }
+function recordingPlayback(){ return !!(U.playing && U.shown && STAGE_PERFORMERS.get(U.shown)?.recorded); }
 function recordedRangeLabel(perf){
   const pc=PIECES[perf.pieceId];
   if(perf.from===0&&perf.to===pc.beats)return '全部';
@@ -227,10 +231,10 @@ function stageMembers(perf){
   const known=new Map();
   for(const rec of S.recs||[])for(const m of rec.snap?.members || rec.members || [])known.set(m.id,m);
   for(const m of [...(S.gradMembers||[]),...S.members])known.set(m.id,m);
-  for(const m of STAGE_PERFORMERS.get(perf) || [])known.set(m.id,m);
+  for(const m of STAGE_PERFORMERS.get(perf)?.members || [])known.set(m.id,m);
   const cast=new Map(Object.entries(buildPtr(perf)).flatMap(([seat,p])=>known.has(p.mid)?[[seat,{...known.get(p.mid),seat}]]:[]));
-  // 切り出した録音で出番がなくても、録音時に座っていた部員は舞台に残す。
-  for(const m of STAGE_PERFORMERS.get(perf) || [])if(SEAT[m.seat]&&!cast.has(m.seat))cast.set(m.seat,{...m});
+  // 選んだ範囲に出番がなくても、演奏するときに座っていた部員は舞台に残す。
+  for(const m of STAGE_PERFORMERS.get(perf)?.members || [])if(SEAT[m.seat]&&!cast.has(m.seat))cast.set(m.seat,{...m});
   return cast;
 }
 // 席ごとに音を並べておく（昔の録音やお手本でも、座っていた席が光るように）
@@ -1867,7 +1871,7 @@ function bind(){
   for(const [id, icon, label] of [['btnNow','play','いまの音で合奏'],['btnStop','stop','止める'],['btnConduct','conduct','指揮する'],['btnRec','play','聴く'],['btnSave','download','保存']]) $('#'+id).innerHTML = uiIcon(icon) + label;
   $('#rollPanel').addEventListener('toggle', e => { if(e.target.open) drawRoll(U.shown, U.playing ? E.now() : -1); });
   $('#btnNow').addEventListener('click', () => {
-    if(!U.perfNow) U.perfNow = perform(currentCtx());
+    if(!U.perfNow) U.perfNow = currentPerformance();
     playPerf(U.perfNow, nowLabel());
   });
   $('#btnRec').addEventListener('click', () => playRec($('#recSel').value));
@@ -1906,7 +1910,11 @@ function bind(){
     renderPiece(); refreshNow();
   });
   $('#venueSel').addEventListener('change', e => setVenue(e.target.value));
-  $('#rangeSel').addEventListener('change', e => { U.range = e.target.value; renderListeningSummary(); refreshNow(); });
+  $('#rangeSel').addEventListener('change', e => {
+    const value=e.target.value;
+    if(recordingPlayback()) return;
+    stopPlay();U.range=value;U.perfNow=null;renderPiece();refreshNow();
+  });
   $('#soloSel').addEventListener('change', e => { U.solo = e.target.value; applySolo(); renderMemberCard(); renderListeningSummary(); });
   $('#viewSel').addEventListener('change', e => { U.view = e.target.value; renderSelectors(); renderRoster(); drawIdle(); if(U.playing) drawRoll(U.shown, E.now()); });
   // 本番を見ているあいだ：舞台の部員をタップすると、その子の様子
@@ -1924,7 +1932,7 @@ function bind(){
     const s = seatAt(e);
     if(!s) return;
     // 録音は当時の部員を開き、同じ席の現部員と取り違えない。
-    const recorded = U.playing && STAGE_PERFORMERS.has(U.shown);
+    const recorded = recordingPlayback();
     const m = recorded ? U.stageMembers.get(s.id) : U.playing && U.stageMembers ? S.members.find(x => x.id === U.stageMembers.get(s.id)?.id) : S.members.find(x => x.seat === s.id);
     U.recordMember=recorded&&m?m:null;U.recordPerf=U.recordMember?U.shown:null;
     U.sel = m ? m.id : null;
@@ -2071,7 +2079,7 @@ function bind(){
     const act = b.dataset.act;
     if(act === 'preview' || act === 'model'){
       const pid = b.dataset.pid;
-      U.piece = pid; U.range = 'all'; renderPiece(); U.perfNow = perform(currentCtx()); U.diag = analyze(U.perfNow); renderDiag();
+      U.piece = pid; U.range = 'all'; renderPiece(); U.perfNow = currentPerformance(); U.diag = analyze(U.perfNow); renderDiag();
       if(act === 'model') playPerf(modelPerf(pid), `お手本：${PIECES[pid].title}（全員がうまい部・${VENUE.hall.name}）`);
       else playPerf(U.perfNow, `いまの部で：${PIECES[pid].title}${readAvg(S, pid) < 5 ? '（譜読み前）' : ''}`);
     }
@@ -2178,7 +2186,7 @@ function start(data){
   loadSamples('snd/', renderSnd).then(renderSnd, renderSnd);
   // 響きの読み込みが再生より後になったら、読み込めた時点で計算した響きに切り替える
   loadVenueIRs('snd/ir/').then(() => { if(E.chain) E.chain.set(E.venueId, E.posId, 0.3, true); });
-  U.perfNow = perform(currentCtx());
+  U.perfNow = currentPerformance();
   U.diag = analyze(U.perfNow);
   U.shown = U.perfNow; U.shownLabel = nowLabel();
   setNowPlaying(); renderDiag(); drawIdle();

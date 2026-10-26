@@ -25,7 +25,7 @@ function openConduct(stage = null){
   CD.stage = stage;
   $('#conduct').classList.remove('watch'); $('#cdClose').textContent = 'やめる'; $('#cdEyebrow').textContent = '指揮';
   soloAll();   // 指揮するときは、全員の音で
-  CD.perf = stage ? perform(recCtx(stage.rec)) : perform(currentCtx());
+  CD.perf = stage ? rememberStageMembers(perform(recCtx(stage.rec)),stage.rec.snap.members,false) : currentPerformance();
   CD.stageMembers = stageMembers(CD.perf);
   // 舞台にいる部員（本番ならオーディションで選んだメンバー）を、指揮台から見えるように描く
   CD.who = new Set([...CD.perf.notes, ...CD.perf.hits].map(n => n.mid));

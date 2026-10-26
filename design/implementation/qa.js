@@ -32,6 +32,7 @@ function record(){
  report.stageCache=Faces.stageCacheSize();
  report.playing=U.playing;report.waiting=!!U.waitPlay;report.shownLabel=U.shownLabel;report.range=U.range;report.solo=U.solo;report.piece=playPiece();report.venue=U.venue;
  report.engineSolo=E.solo;report.viewPart=U.view;
+ report.shownBounds=U.shown?{from:U.shown.from,to:U.shown.to}:null;report.preparedBounds=U.perfNow?{from:U.perfNow.from,to:U.perfNow.to}:null;
  report.shownPlayers=U.shown?Object.entries(buildPtr(U.shown)).map(([seat,p])=>({seat,id:p.mid})):[];
  report.recordsFingerprint=hash(JSON.stringify(S.recs));
  report.recordedCard=U.recordMember?{id:U.recordMember.id,name:U.recordMember.name,grade:U.recordMember.grade,seat:U.recordMember.seat,ranks:Object.fromEntries(STAT_KEYS.map(k=>[k,rankOf(U.recordMember.stats[k])]))}:null;

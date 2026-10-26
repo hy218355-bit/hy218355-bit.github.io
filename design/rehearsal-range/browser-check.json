@@ -1,0 +1,65 @@
+{
+  "before": {
+    "playing": true,
+    "range": "1",
+    "shown": {
+      "from": 0,
+      "to": 81
+    },
+    "summary": "音楽室・中間部・全員"
+  },
+  "stopped": {
+    "playing": false,
+    "waiting": false,
+    "range": "1"
+  },
+  "middle": {
+    "playing": true,
+    "bounds": {
+      "from": 36,
+      "to": 58
+    },
+    "portraits": 39,
+    "kind": "自由曲"
+  },
+  "statePreserved": true,
+  "recordsPreserved": true,
+  "liveCard": {
+    "rename": 1,
+    "recorded": null
+  },
+  "width": 375,
+  "scrollWidth": 375,
+  "errors": [],
+  "loading": {
+    "wasWaiting": true,
+    "cancelled": true,
+    "stillStopped": true,
+    "released": true,
+    "newBounds": {
+      "from": 36,
+      "to": 58
+    },
+    "playing": true,
+    "errors": []
+  },
+  "recording": {
+    "kind": "録音",
+    "rangeDisabled": true,
+    "readonly": true,
+    "rename": 0,
+    "errors": []
+  },
+  "conduct": {
+    "portraits": 39,
+    "title": "「天国と地獄」（音楽室）",
+    "errors": []
+  },
+  "year": {
+    "year": 2027,
+    "steps": 49,
+    "width": 375,
+    "scrollWidth": 375,
+    "errors": []
+  }
+}
