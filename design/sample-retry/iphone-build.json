@@ -1,0 +1,18 @@
+{
+  "build": true,
+  "installed": true,
+  "launched": false,
+  "reason": "device_locked",
+  "filesMatch": {
+    "index.html": true,
+    "js/ui.js": true,
+    "js/samples.js": true
+  },
+  "audioBanksBundled": 41,
+  "audioAssetsMatch": true,
+  "sha256": {
+    "index.html": "54a5b4a512ef33dce0d020ec47f532542c1d0df5b7a4be0d01556c42b7472e47",
+    "js/ui.js": "736e087771d5fe0be1b6c5be21a9594c74eff10940a7b24255ea6df182de77d8",
+    "js/samples.js": "45cd4083ed776a0ba0d6b77e0ed7b83eff9650c6d33ead48477b0eb356405bad"
+  }
+}

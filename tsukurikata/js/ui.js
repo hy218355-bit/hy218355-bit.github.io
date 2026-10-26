@@ -75,7 +75,7 @@ function loadUI(){ try{ const x = JSON.parse(localStorage.getItem(UI_KEY) || 'nu
 // 録音音源の読み込み状況
 function renderSnd(){
   const st = $('#sndStatus');
-  if(SAMPLES.error) st.textContent = '楽器の録音を読み込めなかったので、合成音で鳴らします';
+  if(SAMPLES.error) st.innerHTML = '<span>楽器の録音を読み込めなかったので、合成音で鳴らします</span><button class="btn small quiet" type="button" data-sndretry aria-label="楽器の音を読み直す">読み直す</button>';
   else if(!SAMPLES.ready) st.textContent = `楽器の音を読み込み中 ${Math.round(SAMPLES.progress * 100)}%`;
   else st.textContent = '';
 }
@@ -1967,6 +1967,14 @@ function bind(){
     stopPlay(); haptic('tap');
     U.piece = b.dataset.pswitch === S.pieceId ? null : b.dataset.pswitch; U.range = 'all';
     renderPiece(); refreshNow();
+  });
+  $('#sndStatus').addEventListener('click', e => {
+    if(!e.target.closest('[data-sndretry]') || !SAMPLES.error || busy() || CD.phase !== 'idle') return;
+    // 音源を途中で入れ替えず、一度止めてから読めなかった録音を読み直す。
+    stopPlay();
+    const loading = loadSamples('snd/', renderSnd, {retry:true});
+    renderSnd(); $('#btnNow').focus({preventScroll:true});
+    loading.then(renderSnd, renderSnd);
   });
   $('#venueSel').addEventListener('change', e => setVenue(e.target.value));
   $('#rangeSel').addEventListener('change', e => {

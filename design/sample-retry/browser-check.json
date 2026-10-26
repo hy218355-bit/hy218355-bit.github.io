@@ -1,0 +1,55 @@
+{
+  "normalLoadsAll41": true,
+  "controlledFailureKeeps40": true,
+  "retryLoadsAll41": true,
+  "retryPreserves40": true,
+  "failedBankRetriedOnly": true,
+  "retryDoesNotAutoplay": true,
+  "saveUnchanged": true,
+  "fallbackVoices": [
+    "WindVoice"
+  ],
+  "recoveredVoices": [
+    "SampleVoice"
+  ],
+  "repeatedFailureKeeps40": true,
+  "repeatedFailureCanRetry": true,
+  "views": [
+    {
+      "theme": "light",
+      "width": 375,
+      "scrollWidth": 375,
+      "errors": []
+    },
+    {
+      "theme": "dark",
+      "width": 375,
+      "scrollWidth": 375,
+      "errors": []
+    },
+    {
+      "theme": "dark",
+      "width": 375,
+      "scrollWidth": 375,
+      "errors": []
+    },
+    {
+      "theme": "dark",
+      "width": 375,
+      "scrollWidth": 375,
+      "errors": []
+    },
+    {
+      "theme": "light",
+      "width": 375,
+      "scrollWidth": 375,
+      "errors": []
+    },
+    {
+      "theme": "dark",
+      "width": 375,
+      "scrollWidth": 375,
+      "errors": []
+    }
+  ]
+}

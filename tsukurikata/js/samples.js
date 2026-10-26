@@ -26,7 +26,7 @@ const SAMPLE_BANK = {
   tamtam: {bank: 'tamtam', g: 1},
   glock: {bank: 'glock', g: 5.3}, xylo: {bank: 'xylo', g: 2.4}, mrb: {bank: 'mrb', g: 2.75}, vib: {bank: 'vib', g: 3}, chime: {bank: 'chime', g: 5.3},
 };
-const SAMPLES = {ready: false, use: true, banks: {}, loading: null, progress: 0, error: null};
+const SAMPLES = {ready: false, use: true, banks: {}, loading: null, progress: 0, error: null, manifest: null};
 // 録音はA=440Hz。ゲームの A4（442Hz）にそろえるには、再生速度を A4/440 倍にする（2026年10月まで割っていて、全体が16セント低かった）
 const SAMPLE_TUNE = A4 / 440;
 // 録音ごとの音程のくせ（目録の c：その録音が名目の高さより何セント高いか。ゆっくり吹いた部分を測った）を打ち消す倍率
@@ -55,28 +55,39 @@ function speakInfo(d, sr, s){
   const pk = Math.max(...env), i25 = env.findIndex(v => v >= pk * 0.0625);   // 振幅で25%（エネルギーで1/16）
   return {lead: clamp(i25 * 0.002 - 0.018, 0, 0.075)};
 }
-function loadSamples(base, onProgress){
-  if(SAMPLES.loading) return SAMPLES.loading;
-  SAMPLES.loading = (async () => {
+function loadSamples(base, onProgress, options = {}){
+  if(SAMPLES.loading && !(options.retry && SAMPLES.error)) return SAMPLES.loading;
+  SAMPLES.ready = false; SAMPLES.error = null;
+  // 読めた録音は残し、読めなかった分だけ読み直す。前の処理が終わるまでは同じ待ち合わせを使う。
+  SAMPLES.loading = Promise.resolve().then(async () => {
     const OAC = window.OfflineAudioContext || window.webkitOfflineAudioContext;
     const dec = new OAC(1, 1, 44100);
-    const man = await (await fetch(base + 'manifest.json')).json();
-    const names = Object.keys(man);
-    let done = 0;
-    await Promise.all(names.map(async n => {
-      const ab = await (await fetch(base + n + '.mp3')).arrayBuffer();
+    if(!SAMPLES.manifest){
+      const response = await fetch(base + 'manifest.json');
+      if(!response.ok && response.status !== 0) throw new Error('音の目録: HTTP ' + response.status);
+      SAMPLES.manifest = await response.json();
+    }
+    const man = SAMPLES.manifest, names = Object.keys(man);
+    if(!names.length) throw new Error('楽器の録音が見つからない。');
+    let done = names.filter(n => SAMPLES.banks[n]).length;
+    const progress = () => { SAMPLES.progress = done / names.length; if(onProgress) onProgress(SAMPLES.progress); };
+    progress();
+    const results = await Promise.allSettled(names.filter(n => !SAMPLES.banks[n]).map(async n => {
+      const response = await fetch(base + n + '.mp3');
+      if(!response.ok && response.status !== 0) throw new Error(n + ': HTTP ' + response.status);
+      const ab = await response.arrayBuffer();
       const buf = await decodeBuf(dec, ab);
       const d = buf.getChannelData(0);
       const speaks = man[n].kind === 'sus' || man[n].kind === 'stac';
       const samples = man[n].samples.map(s => ({...s, start: findStart(d, buf.sampleRate, s.o, s.pk)})).map(s => speaks ? {...s, ...speakInfo(d, buf.sampleRate, s)} : s);
       const layers = [...new Set(samples.filter(s => !s.roll && s.l != null && s.l >= 0).map(s => s.l))].sort((a, b) => a - b);
       SAMPLES.banks[n] = {buf, kind: man[n].kind, samples, layers};
-      done++;
-      SAMPLES.progress = done / names.length;
-      if(onProgress) onProgress(SAMPLES.progress);
+      done++; progress();
     }));
+    const failed = results.find(r => r.status === 'rejected');
+    if(failed) throw failed.reason;
     SAMPLES.ready = true;
-  })().catch(e => { SAMPLES.error = e; throw e; });
+  }).catch(e => { SAMPLES.error = e; throw e; });
   return SAMPLES.loading;
 }
 const sampleCfg = instId => SAMPLES.ready && SAMPLES.use ? SAMPLE_BANK[instId] && SAMPLES.banks[SAMPLE_BANK[instId].bank] && SAMPLE_BANK[instId] : null;

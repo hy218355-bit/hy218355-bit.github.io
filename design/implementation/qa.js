@@ -3,6 +3,17 @@
 (async()=>{
 // 確認ページだけ保存先を使わず、操作や早送りで本物のセーブを書き換えない。
 save=()=>{};load=()=>null;saveUI=()=>{};
+// 確認用だけ、一つの録音を読めない状態にする。実際のゲームとセーブには入れない。
+const audioFailure=new URLSearchParams(location.search).get('sampleFailure'),audioRequests={},audioFetch=window.fetch.bind(window);
+let audioBeforeRetry=null;
+window.fetch=(input,init)=>{
+ const url=new URL(typeof input==='string'?input:input.url,document.baseURI),match=url.pathname.match(/\/snd\/([^/]+\.(?:mp3|json))$/);
+ if(match){
+  const name=match[1],count=audioRequests[name]=(audioRequests[name]||0)+1;
+  if((audioFailure==='manifest'&&name==='manifest.json'&&count===1)||(name==='flute.mp3'&&(audioFailure==='repeat'||audioFailure==='once'&&count===1)))return Promise.resolve(new Response('',{status:503}));
+ }
+ return audioFetch(input,init);
+};
 if(document.readyState==='loading')await new Promise(r=>document.addEventListener('DOMContentLoaded',r,{once:true}));
 const q=new URLSearchParams(location.search);let view=q.get('view')||'week';
 document.documentElement.dataset.theme=q.get('theme')==='dark'?'dark':'light';
@@ -26,6 +37,7 @@ function advance(s){
  return practiceWeek(s);
 }
 function record(){
+ report.audio={ready:SAMPLES.ready,progress:SAMPLES.progress,error:SAMPLES.error?{name:SAMPLES.error.name,message:SAMPLES.error.message}:null,banks:Object.keys(SAMPLES.banks),requests:{...audioRequests},preservedCount:audioBeforeRetry?.length,preservedBuffers:audioBeforeRetry?audioBeforeRetry.every(([name,bank])=>SAMPLES.banks[name]===bank):null,voices:[...new Set((E.pb?.voices||[]).map(v=>v.constructor.name))]};
  report.theme=document.documentElement.dataset.theme;report.width=innerWidth;report.scrollWidth=document.documentElement.scrollWidth;
  report.faceCount=document.querySelectorAll('.member-face').length;
  report.stagePortraits=Number($('#stage').dataset.portraitCount||0);report.watchPortraits=Number($('#cdStage').dataset.portraitCount||0);
@@ -189,6 +201,8 @@ new MutationObserver(()=>setTimeout(record,0)).observe($('#nowPlaying'),{childLi
 for(const event of ['click','submit','change'])$('#memberCard').addEventListener(event,()=>setTimeout(record,0));
 $('#rosterTable').addEventListener('click',()=>setTimeout(record,0));
 for(const event of ['click','change','toggle'])$('.col-stage').addEventListener(event,()=>setTimeout(record,0),true);
+$('#sndStatus').addEventListener('click',e=>{if(e.target.closest('[data-sndretry]'))audioBeforeRetry=Object.entries(SAMPLES.banks);setTimeout(record,0);},true);
+let audioReportT;new MutationObserver(()=>{clearTimeout(audioReportT);audioReportT=setTimeout(record,0);}).observe($('#sndStatus'),{childList:true,subtree:true,characterData:true});
 // 一度読み込んだ実ゲームで切り替え、毎回録音素材を読み込み直さない。
 if(q.has('keys'))document.addEventListener('keydown',async e=>{
  if(e.target.matches('input,select,textarea'))return;
