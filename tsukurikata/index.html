@@ -439,6 +439,43 @@ select{background:var(--sheet);border:1.5px solid var(--rule);border-radius:8px;
 .stagecard{display:grid;gap:12px}
 .stagecard h3{font-family:var(--f-display);font-weight:400;font-size:20px;line-height:1.35}
 .stagecard .txt{font-family:var(--f-hand);font-size:15px;line-height:1.7}
+.preparation{display:grid;gap:8px;min-width:0}
+.prep-head{display:flex;align-items:center;gap:8px}
+.prep-head>b{font-size:12px}.prep-head>small{font-size:11px;color:var(--ink-soft)}
+.prep-head>.help-button{margin-left:auto;min-width:44px;min-height:44px}
+.prep-tabs{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:7px}
+.prep-tab{display:grid;justify-items:center;align-content:start;gap:5px;min-width:0;min-height:116px;padding:9px 3px 6px;border:1px solid var(--rule);border-radius:10px;background:var(--sheet);color:var(--ink);font-family:var(--f-body);cursor:pointer}
+.prep-tab>.ui-icon:first-child{width:19px;height:19px;color:var(--brass)}
+.prep-tab>b{font-size:11px}.prep-tab>small{font-size:9px;line-height:1.5;color:var(--ink-soft);text-align:center}
+.prep-tab>.ui-icon:last-child{width:11px;height:11px;margin-top:auto;color:var(--ink-soft)}
+.prep-tab[aria-expanded="true"]{border-color:var(--brass);box-shadow:inset 0 0 0 1px var(--brass);background:color-mix(in srgb,var(--brass) 10%,var(--sheet))}
+.prep-tab[aria-expanded="true"]>.ui-icon:last-child{transform:rotate(180deg)}
+.prep-value{display:flex;align-items:center;justify-content:center;gap:5px;min-height:24px;font-size:17px;font-weight:700;white-space:nowrap}
+.prep-value>span{display:flex;align-items:center;gap:3px}.prep-value small{font-size:9px;font-weight:400}
+.prep-value .rk{width:21px;height:24px;font-size:13px}
+.prep-body{display:grid;gap:9px;padding:10px;border:1px solid var(--rule);border-radius:10px;background:var(--sheet);scroll-margin-bottom:160px}
+.prep-body p{margin:0}.prep-body .lineup-line .btn{min-height:44px}
+.prep-members{display:grid;gap:6px;max-height:234px;overflow:auto;padding:2px}
+.prep-person{display:grid;grid-template-columns:32px minmax(0,1fr) auto auto;align-items:center;gap:7px;min-width:0;min-height:48px;padding:7px;border:1px solid var(--rule);border-radius:8px;background:var(--paper);color:var(--ink);font-family:var(--f-body);text-align:left;scroll-margin-bottom:160px}
+button.prep-person{cursor:pointer}.prep-person>b{min-width:0;font-size:12px;overflow-wrap:anywhere}
+.prep-person>.ui-icon{width:12px;height:12px;color:var(--ink-soft)}
+.prep-person-values{display:flex;align-items:center;gap:6px}.prep-person-values .rk{width:20px;height:22px;font-size:12px}
+.prep-person-values>.instrument-icon{width:20px;height:20px;color:var(--brass)}
+.prep-person-values .sta{width:40px}.prep-person-values .sta .track{display:block;height:5px}
+.prep-songs{display:grid;gap:7px}.prep-songs>span{display:grid;grid-template-columns:auto minmax(0,1fr) auto;align-items:center;gap:7px;font-size:11px}
+.prep-songs>span>span{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.prep-songs .rk{width:20px;height:22px;font-size:12px}
+.prep-reading-head{display:flex;align-items:center;gap:6px;padding:0 16px 0 50px;color:var(--ink-soft);font-size:9px}.prep-reading-head>span:first-child{flex:1}.prep-reading-head>span:not(:first-child){width:20px;text-align:center}
+.preparation:not([data-day="true"]) .prep-reading-head{padding-right:36px}
+.prep-tab:focus-visible,button.prep-person:focus-visible{outline:2px solid var(--brass);outline-offset:1px}
+.stage-notes{border-block:1px solid var(--rule)}.stage-notes>summary{display:flex;align-items:center;min-height:44px;list-style:none;font-size:12px;color:var(--ink-soft);cursor:pointer}
+.stage-notes>summary::-webkit-details-marker{display:none}.stage-notes>summary::after{content:'';width:7px;height:7px;margin:0 5px 4px auto;border-right:1.5px solid currentColor;border-bottom:1.5px solid currentColor;transform:rotate(45deg)}.stage-notes[open]>summary::after{transform:rotate(225deg);margin-bottom:0}.stage-notes>div{display:grid;gap:10px;padding:4px 0 12px}
+@media(max-width:960px){
+ .tabbed #week:has(.stage-actions){padding-bottom:90px}
+ .tabbed:has(.mini:not([hidden])) #week:has(.stage-actions){padding-bottom:148px}
+ .tabbed .stage-actions{position:fixed;left:max(16px,env(safe-area-inset-left,0px));right:max(16px,env(safe-area-inset-right,0px));bottom:calc(60px + env(safe-area-inset-bottom,0px));z-index:45;display:grid;grid-template-columns:1.5fr 1fr;gap:8px;margin:0;padding:15px 0 9px;background:linear-gradient(transparent,var(--paper) 22%)}
+ .stage-actions .btn{min-width:0;min-height:48px;padding:10px 5px;font-size:11px}
+ .tabbed:has(.mini:not([hidden])) .stage-actions{bottom:calc(122px + env(safe-area-inset-bottom,0px))}
+}
 /* 今週の練習：部員ひとりずつ */
 .plan{display:grid;gap:12px}
 .plist{list-style:none;padding:0;display:grid;gap:0}
@@ -818,6 +855,9 @@ button.wr-person:focus-visible{outline:2px solid var(--brass);outline-offset:2px
 .wings ul{list-style:none;padding:0;display:grid;gap:6px}
 .wings li{display:flex;flex-wrap:wrap;align-items:center;gap:6px 10px;font-family:var(--f-hand);font-size:15px;line-height:1.6}
 .wings li span{flex:1 1 200px}
+.wings .btn{min-height:44px}
+.wings li.wing-person{display:grid;grid-template-columns:40px minmax(0,1fr) auto;gap:8px;font-size:13px}
+.wing-person>.member-face{width:40px;height:40px}.wing-person>.btn{min-height:44px;font-size:11px;padding:7px}
 .mental-note{margin-top:2px}
 /* 耳でチューニング */
 .tgrow{display:flex;flex-wrap:wrap;gap:6px 10px;align-items:center}
@@ -1593,7 +1633,7 @@ button.wr-person:focus-visible{outline:2px solid var(--brass);outline-offset:2px
 <script src="js/announce.js?v=result-journal-1"></script>
 <script src="js/tunegame.js"></script>
 <script src="js/fx.js"></script>
-<script src="js/ui.js?v=roster-find-1"></script>
+<script src="js/ui.js?v=stage-preparation-1"></script>
 <div class="tip" id="tip" role="tooltip" hidden></div>
 </body>
 </html>

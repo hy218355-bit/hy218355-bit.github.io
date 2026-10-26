@@ -1,0 +1,15 @@
+{
+  "build": "succeeded",
+  "install": "succeeded",
+  "launch": "succeeded",
+  "files": {
+    "index.html": {
+      "source": "ec4f39a963989f2418f8ffd3b31f4033c66d5059f781cf6f6033034a541b4c1b",
+      "bundle": "ec4f39a963989f2418f8ffd3b31f4033c66d5059f781cf6f6033034a541b4c1b"
+    },
+    "js/ui.js": {
+      "source": "bdcfe0ea0b8bec48f060fcc86086556c8c78f3211ef269732eed257853029587",
+      "bundle": "bdcfe0ea0b8bec48f060fcc86086556c8c78f3211ef269732eed257853029587"
+    }
+  }
+}

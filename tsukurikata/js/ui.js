@@ -667,7 +667,7 @@ function wingsHtml(){
   if(!S.stageDay) return '';
   const tense = tenseMembers(S), calm = S.stageDay.calm, left = 2 - wingActions(S), zb = bandForm(S);
   const mood = S.stageDay.huddle ? '全員で深呼吸をして、空気が少しやわらいだ。' : zb > 0.8 ? '部全体が硬くなっている。話し声もほとんどない。' : zb < -0.8 ? 'みんないい顔をしている。小声で冗談を言い合う余裕もある。' : 'みんな静かに出番を待っている。';
-  const rows = tense.map(m => `<li><span>${calm.includes(m.id) ? `${esc(m.name)}（${esc(instOf(m))}）は、深呼吸して少し落ち着いた。` : `${esc(m.name)}（${esc(instOf(m))}）の手が震えている。`}</span>${calm.includes(m.id) ? '' : `<button class="btn small" type="button" data-act="calm" data-mid="${m.id}"${left ? '' : ' disabled'}>声をかける</button>`}</li>`).join('');
+  const rows = tense.map(m => `<li class="wing-person">${memberFace(m,40)}<span>${calm.includes(m.id) ? `${esc(m.name)}（${esc(instOf(m))}）は、深呼吸して少し落ち着いた。` : `${esc(m.name)}（${esc(instOf(m))}）の手が震えている。`}</span>${calm.includes(m.id) ? '' : `<button class="btn small" type="button" data-act="calm" data-mid="${m.id}"${left ? '' : ' disabled'}>声をかける</button>`}</li>`).join('');
   return `<div class="wings"><span class="tag">舞台袖</span><ul><li><span>${mood}</span>${S.stageDay.huddle ? '' : `<button class="btn small" type="button" data-act="huddle"${left ? '' : ' disabled'}>全員で深呼吸する</button>`}</li>${rows}</ul>
     <p class="small">できるのはあわせて2回まで。本番の強さ（メンタル）は、場数を踏むほど上がる。</p></div>`;
 }
@@ -746,18 +746,19 @@ function renderWeekBody(){
   if(ev && (ev.kind === 'concert' || ev.kind === 'contest')){
     const n = nervesFor(S, ev), v = VENUE[ev.venue];
     const two = ev.kind === 'contest' && setActive(S);
-    w.innerHTML = `<div class="stagecard"><span class="tag">${ev.kind === 'contest' ? 'コンクール' : '本番'}</span><h3>${ev.title}${ev.kind === 'contest' && S.division ? `（${S.division}部門）` : ''}</h3>
+    w.innerHTML = `<div class="stagecard"><h3>${ev.title}${ev.kind === 'contest' && S.division ? `（${S.division}部門）` : ''}</h3>
+      ${preparationHtml(stagePreparation())}
+      <details class="stage-notes"><summary>会場と本番</summary><div>
       ${ev.kind === 'contest' && !isB(S) ? (() => { const rv = rivalResult(S, S.year, ev.level), ly = rivalSeason(S, S.year - 1);
         return rv ? `<p class="small rivalline">ライバル：${esc(rivalShort(S))}${ly && S.year > (S.startYear ?? S.year) ? `（去年は${LEVELS[ly.level].name}${AWARD_NM[ly.award]}）` : ''}も、この大会に出る。</p>` : ''; })() : ''}
       ${ev.kind === 'contest' ? `<p class="small">${two ? `課題曲 ${esc(PIECES[S.setPiece].title)} → 自由曲 ${esc(PIECES[S.pieceId].title)}（続けて吹く）` : `自由曲 ${esc(PIECES[S.pieceId].title)}`}${isB(S) ? '。B部門は県大会まで' : ''}</p>` : ''}
       <p class="small">会場：${v.name}（${v.rt < 0.2 ? '響きはほとんどない' : `残響 約${v.rt.toFixed(1)}秒`}）。${v.desc}</p>
       ${ev.text ? `<p class="txt">${ev.text}</p>` : ''}
-      ${ev.id === 'shinkan' ? showHtml() : ''}
       <p class="txt">${moodText(n)}${v.play.hall ? `会場慣れ ${Math.round(S.hallExp)}。` : ''}</p>
+      <p class="small">自分で指揮すると、その指揮で演奏した結果が審査される。テンポが大きく揺れると、リズムの苦手な部員ほどついてこられない。</p></div></details>
+      ${ev.id === 'shinkan' ? showHtml() : ''}
       ${wingsHtml()}
-      <div class="transport"><button class="btn primary" type="button" data-act="stage">本番の演奏をはじめる</button><button class="btn brass" type="button" data-act="stageconduct">自分で指揮する</button></div>
-      <p class="small">自分で指揮すると、その指揮で演奏した結果が審査される。テンポが大きく揺れると、リズムの苦手な部員ほどついてこられない。</p>
-      ${ev.kind === 'contest' ? lineupLine() : ''}</div>`;
+      <div class="transport stage-actions"><button class="btn primary" type="button" data-act="stage">本番の演奏をはじめる</button><button class="btn brass" type="button" data-act="stageconduct">自分で指揮する</button></div></div>`;
     return;
   }
   if(ev?.kind === 'forced'){
@@ -1229,6 +1230,41 @@ function lineupLine(){
   return `<div class="lineup-line"><span class="small">コンクールの出場メンバー：${set ? `${ms.length - off}人${off ? `（控え${off}人）` : '（全員）'}` : `まだ決めていない（このままだと全員の${ms.length}人）`}</span>
     <button class="btn small" type="button" data-act="lineupopen">${set ? 'メンバーを変える' : 'メンバーを決める'}</button></div>`;
 }
+// 準備の表示は次の本番に出る人だけで見る。編成や譜読み、保存内容は変えない。
+function stagePreparation(){
+  if(S.phase!=='week'||S.pending||S.chooseFinal||!PIECES[S.pieceId])return null;
+  const soon=stageIn(S,3);if(!soon)return null;
+  const contest=soon.ev.kind==='contest',members=seated(S).filter(m=>!contest||!m.out);
+  const songs=[...(contest&&setActive(S)&&PIECES[S.setPiece]?[{id:S.setPiece,label:'課題'}]:[]),{id:S.pieceId,label:'自由'}]
+    .map(p=>({...p,value:members.length?members.reduce((sum,m)=>sum+readMean(m,p.id),0)/members.length:0}));
+  return {...soon,contest,members,songs,tired:members.filter(m=>(m.sta??S.stamina??100)<30),fatigue:fatigueOf(S),onDay:soon.w===0};
+}
+function preparationHtml(p){
+  if(!p)return '';
+  const key=`${S.recruitSeed||0}:${S.year}:${S.week}`;
+  if(U.prepKey!==key){U.prepKey=key;U.prepPanel='';}
+  const selected=U.prepPanel,open=name=>selected===name;
+  const tab=(name,label,icon,value,sub)=>`<button type="button" class="prep-tab" data-prep-toggle="${name}" aria-expanded="${open(name)}" aria-controls="prepBody">${uiIcon(icon)}<b>${label}</b><span class="prep-value">${value}</span><small>${sub}</small>${uiIcon('chevron')}</button>`;
+  const readings=p.songs.map(song=>`<span aria-label="${song.label}曲の譜読み ${rankOf(song.value)}">${p.songs.length>1?`<small>${song.label[0]}</small>`:''}${rankBadge(song.value)}</span>`).join('');
+  const rows=(ms,kind)=>`<div class="prep-members">${ms.map(m=>{
+    const practice=!p.onDay&&kind!=='people',tag=practice?'button':'div';
+    return `<${tag} class="prep-person"${practice?` type="button" data-practice-member="${esc(m.id)}" data-practice-source="prep-${kind}" aria-label="${esc(m.name)}の今週の練習を見る"`:''}>${memberFace(m,32)}<b>${esc(m.name)}</b><span class="prep-person-values">${kind==='reading'?p.songs.map(song=>`<span aria-label="${song.label}曲の譜読み ${rankOf(readMean(m,song.id))}">${rankBadge(readMean(m,song.id))}</span>`).join(''):kind==='rest'?staBar(m):m.seat?instrumentIcon(SEAT[m.seat].inst):''}</span>${practice?uiIcon('chevron'):''}</${tag}>`;
+  }).join('')}</div>`;
+  let body='';
+  if(open('people'))body=`${p.contest?lineupLine():`<p class="small">席のある${p.members.length}人で演奏する。コンクールで控えの部員も出る。</p>`}${rows(p.members,'people')}`;
+  if(open('reading')){
+    const sorted=p.members.slice().sort((a,b)=>Math.min(...p.songs.map(s=>readMean(a,s.id)))-Math.min(...p.songs.map(s=>readMean(b,s.id))));
+    body=`<div class="prep-songs">${p.songs.map(s=>`<span><b>${s.label}曲</b><span>${esc(PIECES[s.id].title)}</span>${rankBadge(s.value)}</span>`).join('')}</div><p class="small">${p.onDay?'本番に出る部員の譜読み。':'顔を押すと、今週の練習を選べる。'}</p><div class="prep-reading-head"><span>部員</span>${p.songs.map(s=>`<span>${s.label}</span>`).join('')}</div>${rows(sorted,'reading')}`;
+  }
+  if(open('rest'))body=`${p.fatigue?'<p class="small">部全体にも疲れが残っていて、演奏に響く。</p>':''}${p.tired.length?`<p class="small">${p.onDay?'出場メンバーのうち、体力が低い部員。':'顔を押すと、今週の練習を選べる。'}</p>${rows(p.tired,'rest')}`:'<p class="small">出場メンバーに、体力が低い部員はいない。</p>'}`;
+  return `<section class="preparation" data-day="${p.onDay}" aria-label="本番の準備"><div class="prep-head"><b>本番の準備</b><small>${p.onDay?'きょう':`あと${p.w}週`}</small><button class="help-button" type="button" aria-label="本番の準備の見方"${tipAttr('本番の準備','本番に出る部員の人選・譜読み・体力。譜読みは出る人の平均を、GからSのランクで見る。体力が30より低い部員と、部全体に残る疲れも確かめられる。')}>?</button></div><div class="prep-tabs">${tab('people','人選','members',p.members.length+'人',p.contest?(lineupSet(S)?'選んだ部員':'まだ決めていない'):'全員')}${tab('reading','譜読み','journal',readings,p.songs.length>1?'課題・自由':'部員の平均')}${tab('rest','体力','rest',p.tired.length+'人',p.tired.length?'疲れ':p.fatigue?'部全体に疲れ':'疲れなし')}</div><div class="prep-body" id="prepBody"${selected?'':' hidden'}>${body}</div></section>`;
+}
+function togglePreparation(name){
+  if(!['people','reading','rest'].includes(name))return;
+  U.prepPanel=U.prepPanel===name?'':name;renderWeek();
+  $(`[data-prep-toggle="${name}"]`)?.focus({preventScroll:true});
+  if(U.prepPanel)$('#prepBody')?.scrollIntoView({block:'nearest'});
+}
 // オーディション：本人の顔・楽器・当日の出来から人選し、部全体の予想点を見比べる。
 const audScore = m => (S.audition.scores[m.id] || auditionScore(S, m));
 function renderAudition(w, ev){
@@ -1402,7 +1438,7 @@ const staBar = m => `<span class="sta" title="体力 ${Math.round(m.sta)}"><span
 const practiceIcon=id=>uiIcon({long:'breath',tune:'tuning',metro:'metronome',phrase:'note',piece:'journal',tutti:'members',hall:'stage',rest:'rest'}[id]||'week');
 const pickGrid = (key, cur, auto) => `<div class="pgrid" role="group" aria-label="今週の練習">`
   + `<button class="pchip" type="button" data-pset="${key}" data-menu="" aria-pressed="${cur === ''}">${practiceIcon('auto')}<span><b>おまかせ</b><small>${auto ? MENU_BY[auto].name : '部員ごと'}</small></span></button>`
-  + MENU.filter(x => menuOpen(S, x.id)).sort((a,b)=>U.pickReturn==='care'?Number(b.id==='rest')-Number(a.id==='rest'):0).map(x => `<button class="pchip" type="button" data-pset="${key}" data-menu="${x.id}" aria-pressed="${cur === x.id}">${practiceIcon(x.id)}<span><b>${x.name}</b><small>${menuUp(x.id)}</small></span></button>`).join('') + '</div>';
+  + MENU.filter(x => menuOpen(S, x.id)).sort((a,b)=>['care','prep-rest'].includes(U.pickReturn)?Number(b.id==='rest')-Number(a.id==='rest'):0).map(x => `<button class="pchip" type="button" data-pset="${key}" data-menu="${x.id}" aria-pressed="${cur === x.id}">${practiceIcon(x.id)}<span><b>${x.name}</b><small>${menuUp(x.id)}</small></span></button>`).join('') + '</div>';
 // 選ぶ前の行へ戻れるようにし、キーボードの位置も保つ。
 function closePracticePicker(){
   const key=U.pick,top=U.pickScroll,from=U.pickReturn;U.pick=null;U.pickReturn=null;renderWeek();
@@ -1437,6 +1473,7 @@ const spanChips = m => {
     + readUnits(pid).map(u => `<button class="chip" type="button" data-spanset="${m.id}" data-i="${u.i}" aria-pressed="${want === u.i}">${esc(spanShort(u))}${rankBadge(v[u.i])}</button>`).join('') + '</div>';
 };
 function planHtml(ev){
+  const prep=stagePreparation();
   // 開いていた練習の一覧は、週が変わったら閉じる
   const stateKey=`${S.recruitSeed||0}:${S.year}`;
   if(U.planStateKey!==stateKey){U.planStateKey=stateKey;U.openSecs=new Set();U.closedSecs=new Set();}
@@ -1477,13 +1514,14 @@ function planHtml(ev){
   return `<div class="plan">
     ${foundingYear(S) && S.week < 4 ? '<p class="small">「おまかせ」のままの部員は、部の方針で自分の練習を決める。指示したい部員だけ、今週の練習を選ぼう。合奏は出た人が多いほど、部のまとまりが伸びる。</p>' : ''}
     ${S.pieceId && !setActive(S) ? `<p class="plan-piece">練習している曲：<b>${esc(PIECES[S.pieceId].title)}</b><small>譜読み</small>${rankBadge(readAvg(S, S.pieceId))}</p>` : ''}
+    ${preparationHtml(prep)}
     <div class="focus"><span>部の方針</span><div class="chips">${POLICIES.map(p => `<button class="chip" type="button" data-polall="${p.id}" aria-pressed="${pol === p.id}">${practiceIcon(p.id==='basics'?'tune':p.id)}${p.name}</button>`).join('')}</div>
     <span class="small">${POLICY_BY[pol].desc}</span></div>
     ${setActive(S) ? `<div class="focus"><span>曲の練習の配分（自由曲 ${esc(PIECES[S.pieceId].title)}・課題曲 ${esc(PIECES[S.setPiece].title)}）</span><div class="chips">${Object.keys(SPLIT).map(k => `<button class="chip" type="button" data-split="${k}" aria-pressed="${(S.split || 'auto') === k}">${SPLIT_NAME[k]}</button>`).join('')}</div>
       <span class="small">譜読み：自由曲 ${rankBadge(readAvg(S, S.pieceId))}・課題曲 ${rankBadge(readAvg(S, S.setPiece))}。曲の練習・合奏の伸びを、この配分で2曲に分ける${(S.split || 'auto') === 'auto' ? `（おまかせ：いまは自由曲 ${Math.round(pieceShares(S)[0][1] * 10)}割・課題曲 ${Math.round(pieceShares(S)[1][1] * 10)}割）` : ''}</span></div>` : ''}
     ${tired.length ? `<div class="plan-care"><div class="care-head"><b>${practiceIcon('rest')}疲れ ${tired.length}人</b><button class="help-button" type="button" aria-label="疲れている部員について"${tipAttr('体力','体力が30を切っている部員。休ませないと、練習の効果が半分になる。顔を押すと、その人の練習を選べる。')}>?</button></div><div class="care-people" role="group" aria-label="疲れている部員">${tired.map(m=>`<button type="button" data-practice-member="${esc(m.id)}" data-practice-source="care" aria-label="${esc(m.name)}の今週の練習を見る${planFor(S,m)==='rest'?'（休む予定）':''}">${memberFace(m,32)}<b>${esc(m.name)}</b>${planFor(S,m)==='rest'?practiceIcon('rest'):''}</button>`).join('')}</div></div>` : ''}
     <div class="psecs"><div class="rkhead"${tipAttr('ランク')}><span></span><span>体力</span><span class="rks">${planCols().map(([, nm]) => `<i>${nm}</i>`).join('')}</span></div>${rows}</div>
-    ${S.pieceId && !S.finalWeek && S.week >= 8 && nextContest(S).w > S.week ? lineupLine() : ''}
+    ${S.pieceId && !S.finalWeek && S.week >= 8 && nextContest(S).w > S.week && !prep?.contest ? lineupLine() : ''}
     <p class="small plan-sum">今週の予定：${sum}${tutti === 1 ? '（合奏は2人以上いないとできない）' : ''}</p>
     <div class="transport"><button class="btn primary" type="button" data-act="practice">この内容で1週間すすめる</button><button class="btn" type="button" data-act="practicemany">次の予定まで進める</button></div>
   </div>`;
@@ -2281,10 +2319,11 @@ function bind(){
     if(e.key === 'Escape' && !e.isComposing && !$('#memberNameForm')?.hidden){ e.preventDefault(); closeMemberNameForm(); }
     else if(e.key === 'Escape' && !e.isComposing && $('#memberCard .mc-move')?.open){ e.preventDefault(); $('#memberCard [data-mact="movecancel"]').click(); }
   });
-  $('#week').addEventListener('keydown',e=>{if(e.key==='Escape'&&U.pick){e.preventDefault();closePracticePicker();}});
+  $('#week').addEventListener('keydown',e=>{if(e.key==='Escape'&&U.pick){e.preventDefault();closePracticePicker();}else if(e.key==='Escape'&&U.prepPanel&&e.target.closest('.preparation')){e.preventDefault();togglePreparation(U.prepPanel);}});
   $('#week').addEventListener('click', e => {
     const b = e.target.closest('button'); if(!b || b.disabled) return;
     if(b.dataset.gradMember){ openGradRoll(b.dataset.gradMember); return; }
+    if(b.dataset.prepToggle){togglePreparation(b.dataset.prepToggle);return;}
     if(b.dataset.practiceMember){haptic('tap');focusPracticeMember(b.dataset.practiceMember,b.dataset.practiceSource);return;}
     if(b.dataset.polall){ commit(setPolicy(S, b.dataset.polall)); renderWeek();document.querySelector(`[data-polall="${b.dataset.polall}"]`)?.focus({preventScroll:true});return; }
     // 今週の練習：ボタンで一覧を開き、選ぶと閉じる（パートの「まとめて選ぶ」は、そのパートの全員に）

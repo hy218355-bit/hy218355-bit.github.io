@@ -109,6 +109,10 @@ function record(){
  report.recruits=(S.recruits||[]).map(r=>({id:r.id,name:r.name,hope:r.hope,exp:!!r.exp,talent:!!r.talent}));
  report.memberSeats=S.members.map(m=>({id:m.id,name:m.name,seat:m.seat,hope:m.hope}));
  report.roster={filter:{...rosterFilter()},picker:!!U.rosterPick,count:$('#rosterCount').textContent,rows:[...document.querySelectorAll('#rosterTable tr[data-mid]')].map(el=>({id:el.dataset.mid,name:el.querySelector('b')?.textContent})),members:S.members.map(m=>({id:m.id,name:m.name,grade:m.grade,sec:m.seat?SEAT[m.seat].sec:'bench',face:Faces.fingerprint(m)})),partsOpen:$('#rosterParts').open};
+ const prep=stagePreparation();report.preparation=prep?{weeks:prep.w,event:prep.ev.title,contest:prep.contest,day:prep.onDay,members:prep.members.map(m=>m.id),songs:prep.songs,tired:prep.tired.map(m=>m.id),fatigue:prep.fatigue,panel:U.prepPanel,visible:!!$('#week .preparation'),rows:[...document.querySelectorAll('#prepBody [data-face]')].map(el=>el.dataset.face)}:null;
+ report.prepSource=S.members.map(m=>({id:m.id,name:m.name,seat:m.seat,out:!!m.out,sta:m.sta,read:S.pieceId?readMean(m,S.pieceId):null,setRead:S.setPiece?readMean(m,S.setPiece):null}));
+ report.wings={actions:wingActions(S),calm:S.stageDay?.calm,huddle:!!S.stageDay?.huddle,tense:tenseMembers(S).map(m=>m.id)};
+ report.stageCasts=S.recs.filter(r=>r.year===S.year&&(r.result||S.pending?.recId===r.id||S.pending?.setRecId===r.id)).map(r=>({id:r.id,piece:r.pieceId,fatigue:r.snap.fatigue,members:r.snap.members.map(m=>m.id)}));
  if(U.asg){
   report.autoPicks=autoAssign(S);report.occupiedSeats=S.members.map(m=>m.seat).filter(Boolean);
   report.assignExpected=assignRecruits(S,U.asg.picks).members.map(m=>({id:m.id,name:m.name,seat:m.seat,hope:m.hope}));
@@ -117,7 +121,7 @@ function record(){
 }
 async function show(next){
  view=next;report={view,errors:[],steps:0};
- U.asg=null;U.weekRes=null;U.pick=null;U.pickReturn=null;U.rosterAt=null;$('#rosterParts').open=false;
+ U.asg=null;U.weekRes=null;U.pick=null;U.pickReturn=null;U.rosterAt=null;U.prepKey=null;$('#rosterParts').open=false;
  stopPlay();if(releaseSamples){releaseSamples();releaseSamples=null;}U.range='all';U.solo='all';U.view='mel';U.piece=null;U.venue='room';E.setSolo({type:'all'});E.setVenue('room');
  for(const id of ['rollPanel','listenSettings','recordingPanel'])$('#'+id).open=false;
  clearTimeout(GR.timer);clearTimeout(AN.timer);cancelAnimationFrame(CD.raf);CD.phase='idle';
@@ -155,7 +159,7 @@ async function show(next){
   for(let i=0;i<100&&!s.consult;i++)s=advance(s);
   if(!s.consult)throw Error('相談の見本が作れなかった');
   if(view==='consult-result')s=resolveConsult(s,consultView(s).choices[0].k);
- }else if(['retirement-listen','consult-music','winter-music','outing-music','stage','recorded-history','reading-stage','song-set','song-final','rehearsal','rehearsal-records','rehearsal-a','rehearsal-loading','practice','practice-late','practice-a','practice-care','practice-growth','members','member','member-old','member-bench','grad','grad-old','grad-auto','senior','conduct','announce','announce-silver','announce-bronze','announce-cast','fx','audition','audition-a','audition-decided','audition-long','ensemble'].includes(view)){
+ }else if(['retirement-listen','consult-music','winter-music','outing-music','stage','recorded-history','reading-stage','song-set','song-final','rehearsal','rehearsal-records','rehearsal-a','rehearsal-loading','practice','practice-late','practice-a','practice-care','practice-growth','members','member','member-old','member-bench','grad','grad-old','grad-auto','senior','conduct','announce','announce-silver','announce-bronze','announce-cast','fx','audition','audition-a','audition-decided','audition-long','ensemble'].includes(view)||view.startsWith('prep-')){
   const ms=fullBand({pitch:68,rhythm:72,tone:64,expr:61}),names=new Set();
   ms.forEach((m,i)=>{m.id='m2028-n'+(i+1)+'-cafe';m.name=makeName(names,'recruit',2028,i+1);m.grade=i%3+1;m.joined=2026;m.joinGrade=1;m.sta=95;m.first={y:2026,w:0,stats:{pitch:15,rhythm:12,tone:18,expr:10}};m.story=[{y:2026,w:0,t:'アルトサックスで入部。'},{y:2027,w:16,t:'はじめての金賞。'},{y:2028,w:26,t:'最後の定期演奏会。'}];});
   s.members=ms;s.year=2028;s.week=10;
@@ -176,6 +180,16 @@ async function show(next){
  if(view==='outing-music'){s.outing={id:'orch'};U.outPick=new Set();}
  if(view==='ensemble'){s.members.forEach((m,i)=>m.grade=i%2+1);s.phase='winter';s.winter={step:1,plan:'kiso'};U.ensKey=null;U.ensPick=null;}
  if(view==='practice-late'){s.week=15;s.members[0].sta=20;}
+ if(view.startsWith('prep-')){
+  s.week=view==='prep-week'?PREF_WEEK-2:view==='prep-concert'?11:PREF_WEEK;s.phase='week';s.consult=null;s.outing=null;s.episode=null;
+  s.members.forEach((m,i)=>{m.fam={galop:[i<4?0:i%4===0?35:85,80,80],ode:[i<4?0:i%5===0?20:65,65,65]};m.sta=i<4||[5,9,38].includes(i)?20:95;m.mental=30;});
+  s.members.at(-1).seat=null;s=runAudition(s);s=setLineup(s,new Set(s.members.slice(0,4).map(m=>m.id)));syncSta(s);
+  if(view==='prep-a'||q.has('two')){s.division='A';s.setPiece='ode';}
+  if(view==='prep-empty')s.members.forEach(m=>m.out=true);
+  if(q.has('outsideTired')){s.members.forEach((m,i)=>{m.sta=i===4?95:0;m.out=i!==4;});syncSta(s);}
+  if(view!=='prep-week'){s.stageDay={seed:1,calm:[]};for(let seed=1;seed<100&&tenseMembers(s).length<3;seed++)s.stageDay.seed=seed;}
+  if(view==='prep-old')delete s.stageDay;
+ }
  if(view==='practice-care'){
   s.week=8;s.members[0].sta=20;s.members.at(-1).sta=25;
   s.plan={[s.members[0].id]:'tune'};
