@@ -1,0 +1,203 @@
+[
+  {
+    "view": "picker",
+    "barTop": 679,
+    "columns": "140.5px 140.5px",
+    "gridBottom": 667.0234375,
+    "menuLabels": [
+      {
+        "text": "おまかせ",
+        "truncated": false
+      },
+      {
+        "text": "ロングトーン",
+        "truncated": false
+      },
+      {
+        "text": "チューニング",
+        "truncated": false
+      },
+      {
+        "text": "メトロノーム",
+        "truncated": false
+      },
+      {
+        "text": "フレーズ練習",
+        "truncated": false
+      },
+      {
+        "text": "曲の練習",
+        "truncated": false
+      },
+      {
+        "text": "合奏",
+        "truncated": false
+      },
+      {
+        "text": "休む",
+        "truncated": false
+      }
+    ],
+    "minimum": 64,
+    "scrollWidth": 375,
+    "width": 375
+  },
+  {
+    "view": "individual",
+    "id": "m2026-n1-5a1397f1",
+    "plan": {
+      "m2026-n1-5a1397f1": "long"
+    },
+    "statsUnchanged": true,
+    "weekUnchanged": true,
+    "scrollBefore": 198.5,
+    "after": {
+      "focus": "m2026-n1-5a1397f1",
+      "scroll": 198.5
+    }
+  },
+  {
+    "view": "closed-part",
+    "section": "hn",
+    "staysClosed": true
+  },
+  {
+    "view": "bulk",
+    "plans": {
+      "m2028-n1-cafe": "rest",
+      "m2028-n2-cafe": "rest",
+      "m2028-n3-cafe": "rest",
+      "m2028-n4-cafe": "rest"
+    },
+    "statsUnchanged": true,
+    "focus": "sec:fl"
+  },
+  {
+    "barTop": 679,
+    "gridBottom": 666.8671875,
+    "hallVisible": true,
+    "menus": 9,
+    "nameHeight": 16.8984375,
+    "scrollWidth": 375,
+    "view": "late-menu",
+    "whoHeight": 30,
+    "width": 375
+  },
+  {
+    "focus": "free",
+    "minimum": 44,
+    "scrollWidth": 375,
+    "selected": "free",
+    "view": "split",
+    "width": 375
+  },
+  {
+    "view": "policy",
+    "rest": "rest",
+    "auto": "auto",
+    "statsUnchanged": true
+  },
+  {
+    "focus": "0",
+    "scrollWidth": 375,
+    "selected": "0",
+    "view": "piece-span",
+    "width": 375
+  },
+  {
+    "scrollWidth": 375,
+    "tab": "week",
+    "theme": "dark",
+    "view": "tab",
+    "width": 375
+  },
+  {
+    "scrollWidth": 375,
+    "tab": "play",
+    "theme": "dark",
+    "view": "tab",
+    "width": 375
+  },
+  {
+    "scrollWidth": 375,
+    "tab": "members",
+    "theme": "dark",
+    "view": "tab",
+    "width": 375
+  },
+  {
+    "scrollWidth": 375,
+    "tab": "log",
+    "theme": "dark",
+    "view": "tab",
+    "width": 375
+  },
+  {
+    "scrollWidth": 375,
+    "tab": "week",
+    "theme": "light",
+    "view": "tab",
+    "width": 375
+  },
+  {
+    "scrollWidth": 375,
+    "tab": "play",
+    "theme": "light",
+    "view": "tab",
+    "width": 375
+  },
+  {
+    "scrollWidth": 375,
+    "tab": "members",
+    "theme": "light",
+    "view": "tab",
+    "width": 375
+  },
+  {
+    "scrollWidth": 375,
+    "tab": "log",
+    "theme": "light",
+    "view": "tab",
+    "width": 375
+  },
+  {
+    "view": "year",
+    "errors": [],
+    "steps": 49,
+    "year": 2027,
+    "members": 9,
+    "saveVersion": 2,
+    "theme": "light",
+    "width": 375,
+    "scrollWidth": 375,
+    "faceCount": 37,
+    "stagePortraits": 9,
+    "watchPortraits": 0,
+    "stageCache": {
+      "images": 10,
+      "stamps": 43
+    },
+    "gradIndex": 0,
+    "gradAuto": false,
+    "logSourceCount": 80,
+    "logRenderedCount": 80,
+    "logPreserved": true,
+    "planOwn": {},
+    "policy": "auto",
+    "week": 0,
+    "statsFingerprint": 0.5009167627431452
+  },
+  {
+    "view": "selected-text",
+    "light": {
+      "background": "color(srgb 0.932235 0.897255 0.836549)",
+      "ink": "#263D43",
+      "small": "rgb(38, 61, 67)",
+      "title": "rgb(38, 61, 67)"
+    },
+    "dark": {
+      "small": "rgb(243, 240, 228)",
+      "title": "rgb(243, 240, 228)"
+    }
+  }
+]

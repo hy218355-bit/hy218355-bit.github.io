@@ -1,0 +1,22 @@
+{
+  "buildSucceeded": true,
+  "installed": true,
+  "launched": true,
+  "files": [
+    {
+      "file": "index.html",
+      "match": true,
+      "sha256": "c220e4feff2a0e480089ac6e540c1ce355d28b5345a556f87086948b5021bd1b"
+    },
+    {
+      "file": "js/ui.js",
+      "match": true,
+      "sha256": "34e6b39f5f071d00f72e16ca32cea8231c9aa04cbc356ccce9d8840166f54bb4"
+    },
+    {
+      "file": "js/icons.js",
+      "match": true,
+      "sha256": "49657a2c6fb421b8e7abe44f50c8f5a93e56039b76fe12c33f24799ef5d608ca"
+    }
+  ]
+}

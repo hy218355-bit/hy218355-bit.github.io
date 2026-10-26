@@ -748,7 +748,11 @@ function renderWeekBody(){
   if(!tuneDone(S)) parts.push(`<div class="tgrow"><button class="btn small" type="button" data-act="tunegame">♪ 耳でチューニング</button><span class="small">週に1回。チューナーの音と部員の音を重ねて、うなりが消えるところまで高さを合わせる。合わせた部員の音程が上がる</span></div>`);
   w.innerHTML = parts.join('');
   w.querySelector('[data-outmore]')?.addEventListener('toggle', e => { U.outMore = e.target.open; });
-  w.querySelectorAll('details.psecd').forEach(d => d.addEventListener('toggle', () => { (U.openSecs ||= new Set())[d.open ? 'add' : 'delete'](d.dataset.sec); }));
+  w.querySelectorAll('details.psecd[data-sec]').forEach(d => d.addEventListener('toggle', () => {
+    if(!d.isConnected)return;
+    (U.openSecs ||= new Set())[d.open?'add':'delete'](d.dataset.sec);
+    (U.closedSecs ||= new Set())[d.open?'delete':'add'](d.dataset.sec);
+  }));
   weekResAnimate(w);
 }
 // この1年の部員：いちばん伸びた子・身につけたスキル・行事に行った子
@@ -1165,9 +1169,25 @@ function rankStrip(m){
 // 体力：色だけの小さな棒（緑・黄・赤）
 const staBar = m => `<span class="sta" title="体力 ${Math.round(m.sta)}"><span class="track"><span class="fill ${m.sta >= 60 ? 'good' : m.sta >= 30 ? 'warn' : 'bad'}" style="width:${clamp(m.sta, 0, 100)}%"></span></span></span>`;
 // 練習を選ぶ一覧（部員ひとり、またはパート全員。key は部員の id か「sec:パート」）。cur は選んである練習（'' はおまかせ、'-' はばらばら）
+const practiceIcon=id=>uiIcon({long:'breath',tune:'tuning',metro:'metronome',phrase:'note',piece:'journal',tutti:'members',hall:'stage',rest:'rest'}[id]||'week');
 const pickGrid = (key, cur, auto) => `<div class="pgrid" role="group" aria-label="今週の練習">`
-  + `<button class="pchip" type="button" data-pset="${key}" data-menu="" aria-pressed="${cur === ''}"><b>おまかせ</b><small>${auto ? MENU_BY[auto].name : '部員ごと'}</small></button>`
-  + MENU.filter(x => menuOpen(S, x.id)).map(x => `<button class="pchip" type="button" data-pset="${key}" data-menu="${x.id}" aria-pressed="${cur === x.id}"><b>${x.name}</b><small>${menuUp(x.id)}</small></button>`).join('') + '</div>';
+  + `<button class="pchip" type="button" data-pset="${key}" data-menu="" aria-pressed="${cur === ''}">${practiceIcon('auto')}<span><b>おまかせ</b><small>${auto ? MENU_BY[auto].name : '部員ごと'}</small></span></button>`
+  + MENU.filter(x => menuOpen(S, x.id)).map(x => `<button class="pchip" type="button" data-pset="${key}" data-menu="${x.id}" aria-pressed="${cur === x.id}">${practiceIcon(x.id)}<span><b>${x.name}</b><small>${menuUp(x.id)}</small></span></button>`).join('') + '</div>';
+// 選ぶ前の行へ戻れるようにし、キーボードの位置も保つ。
+function closePracticePicker(){
+  const key=U.pick,top=U.pickScroll;U.pick=null;renderWeek();
+  document.querySelector(`[data-pick="${key}"]`)?.focus({preventScroll:true});
+  if(top!=null)window.scrollTo(0,top);
+}
+function openPracticePicker(key){
+  if(U.pick===key){closePracticePicker();return;}
+  U.pickScroll=scrollY;U.pick=key;renderWeek();
+  const grid=$('#week .pgrid');if(!grid)return;
+  (grid.querySelector('[aria-pressed="true"]')||grid.querySelector('button'))?.focus({preventScroll:true});
+  const r=grid.getBoundingClientRect(),bar=$('#week .plan>.transport')?.getBoundingClientRect();
+  const bottom=narrow.matches&&bar?bar.top-12:innerHeight-24;
+  if(r.bottom>bottom)window.scrollBy(0,r.bottom-bottom);
+}
 // 曲の個人練習で打ちこむところ（選ばなければ、いちばん吹けていないところ）
 const spanChips = m => {
   const pid = S.pieceId, v = readOf(m, pid), want = S.planSpan?.[m.id], weak = practiceSpan({...S, planSpan: {}}, m);
@@ -1176,7 +1196,9 @@ const spanChips = m => {
 };
 function planHtml(ev){
   // 開いていた練習の一覧は、週が変わったら閉じる
-  if(U.pickAt !== `${S.year}:${S.week}`){ U.pick = null; U.pickAt = `${S.year}:${S.week}`; }
+  const stateKey=`${S.recruitSeed||0}:${S.year}`;
+  if(U.planStateKey!==stateKey){U.planStateKey=stateKey;U.openSecs=new Set();U.closedSecs=new Set();}
+  if(U.pickAt !== `${stateKey}:${S.week}`){ U.pick = null; U.pickAt = `${stateKey}:${S.week}`; }
   const order = m => m.seat ? SEATS.findIndex(x => x.id === m.seat) : 999;
   const ms = S.members.slice().sort((a, b) => order(a) - order(b));
   const count = {};
@@ -1189,9 +1211,9 @@ function planHtml(ev){
   // 部員の行：名前と体力・力の帯・今週の練習のボタン（押すと練習の一覧が開く）
   const rowOf = m => {
     const auto = decideMenu(S, m), own = ownPlan(m), id = own || auto, open = U.pick === m.id;
-    return `<li class="pm${own ? ' own' : ''}${m.out && m.seat ? ' out' : ''}"><span class="who">${memberFace(m,26)}<b>${esc(m.name)}</b><small>${m.grade}年</small></span>
+    return `<li class="pm${own ? ' own' : ''}${m.out && m.seat ? ' out' : ''}"><span class="who">${memberFace(m,30)}<b>${esc(m.name)}</b><small>${m.grade}年</small></span>
       ${staBar(m)}${rankStrip(m)}
-      <button class="pick" type="button" data-pick="${m.id}" aria-expanded="${open}" aria-label="${esc(m.name)}の今週の練習">${own ? '' : '<span class="pk">おまかせ</span>'}<b>${MENU_BY[id].name}</b></button>
+      <button class="pick" type="button" data-pick="${m.id}" aria-expanded="${open}" aria-label="${esc(m.name)}の今週の練習">${practiceIcon(id)}${own ? '' : '<span class="pk">おまかせ</span>'}<b>${MENU_BY[id].name}</b></button>
       ${open ? pickGrid(m.id, own, auto) : ''}${id === 'piece' && S.pieceId ? spanChips(m) : ''}</li>`;
   };
   const rows = groups.map(({k, ms: gm}) => {
@@ -1204,8 +1226,8 @@ function planHtml(ev){
     const what = MENU.filter(x => cnt[x.id]).map(x => `${x.name}${gm.length > 1 ? ` ${cnt[x.id]}` : ''}`).join('・');
     const own = gm.some(m => S.plan?.[m.id] && menuOpen(S, S.plan[m.id]));
     const low = gm.filter(m => m.sta < 30).length;
-    const open = ms.length <= 8 || U.openSecs?.has(k);
-    return `<details class="psecd" data-sec="${k}"${open ? ' open' : ''}><summary><b>${name}<small>${gm.length}人</small></b><span class="what">${what}${own ? '・指示あり' : ''}${low ? `<em>疲れ ${low}人</em>` : ''}</span></summary>
+    const open = (ms.length<=8&&!U.closedSecs.has(k))||U.openSecs.has(k);
+    return `<details class="psecd" data-sec="${k}"${open ? ' open' : ''}><summary><b>${name}<small>${gm.length}人</small></b><span class="part-faces" aria-hidden="true">${gm.slice(0,3).map(m=>memberFace(m,20)).join('')}</span><span class="what">${what}${own ? '・指示あり' : ''}${low ? `<em>疲れ ${low}人</em>` : ''}</span></summary>
       ${secSel ? `<div class="secall">${secSel}</div>` : ''}<ul class="plist">${gm.map(rowOf).join('')}</ul></details>`;
   }).join('');
   const sum = MENU.filter(m => count[m.id]).map(m => `${m.name} ${count[m.id]}人`).join('・');
@@ -1213,7 +1235,7 @@ function planHtml(ev){
   return `<div class="plan">
     ${foundingYear(S) && S.week < 4 ? '<p class="small">「おまかせ」のままの部員は、部の方針で自分の練習を決める。指示したい部員だけ、今週の練習を選ぼう。合奏は出た人が多いほど、部のまとまりが伸びる。</p>' : ''}
     ${S.pieceId && !setActive(S) ? `<p class="plan-piece">練習している曲：<b>${esc(PIECES[S.pieceId].title)}</b><small>譜読み</small>${rankBadge(readAvg(S, S.pieceId))}</p>` : ''}
-    <div class="focus"><span>部の方針</span><div class="chips">${POLICIES.map(p => `<button class="chip" type="button" data-polall="${p.id}" aria-pressed="${pol === p.id}">${p.name}</button>`).join('')}</div>
+    <div class="focus"><span>部の方針</span><div class="chips">${POLICIES.map(p => `<button class="chip" type="button" data-polall="${p.id}" aria-pressed="${pol === p.id}">${practiceIcon(p.id==='basics'?'tune':p.id)}${p.name}</button>`).join('')}</div>
     <span class="small">${POLICY_BY[pol].desc}</span></div>
     ${setActive(S) ? `<div class="focus"><span>曲の練習の配分（自由曲 ${esc(PIECES[S.pieceId].title)}・課題曲 ${esc(PIECES[S.setPiece].title)}）</span><div class="chips">${Object.keys(SPLIT).map(k => `<button class="chip" type="button" data-split="${k}" aria-pressed="${(S.split || 'auto') === k}">${SPLIT_NAME[k]}</button>`).join('')}</div>
       <span class="small">譜読み：自由曲 ${rankBadge(readAvg(S, S.pieceId))}・課題曲 ${rankBadge(readAvg(S, S.setPiece))}。曲の練習・合奏の伸びを、この配分で2曲に分ける${(S.split || 'auto') === 'auto' ? `（おまかせ：いまは自由曲 ${Math.round(pieceShares(S)[0][1] * 10)}割・課題曲 ${Math.round(pieceShares(S)[1][1] * 10)}割）` : ''}</span></div>` : ''}
@@ -1781,20 +1803,21 @@ function bind(){
       renderAll(); refreshNow();
     }
   });
+  $('#week').addEventListener('keydown',e=>{if(e.key==='Escape'&&U.pick){e.preventDefault();closePracticePicker();}});
   $('#week').addEventListener('click', e => {
     const b = e.target.closest('button'); if(!b || b.disabled) return;
-    if(b.dataset.polall){ commit(setPolicy(S, b.dataset.polall)); renderWeek(); return; }
+    if(b.dataset.polall){ commit(setPolicy(S, b.dataset.polall)); renderWeek();document.querySelector(`[data-polall="${b.dataset.polall}"]`)?.focus({preventScroll:true});return; }
     // 今週の練習：ボタンで一覧を開き、選ぶと閉じる（パートの「まとめて選ぶ」は、そのパートの全員に）
-    if(b.dataset.pick){ haptic('tap'); U.pick = U.pick === b.dataset.pick ? null : b.dataset.pick; renderWeek(); return; }
+    if(b.dataset.pick){ haptic('tap');openPracticePicker(b.dataset.pick);return; }
     if(b.dataset.pset){
       haptic('tap');
       const key = b.dataset.pset, v = b.dataset.menu || null, sec = key.startsWith('sec:') ? key.slice(4) : null;
       let s2 = S;
       if(sec){ for(const m of S.members) if((m.seat ? SEAT[m.seat].sec : 'bench') === sec) s2 = setPlan(s2, m.id, v); }
       else s2 = setPlan(S, key, v);
-      U.pick = null; commit(s2); renderWeek(); return;
+      commit(s2);closePracticePicker();return;
     }
-    if(b.dataset.spanset){ haptic('tap'); commit(setPlanSpan(S, b.dataset.spanset, b.dataset.i === '' ? null : +b.dataset.i)); renderWeek(); return; }
+    if(b.dataset.spanset){ haptic('tap'); commit(setPlanSpan(S, b.dataset.spanset, b.dataset.i === '' ? null : +b.dataset.i)); renderWeek();document.querySelector(`[data-spanset="${b.dataset.spanset}"][data-i="${b.dataset.i}"]`)?.focus({preventScroll:true});return; }
     if(b.dataset.audplay){
       const m = memberById(b.dataset.audplay); if(!m) return;
       setVenue('room');
@@ -1818,7 +1841,7 @@ function bind(){
     if(b.dataset.cs !== undefined){ haptic('tap'); commit(resolveConsult(S, +b.dataset.cs)); renderAll(); return; }
     if(b.dataset.wplan){ haptic('tap'); commit(chooseWinterPlan(S, b.dataset.wplan)); renderAll(); scrollTo(0, 0); return; }
     if(b.dataset.ens){ const id = b.dataset.ens; if(U.ensPick.has(id)) U.ensPick.delete(id); else if(U.ensPick.size < ENS_MAX) U.ensPick.add(id); else return; haptic('tap'); updateEnsembleSelection(); return; }
-    if(b.dataset.split){ haptic('tap'); commit(setSplit(S, b.dataset.split)); renderWeek(); return; }
+    if(b.dataset.split){ haptic('tap'); commit(setSplit(S, b.dataset.split)); renderWeek();document.querySelector(`[data-split="${b.dataset.split}"]`)?.focus({preventScroll:true});return; }
     if(b.dataset.rid){ U.asg.sel = b.dataset.rid; haptic('tap'); asgUpdate(); return; }
     if(b.dataset.asg === 'bench'){ if(U.asg?.sel){ U.asg.picks[U.asg.sel] = null; asgUpdate(); } return; }
     if(b.dataset.op !== undefined){
