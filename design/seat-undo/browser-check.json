@@ -1,0 +1,59 @@
+{
+  "swapRestoresState": true,
+  "swapRestoresPeople": true,
+  "recordingsPreserved": true,
+  "undoOnce": true,
+  "benchRestoresState": true,
+  "renameEndsUndo": true,
+  "renameKept": true,
+  "wasWaiting": true,
+  "undoCancelsWaiting": true,
+  "waitingUndoRestoresState": true,
+  "released": true,
+  "noOldAutoplay": true,
+  "views": [
+    {
+      "view": "member",
+      "theme": "light",
+      "width": 375,
+      "scrollWidth": 375,
+      "errors": []
+    },
+    {
+      "view": "member",
+      "theme": "light",
+      "width": 375,
+      "scrollWidth": 375,
+      "errors": []
+    },
+    {
+      "view": "member",
+      "theme": "dark",
+      "width": 375,
+      "scrollWidth": 375,
+      "errors": []
+    },
+    {
+      "view": "member",
+      "theme": "dark",
+      "width": 375,
+      "scrollWidth": 375,
+      "errors": []
+    },
+    {
+      "view": "member",
+      "theme": "dark",
+      "width": 375,
+      "scrollWidth": 375,
+      "errors": []
+    },
+    {
+      "view": "member",
+      "theme": "light",
+      "width": 375,
+      "scrollWidth": 375,
+      "errors": []
+    }
+  ],
+  "policyEndsUndo": true
+}

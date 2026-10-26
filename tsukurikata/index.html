@@ -249,6 +249,8 @@ select{background:var(--sheet);border:1.5px solid var(--rule);border-radius:8px;
 .mbtn:disabled{opacity:.45;cursor:default}
 .mbtn:disabled:hover{border-color:var(--rule)}
 .pcard .tag.fit{justify-self:start;width:fit-content;margin-bottom:2px}
+.mc-undo{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:10px 12px;margin:12px 0;border:1px solid var(--brass);border-radius:9px;background:var(--paper);font-size:13px}
+.mc-undo .btn{min-height:44px;flex:none}
 .mc-move summary{cursor:pointer;font-size:13px;color:var(--ink-soft);padding:4px 0}
 /* 顔と席を同じボタンにまとめ、長い名前でも横へ広げない。 */
 .mc-move{min-width:0}
@@ -1424,7 +1426,7 @@ html[data-season="snow"]{--season-band:linear-gradient(90deg,#DDE8F3,#FFFFFF,#B9
 <script src="js/announce.js?v=result-journal-1"></script>
 <script src="js/tunegame.js"></script>
 <script src="js/fx.js"></script>
-<script src="js/ui.js?v=face-seat-picker-1"></script>
+<script src="js/ui.js?v=seat-undo-1"></script>
 <div class="tip" id="tip" role="tooltip" hidden></div>
 </body>
 </html>

@@ -8,7 +8,7 @@ const U = {
   venue: 'room', pos: 'center', range: 'all', view: 'mel', sel: null, piece: null, solo: 'all',
   shown: null, shownLabel: '', perfNow: null, diag: null, ptr: null, raf: 0, onEnd: null, playing: false, refreshT: 0,
   tab: 'week', tabScroll: {},
-  recordMember: null, recordPerf: null,
+  recordMember: null, recordPerf: null, moveUndo: null,
   lineup: false, draft: null, pred: null, predKey: '', predT: 0, outKey: '', outPick: new Set(),
   sfx: true, fxMode: 'full',
 };
@@ -79,7 +79,12 @@ function renderSnd(){
   else if(!SAMPLES.ready) st.textContent = `楽器の音を読み込み中 ${Math.round(SAMPLES.progress * 100)}%`;
   else st.textContent = '';
 }
-function commit(next){ S = next; save(S); }
+function commit(next){
+  // ほかの操作を巻き戻さないよう、保存する操作で席の取り消しを終える。
+  U.moveUndo = null;
+  $('#memberCard .mc-undo')?.remove();
+  S = next; save(S);
+}
 
 /* ===== いまの演奏を作り直す ===== */
 function currentCtx(){
@@ -1631,6 +1636,27 @@ function closeMemberNameForm(){
   const edit = $('#memberCard [data-mact="rename"]'); edit.setAttribute('aria-expanded', 'false'); edit.focus({preventScroll: true});
   if(narrow.matches) $('#memberCard').scrollIntoView({block: 'start'});
 }
+// 直前の移動だけを戻す。新しい保存や再読み込みを越えて持ち越さない。
+function canUndoMemberMove(){ return !!(U.moveUndo && U.moveUndo.after === S && !busy()); }
+function commitMemberMove(plan){
+  const undo = {before:S, mid:plan.m.id, ids:[plan.m.id,plan.other?.id].filter(Boolean), solo:U.solo, view:U.view};
+  commit(plan.next);
+  U.moveUndo = {...undo, after:S};
+}
+function undoMemberMove(){
+  if(!canUndoMemberMove()) return false;
+  const undo = U.moveUndo;
+  stopPlay();
+  if(U.moveUndo !== undo || !canUndoMemberMove()) return false;
+  commit(undo.before);
+  U.sel = undo.mid; U.solo = undo.solo; U.view = undo.view;
+  applySolo(); U.perfNow = null;
+  renderAll(); refreshNow();
+  $('#memberCard [data-mact="close"]').focus({preventScroll:true});
+  if(narrow.matches) $('#memberCard').scrollIntoView({block:'start'});
+  toast('席を元に戻した。',1800);
+  return true;
+}
 // 移動先を選ぶだけでは保存せず、実際の移動と同じ処理で二人の変化を確かめる。
 function selectedMemberMove(){
   const m = U.sel && memberById(U.sel), value = $('#memberCard .mc-move')?.dataset.moveTo;
@@ -1682,6 +1708,7 @@ function renderMemberCard(){
   const tr = m.trait && TRAITS[m.trait];
   card.innerHTML = `<button class="help-button mc-close" type="button" data-mact="close" aria-label="閉じる">${uiIcon('close')}</button><div class="mc-portrait">${memberFace(m,112)}<div class="mc-head"><h3>${esc(m.name)}</h3>${m.title ? `<span class="tag">${m.title}</span>` : ''}<span class="sub">${seat?instrumentIcon(seat.inst):''}${m.grade}年・${seat ? PART_LABEL[seat.part] : '控え（席なし）'}</span><button class="mc-name-edit" type="button" data-mact="rename" aria-expanded="false" aria-controls="memberNameForm">名前を変える</button></div></div>
     <form class="mc-name-form" id="memberNameForm" data-mid="${m.id}" hidden novalidate><label for="memberName">名前<small>${MEMBER_NAME_MAX}文字まで</small></label><input id="memberName" name="memberName" type="text" value="${esc(m.name)}" maxlength="24" autocomplete="off" autocapitalize="off" spellcheck="false" enterkeyhint="done" aria-describedby="memberNameError"><p id="memberNameError" class="mc-name-error" role="alert" hidden></p><div><button class="btn quiet" type="button" data-mact="renamecancel">やめる</button><button class="btn primary" type="submit">保存する</button></div></form>
+    ${canUndoMemberMove() && U.moveUndo.ids.includes(m.id) ? '<div class="mc-undo"><span>席を移した</span><button class="btn small" type="button" data-mact="moveundo">元に戻す</button></div>' : ''}
     <p class="mc-say">${esc(memberSays(m))}</p>
     ${seat || U.solo !== 'all' ? `<div class="mc-actions">${seat ? '<button class="btn small" type="button" data-mact="solo">▶ この人だけ聴く</button><button class="btn small" type="button" data-mact="secsolo">▶ パートだけ聴く</button>' : ''}${U.solo !== 'all' ? '<button class="btn small quiet" type="button" data-mact="all">全員の音にもどす</button>' : ''}</div>` : ''}
     ${dreamLine(m)}${loveLine(m)}
@@ -1986,6 +2013,7 @@ function bind(){
       return;
     }
     const m = memberById(U.sel); if(!m) return;
+    if(act === 'moveundo'){ undoMemberMove(); return; }
     if(act === 'movegroup'){
       const section=SECTIONS.find(s=>s.id===b.dataset.sec);if(!section)return;
       const picker=$('#memberCard .mc-move');picker.dataset.moveTo='';
@@ -2014,7 +2042,7 @@ function bind(){
       // 移動前の音と読み込み待ちを止め、止めたあとに最新の部から移動を決める。
       stopPlay();
       const plan = selectedMemberMove(); if(busy() || !plan) return;
-      commit(plan.next);
+      commitMemberMove(plan);
       const [type, id] = U.solo.split(':');
       if((type === 'member' && !memberById(id)?.seat) || (type === 'sec' && !seated(S).some(x => SEAT[x.seat].sec === id))) U.solo = 'all';
       applySolo();
