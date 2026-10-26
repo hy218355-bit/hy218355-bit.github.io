@@ -1378,22 +1378,25 @@ function renderLog(){
 /* ===== 部員カード・名簿 ===== */
 // 入部したとき（またはこの日誌をつけ始めたとき）からの伸びと、思い出
 const ymLabel = (y, w) => `${y}年${wkMonth(w)}月`;
-// 入部したときのランク → いまのランク（ランクが変わった力だけ）
+// 入部したときと今の4つの力を同じ順で並べる。変わらない力も省かない。
 function growthText(m){
   if(!m.first) return '';
-  return STAT_KEYS.filter(k => rankOf(m.first.stats[k]) !== rankOf(m.stats[k]))
-    .map(k => `<span class="grk">${STAT_LABEL[k]}${rankBadge(m.first.stats[k])}→${rankBadge(m.stats[k])}</span>`).join('');
+  return STAT_KEYS.map(k => `<span class="grk"><span>${STAT_LABEL[k]}</span>${rankBadge(m.first.stats[k])}<span aria-hidden="true">→</span>${rankBadge(m.stats[k])}</span>`).join('');
+}
+function memberGrowth(m){
+  if(!m.first)return '';
+  return `<div class="mc-growth"><p class="small">${ymLabel(m.first.y,m.first.w)}${m.first.y===m.joined?'の入部':'に日誌をつけ始めて'}から</p><div class="mc-growth-grid">${growthText(m)}</div></div>`;
 }
 function memberStory(m){
-  const g = growthText(m);
   const st = (m.story || []).slice(-5).reverse();
-  if(!g && !st.length) return '';
-  return `<div class="mc-story">${g ? `<p class="small grow-rk">${ymLabel(m.first.y, m.first.w)}${m.first.y === m.joined ? 'の入部' : 'に日誌をつけ始めて'}から${g}</p>` : ''}
-    ${st.length ? `<ul>${st.map(x => `<li><time>${ymLabel(x.y, x.w)}</time>${esc(x.t)}</li>`).join('')}</ul>` : ''}</div>`;
+  if(!st.length)return '';
+  return `<details class="mc-story"><summary>思い出</summary><ul>${st.map(x => `<li><time>${ymLabel(x.y,x.w)}</time>${esc(x.t)}</li>`).join('')}</ul></details>`;
 }
 // 部員カードは、押したところ（合奏のステージか、部員の名簿）の近くに出す
 function placeCard(where){
   const card = $('#memberCard');
+  card.dataset.origin=where;
+  if(where!=='roster')U.cardReturn=null;
   if(where === 'roster') $('.roster').insertBefore(card, $('.roster .sec-grid'));
   else $('.col-stage').appendChild(card);
 }
@@ -1459,14 +1462,14 @@ function renderMemberCard(){
     const o = S.members.find(x => x.seat === s.id);
     return `<option value="${s.id}">${seatLabel(s.id)}${o ? `・${esc(o.name)}と交代` : '・空席'}</option>`;
   }).join('');
-  card.innerHTML = `<div class="mc-portrait">${memberFace(m,112)}<div class="mc-head"><h3>${esc(m.name)}</h3>${m.title ? `<span class="tag">${m.title}</span>` : ''}<span class="sub">${m.grade}年・${seat ? PART_LABEL[seat.part] : '控え（席なし）'}</span><button class="link mc-close" type="button" data-mact="close">閉じる</button></div></div>
+  card.innerHTML = `<button class="help-button mc-close" type="button" data-mact="close" aria-label="閉じる">${uiIcon('close')}</button><div class="mc-portrait">${memberFace(m,112)}<div class="mc-head"><h3>${esc(m.name)}</h3>${m.title ? `<span class="tag">${m.title}</span>` : ''}<span class="sub">${seat?instrumentIcon(seat.inst):''}${m.grade}年・${seat ? PART_LABEL[seat.part] : '控え（席なし）'}</span></div></div>
     <p class="mc-say">${esc(memberSays(m))}</p>
     ${seat ? `<div class="mc-actions"><button class="btn small" type="button" data-mact="solo">▶ この人だけ聴く</button><button class="btn small" type="button" data-mact="secsolo">▶ パートだけ聴く</button>${U.solo !== 'all' ? '<button class="btn small quiet" type="button" data-mact="all">全員の音にもどす</button>' : ''}</div>` : ''}
     ${dreamLine(m)}${loveLine(m)}
-    ${skillList(m)}
-    ${tr ? `<p class="mc-trait">癖：${tr.name}。${tr.desc}</p>` : '<p class="mc-trait">目立った癖はない。</p>'}
-    <div class="stats">${STAT_KEYS.map(k => rankRow(STAT_LABEL[k], m.stats[k])).join('')}${m.mental != null ? rankRow('本番の強さ', m.mental) : ''}${S.pieceId ? `<p class="mc-sub">譜読み（${PIECES[S.pieceId].title}）</p>`
-      + readUnits(S.pieceId).map(u => rankRow(spanShort(u), readOf(m, S.pieceId)[u.i])).join('') : ''}</div>
+    ${m.first?memberGrowth(m):`<div class="stats">${STAT_KEYS.map(k=>rankRow(STAT_LABEL[k],m.stats[k])).join('')}</div>`}
+    ${m.mental!=null?`<div class="stats">${rankRow('本番の強さ',m.mental)}</div>`:''}
+    ${S.pieceId?`<details class="mc-reading"><summary>譜読み（${PIECES[S.pieceId].title}）</summary><div class="stats">${readUnits(S.pieceId).map(u=>rankRow(spanShort(u),readOf(m,S.pieceId)[u.i])).join('')}</div></details>`:''}
+    <details class="mc-personality"><summary>スキル・癖</summary>${skillList(m)}${tr?`<p class="mc-trait">癖：${tr.name}。${tr.desc}</p>`:'<p class="mc-trait">目立った癖はない。</p>'}</details>
     ${memberStory(m)}
 
     <details class="mc-move"><summary>席を移す</summary><div class="mc-actions"><select id="moveSel" aria-label="移す先"><option value="">控え（席なし）</option>${seats}</select><button class="btn small" type="button" data-mact="move"${busy() ? ' disabled' : ''}>移す</button></div>
@@ -1479,9 +1482,10 @@ function renderRoster(){
     const ms = secMembers(S, s.id), seats = SEATS.filter(x => x.sec === s.id).length;
     const av = k => ms.length ? ms.reduce((a, m) => a + m.stats[k], 0) / ms.length : 0;
     const lose = !ms.length && w[s.id] ? LACK_MAX * w[s.id] / tot : 0;
-    return `<button class="sec-tile" type="button" data-sec="${s.id}" aria-pressed="${U.view === s.id}"><b>${s.name}</b>
-      <span class="bars">${STAT_KEYS.map(k => `<i title="${STAT_LABEL[k]} ${rankOf(av(k))}"><span style="height:${av(k)}%;${rankFill(av(k))}"></span></i>`).join('')}</span>
-      <small>${ms.length}/${seats}人${lose ? `<em class="lose">${lose >= 1 ? `いない・この曲で −${Math.round(lose)}点` : 'いない'}</em>` : ''}</small></button>`;
+    const inst=SEATS.find(x=>x.sec===s.id).inst;
+    return `<button class="sec-tile" type="button" data-sec="${s.id}" aria-label="${s.name} ${ms.length}/${seats}人" aria-pressed="${U.view === s.id}"><b>${s.name}</b>
+      <span class="sec-count">${instrumentIcon(inst)}<small>${ms.length}/${seats}人</small></span>
+      <span class="sec-ranks">${STAT_KEYS.map(k=>`<span title="${STAT_LABEL[k]}">${rankBadge(av(k))}</span>`).join('')}</span>${lose?`<em class="lose">${lose>=1?`いない・この曲で −${Math.round(lose)}点`:'いない'}</em>`:''}</button>`;
   }).join('');
   const rows = [];
   for(const sec of SECTIONS){
@@ -1498,8 +1502,8 @@ function renderRoster(){
   $('#rosterTable').innerHTML = `<thead><tr><th>名前</th>${STAT_KEYS.map(k => `<th class="num">${STAT_LABEL[k]}</th>`).join('')}</tr></thead><tbody>${rows.join('') || '<tr class="empty"><td colspan="5">部員はまだいない</td></tr>'}</tbody>`;
 }
 function memberRow(m, part){
-  const sub = [`${m.grade}年`, part + (m.out && m.seat ? '（コンクール控え）' : ''), m.trait ? TRAITS[m.trait].name : '', ...skillsOf(m).map(x => x.name + skillMark(x.lv))].filter(Boolean).join('・');
-  return `<tr class="mem${U.sel === m.id ? ' sel' : ''}" data-mid="${m.id}"><td><span class="roster-person">${memberFace(m,36)}<span><b>${esc(m.name)}</b>${m.title ? ` <span class="tag">${m.title}</span>` : ''}<small>${sub}</small></span></span></td>`
+  const sub=`${m.grade}年・${part}${m.out&&m.seat?'（コンクール控え）':''}`;
+  return `<tr class="mem${U.sel === m.id ? ' sel' : ''}" data-mid="${m.id}"><td><button class="roster-open" type="button" aria-expanded="${U.sel===m.id}" aria-controls="memberCard"><span class="roster-person">${memberFace(m,40)}<span><b>${esc(m.name)}</b>${m.title ? ` <span class="tag">${m.title}</span>` : ''}<small>${sub}</small></span></span></button></td>`
     + STAT_KEYS.map(k => `<td class="num">${rankBadge(m.stats[k])}</td>`).join('') + '</tr>';
 }
 
@@ -1709,7 +1713,7 @@ function bind(){
     U.view = s.sec;
     placeCard('stage');
     renderSelectors(); renderMemberCard(); renderRoster(); drawIdle();
-    if(m) $('#memberCard').scrollIntoView({block: narrow.matches ? 'start' : 'nearest', behavior: 'smooth'});
+    if(m) $('#memberCard').scrollIntoView({block:narrow.matches?'start':'nearest',behavior:!fxCalm()&&U.fxMode==='full'?'smooth':'auto'});
   });
   $('#secGrid').addEventListener('click', e => {
     const b = e.target.closest('[data-sec]'); if(!b) return;
@@ -1719,18 +1723,25 @@ function bind(){
   });
   $('#rosterTable').addEventListener('click', e => {
     const tr = e.target.closest('[data-mid]'); if(!tr) return;
+    U.cardReturn={id:tr.dataset.mid,top:scrollY};
     U.sel = tr.dataset.mid;
     const m = memberById(U.sel);
     if(m?.seat) U.view = SEAT[m.seat].sec;
     if(narrow.matches) placeCard('roster');
     renderSelectors(); renderMemberCard(); renderRoster(); drawIdle();
-    $('#memberCard').scrollIntoView({block: narrow.matches ? 'start' : 'nearest', behavior: 'smooth'});
+    $('#memberCard').scrollIntoView({block:narrow.matches?'start':'nearest',behavior:!fxCalm()&&U.fxMode==='full'?'smooth':'auto'});
+    $('#memberCard [data-mact="close"]').focus({preventScroll:true});
   });
   $('#memberCard').addEventListener('click', e => {
     const b = e.target.closest('[data-mact]'); if(!b) return;
     const m = memberById(U.sel); if(!m) return;
     const act = b.dataset.mact;
-    if(act === 'close'){ U.sel = null; renderSelectors(); renderMemberCard(); renderRoster(); drawIdle(); return; }
+    if(act === 'close'){
+      const back=$('#memberCard').dataset.origin==='roster'&&U.cardReturn;
+      U.sel=null;renderSelectors();renderMemberCard();renderRoster();drawIdle();
+      if(back){document.querySelector(`[data-mid="${back.id}"] .roster-open`)?.focus({preventScroll:true});window.scrollTo(0,back.top);}
+      U.cardReturn=null;return;
+    }
     if(act === 'solo'){ U.solo = `member:${m.id}`; renderSelectors(); applySolo(); renderMemberCard(); if(!U.playing) $('#btnNow').click(); }
     else if(act === 'secsolo'){ U.solo = `sec:${SEAT[m.seat].sec}`; renderSelectors(); applySolo(); renderMemberCard(); if(!U.playing) $('#btnNow').click(); }
     else if(act === 'all'){ U.solo = 'all'; renderSelectors(); applySolo(); renderMemberCard(); }

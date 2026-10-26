@@ -1,0 +1,16 @@
+<!doctype html><html lang="ja"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>顔と成長が見える部員の画面</title>
+<style>
+@font-face{font-family:body;src:url('/tsukurikata/fonts/zen-kaku-gothic-new-500.woff2')}*{box-sizing:border-box}body{margin:0;background:#f1f0e9;color:#263e47;font-family:body,sans-serif}main{max-width:1000px;margin:auto;padding:24px}h1{font-size:23px;margin:0 0 12px}h2{font-size:18px;margin-top:32px}p{font-size:14px;line-height:1.9;max-width:800px}a{color:inherit}.grid{display:grid;grid-template-columns:repeat(2,minmax(0,375px));gap:20px}figure{margin:0}figcaption{font-size:13px;margin:10px 0}img{display:block;width:100%;border-radius:16px;border:1px solid #d4d7c9;box-shadow:0 5px 18px #263e4710}nav{display:flex;flex-wrap:wrap;gap:10px}nav a{padding:10px 14px;border:1px solid #936b2f;border-radius:8px;text-decoration:none}@media(max-width:600px){main{padding:16px}.grid{grid-template-columns:1fr}}
+</style>
+<main><h1>顔と成長が見える部員の画面</h1>
+<p>パート欄を小さくし、名簿の顔と名前を大きく。カードは、本人のひとことと入部からの4つのランクを先に見られます。譜読み・スキル・思い出は、押すと開く形です。</p>
+<nav><a href="/design/implementation/qa.html?view=members&theme=light&keys=1">名簿をさわる</a><a href="/design/implementation/qa.html?view=member&theme=light&keys=1">カードをさわる</a><a href="../selection-polish/">前回の人選</a></nav>
+<h2>名簿 · 375px</h2><div class="grid">
+<figure><figcaption>ライト</figcaption><img src="screenshots/roster-light.png" alt="顔と名前が最初の画面から見える部員一覧・ライト"></figure>
+<figure><figcaption>ダーク</figcaption><img src="screenshots/roster-dark.png" alt="パートのランクと大きくした顔が並ぶ部員一覧・ダーク"></figure></div>
+<h2>部員カード · 375px</h2><p>右上の閉じるボタンも44px。名簿から開いたカードを閉じると、選んでいた人の位置に戻ります。</p><div class="grid">
+<figure><figcaption>ライト</figcaption><img src="screenshots/card-light.png" alt="ひとことと入部からのランクを並べた部員カード・ライト"></figure>
+<figure><figcaption>ダーク</figcaption><img src="screenshots/card-dark.png" alt="成長の4つのランクと折りたためる詳しい情報・ダーク"></figure></div>
+<h2>入部したばかりの子</h2><div class="grid"><figure><figcaption>変わっていない力も、そのまま表示</figcaption><img src="screenshots/new-member-dark.png" alt="夢と、入部したばかりの力を表示した新入部員"></figure></div>
+</main></html>

@@ -1,0 +1,156 @@
+[
+  {
+    "buttonHeight": 48,
+    "faceSize": 40,
+    "faces": 39,
+    "parts": 296.5859375,
+    "scrollWidth": 375,
+    "theme": "light",
+    "view": "roster",
+    "width": 375
+  },
+  {
+    "view": "return-to-roster",
+    "openedId": "m2028-n39-cafe",
+    "cardHidden": true,
+    "focusId": "m2028-n39-cafe",
+    "rowTop": 566.0625,
+    "scrollWidth": 375,
+    "width": 375
+  },
+  {
+    "view": "details",
+    "reading": true,
+    "personality": true,
+    "story": true
+  },
+  {
+    "view": "member-new",
+    "errors": [],
+    "steps": 0,
+    "theme": "dark",
+    "width": 375,
+    "scrollWidth": 375,
+    "faceCount": 11,
+    "stagePortraits": 5,
+    "watchPortraits": 0,
+    "stageCache": {
+      "images": 10,
+      "stamps": 40
+    }
+  },
+  {
+    "view": "member-old",
+    "errors": [],
+    "steps": 0,
+    "theme": "dark",
+    "width": 375,
+    "scrollWidth": 375,
+    "faceCount": 79,
+    "stagePortraits": 39,
+    "watchPortraits": 0,
+    "stageCache": {
+      "images": 10,
+      "stamps": 40
+    },
+    "growthShown": false,
+    "statsShown": true
+  },
+  {
+    "view": "member-bench",
+    "errors": [],
+    "steps": 0,
+    "theme": "dark",
+    "width": 375,
+    "scrollWidth": 375,
+    "faceCount": 79,
+    "stagePortraits": 38,
+    "watchPortraits": 0,
+    "stageCache": {
+      "images": 10,
+      "stamps": 40
+    },
+    "soloShown": false
+  },
+  {
+    "view": "solo",
+    "playing": true,
+    "returnToAll": true,
+    "scrollWidth": 375,
+    "width": 375
+  },
+  {
+    "scrollWidth": 375,
+    "tab": "week",
+    "theme": "dark",
+    "view": "tab",
+    "width": 375
+  },
+  {
+    "scrollWidth": 375,
+    "tab": "play",
+    "theme": "dark",
+    "view": "tab",
+    "width": 375
+  },
+  {
+    "scrollWidth": 375,
+    "tab": "members",
+    "theme": "dark",
+    "view": "tab",
+    "width": 375
+  },
+  {
+    "scrollWidth": 375,
+    "tab": "log",
+    "theme": "dark",
+    "view": "tab",
+    "width": 375
+  },
+  {
+    "scrollWidth": 375,
+    "tab": "week",
+    "theme": "light",
+    "view": "tab",
+    "width": 375
+  },
+  {
+    "scrollWidth": 375,
+    "tab": "play",
+    "theme": "light",
+    "view": "tab",
+    "width": 375
+  },
+  {
+    "scrollWidth": 375,
+    "tab": "members",
+    "theme": "light",
+    "view": "tab",
+    "width": 375
+  },
+  {
+    "scrollWidth": 375,
+    "tab": "log",
+    "theme": "light",
+    "view": "tab",
+    "width": 375
+  },
+  {
+    "view": "year",
+    "errors": [],
+    "steps": 49,
+    "year": 2027,
+    "members": 8,
+    "saveVersion": 2,
+    "theme": "light",
+    "width": 375,
+    "scrollWidth": 375,
+    "faceCount": 11,
+    "stagePortraits": 8,
+    "watchPortraits": 0,
+    "stageCache": {
+      "images": 10,
+      "stamps": 46
+    }
+  }
+]

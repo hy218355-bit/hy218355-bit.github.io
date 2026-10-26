@@ -844,6 +844,55 @@ html[data-season="snow"]{--season-band:linear-gradient(90deg,#DDE8F3,#FFFFFF,#B9
 [data-motion="off"] .fill{transition:none!important}[data-motion="short"] .fill{transition-duration:.3s!important}
 /* 顔を押したあとはカードまでスクロールでき、とばすボタンは手元に残す。 */
 .conduct.watch{overflow-y:auto}.conduct.watch .cd-top{position:sticky;top:0;z-index:2;background:var(--paper);padding-bottom:6px;flex-shrink:0}.conduct.watch .cd-band{flex:1 0 auto}.conduct.watch .cd-member,.conduct.watch .cd-msg,.conduct.watch .cd-legend{flex-shrink:0}
+/* 名簿は顔と名前、カードはひとことと育った力から見える順にする。 */
+.roster .roster-head{display:flex;align-items:center;justify-content:space-between;gap:12px}
+.roster-head .help-button{width:44px;height:44px;flex:none}
+#secGrid{grid-template-columns:repeat(3,minmax(0,1fr));gap:7px}
+#secGrid .sec-tile{min-width:0;min-height:86px;gap:5px;padding:9px 8px;color:var(--ink)}
+#secGrid .sec-tile b{font-size:11px;letter-spacing:0;white-space:nowrap}
+.sec-count{display:flex;align-items:center;gap:6px;color:var(--ink-soft)}
+.sec-count .instrument-icon{width:19px;height:19px;flex:none;color:var(--ink)}
+.sec-ranks{display:flex;gap:3px}
+.sec-ranks .rk{width:17px;height:17px;font-size:10px}
+#secGrid .lose{font-size:10px;line-height:1.5;white-space:normal}
+#secGrid .sec-tile:hover{border-color:var(--rule)}
+#secGrid .sec-tile[aria-pressed="true"]{border-color:var(--brass);background:color-mix(in srgb,var(--brass) 10%,var(--sheet))}
+#rosterTable{table-layout:fixed}
+#rosterTable th.num{width:36px;font-size:10px;padding:9px 1px}
+#rosterTable td{padding:8px 3px}
+#rosterTable td:first-child{padding-left:8px}
+#rosterTable .num .rk{width:24px;height:25px;font-size:13px}
+.roster-open{display:block;width:100%;min-height:48px;padding:0;border:0;background:none;color:var(--ink);font:inherit;text-align:left;cursor:pointer;border-radius:6px}
+.roster-open:focus-visible{outline:2px solid var(--brass);outline-offset:2px}
+#rosterTable .roster-person{gap:8px}
+#rosterTable .roster-person>.member-face{width:40px;height:40px;border-radius:8px}
+#rosterTable .roster-person b{font-size:14px;font-weight:700;white-space:nowrap}
+#rosterTable .roster-person small{font-size:11px;line-height:1.5;margin-top:3px}
+.member-card{position:relative}
+.member-card .mc-close{position:absolute;right:7px;top:7px;margin:0;width:44px;height:44px;z-index:1}
+.mc-close .ui-icon{width:18px;height:18px}
+.member-card .mc-head h3{padding-right:18px}
+.member-card .mc-head .sub{display:flex;align-items:center;gap:5px;line-height:1.6}
+.mc-head .instrument-icon{width:21px;height:21px;flex:none;color:var(--brass)}
+.member-card .mc-say{position:relative;padding:12px;margin:4px 0;border:1px solid var(--rule);background:var(--paper);border-radius:10px;line-height:1.8;text-wrap:balance}
+.member-card .mc-say::before{content:'';position:absolute;top:-6px;left:34px;width:10px;height:10px;border-top:1px solid var(--rule);border-left:1px solid var(--rule);background:var(--paper);transform:rotate(45deg)}
+.member-card>.mc-actions{display:grid;grid-template-columns:repeat(2,minmax(0,1fr))}
+.member-card>.mc-actions .btn{min-height:44px;padding:9px 5px;font-size:12px;white-space:nowrap}
+.mc-growth{padding:12px;background:var(--paper);border:1px solid var(--rule);border-radius:10px}
+.mc-growth>p{margin:0 0 10px;font-size:11px}
+.mc-growth-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px 12px}
+.mc-growth .grk{display:grid;grid-template-columns:minmax(0,1fr) auto auto auto;gap:4px;font-size:12px;color:var(--ink-soft)}
+.mc-growth .grk>.rk{width:21px;height:23px;font-size:12px}
+.mc-growth .grk>.rk:last-child{width:24px;height:26px;font-size:14px}
+.member-card>details{border-top:1px solid var(--rule)}
+.member-card>details>summary{min-height:44px;display:flex;align-items:center;justify-content:space-between;gap:8px;cursor:pointer;font-size:13px;color:var(--ink-soft);list-style:none}
+.member-card>details>summary::-webkit-details-marker{display:none}
+.member-card>details>summary::after{content:'';width:7px;height:7px;flex:none;border-right:1.5px solid currentColor;border-bottom:1.5px solid currentColor;transform:rotate(45deg);margin-right:4px}
+.member-card>details[open]>summary::after{transform:rotate(225deg)}
+.mc-story ul{margin:0 0 12px;padding:0 0 0 12px;border-left:2px solid var(--rule);gap:10px}
+.mc-story li time{display:block;margin:0;font-size:11px}
+.mc-personality>.mc-trait{margin:10px 0}
+@media(min-width:961px){#secGrid{grid-template-columns:repeat(auto-fill,minmax(120px,1fr))}#rosterTable th.num{width:48px}}
 </style>
 </head>
 <body>
@@ -926,7 +975,7 @@ html[data-season="snow"]{--season-band:linear-gradient(90deg,#DDE8F3,#FFFFFF,#B9
   <section class="roster" data-tab="members" aria-labelledby="h-roster">
     <div class="roster-head">
       <h2 id="h-roster">パートと部員</h2>
-      <p class="small">棒は左から音程・リズム・音色・表現。部員を押すと、くわしい様子と、その人だけの音を聴ける。</p>
+      <button class="help-button" type="button" aria-label="パートと部員" data-tipname="パートと部員" data-tip="左から音程・リズム・音色・表現のランク。部員を押すと、くわしい様子と、その人だけの音を聴ける。">?</button>
     </div>
     <div class="sec-grid" id="secGrid"></div>
     <div class="table-wrap"><table id="rosterTable"></table></div>
@@ -1021,7 +1070,7 @@ html[data-season="snow"]{--season-band:linear-gradient(90deg,#DDE8F3,#FFFFFF,#B9
 </nav>
 
 <script src="js/util.js?v=qa-selection-polish-1"></script>
-<script src="js/icons.js?v=qa-selection-polish-1"></script>
+<script src="js/icons.js?v=member-polish-1"></script>
 <script src="js/instrument-icons.js?v=selection-polish-1"></script>
 <script src="js/face-cast.js?v=cast100-1"></script>
 <script src="js/faces.js?v=cast100-1"></script>
@@ -1051,8 +1100,8 @@ html[data-season="snow"]{--season-band:linear-gradient(90deg,#DDE8F3,#FFFFFF,#B9
 <script src="js/announce.js?v=qa-selection-polish-1"></script>
 <script src="js/tunegame.js?v=qa-selection-polish-1"></script>
 <script src="js/fx.js?v=qa-selection-polish-1"></script>
-<script src="js/ui.js?v=selection-polish-1"></script>
+<script src="js/ui.js?v=member-polish-1"></script>
 <div class="tip" id="tip" role="tooltip" hidden></div>
-<script src="/design/implementation/qa.js?v=selection-polish-1"></script>
+<script src="/design/implementation/qa.js?v=member-polish-2"></script>
 </body>
 </html>
