@@ -15,3 +15,11 @@
 ## ②案の改善版
 
 `lp/assets/after-school-v2.webp`：組み込みimage_genで、本提案のために制作したオリジナルの音楽室の画像。既存作品の画像を素材に使用していない。最終プロンプト・生成原稿・書き出し情報は `lp/assets/after-school-v2.prompt.txt`。改善版のロゴ、舞台、画面例と操作アイコンは自作SVG／HTML／CSS。ゲーム本体にはまだ採用しない。
+
+## 放課後の音楽室：ゲーム画面と顔
+
+`after-school/assets/faces-art-direction.webp`：組み込みimage_genで本提案のために制作した12人の絵柄見本。光と色の参照は自作の音楽室。画面内の仮配置はCSSで各枠を表示し、原画の意味や内容は編集していない。ゲーム用の完成素材とは扱わない。生成原稿と最終プロンプトは同フォルダの `faces-art-direction.prompt.txt`。
+
+`after-school/faces.js` と `after-school/assets/faces/*.svg`：絵柄見本とは別に、SVGパーツで自作した試作。原画の画素は含まない。グラデーション、顔の各パーツ、小物も自作。
+
+`after-school/assets/app-icon-1024.svg`：LPで使った校章と音符のマークから自作したアイコン。PNGはローカルブラウザで描画した原稿から書き出した。ゲームのアイコンファイルはまだ変更しない。

@@ -1,0 +1,136 @@
+[
+  {
+    "screen": "week",
+    "theme": "light",
+    "content": 375,
+    "names": [
+      {
+        "height": 27,
+        "scroll": 93,
+        "width": 93
+      },
+      {
+        "height": 27,
+        "scroll": 82,
+        "width": 82
+      }
+    ],
+    "primary": [
+      {
+        "bottom": 732,
+        "top": 686
+      }
+    ],
+    "tabTop": 742,
+    "width": 375
+  },
+  {
+    "screen": "week",
+    "theme": "dark",
+    "content": 375,
+    "names": [
+      {
+        "height": 27,
+        "scroll": 93,
+        "width": 93
+      },
+      {
+        "height": 27,
+        "scroll": 82,
+        "width": 82
+      }
+    ],
+    "primary": [
+      {
+        "bottom": 732,
+        "top": 686
+      }
+    ],
+    "tabTop": 742,
+    "width": 375
+  },
+  {
+    "screen": "stage",
+    "theme": "light",
+    "content": 375,
+    "names": [],
+    "primary": [
+      {
+        "bottom": 541.4921875,
+        "top": 495.4921875
+      }
+    ],
+    "tabTop": 742,
+    "width": 375
+  },
+  {
+    "screen": "stage",
+    "theme": "dark",
+    "content": 375,
+    "names": [],
+    "primary": [
+      {
+        "bottom": 541.4921875,
+        "top": 495.4921875
+      }
+    ],
+    "tabTop": 742,
+    "width": 375
+  },
+  {
+    "screen": "member",
+    "theme": "light",
+    "content": 375,
+    "names": [],
+    "primary": [
+      {
+        "bottom": 684.875,
+        "top": 638.875
+      }
+    ],
+    "tabTop": 742,
+    "width": 375
+  },
+  {
+    "screen": "member",
+    "theme": "dark",
+    "content": 375,
+    "names": [],
+    "primary": [
+      {
+        "bottom": 684.875,
+        "top": 638.875
+      }
+    ],
+    "tabTop": 742,
+    "width": 375
+  },
+  {
+    "screen": "grad",
+    "theme": "light",
+    "content": 375,
+    "names": [],
+    "primary": [
+      {
+        "bottom": 723.671875,
+        "top": 677.671875
+      }
+    ],
+    "tabTop": null,
+    "width": 375
+  },
+  {
+    "screen": "grad",
+    "theme": "dark",
+    "content": 375,
+    "names": [],
+    "primary": [
+      {
+        "bottom": 723.671875,
+        "top": 677.671875
+      }
+    ],
+    "tabTop": null,
+    "width": 375
+  }
+]
