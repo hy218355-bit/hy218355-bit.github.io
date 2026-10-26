@@ -893,6 +893,55 @@ html[data-season="snow"]{--season-band:linear-gradient(90deg,#DDE8F3,#FFFFFF,#B9
 .mc-story li time{display:block;margin:0;font-size:11px}
 .mc-personality>.mc-trait{margin:10px 0}
 @media(min-width:961px){#secGrid{grid-template-columns:repeat(auto-fill,minmax(120px,1fr))}#rosterTable th.num{width:48px}}
+/* 相談は誰の話か、卒業式は顔と育った力が先に分かる形へ。 */
+.episode.consult{padding:14px;gap:14px;border-radius:12px}
+.episode.consult .head{display:flex;align-items:center;flex-wrap:nowrap;gap:10px}
+.consult .head>.member-face{border-radius:10px}
+.consult-person{display:grid;gap:3px;flex:1;min-width:0}
+.consult-person>.tag{justify-self:start;font-size:10px;padding:0 6px}
+.consult-person>b{font-size:17px;font-weight:700}
+.consult .consult-person .who{font-size:11px;line-height:1.6}
+.consult .who .instrument-icon{width:17px;height:17px;vertical-align:-4px;margin-right:4px}
+.consult .head>.help-button{min-width:44px;min-height:44px;align-self:flex-start}
+.episode.consult>.txt{position:relative;border:1px solid var(--rule);border-radius:10px;padding:12px;background:var(--paper);font-size:15px;line-height:1.85;margin:0}
+.episode.consult>.txt::before{content:'';position:absolute;top:-6px;left:22px;width:10px;height:10px;border-top:1px solid var(--rule);border-left:1px solid var(--rule);background:var(--paper);transform:rotate(45deg)}
+.consult .choices .mbtn{display:flex;align-items:center;justify-content:space-between;gap:10px;min-height:52px;padding:12px}
+.consult .choices .mbtn b{font-size:13px;line-height:1.65;font-weight:500}
+.consult .choices .mbtn .ui-icon{width:16px;height:16px;transform:rotate(-90deg);color:var(--brass)}
+.consult-result{display:flex;align-items:flex-start;gap:10px;padding:12px;border:1px solid var(--rule);border-radius:10px;background:var(--sheet)}
+.consult-result>.epres{margin:0;min-width:0}
+.gradroll .gr-card{cursor:default;gap:14px;padding:20px}
+.gradroll .gr-person{gap:14px;padding:0}
+.gradroll .gr-person .member-face{width:104px;height:104px;flex:none}
+.gradroll .gr-person>div{min-width:0;gap:6px}
+.gradroll .gr-name{font-size:24px;font-weight:700}
+.gradroll .gr-sub{display:flex;align-items:center;gap:5px;line-height:1.6;font-size:12px;margin:0}
+.gr-sub .instrument-icon{width:20px;height:20px;flex:none;color:var(--brass)}
+.gr-bye,.senior .bye{margin:0;padding:12px;border:1px solid var(--rule);border-radius:10px;background:var(--paper);font-size:16px;line-height:1.8;text-wrap:balance}
+.gr-mem{margin:0;padding-left:12px;border-left:2px solid var(--brass-soft);gap:10px}
+.gr-mem time{display:block;margin:0;font-size:10.5px}
+.gr-record{border-top:1px solid var(--rule);font-size:13px}
+.gr-record>summary{min-height:44px;display:flex;align-items:center;justify-content:space-between;gap:8px;list-style:none;cursor:pointer;color:var(--ink-soft)}
+.gr-record>summary::-webkit-details-marker{display:none}
+.gr-record>summary::after{content:'';width:7px;height:7px;border-right:1.5px solid currentColor;border-bottom:1.5px solid currentColor;transform:rotate(45deg);margin-right:4px}
+.gr-record[open]>summary::after{transform:rotate(225deg)}
+.gr-record>p{margin:0 0 10px}
+.gr-ctl{display:grid;grid-template-columns:auto 44px minmax(0,1fr) auto;gap:8px;padding-top:12px}
+.gr-ctl .btn{min-height:44px;padding:10px 12px;font-size:12px;white-space:nowrap}
+#grPrev{padding:10px}
+#grPrev .ui-icon{width:18px;height:18px}
+#grStep{text-align:center;font-size:11px}
+.gradroll[data-motion="off"] .gr-card{transition:none;transform:none}
+.gradroll[data-motion="short"] .gr-card{transition-duration:.2s}
+.senior summary{display:grid;grid-template-columns:minmax(0,1fr) auto;align-items:center;gap:10px;min-height:72px}
+.senior-person{display:flex;align-items:center;gap:10px;min-width:0}
+.senior-person>span{min-width:0}
+.senior-person .nm{display:block;font-size:15px}
+.senior-person .sub{display:block;font-size:11px;line-height:1.6;margin-top:4px}
+.senior-person .instrument-icon{width:17px;height:17px;vertical-align:-4px;margin-right:4px;color:var(--brass)}
+.senior .mem{margin:0;padding-left:12px;border-left:2px solid var(--rule)}
+.senior .mem time{display:block;margin:0}
+.senior .transport .btn{min-height:44px}
 </style>
 </head>
 <body>
@@ -1011,7 +1060,7 @@ html[data-season="snow"]{--season-band:linear-gradient(90deg,#DDE8F3,#FFFFFF,#B9
 <section class="gradroll" id="gradRoll" hidden aria-label="卒業式">
   <canvas class="fx-sky" aria-hidden="true"></canvas>
   <div class="gr-card" id="grCard" aria-live="polite"></div>
-  <div class="gr-ctl"><button class="btn quiet small" type="button" id="grSkip">とじる</button><span class="small" id="grStep"></span><button class="btn primary" type="button" id="grNext">次へ</button></div>
+  <div class="gr-ctl"><button class="btn quiet small" type="button" id="grSkip">とじる</button><button class="btn quiet" type="button" id="grPrev" aria-label="前へ" disabled><svg class="ui-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m15 6-6 6 6 6"/></svg></button><span class="small" id="grStep"></span><button class="btn primary" type="button" id="grNext">次へ</button></div>
 </section>
 <div class="fx" id="fx" hidden role="status" aria-live="polite"><canvas class="fx-sky" aria-hidden="true"></canvas><div class="fx-card"></div></div>
 <section class="conduct" id="conduct" hidden aria-labelledby="cdTitle">
@@ -1100,8 +1149,8 @@ html[data-season="snow"]{--season-band:linear-gradient(90deg,#DDE8F3,#FFFFFF,#B9
 <script src="js/announce.js?v=qa-selection-polish-1"></script>
 <script src="js/tunegame.js?v=qa-selection-polish-1"></script>
 <script src="js/fx.js?v=qa-selection-polish-1"></script>
-<script src="js/ui.js?v=member-polish-1"></script>
+<script src="js/ui.js?v=story-polish-1"></script>
 <div class="tip" id="tip" role="tooltip" hidden></div>
-<script src="/design/implementation/qa.js?v=member-polish-2"></script>
+<script src="/design/implementation/qa.js?v=story-polish-1"></script>
 </body>
 </html>

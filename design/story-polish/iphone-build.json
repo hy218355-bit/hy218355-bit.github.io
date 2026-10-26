@@ -1,0 +1,18 @@
+{
+  "buildSucceeded": true,
+  "installed": true,
+  "launched": false,
+  "files": [
+    {
+      "file": "index.html",
+      "match": true,
+      "sha256": "669171ce72743e3481ce4e62c423b5804fdd06b0dac773218d6ea67af57482a3"
+    },
+    {
+      "file": "js/ui.js",
+      "match": true,
+      "sha256": "d8e82b1340848ee1912a8e069079f341e990211aa5753bd8df6550dbc8e76418"
+    }
+  ],
+  "launchFailure": "device_locked"
+}

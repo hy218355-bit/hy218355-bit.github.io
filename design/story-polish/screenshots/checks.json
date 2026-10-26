@@ -1,0 +1,202 @@
+[
+  {
+    "barTop": 679,
+    "choices": [
+      {
+        "bottom": 528.078125,
+        "height": 69.890625,
+        "label": "ここで、もう少しいっしょに吹いてみない？"
+      },
+      {
+        "bottom": 588.078125,
+        "height": 52,
+        "label": "どちらも見学してから決めていいよ"
+      }
+    ],
+    "face": 56,
+    "scrollWidth": 375,
+    "theme": "light",
+    "view": "consult",
+    "width": 375
+  },
+  {
+    "view": "grad-back",
+    "first": "m2028-n3-cafe",
+    "next": "m2028-n6-cafe",
+    "back": "m2028-n3-cafe"
+  },
+  {
+    "bottom": 715.2265625,
+    "controlsTop": 740,
+    "motion": "off",
+    "open": true,
+    "scrollWidth": 375,
+    "top": 40.7734375,
+    "transition": "0s",
+    "view": "grad-record",
+    "width": 375
+  },
+  {
+    "view": "reading-pauses-auto",
+    "before": {
+      "view": "grad-auto",
+      "errors": [],
+      "steps": 0,
+      "theme": "light",
+      "width": 375,
+      "scrollWidth": 375,
+      "faceCount": 79,
+      "stagePortraits": 39,
+      "watchPortraits": 0,
+      "stageCache": {
+        "images": 10,
+        "stamps": 41
+      },
+      "gradIndex": 1,
+      "gradAuto": true
+    },
+    "after": {
+      "view": "grad-auto",
+      "errors": [],
+      "steps": 0,
+      "theme": "light",
+      "width": 375,
+      "scrollWidth": 375,
+      "faceCount": 79,
+      "stagePortraits": 39,
+      "watchPortraits": 0,
+      "stageCache": {
+        "images": 10,
+        "stamps": 41
+      },
+      "gradIndex": 1,
+      "gradAuto": false
+    }
+  },
+  {
+    "view": "grad-old",
+    "errors": [],
+    "steps": 0,
+    "theme": "light",
+    "width": 375,
+    "scrollWidth": 375,
+    "faceCount": 79,
+    "stagePortraits": 39,
+    "watchPortraits": 0,
+    "stageCache": {
+      "images": 10,
+      "stamps": 41
+    },
+    "gradIndex": 1,
+    "gradAuto": false,
+    "currentRanksShown": true
+  },
+  {
+    "face": 48,
+    "growth": 4,
+    "open": true,
+    "scrollWidth": 375,
+    "view": "senior",
+    "width": 375
+  },
+  {
+    "view": "consult-result",
+    "errors": [],
+    "steps": 0,
+    "theme": "light",
+    "width": 375,
+    "scrollWidth": 375,
+    "faceCount": 14,
+    "stagePortraits": 6,
+    "watchPortraits": 0,
+    "stageCache": {
+      "images": 10,
+      "stamps": 44
+    },
+    "gradIndex": 1,
+    "gradAuto": false,
+    "resultFace": true
+  },
+  {
+    "view": "grad-end",
+    "previousDisabledAtFirst": true,
+    "step": "15／15",
+    "nextLabel": "4月へ（新年度）"
+  },
+  {
+    "scrollWidth": 375,
+    "tab": "week",
+    "theme": "light",
+    "view": "tab",
+    "width": 375
+  },
+  {
+    "scrollWidth": 375,
+    "tab": "play",
+    "theme": "light",
+    "view": "tab",
+    "width": 375
+  },
+  {
+    "scrollWidth": 375,
+    "tab": "members",
+    "theme": "light",
+    "view": "tab",
+    "width": 375
+  },
+  {
+    "scrollWidth": 375,
+    "tab": "log",
+    "theme": "light",
+    "view": "tab",
+    "width": 375
+  },
+  {
+    "scrollWidth": 375,
+    "tab": "week",
+    "theme": "dark",
+    "view": "tab",
+    "width": 375
+  },
+  {
+    "scrollWidth": 375,
+    "tab": "play",
+    "theme": "dark",
+    "view": "tab",
+    "width": 375
+  },
+  {
+    "scrollWidth": 375,
+    "tab": "members",
+    "theme": "dark",
+    "view": "tab",
+    "width": 375
+  },
+  {
+    "scrollWidth": 375,
+    "tab": "log",
+    "theme": "dark",
+    "view": "tab",
+    "width": 375
+  },
+  {
+    "view": "year",
+    "errors": [],
+    "steps": 49,
+    "year": 2027,
+    "members": 9,
+    "saveVersion": 2,
+    "theme": "dark",
+    "width": 375,
+    "scrollWidth": 375,
+    "faceCount": 10,
+    "stagePortraits": 9,
+    "watchPortraits": 0,
+    "stageCache": {
+      "images": 10,
+      "stamps": 50
+    },
+    "gradIndex": 14,
+    "gradAuto": false
+  }
+]

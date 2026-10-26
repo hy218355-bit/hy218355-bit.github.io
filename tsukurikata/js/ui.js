@@ -720,10 +720,12 @@ function renderWeekBody(){
   const effHtml = x => (x.effects || x.gains || []).map(g => `<span class="gain">${esc(g)}</span>`).join('');
   if(S.lastEpisode) parts.push(`<p class="epres"><b>${esc(S.lastEpisode.choice)}</b>${esc(S.lastEpisode.result)}${effHtml(S.lastEpisode)}</p>`);
   const cv = consultView(S);
-  if(cv) parts.push(`<div class="episode consult">${memberFace(cv.m,36)}<div class="head"><span class="tag">相談</span><span class="who">${cv.m.grade}年・${esc(instOf(cv.m))}・${esc(cv.m.name)}${skillChips(cv.m)}</span></div><p class="txt">${esc(cv.text)}</p>
-    <div class="choices">${cv.choices.map(c => `<button class="mbtn" type="button" data-cs="${c.k}"><b>${esc(c.label)}</b></button>`).join('')}</div>
-    <p class="small">答え方で、${esc(kun(cv.m))}の育ち方が変わる。答えずに練習を進めると、この相談は流れる。</p></div>`);
-  if(S.lastConsult) parts.push(`<p class="epres"><b>${esc(S.lastConsult.choice)}</b>${esc(S.lastConsult.result)}${effHtml(S.lastConsult)}</p>`);
+  if(cv) parts.push(`<div class="episode consult"><div class="head">${memberFace(cv.m,56)}<div class="consult-person"><span class="tag">相談</span><b>${esc(cv.m.name)}</b><span class="who">${cv.m.seat?instrumentIcon(SEAT[cv.m.seat].inst):''}${cv.m.grade}年・${esc(instOf(cv.m))}${skillChips(cv.m)}</span></div><button class="help-button" type="button" aria-label="相談"${tipAttr('相談',`答え方で、${kun(cv.m)}の育ち方が変わる。答えずに練習を進めると、この相談は流れる。`)}>?</button></div><p class="txt">${esc(cv.text)}</p>
+    <div class="choices">${cv.choices.map(c => `<button class="mbtn" type="button" data-cs="${c.k}"><b>${esc(c.label)}</b>${uiIcon('chevron')}</button>`).join('')}</div></div>`);
+  if(S.lastConsult){
+    const speaker=S.members.find(m=>m.name===S.lastConsult.who);
+    parts.push(`<div class="consult-result">${speaker?memberFace(speaker,36):''}<p class="epres"><b>${esc(S.lastConsult.choice)}</b>${esc(S.lastConsult.result)}${effHtml(S.lastConsult)}</p></div>`);
+  }
   // 行事の誘い：連れて行く部員を選ぶ（★は、行くと特に伸びる子）
   const ov = outingView(S);
   if(ov){
@@ -867,7 +869,7 @@ const seatNth = id => { const p = SEAT[id].part, k = SEATS.filter(x => x.part ==
 const seatLabel = id => PART_LABEL[SEAT[id].part] + seatNth(id);
 /* ===== 卒業式：卒業していく3年生それぞれの3年間を、1人ずつ流す =====
    入部したとき・力の伸び・思い出・毎年のコンクール・スキル・最後のひとこと。後ろでは、その年の定期演奏会の録音を流す。
-   9秒ごとに次の人へ（たたくとすぐ次へ）。最後まで見ると新年度へ */
+   9秒ごとに次の人へ。触れたり読み進めたりしている間は止め、下のボタンで前後へ進む。最後まで見ると新年度へ */
 const GR = {i: 0, slides: [], timer: 0, raf: 0};
 function gradYears(m){
   const out = [];
@@ -889,15 +891,17 @@ function gradSlide(m){
   // 部にいた年数と、思い出のころの学年（「3年生の7月」）
   const joined = m.joined ?? S.year, years = S.year - joined + 1, when = x => `${(m.joinGrade ?? 1) + (x.y - joined)}年生の${wkMonth(x.w)}月`;
   const sk = skillsOf(m).map(x => x.name + skillMark(x.lv)).join('・');
-  return `<div class="gr-person">${memberFace(m,88)}<div><span class="gr-tag">${years}年間</span><b class="gr-name">${esc(m.name)}</b><small class="gr-sub">${esc(inst)}${m.title ? '・' + m.title : ''}</small></div></div>
-    ${joinedHere ? `<p class="gr-line">${f.y}年${wkMonth(f.w)}月、${(m.joinGrade ?? 1) > 1 ? `${m.joinGrade}年生の途中で` : '1年生で'}入部。${m.exp ? '中学から吹いていた。' : '楽器ははじめてだった。'}</p>` : ''}
-    ${f ? `<div class="gbars">${STAT_KEYS.map(k => `<div class="gb"><span class="nm">${STAT_LABEL[k]}</span><span class="track"><span class="fill was" style="width:${clamp(f.stats[k], 0, 100)}%"></span><span class="fill" data-to="${clamp(m.stats[k], 0, 100)}" style="width:${clamp(f.stats[k], 0, 100)}%"></span></span><span class="val">${rankBadge(f.stats[k])}→${rankBadge(m.stats[k])}</span></div>`).join('')}</div>` : ''}
+  return `<div class="gr-person">${memberFace(m,104)}<div><span class="gr-tag">${years}年間</span><b class="gr-name">${esc(m.name)}</b><small class="gr-sub">${m.seat?instrumentIcon(SEAT[m.seat].inst):''}${esc(inst)}${m.title ? '・' + m.title : ''}</small></div></div>
+    ${f?memberGrowth(m):`<div class="stats">${STAT_KEYS.map(k=>rankRow(STAT_LABEL[k],m.stats[k])).join('')}</div>`}
+    <p class="gr-bye">${farewellLine(m)}</p>
     ${mem.length ? `<ul class="gr-mem">${mem.map(x => `<li><time>${when(x)}</time>${esc(x.t)}</li>`).join('')}</ul>` : ''}
+    <details class="gr-record"><summary>部活の記録</summary>
+    ${joinedHere ? `<p class="gr-line">${f.y}年${wkMonth(f.w)}月、${(m.joinGrade ?? 1) > 1 ? `${m.joinGrade}年生の途中で` : '1年生で'}入部。${m.exp ? '中学から吹いていた。' : '楽器ははじめてだった。'}</p>` : ''}
     <p class="gr-res">コンクール：${gradYears(m)}</p>
     ${sk ? `<p class="gr-res">スキル：${sk}</p>` : ''}
     ${m.dreams?.length ? `<p class="gr-res">かなえた夢：${m.dreams.map(x => esc(x.t)).join('・')}<b class="gr-done">${m.dreams.length}つ</b></p>` : ''}
     ${m.dream ? `<p class="gr-res">夢：${esc(dreamText(m))}（夢のつづきは、この先へ）</p>` : ''}
-    <p class="gr-bye">${farewellLine(m)}</p>`;
+    </details>`;
 }
 function openGradRoll(){
   const ms = (S.gradMembers || []).slice().sort((a, b) => SEATS.findIndex(x => x.id === a.seat) - SEATS.findIndex(x => x.id === b.seat));
@@ -917,18 +921,19 @@ function openGradRoll(){
   grShow();
 }
 function grShow(){
-  clearTimeout(GR.timer);
+  pauseGradRoll();
   const card = $('#grCard'), last = GR.i >= GR.slides.length - 1;
   card.classList.remove('in'); card.innerHTML = GR.slides[GR.i]; card.scrollTop = 0; void card.offsetWidth; card.classList.add('in');
-  const grow=()=>card.querySelectorAll('.fill[data-to]').forEach(f=>{f.style.width=f.dataset.to+'%';});
-  if(fxCalm()||U.fxMode==='off')grow();else requestAnimationFrame(()=>requestAnimationFrame(grow));
   $('#grNext').textContent = last ? '4月へ（新年度）' : '次へ';
+  $('#grPrev').disabled=GR.i===0;
   $('#grStep').textContent = `${GR.i + 1}／${GR.slides.length}`;
   if(!last && !fxCalm() && U.fxMode !== 'off') GR.timer = setTimeout(grNext, GR.i === 0 ? 3500 : 9000);
 }
 function grNext(){ if(GR.i < GR.slides.length - 1){ GR.i++; grShow(); } else closeGradRoll(true); }
+function pauseGradRoll(){clearTimeout(GR.timer);GR.timer=0;}
+function grPrev(){if(GR.i>0){GR.i--;grShow();pauseGradRoll();}}
 function closeGradRoll(done){
-  clearTimeout(GR.timer); cancelAnimationFrame(GR.raf);
+  pauseGradRoll(); cancelAnimationFrame(GR.raf);
   $('#gradRoll').hidden = true;
   document.documentElement.classList.remove('conducting');
   stopPlay();
@@ -1247,12 +1252,11 @@ function seniorCard(m, last){
   const f = m.first, first = firstRecOf(m);
   const grow = f ? STAT_KEYS.map(k => [k, m.stats[k] - f.stats[k]]).sort((a, b) => b[1] - a[1])[0] : null;
   const joinedHere = f && f.y === m.joined;
-  const bars = f ? STAT_KEYS.map(k => `<div class="gb"><span class="nm">${STAT_LABEL[k]}</span><span class="track"><span class="fill was" style="width:${clamp(f.stats[k], 0, 100)}%"></span><span class="fill" style="width:${clamp(m.stats[k], 0, 100)}%"></span></span><span class="val">${rankBadge(f.stats[k])}→${rankBadge(m.stats[k])}</span></div>`).join('') : '';
   const inst = m.seat ? INST[SEAT[m.seat].inst].name : '控え';
   const showFirst = first && (!last || first.id !== last.id);
-  return `<details class="senior"><summary>${memberFace(m,36)}<span class="nm">${esc(m.name)}</span><span class="sub">${esc(inst)}${m.title ? '・' + m.title : ''}</span>${grow && rankOf(f.stats[grow[0]]) !== rankOf(m.stats[grow[0]]) ? `<span class="grow">${STAT_LABEL[grow[0]]}${rankBadge(f.stats[grow[0]])}→${rankBadge(m.stats[grow[0]])}</span>` : ''}</summary>
+  return `<details class="senior"><summary><span class="senior-person">${memberFace(m,48)}<span><b class="nm">${esc(m.name)}</b><small class="sub">${m.seat?instrumentIcon(SEAT[m.seat].inst):''}${esc(inst)}${m.title?'・'+m.title:''}</small></span></span>${grow && rankOf(f.stats[grow[0]]) !== rankOf(m.stats[grow[0]]) ? `<span class="grow">${STAT_LABEL[grow[0]]}${rankBadge(f.stats[grow[0]])}→${rankBadge(m.stats[grow[0]])}</span>` : ''}</summary>
     <div class="body">
-      ${f ? `<p class="small">${ymLabel(f.y, f.w)}${joinedHere ? 'に入部したころ' : '（この日誌をつけ始めたころ）'}と、いま</p><div class="gbars">${bars}</div>` : ''}
+      ${f?memberGrowth(m):`<div class="stats">${STAT_KEYS.map(k=>rankRow(STAT_LABEL[k],m.stats[k])).join('')}</div>`}
       ${(m.story || []).length ? `<ul class="mem">${m.story.map(x => `<li><time>${ymLabel(x.y, x.w)}</time>${esc(x.t)}</li>`).join('')}</ul>` : ''}
       <p class="bye">${farewellLine(m)}</p>
       <div class="transport">${showFirst ? `<button class="btn small" type="button" data-act="memplay" data-id="${first.id}" data-mid="${m.id}">▶ ${joinedHere ? '入部したころ' : 'いちばん古い録音'}の音</button>` : ''}${last && recHas(last, m) ? `<button class="btn small" type="button" data-act="memplay" data-id="${last.id}" data-mid="${m.id}">▶ 最後の本番の音</button><button class="btn small" type="button" data-act="memsave" data-id="${last.id}" data-mid="${m.id}">⤓ 保存</button>` : ''}</div>
@@ -1659,7 +1663,8 @@ function bind(){
   $('#btnStop').addEventListener('click', stopPlay);
   $('#grNext').addEventListener('click', e => { e.stopPropagation(); grNext(); });
   $('#grSkip').addEventListener('click', e => { e.stopPropagation(); closeGradRoll(false); });
-  $('#grCard').addEventListener('click', () => grNext());
+  $('#grPrev').addEventListener('click',e=>{e.stopPropagation();grPrev();});
+  for(const name of ['pointerdown','keydown','scroll','toggle'])$('#grCard').addEventListener(name,pauseGradRoll,{passive:true,capture:true});
   $('#prefBox').addEventListener('click', e => {
     const b = e.target.closest('[data-pref]'); if(!b) return;
     const [k, v] = b.dataset.pref.split(':');
