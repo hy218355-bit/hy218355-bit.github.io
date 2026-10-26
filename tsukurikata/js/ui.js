@@ -9,7 +9,7 @@ const U = {
   shown: null, shownLabel: '', perfNow: null, diag: null, ptr: null, raf: 0, onEnd: null, playing: false, refreshT: 0,
   tab: 'week', tabScroll: {},
   recordMember: null, recordPerf: null, moveUndo: null,
-  lineup: false, draft: null, pred: null, predKey: '', predT: 0, outKey: '', outPick: new Set(),
+  lineup: false, draft: null, audListen: null, pred: null, predKey: '', predT: 0, outKey: '', outPick: new Set(),
   sfx: true, fxMode: 'full',
 };
 const UI_KEY = 'suibu-ui-v2';  // 前の名前のころからの保存先（SAVE_KEY と同じ理由でこのまま）
@@ -120,6 +120,7 @@ function renderPlayButtons(){
   $('#btnStop').hidden = !on; $('#btnNow').hidden = on;
   const moveStop = $('#memberCard [data-mact="movestop"]');
   if(moveStop) moveStop.hidden = !on || tabHidden('play');
+  renderAuditionListening();
 }
 
 /* ===== スマホ・タブレット縦：画面下のタブ ===== */
@@ -1220,14 +1221,14 @@ function renderAudition(w, ev){
   const rowsOf = ms => ms.map(m => {
     const a = audScore(m), inn = !U.draft.has(m.id);
     return `<li class="am${inn ? '' : ' off'}" data-audmember="${m.id}"><label><input type="checkbox" data-aout="${m.id}" aria-label="${esc(m.name)}の出場"${inn ? ' checked' : ''}>${memberFace(m,36)}<span class="who"><b>${esc(m.name)}</b><small>${instrumentIcon(SEAT[m.seat].inst)}${m.grade}年・${esc(seatLabel(m.seat))}</small>${a.freeze || a.zone ? `<small class="aud-mood ${a.freeze ? 'freeze' : 'zone'}">${a.freeze ? '緊張で崩れた' : 'いつも以上の出来'}</small>` : ''}</span><span class="aud-rank" aria-label="当日の出来 ${rankOf(a.score)}">${rankBadge(a.score)}<small data-audstatus>${inn ? '出る' : '控え'}</small></span></label>
-      <button class="btn small aud-listen" type="button" data-audplay="${m.id}" aria-label="${esc(m.name)}のオーディションを聴く">${uiIcon('play')}</button></li>`;
+      <button class="btn small aud-listen" type="button" data-audplay="${m.id}" aria-pressed="false" aria-label="${esc(m.name)}のオーディションを聴く">${uiIcon('play')}</button></li>`;
   }).join('');
   const rows = secs.map(([sec, ms]) => fold
     ? `<details class="psecd aud-part" data-asec="${sec.id}"${U.openAud.has(sec.id) ? ' open' : ''}><summary><b>${sec.name}<small>${ms.length}人</small></b><span class="aud-part-faces" data-audfaces="${sec.id}" aria-hidden="true">${audPartFaces(ms)}</span><span class="what" data-acnt="${sec.id}">${audCount(ms)}</span></summary><ul class="plist alist">${rowsOf(ms)}</ul></details>`
     : `<ul class="plist alist"><li class="psec">${sec.name}</li>${rowsOf(ms)}</ul>`).join('');
-  w.innerHTML = `<div class="aud-intro"><span class="small">${esc(cev.title)}に出るメンバー</span><button class="help-button" type="button" aria-label="人選の説明"${tipAttr('人選', `音程やリズムが不安定な部員を入れると、合奏全体の減点になる。安定して吹ける部員が増えると、響きの厚みが加点になる。楽器が欠けると、そのぶんも減点される。チェックを変えて予想点を見くらべよう。当日の出来は、自由曲で問われる力（${PIECES[S.pieceId].asks}）と、その日の緊張で決まる。チェックを外した部員は控え。練習はいつもどおりで、秋からはまた全員で吹く。`)}>?</button></div>
+  w.innerHTML = `<div class="aud-intro"><span class="small">${esc(cev.title)}に出るメンバー</span><button class="help-button" type="button" aria-label="人選の説明"${tipAttr('人選', `音程やリズムが不安定な部員を入れると、合奏全体の減点になる。安定して吹ける部員が増えると、響きの厚みが加点になる。楽器が欠けると、そのぶんも減点される。チェックを変えて予想点を見くらべよう。試聴は、自由曲をいまの力と譜読みで吹いた音。予想は、本番まで練習したときの目安。当日の出来は、自由曲で問われる力（${PIECES[S.pieceId].asks}）と、その日の緊張で決まる。チェックを外した部員は控え。練習はいつもどおりで、秋からはまた全員で吹く。`)}>?</button></div>
     <div class="aud-pred" id="audPred" aria-live="polite"></div>
-    <div class="aud-tools"><button class="btn quiet" type="button" data-aud="all">${uiIcon('members')}全員出る</button><button class="btn quiet" type="button" data-aud="best">${uiIcon('star')}おすすめ</button><button class="btn quiet" type="button" data-aud="listen">${uiIcon('play')}このメンバーで聴く</button></div>
+    <div class="aud-tools"><button class="btn quiet" type="button" data-aud="all">${uiIcon('members')}全員出る</button><button class="btn quiet" type="button" data-aud="best">${uiIcon('star')}おすすめ</button><button class="btn quiet" type="button" data-aud="listen" aria-pressed="false">${uiIcon('play')}選んだ人で聴く</button><button class="btn quiet" type="button" data-aud="listenall" aria-pressed="false">${uiIcon('play')}全員で聴く</button></div>
     <div class="aud-list-head"><span>出る人にチェック</span><span>当日の出来 G〜S</span></div><div class="psecs audition-parts">${rows}</div>
     <div class="transport aud-actions"><button class="btn primary" type="button" data-act="lineup">このメンバーで決める</button>${S.audition.decided ? '<button class="btn quiet" type="button" data-aud="cancel">変えずにもどる</button>' : ''}</div>`;
   updateAuditionSelection(true);
@@ -1240,6 +1241,8 @@ const audCount = ms => { const n = ms.filter(m => !U.draft.has(m.id)).length; re
 // 選び直しても札とフォーカスはそのまま。見た目・チェック・出る人数を同じ選択から描く。
 function updateAuditionSelection(soon = false){
   const root = $('#week'), ms = seated(S), n = ms.filter(m => !U.draft.has(m.id)).length;
+  const listening = auditionListening();
+  if(listening && (listening.state !== S || listening.kind === 'selected' && (U.audSearching || listening.out !== [...U.draft].sort().join(',')))) stopPlay();
   for(const input of root.querySelectorAll('[data-aout]')){
     const on = !U.draft.has(input.dataset.aout), row = input.closest('.am');
     input.checked = on; input.disabled = !!U.audSearching; row.classList.toggle('off', !on);
@@ -1252,9 +1255,52 @@ function updateAuditionSelection(soon = false){
   }
   root.querySelector('[data-act="lineup"]').textContent = n ? `${n}人で決める` : '出る部員を選ぼう';
   for(const b of root.querySelectorAll('[data-act="lineup"],[data-aud="listen"]')) b.disabled = !!U.audSearching || !n;
-  for(const b of root.querySelectorAll('[data-aud="all"],[data-aud="best"]')) b.disabled = !!U.audSearching;
+  for(const b of root.querySelectorAll('[data-aud="all"],[data-aud="best"],[data-aud="listenall"]')) b.disabled = !!U.audSearching || b.dataset.aud === 'listenall' && !ms.length;
+  renderAuditionListening();
   if(U.audSearching){ clearTimeout(U.predT); U.predRequest = (U.predRequest || 0) + 1; $('#audPred').setAttribute('aria-busy', 'true'); $('#audPred').innerHTML = '<b>おすすめのメンバーを探しています……</b>'; return; }
   updatePred(soon);
+}
+// 人選の試聴だけを覚える。全員との聴き比べでチェックやセーブを変えない。
+function auditionListening(){
+  const active = U.waitPlay?.perf || (U.playing ? U.shown : null);
+  return U.audListen?.perf === active ? U.audListen : null;
+}
+function renderAuditionListening(){
+  const active = auditionListening(), n = seated(S).filter(m => !U.draft?.has(m.id)).length;
+  if(U.audListen && !active) U.audListen = null;
+  for(const b of document.querySelectorAll('[data-aud="listen"],[data-aud="listenall"]')){
+    const all = b.dataset.aud === 'listenall', on = active?.kind === (all ? 'all' : 'selected');
+    const who = all ? '全員' : `${n}人`;
+    b.setAttribute('aria-pressed',String(on));
+    b.setAttribute('aria-label',on ? `${who}の試聴を止める` : `${who}で聴く`);
+    b.innerHTML = `${uiIcon(on ? 'stop' : 'play')}${on ? `止める（${who}）` : `${who}で聴く`}`;
+  }
+  for(const b of document.querySelectorAll('[data-audplay]')){
+    const on = active?.kind === 'member' && active.mid === b.dataset.audplay, m = memberById(b.dataset.audplay);
+    b.setAttribute('aria-pressed',String(on));
+    b.disabled = !!U.audSearching;
+    b.setAttribute('aria-label',`${m?.name || ''}のオーディションを${on ? '止める' : '聴く'}`);
+    b.innerHTML = uiIcon(on ? 'stop' : 'play');
+  }
+}
+function listenAudition(kind, mid = null){
+  if(!U.lineup || U.audSearching || busy()) return;
+  const state = S, active = auditionListening();
+  if(active?.kind === kind && active.mid === mid){ stopPlay(); return; }
+  stopPlay();
+  if(S !== state || !U.lineup || U.audSearching || busy()) return;
+  const members = seated(S).filter(m => kind === 'member' ? m.id === mid : kind === 'all' || !U.draft.has(m.id));
+  if(!members.length) return;
+  U.solo = 'all'; E.setSolo({type:'all'});
+  const {ev} = nextContest(S), venue = kind === 'member' ? 'room' : LEVELS[ev.level].venue;
+  setVenue(venue);
+  const ctx = kind === 'member' ? auditionCtx(S,members[0]) : perfCtx(S,{members,venue,fatigue:0});
+  const perf = rememberStageMembers(perform(ctx),members,false);
+  const token = U.audListen = {kind,mid,perf,state:S,out:[...U.draft].sort().join(',')};
+  const done = () => { if(U.audListen === token){ U.audListen = null; renderAuditionListening(); } };
+  const label = kind === 'member' ? `オーディション：${members[0].name}（${instOf(members[0])}）` : `オーディション${kind === 'all' ? '：全員' : 'で選んだ'}${members.length}人（${VENUE[venue].name}）`;
+  playPerf(perf,label,done,{},done);
+  renderSelectors(); renderAuditionListening();
 }
 // 響きの理由は小さな印で見せ、文章は押して開いたときだけ出す。
 function auditionSoundRows(p){
@@ -2158,9 +2204,7 @@ function bind(){
     }
     if(b.dataset.spanset){ haptic('tap'); commit(setPlanSpan(S, b.dataset.spanset, b.dataset.i === '' ? null : +b.dataset.i)); renderWeek();document.querySelector(`[data-spanset="${b.dataset.spanset}"][data-i="${b.dataset.i}"]`)?.focus({preventScroll:true});return; }
     if(b.dataset.audplay){
-      const m = memberById(b.dataset.audplay); if(!m) return;
-      setVenue('room');
-      playPerf(perform(auditionCtx(S, m)), `オーディション：${m.name}（${instOf(m)}）`);
+      listenAudition('member',b.dataset.audplay);
       return;
     }
     if(b.dataset.aud){
@@ -2170,13 +2214,8 @@ function bind(){
         const state = S, el = $('#audPred'); haptic('tap'); U.audSearching = true; updateAuditionSelection();
         setTimeout(() => { if(S !== state || !el.isConnected) return; U.draft = recommendLineup(state); U.audSearching = false; updateAuditionSelection(true); }, 30);
       }
-      else if(a === 'listen'){
-        const {ev} = nextContest(S);
-        setVenue(LEVELS[ev.level].venue);
-        const members = seated(S).filter(m => !U.draft.has(m.id));
-        playPerf(perform(perfCtx(S, {members, venue: LEVELS[ev.level].venue, fatigue: 0})), `オーディションで選んだ${members.length}人（${VENUE[LEVELS[ev.level].venue].name}）`);
-      }
-      else if(a === 'cancel'){ U.lineup = false; U.draft = null; renderWeek(); }
+      else if(a === 'listen' || a === 'listenall') listenAudition(a === 'listenall' ? 'all' : 'selected');
+      else if(a === 'cancel'){ if(auditionListening()) stopPlay(); U.lineup = false; U.draft = null; renderWeek(); }
       return;
     }
     if(b.dataset.ep !== undefined){ haptic('tap'); commit(resolveEpisode(S, +b.dataset.ep)); renderAll(); refreshNow(); return; }
@@ -2224,6 +2263,7 @@ function bind(){
     else if(act === 'lineupopen'){ if(!S.audition || S.audition.y !== S.year) commit(startAudition(S)); U.lineup = true; U.draft = null; renderWeek(); $('#week').scrollIntoView({block: 'start'}); }
     else if(act === 'lineup'){
       if(seated(S).every(m => U.draft.has(m.id))){ $('#audPred').innerHTML = '<b>だれも出ないことになってしまう。1人以上は選ぼう。</b>'; return; }
+      if(auditionListening()) stopPlay();
       haptic('tap'); commit(setLineup(S, U.draft)); U.lineup = false; U.draft = null; renderAll(); refreshNow();
     }
     else if(act === 'assign'){

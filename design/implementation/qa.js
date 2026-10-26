@@ -86,6 +86,9 @@ function record(){
  report.auditionSignals=Array.from(document.querySelectorAll('[data-sound]')).map(e=>({key:e.dataset.sound,label:e.getAttribute('aria-label'),lights:e.querySelectorAll('.on').length,change:e.querySelector('[data-sound-change]')?.dataset.soundChange}));
  report.auditionMembers=S.members.filter(m=>m.seat).map(m=>({id:m.id,name:m.name,out:!!m.out,rank:S.audition?rankOf(audScore(m).score):null}));
  report.auditionExpected=S.audition?seated(S).filter(m=>!(U.draft||new Set()).has(m.id)).map(m=>m.id):[];
+ const audListening=auditionListening();
+ report.auditionListening=audListening?{kind:audListening.kind,mid:audListening.mid,members:STAGE_PERFORMERS.get(audListening.perf)?.members.map(m=>m.id),sameState:audListening.state===S}:null;
+ report.auditionPlayButtons=Array.from(document.querySelectorAll('[data-aud="listen"],[data-aud="listenall"],[data-audplay]')).map(el=>({kind:el.dataset.aud||'member',id:el.dataset.audplay,pressed:el.getAttribute('aria-pressed'),disabled:el.disabled,label:el.getAttribute('aria-label')}));
  const selected=U.sel&&S.members.find(m=>m.id===U.sel);
  report.selectedMember=selected?{id:selected.id,name:selected.name,originalName:selected.originalName,face:Faces.fingerprint(selected)}:null;
  const move=selectedMemberMove();
