@@ -1,0 +1,19 @@
+<!doctype html><html lang="ja"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>人選を、顔と音で決める</title>
+<style>
+@font-face{font-family:body;src:url('/tsukurikata/fonts/zen-kaku-gothic-new-500.woff2')}:root{--paper:#f1f0e9;--ink:#263d43;--rule:#d4d7c9;--brass:#936b2f}*{box-sizing:border-box}body{margin:0;background:var(--paper);color:var(--ink);font-family:body,sans-serif}main{max-width:1000px;margin:auto;padding:24px}h1{font-size:23px;margin:0 0 12px}h2{font-size:18px;margin-top:32px}p{font-size:14px;line-height:1.9;max-width:800px}a{color:inherit}.grid{display:grid;grid-template-columns:repeat(2,minmax(0,375px));gap:20px}figure{margin:0}figcaption{font-size:13px;margin:10px 0}img{display:block;width:100%;border-radius:16px;border:1px solid var(--rule)}nav{display:flex;flex-wrap:wrap;gap:10px}nav a{padding:10px 14px;border:1px solid var(--brass);border-radius:8px;text-decoration:none}@media(max-width:600px){main{padding:16px}.grid{grid-template-columns:1fr}}
+</style>
+<main><h1>人選を、顔と音で決める</h1>
+<p>顔・楽器・当日の出来を見比べて、出る人と控えを選ぶ画面へ。本人の音もその場で聴けます。個人の出来はG〜S、予想点は部全体の目安として見せます。</p>
+<nav><a href="/design/implementation/qa.html?view=audition&theme=light&keys=1">ライトでさわる</a><a href="/design/implementation/qa.html?view=audition&theme=dark&keys=1">ダークでさわる</a><a href="/design/implementation/qa.html?view=audition-small&theme=light&keys=1">5人の人選</a><a href="../member-names/">前回の名前を変える</a></nav>
+<p>確認用の画面です。いつものセーブは書き換えません。</p>
+<h2>本人を見て選ぶ · 375px</h2>
+<p>出る人は金の線とチェック、控えは点線と「控え」の文字。開いたパートや選んでいる位置を保ちながら、出場人数と予想点を見比べられます。</p>
+<div class="grid"><figure><figcaption>ライト</figcaption><img src="screenshots/members-light.png" alt="顔と楽器から出る人と控えを選ぶ人選画面・ライト"></figure><figure><figcaption>ダーク</figcaption><img src="screenshots/members-dark.png" alt="控えに外した部員は点線になり人数も変わる人選画面・ダーク"></figure></div>
+<h2>部全体の目安を先に · 375px</h2>
+<p>予想点と賞を大きく表示。くわしい見方は開いて読めます。「全員出る」「おすすめ」で選び直しても、パートを閉じません。決定ボタンは下のタブのすぐ上に置きました。</p>
+<div class="grid"><figure><figcaption>ライト</figcaption><img src="screenshots/overview-light.png" alt="部全体の予想点とおすすめの操作・ライト"></figure><figure><figcaption>ダーク</figcaption><img src="screenshots/overview-dark.png" alt="予想点と人数が分かる画面・ダーク"></figure></div>
+<h2>少人数でも、長い名前でも</h2>
+<p>5人ならそのまま全員を表示。12文字の名前は切らずに折り返します。誰も選んでいないときは、決定とメンバーの試聴を止めます。</p>
+<div class="grid"><figure><figcaption>5人の人選</figcaption><img src="screenshots/small-light.png" alt="少人数の部を顔とランクで選ぶ"></figure><figure><figcaption>12文字の名前</figcaption><img src="screenshots/long-dark.png" alt="長い名前も全文を読める部員の札"></figure></div>
+</main></html>

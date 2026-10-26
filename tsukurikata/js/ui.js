@@ -1139,55 +1139,77 @@ function lineupLine(){
   return `<div class="lineup-line"><span class="small">コンクールの出場メンバー：${set ? `${ms.length - off}人${off ? `（控え${off}人）` : '（全員）'}` : `まだ決めていない（このままだと全員の${ms.length}人）`}</span>
     <button class="btn small" type="button" data-act="lineupopen">${set ? 'メンバーを変える' : 'メンバーを決める'}</button></div>`;
 }
-// オーディションの画面：一人ずつの点と、選んだメンバーで出たときの点の目安
+// オーディション：本人の顔・楽器・当日の出来から人選し、部全体の予想点を見比べる。
 const audScore = m => (S.audition.scores[m.id] || auditionScore(S, m));
 function renderAudition(w, ev){
   if(!S.audition || S.audition.y !== S.year){ commit(startAudition(S)); }
   if(!U.draft) U.draft = new Set(seated(S).filter(m => m.out).map(m => m.id));
+  const key = `${S.recruitSeed}:${S.year}:${S.week}`;
+  if(U.audKey !== key){ U.audKey = key; U.openAud = new Set(); U.audPredNotes = false; }
+  U.audSearching = false;
   const {ev: cev} = nextContest(S);
   const order = m => SEATS.findIndex(x => x.id === m.seat);
   const secs = SECTIONS.map(sec => [sec, seated(S).filter(m => SEAT[m.seat].sec === sec.id).sort((a, b) => audScore(b).score - audScore(a).score || order(a) - order(b))]).filter(([, ms]) => ms.length);
-  const C = tok();
   // 人数が多いときは、パートごとにたたむ（見出しに「出る人数／パートの人数」）
   const fold = seated(S).length > 12;
   const rowsOf = ms => ms.map(m => {
     const a = audScore(m), inn = !U.draft.has(m.id);
-    return `<li class="am${inn ? '' : ' off'}"><label><input type="checkbox" data-aout="${m.id}"${inn ? ' checked' : ''}><span class="who"><b>${esc(m.name)}</b><small>${m.grade}年・${esc(PART_LABEL[SEAT[m.seat].part])}${a.freeze ? '・緊張で崩れた' : a.zone ? '・いつも以上の出来' : ''}</small></span></label>
-      <span class="sc"><span class="track"><span class="fill" style="width:${a.score}%;background:${skillColor(C, a.score)}"></span></span><b>${a.score}</b></span>
-      <button class="btn small" type="button" data-audplay="${m.id}" aria-label="${esc(m.name)}のオーディションを聴く">▶</button></li>`;
+    return `<li class="am${inn ? '' : ' off'}" data-audmember="${m.id}"><label><input type="checkbox" data-aout="${m.id}" aria-label="${esc(m.name)}の出場"${inn ? ' checked' : ''}>${memberFace(m,36)}<span class="who"><b>${esc(m.name)}</b><small>${instrumentIcon(SEAT[m.seat].inst)}${m.grade}年・${esc(seatLabel(m.seat))}</small>${a.freeze || a.zone ? `<small class="aud-mood ${a.freeze ? 'freeze' : 'zone'}">${a.freeze ? '緊張で崩れた' : 'いつも以上の出来'}</small>` : ''}</span><span class="aud-rank" aria-label="当日の出来 ${rankOf(a.score)}">${rankBadge(a.score)}<small data-audstatus>${inn ? '出る' : '控え'}</small></span></label>
+      <button class="btn small aud-listen" type="button" data-audplay="${m.id}" aria-label="${esc(m.name)}のオーディションを聴く">${uiIcon('play')}</button></li>`;
   }).join('');
   const rows = secs.map(([sec, ms]) => fold
-    ? `<details class="psecd" data-asec="${sec.id}"${U.openAud?.has(sec.id) ? ' open' : ''}><summary><b>${sec.name}<small>${ms.length}人</small></b><span class="what" data-acnt="${sec.id}">${audCount(ms)}</span></summary><ul class="plist alist">${rowsOf(ms)}</ul></details>`
+    ? `<details class="psecd aud-part" data-asec="${sec.id}"${U.openAud.has(sec.id) ? ' open' : ''}><summary><b>${sec.name}<small>${ms.length}人</small></b><span class="aud-part-faces" data-audfaces="${sec.id}" aria-hidden="true">${audPartFaces(ms)}</span><span class="what" data-acnt="${sec.id}">${audCount(ms)}</span></summary><ul class="plist alist">${rowsOf(ms)}</ul></details>`
     : `<ul class="plist alist"><li class="psec">${sec.name}</li>${rowsOf(ms)}</ul>`).join('');
-  const intro = ev?.kind === 'audition' && !S.audition.decided ? ev.text : `${cev.title}に出るメンバーを決める。オーディションの点を見て、出る人にチェックを入れよう。`;
-  w.innerHTML = `<div class="event"><span class="tag"${tipAttr('人選', '音程やリズムが不安定な部員を入れると、合奏全体の減点になる。安定して吹ける部員が増えると、響きの厚みが加点になる。楽器が欠けると、そのぶんも減点される。チェックを変えて予想点を見くらべよう。')}>オーディション</span><span>${intro}</span></div>
-    <p class="small">点は、自由曲で問われる力（${PIECES[S.pieceId].asks}）と、その日の緊張で決まる。チェックを外した部員は控え（練習はいつもどおり。秋からはまた全員で吹く）。</p>
+  w.innerHTML = `<div class="aud-intro"><span class="small">${esc(cev.title)}に出るメンバー</span><button class="help-button" type="button" aria-label="人選の説明"${tipAttr('人選', `音程やリズムが不安定な部員を入れると、合奏全体の減点になる。安定して吹ける部員が増えると、響きの厚みが加点になる。楽器が欠けると、そのぶんも減点される。チェックを変えて予想点を見くらべよう。当日の出来は、自由曲で問われる力（${PIECES[S.pieceId].asks}）と、その日の緊張で決まる。チェックを外した部員は控え。練習はいつもどおりで、秋からはまた全員で吹く。`)}>?</button></div>
     <div class="aud-pred" id="audPred" aria-live="polite"></div>
-    <div class="chips"><button class="chip" type="button" data-aud="all">全員出る</button><button class="chip" type="button" data-aud="best">おすすめのメンバーにする</button><button class="chip" type="button" data-aud="listen">▶ このメンバーで聴く</button></div>
-    ${fold ? `<div class="transport"><button class="btn primary" type="button" data-act="lineup">このメンバーで決める</button></div><p class="small">パートを押すと、一人ずつの点と、出る・控えを選べる。</p>` : ''}
-    <div class="psecs">${rows}</div>
-    <div class="transport"><button class="btn primary" type="button" data-act="lineup">このメンバーで決める</button>${S.audition.decided ? '<button class="btn quiet" type="button" data-aud="cancel">変えずにもどる</button>' : ''}</div>`;
-  updatePred(true);
-  w.querySelectorAll('details[data-asec]').forEach(d => d.addEventListener('toggle', () => { (U.openAud ||= new Set())[d.open ? 'add' : 'delete'](d.dataset.asec); }));
+    <div class="aud-tools"><button class="btn quiet" type="button" data-aud="all">${uiIcon('members')}全員出る</button><button class="btn quiet" type="button" data-aud="best">${uiIcon('star')}おすすめ</button><button class="btn quiet" type="button" data-aud="listen">${uiIcon('play')}このメンバーで聴く</button></div>
+    <div class="aud-list-head"><span>出る人にチェック</span><span>当日の出来 G〜S</span></div><div class="psecs audition-parts">${rows}</div>
+    <div class="transport aud-actions"><button class="btn primary" type="button" data-act="lineup">このメンバーで決める</button>${S.audition.decided ? '<button class="btn quiet" type="button" data-aud="cancel">変えずにもどる</button>' : ''}</div>`;
+  updateAuditionSelection(true);
+  $('#audPred').addEventListener('toggle', e => { if(e.target.isConnected && e.target.matches('.aud-pred-notes')) U.audPredNotes = e.target.open; }, true);
+  w.querySelectorAll('details[data-asec]').forEach(d => d.addEventListener('toggle', () => { if(d.isConnected) U.openAud[d.open ? 'add' : 'delete'](d.dataset.asec); }));
 }
+const audPartFaces = ms => { const on = ms.filter(m => !U.draft.has(m.id)); return (on.length ? on : ms).slice(0,3).map(m => memberFace(m,20)).join(''); };
 // パートの見出しの「出る 7／9人」
 const audCount = ms => { const n = ms.filter(m => !U.draft.has(m.id)).length; return n === ms.length ? '全員出る' : `出る ${n}人・控え ${ms.length - n}人`; };
+// 選び直しても札とフォーカスはそのまま。見た目・チェック・出る人数を同じ選択から描く。
+function updateAuditionSelection(soon = false){
+  const root = $('#week'), ms = seated(S), n = ms.filter(m => !U.draft.has(m.id)).length;
+  for(const input of root.querySelectorAll('[data-aout]')){
+    const on = !U.draft.has(input.dataset.aout), row = input.closest('.am');
+    input.checked = on; input.disabled = !!U.audSearching; row.classList.toggle('off', !on);
+    row.querySelector('[data-audstatus]').textContent = on ? '出る' : '控え';
+  }
+  for(const sec of SECTIONS){
+    const members = ms.filter(m => SEAT[m.seat].sec === sec.id), count = root.querySelector(`[data-acnt="${sec.id}"]`), faces = root.querySelector(`[data-audfaces="${sec.id}"]`);
+    if(count) count.textContent = audCount(members);
+    if(faces){ faces.innerHTML = audPartFaces(members); faces.classList.toggle('all-off', members.every(m => U.draft.has(m.id))); }
+  }
+  root.querySelector('[data-act="lineup"]').textContent = n ? `${n}人で決める` : '出る部員を選ぼう';
+  for(const b of root.querySelectorAll('[data-act="lineup"],[data-aud="listen"]')) b.disabled = !!U.audSearching || !n;
+  for(const b of root.querySelectorAll('[data-aud="all"],[data-aud="best"]')) b.disabled = !!U.audSearching;
+  if(U.audSearching){ clearTimeout(U.predT); U.predRequest = (U.predRequest || 0) + 1; $('#audPred').setAttribute('aria-busy', 'true'); $('#audPred').innerHTML = '<b>おすすめのメンバーを探しています……</b>'; return; }
+  updatePred(soon);
+}
 // 選んだメンバーで出たときの点の目安（メンバーを変えるたびに計算し直す）
 function updatePred(soon){
   const el = $('#audPred'); if(!el) return;
-  const out = U.draft || new Set();
+  const out = new Set(U.draft || []), state = S, request = U.predRequest = (U.predRequest || 0) + 1;
+  clearTimeout(U.predT); el.setAttribute('aria-busy', 'false');
   const n = seated(S).length - [...out].filter(id => memberById(id)?.seat).length;
   const {ev, w} = nextContest(S), L = LEVELS[ev.level], left = w - S.week;
+  if(!n){ el.innerHTML = '<b>出る部員を選ぼう</b>'; return; }
   const key = S.recruitSeed + ':' + S.year + ':' + S.week + ':' + [...out].sort().join(',');
   const show = p => {
     const nm = {gold: '金賞', silver: '銀賞', bronze: '銅賞'}[p.award];
     // 目安は、いまの方針のまま本番の週まで練習を続けたときの部で出す（自分で指揮すると、ここから上がる）
-    el.innerHTML = `<b>${n}人で出ると、${L.name}で審査員平均 ${p.avg.toFixed(1)}点（${nm}）くらい</b><span class="small">${left > 0 ? `本番まであと${left}週、いまの方針で練習を続けたときの目安。` : ''}金賞の目安は${L.gold}点、${L.rep ? `代表は3人ともA（${L.A}点）。` : ''}${p.thin >= 6 ? '人数が少ないぶん、響きが薄いと見られる。' : ''}本番の日の調子や指揮でも上下する。</span>`;
+    el.setAttribute('aria-busy', 'false');
+    el.innerHTML = `<div class="aud-pred-top"><span>${L.name}の目安</span><span>${n}人で出る</span></div><div class="aud-pred-score"><b><span class="aud-score-number">${p.avg.toFixed(1)}</span><small>点</small></b><span class="aud-award ${p.award}">${uiIcon('award')}${nm}くらい</span></div><details class="aud-pred-notes"${U.audPredNotes ? ' open' : ''}><summary>予想の見方${left > 0 ? `・あと${left}週` : ''}</summary><p>${left > 0 ? 'いまの方針で本番まで練習を続けたときの、審査員の平均点の目安。' : '審査員の平均点の目安。'}金賞の目安は${L.gold}点、${L.rep ? `代表は3人ともA（${L.A}点）。` : ''}${p.thin >= 6 ? '人数が少ないぶん、響きが薄いと見られる。' : ''}本番の日の調子や指揮でも上下する。</p></details>`;
   };
-  if(U.predKey === key && U.pred){ show(U.pred); return; }
+  if(U.predState === state && U.predKey === key && U.pred){ show(U.pred); return; }
   el.innerHTML = `<b>${n}人で出ると……</b><span class="small">計算中</span>`;
-  clearTimeout(U.predT);
-  U.predT = setTimeout(() => { U.pred = predictContest(S, out); U.predKey = key; if($('#audPred')) show(U.pred); }, soon ? 30 : 120);
+  el.setAttribute('aria-busy', 'true');
+  U.predT = setTimeout(() => { if(U.predRequest !== request || S !== state || !el.isConnected) return; U.pred = predictContest(state, out); U.predKey = key; U.predState = state; show(U.pred); }, soon ? 30 : 120);
 }
 // 今週の練習：部の方針（全員で1つ）と、部員ひとりずつの今週の練習
 // 練習で伸びるもの（練習を選ぶボタンに小さく出す）
@@ -1892,8 +1914,11 @@ function bind(){
     }
     if(b.dataset.aud){
       const a = b.dataset.aud;
-      if(a === 'all'){ U.draft = new Set(); renderWeek(); }
-      else if(a === 'best'){ $('#audPred').innerHTML = '<b>おすすめのメンバーを探しています……</b>'; setTimeout(() => { U.draft = recommendLineup(S); renderWeek(); }, 30); }
+      if(a === 'all'){ haptic('tap'); U.draft = new Set(); updateAuditionSelection(); }
+      else if(a === 'best'){
+        const state = S, el = $('#audPred'); haptic('tap'); U.audSearching = true; updateAuditionSelection();
+        setTimeout(() => { if(S !== state || !el.isConnected) return; U.draft = recommendLineup(state); U.audSearching = false; updateAuditionSelection(true); }, 30);
+      }
       else if(a === 'listen'){
         const {ev} = nextContest(S);
         setVenue(LEVELS[ev.level].venue);
@@ -1980,10 +2005,7 @@ function bind(){
     const t = e.target;
     if(t.dataset.aout){
       if(t.checked) U.draft.delete(t.dataset.aout); else U.draft.add(t.dataset.aout);
-      t.closest('.am')?.classList.toggle('off', !t.checked);
-      const sec = SEAT[memberById(t.dataset.aout)?.seat]?.sec, cnt = sec && $("#week").querySelector(`[data-acnt="${sec}"]`);
-      if(cnt) cnt.textContent = audCount(seated(S).filter(m => SEAT[m.seat].sec === sec));
-      updatePred();
+      haptic('tap'); updateAuditionSelection();
       return;
     }
   });

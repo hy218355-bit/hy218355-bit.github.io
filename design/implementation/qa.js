@@ -35,6 +35,10 @@ function record(){
  report.logSourceCount=source.length;report.logRenderedCount=shown.length;report.logPreserved=JSON.stringify(source)===JSON.stringify(shown);
  report.planOwn={...(S.plan||{})};report.policy=S.policy;report.week=S.week;report.statsFingerprint=hash(JSON.stringify(S.members.map(m=>m.stats)));
  report.assignPicks={...(U.asg?.picks||{})};report.assignSel=U.asg?.sel;
+ report.auditionOut=[...(U.draft||[])];report.auditionDecided=!!S.audition?.decided;
+ report.auditionSearching=!!U.audSearching;report.auditionPrediction=U.pred?.avg;report.auditionScores=hash(JSON.stringify(S.audition?.scores));
+ report.auditionMembers=S.members.filter(m=>m.seat).map(m=>({id:m.id,name:m.name,out:!!m.out,rank:S.audition?rankOf(audScore(m).score):null}));
+ report.auditionExpected=S.audition?seated(S).filter(m=>!(U.draft||new Set()).has(m.id)).map(m=>m.id):[];
  const selected=U.sel&&S.members.find(m=>m.id===U.sel);
  report.selectedMember=selected?{id:selected.id,name:selected.name,originalName:selected.originalName,face:Faces.fingerprint(selected)}:null;
  report.assignOpen=Array.from(U.asg?.openParts||[]);
@@ -70,7 +74,7 @@ async function show(next){
   for(let i=0;i<100&&!s.consult;i++)s=advance(s);
   if(!s.consult)throw Error('相談の見本が作れなかった');
   if(view==='consult-result')s=resolveConsult(s,consultView(s).choices[0].k);
- }else if(['stage','practice','practice-late','practice-a','members','member','member-old','member-bench','grad','grad-old','grad-auto','senior','conduct','announce','announce-silver','announce-bronze','announce-cast','fx','audition','ensemble'].includes(view)){
+ }else if(['stage','practice','practice-late','practice-a','members','member','member-old','member-bench','grad','grad-old','grad-auto','senior','conduct','announce','announce-silver','announce-bronze','announce-cast','fx','audition','audition-decided','audition-long','ensemble'].includes(view)){
   const ms=fullBand({pitch:68,rhythm:72,tone:64,expr:61}),names=new Set();
   ms.forEach((m,i)=>{m.id='m2028-n'+(i+1)+'-cafe';m.name=makeName(names,'recruit',2028,i+1);m.grade=i%3+1;m.joined=2026;m.joinGrade=1;m.sta=95;m.first={y:2026,w:0,stats:{pitch:15,rhythm:12,tone:18,expr:10}};m.story=[{y:2026,w:0,t:'アルトサックスで入部。'},{y:2027,w:16,t:'はじめての金賞。'},{y:2028,w:26,t:'最後の定期演奏会。'}];});
   s.members=ms;s.year=2028;s.week=10;
@@ -78,7 +82,15 @@ async function show(next){
  if(view==='ensemble'){s.members.forEach((m,i)=>m.grade=i%2+1);s.phase='winter';s.winter={step:1,plan:'kiso'};U.ensKey=null;U.ensPick=null;}
  if(view==='practice-late'){s.week=15;s.members[0].sta=20;}
  if(view==='practice-a'){s.division='A';s.setPiece=setOffer(s)[0];s.split='auto';}
- if(view==='audition'){s.members.forEach((m,i)=>{m.stats={pitch:i<8?20:78,rhythm:i<8?20:78,tone:i<8?20:78,expr:70};m.fam={galop:100};});s=runAudition(s);U.lineup=true;U.draft=null;}else U.lineup=false;
+ if(view.startsWith('audition')){
+  if(view==='audition-small')s.members=s.members.slice(0,5);
+  s.members.forEach((m,i)=>{m.stats={pitch:i<8?20:78,rhythm:i<8?20:78,tone:i<8?20:78,expr:70};m.fam={galop:100};});
+  s=runAudition(s);
+  if(view==='audition-decided')s=setLineup(s,new Set(s.members.slice(0,8).map(m=>m.id)));
+  if(view==='audition-long')s=renameMember(s,s.members[0].id,'あいうえおかきくけこさし');
+  if(q.has('audit')){report.expectedRecommendedOut=[...recommendLineup(s)];report.expectedAllPrediction=predictContest(s,new Set()).avg;}
+  U.lineup=true;U.draft=null;
+ }else U.lineup=false;
  if(!['year','renamed-year'].includes(view)){checkAch(s,true);for(const key of ['skillUp','coachUp','mileUp','loveUp','dreamUp','rivalUp'])delete s[key];}
  if(view==='member-old')delete s.members[0].first;
  if(view==='member-bench')s.members[0].seat=null;
@@ -108,12 +120,14 @@ await show(view);
 document.addEventListener('facesready',()=>setTimeout(record,0));
 for(const event of ['pointerdown','toggle'])$('#grCard').addEventListener(event,()=>setTimeout(record,0),{capture:true});
 $('#grNext').addEventListener('click',()=>setTimeout(record,0));$('#grPrev').addEventListener('click',()=>setTimeout(record,0));
-for(const event of ['click','keydown'])$('#week').addEventListener(event,()=>setTimeout(record,0));
+for(const event of ['click','keydown','change'])$('#week').addEventListener(event,()=>setTimeout(record,0));
+new MutationObserver(()=>setTimeout(record,0)).observe($('#week'),{childList:true,subtree:true});
 for(const event of ['click','submit'])$('#memberCard').addEventListener(event,()=>setTimeout(record,0));
 // 一度読み込んだ実ゲームで切り替え、毎回録音素材を読み込み直さない。
 if(q.has('keys'))document.addEventListener('keydown',async e=>{
  if(e.target.matches('input,select,textarea'))return;
  const key=e.key.toLowerCase();
+ if(key==='3'){e.preventDefault();await show('audition-decided');return;}
  if(key==='4'){e.preventDefault();await show('renamed-year');return;}
  if(key==='9'){e.preventDefault();await show('practice-a');return;}
  if(key==='1'||key==='2'){e.preventDefault();await show(key==='1'?'intake-existing':'intake-full');return;}

@@ -1,0 +1,122 @@
+{
+  "checks": [
+    {
+      "check": "全員の予想点は従来の計算と一致",
+      "pass": true
+    },
+    {
+      "check": "一人だけ控えにすると本人のチェックと枠と人数が揃う",
+      "pass": true
+    },
+    {
+      "check": "キーボードで選び直しても本人の位置とフォーカスを保つ",
+      "pass": true
+    },
+    {
+      "check": "おすすめの人選は従来の選び方と一致",
+      "pass": true
+    },
+    {
+      "check": "おすすめでも開いたパートを閉じず部員の力と当日の出来を変えない",
+      "pass": true
+    },
+    {
+      "check": "全員へ戻すと従来の予想点に戻り予想の説明も開いたまま",
+      "pass": true
+    },
+    {
+      "check": "決定した出場と控えが実際のメンバーへ保存される",
+      "pass": true
+    },
+    {
+      "check": "変えずにもどるでは決定済みの人選を変えない",
+      "pass": true
+    },
+    {
+      "check": "全員を外すと決定と試聴を止め出る人を選ぶ案内を出す",
+      "pass": true
+    },
+    {
+      "check": "0人の状態から全員を戻せる",
+      "pass": true
+    },
+    {
+      "check": "本人の試聴が開き再生バーと決定ボタンが重ならない",
+      "pass": true
+    },
+    {
+      "check": "5人の人選も全員を顔とランクで選べる",
+      "pass": true
+    },
+    {
+      "check": "12文字の名前を切らずに表示し横にはみ出さない",
+      "pass": true
+    },
+    {
+      "check": "全員の当日の出来を従来の点からG〜Sに置き換え数字を出さない",
+      "pass": true
+    }
+  ],
+  "tabs": [
+    {
+      "tab": "week",
+      "scrollWidth": 375,
+      "theme": "dark",
+      "width": 375
+    },
+    {
+      "tab": "play",
+      "scrollWidth": 375,
+      "theme": "dark",
+      "width": 375
+    },
+    {
+      "tab": "members",
+      "scrollWidth": 375,
+      "theme": "dark",
+      "width": 375
+    },
+    {
+      "tab": "log",
+      "scrollWidth": 375,
+      "theme": "dark",
+      "width": 375
+    },
+    {
+      "tab": "week",
+      "scrollWidth": 375,
+      "theme": "light",
+      "width": 375
+    },
+    {
+      "tab": "play",
+      "scrollWidth": 375,
+      "theme": "light",
+      "width": 375
+    },
+    {
+      "tab": "members",
+      "scrollWidth": 375,
+      "theme": "light",
+      "width": 375
+    },
+    {
+      "tab": "log",
+      "scrollWidth": 375,
+      "theme": "light",
+      "width": 375
+    }
+  ],
+  "year": {
+    "year": 2027,
+    "steps": 50,
+    "errors": [],
+    "logPreserved": true
+  },
+  "listening": {
+    "actions": 690,
+    "label": " オーディション：小川 悠斗（フルート）",
+    "miniHidden": false,
+    "miniTop": 696
+  }
+}

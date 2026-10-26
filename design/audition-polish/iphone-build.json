@@ -1,0 +1,17 @@
+{
+  "buildSucceeded": true,
+  "installed": true,
+  "launched": true,
+  "files": [
+    {
+      "file": "index.html",
+      "match": true,
+      "sha256": "77e397a141080c4e846ec9567ef5720f32f0f11815fe0d00cfb8c43b76f01152"
+    },
+    {
+      "file": "js/ui.js",
+      "match": true,
+      "sha256": "2abe44ea1fc70d2450d43c813223c2b47a85fb0508598921e70ff29a011b733d"
+    }
+  ]
+}
