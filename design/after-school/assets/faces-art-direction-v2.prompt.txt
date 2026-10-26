@@ -1,0 +1,17 @@
+顔の年齢感の修正版・生成記録
+
+組み込み image_gen を使用（CLI不使用）。前の12人の見本を編集対象とした。
+オーナーの指摘：1年生から3年生で共通なので、前の顔は少し大人すぎる。
+変更：頬の丸み、短めの顔と柔らかな顎、鼻・目元の影、自然な姿勢。
+顔の絵柄見本であり、実ゲームやSVGパーツには反映していない。
+前の見本は faces-art-direction.webp として保持。
+生成原稿：/Users/yh/.codex/generated_images/01a175a5-1e3d-71b0-810a-8797cdde01e1/exec-dcfb3f29-01e3-4b33-b79d-a188476242fd.png
+保存画像：faces-art-direction-v2.webp（1440×1080、193,950 bytes。縮小・圧縮のみ）
+
+最終プロンプト：
+Use case: identity-preserve. Edit target: the attached twelve-person portrait art-direction sheet for a fictional Japanese high-school wind ensemble game. The owner's feedback is that these faces look too adult, since the same portrait must work throughout first through third year of high school. Revise ONLY the apparent age and related facial proportions; keep the refined contemporary painterly style, all twelve distinct identities, each hairstyle and hair color, the exact same 4-column by 3-row grid and order, the warm ivory background, navy school uniforms, and gentle warm light from the right.
+
+Make all twelve read naturally as ordinary 15–16-year-old high-school students, young enough for a new first-year student but also believable when later displayed as a third-year. A modest but clearly visible reduction in age: slightly shorter midfaces and lower faces; gently fuller soft cheeks; softer, smaller chins and less sculpted jaws; smaller understated noses; natural youthful eyebrows and clear attentive eyes; shorter, less emphasized necks and narrower youthful shoulders. Remove adult model-like sharp cheekbones, mature sensual/languid expressions, heavy eyeliner/lash styling, strong nose/chin shadows and editorial-fashion poses. In the bottom-row second portrait, remove the hand behind the neck and give a natural relaxed upright school portrait posture. Friendly reserved expressions and natural closed-mouth smiles, with enough variation among individuals. Each still has a distinct face. Keep the eyes close to their existing natural size, do NOT solve youth by making eyes enormous. This is one consistent shared-age character set, not three different age groups.
+
+Do NOT turn them into small children or chibi characters. No giant round heads, no infant proportions, no cute mascot or doll faces, no retro cartoon styling, no flat corporate vector art. Avoid adult glamorous idols and fashion illustration. Preserve the polished soft painted linework and hair detail that fits the previously approved music-room artwork. No text, labels, numbers, instruments, logos or watermarks. Keep full hair silhouettes within their individual cells, consistent upper-chest crop. Output a landscape 4:3 twelve-portrait study sheet.
+

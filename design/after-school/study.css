@@ -13,5 +13,5 @@
 .weekly .room-head{min-height:112px;padding-top:12px;padding-bottom:12px}
 .graduation .room-head{min-height:82px;padding:12px 15px}.grad-card .avatar{width:82px;height:82px}.grad-story p{padding-top:3px;padding-bottom:3px}
 /* 絵柄の確認用。原画の12枠をCSSで切り出すだけで、実装素材とは分ける。 */
-.avatar.art-face{background-image:url(assets/faces-art-direction.webp);background-size:400% 300%;background-repeat:no-repeat}
-.member-head .avatar.art-face,.grad-card .avatar.art-face{background-image:url(assets/faces-art-direction.webp);background-size:400% 300%;background-repeat:no-repeat}
+.avatar.art-face{background-image:url(assets/faces-art-direction-v2.webp);background-size:400% 300%;background-repeat:no-repeat}
+.member-head .avatar.art-face,.grad-card .avatar.art-face{background-image:url(assets/faces-art-direction-v2.webp);background-size:400% 300%;background-repeat:no-repeat}

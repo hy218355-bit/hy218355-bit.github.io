@@ -1,0 +1,42 @@
+[
+  {
+    "scrollWidth": 375,
+    "url": "?screen=week&theme=light",
+    "width": 375
+  },
+  {
+    "scrollWidth": 375,
+    "url": "?screen=week&theme=dark",
+    "width": 375
+  },
+  {
+    "scrollWidth": 375,
+    "url": "?screen=stage&theme=light",
+    "width": 375
+  },
+  {
+    "scrollWidth": 375,
+    "url": "?screen=stage&theme=dark",
+    "width": 375
+  },
+  {
+    "scrollWidth": 375,
+    "url": "?screen=member&theme=light",
+    "width": 375
+  },
+  {
+    "scrollWidth": 375,
+    "url": "?screen=member&theme=dark",
+    "width": 375
+  },
+  {
+    "scrollWidth": 375,
+    "url": "?screen=grad&theme=light",
+    "width": 375
+  },
+  {
+    "scrollWidth": 375,
+    "url": "?screen=grad&theme=dark",
+    "width": 375
+  }
+]
