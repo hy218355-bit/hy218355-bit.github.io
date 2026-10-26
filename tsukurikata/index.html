@@ -19,51 +19,116 @@
 @font-face{font-family:"Share Tech Mono";font-weight:400;font-display:swap;src:url(fonts/share-tech-mono-400.ttf) format("truetype")}
 /* Layout: 合奏室。上に部の垂れ幕と週カレンダー、左にステージ（座席・譜面台）、右にホワイトボード（実力・診断・今週・日誌）、下に名簿と部の歴史 */
 :root{
-  --paper:#ECEFF3;
-  --sheet:#FAFBFC;
-  --ink:#1B2540;
-  --ink-soft:#586178;
-  --rule:#D2D8E3;
-  --brass:#A26F14;
-  --on-brass:#FFF8EA;
-  --navy:#2A3D6E;
-  --floor:#E6DFD2;
-  --floor-line:#CFC4B0;
-  --lcd:#BAC7A4;
-  --lcd-ink:#1E2915;
-  --lcd-dim:rgba(30,41,21,.28);
-  --good:#2D8A57;
-  --warn:#B07A06;
-  --bad:#C03E37;
+  --paper:#F0EEE5;
+  --sheet:#FFFCF5;
+  --sheet-soft:#E8EBDF;
+  --ink:#263D43;
+  --ink-soft:#68736D;
+  --rule:#D4D7C9;
+  --brass:#936B2F;
+  --brass-soft:#F0DFBA;
+  --on-brass:#FCF8ED;
+  --navy:#203944;
+  --on-navy:#FFF8E9;
+  --floor:#BDBD9B;
+  --floor-line:#9EAA8D;
+  --lcd:#E8EBDF;
+  --lcd-ink:#263D43;
+  --lcd-dim:#263D4347;
+  --good:#426D53;
+  --warn:#8C6426;
+  --bad:#A64F43;
   --gold:#AE820F;
   --silver:#6F7A88;
   --bronze:#985628;
-  --shadow:rgba(20,30,60,.28);
-  /* 力のランク（G〜S。パワプロのように色で分かる）。文字は --rk-ink */
-  --rk-g:#C3C8D1; --rk-f:#8DB6EA; --rk-e:#7CCAA6; --rk-d:#B5D66A; --rk-c:#F0D257; --rk-b:#F3A64B; --rk-a:#EE7380; --rk-s:#E3AE2A; --rk-s2:#FFE79A; --rk-ink:#1A1305;
-  --f-display:"Dela Gothic One","Hiragino Sans","Yu Gothic",sans-serif;
-  --f-body:"Zen Kaku Gothic New","Hiragino Sans","Yu Gothic","Noto Sans JP",system-ui,sans-serif;
+  --shadow:#283B3520;
+  --rk-g:#CBD0D1;
+  --rk-f:#B8CFE7;
+  --rk-e:#A5CEBA;
+  --rk-d:#BFD27B;
+  --rk-c:#E8CC76;
+  --rk-b:#EDB074;
+  --rk-a:#E49C9D;
+  --rk-s:#E5BF55;
+  --rk-s2:#FFE7A3;
+  --rk-ink:#29343B;
+  --room-ink:#FFF8E9;
+  --room-soft:#E4D6B7;
+  --room-shade:#102832EA;
+  --room-clear:#132A3425;
+  --scene:#12252F;
+  --scene-ink:#F3F0E4;
+  --scene-soft:#B7C5BE;
+  --scene-rule:#42565B;
+  --scene-brass:#E7C38A;
+  --curtain:#263D43;
+  --curtain-edge:#42606A;
+  --spotlight:#F4D69B;
+  --petal:#E8B9C7;
+  --leaf:#A6C4A0;
+  --rain:#ACC2CE;
+  --snow:#F4F2E8;
+  --sunlight:#E7C38A;
+  --autumn:#D6A16F;
+  --f-display:"Zen Kaku Gothic New","Hiragino Sans","Yu Gothic",sans-serif;
+  --f-body:"Zen Kaku Gothic New","Hiragino Sans","Yu Gothic",system-ui,sans-serif;
   --f-hand:"Klee One","Hiragino Mincho ProN","Yu Mincho",serif;
   --f-lcd:"Share Tech Mono",ui-monospace,Menlo,Consolas,monospace;
+  color-scheme:light;
 }
-@media (prefers-color-scheme: dark){
-  :root:not([data-theme="light"]){
-    --paper:#0D1320; --sheet:#141C2D; --ink:#E3E8F2; --ink-soft:#97A1B6; --rule:#28324A;
-    --brass:#DDAE55; --on-brass:#1A1305; --navy:#9DB2E6; --floor:#1B2233; --floor-line:#2C3650;
-    --lcd:#152117; --lcd-ink:#A4E287; --lcd-dim:rgba(164,226,135,.22);
-    --good:#55C287; --warn:#E2B23F; --bad:#EF6A5F;
-    --gold:#E2BC4A; --silver:#B4BDC9; --bronze:#D08A5A; --shadow:rgba(0,0,0,.5);
-    --rk-g:#7A8293; --rk-f:#5E91D8; --rk-e:#45B083; --rk-d:#9CC24D; --rk-c:#E5C443; --rk-b:#EE9440; --rk-a:#E85E6E; --rk-s:#E7B436; --rk-s2:#FFEAA8; --rk-ink:#10131A;
-    color-scheme:dark;
-  }
-}
+@media(prefers-color-scheme:dark){
+:root:not([data-theme="light"]){
+  --paper:#12252F;
+  --sheet:#1E343D;
+  --sheet-soft:#2C4449;
+  --ink:#F3F0E4;
+  --ink-soft:#B7C5BE;
+  --rule:#42565B;
+  --brass:#E7C38A;
+  --brass-soft:#4D493B;
+  --on-brass:#25373B;
+  --navy:#E9C78D;
+  --on-navy:#233740;
+  --floor:#576B60;
+  --floor-line:#768376;
+  --lcd:#263E42;
+  --lcd-ink:#D7DEBF;
+  --lcd-dim:#D7DEBF47;
+  --good:#A6CCB0;
+  --warn:#EBC58B;
+  --bad:#EDAFA1;
+  --gold:#E5BF55;
+  --silver:#BAC4CB;
+  --bronze:#D6A16F;
+  --shadow:#08141C44;
+  --rk-g:#8F9DA1;
+  color-scheme:dark;
+}}
 :root[data-theme="dark"]{
-  --paper:#0D1320; --sheet:#141C2D; --ink:#E3E8F2; --ink-soft:#97A1B6; --rule:#28324A;
-  --brass:#DDAE55; --on-brass:#1A1305; --navy:#9DB2E6; --floor:#1B2233; --floor-line:#2C3650;
-  --lcd:#152117; --lcd-ink:#A4E287; --lcd-dim:rgba(164,226,135,.22);
-  --good:#55C287; --warn:#E2B23F; --bad:#EF6A5F;
-  --gold:#E2BC4A; --silver:#B4BDC9; --bronze:#D08A5A; --shadow:rgba(0,0,0,.5);
-  --rk-g:#7A8293; --rk-f:#5E91D8; --rk-e:#45B083; --rk-d:#9CC24D; --rk-c:#E5C443; --rk-b:#EE9440; --rk-a:#E85E6E; --rk-s:#E7B436; --rk-s2:#FFEAA8; --rk-ink:#10131A;
+  --paper:#12252F;
+  --sheet:#1E343D;
+  --sheet-soft:#2C4449;
+  --ink:#F3F0E4;
+  --ink-soft:#B7C5BE;
+  --rule:#42565B;
+  --brass:#E7C38A;
+  --brass-soft:#4D493B;
+  --on-brass:#25373B;
+  --navy:#E9C78D;
+  --on-navy:#233740;
+  --floor:#576B60;
+  --floor-line:#768376;
+  --lcd:#263E42;
+  --lcd-ink:#D7DEBF;
+  --lcd-dim:#D7DEBF47;
+  --good:#A6CCB0;
+  --warn:#EBC58B;
+  --bad:#EDAFA1;
+  --gold:#E5BF55;
+  --silver:#BAC4CB;
+  --bronze:#D6A16F;
+  --shadow:#08141C44;
+  --rk-g:#8F9DA1;
   color-scheme:dark;
 }
 *{box-sizing:border-box}
@@ -715,12 +780,25 @@ html[data-season="snow"]{--season-band:linear-gradient(90deg,#DDE8F3,#FFFFFF,#B9
   .mini-stop{flex:none;width:40px;height:40px;border-radius:10px;border:0;background:var(--brass);color:var(--on-brass);font-size:15px;cursor:pointer}
 }
 @media (prefers-reduced-motion: reduce){*{transition:none!important}}
+
+/* 放課後の音楽室：色と操作の形を揃える。ゲームの処理は変えない。 */
+.app{max-width:1140px;gap:18px;padding-top:max(16px,calc(env(safe-area-inset-top,0px) + 10px))}
+.top{display:block;position:relative;isolation:isolate;border-radius:14px;overflow:hidden;padding:22px;color:var(--room-ink);background:linear-gradient(90deg,var(--room-shade),var(--room-clear)),url(img/music-room.webp) 78% 62%/cover}
+.banner{writing-mode:horizontal-tb;font-family:var(--f-body);font-size:22px;font-weight:700;line-height:1.5;letter-spacing:.01em;color:inherit;background:none;padding:0;clip-path:none;cursor:help}
+.banner br{display:none}.banner::after{content:'?';display:inline-grid;place-items:center;font-family:var(--f-body);font-size:10px;line-height:1;width:19px;height:19px;border:1px solid currentColor;border-radius:50%;margin-left:9px;vertical-align:4px;opacity:.7}
+.top-main{gap:9px}.school{font-size:11px;color:var(--room-soft);letter-spacing:.04em}.lede{display:none}.cal-wrap{margin-top:7px;gap:21px}.cal-head,.cal-head b,.cal .mo{color:var(--room-ink)}.cal-head b{font-family:var(--f-lcd),var(--f-body);font-size:20px}.cal-head>span{font-size:11px;color:var(--room-soft)}.cal li{height:16px;border-radius:3px;background:color-mix(in srgb,var(--room-ink) 10%,transparent);border-color:color-mix(in srgb,var(--room-ink) 20%,transparent)}.cal li.done{background:color-mix(in srgb,var(--room-soft) 45%,transparent)}.cal li.now{border-color:var(--room-ink)}.cal li.contest{background:var(--brass);border-color:var(--brass);font-size:9px}.cal li.later{opacity:.55}.cal-key{font-size:10px;color:var(--room-soft)}
+.grid{gap:20px}.stand,.member-card,.senior,.episode,.pcard,.sec-tile,.svin,.achv,.history{border-radius:12px;box-shadow:0 8px 22px -16px var(--shadow)}
+.stand{padding:16px;gap:12px}.piece h2,.gr-name,.fx-title,.epilogue h3,.seniors h3,.announce h2{font-weight:700}.piece h2{font-size:22px}.panel{padding:16px;border:1px solid var(--rule);border-radius:12px;background:var(--sheet);box-shadow:0 8px 22px -16px var(--shadow)}.panel>h2{border-bottom:1px solid var(--rule);padding-bottom:10px;font-size:15px}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:7px;border:1px solid var(--rule);border-radius:8px;min-height:44px;padding:10px 14px;background:var(--sheet);font-size:13px}.btn.primary{background:var(--navy);border-color:var(--navy);color:var(--on-navy)}.btn.brass{background:var(--brass);color:var(--on-brass);border-color:var(--brass)}.btn.small{min-height:36px;font-size:12px;padding:8px 10px}.btn:active{transform:translateY(1px)}.btn:disabled:active{transform:none}.chip{border-radius:7px;min-height:34px}.seg{border-radius:9px}.seg button{border-radius:6px;min-height:33px}.pick{border-radius:8px;min-height:44px}.link{min-height:32px}.rk{font-family:var(--f-body);font-weight:700;border-radius:5px}.rk-s{box-shadow:inset 0 0 0 1px var(--rk-s2)}.track{border-radius:4px}.rkscale .rk{font-size:9px}
+.focus{padding:12px;border:1px solid var(--rule);border-radius:9px;background:var(--paper)}.psecs{padding:0 10px;background:var(--sheet);border:1px solid var(--rule);border-radius:10px}.rkhead{background:var(--sheet)}.episode.consult{position:relative;border-radius:4px 12px 12px 12px;border-color:var(--rule);background:var(--sheet)}.episode.consult .txt{font-family:var(--f-hand);font-size:15px}.mc-head h3{font-size:22px;font-weight:700}.mc-say{border-top:1px solid var(--rule);padding-top:12px}.member-card{padding:18px}.tabbar button{border-radius:8px}.tabbar button[aria-current="page"]{background:color-mix(in srgb,var(--brass) 9%,var(--sheet))}.tip{border-radius:12px;box-shadow:0 12px 35px var(--shadow)}
+@media(max-width:960px){.app{gap:14px}.top{padding:17px}.banner{font-size:19px}.panel{padding:13px}.grid{gap:14px}.tabbar{padding:7px max(12px,env(safe-area-inset-left,0px)) calc(7px + env(safe-area-inset-bottom,0px)) max(12px,env(safe-area-inset-right,0px));gap:4px;background:var(--sheet)}.tabbar button{font-size:10px;letter-spacing:.02em;min-height:46px}.tabbar svg{width:22px;height:22px;stroke-width:1.6}.tabbed .app{padding-bottom:calc(176px + env(safe-area-inset-bottom,0px))}.tabbed .plan>.transport{position:fixed;bottom:calc(60px + env(safe-area-inset-bottom,0px));left:max(16px,env(safe-area-inset-left,0px));right:max(16px,env(safe-area-inset-right,0px));z-index:45;display:grid;grid-template-columns:1.55fr 1fr;gap:8px;padding:18px 0 9px;background:linear-gradient(transparent,var(--paper) 28%)}.plan>.transport .btn{min-height:46px;padding:10px 7px;font-size:11px;white-space:nowrap}.tabbed:has(.mini:not([hidden])) .plan>.transport{bottom:calc(122px + env(safe-area-inset-bottom,0px))}.pm,.rkhead{grid-template-columns:minmax(0,1fr) 22px auto;column-gap:5px}.rks{grid-auto-columns:21px;gap:3px}.pm .rk{width:21px;height:23px;font-size:12px}.rkhead{font-size:8px}.rkhead>span:nth-child(2){font-size:8px}.pm .who{font-size:12px;gap:4px;align-items:center;white-space:nowrap}.pm .who b{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.pm .who small{font-size:9px}.pm .sta .track{height:5px}.psecd>summary .what{font-size:10px}.roster-head{display:block}.roster-head .small{margin-top:7px}}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{scroll-behavior:auto!important;transition:none!important;animation:none!important}}
 </style>
 </head>
 <body>
 <div class="app">
   <header class="top" data-tab="week">
-    <h1 class="banner">吹奏楽部の<br>つくりかた</h1>
+    <h1 class="banner" role="button" tabindex="0" data-tipname="吹奏楽部のつくりかた" data-tip="あなたは吹奏楽部の顧問。部員はまだ1年生の5人だけ。一人ひとりに毎週の練習を指示すると、その人の音が少しずつ変わっていく。演奏の評判が上がれば、入部したいという生徒も増えていく。同じ演奏でも、音楽室と体育館とホールでは聞こえ方がまるで違う。">吹奏楽部の<br>つくりかた</h1>
     <div class="top-main">
       <p class="school" id="school">県立みなと高校 吹奏楽部</p>
       <p class="lede">あなたは吹奏楽部の顧問。部員はまだ1年生の5人だけ。一人ひとりに毎週の練習を指示すると、その人の音が少しずつ変わっていく。演奏の評判が上がれば、入部したいという生徒も増えていく。同じ演奏でも、音楽室と体育館とホールでは聞こえ方がまるで違う。</p>
