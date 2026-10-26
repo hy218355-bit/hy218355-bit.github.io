@@ -1713,9 +1713,12 @@ function renderMemberMove(){
   preview.hidden = !plan;
   if(!plan){ preview.innerHTML = ''; return; }
   const people = [plan.m, plan.other].filter(Boolean);
+  const label = id => id ? seatLabel(id) : '控え（席なし）';
+  const seat = id => `<span class="move-seat">${id ? instrumentIcon(SEAT[id].inst) : uiIcon('members')}<span>${esc(label(id))}</span></span>`;
   preview.innerHTML = people.map(before => {
-    const after = plan.next.members.find(x => x.id === before.id), seat = after.seat && SEAT[after.seat];
-    return `<div class="move-person" data-move-preview="${before.id}"><div class="move-person-head">${memberFace(before,36)}<span><b>${esc(before.name)}</b><small>${seat ? instrumentIcon(seat.inst) + esc(seatLabel(after.seat)) : '控え（席なし）'}</small></span></div><div class="move-ranks">${['pitch','tone'].map(k => `<span data-move-rank="${k}" aria-label="${STAT_LABEL[k]} ${rankOf(before.stats[k])}から${rankOf(after.stats[k])}">${STAT_LABEL[k]}${rankBadge(before.stats[k])}${uiIcon('chevron')}${rankBadge(after.stats[k])}</span>`).join('')}</div></div>`;
+    const after = plan.next.members.find(x => x.id === before.id);
+    const changed = ['pitch','tone'].filter(k => rankOf(before.stats[k]) !== rankOf(after.stats[k]));
+    return `<div class="move-person" data-move-preview="${before.id}"><div class="move-person-head">${memberFace(before,36)}<b>${esc(before.name)}</b></div><div class="move-route" role="group" aria-label="${esc(before.name)}：${esc(label(before.seat))}から${esc(label(after.seat))}へ" data-move-from="${before.seat || 'bench'}" data-move-to="${after.seat || 'bench'}">${seat(before.seat)}${uiIcon('chevron')}${seat(after.seat)}</div>${changed.length ? `<div class="move-ranks">${changed.map(k => `<span data-move-rank="${k}" aria-label="${STAT_LABEL[k]} ${rankOf(before.stats[k])}から${rankOf(after.stats[k])}">${STAT_LABEL[k]}${rankBadge(before.stats[k])}${uiIcon('chevron')}${rankBadge(after.stats[k])}</span>`).join('')}</div>` : ''}</div>`;
   }).join('');
 }
 // いまの力は小さなランクを横に並べ、入部時からの変化は別に開く。
@@ -2091,7 +2094,10 @@ function bind(){
       const picker=$('#memberCard .mc-move');
       picker.dataset.moveTo=picker.dataset.moveTo===b.dataset.to?'':b.dataset.to;
       picker.querySelectorAll('[data-mact="movechoose"]').forEach(x=>x.setAttribute('aria-pressed',String(x.dataset.to===picker.dataset.moveTo)));
-      renderMemberMove();return;
+      renderMemberMove();
+      // 選んだだけでは移さず、二人の移動先を確定ボタンの上で見せる。
+      if(narrow.matches && !$('#movePreview').hidden) $('#movePreview').scrollIntoView({block:'nearest',behavior:!fxCalm()&&U.fxMode==='full'?'smooth':'auto'});
+      return;
     }
     if(act === 'rename'){
       $('#memberNameForm').hidden = false; b.setAttribute('aria-expanded', 'true');
@@ -2274,8 +2280,14 @@ function bind(){
   $('#miniStop').addEventListener('click', () => stopPlay());
   narrow.addEventListener?.('change', () => setTab(U.tab, true));
   const redraw = () => { if(U.playing) return; drawIdle(); };
-  if('ResizeObserver' in window) new ResizeObserver(redraw).observe($('.stand'));
-  else window.addEventListener('resize', redraw);
+  // 大きさの通知中に舞台の高さを変えず、次の描画にまとめる。
+  let resizeFrame = 0;
+  const resizeRedraw = () => {
+    if(resizeFrame) return;
+    resizeFrame = requestAnimationFrame(() => { resizeFrame = 0; redraw(); });
+  };
+  if('ResizeObserver' in window) new ResizeObserver(resizeRedraw).observe($('.stand'));
+  else window.addEventListener('resize', resizeRedraw);
   window.matchMedia?.('(prefers-color-scheme: dark)').addEventListener?.('change', () => { redraw(); renderRoster(); });
   new MutationObserver(() => { redraw(); renderRoster(); }).observe(document.documentElement, {attributes: true, attributeFilter: ['data-theme']});
   document.fonts?.ready.then(redraw);

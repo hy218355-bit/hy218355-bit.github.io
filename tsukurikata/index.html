@@ -270,7 +270,7 @@ select{background:var(--sheet);border:1.5px solid var(--rule);border-radius:8px;
 .move-empty{display:grid;place-items:center;background:var(--paper);color:var(--ink-soft)}
 .move-empty .ui-icon,.move-empty .instrument-icon{width:24px;height:24px}
 .move-choice>span:not(.move-empty):not(.move-check){min-width:0;overflow-wrap:anywhere}
-.move-choice b{display:block;font-size:12px;line-height:1.5}
+.move-choice b{display:block;padding-right:12px;font-size:12px;line-height:1.5}
 .move-choice small{display:block;font-size:10px;line-height:1.5;color:var(--ink-soft)}
 .move-check{position:absolute;right:3px;top:3px;display:none;width:16px;height:16px;border-radius:50%;background:var(--brass);color:var(--on-brass)}
 .move-check .ui-icon{width:14px;height:14px}
@@ -280,10 +280,12 @@ select{background:var(--sheet);border:1.5px solid var(--rule);border-radius:8px;
 .move-person{border:1px solid var(--rule);border-radius:9px;background:var(--paper);padding:10px;min-width:0}
 .move-person-head{display:flex;align-items:center;gap:9px;min-width:0}
 .move-person-head>.member-face{border-radius:50%;flex:none}
-.move-person-head>span{min-width:0;overflow-wrap:anywhere}
-.move-person-head b{display:block;font-size:13px}
-.move-person-head small{display:block;font-size:11px;line-height:1.6;color:var(--ink-soft)}
-.move-person-head .instrument-icon{width:16px;height:16px;vertical-align:-3px;margin-right:4px;color:var(--brass)}
+.move-person-head b{min-width:0;overflow-wrap:anywhere;font-size:13px}
+.move-route{display:grid;grid-template-columns:minmax(0,1fr) 14px minmax(0,1fr);align-items:stretch;gap:6px;margin-top:8px}
+.move-route>.ui-icon{width:14px;height:14px;align-self:center;transform:rotate(-90deg);color:var(--brass)}
+.move-seat{display:flex;flex-direction:column;align-items:flex-start;gap:5px;min-width:0;padding:7px;border:1px solid var(--rule);border-radius:7px;color:var(--ink-soft);font-size:11px;line-height:1.5;overflow-wrap:anywhere}
+.move-seat>.instrument-icon,.move-seat>.ui-icon{width:20px;height:20px;flex:none;color:var(--brass)}
+.move-seat:last-child{border-color:var(--brass);background:var(--sheet);color:var(--ink);font-weight:700}
 .move-ranks{display:flex;flex-wrap:wrap;gap:8px 14px;margin-top:9px;font-size:11px}
 .move-ranks>span{display:flex;align-items:center;gap:4px}
 .move-ranks .rk{width:23px;height:25px;font-size:13px}
@@ -965,11 +967,21 @@ html[data-season="snow"]{--season-band:linear-gradient(90deg,#DDE8F3,#FFFFFF,#B9
 @media(min-width:961px){#secGrid{grid-template-columns:repeat(auto-fill,minmax(120px,1fr))}#rosterTable th.num{width:48px}}
 /* 席選びの間は、確定と中止を親指の届く場所に置く。再生中は停止も残す。 */
 @media(max-width:960px){
+  .move-preview{scroll-margin-bottom:calc(150px + env(safe-area-inset-bottom,0px))}
+  .tabbed:has(.mini:not([hidden])) .move-preview{scroll-margin-bottom:calc(208px + env(safe-area-inset-bottom,0px))}
   .tabbed .stand:has(>#memberCard:not([hidden]) .mc-move[open])>.rehearsal-actions{display:none}
   .tabbed .mc-move[open]>.move-actions{position:fixed;left:max(16px,env(safe-area-inset-left,0px));right:max(16px,env(safe-area-inset-right,0px));bottom:calc(68px + env(safe-area-inset-bottom,0px));z-index:46;display:grid;grid-template-columns:1fr 1.55fr;gap:8px;margin:0;padding:8px;border:1px solid var(--rule);border-radius:12px;background:var(--sheet);box-shadow:0 4px 18px var(--shadow)}
   .tabbed .mc-move[open]>.move-actions:has(.move-stop:not([hidden])){grid-template-columns:1fr 1.55fr 44px}
   .tabbed .mc-move>.move-actions .btn{min-width:0;min-height:44px;justify-content:center}
   .tabbed:has(.mini:not([hidden])) .mc-move[open]>.move-actions{bottom:calc(126px + env(safe-area-inset-bottom,0px))}
+}
+@media(max-width:360px){
+  .move-person{padding:8px}
+  .move-seat{padding:6px}
+  .move-ranks{gap:6px;font-size:10px}
+  .move-ranks>span{gap:3px}
+  .move-ranks .rk{width:19px;height:23px;font-size:12px}
+  .move-ranks .ui-icon{width:10px;height:10px}
 }
 /* 相談は誰の話か、卒業式は顔と育った力が先に分かる形へ。 */
 .episode.consult{padding:14px;gap:14px;border-radius:12px}
@@ -1478,7 +1490,7 @@ html[data-season="snow"]{--season-band:linear-gradient(90deg,#DDE8F3,#FFFFFF,#B9
 <script src="js/announce.js?v=result-journal-1"></script>
 <script src="js/tunegame.js"></script>
 <script src="js/fx.js"></script>
-<script src="js/ui.js?v=member-record-stop-1"></script>
+<script src="js/ui.js?v=seat-route-2"></script>
 <div class="tip" id="tip" role="tooltip" hidden></div>
 </body>
 </html>

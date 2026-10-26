@@ -1,0 +1,3107 @@
+{
+  "version": "seat-route-5",
+  "selectionAndCommit": {
+    "open": {
+      "theme": "light",
+      "width": 320,
+      "scrollWidth": 320,
+      "errors": [],
+      "boot": {
+        "scripts": 33,
+        "loaded": 33,
+        "failed": [],
+        "errors": []
+      },
+      "move": {
+        "value": "",
+        "enabled": false,
+        "state": 0.3786244010552764,
+        "people": [
+          {
+            "id": "m2028-n1-cafe",
+            "seat": "picc1",
+            "ranks": {
+              "pitch": "C",
+              "rhythm": "B",
+              "tone": "C",
+              "expr": "C"
+            },
+            "face": 46
+          },
+          {
+            "id": "m2028-n37-cafe",
+            "seat": "perc2",
+            "ranks": {
+              "pitch": "C",
+              "rhythm": "B",
+              "tone": "C",
+              "expr": "C"
+            },
+            "face": 80
+          }
+        ],
+        "expected": null,
+        "peopleFingerprint": "05ce46648f9c7bacc68224d952cfc465c2636665c21d1474ece36ddce543f6f4",
+        "expectedFingerprint": null
+      },
+      "undo": {
+        "available": false,
+        "visible": false,
+        "saved": false,
+        "before": null
+      },
+      "dom": {
+        "bar": {
+          "bottom": 500,
+          "height": 62,
+          "left": 16,
+          "right": 304,
+          "top": 438,
+          "width": 288
+        },
+        "button": {
+          "bottom": 491,
+          "height": 44,
+          "left": 135.7421875,
+          "right": 295,
+          "top": 447,
+          "width": 159.2578125
+        },
+        "hit": "move",
+        "preview": {
+          "bottom": 0,
+          "height": 0,
+          "left": 0,
+          "right": 0,
+          "top": 0,
+          "width": 0
+        },
+        "routes": []
+      }
+    },
+    "deselected": {
+      "theme": "light",
+      "width": 375,
+      "scrollWidth": 375,
+      "errors": [],
+      "boot": {
+        "scripts": 33,
+        "loaded": 33,
+        "failed": [],
+        "errors": []
+      },
+      "move": {
+        "value": "",
+        "enabled": false,
+        "state": 0.3786244010552764,
+        "people": [
+          {
+            "id": "m2028-n1-cafe",
+            "seat": "picc1",
+            "ranks": {
+              "pitch": "C",
+              "rhythm": "B",
+              "tone": "C",
+              "expr": "C"
+            },
+            "face": 46
+          },
+          {
+            "id": "m2028-n37-cafe",
+            "seat": "perc2",
+            "ranks": {
+              "pitch": "C",
+              "rhythm": "B",
+              "tone": "C",
+              "expr": "C"
+            },
+            "face": 80
+          }
+        ],
+        "expected": null,
+        "peopleFingerprint": "05ce46648f9c7bacc68224d952cfc465c2636665c21d1474ece36ddce543f6f4",
+        "expectedFingerprint": null
+      },
+      "undo": {
+        "available": false,
+        "visible": false,
+        "saved": false,
+        "before": null
+      },
+      "dom": {
+        "bar": {
+          "bottom": 744,
+          "height": 62,
+          "left": 16,
+          "right": 359,
+          "top": 682,
+          "width": 343
+        },
+        "button": {
+          "bottom": 735,
+          "height": 44,
+          "left": 157.3125,
+          "right": 350,
+          "top": 691,
+          "width": 192.6875
+        },
+        "hit": "move",
+        "preview": {
+          "bottom": 0,
+          "height": 0,
+          "left": 0,
+          "right": 0,
+          "top": 0,
+          "width": 0
+        },
+        "routes": []
+      }
+    },
+    "light": {
+      "theme": "light",
+      "width": 375,
+      "scrollWidth": 375,
+      "errors": [],
+      "boot": {
+        "scripts": 33,
+        "loaded": 33,
+        "failed": [],
+        "errors": []
+      },
+      "move": {
+        "value": "perc2",
+        "enabled": true,
+        "state": 0.3786244010552764,
+        "people": [
+          {
+            "id": "m2028-n1-cafe",
+            "seat": "picc1",
+            "ranks": {
+              "pitch": "C",
+              "rhythm": "B",
+              "tone": "C",
+              "expr": "C"
+            },
+            "face": 46
+          },
+          {
+            "id": "m2028-n37-cafe",
+            "seat": "perc2",
+            "ranks": {
+              "pitch": "C",
+              "rhythm": "B",
+              "tone": "C",
+              "expr": "C"
+            },
+            "face": 80
+          }
+        ],
+        "expected": [
+          {
+            "id": "m2028-n1-cafe",
+            "seat": "perc2",
+            "ranks": {
+              "pitch": "E",
+              "rhythm": "B",
+              "tone": "F",
+              "expr": "C"
+            },
+            "face": 46
+          },
+          {
+            "id": "m2028-n37-cafe",
+            "seat": "picc1",
+            "ranks": {
+              "pitch": "E",
+              "rhythm": "B",
+              "tone": "F",
+              "expr": "C"
+            },
+            "face": 80
+          }
+        ],
+        "peopleFingerprint": "05ce46648f9c7bacc68224d952cfc465c2636665c21d1474ece36ddce543f6f4",
+        "expectedFingerprint": "be66ea770e61ab44dc0ef4da22e82a90b89f485e60fa60f6f75f32270815ff37"
+      },
+      "undo": {
+        "available": false,
+        "visible": false,
+        "saved": false,
+        "before": null
+      },
+      "dom": {
+        "bar": {
+          "bottom": 744,
+          "height": 62,
+          "left": 16,
+          "right": 359,
+          "top": 682,
+          "width": 343
+        },
+        "button": {
+          "bottom": 735,
+          "height": 44,
+          "left": 157.3125,
+          "right": 350,
+          "top": 691,
+          "width": 192.6875
+        },
+        "hit": "move",
+        "preview": {
+          "bottom": 661.9921875,
+          "height": 391,
+          "left": 65,
+          "right": 310,
+          "top": 270.9921875,
+          "width": 245
+        },
+        "routes": [
+          {
+            "box": {
+              "bottom": 416.4921875,
+              "height": 90.5,
+              "left": 76,
+              "right": 299,
+              "top": 325.9921875,
+              "width": 223
+            },
+            "from": "picc1",
+            "id": "m2028-n1-cafe",
+            "label": "田中 七海：ピッコロからパーカッション2（スネア・小物）へ",
+            "ranks": [
+              "音程 CからE",
+              "音色 CからF"
+            ],
+            "text": "ピッコロパーカッション2（スネア・小物）",
+            "to": "perc2"
+          },
+          {
+            "box": {
+              "bottom": 616.9921875,
+              "height": 90.5,
+              "left": 76,
+              "right": 299,
+              "top": 526.4921875,
+              "width": 223
+            },
+            "from": "perc2",
+            "id": "m2028-n37-cafe",
+            "label": "山田 蓮：パーカッション2（スネア・小物）からピッコロへ",
+            "ranks": [
+              "音程 CからE",
+              "音色 CからF"
+            ],
+            "text": "パーカッション2（スネア・小物）ピッコロ",
+            "to": "picc1"
+          }
+        ]
+      }
+    },
+    "dark": {
+      "theme": "dark",
+      "width": 375,
+      "scrollWidth": 375,
+      "errors": [],
+      "boot": {
+        "scripts": 33,
+        "loaded": 33,
+        "failed": [],
+        "errors": []
+      },
+      "move": {
+        "value": "perc2",
+        "enabled": true,
+        "state": 0.3786244010552764,
+        "people": [
+          {
+            "id": "m2028-n1-cafe",
+            "seat": "picc1",
+            "ranks": {
+              "pitch": "C",
+              "rhythm": "B",
+              "tone": "C",
+              "expr": "C"
+            },
+            "face": 46
+          },
+          {
+            "id": "m2028-n37-cafe",
+            "seat": "perc2",
+            "ranks": {
+              "pitch": "C",
+              "rhythm": "B",
+              "tone": "C",
+              "expr": "C"
+            },
+            "face": 80
+          }
+        ],
+        "expected": [
+          {
+            "id": "m2028-n1-cafe",
+            "seat": "perc2",
+            "ranks": {
+              "pitch": "E",
+              "rhythm": "B",
+              "tone": "F",
+              "expr": "C"
+            },
+            "face": 46
+          },
+          {
+            "id": "m2028-n37-cafe",
+            "seat": "picc1",
+            "ranks": {
+              "pitch": "E",
+              "rhythm": "B",
+              "tone": "F",
+              "expr": "C"
+            },
+            "face": 80
+          }
+        ],
+        "peopleFingerprint": "05ce46648f9c7bacc68224d952cfc465c2636665c21d1474ece36ddce543f6f4",
+        "expectedFingerprint": "be66ea770e61ab44dc0ef4da22e82a90b89f485e60fa60f6f75f32270815ff37"
+      },
+      "undo": {
+        "available": false,
+        "visible": false,
+        "saved": false,
+        "before": null
+      },
+      "dom": {
+        "bar": {
+          "bottom": 744,
+          "height": 62,
+          "left": 16,
+          "right": 359,
+          "top": 682,
+          "width": 343
+        },
+        "button": {
+          "bottom": 735,
+          "height": 44,
+          "left": 157.3125,
+          "right": 350,
+          "top": 691,
+          "width": 192.6875
+        },
+        "hit": "move",
+        "preview": {
+          "bottom": 661.9921875,
+          "height": 391,
+          "left": 65,
+          "right": 310,
+          "top": 270.9921875,
+          "width": 245
+        },
+        "routes": [
+          {
+            "box": {
+              "bottom": 416.4921875,
+              "height": 90.5,
+              "left": 76,
+              "right": 299,
+              "top": 325.9921875,
+              "width": 223
+            },
+            "from": "picc1",
+            "id": "m2028-n1-cafe",
+            "label": "田中 七海：ピッコロからパーカッション2（スネア・小物）へ",
+            "ranks": [
+              "音程 CからE",
+              "音色 CからF"
+            ],
+            "text": "ピッコロパーカッション2（スネア・小物）",
+            "to": "perc2"
+          },
+          {
+            "box": {
+              "bottom": 616.9921875,
+              "height": 90.5,
+              "left": 76,
+              "right": 299,
+              "top": 526.4921875,
+              "width": 223
+            },
+            "from": "perc2",
+            "id": "m2028-n37-cafe",
+            "label": "山田 蓮：パーカッション2（スネア・小物）からピッコロへ",
+            "ranks": [
+              "音程 CからE",
+              "音色 CからF"
+            ],
+            "text": "パーカッション2（スネア・小物）ピッコロ",
+            "to": "picc1"
+          }
+        ]
+      }
+    },
+    "moved": {
+      "theme": "dark",
+      "width": 375,
+      "scrollWidth": 375,
+      "errors": [],
+      "boot": {
+        "scripts": 33,
+        "loaded": 33,
+        "failed": [],
+        "errors": []
+      },
+      "move": {
+        "value": "",
+        "enabled": false,
+        "state": 0.4009817377664149,
+        "people": [
+          {
+            "id": "m2028-n1-cafe",
+            "seat": "perc2",
+            "ranks": {
+              "pitch": "E",
+              "rhythm": "B",
+              "tone": "F",
+              "expr": "C"
+            },
+            "face": 46
+          },
+          {
+            "id": "m2028-n37-cafe",
+            "seat": "picc1",
+            "ranks": {
+              "pitch": "E",
+              "rhythm": "B",
+              "tone": "F",
+              "expr": "C"
+            },
+            "face": 80
+          }
+        ],
+        "expected": null,
+        "peopleFingerprint": "be66ea770e61ab44dc0ef4da22e82a90b89f485e60fa60f6f75f32270815ff37",
+        "expectedFingerprint": null
+      },
+      "undo": {
+        "available": true,
+        "visible": true,
+        "saved": true,
+        "before": 0.3786244010552764
+      },
+      "dom": {
+        "bar": {
+          "bottom": 855.3828125,
+          "height": 44,
+          "left": 65,
+          "right": 310,
+          "top": 811.3828125,
+          "width": 245
+        },
+        "button": {
+          "bottom": 855.3828125,
+          "height": 44,
+          "left": 254,
+          "right": 310,
+          "top": 811.3828125,
+          "width": 56
+        },
+        "preview": {
+          "bottom": 0,
+          "height": 0,
+          "left": 0,
+          "right": 0,
+          "top": 0,
+          "width": 0
+        },
+        "routes": []
+      }
+    },
+    "undone": {
+      "theme": "dark",
+      "width": 375,
+      "scrollWidth": 375,
+      "errors": [],
+      "boot": {
+        "scripts": 33,
+        "loaded": 33,
+        "failed": [],
+        "errors": []
+      },
+      "move": {
+        "value": "",
+        "enabled": false,
+        "state": 0.3786244010552764,
+        "people": [
+          {
+            "id": "m2028-n1-cafe",
+            "seat": "picc1",
+            "ranks": {
+              "pitch": "C",
+              "rhythm": "B",
+              "tone": "C",
+              "expr": "C"
+            },
+            "face": 46
+          },
+          {
+            "id": "m2028-n37-cafe",
+            "seat": "perc2",
+            "ranks": {
+              "pitch": "C",
+              "rhythm": "B",
+              "tone": "C",
+              "expr": "C"
+            },
+            "face": 80
+          }
+        ],
+        "expected": null,
+        "peopleFingerprint": "05ce46648f9c7bacc68224d952cfc465c2636665c21d1474ece36ddce543f6f4",
+        "expectedFingerprint": null
+      },
+      "undo": {
+        "available": false,
+        "visible": false,
+        "saved": false,
+        "before": null
+      },
+      "dom": {
+        "bar": {
+          "bottom": 715.9921875,
+          "height": 44,
+          "left": 65,
+          "right": 310,
+          "top": 671.9921875,
+          "width": 245
+        },
+        "button": {
+          "bottom": 715.9921875,
+          "height": 44,
+          "left": 254,
+          "right": 310,
+          "top": 671.9921875,
+          "width": 56
+        },
+        "preview": {
+          "bottom": 0,
+          "height": 0,
+          "left": 0,
+          "right": 0,
+          "top": 0,
+          "width": 0
+        },
+        "routes": []
+      }
+    },
+    "bench": {
+      "theme": "dark",
+      "width": 375,
+      "scrollWidth": 375,
+      "errors": [],
+      "boot": {
+        "scripts": 33,
+        "loaded": 33,
+        "failed": [],
+        "errors": []
+      },
+      "move": {
+        "value": "bench",
+        "enabled": true,
+        "state": 0.3786244010552764,
+        "people": [
+          {
+            "id": "m2028-n1-cafe",
+            "seat": "picc1",
+            "ranks": {
+              "pitch": "C",
+              "rhythm": "B",
+              "tone": "C",
+              "expr": "C"
+            },
+            "face": 46
+          }
+        ],
+        "expected": [
+          {
+            "id": "m2028-n1-cafe",
+            "seat": null,
+            "ranks": {
+              "pitch": "C",
+              "rhythm": "B",
+              "tone": "C",
+              "expr": "C"
+            },
+            "face": 46
+          }
+        ],
+        "peopleFingerprint": "05ce46648f9c7bacc68224d952cfc465c2636665c21d1474ece36ddce543f6f4",
+        "expectedFingerprint": "fac8f10a4e817c486f45df25505b501b962fa17f36d254a2953f04f3bbf3b914"
+      },
+      "undo": {
+        "available": false,
+        "visible": false,
+        "saved": false,
+        "before": null
+      },
+      "dom": {
+        "bar": {
+          "bottom": 744,
+          "height": 62,
+          "left": 16,
+          "right": 359,
+          "top": 682,
+          "width": 343
+        },
+        "button": {
+          "bottom": 735,
+          "height": 44,
+          "left": 157.3125,
+          "right": 350,
+          "top": 691,
+          "width": 192.6875
+        },
+        "hit": "move",
+        "preview": {
+          "bottom": 579.4921875,
+          "height": 123.5,
+          "left": 65,
+          "right": 310,
+          "top": 455.9921875,
+          "width": 245
+        },
+        "routes": [
+          {
+            "box": {
+              "bottom": 568.4921875,
+              "height": 57.5,
+              "left": 76,
+              "right": 299,
+              "top": 510.9921875,
+              "width": 223
+            },
+            "from": "picc1",
+            "id": "m2028-n1-cafe",
+            "label": "田中 七海：ピッコロから控え（席なし）へ",
+            "ranks": [],
+            "text": "ピッコロ控え（席なし）",
+            "to": "bench"
+          }
+        ]
+      }
+    },
+    "benched": {
+      "theme": "dark",
+      "width": 375,
+      "scrollWidth": 375,
+      "errors": [],
+      "boot": {
+        "scripts": 33,
+        "loaded": 33,
+        "failed": [],
+        "errors": []
+      },
+      "move": {
+        "value": "",
+        "enabled": false,
+        "state": 0.9629728081636131,
+        "people": [
+          {
+            "id": "m2028-n1-cafe",
+            "seat": null,
+            "ranks": {
+              "pitch": "C",
+              "rhythm": "B",
+              "tone": "C",
+              "expr": "C"
+            },
+            "face": 46
+          },
+          {
+            "id": "m2028-n37-cafe",
+            "seat": "perc2",
+            "ranks": {
+              "pitch": "C",
+              "rhythm": "B",
+              "tone": "C",
+              "expr": "C"
+            },
+            "face": 80
+          }
+        ],
+        "expected": null,
+        "peopleFingerprint": "fac8f10a4e817c486f45df25505b501b962fa17f36d254a2953f04f3bbf3b914",
+        "expectedFingerprint": null
+      },
+      "undo": {
+        "available": true,
+        "visible": true,
+        "saved": true,
+        "before": 0.3786244010552764
+      },
+      "dom": {
+        "bar": {
+          "bottom": 753.9921875,
+          "height": 44,
+          "left": 65,
+          "right": 310,
+          "top": 709.9921875,
+          "width": 245
+        },
+        "button": {
+          "bottom": 753.9921875,
+          "height": 44,
+          "left": 254,
+          "right": 310,
+          "top": 709.9921875,
+          "width": 56
+        },
+        "preview": {
+          "bottom": 0,
+          "height": 0,
+          "left": 0,
+          "right": 0,
+          "top": 0,
+          "width": 0
+        },
+        "routes": []
+      }
+    },
+    "empty": {
+      "theme": "dark",
+      "width": 375,
+      "scrollWidth": 375,
+      "errors": [],
+      "boot": {
+        "scripts": 33,
+        "loaded": 33,
+        "failed": [],
+        "errors": []
+      },
+      "move": {
+        "value": "picc1",
+        "enabled": true,
+        "state": 0.9629728081636131,
+        "people": [
+          {
+            "id": "m2028-n1-cafe",
+            "seat": null,
+            "ranks": {
+              "pitch": "C",
+              "rhythm": "B",
+              "tone": "C",
+              "expr": "C"
+            },
+            "face": 46
+          }
+        ],
+        "expected": [
+          {
+            "id": "m2028-n1-cafe",
+            "seat": "picc1",
+            "ranks": {
+              "pitch": "C",
+              "rhythm": "B",
+              "tone": "C",
+              "expr": "C"
+            },
+            "face": 46
+          }
+        ],
+        "peopleFingerprint": "fac8f10a4e817c486f45df25505b501b962fa17f36d254a2953f04f3bbf3b914",
+        "expectedFingerprint": "05ce46648f9c7bacc68224d952cfc465c2636665c21d1474ece36ddce543f6f4"
+      },
+      "undo": {
+        "available": true,
+        "visible": true,
+        "saved": true,
+        "before": 0.3786244010552764
+      },
+      "dom": {
+        "bar": {
+          "bottom": 744,
+          "height": 62,
+          "left": 16,
+          "right": 359,
+          "top": 682,
+          "width": 343
+        },
+        "button": {
+          "bottom": 735,
+          "height": 44,
+          "left": 157.3125,
+          "right": 350,
+          "top": 691,
+          "width": 192.6875
+        },
+        "hit": "move",
+        "preview": {
+          "bottom": 661.9921875,
+          "height": 123.5,
+          "left": 65,
+          "right": 310,
+          "top": 538.4921875,
+          "width": 245
+        },
+        "routes": [
+          {
+            "box": {
+              "bottom": 650.9921875,
+              "height": 57.5,
+              "left": 76,
+              "right": 299,
+              "top": 593.4921875,
+              "width": 223
+            },
+            "from": "bench",
+            "id": "m2028-n1-cafe",
+            "label": "田中 七海：控え（席なし）からピッコロへ",
+            "ranks": [],
+            "text": "控え（席なし）ピッコロ",
+            "to": "picc1"
+          }
+        ]
+      }
+    },
+    "emptyMoved": {
+      "theme": "dark",
+      "width": 375,
+      "scrollWidth": 375,
+      "errors": [],
+      "boot": {
+        "scripts": 33,
+        "loaded": 33,
+        "failed": [],
+        "errors": []
+      },
+      "move": {
+        "value": "",
+        "enabled": false,
+        "state": 0.3496182723902166,
+        "people": [
+          {
+            "id": "m2028-n1-cafe",
+            "seat": "picc1",
+            "ranks": {
+              "pitch": "C",
+              "rhythm": "B",
+              "tone": "C",
+              "expr": "C"
+            },
+            "face": 46
+          },
+          {
+            "id": "m2028-n37-cafe",
+            "seat": "perc2",
+            "ranks": {
+              "pitch": "C",
+              "rhythm": "B",
+              "tone": "C",
+              "expr": "C"
+            },
+            "face": 80
+          }
+        ],
+        "expected": null,
+        "peopleFingerprint": "05ce46648f9c7bacc68224d952cfc465c2636665c21d1474ece36ddce543f6f4",
+        "expectedFingerprint": null
+      },
+      "undo": {
+        "available": true,
+        "visible": true,
+        "saved": true,
+        "before": 0.9629728081636131
+      },
+      "dom": {
+        "bar": {
+          "bottom": 807.9921875,
+          "height": 44,
+          "left": 65,
+          "right": 310,
+          "top": 763.9921875,
+          "width": 245
+        },
+        "button": {
+          "bottom": 807.9921875,
+          "height": 44,
+          "left": 254,
+          "right": 310,
+          "top": 763.9921875,
+          "width": 56
+        },
+        "preview": {
+          "bottom": 0,
+          "height": 0,
+          "left": 0,
+          "right": 0,
+          "top": 0,
+          "width": 0
+        },
+        "routes": []
+      }
+    },
+    "emptyUndone": {
+      "theme": "dark",
+      "width": 375,
+      "scrollWidth": 375,
+      "errors": [],
+      "boot": {
+        "scripts": 33,
+        "loaded": 33,
+        "failed": [],
+        "errors": []
+      },
+      "move": {
+        "value": "",
+        "enabled": false,
+        "state": 0.9629728081636131,
+        "people": [
+          {
+            "id": "m2028-n1-cafe",
+            "seat": null,
+            "ranks": {
+              "pitch": "C",
+              "rhythm": "B",
+              "tone": "C",
+              "expr": "C"
+            },
+            "face": 46
+          },
+          {
+            "id": "m2028-n37-cafe",
+            "seat": "perc2",
+            "ranks": {
+              "pitch": "C",
+              "rhythm": "B",
+              "tone": "C",
+              "expr": "C"
+            },
+            "face": 80
+          }
+        ],
+        "expected": null,
+        "peopleFingerprint": "fac8f10a4e817c486f45df25505b501b962fa17f36d254a2953f04f3bbf3b914",
+        "expectedFingerprint": null
+      },
+      "undo": {
+        "available": false,
+        "visible": false,
+        "saved": false,
+        "before": null
+      },
+      "dom": {
+        "bar": {
+          "bottom": 661.9921875,
+          "height": 44,
+          "left": 65,
+          "right": 310,
+          "top": 617.9921875,
+          "width": 245
+        },
+        "button": {
+          "bottom": 661.9921875,
+          "height": 44,
+          "left": 254,
+          "right": 310,
+          "top": 617.9921875,
+          "width": 56
+        },
+        "preview": {
+          "bottom": 0,
+          "height": 0,
+          "left": 0,
+          "right": 0,
+          "top": 0,
+          "width": 0
+        },
+        "routes": []
+      }
+    },
+    "sameInstrument": {
+      "theme": "dark",
+      "width": 375,
+      "scrollWidth": 375,
+      "errors": [],
+      "boot": {
+        "scripts": 33,
+        "loaded": 33,
+        "failed": [],
+        "errors": []
+      },
+      "move": {
+        "value": "fl1b",
+        "enabled": true,
+        "state": 0.9629728081636131,
+        "people": [
+          {
+            "id": "m2028-n2-cafe",
+            "seat": "fl1a",
+            "ranks": {
+              "pitch": "C",
+              "rhythm": "B",
+              "tone": "C",
+              "expr": "C"
+            },
+            "face": 85
+          },
+          {
+            "id": "m2028-n3-cafe",
+            "seat": "fl1b",
+            "ranks": {
+              "pitch": "C",
+              "rhythm": "B",
+              "tone": "C",
+              "expr": "C"
+            },
+            "face": 24
+          }
+        ],
+        "expected": [
+          {
+            "id": "m2028-n2-cafe",
+            "seat": "fl1b",
+            "ranks": {
+              "pitch": "C",
+              "rhythm": "B",
+              "tone": "C",
+              "expr": "C"
+            },
+            "face": 85
+          },
+          {
+            "id": "m2028-n3-cafe",
+            "seat": "fl1a",
+            "ranks": {
+              "pitch": "C",
+              "rhythm": "B",
+              "tone": "C",
+              "expr": "C"
+            },
+            "face": 24
+          }
+        ],
+        "peopleFingerprint": "fac8f10a4e817c486f45df25505b501b962fa17f36d254a2953f04f3bbf3b914",
+        "expectedFingerprint": "f0b6db9701416de48be5b02580494ffea20eb037fb21a7abe95f7ae893f01c62"
+      },
+      "undo": {
+        "available": false,
+        "visible": false,
+        "saved": false,
+        "before": null
+      },
+      "dom": {
+        "bar": {
+          "bottom": 744,
+          "height": 62,
+          "left": 16,
+          "right": 359,
+          "top": 682,
+          "width": 343
+        },
+        "button": {
+          "bottom": 735,
+          "height": 44,
+          "left": 157.3125,
+          "right": 350,
+          "top": 691,
+          "width": 192.6875
+        },
+        "hit": "move",
+        "preview": {
+          "bottom": 662,
+          "height": 290,
+          "left": 48,
+          "right": 327,
+          "top": 372,
+          "width": 279
+        },
+        "routes": [
+          {
+            "box": {
+              "bottom": 501,
+              "height": 74,
+              "left": 59,
+              "right": 316,
+              "top": 427,
+              "width": 257
+            },
+            "from": "fl1a",
+            "id": "m2028-n2-cafe",
+            "label": "小川 悠斗：フルート 1stからフルート 1st（2人目）へ",
+            "ranks": [],
+            "text": "フルート 1stフルート 1st（2人目）",
+            "to": "fl1b"
+          },
+          {
+            "box": {
+              "bottom": 651,
+              "height": 74,
+              "left": 59,
+              "right": 316,
+              "top": 577,
+              "width": 257
+            },
+            "from": "fl1b",
+            "id": "m2028-n3-cafe",
+            "label": "松井 颯太：フルート 1st（2人目）からフルート 1stへ",
+            "ranks": [],
+            "text": "フルート 1st（2人目）フルート 1st",
+            "to": "fl1a"
+          }
+        ]
+      }
+    },
+    "cancelled": {
+      "theme": "dark",
+      "width": 375,
+      "scrollWidth": 375,
+      "errors": [],
+      "boot": {
+        "scripts": 33,
+        "loaded": 33,
+        "failed": [],
+        "errors": []
+      },
+      "move": {
+        "value": "",
+        "enabled": false,
+        "state": 0.9629728081636131,
+        "people": [
+          {
+            "id": "m2028-n1-cafe",
+            "seat": null,
+            "ranks": {
+              "pitch": "C",
+              "rhythm": "B",
+              "tone": "C",
+              "expr": "C"
+            },
+            "face": 46
+          },
+          {
+            "id": "m2028-n37-cafe",
+            "seat": "perc2",
+            "ranks": {
+              "pitch": "C",
+              "rhythm": "B",
+              "tone": "C",
+              "expr": "C"
+            },
+            "face": 80
+          }
+        ],
+        "expected": null,
+        "peopleFingerprint": "fac8f10a4e817c486f45df25505b501b962fa17f36d254a2953f04f3bbf3b914",
+        "expectedFingerprint": null
+      },
+      "undo": {
+        "available": false,
+        "visible": false,
+        "saved": false,
+        "before": null
+      },
+      "dom": {
+        "bar": {
+          "bottom": 704,
+          "height": 44,
+          "left": 48,
+          "right": 327,
+          "top": 660,
+          "width": 279
+        },
+        "button": {
+          "bottom": 704,
+          "height": 44,
+          "left": 271,
+          "right": 327,
+          "top": 660,
+          "width": 56
+        },
+        "preview": {
+          "bottom": 0,
+          "height": 0,
+          "left": 0,
+          "right": 0,
+          "top": 0,
+          "width": 0
+        },
+        "routes": []
+      }
+    },
+    "playing": {
+      "theme": "dark",
+      "width": 375,
+      "scrollWidth": 375,
+      "errors": [],
+      "boot": {
+        "scripts": 33,
+        "loaded": 33,
+        "failed": [],
+        "errors": []
+      },
+      "move": {
+        "value": "perc2",
+        "enabled": true,
+        "state": 0.9629728081636131,
+        "people": [
+          {
+            "id": "m2028-n2-cafe",
+            "seat": "fl1a",
+            "ranks": {
+              "pitch": "C",
+              "rhythm": "B",
+              "tone": "C",
+              "expr": "C"
+            },
+            "face": 85
+          },
+          {
+            "id": "m2028-n37-cafe",
+            "seat": "perc2",
+            "ranks": {
+              "pitch": "C",
+              "rhythm": "B",
+              "tone": "C",
+              "expr": "C"
+            },
+            "face": 80
+          }
+        ],
+        "expected": [
+          {
+            "id": "m2028-n2-cafe",
+            "seat": "perc2",
+            "ranks": {
+              "pitch": "E",
+              "rhythm": "B",
+              "tone": "F",
+              "expr": "C"
+            },
+            "face": 85
+          },
+          {
+            "id": "m2028-n37-cafe",
+            "seat": "fl1a",
+            "ranks": {
+              "pitch": "E",
+              "rhythm": "B",
+              "tone": "F",
+              "expr": "C"
+            },
+            "face": 80
+          }
+        ],
+        "peopleFingerprint": "fac8f10a4e817c486f45df25505b501b962fa17f36d254a2953f04f3bbf3b914",
+        "expectedFingerprint": "2c80854a0bb48aee3a1780ab9bf1aeac521f0c113187a282ce3b8af8fc9f6b56"
+      },
+      "undo": {
+        "available": false,
+        "visible": false,
+        "saved": false,
+        "before": null
+      },
+      "dom": {
+        "bar": {
+          "bottom": 686,
+          "height": 62,
+          "left": 16,
+          "right": 359,
+          "top": 624,
+          "width": 343
+        },
+        "button": {
+          "bottom": 677,
+          "height": 44,
+          "left": 157.3125,
+          "right": 350,
+          "top": 633,
+          "width": 192.6875
+        },
+        "hit": "move",
+        "preview": {
+          "bottom": 604,
+          "height": 358,
+          "left": 48,
+          "right": 327,
+          "top": 246,
+          "width": 279
+        },
+        "routes": [
+          {
+            "box": {
+              "bottom": 375,
+              "height": 74,
+              "left": 59,
+              "right": 316,
+              "top": 301,
+              "width": 257
+            },
+            "from": "fl1a",
+            "id": "m2028-n2-cafe",
+            "label": "小川 悠斗：フルート 1stからパーカッション2（スネア・小物）へ",
+            "ranks": [
+              "音程 CからE",
+              "音色 CからF"
+            ],
+            "text": "フルート 1stパーカッション2（スネア・小物）",
+            "to": "perc2"
+          },
+          {
+            "box": {
+              "bottom": 559,
+              "height": 74,
+              "left": 59,
+              "right": 316,
+              "top": 485,
+              "width": 257
+            },
+            "from": "perc2",
+            "id": "m2028-n37-cafe",
+            "label": "山田 蓮：パーカッション2（スネア・小物）からフルート 1stへ",
+            "ranks": [
+              "音程 CからE",
+              "音色 CからF"
+            ],
+            "text": "パーカッション2（スネア・小物）フルート 1st",
+            "to": "fl1a"
+          }
+        ]
+      }
+    },
+    "long": {
+      "theme": "dark",
+      "width": 375,
+      "scrollWidth": 375,
+      "errors": [],
+      "boot": {
+        "scripts": 33,
+        "loaded": 33,
+        "failed": [],
+        "errors": []
+      },
+      "move": {
+        "value": "fl1b",
+        "enabled": true,
+        "state": 0.025979415280744433,
+        "people": [
+          {
+            "id": "m2028-n2-cafe",
+            "seat": "fl1a",
+            "ranks": {
+              "pitch": "C",
+              "rhythm": "B",
+              "tone": "C",
+              "expr": "C"
+            },
+            "face": 85
+          },
+          {
+            "id": "m2028-n3-cafe",
+            "seat": "fl1b",
+            "ranks": {
+              "pitch": "C",
+              "rhythm": "B",
+              "tone": "C",
+              "expr": "C"
+            },
+            "face": 24
+          }
+        ],
+        "expected": [
+          {
+            "id": "m2028-n2-cafe",
+            "seat": "fl1b",
+            "ranks": {
+              "pitch": "C",
+              "rhythm": "B",
+              "tone": "C",
+              "expr": "C"
+            },
+            "face": 85
+          },
+          {
+            "id": "m2028-n3-cafe",
+            "seat": "fl1a",
+            "ranks": {
+              "pitch": "C",
+              "rhythm": "B",
+              "tone": "C",
+              "expr": "C"
+            },
+            "face": 24
+          }
+        ],
+        "peopleFingerprint": "fac8f10a4e817c486f45df25505b501b962fa17f36d254a2953f04f3bbf3b914",
+        "expectedFingerprint": "f0b6db9701416de48be5b02580494ffea20eb037fb21a7abe95f7ae893f01c62"
+      },
+      "undo": {
+        "available": false,
+        "visible": false,
+        "saved": false,
+        "before": null
+      },
+      "dom": {
+        "bar": {
+          "bottom": 744,
+          "height": 62,
+          "left": 16,
+          "right": 359,
+          "top": 682,
+          "width": 343
+        },
+        "button": {
+          "bottom": 735,
+          "height": 44,
+          "left": 157.3125,
+          "right": 350,
+          "top": 691,
+          "width": 192.6875
+        },
+        "hit": "move",
+        "preview": {
+          "bottom": 662,
+          "height": 290,
+          "left": 48,
+          "right": 327,
+          "top": 372,
+          "width": 279
+        },
+        "routes": [
+          {
+            "box": {
+              "bottom": 501,
+              "height": 74,
+              "left": 59,
+              "right": 316,
+              "top": 427,
+              "width": 257
+            },
+            "from": "fl1a",
+            "id": "m2028-n2-cafe",
+            "label": "あいうえおかきくけこさし：フルート 1stからフルート 1st（2人目）へ",
+            "ranks": [],
+            "text": "フルート 1stフルート 1st（2人目）",
+            "to": "fl1b"
+          },
+          {
+            "box": {
+              "bottom": 651,
+              "height": 74,
+              "left": 59,
+              "right": 316,
+              "top": 577,
+              "width": 257
+            },
+            "from": "fl1b",
+            "id": "m2028-n3-cafe",
+            "label": "さしすせそたちつてとなに：フルート 1st（2人目）からフルート 1stへ",
+            "ranks": [],
+            "text": "フルート 1st（2人目）フルート 1st",
+            "to": "fl1a"
+          }
+        ]
+      }
+    },
+    "finalBusy": {
+      "theme": "dark",
+      "width": 375,
+      "scrollWidth": 375,
+      "errors": [],
+      "boot": {
+        "scripts": 33,
+        "loaded": 33,
+        "failed": [],
+        "errors": []
+      },
+      "move": {
+        "value": "perc2",
+        "enabled": false,
+        "state": 0.945601784158498,
+        "people": [
+          {
+            "id": "m2028-n1-cafe",
+            "seat": "picc1",
+            "ranks": {
+              "pitch": "C",
+              "rhythm": "B",
+              "tone": "C",
+              "expr": "C"
+            },
+            "face": 46
+          },
+          {
+            "id": "m2028-n37-cafe",
+            "seat": "perc2",
+            "ranks": {
+              "pitch": "C",
+              "rhythm": "B",
+              "tone": "C",
+              "expr": "C"
+            },
+            "face": 80
+          }
+        ],
+        "expected": [
+          {
+            "id": "m2028-n1-cafe",
+            "seat": "perc2",
+            "ranks": {
+              "pitch": "E",
+              "rhythm": "B",
+              "tone": "F",
+              "expr": "C"
+            },
+            "face": 46
+          },
+          {
+            "id": "m2028-n37-cafe",
+            "seat": "picc1",
+            "ranks": {
+              "pitch": "E",
+              "rhythm": "B",
+              "tone": "F",
+              "expr": "C"
+            },
+            "face": 80
+          }
+        ],
+        "peopleFingerprint": "05ce46648f9c7bacc68224d952cfc465c2636665c21d1474ece36ddce543f6f4",
+        "expectedFingerprint": "be66ea770e61ab44dc0ef4da22e82a90b89f485e60fa60f6f75f32270815ff37"
+      },
+      "undo": {
+        "available": false,
+        "visible": false,
+        "saved": false,
+        "before": null
+      },
+      "dom": {
+        "bar": {
+          "bottom": 744,
+          "height": 62,
+          "left": 16,
+          "right": 359,
+          "top": 682,
+          "width": 343
+        },
+        "button": {
+          "bottom": 735,
+          "height": 44,
+          "left": 157.3125,
+          "right": 350,
+          "top": 691,
+          "width": 192.6875
+        },
+        "hit": "move",
+        "preview": {
+          "bottom": 661.9921875,
+          "height": 391,
+          "left": 65,
+          "right": 310,
+          "top": 270.9921875,
+          "width": 245
+        },
+        "routes": [
+          {
+            "box": {
+              "bottom": 416.4921875,
+              "height": 90.5,
+              "left": 76,
+              "right": 299,
+              "top": 325.9921875,
+              "width": 223
+            },
+            "from": "picc1",
+            "id": "m2028-n1-cafe",
+            "label": "田中 七海：ピッコロからパーカッション2（スネア・小物）へ",
+            "ranks": [
+              "音程 CからE",
+              "音色 CからF"
+            ],
+            "text": "ピッコロパーカッション2（スネア・小物）",
+            "to": "perc2"
+          },
+          {
+            "box": {
+              "bottom": 616.9921875,
+              "height": 90.5,
+              "left": 76,
+              "right": 299,
+              "top": 526.4921875,
+              "width": 223
+            },
+            "from": "perc2",
+            "id": "m2028-n37-cafe",
+            "label": "山田 蓮：パーカッション2（スネア・小物）からピッコロへ",
+            "ranks": [
+              "音程 CからE",
+              "音色 CからF"
+            ],
+            "text": "パーカッション2（スネア・小物）ピッコロ",
+            "to": "picc1"
+          }
+        ]
+      }
+    }
+  },
+  "resizeBeforeChange": {
+    "errors": [
+      "ResizeObserver loop completed with undelivered notifications."
+    ],
+    "from": {
+      "width": 375,
+      "height": 667
+    },
+    "to": {
+      "width": 768,
+      "height": 1024
+    }
+  },
+  "resizeAfterChange": [
+    {
+      "size": {
+        "width": 320,
+        "height": 568
+      },
+      "result": {
+        "theme": "light",
+        "width": 320,
+        "scrollWidth": 320,
+        "errors": [],
+        "boot": {
+          "scripts": 33,
+          "loaded": 33,
+          "failed": [],
+          "errors": []
+        },
+        "move": {
+          "value": "perc2",
+          "enabled": true,
+          "state": 0.10574383521452546,
+          "people": [
+            {
+              "id": "m2028-n1-cafe",
+              "seat": "picc1",
+              "ranks": {
+                "pitch": "C",
+                "rhythm": "B",
+                "tone": "C",
+                "expr": "C"
+              },
+              "face": 46
+            },
+            {
+              "id": "m2028-n37-cafe",
+              "seat": "perc2",
+              "ranks": {
+                "pitch": "C",
+                "rhythm": "B",
+                "tone": "C",
+                "expr": "C"
+              },
+              "face": 80
+            }
+          ],
+          "expected": [
+            {
+              "id": "m2028-n1-cafe",
+              "seat": "perc2",
+              "ranks": {
+                "pitch": "E",
+                "rhythm": "B",
+                "tone": "F",
+                "expr": "C"
+              },
+              "face": 46
+            },
+            {
+              "id": "m2028-n37-cafe",
+              "seat": "picc1",
+              "ranks": {
+                "pitch": "E",
+                "rhythm": "B",
+                "tone": "F",
+                "expr": "C"
+              },
+              "face": 80
+            }
+          ],
+          "peopleFingerprint": "05ce46648f9c7bacc68224d952cfc465c2636665c21d1474ece36ddce543f6f4",
+          "expectedFingerprint": "be66ea770e61ab44dc0ef4da22e82a90b89f485e60fa60f6f75f32270815ff37"
+        },
+        "undo": {
+          "available": false,
+          "visible": false,
+          "saved": false,
+          "before": null
+        },
+        "dom": {
+          "bar": {
+            "bottom": 500,
+            "height": 62,
+            "left": 16,
+            "right": 304,
+            "top": 438,
+            "width": 288
+          },
+          "button": {
+            "bottom": 491,
+            "height": 44,
+            "left": 135.7421875,
+            "right": 295,
+            "top": 447,
+            "width": 159.2578125
+          },
+          "hit": "move",
+          "preview": {
+            "bottom": 418.1328125,
+            "height": 408,
+            "left": 65,
+            "right": 255,
+            "top": 10.1328125,
+            "width": 190
+          },
+          "routes": [
+            {
+              "box": {
+                "bottom": 168.1328125,
+                "height": 105,
+                "left": 74,
+                "right": 246,
+                "top": 63.1328125,
+                "width": 172
+              },
+              "from": "picc1",
+              "id": "m2028-n1-cafe",
+              "label": "田中 七海：ピッコロからパーカッション2（スネア・小物）へ",
+              "ranks": [
+                "音程 CからE",
+                "音色 CからF"
+              ],
+              "text": "ピッコロパーカッション2（スネア・小物）",
+              "to": "perc2"
+            },
+            {
+              "box": {
+                "bottom": 377.1328125,
+                "height": 105,
+                "left": 74,
+                "right": 246,
+                "top": 272.1328125,
+                "width": 172
+              },
+              "from": "perc2",
+              "id": "m2028-n37-cafe",
+              "label": "山田 蓮：パーカッション2（スネア・小物）からピッコロへ",
+              "ranks": [
+                "音程 CからE",
+                "音色 CからF"
+              ],
+              "text": "パーカッション2（スネア・小物）ピッコロ",
+              "to": "picc1"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "size": {
+        "width": 375,
+        "height": 667
+      },
+      "result": {
+        "theme": "light",
+        "width": 375,
+        "scrollWidth": 375,
+        "errors": [],
+        "boot": {
+          "scripts": 33,
+          "loaded": 33,
+          "failed": [],
+          "errors": []
+        },
+        "move": {
+          "value": "perc2",
+          "enabled": true,
+          "state": 0.10574383521452546,
+          "people": [
+            {
+              "id": "m2028-n1-cafe",
+              "seat": "picc1",
+              "ranks": {
+                "pitch": "C",
+                "rhythm": "B",
+                "tone": "C",
+                "expr": "C"
+              },
+              "face": 46
+            },
+            {
+              "id": "m2028-n37-cafe",
+              "seat": "perc2",
+              "ranks": {
+                "pitch": "C",
+                "rhythm": "B",
+                "tone": "C",
+                "expr": "C"
+              },
+              "face": 80
+            }
+          ],
+          "expected": [
+            {
+              "id": "m2028-n1-cafe",
+              "seat": "perc2",
+              "ranks": {
+                "pitch": "E",
+                "rhythm": "B",
+                "tone": "F",
+                "expr": "C"
+              },
+              "face": 46
+            },
+            {
+              "id": "m2028-n37-cafe",
+              "seat": "picc1",
+              "ranks": {
+                "pitch": "E",
+                "rhythm": "B",
+                "tone": "F",
+                "expr": "C"
+              },
+              "face": 80
+            }
+          ],
+          "peopleFingerprint": "05ce46648f9c7bacc68224d952cfc465c2636665c21d1474ece36ddce543f6f4",
+          "expectedFingerprint": "be66ea770e61ab44dc0ef4da22e82a90b89f485e60fa60f6f75f32270815ff37"
+        },
+        "undo": {
+          "available": false,
+          "visible": false,
+          "saved": false,
+          "before": null
+        },
+        "dom": {
+          "bar": {
+            "bottom": 599,
+            "height": 62,
+            "left": 16,
+            "right": 359,
+            "top": 537,
+            "width": 343
+          },
+          "button": {
+            "bottom": 590,
+            "height": 44,
+            "left": 157.3125,
+            "right": 350,
+            "top": 546,
+            "width": 192.6875
+          },
+          "hit": "move",
+          "preview": {
+            "bottom": 516.9921875,
+            "height": 391,
+            "left": 65,
+            "right": 310,
+            "top": 125.9921875,
+            "width": 245
+          },
+          "routes": [
+            {
+              "box": {
+                "bottom": 271.4921875,
+                "height": 90.5,
+                "left": 76,
+                "right": 299,
+                "top": 180.9921875,
+                "width": 223
+              },
+              "from": "picc1",
+              "id": "m2028-n1-cafe",
+              "label": "田中 七海：ピッコロからパーカッション2（スネア・小物）へ",
+              "ranks": [
+                "音程 CからE",
+                "音色 CからF"
+              ],
+              "text": "ピッコロパーカッション2（スネア・小物）",
+              "to": "perc2"
+            },
+            {
+              "box": {
+                "bottom": 471.9921875,
+                "height": 90.5,
+                "left": 76,
+                "right": 299,
+                "top": 381.4921875,
+                "width": 223
+              },
+              "from": "perc2",
+              "id": "m2028-n37-cafe",
+              "label": "山田 蓮：パーカッション2（スネア・小物）からピッコロへ",
+              "ranks": [
+                "音程 CからE",
+                "音色 CからF"
+              ],
+              "text": "パーカッション2（スネア・小物）ピッコロ",
+              "to": "picc1"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "size": {
+        "width": 768,
+        "height": 1024
+      },
+      "result": {
+        "theme": "light",
+        "width": 768,
+        "scrollWidth": 768,
+        "errors": [],
+        "boot": {
+          "scripts": 33,
+          "loaded": 33,
+          "failed": [],
+          "errors": []
+        },
+        "move": {
+          "value": "perc2",
+          "enabled": true,
+          "state": 0.10574383521452546,
+          "people": [
+            {
+              "id": "m2028-n1-cafe",
+              "seat": "picc1",
+              "ranks": {
+                "pitch": "C",
+                "rhythm": "B",
+                "tone": "C",
+                "expr": "C"
+              },
+              "face": 46
+            },
+            {
+              "id": "m2028-n37-cafe",
+              "seat": "perc2",
+              "ranks": {
+                "pitch": "C",
+                "rhythm": "B",
+                "tone": "C",
+                "expr": "C"
+              },
+              "face": 80
+            }
+          ],
+          "expected": [
+            {
+              "id": "m2028-n1-cafe",
+              "seat": "perc2",
+              "ranks": {
+                "pitch": "E",
+                "rhythm": "B",
+                "tone": "F",
+                "expr": "C"
+              },
+              "face": 46
+            },
+            {
+              "id": "m2028-n37-cafe",
+              "seat": "picc1",
+              "ranks": {
+                "pitch": "E",
+                "rhythm": "B",
+                "tone": "F",
+                "expr": "C"
+              },
+              "face": 80
+            }
+          ],
+          "peopleFingerprint": "05ce46648f9c7bacc68224d952cfc465c2636665c21d1474ece36ddce543f6f4",
+          "expectedFingerprint": "be66ea770e61ab44dc0ef4da22e82a90b89f485e60fa60f6f75f32270815ff37"
+        },
+        "undo": {
+          "available": false,
+          "visible": false,
+          "saved": false,
+          "before": null
+        },
+        "dom": {
+          "bar": {
+            "bottom": 956,
+            "height": 62,
+            "left": 16,
+            "right": 752,
+            "top": 894,
+            "width": 736
+          },
+          "button": {
+            "bottom": 947,
+            "height": 44,
+            "left": 311.4375,
+            "right": 743,
+            "top": 903,
+            "width": 431.5625
+          },
+          "hit": "move",
+          "preview": {
+            "bottom": 874.09375,
+            "height": 325,
+            "left": 65,
+            "right": 703,
+            "top": 549.09375,
+            "width": 638
+          },
+          "routes": [
+            {
+              "box": {
+                "bottom": 661.59375,
+                "height": 57.5,
+                "left": 76,
+                "right": 692,
+                "top": 604.09375,
+                "width": 616
+              },
+              "from": "picc1",
+              "id": "m2028-n1-cafe",
+              "label": "田中 七海：ピッコロからパーカッション2（スネア・小物）へ",
+              "ranks": [
+                "音程 CからE",
+                "音色 CからF"
+              ],
+              "text": "ピッコロパーカッション2（スネア・小物）",
+              "to": "perc2"
+            },
+            {
+              "box": {
+                "bottom": 829.09375,
+                "height": 57.5,
+                "left": 76,
+                "right": 692,
+                "top": 771.59375,
+                "width": 616
+              },
+              "from": "perc2",
+              "id": "m2028-n37-cafe",
+              "label": "山田 蓮：パーカッション2（スネア・小物）からピッコロへ",
+              "ranks": [
+                "音程 CからE",
+                "音色 CからF"
+              ],
+              "text": "パーカッション2（スネア・小物）ピッコロ",
+              "to": "picc1"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "size": {
+        "width": 1280,
+        "height": 900
+      },
+      "result": {
+        "theme": "light",
+        "width": 1280,
+        "scrollWidth": 1280,
+        "errors": [],
+        "boot": {
+          "scripts": 33,
+          "loaded": 33,
+          "failed": [],
+          "errors": []
+        },
+        "move": {
+          "value": "perc2",
+          "enabled": true,
+          "state": 0.10574383521452546,
+          "people": [
+            {
+              "id": "m2028-n1-cafe",
+              "seat": "picc1",
+              "ranks": {
+                "pitch": "C",
+                "rhythm": "B",
+                "tone": "C",
+                "expr": "C"
+              },
+              "face": 46
+            },
+            {
+              "id": "m2028-n37-cafe",
+              "seat": "perc2",
+              "ranks": {
+                "pitch": "C",
+                "rhythm": "B",
+                "tone": "C",
+                "expr": "C"
+              },
+              "face": 80
+            }
+          ],
+          "expected": [
+            {
+              "id": "m2028-n1-cafe",
+              "seat": "perc2",
+              "ranks": {
+                "pitch": "E",
+                "rhythm": "B",
+                "tone": "F",
+                "expr": "C"
+              },
+              "face": 46
+            },
+            {
+              "id": "m2028-n37-cafe",
+              "seat": "picc1",
+              "ranks": {
+                "pitch": "E",
+                "rhythm": "B",
+                "tone": "F",
+                "expr": "C"
+              },
+              "face": 80
+            }
+          ],
+          "peopleFingerprint": "05ce46648f9c7bacc68224d952cfc465c2636665c21d1474ece36ddce543f6f4",
+          "expectedFingerprint": "be66ea770e61ab44dc0ef4da22e82a90b89f485e60fa60f6f75f32270815ff37"
+        },
+        "undo": {
+          "available": false,
+          "visible": false,
+          "saved": false,
+          "before": null
+        },
+        "dom": {
+          "bar": {
+            "bottom": 1049.1875,
+            "height": 44,
+            "left": 135,
+            "right": 714.4296875,
+            "top": 1005.1875,
+            "width": 579.4296875
+          },
+          "button": {
+            "bottom": 1049.1875,
+            "height": 44,
+            "left": 618.4296875,
+            "right": 714.4296875,
+            "top": 1005.1875,
+            "width": 96
+          },
+          "preview": {
+            "bottom": 993.1875,
+            "height": 325,
+            "left": 135,
+            "right": 714.4296875,
+            "top": 668.1875,
+            "width": 579.4296875
+          },
+          "routes": [
+            {
+              "box": {
+                "bottom": 780.6875,
+                "height": 57.5,
+                "left": 146,
+                "right": 703.4296875,
+                "top": 723.1875,
+                "width": 557.4296875
+              },
+              "from": "picc1",
+              "id": "m2028-n1-cafe",
+              "label": "田中 七海：ピッコロからパーカッション2（スネア・小物）へ",
+              "ranks": [
+                "音程 CからE",
+                "音色 CからF"
+              ],
+              "text": "ピッコロパーカッション2（スネア・小物）",
+              "to": "perc2"
+            },
+            {
+              "box": {
+                "bottom": 948.1875,
+                "height": 57.5,
+                "left": 146,
+                "right": 703.4296875,
+                "top": 890.6875,
+                "width": 557.4296875
+              },
+              "from": "perc2",
+              "id": "m2028-n37-cafe",
+              "label": "山田 蓮：パーカッション2（スネア・小物）からピッコロへ",
+              "ranks": [
+                "音程 CからE",
+                "音色 CからF"
+              ],
+              "text": "パーカッション2（スネア・小物）ピッコロ",
+              "to": "picc1"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "size": {
+        "width": 375,
+        "height": 812
+      },
+      "result": {
+        "theme": "light",
+        "width": 375,
+        "scrollWidth": 375,
+        "errors": [],
+        "boot": {
+          "scripts": 33,
+          "loaded": 33,
+          "failed": [],
+          "errors": []
+        },
+        "move": {
+          "value": "perc2",
+          "enabled": true,
+          "state": 0.10574383521452546,
+          "people": [
+            {
+              "id": "m2028-n1-cafe",
+              "seat": "picc1",
+              "ranks": {
+                "pitch": "C",
+                "rhythm": "B",
+                "tone": "C",
+                "expr": "C"
+              },
+              "face": 46
+            },
+            {
+              "id": "m2028-n37-cafe",
+              "seat": "perc2",
+              "ranks": {
+                "pitch": "C",
+                "rhythm": "B",
+                "tone": "C",
+                "expr": "C"
+              },
+              "face": 80
+            }
+          ],
+          "expected": [
+            {
+              "id": "m2028-n1-cafe",
+              "seat": "perc2",
+              "ranks": {
+                "pitch": "E",
+                "rhythm": "B",
+                "tone": "F",
+                "expr": "C"
+              },
+              "face": 46
+            },
+            {
+              "id": "m2028-n37-cafe",
+              "seat": "picc1",
+              "ranks": {
+                "pitch": "E",
+                "rhythm": "B",
+                "tone": "F",
+                "expr": "C"
+              },
+              "face": 80
+            }
+          ],
+          "peopleFingerprint": "05ce46648f9c7bacc68224d952cfc465c2636665c21d1474ece36ddce543f6f4",
+          "expectedFingerprint": "be66ea770e61ab44dc0ef4da22e82a90b89f485e60fa60f6f75f32270815ff37"
+        },
+        "undo": {
+          "available": false,
+          "visible": false,
+          "saved": false,
+          "before": null
+        },
+        "dom": {
+          "bar": {
+            "bottom": 744,
+            "height": 62,
+            "left": 16,
+            "right": 359,
+            "top": 682,
+            "width": 343
+          },
+          "button": {
+            "bottom": 735,
+            "height": 44,
+            "left": 157.3125,
+            "right": 350,
+            "top": 691,
+            "width": 192.6875
+          },
+          "hit": "move",
+          "preview": {
+            "bottom": 661.9921875,
+            "height": 391,
+            "left": 65,
+            "right": 310,
+            "top": 270.9921875,
+            "width": 245
+          },
+          "routes": [
+            {
+              "box": {
+                "bottom": 416.4921875,
+                "height": 90.5,
+                "left": 76,
+                "right": 299,
+                "top": 325.9921875,
+                "width": 223
+              },
+              "from": "picc1",
+              "id": "m2028-n1-cafe",
+              "label": "田中 七海：ピッコロからパーカッション2（スネア・小物）へ",
+              "ranks": [
+                "音程 CからE",
+                "音色 CからF"
+              ],
+              "text": "ピッコロパーカッション2（スネア・小物）",
+              "to": "perc2"
+            },
+            {
+              "box": {
+                "bottom": 616.9921875,
+                "height": 90.5,
+                "left": 76,
+                "right": 299,
+                "top": 526.4921875,
+                "width": 223
+              },
+              "from": "perc2",
+              "id": "m2028-n37-cafe",
+              "label": "山田 蓮：パーカッション2（スネア・小物）からピッコロへ",
+              "ranks": [
+                "音程 CからE",
+                "音色 CからF"
+              ],
+              "text": "パーカッション2（スネア・小物）ピッコロ",
+              "to": "picc1"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "size": {
+        "width": 768,
+        "height": 1024
+      },
+      "result": {
+        "theme": "light",
+        "width": 768,
+        "scrollWidth": 768,
+        "errors": [],
+        "boot": {
+          "scripts": 33,
+          "loaded": 33,
+          "failed": [],
+          "errors": []
+        },
+        "move": {
+          "value": "perc2",
+          "enabled": true,
+          "state": 0.10574383521452546,
+          "people": [
+            {
+              "id": "m2028-n1-cafe",
+              "seat": "picc1",
+              "ranks": {
+                "pitch": "C",
+                "rhythm": "B",
+                "tone": "C",
+                "expr": "C"
+              },
+              "face": 46
+            },
+            {
+              "id": "m2028-n37-cafe",
+              "seat": "perc2",
+              "ranks": {
+                "pitch": "C",
+                "rhythm": "B",
+                "tone": "C",
+                "expr": "C"
+              },
+              "face": 80
+            }
+          ],
+          "expected": [
+            {
+              "id": "m2028-n1-cafe",
+              "seat": "perc2",
+              "ranks": {
+                "pitch": "E",
+                "rhythm": "B",
+                "tone": "F",
+                "expr": "C"
+              },
+              "face": 46
+            },
+            {
+              "id": "m2028-n37-cafe",
+              "seat": "picc1",
+              "ranks": {
+                "pitch": "E",
+                "rhythm": "B",
+                "tone": "F",
+                "expr": "C"
+              },
+              "face": 80
+            }
+          ],
+          "peopleFingerprint": "05ce46648f9c7bacc68224d952cfc465c2636665c21d1474ece36ddce543f6f4",
+          "expectedFingerprint": "be66ea770e61ab44dc0ef4da22e82a90b89f485e60fa60f6f75f32270815ff37"
+        },
+        "undo": {
+          "available": false,
+          "visible": false,
+          "saved": false,
+          "before": null
+        },
+        "dom": {
+          "bar": {
+            "bottom": 956,
+            "height": 62,
+            "left": 16,
+            "right": 752,
+            "top": 894,
+            "width": 736
+          },
+          "button": {
+            "bottom": 947,
+            "height": 44,
+            "left": 311.4375,
+            "right": 743,
+            "top": 903,
+            "width": 431.5625
+          },
+          "hit": "move",
+          "preview": {
+            "bottom": 874.09375,
+            "height": 325,
+            "left": 65,
+            "right": 703,
+            "top": 549.09375,
+            "width": 638
+          },
+          "routes": [
+            {
+              "box": {
+                "bottom": 661.59375,
+                "height": 57.5,
+                "left": 76,
+                "right": 692,
+                "top": 604.09375,
+                "width": 616
+              },
+              "from": "picc1",
+              "id": "m2028-n1-cafe",
+              "label": "田中 七海：ピッコロからパーカッション2（スネア・小物）へ",
+              "ranks": [
+                "音程 CからE",
+                "音色 CからF"
+              ],
+              "text": "ピッコロパーカッション2（スネア・小物）",
+              "to": "perc2"
+            },
+            {
+              "box": {
+                "bottom": 829.09375,
+                "height": 57.5,
+                "left": 76,
+                "right": 692,
+                "top": 771.59375,
+                "width": 616
+              },
+              "from": "perc2",
+              "id": "m2028-n37-cafe",
+              "label": "山田 蓮：パーカッション2（スネア・小物）からピッコロへ",
+              "ranks": [
+                "音程 CからE",
+                "音色 CからF"
+              ],
+              "text": "パーカッション2（スネア・小物）ピッコロ",
+              "to": "picc1"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "size": {
+        "width": 320,
+        "height": 568
+      },
+      "result": {
+        "theme": "light",
+        "width": 320,
+        "scrollWidth": 320,
+        "errors": [],
+        "boot": {
+          "scripts": 33,
+          "loaded": 33,
+          "failed": [],
+          "errors": []
+        },
+        "move": {
+          "value": "perc2",
+          "enabled": true,
+          "state": 0.10574383521452546,
+          "people": [
+            {
+              "id": "m2028-n1-cafe",
+              "seat": "picc1",
+              "ranks": {
+                "pitch": "C",
+                "rhythm": "B",
+                "tone": "C",
+                "expr": "C"
+              },
+              "face": 46
+            },
+            {
+              "id": "m2028-n37-cafe",
+              "seat": "perc2",
+              "ranks": {
+                "pitch": "C",
+                "rhythm": "B",
+                "tone": "C",
+                "expr": "C"
+              },
+              "face": 80
+            }
+          ],
+          "expected": [
+            {
+              "id": "m2028-n1-cafe",
+              "seat": "perc2",
+              "ranks": {
+                "pitch": "E",
+                "rhythm": "B",
+                "tone": "F",
+                "expr": "C"
+              },
+              "face": 46
+            },
+            {
+              "id": "m2028-n37-cafe",
+              "seat": "picc1",
+              "ranks": {
+                "pitch": "E",
+                "rhythm": "B",
+                "tone": "F",
+                "expr": "C"
+              },
+              "face": 80
+            }
+          ],
+          "peopleFingerprint": "05ce46648f9c7bacc68224d952cfc465c2636665c21d1474ece36ddce543f6f4",
+          "expectedFingerprint": "be66ea770e61ab44dc0ef4da22e82a90b89f485e60fa60f6f75f32270815ff37"
+        },
+        "undo": {
+          "available": false,
+          "visible": false,
+          "saved": false,
+          "before": null
+        },
+        "dom": {
+          "bar": {
+            "bottom": 500,
+            "height": 62,
+            "left": 16,
+            "right": 304,
+            "top": 438,
+            "width": 288
+          },
+          "button": {
+            "bottom": 491,
+            "height": 44,
+            "left": 135.7421875,
+            "right": 295,
+            "top": 447,
+            "width": 159.2578125
+          },
+          "hit": "move",
+          "preview": {
+            "bottom": 418.1328125,
+            "height": 408,
+            "left": 65,
+            "right": 255,
+            "top": 10.1328125,
+            "width": 190
+          },
+          "routes": [
+            {
+              "box": {
+                "bottom": 168.1328125,
+                "height": 105,
+                "left": 74,
+                "right": 246,
+                "top": 63.1328125,
+                "width": 172
+              },
+              "from": "picc1",
+              "id": "m2028-n1-cafe",
+              "label": "田中 七海：ピッコロからパーカッション2（スネア・小物）へ",
+              "ranks": [
+                "音程 CからE",
+                "音色 CからF"
+              ],
+              "text": "ピッコロパーカッション2（スネア・小物）",
+              "to": "perc2"
+            },
+            {
+              "box": {
+                "bottom": 377.1328125,
+                "height": 105,
+                "left": 74,
+                "right": 246,
+                "top": 272.1328125,
+                "width": 172
+              },
+              "from": "perc2",
+              "id": "m2028-n37-cafe",
+              "label": "山田 蓮：パーカッション2（スネア・小物）からピッコロへ",
+              "ranks": [
+                "音程 CからE",
+                "音色 CからF"
+              ],
+              "text": "パーカッション2（スネア・小物）ピッコロ",
+              "to": "picc1"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "size": {
+        "width": 375,
+        "height": 812
+      },
+      "result": {
+        "theme": "light",
+        "width": 375,
+        "scrollWidth": 375,
+        "errors": [],
+        "boot": {
+          "scripts": 33,
+          "loaded": 33,
+          "failed": [],
+          "errors": []
+        },
+        "move": {
+          "value": "perc2",
+          "enabled": true,
+          "state": 0.10574383521452546,
+          "people": [
+            {
+              "id": "m2028-n1-cafe",
+              "seat": "picc1",
+              "ranks": {
+                "pitch": "C",
+                "rhythm": "B",
+                "tone": "C",
+                "expr": "C"
+              },
+              "face": 46
+            },
+            {
+              "id": "m2028-n37-cafe",
+              "seat": "perc2",
+              "ranks": {
+                "pitch": "C",
+                "rhythm": "B",
+                "tone": "C",
+                "expr": "C"
+              },
+              "face": 80
+            }
+          ],
+          "expected": [
+            {
+              "id": "m2028-n1-cafe",
+              "seat": "perc2",
+              "ranks": {
+                "pitch": "E",
+                "rhythm": "B",
+                "tone": "F",
+                "expr": "C"
+              },
+              "face": 46
+            },
+            {
+              "id": "m2028-n37-cafe",
+              "seat": "picc1",
+              "ranks": {
+                "pitch": "E",
+                "rhythm": "B",
+                "tone": "F",
+                "expr": "C"
+              },
+              "face": 80
+            }
+          ],
+          "peopleFingerprint": "05ce46648f9c7bacc68224d952cfc465c2636665c21d1474ece36ddce543f6f4",
+          "expectedFingerprint": "be66ea770e61ab44dc0ef4da22e82a90b89f485e60fa60f6f75f32270815ff37"
+        },
+        "undo": {
+          "available": false,
+          "visible": false,
+          "saved": false,
+          "before": null
+        },
+        "dom": {
+          "bar": {
+            "bottom": 744,
+            "height": 62,
+            "left": 16,
+            "right": 359,
+            "top": 682,
+            "width": 343
+          },
+          "button": {
+            "bottom": 735,
+            "height": 44,
+            "left": 157.3125,
+            "right": 350,
+            "top": 691,
+            "width": 192.6875
+          },
+          "hit": "move",
+          "preview": {
+            "bottom": 661.9921875,
+            "height": 391,
+            "left": 65,
+            "right": 310,
+            "top": 270.9921875,
+            "width": 245
+          },
+          "routes": [
+            {
+              "box": {
+                "bottom": 416.4921875,
+                "height": 90.5,
+                "left": 76,
+                "right": 299,
+                "top": 325.9921875,
+                "width": 223
+              },
+              "from": "picc1",
+              "id": "m2028-n1-cafe",
+              "label": "田中 七海：ピッコロからパーカッション2（スネア・小物）へ",
+              "ranks": [
+                "音程 CからE",
+                "音色 CからF"
+              ],
+              "text": "ピッコロパーカッション2（スネア・小物）",
+              "to": "perc2"
+            },
+            {
+              "box": {
+                "bottom": 616.9921875,
+                "height": 90.5,
+                "left": 76,
+                "right": 299,
+                "top": 526.4921875,
+                "width": 223
+              },
+              "from": "perc2",
+              "id": "m2028-n37-cafe",
+              "label": "山田 蓮：パーカッション2（スネア・小物）からピッコロへ",
+              "ranks": [
+                "音程 CからE",
+                "音色 CからF"
+              ],
+              "text": "パーカッション2（スネア・小物）ピッコロ",
+              "to": "picc1"
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "finalThemes": {
+    "light": {
+      "theme": "light",
+      "width": 375,
+      "scrollWidth": 375,
+      "errors": [],
+      "boot": {
+        "scripts": 33,
+        "loaded": 33,
+        "failed": [],
+        "errors": []
+      },
+      "move": {
+        "value": "perc2",
+        "enabled": true,
+        "state": 0.10574383521452546,
+        "people": [
+          {
+            "id": "m2028-n1-cafe",
+            "seat": "picc1",
+            "ranks": {
+              "pitch": "C",
+              "rhythm": "B",
+              "tone": "C",
+              "expr": "C"
+            },
+            "face": 46
+          },
+          {
+            "id": "m2028-n37-cafe",
+            "seat": "perc2",
+            "ranks": {
+              "pitch": "C",
+              "rhythm": "B",
+              "tone": "C",
+              "expr": "C"
+            },
+            "face": 80
+          }
+        ],
+        "expected": [
+          {
+            "id": "m2028-n1-cafe",
+            "seat": "perc2",
+            "ranks": {
+              "pitch": "E",
+              "rhythm": "B",
+              "tone": "F",
+              "expr": "C"
+            },
+            "face": 46
+          },
+          {
+            "id": "m2028-n37-cafe",
+            "seat": "picc1",
+            "ranks": {
+              "pitch": "E",
+              "rhythm": "B",
+              "tone": "F",
+              "expr": "C"
+            },
+            "face": 80
+          }
+        ],
+        "peopleFingerprint": "05ce46648f9c7bacc68224d952cfc465c2636665c21d1474ece36ddce543f6f4",
+        "expectedFingerprint": "be66ea770e61ab44dc0ef4da22e82a90b89f485e60fa60f6f75f32270815ff37"
+      },
+      "undo": {
+        "available": false,
+        "visible": false,
+        "saved": false,
+        "before": null
+      },
+      "dom": {
+        "bar": {
+          "bottom": 744,
+          "height": 62,
+          "left": 16,
+          "right": 359,
+          "top": 682,
+          "width": 343
+        },
+        "button": {
+          "bottom": 735,
+          "height": 44,
+          "left": 157.3125,
+          "right": 350,
+          "top": 691,
+          "width": 192.6875
+        },
+        "hit": "move",
+        "preview": {
+          "bottom": 661.9921875,
+          "height": 391,
+          "left": 65,
+          "right": 310,
+          "top": 270.9921875,
+          "width": 245
+        },
+        "routes": [
+          {
+            "box": {
+              "bottom": 416.4921875,
+              "height": 90.5,
+              "left": 76,
+              "right": 299,
+              "top": 325.9921875,
+              "width": 223
+            },
+            "from": "picc1",
+            "id": "m2028-n1-cafe",
+            "label": "田中 七海：ピッコロからパーカッション2（スネア・小物）へ",
+            "ranks": [
+              "音程 CからE",
+              "音色 CからF"
+            ],
+            "text": "ピッコロパーカッション2（スネア・小物）",
+            "to": "perc2"
+          },
+          {
+            "box": {
+              "bottom": 616.9921875,
+              "height": 90.5,
+              "left": 76,
+              "right": 299,
+              "top": 526.4921875,
+              "width": 223
+            },
+            "from": "perc2",
+            "id": "m2028-n37-cafe",
+            "label": "山田 蓮：パーカッション2（スネア・小物）からピッコロへ",
+            "ranks": [
+              "音程 CからE",
+              "音色 CからF"
+            ],
+            "text": "パーカッション2（スネア・小物）ピッコロ",
+            "to": "picc1"
+          }
+        ]
+      }
+    },
+    "dark": {
+      "theme": "dark",
+      "width": 375,
+      "scrollWidth": 375,
+      "errors": [],
+      "boot": {
+        "scripts": 33,
+        "loaded": 33,
+        "failed": [],
+        "errors": []
+      },
+      "move": {
+        "value": "perc2",
+        "enabled": true,
+        "state": 0.10574383521452546,
+        "people": [
+          {
+            "id": "m2028-n1-cafe",
+            "seat": "picc1",
+            "ranks": {
+              "pitch": "C",
+              "rhythm": "B",
+              "tone": "C",
+              "expr": "C"
+            },
+            "face": 46
+          },
+          {
+            "id": "m2028-n37-cafe",
+            "seat": "perc2",
+            "ranks": {
+              "pitch": "C",
+              "rhythm": "B",
+              "tone": "C",
+              "expr": "C"
+            },
+            "face": 80
+          }
+        ],
+        "expected": [
+          {
+            "id": "m2028-n1-cafe",
+            "seat": "perc2",
+            "ranks": {
+              "pitch": "E",
+              "rhythm": "B",
+              "tone": "F",
+              "expr": "C"
+            },
+            "face": 46
+          },
+          {
+            "id": "m2028-n37-cafe",
+            "seat": "picc1",
+            "ranks": {
+              "pitch": "E",
+              "rhythm": "B",
+              "tone": "F",
+              "expr": "C"
+            },
+            "face": 80
+          }
+        ],
+        "peopleFingerprint": "05ce46648f9c7bacc68224d952cfc465c2636665c21d1474ece36ddce543f6f4",
+        "expectedFingerprint": "be66ea770e61ab44dc0ef4da22e82a90b89f485e60fa60f6f75f32270815ff37"
+      },
+      "undo": {
+        "available": false,
+        "visible": false,
+        "saved": false,
+        "before": null
+      },
+      "dom": {
+        "bar": {
+          "bottom": 744,
+          "height": 62,
+          "left": 16,
+          "right": 359,
+          "top": 682,
+          "width": 343
+        },
+        "button": {
+          "bottom": 735,
+          "height": 44,
+          "left": 157.3125,
+          "right": 350,
+          "top": 691,
+          "width": 192.6875
+        },
+        "hit": "move",
+        "preview": {
+          "bottom": 661.9921875,
+          "height": 391,
+          "left": 65,
+          "right": 310,
+          "top": 270.9921875,
+          "width": 245
+        },
+        "routes": [
+          {
+            "box": {
+              "bottom": 416.4921875,
+              "height": 90.5,
+              "left": 76,
+              "right": 299,
+              "top": 325.9921875,
+              "width": 223
+            },
+            "from": "picc1",
+            "id": "m2028-n1-cafe",
+            "label": "田中 七海：ピッコロからパーカッション2（スネア・小物）へ",
+            "ranks": [
+              "音程 CからE",
+              "音色 CからF"
+            ],
+            "text": "ピッコロパーカッション2（スネア・小物）",
+            "to": "perc2"
+          },
+          {
+            "box": {
+              "bottom": 616.9921875,
+              "height": 90.5,
+              "left": 76,
+              "right": 299,
+              "top": 526.4921875,
+              "width": 223
+            },
+            "from": "perc2",
+            "id": "m2028-n37-cafe",
+            "label": "山田 蓮：パーカッション2（スネア・小物）からピッコロへ",
+            "ranks": [
+              "音程 CからE",
+              "音色 CからF"
+            ],
+            "text": "パーカッション2（スネア・小物）ピッコロ",
+            "to": "picc1"
+          }
+        ]
+      }
+    }
+  }
+}
