@@ -1,0 +1,88 @@
+{
+  "checks": [
+    {
+      "check": "15曲の星表示が設定値と一致する",
+      "pass": true
+    },
+    {
+      "check": "星を押すと譜読みに必要な時間の説明が出る",
+      "pass": true
+    },
+    {
+      "check": "星5の曲を選ぶと合奏でも同じ難しさを表示し部員の力を変えない",
+      "pass": true
+    },
+    {
+      "check": "実際の15曲の一覧で文字切れや横はみ出しがなく操作範囲44px以上",
+      "pass": true
+    },
+    {
+      "check": "課題曲の3曲にも難しさを表示する",
+      "pass": true
+    },
+    {
+      "check": "定期演奏会の選曲でもすでに覚えた譜読みを減らさない",
+      "pass": true
+    },
+    {
+      "check": "星5の曲で新年度まで進みエラーなく日誌を保つ",
+      "pass": true
+    }
+  ],
+  "tabs": [
+    {
+      "tab": "week",
+      "scrollWidth": 375,
+      "theme": "light",
+      "width": 375
+    },
+    {
+      "tab": "play",
+      "scrollWidth": 375,
+      "theme": "light",
+      "width": 375
+    },
+    {
+      "tab": "members",
+      "scrollWidth": 375,
+      "theme": "light",
+      "width": 375
+    },
+    {
+      "tab": "log",
+      "scrollWidth": 375,
+      "theme": "light",
+      "width": 375
+    },
+    {
+      "tab": "week",
+      "scrollWidth": 375,
+      "theme": "dark",
+      "width": 375
+    },
+    {
+      "tab": "play",
+      "scrollWidth": 375,
+      "theme": "dark",
+      "width": 375
+    },
+    {
+      "tab": "members",
+      "scrollWidth": 375,
+      "theme": "dark",
+      "width": 375
+    },
+    {
+      "tab": "log",
+      "scrollWidth": 375,
+      "theme": "dark",
+      "width": 375
+    }
+  ],
+  "year": {
+    "year": 2027,
+    "steps": 49,
+    "errors": [],
+    "logPreserved": true
+  }
+}

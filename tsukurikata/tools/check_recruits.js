@@ -5,7 +5,7 @@ const root=path.join(__dirname,'..');let random=123456789,saved=null;
 const math=Object.create(Math);math.random=()=>((random=(Math.imul(random,1664525)+1013904223)>>>0)/4294967296);
 const ctx=vm.createContext({console,Math:math,JSON,Set,Map,setTimeout,assert,URL,document:{currentScript:{src:'http://local/js/faces.js'}},localStorage:{getItem:()=>saved,setItem:(_,v)=>{saved=v;}}});
 const html=fs.readFileSync(path.join(root,'index.html'),'utf8');
-for(const file of ['util','instruments','venues','scores',...[...html.matchAll(/src="js\/(pieces\/[^"?]+)\.js"/g)].map(m=>m[1]),'band','game','face-cast','faces'])vm.runInContext(fs.readFileSync(path.join(root,'js',file+'.js'),'utf8'),ctx,{filename:file+'.js'});
+for(const file of ['util','instruments','venues','scores',...[...html.matchAll(/src="js\/(pieces\/[^"?]+)\.js(?:\?[^ "]*)?"/g)].map(m=>m[1]),'band','game','face-cast','faces'])vm.runInContext(fs.readFileSync(path.join(root,'js',file+'.js'),'utf8'),ctx,{filename:file+'.js'});
 vm.runInContext(`
 const a=freshState(),b=freshState();
 assert.notEqual(a.recruitSeed,b.recruitSeed);assert.notEqual(a.recruits[0].id,b.recruits[0].id);
@@ -34,10 +34,10 @@ assert.ok(Math.max(...Object.values(gifted.stats))<80,'入部時から完成し�
 const changed=SEATS.find(x=>x.inst!==rare.hope).id;
 const switched=assignRecruits(start,{[rare.id]:changed}).members[0];
 assert.ok(avgStat(gifted)>avgStat(switched)+15,'楽器を変えても同じ力だった');
-// 入部待ちを含む古い控えでは、新しい種だけを補い、部員の情報を保つ。
+// 古い控えに出会いの種と元の名前を補っても、本人と入部待ちの情報は保つ。
 const oldStart=freshState(),old=assignRecruits(oldStart,autoAssign(oldStart));old.members=[normal];old.recruits=[{id:'m2026-n99',name:'佐藤 陽菜',hope:'flute',exp:true,grade:1,trait:'steady'}];delete old.recruitSeed;
-const beforeMembers=JSON.stringify(old.members),beforeRecruits=JSON.stringify(old.recruits);save(old);
-const loaded=load();assert.ok(loaded);assert.equal(JSON.stringify(loaded.members),beforeMembers);assert.equal(JSON.stringify(loaded.recruits),beforeRecruits);
+const expectedMembers=old.members.map(m=>({...m,originalName:m.originalName||m.name})),beforeRecruits=JSON.stringify(old.recruits);save(old);
+const loaded=load();assert.ok(loaded);assert.equal(JSON.stringify(loaded.members),JSON.stringify(expectedMembers));assert.equal(JSON.stringify(loaded.recruits),beforeRecruits);
 save(loaded);assert.equal(load().recruitSeed,loaded.recruitSeed);
 const base=Faces.fingerprint(old.recruits[0]);assert.equal(Faces.fingerprint({...old.recruits[0],grade:3}),base);
 const oldPools=Object.fromEntries(['female','male'].map(style=>[style,FACE_CAST.cast.filter(f=>f.base<39&&f.style===style).sort((a,b)=>hash('portrait-cast-v2',a.base)-hash('portrait-cast-v2',b.base))]));

@@ -154,6 +154,10 @@ const avgStat = m => STAT_KEYS.reduce((a, k) => a + m.stats[k], 0) / 4;
 
 /* ===== 曲の区間ごとの譜読み =====
    部員は曲の区間（PIECES[].spans）ごとに譜読みを持つ（m.fam[曲] は区間ごとの配列）。くり返しの区間（same）は、もとの区間と同じ譜読みを使う */
+// 曲を覚えるのに必要な練習量。難しさ3を今までと同じ速さにし、覚えた値は変えない。
+const READING_LOAD = [0, 0.8, 0.9, 1, 1.2, 1.4];
+const pieceDifficulty = pid => { const n = PIECES[pid]?.readDifficulty; return Number.isInteger(n) && n >= 1 && n <= 5 ? n : 3; };
+const readingLoad = pid => READING_LOAD[pieceDifficulty(pid)];
 const readUnit = (pid, i) => PIECES[pid].spans[i]?.same ?? i;
 // 練習で選べる区間（くり返しの区間は除く）
 const readUnits = pid => PIECES[pid].spans.map((sp, i) => ({...sp, i})).filter(sp => sp.same == null);

@@ -127,7 +127,7 @@
     pad('hnB', B1, 165, i, 1.1), sfHit('hnS', i), pad('hnB', B2, END, i, 1.1), fin('hnF', i)];
 
   addPiece({
-    id: 'flowers',
+    id: 'flowers', readDifficulty: 4,
     title: '「花のワルツ」',
     full: 'チャイコフスキー バレエ《くるみ割り人形》より「花のワルツ」',
     composer: 'P.チャイコフスキー（1892年）',

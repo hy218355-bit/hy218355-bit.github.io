@@ -1,0 +1,102 @@
+{
+  "buildSucceeded": true,
+  "installed": true,
+  "launched": true,
+  "files": [
+    {
+      "file": "index.html",
+      "match": true,
+      "sha256": "4fc32f18226abf6c62b68d6e4e97b3cf04872223b3e6c4ae8e221ac20ff77cc7"
+    },
+    {
+      "file": "js/ui.js",
+      "match": true,
+      "sha256": "c5de009a66c60d30f462a3115c9547278631086e77627445d2dbad62a6782786"
+    },
+    {
+      "file": "js/game.js",
+      "match": true,
+      "sha256": "67f9b7dcf7ece81e15362f2bdf21c91979579146cbac92e12af7cd2b1cb9af30"
+    },
+    {
+      "file": "js/band.js",
+      "match": true,
+      "sha256": "eca0ccc50434c8dcb5cf773b26bd0954486ca4bc92690043b92f10ac96572127"
+    },
+    {
+      "file": "js/pieces/aida.js",
+      "match": true,
+      "sha256": "5f56b2b7a12896ab1460235e88edd1ff49e5bf7660ca72459e7b99935cf08965"
+    },
+    {
+      "file": "js/pieces/canon.js",
+      "match": true,
+      "sha256": "4d6653efb920f3696f09b75256e4964bf26eaef7b950ac6610aa510abce14982"
+    },
+    {
+      "file": "js/pieces/carmen.js",
+      "match": true,
+      "sha256": "bad3916d260b9f956fdf243a8a0a5d57a8cd32ac04c279e770be9c32de370672"
+    },
+    {
+      "file": "js/pieces/flowers.js",
+      "match": true,
+      "sha256": "77ee7086997022bbcc3f163a8e0ea93e7b62ed691412f163a6edff9efaa29d86"
+    },
+    {
+      "file": "js/pieces/galop.js",
+      "match": true,
+      "sha256": "079ea9b52b427be63ede87c7362fc34e67d1a7d5bbcfd48d8a621be354e537b4"
+    },
+    {
+      "file": "js/pieces/hero.js",
+      "match": true,
+      "sha256": "f854df1d1f65d57043f1866b7a01114379585ac95c27ec2b4d8552bb59923ac2"
+    },
+    {
+      "file": "js/pieces/holst.js",
+      "match": true,
+      "sha256": "d0c144f67e35198cc770419d255ca9ec7c7abea7c98506b2eaa6d0bf47201f90"
+    },
+    {
+      "file": "js/pieces/hungarian.js",
+      "match": true,
+      "sha256": "c88a38e1e772985d2cc3e604ee38647ca7e63584cc6b253ad678a41ee57a80ac"
+    },
+    {
+      "file": "js/pieces/largo.js",
+      "match": true,
+      "sha256": "64467b87e738b6e0e3706478428b988ee1f84f876a540c519c59e1d54eed5490"
+    },
+    {
+      "file": "js/pieces/ode.js",
+      "match": true,
+      "sha256": "c8d5613800edabf42f33bb54ff10f52bbd1781e7bbb06145436626023c99a1e1"
+    },
+    {
+      "file": "js/pieces/pomp.js",
+      "match": true,
+      "sha256": "c66fbe5d291c6b4163c1ece97d3344d4fb48fcccfac871a8eb7c2c14a6817913"
+    },
+    {
+      "file": "js/pieces/spring.js",
+      "match": true,
+      "sha256": "2fe7cc77d6b386075fb5b4d11cbf5d39c92ab10cb7c4b0114b2c4978f944cffc"
+    },
+    {
+      "file": "js/pieces/swan.js",
+      "match": true,
+      "sha256": "384e8176e925907be37e900c7253a561187cdb48f71423712126425af9ef55a6"
+    },
+    {
+      "file": "js/pieces/tell.js",
+      "match": true,
+      "sha256": "1c66a1fe717a70d57d9e251fe2d9bde1735c3615694af513b706b2eb99971fcb"
+    },
+    {
+      "file": "js/pieces/valkyrie.js",
+      "match": true,
+      "sha256": "fd6d1be8572b0778d489c2687fc256158dbe7cf4476fdea270500ba77a43b9ab"
+    }
+  ]
+}

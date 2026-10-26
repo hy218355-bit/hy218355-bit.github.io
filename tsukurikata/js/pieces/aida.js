@@ -120,7 +120,7 @@
   const voice = k => [...line3(V_A[k], 16), ...line3(V_A2[k], 40), ...line3(V_B[k], 64), ...line3(V_B2[k], 88), ...line3(V_R[k], 112), ...line3(V_F[k], 128)];
 
   addPiece({
-    id: 'aida',
+    id: 'aida', readDifficulty: 2,
     title: '「凱旋行進曲」',
     full: 'ヴェルディ 歌劇《アイーダ》より「凱旋行進曲」',
     composer: 'G.ヴェルディ（1871年）',

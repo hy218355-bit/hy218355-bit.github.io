@@ -82,7 +82,7 @@
   const drag = (b, v) => [{i: 'sd', b: b - .15, d: .15, roll: true, v: v * .4, v1: v * .65}, {i: 'sd', b, v}];
 
   addPiece({
-    id: 'pomp',
+    id: 'pomp', readDifficulty: 2,
     title: '「威風堂々」',
     full: 'エルガー 行進曲「威風堂々」第1番より（中間部）',
     composer: 'E.エルガー（1901年）',

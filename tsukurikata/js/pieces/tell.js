@@ -194,7 +194,7 @@
   });
 
   addPiece(qPiece({
-    id: 'tell',
+    id: 'tell', readDifficulty: 5,
     title: '「ウィリアム・テル」序曲',
     full: 'ロッシーニ 歌劇《ウィリアム・テル》序曲より「スイス軍の行進」',
     composer: 'G.ロッシーニ（1829年）',

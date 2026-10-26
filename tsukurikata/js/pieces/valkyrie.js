@@ -152,7 +152,7 @@
   const hornCall = (ln, from, to, k = 1) => callSegs((f, t, s) => cm(ln, f, t, 0, .9 * s * k), from, to);
 
   addPiece({
-    id: 'valkyrie',
+    id: 'valkyrie', readDifficulty: 4,
     title: '「ワルキューレの騎行」',
     full: 'ワーグナー 楽劇《ワルキューレ》より「ワルキューレの騎行」',
     composer: 'R.ワーグナー（1856年）',

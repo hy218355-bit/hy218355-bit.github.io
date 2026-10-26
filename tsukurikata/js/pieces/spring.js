@@ -136,7 +136,7 @@
   const mrb = MRB.flat().map(e => ({i: 'mrb', b: e.b, m: e.m, v: dynAt(e.b) === 'p' ? .09 : .14}));
 
   addPiece({
-    id: 'spring',
+    id: 'spring', readDifficulty: 4,
     outGain: 2.18,   // 聴くときの音量。全15曲の大きさ（K特性のラウドネス）がそろうように測って決めた（2026年10月。静かな曲は少し小さいまま）
     title: '《四季》より「春」',
     full: 'ヴィヴァルディ ヴァイオリン協奏曲集《四季》より「春」第1楽章',

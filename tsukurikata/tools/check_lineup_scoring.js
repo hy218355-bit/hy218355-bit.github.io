@@ -3,7 +3,7 @@
 const fs=require('node:fs'),vm=require('node:vm'),assert=require('node:assert/strict'),path=require('node:path');
 const root=path.join(__dirname,'..'),ctx=vm.createContext({console,Math,JSON,Set,Map,setTimeout,assert});
 const html=fs.readFileSync(path.join(root,'index.html'),'utf8');
-for(const file of ['util','instruments','venues','scores',...[...html.matchAll(/src="js\/(pieces\/[^"?]+)\.js"/g)].map(m=>m[1]),'band','game'])vm.runInContext(fs.readFileSync(path.join(root,'js',file+'.js'),'utf8'),ctx,{filename:file+'.js'});
+for(const file of ['util','instruments','venues','scores',...[...html.matchAll(/src="js\/(pieces\/[^"?]+)\.js(?:\?[^ "]*)?"/g)].map(m=>m[1]),'band','game'])vm.runInContext(fs.readFileSync(path.join(root,'js',file+'.js'),'utf8'),ctx,{filename:file+'.js'});
 vm.runInContext(`
 const rows=[];
 for(const pid of Object.keys(PIECES)){

@@ -115,7 +115,7 @@
   const tp = (n, v) => ({i: 'timp', m: nn(n), v});
 
   addPiece({
-    id: 'holst',
+    id: 'holst', readDifficulty: 3,
     title: '「木星」',
     full: 'ホルスト 組曲《惑星》より「木星」（中間部）',
     composer: 'G.ホルスト（1916年）',

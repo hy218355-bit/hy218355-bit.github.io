@@ -4,11 +4,14 @@
 // 方針は auto / basics、メンバーは all（全員出る）か best（オーディションでおすすめを選ぶ）
 const fs = require('fs'), vm = require('vm'), path = require('path');
 const [YEARS = '3', POL = 'auto', PIECE = 'galop', LINEUP = 'all'] = process.argv.slice(2);
-const ctx = vm.createContext({console, Math, JSON, Object, Array, Set, Map, WeakMap, Float32Array, Number, String, Error, Infinity, NaN, setTimeout,
+// 比較のときだけ入部条件をそろえる。指定がなければ、これまでどおり毎回違う部で進める。
+const simMath = Object.create(Math);
+if(process.env.SIM_SEED){let seed=(Number(process.env.SIM_SEED)+Number(process.env.SIM_RUN||0))>>>0;simMath.random=()=>{seed=(Math.imul(seed,1664525)+1013904223)>>>0;return seed/4294967296;};}
+const ctx = vm.createContext({console, Math:simMath, JSON, Object, Array, Set, Map, WeakMap, Float32Array, Number, String, Error, Infinity, NaN, setTimeout,
   YEARS: +YEARS, POL, PIECE, LINEUP});
 // 曲（js/pieces/*.js）は index.html に書いた順に読む
 const html = fs.readFileSync(path.join(__dirname, '..', 'index.html'), 'utf8');
-const pieces = [...html.matchAll(/src="js\/(pieces\/[^"]+)\.js"/g)].map(m => m[1]);
+const pieces = [...html.matchAll(/src="js\/(pieces\/[^"?]+)\.js(?:\?[^ "]*)?"/g)].map(m => m[1]);
 for(const f of ['util', 'instruments', 'venues', 'scores', ...pieces, 'band', 'game'])
   vm.runInContext(fs.readFileSync(path.join(__dirname, '..', 'js', f + '.js'), 'utf8'), ctx, {filename: f + '.js'});
 

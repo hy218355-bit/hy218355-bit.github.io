@@ -1,0 +1,20 @@
+<!doctype html><html lang="ja"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>曲の難しさは、覚えるまでの時間</title>
+<style>
+@font-face{font-family:body;src:url('/tsukurikata/fonts/zen-kaku-gothic-new-500.woff2')}:root{--paper:#f1f0e9;--ink:#263d43;--rule:#d4d7c9;--brass:#936b2f}*{box-sizing:border-box}body{margin:0;background:var(--paper);color:var(--ink);font-family:body,sans-serif}main{max-width:1000px;margin:auto;padding:24px}h1{font-size:23px;margin:0 0 12px}h2{font-size:18px;margin-top:32px}p{font-size:14px;line-height:1.9;max-width:800px}a{color:inherit}.grid{display:grid;grid-template-columns:repeat(2,minmax(0,375px));gap:20px}figure{margin:0}figcaption{font-size:13px;margin:10px 0}img{display:block;width:100%;border-radius:16px;border:1px solid var(--rule)}nav{display:flex;flex-wrap:wrap;gap:10px}nav a{padding:10px 14px;border:1px solid var(--brass);border-radius:8px;text-decoration:none}.reading-test{display:flex;gap:12px;max-width:770px;margin:16px 0}.reading-test>div{flex:1;padding:14px;border:1px solid var(--rule);border-radius:10px;text-align:center}.reading-test b{display:block;color:var(--brass);font-size:24px}.reading-test span{font-size:12px}details{margin:20px 0;padding:12px;border:1px solid var(--rule);border-radius:10px}summary{cursor:pointer;font-size:14px}@media(max-width:600px){main{padding:16px}.grid{grid-template-columns:1fr}}
+</style>
+<main><h1>曲の難しさは、覚えるまでの時間</h1>
+<p>全15曲に、譜読みの重さを星1〜5で付けました。星が多い曲ほど同じ練習で覚えられる量が少なくなります。実力や「譜読みが速い」スキルはこれまでどおり効き、すでに覚えた分も残ります。</p>
+<nav><a href="/design/implementation/qa.html?view=song-choice&theme=light&keys=1">15曲から選ぶ</a><a href="/design/implementation/qa.html?view=song-samples&theme=dark&keys=1">3曲を見比べる</a><a href="/design/implementation/qa.html?view=song-set&theme=light&keys=1">課題曲を選ぶ</a><a href="../rehearsal-polish/">前回の合奏</a></nav>
+<p>確認用の画面です。いつものセーブや設定は書き換えません。</p>
+<h2>選ぶ前に、星を見る · 375px</h2>
+<p>曲名の横に難しさを表示。星を押すと、譜読みの時間について説明が出ます。部員の力はこれまでどおりG〜Sです。</p>
+<div class="grid"><figure><figcaption>ライト</figcaption><img src="screenshots/choices-light.png" alt="曲名の横の星から譜読みの難しさを見比べる・ライト"></figure><figure><figcaption>ダーク</figcaption><img src="screenshots/choices-dark.png" alt="星1と星3と星5の曲を見比べる・ダーク"></figure></div>
+<h2>同じ曲・同じ部で比べた確認例</h2>
+<p>難しさだけを変え、体力ややる気などの条件を固定して合奏を重ねた例です。9割を覚えるまでの練習回数に差が出ました。</p>
+<div class="reading-test"><div><span>星1</span><b>5回</b></div><div><span>星3</span><b>6回</b></div><div><span>星5</span><b>8回</b></div></div>
+<h2>選んだあとも、合奏で分かる · 375px</h2>
+<p>自由曲と課題曲の両方に効きます。曲を選び直しても、その曲ですでに覚えた分を引きつぎます。</p>
+<div class="grid"><figure><figcaption>ライト</figcaption><img src="screenshots/stage-light.png" alt="合奏の曲名の上にも星の難しさを表示・ライト"></figure><figure><figcaption>ダーク</figcaption><img src="screenshots/stage-dark.png" alt="星5の曲を選んだ合奏画面・ダーク"></figure></div>
+<details><summary>全15曲の確認について</summary><p>同じ10組の入部条件で、変更前と変更後をそれぞれ3年分ずつ進めました。初年度の県大会平均は全15曲で37〜47点の目安に収まっています。2・3年目は変更前から目安を上回る曲もあり、比較結果を記録しています。</p><p><a href="balance.json">曲ごとの変更前後の確認結果</a> · <a href="mechanics-check.txt">譜読み・スキル・セーブの確認結果</a></p></details>
+</main></html>

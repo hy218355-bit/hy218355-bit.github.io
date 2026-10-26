@@ -481,6 +481,7 @@ function renderPiece(){
   $('#pieceSwitch').hidden = !two;
   if(two) $('#pieceSwitch').innerHTML = [[S.pieceId, '自由曲'], [S.setPiece, '課題曲']].map(([id, nm]) => `<button type="button" data-pswitch="${id}" aria-pressed="${pid === id}">${nm}：${esc(PIECES[id].title)}</button>`).join('');
   $('#pieceEyebrow').textContent = two && pid === S.setPiece ? '課題曲' : S.phase === 'choose' || S.phase === 'chooseSet' || pid !== S.pieceId ? '試しに聴く曲' : S.finalWeek ? '定期演奏会の曲' : '自由曲';
+  $('#pieceDifficulty').innerHTML = difficultyBadge(pid);
   $('#piece').textContent = pc.title;
   $('#piece').setAttribute('data-tip',pc.full);$('#piece').setAttribute('data-tipname','曲名');$('#piece').setAttribute('role','button');$('#piece').tabIndex=0;
   $('#pieceMeta').textContent = `${pc.composer}｜問われる力：${pc.asks}`;
@@ -1656,16 +1657,20 @@ function modelPerf(pid){
   return perform({members: fullBand({pitch: 100, rhythm: 100, tone: 100, expr: 100}), pieceId: pid, cohesion: 100, fam: 100, interp: {tempo: 1, dyn: 1, rub: 1}, venue: 'hall', seed: 'band', lead: () => 1});
 }
 // 曲のカード（選曲・課題曲・定期演奏会の曲）：短い曲名・作曲者・問われる力と、聴く・決めるボタン。曲の説明は「どんな曲？」で開く
+function difficultyBadge(pid){
+  const n = pieceDifficulty(pid);
+  return `<button class="piece-difficulty" type="button" data-difficulty="${n}" aria-label="${esc(PIECES[pid].title)}の難しさ ${n}/5"${tipAttr('曲の難しさ','星が多い曲ほど、覚えるまでに練習時間がかかる。曲の練習も合奏も、譜読みがゆっくり進む。うまい部員や「譜読みが速い」スキルを持つ部員は、早く覚えられる。すでに覚えた分はそのまま残る。')}><span>難しさ</span><span class="difficulty-stars" aria-hidden="true">${Array.from({length:5},(_,i)=>`<span class="difficulty-star${i<n?' on':''}">${uiIcon('star')}</span>`).join('')}</span></button>`;
+}
 function pieceCard(id, {tag = '', note = '', act, label}){
   const pc = PIECES[id];
   // いまの部員で吹くと、いない楽器（審査で減点になる）
   const lk = seated(S).length ? lackOf(id, seated(S).map(m => SEAT[m.seat].sec)) : null;
   // 作曲者は「どんな曲？」の中に。いない楽器は、いちばん大事なものだけ
-  return `<div class="pcard">${tag ? `<span class="tag fit">${tag}</span>` : ''}<h3>${pc.title}</h3>${note ? `<p>${note}</p>` : ''}
+  return `<div class="pcard">${tag ? `<span class="tag fit">${tag}</span>` : ''}<div class="piece-heading"><h3>${pc.title}</h3>${difficultyBadge(id)}</div>${note ? `<p>${note}</p>` : ''}
     <p class="asks">問われる力：<b>${pc.asks}</b></p>
     ${lk ? `<p class="asks">${lk.pts >= 1 ? `いない楽器で <b>−${Math.round(lk.pts)}点</b>（とくに${lackNames(lk.miss.slice(0, 1))[0]}）` : lk.miss.length ? 'いない楽器は、審査にほぼ響かない' : 'いまの部で、楽器はそろっている'}</p>` : ''}
     <details class="pdesc"><summary>どんな曲？</summary><p>${pc.composer}。${pc.full}。${pc.desc}</p></details>
-    <div class="row"><button class="btn small" type="button" data-act="model" data-pid="${id}">▶ お手本</button><button class="btn small" type="button" data-act="preview" data-pid="${id}">▶ いまの部で</button><button class="btn small primary" type="button" data-act="${act}" data-pid="${id}">${label}</button></div></div>`;
+    <div class="row"><button class="btn small" type="button" data-act="model" data-pid="${id}">${uiIcon('play')}お手本</button><button class="btn small" type="button" data-act="preview" data-pid="${id}">${uiIcon('play')}いまの部で</button><button class="btn small primary" type="button" data-act="${act}" data-pid="${id}">${label}</button></div></div>`;
 }
 const listenBtns = id => `<button class="btn small" type="button" data-act="model" data-pid="${id}">▶ お手本を聴く</button><button class="btn small" type="button" data-act="preview" data-pid="${id}">▶ いまの部で聴く</button>`;
 

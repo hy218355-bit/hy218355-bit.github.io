@@ -74,7 +74,7 @@
   const odeTimp = list => list.map(([b, n, v]) => ({i: 'timp', b, m: n === 'A' ? 45 : 50, v}));
 
   addPiece({
-    id: 'ode',
+    id: 'ode', readDifficulty: 1,
     title: '「歓喜の歌」',
     full: 'ベートーヴェン 交響曲第9番 第4楽章より「歓喜の歌」',
     composer: 'L.v.ベートーヴェン（1824年）',

@@ -1160,6 +1160,20 @@ html[data-season="snow"]{--season-band:linear-gradient(90deg,#DDE8F3,#FFFFFF,#B9
  .tabbed .col-stage.tab-on .rehearsal-actions{position:fixed;left:max(16px,env(safe-area-inset-left,0px));right:max(16px,env(safe-area-inset-right,0px));bottom:calc(60px + env(safe-area-inset-bottom,0px));z-index:45;padding:12px 0 8px;background:linear-gradient(transparent,var(--paper) 18%)}
  .rehearsal-actions .btn{font-size:12px}
 }
+/* 星は、曲を覚えるまでに必要な練習時間の違いを表す。 */
+.piece-heading{display:flex;align-items:center;gap:8px;min-width:0}
+.piece-heading h3{flex:1;min-width:0;overflow-wrap:anywhere}
+.piece-difficulty{display:inline-flex;align-items:center;justify-content:center;gap:5px;flex:none;min-height:44px;padding:6px;border:1px solid var(--rule);border-radius:8px;background:var(--paper);color:var(--ink-soft);font:10px var(--f-body);cursor:pointer}
+.difficulty-stars{display:inline-flex;gap:1px;align-items:center}
+.difficulty-star{display:inline-flex;color:var(--ink-soft);opacity:.45}
+.difficulty-star .ui-icon{width:12px;height:12px}
+.difficulty-star.on{color:var(--brass);opacity:1}
+.difficulty-star.on .ui-icon{fill:currentColor}
+.piece-label-row{display:flex;align-items:center;justify-content:space-between;gap:10px}
+.piece-label-row .eyebrow{margin:0}
+.pcard .row{flex-wrap:nowrap;gap:6px}
+.pcard .row .btn{display:flex;align-items:center;justify-content:center;gap:3px;flex:1;min-width:0;min-height:44px;padding:8px 4px;font-size:11px;white-space:nowrap}
+.pcard .row .ui-icon{width:12px;height:12px}
 </style>
 </head>
 <body>
@@ -1183,7 +1197,7 @@ html[data-season="snow"]{--season-band:linear-gradient(90deg,#DDE8F3,#FFFFFF,#B9
         <div class="stand-head">
           <div class="piece">
             <div class="seg pswitch" id="pieceSwitch" hidden></div>
-            <p class="eyebrow" id="pieceEyebrow">自由曲</p>
+            <div class="piece-label-row"><p class="eyebrow" id="pieceEyebrow">自由曲</p><div id="pieceDifficulty"></div></div>
             <h2 id="piece"></h2>
             <p class="meta" id="pieceMeta"></p>
           </div>
@@ -1345,29 +1359,29 @@ html[data-season="snow"]{--season-band:linear-gradient(90deg,#DDE8F3,#FFFFFF,#B9
 <script src="js/venues.js"></script>
 <script src="js/samples.js"></script>
 <script src="js/scores.js"></script>
-<script src="js/pieces/largo.js"></script>
-<script src="js/pieces/ode.js"></script>
-<script src="js/pieces/galop.js"></script>
-<script src="js/pieces/pomp.js"></script>
-<script src="js/pieces/aida.js"></script>
-<script src="js/pieces/hero.js"></script>
-<script src="js/pieces/holst.js"></script>
-<script src="js/pieces/hungarian.js"></script>
-<script src="js/pieces/flowers.js"></script>
-<script src="js/pieces/tell.js"></script>
-<script src="js/pieces/carmen.js"></script>
-<script src="js/pieces/valkyrie.js"></script>
-<script src="js/pieces/swan.js"></script>
-<script src="js/pieces/spring.js"></script>
-<script src="js/pieces/canon.js"></script>
-<script src="js/band.js?v=member-name-1"></script>
-<script src="js/game.js?v=member-name-1"></script>
+<script src="js/pieces/largo.js?v=reading-difficulty-1"></script>
+<script src="js/pieces/ode.js?v=reading-difficulty-1"></script>
+<script src="js/pieces/galop.js?v=reading-difficulty-1"></script>
+<script src="js/pieces/pomp.js?v=reading-difficulty-1"></script>
+<script src="js/pieces/aida.js?v=reading-difficulty-1"></script>
+<script src="js/pieces/hero.js?v=reading-difficulty-1"></script>
+<script src="js/pieces/holst.js?v=reading-difficulty-1"></script>
+<script src="js/pieces/hungarian.js?v=reading-difficulty-1"></script>
+<script src="js/pieces/flowers.js?v=reading-difficulty-1"></script>
+<script src="js/pieces/tell.js?v=reading-difficulty-1"></script>
+<script src="js/pieces/carmen.js?v=reading-difficulty-1"></script>
+<script src="js/pieces/valkyrie.js?v=reading-difficulty-1"></script>
+<script src="js/pieces/swan.js?v=reading-difficulty-1"></script>
+<script src="js/pieces/spring.js?v=reading-difficulty-1"></script>
+<script src="js/pieces/canon.js?v=reading-difficulty-1"></script>
+<script src="js/band.js?v=reading-difficulty-1"></script>
+<script src="js/game.js?v=reading-difficulty-1"></script>
 <script src="js/engine.js"></script>
 <script src="js/conduct.js?v=stage-faces-2"></script>
 <script src="js/announce.js?v=result-journal-1"></script>
 <script src="js/tunegame.js"></script>
 <script src="js/fx.js"></script>
-<script src="js/ui.js?v=rehearsal-polish-1"></script>
+<script src="js/ui.js?v=reading-difficulty-1"></script>
 <div class="tip" id="tip" role="tooltip" hidden></div>
 </body>
 </html>

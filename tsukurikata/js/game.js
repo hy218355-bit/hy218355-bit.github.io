@@ -375,8 +375,8 @@ function practiceWeek(s0, plan){
       const units = readUnits(pid), cur = readOf(m, pid), before = readMean(m, pid);
       const sp = id === 'piece' ? practiceSpan(s, m, pid) : null;
       if(pid === s.pieceId) span = sp;
-      const rate = sh * mu.read * eff * (0.5 + avgStat(m) / 100) * (1 + SKILLS.reader.read * skillLv(m, 'reader'));
-      // 1週間に覚えられる量は同じなので、打ちこんだ区間が短いほど大きく進む（くり返しの区間は数えない）
+      const rate = sh * mu.read * eff * (0.5 + avgStat(m) / 100) * (1 + SKILLS.reader.read * skillLv(m, 'reader')) / readingLoad(pid);
+      // 同じ曲なら1週間に覚えられる量は同じなので、打ちこんだ区間が短いほど大きく進む（くり返しの区間は数えない）
       const len = u => u.to - u.from, total = units.reduce((a, u) => a + len(u), 0);
       const next = cur.slice(), ease = readEase(pid, m.seat ? SEAT[m.seat].part : null);
       for(const u of units){

@@ -32,6 +32,7 @@ function record(){
  report.stageCache=Faces.stageCacheSize();
  report.playing=U.playing;report.waiting=!!U.waitPlay;report.shownLabel=U.shownLabel;report.range=U.range;report.solo=U.solo;report.piece=playPiece();report.venue=U.venue;
  report.recordings=S.recs.map(r=>({id:r.id,label:r.label}));
+ report.readings=PIECE_IDS.map(id=>({id,level:pieceDifficulty(id),load:readingLoad(id),average:readAvg(S,id)}));
  const stageCanvas=$('#stage'),stageBox=stageCanvas.getBoundingClientRect(),stageMap=stageGeom(Math.max(240,stageBox.width),true);
  report.stageSeats=SEATS.map(s=>({id:s.id,point:seatXY(s,stageMap),member:S.members.find(m=>m.seat===s.id)?.id}));
  report.gradIndex=GR.i;report.gradAuto=Boolean(GR.timer);
@@ -63,13 +64,13 @@ async function show(next){
  for(const id of ['conduct','gradRoll','announce','fx'])$('#'+id).hidden=true;
  document.documentElement.classList.remove('conducting');
  let s=freshState(2026);
- if(!['intake','talent'].includes(view)){s=assignRecruits(s,autoAssign(s));s=choosePiece(s,'galop');}
+ if(!['intake','talent'].includes(view)){s=assignRecruits(s,autoAssign(s));if(!['song-choice','song-samples'].includes(view))s=choosePiece(s,view==='reading-year-hard'?'tell':'galop');}
  if(view==='talent'){s.recruitSeed=12345;s.seq=0;s.rep=90;s.recruits=null;const rs=makeRecruits(s,40);s.recruits=[...rs.filter(r=>r.talent).slice(0,1),...rs.filter(r=>!r.talent).slice(0,7)];}
  if(view==='intake-existing'||view==='intake-full'){
   s.members=fullBand({pitch:55,rhythm:60,tone:50,expr:48}).slice(0,view==='intake-full'?39:32);s.year=2028;s.week=10;
   s.recruitSeed=12345;s.seq=100;s.recruits=makeRecruits(s,8);s.recruitWhen=s.week;
  }
- if(['year','journal','renamed-year'].includes(view)){
+ if(['year','journal','renamed-year','reading-year-hard'].includes(view)){
   if(view==='renamed-year'){s=renameMember(s,s.members[0].id,'山田 花音');report.renamedBefore={id:s.members[0].id,name:s.members[0].name,face:Faces.fingerprint(s.members[0])};}
   const start=s.year;
   while(s.year===start&&report.steps++<160){s=advance(s);S=s;renderAll();await new Promise(r=>setTimeout(r,0));}
@@ -80,7 +81,7 @@ async function show(next){
   for(let i=0;i<100&&!s.consult;i++)s=advance(s);
   if(!s.consult)throw Error('相談の見本が作れなかった');
   if(view==='consult-result')s=resolveConsult(s,consultView(s).choices[0].k);
- }else if(['stage','rehearsal','rehearsal-records','rehearsal-a','rehearsal-loading','practice','practice-late','practice-a','members','member','member-old','member-bench','grad','grad-old','grad-auto','senior','conduct','announce','announce-silver','announce-bronze','announce-cast','fx','audition','audition-decided','audition-long','ensemble'].includes(view)){
+ }else if(['stage','reading-stage','song-set','song-final','rehearsal','rehearsal-records','rehearsal-a','rehearsal-loading','practice','practice-late','practice-a','members','member','member-old','member-bench','grad','grad-old','grad-auto','senior','conduct','announce','announce-silver','announce-bronze','announce-cast','fx','audition','audition-decided','audition-long','ensemble'].includes(view)){
   const ms=fullBand({pitch:68,rhythm:72,tone:64,expr:61}),names=new Set();
   ms.forEach((m,i)=>{m.id='m2028-n'+(i+1)+'-cafe';m.name=makeName(names,'recruit',2028,i+1);m.grade=i%3+1;m.joined=2026;m.joinGrade=1;m.sta=95;m.first={y:2026,w:0,stats:{pitch:15,rhythm:12,tone:18,expr:10}};m.story=[{y:2026,w:0,t:'アルトサックスで入部。'},{y:2027,w:16,t:'はじめての金賞。'},{y:2028,w:26,t:'最後の定期演奏会。'}];});
   s.members=ms;s.year=2028;s.week=10;
@@ -88,6 +89,9 @@ async function show(next){
  if(view==='ensemble'){s.members.forEach((m,i)=>m.grade=i%2+1);s.phase='winter';s.winter={step:1,plan:'kiso'};U.ensKey=null;U.ensPick=null;}
  if(view==='practice-late'){s.week=15;s.members[0].sta=20;}
  if(view==='practice-a'){s.division='A';s.setPiece=setOffer(s)[0];s.split='auto';}
+ if(view==='reading-stage')s.pieceId='tell';
+ if(view==='song-set'){s.division='A';s.phase='chooseSet';}
+ if(view==='song-final'){s.chooseFinal=true;s.contestPiece='galop';for(const m of s.members)m.fam={galop:[65,65,65]};}
  if(view.startsWith('rehearsal')){
   s.recs=[];
   if(view==='rehearsal-records'){s.week=0;addRec(s,'2028年 4月の合奏',{venue:'room'});s.week=10;addRec(s,'2028年 6月の合奏',{venue:'hall'});}
@@ -102,7 +106,7 @@ async function show(next){
   if(q.has('audit')){report.expectedRecommendedOut=[...recommendLineup(s)];report.expectedAllPrediction=predictContest(s,new Set()).avg;}
   U.lineup=true;U.draft=null;
  }else U.lineup=false;
- if(!['year','renamed-year'].includes(view)){checkAch(s,true);for(const key of ['skillUp','coachUp','mileUp','loveUp','dreamUp','rivalUp'])delete s[key];}
+ if(!['year','renamed-year','reading-year-hard'].includes(view)){checkAch(s,true);for(const key of ['skillUp','coachUp','mileUp','loveUp','dreamUp','rivalUp'])delete s[key];}
  if(view==='member-old')delete s.members[0].first;
  if(view==='member-bench')s.members[0].seat=null;
  if(view==='journal-ambiguous'){s.members=[...s.members,{...s.members[0],id:'different-person'}];s.log=[{y:s.year,w:0,text:s.members[0].name+'が、スキルを身につけた。'}];}
@@ -110,7 +114,8 @@ async function show(next){
  if(view==='grad-old')s.members.forEach(m=>{delete m.first;m.story=[];});
  S=s;U.sel=null;hideTip();renderAll();refreshNow();$('#toast').hidden=true;
  const cardView=view==='member'||view.startsWith('member-');
- setTab(['log','journal','journal-ambiguous','journal-empty'].includes(view)?'log':view==='members'?'members':cardView||view.startsWith('rehearsal')||['stage','conduct'].includes(view)?'play':'week');
+ setTab(['log','journal','journal-ambiguous','journal-empty'].includes(view)?'log':view==='members'?'members':cardView||view.startsWith('rehearsal')||['stage','reading-stage','conduct'].includes(view)?'play':'week');
+ if(view==='song-samples')for(const card of document.querySelectorAll('.pcard'))card.hidden=!['largo','galop','tell'].includes(card.querySelector('[data-pid]')?.dataset.pid);
  if(cardView){placeCard('stage');U.sel=s.members[0].id;renderMemberCard();}
  if(['grad','grad-old','grad-auto'].includes(view)){U.fxMode=view==='grad-auto'?'short':'off';S.gradMembers=s.members.filter(m=>m.grade===3);openGradRoll();GR.i=1;grShow();if(view!=='grad-auto')pauseGradRoll();}
  if(view==='senior'){$('#week').innerHTML='<div class="seniors">'+s.members.filter(m=>m.grade===3).map(m=>seniorCard(m,null)).join('')+'</div>';}
@@ -128,6 +133,7 @@ async function show(next){
  await document.fonts.ready;await new Promise(r=>setTimeout(r,80));
  if(cardView)$('#memberCard').scrollIntoView({block:'start'});
  else if(view==='consult')$('.episode.consult').scrollIntoView({block:'center'});
+ else if(view.startsWith('song-'))$('.pcard')?.scrollIntoView({block:'start'});
  else window.scrollTo(0,0);
  record();console.log('画面確認',report);
 }

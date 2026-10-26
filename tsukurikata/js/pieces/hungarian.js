@@ -164,7 +164,7 @@
   const triT = b0 => [...each(b0, b0 + 2, .5, x => [{i: 'tri', b: x, v: .3}]), {i: 'tri', b: b0 + 2, d: 1.5, roll: true, v: .2, v1: .3}];
 
   addPiece({
-    id: 'hungarian',
+    id: 'hungarian', readDifficulty: 5,
     title: '「ハンガリー舞曲第5番」',
     full: 'ブラームス「ハンガリー舞曲第5番」',
     composer: 'J.ブラームス（1869年）',

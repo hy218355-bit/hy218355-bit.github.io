@@ -94,7 +94,7 @@
   const lo = (f, t, sc) => ({f, t, r: 'mel', sh: -12, sc: sc * ROLE_SCALE.bass / ROLE_SCALE.mel});
 
   addPiece({
-    id: 'swan',
+    id: 'swan', readDifficulty: 3,
     title: '「情景」',
     full: 'チャイコフスキー バレエ《白鳥の湖》より「情景」',
     composer: 'P.チャイコフスキー（1876年）',

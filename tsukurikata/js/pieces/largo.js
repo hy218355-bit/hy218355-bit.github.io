@@ -30,7 +30,7 @@
   };
 
   addPiece({
-    id: 'largo',
+    id: 'largo', readDifficulty: 1,
     title: '《新世界より》第2楽章',
     full: 'ドヴォルザーク 交響曲第9番「新世界より」第2楽章 Largo',
     composer: 'A.ドヴォルザーク（1893年）',

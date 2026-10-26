@@ -89,7 +89,7 @@
   const galHorn = (i, mid) => [{f: 0, t: 4, r: 'mel', sh: -12}, ...offG('hn', i), mid, gp('hnMB', 'MB', i, .8), gp('hnD', 'D', i, 1.2), ...coda('hn', i)];
 
   addPiece({
-    id: 'galop',
+    id: 'galop', readDifficulty: 3,
     title: '「天国と地獄」',
     full: 'オッフェンバック 喜歌劇《天国と地獄》より「地獄のギャロップ」（カンカン）',
     composer: 'J.オッフェンバック（1858年）',
