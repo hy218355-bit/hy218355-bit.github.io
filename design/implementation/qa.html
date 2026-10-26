@@ -754,6 +754,17 @@ html[data-season="snow"]{--season-band:linear-gradient(90deg,#DDE8F3,#FFFFFF,#B9
 .weekres .wr .d{font-family:var(--f-lcd);font-size:12px;color:var(--good)}
 .weekres .wr .d.minus{color:var(--bad)}
 .weekres .small{margin-top:2px}
+.wr-members{display:grid;gap:8px;margin-top:9px;padding-top:10px;border-top:1px solid var(--rule)}
+.wr-members>small{font-size:11px;color:var(--ink-soft)}
+.wr-people{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:7px}
+.wr-person{display:grid;justify-items:center;align-content:start;gap:6px;min-width:0;padding:10px 4px;border:1px solid var(--rule);border-radius:9px;background:var(--paper);color:var(--ink);font-family:var(--f-body);text-align:center}
+button.wr-person{cursor:pointer}
+.wr-person>b{max-width:100%;font-size:11px;line-height:1.5;overflow-wrap:anywhere}
+.wr-person>small{font-size:10px;color:var(--ink-soft)}
+.wr-ranks{display:flex;align-items:center;gap:3px;font-size:11px}
+.wr-ranks .rk{width:20px;height:22px;font-size:12px}
+button.wr-person:hover{border-color:var(--brass)}
+button.wr-person:focus-visible{outline:2px solid var(--brass);outline-offset:2px}
 .countup.pop{animation:cpop .35s ease-out}
 @keyframes cpop{50%{transform:scale(1.25)}}
 .countup{display:inline-block}
@@ -1145,7 +1156,7 @@ html[data-season="snow"]{--season-band:linear-gradient(90deg,#DDE8F3,#FFFFFF,#B9
 .plan .pick>.ui-icon{width:18px;height:18px;color:var(--brass)}
 .plan .pick::after{content:'';width:7px;height:7px;flex:none;border-right:1.5px solid var(--ink-soft);border-bottom:1.5px solid var(--ink-soft);transform:rotate(45deg);margin:0 2px 4px auto}
 .plan .pick[aria-expanded="true"]::after{transform:rotate(225deg);margin-bottom:0}
-.plan .pgrid{grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;max-height:min(360px,calc(100dvh - 200px));overflow:auto;width:100%;padding:2px;scroll-margin-block:110px}
+.plan .pgrid{grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;max-height:min(360px,calc(100dvh - 280px));overflow:auto;width:100%;padding:2px;scroll-margin-block:110px}
 .plan .pchip{position:relative;display:grid;grid-template-columns:20px minmax(0,1fr);align-items:center;gap:8px;min-height:64px;padding:9px 8px;text-align:left;border-width:2px}
 .pchip>.ui-icon{width:20px;height:20px;color:var(--ink-soft)}
 .pchip>span{display:grid;gap:5px;min-width:0}
@@ -1160,6 +1171,18 @@ html[data-season="snow"]{--season-band:linear-gradient(90deg,#DDE8F3,#FFFFFF,#B9
 .plan .pspan>.chip:hover{border-color:var(--rule)}
 .plan .pspan>.chip[aria-pressed="true"]{border-color:var(--brass);color:var(--ink);background:color-mix(in srgb,var(--brass) 12%,var(--sheet))}
 .plan [data-pick]:focus-visible,.plan .pchip:focus-visible{outline:2px solid var(--ink);outline-offset:2px}
+.plan .pm{scroll-margin-top:14px}
+.plan-care{display:grid;gap:8px;padding:10px;border:1px solid var(--rule);border-left:3px solid var(--warn);border-radius:9px;background:var(--sheet)}
+.care-head{display:flex;align-items:center;justify-content:space-between;gap:8px}
+.care-head>b{display:flex;align-items:center;gap:7px;font-size:12px}
+.care-head>b>.ui-icon{color:var(--warn)}
+.care-head>.help-button{min-width:44px;min-height:44px}
+.care-people{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:7px;max-height:166px;overflow:auto;padding:2px}
+.care-people>button{display:flex;align-items:center;gap:6px;min-width:0;min-height:48px;padding:6px;border:1px solid var(--rule);border-radius:8px;background:var(--paper);color:var(--ink);font-family:var(--f-body);text-align:left;cursor:pointer}
+.care-people>button>b{min-width:0;font-size:11px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.care-people>button>.ui-icon{flex:none;width:14px;height:14px;margin-left:auto;color:var(--brass)}
+.care-people>button:hover{border-color:var(--brass)}
+.care-people>button:focus-visible{outline:2px solid var(--brass);outline-offset:1px}
 @media(min-width:600px){.plan .pgrid{grid-template-columns:repeat(3,minmax(0,1fr))}}
 /* 入部：顔と希望を見比べ、楽器ごとの空き席から担当を決める。 */
 .rchips{gap:8px;margin:14px 0 22px}
@@ -1524,39 +1547,39 @@ html[data-season="snow"]{--season-band:linear-gradient(90deg,#DDE8F3,#FFFFFF,#B9
   <button type="button" data-tabgo="log"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 5.5C4 4.7 4.7 4 5.5 4H11v16H5.5c-.8 0-1.5-.7-1.5-1.5z"/><path d="M20 5.5c0-.8-.7-1.5-1.5-1.5H13v16h5.5c.8 0 1.5-.7 1.5-1.5z"/></svg><span>日誌</span></button>
 </nav>
 
-<script src="js/util.js?v=qa-graduation-album-7"></script>
-<script src="js/icons.js?v=qa-graduation-album-7"></script>
-<script src="js/instrument-icons.js?v=qa-graduation-album-7"></script>
-<script src="js/face-cast.js?v=qa-graduation-album-7"></script>
-<script src="js/faces.js?v=qa-graduation-album-7"></script>
-<script src="js/instruments.js?v=qa-graduation-album-7"></script>
-<script src="js/venues.js?v=qa-graduation-album-7"></script>
-<script src="js/samples.js?v=qa-graduation-album-7"></script>
-<script src="js/scores.js?v=qa-graduation-album-7"></script>
-<script src="js/pieces/largo.js?v=qa-graduation-album-7"></script>
-<script src="js/pieces/ode.js?v=qa-graduation-album-7"></script>
-<script src="js/pieces/galop.js?v=qa-graduation-album-7"></script>
-<script src="js/pieces/pomp.js?v=qa-graduation-album-7"></script>
-<script src="js/pieces/aida.js?v=qa-graduation-album-7"></script>
-<script src="js/pieces/hero.js?v=qa-graduation-album-7"></script>
-<script src="js/pieces/holst.js?v=qa-graduation-album-7"></script>
-<script src="js/pieces/hungarian.js?v=qa-graduation-album-7"></script>
-<script src="js/pieces/flowers.js?v=qa-graduation-album-7"></script>
-<script src="js/pieces/tell.js?v=qa-graduation-album-7"></script>
-<script src="js/pieces/carmen.js?v=qa-graduation-album-7"></script>
-<script src="js/pieces/valkyrie.js?v=qa-graduation-album-7"></script>
-<script src="js/pieces/swan.js?v=qa-graduation-album-7"></script>
-<script src="js/pieces/spring.js?v=qa-graduation-album-7"></script>
-<script src="js/pieces/canon.js?v=qa-graduation-album-7"></script>
-<script src="js/band.js?v=qa-graduation-album-7"></script>
-<script src="js/game.js?v=qa-graduation-album-7"></script>
-<script src="js/engine.js?v=qa-graduation-album-7"></script>
-<script src="js/conduct.js?v=qa-graduation-album-7"></script>
-<script src="js/announce.js?v=qa-graduation-album-7"></script>
-<script src="js/tunegame.js?v=qa-graduation-album-7"></script>
-<script src="js/fx.js?v=qa-graduation-album-7"></script>
-<script src="js/ui.js?v=qa-graduation-album-7"></script>
+<script src="js/util.js?v=qa-practice-faces-3"></script>
+<script src="js/icons.js?v=qa-practice-faces-3"></script>
+<script src="js/instrument-icons.js?v=qa-practice-faces-3"></script>
+<script src="js/face-cast.js?v=qa-practice-faces-3"></script>
+<script src="js/faces.js?v=qa-practice-faces-3"></script>
+<script src="js/instruments.js?v=qa-practice-faces-3"></script>
+<script src="js/venues.js?v=qa-practice-faces-3"></script>
+<script src="js/samples.js?v=qa-practice-faces-3"></script>
+<script src="js/scores.js?v=qa-practice-faces-3"></script>
+<script src="js/pieces/largo.js?v=qa-practice-faces-3"></script>
+<script src="js/pieces/ode.js?v=qa-practice-faces-3"></script>
+<script src="js/pieces/galop.js?v=qa-practice-faces-3"></script>
+<script src="js/pieces/pomp.js?v=qa-practice-faces-3"></script>
+<script src="js/pieces/aida.js?v=qa-practice-faces-3"></script>
+<script src="js/pieces/hero.js?v=qa-practice-faces-3"></script>
+<script src="js/pieces/holst.js?v=qa-practice-faces-3"></script>
+<script src="js/pieces/hungarian.js?v=qa-practice-faces-3"></script>
+<script src="js/pieces/flowers.js?v=qa-practice-faces-3"></script>
+<script src="js/pieces/tell.js?v=qa-practice-faces-3"></script>
+<script src="js/pieces/carmen.js?v=qa-practice-faces-3"></script>
+<script src="js/pieces/valkyrie.js?v=qa-practice-faces-3"></script>
+<script src="js/pieces/swan.js?v=qa-practice-faces-3"></script>
+<script src="js/pieces/spring.js?v=qa-practice-faces-3"></script>
+<script src="js/pieces/canon.js?v=qa-practice-faces-3"></script>
+<script src="js/band.js?v=qa-practice-faces-3"></script>
+<script src="js/game.js?v=qa-practice-faces-3"></script>
+<script src="js/engine.js?v=qa-practice-faces-3"></script>
+<script src="js/conduct.js?v=qa-practice-faces-3"></script>
+<script src="js/announce.js?v=qa-practice-faces-3"></script>
+<script src="js/tunegame.js?v=qa-practice-faces-3"></script>
+<script src="js/fx.js?v=qa-practice-faces-3"></script>
+<script src="js/ui.js?v=qa-practice-faces-3"></script>
 <div class="tip" id="tip" role="tooltip" hidden></div>
-<script src="/design/implementation/qa.js?v=qa-graduation-album-7"></script>
+<script src="/design/implementation/qa.js?v=qa-practice-faces-3"></script>
 </body>
 </html>

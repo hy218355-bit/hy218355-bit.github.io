@@ -910,7 +910,8 @@ function fxMoments(){
 // 練習の結果：すすめる前の部の様子を写しておき、週のはじめに「先週の練習の成果」として、伸びたぶんを数え上げて見せる
 function weekSnap(s){
   return {pitch: bandAvg(s, 'pitch'), rhythm: bandAvg(s, 'rhythm'), tone: bandAvg(s, 'tone'), expr: bandAvg(s, 'expr'), coh: s.cohesion,
-    read: s.pieceId ? readAvg(s, s.pieceId) : null, pid: s.pieceId, ms: Object.fromEntries(s.members.map(m => [m.id, avgStat(m)]))};
+    read: s.pieceId ? readAvg(s, s.pieceId) : null, pid: s.pieceId, ms: Object.fromEntries(s.members.map(m => [m.id, avgStat(m)])),
+    stats: Object.fromEntries(s.members.map(m => [m.id, {...m.stats}]))};
 }
 // 一度だけ、棒を前の長さから伸ばし、数字を数え上げる（描き直しが続いても、最後に描いたものを動かす）
 function weekResAnimate(w){
@@ -930,9 +931,17 @@ function weekResHtml(){
   const rows = [...STAT_KEYS.map(k => [STAT_LABEL[k], b[k], bandAvg(S, k)]), ['まとまり', b.coh, S.cohesion],
     ...(b.read != null && b.pid === S.pieceId ? [['譜読み', b.read, readAvg(S, S.pieceId)]] : [])];
   const top = S.members.filter(m => b.ms[m.id] != null).map(m => ({m, d: avgStat(m) - b.ms[m.id]})).filter(x => x.d >= 0.5).sort((x, y) => y.d - x.d).slice(0, 3);
+  const canPlan = !episodeView(S);
   return `<div class="weekres"><b>${r.n > 1 ? `この${r.n}週の練習の成果` : '先週の練習の成果'}</b>
     ${rows.map(([nm, a, v]) => `<div class="wr"><span class="nm">${nm}</span><span class="track"><span class="fill" style="width:${clamp(start ? a : v, 0, 100)}%;${rankFill(v)}" data-to="${clamp(v, 0, 100)}"></span></span>${rankBadge(v, v > a && rankOf(a) !== rankOf(v))}</div>`).join('')}
-    ${top.length ? `<p class="small">よく伸びた：${top.map(x => esc(x.m.name)).join('・')}</p>` : ''}</div>`;
+    ${top.length ? `<div class="wr-members"><small>よく伸びた</small><div class="wr-people">${top.map(({m}) => {
+      // 上がったランクがあれば優先し、同じランクの中で伸びた週は今のランクだけを見せる。
+      const gains = STAT_KEYS.map(k => ({k, before: b.stats?.[m.id]?.[k], now: m.stats[k]})).filter(x => x.before != null && x.now > x.before)
+        .sort((a, b) => Number(rankOf(b.before) !== rankOf(b.now)) - Number(rankOf(a.before) !== rankOf(a.now)) || (b.now - b.before) - (a.now - a.before));
+      const best = gains[0], up = best && rankOf(best.before) !== rankOf(best.now);
+      const changeLabel = best ? `${STAT_LABEL[best.k]} ${up ? rankOf(best.before)+'から' : ''}${rankOf(best.now)}` : '';
+      return `<${canPlan?'button type="button"':'div'} class="wr-person"${canPlan?` data-practice-member="${esc(m.id)}" data-practice-source="growth" aria-label="${esc(m.name)} ${changeLabel}、今週の練習を見る"`:''}>${memberFace(m,40)}<b>${esc(m.name)}</b>${best ? `<small>${STAT_LABEL[best.k]}</small><span class="wr-ranks" aria-label="${changeLabel}">${up ? rankBadge(best.before)+'<span aria-hidden="true">→</span>' : ''}${rankBadge(best.now,up)}</span>` : ''}</${canPlan?'button':'div'}>`;
+    }).join('')}</div></div>` : ''}</div>`;
 }
 // 同じ受け持ちに席がいくつかあるときは、2つ目からの席に「2人目」「3人目」をつける（トランペット 1st は2人、クラリネット 1st は3人で吹く）
 const seatNth = id => { const p = SEAT[id].part, k = SEATS.filter(x => x.part === p).findIndex(x => x.id === id); return k > 0 ? `（${k + 1}人目）` : ''; };
@@ -1393,21 +1402,33 @@ const staBar = m => `<span class="sta" title="体力 ${Math.round(m.sta)}"><span
 const practiceIcon=id=>uiIcon({long:'breath',tune:'tuning',metro:'metronome',phrase:'note',piece:'journal',tutti:'members',hall:'stage',rest:'rest'}[id]||'week');
 const pickGrid = (key, cur, auto) => `<div class="pgrid" role="group" aria-label="今週の練習">`
   + `<button class="pchip" type="button" data-pset="${key}" data-menu="" aria-pressed="${cur === ''}">${practiceIcon('auto')}<span><b>おまかせ</b><small>${auto ? MENU_BY[auto].name : '部員ごと'}</small></span></button>`
-  + MENU.filter(x => menuOpen(S, x.id)).map(x => `<button class="pchip" type="button" data-pset="${key}" data-menu="${x.id}" aria-pressed="${cur === x.id}">${practiceIcon(x.id)}<span><b>${x.name}</b><small>${menuUp(x.id)}</small></span></button>`).join('') + '</div>';
+  + MENU.filter(x => menuOpen(S, x.id)).sort((a,b)=>U.pickReturn==='care'?Number(b.id==='rest')-Number(a.id==='rest'):0).map(x => `<button class="pchip" type="button" data-pset="${key}" data-menu="${x.id}" aria-pressed="${cur === x.id}">${practiceIcon(x.id)}<span><b>${x.name}</b><small>${menuUp(x.id)}</small></span></button>`).join('') + '</div>';
 // 選ぶ前の行へ戻れるようにし、キーボードの位置も保つ。
 function closePracticePicker(){
-  const key=U.pick,top=U.pickScroll;U.pick=null;renderWeek();
-  document.querySelector(`[data-pick="${key}"]`)?.focus({preventScroll:true});
+  const key=U.pick,top=U.pickScroll,from=U.pickReturn;U.pick=null;U.pickReturn=null;renderWeek();
+  const origin=from && [...document.querySelectorAll('#week [data-practice-member]')].find(b=>b.dataset.practiceMember===key&&b.dataset.practiceSource===from);
+  (origin || document.querySelector(`[data-pick="${key}"]`))?.focus({preventScroll:true});
   if(top!=null)window.scrollTo(0,top);
 }
-function openPracticePicker(key){
+function openPracticePicker(key, from = null){
   if(U.pick===key){closePracticePicker();return;}
-  U.pickScroll=scrollY;U.pick=key;renderWeek();
+  U.pickScroll=scrollY;U.pickReturn=from;U.pick=key;renderWeek();
   const grid=$('#week .pgrid');if(!grid)return;
   (grid.querySelector('[aria-pressed="true"]')||grid.querySelector('button'))?.focus({preventScroll:true});
   const r=grid.getBoundingClientRect(),bar=$('#week .plan>.transport')?.getBoundingClientRect();
   const bottom=narrow.matches&&bar?bar.top-12:innerHeight-24;
   if(r.bottom>bottom)window.scrollBy(0,r.bottom-bottom);
+}
+// 顔から本人の練習へ移るだけでは指示を変えない。閉じると元の顔へ戻す。
+function focusPracticeMember(mid, source){
+  if(S.phase !== 'week' || !memberById(mid)) return;
+  const row=[...document.querySelectorAll('#week [data-practice-row]')].find(el=>el.dataset.practiceRow===mid),group=row?.closest('details[data-sec]');
+  if(!group) return;
+  (U.openSecs ||= new Set()).add(group.dataset.sec);(U.closedSecs ||= new Set()).delete(group.dataset.sec);
+  if(U.pick===mid)U.pick=null;
+  openPracticePicker(mid,source);
+  const target=[...document.querySelectorAll('#week [data-practice-row]')].find(el=>el.dataset.practiceRow===mid);
+  target?.scrollIntoView({block:'start',behavior:!fxCalm()&&U.fxMode==='full'?'smooth':'auto'});
 }
 // 曲の個人練習で打ちこむところ（選ばなければ、いちばん吹けていないところ）
 const spanChips = m => {
@@ -1424,7 +1445,7 @@ function planHtml(ev){
   const ms = S.members.slice().sort((a, b) => order(a) - order(b));
   const count = {};
   for(const m of ms){ const id = planFor(S, m); count[id] = (count[id] || 0) + 1; }
-  const tired = ms.filter(m => m.sta < 30).length;
+  const tired = ms.filter(m => m.sta < 30);
   const pol = POLICY_BY[S.policy] ? S.policy : 'auto';
   // 部員はパートごとにたたむ（部員が多いと「すすめる」ボタンがずっと下になるので）。見出しに、そのパートの今週の練習をまとめて出す
   const groups = [];
@@ -1432,7 +1453,7 @@ function planHtml(ev){
   // 部員の行：名前と体力・力の帯・今週の練習のボタン（押すと練習の一覧が開く）
   const rowOf = m => {
     const auto = decideMenu(S, m), own = ownPlan(m), id = own || auto, open = U.pick === m.id;
-    return `<li class="pm${own ? ' own' : ''}${m.out && m.seat ? ' out' : ''}"><span class="who">${memberFace(m,30)}<b>${esc(m.name)}</b><small>${m.grade}年</small></span>
+    return `<li class="pm${own ? ' own' : ''}${m.out && m.seat ? ' out' : ''}" data-practice-row="${esc(m.id)}"><span class="who">${memberFace(m,30)}<b>${esc(m.name)}</b><small>${m.grade}年</small></span>
       ${staBar(m)}${rankStrip(m)}
       <button class="pick" type="button" data-pick="${m.id}" aria-expanded="${open}" aria-label="${esc(m.name)}の今週の練習">${practiceIcon(id)}${own ? '' : '<span class="pk">おまかせ</span>'}<b>${MENU_BY[id].name}</b></button>
       ${open ? pickGrid(m.id, own, auto) : ''}${id === 'piece' && S.pieceId ? spanChips(m) : ''}</li>`;
@@ -1460,10 +1481,10 @@ function planHtml(ev){
     <span class="small">${POLICY_BY[pol].desc}</span></div>
     ${setActive(S) ? `<div class="focus"><span>曲の練習の配分（自由曲 ${esc(PIECES[S.pieceId].title)}・課題曲 ${esc(PIECES[S.setPiece].title)}）</span><div class="chips">${Object.keys(SPLIT).map(k => `<button class="chip" type="button" data-split="${k}" aria-pressed="${(S.split || 'auto') === k}">${SPLIT_NAME[k]}</button>`).join('')}</div>
       <span class="small">譜読み：自由曲 ${rankBadge(readAvg(S, S.pieceId))}・課題曲 ${rankBadge(readAvg(S, S.setPiece))}。曲の練習・合奏の伸びを、この配分で2曲に分ける${(S.split || 'auto') === 'auto' ? `（おまかせ：いまは自由曲 ${Math.round(pieceShares(S)[0][1] * 10)}割・課題曲 ${Math.round(pieceShares(S)[1][1] * 10)}割）` : ''}</span></div>` : ''}
+    ${tired.length ? `<div class="plan-care"><div class="care-head"><b>${practiceIcon('rest')}疲れ ${tired.length}人</b><button class="help-button" type="button" aria-label="疲れている部員について"${tipAttr('体力','体力が30を切っている部員。休ませないと、練習の効果が半分になる。顔を押すと、その人の練習を選べる。')}>?</button></div><div class="care-people" role="group" aria-label="疲れている部員">${tired.map(m=>`<button type="button" data-practice-member="${esc(m.id)}" data-practice-source="care" aria-label="${esc(m.name)}の今週の練習を見る${planFor(S,m)==='rest'?'（休む予定）':''}">${memberFace(m,32)}<b>${esc(m.name)}</b>${planFor(S,m)==='rest'?practiceIcon('rest'):''}</button>`).join('')}</div></div>` : ''}
     <div class="psecs"><div class="rkhead"${tipAttr('ランク')}><span></span><span>体力</span><span class="rks">${planCols().map(([, nm]) => `<i>${nm}</i>`).join('')}</span></div>${rows}</div>
     ${S.pieceId && !S.finalWeek && S.week >= 8 && nextContest(S).w > S.week ? lineupLine() : ''}
     <p class="small plan-sum">今週の予定：${sum}${tutti === 1 ? '（合奏は2人以上いないとできない）' : ''}</p>
-    ${tired ? `<p class="small">体力が30を切っている部員が${tired}人。休ませないと、練習の効果が半分になる。</p>` : ''}
     <div class="transport"><button class="btn primary" type="button" data-act="practice">この内容で1週間すすめる</button><button class="btn" type="button" data-act="practicemany">次の予定まで進める</button></div>
   </div>`;
 }
@@ -2207,6 +2228,7 @@ function bind(){
   $('#week').addEventListener('click', e => {
     const b = e.target.closest('button'); if(!b || b.disabled) return;
     if(b.dataset.gradMember){ openGradRoll(b.dataset.gradMember); return; }
+    if(b.dataset.practiceMember){haptic('tap');focusPracticeMember(b.dataset.practiceMember,b.dataset.practiceSource);return;}
     if(b.dataset.polall){ commit(setPolicy(S, b.dataset.polall)); renderWeek();document.querySelector(`[data-polall="${b.dataset.polall}"]`)?.focus({preventScroll:true});return; }
     // 今週の練習：ボタンで一覧を開き、選ぶと閉じる（パートの「まとめて選ぶ」は、そのパートの全員に）
     if(b.dataset.pick){ haptic('tap');openPracticePicker(b.dataset.pick);return; }

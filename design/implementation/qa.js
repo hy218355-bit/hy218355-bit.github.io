@@ -85,6 +85,7 @@ function record(){
  const source=S.log.slice().reverse().slice(0,80).map(e=>e.text).sort(),shown=Array.from(document.querySelectorAll('.log-preview,.log-notes>li>span:last-child')).map(e=>e.textContent).sort();
  report.logSourceCount=source.length;report.logRenderedCount=shown.length;report.logPreserved=JSON.stringify(source)===JSON.stringify(shown);
  report.planOwn={...(S.plan||{})};report.policy=S.policy;report.week=S.week;report.statsFingerprint=hash(JSON.stringify(S.members.map(m=>m.stats)));
+ report.practice={pick:U.pick,from:U.pickReturn,open:[...document.querySelectorAll('#week details[data-sec][open]')].map(el=>el.dataset.sec),tired:S.members.filter(m=>m.sta<30).map(m=>({id:m.id,name:m.name,menu:planFor(S,m),face:Faces.fingerprint(m)})),growth:[...document.querySelectorAll('.wr-person')].map(el=>({id:el.dataset.practiceMember,face:el.querySelector('[data-face]')?.dataset.face,name:el.querySelector('b')?.textContent,ranks:el.querySelector('.wr-ranks')?.getAttribute('aria-label'),interactive:el.tagName==='BUTTON'})),before:U.weekRes?.b.stats,members:S.members.map(m=>({id:m.id,name:m.name,stats:m.stats})),resultKey:U.weekRes?.key};
  report.assignPicks={...(U.asg?.picks||{})};report.assignSel=U.asg?.sel;
  report.auditionOut=[...(U.draft||[])];report.auditionDecided=!!S.audition?.decided;
  report.auditionSearching=!!U.audSearching;report.auditionPrediction=U.pred?.avg;report.auditionSound=U.pred?.sound;report.auditionScores=hash(JSON.stringify(S.audition?.scores));
@@ -115,7 +116,7 @@ function record(){
 }
 async function show(next){
  view=next;report={view,errors:[],steps:0};
- U.asg=null;
+ U.asg=null;U.weekRes=null;U.pick=null;U.pickReturn=null;
  stopPlay();if(releaseSamples){releaseSamples();releaseSamples=null;}U.range='all';U.solo='all';U.view='mel';U.piece=null;U.venue='room';E.setSolo({type:'all'});E.setVenue('room');
  for(const id of ['rollPanel','listenSettings','recordingPanel'])$('#'+id).open=false;
  clearTimeout(GR.timer);clearTimeout(AN.timer);cancelAnimationFrame(CD.raf);CD.phase='idle';
@@ -153,7 +154,7 @@ async function show(next){
   for(let i=0;i<100&&!s.consult;i++)s=advance(s);
   if(!s.consult)throw Error('相談の見本が作れなかった');
   if(view==='consult-result')s=resolveConsult(s,consultView(s).choices[0].k);
- }else if(['retirement-listen','consult-music','winter-music','outing-music','stage','recorded-history','reading-stage','song-set','song-final','rehearsal','rehearsal-records','rehearsal-a','rehearsal-loading','practice','practice-late','practice-a','members','member','member-old','member-bench','grad','grad-old','grad-auto','senior','conduct','announce','announce-silver','announce-bronze','announce-cast','fx','audition','audition-a','audition-decided','audition-long','ensemble'].includes(view)){
+ }else if(['retirement-listen','consult-music','winter-music','outing-music','stage','recorded-history','reading-stage','song-set','song-final','rehearsal','rehearsal-records','rehearsal-a','rehearsal-loading','practice','practice-late','practice-a','practice-care','practice-growth','members','member','member-old','member-bench','grad','grad-old','grad-auto','senior','conduct','announce','announce-silver','announce-bronze','announce-cast','fx','audition','audition-a','audition-decided','audition-long','ensemble'].includes(view)){
   const ms=fullBand({pitch:68,rhythm:72,tone:64,expr:61}),names=new Set();
   ms.forEach((m,i)=>{m.id='m2028-n'+(i+1)+'-cafe';m.name=makeName(names,'recruit',2028,i+1);m.grade=i%3+1;m.joined=2026;m.joinGrade=1;m.sta=95;m.first={y:2026,w:0,stats:{pitch:15,rhythm:12,tone:18,expr:10}};m.story=[{y:2026,w:0,t:'アルトサックスで入部。'},{y:2027,w:16,t:'はじめての金賞。'},{y:2028,w:26,t:'最後の定期演奏会。'}];});
   s.members=ms;s.year=2028;s.week=10;
@@ -174,6 +175,17 @@ async function show(next){
  if(view==='outing-music'){s.outing={id:'orch'};U.outPick=new Set();}
  if(view==='ensemble'){s.members.forEach((m,i)=>m.grade=i%2+1);s.phase='winter';s.winter={step:1,plan:'kiso'};U.ensKey=null;U.ensPick=null;}
  if(view==='practice-late'){s.week=15;s.members[0].sta=20;}
+ if(view==='practice-care'){
+  s.week=8;s.members[0].sta=20;s.members.at(-1).sta=25;
+  s.plan={[s.members[0].id]:'tune'};
+  if(q.has('manyTired'))s.members.forEach(m=>m.sta=20);
+  if(q.has('longTired'))s=renameMember(s,s.members.at(-1).id,'あいうえおかきくけこさし');
+  if(q.has('benchTired'))s.members.at(-1).seat=null;
+ }
+ if(view==='practice-growth'){
+  s.week=8;s.plan=Object.fromEntries(s.members.map(m=>[m.id,'rest']));
+  s.members.slice(0,3).forEach((m,i)=>{m.stats=q.has('sameRank')?{pitch:72,rhythm:72,tone:72,expr:72}:{pitch:39.7,rhythm:49.7,tone:59.7,expr:40};s.plan[m.id]=['tune','metro','long'][i];});
+ }
  if(view==='practice-a'){s.division='A';s.setPiece=setOffer(s)[0];s.split='auto';}
  if(view==='reading-stage')s.pieceId='tell';
  if(view==='recorded-history'){

@@ -1,0 +1,3029 @@
+{
+  "version": "qa-practice-faces-3",
+  "checks": {
+    "initial": {
+      "year": 2028,
+      "week": 8,
+      "phase": "week",
+      "theme": "light",
+      "width": 1512,
+      "scrollWidth": 1512,
+      "state": 0.2524502619635314,
+      "stats": 0.771712013753131,
+      "recordings": 0.937219318933785,
+      "plan": {
+        "m2028-n1-cafe": "tune"
+      },
+      "practice": {
+        "pick": null,
+        "from": null,
+        "open": [],
+        "tired": [
+          {
+            "id": "m2028-n1-cafe",
+            "name": "田中 七海",
+            "menu": "tune",
+            "face": 46
+          },
+          {
+            "id": "m2028-n39-cafe",
+            "name": "横山 透",
+            "menu": "rest",
+            "face": 4
+          }
+        ],
+        "growth": [],
+        "growthMembers": []
+      },
+      "boot": {
+        "scripts": 33,
+        "loaded": 33,
+        "failed": [],
+        "errors": []
+      },
+      "errors": []
+    },
+    "openFirst": {
+      "year": 2028,
+      "week": 8,
+      "phase": "week",
+      "theme": "light",
+      "width": 375,
+      "scrollWidth": 375,
+      "state": 0.2524502619635314,
+      "stats": 0.771712013753131,
+      "recordings": 0.937219318933785,
+      "plan": {
+        "m2028-n1-cafe": "tune"
+      },
+      "practice": {
+        "pick": "m2028-n1-cafe",
+        "from": "care",
+        "open": [
+          "fl"
+        ],
+        "tired": [
+          {
+            "id": "m2028-n1-cafe",
+            "name": "田中 七海",
+            "menu": "tune",
+            "face": 46
+          },
+          {
+            "id": "m2028-n39-cafe",
+            "name": "横山 透",
+            "menu": "rest",
+            "face": 4
+          }
+        ],
+        "growth": [],
+        "growthMembers": []
+      },
+      "boot": {
+        "scripts": 33,
+        "loaded": 33,
+        "failed": [],
+        "errors": []
+      },
+      "errors": []
+    },
+    "escape": {
+      "year": 2028,
+      "week": 8,
+      "phase": "week",
+      "theme": "light",
+      "width": 375,
+      "scrollWidth": 375,
+      "state": 0.2524502619635314,
+      "stats": 0.771712013753131,
+      "recordings": 0.937219318933785,
+      "plan": {
+        "m2028-n1-cafe": "tune"
+      },
+      "practice": {
+        "pick": null,
+        "from": null,
+        "open": [
+          "fl"
+        ],
+        "tired": [
+          {
+            "id": "m2028-n1-cafe",
+            "name": "田中 七海",
+            "menu": "tune",
+            "face": 46
+          },
+          {
+            "id": "m2028-n39-cafe",
+            "name": "横山 透",
+            "menu": "rest",
+            "face": 4
+          }
+        ],
+        "growth": [],
+        "growthMembers": []
+      },
+      "boot": {
+        "scripts": 33,
+        "loaded": 33,
+        "failed": [],
+        "errors": []
+      },
+      "errors": []
+    },
+    "rest": {
+      "year": 2028,
+      "week": 8,
+      "phase": "week",
+      "theme": "light",
+      "width": 375,
+      "scrollWidth": 375,
+      "state": 0.0299453295301646,
+      "stats": 0.771712013753131,
+      "recordings": 0.937219318933785,
+      "plan": {
+        "m2028-n1-cafe": "rest"
+      },
+      "practice": {
+        "pick": null,
+        "from": null,
+        "open": [
+          "fl"
+        ],
+        "tired": [
+          {
+            "id": "m2028-n1-cafe",
+            "name": "田中 七海",
+            "menu": "rest",
+            "face": 46
+          },
+          {
+            "id": "m2028-n39-cafe",
+            "name": "横山 透",
+            "menu": "rest",
+            "face": 4
+          }
+        ],
+        "growth": [],
+        "growthMembers": []
+      },
+      "boot": {
+        "scripts": 33,
+        "loaded": 33,
+        "failed": [],
+        "errors": []
+      },
+      "errors": []
+    },
+    "careDark": {
+      "year": 2028,
+      "week": 8,
+      "phase": "week",
+      "theme": "dark",
+      "width": 375,
+      "scrollWidth": 375,
+      "state": 0.0299453295301646,
+      "stats": 0.771712013753131,
+      "recordings": 0.937219318933785,
+      "plan": {
+        "m2028-n1-cafe": "rest"
+      },
+      "practice": {
+        "pick": null,
+        "from": null,
+        "open": [
+          "fl"
+        ],
+        "tired": [
+          {
+            "id": "m2028-n1-cafe",
+            "name": "田中 七海",
+            "menu": "rest",
+            "face": 46
+          },
+          {
+            "id": "m2028-n39-cafe",
+            "name": "横山 透",
+            "menu": "rest",
+            "face": 4
+          }
+        ],
+        "growth": [],
+        "growthMembers": []
+      },
+      "boot": {
+        "scripts": 33,
+        "loaded": 33,
+        "failed": [],
+        "errors": []
+      },
+      "errors": []
+    },
+    "last": {
+      "year": 2028,
+      "week": 8,
+      "phase": "week",
+      "theme": "dark",
+      "width": 375,
+      "scrollWidth": 375,
+      "state": 0.0299453295301646,
+      "stats": 0.771712013753131,
+      "recordings": 0.937219318933785,
+      "plan": {
+        "m2028-n1-cafe": "rest"
+      },
+      "practice": {
+        "pick": "m2028-n39-cafe",
+        "from": "care",
+        "open": [
+          "fl",
+          "perc"
+        ],
+        "tired": [
+          {
+            "id": "m2028-n1-cafe",
+            "name": "田中 七海",
+            "menu": "rest",
+            "face": 46
+          },
+          {
+            "id": "m2028-n39-cafe",
+            "name": "横山 透",
+            "menu": "rest",
+            "face": 4
+          }
+        ],
+        "growth": [],
+        "growthMembers": []
+      },
+      "boot": {
+        "scripts": 33,
+        "loaded": 33,
+        "failed": [],
+        "errors": []
+      },
+      "errors": []
+    },
+    "beforeGrowth": {
+      "year": 2028,
+      "week": 8,
+      "phase": "week",
+      "theme": "light",
+      "width": 375,
+      "scrollWidth": 375,
+      "state": 0.7102623204700649,
+      "stats": 0.0032994553912431,
+      "recordings": 0.34695388725958765,
+      "plan": {
+        "m2028-n1-cafe": "tune",
+        "m2028-n2-cafe": "metro",
+        "m2028-n3-cafe": "long",
+        "m2028-n4-cafe": "rest",
+        "m2028-n5-cafe": "rest",
+        "m2028-n6-cafe": "rest",
+        "m2028-n7-cafe": "rest",
+        "m2028-n8-cafe": "rest",
+        "m2028-n9-cafe": "rest",
+        "m2028-n10-cafe": "rest",
+        "m2028-n11-cafe": "rest",
+        "m2028-n12-cafe": "rest",
+        "m2028-n13-cafe": "rest",
+        "m2028-n14-cafe": "rest",
+        "m2028-n15-cafe": "rest",
+        "m2028-n16-cafe": "rest",
+        "m2028-n17-cafe": "rest",
+        "m2028-n18-cafe": "rest",
+        "m2028-n19-cafe": "rest",
+        "m2028-n20-cafe": "rest",
+        "m2028-n21-cafe": "rest",
+        "m2028-n22-cafe": "rest",
+        "m2028-n23-cafe": "rest",
+        "m2028-n24-cafe": "rest",
+        "m2028-n25-cafe": "rest",
+        "m2028-n26-cafe": "rest",
+        "m2028-n27-cafe": "rest",
+        "m2028-n28-cafe": "rest",
+        "m2028-n29-cafe": "rest",
+        "m2028-n30-cafe": "rest",
+        "m2028-n31-cafe": "rest",
+        "m2028-n32-cafe": "rest",
+        "m2028-n33-cafe": "rest",
+        "m2028-n34-cafe": "rest",
+        "m2028-n35-cafe": "rest",
+        "m2028-n36-cafe": "rest",
+        "m2028-n37-cafe": "rest",
+        "m2028-n38-cafe": "rest",
+        "m2028-n39-cafe": "rest"
+      },
+      "practice": {
+        "pick": null,
+        "from": null,
+        "open": [],
+        "tired": [],
+        "growth": [],
+        "growthMembers": []
+      },
+      "boot": {
+        "scripts": 33,
+        "loaded": 33,
+        "failed": [],
+        "errors": []
+      },
+      "errors": []
+    },
+    "growth": {
+      "year": 2028,
+      "week": 9,
+      "phase": "week",
+      "theme": "light",
+      "width": 375,
+      "scrollWidth": 375,
+      "state": 0.16965764993801713,
+      "stats": 0.42205519741401076,
+      "recordings": 0.34695388725958765,
+      "plan": {},
+      "practice": {
+        "pick": null,
+        "from": null,
+        "open": [],
+        "tired": [],
+        "growth": [
+          {
+            "face": "m2028-n1-cafe",
+            "name": "田中 七海",
+            "ranks": "音程 FからD",
+            "interactive": false
+          },
+          {
+            "face": "m2028-n2-cafe",
+            "name": "小川 悠斗",
+            "ranks": "リズム EからD",
+            "interactive": false
+          },
+          {
+            "face": "m2028-n3-cafe",
+            "name": "松井 颯太",
+            "ranks": "音色 DからC",
+            "interactive": false
+          }
+        ],
+        "growthMembers": [
+          {
+            "id": "m2028-n1-cafe",
+            "name": "田中 七海",
+            "stats": {
+              "pitch": 50.1,
+              "rhythm": 49.7,
+              "tone": 61.2,
+              "expr": 40
+            },
+            "before": {
+              "pitch": 39.7,
+              "rhythm": 49.7,
+              "tone": 59.7,
+              "expr": 40
+            }
+          },
+          {
+            "id": "m2028-n2-cafe",
+            "name": "小川 悠斗",
+            "stats": {
+              "pitch": 41,
+              "rhythm": 58.4,
+              "tone": 59.7,
+              "expr": 40
+            },
+            "before": {
+              "pitch": 39.7,
+              "rhythm": 49.7,
+              "tone": 59.7,
+              "expr": 40
+            }
+          },
+          {
+            "id": "m2028-n3-cafe",
+            "name": "松井 颯太",
+            "stats": {
+              "pitch": 42.3,
+              "rhythm": 49.7,
+              "tone": 66.5,
+              "expr": 40
+            },
+            "before": {
+              "pitch": 39.7,
+              "rhythm": 49.7,
+              "tone": 59.7,
+              "expr": 40
+            }
+          }
+        ]
+      },
+      "boot": {
+        "scripts": 33,
+        "loaded": 33,
+        "failed": [],
+        "errors": []
+      },
+      "errors": []
+    },
+    "growthAfterEpisode": {
+      "year": 2028,
+      "week": 9,
+      "phase": "week",
+      "theme": "light",
+      "width": 375,
+      "scrollWidth": 375,
+      "state": 0.4380487755406648,
+      "stats": 0.4054113251622766,
+      "recordings": 0.34695388725958765,
+      "plan": {},
+      "practice": {
+        "pick": null,
+        "from": null,
+        "open": [],
+        "tired": [],
+        "growth": [
+          {
+            "id": "m2028-n1-cafe",
+            "face": "m2028-n1-cafe",
+            "name": "田中 七海",
+            "ranks": "音程 FからD",
+            "interactive": true
+          },
+          {
+            "id": "m2028-n2-cafe",
+            "face": "m2028-n2-cafe",
+            "name": "小川 悠斗",
+            "ranks": "リズム EからD",
+            "interactive": true
+          },
+          {
+            "id": "m2028-n3-cafe",
+            "face": "m2028-n3-cafe",
+            "name": "松井 颯太",
+            "ranks": "音色 DからC",
+            "interactive": true
+          }
+        ],
+        "growthMembers": [
+          {
+            "id": "m2028-n1-cafe",
+            "name": "田中 七海",
+            "stats": {
+              "pitch": 50.1,
+              "rhythm": 49.7,
+              "tone": 61.2,
+              "expr": 40
+            },
+            "before": {
+              "pitch": 39.7,
+              "rhythm": 49.7,
+              "tone": 59.7,
+              "expr": 40
+            }
+          },
+          {
+            "id": "m2028-n2-cafe",
+            "name": "小川 悠斗",
+            "stats": {
+              "pitch": 41,
+              "rhythm": 58.4,
+              "tone": 59.7,
+              "expr": 40
+            },
+            "before": {
+              "pitch": 39.7,
+              "rhythm": 49.7,
+              "tone": 59.7,
+              "expr": 40
+            }
+          },
+          {
+            "id": "m2028-n3-cafe",
+            "name": "松井 颯太",
+            "stats": {
+              "pitch": 42.3,
+              "rhythm": 49.7,
+              "tone": 66.5,
+              "expr": 40
+            },
+            "before": {
+              "pitch": 39.7,
+              "rhythm": 49.7,
+              "tone": 59.7,
+              "expr": 40
+            }
+          }
+        ]
+      },
+      "boot": {
+        "scripts": 33,
+        "loaded": 33,
+        "failed": [],
+        "errors": []
+      },
+      "errors": []
+    },
+    "growthDark": {
+      "year": 2028,
+      "week": 9,
+      "phase": "week",
+      "theme": "dark",
+      "width": 375,
+      "scrollWidth": 375,
+      "state": 0.4380487755406648,
+      "stats": 0.4054113251622766,
+      "recordings": 0.34695388725958765,
+      "plan": {},
+      "practice": {
+        "pick": null,
+        "from": null,
+        "open": [],
+        "tired": [],
+        "growth": [
+          {
+            "id": "m2028-n1-cafe",
+            "face": "m2028-n1-cafe",
+            "name": "田中 七海",
+            "ranks": "音程 FからD",
+            "interactive": true
+          },
+          {
+            "id": "m2028-n2-cafe",
+            "face": "m2028-n2-cafe",
+            "name": "小川 悠斗",
+            "ranks": "リズム EからD",
+            "interactive": true
+          },
+          {
+            "id": "m2028-n3-cafe",
+            "face": "m2028-n3-cafe",
+            "name": "松井 颯太",
+            "ranks": "音色 DからC",
+            "interactive": true
+          }
+        ],
+        "growthMembers": [
+          {
+            "id": "m2028-n1-cafe",
+            "name": "田中 七海",
+            "stats": {
+              "pitch": 50.1,
+              "rhythm": 49.7,
+              "tone": 61.2,
+              "expr": 40
+            },
+            "before": {
+              "pitch": 39.7,
+              "rhythm": 49.7,
+              "tone": 59.7,
+              "expr": 40
+            }
+          },
+          {
+            "id": "m2028-n2-cafe",
+            "name": "小川 悠斗",
+            "stats": {
+              "pitch": 41,
+              "rhythm": 58.4,
+              "tone": 59.7,
+              "expr": 40
+            },
+            "before": {
+              "pitch": 39.7,
+              "rhythm": 49.7,
+              "tone": 59.7,
+              "expr": 40
+            }
+          },
+          {
+            "id": "m2028-n3-cafe",
+            "name": "松井 颯太",
+            "stats": {
+              "pitch": 42.3,
+              "rhythm": 49.7,
+              "tone": 66.5,
+              "expr": 40
+            },
+            "before": {
+              "pitch": 39.7,
+              "rhythm": 49.7,
+              "tone": 59.7,
+              "expr": 40
+            }
+          }
+        ]
+      },
+      "boot": {
+        "scripts": 33,
+        "loaded": 33,
+        "failed": [],
+        "errors": []
+      },
+      "errors": []
+    },
+    "growthJump": {
+      "year": 2028,
+      "week": 9,
+      "phase": "week",
+      "theme": "dark",
+      "width": 375,
+      "scrollWidth": 375,
+      "state": 0.4380487755406648,
+      "stats": 0.4054113251622766,
+      "recordings": 0.34695388725958765,
+      "plan": {},
+      "practice": {
+        "pick": "m2028-n2-cafe",
+        "from": "growth",
+        "open": [
+          "fl"
+        ],
+        "tired": [],
+        "growth": [
+          {
+            "id": "m2028-n1-cafe",
+            "face": "m2028-n1-cafe",
+            "name": "田中 七海",
+            "ranks": "音程 FからD",
+            "interactive": true
+          },
+          {
+            "id": "m2028-n2-cafe",
+            "face": "m2028-n2-cafe",
+            "name": "小川 悠斗",
+            "ranks": "リズム EからD",
+            "interactive": true
+          },
+          {
+            "id": "m2028-n3-cafe",
+            "face": "m2028-n3-cafe",
+            "name": "松井 颯太",
+            "ranks": "音色 DからC",
+            "interactive": true
+          }
+        ],
+        "growthMembers": [
+          {
+            "id": "m2028-n1-cafe",
+            "name": "田中 七海",
+            "stats": {
+              "pitch": 50.1,
+              "rhythm": 49.7,
+              "tone": 61.2,
+              "expr": 40
+            },
+            "before": {
+              "pitch": 39.7,
+              "rhythm": 49.7,
+              "tone": 59.7,
+              "expr": 40
+            }
+          },
+          {
+            "id": "m2028-n2-cafe",
+            "name": "小川 悠斗",
+            "stats": {
+              "pitch": 41,
+              "rhythm": 58.4,
+              "tone": 59.7,
+              "expr": 40
+            },
+            "before": {
+              "pitch": 39.7,
+              "rhythm": 49.7,
+              "tone": 59.7,
+              "expr": 40
+            }
+          },
+          {
+            "id": "m2028-n3-cafe",
+            "name": "松井 颯太",
+            "stats": {
+              "pitch": 42.3,
+              "rhythm": 49.7,
+              "tone": 66.5,
+              "expr": 40
+            },
+            "before": {
+              "pitch": 39.7,
+              "rhythm": 49.7,
+              "tone": 59.7,
+              "expr": 40
+            }
+          }
+        ]
+      },
+      "boot": {
+        "scripts": 33,
+        "loaded": 33,
+        "failed": [],
+        "errors": []
+      },
+      "errors": []
+    },
+    "many": {
+      "year": 2028,
+      "week": 8,
+      "phase": "week",
+      "theme": "dark",
+      "width": 375,
+      "scrollWidth": 375,
+      "state": 0.23644957225769758,
+      "stats": 0.771712013753131,
+      "recordings": 0.1914111685473472,
+      "plan": {
+        "m2028-n1-cafe": "tune"
+      },
+      "practice": {
+        "pick": null,
+        "from": null,
+        "open": [],
+        "tired": [
+          {
+            "id": "m2028-n1-cafe",
+            "name": "田中 七海",
+            "menu": "tune",
+            "face": 46
+          },
+          {
+            "id": "m2028-n2-cafe",
+            "name": "小川 悠斗",
+            "menu": "rest",
+            "face": 85
+          },
+          {
+            "id": "m2028-n3-cafe",
+            "name": "松井 颯太",
+            "menu": "rest",
+            "face": 24
+          },
+          {
+            "id": "m2028-n4-cafe",
+            "name": "菅原 菜月",
+            "menu": "rest",
+            "face": 34
+          },
+          {
+            "id": "m2028-n5-cafe",
+            "name": "岡本 智也",
+            "menu": "rest",
+            "face": 94
+          },
+          {
+            "id": "m2028-n6-cafe",
+            "name": "山口 大翔",
+            "menu": "rest",
+            "face": 92
+          },
+          {
+            "id": "m2028-n7-cafe",
+            "name": "山下 彩花",
+            "menu": "rest",
+            "face": 20
+          },
+          {
+            "id": "m2028-n8-cafe",
+            "name": "高木 瑛太",
+            "menu": "rest",
+            "face": 80
+          },
+          {
+            "id": "m2028-n9-cafe",
+            "name": "清水 菜月",
+            "menu": "rest",
+            "face": 77
+          },
+          {
+            "id": "m2028-n10-cafe",
+            "name": "山本 凛",
+            "menu": "rest",
+            "face": 31
+          },
+          {
+            "id": "m2028-n11-cafe",
+            "name": "山田 悠真",
+            "menu": "rest",
+            "face": 9
+          },
+          {
+            "id": "m2028-n12-cafe",
+            "name": "西村 樹",
+            "menu": "rest",
+            "face": 93
+          },
+          {
+            "id": "m2028-n13-cafe",
+            "name": "松井 美咲",
+            "menu": "rest",
+            "face": 55
+          },
+          {
+            "id": "m2028-n14-cafe",
+            "name": "阿部 和奏",
+            "menu": "rest",
+            "face": 60
+          },
+          {
+            "id": "m2028-n15-cafe",
+            "name": "前田 紬",
+            "menu": "rest",
+            "face": 38
+          },
+          {
+            "id": "m2028-n16-cafe",
+            "name": "野口 陽翔",
+            "menu": "rest",
+            "face": 12
+          },
+          {
+            "id": "m2028-n17-cafe",
+            "name": "工藤 美月",
+            "menu": "rest",
+            "face": 53
+          },
+          {
+            "id": "m2028-n18-cafe",
+            "name": "中野 透",
+            "menu": "rest",
+            "face": 83
+          },
+          {
+            "id": "m2028-n19-cafe",
+            "name": "木村 湊",
+            "menu": "rest",
+            "face": 90
+          },
+          {
+            "id": "m2028-n20-cafe",
+            "name": "佐々木 彩花",
+            "menu": "rest",
+            "face": 47
+          },
+          {
+            "id": "m2028-n21-cafe",
+            "name": "井上 優",
+            "menu": "rest",
+            "face": 61
+          },
+          {
+            "id": "m2028-n22-cafe",
+            "name": "酒井 陸",
+            "menu": "rest",
+            "face": 82
+          },
+          {
+            "id": "m2028-n23-cafe",
+            "name": "松田 拓海",
+            "menu": "rest",
+            "face": 97
+          },
+          {
+            "id": "m2028-n24-cafe",
+            "name": "中村 絢",
+            "menu": "rest",
+            "face": 28
+          },
+          {
+            "id": "m2028-n25-cafe",
+            "name": "林 亮",
+            "menu": "rest",
+            "face": 96
+          },
+          {
+            "id": "m2028-n26-cafe",
+            "name": "岩崎 結衣",
+            "menu": "rest",
+            "face": 6
+          },
+          {
+            "id": "m2028-n27-cafe",
+            "name": "千葉 陸",
+            "menu": "rest",
+            "face": 19
+          },
+          {
+            "id": "m2028-n28-cafe",
+            "name": "竹内 花音",
+            "menu": "rest",
+            "face": 68
+          },
+          {
+            "id": "m2028-n29-cafe",
+            "name": "井上 雫",
+            "menu": "rest",
+            "face": 27
+          },
+          {
+            "id": "m2028-n30-cafe",
+            "name": "石井 透",
+            "menu": "rest",
+            "face": 35
+          },
+          {
+            "id": "m2028-n31-cafe",
+            "name": "山下 茜",
+            "menu": "rest",
+            "face": 49
+          },
+          {
+            "id": "m2028-n32-cafe",
+            "name": "渡辺 渚",
+            "menu": "rest",
+            "face": 22
+          },
+          {
+            "id": "m2028-n33-cafe",
+            "name": "坂本 雫",
+            "menu": "rest",
+            "face": 15
+          },
+          {
+            "id": "m2028-n34-cafe",
+            "name": "菅原 智也",
+            "menu": "rest",
+            "face": 94
+          },
+          {
+            "id": "m2028-n35-cafe",
+            "name": "高木 明里",
+            "menu": "rest",
+            "face": 37
+          },
+          {
+            "id": "m2028-n36-cafe",
+            "name": "佐藤 誠",
+            "menu": "rest",
+            "face": 89
+          },
+          {
+            "id": "m2028-n37-cafe",
+            "name": "山田 蓮",
+            "menu": "rest",
+            "face": 80
+          },
+          {
+            "id": "m2028-n38-cafe",
+            "name": "原 杏",
+            "menu": "rest",
+            "face": 36
+          },
+          {
+            "id": "m2028-n39-cafe",
+            "name": "あいうえおかきくけこさし",
+            "menu": "rest",
+            "face": 4
+          }
+        ],
+        "growth": [],
+        "growthMembers": []
+      },
+      "boot": {
+        "scripts": 33,
+        "loaded": 33,
+        "failed": [],
+        "errors": []
+      },
+      "errors": []
+    },
+    "benchLong": {
+      "year": 2028,
+      "week": 8,
+      "phase": "week",
+      "theme": "dark",
+      "width": 320,
+      "scrollWidth": 320,
+      "state": 0.23644957225769758,
+      "stats": 0.771712013753131,
+      "recordings": 0.1914111685473472,
+      "plan": {
+        "m2028-n1-cafe": "tune"
+      },
+      "practice": {
+        "pick": "m2028-n39-cafe",
+        "from": "care",
+        "open": [
+          "bench"
+        ],
+        "tired": [
+          {
+            "id": "m2028-n1-cafe",
+            "name": "田中 七海",
+            "menu": "tune",
+            "face": 46
+          },
+          {
+            "id": "m2028-n2-cafe",
+            "name": "小川 悠斗",
+            "menu": "rest",
+            "face": 85
+          },
+          {
+            "id": "m2028-n3-cafe",
+            "name": "松井 颯太",
+            "menu": "rest",
+            "face": 24
+          },
+          {
+            "id": "m2028-n4-cafe",
+            "name": "菅原 菜月",
+            "menu": "rest",
+            "face": 34
+          },
+          {
+            "id": "m2028-n5-cafe",
+            "name": "岡本 智也",
+            "menu": "rest",
+            "face": 94
+          },
+          {
+            "id": "m2028-n6-cafe",
+            "name": "山口 大翔",
+            "menu": "rest",
+            "face": 92
+          },
+          {
+            "id": "m2028-n7-cafe",
+            "name": "山下 彩花",
+            "menu": "rest",
+            "face": 20
+          },
+          {
+            "id": "m2028-n8-cafe",
+            "name": "高木 瑛太",
+            "menu": "rest",
+            "face": 80
+          },
+          {
+            "id": "m2028-n9-cafe",
+            "name": "清水 菜月",
+            "menu": "rest",
+            "face": 77
+          },
+          {
+            "id": "m2028-n10-cafe",
+            "name": "山本 凛",
+            "menu": "rest",
+            "face": 31
+          },
+          {
+            "id": "m2028-n11-cafe",
+            "name": "山田 悠真",
+            "menu": "rest",
+            "face": 9
+          },
+          {
+            "id": "m2028-n12-cafe",
+            "name": "西村 樹",
+            "menu": "rest",
+            "face": 93
+          },
+          {
+            "id": "m2028-n13-cafe",
+            "name": "松井 美咲",
+            "menu": "rest",
+            "face": 55
+          },
+          {
+            "id": "m2028-n14-cafe",
+            "name": "阿部 和奏",
+            "menu": "rest",
+            "face": 60
+          },
+          {
+            "id": "m2028-n15-cafe",
+            "name": "前田 紬",
+            "menu": "rest",
+            "face": 38
+          },
+          {
+            "id": "m2028-n16-cafe",
+            "name": "野口 陽翔",
+            "menu": "rest",
+            "face": 12
+          },
+          {
+            "id": "m2028-n17-cafe",
+            "name": "工藤 美月",
+            "menu": "rest",
+            "face": 53
+          },
+          {
+            "id": "m2028-n18-cafe",
+            "name": "中野 透",
+            "menu": "rest",
+            "face": 83
+          },
+          {
+            "id": "m2028-n19-cafe",
+            "name": "木村 湊",
+            "menu": "rest",
+            "face": 90
+          },
+          {
+            "id": "m2028-n20-cafe",
+            "name": "佐々木 彩花",
+            "menu": "rest",
+            "face": 47
+          },
+          {
+            "id": "m2028-n21-cafe",
+            "name": "井上 優",
+            "menu": "rest",
+            "face": 61
+          },
+          {
+            "id": "m2028-n22-cafe",
+            "name": "酒井 陸",
+            "menu": "rest",
+            "face": 82
+          },
+          {
+            "id": "m2028-n23-cafe",
+            "name": "松田 拓海",
+            "menu": "rest",
+            "face": 97
+          },
+          {
+            "id": "m2028-n24-cafe",
+            "name": "中村 絢",
+            "menu": "rest",
+            "face": 28
+          },
+          {
+            "id": "m2028-n25-cafe",
+            "name": "林 亮",
+            "menu": "rest",
+            "face": 96
+          },
+          {
+            "id": "m2028-n26-cafe",
+            "name": "岩崎 結衣",
+            "menu": "rest",
+            "face": 6
+          },
+          {
+            "id": "m2028-n27-cafe",
+            "name": "千葉 陸",
+            "menu": "rest",
+            "face": 19
+          },
+          {
+            "id": "m2028-n28-cafe",
+            "name": "竹内 花音",
+            "menu": "rest",
+            "face": 68
+          },
+          {
+            "id": "m2028-n29-cafe",
+            "name": "井上 雫",
+            "menu": "rest",
+            "face": 27
+          },
+          {
+            "id": "m2028-n30-cafe",
+            "name": "石井 透",
+            "menu": "rest",
+            "face": 35
+          },
+          {
+            "id": "m2028-n31-cafe",
+            "name": "山下 茜",
+            "menu": "rest",
+            "face": 49
+          },
+          {
+            "id": "m2028-n32-cafe",
+            "name": "渡辺 渚",
+            "menu": "rest",
+            "face": 22
+          },
+          {
+            "id": "m2028-n33-cafe",
+            "name": "坂本 雫",
+            "menu": "rest",
+            "face": 15
+          },
+          {
+            "id": "m2028-n34-cafe",
+            "name": "菅原 智也",
+            "menu": "rest",
+            "face": 94
+          },
+          {
+            "id": "m2028-n35-cafe",
+            "name": "高木 明里",
+            "menu": "rest",
+            "face": 37
+          },
+          {
+            "id": "m2028-n36-cafe",
+            "name": "佐藤 誠",
+            "menu": "rest",
+            "face": 89
+          },
+          {
+            "id": "m2028-n37-cafe",
+            "name": "山田 蓮",
+            "menu": "rest",
+            "face": 80
+          },
+          {
+            "id": "m2028-n38-cafe",
+            "name": "原 杏",
+            "menu": "rest",
+            "face": 36
+          },
+          {
+            "id": "m2028-n39-cafe",
+            "name": "あいうえおかきくけこさし",
+            "menu": "rest",
+            "face": 4
+          }
+        ],
+        "growth": [],
+        "growthMembers": []
+      },
+      "boot": {
+        "scripts": 33,
+        "loaded": 33,
+        "failed": [],
+        "errors": []
+      },
+      "errors": []
+    },
+    "sameRank": {
+      "year": 2028,
+      "week": 9,
+      "phase": "week",
+      "theme": "dark",
+      "width": 375,
+      "scrollWidth": 375,
+      "state": 0.6734692060854286,
+      "stats": 0.09831826412118971,
+      "recordings": 0.7708413526415825,
+      "plan": {},
+      "practice": {
+        "pick": null,
+        "from": null,
+        "open": [],
+        "tired": [],
+        "growth": [
+          {
+            "face": "m2028-n1-cafe",
+            "name": "田中 七海",
+            "ranks": "音程 B",
+            "interactive": false
+          },
+          {
+            "face": "m2028-n3-cafe",
+            "name": "松井 颯太",
+            "ranks": "音色 B",
+            "interactive": false
+          },
+          {
+            "face": "m2028-n2-cafe",
+            "name": "小川 悠斗",
+            "ranks": "リズム B",
+            "interactive": false
+          }
+        ],
+        "growthMembers": [
+          {
+            "id": "m2028-n1-cafe",
+            "name": "田中 七海",
+            "stats": {
+              "pitch": 76.8,
+              "rhythm": 72,
+              "tone": 72.9,
+              "expr": 72
+            },
+            "before": {
+              "pitch": 72,
+              "rhythm": 72,
+              "tone": 72,
+              "expr": 72
+            }
+          },
+          {
+            "id": "m2028-n3-cafe",
+            "name": "松井 颯太",
+            "stats": {
+              "pitch": 73.2,
+              "rhythm": 72,
+              "tone": 76.1,
+              "expr": 72
+            },
+            "before": {
+              "pitch": 72,
+              "rhythm": 72,
+              "tone": 72,
+              "expr": 72
+            }
+          },
+          {
+            "id": "m2028-n2-cafe",
+            "name": "小川 悠斗",
+            "stats": {
+              "pitch": 72.6,
+              "rhythm": 76.5,
+              "tone": 72,
+              "expr": 72
+            },
+            "before": {
+              "pitch": 72,
+              "rhythm": 72,
+              "tone": 72,
+              "expr": 72
+            }
+          }
+        ]
+      },
+      "boot": {
+        "scripts": 33,
+        "loaded": 33,
+        "failed": [],
+        "errors": []
+      },
+      "errors": []
+    },
+    "finalGrowthGate": {
+      "year": 2028,
+      "week": 9,
+      "phase": "week",
+      "theme": "dark",
+      "width": 375,
+      "scrollWidth": 375,
+      "state": 0.515572449658066,
+      "stats": 0.42205519741401076,
+      "recordings": 0.33988928608596325,
+      "plan": {},
+      "practice": {
+        "pick": null,
+        "from": null,
+        "open": [],
+        "tired": [],
+        "growth": [
+          {
+            "face": "m2028-n1-cafe",
+            "name": "田中 七海",
+            "ranks": "音程 FからD",
+            "interactive": false
+          },
+          {
+            "face": "m2028-n2-cafe",
+            "name": "小川 悠斗",
+            "ranks": "リズム EからD",
+            "interactive": false
+          },
+          {
+            "face": "m2028-n3-cafe",
+            "name": "松井 颯太",
+            "ranks": "音色 DからC",
+            "interactive": false
+          }
+        ],
+        "growthMembers": [
+          {
+            "id": "m2028-n1-cafe",
+            "name": "田中 七海",
+            "stats": {
+              "pitch": 50.1,
+              "rhythm": 49.7,
+              "tone": 61.2,
+              "expr": 40
+            },
+            "before": {
+              "pitch": 39.7,
+              "rhythm": 49.7,
+              "tone": 59.7,
+              "expr": 40
+            }
+          },
+          {
+            "id": "m2028-n2-cafe",
+            "name": "小川 悠斗",
+            "stats": {
+              "pitch": 41,
+              "rhythm": 58.4,
+              "tone": 59.7,
+              "expr": 40
+            },
+            "before": {
+              "pitch": 39.7,
+              "rhythm": 49.7,
+              "tone": 59.7,
+              "expr": 40
+            }
+          },
+          {
+            "id": "m2028-n3-cafe",
+            "name": "松井 颯太",
+            "stats": {
+              "pitch": 42.3,
+              "rhythm": 49.7,
+              "tone": 66.5,
+              "expr": 40
+            },
+            "before": {
+              "pitch": 39.7,
+              "rhythm": 49.7,
+              "tone": 59.7,
+              "expr": 40
+            }
+          }
+        ]
+      },
+      "boot": {
+        "scripts": 33,
+        "loaded": 33,
+        "failed": [],
+        "errors": []
+      },
+      "errors": []
+    },
+    "finalGrowth": {
+      "year": 2028,
+      "week": 9,
+      "phase": "week",
+      "theme": "dark",
+      "width": 375,
+      "scrollWidth": 375,
+      "state": 0.4962415494956076,
+      "stats": 0.4054113251622766,
+      "recordings": 0.33988928608596325,
+      "plan": {},
+      "practice": {
+        "pick": null,
+        "from": null,
+        "open": [],
+        "tired": [],
+        "growth": [
+          {
+            "id": "m2028-n1-cafe",
+            "face": "m2028-n1-cafe",
+            "name": "田中 七海",
+            "ranks": "音程 FからD",
+            "interactive": true
+          },
+          {
+            "id": "m2028-n2-cafe",
+            "face": "m2028-n2-cafe",
+            "name": "小川 悠斗",
+            "ranks": "リズム EからD",
+            "interactive": true
+          },
+          {
+            "id": "m2028-n3-cafe",
+            "face": "m2028-n3-cafe",
+            "name": "松井 颯太",
+            "ranks": "音色 DからC",
+            "interactive": true
+          }
+        ],
+        "growthMembers": [
+          {
+            "id": "m2028-n1-cafe",
+            "name": "田中 七海",
+            "stats": {
+              "pitch": 50.1,
+              "rhythm": 49.7,
+              "tone": 61.2,
+              "expr": 40
+            },
+            "before": {
+              "pitch": 39.7,
+              "rhythm": 49.7,
+              "tone": 59.7,
+              "expr": 40
+            }
+          },
+          {
+            "id": "m2028-n2-cafe",
+            "name": "小川 悠斗",
+            "stats": {
+              "pitch": 41,
+              "rhythm": 58.4,
+              "tone": 59.7,
+              "expr": 40
+            },
+            "before": {
+              "pitch": 39.7,
+              "rhythm": 49.7,
+              "tone": 59.7,
+              "expr": 40
+            }
+          },
+          {
+            "id": "m2028-n3-cafe",
+            "name": "松井 颯太",
+            "stats": {
+              "pitch": 42.3,
+              "rhythm": 49.7,
+              "tone": 66.5,
+              "expr": 40
+            },
+            "before": {
+              "pitch": 39.7,
+              "rhythm": 49.7,
+              "tone": 59.7,
+              "expr": 40
+            }
+          }
+        ]
+      },
+      "boot": {
+        "scripts": 33,
+        "loaded": 33,
+        "failed": [],
+        "errors": []
+      },
+      "errors": []
+    },
+    "finalGrowthJump": {
+      "year": 2028,
+      "week": 9,
+      "phase": "week",
+      "theme": "dark",
+      "width": 375,
+      "scrollWidth": 375,
+      "state": 0.4962415494956076,
+      "stats": 0.4054113251622766,
+      "recordings": 0.33988928608596325,
+      "plan": {},
+      "practice": {
+        "pick": "m2028-n1-cafe",
+        "from": "growth",
+        "open": [
+          "fl"
+        ],
+        "tired": [],
+        "growth": [
+          {
+            "id": "m2028-n1-cafe",
+            "face": "m2028-n1-cafe",
+            "name": "田中 七海",
+            "ranks": "音程 FからD",
+            "interactive": true
+          },
+          {
+            "id": "m2028-n2-cafe",
+            "face": "m2028-n2-cafe",
+            "name": "小川 悠斗",
+            "ranks": "リズム EからD",
+            "interactive": true
+          },
+          {
+            "id": "m2028-n3-cafe",
+            "face": "m2028-n3-cafe",
+            "name": "松井 颯太",
+            "ranks": "音色 DからC",
+            "interactive": true
+          }
+        ],
+        "growthMembers": [
+          {
+            "id": "m2028-n1-cafe",
+            "name": "田中 七海",
+            "stats": {
+              "pitch": 50.1,
+              "rhythm": 49.7,
+              "tone": 61.2,
+              "expr": 40
+            },
+            "before": {
+              "pitch": 39.7,
+              "rhythm": 49.7,
+              "tone": 59.7,
+              "expr": 40
+            }
+          },
+          {
+            "id": "m2028-n2-cafe",
+            "name": "小川 悠斗",
+            "stats": {
+              "pitch": 41,
+              "rhythm": 58.4,
+              "tone": 59.7,
+              "expr": 40
+            },
+            "before": {
+              "pitch": 39.7,
+              "rhythm": 49.7,
+              "tone": 59.7,
+              "expr": 40
+            }
+          },
+          {
+            "id": "m2028-n3-cafe",
+            "name": "松井 颯太",
+            "stats": {
+              "pitch": 42.3,
+              "rhythm": 49.7,
+              "tone": 66.5,
+              "expr": 40
+            },
+            "before": {
+              "pitch": 39.7,
+              "rhythm": 49.7,
+              "tone": 59.7,
+              "expr": 40
+            }
+          }
+        ]
+      },
+      "boot": {
+        "scripts": 33,
+        "loaded": 33,
+        "failed": [],
+        "errors": []
+      },
+      "errors": []
+    },
+    "finalGrowthLight": {
+      "year": 2028,
+      "week": 9,
+      "phase": "week",
+      "theme": "light",
+      "width": 375,
+      "scrollWidth": 375,
+      "state": 0.4962415494956076,
+      "stats": 0.4054113251622766,
+      "recordings": 0.33988928608596325,
+      "plan": {},
+      "practice": {
+        "pick": null,
+        "from": null,
+        "open": [
+          "fl"
+        ],
+        "tired": [],
+        "growth": [
+          {
+            "id": "m2028-n1-cafe",
+            "face": "m2028-n1-cafe",
+            "name": "田中 七海",
+            "ranks": "音程 FからD",
+            "interactive": true
+          },
+          {
+            "id": "m2028-n2-cafe",
+            "face": "m2028-n2-cafe",
+            "name": "小川 悠斗",
+            "ranks": "リズム EからD",
+            "interactive": true
+          },
+          {
+            "id": "m2028-n3-cafe",
+            "face": "m2028-n3-cafe",
+            "name": "松井 颯太",
+            "ranks": "音色 DからC",
+            "interactive": true
+          }
+        ],
+        "growthMembers": [
+          {
+            "id": "m2028-n1-cafe",
+            "name": "田中 七海",
+            "stats": {
+              "pitch": 50.1,
+              "rhythm": 49.7,
+              "tone": 61.2,
+              "expr": 40
+            },
+            "before": {
+              "pitch": 39.7,
+              "rhythm": 49.7,
+              "tone": 59.7,
+              "expr": 40
+            }
+          },
+          {
+            "id": "m2028-n2-cafe",
+            "name": "小川 悠斗",
+            "stats": {
+              "pitch": 41,
+              "rhythm": 58.4,
+              "tone": 59.7,
+              "expr": 40
+            },
+            "before": {
+              "pitch": 39.7,
+              "rhythm": 49.7,
+              "tone": 59.7,
+              "expr": 40
+            }
+          },
+          {
+            "id": "m2028-n3-cafe",
+            "name": "松井 颯太",
+            "stats": {
+              "pitch": 42.3,
+              "rhythm": 49.7,
+              "tone": 66.5,
+              "expr": 40
+            },
+            "before": {
+              "pitch": 39.7,
+              "rhythm": 49.7,
+              "tone": 59.7,
+              "expr": 40
+            }
+          }
+        ]
+      },
+      "boot": {
+        "scripts": 33,
+        "loaded": 33,
+        "failed": [],
+        "errors": []
+      },
+      "errors": []
+    },
+    "finalCareOpen": {
+      "year": 2028,
+      "week": 8,
+      "phase": "week",
+      "theme": "light",
+      "width": 375,
+      "scrollWidth": 375,
+      "state": 0.7580408859066665,
+      "stats": 0.771712013753131,
+      "recordings": 0.9641672843135893,
+      "plan": {
+        "m2028-n1-cafe": "tune"
+      },
+      "practice": {
+        "pick": "m2028-n1-cafe",
+        "from": "care",
+        "open": [
+          "fl"
+        ],
+        "tired": [
+          {
+            "id": "m2028-n1-cafe",
+            "name": "田中 七海",
+            "menu": "tune",
+            "face": 46
+          },
+          {
+            "id": "m2028-n39-cafe",
+            "name": "横山 透",
+            "menu": "rest",
+            "face": 4
+          }
+        ],
+        "growth": [],
+        "growthMembers": []
+      },
+      "boot": {
+        "scripts": 33,
+        "loaded": 33,
+        "failed": [],
+        "errors": []
+      },
+      "errors": []
+    },
+    "finalCare": {
+      "year": 2028,
+      "week": 8,
+      "phase": "week",
+      "theme": "light",
+      "width": 375,
+      "scrollWidth": 375,
+      "state": 0.7580408859066665,
+      "stats": 0.771712013753131,
+      "recordings": 0.9641672843135893,
+      "plan": {
+        "m2028-n1-cafe": "tune"
+      },
+      "practice": {
+        "pick": null,
+        "from": null,
+        "open": [
+          "fl"
+        ],
+        "tired": [
+          {
+            "id": "m2028-n1-cafe",
+            "name": "田中 七海",
+            "menu": "tune",
+            "face": 46
+          },
+          {
+            "id": "m2028-n39-cafe",
+            "name": "横山 透",
+            "menu": "rest",
+            "face": 4
+          }
+        ],
+        "growth": [],
+        "growthMembers": []
+      },
+      "boot": {
+        "scripts": 33,
+        "loaded": 33,
+        "failed": [],
+        "errors": []
+      },
+      "errors": []
+    },
+    "finalCareDark": {
+      "year": 2028,
+      "week": 8,
+      "phase": "week",
+      "theme": "dark",
+      "width": 375,
+      "scrollWidth": 375,
+      "state": 0.7580408859066665,
+      "stats": 0.771712013753131,
+      "recordings": 0.9641672843135893,
+      "plan": {
+        "m2028-n1-cafe": "tune"
+      },
+      "practice": {
+        "pick": null,
+        "from": null,
+        "open": [
+          "fl"
+        ],
+        "tired": [
+          {
+            "id": "m2028-n1-cafe",
+            "name": "田中 七海",
+            "menu": "tune",
+            "face": 46
+          },
+          {
+            "id": "m2028-n39-cafe",
+            "name": "横山 透",
+            "menu": "rest",
+            "face": 4
+          }
+        ],
+        "growth": [],
+        "growthMembers": []
+      },
+      "boot": {
+        "scripts": 33,
+        "loaded": 33,
+        "failed": [],
+        "errors": []
+      },
+      "errors": []
+    },
+    "finalRest": {
+      "year": 2028,
+      "week": 8,
+      "phase": "week",
+      "theme": "dark",
+      "width": 375,
+      "scrollWidth": 375,
+      "state": 0.7582104022148997,
+      "stats": 0.771712013753131,
+      "recordings": 0.9641672843135893,
+      "plan": {
+        "m2028-n1-cafe": "rest"
+      },
+      "practice": {
+        "pick": null,
+        "from": null,
+        "open": [
+          "fl"
+        ],
+        "tired": [
+          {
+            "id": "m2028-n1-cafe",
+            "name": "田中 七海",
+            "menu": "rest",
+            "face": 46
+          },
+          {
+            "id": "m2028-n39-cafe",
+            "name": "横山 透",
+            "menu": "rest",
+            "face": 4
+          }
+        ],
+        "growth": [],
+        "growthMembers": []
+      },
+      "boot": {
+        "scripts": 33,
+        "loaded": 33,
+        "failed": [],
+        "errors": []
+      },
+      "errors": []
+    },
+    "latestCare": {
+      "year": 2028,
+      "week": 8,
+      "phase": "week",
+      "theme": "light",
+      "width": 375,
+      "scrollWidth": 375,
+      "state": 0.9635228081606328,
+      "stats": 0.771712013753131,
+      "recordings": 0.714272717712447,
+      "plan": {
+        "m2028-n1-cafe": "tune"
+      },
+      "practice": {
+        "pick": null,
+        "from": null,
+        "open": [],
+        "tired": [
+          {
+            "id": "m2028-n1-cafe",
+            "name": "田中 七海",
+            "menu": "tune",
+            "face": 46
+          },
+          {
+            "id": "m2028-n39-cafe",
+            "name": "横山 透",
+            "menu": "rest",
+            "face": 4
+          }
+        ],
+        "growth": [],
+        "growthMembers": []
+      },
+      "boot": {
+        "scripts": 33,
+        "loaded": 33,
+        "failed": [],
+        "errors": []
+      },
+      "errors": []
+    },
+    "latestCareDark": {
+      "year": 2028,
+      "week": 8,
+      "phase": "week",
+      "theme": "dark",
+      "width": 375,
+      "scrollWidth": 375,
+      "state": 0.9635228081606328,
+      "stats": 0.771712013753131,
+      "recordings": 0.714272717712447,
+      "plan": {
+        "m2028-n1-cafe": "tune"
+      },
+      "practice": {
+        "pick": null,
+        "from": null,
+        "open": [],
+        "tired": [
+          {
+            "id": "m2028-n1-cafe",
+            "name": "田中 七海",
+            "menu": "tune",
+            "face": 46
+          },
+          {
+            "id": "m2028-n39-cafe",
+            "name": "横山 透",
+            "menu": "rest",
+            "face": 4
+          }
+        ],
+        "growth": [],
+        "growthMembers": []
+      },
+      "boot": {
+        "scripts": 33,
+        "loaded": 33,
+        "failed": [],
+        "errors": []
+      },
+      "errors": []
+    },
+    "fullMotion": {
+      "year": 2028,
+      "week": 8,
+      "phase": "week",
+      "theme": "dark",
+      "width": 375,
+      "scrollWidth": 375,
+      "state": 0.9635228081606328,
+      "stats": 0.771712013753131,
+      "recordings": 0.714272717712447,
+      "plan": {
+        "m2028-n1-cafe": "tune"
+      },
+      "practice": {
+        "pick": "m2028-n39-cafe",
+        "from": "care",
+        "open": [
+          "perc"
+        ],
+        "tired": [
+          {
+            "id": "m2028-n1-cafe",
+            "name": "田中 七海",
+            "menu": "tune",
+            "face": 46
+          },
+          {
+            "id": "m2028-n39-cafe",
+            "name": "横山 透",
+            "menu": "rest",
+            "face": 4
+          }
+        ],
+        "growth": [],
+        "growthMembers": []
+      },
+      "boot": {
+        "scripts": 33,
+        "loaded": 33,
+        "failed": [],
+        "errors": []
+      },
+      "errors": []
+    },
+    "latestGrowthGate": {
+      "year": 2028,
+      "week": 9,
+      "phase": "week",
+      "theme": "dark",
+      "width": 375,
+      "scrollWidth": 375,
+      "state": 0.30931857810355723,
+      "stats": 0.42205519741401076,
+      "recordings": 0.6466692273970693,
+      "plan": {},
+      "practice": {
+        "pick": null,
+        "from": null,
+        "open": [],
+        "tired": [],
+        "growth": [
+          {
+            "face": "m2028-n1-cafe",
+            "name": "田中 七海",
+            "ranks": "音程 FからD",
+            "interactive": false
+          },
+          {
+            "face": "m2028-n2-cafe",
+            "name": "小川 悠斗",
+            "ranks": "リズム EからD",
+            "interactive": false
+          },
+          {
+            "face": "m2028-n3-cafe",
+            "name": "松井 颯太",
+            "ranks": "音色 DからC",
+            "interactive": false
+          }
+        ],
+        "growthMembers": [
+          {
+            "id": "m2028-n1-cafe",
+            "name": "田中 七海",
+            "stats": {
+              "pitch": 50.1,
+              "rhythm": 49.7,
+              "tone": 61.2,
+              "expr": 40
+            },
+            "before": {
+              "pitch": 39.7,
+              "rhythm": 49.7,
+              "tone": 59.7,
+              "expr": 40
+            }
+          },
+          {
+            "id": "m2028-n2-cafe",
+            "name": "小川 悠斗",
+            "stats": {
+              "pitch": 41,
+              "rhythm": 58.4,
+              "tone": 59.7,
+              "expr": 40
+            },
+            "before": {
+              "pitch": 39.7,
+              "rhythm": 49.7,
+              "tone": 59.7,
+              "expr": 40
+            }
+          },
+          {
+            "id": "m2028-n3-cafe",
+            "name": "松井 颯太",
+            "stats": {
+              "pitch": 42.3,
+              "rhythm": 49.7,
+              "tone": 66.5,
+              "expr": 40
+            },
+            "before": {
+              "pitch": 39.7,
+              "rhythm": 49.7,
+              "tone": 59.7,
+              "expr": 40
+            }
+          }
+        ]
+      },
+      "boot": {
+        "scripts": 33,
+        "loaded": 33,
+        "failed": [],
+        "errors": []
+      },
+      "errors": []
+    },
+    "latestGrowth": {
+      "year": 2028,
+      "week": 9,
+      "phase": "week",
+      "theme": "dark",
+      "width": 375,
+      "scrollWidth": 375,
+      "state": 0.459710966097191,
+      "stats": 0.4054113251622766,
+      "recordings": 0.6466692273970693,
+      "plan": {},
+      "practice": {
+        "pick": null,
+        "from": null,
+        "open": [],
+        "tired": [],
+        "growth": [
+          {
+            "id": "m2028-n1-cafe",
+            "face": "m2028-n1-cafe",
+            "name": "田中 七海",
+            "ranks": "音程 FからD",
+            "interactive": true
+          },
+          {
+            "id": "m2028-n2-cafe",
+            "face": "m2028-n2-cafe",
+            "name": "小川 悠斗",
+            "ranks": "リズム EからD",
+            "interactive": true
+          },
+          {
+            "id": "m2028-n3-cafe",
+            "face": "m2028-n3-cafe",
+            "name": "松井 颯太",
+            "ranks": "音色 DからC",
+            "interactive": true
+          }
+        ],
+        "growthMembers": [
+          {
+            "id": "m2028-n1-cafe",
+            "name": "田中 七海",
+            "stats": {
+              "pitch": 50.1,
+              "rhythm": 49.7,
+              "tone": 61.2,
+              "expr": 40
+            },
+            "before": {
+              "pitch": 39.7,
+              "rhythm": 49.7,
+              "tone": 59.7,
+              "expr": 40
+            }
+          },
+          {
+            "id": "m2028-n2-cafe",
+            "name": "小川 悠斗",
+            "stats": {
+              "pitch": 41,
+              "rhythm": 58.4,
+              "tone": 59.7,
+              "expr": 40
+            },
+            "before": {
+              "pitch": 39.7,
+              "rhythm": 49.7,
+              "tone": 59.7,
+              "expr": 40
+            }
+          },
+          {
+            "id": "m2028-n3-cafe",
+            "name": "松井 颯太",
+            "stats": {
+              "pitch": 42.3,
+              "rhythm": 49.7,
+              "tone": 66.5,
+              "expr": 40
+            },
+            "before": {
+              "pitch": 39.7,
+              "rhythm": 49.7,
+              "tone": 59.7,
+              "expr": 40
+            }
+          }
+        ]
+      },
+      "boot": {
+        "scripts": 33,
+        "loaded": 33,
+        "failed": [],
+        "errors": []
+      },
+      "errors": []
+    },
+    "latestGrowthJump": {
+      "year": 2028,
+      "week": 9,
+      "phase": "week",
+      "theme": "dark",
+      "width": 375,
+      "scrollWidth": 375,
+      "state": 0.459710966097191,
+      "stats": 0.4054113251622766,
+      "recordings": 0.6466692273970693,
+      "plan": {},
+      "practice": {
+        "pick": "m2028-n1-cafe",
+        "from": "growth",
+        "open": [
+          "fl"
+        ],
+        "tired": [],
+        "growth": [
+          {
+            "id": "m2028-n1-cafe",
+            "face": "m2028-n1-cafe",
+            "name": "田中 七海",
+            "ranks": "音程 FからD",
+            "interactive": true
+          },
+          {
+            "id": "m2028-n2-cafe",
+            "face": "m2028-n2-cafe",
+            "name": "小川 悠斗",
+            "ranks": "リズム EからD",
+            "interactive": true
+          },
+          {
+            "id": "m2028-n3-cafe",
+            "face": "m2028-n3-cafe",
+            "name": "松井 颯太",
+            "ranks": "音色 DからC",
+            "interactive": true
+          }
+        ],
+        "growthMembers": [
+          {
+            "id": "m2028-n1-cafe",
+            "name": "田中 七海",
+            "stats": {
+              "pitch": 50.1,
+              "rhythm": 49.7,
+              "tone": 61.2,
+              "expr": 40
+            },
+            "before": {
+              "pitch": 39.7,
+              "rhythm": 49.7,
+              "tone": 59.7,
+              "expr": 40
+            }
+          },
+          {
+            "id": "m2028-n2-cafe",
+            "name": "小川 悠斗",
+            "stats": {
+              "pitch": 41,
+              "rhythm": 58.4,
+              "tone": 59.7,
+              "expr": 40
+            },
+            "before": {
+              "pitch": 39.7,
+              "rhythm": 49.7,
+              "tone": 59.7,
+              "expr": 40
+            }
+          },
+          {
+            "id": "m2028-n3-cafe",
+            "name": "松井 颯太",
+            "stats": {
+              "pitch": 42.3,
+              "rhythm": 49.7,
+              "tone": 66.5,
+              "expr": 40
+            },
+            "before": {
+              "pitch": 39.7,
+              "rhythm": 49.7,
+              "tone": 59.7,
+              "expr": 40
+            }
+          }
+        ]
+      },
+      "boot": {
+        "scripts": 33,
+        "loaded": 33,
+        "failed": [],
+        "errors": []
+      },
+      "errors": []
+    },
+    "latestGrowthLight": {
+      "year": 2028,
+      "week": 9,
+      "phase": "week",
+      "theme": "light",
+      "width": 375,
+      "scrollWidth": 375,
+      "state": 0.459710966097191,
+      "stats": 0.4054113251622766,
+      "recordings": 0.6466692273970693,
+      "plan": {},
+      "practice": {
+        "pick": null,
+        "from": null,
+        "open": [
+          "fl"
+        ],
+        "tired": [],
+        "growth": [
+          {
+            "id": "m2028-n1-cafe",
+            "face": "m2028-n1-cafe",
+            "name": "田中 七海",
+            "ranks": "音程 FからD",
+            "interactive": true
+          },
+          {
+            "id": "m2028-n2-cafe",
+            "face": "m2028-n2-cafe",
+            "name": "小川 悠斗",
+            "ranks": "リズム EからD",
+            "interactive": true
+          },
+          {
+            "id": "m2028-n3-cafe",
+            "face": "m2028-n3-cafe",
+            "name": "松井 颯太",
+            "ranks": "音色 DからC",
+            "interactive": true
+          }
+        ],
+        "growthMembers": [
+          {
+            "id": "m2028-n1-cafe",
+            "name": "田中 七海",
+            "stats": {
+              "pitch": 50.1,
+              "rhythm": 49.7,
+              "tone": 61.2,
+              "expr": 40
+            },
+            "before": {
+              "pitch": 39.7,
+              "rhythm": 49.7,
+              "tone": 59.7,
+              "expr": 40
+            }
+          },
+          {
+            "id": "m2028-n2-cafe",
+            "name": "小川 悠斗",
+            "stats": {
+              "pitch": 41,
+              "rhythm": 58.4,
+              "tone": 59.7,
+              "expr": 40
+            },
+            "before": {
+              "pitch": 39.7,
+              "rhythm": 49.7,
+              "tone": 59.7,
+              "expr": 40
+            }
+          },
+          {
+            "id": "m2028-n3-cafe",
+            "name": "松井 颯太",
+            "stats": {
+              "pitch": 42.3,
+              "rhythm": 49.7,
+              "tone": 66.5,
+              "expr": 40
+            },
+            "before": {
+              "pitch": 39.7,
+              "rhythm": 49.7,
+              "tone": 59.7,
+              "expr": 40
+            }
+          }
+        ]
+      },
+      "boot": {
+        "scripts": 33,
+        "loaded": 33,
+        "failed": [],
+        "errors": []
+      },
+      "errors": []
+    },
+    "latestMany": {
+      "year": 2028,
+      "week": 8,
+      "phase": "week",
+      "theme": "dark",
+      "width": 375,
+      "scrollWidth": 375,
+      "state": 0.9340666336938739,
+      "stats": 0.771712013753131,
+      "recordings": 0.7784408982843161,
+      "plan": {
+        "m2028-n1-cafe": "tune"
+      },
+      "practice": {
+        "pick": null,
+        "from": null,
+        "open": [],
+        "tired": [
+          {
+            "id": "m2028-n1-cafe",
+            "name": "田中 七海",
+            "menu": "tune",
+            "face": 46
+          },
+          {
+            "id": "m2028-n2-cafe",
+            "name": "小川 悠斗",
+            "menu": "rest",
+            "face": 85
+          },
+          {
+            "id": "m2028-n3-cafe",
+            "name": "松井 颯太",
+            "menu": "rest",
+            "face": 24
+          },
+          {
+            "id": "m2028-n4-cafe",
+            "name": "菅原 菜月",
+            "menu": "rest",
+            "face": 34
+          },
+          {
+            "id": "m2028-n5-cafe",
+            "name": "岡本 智也",
+            "menu": "rest",
+            "face": 94
+          },
+          {
+            "id": "m2028-n6-cafe",
+            "name": "山口 大翔",
+            "menu": "rest",
+            "face": 92
+          },
+          {
+            "id": "m2028-n7-cafe",
+            "name": "山下 彩花",
+            "menu": "rest",
+            "face": 20
+          },
+          {
+            "id": "m2028-n8-cafe",
+            "name": "高木 瑛太",
+            "menu": "rest",
+            "face": 80
+          },
+          {
+            "id": "m2028-n9-cafe",
+            "name": "清水 菜月",
+            "menu": "rest",
+            "face": 77
+          },
+          {
+            "id": "m2028-n10-cafe",
+            "name": "山本 凛",
+            "menu": "rest",
+            "face": 31
+          },
+          {
+            "id": "m2028-n11-cafe",
+            "name": "山田 悠真",
+            "menu": "rest",
+            "face": 9
+          },
+          {
+            "id": "m2028-n12-cafe",
+            "name": "西村 樹",
+            "menu": "rest",
+            "face": 93
+          },
+          {
+            "id": "m2028-n13-cafe",
+            "name": "松井 美咲",
+            "menu": "rest",
+            "face": 55
+          },
+          {
+            "id": "m2028-n14-cafe",
+            "name": "阿部 和奏",
+            "menu": "rest",
+            "face": 60
+          },
+          {
+            "id": "m2028-n15-cafe",
+            "name": "前田 紬",
+            "menu": "rest",
+            "face": 38
+          },
+          {
+            "id": "m2028-n16-cafe",
+            "name": "野口 陽翔",
+            "menu": "rest",
+            "face": 12
+          },
+          {
+            "id": "m2028-n17-cafe",
+            "name": "工藤 美月",
+            "menu": "rest",
+            "face": 53
+          },
+          {
+            "id": "m2028-n18-cafe",
+            "name": "中野 透",
+            "menu": "rest",
+            "face": 83
+          },
+          {
+            "id": "m2028-n19-cafe",
+            "name": "木村 湊",
+            "menu": "rest",
+            "face": 90
+          },
+          {
+            "id": "m2028-n20-cafe",
+            "name": "佐々木 彩花",
+            "menu": "rest",
+            "face": 47
+          },
+          {
+            "id": "m2028-n21-cafe",
+            "name": "井上 優",
+            "menu": "rest",
+            "face": 61
+          },
+          {
+            "id": "m2028-n22-cafe",
+            "name": "酒井 陸",
+            "menu": "rest",
+            "face": 82
+          },
+          {
+            "id": "m2028-n23-cafe",
+            "name": "松田 拓海",
+            "menu": "rest",
+            "face": 97
+          },
+          {
+            "id": "m2028-n24-cafe",
+            "name": "中村 絢",
+            "menu": "rest",
+            "face": 28
+          },
+          {
+            "id": "m2028-n25-cafe",
+            "name": "林 亮",
+            "menu": "rest",
+            "face": 96
+          },
+          {
+            "id": "m2028-n26-cafe",
+            "name": "岩崎 結衣",
+            "menu": "rest",
+            "face": 6
+          },
+          {
+            "id": "m2028-n27-cafe",
+            "name": "千葉 陸",
+            "menu": "rest",
+            "face": 19
+          },
+          {
+            "id": "m2028-n28-cafe",
+            "name": "竹内 花音",
+            "menu": "rest",
+            "face": 68
+          },
+          {
+            "id": "m2028-n29-cafe",
+            "name": "井上 雫",
+            "menu": "rest",
+            "face": 27
+          },
+          {
+            "id": "m2028-n30-cafe",
+            "name": "石井 透",
+            "menu": "rest",
+            "face": 35
+          },
+          {
+            "id": "m2028-n31-cafe",
+            "name": "山下 茜",
+            "menu": "rest",
+            "face": 49
+          },
+          {
+            "id": "m2028-n32-cafe",
+            "name": "渡辺 渚",
+            "menu": "rest",
+            "face": 22
+          },
+          {
+            "id": "m2028-n33-cafe",
+            "name": "坂本 雫",
+            "menu": "rest",
+            "face": 15
+          },
+          {
+            "id": "m2028-n34-cafe",
+            "name": "菅原 智也",
+            "menu": "rest",
+            "face": 94
+          },
+          {
+            "id": "m2028-n35-cafe",
+            "name": "高木 明里",
+            "menu": "rest",
+            "face": 37
+          },
+          {
+            "id": "m2028-n36-cafe",
+            "name": "佐藤 誠",
+            "menu": "rest",
+            "face": 89
+          },
+          {
+            "id": "m2028-n37-cafe",
+            "name": "山田 蓮",
+            "menu": "rest",
+            "face": 80
+          },
+          {
+            "id": "m2028-n38-cafe",
+            "name": "原 杏",
+            "menu": "rest",
+            "face": 36
+          },
+          {
+            "id": "m2028-n39-cafe",
+            "name": "あいうえおかきくけこさし",
+            "menu": "rest",
+            "face": 4
+          }
+        ],
+        "growth": [],
+        "growthMembers": []
+      },
+      "boot": {
+        "scripts": 33,
+        "loaded": 33,
+        "failed": [],
+        "errors": []
+      },
+      "errors": []
+    },
+    "latestSmallBench": {
+      "year": 2028,
+      "week": 8,
+      "phase": "week",
+      "theme": "dark",
+      "width": 320,
+      "scrollWidth": 320,
+      "state": 0.9340666336938739,
+      "stats": 0.771712013753131,
+      "recordings": 0.7784408982843161,
+      "plan": {
+        "m2028-n1-cafe": "tune"
+      },
+      "practice": {
+        "pick": "m2028-n39-cafe",
+        "from": "care",
+        "open": [
+          "bench"
+        ],
+        "tired": [
+          {
+            "id": "m2028-n1-cafe",
+            "name": "田中 七海",
+            "menu": "tune",
+            "face": 46
+          },
+          {
+            "id": "m2028-n2-cafe",
+            "name": "小川 悠斗",
+            "menu": "rest",
+            "face": 85
+          },
+          {
+            "id": "m2028-n3-cafe",
+            "name": "松井 颯太",
+            "menu": "rest",
+            "face": 24
+          },
+          {
+            "id": "m2028-n4-cafe",
+            "name": "菅原 菜月",
+            "menu": "rest",
+            "face": 34
+          },
+          {
+            "id": "m2028-n5-cafe",
+            "name": "岡本 智也",
+            "menu": "rest",
+            "face": 94
+          },
+          {
+            "id": "m2028-n6-cafe",
+            "name": "山口 大翔",
+            "menu": "rest",
+            "face": 92
+          },
+          {
+            "id": "m2028-n7-cafe",
+            "name": "山下 彩花",
+            "menu": "rest",
+            "face": 20
+          },
+          {
+            "id": "m2028-n8-cafe",
+            "name": "高木 瑛太",
+            "menu": "rest",
+            "face": 80
+          },
+          {
+            "id": "m2028-n9-cafe",
+            "name": "清水 菜月",
+            "menu": "rest",
+            "face": 77
+          },
+          {
+            "id": "m2028-n10-cafe",
+            "name": "山本 凛",
+            "menu": "rest",
+            "face": 31
+          },
+          {
+            "id": "m2028-n11-cafe",
+            "name": "山田 悠真",
+            "menu": "rest",
+            "face": 9
+          },
+          {
+            "id": "m2028-n12-cafe",
+            "name": "西村 樹",
+            "menu": "rest",
+            "face": 93
+          },
+          {
+            "id": "m2028-n13-cafe",
+            "name": "松井 美咲",
+            "menu": "rest",
+            "face": 55
+          },
+          {
+            "id": "m2028-n14-cafe",
+            "name": "阿部 和奏",
+            "menu": "rest",
+            "face": 60
+          },
+          {
+            "id": "m2028-n15-cafe",
+            "name": "前田 紬",
+            "menu": "rest",
+            "face": 38
+          },
+          {
+            "id": "m2028-n16-cafe",
+            "name": "野口 陽翔",
+            "menu": "rest",
+            "face": 12
+          },
+          {
+            "id": "m2028-n17-cafe",
+            "name": "工藤 美月",
+            "menu": "rest",
+            "face": 53
+          },
+          {
+            "id": "m2028-n18-cafe",
+            "name": "中野 透",
+            "menu": "rest",
+            "face": 83
+          },
+          {
+            "id": "m2028-n19-cafe",
+            "name": "木村 湊",
+            "menu": "rest",
+            "face": 90
+          },
+          {
+            "id": "m2028-n20-cafe",
+            "name": "佐々木 彩花",
+            "menu": "rest",
+            "face": 47
+          },
+          {
+            "id": "m2028-n21-cafe",
+            "name": "井上 優",
+            "menu": "rest",
+            "face": 61
+          },
+          {
+            "id": "m2028-n22-cafe",
+            "name": "酒井 陸",
+            "menu": "rest",
+            "face": 82
+          },
+          {
+            "id": "m2028-n23-cafe",
+            "name": "松田 拓海",
+            "menu": "rest",
+            "face": 97
+          },
+          {
+            "id": "m2028-n24-cafe",
+            "name": "中村 絢",
+            "menu": "rest",
+            "face": 28
+          },
+          {
+            "id": "m2028-n25-cafe",
+            "name": "林 亮",
+            "menu": "rest",
+            "face": 96
+          },
+          {
+            "id": "m2028-n26-cafe",
+            "name": "岩崎 結衣",
+            "menu": "rest",
+            "face": 6
+          },
+          {
+            "id": "m2028-n27-cafe",
+            "name": "千葉 陸",
+            "menu": "rest",
+            "face": 19
+          },
+          {
+            "id": "m2028-n28-cafe",
+            "name": "竹内 花音",
+            "menu": "rest",
+            "face": 68
+          },
+          {
+            "id": "m2028-n29-cafe",
+            "name": "井上 雫",
+            "menu": "rest",
+            "face": 27
+          },
+          {
+            "id": "m2028-n30-cafe",
+            "name": "石井 透",
+            "menu": "rest",
+            "face": 35
+          },
+          {
+            "id": "m2028-n31-cafe",
+            "name": "山下 茜",
+            "menu": "rest",
+            "face": 49
+          },
+          {
+            "id": "m2028-n32-cafe",
+            "name": "渡辺 渚",
+            "menu": "rest",
+            "face": 22
+          },
+          {
+            "id": "m2028-n33-cafe",
+            "name": "坂本 雫",
+            "menu": "rest",
+            "face": 15
+          },
+          {
+            "id": "m2028-n34-cafe",
+            "name": "菅原 智也",
+            "menu": "rest",
+            "face": 94
+          },
+          {
+            "id": "m2028-n35-cafe",
+            "name": "高木 明里",
+            "menu": "rest",
+            "face": 37
+          },
+          {
+            "id": "m2028-n36-cafe",
+            "name": "佐藤 誠",
+            "menu": "rest",
+            "face": 89
+          },
+          {
+            "id": "m2028-n37-cafe",
+            "name": "山田 蓮",
+            "menu": "rest",
+            "face": 80
+          },
+          {
+            "id": "m2028-n38-cafe",
+            "name": "原 杏",
+            "menu": "rest",
+            "face": 36
+          },
+          {
+            "id": "m2028-n39-cafe",
+            "name": "あいうえおかきくけこさし",
+            "menu": "rest",
+            "face": 4
+          }
+        ],
+        "growth": [],
+        "growthMembers": []
+      },
+      "boot": {
+        "scripts": 33,
+        "loaded": 33,
+        "failed": [],
+        "errors": []
+      },
+      "errors": []
+    }
+  },
+  "focus": {
+    "growth": {
+      "id": "m2028-n1-cafe",
+      "label": "田中 七海 音程 FからD、今週の練習を見る",
+      "source": "growth"
+    },
+    "care": {
+      "id": "m2028-n39-cafe",
+      "source": "care"
+    }
+  },
+  "smallLayout": {
+    "bar": {
+      "bottom": 508,
+      "height": 73,
+      "top": 435,
+      "width": 288
+    },
+    "name": "あいうえおかきくけこさし3年",
+    "options": [
+      "",
+      "rest",
+      "long",
+      "tune",
+      "metro",
+      "phrase",
+      "piece",
+      "tutti"
+    ],
+    "rest": {
+      "bottom": 176.8515625,
+      "height": 64,
+      "top": 112.8515625,
+      "width": 113
+    },
+    "row": {
+      "bottom": 414.8515625,
+      "height": 401,
+      "top": 13.8515625,
+      "width": 238
+    },
+    "scrollWidth": 320,
+    "width": 320
+  },
+  "fullMotionPreferences": [
+    {
+      "label": "ふつう",
+      "pressed": "true"
+    },
+    {
+      "label": "短く",
+      "pressed": "false"
+    },
+    {
+      "label": "なし",
+      "pressed": "false"
+    }
+  ]
+}
