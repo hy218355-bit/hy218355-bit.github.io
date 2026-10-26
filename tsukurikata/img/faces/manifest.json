@@ -1,41 +1,330 @@
-[
-  {
-    "file": "portraits-01.webp",
-    "width": 1448,
-    "height": 1086,
-    "cols": 4,
-    "rows": 3,
-    "female": 9,
-    "male": 3,
-    "offset": 0,
-    "quality": 84,
-    "bytes": 194512,
-    "source": "/Users/yh/.codex/generated_images/01a175a5-1e3d-71b0-810a-8797cdde01e1/exec-464d9f7a-e058-4ce7-9aca-b672dc8150fc.png"
-  },
-  {
-    "file": "portraits-02.webp",
-    "width": 1448,
-    "height": 1086,
-    "cols": 4,
-    "rows": 3,
-    "female": 10,
-    "male": 2,
-    "offset": 12,
-    "quality": 83,
-    "bytes": 196002,
-    "source": "/Users/yh/.codex/generated_images/01a175a5-1e3d-71b0-810a-8797cdde01e1/exec-3d1af056-7919-47c5-adc9-af357481c767.png"
-  },
-  {
-    "file": "portraits-03.webp",
-    "width": 1619,
-    "height": 972,
-    "cols": 5,
-    "rows": 3,
-    "female": 12,
-    "male": 3,
-    "offset": 24,
-    "quality": 80,
-    "bytes": 197882,
-    "source": "/Users/yh/.codex/generated_images/01a175a5-1e3d-71b0-810a-8797cdde01e1/exec-bd564513-0da1-4914-b96c-9ce16226bb74.png"
-  }
-]
+{
+  "version": "cast-balance-20261026-1",
+  "sheets": [
+    {
+      "file": "classmates-01.webp",
+      "width": 1448,
+      "height": 1086,
+      "cols": 4,
+      "rows": 3,
+      "quality": 86,
+      "bytes": 192346,
+      "source": "/Users/yh/.codex/generated_images/01a175a5-1e3d-71b0-810a-8797cdde01e1/exec-3c1c56b5-ae88-4c4a-8e66-bd401a8066ad.png"
+    },
+    {
+      "file": "classmates-02.webp",
+      "width": 1448,
+      "height": 1086,
+      "cols": 4,
+      "rows": 3,
+      "quality": 84,
+      "bytes": 198608,
+      "source": "/Users/yh/.codex/generated_images/01a175a5-1e3d-71b0-810a-8797cdde01e1/exec-0e784d25-a837-4adf-b9f5-a3a5801fa599.png"
+    },
+    {
+      "file": "classmates-03.webp",
+      "width": 1619,
+      "height": 971,
+      "cols": 5,
+      "rows": 3,
+      "quality": 82,
+      "bytes": 190294,
+      "source": "/Users/yh/.codex/generated_images/01a175a5-1e3d-71b0-810a-8797cdde01e1/exec-acab5355-1188-4b78-a9f0-0dc87cfb74cb.png"
+    },
+    {
+      "file": "portraits-01.webp",
+      "width": 1448,
+      "height": 1086,
+      "cols": 4,
+      "rows": 3,
+      "quality": 84,
+      "bytes": 194512,
+      "source": "/Users/yh/.codex/generated_images/01a175a5-1e3d-71b0-810a-8797cdde01e1/exec-464d9f7a-e058-4ce7-9aca-b672dc8150fc.png"
+    },
+    {
+      "file": "classmates-04.webp",
+      "width": 1254,
+      "height": 1254,
+      "cols": 2,
+      "rows": 2,
+      "quality": 92,
+      "bytes": 198482,
+      "source": "/Users/yh/.codex/generated_images/01a175a5-1e3d-71b0-810a-8797cdde01e1/exec-d041c999-d0f1-4eb0-8ec4-d3e432d35d3f.png"
+    }
+  ],
+  "cast": [
+    {
+      "base": 0,
+      "sheet": 0,
+      "cell": 0,
+      "style": "male",
+      "standout": false
+    },
+    {
+      "base": 1,
+      "sheet": 3,
+      "cell": 0,
+      "style": "female",
+      "standout": true
+    },
+    {
+      "base": 2,
+      "sheet": 0,
+      "cell": 2,
+      "style": "female",
+      "standout": false
+    },
+    {
+      "base": 3,
+      "sheet": 3,
+      "cell": 1,
+      "style": "female",
+      "standout": true
+    },
+    {
+      "base": 4,
+      "sheet": 0,
+      "cell": 4,
+      "style": "male",
+      "standout": false
+    },
+    {
+      "base": 5,
+      "sheet": 0,
+      "cell": 5,
+      "style": "female",
+      "standout": false
+    },
+    {
+      "base": 6,
+      "sheet": 3,
+      "cell": 2,
+      "style": "female",
+      "standout": true
+    },
+    {
+      "base": 7,
+      "sheet": 0,
+      "cell": 7,
+      "style": "female",
+      "standout": false
+    },
+    {
+      "base": 8,
+      "sheet": 3,
+      "cell": 3,
+      "style": "female",
+      "standout": true
+    },
+    {
+      "base": 9,
+      "sheet": 3,
+      "cell": 9,
+      "style": "male",
+      "standout": true
+    },
+    {
+      "base": 10,
+      "sheet": 0,
+      "cell": 10,
+      "style": "female",
+      "standout": false
+    },
+    {
+      "base": 11,
+      "sheet": 0,
+      "cell": 11,
+      "style": "male",
+      "standout": false
+    },
+    {
+      "base": 12,
+      "sheet": 4,
+      "cell": 0,
+      "style": "male",
+      "standout": false
+    },
+    {
+      "base": 13,
+      "sheet": 1,
+      "cell": 1,
+      "style": "female",
+      "standout": false
+    },
+    {
+      "base": 14,
+      "sheet": 3,
+      "cell": 4,
+      "style": "female",
+      "standout": true
+    },
+    {
+      "base": 15,
+      "sheet": 1,
+      "cell": 3,
+      "style": "female",
+      "standout": false
+    },
+    {
+      "base": 16,
+      "sheet": 1,
+      "cell": 4,
+      "style": "female",
+      "standout": false
+    },
+    {
+      "base": 17,
+      "sheet": 3,
+      "cell": 5,
+      "style": "female",
+      "standout": true
+    },
+    {
+      "base": 18,
+      "sheet": 1,
+      "cell": 6,
+      "style": "female",
+      "standout": false
+    },
+    {
+      "base": 19,
+      "sheet": 4,
+      "cell": 1,
+      "style": "male",
+      "standout": false
+    },
+    {
+      "base": 20,
+      "sheet": 1,
+      "cell": 8,
+      "style": "female",
+      "standout": false
+    },
+    {
+      "base": 21,
+      "sheet": 3,
+      "cell": 6,
+      "style": "female",
+      "standout": true
+    },
+    {
+      "base": 22,
+      "sheet": 1,
+      "cell": 10,
+      "style": "female",
+      "standout": false
+    },
+    {
+      "base": 23,
+      "sheet": 1,
+      "cell": 11,
+      "style": "female",
+      "standout": false
+    },
+    {
+      "base": 24,
+      "sheet": 4,
+      "cell": 2,
+      "style": "male",
+      "standout": false
+    },
+    {
+      "base": 25,
+      "sheet": 2,
+      "cell": 1,
+      "style": "female",
+      "standout": false
+    },
+    {
+      "base": 26,
+      "sheet": 2,
+      "cell": 2,
+      "style": "female",
+      "standout": false
+    },
+    {
+      "base": 27,
+      "sheet": 2,
+      "cell": 3,
+      "style": "female",
+      "standout": false
+    },
+    {
+      "base": 28,
+      "sheet": 3,
+      "cell": 8,
+      "style": "female",
+      "standout": true
+    },
+    {
+      "base": 29,
+      "sheet": 2,
+      "cell": 5,
+      "style": "female",
+      "standout": false
+    },
+    {
+      "base": 30,
+      "sheet": 2,
+      "cell": 6,
+      "style": "female",
+      "standout": false
+    },
+    {
+      "base": 31,
+      "sheet": 2,
+      "cell": 7,
+      "style": "female",
+      "standout": false
+    },
+    {
+      "base": 32,
+      "sheet": 2,
+      "cell": 8,
+      "style": "female",
+      "standout": false
+    },
+    {
+      "base": 33,
+      "sheet": 2,
+      "cell": 9,
+      "style": "female",
+      "standout": false
+    },
+    {
+      "base": 34,
+      "sheet": 2,
+      "cell": 10,
+      "style": "female",
+      "standout": false
+    },
+    {
+      "base": 35,
+      "sheet": 4,
+      "cell": 3,
+      "style": "male",
+      "standout": false
+    },
+    {
+      "base": 36,
+      "sheet": 2,
+      "cell": 12,
+      "style": "female",
+      "standout": false
+    },
+    {
+      "base": 37,
+      "sheet": 2,
+      "cell": 13,
+      "style": "female",
+      "standout": false
+    },
+    {
+      "base": 38,
+      "sheet": 2,
+      "cell": 14,
+      "style": "female",
+      "standout": false
+    }
+  ]
+}

@@ -101,23 +101,16 @@ const GIVEN = '陽菜 結衣 葵 凛 美咲 楓 莉子 真央 杏 彩花 七海 
 // オーナーの指定による、この作品の名前と顔の配役。現実の人の性別の判定には使わない。
 const GIVEN_MALE = '悠真 蓮 湊 陽翔 颯太 大翔 樹 悠斗 蒼 瑛太 拓海 健太 翔 航 透 智也 亮 隼 朔 健 誠 陸 海斗'.split(' ');
 const GIVEN_FEMALE = GIVEN.filter(name => !GIVEN_MALE.includes(name));
-function recruitPresentation(...seed){
-  // 通し番号で5人に1人。前の部員の名前やセーブは書き換えない。
-  const seq = seed[0] === 'recruit' ? Number(seed[2]) : NaN;
-  return Number.isInteger(seq) ? (seq % 5 === 0 ? 'male' : 'female') : (hash(...seed, 'name-cast') < .2 ? 'male' : 'female');
-}
 function namePresentation(member){
   const given = String(member?.name || '').trim().split(/\s+/).pop();
   if(GIVEN_MALE.includes(given)) return 'male';
   if(GIVEN_FEMALE.includes(given)) return 'female';
-  const seq = /-(?:j|n)(\d+)$/.exec(String(member?.id || ''));
-  return seq ? (Number(seq[1]) % 5 === 0 ? 'male' : 'female') : (hash(member?.id || '', 'name-cast') < .2 ? 'male' : 'female');
+  return hash(member?.id || '', 'name-cast') < .35 ? 'male' : 'female';
 }
 
 function makeName(used, ...seed){
-  const pool = recruitPresentation(...seed) === 'male' ? GIVEN_MALE : GIVEN_FEMALE;
   for(let k = 0; k < 50; k++){
-    const n = SURNAMES[Math.floor(hash(...seed, 's', k) * SURNAMES.length)] + ' ' + pool[Math.floor(hash(...seed, 'g', k) * pool.length)];
+    const n = SURNAMES[Math.floor(hash(...seed, 's', k) * SURNAMES.length)] + ' ' + GIVEN[Math.floor(hash(...seed, 'g', k) * GIVEN.length)];
     if(!used.has(n)){ used.add(n); return n; }
   }
   return '新入部員';

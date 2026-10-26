@@ -1,0 +1,75 @@
+{
+  "screens": [
+    {
+      "view": "member",
+      "errors": [],
+      "steps": 0,
+      "width": 375,
+      "scrollWidth": 375,
+      "faceCount": 79,
+      "theme": "light",
+      "browser": "Chrome"
+    },
+    {
+      "view": "members",
+      "errors": [],
+      "steps": 0,
+      "width": 375,
+      "scrollWidth": 375,
+      "faceCount": 78,
+      "theme": "light",
+      "browser": "Chrome"
+    },
+    {
+      "view": "week",
+      "errors": [],
+      "steps": 0,
+      "width": 375,
+      "scrollWidth": 375,
+      "faceCount": 10,
+      "theme": "light",
+      "browser": "Chrome"
+    },
+    {
+      "view": "consult",
+      "errors": [],
+      "steps": 0,
+      "width": 375,
+      "scrollWidth": 375,
+      "faceCount": 13,
+      "theme": "light",
+      "browser": "Chrome"
+    },
+    {
+      "view": "conduct",
+      "errors": [],
+      "steps": 0,
+      "width": 375,
+      "scrollWidth": 375,
+      "faceCount": 79,
+      "theme": "light",
+      "browser": "Chrome"
+    },
+    {
+      "view": "grad",
+      "errors": [],
+      "steps": 0,
+      "width": 375,
+      "scrollWidth": 375,
+      "faceCount": 79,
+      "theme": "light",
+      "browser": "Chrome"
+    },
+    {
+      "view": "intake",
+      "errors": [],
+      "steps": 0,
+      "width": 375,
+      "scrollWidth": 375,
+      "faceCount": 5,
+      "theme": "light",
+      "browser": "Chrome"
+    }
+  ],
+  "note": "ライト7画面を保存。連続遷移の一部は未起動となったため、14画面一括試験は完了扱いにしていない。ダークはactual-game.jpgで入部5人を確認。"
+}

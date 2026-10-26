@@ -6,10 +6,11 @@
 
 ## 部員の顔
 
-- `faces/portraits-01.webp`〜`portraits-03.webp`：本作品のために組み込みimage_genで新たに制作した39人（女性31人・男性8人）。初々しい美男・美女として描き直した。外部作品の絵は使用していない。
-- 最終プロンプトは `design/face-revision/prompts.json`。原稿のパス、画素数、WebPの品質と容量は `faces/manifest.json`。原稿は保持し、`tools/build_faces.py` で元の画素数のままWebPへ圧縮した。切り分けや減色・SVG化は行っていない。
-- 1枠は約324〜362px四方。3枚はそれぞれ200,000 bytes以下。CSSで表示枠を合わせ、同じ画像を全画面で共有する。旧SVGパーツと読み込み用JSは同梱から削除した。
-- オーナーの新しい指定に合わせ、この作品の名前リストに対応した顔を出す。今いる部員の名前は残し、新入部員の名前だけ5人に女性4人・男性1人の配役にする。顔の選択はidと名前の配役から決まり、セーブに性別・顔の情報を追加しない。
+- `faces/classmates-01.webp`〜`classmates-03.webp`：以前承認された高1寄りの39人の原画。`design/after-school/assets/faces-art-direction-v4.prompt.txt`、`design/after-school/cast39/assets/sheet02.prompt.txt`・`sheet03.prompt.txt` に制作記録がある。
+- `faces/portraits-01.webp`：前回の描き直しの原画から、かわいい女子8人とかっこいい男子1人の枠を使う。制作記録は `design/face-revision/prompts.json`。
+- `faces/classmates-04.webp`：自然な顔立ちの男子4人を組み込みimage_genで本作品のために追加制作。制作と最終編集のプロンプトは `design/cast-balance/prompts.json`。外部作品の絵は使っていない。
+- 原画の画素数のままWebPへ圧縮。減色パレットやSVG化を使わず、CSSで各枠を表示する。どの枠を使うかは `faces/manifest.json`・`js/face-cast.js`。39人の中で女子8人と男子1人だけを整った顔立ちとし、残り30人は自然な個性を保つ。各画像は200KB以下。
+- 名前は元のリストと生成処理のまま。オーナーの指定に合わせ、この作品内の名前の配役に顔を対応させる。顔の選択はidと配役から決まり、既存名を変更せず、セーブに性別や顔の情報を追加しない。
 
 ## アプリアイコン
 

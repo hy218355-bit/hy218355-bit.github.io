@@ -1,0 +1,17 @@
+{
+  "build": "Release",
+  "installed": true,
+  "launched": true,
+  "bundleID": "io.github.hy218355-bit.tsukurikata",
+  "files": {
+    "index.html": "6d1d91747f54f8e56832b09e05a36228294837c70a56609e63e3f051a694f404",
+    "js/face-cast.js": "d4614980b18f795ceaec1a9024e19bf874c96d31aa6dd4aec89bef4ff2859734",
+    "js/faces.js": "b55877447bd6269f0b48a4cb2aecb9e0c2358541048046ccd053f3c28f7ca710",
+    "js/band.js": "1d6a9bf5f5fc688c8f2aa274756298c3241624a38373d9f335af15d867a39922",
+    "img/faces/classmates-03.webp": "5b724d6b00024113219fa407d94c50f341ee8dd1e1be44d241ef2a999a48c9c9",
+    "img/faces/classmates-02.webp": "4fd2f7230994797097fb5368bc3e162981d73d0699116a3cadfa5fa3a2963a35",
+    "img/faces/classmates-04.webp": "577e3faaba482d2c94e732b064414728642cf047ef49a8a169132fdab5de7cf3",
+    "img/faces/portraits-01.webp": "9edff54832053146a1e27fc494624cf39f83413f66bbd15d36d959ef36c92097",
+    "img/faces/classmates-01.webp": "2a6b7ce45cfed07a988199f8d8330885f11896ac56e0a70421c29ec51080e1d0"
+  }
+}
