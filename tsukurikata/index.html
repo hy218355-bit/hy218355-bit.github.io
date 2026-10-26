@@ -250,7 +250,11 @@ select{background:var(--sheet);border:1.5px solid var(--rule);border-radius:8px;
 .mbtn:disabled:hover{border-color:var(--rule)}
 .pcard .tag.fit{justify-self:start;width:fit-content;margin-bottom:2px}
 .mc-move summary{cursor:pointer;font-size:13px;color:var(--ink-soft);padding:4px 0}
-.mc-move .mc-actions{margin-top:6px}
+/* 移す先の長い名前で、カードの幅を押し広げない。 */
+.mc-move{min-width:0}
+.mc-move .mc-actions{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:8px;margin-top:6px}
+.mc-move select{width:100%;min-width:0;min-height:44px;font-size:16px}
+.mc-move .mc-actions .btn{min-width:56px;min-height:44px}
 .mc-head h3{font-size:19px;font-weight:700}
 .mc-head .sub{font-size:13px;color:var(--ink-soft)}
 .tag{font-size:12px;font-weight:700;letter-spacing:.06em;color:var(--on-brass);background:var(--brass);border-radius:3px;padding:1px 8px;white-space:nowrap}

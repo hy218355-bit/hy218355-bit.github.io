@@ -1,0 +1,105 @@
+{
+  "before": {
+    "scrollWidth": 400,
+    "select": {
+      "bottom": 471.484375,
+      "height": 37.5,
+      "left": 52,
+      "right": 400.5,
+      "top": 433.984375,
+      "width": 348.5,
+      "x": 52,
+      "y": 433.984375
+    },
+    "width": 375
+  },
+  "light": {
+    "button": {
+      "bottom": 477.984375,
+      "height": 44,
+      "left": 267,
+      "right": 323,
+      "top": 433.984375,
+      "width": 56,
+      "x": 267,
+      "y": 433.984375
+    },
+    "scrollWidth": 375,
+    "select": {
+      "bottom": 477.984375,
+      "height": 44,
+      "left": 52,
+      "right": 259,
+      "top": 433.984375,
+      "width": 207,
+      "x": 52,
+      "y": 433.984375
+    },
+    "value": "perc2",
+    "width": 375
+  },
+  "dark": {
+    "button": {
+      "bottom": 427.984375,
+      "height": 44,
+      "left": 267,
+      "right": 323,
+      "top": 383.984375,
+      "width": 56,
+      "x": 267,
+      "y": 383.984375
+    },
+    "scrollWidth": 375,
+    "select": {
+      "bottom": 427.984375,
+      "height": 44,
+      "left": 52,
+      "right": 259,
+      "top": 383.984375,
+      "width": 207,
+      "x": 52,
+      "y": 383.984375
+    },
+    "theme": "dark",
+    "width": 375
+  },
+  "roster": {
+    "button": {
+      "bottom": 477.9921875,
+      "height": 44,
+      "left": 284,
+      "right": 340,
+      "top": 433.9921875,
+      "width": 56,
+      "x": 284,
+      "y": 433.9921875
+    },
+    "parent": "roster tab-on",
+    "scrollWidth": 375,
+    "select": {
+      "bottom": 477.9921875,
+      "height": 44,
+      "left": 35,
+      "right": 276,
+      "top": 433.9921875,
+      "width": 241,
+      "x": 35,
+      "y": 433.9921875
+    },
+    "width": 375
+  },
+  "moved": {
+    "id": "m2028-n1-cafe",
+    "before": {
+      "id": "m2028-n1-cafe",
+      "name": "田中 七海",
+      "seat": "picc1"
+    },
+    "after": {
+      "id": "m2028-n1-cafe",
+      "name": "田中 七海",
+      "seat": "perc2"
+    }
+  },
+  "errors": []
+}
