@@ -18,7 +18,8 @@ const UI_KEY = 'suibu-ui-v2';  // 前の名前のころからの保存先（SAVE
    パワプロのように、力を G〜S の8段階の色と1文字で見せる（数字は出さない）。
    入部したては G〜F、1年で D ほど、3年生のふつうの子で B、いちばんうまい子で S */
 const RANKS = [[90, 'S'], [80, 'A'], [70, 'B'], [60, 'C'], [50, 'D'], [40, 'E'], [20, 'F'], [0, 'G']];
-const rankOf = v => RANKS.find(([t]) => v >= t - 1e-9)[1];
+// 入部で平均が下がった週は、表示用の前の値が負になることがある。Gの範囲へ収める。
+const rankOf = v => RANKS.find(([t]) => clamp(Number(v) || 0,0,100) >= t - 1e-9)[1];
 // up：この週にランクが上がった（光らせて ▲ をつける）
 const rankBadge = (v, up) => `<i class="rk rk-${rankOf(v).toLowerCase()}${up ? ' up' : ''}">${rankOf(v)}${up ? uiIcon('up') : ''}</i>`;
 const rankFill = v => `background:var(--rk-${rankOf(v).toLowerCase()})`;
@@ -225,7 +226,7 @@ function stageFloor(g, G, C){
   g.fillStyle=C.brass;g.globalAlpha=.28;
   g.beginPath();g.moveTo(0,0);g.lineTo(34,0);g.quadraticCurveTo(32,34,0,58);g.closePath();g.fill();
   g.beginPath();g.moveTo(G.W,0);g.lineTo(G.W-34,0);g.quadraticCurveTo(G.W-32,34,G.W,58);g.closePath();g.fill();
-  g.globalAlpha=1;g.fillStyle=C.ink;g.beginPath();g.roundRect(G.cx-19,G.baseY+2,38,13,4);g.fill();
+  g.globalAlpha=1;g.fillStyle=C.ink;rrect(g,G.cx-19,G.baseY+2,38,13,4);g.fill();
   g.fillStyle=C.sheet;g.font=`700 9px ${C.fBody}`;g.textAlign='center';g.textBaseline='middle';g.fillText('指揮',G.cx,G.baseY+8.5);
 }
 function drawStage(t = -1, cv = $('#stage'), who = null){
@@ -341,7 +342,7 @@ function drawRoll(perf, t = -1){
       const x0 = X(perf.b2t(a)), x1 = X(perf.b2t(b)), v = rd[i];
       if(v < 85){ g.fillStyle = v < 50 ? C.bad : C.warn; g.globalAlpha = 0.06 + 0.12 * (1 - v / 85); g.fillRect(x0, MA.y - 2, x1 - x0, MA.h + 4); }
       g.globalAlpha = 1; g.fillStyle = v < 50 ? C.bad : v < 85 ? C.warn : C.soft;
-      if(x1 - x0 > 40) g.fillText(x1 - x0 > 110 ? `${spanShort(sp)} 譜読み${Math.round(v)}` : `譜読み${Math.round(v)}`, x0 + 4, MA.y + 8);
+      if(x1 - x0 > 40) g.fillText(x1 - x0 > 110 ? `${spanShort(sp)} 譜読み${rankOf(v)}` : `譜読み${rankOf(v)}`, x0 + 4, MA.y + 8);
     });
     g.globalAlpha = 1;
   }
@@ -419,8 +420,8 @@ function renderHeader(){
     const li = document.createElement('li');
     const ev = eventAt(S, w);
     if(ev?.kind === 'contest'){ li.className = 'contest'; li.textContent = {pref: '県', block: '支部', national: '全国'}[ev.level]; }
-    else if(ev?.kind === 'concert') li.classList.add('show');
-    else if(ev) li.classList.add('ev');
+    else if(ev?.kind === 'concert'){ li.classList.add('show');li.innerHTML=uiIcon('note'); }
+    else if(ev){li.classList.add('ev');li.innerHTML=uiIcon('event');}
     if(S.phase !== 'choose' && w < S.week) li.classList.add('done');
     if(S.phase === 'week' && w === S.week) li.classList.add('now');
     if(S.phase === 'end' && w > S.week) li.classList.add('later');
@@ -433,6 +434,7 @@ function renderHeader(){
     const li = document.createElement('li'), step = S.phase === 'winter' ? S.winter.step : -1;
     li.className = 'wint' + (st.id !== 'plan' ? ' ev' : '') + (step > k ? ' done' : '') + (step === k ? ' now' : '');
     li.title = `${st.m}月：${st.title}`;
+    if(st.id!=='plan')li.insertAdjacentHTML('afterbegin',uiIcon(st.id==='grad'?'star':'award'));
     if(!k){ const mo = document.createElement('span'); mo.className = 'mo'; mo.textContent = '冬'; li.appendChild(mo); }
     ol.appendChild(li);
   });
@@ -451,10 +453,11 @@ function renderPiece(){
   $('#pieceSwitch').hidden = !two;
   if(two) $('#pieceSwitch').innerHTML = [[S.pieceId, '自由曲'], [S.setPiece, '課題曲']].map(([id, nm]) => `<button type="button" data-pswitch="${id}" aria-pressed="${pid === id}">${nm}：${esc(PIECES[id].title)}</button>`).join('');
   $('#pieceEyebrow').textContent = two && pid === S.setPiece ? '課題曲' : S.phase === 'choose' || S.phase === 'chooseSet' || pid !== S.pieceId ? '試しに聴く曲' : S.finalWeek ? '定期演奏会の曲' : '自由曲';
-  $('#piece').textContent = pc.full;
+  $('#piece').textContent = pc.title;
+  $('#piece').setAttribute('data-tip',pc.full);$('#piece').setAttribute('data-tipname','曲名');$('#piece').setAttribute('role','button');$('#piece').tabIndex=0;
   $('#pieceMeta').textContent = `${pc.composer}｜問われる力：${pc.asks}`;
   const rd = (pid === S.pieceId || (two && pid === S.setPiece)) && S.phase !== 'choose' ? spanReadAvg(S, pid) : null;
-  $('#rangeSel').innerHTML = `<option value="all">全部</option>` + pc.spans.map((sp, i) => `<option value="${i}">${sp.name}${rd ? `（譜読み${Math.round(rd[i])}）` : ''}</option>`).join('');
+  $('#rangeSel').innerHTML = `<option value="all">全部</option>` + pc.spans.map((sp, i) => `<option value="${i}">${sp.name}${rd ? `（譜読み${rankOf(rd[i])}）` : ''}</option>`).join('');
   $('#rangeSel').value = U.range;
 }
 function renderVenues(){
@@ -512,7 +515,7 @@ function coachHtml(){
   const lv = coachLevel(S), xp = S.coach?.xp || 0, a = coachNeed(lv), b = coachNeed(lv + 1);
   const pct = lv >= 12 ? 100 : clamp((xp - a) / (b - a) * 100, 0, 100);
   return `<div class="vital coach"${tipAttr('顧問の指導力')}><span class="row"><span>顧問の指導力</span><b>Lv${lv}</b></span><span class="track"><span class="fill" style="width:${pct}%"></span></span>
-    <small>${coachTitle(lv)}・練習の効果 +${Math.round((coachMult(S) - 1) * 100)}%${lv < 12 ? `・次のレベルまで ${Math.ceil(b - xp)}` : ''}</small></div>`;
+    <small>${coachTitle(lv)}・練習の効果 +${Math.round((coachMult(S) - 1) * 100)}%</small></div>`;
 }
 // 部員の力の平均（音程・リズム・音色・表現）の、今年と去年の週ごとの線。下に月、県大会の週に印
 function trendSvg(){
@@ -525,7 +528,7 @@ function trendSvg(){
   const cur = now[now.length - 1], was = cur && prev.filter(x => x.w <= cur.w).pop();
   const months = [];
   for(let w = 0; w <= last; w += 4) months.push(`<span style="left:${pct(w)}%">${wkMonth(w)}月</span>`);
-  return `<figure class="trend"${tipAttr('部員の力の平均')}><figcaption><span class="tr-t">部員の力の平均</span>${cur ? `<b>${Math.round(cur.a)}</b>` : ''}${was ? `<small>去年のいまごろ ${Math.round(was.a)}</small>` : ''}
+  return `<figure class="trend"${tipAttr('部員の力の平均')}><figcaption><span class="tr-t">部員の力の平均</span>${cur ? `${rankBadge(cur.a)}` : ''}${was ? `<small>去年のいまごろ ${rankBadge(was.a)}</small>` : ''}
     <span class="tr-k"><span class="k-avg">今年</span>${prev.length > 1 ? '<span class="k-prev">去年</span>' : ''}</span></figcaption>
     <div class="tr-plot"><span class="tr-ev" style="left:${pct(PREF_WEEK)}%">県大会</span>
     <svg viewBox="0 0 ${W} ${H}" preserveAspectRatio="none" role="img" aria-label="部員の力の平均の、今年と去年の伸び">
@@ -540,7 +543,7 @@ function renderStats(){
   $('#memberCount').textContent = `${S.members.length}人${S.members.length > ms.length ? `（控え${S.members.length - ms.length}人）` : ''}／${SEATS.length}席`;
   const d = S.lastDelta || {};
   const pid = S.pieceId || playPiece();
-  const row = (nm, v, dv) => rankRow(nm, v, dv > 0 && rankOf(v - dv) !== rankOf(v));
+  const row = (nm, v, dv) => rankRow(nm, v, dv > 0 && v >= dv && rankOf(v - dv) !== rankOf(v));
   $('#stats').innerHTML = STAT_KEYS.map(k => row(STAT_LABEL[k], bandAvg(S, k), d[k])).join('')
     + row('まとまり', S.cohesion, d.coh)
     + (S.pieceId ? row(setActive(S) ? '自由曲の譜読み' : '譜読み', readAvg(S, pid), d.read) : '')
@@ -677,7 +680,7 @@ function renderWeekBody(){
   }
   if(S.chooseFinal){
     w.innerHTML = `<div class="event"><span class="tag">定期演奏会の曲</span><span>3年生の最後の本番、${wkLabel(S.finalWeek)}の定期演奏会で演奏する曲を決めよう。コンクールの曲をもう一度でも、新しい曲に挑戦してもいい（新しい曲は、譜読みが低いところから）。</span></div>`
-      + PIECE_IDS.map(id => pieceCard(id, {tag: id === S.contestPiece ? 'コンクールで演奏した曲' : '', note: `譜読み ${Math.round(readAvg(S, id))}`, act: 'choosefinal', label: '決める'})).join('');
+      + PIECE_IDS.map(id => pieceCard(id, {tag: id === S.contestPiece ? 'コンクールで演奏した曲' : '', note: `譜読み ${rankBadge(readAvg(S, id))}`, act: 'choosefinal', label: '決める'})).join('');
     return;
   }
   const parts = [weekResHtml()];
@@ -736,7 +739,7 @@ function yearSummaryHtml(){
   const lastStage = S.recs.slice().reverse().find(r => r.year === S.year && r.final) || S.recs.slice().reverse().find(r => r.year === S.year && r.result);
   // この1年の伸び（部の実力のグラフと同じ記録から）
   const yr = (S.trend || []).filter(x => x.y === S.year), grow = yr.length > 1 ? Math.round(yr[yr.length - 1].a - yr[0].a) : null;
-  const yearLine = `<p class="small year-sum">${grow != null ? `部の平均 ${Math.round(yr[0].a)} → ${Math.round(yr[yr.length - 1].a)}（${grow >= 0 ? '+' : ''}${grow}）・` : ''}顧問の指導力 Lv${coachLevel(S)}（${coachTitle(coachLevel(S))}）</p>`;
+  const yearLine = `<p class="small year-sum">${grow != null ? `部の平均 ${rankBadge(yr[0].a)} → ${rankBadge(yr[yr.length - 1].a)}・` : ''}顧問の指導力 Lv${coachLevel(S)}（${coachTitle(coachLevel(S))}）</p>`;
   return `<div class="stagecard"><h3>${S.year}年度のまとめ</h3>${res.length ? `<ol class="small" style="padding-left:1.2em">${res.join('')}</ol>` : ''}${yearLine}${yearMembersHtml()}
     <div class="transport">${april ? `<button class="btn small" type="button" data-act="playrec" data-id="${april.id}">▶ 4月の録音</button>` : ''}${lastStage ? `<button class="btn small" type="button" data-act="playrec" data-id="${lastStage.id}">▶ 最後の本番</button><button class="btn small" type="button" data-act="saverec" data-id="${lastStage.id}">⤓ 保存</button>` : ''}</div></div>`;
 }
@@ -884,6 +887,7 @@ function openGradRoll(){
     `<span class="gr-tag">卒業おめでとう</span><b class="gr-name">ありがとう、先輩たち</b><p class="gr-line">${ms.map(m => esc(m.name)).join('　')}</p><p class="gr-res">1・2年生が演奏で送り出した。春から、新しい部がはじまる。</p>`];
   GR.i = 0;
   $('#gradRoll').hidden = false;
+  $('#gradRoll').dataset.motion=fxCalm()||U.fxMode==='off'?'off':U.fxMode;
   document.documentElement.classList.add('conducting');
   if(!fxCalm() && U.fxMode === 'full') fxSky($('#gradRoll .fx-sky'), 'sakura', GR);
   // 後ろで、その年の定期演奏会の録音を流す
@@ -895,10 +899,11 @@ function grShow(){
   clearTimeout(GR.timer);
   const card = $('#grCard'), last = GR.i >= GR.slides.length - 1;
   card.classList.remove('in'); card.innerHTML = GR.slides[GR.i]; card.scrollTop = 0; void card.offsetWidth; card.classList.add('in');
-  requestAnimationFrame(() => requestAnimationFrame(() => card.querySelectorAll('.fill[data-to]').forEach(f => { f.style.width = f.dataset.to + '%'; })));
+  const grow=()=>card.querySelectorAll('.fill[data-to]').forEach(f=>{f.style.width=f.dataset.to+'%';});
+  if(fxCalm()||U.fxMode==='off')grow();else requestAnimationFrame(()=>requestAnimationFrame(grow));
   $('#grNext').textContent = last ? '4月へ（新年度）' : '次へ';
   $('#grStep').textContent = `${GR.i + 1}／${GR.slides.length}`;
-  if(!last) GR.timer = setTimeout(grNext, GR.i === 0 ? 3500 : 9000);
+  if(!last && !fxCalm() && U.fxMode !== 'off') GR.timer = setTimeout(grNext, GR.i === 0 ? 3500 : 9000);
 }
 function grNext(){ if(GR.i < GR.slides.length - 1){ GR.i++; grShow(); } else closeGradRoll(true); }
 function closeGradRoll(done){
@@ -924,10 +929,10 @@ function renderWinter(w){
       const key = `${S.year}:ens`;
       if(U.ensKey !== key){ U.ensKey = key; U.ensPick = new Set(autoEnsemble(S)); }
       const k = U.ensPick.size, ok = k >= ENS_MIN && k <= ENS_MAX;
-      const chip = m => `<button class="chip" type="button" data-ens="${m.id}" aria-pressed="${U.ensPick.has(m.id)}">${esc(m.name)}<small>${m.grade}年・${Math.round(avgStat(m))}</small></button>`;
+      const chip = m => `<button class="chip" type="button" data-ens="${m.id}" aria-pressed="${U.ensPick.has(m.id)}">${esc(m.name)}<small>${m.grade}年・${rankBadge(avgStat(m))}</small></button>`;
       const secs = SECTIONS.map(sc => [sc, seated(S).filter(m => secOf(m) === sc.id)]).filter(([, l]) => l.length)
         .map(([sc, l]) => `<div class="chips opsec"><span class="oplab">${sc.name}</span>${l.map(chip).join('')}</div>`).join('');
-      w.innerHTML = `${intro}<p class="small">出る部員を${ENS_MIN}〜${ENS_MAX}人選ぶ（名前の横の数字は、力の平均）。はじめは、うまい部員のパートを中心に5人を選んである。</p>
+      w.innerHTML = `${intro}<p class="small">出る部員を${ENS_MIN}〜${ENS_MAX}人選ぶ（名前の横は、力のランク）。はじめは、うまい部員のパートを中心に5人を選んである。</p>
         <div class="episode ensp">${secs}</div>
         <div class="transport"><button class="btn primary" type="button" data-act="ensgo"${ok ? '' : ' disabled'}>${ok ? `この${k}人で出る` : `${ENS_MIN}〜${ENS_MAX}人を選ぶ（いま${k}人）`}</button><button class="btn quiet" type="button" data-act="ensskip">今年は出ない</button></div>`;
       return;
@@ -986,7 +991,7 @@ function asgUpdate(){
   list.innerHTML = S.recruits.map(r => {
     const seat = A.picks[r.id], happy = seat && SEAT[seat].inst === r.hope;
     const sk = Object.entries(innateSkills(r.id, r.exp)).map(([id, v]) => `<span class="sk">${SKILLS[id].name}${skillMark(v >= 2.5 ? 2 : 1)}</span>`).join('');
-    return `<button class="rchip" type="button" data-rid="${r.id}" aria-pressed="${A.sel === r.id}"><b>${esc(r.name)}</b><small>${r.grade || 1}年・希望：${INST[r.hope].name}・${r.exp ? '経験あり' : '初心者'}</small>${sk ? `<span class="sks">${sk}</span>` : ''}
+    return `<button class="rchip" type="button" data-rid="${r.id}" aria-pressed="${A.sel === r.id}"><b>${memberFace(r,32)}${esc(r.name)}</b><small>${r.grade || 1}年・希望：${INST[r.hope].name}・${r.exp ? '経験あり' : '初心者'}</small>${sk ? `<span class="sks">${sk}</span>` : ''}
       <span class="where${happy ? ' happy' : seat ? '' : ' none'}">${seat ? `→ ${seatLabel(seat)}${happy ? '・希望どおり' : ''}` : '→ まだ席がない（控え）'}</span></button>`;
   }).join('');
   const r = S.recruits.find(x => x.id === A.sel);
@@ -1293,6 +1298,7 @@ async function saveAction(kind){
 }
 // 設定（効果音・演出）
 function renderPrefs(){
+  document.documentElement.dataset.fxMode = U.fxMode;
   const seg = (k, opts, cur) => opts.map(([v, nm]) => `<button type="button" data-pref="${k}:${v}" aria-pressed="${cur === v}">${nm}</button>`).join('');
   $('#prefSfx').innerHTML = seg('sfx', [['on', 'オン'], ['off', 'オフ']], U.sfx ? 'on' : 'off');
   $('#prefFx').innerHTML = seg('fx', [['full', 'ふつう'], ['short', '短く'], ['off', 'なし']], U.fxMode);
@@ -1417,13 +1423,14 @@ function renderMemberCard(){
   }).join('');
   card.innerHTML = `<div class="mc-portrait">${memberFace(m,112)}<div class="mc-head"><h3>${esc(m.name)}</h3>${m.title ? `<span class="tag">${m.title}</span>` : ''}<span class="sub">${m.grade}年・${seat ? PART_LABEL[seat.part] : '控え（席なし）'}</span><button class="link mc-close" type="button" data-mact="close">閉じる</button></div></div>
     <p class="mc-say">${esc(memberSays(m))}</p>
+    ${seat ? `<div class="mc-actions"><button class="btn small" type="button" data-mact="solo">▶ この人だけ聴く</button><button class="btn small" type="button" data-mact="secsolo">▶ パートだけ聴く</button>${U.solo !== 'all' ? '<button class="btn small quiet" type="button" data-mact="all">全員の音にもどす</button>' : ''}</div>` : ''}
     ${dreamLine(m)}${loveLine(m)}
     ${skillList(m)}
     ${tr ? `<p class="mc-trait">癖：${tr.name}。${tr.desc}</p>` : '<p class="mc-trait">目立った癖はない。</p>'}
     <div class="stats">${STAT_KEYS.map(k => rankRow(STAT_LABEL[k], m.stats[k])).join('')}${m.mental != null ? rankRow('本番の強さ', m.mental) : ''}${S.pieceId ? `<p class="mc-sub">譜読み（${PIECES[S.pieceId].title}）</p>`
       + readUnits(S.pieceId).map(u => rankRow(spanShort(u), readOf(m, S.pieceId)[u.i])).join('') : ''}</div>
     ${memberStory(m)}
-    ${seat ? `<div class="mc-actions"><button class="btn small" type="button" data-mact="solo">▶ この人だけ聴く</button><button class="btn small" type="button" data-mact="secsolo">▶ パートだけ聴く</button>${U.solo !== 'all' ? '<button class="btn small quiet" type="button" data-mact="all">全員の音にもどす</button>' : ''}</div>` : ''}
+
     <details class="mc-move"><summary>席を移す</summary><div class="mc-actions"><select id="moveSel" aria-label="移す先"><option value="">控え（席なし）</option>${seats}</select><button class="btn small" type="button" data-mact="move"${busy() ? ' disabled' : ''}>移す</button></div>
     <p class="small">楽器が変わると、その楽器での音程と音色は基礎からやり直しになる。</p></details>`;
 }
@@ -1852,4 +1859,6 @@ function start(data){
   setNowPlaying(); renderDiag(); drawIdle();
 }
 window.claude?.hot?.snapshot?.(() => ({S}));
-window.claude?.hot?.ready ? window.claude.hot.ready(start) : start(window.claude?.hot?.data ?? {});
+// 画面と共通のスクリプトがそろってから起動する。
+const bootGame=()=>window.claude?.hot?.ready ? window.claude.hot.ready(start) : start(window.claude?.hot?.data ?? {});
+if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',bootGame,{once:true});else bootGame();

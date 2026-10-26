@@ -1,0 +1,587 @@
+[
+  {
+    "view": "year",
+    "errors": [],
+    "steps": 49,
+    "year": 2027,
+    "members": 9,
+    "saveVersion": 2,
+    "width": 375,
+    "scrollWidth": 375,
+    "faceCount": 9
+  },
+  {
+    "view": "week",
+    "errors": [],
+    "steps": 0,
+    "width": 375,
+    "scrollWidth": 375,
+    "faceCount": 10,
+    "theme": "light",
+    "actualWidth": {
+      "oneLine": [
+        26,
+        26,
+        26,
+        26,
+        26
+      ],
+      "scrollWidth": 375,
+      "width": 375
+    }
+  },
+  {
+    "view": "week",
+    "errors": [],
+    "steps": 0,
+    "width": 375,
+    "scrollWidth": 375,
+    "faceCount": 10,
+    "theme": "dark",
+    "actualWidth": {
+      "oneLine": [
+        26,
+        26,
+        26,
+        26,
+        26
+      ],
+      "scrollWidth": 375,
+      "width": 375
+    }
+  },
+  {
+    "view": "stage",
+    "errors": [],
+    "steps": 0,
+    "width": 375,
+    "scrollWidth": 375,
+    "faceCount": 78,
+    "theme": "light",
+    "actualWidth": {
+      "oneLine": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "scrollWidth": 375,
+      "width": 375
+    }
+  },
+  {
+    "view": "stage",
+    "errors": [],
+    "steps": 0,
+    "width": 375,
+    "scrollWidth": 375,
+    "faceCount": 78,
+    "theme": "dark",
+    "actualWidth": {
+      "oneLine": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "scrollWidth": 375,
+      "width": 375
+    }
+  },
+  {
+    "view": "members",
+    "errors": [],
+    "steps": 0,
+    "width": 375,
+    "scrollWidth": 375,
+    "faceCount": 78,
+    "theme": "light",
+    "actualWidth": {
+      "oneLine": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "scrollWidth": 375,
+      "width": 375
+    }
+  },
+  {
+    "view": "members",
+    "errors": [],
+    "steps": 0,
+    "width": 375,
+    "scrollWidth": 375,
+    "faceCount": 78,
+    "theme": "dark",
+    "actualWidth": {
+      "oneLine": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "scrollWidth": 375,
+      "width": 375
+    }
+  },
+  {
+    "view": "log",
+    "errors": [],
+    "steps": 0,
+    "width": 375,
+    "scrollWidth": 375,
+    "faceCount": 10,
+    "theme": "light",
+    "actualWidth": {
+      "oneLine": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "scrollWidth": 375,
+      "width": 375
+    }
+  },
+  {
+    "view": "log",
+    "errors": [],
+    "steps": 0,
+    "width": 375,
+    "scrollWidth": 375,
+    "faceCount": 10,
+    "theme": "dark",
+    "actualWidth": {
+      "oneLine": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "scrollWidth": 375,
+      "width": 375
+    }
+  },
+  {
+    "view": "member",
+    "errors": [],
+    "steps": 0,
+    "width": 375,
+    "scrollWidth": 375,
+    "faceCount": 79,
+    "theme": "light",
+    "layout": {
+      "buttons": [
+        {
+          "bottom": 245,
+          "text": "この人だけ聴く",
+          "top": 209
+        },
+        {
+          "bottom": 245,
+          "text": "パートだけ聴く",
+          "top": 209
+        },
+        {
+          "bottom": 936,
+          "text": "移す",
+          "top": 900
+        }
+      ],
+      "facesLoaded": true,
+      "scrollWidth": 375,
+      "width": 375
+    }
+  },
+  {
+    "view": "member",
+    "errors": [],
+    "steps": 0,
+    "width": 375,
+    "scrollWidth": 375,
+    "faceCount": 79,
+    "theme": "dark",
+    "layout": {
+      "buttons": [
+        {
+          "bottom": 245,
+          "text": "この人だけ聴く",
+          "top": 209
+        },
+        {
+          "bottom": 245,
+          "text": "パートだけ聴く",
+          "top": 209
+        },
+        {
+          "bottom": 936,
+          "text": "移す",
+          "top": 900
+        }
+      ],
+      "facesLoaded": true,
+      "scrollWidth": 375,
+      "width": 375
+    }
+  },
+  {
+    "view": "consult",
+    "errors": [],
+    "steps": 0,
+    "width": 375,
+    "scrollWidth": 375,
+    "faceCount": 13,
+    "theme": "light",
+    "layout": {
+      "buttons": [
+        {
+          "bottom": 743,
+          "text": "この内容で1週間すすめる",
+          "top": 697
+        },
+        {
+          "bottom": 743,
+          "text": "次の予定まで進める",
+          "top": 697
+        }
+      ],
+      "facesLoaded": true,
+      "scrollWidth": 375,
+      "width": 375
+    }
+  },
+  {
+    "view": "consult",
+    "errors": [],
+    "steps": 0,
+    "width": 375,
+    "scrollWidth": 375,
+    "faceCount": 13,
+    "theme": "dark",
+    "layout": {
+      "buttons": [
+        {
+          "bottom": 743,
+          "text": "この内容で1週間すすめる",
+          "top": 697
+        },
+        {
+          "bottom": 743,
+          "text": "次の予定まで進める",
+          "top": 697
+        }
+      ],
+      "facesLoaded": true,
+      "scrollWidth": 375,
+      "width": 375
+    }
+  },
+  {
+    "view": "conduct",
+    "errors": [],
+    "steps": 0,
+    "width": 375,
+    "scrollWidth": 375,
+    "faceCount": 79,
+    "theme": "light",
+    "layout": {
+      "buttons": [],
+      "facesLoaded": true,
+      "scrollWidth": 375,
+      "width": 375
+    }
+  },
+  {
+    "view": "conduct",
+    "errors": [],
+    "steps": 0,
+    "width": 375,
+    "scrollWidth": 375,
+    "faceCount": 79,
+    "theme": "dark",
+    "layout": {
+      "buttons": [],
+      "facesLoaded": true,
+      "scrollWidth": 375,
+      "width": 375
+    }
+  },
+  {
+    "view": "announce",
+    "errors": [],
+    "steps": 0,
+    "width": 375,
+    "scrollWidth": 375,
+    "faceCount": 78,
+    "theme": "light",
+    "layout": {
+      "buttons": [
+        {
+          "bottom": 743,
+          "text": "この内容で1週間すすめる",
+          "top": 697
+        },
+        {
+          "bottom": 743,
+          "text": "次の予定まで進める",
+          "top": 697
+        },
+        {
+          "bottom": 798,
+          "text": "結果を見る",
+          "top": 754
+        }
+      ],
+      "facesLoaded": true,
+      "scrollWidth": 375,
+      "width": 375
+    }
+  },
+  {
+    "view": "announce",
+    "errors": [],
+    "steps": 0,
+    "width": 375,
+    "scrollWidth": 375,
+    "faceCount": 78,
+    "theme": "dark",
+    "layout": {
+      "buttons": [
+        {
+          "bottom": 743,
+          "text": "この内容で1週間すすめる",
+          "top": 697
+        },
+        {
+          "bottom": 743,
+          "text": "次の予定まで進める",
+          "top": 697
+        },
+        {
+          "bottom": 798,
+          "text": "結果を見る",
+          "top": 754
+        }
+      ],
+      "facesLoaded": true,
+      "scrollWidth": 375,
+      "width": 375
+    }
+  },
+  {
+    "view": "grad",
+    "errors": [],
+    "steps": 0,
+    "width": 375,
+    "scrollWidth": 375,
+    "faceCount": 79,
+    "theme": "light",
+    "layout": {
+      "buttons": [
+        {
+          "bottom": 743,
+          "text": "この内容で1週間すすめる",
+          "top": 697
+        },
+        {
+          "bottom": 743,
+          "text": "次の予定まで進める",
+          "top": 697
+        },
+        {
+          "bottom": 792,
+          "text": "とじる",
+          "top": 756
+        },
+        {
+          "bottom": 796,
+          "text": "次へ",
+          "top": 752
+        }
+      ],
+      "facesLoaded": true,
+      "scrollWidth": 375,
+      "width": 375
+    }
+  },
+  {
+    "view": "grad",
+    "errors": [],
+    "steps": 0,
+    "width": 375,
+    "scrollWidth": 375,
+    "faceCount": 79,
+    "theme": "dark",
+    "layout": {
+      "buttons": [
+        {
+          "bottom": 743,
+          "text": "この内容で1週間すすめる",
+          "top": 697
+        },
+        {
+          "bottom": 743,
+          "text": "次の予定まで進める",
+          "top": 697
+        },
+        {
+          "bottom": 792,
+          "text": "とじる",
+          "top": 756
+        },
+        {
+          "bottom": 796,
+          "text": "次へ",
+          "top": 752
+        }
+      ],
+      "facesLoaded": true,
+      "scrollWidth": 375,
+      "width": 375
+    }
+  }
+]

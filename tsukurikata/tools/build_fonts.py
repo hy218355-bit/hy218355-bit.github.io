@@ -20,7 +20,7 @@ for path, name in [('zenkakugothicnew/ZenKakuGothicNew-Regular.ttf', 'zen-kaku-g
                    ('zenkakugothicnew/ZenKakuGothicNew-Bold.ttf', 'zen-kaku-gothic-new-700'),
                    ('kleeone/KleeOne-SemiBold.ttf', 'klee-one-600'),
                    ('delagothicone/DelaGothicOne-Regular.ttf', 'dela-gothic-one-400')]:
-    subprocess.run(['pyftsubset', os.path.join(OFL, path), '--text=' + chars, "--layout-features=*",
+    subprocess.run([sys.executable, '-m', 'fontTools.subset', os.path.join(OFL, path), '--text=' + chars, "--layout-features=*",
                     '--flavor=woff2', '--output-file=' + os.path.join(OUT, name + '.woff2')], check=True)
 # Share Tech Mono は名前の予約（Reserved Font Name）があるので、手を加えずそのまま入れる
 subprocess.run(['cp', os.path.join(OFL, 'sharetechmono/ShareTechMono-Regular.ttf'), os.path.join(OUT, 'share-tech-mono-400.ttf')], check=True)

@@ -31,5 +31,6 @@ for(const [tab,name] of Object.entries({week:'week',play:'stage',members:'member
 const banner=document.querySelector('.banner');if(banner)banner.insertAdjacentHTML('afterbegin',uiIcon('crest','brand-mark'));
 paintUiIcons();
 const iconObserver=new MutationObserver(records=>{const roots=new Set();for(const r of records){if(r.type==='characterData')roots.add(r.target.parentElement);else for(const n of r.addedNodes)roots.add(n.nodeType===1?n:n.parentElement);}for(const root of roots)if(root?.isConnected)paintUiIcons(root);});
-iconObserver.observe(document.body,{childList:true,subtree:true,characterData:true});
+const startIconObserver=()=>{paintUiIcons();iconObserver.observe(document.body,{childList:true,subtree:true,characterData:true});};
+if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',startIconObserver,{once:true});else startIconObserver();
 

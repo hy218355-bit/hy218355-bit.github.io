@@ -10,8 +10,8 @@ id=String(id);if(featuresCache.has(id))return featuresCache.get(id);
 const m=/-(?:j|n)(\d+)$/.exec(id);
 let base;
 if(m){
-  /* 通し番号の39人ごとに原画をシャッフル。近い代で同じ輪郭が重なりにくくする。 */
-  const seq=Number(m[1]),cycle=Math.floor(seq/39);
+  /* 通し番号を、hashで並べた39人に一つずつ合わせる。近い代で顔が重なりにくくする。 */
+  const seq=Number(m[1]),cycle=0;
   if(!orders.has(cycle))orders.set(cycle,Array.from({length:39},(_,i)=>i).sort((a,b)=>hash('portrait-order',cycle,a)-hash('portrait-order',cycle,b)));
   base=orders.get(cycle)[seq%39];
 }else base=Math.floor(h(id,'outline')*39);
@@ -33,7 +33,10 @@ return '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 224 224">'+parts.ma
 function url(id,mood){
 const key=String(id)+'|'+mood;if(urls.has(key))return urls.get(key);
 const source=svg(id,mood);if(!source)return null;
-const value=URL.createObjectURL(new Blob([source],{type:'image/svg+xml'}));urls.set(key,value);return value;
+const value=URL.createObjectURL(new Blob([source],{type:'image/svg+xml'}));urls.set(key,value);
+// 今も画面に出ている顔は残し、古い顔のキャッシュに上限をつける。
+if(urls.size>160){const used=new Set([...document.querySelectorAll('.member-face')].map(img=>img.src));for(const [oldKey,oldUrl] of urls){if(urls.size<=160)break;if(oldKey!==key&&!used.has(oldUrl)){URL.revokeObjectURL(oldUrl);urls.delete(oldKey);}}}
+return value;
 }
 function load(base){
 if(loading.has(base)||partsCache.has(base))return;loading.add(base);
@@ -48,9 +51,10 @@ function image(member,size=36,options={}){
 const id=String(typeof member==='object'?member.id:member),f=features(id);
 const mood=options.mood||(typeof member==='object'&&(member.sta??100)<30?'tired':'normal');
 const source=url(id,mood)||root+'face-'+String(f.base+1).padStart(2,'0')+'.svg';
-if(!partsCache.has(f.base))load(f.base);
-return `<img class="member-face" src="${source}" width="${size}" height="${size}" style="--face-size:${size}px" data-template="${f.base}" data-face="${esc(id)}" data-mood="${mood}" alt="" decoding="async">`;
+return `<img class="member-face" src="${source}" width="${size}" height="${size}" style="--face-size:${size}px" data-template="${f.base}" data-face="${esc(id)}" data-mood="${mood}" alt="" decoding="async" loading="lazy">`;
 }
+// 隠れた一覧の顔まで一度に読み込まず、顔が出るときにパーツを読む。
+document.addEventListener('load',event=>{const img=event.target;if(img?.matches?.('.member-face'))load(Number(img.dataset.template));},true);
 return {image,features,svg,register,fingerprint:id=>Object.values(features(id)).join(':'),cacheSize:()=>urls.size};
 })();
 const memberFace=(m,size,options)=>Faces.image(m,size,options);

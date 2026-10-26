@@ -1,0 +1,23 @@
+[
+  {
+    "mode": "full",
+    "overlay": true,
+    "rayAnimation": "none",
+    "scrollWidth": 375,
+    "width": 375
+  },
+  {
+    "mode": "short",
+    "overlay": true,
+    "rayAnimation": "none",
+    "scrollWidth": 375,
+    "width": 375
+  },
+  {
+    "mode": "off",
+    "overlay": false,
+    "rayAnimation": "none",
+    "scrollWidth": 375,
+    "width": 375
+  }
+]
