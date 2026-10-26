@@ -1,0 +1,126 @@
+{
+  "castCount": 39,
+  "portraits": 39,
+  "sharedId": {
+    "recorded": {
+      "seat": "picc1",
+      "id": "m2028-n1-cafe",
+      "name": "田中 七海",
+      "grade": 3,
+      "ranks": {
+        "pitch": "A",
+        "rhythm": "A",
+        "tone": "A",
+        "expr": "A"
+      }
+    },
+    "current": {
+      "id": "m2028-n1-cafe",
+      "name": "田中 花音",
+      "seat": "perc2"
+    }
+  },
+  "graduateCard": {
+    "id": "m2026-n15-f00d",
+    "name": "前田 紬",
+    "grade": 3,
+    "seat": "cl3a",
+    "ranks": {
+      "pitch": "A",
+      "rhythm": "A",
+      "tone": "A",
+      "expr": "A"
+    }
+  },
+  "currentMemberMissing": true,
+  "solo": "member:m2026-n15-f00d",
+  "engineSolo": {
+    "type": "member",
+    "id": "m2026-n15-f00d"
+  },
+  "restored": "all",
+  "recordsPreserved": true,
+  "width": 375,
+  "scrollWidth": 375,
+  "errors": [],
+  "later": {
+    "first": {
+      "seat": "picc1",
+      "id": "m2028-n1-cafe",
+      "name": "田中 葵",
+      "grade": 3,
+      "ranks": {
+        "pitch": "D",
+        "rhythm": "D",
+        "tone": "D",
+        "expr": "D"
+      }
+    },
+    "cardCleared": true,
+    "recordsPreserved": true
+  },
+  "twoRecords": {
+    "first": {
+      "id": "m2028-n1-cafe",
+      "name": "田中 七海",
+      "grade": 3,
+      "seat": "picc1",
+      "ranks": {
+        "pitch": "A",
+        "rhythm": "A",
+        "tone": "A",
+        "expr": "A"
+      }
+    },
+    "later": {
+      "id": "m2028-n1-cafe",
+      "name": "田中 葵",
+      "grade": 3,
+      "seat": "picc1",
+      "ranks": {
+        "pitch": "D",
+        "rhythm": "D",
+        "tone": "D",
+        "expr": "D"
+      }
+    },
+    "current": {
+      "id": "m2028-n1-cafe",
+      "name": "田中 花音",
+      "seat": "perc2"
+    },
+    "statePreserved": true
+  },
+  "stopClears": true,
+  "current": {
+    "first": {
+      "seat": "perc2",
+      "id": "m2028-n1-cafe",
+      "name": "田中 花音",
+      "grade": 1,
+      "ranks": {
+        "pitch": "C",
+        "rhythm": "B",
+        "tone": "C",
+        "expr": "C"
+      }
+    },
+    "cardCleared": true
+  },
+  "liveEditing": {
+    "rename": 1,
+    "move": 1
+  },
+  "roster": {
+    "name": "山田 蓮",
+    "rename": 1,
+    "recorded": null
+  },
+  "final": {
+    "statePreserved": true,
+    "recordsPreserved": true,
+    "width": 375,
+    "scrollWidth": 375,
+    "errors": []
+  }
+}

@@ -274,7 +274,7 @@ function cdFinish(natural){
 }
 
 /* ===== 録音の再生（指揮した録音は、そのときの拍の進み方で）と保存 ===== */
-const recPerf = rec => perform({...recCtx(rec), ...(rec.span || {})});
+const recPerf = rec => rememberStageMembers(perform({...recCtx(rec), ...(rec.span || {})}),rec.snap.members);
 function playRecording(rec, label, onEnd = null){
   if(!E.ensure()) return;
   const perf = recPerf(rec);

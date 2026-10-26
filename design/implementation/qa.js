@@ -34,6 +34,8 @@ function record(){
  report.engineSolo=E.solo;report.viewPart=U.view;
  report.shownPlayers=U.shown?Object.entries(buildPtr(U.shown)).map(([seat,p])=>({seat,id:p.mid})):[];
  report.recordsFingerprint=hash(JSON.stringify(S.recs));
+ report.recordedCard=U.recordMember?{id:U.recordMember.id,name:U.recordMember.name,grade:U.recordMember.grade,seat:U.recordMember.seat,ranks:Object.fromEntries(STAT_KEYS.map(k=>[k,rankOf(U.recordMember.stats[k])]))}:null;
+ report.recordedCast=U.stageMembers?Array.from(U.stageMembers,([seat,m])=>({seat,id:m.id,name:m.name,grade:m.grade,ranks:Object.fromEntries(STAT_KEYS.map(k=>[k,rankOf(m.stats[k])]))})):[];
  report.recordings=S.recs.map(r=>({id:r.id,label:r.label}));
  report.readings=PIECE_IDS.map(id=>({id,level:pieceDifficulty(id),load:readingLoad(id),average:readAvg(S,id)}));
  const stageCanvas=$('#stage'),stageBox=stageCanvas.getBoundingClientRect(),stageMap=stageGeom(Math.max(240,stageBox.width),true);
@@ -97,7 +99,7 @@ async function show(next){
   for(let i=0;i<100&&!s.consult;i++)s=advance(s);
   if(!s.consult)throw Error('相談の見本が作れなかった');
   if(view==='consult-result')s=resolveConsult(s,consultView(s).choices[0].k);
- }else if(['stage','reading-stage','song-set','song-final','rehearsal','rehearsal-records','rehearsal-a','rehearsal-loading','practice','practice-late','practice-a','members','member','member-old','member-bench','grad','grad-old','grad-auto','senior','conduct','announce','announce-silver','announce-bronze','announce-cast','fx','audition','audition-a','audition-decided','audition-long','ensemble'].includes(view)){
+ }else if(['stage','recorded-history','reading-stage','song-set','song-final','rehearsal','rehearsal-records','rehearsal-a','rehearsal-loading','practice','practice-late','practice-a','members','member','member-old','member-bench','grad','grad-old','grad-auto','senior','conduct','announce','announce-silver','announce-bronze','announce-cast','fx','audition','audition-a','audition-decided','audition-long','ensemble'].includes(view)){
   const ms=fullBand({pitch:68,rhythm:72,tone:64,expr:61}),names=new Set();
   ms.forEach((m,i)=>{m.id='m2028-n'+(i+1)+'-cafe';m.name=makeName(names,'recruit',2028,i+1);m.grade=i%3+1;m.joined=2026;m.joinGrade=1;m.sta=95;m.first={y:2026,w:0,stats:{pitch:15,rhythm:12,tone:18,expr:10}};m.story=[{y:2026,w:0,t:'アルトサックスで入部。'},{y:2027,w:16,t:'はじめての金賞。'},{y:2028,w:26,t:'最後の定期演奏会。'}];});
   s.members=ms;s.year=2028;s.week=10;
@@ -106,6 +108,14 @@ async function show(next){
  if(view==='practice-late'){s.week=15;s.members[0].sta=20;}
  if(view==='practice-a'){s.division='A';s.setPiece=setOffer(s)[0];s.split='auto';}
  if(view==='reading-stage')s.pieceId='tell';
+ if(view==='recorded-history'){
+  s.recs=[];const old=clone(s);old.year=2026;old.week=26;old.cohesion=80;
+  old.members.forEach((m,i)=>{if(i)m.id='m2026-n'+(i+1)+'-f00d';m.grade=3;m.stats={pitch:80,rhythm:80,tone:80,expr:80};m.fam={galop:100};});
+  addRec(old,'2026年 定期演奏会',{venue:'hall'});
+  old.year=2027;old.members[0].name='田中 葵';old.members[0].stats={pitch:55,rhythm:55,tone:55,expr:55};addRec(old,'2027年 定期演奏会',{venue:'hall'});
+  s.recs=clone(old.recs);s.year=2031;s.gradMembers=[];
+  s=renameMember(s,s.members[0].id,'田中 花音');const other=s.members.find(m=>m.seat==='perc2');other.seat='picc1';s.members[0].seat='perc2';
+ }
  if(view==='song-set'){s.division='A';s.phase='chooseSet';}
  if(view==='song-final'){s.chooseFinal=true;s.contestPiece='galop';for(const m of s.members)m.fam={galop:[65,65,65]};}
  if(view.startsWith('rehearsal')){
@@ -132,7 +142,7 @@ async function show(next){
  if(q.has('busy')&&view.startsWith('member')){s.week=PREF_WEEK;s=beginStage(s);}
  S=s;U.sel=null;hideTip();renderAll();refreshNow();$('#toast').hidden=true;
  const cardView=view==='member'||view.startsWith('member-');
- setTab(['log','journal','journal-ambiguous','journal-empty'].includes(view)?'log':view==='members'?'members':cardView||view.startsWith('rehearsal')||['stage','reading-stage','conduct'].includes(view)?'play':'week');
+ setTab(['log','journal','journal-ambiguous','journal-empty'].includes(view)?'log':view==='members'?'members':cardView||view.startsWith('rehearsal')||['stage','recorded-history','reading-stage','conduct'].includes(view)?'play':'week');
  if(view==='song-samples')for(const card of document.querySelectorAll('.pcard'))card.hidden=!['largo','galop','tell'].includes(card.querySelector('[data-pid]')?.dataset.pid);
  if(cardView){placeCard('stage');U.sel=s.members[0].id;renderMemberCard();}
  if(['grad','grad-old','grad-auto'].includes(view)){U.fxMode=view==='grad-auto'?'short':'off';S.gradMembers=s.members.filter(m=>m.grade===3);openGradRoll();GR.i=1;grShow();if(view!=='grad-auto')pauseGradRoll();}

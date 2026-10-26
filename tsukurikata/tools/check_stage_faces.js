@@ -22,8 +22,17 @@ for(const W of [240,309,343,720]){
  for(let i=0;i<points.length;i++)for(let j=i+1;j<points.length;j++)if(Math.hypot(points[i][1][0]-points[j][1][0],points[i][1][1]-points[j][1][1])<G.r*2+1.5)throw Error('顔が重なる: '+W);
  const old=stageGeom(W);for(const s of SEATS){const [x,y]=seatXY(s,old);if(x!==old.cx+s.x*old.R||y!==old.baseY-s.y*old.R*.95)throw Error('楽器決めの位置が変わった');}
 }
-const S={members:[{id:'new',name:'佐藤 結衣',seat:'picc1',stats:{pitch:50}}],recs:[{members:[{id:'old',name:'佐藤 悠真',seat:'picc1',stats:{pitch:40}}]}]};
+const S={members:[{id:'new',name:'佐藤 結衣',seat:'picc1',stats:{pitch:50}}],recs:[{snap:{members:[{id:'old',name:'佐藤 悠真',seat:'picc1',stats:{pitch:40}}]}}]};
 const oldCast=stageMembers({notes:[{seat:'picc1',mid:'old'}],hits:[]});if(oldCast.get('picc1').id!=='old')throw Error('昔の録音が今の部員の顔になった');
+const first={notes:[{seat:'fl1a',mid:'new'}],hits:[]},later={notes:[{seat:'picc1',mid:'new'}],hits:[]};
+const saved=JSON.stringify(S),sound=JSON.stringify(first);
+rememberStageMembers(first,[{id:'new',name:'佐藤 七海',grade:1,seat:'fl1a',stats:{pitch:25}}]);
+rememberStageMembers(later,[{id:'new',name:'佐藤 葵',grade:2,seat:'picc1',stats:{pitch:70}}]);
+const beforeRename=stageMembers(first).get('fl1a');
+if(beforeRename.name!=='佐藤 七海'||beforeRename.grade!==1||beforeRename.stats.pitch!==25||beforeRename.seat!=='fl1a')throw Error('選んだ録音の名前・学年・力・席が変わった');
+if(stageMembers(later).get('picc1').name!=='佐藤 葵')throw Error('別の録音の部員情報が混ざった');
+if(stageMembers({notes:[{seat:'picc1',mid:'new'}],hits:[]}).get('picc1').name!=='佐藤 結衣')throw Error('現在の合奏に昔の名前が混ざった');
+if(JSON.stringify(S)!==saved||JSON.stringify(first)!==sound)throw Error('顔の表示でセーブや演奏の音が変わった');
 `,ctx);
 // 全座席の楽器に絵があり、同じ輪郭を毎フレーム作り直さない。
 let paths=0,strokes=0;

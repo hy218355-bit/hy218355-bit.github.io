@@ -8,6 +8,7 @@ const U = {
   venue: 'room', pos: 'center', range: 'all', view: 'mel', sel: null, piece: null, solo: 'all',
   shown: null, shownLabel: '', perfNow: null, diag: null, ptr: null, raf: 0, onEnd: null, playing: false, refreshT: 0,
   tab: 'week', tabScroll: {},
+  recordMember: null, recordPerf: null,
   lineup: false, draft: null, pred: null, predKey: '', predT: 0, outKey: '', outPick: new Set(),
   sfx: true, fxMode: 'full',
 };
@@ -130,6 +131,7 @@ function updateMini(){
 
 /* ===== 再生 ===== */
 function playPerf(perf, label, onEnd, opts = {}){
+  if(U.recordMember && U.recordPerf !== perf) clearRecordedMember();
   if(SAMPLES.use && !SAMPLES.ready && SAMPLES.loading && !SAMPLES.error){
     const token = U.waitPlay = {};
     $('#nowPlaying').textContent = '録音を読み込んでいます…（読み込めたら鳴ります）';
@@ -172,6 +174,7 @@ function endPlay(natural = false){
   cancelAnimationFrame(U.raf);
   $('#btnStop').hidden = true; $('#btnNow').hidden = false;
   setNowPlaying();
+  clearRecordedMember();
   drawIdle();
   const cb = U.onEnd; U.onEnd = null;
   if(cb) cb(natural);
@@ -205,11 +208,15 @@ const seatXY = (s, G) => {
   const {row,fraction}=STAGE_FACE_LAYOUT.get(s.id);
   return [G.cx+(fraction-.5)*(G.W-36),stageRowY(row,G)+Math.abs(fraction-.5)*12];
 };
+// 再生する録音そのものの部員情報を、演奏の音やセーブとは別に覚える。
+const STAGE_PERFORMERS = new WeakMap();
+function rememberStageMembers(perf, members){ STAGE_PERFORMERS.set(perf, members || []); return perf; }
 // 昔の録音でも、いま同じ席にいる別の部員の顔へ入れ替わらないようにする。
 function stageMembers(perf){
   const known=new Map();
-  for(const rec of S.recs||[])for(const m of rec.members||[])known.set(m.id,m);
+  for(const rec of S.recs||[])for(const m of rec.snap?.members || rec.members || [])known.set(m.id,m);
   for(const m of [...(S.gradMembers||[]),...S.members])known.set(m.id,m);
+  for(const m of STAGE_PERFORMERS.get(perf) || [])known.set(m.id,m);
   return new Map(Object.entries(buildPtr(perf)).flatMap(([seat,p])=>known.has(p.mid)?[[seat,{...known.get(p.mid),seat}]]:[]));
 }
 // 席ごとに音を並べておく（昔の録音やお手本でも、座っていた席が光るように）
@@ -262,7 +269,7 @@ function drawStage(t = -1, cv = $('#stage'), who = null){
   stageFloor(g, G, C);
 
   const viewSec = main && U.view !== 'mel' ? U.view : null;
-  const sel = main ? U.sel && memberById(U.sel) : CD.sel && memberById(CD.sel);
+  const sel = main ? U.recordMember || (U.sel && memberById(U.sel)) : CD.sel && memberById(CD.sel);
   let portraits=0;
   for(const s of SEATS){
     const [x, y] = seatXY(s, G);
@@ -508,7 +515,7 @@ function renderSelectors(){
   $('#recordingCount').textContent = recs.length ? `${recs.length}件` : 'まだない';
   $('#btnRec').disabled = !recs.length;
   $('#btnSave').disabled = !recs.length;
-  const sel = U.sel && memberById(U.sel);
+  const sel = U.recordMember || (U.sel && memberById(U.sel));
   $('#soloSel').innerHTML = `<option value="all">全員</option>` + SECTIONS.map(s => `<option value="sec:${s.id}">${s.name}だけ</option>`).join('')
     + (sel ? `<option value="member:${sel.id}">${esc(sel.name)}だけ</option>` : '');
   if(![...$('#soloSel').options].some(o => o.value === U.solo)){ U.solo = 'all'; applySolo(); }
@@ -1622,8 +1629,20 @@ function renderMemberMove(){
     return `<div class="move-person" data-move-preview="${before.id}"><div class="move-person-head">${memberFace(before,36)}<span><b>${esc(before.name)}</b><small>${seat ? instrumentIcon(seat.inst) + esc(seatLabel(after.seat)) : '控え（席なし）'}</small></span></div><div class="move-ranks">${['pitch','tone'].map(k => `<span data-move-rank="${k}" aria-label="${STAT_LABEL[k]} ${rankOf(before.stats[k])}から${rankOf(after.stats[k])}">${STAT_LABEL[k]}${rankBadge(before.stats[k])}${uiIcon('chevron')}${rankBadge(after.stats[k])}</span>`).join('')}</div></div>`;
   }).join('');
 }
+// 録音時の部員は見る・聴くだけにし、いまの部員の名前や席を変える操作を出さない。
+function clearRecordedMember(){
+  if(!U.recordMember) return;
+  U.recordMember=null;U.recordPerf=null;U.sel=null;
+  renderSelectors();renderMemberCard();renderRoster();
+}
+function renderRecordedMemberCard(card, m){
+  card.dataset.recorded=m.id;
+  card.innerHTML=`<button class="help-button mc-close" type="button" data-mact="close" aria-label="閉じる">${uiIcon('close')}</button><div class="mc-portrait">${memberFace(m,112)}<div class="mc-head"><h3>${esc(m.name)}</h3><span class="sub">${instrumentIcon(SEAT[m.seat].inst)}${m.grade ? `${m.grade}年・` : ''}${esc(seatLabel(m.seat))}</span><span class="small">録音時</span></div></div><div class="stats">${STAT_KEYS.map(k=>rankRow(STAT_LABEL[k],m.stats[k])).join('')}</div><div class="mc-actions"><button class="btn small" type="button" data-mact="recordsolo">${uiIcon('play')}この人だけ聴く</button>${U.solo!=='all'?'<button class="btn small quiet" type="button" data-mact="recordall">全員の音にもどす</button>':''}</div>`;
+}
 function renderMemberCard(){
   const card = $('#memberCard');
+  delete card.dataset.recorded;
+  if(U.recordMember){card.hidden=false;renderRecordedMemberCard(card,U.recordMember);return;}
   const m = U.sel && memberById(U.sel);
   if(!m){ card.hidden = true; return; }
   card.hidden = false;
@@ -1886,8 +1905,10 @@ function bind(){
   $('#stage').addEventListener('click', e => {
     const s = seatAt(e);
     if(!s) return;
-    // 卒業生の録音を押したとき、同じ席の現部員のカードを出さない。
-    const m = U.playing && U.stageMembers ? S.members.find(x => x.id === U.stageMembers.get(s.id)?.id) : S.members.find(x => x.seat === s.id);
+    // 録音は当時の部員を開き、同じ席の現部員と取り違えない。
+    const recorded = U.playing && STAGE_PERFORMERS.has(U.shown);
+    const m = recorded ? U.stageMembers.get(s.id) : U.playing && U.stageMembers ? S.members.find(x => x.id === U.stageMembers.get(s.id)?.id) : S.members.find(x => x.seat === s.id);
+    U.recordMember=recorded&&m?m:null;U.recordPerf=U.recordMember?U.shown:null;
     U.sel = m ? m.id : null;
     U.view = s.sec;
     placeCard('stage');
@@ -1902,6 +1923,7 @@ function bind(){
   });
   $('#rosterTable').addEventListener('click', e => {
     const tr = e.target.closest('[data-mid]'); if(!tr) return;
+    clearRecordedMember();
     U.cardReturn={id:tr.dataset.mid,top:scrollY};
     U.sel = tr.dataset.mid;
     const m = memberById(U.sel);
@@ -1917,16 +1939,22 @@ function bind(){
   });
   $('#memberCard').addEventListener('click', e => {
     const b = e.target.closest('[data-mact]'); if(!b) return;
-    const m = memberById(U.sel); if(!m) return;
     const act = b.dataset.mact;
     if(act === 'close'){
       const fromStage = $('#memberCard').dataset.origin === 'stage';
       const back=$('#memberCard').dataset.origin==='roster'&&U.cardReturn;
-      U.sel=null;renderSelectors();renderMemberCard();renderRoster();drawIdle();
+      U.recordMember=null;U.recordPerf=null;U.sel=null;renderSelectors();renderMemberCard();renderRoster();drawIdle();
       if(back){document.querySelector(`[data-mid="${back.id}"] .roster-open`)?.focus({preventScroll:true});window.scrollTo(0,back.top);}
       else if(fromStage && narrow.matches) $('#stage').scrollIntoView({block:'start'});
       U.cardReturn=null;return;
     }
+    if(U.recordMember){
+      if(act==='recordsolo'||act==='recordall'){
+        U.solo=act==='recordsolo'?`member:${U.recordMember.id}`:'all';applySolo();renderSelectors();renderMemberCard();
+      }
+      return;
+    }
+    const m = memberById(U.sel); if(!m) return;
     if(act === 'rename'){
       $('#memberNameForm').hidden = false; b.setAttribute('aria-expanded', 'true');
       $('#memberName').focus({preventScroll: true}); $('#memberName').select();
