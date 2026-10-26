@@ -5,6 +5,7 @@ const root=new URL('../img/faces/',document.currentScript.src).href;
 const sheets=FACE_CAST.sheets,atlas=FACE_CAST.cast;
 const pools=Object.fromEntries(['female','male'].map(style=>[style,atlas.filter(face=>face.style===style).sort((a,b)=>hash('portrait-cast-v2',a.base)-hash('portrait-cast-v2',b.base))]));
 const featuresCache=new Map();
+const stageImages=new Map(),stageStamps=new Map();
 function features(member){
   const m=typeof member==='object'?member:{id:String(member)},id=String(m.id),style=namePresentation(m),key=id+'|'+style;
   if(featuresCache.has(key))return featuresCache.get(key);
@@ -24,6 +25,28 @@ function image(member,size=36,options={}){
   const m=typeof member==='object'?member:{id:String(member)},mood=options.mood||((m.sta??100)<30?'tired':'normal');
   return portrait(features(m),size,`data-face="${esc(String(m.id))}" data-mood="${mood}"`);
 }
-return {image,features,catalog:atlas,preview:(base,size=112)=>portrait(atlas[base],size),fingerprint:member=>features(member).base,cacheSize:()=>featuresCache.size};
+// 舞台の顔は原画を一度だけ読み、丸い小さな絵を作って毎フレーム使い回す。
+function stageStamp(face){
+  if(stageStamps.has(face.base))return stageStamps.get(face.base);
+  const sheet=sheets[face.sheet];
+  let img=stageImages.get(face.sheet);
+  if(!img){
+    img=new Image();img.decoding='async';stageImages.set(face.sheet,img);
+    img.onload=()=>document.dispatchEvent(new Event('facesready'));
+    img.src=root+sheet.file+'?v='+FACE_CAST.version;
+  }
+  if(!img.complete||!img.naturalWidth)return null;
+  const stamp=document.createElement('canvas');stamp.width=stamp.height=128;
+  const g=stamp.getContext('2d'),w=img.naturalWidth/sheet.cols,h=img.naturalHeight/sheet.rows;
+  const col=face.cell%sheet.cols,row=Math.floor(face.cell/sheet.cols);
+  g.beginPath();g.arc(64,64,64,0,Math.PI*2);g.clip();
+  g.drawImage(img,(col+.08)*w,(row+.02)*h,w*.84,h*.84,0,0,128,128);
+  stageStamps.set(face.base,stamp);return stamp;
+}
+function draw(g,member,x,y,size){
+  const stamp=stageStamp(features(member));if(!stamp)return false;
+  g.drawImage(stamp,x-size/2,y-size/2,size,size);return true;
+}
+return {image,draw,features,catalog:atlas,preview:(base,size=112)=>portrait(atlas[base],size),fingerprint:member=>features(member).base,cacheSize:()=>featuresCache.size,stageCacheSize:()=>({images:stageImages.size,stamps:stageStamps.size})};
 })();
 const memberFace=(m,size,options)=>Faces.image(m,size,options);

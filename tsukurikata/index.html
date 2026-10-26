@@ -806,6 +806,8 @@ html[data-season="snow"]{--season-band:linear-gradient(90deg,#DDE8F3,#FFFFFF,#B9
 .rchip>b{display:flex;align-items:center;gap:7px}.rchip>b .member-face{border-radius:6px}.meta{font-size:12px}#piece[data-tip]::after{content:'?';display:inline-grid;place-items:center;width:18px;height:18px;border:1px solid var(--rule);border-radius:50%;font-size:10px;vertical-align:3px;margin-left:7px;color:var(--ink-soft)}
 :root[data-fx-mode="off"] *,:root[data-fx-mode="off"] *::before,:root[data-fx-mode="off"] *::after{animation:none!important;transition:none!important}
 [data-motion="off"] .fill{transition:none!important}[data-motion="short"] .fill{transition-duration:.3s!important}
+/* 顔を押したあとはカードまでスクロールでき、とばすボタンは手元に残す。 */
+.conduct.watch{overflow-y:auto}.conduct.watch .cd-top{position:sticky;top:0;z-index:2;background:var(--paper);padding-bottom:6px;flex-shrink:0}.conduct.watch .cd-band{flex:1 0 auto}.conduct.watch .cd-member,.conduct.watch .cd-msg,.conduct.watch .cd-legend{flex-shrink:0}
 </style>
 </head>
 <body>
@@ -984,8 +986,8 @@ html[data-season="snow"]{--season-band:linear-gradient(90deg,#DDE8F3,#FFFFFF,#B9
 
 <script src="js/util.js"></script>
 <script src="js/icons.js"></script>
-<script src="js/face-cast.js?v=balance-1"></script>
-<script src="js/faces.js?v=balance-1"></script>
+<script src="js/face-cast.js?v=stage-faces-2"></script>
+<script src="js/faces.js?v=stage-faces-2"></script>
 <script src="js/instruments.js"></script>
 <script src="js/venues.js"></script>
 <script src="js/samples.js"></script>
@@ -1008,11 +1010,11 @@ html[data-season="snow"]{--season-band:linear-gradient(90deg,#DDE8F3,#FFFFFF,#B9
 <script src="js/band.js?v=balance-1"></script>
 <script src="js/game.js"></script>
 <script src="js/engine.js"></script>
-<script src="js/conduct.js"></script>
+<script src="js/conduct.js?v=stage-faces-2"></script>
 <script src="js/announce.js"></script>
 <script src="js/tunegame.js"></script>
 <script src="js/fx.js"></script>
-<script src="js/ui.js"></script>
+<script src="js/ui.js?v=stage-faces-3"></script>
 <div class="tip" id="tip" role="tooltip" hidden></div>
 </body>
 </html>

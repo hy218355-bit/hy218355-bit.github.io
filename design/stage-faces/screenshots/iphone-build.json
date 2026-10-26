@@ -1,0 +1,17 @@
+{
+  "build": "Release",
+  "installed": true,
+  "launched": true,
+  "bundleID": "io.github.hy218355-bit.tsukurikata",
+  "files": {
+    "index.html": "8176cbd660ac7466ca1d782c2ba7ea9480f0a0ac224ecd76c8a5209e626a1608",
+    "js/ui.js": "bf1ff61b329dc8aa2b52440e72df3de1e67edd914193c6cdf4467440f7c6734c",
+    "js/faces.js": "2bb5cef33789a2828dc527c2f48b00fbc1dd859ed9fb2cce2c3ebabcfca179d6",
+    "js/face-cast.js": "d96465929972f1da68d9bfe3813bfdf29b6a4fc2d5ce24160636cd93efc7c87d",
+    "js/conduct.js": "edf61c996f7ed7015c44c3feb4d991b6c384e17c470df7f70548efa0db08a440",
+    "img/faces/plain-01.webp": "393f673b00e1fbdf1334161797263a88f805ca447706815fd72c790992d8132c",
+    "img/faces/portraits-01.webp": "9edff54832053146a1e27fc494624cf39f83413f66bbd15d36d959ef36c92097",
+    "img/faces/plain-03.webp": "3badc7147fd996c0735fce53b17e689f0cd09f5ed8491ae35fbd35a6c6fdf724",
+    "img/faces/plain-02.webp": "9c51374ac4b2fc8524f113d8f16fd367ae553c731f1e20325835d52340431f7d"
+  }
+}

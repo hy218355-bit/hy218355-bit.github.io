@@ -807,6 +807,8 @@ html[data-season="snow"]{--season-band:linear-gradient(90deg,#DDE8F3,#FFFFFF,#B9
 .rchip>b{display:flex;align-items:center;gap:7px}.rchip>b .member-face{border-radius:6px}.meta{font-size:12px}#piece[data-tip]::after{content:'?';display:inline-grid;place-items:center;width:18px;height:18px;border:1px solid var(--rule);border-radius:50%;font-size:10px;vertical-align:3px;margin-left:7px;color:var(--ink-soft)}
 :root[data-fx-mode="off"] *,:root[data-fx-mode="off"] *::before,:root[data-fx-mode="off"] *::after{animation:none!important;transition:none!important}
 [data-motion="off"] .fill{transition:none!important}[data-motion="short"] .fill{transition-duration:.3s!important}
+/* 顔を押したあとはカードまでスクロールでき、とばすボタンは手元に残す。 */
+.conduct.watch{overflow-y:auto}.conduct.watch .cd-top{position:sticky;top:0;z-index:2;background:var(--paper);padding-bottom:6px;flex-shrink:0}.conduct.watch .cd-band{flex:1 0 auto}.conduct.watch .cd-member,.conduct.watch .cd-msg,.conduct.watch .cd-legend{flex-shrink:0}
 </style>
 </head>
 <body>
@@ -983,38 +985,38 @@ html[data-season="snow"]{--season-band:linear-gradient(90deg,#DDE8F3,#FFFFFF,#B9
   <button type="button" data-tabgo="log"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 5.5C4 4.7 4.7 4 5.5 4H11v16H5.5c-.8 0-1.5-.7-1.5-1.5z"/><path d="M20 5.5c0-.8-.7-1.5-1.5-1.5H13v16h5.5c.8 0 1.5-.7 1.5-1.5z"/></svg><span>日誌</span></button>
 </nav>
 
-<script src="js/util.js?qa-final=balance-2"></script>
-<script src="js/icons.js?qa-final=balance-2"></script>
-<script src="js/face-cast.js?v=balance-1"></script>
-<script src="js/faces.js?v=balance-1"></script>
-<script src="js/instruments.js?qa-final=balance-2"></script>
-<script src="js/venues.js?qa-final=balance-2"></script>
-<script src="js/samples.js?qa-final=balance-2"></script>
-<script src="js/scores.js?qa-final=balance-2"></script>
-<script src="js/pieces/largo.js?qa-final=balance-2"></script>
-<script src="js/pieces/ode.js?qa-final=balance-2"></script>
-<script src="js/pieces/galop.js?qa-final=balance-2"></script>
-<script src="js/pieces/pomp.js?qa-final=balance-2"></script>
-<script src="js/pieces/aida.js?qa-final=balance-2"></script>
-<script src="js/pieces/hero.js?qa-final=balance-2"></script>
-<script src="js/pieces/holst.js?qa-final=balance-2"></script>
-<script src="js/pieces/hungarian.js?qa-final=balance-2"></script>
-<script src="js/pieces/flowers.js?qa-final=balance-2"></script>
-<script src="js/pieces/tell.js?qa-final=balance-2"></script>
-<script src="js/pieces/carmen.js?qa-final=balance-2"></script>
-<script src="js/pieces/valkyrie.js?qa-final=balance-2"></script>
-<script src="js/pieces/swan.js?qa-final=balance-2"></script>
-<script src="js/pieces/spring.js?qa-final=balance-2"></script>
-<script src="js/pieces/canon.js?qa-final=balance-2"></script>
+<script src="js/util.js"></script>
+<script src="js/icons.js"></script>
+<script src="js/face-cast.js?v=stage-faces-2"></script>
+<script src="js/faces.js?v=stage-faces-2"></script>
+<script src="js/instruments.js"></script>
+<script src="js/venues.js"></script>
+<script src="js/samples.js"></script>
+<script src="js/scores.js"></script>
+<script src="js/pieces/largo.js"></script>
+<script src="js/pieces/ode.js"></script>
+<script src="js/pieces/galop.js"></script>
+<script src="js/pieces/pomp.js"></script>
+<script src="js/pieces/aida.js"></script>
+<script src="js/pieces/hero.js"></script>
+<script src="js/pieces/holst.js"></script>
+<script src="js/pieces/hungarian.js"></script>
+<script src="js/pieces/flowers.js"></script>
+<script src="js/pieces/tell.js"></script>
+<script src="js/pieces/carmen.js"></script>
+<script src="js/pieces/valkyrie.js"></script>
+<script src="js/pieces/swan.js"></script>
+<script src="js/pieces/spring.js"></script>
+<script src="js/pieces/canon.js"></script>
 <script src="js/band.js?v=balance-1"></script>
-<script src="js/game.js?qa-final=balance-2"></script>
-<script src="js/engine.js?qa-final=balance-2"></script>
-<script src="js/conduct.js?qa-final=balance-2"></script>
-<script src="js/announce.js?qa-final=balance-2"></script>
-<script src="js/tunegame.js?qa-final=balance-2"></script>
-<script src="js/fx.js?qa-final=balance-2"></script>
-<script src="js/ui.js?qa-final=balance-2"></script>
+<script src="js/game.js"></script>
+<script src="js/engine.js"></script>
+<script src="js/conduct.js?v=stage-faces-2"></script>
+<script src="js/announce.js"></script>
+<script src="js/tunegame.js"></script>
+<script src="js/fx.js"></script>
+<script src="js/ui.js?v=stage-faces-3"></script>
 <div class="tip" id="tip" role="tooltip" hidden></div>
-<script src="/design/implementation/qa.js?v=balance-2"></script>
+<script src="/design/implementation/qa.js?v=stage-faces-2"></script>
 </body>
 </html>

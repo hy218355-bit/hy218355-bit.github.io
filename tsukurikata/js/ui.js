@@ -141,6 +141,7 @@ function playPerf(perf, label, onEnd, opts = {}){
   if(window.TSUKURIKATA_NATIVE) nativePost({type: 'log', msg: `play start "${label}" ${perf.notes.length} notes, ${perf.total.toFixed(1)}s, audio ${E.ac.state}`});
   nativePost({type: 'playing', on: true});
   U.ptr = buildPtr(perf);
+  U.stageMembers = stageMembers(perf);
   $('#btnStop').hidden = false; $('#btnNow').hidden = true;
   setNowPlaying();
   cancelAnimationFrame(U.raf);
@@ -184,12 +185,27 @@ function setVenue(id){
 }
 
 /* ===== ステージ（座席） ===== */
-function stageGeom(W){
-  const H = Math.round(clamp(W * 0.5, 210, 360));
+function stageGeom(W, portraits = false){
+  const H = Math.round(portraits ? clamp(W * .84, 282, 400) : clamp(W * 0.5, 210, 360));
   const R = Math.min((W / 2 - 18) / 0.78, (H - 46) / 0.92);
-  return {W, H, cx: W / 2, baseY: H - 28, R, r: clamp(R * 0.038, 6, 13)};
+  return {W, H, cx: W / 2, baseY: H - 28, R, portraits, r: portraits ? clamp((W - 36) / 7 * .42, 7.5, 17) : clamp(R * 0.038, 6, 13)};
 }
-const seatXY = (s, G) => [G.cx + s.x * G.R, G.baseY - s.y * G.R * 0.95];
+// 奥行きで5段へ分け、段の中は元の左右の順を保つ。音の位置は元の座席データを使う。
+const STAGE_FACE_ROWS=(()=>{const seats=SEATS.slice().sort((a,b)=>a.y-b.y||a.x-b.x),rows=[];for(let i=0;i<seats.length;i+=8)rows.push(seats.slice(i,i+8).sort((a,b)=>a.x-b.x));return rows;})();
+const STAGE_FACE_LAYOUT=new Map(STAGE_FACE_ROWS.flatMap((row,r)=>row.map((s,i)=>[s.id,{row:r,fraction:i/Math.max(1,row.length-1)}])));
+const stageRowY=(row,G)=>G.H-66-row*(G.H-100)/4;
+const seatXY = (s, G) => {
+  if(!G.portraits)return [G.cx + s.x * G.R, G.baseY - s.y * G.R * .95];
+  const {row,fraction}=STAGE_FACE_LAYOUT.get(s.id);
+  return [G.cx+(fraction-.5)*(G.W-36),stageRowY(row,G)+Math.abs(fraction-.5)*12];
+};
+// 昔の録音でも、いま同じ席にいる別の部員の顔へ入れ替わらないようにする。
+function stageMembers(perf){
+  const known=new Map();
+  for(const rec of S.recs||[])for(const m of rec.members||[])known.set(m.id,m);
+  for(const m of [...(S.gradMembers||[]),...S.members])known.set(m.id,m);
+  return new Map(Object.entries(buildPtr(perf)).flatMap(([seat,p])=>known.has(p.mid)?[[seat,{...known.get(p.mid),seat}]]:[]));
+}
 // 席ごとに音を並べておく（昔の録音やお手本でも、座っていた席が光るように）
 function buildPtr(perf){
   const m = {};
@@ -218,10 +234,13 @@ function stageFloor(g, G, C){
   const wall=g.createLinearGradient(0,0,0,G.H);wall.addColorStop(0,C.sheet);wall.addColorStop(1,C.paper);g.fillStyle=wall;g.fillRect(0,0,G.W,G.H);
   g.save();
   const floor=g.createLinearGradient(0,24,0,G.baseY+18);floor.addColorStop(0,C.floor);floor.addColorStop(1,C.floorLine);
-  g.fillStyle=floor;g.beginPath();g.moveTo(G.cx-G.R*.95,G.baseY+18);g.lineTo(G.cx-G.R,G.baseY-G.R*.62);g.quadraticCurveTo(G.cx,G.baseY-G.R*1.18,G.cx+G.R,G.baseY-G.R*.62);g.lineTo(G.cx+G.R*.95,G.baseY+18);g.closePath();g.fill();g.clip();
+  g.fillStyle=floor;g.beginPath();
+  if(G.portraits){g.moveTo(0,G.H);g.lineTo(12,24);g.quadraticCurveTo(G.cx,0,G.W-12,24);g.lineTo(G.W,G.H);}
+  else{g.moveTo(G.cx-G.R*.95,G.baseY+18);g.lineTo(G.cx-G.R,G.baseY-G.R*.62);g.quadraticCurveTo(G.cx,G.baseY-G.R*1.18,G.cx+G.R,G.baseY-G.R*.62);g.lineTo(G.cx+G.R*.95,G.baseY+18);}
+  g.closePath();g.fill();g.clip();
   g.strokeStyle=C.floorLine;g.lineWidth=.7;g.globalAlpha=.55;
   for(let y=24;y<G.H;y+=18){g.beginPath();g.moveTo(0,y);g.lineTo(G.W,y);g.stroke();}
-  for(const rr of [.45,.67,.88]){g.globalAlpha=.8;g.lineWidth=1.2;g.beginPath();g.arc(G.cx,G.baseY,G.R*rr,Math.PI*1.08,Math.PI*1.92);g.stroke();}
+  for(const rr of G.portraits?[0,1,2,3,4]:[.45,.67,.88]){g.globalAlpha=.8;g.lineWidth=1.2;g.beginPath();if(G.portraits){const y=stageRowY(rr,G)+G.r+12;g.moveTo(12,y+5);g.quadraticCurveTo(G.cx,y-5,G.W-12,y+5);}else g.arc(G.cx,G.baseY,G.R*rr,Math.PI*1.08,Math.PI*1.92);g.stroke();}
   g.restore();
   g.fillStyle=C.brass;g.globalAlpha=.28;
   g.beginPath();g.moveTo(0,0);g.lineTo(34,0);g.quadraticCurveTo(32,34,0,58);g.closePath();g.fill();
@@ -231,16 +250,18 @@ function stageFloor(g, G, C){
 }
 function drawStage(t = -1, cv = $('#stage'), who = null){
   const main = cv.id === 'stage';
-  const G = stageGeom(Math.max(240, cv.parentElement.clientWidth));
+  const G = stageGeom(Math.max(240, cv.parentElement.clientWidth), true);
   const {g, W, H} = fitCanvas(cv, G.H);
   const C = tok();
   stageFloor(g, G, C);
 
   const viewSec = main && U.view !== 'mel' ? U.view : null;
   const sel = main ? U.sel && memberById(U.sel) : CD.sel && memberById(CD.sel);
+  let portraits=0;
   for(const s of SEATS){
     const [x, y] = seatXY(s, G);
-    const m = S.members.find(mm => mm.seat === s.id && (!who || who.has(mm.id)));
+    const cast=main ? (t>=0 ? U.stageMembers : null) : CD.stageMembers;
+    const m = cast ? cast.get(s.id) : S.members.find(mm => mm.seat === s.id && (!who || who.has(mm.id)));
     const dim = viewSec && s.sec !== viewSec;
     g.globalAlpha = dim ? 0.3 : 1;
     const p = t >= 0 && U.ptr?.[s.id];
@@ -257,7 +278,9 @@ function drawStage(t = -1, cv = $('#stage'), who = null){
     if(m){
       g.fillStyle = skillColor(C, avgStats(m));
       g.beginPath(); g.arc(x, y, G.r, 0, Math.PI * 2); g.fill();
-      if(m.grade === 1){ g.strokeStyle = C.sheet; g.lineWidth = 1.5; g.beginPath(); g.arc(x, y, G.r - 2.5, 0, Math.PI * 2); g.stroke(); }
+      const painted=Faces.draw(g,m,x,y,G.r*2-2);if(painted)portraits++;
+      g.strokeStyle=skillColor(C,avgStats(m));g.lineWidth=2;g.beginPath();g.arc(x,y,G.r,0,Math.PI*2);g.stroke();
+      if(m.grade === 1){ g.strokeStyle = C.sheet; g.lineWidth = 1; g.beginPath(); g.arc(x, y, G.r - 1.7, 0, Math.PI * 2); g.stroke(); }
     } else {
       g.setLineDash([3, 3]); g.strokeStyle = C.soft; g.lineWidth = 1.2;
       g.beginPath(); g.arc(x, y, G.r - 1, 0, Math.PI * 2); g.stroke(); g.setLineDash([]);
@@ -266,17 +289,18 @@ function drawStage(t = -1, cv = $('#stage'), who = null){
       g.strokeStyle = C.ink; g.lineWidth = 3; g.globalAlpha = 1;
       g.beginPath(); g.arc(x, y, G.r + 3.5, 0, Math.PI * 2); g.stroke();
     }
-    if(G.r >= 10){
-      g.fillStyle = m ? C.rkInk : C.soft;
-      g.font = `700 ${G.r >= 13 ? 9 : 8}px ${C.fBody}`;
-      g.fillText(s.sec === 'perc' ? 'Perc' : INST[s.inst].short.replace('Sax', 'S'), x, y + 0.5);
+    if(G.r >= 12){
+      g.fillStyle = m ? C.ink : C.soft;
+      g.font = `700 ${G.r >= 13 ? 9 : 7}px ${C.fBody}`;
+      g.fillText(s.sec === 'perc' ? 'Perc' : INST[s.inst].short.replace('Sax', 'S'), x, G.portraits ? y+G.r+9 : y+.5);
     }
     g.globalAlpha = 1;
   }
+  if(cv.dataset.portraitCount!==String(portraits))cv.dataset.portraitCount=String(portraits);
 }
 function seatAt(ev, cv = $('#stage')){
   const rect = cv.getBoundingClientRect();
-  const G = stageGeom(Math.max(240, rect.width));
+  const G = stageGeom(Math.max(240, rect.width),cv.id!=='asgStage');
   const px = ev.clientX - rect.left, py = ev.clientY - rect.top;
   let best = null, bd = Infinity;
   for(const s of SEATS){
@@ -1384,11 +1408,13 @@ function showCdMember(id){
   const C = tok(), mood = (CD.perf?.mental || []).find(x => x.mid === m.id)?.kind;
   const plays = CD.who?.has(m.id), solo = U.solo === `member:${m.id}`;
   el.innerHTML = `<div class="cm-head">${memberFace(m,54,{mood})}<span><b>${esc(m.name)}</b><small>${m.grade}年・${esc(PART_LABEL[SEAT[m.seat].part])}${m.title ? '・' + esc(m.title) : ''}</small></span><button class="btn small quiet" type="button" data-cdm="close">閉じる</button></div>
+    ${plays ? `<div class="row"><button class="btn small" type="button" data-cdm="solo">${solo ? '全員の音にもどす' : 'この子の音だけ聴く'}</button></div>` : ''}
     <p class="cm-say">${esc(memberSays(m))}</p>
     <div class="cm-stats">${STAT_KEYS.map(k => `<span class="cm-st">${STAT_LABEL[k]}<span class="track"><span class="fill" style="width:${clamp(m.stats[k], 0, 100)}%;background:${skillColor(C, m.stats[k])}"></span></span>${rankBadge(m.stats[k])}</span>`).join('')}</div>
     <p class="cm-note">本番の強さ ${rankBadge(m.mental ?? 40)}${mood === 'zone' ? '・今日は、いつも以上の音が出ている' : mood === 'freeze' ? '・今日は、緊張で頭が真っ白になっている' : ''}${plays ? '' : '・この本番には出ていない'}${skillChips(m)}</p>
-    ${plays ? `<div class="row"><button class="btn small" type="button" data-cdm="solo">${solo ? '全員の音にもどす' : 'この子の音だけ聴く'}</button></div>` : ''}`;
+    `;
   el.hidden = false;
+  if(CD.phase==='watch'&&narrow.matches)el.scrollIntoView({block:'nearest',behavior:!fxCalm()&&U.fxMode==='full'?'smooth':'auto'});
   if(!U.playing) drawStage(-1, $('#cdStage'), CD.who);
 }
 function memberSays(m){
@@ -1664,7 +1690,8 @@ function bind(){
   $('#stage').addEventListener('click', e => {
     const s = seatAt(e);
     if(!s) return;
-    const m = S.members.find(x => x.seat === s.id);
+    // 卒業生の録音を押したとき、同じ席の現部員のカードを出さない。
+    const m = U.playing && U.stageMembers ? S.members.find(x => x.id === U.stageMembers.get(s.id)?.id) : S.members.find(x => x.seat === s.id);
     U.sel = m ? m.id : null;
     U.view = s.sec;
     placeCard('stage');
@@ -1839,6 +1866,11 @@ function bind(){
   window.matchMedia?.('(prefers-color-scheme: dark)').addEventListener?.('change', () => { redraw(); renderRoster(); });
   new MutationObserver(() => { redraw(); renderRoster(); }).observe(document.documentElement, {attributes: true, attributeFilter: ['data-theme']});
   document.fonts?.ready.then(redraw);
+  document.addEventListener('facesready',()=>{
+    if(U.playing)return;
+    if(!tabHidden('play'))drawStage(-1);
+    if(!$('#conduct').hidden)drawStage(-1,$('#cdStage'),CD.who);
+  });
 }
 
 function start(data){

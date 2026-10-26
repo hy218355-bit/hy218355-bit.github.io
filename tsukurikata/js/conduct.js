@@ -26,6 +26,7 @@ function openConduct(stage = null){
   $('#conduct').classList.remove('watch'); $('#cdClose').textContent = 'やめる'; $('#cdEyebrow').textContent = '指揮';
   soloAll();   // 指揮するときは、全員の音で
   CD.perf = stage ? perform(recCtx(stage.rec)) : perform(currentCtx());
+  CD.stageMembers = stageMembers(CD.perf);
   // 舞台にいる部員（本番ならオーディションで選んだメンバー）を、指揮台から見えるように描く
   CD.who = new Set([...CD.perf.notes, ...CD.perf.hits].map(n => n.mid));
   CD.phase = 'count'; CD.count = []; CD.lv = []; CD.level = 1; CD.clock = null; CD.rec = null; CD.lastTap = 0; CD.idleHint = false; CD.beatShown = -1; CD.tmHint = null;
@@ -57,6 +58,7 @@ function openConduct(stage = null){
 function openWatch(perf, title){
   cancelAnimationFrame(CD.raf);
   CD.phase = 'watch'; CD.stage = null; CD.perf = perf;
+  CD.stageMembers = stageMembers(perf);
   CD.who = new Set([...perf.notes, ...perf.hits].map(n => n.mid));
   $('#cdTitle').textContent = title;
   $('#cdEyebrow').textContent = '本番';
