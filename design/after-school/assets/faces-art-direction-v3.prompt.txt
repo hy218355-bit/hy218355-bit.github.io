@@ -1,0 +1,40 @@
+顔立ちの違いを見直した第3版・生成記録
+
+組み込み image_gen を使用（CLI不使用）。
+オーナーの指摘：「顔似てる」。1〜3年生共通の若さは維持。
+前回の原画を編集すると顔の共通性が強く残ったため、採用見本は参照画像なしで新規制作した。
+輪郭の幅・長さ、頬、顎、目の開きと間隔、眉、鼻、口の形を12人ごとに指定した。
+正面寄り・目を開いた穏やかな表情で、表情以外の差を確認するためのシート。
+顔の絵柄見本だけで、ゲーム本体・SVG・既存の四画面への仮配置は未変更。
+生成原稿：/Users/yh/.codex/generated_images/01a175a5-1e3d-71b0-810a-8797cdde01e1/exec-d3d02e8c-5da4-4ebb-8f0b-674158bbd744.png
+保存画像：faces-art-direction-v3.webp（1440×1080、機械的な縮小・圧縮のみ）。
+検討した途中の原稿：/Users/yh/.codex/generated_images/01a175a5-1e3d-71b0-810a-8797cdde01e1/exec-67836506-a124-4121-a587-900809c83cc2.png（表情差に寄ったため、最終見本には使わない）。
+
+最終プロンプト：
+Create an ORIGINAL character casting sheet for a contemporary Japanese high-school wind-ensemble narrative game. 12 distinct ordinary Japanese students, all youthful approximately 15–16, used with the same face from school year one to three. Landscape 4:3, exactly 4 columns and 3 rows of equally sized individual head-and-shoulder portraits. Everyone faces almost straight toward the viewer, both eyes open, simple neutral mouth or subtle closed smile. This sheet tests identity, NOT expressions, poses or different emotions. No text.
+
+ART DIRECTION: refined modern 2020s hand-drawn anime-influenced indie game art, delicate variable-weight ink contours, soft painterly skin and hair, controlled natural warm right side lighting, dark navy uniform/cardigan shoulders and cream shirts, flat pale ivory background. Attractive approachable believable teens, sensitive character drawing and lived-in personality. Natural medium and small eyes with visible eyelids, no glamour or makeup. Neck and shoulders youthful and understated. NOT old fashioned, NOT vector clipart, NOT chibi, NOT child faces.
+
+CRITICAL DESIGN GOAL: twelve unrelated faces, not twelve hairstyle variants on a pretty base. A studio character designer's diverse ensemble cast with STRONGLY DIFFERENT FACE GEOMETRY. Hair can be varied but is secondary. If everyone wore an identical cap their different faces would remain recognizable. Do not make all faces slim ovals with pointed chins, all eyes big shiny almonds, all noses tiny triangles or all mouths the same. The primary differences are cranial width, cheek fullness, lower-face length, eye size and spacing, brow shape and thickness, nose width and bridge, lip shape and mouth width. Distribute these differences across short-haired and long-haired students equally, no gendered face template.
+
+Exact facial casting left to right, row by row. Use real structural contrast, not tiny cosmetic variations:
+ROW 1:
+1. A distinctly BROAD SOFT SQUARE face with a broad rounded chin, low thick straight brows, small NARROW MONOLID horizontal eyes, a broad small rounded nose, wide thin mouth. Very short plain crop, no fashion spikes.
+2. A distinctly ROUND full-cheeked face, short lower face, small WIDE-SET round eyes, sparse short eyebrows, flat short nose, small full-lipped mouth. Simple shoulder-length straight hair tucked behind ears, not a perfect bob.
+3. A distinctly LONG NARROW face with long soft chin and high forehead, small CLOSE-SET drooping eyes, fine long level brows, longer visible straight nose bridge, narrow relaxed mouth. Plain low tied-back long hair, not swept fashion hair.
+4. A distinctly SHORT HEART-shaped face, wide forehead, small round chin, medium WIDE-SET upturned almond eyes, thick noticeably curved brows, short tiny upturned nose, wide gently curved mouth. Uneven short fringe with short hair.
+
+ROW 2:
+5. Broad face with extremely full soft cheeks and a very short chin, small CLOSE-SET almond eyes, thick high curved brows, wide rounded nose and wide full lips; messy short curls.
+6. Tall softly RECTANGULAR face with nearly parallel sides and rounded flat chin, medium NARROW horizontal eyes spaced far apart, short straight brows, small long nose, thin wide mouth. Plain straight blunt bob.
+7. Small softly TRIANGULAR face with broad forehead, narrow cheeks and a short rounded chin, medium round CLOSE-SET open eyes, thin slanting brows, broad low nose, compact thick lips. Medium unstyled center part.
+8. A BROAD OVAL face with low forehead and wide jaw, medium gently DROOPING eyes, low thick angled eyebrows, visible short straight nose, small downturned neutral mouth. Low ponytail, no framing wisps that hide the jaw.
+
+ROW 3:
+9. A LONG OVAL face with long round chin, narrow WIDE-SET monolid eyes, fine high arched brows, small broad nose, wide thin lips with a slight smile. Straight long hair, center-part forehead exposed.
+10. A compact ROUND face with gently prominent cheeks, large widely spaced ROUND eyes, short straight dense eyebrows, short flat nose, small thin straight mouth. Short straight bowl-like crop without glamorous styling.
+11. A broad soft DIAMOND face with wide cheekbones, narrow rounded jaw and high forehead, narrow CLOSE-SET upturned eyes, thick long straight brows, longer rounded nose, very wide gently smiling mouth. Short wavy side-part bob.
+12. A softly SQUARE face with short flat chin, small wide-set drooping eyes visible through simple rectangular spectacles, sparse curved brows, broad rounded nose, small full mouth. Naturally untidy medium-short hair.
+
+All 12 eyes OPEN, restrained neutral or closed-smile expressions, no toothy grins, no expression tricks, no extreme head tilts. Diverse healthy teenage physiques visible in shoulders; the round-cheeked students must actually be round-cheeked, not all slender fashion models. No adult facial hair, no long mature necks, no chiselled mature jaws, no idealized idol cast. No exaggerated comic caricature, ethnic stereotypes, props, instruments, frames, lettering, numbers, logos or watermarks. Keep hair fully inside its cell. Keep youthful everyday school atmosphere, polished art with genuinely differentiated anatomical identities.
+
