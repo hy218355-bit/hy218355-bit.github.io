@@ -3,6 +3,7 @@
 const INSTRUMENT_LINES={
  flute:'M3 10H21V14H3ZM6 10V14M10 10V14M14 10V14M18 10V14',
  reed:'M11 2H13V6L14 18L17 22H7L10 18ZM10 10H14M10 14H14',
+ oboe:'M12 1V5M10 5H14L15 21H9ZM10 10H14M10 14H14M9 18H15',
  bassoon:'M9 22L7 6H11L13 22ZM11 7L15 4H18V2M8 12H11M9 17H12',
  bassclarinet:'M8 3H12V5H10V16Q10 21 16 20L20 16V22H15Q7 23 7 17V7M8 11H11',
  sax:'M6 3H10L13 16Q14 19 17 16L16 11L22 10L21 18Q15 25 10 19L7 6H4M10 10L13 9M11 14L14 13',
@@ -17,7 +18,11 @@ const INSTRUMENT_LINES={
  drum:'M10 3C0 3 0 21 10 21C20 21 20 3 10 3ZM10 3H16C24 3 24 21 16 21H10M15 5L15 19M7 21L5 24M17 21L19 24',
  cymbal:'M12 8C0 8 0 15 12 15C24 15 24 8 12 8ZM12 15V23M6 23L12 20L18 23M9 8L10 5H14L15 8M4 3L7 6M20 3L17 6',
 };
-const INSTRUMENT_SHAPES={picc:'flute',fl:'flute',ob:'reed',fg:'bassoon',ebcl:'reed',cl:'reed',bcl:'bassclarinet',asax:'sax',tsax:'sax',bsax:'sax',tp:'trumpet',hn:'horn',tb:'trombone',btb:'trombone',euph:'euph',tuba:'tuba',cb:'bass',timp:'timp',sd:'snare',bd:'drum',cym:'cymbal'};
+const INSTRUMENT_SHAPES={picc:'flute',fl:'flute',ob:'oboe',fg:'bassoon',ebcl:'reed',cl:'reed',bcl:'bassclarinet',asax:'sax',tsax:'sax',bsax:'sax',tp:'trumpet',hn:'horn',tb:'trombone',btb:'trombone',euph:'euph',tuba:'tuba',cb:'bass',timp:'timp',sd:'snare',bd:'drum',cym:'cymbal'};
+function instrumentIcon(inst){
+ const line=INSTRUMENT_LINES[INSTRUMENT_SHAPES[inst]];if(!line)return '';
+ return `<svg class="instrument-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="${line}"/></svg>`;
+}
 const instrumentPaths=new Map();
 function drawInstrument(g,inst,x,y,size,color){
  const shape=INSTRUMENT_SHAPES[inst];if(!shape)return false;

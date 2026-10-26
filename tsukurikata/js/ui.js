@@ -935,6 +935,17 @@ function closeGradRoll(done){
   if(done){ commit({...S, winter: {...S.winter, gradDone: true}}); renderAll(); scrollTo(0, 0); }
 }
 /* ===== 冬（11月 新体制 → 1月 アンサンブルコンテスト → 3月 卒業式） ===== */
+const ensembleSubmitLabel=k=>k>=ENS_MIN?`この${k}人で出る`:`あと${ENS_MIN-k}人を選ぶ`;
+// 選択で一覧を作り直さず、押した場所とキーボードのフォーカスを保つ。
+function updateEnsembleSelection(){
+  const k=U.ensPick.size;
+  for(const b of document.querySelectorAll('#week [data-ens]')){
+    const picked=U.ensPick.has(b.dataset.ens);b.setAttribute('aria-pressed',String(picked));
+    b.setAttribute('aria-disabled',String(!picked&&k>=ENS_MAX));
+  }
+  const submit=$('#week [data-act="ensgo"]');
+  if(submit){submit.disabled=k<ENS_MIN||k>ENS_MAX;submit.textContent=ensembleSubmitLabel(k);}
+}
 function renderWinter(w){
   const st = winterStep(S), names = S.retiredNow?.names || [];
   if(st.id === 'plan'){
@@ -947,15 +958,19 @@ function renderWinter(w){
     const e = S.winter.ens;
     const intro = `<div class="event"><span class="tag">1月・アンサンブルコンテスト</span><span>3〜8人の少人数で出る、冬の大会。今年の自由曲を、選んだ人数で吹く。少人数なので、一人ひとりの音程・リズム・音色・表現がそのまま聞こえる。出た部員は、聴き合う耳と度胸が育つ。</span></div>`;
     if(!e){
-      const key = `${S.year}:ens`;
+      const key = `${S.recruitSeed||0}:${S.year}:ens`;
       if(U.ensKey !== key){ U.ensKey = key; U.ensPick = new Set(autoEnsemble(S)); }
       const k = U.ensPick.size, ok = k >= ENS_MIN && k <= ENS_MAX;
-      const chip = m => `<button class="chip" type="button" data-ens="${m.id}" aria-pressed="${U.ensPick.has(m.id)}"><span class="ens-check" aria-hidden="true"></span>${esc(m.name)}<small>${m.grade}年・${rankBadge(avgStat(m))}</small></button>`;
+      const chip = m => {
+        const inst=SEAT[m.seat].inst,picked=U.ensPick.has(m.id);
+        const label=`${m.name} ${m.grade}年・${INST[inst].name}・${rankOf(avgStat(m))}`;
+        return `<button class="chip ens-member" type="button" data-ens="${m.id}" aria-label="${esc(label)}" aria-pressed="${picked}" aria-disabled="${!picked&&k>=ENS_MAX}">${memberFace(m,34)}<span class="ens-person"><b>${esc(m.name)}</b><small title="${esc(INST[inst].name)}">${instrumentIcon(inst)}<span>${m.grade}年</span>${rankBadge(avgStat(m))}</small></span><span class="ens-check" aria-hidden="true"></span></button>`;
+      };
       const secs = SECTIONS.map(sc => [sc, seated(S).filter(m => secOf(m) === sc.id)]).filter(([, l]) => l.length)
-        .map(([sc, l]) => `<div class="chips opsec"><span class="oplab">${sc.name}</span>${l.map(chip).join('')}</div>`).join('');
-      w.innerHTML = `${intro}<p class="small">出る部員を${ENS_MIN}〜${ENS_MAX}人選ぶ（名前の横は、力のランク）。はじめは、うまい部員のパートを中心に5人を選んである。</p>
+        .map(([sc, l]) => `<div class="ens-section"><h3>${sc.name}</h3><div class="ens-grid">${l.map(chip).join('')}</div></div>`).join('');
+      w.innerHTML = `<div class="ens-intro"><span class="small">${ENS_MIN}〜${ENS_MAX}人を選ぶ</span><button class="help-button" type="button" aria-label="アンサンブルコンテスト"${tipAttr('アンサンブルコンテスト','3〜8人の少人数で出る、冬の大会。今年の自由曲を、選んだ人数で吹く。少人数なので、一人ひとりの音程・リズム・音色・表現がそのまま聞こえる。出た部員は、聴き合う耳と度胸が育つ。G〜Sは、力のランク。はじめは、うまい部員のパートを中心に5人を選んである。')}>?</button></div>
         <div class="episode ensp">${secs}</div>
-        <div class="transport"><button class="btn primary" type="button" data-act="ensgo"${ok ? '' : ' disabled'}>${ok ? `この${k}人で出る` : `${ENS_MIN}〜${ENS_MAX}人を選ぶ（いま${k}人）`}</button><button class="btn quiet" type="button" data-act="ensskip">今年は出ない</button></div>`;
+        <div class="transport ens-actions"><button class="btn primary" type="button" data-act="ensgo"${ok ? '' : ' disabled'}>${ensembleSubmitLabel(k)}</button><button class="btn quiet" type="button" data-act="ensskip">今年は出ない</button></div>`;
       return;
     }
     if(e.skipped){
@@ -1524,6 +1539,7 @@ function showTip(el){
   if(tip.dataset.for === el.dataset.tipname && !tip.hidden){ hideTip(); return; }
   tip.innerHTML = `<b>${esc(el.dataset.tipname)}</b>${esc(el.dataset.tip)}`;
   tip.dataset.for = el.dataset.tipname;
+  tip.classList.toggle('over-stage',Boolean(el.closest('.conduct')));
   tip.hidden = false; tip.classList.remove('on');
   const r = el.getBoundingClientRect(), w = tip.offsetWidth, h = tip.offsetHeight;
   const left = clamp(r.left, 16, innerWidth - 16 - w);
@@ -1759,7 +1775,7 @@ function bind(){
     if(b.dataset.ep !== undefined){ haptic('tap'); commit(resolveEpisode(S, +b.dataset.ep)); renderAll(); refreshNow(); return; }
     if(b.dataset.cs !== undefined){ haptic('tap'); commit(resolveConsult(S, +b.dataset.cs)); renderAll(); return; }
     if(b.dataset.wplan){ haptic('tap'); commit(chooseWinterPlan(S, b.dataset.wplan)); renderAll(); scrollTo(0, 0); return; }
-    if(b.dataset.ens){ const id = b.dataset.ens; if(U.ensPick.has(id)) U.ensPick.delete(id); else if(U.ensPick.size < ENS_MAX) U.ensPick.add(id); else return; haptic('tap'); renderWeek(); return; }
+    if(b.dataset.ens){ const id = b.dataset.ens; if(U.ensPick.has(id)) U.ensPick.delete(id); else if(U.ensPick.size < ENS_MAX) U.ensPick.add(id); else return; haptic('tap'); updateEnsembleSelection(); return; }
     if(b.dataset.split){ haptic('tap'); commit(setSplit(S, b.dataset.split)); renderWeek(); return; }
     if(b.dataset.rid){ U.asg.sel = b.dataset.rid; haptic('tap'); asgUpdate(); return; }
     if(b.dataset.asg === 'bench'){ if(U.asg?.sel){ U.asg.picks[U.asg.sel] = null; asgUpdate(); } return; }

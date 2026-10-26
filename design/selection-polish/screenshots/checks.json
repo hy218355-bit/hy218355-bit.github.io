@@ -1,0 +1,198 @@
+[
+  {
+    "view": "before",
+    "listHeight": 1987,
+    "scrollWidth": 375,
+    "selected": 4,
+    "width": 375
+  },
+  {
+    "border": "rgb(212, 215, 201)",
+    "cardHeight": 64.6953125,
+    "decisionBottom": 744,
+    "faces": 39,
+    "focusRetained": true,
+    "icons": 39,
+    "listHeight": 1778.1015625,
+    "nameFont": "13px",
+    "pressed": "false",
+    "scrollWidth": 375,
+    "tabTop": 751,
+    "theme": "light",
+    "view": "ensemble",
+    "width": 375
+  },
+  {
+    "view": "limit",
+    "count": 8,
+    "disabled": 31,
+    "submit": "この8人で出る",
+    "ninthIgnored": true
+  },
+  {
+    "view": "minimum",
+    "count": 2,
+    "disabled": true,
+    "submit": "あと1人を選ぶ",
+    "unavailable": 0
+  },
+  {
+    "view": "keyboard",
+    "count": 3,
+    "disabled": false,
+    "focus": "m2028-n1-cafe",
+    "submit": "この3人で出る"
+  },
+  {
+    "view": "stage",
+    "errors": [],
+    "steps": 0,
+    "theme": "dark",
+    "width": 375,
+    "scrollWidth": 375,
+    "faceCount": 78,
+    "stagePortraits": 39,
+    "watchPortraits": 0,
+    "stageCache": {
+      "images": 10,
+      "stamps": 37
+    }
+  },
+  {
+    "view": "stage",
+    "errors": [],
+    "steps": 0,
+    "theme": "light",
+    "width": 375,
+    "scrollWidth": 375,
+    "faceCount": 78,
+    "stagePortraits": 39,
+    "watchPortraits": 0,
+    "stageCache": {
+      "images": 10,
+      "stamps": 37
+    }
+  },
+  {
+    "view": "stage-help",
+    "aboveStage": true,
+    "bottom": 748.3828125,
+    "scrollWidth": 375,
+    "top": 622,
+    "visible": true,
+    "width": 375,
+    "z": "81"
+  },
+  {
+    "view": "conduct",
+    "errors": [],
+    "steps": 0,
+    "theme": "dark",
+    "width": 375,
+    "scrollWidth": 375,
+    "faceCount": 78,
+    "stagePortraits": 39,
+    "watchPortraits": 39,
+    "stageCache": {
+      "images": 10,
+      "stamps": 37
+    }
+  },
+  {
+    "view": "last-member",
+    "before": {
+      "bar": 686,
+      "last": 438.296875,
+      "y": 1697.5
+    },
+    "after": {
+      "focus": "m2028-n39-cafe",
+      "pressed": "false",
+      "y": 1697.5
+    }
+  },
+  {
+    "view": "playing-selection",
+    "decisionBottom": 682,
+    "miniBottom": 748,
+    "miniTop": 696,
+    "miniVisible": true,
+    "scrollWidth": 375,
+    "tabTop": 751,
+    "width": 375
+  },
+  {
+    "scrollWidth": 375,
+    "tab": "week",
+    "theme": "dark",
+    "view": "tab",
+    "width": 375
+  },
+  {
+    "scrollWidth": 375,
+    "tab": "play",
+    "theme": "dark",
+    "view": "tab",
+    "width": 375
+  },
+  {
+    "scrollWidth": 375,
+    "tab": "members",
+    "theme": "dark",
+    "view": "tab",
+    "width": 375
+  },
+  {
+    "scrollWidth": 375,
+    "tab": "log",
+    "theme": "dark",
+    "view": "tab",
+    "width": 375
+  },
+  {
+    "scrollWidth": 375,
+    "tab": "week",
+    "theme": "light",
+    "view": "tab",
+    "width": 375
+  },
+  {
+    "scrollWidth": 375,
+    "tab": "play",
+    "theme": "light",
+    "view": "tab",
+    "width": 375
+  },
+  {
+    "scrollWidth": 375,
+    "tab": "members",
+    "theme": "light",
+    "view": "tab",
+    "width": 375
+  },
+  {
+    "scrollWidth": 375,
+    "tab": "log",
+    "theme": "light",
+    "view": "tab",
+    "width": 375
+  },
+  {
+    "view": "year",
+    "errors": [],
+    "steps": 49,
+    "year": 2027,
+    "members": 8,
+    "saveVersion": 2,
+    "theme": "light",
+    "width": 375,
+    "scrollWidth": 375,
+    "faceCount": 10,
+    "stagePortraits": 8,
+    "watchPortraits": 0,
+    "stageCache": {
+      "images": 10,
+      "stamps": 41
+    }
+  }
+]

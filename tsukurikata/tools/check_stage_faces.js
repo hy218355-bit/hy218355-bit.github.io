@@ -31,7 +31,7 @@ ctx.Path2D=class{constructor(d){assert.ok(d.startsWith('M'));paths++;}};
 vm.runInContext(fs.readFileSync(path.join(root,'js/instrument-icons.js'),'utf8'),ctx);
 ctx.iconCanvas={save(){},restore(){},translate(){},scale(){},stroke(){strokes++;}};
 vm.runInContext("for(let frame=0;frame<100;frame++)for(const s of SEATS)if(!drawInstrument(iconCanvas,s.inst,20,20,18,'ink'))throw Error('楽器の絵がない: '+s.inst);",ctx);
-assert.equal(paths,15);assert.equal(strokes,3900);
+assert.equal(paths,16);assert.equal(strokes,3900);
 ctx.target={drawImage(){targetDraws++;}};
 vm.runInContext("for(let i=0;i<100;i++)if(Faces.draw(target,{id:'m2026-n1',name:'佐藤 陽菜'},20,20,24))throw Error('原画の読み込み前に描いた');",ctx);
 assert.equal(images.length,1);assert.equal(stamps,0);images[0].loaded();

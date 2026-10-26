@@ -297,6 +297,32 @@ select{background:var(--sheet);border:1.5px solid var(--rule);border-radius:8px;
 .chip[aria-pressed="true"] .ens-check{background:var(--brass);border-color:var(--brass);color:var(--sheet)}
 .chip[aria-pressed="true"] .ens-check::after{content:'';width:8px;height:4px;border-left:2px solid currentColor;border-bottom:2px solid currentColor;transform:translateY(-1px) rotate(-45deg)}
 .ensp .chip[data-ens]:focus-visible{outline:2px solid var(--ink);outline-offset:3px}
+.ens-intro{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px}
+.ens-intro .help-button{margin:0;min-width:44px;min-height:44px}
+.episode.ensp{padding:0;border:0;background:none;gap:14px}
+.ens-section h3{font:700 12px var(--f-body);color:var(--ink-soft);margin:0 0 6px;letter-spacing:.06em}
+.ens-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
+.ensp .chip.ens-member{position:relative;min-width:0;min-height:64px;padding:8px 7px;gap:7px;text-align:left;scroll-margin-block:100px}
+.ens-member .member-face{border-radius:50%}
+.ens-person{display:grid;gap:6px;min-width:0;flex:1}
+.ens-person b{font-size:13px;line-height:1.5;white-space:nowrap;letter-spacing:0;font-weight:500}
+.ens-member[aria-pressed="true"] .ens-person b{font-weight:700}
+.episode .ens-person small{display:flex;align-items:center;gap:5px;margin:0;line-height:1}
+.ens-person .instrument-icon{width:17px;height:17px;flex:none;color:var(--ink)}
+.ens-person .rk{width:20px;height:20px;font-size:11px}
+.ens-member .ens-check{position:absolute;top:4px;right:4px;width:12px;height:12px;border-width:1px}
+.ens-member[aria-pressed="true"] .ens-check::after{width:6px;height:3px;border-width:0 0 1.5px 1.5px}
+.ens-member[aria-disabled="true"]{opacity:.5;cursor:default}
+.ens-actions{margin-top:18px;padding:12px 0 2px;border-top:1px solid var(--rule)}
+.ens-actions .btn{min-height:46px}
+.stage-key{align-items:center;gap:8px;justify-content:space-between}
+.stage-key .help-button{margin:0;flex:none;min-width:44px;min-height:44px}
+@media(max-width:960px){
+ .tabbed .ens-actions{position:fixed;left:max(16px,env(safe-area-inset-left,0px));right:max(16px,env(safe-area-inset-right,0px));bottom:calc(60px + env(safe-area-inset-bottom,0px));z-index:45;display:grid;grid-template-columns:minmax(0,1.4fr) minmax(0,1fr);gap:8px;padding:12px 0 8px;border-top:0;background:linear-gradient(transparent,var(--paper) 18%)}
+ .ens-actions .btn{font-size:12px;padding:10px 8px;white-space:nowrap}
+ .tabbed:has(.mini:not([hidden])) .ens-actions{bottom:calc(122px + env(safe-area-inset-bottom,0px))}
+}
+@media(min-width:600px){.ens-grid{grid-template-columns:repeat(auto-fill,minmax(164px,1fr))}.ens-person b{font-size:14px}}
 .chip.none{border-style:dashed}
 /* はじめての人への案内：次に押すボタンがゆっくり光る */
 .btn.guide{outline:2px solid var(--brass);outline-offset:2px;animation:guide 1.8s ease-in-out infinite}
@@ -548,6 +574,7 @@ tr.empty td{color:var(--ink-soft)}
 .tip{position:absolute;z-index:58;width:min(300px,calc(100vw - 32px));padding:10px 12px;border-radius:10px;background:var(--sheet);color:var(--ink);border:1px solid var(--rule);
   box-shadow:0 8px 24px var(--shadow);font-size:13px;line-height:1.6;opacity:0;transform:translateY(-6px) scale(.97);transform-origin:top left;transition:opacity .2s ease,transform .2s ease}
 .tip.up{transform:translateY(6px) scale(.97);transform-origin:bottom left}
+.tip.over-stage{z-index:81}
 .tip.on{opacity:1;transform:none}
 .tip b{display:block;color:var(--brass);font-size:12px;margin-bottom:2px}
 @media (prefers-reduced-motion: reduce){.tip,.tip.up{transform:none;transition:opacity .12s}}
@@ -845,7 +872,7 @@ html[data-season="snow"]{--season-band:linear-gradient(90deg,#DDE8F3,#FFFFFF,#B9
           </div>
         </div>
         <div class="stage-wrap"><canvas id="stage" role="img" aria-label="ステージの座席。色が部員の実力、演奏中は音量に合わせて光る。席を押すと部員の詳しい情報が出る。"></canvas></div>
-        <p class="legend"><span data-tip="力は G・F・E・D・C・B・A・S の8段階。右ほどうまい" data-tipname="ランク" role="button" tabindex="0">色：部員の力<i class="rkscale"><i class="rk rk-g">G</i><i class="rk rk-f">F</i><i class="rk rk-e">E</i><i class="rk rk-d">D</i><i class="rk rk-c">C</i><i class="rk rk-b">B</i><i class="rk rk-a">A</i><i class="rk rk-s">S</i></i></span><span><i class="sw sw-ring"></i>内側の輪：1年生</span><span><i class="sw sw-glow"></i>光る：いま音を出している（赤く光ったら音を外した）</span><span><i class="sw sw-empty"></i>点線：空いている席</span></p>
+        <p class="legend stage-key"><span data-tip="力は G・F・E・D・C・B・A・S の8段階。右ほどうまい" data-tipname="ランク" role="button" tabindex="0">色：部員の力<i class="rkscale"><i class="rk rk-g">G</i><i class="rk rk-f">F</i><i class="rk rk-e">E</i><i class="rk rk-d">D</i><i class="rk rk-c">C</i><i class="rk rk-b">B</i><i class="rk rk-a">A</i><i class="rk rk-s">S</i></i></span><button class="help-button" type="button" aria-label="舞台の見方" data-tipname="舞台の見方" data-tip="内側の輪：1年生 光る：いま音を出している（赤く光ったら音を外した） 点線：空いている席">?</button></p>
         <div class="transport">
           <button class="btn primary" id="btnNow" type="button">▶ いまの音で合奏</button>
           <button class="btn quiet" id="btnStop" type="button" hidden>■ 止める</button>
@@ -944,7 +971,7 @@ html[data-season="snow"]{--season-band:linear-gradient(90deg,#DDE8F3,#FFFFFF,#B9
   </div>
   <p class="cd-msg" id="cdMsg" aria-live="polite"></p>
   <div class="cd-band"><div class="cd-stagewrap"><canvas id="cdStage" role="img" aria-label="舞台の部員。音を出している部員が光る。"></canvas><div class="cd-curtain" aria-hidden="true"><i></i><i></i><div class="cd-intro"></div></div></div><div class="cd-prog" aria-hidden="true"><i id="cdProg"></i></div></div>
-  <p class="legend cd-legend"><span data-tip="力は G・F・E・D・C・B・A・S の8段階。右ほどうまい" data-tipname="ランク" role="button" tabindex="0">色：部員の力<i class="rkscale"><i class="rk rk-g">G</i><i class="rk rk-f">F</i><i class="rk rk-e">E</i><i class="rk rk-d">D</i><i class="rk rk-c">C</i><i class="rk rk-b">B</i><i class="rk rk-a">A</i><i class="rk rk-s">S</i></i></span><span><i class="sw sw-ring"></i>内側の輪：1年生</span><span><i class="sw sw-glow"></i>光る：いま音を出している（赤く光ったら音を外した）</span><span><i class="sw sw-empty"></i>点線：空いている席</span><span>部員をタップすると、その子の様子が出る</span></p>
+  <p class="legend stage-key cd-legend"><span data-tip="力は G・F・E・D・C・B・A・S の8段階。右ほどうまい" data-tipname="ランク" role="button" tabindex="0">色：部員の力<i class="rkscale"><i class="rk rk-g">G</i><i class="rk rk-f">F</i><i class="rk rk-e">E</i><i class="rk rk-d">D</i><i class="rk rk-c">C</i><i class="rk rk-b">B</i><i class="rk rk-a">A</i><i class="rk rk-s">S</i></i></span><button class="help-button" type="button" aria-label="舞台の見方" data-tipname="舞台の見方" data-tip="内側の輪：1年生 光る：いま音を出している（赤く光ったら音を外した） 点線：空いている席 部員をタップすると、その子の様子が出る">?</button></p>
   <div class="cd-member" id="cdMember" hidden></div>
   <div class="cd-pad" id="cdPad" role="button" tabindex="0" aria-label="拍に合わせてここをタップ（上ほど大きく、下ほど小さく）">
     <svg class="cd-pattern" id="cdPattern" viewBox="0 0 200 210" aria-hidden="true"></svg>
@@ -994,7 +1021,7 @@ html[data-season="snow"]{--season-band:linear-gradient(90deg,#DDE8F3,#FFFFFF,#B9
 
 <script src="js/util.js"></script>
 <script src="js/icons.js"></script>
-<script src="js/instrument-icons.js"></script>
+<script src="js/instrument-icons.js?v=selection-polish-1"></script>
 <script src="js/face-cast.js?v=cast100-1"></script>
 <script src="js/faces.js?v=cast100-1"></script>
 <script src="js/instruments.js"></script>
@@ -1023,7 +1050,7 @@ html[data-season="snow"]{--season-band:linear-gradient(90deg,#DDE8F3,#FFFFFF,#B9
 <script src="js/announce.js"></script>
 <script src="js/tunegame.js"></script>
 <script src="js/fx.js"></script>
-<script src="js/ui.js?v=stage-instruments-1"></script>
+<script src="js/ui.js?v=selection-polish-1"></script>
 <div class="tip" id="tip" role="tooltip" hidden></div>
 </body>
 </html>
