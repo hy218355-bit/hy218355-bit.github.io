@@ -31,6 +31,9 @@ function record(){
  report.stagePortraits=Number($('#stage').dataset.portraitCount||0);report.watchPortraits=Number($('#cdStage').dataset.portraitCount||0);
  report.stageCache=Faces.stageCacheSize();
  report.playing=U.playing;report.waiting=!!U.waitPlay;report.shownLabel=U.shownLabel;report.range=U.range;report.solo=U.solo;report.piece=playPiece();report.venue=U.venue;
+ report.engineSolo=E.solo;report.viewPart=U.view;
+ report.shownPlayers=U.shown?Object.entries(buildPtr(U.shown)).map(([seat,p])=>({seat,id:p.mid})):[];
+ report.recordsFingerprint=hash(JSON.stringify(S.recs));
  report.recordings=S.recs.map(r=>({id:r.id,label:r.label}));
  report.readings=PIECE_IDS.map(id=>({id,level:pieceDifficulty(id),load:readingLoad(id),average:readAvg(S,id)}));
  const stageCanvas=$('#stage'),stageBox=stageCanvas.getBoundingClientRect(),stageMap=stageGeom(Math.max(240,stageBox.width),true);
@@ -142,9 +145,10 @@ async function show(next){
  }
  if(view==='balanced-result'){reveal();AN.skip();}
  if(view==='fx'){U.fxMode=q.get('fx')||'short';fxShow({kind:'cut',html:fxCutHtml('実績を達成','はじめての金賞','',''),ms:60000});clearTimeout(FX.timer);}
- if(view==='rehearsal-loading'){
-  await SAMPLES.loading;const original=SAMPLES.loading;SAMPLES.ready=false;
-  SAMPLES.loading=new Promise(resolve=>{releaseSamples=()=>{SAMPLES.ready=true;SAMPLES.loading=original;resolve();};});
+ if(view==='rehearsal-loading'||q.has('loading')){
+  await SAMPLES.loading?.catch(()=>{});const original=SAMPLES.loading,originalError=SAMPLES.error,originalReady=SAMPLES.ready;
+  report.fixtureAudioFallback=!!originalError;SAMPLES.ready=false;SAMPLES.error=null;
+  SAMPLES.loading=new Promise(resolve=>{releaseSamples=()=>{SAMPLES.ready=originalReady;SAMPLES.error=originalError;SAMPLES.loading=original;resolve();};});
  }
  await document.fonts.ready;await new Promise(r=>setTimeout(r,80));
  if(cardView)$('#memberCard').scrollIntoView({block:'start'});
@@ -159,6 +163,7 @@ for(const event of ['pointerdown','toggle'])$('#grCard').addEventListener(event,
 $('#grNext').addEventListener('click',()=>setTimeout(record,0));$('#grPrev').addEventListener('click',()=>setTimeout(record,0));
 for(const event of ['click','keydown','change'])$('#week').addEventListener(event,()=>setTimeout(record,0));
 new MutationObserver(()=>setTimeout(record,0)).observe($('#week'),{childList:true,subtree:true});
+new MutationObserver(()=>setTimeout(record,0)).observe($('#nowPlaying'),{childList:true,subtree:true});
 for(const event of ['click','submit','change'])$('#memberCard').addEventListener(event,()=>setTimeout(record,0));
 $('#rosterTable').addEventListener('click',()=>setTimeout(record,0));
 for(const event of ['click','change','toggle'])$('.col-stage').addEventListener(event,()=>setTimeout(record,0),true);
@@ -166,7 +171,7 @@ for(const event of ['click','change','toggle'])$('.col-stage').addEventListener(
 if(q.has('keys'))document.addEventListener('keydown',async e=>{
  if(e.target.matches('input,select,textarea'))return;
  const key=e.key.toLowerCase();
- if(view==='rehearsal-loading'&&key==='j'){e.preventDefault();releaseSamples?.();releaseSamples=null;report.loadingReleased=true;setTimeout(record,30);return;}
+ if(releaseSamples&&key==='j'){e.preventDefault();releaseSamples();releaseSamples=null;report.loadingReleased=true;setTimeout(record,30);return;}
  if(key==='3'){e.preventDefault();await show('audition-decided');return;}
  if(key==='4'){e.preventDefault();await show('renamed-year');return;}
  if(key==='9'){e.preventDefault();await show('practice-a');return;}

@@ -1,0 +1,58 @@
+{
+  "reproduced": {
+    "playing": true,
+    "solo": "member:m2028-n1-cafe",
+    "seat": null
+  },
+  "bench": {
+    "wasPlaying": true,
+    "stopped": true,
+    "solo": "all",
+    "engineSolo": {
+      "type": "all"
+    },
+    "recordsPreserved": true
+  },
+  "replay": {
+    "playing": true,
+    "solo": "all",
+    "benchNotInPerformance": true
+  },
+  "width": 375,
+  "scrollWidth": 375,
+  "errors": [],
+  "swap": {
+    "stopped": true,
+    "soloPreserved": true,
+    "playing": true,
+    "personSeat": "perc2",
+    "errors": []
+  },
+  "loading": {
+    "wasWaiting": true,
+    "cancelled": true,
+    "released": true,
+    "stillStopped": true,
+    "solo": "all",
+    "errors": [],
+    "fixtureAudioFallback": false
+  },
+  "section": {
+    "before": "sec:dr",
+    "after": "all",
+    "stopped": true,
+    "errors": []
+  },
+  "restoreControl": {
+    "visibleOnBench": true,
+    "solo": "all"
+  },
+  "view": {
+    "before": "fl",
+    "after": "perc",
+    "seat": "perc2",
+    "width": 375,
+    "scrollWidth": 375,
+    "errors": []
+  }
+}

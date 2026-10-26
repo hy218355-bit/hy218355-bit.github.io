@@ -1636,7 +1636,7 @@ function renderMemberCard(){
   card.innerHTML = `<button class="help-button mc-close" type="button" data-mact="close" aria-label="閉じる">${uiIcon('close')}</button><div class="mc-portrait">${memberFace(m,112)}<div class="mc-head"><h3>${esc(m.name)}</h3>${m.title ? `<span class="tag">${m.title}</span>` : ''}<span class="sub">${seat?instrumentIcon(seat.inst):''}${m.grade}年・${seat ? PART_LABEL[seat.part] : '控え（席なし）'}</span><button class="mc-name-edit" type="button" data-mact="rename" aria-expanded="false" aria-controls="memberNameForm">名前を変える</button></div></div>
     <form class="mc-name-form" id="memberNameForm" data-mid="${m.id}" hidden novalidate><label for="memberName">名前<small>${MEMBER_NAME_MAX}文字まで</small></label><input id="memberName" name="memberName" type="text" value="${esc(m.name)}" maxlength="24" autocomplete="off" autocapitalize="off" spellcheck="false" enterkeyhint="done" aria-describedby="memberNameError"><p id="memberNameError" class="mc-name-error" role="alert" hidden></p><div><button class="btn quiet" type="button" data-mact="renamecancel">やめる</button><button class="btn primary" type="submit">保存する</button></div></form>
     <p class="mc-say">${esc(memberSays(m))}</p>
-    ${seat ? `<div class="mc-actions"><button class="btn small" type="button" data-mact="solo">▶ この人だけ聴く</button><button class="btn small" type="button" data-mact="secsolo">▶ パートだけ聴く</button>${U.solo !== 'all' ? '<button class="btn small quiet" type="button" data-mact="all">全員の音にもどす</button>' : ''}</div>` : ''}
+    ${seat || U.solo !== 'all' ? `<div class="mc-actions">${seat ? '<button class="btn small" type="button" data-mact="solo">▶ この人だけ聴く</button><button class="btn small" type="button" data-mact="secsolo">▶ パートだけ聴く</button>' : ''}${U.solo !== 'all' ? '<button class="btn small quiet" type="button" data-mact="all">全員の音にもどす</button>' : ''}</div>` : ''}
     ${dreamLine(m)}${loveLine(m)}
     ${m.first?memberGrowth(m):`<div class="stats">${STAT_KEYS.map(k=>rankRow(STAT_LABEL[k],m.stats[k])).join('')}</div>`}
     ${m.mental!=null?`<div class="stats">${rankRow('本番の強さ',m.mental)}</div>`:''}
@@ -1937,9 +1937,20 @@ function bind(){
     else if(act === 'secsolo'){ U.solo = `sec:${SEAT[m.seat].sec}`; renderSelectors(); applySolo(); renderMemberCard(); if(!U.playing) $('#btnNow').click(); }
     else if(act === 'all'){ U.solo = 'all'; renderSelectors(); applySolo(); renderMemberCard(); }
     else if(act === 'move'){
+      if(busy() || !selectedMemberMove()) return;
+      // 移動前の音と読み込み待ちを止め、止めたあとに最新の部から移動を決める。
+      stopPlay();
       const plan = selectedMemberMove(); if(busy() || !plan) return;
       commit(plan.next);
+      const [type, id] = U.solo.split(':');
+      if((type === 'member' && !memberById(id)?.seat) || (type === 'sec' && !seated(S).some(x => SEAT[x.seat].sec === id))) U.solo = 'all';
+      applySolo();
+      if(plan.m.seat && U.view === SEAT[plan.m.seat].sec) U.view = plan.to ? SEAT[plan.to].sec : 'mel';
+      U.perfNow = null;
       renderAll(); refreshNow();
+      $('#memberCard [data-mact="close"]').focus({preventScroll:true});
+      if(narrow.matches) $('#memberCard').scrollIntoView({block:'start'});
+      toast('席を移した。',1800);
     }
   });
   $('#memberCard').addEventListener('change', e => { if(e.target.id === 'moveSel') renderMemberMove(); });
