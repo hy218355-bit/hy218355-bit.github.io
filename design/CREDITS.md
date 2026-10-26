@@ -28,4 +28,6 @@
 
 `after-school/assets/faces-art-direction-v4.webp`：高1寄りに幼くするという指摘に合わせ、3版を組み込みimage_genで編集した絵柄見本。12人の違いを保ち、頬・顎・顔の長さと陰影を調整した。生成記録は `faces-art-direction-v4.prompt.txt`。ゲーム本体やSVG試作には未反映。
 
+`after-school/cast39/assets/sheet02.webp`・`sheet03.webp`：オーナーの指定で39人へ増やすため、承認された自作の第4版を絵柄・年齢感の参照として、組み込みimage_genで女子27人を新規制作した。第4版の12人と合わせて、女子35人・男子4人の絵柄見本。最終プロンプトと原稿の場所は各同名の `.prompt.txt`。ゲーム・セーブ・SVGには未反映。表示するHTML・CSS・JSは自作。
+
 `after-school/assets/app-icon-1024.svg`：LPで使った校章と音符のマークから自作したアイコン。PNGはローカルブラウザで描画した原稿から書き出した。ゲームのアイコンファイルはまだ変更しない。

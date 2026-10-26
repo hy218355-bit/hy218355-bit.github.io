@@ -1,0 +1,27 @@
+39人の顔の見本・生成記録
+
+組み込み image_gen を使用（CLI不使用）。承認された自作の第4版を絵柄と年齢感だけの参照にした新規制作。
+名前やセーブと結びつけず、絵柄見本の女子を追加する。ゲーム本体・SVGには未反映。
+
+最終プロンプト：
+Use case: stylized-concept. Produce an original character portrait sheet extending an existing Japanese high-school wind-ensemble game cast.
+The attached image is ONLY the APPROVED ART STYLE AND AGE reference: contemporary delicate hand-drawn linework, softly painted youthful 15-year-old faces, short soft chins, slight cheek fullness, natural medium and small Japanese eyes, navy school blazer or cardigan, cream shirt, small simple navy ribbon, ivory background, warm gentle light from the right. Do NOT copy its twelve facial identities or compositions one for one. These are ADDITIONAL STUDENTS and must look like different people, while obviously belonging to the same illustrated game. Each is a fictional Japanese high-school GIRL, newly entering first year, age about 15. Varied ordinary approachable classmates, not identical pretty idols. A girl may have very short hair, strong brows or a broad jaw. Natural teen proportions and youthful soft cheeks. Keep face types, eye apertures and spacing, nose widths, eyebrows and lip shapes highly differentiated. No male characters in this sheet.
+All portraits almost front-facing, both eyes open, neutral or gentle closed-mouth smile, no dramatic expressions to disguise same-face anatomy. Polished yet understated modern indie narrative game character art, quietly endearing. Clear eyes and mouth readable at thumbnail size. Avoid mature seniors, adult model glamour, long mature necks, heavy makeup, identical V-shaped faces, identical big almond eyes, identical tiny triangle noses, hyper-glossy hair, chibi, giant eyes, retro anime, flat vector clipart, sexualized clothing. No instruments, props, text, letters, numbers, watermark or labels. Upper-chest crop, complete hair silhouettes within each cell, consistent head scale and school uniform. Flat pale ivory background throughout. Keep clean straight equally sized rectangular cells, no gutters or overlapping portraits.
+EXACTLY TWELVE new portraits in a 4-column by 3-row grid, landscape 4:3. Distinct facial and hair casting, left to right top to bottom:
+1. Very round broad face, full cheeks, small wide-set monolid eyes, thick short straight brows, broad short nose, medium wide thin smile; natural low twin ponytails.
+2. Narrow oval face and short chin, small close-set downturned eyes, fine level brows, longer slim nose, narrow full lips; very short side-fringe pixie hair.
+3. Short heart face, wide forehead, round wide-set attentive eyes, thin flat brows, rounded button nose, wide full lips; straight shoulder-length hair with short uneven fringe.
+4. Softly square face with broad rounded chin, gently upturned narrow eyes, fine long brows, wider rounded nose, broad closed smile; high plain ponytail, forehead exposed.
+5. Plump oval face and soft cheeks, small close-set horizontal eyes, short thick arched brows, visible longer nose bridge, compact full mouth; one loose side braid.
+6. Compact oval face, medium large wide-set round eyes, thin nearly horizontal brows, low broad nose, slightly asymmetric small smile; chin-length blunt bob with parted bangs.
+7. Long softly rectangular face, narrow long gently drooping eyes, thin straight brows, slim straight nose, very small mouth; long straight hair and round thin spectacles.
+8. Wide short triangular face with full lower cheeks, dense thick brows, small downturned eyes, broad low nose, full wide mouth; very short soft curly haircut.
+9. Diamond face with gently broad cheeks and rounded chin, small upturned close-set eyes, delicate arched brows, rounded wider nose, long thin mouth; mid-length hair side-tucked with one small simple hairpin.
+10. Narrow heart face with short rounded chin, medium wide-set almond eyes, thick high curved brows, short flat nose, tiny full mouth; short low ponytail with airy bangs.
+11. Broad oval face, close-set medium round eyes, uneven fine brows, short slightly upturned nose, wide straight thin mouth; short crop with long side pieces, no ponytail.
+12. Short softly square face, small sleepy-looking narrow wide-set eyes, thin straight low brows, compact wide nose, fuller lower lip; medium plain hair with a side part, small oval glasses.
+Make these twelve strongly individually recognizable without relying solely on hair or glasses. Consistent art finish and age to the reference.
+
+
+生成原稿：/Users/yh/.codex/generated_images/01a175a5-1e3d-71b0-810a-8797cdde01e1/exec-0e784d25-a837-4adf-b9f5-a3a5801fa599.png
+保存画像：sheet02.webp（1440×1080、195,814 bytes）。機械的な縮小と圧縮のみ。原稿は保持。

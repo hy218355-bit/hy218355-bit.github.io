@@ -1,0 +1,267 @@
+{
+  "purpose": "絵柄見本のみ。名前・性別・セーブのゲームデータには結びつけない。",
+  "count": 39,
+  "appearanceCounts": {
+    "女子": 35,
+    "男子": 4
+  },
+  "sheets": [
+    {
+      "id": 1,
+      "src": "../assets/faces-art-direction-v4.webp",
+      "cols": 4,
+      "rows": 3,
+      "count": 12
+    },
+    {
+      "id": 2,
+      "src": "assets/sheet02.webp",
+      "cols": 4,
+      "rows": 3,
+      "count": 12
+    },
+    {
+      "id": 3,
+      "src": "assets/sheet03.webp",
+      "cols": 5,
+      "rows": 3,
+      "count": 15
+    }
+  ],
+  "members": [
+    {
+      "id": "study-01",
+      "sheet": 1,
+      "index": 0,
+      "appearance": "男子"
+    },
+    {
+      "id": "study-02",
+      "sheet": 1,
+      "index": 1,
+      "appearance": "女子"
+    },
+    {
+      "id": "study-03",
+      "sheet": 1,
+      "index": 2,
+      "appearance": "女子"
+    },
+    {
+      "id": "study-04",
+      "sheet": 1,
+      "index": 3,
+      "appearance": "女子"
+    },
+    {
+      "id": "study-05",
+      "sheet": 1,
+      "index": 4,
+      "appearance": "男子"
+    },
+    {
+      "id": "study-06",
+      "sheet": 1,
+      "index": 5,
+      "appearance": "女子"
+    },
+    {
+      "id": "study-07",
+      "sheet": 1,
+      "index": 6,
+      "appearance": "女子"
+    },
+    {
+      "id": "study-08",
+      "sheet": 1,
+      "index": 7,
+      "appearance": "女子"
+    },
+    {
+      "id": "study-09",
+      "sheet": 1,
+      "index": 8,
+      "appearance": "女子"
+    },
+    {
+      "id": "study-10",
+      "sheet": 1,
+      "index": 9,
+      "appearance": "男子"
+    },
+    {
+      "id": "study-11",
+      "sheet": 1,
+      "index": 10,
+      "appearance": "女子"
+    },
+    {
+      "id": "study-12",
+      "sheet": 1,
+      "index": 11,
+      "appearance": "男子"
+    },
+    {
+      "id": "study-13",
+      "sheet": 2,
+      "index": 0,
+      "appearance": "女子"
+    },
+    {
+      "id": "study-14",
+      "sheet": 2,
+      "index": 1,
+      "appearance": "女子"
+    },
+    {
+      "id": "study-15",
+      "sheet": 2,
+      "index": 2,
+      "appearance": "女子"
+    },
+    {
+      "id": "study-16",
+      "sheet": 2,
+      "index": 3,
+      "appearance": "女子"
+    },
+    {
+      "id": "study-17",
+      "sheet": 2,
+      "index": 4,
+      "appearance": "女子"
+    },
+    {
+      "id": "study-18",
+      "sheet": 2,
+      "index": 5,
+      "appearance": "女子"
+    },
+    {
+      "id": "study-19",
+      "sheet": 2,
+      "index": 6,
+      "appearance": "女子"
+    },
+    {
+      "id": "study-20",
+      "sheet": 2,
+      "index": 7,
+      "appearance": "女子"
+    },
+    {
+      "id": "study-21",
+      "sheet": 2,
+      "index": 8,
+      "appearance": "女子"
+    },
+    {
+      "id": "study-22",
+      "sheet": 2,
+      "index": 9,
+      "appearance": "女子"
+    },
+    {
+      "id": "study-23",
+      "sheet": 2,
+      "index": 10,
+      "appearance": "女子"
+    },
+    {
+      "id": "study-24",
+      "sheet": 2,
+      "index": 11,
+      "appearance": "女子"
+    },
+    {
+      "id": "study-25",
+      "sheet": 3,
+      "index": 0,
+      "appearance": "女子"
+    },
+    {
+      "id": "study-26",
+      "sheet": 3,
+      "index": 1,
+      "appearance": "女子"
+    },
+    {
+      "id": "study-27",
+      "sheet": 3,
+      "index": 2,
+      "appearance": "女子"
+    },
+    {
+      "id": "study-28",
+      "sheet": 3,
+      "index": 3,
+      "appearance": "女子"
+    },
+    {
+      "id": "study-29",
+      "sheet": 3,
+      "index": 4,
+      "appearance": "女子"
+    },
+    {
+      "id": "study-30",
+      "sheet": 3,
+      "index": 5,
+      "appearance": "女子"
+    },
+    {
+      "id": "study-31",
+      "sheet": 3,
+      "index": 6,
+      "appearance": "女子"
+    },
+    {
+      "id": "study-32",
+      "sheet": 3,
+      "index": 7,
+      "appearance": "女子"
+    },
+    {
+      "id": "study-33",
+      "sheet": 3,
+      "index": 8,
+      "appearance": "女子"
+    },
+    {
+      "id": "study-34",
+      "sheet": 3,
+      "index": 9,
+      "appearance": "女子"
+    },
+    {
+      "id": "study-35",
+      "sheet": 3,
+      "index": 10,
+      "appearance": "女子"
+    },
+    {
+      "id": "study-36",
+      "sheet": 3,
+      "index": 11,
+      "appearance": "女子"
+    },
+    {
+      "id": "study-37",
+      "sheet": 3,
+      "index": 12,
+      "appearance": "女子"
+    },
+    {
+      "id": "study-38",
+      "sheet": 3,
+      "index": 13,
+      "appearance": "女子"
+    },
+    {
+      "id": "study-39",
+      "sheet": 3,
+      "index": 14,
+      "appearance": "女子"
+    }
+  ]
+}

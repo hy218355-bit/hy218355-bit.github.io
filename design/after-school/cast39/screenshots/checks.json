@@ -1,0 +1,47 @@
+[
+  {
+    "count": 39,
+    "scrollWidth": 375,
+    "view": "light",
+    "width": 375
+  },
+  {
+    "dialogWidth": 345,
+    "scrollWidth": 375,
+    "title": "顔の見本 39",
+    "view": "dialog",
+    "width": 375
+  },
+  {
+    "count": 39,
+    "faceWidth": 32,
+    "scrollWidth": 375,
+    "view": "32px",
+    "width": 375
+  },
+  {
+    "count": 39,
+    "scrollWidth": 375,
+    "theme": "dark",
+    "view": "dark",
+    "width": 375
+  },
+  {
+    "count": 12,
+    "scrollWidth": 375,
+    "view": "?sheet=2",
+    "width": 375
+  },
+  {
+    "count": 15,
+    "scrollWidth": 375,
+    "view": "?sheet=3",
+    "width": 375
+  },
+  {
+    "count": 39,
+    "scrollWidth": 375,
+    "view": "all",
+    "width": 375
+  }
+]
