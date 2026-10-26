@@ -100,7 +100,7 @@ function currentPerformance(){
 }
 function refreshNow(){
   clearTimeout(U.refreshT);
-  // 描き直しを待たずに押しても、変更前の音を再生しない。
+  // 描き直しを待たずに押しても、前の音を再生しない。
   U.perfNow = null;
   U.refreshT = setTimeout(() => {
     U.perfNow = currentPerformance();
@@ -118,6 +118,8 @@ function setNowPlaying(){
 function renderPlayButtons(){
   const on = !!(U.playing || U.waitPlay);
   $('#btnStop').hidden = !on; $('#btnNow').hidden = on;
+  const moveStop = $('#memberCard [data-mact="movestop"]');
+  if(moveStop) moveStop.hidden = !on || tabHidden('play');
 }
 
 /* ===== スマホ・タブレット縦：画面下のタブ ===== */
@@ -133,6 +135,7 @@ function setTab(t, keep){
   document.querySelectorAll('[data-tabgo]').forEach(b => { if(b.dataset.tabgo === t) b.setAttribute('aria-current', 'page'); else b.removeAttribute('aria-current'); });
   if(narrow.matches) window.scrollTo(0, keep ? (U.tabScroll[t] || 0) : 0);
   updateMini();
+  renderPlayButtons();
   // 隠れていたあいだは描けないので、見えたところで描き直す
   if(t === 'play' && !U.playing) requestAnimationFrame(drawIdle);
 }
@@ -1698,7 +1701,7 @@ function moveChoices(m, sec){
 }
 function movePicker(m){
   const sec = m.seat ? SEAT[m.seat].sec : SECTIONS[0].id;
-  return `<details class="move-filter"><summary id="moveGroupLabel">${esc(SECTIONS.find(s=>s.id===sec).name)}</summary><div class="move-groups">${SECTIONS.map(s=>`<button type="button" data-mact="movegroup" data-sec="${s.id}" aria-pressed="${s.id===sec}">${instrumentIcon(SEATS.find(x=>x.sec===s.id).inst)}<span>${esc(s.name)}</span></button>`).join('')}</div></details><div class="move-choices" role="group" aria-label="移す先">${moveChoices(m,sec)}</div>`;
+  return `<div class="move-groups" role="group" aria-label="楽器">${SECTIONS.map(s=>`<button type="button" data-mact="movegroup" data-sec="${s.id}" aria-pressed="${s.id===sec}">${instrumentIcon(SEATS.find(x=>x.sec===s.id).inst)}<span>${esc(s.name)}</span></button>`).join('')}</div><div class="move-choices" role="group" aria-label="移す先">${moveChoices(m,sec)}</div>`;
 }
 function renderMemberMove(){
   const preview = $('#movePreview'), button = $('#memberCard [data-mact="move"]');
@@ -1743,7 +1746,7 @@ function renderMemberCard(){
     <form class="mc-name-form" id="memberNameForm" data-mid="${m.id}" hidden novalidate><label for="memberName">名前<small>${MEMBER_NAME_MAX}文字まで</small></label><input id="memberName" name="memberName" type="text" value="${esc(m.name)}" maxlength="24" autocomplete="off" autocapitalize="off" spellcheck="false" enterkeyhint="done" aria-describedby="memberNameError"><p id="memberNameError" class="mc-name-error" role="alert" hidden></p><div><button class="btn quiet" type="button" data-mact="renamecancel">やめる</button><button class="btn primary" type="submit">保存する</button></div></form>
     ${canUndoMemberMove() && U.moveUndo.ids.includes(m.id) ? '<div class="mc-undo"><span>席を移した</span><button class="btn small" type="button" data-mact="moveundo">元に戻す</button></div>' : ''}
     ${seat || U.solo !== 'all' ? `<div class="mc-actions">${seat ? `<button class="btn small" type="button" data-mact="solo" aria-pressed="${U.solo===`member:${m.id}`}">${uiIcon('play')}この人だけ聴く</button><button class="btn small" type="button" data-mact="secsolo" aria-pressed="${U.solo===`sec:${seat.sec}`}">${uiIcon('play')}パートだけ聴く</button>` : ''}${U.solo !== 'all' ? '<button class="btn small quiet" type="button" data-mact="all">全員の音にもどす</button>' : ''}</div>` : ''}
-    <details class="mc-move" data-move-to=""><summary>席を移す</summary>${movePicker(m)}<div class="move-preview" id="movePreview" aria-live="polite" hidden></div><div class="mc-actions"><button class="btn primary" type="button" data-mact="move" disabled>移す</button></div>
+    <details class="mc-move" data-move-to=""><summary>席を移す</summary>${movePicker(m)}<div class="move-preview" id="movePreview" aria-live="polite" hidden></div><div class="mc-actions move-actions"><button class="btn quiet" type="button" data-mact="movecancel">やめる</button><button class="btn primary" type="button" data-mact="move" disabled>移す</button><button class="btn quiet move-stop" type="button" data-mact="movestop" aria-label="止める"${(U.playing || U.waitPlay) && !tabHidden('play') ? '' : ' hidden'}>${uiIcon('stop')}</button></div>
     <p class="small">楽器が変わると、その楽器での音程と音色は基礎からやり直しになる。</p></details>
     ${memberCurrentRanks(m)}
     <p class="mc-say">${esc(memberSays(m))}</p>
@@ -2055,13 +2058,19 @@ function bind(){
     }
     const m = memberById(U.sel); if(!m) return;
     if(act === 'moveundo'){ undoMemberMove(); return; }
+    if(act === 'movestop'){ stopPlay(); return; }
+    if(act === 'movecancel'){
+      const picker=$('#memberCard .mc-move');picker.dataset.moveTo='';
+      picker.querySelectorAll('[data-mact="movechoose"]').forEach(x=>x.setAttribute('aria-pressed','false'));
+      renderMemberMove();picker.open=false;picker.querySelector('summary').focus({preventScroll:true});
+      if(narrow.matches) $('#memberCard').scrollIntoView({block:'start'});return;
+    }
     if(act === 'movegroup'){
       const section=SECTIONS.find(s=>s.id===b.dataset.sec);if(!section)return;
       const picker=$('#memberCard .mc-move');picker.dataset.moveTo='';
-      $('#moveGroupLabel').textContent=section.name;
       picker.querySelectorAll('[data-mact="movegroup"]').forEach(x=>x.setAttribute('aria-pressed',String(x===b)));
       picker.querySelector('.move-choices').innerHTML=moveChoices(m,section.id);
-      picker.querySelector('.move-filter').open=false;renderMemberMove();$('#moveGroupLabel').focus({preventScroll:true});return;
+      renderMemberMove();return;
     }
     if(act === 'movechoose'){
       const picker=$('#memberCard .mc-move');
@@ -2110,6 +2119,7 @@ function bind(){
   });
   $('#memberCard').addEventListener('keydown', e => {
     if(e.key === 'Escape' && !e.isComposing && !$('#memberNameForm')?.hidden){ e.preventDefault(); closeMemberNameForm(); }
+    else if(e.key === 'Escape' && !e.isComposing && $('#memberCard .mc-move')?.open){ e.preventDefault(); $('#memberCard [data-mact="movecancel"]').click(); }
   });
   $('#week').addEventListener('keydown',e=>{if(e.key==='Escape'&&U.pick){e.preventDefault();closePracticePicker();}});
   $('#week').addEventListener('click', e => {

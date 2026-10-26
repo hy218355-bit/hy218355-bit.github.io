@@ -259,10 +259,8 @@ select{background:var(--sheet);border:1.5px solid var(--rule);border-radius:8px;
 .mc-move{min-width:0}
 .mc-move>.mc-actions{margin-top:12px;justify-content:flex-end}
 .mc-move>.mc-actions .btn{min-width:96px;min-height:44px}
-.move-filter{margin-top:8px;border:1px solid var(--rule);border-radius:9px;padding:0 10px}
-.mc-move .move-filter>summary{min-height:44px;display:flex;align-items:center;justify-content:space-between;color:var(--ink);font-weight:700}
-.move-filter>summary:after{content:'';width:7px;height:7px;border-right:1.5px solid var(--ink-soft);border-bottom:1.5px solid var(--ink-soft);transform:rotate(45deg);margin:0 3px 4px 10px}
-.move-groups{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:6px;padding:0 0 10px}
+.mc-move>.move-actions .move-stop{min-width:44px;padding:10px}
+.move-groups{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:6px;margin-top:8px;padding:0 0 10px;border-bottom:1px solid var(--rule)}
 .move-groups button{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;min-width:0;min-height:62px;border:1px solid var(--rule);border-radius:7px;background:var(--sheet);color:var(--ink);font:11px var(--f-body);padding:6px 2px;overflow-wrap:anywhere;cursor:pointer}
 .move-groups .instrument-icon{width:24px;height:24px;color:var(--brass)}
 .move-groups button[aria-pressed="true"]{border-color:var(--brass);box-shadow:inset 0 0 0 1px var(--brass)}
@@ -965,6 +963,14 @@ html[data-season="snow"]{--season-band:linear-gradient(90deg,#DDE8F3,#FFFFFF,#B9
 .mc-story li time{display:block;margin:0;font-size:11px}
 .mc-personality>.mc-trait{margin:10px 0}
 @media(min-width:961px){#secGrid{grid-template-columns:repeat(auto-fill,minmax(120px,1fr))}#rosterTable th.num{width:48px}}
+/* 席選びの間は、確定と中止を親指の届く場所に置く。再生中は停止も残す。 */
+@media(max-width:960px){
+  .tabbed .stand:has(>#memberCard:not([hidden]) .mc-move[open])>.rehearsal-actions{display:none}
+  .tabbed .mc-move[open]>.move-actions{position:fixed;left:max(16px,env(safe-area-inset-left,0px));right:max(16px,env(safe-area-inset-right,0px));bottom:calc(68px + env(safe-area-inset-bottom,0px));z-index:46;display:grid;grid-template-columns:1fr 1.55fr;gap:8px;margin:0;padding:8px;border:1px solid var(--rule);border-radius:12px;background:var(--sheet);box-shadow:0 4px 18px var(--shadow)}
+  .tabbed .mc-move[open]>.move-actions:has(.move-stop:not([hidden])){grid-template-columns:1fr 1.55fr 44px}
+  .tabbed .mc-move>.move-actions .btn{min-width:0;min-height:44px;justify-content:center}
+  .tabbed:has(.mini:not([hidden])) .mc-move[open]>.move-actions{bottom:calc(126px + env(safe-area-inset-bottom,0px))}
+}
 /* 相談は誰の話か、卒業式は顔と育った力が先に分かる形へ。 */
 .episode.consult{padding:14px;gap:14px;border-radius:12px}
 .episode.consult .head{display:flex;align-items:center;flex-wrap:nowrap;gap:10px}
@@ -1472,7 +1478,7 @@ html[data-season="snow"]{--season-band:linear-gradient(90deg,#DDE8F3,#FFFFFF,#B9
 <script src="js/announce.js?v=result-journal-1"></script>
 <script src="js/tunegame.js"></script>
 <script src="js/fx.js"></script>
-<script src="js/ui.js?v=live-performance-1"></script>
+<script src="js/ui.js?v=seat-actions-1"></script>
 <div class="tip" id="tip" role="tooltip" hidden></div>
 </body>
 </html>
