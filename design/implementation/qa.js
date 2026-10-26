@@ -36,6 +36,7 @@ if(view==='year'){
 }else if(['stage','members','member','grad','conduct','announce','fx'].includes(view)){
  const ms=fullBand({pitch:68,rhythm:72,tone:64,expr:61});
  ms.forEach((m,i)=>{m.id='m2026-n'+i;m.grade=i%3+1;m.joined=2026;m.joinGrade=1;m.sta=95;m.first={y:2026,w:0,stats:{pitch:15,rhythm:12,tone:18,expr:10}};m.story=[{y:2026,w:0,t:'アルトサックスで入部。'},{y:2027,w:16,t:'はじめての金賞。'},{y:2028,w:26,t:'最後の定期演奏会。'}];});
+ const castNames=new Set();ms.forEach((m,i)=>{m.id='m2028-n'+(i+1);m.name=makeName(castNames,'recruit',2028,i+1);});
  s.members=ms;s.year=2028;s.week=10;
 }
 // 静止画の状態では実績と一時的な知らせを既読にする。1年の進行試験では消さない。
@@ -50,6 +51,8 @@ if(view==='announce'){showAnnounce({award:'gold',rep:true,avg:85},'pref',()=>{},
 if(view==='fx'){U.fxMode=q.get('fx')||'short';fxShow({kind:'cut',html:fxCutHtml('実績を達成','はじめての金賞','',''),ms:60000});clearTimeout(FX.timer);}
 await document.fonts.ready;
 await new Promise(r=>setTimeout(r,50));
+if(view==='member')$('#memberCard').scrollIntoView({block:'start'});
+if(view==='consult')$('.episode.consult').scrollIntoView({block:'center'});
 report.width=innerWidth;report.scrollWidth=document.documentElement.scrollWidth;
 report.faceCount=document.querySelectorAll('.member-face').length;
 const out=document.createElement('output');out.id='qaResult';out.hidden=true;out.textContent=JSON.stringify(report);document.body.append(out);

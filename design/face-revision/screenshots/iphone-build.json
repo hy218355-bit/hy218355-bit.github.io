@@ -1,0 +1,13 @@
+{
+  "build": "Release",
+  "installed": true,
+  "launched": true,
+  "bundleID": "io.github.hy218355-bit.tsukurikata",
+  "files": {
+    "js/faces.js": "e96c0bfc9fd5302a667b0c6613cb43c9394cdabf2f8f6b66fba9d88cb67f9ed4",
+    "js/band.js": "37d6133c2142c5f863ed6a8d884f93170c1b7614cd36063c8bc31dfa2adcd2fd",
+    "img/faces/portraits-01.webp": "9edff54832053146a1e27fc494624cf39f83413f66bbd15d36d959ef36c92097",
+    "img/faces/portraits-02.webp": "c084e9afd3748e326fcab0eb1a7c576faca525f60704778689666dd02eadd56e",
+    "img/faces/portraits-03.webp": "854044a5a7c974b98b663bd051d774fa301f6c19e75f780501f9e99a7891e36f"
+  }
+}

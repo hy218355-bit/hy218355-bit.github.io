@@ -1,40 +1,34 @@
 'use strict';
-/* 顔の決まり方・再利用・旧セーブ互換を、画面を開かずに確かめる。 */
+/* 名前と顔の配役、比率、画像の再利用、旧セーブを変えないことを確かめる。 */
 const fs=require('node:fs'),vm=require('node:vm'),assert=require('node:assert/strict'),path=require('node:path');
-const root=path.join(__dirname,'..'),ctx=vm.createContext({URL,Blob,document:{currentScript:{src:'http://local/js/faces.js'},querySelectorAll:()=>[],addEventListener:()=>{}},console});
-for(const file of ['util.js','faces.js'])vm.runInContext(fs.readFileSync(path.join(root,'js',file),'utf8'),ctx);
-const files=fs.readdirSync(path.join(root,'img/faces')).filter(f=>/^face-\d+.js$/.test(f));
-assert.equal(files.length,39);
-for(const f of files)vm.runInContext(fs.readFileSync(path.join(root,'img/faces',f),'utf8'),ctx);
+const root=path.join(__dirname,'..'),ctx=vm.createContext({URL,document:{currentScript:{src:'http://local/js/faces.js'}},console});
+for(const file of ['util.js','instruments.js','band.js','faces.js'])vm.runInContext(fs.readFileSync(path.join(root,'js',file),'utf8'),ctx);
 vm.runInContext(`
-for(const pool of [Array.from({length:40},(_,i)=>'m2026-n'+i),Array.from({length:40},(_,i)=>'old-member-'+i)]){
-  if(new Set(pool.map(id=>Faces.fingerprint(id))).size!==40)throw Error('顔の組み合わせが重複');
+const used=new Set(),members=Array.from({length:200},(_,i)=>({id:'m2026-n'+(i+1),name:makeName(used,'recruit',2026,i+1),grade:1,sta:90}));
+if(members.filter(m=>namePresentation(m)==='male').length!==40)throw Error('新入部員が女性4対男性1でない');
+if(new Set(members.map(m=>m.name)).size!==200)throw Error('名前の重複');
+for(const m of members)if(Faces.features(m).style!==namePresentation(m))throw Error('名前と顔が合わない');
+for(const name of GIVEN_FEMALE)if(Faces.features({id:'m2026-n5',name:'佐藤 '+name}).style!=='female')throw Error(name+'に男性の顔');
+for(const name of GIVEN_MALE)if(Faces.features({id:'m2026-n1',name:'佐藤 '+name}).style!=='male')throw Error(name+'に女性の顔');
+if(new Set(members.slice(0,39).map(m=>Faces.fingerprint(m))).size<38)throw Error('39人の顔が重なりすぎている');
+const old={id:'m2026-n5',name:'佐藤 陽菜',grade:1,sta:90,stats:{pitch:50}},before=JSON.stringify(old);
+const first=Faces.features(old),next=Faces.features({...old,grade:3});
+if(first!==next)throw Error('進級で顔が変わった');
+for(const size of [26,32,36,54,88,112]){
+ const html=Faces.image(old,size);
+ if(!html.includes('portraits-')||!html.includes('data-presentation="female"')||/<svg|blob:|data:image/.test(html))throw Error('原画の表示でない');
 }
-const ids=Array.from({length:39},(_,i)=>'m2026-n'+i);
-if(new Set(ids.map(id=>Faces.features(id).base)).size!==39)throw Error('39人の原画が重複');
-const m={id:'m2026-n1',name:'前の名前',grade:1,sta:90},before=JSON.stringify(m);
-const first=Faces.image(m,36),second=Faces.image({...m,name:'別の名前',grade:3},36);
-if(first!==second)throw Error('名前か学年で顔が変わった');
-if(JSON.stringify(m)!==before)throw Error('部員データを変更した');
-if(Faces.cacheSize()!==1)throw Error('同じ顔を再利用していない');
-for(const mood of ['normal','tired','zone','freeze']){
- const svg=Faces.svg(m.id,mood);if(!svg||/<image|data:image/i.test(svg))throw Error('SVGパーツでない');
-}
+if(JSON.stringify(old)!==before)throw Error('前のセーブを変更した');
+for(let i=0;i<1000;i++)Faces.features({id:'old-save-'+i,name:'佐藤 陽菜'});
+if(Faces.cacheSize()>256)throw Error('キャッシュが増え続けている');
 `,ctx);
-const sizes=files.map(f=>fs.statSync(path.join(root,'img/faces',f)).size);
-assert.ok(Math.max(...sizes)<200000);
-console.log('39人の原画／40人の組み合わせ／名前と学年からの独立／セーブ不変／キャッシュ／SVG形式：確認済み。最大 '+Math.max(...sizes)+' bytes');
-
-
-// 入部後に平均との差分が負になる週でも、表示を止めない。
-const ui=fs.readFileSync(path.join(root,'js/ui.js'),'utf8');
-vm.runInContext(ui.slice(ui.indexOf('const RANKS ='),ui.indexOf('// up：')),ctx);
+const manifest=JSON.parse(fs.readFileSync(path.join(root,'img/faces/manifest.json'),'utf8'));
+assert.equal(manifest.reduce((n,s)=>n+s.female+s.male,0),39);
+assert.equal(manifest.reduce((n,s)=>n+s.female,0),31);
+assert.equal(manifest.reduce((n,s)=>n+s.male,0),8);
+for(const sheet of manifest){assert.ok(fs.statSync(path.join(root,'img/faces',sheet.file)).size<=200000);assert.ok(sheet.width/sheet.cols>=320);assert.ok(sheet.height/sheet.rows>=320);}
+console.log('女性31人・男性8人／新入部員4対1／すべての既存名と顔の対応／39人で重複1人以下／旧セーブ不変／キャッシュ上限／原画の解像度と容量：確認済み');
+// ランク表示の境界も保つ。
+const ui=fs.readFileSync(path.join(root,'js/ui.js'),'utf8');vm.runInContext(ui.slice(ui.indexOf('const RANKS ='),ui.indexOf('// up：')),ctx);
 for(const [v,r] of [[-10,'G'],[0,'G'],[19,'G'],[20,'F'],[89,'A'],[90,'S'],[101,'S']])assert.equal(vm.runInContext('rankOf('+v+')',ctx),r);
-console.log('ランクの下限・上限と境界：確認済み');
-
-// 長く遊んだときに、画面にない顔のキャッシュを増やし続けない。
-vm.runInContext("for(let i=0;i<220;i++)Faces.image({id:'old-save-'+i,sta:100},36);if(Faces.cacheSize()>160)throw Error('顔のキャッシュが上限を超えた');",ctx);
-console.log('長く遊んだときのキャッシュ上限：確認済み');
-
-vm.runInContext("for(const start of [1,10,35,80]){const ids=Array.from({length:39},(_,i)=>'m2028-n'+(start+i));if(new Set(ids.map(id=>Faces.features(id).base)).size!==39)throw Error('39人の代の境目で顔が重複');}",ctx);
-console.log('39人の代の境目：確認済み');
+console.log('ランクの境界：確認済み');

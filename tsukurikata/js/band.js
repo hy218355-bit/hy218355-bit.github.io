@@ -98,9 +98,26 @@ const FILL_ORDER = ['tp3a', 'hn3', 'cl3a', 'cl2b', 'hn4', 'euph2', 'tuba2', 'tb2
 const SURNAMES = '佐藤 鈴木 高橋 田中 伊藤 渡辺 山本 中村 小林 加藤 吉田 山田 佐々木 山口 松本 井上 木村 林 清水 山崎 森 池田 橋本 阿部 石川 山下 中島 石井 小川 前田 岡田 長谷川 藤田 後藤 近藤 村上 遠藤 青木 坂本 福田 太田 西村 藤井 金子 岡本 藤原 中野 三浦 原田 中川 松田 竹内 小野 田村 中山 和田 石田 森田 上田 原 内田 柴田 酒井 宮崎 横山 高木 安藤 宮本 大野 小島 工藤 野口 桜井 千葉 岩崎 松井 菅原 久保 杉山'.split(' ');
 const GIVEN = '陽菜 結衣 葵 凛 美咲 楓 莉子 真央 杏 彩花 七海 心春 優奈 千尋 遥 紗希 明里 花音 菜月 美月 悠真 蓮 湊 陽翔 颯太 大翔 樹 悠斗 蒼 瑛太 拓海 健太 翔 航 律 奏 響 晴 光 歩 柚 透 真琴 優 渚 薫 千夏 紬 澪 詩 雫 智也 亮 隼 朔 環 絢 茜 栞 萌 和奏 恵 碧 理央 早紀 健 誠 陸 海斗 文香'.split(' ');
 
+// オーナーの指定による、この作品の名前と顔の配役。現実の人の性別の判定には使わない。
+const GIVEN_MALE = '悠真 蓮 湊 陽翔 颯太 大翔 樹 悠斗 蒼 瑛太 拓海 健太 翔 航 透 智也 亮 隼 朔 健 誠 陸 海斗'.split(' ');
+const GIVEN_FEMALE = GIVEN.filter(name => !GIVEN_MALE.includes(name));
+function recruitPresentation(...seed){
+  // 通し番号で5人に1人。前の部員の名前やセーブは書き換えない。
+  const seq = seed[0] === 'recruit' ? Number(seed[2]) : NaN;
+  return Number.isInteger(seq) ? (seq % 5 === 0 ? 'male' : 'female') : (hash(...seed, 'name-cast') < .2 ? 'male' : 'female');
+}
+function namePresentation(member){
+  const given = String(member?.name || '').trim().split(/\s+/).pop();
+  if(GIVEN_MALE.includes(given)) return 'male';
+  if(GIVEN_FEMALE.includes(given)) return 'female';
+  const seq = /-(?:j|n)(\d+)$/.exec(String(member?.id || ''));
+  return seq ? (Number(seq[1]) % 5 === 0 ? 'male' : 'female') : (hash(member?.id || '', 'name-cast') < .2 ? 'male' : 'female');
+}
+
 function makeName(used, ...seed){
+  const pool = recruitPresentation(...seed) === 'male' ? GIVEN_MALE : GIVEN_FEMALE;
   for(let k = 0; k < 50; k++){
-    const n = SURNAMES[Math.floor(hash(...seed, 's', k) * SURNAMES.length)] + ' ' + GIVEN[Math.floor(hash(...seed, 'g', k) * GIVEN.length)];
+    const n = SURNAMES[Math.floor(hash(...seed, 's', k) * SURNAMES.length)] + ' ' + pool[Math.floor(hash(...seed, 'g', k) * pool.length)];
     if(!used.has(n)){ used.add(n); return n; }
   }
   return '新入部員';
