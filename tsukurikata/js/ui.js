@@ -1006,9 +1006,8 @@ function renderWinter(w){
   w.innerHTML = `<div class="event"><span class="tag">3月・卒業式</span><span>${names.length ? `卒業式の日。${names.map(esc).join('、')}を、1・2年生の演奏で送ろう。` : '3月。春休みの音楽室で、新しい1年に向けて準備をしよう。'}</span></div>
     <div class="transport">${grads.length ? `<button class="btn primary" type="button" data-act="gradroll">${grads.length}人の3年間をふり返って、送る</button><button class="btn quiet" type="button" data-act="graddone">ふり返らずに送る</button>` : `<button class="btn primary" type="button" data-act="graddone">${names.length ? '演奏で送る' : '1年をふり返る'}</button>`}</div>`;
 }
-/* ===== 新しく入った部員の担当を決める（部をつくった最初の5人・本入部の1年生・途中から入ってきた部員） =====
-   上の札で部員を選び、舞台の空いている席をタップして座らせる。選んだ部員の希望の楽器の席は光る。
-   この曲で旋律やソロを吹く空き席には ♪ をつける */
+/* ===== 新しく入った部員の担当を決める =====
+   顔の札で部員を選び、楽器ごとの空き席から担当を決める。舞台からも同じように選べる。 */
 function asgState(){
   const key = `${S.year}:${S.week}:${S.recruits.map(r => r.id).join(',')}`;
   if(U.asg?.key !== key){ const map = autoAssign(S); U.asg = {key, picks: Object.fromEntries(S.recruits.map(r => [r.id, map[r.id] || null])), sel: S.recruits[0]?.id}; }
@@ -1018,13 +1017,22 @@ function renderAssign(w, ev){
   asgState();
   const first = foundingYear(S) && !S.members.length;
   const intro = first ? `休部していた吹奏楽部に、1年生が${S.recruits.length}人入部してきた。` : ev?.kind === 'assign' ? '1年生が正式に入部した。' : '新しい部員が入ってきた。';
-  w.innerHTML = `<div class="event"><span class="tag">${first ? '入部' : ev?.kind === 'assign' ? ev.title : '入部'}</span><span>${intro}部員を選んでから、舞台の空いている席をタップして座らせよう。希望の楽器だとやる気が上がる。</span></div>
+  w.innerHTML = `<div class="event"><span class="tag">${first ? '入部' : ev?.kind === 'assign' ? ev.title : '入部'}</span><span>${intro}</span></div>
     <div class="rchips" id="asgList"></div>
-    <div class="stage-wrap"><canvas id="asgStage" role="img" aria-label="舞台の席。部員を選んでから、空いている席をタップすると座る。"></canvas></div>
-    <p class="legend" id="asgLegend"></p>
+    <section class="asg-chooser" aria-label="担当を決める"><div id="asgFocus" class="asg-focus" tabindex="-1"></div><div id="asgSeats"></div></section>
+    <details class="asg-overview"><summary>${uiIcon('stage')}舞台で見る</summary>
+      <div class="stage-wrap"><canvas id="asgStage" role="img" aria-label="舞台の席。部員を選んでから、空いている席をタップすると座る。"></canvas></div>
+      <p class="legend" id="asgLegend"></p>
+    </details>
     <p class="asg-lack" id="asgLack"></p>
-    <div class="transport"><button class="btn small" type="button" data-asg="bench">選んでいる部員を控え（席なし）に</button><button class="btn primary" type="button" data-act="assign">この配置で決める</button></div>`;
+    <div class="transport asg-actions"><button class="btn quiet" type="button" data-asg="bench">控え（席なし）に</button><button class="btn primary" type="button" data-act="assign">この配置で決める</button></div>`;
   $('#asgStage').addEventListener('click', asgTap);
+  $('.asg-overview').addEventListener('toggle', e => { if(e.target.open) drawAssignStage(); });
+  $('#asgSeats').addEventListener('toggle', e => {
+    if(e.target.isConnected && e.target.dataset.asgsec && U.asg?.openParts){
+      if(e.target.open) U.asg.openParts.add(e.target.dataset.asgsec); else U.asg.openParts.delete(e.target.dataset.asgsec);
+    }
+  }, true);
   asgUpdate();
 }
 // いない楽器の減点の目安
@@ -1036,10 +1044,24 @@ function asgUpdate(){
   list.innerHTML = S.recruits.map(r => {
     const seat = A.picks[r.id], happy = seat && SEAT[seat].inst === r.hope;
     const sk = Object.entries(innateSkills(r.id, r.exp)).map(([id, v]) => `<span class="sk">${SKILLS[id].name}${skillMark(v >= 2.5 ? 2 : 1)}</span>`).join('');
-    return `<button class="rchip" type="button" data-rid="${r.id}" aria-pressed="${A.sel === r.id}"><b>${memberFace(r,32)}${esc(r.name)}</b><small>${r.grade || 1}年・希望：${INST[r.hope].name}・${r.talent ? '中学で実績' : r.exp ? '経験あり' : '初心者'}</small>${sk ? `<span class="sks">${sk}</span>` : ''}
-      <span class="where${happy ? ' happy' : seat ? '' : ' none'}">${seat ? `→ ${seatLabel(seat)}${happy ? '・希望どおり' : ''}` : '→ まだ席がない（控え）'}</span></button>`;
+    return `<button class="rchip" type="button" data-rid="${r.id}" aria-pressed="${A.sel === r.id}"><b>${memberFace(r,40)}<span>${esc(r.name)}<small>${r.grade || 1}年・${r.talent ? '中学で実績' : r.exp ? '経験あり' : '初心者'}</small></span></b>
+      <span class="asg-hope">${instrumentIcon(r.hope)}<span><small>希望</small>${INST[r.hope].name}</span></span>${sk ? `<span class="sks">${sk}</span>` : ''}
+      <span class="where${happy ? ' happy' : seat ? '' : ' none'}">${seat ? `${seatLabel(seat)}${happy ? '<small>希望どおり</small>' : ''}` : '控え（席なし）'}</span></button>`;
   }).join('');
   const r = S.recruits.find(x => x.id === A.sel);
+  if(r){
+    const seat = A.picks[r.id], index = S.recruits.indexOf(r), hopeSec = SEATS.find(s => s.inst === r.hope)?.sec;
+    if(A.seatFor !== r.id){ A.seatFor = r.id; A.openParts = new Set([hopeSec, seat && SEAT[seat].sec].filter(Boolean)); }
+    $('#asgFocus').innerHTML = `<div class="asg-person">${memberFace(r,48)}<div><b>${esc(r.name)}</b><small>${seat ? seatLabel(seat) : '控え（席なし）'}</small></div><div class="asg-nav"><button type="button" data-asgnav="-1" aria-label="前の部員"${index ? '' : ' disabled'}>${uiIcon('chevron')}</button><button type="button" data-asgnav="1" aria-label="次の部員"${index < S.recruits.length - 1 ? '' : ' disabled'}>${uiIcon('chevron')}</button></div></div>
+      <div class="asg-seat-title"><b>担当を選ぶ</b><button class="help-button" type="button" ${tipAttr('楽器決め','部員を選んでから、空いている席を選ぼう。希望の楽器だとやる気が上がる。席のない部員は控えになる。')} aria-label="楽器決めの説明">?</button><span>${instrumentIcon(r.hope)}希望：${INST[r.hope].name}</span></div>`;
+    const free = SEATS.filter(s => !S.members.some(m => m.seat === s.id) && !Object.entries(A.picks).some(([id, pick]) => id !== r.id && pick === s.id));
+    $('#asgSeats').innerHTML = SECTIONS.map(sec => {
+      const seats = free.filter(s => s.sec === sec.id);
+      if(!seats.length) return '';
+      return `<details class="asg-part" data-asgsec="${sec.id}"${A.openParts.has(sec.id) ? ' open' : ''}><summary>${instrumentIcon(seats[0].inst)}<b>${sec.name}</b><small>${seats.length}席</small></summary><div class="asg-seat-grid">${seats.map(s => `<button type="button" class="asg-seat" data-asgseat="${s.id}" aria-pressed="${seat === s.id}">${instrumentIcon(s.inst)}<span>${seatLabel(s.id)}${s.inst === r.hope ? '<small>希望の楽器</small>' : ''}</span>${seat === s.id ? '<svg class="asg-check" viewBox="0 0 24 24" aria-hidden="true"><path d="m5 12 4 4L19 6"/></svg>' : ''}</button>`).join('')}</div></details>`;
+    }).join('') || '<p class="small">空いている席はない</p>';
+    $('[data-asg="bench"]').disabled = !seat;
+  }
   $('#asgLegend').innerHTML = `${r ? `<span><i class="sw sw-hope"></i>光る席：${esc(r.name)}の希望（${INST[r.hope].name}）</span>` : ''}<span><i class="sw sw-new"></i>新しい部員</span><span><i class="sw sw-old"></i>いまの部員</span>${S.pieceId ? '<span>♪：この曲で旋律を吹く席</span>' : ''}`;
   // この配置で、曲に受け持ちがあるのに一人もいない楽器
   if(S.pieceId){
@@ -1047,7 +1069,13 @@ function asgUpdate(){
     const lk = lackOf(S.pieceId, secs);
     $('#asgLack').innerHTML = lk.miss.length ? `この曲でいない楽器：<b>${lackNames(lk.miss).join('・')}</b>${lackPts(lk)}` : '<b>この曲の楽器は、全部そろっている</b>';
   }
-  drawAssignStage();
+  if($('.asg-overview').open) drawAssignStage();
+}
+function asgSelect(id, scroll = false){
+  if(!U.asg || !S.recruits.some(r => r.id === id)) return;
+  U.asg.sel = id; haptic('tap'); asgUpdate();
+  $('#asgFocus').focus({preventScroll: true});
+  if(scroll) $('#asgFocus').scrollIntoView({block: 'start', behavior: fxCalm() || U.fxMode !== 'full' ? 'instant' : 'smooth'});
 }
 function drawAssignStage(){
   const cv = $('#asgStage');
@@ -1059,13 +1087,13 @@ function drawAssignStage(){
   const by = Object.fromEntries(Object.entries(A.picks).filter(([, v]) => v).map(([k, v]) => [v, k]));
   stageFloor(g, G, C);
   const dot = (x, y, fill, alpha = 1) => { g.globalAlpha = alpha; g.fillStyle = fill; g.beginPath(); g.arc(x, y, G.r, 0, Math.PI * 2); g.fill(); g.globalAlpha = 1; };
-  const label = (s, x, y, col) => { if(G.r < 10) return; g.fillStyle = col; g.font = `700 ${G.r >= 13 ? 9 : 8}px ${C.fBody}`; g.textAlign = 'center'; g.textBaseline = 'middle'; g.fillText(s.sec === 'perc' ? 'Perc' : INST[s.inst].short.replace('Sax', 'S'), x, y + 0.5); };
+  const label = (s, x, y, col) => drawInstrument(g, s.inst, x, y, G.r * 1.5, col);
   for(const s of SEATS){
     const [x, y] = seatXY(s, G);
     const m = S.members.find(mm => mm.seat === s.id), rid = by[s.id];
-    if(m){ dot(x, y, skillColor(C, avgStats(m)), 0.45); label(s, x, y, 'rgba(255,255,255,.8)'); continue; }
+    if(m){ dot(x, y, skillColor(C, avgStats(m)), 0.45); label(s, x, y, C.ink); continue; }
     if(rid){
-      dot(x, y, C.brass); label(s, x, y, '#fff');
+      dot(x, y, C.brass); label(s, x, y, C.rkInk);
       if(rid === A.sel){ g.strokeStyle = C.ink; g.lineWidth = 3; g.beginPath(); g.arc(x, y, G.r + 3.5, 0, Math.PI * 2); g.stroke(); }
       continue;
     }
@@ -1081,12 +1109,16 @@ function drawAssignStage(){
 }
 // 舞台をタップ：いまの部員の席ならその子の名前、新しい部員の席ならその子を選ぶ、空いている席なら選んでいる部員を座らせる
 function asgTap(e){
-  const A = U.asg, s = seatAt(e, $('#asgStage'));
+  const s = seatAt(e, $('#asgStage'));
+  if(s) asgChooseSeat(s.id);
+}
+function asgChooseSeat(id){
+  const A = U.asg, s = SEAT[id];
   if(!A || !s) return;
   const m = S.members.find(x => x.seat === s.id);
   if(m){ toast(`${m.name}（${m.grade}年・${seatLabel(s.id)}）の席`, 1800); return; }
   const rid = Object.keys(A.picks).find(k => A.picks[k] === s.id);
-  if(rid){ A.sel = rid; asgUpdate(); return; }
+  if(rid){ asgSelect(rid); return; }
   if(!A.sel) return;
   haptic('tap');
   A.picks[A.sel] = s.id;
@@ -1096,6 +1128,9 @@ function asgTap(e){
   const next = S.recruits.find(x => !A.picks[x.id]);
   if(next) A.sel = next.id;
   asgUpdate();
+  const target = A.sel === who.id ? $(`[data-asgseat="${s.id}"]`) : $('#asgFocus');
+  target?.focus({preventScroll: true});
+  if(A.sel !== who.id) $('#asgFocus').scrollIntoView({block: 'start'});
 }
 // コンクールに出るメンバーの人数と、決め直すボタン
 function lineupLine(){
@@ -1842,8 +1877,10 @@ function bind(){
     if(b.dataset.wplan){ haptic('tap'); commit(chooseWinterPlan(S, b.dataset.wplan)); renderAll(); scrollTo(0, 0); return; }
     if(b.dataset.ens){ const id = b.dataset.ens; if(U.ensPick.has(id)) U.ensPick.delete(id); else if(U.ensPick.size < ENS_MAX) U.ensPick.add(id); else return; haptic('tap'); updateEnsembleSelection(); return; }
     if(b.dataset.split){ haptic('tap'); commit(setSplit(S, b.dataset.split)); renderWeek();document.querySelector(`[data-split="${b.dataset.split}"]`)?.focus({preventScroll:true});return; }
-    if(b.dataset.rid){ U.asg.sel = b.dataset.rid; haptic('tap'); asgUpdate(); return; }
-    if(b.dataset.asg === 'bench'){ if(U.asg?.sel){ U.asg.picks[U.asg.sel] = null; asgUpdate(); } return; }
+    if(b.dataset.rid){ asgSelect(b.dataset.rid, narrow.matches); return; }
+    if(b.dataset.asgnav){ const i = S.recruits.findIndex(r => r.id === U.asg?.sel); asgSelect(S.recruits[i + Number(b.dataset.asgnav)]?.id, narrow.matches); return; }
+    if(b.dataset.asgseat){ asgChooseSeat(b.dataset.asgseat); return; }
+    if(b.dataset.asg === 'bench'){ if(U.asg?.sel){ haptic('tap'); U.asg.picks[U.asg.sel] = null; asgUpdate(); $('#asgFocus').focus({preventScroll: true}); if(narrow.matches) $('#asgFocus').scrollIntoView({block: 'start'}); } return; }
     if(b.dataset.op !== undefined){
       const id = b.dataset.op, v = outingView(S);
       if(U.outPick.has(id)) U.outPick.delete(id); else if(v && U.outPick.size < v.n) U.outPick.add(id); else return;

@@ -1,0 +1,44 @@
+[
+  {
+    "view": "intake-existing",
+    "theme": "light",
+    "width": 375,
+    "scrollWidth": 375,
+    "errors": []
+  },
+  {
+    "view": "intake-existing",
+    "theme": "dark",
+    "width": 375,
+    "scrollWidth": 375,
+    "errors": []
+  },
+  {
+    "view": "intake-full",
+    "theme": "light",
+    "width": 375,
+    "scrollWidth": 375,
+    "errors": []
+  },
+  {
+    "view": "intake-full",
+    "theme": "dark",
+    "width": 375,
+    "scrollWidth": 375,
+    "errors": []
+  },
+  {
+    "view": "talent",
+    "theme": "light",
+    "width": 375,
+    "scrollWidth": 375,
+    "errors": []
+  },
+  {
+    "view": "talent",
+    "theme": "dark",
+    "width": 375,
+    "scrollWidth": 375,
+    "errors": []
+  }
+]

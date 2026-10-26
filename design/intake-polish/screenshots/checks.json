@@ -1,0 +1,99 @@
+{
+  "checks": [
+    {
+      "check": "最初の配置は従来の自動配置と一致",
+      "pass": true
+    },
+    {
+      "check": "前後の部員を切り替えても配置を変更しない",
+      "pass": true
+    },
+    {
+      "check": "控えにすると席が解除される",
+      "pass": true
+    },
+    {
+      "check": "空き席をキーボードで選び次の席なし部員へ移る",
+      "pass": true
+    },
+    {
+      "check": "決定した名前・席・希望が従来の入部処理と一致",
+      "pass": true
+    },
+    {
+      "check": "先輩32人と他の新入部員の席は選択肢に含めない",
+      "pass": true
+    },
+    {
+      "check": "39席が埋まった入部でも全員を控えとして決定できる",
+      "pass": true
+    },
+    {
+      "check": "満席でも元の39人の席を変えず新しい8人は控え",
+      "pass": true
+    },
+    {
+      "check": "同じ部員の席を変えても手で閉じたパートは閉じたまま",
+      "pass": true
+    }
+  ],
+  "tabs": [
+    {
+      "scrollWidth": 375,
+      "tab": "week",
+      "theme": "dark",
+      "width": 375
+    },
+    {
+      "scrollWidth": 375,
+      "tab": "play",
+      "theme": "dark",
+      "width": 375
+    },
+    {
+      "scrollWidth": 375,
+      "tab": "members",
+      "theme": "dark",
+      "width": 375
+    },
+    {
+      "scrollWidth": 375,
+      "tab": "log",
+      "theme": "dark",
+      "width": 375
+    },
+    {
+      "scrollWidth": 375,
+      "tab": "week",
+      "theme": "light",
+      "width": 375
+    },
+    {
+      "scrollWidth": 375,
+      "tab": "play",
+      "theme": "light",
+      "width": 375
+    },
+    {
+      "scrollWidth": 375,
+      "tab": "members",
+      "theme": "light",
+      "width": 375
+    },
+    {
+      "scrollWidth": 375,
+      "tab": "log",
+      "theme": "light",
+      "width": 375
+    }
+  ],
+  "year": {
+    "year": 2027,
+    "steps": 49,
+    "errors": [],
+    "logPreserved": true,
+    "width": 375,
+    "scrollWidth": 375
+  },
+  "note": "満席の見本を切り替える際は一時的な配置状態を初期化して検証。実際の保存処理には変更なし。"
+}

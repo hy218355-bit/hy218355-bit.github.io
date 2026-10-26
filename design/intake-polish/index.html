@@ -1,0 +1,19 @@
+<!doctype html><html lang="ja"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>顔と希望を見ながら、楽器を決める</title>
+<style>
+@font-face{font-family:body;src:url('/tsukurikata/fonts/zen-kaku-gothic-new-500.woff2')}:root{--paper:#f1f0e9;--ink:#263d43;--rule:#d4d7c9;--brass:#936b2f}*{box-sizing:border-box}body{margin:0;background:var(--paper);color:var(--ink);font-family:body,sans-serif}main{max-width:1000px;margin:auto;padding:24px}h1{font-size:23px;margin:0 0 12px}h2{font-size:18px;margin-top:32px}p{font-size:14px;line-height:1.9;max-width:800px}a{color:inherit}.grid{display:grid;grid-template-columns:repeat(2,minmax(0,375px));gap:20px}figure{margin:0}figcaption{font-size:13px;margin:10px 0}img{display:block;width:100%;border-radius:16px;border:1px solid var(--rule)}nav{display:flex;flex-wrap:wrap;gap:10px}nav a{padding:10px 14px;border:1px solid var(--brass);border-radius:8px;text-decoration:none}@media(max-width:600px){main{padding:16px}.grid{grid-template-columns:1fr}}
+</style>
+<main><h1>顔と希望を見ながら、楽器を決める</h1>
+<p>部員の顔と希望の楽器を見比べて、担当を決める画面へ。空いている席を名前で選び、金の枠とチェックで今の担当が分かります。決定ボタンは画面の下に置きました。</p>
+<nav><a href="/design/implementation/qa.html?view=intake&theme=light&keys=1">入部をさわる</a><a href="/design/implementation/qa.html?view=intake-existing&theme=dark&keys=1">先輩のいる入部</a><a href="/design/implementation/qa.html?view=talent&theme=light&keys=1">経験者の入部</a><a href="../practice-polish/">前回の今週の練習</a></nav>
+<p>確認用の画面です。いつものセーブは書き換えません。</p>
+<h2>顔・希望・担当を見比べる · 375px</h2>
+<p>部員の顔を40pxに。希望の楽器にはアイコンを添え、経験や得意わざと、決まった席を分けて見せます。</p>
+<div class="grid"><figure><figcaption>ライト</figcaption><img src="screenshots/intake-light.png" alt="部員の顔と楽器の希望を並べた入部画面・ライト"></figure><figure><figcaption>ダーク</figcaption><img src="screenshots/intake-dark.png" alt="部員の顔と楽器の希望を並べた入部画面・ダーク"></figure></div>
+<h2>名前で選べる席 · 375px</h2>
+<p>選んだ部員を48pxの顔で表示。前後の部員へもその場で切り替えられます。希望や今の担当のパートを開き、空いている席と本人の席から選べます。</p>
+<div class="grid"><figure><figcaption>ライト</figcaption><img src="screenshots/seats-light.png" alt="楽器ごとの席と金の選択表示・ライト"></figure><figure><figcaption>ダーク</figcaption><img src="screenshots/seats-dark.png" alt="選んだ席の枠とチェック・ダーク"></figure></div>
+<h2>先輩のいる入部・満席の入部</h2>
+<p>舞台の一覧も開いて見られます。満席なら新しい部員は控えに。先輩の席、自動配置、希望によるやる気や経験者の力は、これまでと同じです。</p>
+<div class="grid"><figure><figcaption>舞台を開く</figcaption><img src="screenshots/overview-dark.png" alt="入部画面から舞台を開き楽器の配置を見る"></figure><figure><figcaption>満席の入部</figcaption><img src="screenshots/full-dark.png" alt="空き席のない状態でも控えとして入部できる"></figure></div>
+</main></html>

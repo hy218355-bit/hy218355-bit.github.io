@@ -1006,6 +1006,63 @@ html[data-season="snow"]{--season-band:linear-gradient(90deg,#DDE8F3,#FFFFFF,#B9
 .plan .pspan>.chip[aria-pressed="true"]{border-color:var(--brass);color:var(--ink);background:color-mix(in srgb,var(--brass) 12%,var(--sheet))}
 .plan [data-pick]:focus-visible,.plan .pchip:focus-visible{outline:2px solid var(--ink);outline-offset:2px}
 @media(min-width:600px){.plan .pgrid{grid-template-columns:repeat(3,minmax(0,1fr))}}
+/* 入部：顔と希望を見比べ、楽器ごとの空き席から担当を決める。 */
+.rchips{gap:8px;margin:14px 0 22px}
+.rchip{padding:10px;gap:9px;border-radius:12px;min-width:0}
+.rchip[aria-pressed="true"]{background:color-mix(in srgb,var(--brass) 9%,var(--sheet));border-color:var(--brass)}
+.rchip>b{gap:7px;line-height:1.4}
+.rchip>b>span{min-width:0;overflow-wrap:anywhere}
+.rchip>b small{display:block;font-size:10px;font-weight:400}
+.rchip .asg-hope{display:flex;align-items:center;gap:6px;font-size:12px;line-height:1.4}
+.asg-hope .instrument-icon{width:26px;height:26px;flex:none;color:var(--brass)}
+.asg-hope small{display:block;font-size:10px}
+.rchip .where{border-top:1px solid var(--rule);padding-top:7px;margin-top:auto;line-height:1.45;overflow-wrap:anywhere}
+.rchip .where small{display:block;color:inherit;font-size:10px}
+.rchip .sks:empty{display:none}
+.asg-chooser{border:1px solid var(--rule);border-radius:14px;background:var(--sheet);overflow:hidden}
+.asg-focus{padding:14px 12px 0;scroll-margin-top:16px}
+.asg-focus:focus-visible{outline:2px solid var(--brass);outline-offset:-3px}
+.asg-person{display:flex;align-items:center;gap:10px}
+.asg-person>div:not(.asg-nav){flex:1;min-width:0}
+.asg-person b{display:block;font-size:17px}
+.asg-person small{display:block;font-size:11px;line-height:1.5;color:var(--ink-soft)}
+.asg-nav{display:flex;gap:4px}
+.asg-nav button{display:grid;place-items:center;width:44px;height:44px;padding:0;border:1px solid var(--rule);border-radius:50%;background:var(--paper);color:var(--ink);cursor:pointer}
+.asg-nav button:disabled{opacity:.3;cursor:default}
+.asg-nav button:first-child .ui-icon{transform:rotate(90deg)}
+.asg-nav button:last-child .ui-icon{transform:rotate(-90deg)}
+.asg-seat-title{display:flex;flex-wrap:wrap;align-items:center;gap:6px;margin-top:8px;min-height:44px}
+.asg-seat-title>b{font-size:13px}
+.asg-seat-title .help-button{width:44px;height:44px}
+.asg-seat-title>span{display:flex;align-items:center;gap:4px;margin-left:auto;color:var(--good);font-size:11px}
+.asg-seat-title .instrument-icon{width:18px;height:18px}
+.asg-part{border-top:1px solid var(--rule)}
+.asg-part summary{display:flex;align-items:center;gap:8px;min-height:48px;padding:10px 12px;list-style:none;cursor:pointer}
+.asg-part summary::-webkit-details-marker{display:none}
+.asg-part summary>.instrument-icon{width:24px;height:24px;color:var(--brass)}
+.asg-part summary b{font-size:13px}
+.asg-part summary small{font:12px var(--f-body);color:var(--ink-soft);margin-left:auto}
+.asg-part summary::after{content:'';width:7px;height:7px;border-right:1.5px solid var(--ink-soft);border-bottom:1.5px solid var(--ink-soft);transform:rotate(45deg);margin-left:6px;margin-right:3px}
+.asg-part[open] summary::after{transform:rotate(225deg)}
+.asg-seat-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:7px;padding:0 10px 12px}
+.asg-seat{display:flex;align-items:center;position:relative;gap:6px;min-width:0;min-height:58px;text-align:left;padding:9px 8px;border:1.5px solid var(--rule);border-radius:9px;background:var(--paper);color:var(--ink);font:700 11px/1.5 var(--f-body);cursor:pointer}
+.asg-seat>.instrument-icon{width:22px;height:22px;flex:none;color:var(--brass)}
+.asg-seat>span{min-width:0;overflow-wrap:anywhere}
+.asg-seat small{display:block;font-size:10px;font-weight:400;color:var(--good)}
+.asg-seat[aria-pressed="true"]{border-color:var(--brass);box-shadow:inset 0 0 0 1px var(--brass);background:color-mix(in srgb,var(--brass) 12%,var(--sheet))}
+.asg-check{position:absolute;top:-5px;right:-5px;width:18px;height:18px;padding:2px;background:var(--brass);color:var(--rk-ink);border-radius:50%;fill:none;stroke:currentColor;stroke-width:2.5;stroke-linecap:round;stroke-linejoin:round}
+.asg-overview{margin-top:16px;border:1px solid var(--rule);border-radius:12px;padding:0 12px}
+.asg-overview>summary{display:flex;align-items:center;gap:8px;min-height:48px;font-size:13px;cursor:pointer}
+.asg-overview>summary .ui-icon{color:var(--brass)}
+.asg-overview .stage-wrap{margin-top:4px}
+.asg-actions{margin-top:18px}
+.asg-actions .btn{min-height:46px}
+@media(max-width:960px){
+ .tabbed #week:has(.asg-actions){padding-bottom:90px}
+ .tabbed .asg-actions{position:fixed;left:max(16px,env(safe-area-inset-left,0px));right:max(16px,env(safe-area-inset-right,0px));bottom:calc(60px + env(safe-area-inset-bottom,0px));z-index:45;display:grid;grid-template-columns:1fr 1.3fr;gap:8px;padding:12px 0 8px;background:linear-gradient(transparent,var(--paper) 18%)}
+ .asg-actions .btn{font-size:12px;padding:10px 6px;white-space:nowrap}
+ .tabbed:has(.mini:not([hidden])) .asg-actions{bottom:calc(122px + env(safe-area-inset-bottom,0px))}
+}
 </style>
 </head>
 <body>
@@ -1213,8 +1270,8 @@ html[data-season="snow"]{--season-band:linear-gradient(90deg,#DDE8F3,#FFFFFF,#B9
 <script src="js/announce.js?v=result-journal-1"></script>
 <script src="js/tunegame.js?v=qa-selection-polish-1"></script>
 <script src="js/fx.js?v=qa-selection-polish-1"></script>
-<script src="js/ui.js?v=practice-polish-1"></script>
+<script src="js/ui.js?v=intake-polish-1"></script>
 <div class="tip" id="tip" role="tooltip" hidden></div>
-<script src="/design/implementation/qa.js?v=practice-polish-3"></script>
+<script src="/design/implementation/qa.js?v=intake-polish-1"></script>
 </body>
 </html>
