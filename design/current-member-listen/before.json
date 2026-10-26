@@ -1,0 +1,256 @@
+{
+  "theme": "light",
+  "width": 375,
+  "scrollWidth": 375,
+  "playing": true,
+  "waiting": false,
+  "playbackId": null,
+  "shownLabel": "2027年 定期演奏会（県民文化会館で録音）",
+  "engineSolo": {
+    "type": "member",
+    "id": "m2028-n2-cafe"
+  },
+  "audibleMemberIds": [],
+  "performanceAudit": {
+    "expected": 0.6905609536916018,
+    "prepared": 0.6905609536916018,
+    "shown": 0.1801566311623901,
+    "expectedCohesion": 0.2,
+    "preparedCohesion": 0.2,
+    "shownCohesion": 0.8
+  },
+  "selectedMember": {
+    "id": "m2028-n2-cafe",
+    "name": "小川 悠斗",
+    "face": 85
+  },
+  "recordedCard": null,
+  "recordsFingerprint": 0.29388283868320286,
+  "listening": {
+    "shownPiece": "galop",
+    "title": "「天国と地獄」",
+    "kind": "録音",
+    "range": "recorded",
+    "rangeLabel": "全部",
+    "rangeDisabled": true,
+    "conductDisabled": true,
+    "summary": "県民文化会館・全部・小川 悠斗だけ",
+    "engineVenue": "hall"
+  },
+  "errors": [],
+  "state": 0.7186669250950217,
+  "audio": {
+    "ready": true,
+    "error": null,
+    "voices": [
+      "SampleVoice"
+    ]
+  },
+  "audioButtons": [
+    {
+      "action": "solo",
+      "pressed": "true"
+    },
+    {
+      "action": "secsolo",
+      "pressed": "false"
+    }
+  ],
+  "cast": [
+    {
+      "id": "m2028-n1-cafe",
+      "name": "田中 葵",
+      "seat": "picc1"
+    },
+    {
+      "id": "m2026-n2-f00d",
+      "name": "小川 悠斗",
+      "seat": "fl1a"
+    },
+    {
+      "id": "m2026-n3-f00d",
+      "name": "松井 颯太",
+      "seat": "fl1b"
+    },
+    {
+      "id": "m2026-n4-f00d",
+      "name": "菅原 菜月",
+      "seat": "fl2a"
+    },
+    {
+      "id": "m2026-n5-f00d",
+      "name": "岡本 智也",
+      "seat": "ob1"
+    },
+    {
+      "id": "m2026-n6-f00d",
+      "name": "山口 大翔",
+      "seat": "cl1a"
+    },
+    {
+      "id": "m2026-n7-f00d",
+      "name": "山下 彩花",
+      "seat": "cl1b"
+    },
+    {
+      "id": "m2026-n8-f00d",
+      "name": "高木 瑛太",
+      "seat": "cl1c"
+    },
+    {
+      "id": "m2026-n9-f00d",
+      "name": "清水 菜月",
+      "seat": "asax1"
+    },
+    {
+      "id": "m2026-n10-f00d",
+      "name": "山本 凛",
+      "seat": "asax2"
+    },
+    {
+      "id": "m2026-n11-f00d",
+      "name": "山田 悠真",
+      "seat": "fg1"
+    },
+    {
+      "id": "m2026-n12-f00d",
+      "name": "西村 樹",
+      "seat": "ebcl1"
+    },
+    {
+      "id": "m2026-n13-f00d",
+      "name": "松井 美咲",
+      "seat": "cl2a"
+    },
+    {
+      "id": "m2026-n14-f00d",
+      "name": "阿部 和奏",
+      "seat": "cl2b"
+    },
+    {
+      "id": "m2026-n15-f00d",
+      "name": "前田 紬",
+      "seat": "cl3a"
+    },
+    {
+      "id": "m2026-n16-f00d",
+      "name": "野口 陽翔",
+      "seat": "cl3b"
+    },
+    {
+      "id": "m2026-n17-f00d",
+      "name": "工藤 美月",
+      "seat": "bcl1"
+    },
+    {
+      "id": "m2026-n18-f00d",
+      "name": "中野 透",
+      "seat": "tsax1"
+    },
+    {
+      "id": "m2026-n19-f00d",
+      "name": "木村 湊",
+      "seat": "bsax1"
+    },
+    {
+      "id": "m2026-n20-f00d",
+      "name": "佐々木 彩花",
+      "seat": "hn1"
+    },
+    {
+      "id": "m2026-n21-f00d",
+      "name": "井上 優",
+      "seat": "hn2"
+    },
+    {
+      "id": "m2026-n22-f00d",
+      "name": "酒井 陸",
+      "seat": "hn3"
+    },
+    {
+      "id": "m2026-n23-f00d",
+      "name": "松田 拓海",
+      "seat": "hn4"
+    },
+    {
+      "id": "m2026-n24-f00d",
+      "name": "中村 絢",
+      "seat": "tp1a"
+    },
+    {
+      "id": "m2026-n25-f00d",
+      "name": "林 亮",
+      "seat": "tp1b"
+    },
+    {
+      "id": "m2026-n26-f00d",
+      "name": "岩崎 結衣",
+      "seat": "tp2a"
+    },
+    {
+      "id": "m2026-n27-f00d",
+      "name": "千葉 陸",
+      "seat": "tp3a"
+    },
+    {
+      "id": "m2026-n28-f00d",
+      "name": "竹内 花音",
+      "seat": "tb1"
+    },
+    {
+      "id": "m2026-n29-f00d",
+      "name": "井上 雫",
+      "seat": "tb2"
+    },
+    {
+      "id": "m2026-n30-f00d",
+      "name": "石井 透",
+      "seat": "btb1"
+    },
+    {
+      "id": "m2026-n31-f00d",
+      "name": "山下 茜",
+      "seat": "euph1"
+    },
+    {
+      "id": "m2026-n32-f00d",
+      "name": "渡辺 渚",
+      "seat": "euph2"
+    },
+    {
+      "id": "m2026-n33-f00d",
+      "name": "坂本 雫",
+      "seat": "tuba1"
+    },
+    {
+      "id": "m2026-n34-f00d",
+      "name": "菅原 智也",
+      "seat": "tuba2"
+    },
+    {
+      "id": "m2026-n35-f00d",
+      "name": "高木 明里",
+      "seat": "cb1"
+    },
+    {
+      "id": "m2026-n36-f00d",
+      "name": "佐藤 誠",
+      "seat": "perc1"
+    },
+    {
+      "id": "m2026-n38-f00d",
+      "name": "原 杏",
+      "seat": "perc3"
+    },
+    {
+      "id": "m2026-n37-f00d",
+      "name": "山田 蓮",
+      "seat": "perc2"
+    },
+    {
+      "id": "m2026-n39-f00d",
+      "name": "横山 透",
+      "seat": "perc4"
+    }
+  ]
+}

@@ -1,0 +1,14 @@
+[
+  {
+    "level": "error",
+    "message": "ReferenceError: SEASON_OF is not defined\n    at fxMoments (http://127.0.0.1:8005/tsukurikata/js/ui.js?v=qa-current-listen-3:855:28)\n    at renderAll (http://127.0.0.1:8005/tsukurikata/js/ui.js?v=qa-current-listen-3:1848:3)\n    at start (http://127.0.0.1:8005/tsukurikata/js/ui.js?v=qa-current-listen-3:2292:3)\n    at HTMLDocument.bootGame (http://127.0.0.1:8005/tsukurikata/js/ui.js?v=qa-current-listen-3:2306:81)",
+    "timestamp": "2026-10-26T18:29:54.886Z",
+    "url": "http://127.0.0.1:8005/tsukurikata/js/ui.js?v=qa-current-listen-3"
+  },
+  {
+    "level": "error",
+    "message": "画面確認に失敗 ReferenceError: FX is not defined\n    at http://127.0.0.1:8005/design/implementation/qa.js?v=qa-current-listen-3:25:28",
+    "timestamp": "2026-10-26T18:29:54.886Z",
+    "url": "http://127.0.0.1:8005/design/implementation/qa.js?v=qa-current-listen-3"
+  }
+]

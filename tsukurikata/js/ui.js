@@ -1855,6 +1855,17 @@ function renderAll(){
 /* ===== 操作 ===== */
 // 「この人だけ聴く」「パートだけ」を、全員の音にもどす
 function soloAll(){ const was = U.solo !== 'all'; U.solo = 'all'; applySolo(); if(was){ renderSelectors(); renderMemberCard(); } }
+// 今の部員の試聴は今の部から鳴らす。昔の録音やお手本の中から探さない。
+function listenCurrentMember(id, section = false){
+  if(!memberById(id)?.seat) return;
+  if(U.playing && U.shown !== U.perfNow) stopPlay();
+  // 停止時の処理で部が変わることもあるので、今いる本人を取り直す。
+  const m = memberById(id); if(!m?.seat) return;
+  U.sel = m.id;
+  U.solo = section ? `sec:${SEAT[m.seat].sec}` : `member:${m.id}`;
+  renderSelectors(); applySolo(); renderMemberCard();
+  if(!U.playing) $('#btnNow').click();
+}
 function startStage(){
   stopPlay();
   soloAll();
@@ -1939,7 +1950,9 @@ function bind(){
   for(const [id, icon, label] of [['btnNow','play','いまの音で合奏'],['btnStop','stop','止める'],['btnConduct','conduct','指揮する'],['btnRec','play','聴く'],['btnSave','download','保存']]) $('#'+id).innerHTML = uiIcon(icon) + label;
   $('#rollPanel').addEventListener('toggle', e => { if(e.target.open) drawRoll(U.shown, U.playing ? E.now() : -1); });
   $('#btnNow').addEventListener('click', () => {
-    if(!U.perfNow) U.perfNow = currentPerformance();
+    // すぐ再生したときは、予約した作り直しをここで行い、同じ音を二度作らない。
+    clearTimeout(U.refreshT);
+    if(!U.perfNow){ U.perfNow = currentPerformance(); U.diag = analyze(U.perfNow); renderDiag(); }
     playPerf(U.perfNow, nowLabel());
   });
   $('#btnRec').addEventListener('click', () => playRec($('#recSel').value));
@@ -2084,8 +2097,8 @@ function bind(){
       if(narrow.matches) $('#memberCard').scrollIntoView({block: 'start'}); return;
     }
     if(act === 'renamecancel'){ closeMemberNameForm(); return; }
-    if(act === 'solo'){ U.solo = `member:${m.id}`; renderSelectors(); applySolo(); renderMemberCard(); if(!U.playing) $('#btnNow').click(); }
-    else if(act === 'secsolo'){ U.solo = `sec:${SEAT[m.seat].sec}`; renderSelectors(); applySolo(); renderMemberCard(); if(!U.playing) $('#btnNow').click(); }
+    if(act === 'solo') listenCurrentMember(m.id);
+    else if(act === 'secsolo') listenCurrentMember(m.id, true);
     else if(act === 'all'){ U.solo = 'all'; renderSelectors(); applySolo(); renderMemberCard(); }
     else if(act === 'move'){
       if(busy() || !selectedMemberMove()) return;

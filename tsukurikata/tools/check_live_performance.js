@@ -42,7 +42,7 @@ fresh();S.week=26;U.perfNow=U.shown=currentPerformance();checkNext(startWinter(S
 // 会場や範囲を変え、描き直しを待たずに再生する。
 fresh();const all=U.perfNow;U.range='0';U.venue='hall';refreshNow();assert.equal(U.perfNow,null);$('#btnNow').click();
 assert.ok(json(played.perf)===json(perform(currentCtx())));assert.ok(json(played.perf)!==json(all));
-const listening=U.shown,label=U.shownLabel;flush();assert.equal(U.shown,listening);assert.equal(U.shownLabel,label);
+const listening=U.shown,label=U.shownLabel;flush();assert.equal(U.shown,listening);assert.equal(U.perfNow,listening,'即時再生で作った同じ音を、予約した処理で作り直さない');assert.equal(U.shownLabel,label);
 // 続けて変更したときは最後の状態で一度だけ作り直す。再生中の録音は上書きしない。
 fresh();U.playing=true;const recording=U.shown;U.shownLabel='昔の録音';const count=refreshes;
 commit({...S,cohesion:41});refreshNow();commit({...S,cohesion:43});refreshNow();assert.equal(timers.size,1);flush();

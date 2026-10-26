@@ -24,6 +24,7 @@ const q=new URLSearchParams(location.search);let view=q.get('view')||'week';
 document.documentElement.dataset.theme=q.get('theme')==='dark'?'dark':'light';
 U.sfx=false;U.fxMode='off';FX.q=[];clearTimeout(FX.timer);FX.on=false;$('#fx').hidden=true;
 let report,releaseSamples,performanceMemo;
+const playbackIds=new WeakMap();let playbackCount=0;
 window.addEventListener('error',e=>{if(report)report.errors.push(e.message);});
 function advance(s){
  if(recruitsDue(s)&&!s.pending)return assignRecruits(s,autoAssign(s));
@@ -60,6 +61,9 @@ function record(){
  report.shownMatchesPrepared=!!U.shown&&U.shown===U.perfNow;
  report.playing=U.playing;report.waiting=!!U.waitPlay;report.shownLabel=U.shownLabel;report.range=U.range;report.solo=U.solo;report.piece=playPiece();report.venue=U.venue;
  report.engineSolo=E.solo;report.viewPart=U.view;
+ if(E.pb&&!playbackIds.has(E.pb))playbackIds.set(E.pb,++playbackCount);
+ report.playbackId=E.pb?playbackIds.get(E.pb):null;
+ report.audibleMemberIds=E.pb?Object.keys(E.pb.mem).filter(mid=>E.pb.audible(mid,E.solo)):[];
  report.shownBounds=U.shown?{from:U.shown.from,to:U.shown.to}:null;report.preparedBounds=U.perfNow?{from:U.perfNow.from,to:U.perfNow.to}:null;
  report.shownPlayers=U.shown?Object.entries(buildPtr(U.shown)).map(([seat,p])=>({seat,id:p.mid})):[];
  report.recordsFingerprint=hash(JSON.stringify(S.recs));

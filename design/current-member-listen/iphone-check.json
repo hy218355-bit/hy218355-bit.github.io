@@ -1,0 +1,16 @@
+{
+  "build": "succeeded",
+  "firstInstall": "connection_invalid",
+  "finalInstall": "succeeded",
+  "launch": "device_locked",
+  "files": {
+    "index.html": {
+      "source": "a460a396c04ec92ddefb8f44bb3e554c37ac5f1e14e3878535b34a5bccd822bd",
+      "bundle": "a460a396c04ec92ddefb8f44bb3e554c37ac5f1e14e3878535b34a5bccd822bd"
+    },
+    "js/ui.js": {
+      "source": "5b3a16e748b8fed904d9ee864c78706401fc80c15a8112c8370195fd8cc776f6",
+      "bundle": "5b3a16e748b8fed904d9ee864c78706401fc80c15a8112c8370195fd8cc776f6"
+    }
+  }
+}
