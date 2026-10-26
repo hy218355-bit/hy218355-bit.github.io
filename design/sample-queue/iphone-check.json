@@ -1,0 +1,16 @@
+{
+  "build": "succeeded",
+  "firstInstall": "connection_interrupted",
+  "retryInstall": "succeeded",
+  "launch": "device_locked",
+  "files": {
+    "index.html": {
+      "source": "e7df23f7fe45f1fb84da27617989caeacec4af59afa30e1c5d342187d750aef1",
+      "bundle": "e7df23f7fe45f1fb84da27617989caeacec4af59afa30e1c5d342187d750aef1"
+    },
+    "js/samples.js": {
+      "source": "5254e7c49a70575366ec6adcab27d6116bf6715871c88142823be430b4cd2755",
+      "bundle": "5254e7c49a70575366ec6adcab27d6116bf6715871c88142823be430b4cd2755"
+    }
+  }
+}

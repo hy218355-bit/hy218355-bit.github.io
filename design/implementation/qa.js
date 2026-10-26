@@ -5,14 +5,19 @@
 save=()=>{};load=()=>null;saveUI=()=>{};
 // 確認用だけ、一つの録音を読めない状態にする。実際のゲームとセーブには入れない。
 const audioFailure=new URLSearchParams(location.search).get('sampleFailure'),audioRequests={},audioFetch=window.fetch.bind(window);
+const audioFlow={active:0,peak:0,finished:0,failed:0,started:performance.now(),settledMs:null};
 let audioBeforeRetry=null;
 window.fetch=(input,init)=>{
  const url=new URL(typeof input==='string'?input:input.url,document.baseURI),match=url.pathname.match(/\/snd\/([^/]+\.(?:mp3|json))$/);
+ let request;
  if(match){
   const name=match[1],count=audioRequests[name]=(audioRequests[name]||0)+1;
-  if((audioFailure==='manifest'&&name==='manifest.json'&&count===1)||(name==='flute.mp3'&&(audioFailure==='repeat'||audioFailure==='once'&&count===1)))return Promise.resolve(new Response('',{status:503}));
+  if((audioFailure==='manifest'&&name==='manifest.json'&&count===1)||(name==='flute.mp3'&&(audioFailure==='repeat'||audioFailure==='once'&&count===1)))request=Promise.resolve(new Response('',{status:503}));
  }
- return audioFetch(input,init);
+ request=request||audioFetch(input,init);
+ if(!match||!match[1].endsWith('.mp3'))return request;
+ audioFlow.active++;audioFlow.peak=Math.max(audioFlow.peak,audioFlow.active);
+ return request.then(r=>{if(!r.ok&&r.status!==0)audioFlow.failed++;return r;},e=>{audioFlow.failed++;throw e;}).finally(()=>{audioFlow.active--;audioFlow.finished++;});
 };
 if(document.readyState==='loading')await new Promise(r=>document.addEventListener('DOMContentLoaded',r,{once:true}));
 const q=new URLSearchParams(location.search);let view=q.get('view')||'week';
@@ -43,7 +48,8 @@ function record(){
   const fingerprint=p=>p?hash(JSON.stringify(p)):null;
   report.performanceAudit={expected:fingerprint(performanceMemo.perf),prepared:fingerprint(U.perfNow),shown:fingerprint(U.shown),expectedCohesion:performanceMemo.perf.cohesion,preparedCohesion:U.perfNow?.cohesion,shownCohesion:U.shown?.cohesion};
  }
- report.audio={ready:SAMPLES.ready,progress:SAMPLES.progress,error:SAMPLES.error?{name:SAMPLES.error.name,message:SAMPLES.error.message}:null,banks:Object.keys(SAMPLES.banks),requests:{...audioRequests},preservedCount:audioBeforeRetry?.length,preservedBuffers:audioBeforeRetry?audioBeforeRetry.every(([name,bank])=>SAMPLES.banks[name]===bank):null,voices:[...new Set((E.pb?.voices||[]).map(v=>v.constructor.name))]};
+ if(audioFlow.settledMs===null&&(SAMPLES.ready||SAMPLES.error))audioFlow.settledMs=Math.round(performance.now()-audioFlow.started);
+ report.audio={ready:SAMPLES.ready,progress:SAMPLES.progress,error:SAMPLES.error?{name:SAMPLES.error.name,message:SAMPLES.error.message}:null,banks:Object.keys(SAMPLES.banks),requests:{...audioRequests},flow:{...audioFlow},preservedCount:audioBeforeRetry?.length,preservedBuffers:audioBeforeRetry?audioBeforeRetry.every(([name,bank])=>SAMPLES.banks[name]===bank):null,voices:[...new Set((E.pb?.voices||[]).map(v=>v.constructor.name))]};
  const yearNext=$('#week .year-actions .btn')?.getBoundingClientRect();report.yearNext=yearNext?{top:yearNext.top,bottom:yearNext.bottom,height:yearNext.height}:null;
  report.yearGrowth=Array.from(document.querySelectorAll('[data-year-growth]')).map(el=>({id:el.dataset.yearGrowth,name:el.querySelector('b').textContent,ranks:el.querySelector('.yr-grow-ranks').getAttribute('aria-label')}));
  report.year=S.year;report.phase=S.phase;report.pending=S.pending?{kind:S.pending.kind,revealed:!!S.pending.revealed}:null;report.expectedNowLabel=nowLabel();
@@ -91,7 +97,7 @@ function record(){
   report.autoPicks=autoAssign(S);report.occupiedSeats=S.members.map(m=>m.seat).filter(Boolean);
   report.assignExpected=assignRecruits(S,U.asg.picks).members.map(m=>({id:m.id,name:m.name,seat:m.seat,hope:m.hope}));
  }
- let out=$('#qaResult');if(!out){out=document.createElement('output');out.id='qaResult';out.hidden=true;document.body.append(out);}out.textContent=JSON.stringify(report);
+ let out=$('#qaResult');if(!out){out=document.createElement('output');out.id='qaResult';out.hidden=true;document.body.append(out);}out.dataset.audioSettled=String(!!(SAMPLES.ready||SAMPLES.error));out.dataset.audioReady=String(SAMPLES.ready);out.textContent=JSON.stringify(report);
 }
 async function show(next){
  view=next;report={view,errors:[],steps:0};

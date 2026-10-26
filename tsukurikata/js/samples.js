@@ -72,7 +72,7 @@ function loadSamples(base, onProgress, options = {}){
     let done = names.filter(n => SAMPLES.banks[n]).length;
     const progress = () => { SAMPLES.progress = done / names.length; if(onProgress) onProgress(SAMPLES.progress); };
     progress();
-    const results = await Promise.allSettled(names.filter(n => !SAMPLES.banks[n]).map(async n => {
+    const read = async n => {
       const response = await fetch(base + n + '.mp3');
       if(!response.ok && response.status !== 0) throw new Error(n + ': HTTP ' + response.status);
       const ab = await response.arrayBuffer();
@@ -83,6 +83,17 @@ function loadSamples(base, onProgress, options = {}){
       const layers = [...new Set(samples.filter(s => !s.roll && s.l != null && s.l >= 0).map(s => s.l))].sort((a, b) => a - b);
       SAMPLES.banks[n] = {buf, kind: man[n].kind, samples, layers};
       done++; progress();
+    };
+    // 取得して音を開くまで4個ずつ進め、一度に大きな録音を抱えこまない。
+    // 読めない録音があっても残りを読み、全部の処理が終わってから再試行を受け付ける。
+    const pending = names.filter(n => !SAMPLES.banks[n]), results = new Array(pending.length);
+    let next = 0;
+    await Promise.all(Array.from({length: Math.min(4, pending.length)}, async () => {
+      while(next < pending.length){
+        const i = next++;
+        try{ await read(pending[i]); results[i] = {status: 'fulfilled'}; }
+        catch(reason){ results[i] = {status: 'rejected', reason}; }
+      }
     }));
     const failed = results.find(r => r.status === 'rejected');
     if(failed) throw failed.reason;
