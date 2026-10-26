@@ -1104,7 +1104,7 @@ function renderAudition(w, ev){
     ? `<details class="psecd" data-asec="${sec.id}"${U.openAud?.has(sec.id) ? ' open' : ''}><summary><b>${sec.name}<small>${ms.length}人</small></b><span class="what" data-acnt="${sec.id}">${audCount(ms)}</span></summary><ul class="plist alist">${rowsOf(ms)}</ul></details>`
     : `<ul class="plist alist"><li class="psec">${sec.name}</li>${rowsOf(ms)}</ul>`).join('');
   const intro = ev?.kind === 'audition' && !S.audition.decided ? ev.text : `${cev.title}に出るメンバーを決める。オーディションの点を見て、出る人にチェックを入れよう。`;
-  w.innerHTML = `<div class="event"><span class="tag">オーディション</span><span>${intro}</span></div>
+  w.innerHTML = `<div class="event"><span class="tag"${tipAttr('人選', '音程やリズムが不安定な部員を入れると、合奏全体の減点になる。安定して吹ける部員が増えると、響きの厚みが加点になる。楽器が欠けると、そのぶんも減点される。チェックを変えて予想点を見くらべよう。')}>オーディション</span><span>${intro}</span></div>
     <p class="small">点は、自由曲で問われる力（${PIECES[S.pieceId].asks}）と、その日の緊張で決まる。チェックを外した部員は控え（練習はいつもどおり。秋からはまた全員で吹く）。</p>
     <div class="aud-pred" id="audPred" aria-live="polite"></div>
     <div class="chips"><button class="chip" type="button" data-aud="all">全員出る</button><button class="chip" type="button" data-aud="best">おすすめのメンバーにする</button><button class="chip" type="button" data-aud="listen">▶ このメンバーで聴く</button></div>

@@ -1,0 +1,11 @@
+{
+  "build": "Release, succeeded",
+  "installed": true,
+  "launched": true,
+  "bundleMatches": {
+    "index.html": "d3c6ab5d3f6b73ed786c59ec84308fef4f209b37a7d5e729cf8f142ad1aec855",
+    "js/band.js": "801c23fd54c36b467e445999851cf01e236818bea276ef1d94174a19a08765d2",
+    "js/game.js": "7ba14d666a65703d3b6890a22ccdc253cf5eb45988aac0a14d5ceb3a9e9d111a",
+    "js/ui.js": "0b44bd468d89d37f38e779fdb1043b80d5335c270186ebde7a4a846757531266"
+  }
+}

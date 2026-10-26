@@ -1,0 +1,201 @@
+{
+  "runs": 10,
+  "years": 3,
+  "pieces": 15,
+  "results": [
+    {
+      "piece": "largo",
+      "scores": [
+        37.3,
+        67.5,
+        75.9
+      ]
+    },
+    {
+      "piece": "ode",
+      "scores": [
+        40.1,
+        62.3,
+        76.4
+      ]
+    },
+    {
+      "piece": "galop",
+      "scores": [
+        42.2,
+        65.7,
+        74.1
+      ]
+    },
+    {
+      "piece": "pomp",
+      "scores": [
+        42.1,
+        66.3,
+        73.2
+      ]
+    },
+    {
+      "piece": "aida",
+      "scores": [
+        42.5,
+        69.0,
+        74.6
+      ]
+    },
+    {
+      "piece": "hero",
+      "scores": [
+        39.1,
+        67.1,
+        73.6
+      ]
+    },
+    {
+      "piece": "holst",
+      "scores": [
+        42.3,
+        69.8,
+        74.3
+      ]
+    },
+    {
+      "piece": "hungarian",
+      "scores": [
+        39.3,
+        64.8,
+        74.4
+      ]
+    },
+    {
+      "piece": "flowers",
+      "scores": [
+        39.7,
+        66.3,
+        71.7
+      ]
+    },
+    {
+      "piece": "tell",
+      "scores": [
+        40.8,
+        61.9,
+        72.5
+      ]
+    },
+    {
+      "piece": "carmen",
+      "scores": [
+        40.6,
+        62.6,
+        70.6
+      ]
+    },
+    {
+      "piece": "valkyrie",
+      "scores": [
+        39.9,
+        62.0,
+        73.0
+      ]
+    },
+    {
+      "piece": "swan",
+      "scores": [
+        38.9,
+        68.3,
+        74.4
+      ]
+    },
+    {
+      "piece": "spring",
+      "scores": [
+        36.3,
+        63.9,
+        74.7
+      ]
+    },
+    {
+      "piece": "canon",
+      "scores": [
+        37.7,
+        65.1,
+        74.3
+      ]
+    }
+  ],
+  "outsideTarget": [
+    {
+      "piece": "largo",
+      "year": 2,
+      "average": 67.5,
+      "target": [
+        55,
+        67
+      ]
+    },
+    {
+      "piece": "largo",
+      "year": 3,
+      "average": 75.9,
+      "target": [
+        65,
+        75
+      ]
+    },
+    {
+      "piece": "ode",
+      "year": 3,
+      "average": 76.4,
+      "target": [
+        65,
+        75
+      ]
+    },
+    {
+      "piece": "aida",
+      "year": 2,
+      "average": 69.0,
+      "target": [
+        55,
+        67
+      ]
+    },
+    {
+      "piece": "hero",
+      "year": 2,
+      "average": 67.1,
+      "target": [
+        55,
+        67
+      ]
+    },
+    {
+      "piece": "holst",
+      "year": 2,
+      "average": 69.8,
+      "target": [
+        55,
+        67
+      ]
+    },
+    {
+      "piece": "swan",
+      "year": 2,
+      "average": 68.3,
+      "target": [
+        55,
+        67
+      ]
+    },
+    {
+      "piece": "spring",
+      "year": 1,
+      "average": 36.3,
+      "target": [
+        37,
+        47
+      ]
+    }
+  ]
+}

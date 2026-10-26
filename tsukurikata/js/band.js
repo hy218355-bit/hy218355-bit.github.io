@@ -350,7 +350,7 @@ function perform(ctx){
         const inst = e.inst;
         const written = e.role === 'hit' ? 0.58 + (e.v - 0.58) * SPREAD : ideal(e.b) * e.sc;
         const v = clamp(vScale(written) + 0.2 * iT * clampG(H.gauss('v')) * 0.5, 0.04, 1);
-        const h = {mid: m.id, seat: seat.id, sec: p.sec, inst, role: e.role, t, tIdeal, v, key: k.join(':'), b: e.b, db: e.d || 0, tg: b2s(e.b) - off, R, weight: ROLE_WEIGHT.hit};
+        const h = {mid: m.id, seat: seat.id, sec: p.sec, inst, role: e.role, t, tIdeal, v, key: k.join(':'), b: e.b, db: e.d || 0, tg: b2s(e.b) - off, R, T, weight: ROLE_WEIGHT.hit};
         if(e.roll){
           h.roll = true;
           h.dur = b2s(endB) - b2s(e.b) + fermata;
@@ -504,6 +504,27 @@ function lackOf(pid, secs){
 const lackNames = miss => miss.map(id => SEC[id].name);
 
 const THIN_MAX = 12;
+// 音数の多い楽器に埋もれないよう、一人ずつの演奏を先に測る。
+// 当日の音程・リズム・音色と譜面の取り違えで決まるので、学年や人数だけでは加点しない。
+function ensembleOf(perf){
+  const byMember = new Map();
+  for(const n of [...perf.notes, ...perf.hits]){
+    const p = byMember.get(n.mid) || {sum: 0, weight: 0};
+    const pitch = n.err != null ? Math.exp(-Math.abs(n.err) / 18) : 1;
+    const q = n.wrong ? 0 : Math.cbrt(pitch * (n.R ?? 0) * (n.T ?? n.R ?? 0)) * (n.crack ? 0.2 : 1);
+    const w = n.weight || 1;
+    p.sum += q * w; p.weight += w;
+    byMember.set(n.mid, p);
+  }
+  const qs = [...byMember.values()].map(p => p.sum / p.weight).sort((a, b) => a - b);
+  // 全体が育ち始めの部と、育った部で一人だけ大きく乱す場合を分ける。
+  const reference = Math.max(0.4, (qs[Math.floor((qs.length - 1) * 0.75)] || 0) - 0.15);
+  const disruption = Math.min(20, qs.reduce((a, q) => a + 4 * Math.pow(clamp01((reference - q) / 0.5), 2), 0));
+  // 安定して吹ける人の音を重ねるほど厚くなる。大編成でも加点は頭打ちにする。
+  const support = qs.reduce((a, q) => a + clamp01((q - 0.45) / 0.4), 0);
+  const fullness = 4 * clamp01((support - 8) / 31);
+  return {disruption, fullness, support};
+}
 function analyze(perf){
   const pc = PIECES[perf.pieceId];
   const lv = (inst, v) => INST[inst].gain * (0.03 + 0.97 * Math.pow(v, 1.8));
@@ -594,8 +615,9 @@ function analyze(perf){
   const thin = THIN_MAX * clamp((30 - (perf.players || 0)) / 25, 0, 1.15);
   // この曲で受け持ちのある楽器が、一人もいない（旋律やソロの楽器ほど大きい）
   const lack = lackOf(perf.pieceId, perf.secs || SECTIONS.map(s => s.id));
-  const penalty = Math.min(25, 200 * wrongRate) + missingMel.length * 8 + missingBass.length * 8 + thin + lack.pts;
-  return {score, penalty, thin, lack, pitchDev, spread, rhythmMs, drift, cracks, wrong, balanceDb, sec: secOut, missingMel, missingBass, focus: pc.focus, ceiling: pc.ceiling};
+  const ensemble = ensembleOf(perf);
+  const penalty = Math.min(25, 200 * wrongRate) + missingMel.length * 8 + missingBass.length * 8 + thin + lack.pts + ensemble.disruption;
+  return {score, penalty, ...ensemble, thin, lack, pitchDev, spread, rhythmMs, drift, cracks, wrong, balanceDb, sec: secOut, missingMel, missingBass, focus: pc.focus, ceiling: pc.ceiling};
 }
 
 /* ===== 審査 ===== */
@@ -674,7 +696,7 @@ function judge(perf, a, levelId){
     for(const [k, x] of Object.entries(j.w)){ w[k] = x * (a.focus[k] || 1); tot += w[k]; }
     let sc = 0;
     for(const k of Object.keys(w)) sc += a.score[k] * w[k] / tot;
-    sc = Math.round(clamp(sc * a.ceiling - a.penalty + it.adj + 2.5 * clampG(gauss('judge', levelId, i, Math.round(sc))), 0, 100));
+    sc = Math.round(clamp(sc * a.ceiling - a.penalty + (a.fullness || 0) + it.adj + 2.5 * clampG(gauss('judge', levelId, i, Math.round(sc))), 0, 100));
     // 審査員が重く見る3項目から、ほかの審査員とかぶらない講評を選ぶ
     const dims = Object.entries(w).sort((x, y) => y[1] - x[1]).slice(0, 3).map(([k]) => k);
     const pick = (list, good) => {
@@ -694,7 +716,9 @@ function judge(perf, a, levelId){
     if(i === 2 && a.wrong >= 4) comments.push('まだ譜面が手の内に入っていない箇所が見られます。');
     if(i === 0 && a.missingMel.length) comments.push('人数の少ないパートの旋律が聞こえにくくなっていました。');
     if(i === 0 && a.lack.pts >= 1) comments.push(`${lackNames(a.lack.miss.slice(0, 2)).join('と')}${a.lack.miss.length > 2 ? 'など' : ''}がいないため、その受け持ちをほかの楽器で補っていました。この曲本来の響きには、まだ届いていません。`);
+    else if(i === 0 && a.disruption >= 3) comments.push('音程やリズムが不安定な奏者の音が重なり、全体の響きが乱れています。本番に出るメンバーを見直しましょう。');
     else if(i === 0 && a.thin >= 4) comments.push(a.thin >= 7 ? '少ない人数でよく工夫していますが、響きの厚みはまだこれからです。' : '人数がもう少しそろうと、響きに厚みが出てきそうです。');
+    else if(i === 0 && a.fullness >= 2) comments.push('安定した音が重なり、厚みのある響きになっています。');
     if(i === 0 && perf.conducted && perf.jitter > 0.2) comments.push('指揮の拍が安定せず、合奏が落ち着きませんでした。');
     if(!comments.length) comments.push('全体によくまとまっています。あと一歩の磨き込みを期待します。');
     return {name: j.name, score: sc, grade: sc >= L.A ? 'A' : sc >= L.B ? 'B' : 'C', comment: comments.join('')};
@@ -723,5 +747,5 @@ function quality(a){
   const w = {pitch: .25, rhythm: .25, tone: .2, expr: .15, balance: .15};
   let s = 0;
   for(const k of Object.keys(w)) s += a.score[k] * w[k];
-  return clamp(s - a.penalty, 0, 100);
+  return clamp(s - a.penalty + (a.fullness || 0), 0, 100);
 }

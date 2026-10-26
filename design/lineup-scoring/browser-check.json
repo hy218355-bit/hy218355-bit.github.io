@@ -1,0 +1,34 @@
+{
+  "year": {
+    "view": "year",
+    "errors": [],
+    "steps": 49,
+    "year": 2027,
+    "members": 8,
+    "saveVersion": 2,
+    "theme": "light",
+    "width": 375,
+    "scrollWidth": 375,
+    "faceCount": 10,
+    "stagePortraits": 8,
+    "watchPortraits": 0,
+    "stageCache": {
+      "images": 4,
+      "stamps": 27
+    }
+  },
+  "console": [],
+  "audition": {
+    "all": 40,
+    "recommended": 67.7,
+    "allMembers": 39,
+    "selected": 32,
+    "width": 375,
+    "scrollWidth": 375,
+    "themes": [
+      "light",
+      "dark"
+    ],
+    "tipOpened": true
+  }
+}

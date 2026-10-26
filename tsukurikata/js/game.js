@@ -1558,6 +1558,14 @@ function recommendLineup(s){
     const p = predictContest(s, out);
     if(p.avg > best.avg + 0.3) best = {out, avg: p.avg};
   }
+  // 大まかに選んだ境目の前後も聴き、一人だけ外す・戻す人選を見落とさない。
+  const boundary = best.out.size;
+  for(const k of [boundary - 1, boundary + 1]){
+    if(k < 0 || k >= ms.length || tried.has(k)) continue;
+    const out = new Set(ms.slice(0, k).map(m => m.id));
+    const p = predictContest(s, out);
+    if(p.avg > best.avg + 0.3) best = {out, avg: p.avg};
+  }
   return best.out;
 }
 function setLineup(s0, outIds){
