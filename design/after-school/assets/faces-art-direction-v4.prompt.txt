@@ -1,0 +1,20 @@
+高1寄りの年齢感の第4版・生成記録
+
+組み込み image_gen を使用（CLI不使用）。
+オーナーの指摘：「もう少し幼くてもいい高1よりに」。
+編集対象：自作の faces-art-direction-v3.webp。
+12人の顔立ち・髪型・目の形・並びは保ち、顔の長さと顎、頬、鼻と首の陰影を調整した。
+絵柄見本だけの修正。ゲーム本体・SVG試作・四画面の仮配置は未変更。
+生成原稿：/Users/yh/.codex/generated_images/01a175a5-1e3d-71b0-810a-8797cdde01e1/exec-3c1c56b5-ae88-4c4a-8e66-bd401a8066ad.png
+保存画像：faces-art-direction-v4.webp（1440×1080。機械的な縮小・圧縮のみ）。
+前の見本は削除・上書きせず保持。
+
+最終プロンプト：
+Use case: identity-preserve. Edit the attached original twelve-student face sheet. The owner likes the increased facial variety but asks for a LITTLE MORE YOUTH, leaning toward first-year high-school students. All portraits will be shared across first to third year, so focus on the fresh 15-year-old new-school-entrant appearance.
+
+Change the apparent age of ALL TWELVE portraits toward naturally youthful 14–15-year-old faces just entering high school, with a noticeable but tasteful increase in adolescent softness. Preserve each person's distinct identity and facial architecture: broad-square versus round versus long-oval versus rectangular versus heart-shaped; narrow versus round versus almond eyes; eye spacing; brow shape and thickness; nose width; mouth width; different cheek fullness and body build. Their individuality must remain as clear as in the input. Do NOT make them twelve versions of the same cute round face.
+
+Specific age adjustments: shorten the lower facial third and midface moderately (roughly 10–15 percent), soften chin projections and hard jaw corners, add a little soft cheek volume, slightly lower the emphasis of the nose bridge, use smaller understated nose projections while preserving the different nose shapes and widths, gently increase the cranial-to-face proportion without turning heads enormous. Keep their existing eye apertures and monolid/round/almond differences; youthful eyes should be clear and attentive, not huge. Keep broad faces broad, long faces comparatively longer, thin eyes thin, thick brows thick. Neck and shoulders slightly less mature; remove muscular or heavy adult-looking neck contour/shadow especially on portraits 1, 5, 8 and 12 while preserving the fuller physiques. Give portraits 3, 6, 9 and 11 especially softer and slightly shorter lower faces so they read as first-year students rather than mature seniors. Do not make the youngest-looking portraits 4, 7 and 10 look like elementary school children; give them only a light adjustment.
+
+Preserve all twelve hairstyles, hair colors, glasses on portrait 12, navy school uniforms, neutral or gentle closed-smile expressions, both eyes open, almost frontal pose, head-and-upper-chest framing, exact 4-column by 3-row grid and order, ivory background, delicate modern illustrated linework, soft painterly texture and gentle warm right-side illumination. Do not add stronger makeup, heavy eyelashes, fashion-model expression, adult sculpted cheekbones or long elegant necks. No chibi, no baby proportions, no retro cartoon style, no flat corporate vector. The desired mood is a varied group of ordinary young first-year students, still a little unpolished and endearing. No words, names, numbers, props or watermarks. Output one landscape 4:3 sheet, same clean grid.
+

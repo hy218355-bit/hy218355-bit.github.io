@@ -26,4 +26,6 @@
 
 `after-school/assets/faces-art-direction-v3.webp`：顔が似すぎるという指摘を受け、組み込みimage_genで参照画像なしに新規制作した12人。輪郭・目・眉・鼻・口の違いを広げた絵柄確認用。原稿と最終プロンプトは `faces-art-direction-v3.prompt.txt`。表示用HTMLとPNGもデザイン案のみ。ゲームとSVG試作へは未反映。
 
+`after-school/assets/faces-art-direction-v4.webp`：高1寄りに幼くするという指摘に合わせ、3版を組み込みimage_genで編集した絵柄見本。12人の違いを保ち、頬・顎・顔の長さと陰影を調整した。生成記録は `faces-art-direction-v4.prompt.txt`。ゲーム本体やSVG試作には未反映。
+
 `after-school/assets/app-icon-1024.svg`：LPで使った校章と音符のマークから自作したアイコン。PNGはローカルブラウザで描画した原稿から書き出した。ゲームのアイコンファイルはまだ変更しない。
