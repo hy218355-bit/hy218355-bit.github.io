@@ -62,7 +62,7 @@ function showAnnounce(j, levelId, onDone, div = null){
     li.innerHTML = `<span class="no">${r.no}</span><span class="nm">${esc(r.name)}${r.rival ? '<small class="rtag">ライバル</small>' : ''}</span><span class="aw ${r.award}"></span>`;
     return li;
   };
-  const say = (el, text) => { el.textContent = text; el.classList.add('on'); };
+  const say = (el, text) => { el.innerHTML = (text === '……' ? '' : uiIcon('award')) + esc(text); el.classList.add('on'); };
   steps.push([600, () => {}]);
   for(const r of list){
     let li;
@@ -99,7 +99,7 @@ function showAnnounce(j, levelId, onDone, div = null){
   const next = () => {
     if(AN.token !== token || i >= steps.length) return;
     const [wait, fn] = steps[i++];
-    AN.timer = setTimeout(() => { if(AN.token !== token) return; fn(); next(); }, wait);
+    AN.timer = setTimeout(() => { if(AN.token !== token) return; fn(); next(); }, fxCalm() || U.fxMode === 'off' ? 0 : U.fxMode === 'short' ? Math.min(wait,120) : wait);
   };
   AN.skip = () => {
     // 残りを一度に出す（拍手や振動は鳴らさない）
@@ -111,7 +111,7 @@ function showAnnounce(j, levelId, onDone, div = null){
     $('#anSkip').hidden = true; $('#anDone').hidden = false;
     $('#announce .an-body').querySelector('.ours')?.scrollIntoView({block: 'center'});
   };
-  next();
+  if(fxCalm() || U.fxMode === 'off') AN.skip(); else next();
 }
 function closeAnnounce(){
   clearTimeout(AN.timer);

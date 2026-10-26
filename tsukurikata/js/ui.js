@@ -28,7 +28,7 @@ function tok(){
   const cs = getComputedStyle(document.documentElement), g = n => cs.getPropertyValue(n).trim();
   return {
     ink: g('--ink'), soft: g('--ink-soft'), rule: g('--rule'), sheet: g('--sheet'), paper: g('--paper'), brass: g('--brass'),
-    floor: g('--floor'), floorLine: g('--floor-line'), good: g('--good'), warn: g('--warn'), bad: g('--bad'),
+    rkInk:g('--rk-ink'), floor: g('--floor'), floorLine: g('--floor-line'), good: g('--good'), warn: g('--warn'), bad: g('--bad'),
     lcdInk: g('--lcd-ink'), lcdDim: g('--lcd-dim'), fBody: g('--f-body'), fLcd: g('--f-lcd'), fHand: g('--f-hand'),
     rk: Object.fromEntries(RANKS.map(([, r]) => [r, g(`--rk-${r.toLowerCase()}`)])),
   };
@@ -212,19 +212,21 @@ function levelAt(p, t){
 // cv を渡すと、そのキャンバス（指揮の画面）に描く。who を渡すと、その部員だけが舞台にいる（本番の出場メンバー）
 // 舞台の床とひな壇、指揮台
 function stageFloor(g, G, C){
-  // 床とひな壇
-  g.fillStyle = C.floor;
-  g.beginPath(); g.moveTo(G.cx - G.R * 0.95, G.baseY + 18); g.lineTo(G.cx - G.R * 1.0, G.baseY - G.R * 0.62);
-  g.quadraticCurveTo(G.cx, G.baseY - G.R * 1.18, G.cx + G.R * 1.0, G.baseY - G.R * 0.62); g.lineTo(G.cx + G.R * 0.95, G.baseY + 18); g.closePath(); g.fill();
-  g.strokeStyle = C.floorLine; g.lineWidth = 1;
-  for(const rr of [0.45, 0.67, 0.88]){
-    g.beginPath(); g.arc(G.cx, G.baseY, G.R * rr, Math.PI * 1.08, Math.PI * 1.92); g.stroke();
-  }
-  // 指揮台
-  g.fillStyle = C.ink; g.globalAlpha = .8;
-  g.fillRect(G.cx - 18, G.baseY + 2, 36, 12);
-  g.globalAlpha = 1; g.fillStyle = C.sheet; g.font = `700 9px ${C.fBody}`; g.textAlign = 'center'; g.textBaseline = 'middle';
-  g.fillText('指揮', G.cx, G.baseY + 8.5);
+  /* 座席の座標はそのままに、奥の壁と木の床、控えめな照明を重ねる。 */
+  g.fillStyle=C.paper;g.fillRect(0,0,G.W,G.H);
+  const wall=g.createLinearGradient(0,0,0,G.H);wall.addColorStop(0,C.sheet);wall.addColorStop(1,C.paper);g.fillStyle=wall;g.fillRect(0,0,G.W,G.H);
+  g.save();
+  const floor=g.createLinearGradient(0,24,0,G.baseY+18);floor.addColorStop(0,C.floor);floor.addColorStop(1,C.floorLine);
+  g.fillStyle=floor;g.beginPath();g.moveTo(G.cx-G.R*.95,G.baseY+18);g.lineTo(G.cx-G.R,G.baseY-G.R*.62);g.quadraticCurveTo(G.cx,G.baseY-G.R*1.18,G.cx+G.R,G.baseY-G.R*.62);g.lineTo(G.cx+G.R*.95,G.baseY+18);g.closePath();g.fill();g.clip();
+  g.strokeStyle=C.floorLine;g.lineWidth=.7;g.globalAlpha=.55;
+  for(let y=24;y<G.H;y+=18){g.beginPath();g.moveTo(0,y);g.lineTo(G.W,y);g.stroke();}
+  for(const rr of [.45,.67,.88]){g.globalAlpha=.8;g.lineWidth=1.2;g.beginPath();g.arc(G.cx,G.baseY,G.R*rr,Math.PI*1.08,Math.PI*1.92);g.stroke();}
+  g.restore();
+  g.fillStyle=C.brass;g.globalAlpha=.28;
+  g.beginPath();g.moveTo(0,0);g.lineTo(34,0);g.quadraticCurveTo(32,34,0,58);g.closePath();g.fill();
+  g.beginPath();g.moveTo(G.W,0);g.lineTo(G.W-34,0);g.quadraticCurveTo(G.W-32,34,G.W,58);g.closePath();g.fill();
+  g.globalAlpha=1;g.fillStyle=C.ink;g.beginPath();g.roundRect(G.cx-19,G.baseY+2,38,13,4);g.fill();
+  g.fillStyle=C.sheet;g.font=`700 9px ${C.fBody}`;g.textAlign='center';g.textBaseline='middle';g.fillText('指揮',G.cx,G.baseY+8.5);
 }
 function drawStage(t = -1, cv = $('#stage'), who = null){
   const main = cv.id === 'stage';
@@ -264,7 +266,7 @@ function drawStage(t = -1, cv = $('#stage'), who = null){
       g.beginPath(); g.arc(x, y, G.r + 3.5, 0, Math.PI * 2); g.stroke();
     }
     if(G.r >= 10){
-      g.fillStyle = m ? '#fff' : C.soft;
+      g.fillStyle = m ? C.rkInk : C.soft;
       g.font = `700 ${G.r >= 13 ? 9 : 8}px ${C.fBody}`;
       g.fillText(s.sec === 'perc' ? 'Perc' : INST[s.inst].short.replace('Sax', 'S'), x, y + 0.5);
     }
@@ -601,6 +603,10 @@ function moodText(n){
 const GUIDE_WEEKS = 3, GUIDE_ACTS = ['assign', 'reveal', 'next', 'stage', 'practice'];
 function renderWeek(){
   renderWeekBody();
+  // 長い説明は見出しの吹き出しへ。文章そのものは保持する。
+  const intro=$('#week .plan > p.small:first-child');
+  if(intro){ $('#h-week').insertAdjacentHTML('beforeend', '<button class="help-button" type="button"'+tipAttr('今週の練習',intro.textContent)+'>?</button>');intro.hidden=true; }
+  for(const focus of document.querySelectorAll('#week .focus')){const desc=focus.querySelector(':scope>.small'),label=focus.querySelector(':scope>span:first-child');if(desc&&label){label.setAttribute('data-tip',desc.textContent);label.setAttribute('data-tipname',label.textContent);label.setAttribute('role','button');label.tabIndex=0;desc.hidden=true;}}
   if(!foundingYear(S) || S.week > GUIDE_WEEKS) return;
   const w = $('#week');
   const b = GUIDE_ACTS.map(a => w.querySelector(`[data-act="${a}"]:not([disabled])`)).find(Boolean)

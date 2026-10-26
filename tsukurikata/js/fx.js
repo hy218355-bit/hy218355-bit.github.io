@@ -65,7 +65,7 @@ function fxNext(){
   FX.timer = setTimeout(fxNext, it.ms || 2400);
 }
 document.getElementById('fx')?.addEventListener('click', fxNext);
-const fxCutHtml = (tag, title, who, desc) => `<div class="fx-rays" aria-hidden="true"></div><span class="fx-tag">${esc(tag)}</span>
+const fxCutHtml = (tag, title, who, desc) => `<div class="fx-rays" aria-hidden="true"></div><span class="fx-emblem">${uiIcon(tag.includes('実績') ? 'award' : 'star')}</span><span class="fx-tag">${esc(tag)}</span>
   <b class="fx-title">${esc(title)}</b>${who ? `<span class="fx-who">${esc(who)}</span>` : ''}${desc ? `<p class="fx-desc">${esc(desc)}</p>` : ''}`;
 
 /* ----- 季節 ----- */
@@ -101,8 +101,9 @@ function fxSky(cv, season, holder = FX){
   const dpr = window.devicePixelRatio || 1, W = cv.clientWidth * dpr, H = cv.clientHeight * dpr;
   cv.width = W; cv.height = H;
   const g = cv.getContext('2d');
-  const COL = {sakura: ['#F6C1D1', '#F9D7E2', '#EFA3BC'], green: ['#8FC98A', '#B5DB8E', '#6DB36B'], rain: ['#9DB8D6', '#B9CDE4'], snow: ['#FFFFFF', '#EAF2FA', '#DDE8F3'],
-    summer: ['#FFD86B', '#FFF1B0', '#FFB84D'], autumn: ['#E8893A', '#D9542C', '#F0B04A']}[season];
+  const css=getComputedStyle(document.documentElement),color=name=>css.getPropertyValue('--'+name).trim();
+  const base={sakura:'petal',green:'leaf',rain:'rain',snow:'snow',summer:'sunlight',autumn:'autumn'}[season];
+  const COL=[color(base),color(base),color('spotlight')];
   const n = season === 'rain' ? 70 : 36;
   const ps = Array.from({length: n}, () => ({x: Math.random() * W, y: (Math.random() * 2 - 1) * H, v: 0.6 + Math.random(),
     r: (3 + Math.random() * 4) * dpr, a: Math.random() * 6.28, w: (Math.random() - 0.5) * 0.08, c: COL[Math.floor(Math.random() * COL.length)]}));
@@ -144,7 +145,7 @@ function fxCountUps(root = document){
     if(FX.done.has(key)){ el.textContent = to.toFixed(dec); continue; }
     FX.done.add(key);
     if(fxCalm() || U.fxMode === 'off'){ el.textContent = to.toFixed(dec); continue; }
-    const from = +(el.dataset.from || 0), t0 = performance.now(), dur = +(el.dataset.ms || 900);
+    const from = +(el.dataset.from || 0), t0 = performance.now(), dur = U.fxMode === 'short' ? Math.min(400,+(el.dataset.ms || 900)) : +(el.dataset.ms || 900);
     const tick = now => {
       const k = Math.min(1, (now - t0) / dur), e = 1 - Math.pow(1 - k, 3);
       el.textContent = (from + (to - from) * e).toFixed(dec);
