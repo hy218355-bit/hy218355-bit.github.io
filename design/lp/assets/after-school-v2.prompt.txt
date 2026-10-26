@@ -1,0 +1,11 @@
+音楽室の原画・生成記録
+
+方式：組み込み image_gen（CLIは不使用）
+意図：元のSVGの修正ではなく、LP用の新しい環境イラストを制作。
+出力：背景不透明。顔・人物・ロゴ・文字は入れない。
+生成原稿：/Users/yh/.codex/generated_images/01a175a5-1e3d-71b0-810a-8797cdde01e1/exec-3a030d8c-b44b-45cf-b690-eabf7e6e8e4e.png
+採用ファイル：after-school-v2.webp（1600×900、162,344 bytes）
+書き出し：Pillowで縮小しWebP品質84に圧縮。原画は保存したまま。
+
+最終プロンプト（原文）：
+Use case: illustration-story / website hero. Create a brand-new premium contemporary Japanese school wind-ensemble game environment illustration, landscape 16:9, very wide, no text and no interface. Scene: an authentic Japanese high-school music practice room just after afternoon club practice. Five simple wooden school chairs loosely arranged, two black music stands with real-looking unlettered sheet music, warm wooden floorboards, tall windows along the RIGHT side looking toward a quiet school building and trees. A beautiful anatomically believable golden French horn rests carefully on the seat of the closest chair in the lower-right foreground, with its circular coiled tubing and flared bell clearly recognizable; a closed dark instrument case sits nearby. The room feels recently inhabited, lovingly observed, but there are NO people. Lighting: late-afternoon low amber sunlight streams diagonally from the right windows, long gentle shadows, soft dust motes, translucent curtains, deep indigo-blue shaded room contrasted with luminous pale gold. Composition: viewpoint at seated eye height, foreground horn and chair around right 65–80% of the image; keep the left 40% as quiet, dark blue wall and shadow with very low detail for overlaid web copy, keep the top edge uncluttered for navigation. Craft: highly polished modern hand-painted 2D animation background / indie narrative game key art, refined realistic perspective, subtle material texture and painterly gradients, delicate atmosphere and cinematic depth, elegant restrained warm/cool palette, emotionally warm, hopeful, inviting, not abandoned or sad. Avoid generic flat vector art, clip-art, pixel art, retro filters, excessive bloom, fantasy, sparkles, fantasy architecture, any logos, written text, watermarks, frames, people or faces. This is original artwork for the fictional game '吹奏楽部のつくりかた'; do not include the title in the image.
