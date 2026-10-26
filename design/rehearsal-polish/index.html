@@ -1,0 +1,19 @@
+<!doctype html><html lang="ja"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>顔を見ながら、合奏を聴く</title>
+<style>
+@font-face{font-family:body;src:url('/tsukurikata/fonts/zen-kaku-gothic-new-500.woff2')}:root{--paper:#f1f0e9;--ink:#263d43;--rule:#d4d7c9;--brass:#936b2f}*{box-sizing:border-box}body{margin:0;background:var(--paper);color:var(--ink);font-family:body,sans-serif}main{max-width:1000px;margin:auto;padding:24px}h1{font-size:23px;margin:0 0 12px}h2{font-size:18px;margin-top:32px}p{font-size:14px;line-height:1.9;max-width:800px}a{color:inherit}.grid{display:grid;grid-template-columns:repeat(2,minmax(0,375px));gap:20px}figure{margin:0}figcaption{font-size:13px;margin:10px 0}img{display:block;width:100%;border-radius:16px;border:1px solid var(--rule)}nav{display:flex;flex-wrap:wrap;gap:10px}nav a{padding:10px 14px;border:1px solid var(--brass);border-radius:8px;text-decoration:none}@media(max-width:600px){main{padding:16px}.grid{grid-template-columns:1fr}}
+</style>
+<main><h1>顔を見ながら、合奏を聴く</h1>
+<p>「いまの音で合奏」「止める」「指揮する」を、画面の下からいつでも押せる形に。舞台で選んだ部員のカードをすぐ下に出し、録音・聴き方・音の動きは必要なときに開けるようにしました。</p>
+<nav><a href="/design/implementation/qa.html?view=rehearsal-records&theme=light&keys=1">ライトでさわる</a><a href="/design/implementation/qa.html?view=rehearsal-records&theme=dark&keys=1">ダークでさわる</a><a href="/design/implementation/qa.html?view=rehearsal-a&theme=light&keys=1">課題曲を切り替える</a><a href="../audition-polish/">前回の人選</a></nav>
+<p>確認用の画面です。いつものセーブや設定は書き換えません。</p>
+<h2>舞台と聴く操作を近くに · 375px</h2>
+<p>部員の顔と楽器はそのまま。会場・範囲・聴くパートは、閉じた「聴き方」の見出しでも分かります。音を読み込み中も「止める」から取り消せます。</p>
+<div class="grid"><figure><figcaption>ライト</figcaption><img src="screenshots/stage-light.png" alt="舞台と手元の再生ボタン、折りたたんだ聴き方・ライト"></figure><figure><figcaption>ダーク</figcaption><img src="screenshots/stage-dark.png" alt="舞台と手元の再生ボタン、折りたたんだ聴き方・ダーク"></figure></div>
+<h2>気になる部員をすぐ見る · 375px</h2>
+<p>舞台の顔を押すと、その子のカードへ。本人やパートの音を聴いたり、名前を変えたりできます。閉じると舞台へ戻ります。</p>
+<div class="grid"><figure><figcaption>ライト</figcaption><img src="screenshots/member-light.png" alt="舞台のすぐ下に開いた本人のカード・ライト"></figure><figure><figcaption>ダーク</figcaption><img src="screenshots/member-dark.png" alt="本人の顔と成長を見ながら合奏を聴く画面・ダーク"></figure></div>
+<h2>聴き方や音の動きは、必要なときに</h2>
+<p>古い録音を選んだあとに部員を見ても、録音の選択を保ちます。音の動きは開いたときだけ描き、閉じている間の描画を減らしました。</p>
+<div class="grid"><figure><figcaption>会場・範囲・聴くパート</figcaption><img src="screenshots/settings-light.png" alt="聴き方を開いて会場と範囲とパートを選ぶ"></figure><figure><figcaption>音の動き</figcaption><img src="screenshots/roll-light.png" alt="必要なときに開いて見る演奏の音の動き"></figure></div>
+</main></html>

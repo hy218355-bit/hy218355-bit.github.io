@@ -1,0 +1,120 @@
+{
+  "checks": [
+    {
+      "check": "舞台の本人を開くとすぐ下にカードが出て録音の選択を保つ",
+      "pass": true
+    },
+    {
+      "check": "カードを閉じると舞台へ戻る",
+      "pass": true
+    },
+    {
+      "check": "選んだ古い録音をその名前で再生し停止を手元に置く",
+      "pass": true
+    },
+    {
+      "check": "停止すると合奏のボタンへ戻る",
+      "pass": true
+    },
+    {
+      "check": "会場・範囲・聴くパートが折りたたんだ見出しにも反映される",
+      "pass": true
+    },
+    {
+      "check": "音の動きを開くと375pxに収まる楽譜を描く",
+      "pass": true
+    },
+    {
+      "check": "音を読み込み中でも停止を表示する",
+      "pass": true
+    },
+    {
+      "check": "読み込み中に止めると完了しても勝手に再生しない",
+      "pass": true
+    },
+    {
+      "check": "録音がないときは選択・再生・保存を止める",
+      "pass": true
+    },
+    {
+      "check": "A部門は課題曲へ切り替えられ部員の力と週を変えない",
+      "pass": true
+    },
+    {
+      "check": "手元のボタンから指揮の画面を開ける",
+      "pass": true
+    },
+    {
+      "check": "新年度まで進み日誌を保ちエラーが出ない",
+      "pass": true
+    },
+    {
+      "check": "舞台から開いた部員カードも375pxからはみ出さない",
+      "pass": true
+    },
+    {
+      "check": "名簿でパートを選ぶと合奏の音の動きを開く",
+      "pass": true
+    },
+    {
+      "check": "名簿から開いたカードは名簿の本人へ戻る",
+      "pass": true
+    }
+  ],
+  "tabs": [
+    {
+      "tab": "week",
+      "scrollWidth": 375,
+      "theme": "light",
+      "width": 375
+    },
+    {
+      "tab": "play",
+      "scrollWidth": 375,
+      "theme": "light",
+      "width": 375
+    },
+    {
+      "tab": "members",
+      "scrollWidth": 375,
+      "theme": "light",
+      "width": 375
+    },
+    {
+      "tab": "log",
+      "scrollWidth": 375,
+      "theme": "light",
+      "width": 375
+    },
+    {
+      "tab": "week",
+      "scrollWidth": 375,
+      "theme": "dark",
+      "width": 375
+    },
+    {
+      "tab": "play",
+      "scrollWidth": 375,
+      "theme": "dark",
+      "width": 375
+    },
+    {
+      "tab": "members",
+      "scrollWidth": 375,
+      "theme": "dark",
+      "width": 375
+    },
+    {
+      "tab": "log",
+      "scrollWidth": 375,
+      "theme": "dark",
+      "width": 375
+    }
+  ],
+  "year": {
+    "year": 2027,
+    "steps": 49,
+    "errors": [],
+    "logPreserved": true
+  }
+}

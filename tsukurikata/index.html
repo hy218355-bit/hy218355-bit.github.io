@@ -1131,6 +1131,35 @@ html[data-season="snow"]{--season-band:linear-gradient(90deg,#DDE8F3,#FFFFFF,#B9
  .aud-actions .btn{flex:1;font-size:12px;padding:10px 6px}
  .tabbed:has(.mini:not([hidden])) .aud-actions{bottom:calc(122px + env(safe-area-inset-bottom,0px))}
 }
+/* 合奏の主な操作を手元に置き、くわしい聴き方と音の動きは開いて見る。 */
+.rehearsal-actions{display:grid;grid-template-columns:minmax(0,1.45fr) minmax(0,1fr);gap:8px;margin:0}
+.rehearsal-actions .btn{display:flex;align-items:center;justify-content:center;gap:7px;min-height:48px;font-size:13px;padding:10px 6px;white-space:nowrap}
+.rehearsal-actions .ui-icon{width:19px;height:19px}
+.play-detail{border:1px solid var(--rule);border-radius:11px;min-width:0;background:var(--sheet);padding:0 12px}
+.play-detail>summary{display:grid;grid-template-columns:auto minmax(0,1fr) 8px;align-items:center;gap:8px;min-height:48px;padding:9px 0;list-style:none;cursor:pointer}
+.play-detail>summary::-webkit-details-marker{display:none}
+.play-detail>summary b{font-size:13px}
+.play-detail>summary small{font-size:10px;line-height:1.5;color:var(--ink-soft);text-align:right;overflow-wrap:anywhere}
+.play-detail>summary::after{grid-column:3;content:'';width:7px;height:7px;border-right:1.5px solid var(--ink-soft);border-bottom:1.5px solid var(--ink-soft);transform:rotate(45deg);margin-right:3px}
+.play-detail[open]>summary::after{transform:rotate(225deg)}
+.play-detail[open]>summary{margin-bottom:8px;border-bottom:1px solid var(--rule)}
+.play-detail .recrow{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:12px}
+.play-detail .recrow select{grid-column:1/-1;width:100%;min-width:0;min-height:48px;font-size:16px}
+.play-detail .recrow .btn{min-height:44px;font-size:12px}
+.play-detail .options{margin:0 0 12px;gap:10px}
+.play-detail .options label{font-size:12px}
+.play-detail select{min-width:0;max-width:100%;min-height:44px;font-size:16px}
+.play-detail .view-head{margin-bottom:12px}
+.play-detail .view-head label{display:grid;gap:6px;font-size:12px}
+.play-detail .view-head select{width:100%}
+.play-detail .legend{margin:8px 0 12px}
+.stand>.member-card{margin:0;scroll-margin-top:14px;box-shadow:none}
+.stand>.now-playing{margin:0;line-height:1.7;overflow-wrap:anywhere}
+@media(max-width:960px){
+ .tabbed main.grid:has(.col-stage.tab-on){padding-bottom:90px}
+ .tabbed .col-stage.tab-on .rehearsal-actions{position:fixed;left:max(16px,env(safe-area-inset-left,0px));right:max(16px,env(safe-area-inset-right,0px));bottom:calc(60px + env(safe-area-inset-bottom,0px));z-index:45;padding:12px 0 8px;background:linear-gradient(transparent,var(--paper) 18%)}
+ .rehearsal-actions .btn{font-size:12px}
+}
 </style>
 </head>
 <body>
@@ -1160,31 +1189,31 @@ html[data-season="snow"]{--season-band:linear-gradient(90deg,#DDE8F3,#FFFFFF,#B9
           </div>
         </div>
         <div class="stage-wrap"><canvas id="stage" role="img" aria-label="ステージの座席。色が部員の実力、演奏中は音量に合わせて光る。席を押すと部員の詳しい情報が出る。"></canvas></div>
-        <p class="legend stage-key"><span data-tip="力は G・F・E・D・C・B・A・S の8段階。右ほどうまい" data-tipname="ランク" role="button" tabindex="0">色：部員の力<i class="rkscale"><i class="rk rk-g">G</i><i class="rk rk-f">F</i><i class="rk rk-e">E</i><i class="rk rk-d">D</i><i class="rk rk-c">C</i><i class="rk rk-b">B</i><i class="rk rk-a">A</i><i class="rk rk-s">S</i></i></span><button class="help-button" type="button" aria-label="舞台の見方" data-tipname="舞台の見方" data-tip="内側の輪：1年生 光る：いま音を出している（赤く光ったら音を外した） 点線：空いている席">?</button></p>
-        <div class="transport">
+        <p class="legend stage-key"><span data-tip="力は G・F・E・D・C・B・A・S の8段階。右ほどうまい" data-tipname="ランク" role="button" tabindex="0">色：部員の力<i class="rkscale"><i class="rk rk-g">G</i><i class="rk rk-f">F</i><i class="rk rk-e">E</i><i class="rk rk-d">D</i><i class="rk rk-c">C</i><i class="rk rk-b">B</i><i class="rk rk-a">A</i><i class="rk rk-s">S</i></i></span><button class="help-button" type="button" aria-label="舞台の見方" data-tipname="舞台の見方" data-tip="顔の下の絵は楽器。色は力のランク。光る部員はいま音を出している（赤く光ったら音を外した）。点線は空いている席。部員を押すと、その子のカードが開く。">?</button></p>
+        <section class="member-card" id="memberCard" hidden aria-live="polite"></section>
+        <div class="transport rehearsal-actions">
           <button class="btn primary" id="btnNow" type="button">▶ いまの音で合奏</button>
           <button class="btn quiet" id="btnStop" type="button" hidden>■ 止める</button>
           <button class="btn brass" id="btnConduct" type="button">指揮する</button>
         </div>
-        <div class="recrow">
+        <p class="now-playing"><span id="nowPlaying" aria-live="polite"></span> <span id="sndStatus" aria-live="polite"></span></p>
+        <details class="play-detail" id="recordingPanel"><summary><b>録音を聴く</b><small id="recordingCount"></small></summary><div class="recrow">
           <select id="recSel" aria-label="録音を選ぶ"></select>
           <button class="btn small" id="btnRec" type="button">▶ 聴く</button>
           <button class="btn small" id="btnSave" type="button" title="会場の響きつきで音声ファイルに書き出す">⤓ 保存</button>
-        </div>
-        <div class="options">
+        </div></details>
+        <details class="play-detail" id="listenSettings"><summary><b>聴き方</b><small id="listeningSummary"></small></summary><div class="options">
           <label>会場 <select id="venueSel"></select></label>
           <label>範囲 <select id="rangeSel"></select></label>
           <label>聴くパート <select id="soloSel"></select></label>
-        </div>
-        <p class="now-playing"><span id="nowPlaying" aria-live="polite"></span> <span id="sndStatus" aria-live="polite"></span></p>
-        <div class="view-head"><label>表示 <select id="viewSel" aria-label="表示するパート"></select></label></div>
+        </div></details>
+        <details class="play-detail" id="rollPanel"><summary><b>音の動き</b></summary><div class="view-head"><label>表示 <select id="viewSel" aria-label="表示するパート"></select></label></div>
         <div class="roll-wrap"><canvas id="roll" role="img" aria-label="演奏の見える化。横が時間、縦が音の高さ、下段が抑揚。"></canvas></div>
         <ul class="legend">
           <li><i class="dot good"></i>合っている <i class="dot warn"></i>少しずれ <i class="dot bad"></i>ずれ・間違い</li>
           <li><i class="k k-dash"></i>目指す抑揚</li>
-        </ul>
+        </ul></details>
       </section>
-      <section class="member-card" id="memberCard" hidden aria-live="polite"></section>
     </div>
 
     <div class="board">
@@ -1259,7 +1288,7 @@ html[data-season="snow"]{--season-band:linear-gradient(90deg,#DDE8F3,#FFFFFF,#B9
   </div>
   <p class="cd-msg" id="cdMsg" aria-live="polite"></p>
   <div class="cd-band"><div class="cd-stagewrap"><canvas id="cdStage" role="img" aria-label="舞台の部員。音を出している部員が光る。"></canvas><div class="cd-curtain" aria-hidden="true"><i></i><i></i><div class="cd-intro"></div></div></div><div class="cd-prog" aria-hidden="true"><i id="cdProg"></i></div></div>
-  <p class="legend stage-key cd-legend"><span data-tip="力は G・F・E・D・C・B・A・S の8段階。右ほどうまい" data-tipname="ランク" role="button" tabindex="0">色：部員の力<i class="rkscale"><i class="rk rk-g">G</i><i class="rk rk-f">F</i><i class="rk rk-e">E</i><i class="rk rk-d">D</i><i class="rk rk-c">C</i><i class="rk rk-b">B</i><i class="rk rk-a">A</i><i class="rk rk-s">S</i></i></span><button class="help-button" type="button" aria-label="舞台の見方" data-tipname="舞台の見方" data-tip="内側の輪：1年生 光る：いま音を出している（赤く光ったら音を外した） 点線：空いている席 部員をタップすると、その子の様子が出る">?</button></p>
+  <p class="legend stage-key cd-legend"><span data-tip="力は G・F・E・D・C・B・A・S の8段階。右ほどうまい" data-tipname="ランク" role="button" tabindex="0">色：部員の力<i class="rkscale"><i class="rk rk-g">G</i><i class="rk rk-f">F</i><i class="rk rk-e">E</i><i class="rk rk-d">D</i><i class="rk rk-c">C</i><i class="rk rk-b">B</i><i class="rk rk-a">A</i><i class="rk rk-s">S</i></i></span><button class="help-button" type="button" aria-label="舞台の見方" data-tipname="舞台の見方" data-tip="顔の下の絵は楽器。色は力のランク。光る部員はいま音を出している（赤く光ったら音を外した）。点線は空いている席。部員を押すと、その子の様子が出る。">?</button></p>
   <div class="cd-member" id="cdMember" hidden></div>
   <div class="cd-pad" id="cdPad" role="button" tabindex="0" aria-label="拍に合わせてここをタップ（上ほど大きく、下ほど小さく）">
     <svg class="cd-pattern" id="cdPattern" viewBox="0 0 200 210" aria-hidden="true"></svg>
@@ -1308,7 +1337,7 @@ html[data-season="snow"]{--season-band:linear-gradient(90deg,#DDE8F3,#FFFFFF,#B9
 </nav>
 
 <script src="js/util.js"></script>
-<script src="js/icons.js?v=practice-polish-1"></script>
+<script src="js/icons.js?v=rehearsal-polish-1"></script>
 <script src="js/instrument-icons.js?v=selection-polish-1"></script>
 <script src="js/face-cast.js?v=cast100-1"></script>
 <script src="js/faces.js?v=cast100-1"></script>
@@ -1338,7 +1367,7 @@ html[data-season="snow"]{--season-band:linear-gradient(90deg,#DDE8F3,#FFFFFF,#B9
 <script src="js/announce.js?v=result-journal-1"></script>
 <script src="js/tunegame.js"></script>
 <script src="js/fx.js"></script>
-<script src="js/ui.js?v=audition-polish-1"></script>
+<script src="js/ui.js?v=rehearsal-polish-1"></script>
 <div class="tip" id="tip" role="tooltip" hidden></div>
 </body>
 </html>

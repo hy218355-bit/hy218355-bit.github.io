@@ -97,7 +97,12 @@ function refreshNow(){
 }
 function setNowPlaying(){
   $('#nowPlaying').innerHTML = U.playing ? `<b>再生中</b>：${esc(U.shownLabel)}` : `表示中：${esc(U.shownLabel)}`;
+  renderPlayButtons();
   updateMini();
+}
+function renderPlayButtons(){
+  const on = !!(U.playing || U.waitPlay);
+  $('#btnStop').hidden = !on; $('#btnNow').hidden = on;
 }
 
 /* ===== スマホ・タブレット縦：画面下のタブ ===== */
@@ -128,14 +133,14 @@ function playPerf(perf, label, onEnd, opts = {}){
   if(SAMPLES.use && !SAMPLES.ready && SAMPLES.loading && !SAMPLES.error){
     const token = U.waitPlay = {};
     $('#nowPlaying').textContent = '録音を読み込んでいます…（読み込めたら鳴ります）';
-    E.unlock(); updateMini();
+    E.unlock(); updateMini(); renderPlayButtons();
     const go = () => { if(U.waitPlay === token){ U.waitPlay = null; playPerf(perf, label, onEnd, opts); } };
     SAMPLES.loading.then(go, go);
     return;
   }
   U.waitPlay = null;
   const pb = E.play(perf, null, opts);
-  if(!pb){ $('#nowPlaying').textContent = 'このブラウザでは音を鳴らせません。'; return; }
+  if(!pb){ renderPlayButtons(); updateMini(); $('#nowPlaying').textContent = 'このブラウザでは音を鳴らせません。'; return; }
   U.shown = perf; U.shownLabel = label; U.playing = true; U.onEnd = onEnd || null;
   U.lastT = 0;
   if(window.TSUKURIKATA_NATIVE) nativePost({type: 'log', msg: `play start "${label}" ${perf.notes.length} notes, ${perf.total.toFixed(1)}s, audio ${E.ac.state}`});
@@ -172,8 +177,9 @@ function endPlay(natural = false){
   if(cb) cb(natural);
 }
 function stopPlay(){
-  U.waitPlay = null; updateMini();
-  if(!U.playing) return;
+  const waiting = !!U.waitPlay;
+  U.waitPlay = null; updateMini(); renderPlayButtons();
+  if(!U.playing){ if(waiting) setNowPlaying(); return; }
   E.stop();
   endPlay();
 }
@@ -318,6 +324,7 @@ function viewHits(perf){
   return perf.hits.filter(h => h.sec === U.view);
 }
 function drawRoll(perf, t = -1){
+  if(!$('#rollPanel').open) return;
   const {g, W, H} = fitCanvas($('#roll'), 260);
   const C = tok();
   if(!perf) return;
@@ -480,14 +487,24 @@ function renderPiece(){
   const rd = (pid === S.pieceId || (two && pid === S.setPiece)) && S.phase !== 'choose' ? spanReadAvg(S, pid) : null;
   $('#rangeSel').innerHTML = `<option value="all">全部</option>` + pc.spans.map((sp, i) => `<option value="${i}">${sp.name}${rd ? `（譜読み${rankOf(rd[i])}）` : ''}</option>`).join('');
   $('#rangeSel').value = U.range;
+  renderListeningSummary();
 }
 function renderVenues(){
   $('#venueSel').innerHTML = VENUES.map(v => `<option value="${v.id}">${v.name}</option>`).join('');
   $('#venueSel').value = U.venue;
+  renderListeningSummary();
+}
+function renderListeningSummary(){
+  const pc = PIECES[playPiece()], range = U.range === 'all' ? '全部' : pc?.spans[Number(U.range)] ? spanShort(pc.spans[Number(U.range)]) : '全部';
+  const solo = $('#soloSel').selectedOptions[0]?.textContent || '全員';
+  $('#listeningSummary').textContent = [VENUE[U.venue].name, range, solo].join('・');
 }
 function renderSelectors(){
-  const recs = S.recs.slice().reverse();
+  const recs = S.recs.slice().reverse(), previous = $('#recSel').value;
   $('#recSel').innerHTML = recs.length ? recs.map(r => `<option value="${r.id}">${esc(r.label)}</option>`).join('') : '<option value="">録音はまだない</option>';
+  if(recs.some(r => r.id === previous)) $('#recSel').value = previous;
+  $('#recSel').disabled = !recs.length;
+  $('#recordingCount').textContent = recs.length ? `${recs.length}件` : 'まだない';
   $('#btnRec').disabled = !recs.length;
   $('#btnSave').disabled = !recs.length;
   const sel = U.sel && memberById(U.sel);
@@ -497,6 +514,7 @@ function renderSelectors(){
   $('#soloSel').value = U.solo;
   $('#viewSel').innerHTML = `<option value="mel">旋律を吹いている部員</option>` + SECTIONS.map(s => `<option value="${s.id}">${s.name}パート</option>`).join('');
   $('#viewSel').value = U.view;
+  renderListeningSummary();
 }
 function applySolo(){
   const [type, id] = U.solo.split(':');
@@ -1503,7 +1521,7 @@ function placeCard(where){
   card.dataset.origin=where;
   if(where!=='roster')U.cardReturn=null;
   if(where === 'roster') $('.roster').insertBefore(card, $('.roster .sec-grid'));
-  else $('.col-stage').appendChild(card);
+  else $('.stand').insertBefore(card, $('.rehearsal-actions'));
 }
 // スキル：小さな札（名前の横）と、部員カードの一覧（説明と育ち方）
 const skillChips = m => skillsOf(m).map(x => ` <span class="sk">${x.name}${skillMark(x.lv)}</span>`).join('');
@@ -1765,6 +1783,8 @@ function playRec(id){
   playRecording(rec, `${rec.label}（${VENUE[rec.venue].name}で録音）`);
 }
 function bind(){
+  for(const [id, icon, label] of [['btnNow','play','いまの音で合奏'],['btnStop','stop','止める'],['btnConduct','conduct','指揮する'],['btnRec','play','聴く'],['btnSave','download','保存']]) $('#'+id).innerHTML = uiIcon(icon) + label;
+  $('#rollPanel').addEventListener('toggle', e => { if(e.target.open) drawRoll(U.shown, U.playing ? E.now() : -1); });
   $('#btnNow').addEventListener('click', () => {
     if(!U.perfNow) U.perfNow = perform(currentCtx());
     playPerf(U.perfNow, nowLabel());
@@ -1805,8 +1825,8 @@ function bind(){
     renderPiece(); refreshNow();
   });
   $('#venueSel').addEventListener('change', e => setVenue(e.target.value));
-  $('#rangeSel').addEventListener('change', e => { U.range = e.target.value; refreshNow(); });
-  $('#soloSel').addEventListener('change', e => { U.solo = e.target.value; applySolo(); renderMemberCard(); });
+  $('#rangeSel').addEventListener('change', e => { U.range = e.target.value; renderListeningSummary(); refreshNow(); });
+  $('#soloSel').addEventListener('change', e => { U.solo = e.target.value; applySolo(); renderMemberCard(); renderListeningSummary(); });
   $('#viewSel').addEventListener('change', e => { U.view = e.target.value; renderSelectors(); renderRoster(); drawIdle(); if(U.playing) drawRoll(U.shown, E.now()); });
   // 本番を見ているあいだ：舞台の部員をタップすると、その子の様子
   $('#cdStage').addEventListener('click', e => {
@@ -1834,7 +1854,7 @@ function bind(){
     const b = e.target.closest('[data-sec]'); if(!b) return;
     U.view = U.view === b.dataset.sec ? 'mel' : b.dataset.sec;
     renderSelectors(); renderRoster(); drawIdle();
-    if(tabHidden('play') && U.view !== 'mel'){ setTab('play'); $('.roll-wrap').scrollIntoView({block: 'center'}); }
+    if(tabHidden('play') && U.view !== 'mel'){ setTab('play'); $('#rollPanel').open = true; drawRoll(U.shown); $('.roll-wrap').scrollIntoView({block: 'center'}); }
   });
   $('#rosterTable').addEventListener('click', e => {
     const tr = e.target.closest('[data-mid]'); if(!tr) return;
@@ -1856,9 +1876,11 @@ function bind(){
     const m = memberById(U.sel); if(!m) return;
     const act = b.dataset.mact;
     if(act === 'close'){
+      const fromStage = $('#memberCard').dataset.origin === 'stage';
       const back=$('#memberCard').dataset.origin==='roster'&&U.cardReturn;
       U.sel=null;renderSelectors();renderMemberCard();renderRoster();drawIdle();
       if(back){document.querySelector(`[data-mid="${back.id}"] .roster-open`)?.focus({preventScroll:true});window.scrollTo(0,back.top);}
+      else if(fromStage && narrow.matches) $('#stage').scrollIntoView({block:'start'});
       U.cardReturn=null;return;
     }
     if(act === 'rename'){

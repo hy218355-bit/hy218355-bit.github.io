@@ -1,6 +1,7 @@
 'use strict';
 /* 画面で使う小さな絵。色は文字色から受け継ぐ。音符の楽譜表記は置き換えない。 */
 const UI_ICON_PATHS={
+conduct:'<path d="M5 20 18 4m-2-1 4 3M3 18l4 3"/>',
 play:'<path d="m8 4 12 8-12 8Z"/>',
 stop:'<rect x="5" y="5" width="14" height="14" rx="2"/>',
 close:'<path d="m6 6 12 12M18 6 6 18"/>',
