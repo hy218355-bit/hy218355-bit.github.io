@@ -1,0 +1,9 @@
+{
+  "build": "Release iphoneos BUILD SUCCEEDED",
+  "sourceMatchesBundle": {
+    "index.html": "156b582af0adc6e5405f6b128da774246870272bf894aa452548b14fd39a8f87",
+    "js/ui.js": "ed6dc84815f75bc24115c8d80c4a84e44cc2b2232228aa49cd419ef65463eb6d"
+  },
+  "installation": "端末が見つからず最終版をインストールできない",
+  "realDeviceVisualCheck": "未確認"
+}

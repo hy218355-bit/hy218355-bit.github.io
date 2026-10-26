@@ -795,31 +795,61 @@ function renderWeekBody(){
   // 行事の誘い：連れて行く部員を選ぶ（★は、行くと特に伸びる子）
   const ov = outingView(S);
   if(ov){
-    const key = `${S.year}:${S.week}:${S.outing.id}`;
-    if(U.outKey !== key){ U.outKey = key; U.outPick = new Set(); U.outMore = false; }
+    const key = `${S.recruitSeed||0}:${S.year}:${S.week}:${S.outing.id}`;
+    if(U.outKey !== key){ U.outKey = key; U.outPick = new Set(); U.outMore = !ov.fit.size; }
+    const eligible=new Set(seated(S).map(m=>m.id));U.outPick=new Set([...U.outPick].filter(id=>eligible.has(id)));
     // ★の子はパートごとに並べて見せ、ほかの部員はたたんでおく（部員が多いと長くなるので）
-    const chip = m => `<button class="chip" type="button" data-op="${m.id}" aria-pressed="${U.outPick.has(m.id)}">${ov.fit.has(m.id) ? '<span class="fitmark">★</span>' : ''}${esc(m.name)}<small>${m.grade}年</small></button>`;
+    const chip = m => `<button class="out-person" type="button" data-op="${m.id}" aria-pressed="${U.outPick.has(m.id)}" aria-label="${esc(m.name)} ${m.grade}年・${esc(instOf(m))}${ov.fit.has(m.id)?'・特に伸びる':''}"><span class="out-portrait">${memberFace(m,40)}${ov.fit.has(m.id)?`<span class="out-star">${uiIcon('star')}</span>`:''}</span><span class="out-person-text"><b>${esc(m.name)}</b><span class="out-meta"><small>${m.grade}年</small><span class="out-check" aria-hidden="true">${uiIcon('check')}</span></span></span></button>`;
     const bySec = ms => SECTIONS.map(sc => [sc, ms.filter(m => secOf(m) === sc.id)]).filter(([, l]) => l.length)
-      .map(([sc, l]) => `<div class="chips opsec"><span class="oplab">${sc.name}</span>${l.map(chip).join('')}</div>`).join('');
+      .map(([sc, l]) => `<div class="out-section"><b class="oplab">${instrumentIcon(SEATS.find(s=>s.sec===sc.id).inst)}${sc.name}</b><div class="out-grid">${l.map(chip).join('')}</div></div>`).join('');
     const fitMs = seated(S).filter(m => ov.fit.has(m.id)), rest = seated(S).filter(m => !ov.fit.has(m.id));
     const k = U.outPick.size;
-    parts.push(`<div class="episode outing"><div class="head"><span class="tag">行事</span><span class="who">${esc(ov.o.title)}</span></div><p class="txt">${esc(ov.o.text)}</p>
-      <p class="small"><span class="fitmark">★</span>${esc(ov.o.fitText)}</p>
-      ${bySec(fitMs)}${rest.length ? `<details class="opmore" data-outmore${U.outMore || !fitMs.length ? ' open' : ''}><summary>${fitMs.length ? 'ほかの部員から選ぶ' : '部員から選ぶ'}（${rest.length}人）</summary>${bySec(rest)}</details>` : ''}
-      <button class="mbtn" type="button" data-act="outing"${k ? '' : ' disabled'}><b>${k ? `この${k}人で行く` : `連れて行く部員を${ov.n}人まで選ぶ`}</b></button>
-      <p class="small">選ばずに練習を進めると、この話は流れる。</p></div>`);
+    parts.push(`<div class="episode outing" data-selected="${k>0}"><div class="head"><span class="tag">行事</span><span class="who">${esc(ov.o.title)}</span><button class="help-button" type="button" aria-label="行事の見方"${tipAttr('行事',`★は、行くと特に伸びる部員。${ov.o.fitText.replace(/。+$/,'')}。選ばずに練習を進めると、この話は流れる。`)}>?</button></div><p class="txt">${esc(ov.o.text)}</p>
+      ${fitMs.length?`<span class="out-legend">${uiIcon('star')}特に伸びる</span>`:''}
+      ${bySec(fitMs)}${rest.length ? `<details class="opmore" data-outmore${U.outMore ? ' open' : ''}><summary>${fitMs.length ? 'ほかの部員から選ぶ' : '部員から選ぶ'}（${rest.length}人）</summary>${bySec(rest)}</details>` : ''}
+      <div class="outing-actions"><div class="out-selection"><span class="out-selected-faces" aria-hidden="true"></span><b id="outingCount" role="status" aria-live="polite"></b></div><div class="out-action-buttons"><button class="btn primary" type="button" data-act="outing" disabled>部員を選ぶ</button><button class="btn quiet" type="button" data-out-cancel hidden>やめる</button></div></div></div>`);
   }
-  if(S.lastOuting) parts.push(`<p class="epres"><b>${esc(S.lastOuting.title)}（${esc(S.lastOuting.who)}）</b>${esc(S.lastOuting.result)}${effHtml(S.lastOuting)}</p>`);
+  if(S.lastOuting){const people=outingResultPeople(),last=S.lastOuting,gains=effHtml(last);parts.push(`<div class="outing-result">${people.length?`<div class="out-result-faces">${people.map(m=>`<span data-out-result="${esc(m.id)}" title="${esc(m.name)}">${memberFace(m,36)}</span>`).join('')}</div>`:''}<p class="epres"><b tabindex="-1" data-out-result-title>${esc(last.title)}${last.who&&!String(last.result||'').includes(last.who)?`（${esc(last.who)}）`:''}</b>${esc(last.result)}</p>${gains?`<details class="outing-gains"${U.outGains?.key===outingResultKey()&&U.outGains.open?' open':''}><summary>変わったこと</summary><div>${gains}</div></details>`:''}</div>`);}
   parts.push(planHtml(ev));
   if(!tuneDone(S)) parts.push(`<div class="tgrow"><button class="btn small" type="button" data-act="tunegame">♪ 耳でチューニング</button><span class="small">週に1回。チューナーの音と部員の音を重ねて、うなりが消えるところまで高さを合わせる。合わせた部員の音程が上がる</span></div>`);
   w.innerHTML = parts.join('');
-  w.querySelector('[data-outmore]')?.addEventListener('toggle', e => { U.outMore = e.target.open; });
+  updateOutingSelection();
+  w.querySelector('.outing-gains')?.addEventListener('toggle',e=>{if(e.target.isConnected)U.outGains={key:outingResultKey(),open:e.target.open};});
+  w.querySelector('[data-outmore]')?.addEventListener('toggle', e => { if(e.target.isConnected)U.outMore = e.target.open; });
   w.querySelectorAll('details.psecd[data-sec]').forEach(d => d.addEventListener('toggle', () => {
     if(!d.isConnected)return;
     (U.openSecs ||= new Set())[d.open?'add':'delete'](d.dataset.sec);
     (U.closedSecs ||= new Set())[d.open?'delete':'add'](d.dataset.sec);
   }));
   weekResAnimate(w);
+}
+// 選ぶ間は画面だけを描き直し、確定するまで行事の効果を保存しない。
+function updateOutingSelection(){
+  const view=outingView(S),panel=$('#week .outing');if(!view||!panel)return;
+  const selected=seated(S).filter(m=>U.outPick.has(m.id)),count=selected.length,full=count>=view.n;
+  panel.dataset.selected=String(count>0);
+  for(const b of panel.querySelectorAll('[data-op]')){const on=U.outPick.has(b.dataset.op);b.setAttribute('aria-pressed',String(on));b.disabled=full&&!on;}
+  const text=`${count}／${view.n}人`,status=$('#outingCount');if(status.textContent!==text)status.textContent=text;
+  status.setAttribute('aria-label',`${count}人を選んだ${selected.length?'：'+selected.map(m=>m.name).join('・'):''}`);
+  const portraits=panel.querySelector('.out-selected-faces');portraits.innerHTML=selected.map(m=>memberFace(m,24)).join('');
+  const go=panel.querySelector('[data-act="outing"]');go.disabled=!count;go.textContent=count?`この${count}人で行く`:view.n?`部員を${view.n}人まで選ぶ`:'連れて行ける部員がいない';
+  panel.querySelector('[data-out-cancel]').hidden=!count;
+}
+function cancelOutingSelection(){
+  U.outPick.clear();updateOutingSelection();
+  const visible=b=>b&&!b.closest('details:not([open])')&&b.getClientRects().length;
+  const last=$(`#week [data-op="${U.outFocus}"]`),first=[...document.querySelectorAll('#week [data-op]')].find(visible);
+  const target=visible(last)?last:first||$('#week .outing .help-button');target?.focus({preventScroll:true});target?.scrollIntoView({block:'nearest'});
+}
+const outingResultKey=()=>S.lastOuting?`${S.recruitSeed||0}:${S.year}:${S.week}:${S.lastOuting.title}:${S.lastOuting.who}:${S.lastOuting.result}`:'';
+function outingResultPeople(){
+  if(U.outResult?.key===outingResultKey())return U.outResult.people;
+  const who=S.lastOuting?.who;if(!who)return [];
+  // 前の記録は名前だけなので、同じ名前や区切りを含む名前なら顔を推測しない。
+  if(S.members.some(m=>[m.name,m.originalName].some(n=>n?.includes('・')&&who.includes(n))))return [];
+  const matches=who.split('・').map(name=>S.members.filter(m=>m.name===name||m.originalName===name));
+  if(matches.some(ms=>ms.length!==1)||new Set(matches.map(ms=>ms[0].id)).size!==matches.length)return [];
+  return matches.map(ms=>ms[0]);
 }
 // この1年の部員：いちばん伸びた子・身につけたスキル・行事に行った子
 // 1年のまとめ（3月の卒業式のあと）：大会の結果・アンサンブル・部の伸び・この1年の部員・4月と最後の本番の聴き比べ
@@ -1451,7 +1481,7 @@ function openPracticePicker(key, from = null){
   U.pickScroll=scrollY;U.pickReturn=from;U.pick=key;renderWeek();
   const grid=$('#week .pgrid');if(!grid)return;
   (grid.querySelector('[aria-pressed="true"]')||grid.querySelector('button'))?.focus({preventScroll:true});
-  const r=grid.getBoundingClientRect(),bar=$('#week .plan>.transport')?.getBoundingClientRect();
+  const r=grid.getBoundingClientRect(),bar=($('#week .outing[data-selected="true"] .outing-actions')||$('#week .plan>.transport'))?.getBoundingClientRect();
   const bottom=narrow.matches&&bar?bar.top-12:innerHeight-24;
   if(r.bottom>bottom)window.scrollBy(0,r.bottom-bottom);
 }
@@ -2319,7 +2349,7 @@ function bind(){
     if(e.key === 'Escape' && !e.isComposing && !$('#memberNameForm')?.hidden){ e.preventDefault(); closeMemberNameForm(); }
     else if(e.key === 'Escape' && !e.isComposing && $('#memberCard .mc-move')?.open){ e.preventDefault(); $('#memberCard [data-mact="movecancel"]').click(); }
   });
-  $('#week').addEventListener('keydown',e=>{if(e.key==='Escape'&&U.pick){e.preventDefault();closePracticePicker();}else if(e.key==='Escape'&&U.prepPanel&&e.target.closest('.preparation')){e.preventDefault();togglePreparation(U.prepPanel);}});
+  $('#week').addEventListener('keydown',e=>{if(e.key==='Escape'&&U.pick){e.preventDefault();closePracticePicker();}else if(e.key==='Escape'&&U.outPick?.size&&e.target.closest('.outing')&&$('#tip').hidden){e.preventDefault();cancelOutingSelection();}else if(e.key==='Escape'&&U.prepPanel&&e.target.closest('.preparation')){e.preventDefault();togglePreparation(U.prepPanel);}});
   $('#week').addEventListener('click', e => {
     const b = e.target.closest('button'); if(!b || b.disabled) return;
     if(b.dataset.gradMember){ openGradRoll(b.dataset.gradMember); return; }
@@ -2364,9 +2394,15 @@ function bind(){
     if(b.dataset.op !== undefined){
       const id = b.dataset.op, v = outingView(S);
       if(U.outPick.has(id)) U.outPick.delete(id); else if(v && U.outPick.size < v.n) U.outPick.add(id); else return;
-      haptic('tap'); renderWeek(); return;
+      U.outFocus=id;haptic('tap');updateOutingSelection();return;
     }
-    if(b.dataset.act === 'outing'){ haptic('tap'); commit(resolveOuting(S, [...U.outPick])); U.outPick = new Set(); renderAll(); refreshNow(); return; }
+    if(b.hasAttribute('data-out-cancel')){cancelOutingSelection();return;}
+    if(b.dataset.act === 'outing'){
+      const view=outingView(S),ids=[...U.outPick].filter(id=>seated(S).some(m=>m.id===id));if(!view||!ids.length)return;
+      const people=ids.slice(0,view.n).map(id=>{const m=memberById(id);return {id:m.id,name:m.name,originalName:m.originalName};});
+      haptic('tap');commit(resolveOuting(S,ids));U.outResult={key:outingResultKey(),people};U.outPick=new Set();renderAll();refreshNow();
+      $('[data-out-result-title]')?.focus({preventScroll:true});$('.outing-result')?.scrollIntoView({block:'start',behavior:!fxCalm()&&U.fxMode==='full'?'smooth':'auto'});return;
+    }
     const act = b.dataset.act;
     if(act === 'preview' || act === 'model'){
       const pid = b.dataset.pid;

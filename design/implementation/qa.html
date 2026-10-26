@@ -278,6 +278,45 @@ select{background:var(--sheet);border:1.5px solid var(--rule);border-radius:8px;
 .opmore[open] summary{margin-bottom:6px}
 .opmore .opsec + .opsec{margin-top:6px}
 .fitmark{color:var(--brass);margin-right:2px}
+.outing .head{display:grid;grid-template-columns:auto minmax(0,1fr) 44px;align-items:center;gap:8px}
+.outing .head>.help-button{min-width:44px;min-height:44px}
+.out-legend{display:flex;align-items:center;gap:5px;font-size:11px;color:var(--ink-soft)}
+.out-legend>.ui-icon{width:13px;height:13px;color:var(--brass);fill:currentColor}
+.out-section{display:grid;gap:7px;margin:10px 0 14px;min-width:0}
+.out-section>.oplab{display:flex;align-items:center;gap:6px;font-size:11px;font-weight:400}
+.out-section>.oplab>.instrument-icon{width:18px;height:18px;color:var(--brass)}
+.out-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:7px}
+.out-person{display:grid;grid-template-columns:40px minmax(0,1fr);align-items:center;gap:7px;min-width:0;min-height:69px;padding:8px 6px;border:1px solid var(--rule);border-radius:9px;background:var(--paper);color:var(--ink);font-family:var(--f-body);text-align:left;cursor:pointer;scroll-margin-block:14px calc(170px + var(--practice-footer-mini,0px))}
+.out-person-text{display:grid;gap:6px;min-width:0}.out-person-text>b{font-size:12px;line-height:1.5;overflow-wrap:anywhere}
+.out-meta{display:flex;align-items:center;justify-content:space-between;gap:4px}.out-meta>small{font-size:10px;color:var(--ink-soft)}
+.out-portrait{position:relative;width:40px;height:40px}
+.out-star{position:absolute;bottom:-3px;right:-3px;display:grid;place-items:center;width:16px;height:16px;border:2px solid var(--sheet);border-radius:50%;background:var(--brass-soft);color:var(--brass)}
+.out-star>.ui-icon{width:10px;height:10px;fill:currentColor}
+.out-check{display:grid;place-items:center;width:16px;height:16px;border:1px solid var(--rule);border-radius:4px;color:var(--brass)}.out-check>.ui-icon{width:12px;height:12px;visibility:hidden}
+.out-person[aria-pressed="true"]{border-color:var(--brass);box-shadow:inset 0 0 0 1px var(--brass);background:color-mix(in srgb,var(--brass) 13%,var(--sheet))}
+.out-person[aria-pressed="true"] .out-check{border-color:var(--brass)}.out-person[aria-pressed="true"] .out-check>.ui-icon{visibility:visible}
+.out-person:disabled{opacity:.6;cursor:default}.out-person:focus-visible{outline:2px solid var(--brass);outline-offset:1px}
+.outing .opmore>summary{display:flex;align-items:center;gap:6px;list-style:none;min-height:44px;font-size:12px;border-block:1px solid var(--rule)}
+.outing .opmore>summary::-webkit-details-marker{display:none}.outing .opmore>summary::after{content:'';width:7px;height:7px;margin:0 4px 4px auto;border-right:1.5px solid currentColor;border-bottom:1.5px solid currentColor;transform:rotate(45deg)}.outing .opmore[open]>summary::after{transform:rotate(225deg);margin-bottom:0}
+.outing-actions{display:grid;gap:7px;margin-top:12px}
+.out-selection{display:flex;align-items:center;justify-content:space-between;gap:8px;min-height:32px}
+.out-selected-faces{display:flex;align-items:center;gap:5px}
+#outingCount{font:14px var(--f-lcd);color:var(--ink-soft)}
+.out-action-buttons{display:grid;grid-template-columns:1.6fr 1fr;gap:8px}.out-action-buttons:has([data-out-cancel][hidden]){grid-template-columns:1fr}
+.out-action-buttons>.btn{min-height:48px;min-width:0;padding:10px 7px;font-size:12px}
+.outing-result{display:grid;gap:8px;margin:10px 0;scroll-margin-top:14px}.outing-result .epres{margin:0}
+.out-result-faces{display:flex;align-items:center;gap:7px}
+.outing-gains>summary{min-height:44px;display:flex;align-items:center;gap:6px;font-size:12px;color:var(--ink-soft);cursor:pointer;list-style:none}
+.outing-gains>summary::-webkit-details-marker{display:none}.outing-gains>summary::after{content:'';width:7px;height:7px;margin:0 5px 4px auto;border-right:1.5px solid currentColor;border-bottom:1.5px solid currentColor;transform:rotate(45deg)}.outing-gains[open]>summary::after{transform:rotate(225deg);margin-bottom:0}
+.outing-gains>div{display:flex;flex-wrap:wrap;gap:6px}.outing-gains .gain{font-size:11px;color:var(--ink-soft);border:1px solid var(--rule);border-radius:5px;padding:4px}
+@media(max-width:960px){
+ .tabbed #week:has(.outing[data-selected="true"]){padding-bottom:132px;--practice-footer-extra:35px}
+ .tabbed:has(.mini:not([hidden])) #week{--practice-footer-mini:62px}
+ .tabbed #week:has(.outing[data-selected="true"]) .plan>.transport{display:none}
+ .tabbed .outing[data-selected="true"] .outing-actions{position:fixed;left:max(16px,env(safe-area-inset-left,0px));right:max(16px,env(safe-area-inset-right,0px));bottom:calc(60px + env(safe-area-inset-bottom,0px));z-index:46;margin:0;padding:12px 0 9px;background:linear-gradient(transparent,var(--paper) 15%)}
+ .tabbed:has(.mini:not([hidden])) #week:has(.outing[data-selected="true"]){padding-bottom:190px}
+ .tabbed:has(.mini:not([hidden])) .outing[data-selected="true"] .outing-actions{bottom:calc(122px + env(safe-area-inset-bottom,0px))}
+}
 .mbtn:disabled{opacity:.45;cursor:default}
 .mbtn:disabled:hover{border-color:var(--rule)}
 .pcard .tag.fit{justify-self:start;width:fit-content;margin-bottom:2px}
@@ -1232,7 +1271,7 @@ button.wr-person:focus-visible{outline:2px solid var(--brass);outline-offset:2px
 .plan .pick>.ui-icon{width:18px;height:18px;color:var(--brass)}
 .plan .pick::after{content:'';width:7px;height:7px;flex:none;border-right:1.5px solid var(--ink-soft);border-bottom:1.5px solid var(--ink-soft);transform:rotate(45deg);margin:0 2px 4px auto}
 .plan .pick[aria-expanded="true"]::after{transform:rotate(225deg);margin-bottom:0}
-.plan .pgrid{grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;max-height:min(360px,calc(100dvh - 280px));overflow:auto;width:100%;padding:2px;scroll-margin-block:110px}
+.plan .pgrid{grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;max-height:min(360px,max(96px,calc(100dvh - 280px - var(--practice-footer-extra,0px) - var(--practice-footer-mini,0px))));overflow:auto;width:100%;padding:2px;scroll-margin-block:110px}
 .plan .pchip{position:relative;display:grid;grid-template-columns:20px minmax(0,1fr);align-items:center;gap:8px;min-height:64px;padding:9px 8px;text-align:left;border-width:2px}
 .pchip>.ui-icon{width:20px;height:20px;color:var(--ink-soft)}
 .pchip>span{display:grid;gap:5px;min-width:0}
@@ -1631,39 +1670,39 @@ button.wr-person:focus-visible{outline:2px solid var(--brass);outline-offset:2px
   <button type="button" data-tabgo="log"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 5.5C4 4.7 4.7 4 5.5 4H11v16H5.5c-.8 0-1.5-.7-1.5-1.5z"/><path d="M20 5.5c0-.8-.7-1.5-1.5-1.5H13v16h5.5c.8 0 1.5-.7 1.5-1.5z"/></svg><span>日誌</span></button>
 </nav>
 
-<script src="js/util.js?v=qa-stage-preparation-3"></script>
-<script src="js/icons.js?v=qa-stage-preparation-3"></script>
-<script src="js/instrument-icons.js?v=qa-stage-preparation-3"></script>
-<script src="js/face-cast.js?v=qa-stage-preparation-3"></script>
-<script src="js/faces.js?v=qa-stage-preparation-3"></script>
-<script src="js/instruments.js?v=qa-stage-preparation-3"></script>
-<script src="js/venues.js?v=qa-stage-preparation-3"></script>
-<script src="js/samples.js?v=qa-stage-preparation-3"></script>
-<script src="js/scores.js?v=qa-stage-preparation-3"></script>
-<script src="js/pieces/largo.js?v=qa-stage-preparation-3"></script>
-<script src="js/pieces/ode.js?v=qa-stage-preparation-3"></script>
-<script src="js/pieces/galop.js?v=qa-stage-preparation-3"></script>
-<script src="js/pieces/pomp.js?v=qa-stage-preparation-3"></script>
-<script src="js/pieces/aida.js?v=qa-stage-preparation-3"></script>
-<script src="js/pieces/hero.js?v=qa-stage-preparation-3"></script>
-<script src="js/pieces/holst.js?v=qa-stage-preparation-3"></script>
-<script src="js/pieces/hungarian.js?v=qa-stage-preparation-3"></script>
-<script src="js/pieces/flowers.js?v=qa-stage-preparation-3"></script>
-<script src="js/pieces/tell.js?v=qa-stage-preparation-3"></script>
-<script src="js/pieces/carmen.js?v=qa-stage-preparation-3"></script>
-<script src="js/pieces/valkyrie.js?v=qa-stage-preparation-3"></script>
-<script src="js/pieces/swan.js?v=qa-stage-preparation-3"></script>
-<script src="js/pieces/spring.js?v=qa-stage-preparation-3"></script>
-<script src="js/pieces/canon.js?v=qa-stage-preparation-3"></script>
-<script src="js/band.js?v=qa-stage-preparation-3"></script>
-<script src="js/game.js?v=qa-stage-preparation-3"></script>
-<script src="js/engine.js?v=qa-stage-preparation-3"></script>
-<script src="js/conduct.js?v=qa-stage-preparation-3"></script>
-<script src="js/announce.js?v=qa-stage-preparation-3"></script>
-<script src="js/tunegame.js?v=qa-stage-preparation-3"></script>
-<script src="js/fx.js?v=qa-stage-preparation-3"></script>
-<script src="js/ui.js?v=qa-stage-preparation-3"></script>
+<script src="js/util.js?v=qa-outing-faces-6"></script>
+<script src="js/icons.js?v=qa-outing-faces-6"></script>
+<script src="js/instrument-icons.js?v=qa-outing-faces-6"></script>
+<script src="js/face-cast.js?v=qa-outing-faces-6"></script>
+<script src="js/faces.js?v=qa-outing-faces-6"></script>
+<script src="js/instruments.js?v=qa-outing-faces-6"></script>
+<script src="js/venues.js?v=qa-outing-faces-6"></script>
+<script src="js/samples.js?v=qa-outing-faces-6"></script>
+<script src="js/scores.js?v=qa-outing-faces-6"></script>
+<script src="js/pieces/largo.js?v=qa-outing-faces-6"></script>
+<script src="js/pieces/ode.js?v=qa-outing-faces-6"></script>
+<script src="js/pieces/galop.js?v=qa-outing-faces-6"></script>
+<script src="js/pieces/pomp.js?v=qa-outing-faces-6"></script>
+<script src="js/pieces/aida.js?v=qa-outing-faces-6"></script>
+<script src="js/pieces/hero.js?v=qa-outing-faces-6"></script>
+<script src="js/pieces/holst.js?v=qa-outing-faces-6"></script>
+<script src="js/pieces/hungarian.js?v=qa-outing-faces-6"></script>
+<script src="js/pieces/flowers.js?v=qa-outing-faces-6"></script>
+<script src="js/pieces/tell.js?v=qa-outing-faces-6"></script>
+<script src="js/pieces/carmen.js?v=qa-outing-faces-6"></script>
+<script src="js/pieces/valkyrie.js?v=qa-outing-faces-6"></script>
+<script src="js/pieces/swan.js?v=qa-outing-faces-6"></script>
+<script src="js/pieces/spring.js?v=qa-outing-faces-6"></script>
+<script src="js/pieces/canon.js?v=qa-outing-faces-6"></script>
+<script src="js/band.js?v=qa-outing-faces-6"></script>
+<script src="js/game.js?v=qa-outing-faces-6"></script>
+<script src="js/engine.js?v=qa-outing-faces-6"></script>
+<script src="js/conduct.js?v=qa-outing-faces-6"></script>
+<script src="js/announce.js?v=qa-outing-faces-6"></script>
+<script src="js/tunegame.js?v=qa-outing-faces-6"></script>
+<script src="js/fx.js?v=qa-outing-faces-6"></script>
+<script src="js/ui.js?v=qa-outing-faces-6"></script>
 <div class="tip" id="tip" role="tooltip" hidden></div>
-<script src="/design/implementation/qa.js?v=qa-stage-preparation-3"></script>
+<script src="/design/implementation/qa.js?v=qa-outing-faces-6"></script>
 </body>
 </html>

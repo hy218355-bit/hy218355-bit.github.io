@@ -85,6 +85,10 @@ function record(){
  const source=S.log.slice().reverse().slice(0,80).map(e=>e.text).sort(),shown=Array.from(document.querySelectorAll('.log-preview,.log-notes>li>span:last-child')).map(e=>e.textContent).sort();
  report.logSourceCount=source.length;report.logRenderedCount=shown.length;report.logPreserved=JSON.stringify(source)===JSON.stringify(shown);
  report.planOwn={...(S.plan||{})};report.policy=S.policy;report.week=S.week;report.statsFingerprint=hash(JSON.stringify(S.members.map(m=>m.stats)));
+ report.memberFingerprint=hash(JSON.stringify(S.members));
+ const outing=outingView(S);report.outing=outing?{id:S.outing.id,n:outing.n,fit:[...outing.fit],selected:[...U.outPick],more:!!U.outMore,eligible:seated(S).map(m=>m.id),buttons:[...document.querySelectorAll('#week [data-op]')].map(el=>({id:el.dataset.op,pressed:el.getAttribute('aria-pressed'),disabled:el.disabled,face:el.querySelector('[data-face]')?.dataset.face})),confirm:$('#week [data-act="outing"]')?.textContent}:null;
+ report.outingResult={last:S.lastOuting,faces:[...document.querySelectorAll('[data-out-result]')].map(el=>({id:el.dataset.outResult,name:el.title})),gains:[...document.querySelectorAll('.outing-gains .gain')].map(el=>el.textContent),gainsOpen:!!$('.outing-gains')?.open,log:hash(JSON.stringify(S.outLog||[])),coach:S.coach};
+ if(outing&&U.outPick.size&&q.has('outingAudit')){const expected=resolveOuting(S,[...U.outPick]);report.expectedOuting={members:hash(JSON.stringify(expected.members)),last:expected.lastOuting,log:hash(JSON.stringify(expected.outLog||[])),coach:expected.coach};}
  report.practice={pick:U.pick,from:U.pickReturn,open:[...document.querySelectorAll('#week details[data-sec][open]')].map(el=>el.dataset.sec),tired:S.members.filter(m=>m.sta<30).map(m=>({id:m.id,name:m.name,menu:planFor(S,m),face:Faces.fingerprint(m)})),growth:[...document.querySelectorAll('.wr-person')].map(el=>({id:el.dataset.practiceMember,face:el.querySelector('[data-face]')?.dataset.face,name:el.querySelector('b')?.textContent,ranks:el.querySelector('.wr-ranks')?.getAttribute('aria-label'),interactive:el.tagName==='BUTTON'})),before:U.weekRes?.b.stats,members:S.members.map(m=>({id:m.id,name:m.name,stats:m.stats})),resultKey:U.weekRes?.key};
  report.assignPicks={...(U.asg?.picks||{})};report.assignSel=U.asg?.sel;
  report.auditionOut=[...(U.draft||[])];report.auditionDecided=!!S.audition?.decided;
@@ -121,7 +125,7 @@ function record(){
 }
 async function show(next){
  view=next;report={view,errors:[],steps:0};
- U.asg=null;U.weekRes=null;U.pick=null;U.pickReturn=null;U.rosterAt=null;U.prepKey=null;$('#rosterParts').open=false;
+ U.asg=null;U.weekRes=null;U.pick=null;U.pickReturn=null;U.rosterAt=null;U.prepKey=null;U.outKey='';U.outResult=null;$('#rosterParts').open=false;
  stopPlay();if(releaseSamples){releaseSamples();releaseSamples=null;}U.range='all';U.solo='all';U.view='mel';U.piece=null;U.venue='room';E.setSolo({type:'all'});E.setVenue('room');
  for(const id of ['rollPanel','listenSettings','recordingPanel'])$('#'+id).open=false;
  clearTimeout(GR.timer);clearTimeout(AN.timer);cancelAnimationFrame(CD.raf);CD.phase='idle';
@@ -177,7 +181,16 @@ async function show(next){
   s.recs=clone(early.recs);s.week=26;
   addRec(s,'2028年 定期演奏会',{venue:'hall'}).final=true;s=endSeason(s);
  }
- if(view==='outing-music'){s.outing={id:'orch'};U.outPick=new Set();}
+ if(view==='outing-music'){
+  s.week=8;s.episode=null;s.consult=null;s.outing={id:OUTING_BY[q.get('kind')]?q.get('kind'):'orch'};U.outPick=new Set();
+  if(q.has('outBench'))s.members.at(-1).seat=null;
+  if(q.has('outOne'))s.members=s.members.slice(0,1);
+  if(q.has('outEmpty'))s.members.forEach(m=>m.seat=null);
+  if(q.has('outLong'))s=renameMember(s,s.members[0].id,'あいうえおかきくけこさし');
+  if(q.has('outDot'))s=renameMember(s,s.members[0].id,'田中・七海');
+  if(q.has('outDuplicate'))s.members[1].name=s.members[0].name;
+  if(q.has('outOldResult')){s=resolveOuting(s,seated(s).slice(0,3).map(m=>m.id));U.outResult=null;}
+ }
  if(view==='ensemble'){s.members.forEach((m,i)=>m.grade=i%2+1);s.phase='winter';s.winter={step:1,plan:'kiso'};U.ensKey=null;U.ensPick=null;}
  if(view==='practice-late'){s.week=15;s.members[0].sta=20;}
  if(view.startsWith('prep-')){
