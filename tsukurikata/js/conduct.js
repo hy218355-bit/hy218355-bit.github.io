@@ -277,6 +277,7 @@ function cdFinish(natural){
 const recPerf = rec => rememberStageMembers(perform({...recCtx(rec), ...(rec.span || {})}),rec.snap.members);
 function playRecording(rec, label, onEnd = null){
   if(!E.ensure()) return;
+  setVenue(rec.venue);
   const perf = recPerf(rec);
   const opts = rec.conduct ? {clock: BeatClock.fromSaved(rec.conduct.ev, E.ac.currentTime + 0.3, rec.conduct.taps), lv: rec.conduct.lv} : {};
   playPerf(perf, label, onEnd, opts);

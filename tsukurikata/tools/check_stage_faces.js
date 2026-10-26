@@ -26,10 +26,11 @@ const S={members:[{id:'new',name:'佐藤 結衣',seat:'picc1',stats:{pitch:50}}]
 const oldCast=stageMembers({notes:[{seat:'picc1',mid:'old'}],hits:[]});if(oldCast.get('picc1').id!=='old')throw Error('昔の録音が今の部員の顔になった');
 const first={notes:[{seat:'fl1a',mid:'new'}],hits:[]},later={notes:[{seat:'picc1',mid:'new'}],hits:[]};
 const saved=JSON.stringify(S),sound=JSON.stringify(first);
-rememberStageMembers(first,[{id:'new',name:'佐藤 七海',grade:1,seat:'fl1a',stats:{pitch:25}}]);
+rememberStageMembers(first,[{id:'new',name:'佐藤 七海',grade:1,seat:'fl1a',stats:{pitch:25}},{id:'quiet',name:'佐藤 紬',grade:2,seat:'tuba1',stats:{pitch:60}}]);
 rememberStageMembers(later,[{id:'new',name:'佐藤 葵',grade:2,seat:'picc1',stats:{pitch:70}}]);
 const beforeRename=stageMembers(first).get('fl1a');
 if(beforeRename.name!=='佐藤 七海'||beforeRename.grade!==1||beforeRename.stats.pitch!==25||beforeRename.seat!=='fl1a')throw Error('選んだ録音の名前・学年・力・席が変わった');
+if(stageMembers(first).get('tuba1')?.id!=='quiet')throw Error('録音の範囲に出番がない部員が舞台から消えた');
 if(stageMembers(later).get('picc1').name!=='佐藤 葵')throw Error('別の録音の部員情報が混ざった');
 if(stageMembers({notes:[{seat:'picc1',mid:'new'}],hits:[]}).get('picc1').name!=='佐藤 結衣')throw Error('現在の合奏に昔の名前が混ざった');
 if(JSON.stringify(S)!==saved||JSON.stringify(first)!==sound)throw Error('顔の表示でセーブや演奏の音が変わった');

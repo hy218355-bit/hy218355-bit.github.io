@@ -37,6 +37,7 @@ function record(){
  report.recordedCard=U.recordMember?{id:U.recordMember.id,name:U.recordMember.name,grade:U.recordMember.grade,seat:U.recordMember.seat,ranks:Object.fromEntries(STAT_KEYS.map(k=>[k,rankOf(U.recordMember.stats[k])]))}:null;
  report.recordedCast=U.stageMembers?Array.from(U.stageMembers,([seat,m])=>({seat,id:m.id,name:m.name,grade:m.grade,ranks:Object.fromEntries(STAT_KEYS.map(k=>[k,rankOf(m.stats[k])]))})):[];
  report.recordings=S.recs.map(r=>({id:r.id,label:r.label}));
+ report.listening={shownPiece:U.shown?.pieceId,title:$('#piece').textContent,kind:$('#pieceEyebrow').textContent,range:$('#rangeSel').value,rangeLabel:$('#rangeSel').selectedOptions[0]?.textContent,rangeDisabled:$('#rangeSel').disabled,conductDisabled:$('#btnConduct').disabled,summary:$('#listeningSummary').textContent,engineVenue:E.venueId};
  report.readings=PIECE_IDS.map(id=>({id,level:pieceDifficulty(id),load:readingLoad(id),average:readAvg(S,id)}));
  const stageCanvas=$('#stage'),stageBox=stageCanvas.getBoundingClientRect(),stageMap=stageGeom(Math.max(240,stageBox.width),true);
  report.stageSeats=SEATS.map(s=>({id:s.id,point:seatXY(s,stageMap),member:S.members.find(m=>m.seat===s.id)?.id}));
@@ -111,10 +112,14 @@ async function show(next){
  if(view==='recorded-history'){
   s.recs=[];const old=clone(s);old.year=2026;old.week=26;old.cohesion=80;
   old.members.forEach((m,i)=>{if(i)m.id='m2026-n'+(i+1)+'-f00d';m.grade=3;m.stats={pitch:80,rhythm:80,tone:80,expr:80};m.fam={galop:100};});
+  if(q.has('different')){old.pieceId='largo';old.members.forEach(m=>m.fam={galop:100,largo:100,ode:100});}
   addRec(old,'2026年 定期演奏会',{venue:'hall'});
+  if(q.has('different')){old.recs.at(-1).span={from:PIECES.largo.spans[0].from,to:PIECES.largo.spans[0].to};old.pieceId='ode';}
+  if(q.has('short'))old.recs.at(-1).span={from:0,to:.25};
   old.year=2027;old.members[0].name='田中 葵';old.members[0].stats={pitch:55,rhythm:55,tone:55,expr:55};addRec(old,'2027年 定期演奏会',{venue:'hall'});
   s.recs=clone(old.recs);s.year=2031;s.gradMembers=[];
   s=renameMember(s,s.members[0].id,'田中 花音');const other=s.members.find(m=>m.seat==='perc2');other.seat='picc1';s.members[0].seat='perc2';
+  if(q.has('a')){s.division='A';s.setPiece='ode';}
  }
  if(view==='song-set'){s.division='A';s.phase='chooseSet';}
  if(view==='song-final'){s.chooseFinal=true;s.contestPiece='galop';for(const m of s.members)m.fam={galop:[65,65,65]};}
@@ -139,6 +144,7 @@ async function show(next){
  if(view==='journal-ambiguous'){s.members=[...s.members,{...s.members[0],id:'different-person'}];s.log=[{y:s.year,w:0,text:s.members[0].name+'が、スキルを身につけた。'}];}
  if(view==='journal-empty')s.log=[];
  if(view==='grad-old')s.members.forEach(m=>{delete m.first;m.story=[];});
+ if(q.has('concertrec')&&view.startsWith('grad')){const fin=addRec(s,'2028年 定期演奏会',{venue:'hall',pieceId:'largo'});fin.final=true;report.beforeConcertVenue=U.venue;}
  if(q.has('busy')&&view.startsWith('member')){s.week=PREF_WEEK;s=beginStage(s);}
  S=s;U.sel=null;hideTip();renderAll();refreshNow();$('#toast').hidden=true;
  const cardView=view==='member'||view.startsWith('member-');

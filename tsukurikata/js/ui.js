@@ -149,6 +149,7 @@ function playPerf(perf, label, onEnd, opts = {}){
   nativePost({type: 'playing', on: true});
   U.ptr = buildPtr(perf);
   U.stageMembers = stageMembers(perf);
+  renderPiece();
   $('#btnStop').hidden = false; $('#btnNow').hidden = true;
   setNowPlaying();
   cancelAnimationFrame(U.raf);
@@ -168,6 +169,7 @@ function playPerf(perf, label, onEnd, opts = {}){
 }
 // natural：最後まで鳴り終わったとき（止めるボタンなら false）
 function endPlay(natural = false){
+  const wasRecording = recordingPlayback();
   if(window.TSUKURIKATA_NATIVE) nativePost({type: 'log', msg: `play end ${natural ? 'natural' : 'stopped'} at ${(U.lastT ?? -1).toFixed(2)}s / ${U.shown?.total?.toFixed(1)}s, audio ${E.ac?.state}`});
   U.playing = false;
   nativePost({type: 'playing', on: false});
@@ -175,6 +177,8 @@ function endPlay(natural = false){
   $('#btnStop').hidden = true; $('#btnNow').hidden = false;
   setNowPlaying();
   clearRecordedMember();
+  renderPiece();
+  if(wasRecording){U.perfNow=null;refreshNow();}
   drawIdle();
   const cb = U.onEnd; U.onEnd = null;
   if(cb) cb(natural);
@@ -211,13 +215,23 @@ const seatXY = (s, G) => {
 // 再生する録音そのものの部員情報を、演奏の音やセーブとは別に覚える。
 const STAGE_PERFORMERS = new WeakMap();
 function rememberStageMembers(perf, members){ STAGE_PERFORMERS.set(perf, members || []); return perf; }
+function recordingPlayback(){ return !!(U.playing && U.shown && STAGE_PERFORMERS.has(U.shown)); }
+function recordedRangeLabel(perf){
+  const pc=PIECES[perf.pieceId];
+  if(perf.from===0&&perf.to===pc.beats)return '全部';
+  const span=pc.spans.find(s=>Math.abs(s.from-perf.from)<1e-6&&Math.abs(s.to-perf.to)<1e-6);
+  return span?spanShort(span):'録音の範囲';
+}
 // 昔の録音でも、いま同じ席にいる別の部員の顔へ入れ替わらないようにする。
 function stageMembers(perf){
   const known=new Map();
   for(const rec of S.recs||[])for(const m of rec.snap?.members || rec.members || [])known.set(m.id,m);
   for(const m of [...(S.gradMembers||[]),...S.members])known.set(m.id,m);
   for(const m of STAGE_PERFORMERS.get(perf) || [])known.set(m.id,m);
-  return new Map(Object.entries(buildPtr(perf)).flatMap(([seat,p])=>known.has(p.mid)?[[seat,{...known.get(p.mid),seat}]]:[]));
+  const cast=new Map(Object.entries(buildPtr(perf)).flatMap(([seat,p])=>known.has(p.mid)?[[seat,{...known.get(p.mid),seat}]]:[]));
+  // 切り出した録音で出番がなくても、録音時に座っていた部員は舞台に残す。
+  for(const m of STAGE_PERFORMERS.get(perf) || [])if(SEAT[m.seat]&&!cast.has(m.seat))cast.set(m.seat,{...m});
+  return cast;
 }
 // 席ごとに音を並べておく（昔の録音やお手本でも、座っていた席が光るように）
 function buildPtr(perf){
@@ -482,19 +496,24 @@ function renderHeader(){
   $('#weeksLeft').textContent = nx ? (nx[0] === S.week ? `今週は本番：${nx[1].title}` : `次の本番「${nx[1].title}」まで${nx[0] - S.week}週`) : '';
 }
 function renderPiece(){
-  const pid = playPiece(), pc = PIECES[pid];
+  const recorded=recordingPlayback(), pid = recorded?U.shown.pieceId:playPiece(), pc = PIECES[pid];
+  $('#btnConduct').disabled=recorded||busy();
   // A部門でコンクールまでは、自由曲と課題曲を切りかえて聴ける
-  const two = setActive(S) && S.phase === 'week';
+  const two = !recorded && setActive(S) && S.phase === 'week';
   $('#pieceSwitch').hidden = !two;
   if(two) $('#pieceSwitch').innerHTML = [[S.pieceId, '自由曲'], [S.setPiece, '課題曲']].map(([id, nm]) => `<button type="button" data-pswitch="${id}" aria-pressed="${pid === id}">${nm}：${esc(PIECES[id].title)}</button>`).join('');
-  $('#pieceEyebrow').textContent = two && pid === S.setPiece ? '課題曲' : S.phase === 'choose' || S.phase === 'chooseSet' || pid !== S.pieceId ? '試しに聴く曲' : S.finalWeek ? '定期演奏会の曲' : '自由曲';
+  $('#pieceEyebrow').textContent = recorded ? '録音' : two && pid === S.setPiece ? '課題曲' : S.phase === 'choose' || S.phase === 'chooseSet' || pid !== S.pieceId ? '試しに聴く曲' : S.finalWeek ? '定期演奏会の曲' : '自由曲';
   $('#pieceDifficulty').innerHTML = difficultyBadge(pid);
   $('#piece').textContent = pc.title;
   $('#piece').setAttribute('data-tip',pc.full);$('#piece').setAttribute('data-tipname','曲名');$('#piece').setAttribute('role','button');$('#piece').tabIndex=0;
   $('#pieceMeta').textContent = `${pc.composer}｜問われる力：${pc.asks}`;
-  const rd = (pid === S.pieceId || (two && pid === S.setPiece)) && S.phase !== 'choose' ? spanReadAvg(S, pid) : null;
-  $('#rangeSel').innerHTML = `<option value="all">全部</option>` + pc.spans.map((sp, i) => `<option value="${i}">${sp.name}${rd ? `（譜読み${rankOf(rd[i])}）` : ''}</option>`).join('');
-  $('#rangeSel').value = U.range;
+  $('#rangeSel').disabled=recorded;
+  if(recorded) $('#rangeSel').innerHTML=`<option value="recorded">${recordedRangeLabel(U.shown)}</option>`;
+  else{
+    const rd = (pid === S.pieceId || (two && pid === S.setPiece)) && S.phase !== 'choose' ? spanReadAvg(S, pid) : null;
+    $('#rangeSel').innerHTML = `<option value="all">全部</option>` + pc.spans.map((sp, i) => `<option value="${i}">${sp.name}${rd ? `（譜読み${rankOf(rd[i])}）` : ''}</option>`).join('');
+    $('#rangeSel').value = U.range;
+  }
   renderListeningSummary();
 }
 function renderVenues(){
@@ -503,7 +522,7 @@ function renderVenues(){
   renderListeningSummary();
 }
 function renderListeningSummary(){
-  const pc = PIECES[playPiece()], range = U.range === 'all' ? '全部' : pc?.spans[Number(U.range)] ? spanShort(pc.spans[Number(U.range)]) : '全部';
+  const pc = PIECES[playPiece()], range = recordingPlayback()?recordedRangeLabel(U.shown):U.range === 'all' ? '全部' : pc?.spans[Number(U.range)] ? spanShort(pc.spans[Number(U.range)]) : '全部';
   const solo = $('#soloSel').selectedOptions[0]?.textContent || '全員';
   $('#listeningSummary').textContent = [VENUE[U.venue].name, range, solo].join('・');
 }
@@ -1842,7 +1861,6 @@ function playEnsemble(){
 function playRec(id){
   const rec = S.recs.find(r => r.id === id);
   if(!rec) return;
-  setVenue(rec.venue);
   playRecording(rec, `${rec.label}（${VENUE[rec.venue].name}で録音）`);
 }
 function bind(){

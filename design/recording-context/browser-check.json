@@ -1,0 +1,106 @@
+{
+  "before": {
+    "shownPiece": "largo",
+    "title": "「天国と地獄」",
+    "kind": "自由曲",
+    "range": "1",
+    "rangeLabel": "中間部（譜読みG）",
+    "rangeDisabled": false,
+    "summary": "県民文化会館・中間部・全員"
+  },
+  "live": {
+    "shownPiece": "ode",
+    "title": "「歓喜の歌」",
+    "kind": "課題曲",
+    "range": "1",
+    "rangeLabel": "後半（高い音の旋律〜全員）（譜読みG）",
+    "rangeDisabled": false,
+    "summary": "音楽室・後半・全員",
+    "engineVenue": "room"
+  },
+  "record": {
+    "shownPiece": "largo",
+    "title": "《新世界より》第2楽章",
+    "kind": "録音",
+    "range": "recorded",
+    "rangeLabel": "前半",
+    "rangeDisabled": true,
+    "conductDisabled": true,
+    "summary": "県民文化会館・前半・全員",
+    "engineVenue": "hall"
+  },
+  "portraits": 39,
+  "cast": 39,
+  "stop": {
+    "shownPiece": "ode",
+    "title": "「歓喜の歌」",
+    "kind": "課題曲",
+    "range": "1",
+    "rangeLabel": "後半（高い音の旋律〜全員）（譜読みG）",
+    "rangeDisabled": false,
+    "conductDisabled": false,
+    "summary": "県民文化会館・後半・全員",
+    "engineVenue": "hall"
+  },
+  "piecePreserved": true,
+  "rangePreserved": true,
+  "statePreserved": true,
+  "recordsPreserved": true,
+  "width": 375,
+  "scrollWidth": 375,
+  "errors": [],
+  "full": {
+    "shownPiece": "ode",
+    "title": "「歓喜の歌」",
+    "kind": "録音",
+    "range": "recorded",
+    "rangeLabel": "全部",
+    "rangeDisabled": true,
+    "summary": "県民文化会館・全部・全員",
+    "engineVenue": "hall"
+  },
+  "tinyStarted": {
+    "playing": true,
+    "listening": {
+      "shownPiece": "largo",
+      "title": "《新世界より》第2楽章",
+      "kind": "録音",
+      "range": "recorded",
+      "rangeLabel": "録音の範囲",
+      "rangeDisabled": true,
+      "summary": "県民文化会館・録音の範囲・全員",
+      "engineVenue": "hall"
+    }
+  },
+  "naturalEnd": {
+    "playing": false,
+    "listening": {
+      "shownPiece": "galop",
+      "title": "「天国と地獄」",
+      "kind": "自由曲",
+      "range": "all",
+      "rangeLabel": "全部",
+      "rangeDisabled": false,
+      "summary": "県民文化会館・全部・全員",
+      "engineVenue": "hall"
+    },
+    "errors": []
+  },
+  "graduation": {
+    "beforeVenue": "room",
+    "venue": "hall",
+    "playing": true,
+    "listening": {
+      "shownPiece": "largo",
+      "title": "《新世界より》第2楽章",
+      "kind": "録音",
+      "range": "recorded",
+      "rangeLabel": "全部",
+      "rangeDisabled": true,
+      "summary": "県民文化会館・全部・全員",
+      "engineVenue": "hall"
+    },
+    "errors": []
+  },
+  "finalErrors": []
+}
