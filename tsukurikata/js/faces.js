@@ -4,13 +4,26 @@ const Faces=(()=>{
 const root=new URL('../img/faces/',document.currentScript.src).href;
 const sheets=FACE_CAST.sheets,atlas=FACE_CAST.cast;
 const pools=Object.fromEntries(['female','male'].map(style=>[style,atlas.filter(face=>face.style===style).sort((a,b)=>hash('portrait-cast-v2',a.base)-hash('portrait-cast-v2',b.base))]));
+const legacyPools=Object.fromEntries(['female','male'].map(style=>[style,pools[style].filter(face=>face.base<39)]));
+const draws=new Map();
 const featuresCache=new Map();
 const stageImages=new Map(),stageStamps=new Map();
 function features(member){
   const m=typeof member==='object'?member:{id:String(member)},id=String(m.id),style=namePresentation(m),key=id+'|'+style;
   if(featuresCache.has(key))return featuresCache.get(key);
-  const match=/-(?:j|n)(\d+)$/.exec(id),seq=match?Number(match[1]):null,pool=pools[style];
-  const index=seq!==null&&seq>0?(seq-1)%pool.length:Math.floor(hash(id,'portrait-cast-v2',style)*pool.length);
+  const match=/-(?:j|n)(\d+)$/.exec(id),seq=match?Number(match[1]):null;
+  const newer=/-(?:j|n)(\d+)-([0-9a-f]+)$/.exec(id);
+  let pool=seq!==null?legacyPools[style]:pools[style];
+  if(newer){
+    const drawKey=newer[2]+'|'+style;
+    if(!draws.has(drawKey)){
+      if(draws.size>=32)draws.delete(draws.keys().next().value);
+      draws.set(drawKey,pool.slice().sort((a,b)=>hash('cast100',drawKey,a.base)-hash('cast100',drawKey,b.base)));
+    }
+    pool=draws.get(drawKey);
+  }
+  // 昔のidは元の39人から同じ顔、新しいidはセーブごとに混ぜた100人から選ぶ。
+  const index=newer?(Number(newer[1])-1)%pool.length:seq!==null&&seq>0?(seq-1)%pool.length:Math.floor(hash(id,'portrait-cast-v2',style)*pool.length);
   const face=Object.freeze({...pool[index%pool.length]});
   if(featuresCache.size>=256)featuresCache.delete(featuresCache.keys().next().value);
   featuresCache.set(key,face);return face;

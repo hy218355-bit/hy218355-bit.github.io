@@ -33,3 +33,10 @@ for(const img of images)if(!img.complete)img.loaded();
 vm.runInContext("for(const [name,n] of [['陽菜',31],['悠真',8]])for(let i=1;i<=n;i++)Faces.draw(target,{id:'m2026-n'+i,name:'佐藤 '+name},20,20,24);",ctx);
 assert.equal(images.length,4);assert.equal(stamps,39);assert.equal(sourceDraws,39);
 console.log('240〜720pxの顔の間隔・はみ出し・タップ／楽器決めの位置維持／録音の本人の顔／4枚の読み込みと39個の絵の再利用：確認済み');
+
+// 新しいidで全候補を引いても、原画10枚と丸い画像100個だけを使い回す。
+vm.runInContext("for(const [name,n] of [['陽菜',71],['悠真',29]])for(let i=1;i<=n;i++)Faces.draw(target,{id:'m2026-n'+i+'-abc',name:'佐藤 '+name},20,20,24);",ctx);
+for(const img of images)if(!img.complete)img.loaded();
+vm.runInContext("for(const [name,n] of [['陽菜',71],['悠真',29]])for(let i=1;i<=n;i++)Faces.draw(target,{id:'m2026-n'+i+'-abc',name:'佐藤 '+name},20,20,24);",ctx);
+assert.equal(images.length,10);assert.equal(stamps,100);assert.equal(sourceDraws,100);
+console.log('100人へ拡張しても原画10枚・丸い画像100個を再利用：確認済み');

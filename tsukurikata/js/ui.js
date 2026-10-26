@@ -1015,7 +1015,7 @@ function asgUpdate(){
   list.innerHTML = S.recruits.map(r => {
     const seat = A.picks[r.id], happy = seat && SEAT[seat].inst === r.hope;
     const sk = Object.entries(innateSkills(r.id, r.exp)).map(([id, v]) => `<span class="sk">${SKILLS[id].name}${skillMark(v >= 2.5 ? 2 : 1)}</span>`).join('');
-    return `<button class="rchip" type="button" data-rid="${r.id}" aria-pressed="${A.sel === r.id}"><b>${memberFace(r,32)}${esc(r.name)}</b><small>${r.grade || 1}年・希望：${INST[r.hope].name}・${r.exp ? '経験あり' : '初心者'}</small>${sk ? `<span class="sks">${sk}</span>` : ''}
+    return `<button class="rchip" type="button" data-rid="${r.id}" aria-pressed="${A.sel === r.id}"><b>${memberFace(r,32)}${esc(r.name)}</b><small>${r.grade || 1}年・希望：${INST[r.hope].name}・${r.talent ? '中学で実績' : r.exp ? '経験あり' : '初心者'}</small>${sk ? `<span class="sks">${sk}</span>` : ''}
       <span class="where${happy ? ' happy' : seat ? '' : ' none'}">${seat ? `→ ${seatLabel(seat)}${happy ? '・希望どおり' : ''}` : '→ まだ席がない（控え）'}</span></button>`;
   }).join('');
   const r = S.recruits.find(x => x.id === A.sel);
@@ -1122,7 +1122,7 @@ function updatePred(soon){
   const out = U.draft || new Set();
   const n = seated(S).length - [...out].filter(id => memberById(id)?.seat).length;
   const {ev, w} = nextContest(S), L = LEVELS[ev.level], left = w - S.week;
-  const key = S.year + ':' + S.week + ':' + [...out].sort().join(',');
+  const key = S.recruitSeed + ':' + S.year + ':' + S.week + ':' + [...out].sort().join(',');
   const show = p => {
     const nm = {gold: '金賞', silver: '銀賞', bronze: '銅賞'}[p.award];
     // 目安は、いまの方針のまま本番の週まで練習を続けたときの部で出す（自分で指揮すると、ここから上がる）

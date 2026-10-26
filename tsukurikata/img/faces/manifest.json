@@ -1,5 +1,5 @@
 {
-  "version": "stage-faces-20261026-2",
+  "version": "cast100-20261026-1",
   "sheets": [
     {
       "file": "plain-01.webp",
@@ -40,6 +40,66 @@
       "quality": 84,
       "bytes": 194512,
       "source": "/Users/yh/.codex/generated_images/01a175a5-1e3d-71b0-810a-8797cdde01e1/exec-464d9f7a-e058-4ce7-9aca-b672dc8150fc.png"
+    },
+    {
+      "file": "classmates-04.webp",
+      "width": 1983,
+      "height": 793,
+      "cols": 5,
+      "rows": 2,
+      "quality": 85,
+      "bytes": 195528,
+      "source": "/Users/yh/.codex/generated_images/01a175a5-1e3d-71b0-810a-8797cdde01e1/exec-8e238e3a-83cb-43dc-81d0-79167ec84350.png"
+    },
+    {
+      "file": "classmates-05.webp",
+      "width": 1983,
+      "height": 793,
+      "cols": 5,
+      "rows": 2,
+      "quality": 85,
+      "bytes": 190852,
+      "source": "/Users/yh/.codex/generated_images/01a175a5-1e3d-71b0-810a-8797cdde01e1/exec-87e66c8f-2beb-4e18-8544-0617036216b8.png"
+    },
+    {
+      "file": "classmates-06.webp",
+      "width": 1983,
+      "height": 793,
+      "cols": 5,
+      "rows": 2,
+      "quality": 84,
+      "bytes": 199780,
+      "source": "/Users/yh/.codex/generated_images/01a175a5-1e3d-71b0-810a-8797cdde01e1/exec-654ca231-ae84-46a0-8160-ceb650869695.png"
+    },
+    {
+      "file": "classmates-07.webp",
+      "width": 1983,
+      "height": 793,
+      "cols": 5,
+      "rows": 2,
+      "quality": 83,
+      "bytes": 199654,
+      "source": "/Users/yh/.codex/generated_images/01a175a5-1e3d-71b0-810a-8797cdde01e1/exec-cf901a30-135c-4b6b-937e-27e04e1cf36a.png"
+    },
+    {
+      "file": "classmates-08.webp",
+      "width": 1983,
+      "height": 793,
+      "cols": 5,
+      "rows": 2,
+      "quality": 89,
+      "bytes": 192380,
+      "source": "/Users/yh/.codex/generated_images/01a175a5-1e3d-71b0-810a-8797cdde01e1/exec-a5e94538-6ed9-498e-8159-5ddfb76ce8a6.png"
+    },
+    {
+      "file": "classmates-09.webp",
+      "width": 1983,
+      "height": 793,
+      "cols": 5,
+      "rows": 2,
+      "quality": 89,
+      "bytes": 192864,
+      "source": "/Users/yh/.codex/generated_images/01a175a5-1e3d-71b0-810a-8797cdde01e1/exec-53c3cd81-c21c-4058-8796-a692d9f40ca5.png"
     }
   ],
   "cast": [
@@ -315,6 +375,433 @@
       "cell": 2,
       "style": "female",
       "standout": false
+    },
+    {
+      "base": 39,
+      "sheet": 4,
+      "cell": 0,
+      "style": "female",
+      "standout": false
+    },
+    {
+      "base": 40,
+      "sheet": 4,
+      "cell": 1,
+      "style": "female",
+      "standout": false
+    },
+    {
+      "base": 41,
+      "sheet": 4,
+      "cell": 2,
+      "style": "female",
+      "standout": false
+    },
+    {
+      "base": 42,
+      "sheet": 4,
+      "cell": 3,
+      "style": "female",
+      "standout": false
+    },
+    {
+      "base": 43,
+      "sheet": 4,
+      "cell": 4,
+      "style": "female",
+      "standout": false
+    },
+    {
+      "base": 44,
+      "sheet": 4,
+      "cell": 5,
+      "style": "female",
+      "standout": false
+    },
+    {
+      "base": 45,
+      "sheet": 4,
+      "cell": 6,
+      "style": "female",
+      "standout": false
+    },
+    {
+      "base": 46,
+      "sheet": 4,
+      "cell": 7,
+      "style": "female",
+      "standout": false
+    },
+    {
+      "base": 47,
+      "sheet": 4,
+      "cell": 8,
+      "style": "female",
+      "standout": false
+    },
+    {
+      "base": 48,
+      "sheet": 4,
+      "cell": 9,
+      "style": "female",
+      "standout": false
+    },
+    {
+      "base": 49,
+      "sheet": 5,
+      "cell": 0,
+      "style": "female",
+      "standout": false
+    },
+    {
+      "base": 50,
+      "sheet": 5,
+      "cell": 1,
+      "style": "female",
+      "standout": false
+    },
+    {
+      "base": 51,
+      "sheet": 5,
+      "cell": 2,
+      "style": "female",
+      "standout": false
+    },
+    {
+      "base": 52,
+      "sheet": 5,
+      "cell": 3,
+      "style": "female",
+      "standout": false
+    },
+    {
+      "base": 53,
+      "sheet": 5,
+      "cell": 4,
+      "style": "female",
+      "standout": false
+    },
+    {
+      "base": 54,
+      "sheet": 5,
+      "cell": 5,
+      "style": "female",
+      "standout": false
+    },
+    {
+      "base": 55,
+      "sheet": 5,
+      "cell": 6,
+      "style": "female",
+      "standout": false
+    },
+    {
+      "base": 56,
+      "sheet": 5,
+      "cell": 7,
+      "style": "female",
+      "standout": false
+    },
+    {
+      "base": 57,
+      "sheet": 5,
+      "cell": 8,
+      "style": "female",
+      "standout": false
+    },
+    {
+      "base": 58,
+      "sheet": 5,
+      "cell": 9,
+      "style": "female",
+      "standout": false
+    },
+    {
+      "base": 59,
+      "sheet": 6,
+      "cell": 0,
+      "style": "female",
+      "standout": false
+    },
+    {
+      "base": 60,
+      "sheet": 6,
+      "cell": 1,
+      "style": "female",
+      "standout": false
+    },
+    {
+      "base": 61,
+      "sheet": 6,
+      "cell": 2,
+      "style": "female",
+      "standout": false
+    },
+    {
+      "base": 62,
+      "sheet": 6,
+      "cell": 3,
+      "style": "female",
+      "standout": false
+    },
+    {
+      "base": 63,
+      "sheet": 6,
+      "cell": 4,
+      "style": "female",
+      "standout": false
+    },
+    {
+      "base": 64,
+      "sheet": 6,
+      "cell": 5,
+      "style": "female",
+      "standout": false
+    },
+    {
+      "base": 65,
+      "sheet": 6,
+      "cell": 6,
+      "style": "female",
+      "standout": false
+    },
+    {
+      "base": 66,
+      "sheet": 6,
+      "cell": 7,
+      "style": "female",
+      "standout": false
+    },
+    {
+      "base": 67,
+      "sheet": 6,
+      "cell": 8,
+      "style": "female",
+      "standout": false
+    },
+    {
+      "base": 68,
+      "sheet": 6,
+      "cell": 9,
+      "style": "female",
+      "standout": false
+    },
+    {
+      "base": 69,
+      "sheet": 7,
+      "cell": 0,
+      "style": "female",
+      "standout": true
+    },
+    {
+      "base": 70,
+      "sheet": 7,
+      "cell": 1,
+      "style": "female",
+      "standout": true
+    },
+    {
+      "base": 71,
+      "sheet": 7,
+      "cell": 2,
+      "style": "female",
+      "standout": true
+    },
+    {
+      "base": 72,
+      "sheet": 7,
+      "cell": 3,
+      "style": "female",
+      "standout": true
+    },
+    {
+      "base": 73,
+      "sheet": 7,
+      "cell": 4,
+      "style": "female",
+      "standout": true
+    },
+    {
+      "base": 74,
+      "sheet": 7,
+      "cell": 5,
+      "style": "female",
+      "standout": true
+    },
+    {
+      "base": 75,
+      "sheet": 7,
+      "cell": 6,
+      "style": "female",
+      "standout": true
+    },
+    {
+      "base": 76,
+      "sheet": 7,
+      "cell": 7,
+      "style": "female",
+      "standout": true
+    },
+    {
+      "base": 77,
+      "sheet": 7,
+      "cell": 8,
+      "style": "female",
+      "standout": true
+    },
+    {
+      "base": 78,
+      "sheet": 7,
+      "cell": 9,
+      "style": "female",
+      "standout": true
+    },
+    {
+      "base": 79,
+      "sheet": 8,
+      "cell": 0,
+      "style": "male",
+      "standout": false
+    },
+    {
+      "base": 80,
+      "sheet": 8,
+      "cell": 1,
+      "style": "male",
+      "standout": false
+    },
+    {
+      "base": 81,
+      "sheet": 8,
+      "cell": 2,
+      "style": "male",
+      "standout": false
+    },
+    {
+      "base": 82,
+      "sheet": 8,
+      "cell": 3,
+      "style": "male",
+      "standout": false
+    },
+    {
+      "base": 83,
+      "sheet": 8,
+      "cell": 4,
+      "style": "male",
+      "standout": false
+    },
+    {
+      "base": 84,
+      "sheet": 8,
+      "cell": 5,
+      "style": "male",
+      "standout": false
+    },
+    {
+      "base": 85,
+      "sheet": 8,
+      "cell": 6,
+      "style": "male",
+      "standout": false
+    },
+    {
+      "base": 86,
+      "sheet": 8,
+      "cell": 7,
+      "style": "male",
+      "standout": false
+    },
+    {
+      "base": 87,
+      "sheet": 8,
+      "cell": 8,
+      "style": "male",
+      "standout": false
+    },
+    {
+      "base": 88,
+      "sheet": 8,
+      "cell": 9,
+      "style": "male",
+      "standout": false
+    },
+    {
+      "base": 89,
+      "sheet": 9,
+      "cell": 0,
+      "style": "male",
+      "standout": false
+    },
+    {
+      "base": 90,
+      "sheet": 9,
+      "cell": 1,
+      "style": "male",
+      "standout": false
+    },
+    {
+      "base": 91,
+      "sheet": 9,
+      "cell": 2,
+      "style": "male",
+      "standout": false
+    },
+    {
+      "base": 92,
+      "sheet": 9,
+      "cell": 3,
+      "style": "male",
+      "standout": false
+    },
+    {
+      "base": 93,
+      "sheet": 9,
+      "cell": 4,
+      "style": "male",
+      "standout": false
+    },
+    {
+      "base": 94,
+      "sheet": 9,
+      "cell": 5,
+      "style": "male",
+      "standout": false
+    },
+    {
+      "base": 95,
+      "sheet": 9,
+      "cell": 6,
+      "style": "male",
+      "standout": false
+    },
+    {
+      "base": 96,
+      "sheet": 9,
+      "cell": 7,
+      "style": "male",
+      "standout": false
+    },
+    {
+      "base": 97,
+      "sheet": 9,
+      "cell": 8,
+      "style": "male",
+      "standout": false
+    },
+    {
+      "base": 98,
+      "sheet": 9,
+      "cell": 9,
+      "style": "male",
+      "standout": true
+    },
+    {
+      "base": 99,
+      "sheet": 3,
+      "cell": 10,
+      "style": "male",
+      "standout": true
     }
   ]
 }

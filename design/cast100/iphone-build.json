@@ -1,0 +1,20 @@
+{
+  "build": "Release succeeded",
+  "installed": true,
+  "launched": true,
+  "bundleMatches": {
+    "index.html": "7bfa0456ebbeab66da60c1bdb99d20378ddab3cda95b7643e1a894bcea2a2e20",
+    "js/game.js": "b9c9328da7870432f6e700bc2dad0933baa5f60c102f8a6f4915e8b532e1bcb2",
+    "js/ui.js": "17cce9f0ad6c65a230d7a9cc7e822b9f13a5ba9fd78cb000585c9c8ab9abc3b6",
+    "js/faces.js": "08313bebfc271349e603d6e33188b107f58a321fc2458b4e637c38dcb54c849e",
+    "js/face-cast.js": "98c14e460b1a268411ae3a11a03a35eba65af15d8290486ac5529d1955fe66a7",
+    "img/CREDITS.md": "8008b55d135c8a9c36c92e00f229507224e589a4b516b5e621fb69234d28434a",
+    "img/faces/manifest.json": "3c0a1adb9f833510a216ec4f201b2ef99f9d5e63a85294d0dd22e77f2a9db0e9",
+    "img/faces/classmates-04.webp": "132783a9aa4031fd6af95f885a141440907a8f9d00a737a5a125b9b128643cad",
+    "img/faces/classmates-05.webp": "f6283ea553a0236c127cd57a8cc1105062797b3f9e463784c595d7d326760ec4",
+    "img/faces/classmates-06.webp": "ee1e30b12c1322a11b8b3e948a64859cd1df441adb4f2da39faddace2bcfb6df",
+    "img/faces/classmates-07.webp": "86f9cdd33ccc9d90f071a32f333fac9c4d4cc6180a2838766bbe1b04c121037e",
+    "img/faces/classmates-08.webp": "25f48026f1cb8536c0dce121c541413030dc999386695087542180077077b229",
+    "img/faces/classmates-09.webp": "33cb972d7bf6f208819ae9228b540bb088327617de837bfedcf86d8e5ca17928"
+  }
+}

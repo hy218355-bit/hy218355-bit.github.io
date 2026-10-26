@@ -92,7 +92,7 @@ const PIECE_MOVED = {march: 'aida', wa: 'galop', stars: 'aida', jupiter: 'holst'
 function freshState(year = 2026){
   const s = {
     v: 2, year, startYear: year, founding: true, week: 0, phase: 'choose', pieceId: null, interp: {tempo: 1, dyn: 1, rub: 1}, policy: 'auto',
-    members: [], recruits: null, plan: {}, rep: 5, seq: 0, trend: [], coach: {xp: 0},
+    members: [], recruits: null, plan: {}, rep: 5, seq: 0, recruitSeed: Math.floor(Math.random() * 0x100000000), trend: [], coach: {xp: 0},
     cohesion: 20, stamina: 100, morale: 75, hallExp: 0,
     log: [], recs: [], history: [], season: [], flags: {}, pending: null, lastDelta: {},
   };
@@ -1517,7 +1517,7 @@ const startAudition = s0 => runAudition(clone(s0));
 let projMemo = null;
 function projectToContest(s0){
   const {w} = nextContest(s0);
-  const key = [s0.year, s0.week, s0.seq, s0.policy, w, s0.members.length].join(':');
+  const key = [s0.recruitSeed, s0.year, s0.week, s0.seq, s0.policy, w, s0.members.length].join(':');
   if(projMemo?.key === key) return projMemo.s;
   let s = clone(s0), guard = 0;
   s.plan = {};
@@ -2110,6 +2110,8 @@ function toggleShow(s0, sec){
 }
 // opts.founders：最初の5人、opts.joiners：評判を聞いて途中から入ってくる生徒（2年生のこともある）、opts.show：見せた楽器
 function makeRecruits(s, n, opts = {}){
+  // セーブごとの出会いを変える。昔の部員の名前や力は作り直さない。
+  if(s.recruitSeed == null) s.recruitSeed = Math.floor(hash(s.startYear ?? s.year, s.seq, 'recruit-save') * 0x100000000);
   const used = new Set([...s.members, ...(s.recruits || [])].map(m => m.name));
   const empty = SEATS.filter(x => !s.members.some(m => m.seat === x.id));
   const insts = [...new Set(empty.map(x => x.inst))];
@@ -2117,7 +2119,7 @@ function makeRecruits(s, n, opts = {}){
   const out = [], hopes = [];
   for(let i = 0; i < n; i++){
     s.seq = (s.seq || 0) + 1;
-    const id = `m${s.year}-${opts.joiners ? 'j' : 'n'}${s.seq}`, seed = ['recruit', s.year, s.seq];
+    const id = `m${s.year}-${opts.joiners ? 'j' : 'n'}${s.seq}-${s.recruitSeed.toString(16)}`, seed = ['recruit', s.year, s.seq, s.recruitSeed];
     let hope;
     if(opts.founders){
       const pool = FOUNDER_HOPES[Math.min(i, FOUNDER_HOPES.length - 1)].filter(x => !hopes.includes(x));
@@ -2132,9 +2134,11 @@ function makeRecruits(s, n, opts = {}){
     }
     hopes.push(hope);
     // 経験者の割合：最初の5人は2人ほど。評判が上がると、経験者も入ってきやすくなる
-    const exp = opts.founders ? i === 1 || i === 3 : hash(...seed, 'exp') < 0.3 + (s.rep ?? 30) / 250;
+    // 評判を聞いた経験者の中には、入部時点でよく吹ける子もときどき混じる。
+    const talent = !opts.founders && hash(...seed, 'talent') < 0.14 * clamp01(((s.rep ?? 30) - 35) / 65);
+    const exp = opts.founders ? i === 1 || i === 3 : talent || hash(...seed, 'exp') < 0.3 + (s.rep ?? 30) / 250;
     const grade = opts.joiners && s.week > 0 && s.week < 20 && hash(...seed, 'grade') < 0.25 ? 2 : 1;
-    out.push({id, name: makeName(used, ...seed), hope, exp, grade, trait: pickTrait(...seed)});
+    out.push({id, name: makeName(used, ...seed), hope, exp, grade, trait: pickTrait(...seed), ...(talent ? {talent: true} : {})});
   }
   return out;
 }
@@ -2169,8 +2173,8 @@ function assignRecruits(s0, map){
     if(match) happy++;
     const g = r.grade || 1;
     // 中学で同じ楽器を吹いていた部員は、はじめから少し吹ける
-    const base = (r.exp && match ? 30 : r.exp ? 16 : 6) + (g - 1) * (r.exp ? 8 : 4);
-    const stats = makeStats(base, r.exp ? 5 : 3, 'stat', r.id);
+    const base = (r.exp && match ? 30 : r.exp ? 16 : 6) + (g - 1) * (r.exp ? 8 : 4) + (r.talent ? match ? 26 : 15 : 0);
+    const stats = makeStats(base, r.talent ? 7 : r.exp ? 5 : 3, 'stat', r.id);
     s.members.push({id: r.id, name: r.name, grade: g, joinGrade: g, seat, trait: r.trait, joined: s.year, exp: !!r.exp, mental: mentalInit(r.trait, g, 'stat', r.id) + (r.exp ? 6 : 0),
       stats, first: {y: s.year, w: s.week, stats: {...stats}}, hope: r.hope, sta: Math.round(s.members.length ? s.stamina : 100), fam: {},
       sp: innateSkills(r.id, r.exp), bent: {}, dream: pickDream(r.id, r.exp),
@@ -2233,6 +2237,8 @@ function load(){
         for(const x of r.snap?.members || []) if(x.pfams){ x.pfam = meanOf(x.pfams); delete x.pfams; }
       }
       s.startYear ??= s.history[0]?.year ?? s.year;
+      // 古いセーブにも出会いの種を一度だけ補う。今いる部員と入部待ちの子はそのまま。
+      s.recruitSeed ??= Math.floor(hash(s.startYear, s.seq, 'recruit-save') * 0x100000000);
       for(const m of s.members) m.mental ??= mentalInit(m.trait, m.grade, 'mig', m.id);
       // 部員ひとりずつの体力・方針と、部の評判（2026年10月に、練習を一人ずつ指示する形にした）
       for(const m of s.members) m.sta ??= s.stamina ?? 100;

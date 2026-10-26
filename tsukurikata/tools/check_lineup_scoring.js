@@ -27,7 +27,7 @@ for(const pid of Object.keys(PIECES)){
  const noPerc=run(all.filter(m=>SEAT[m.seat].sec!=='perc'));assert.ok(noPerc.a.lack.pts>=d.a.lack.pts,'欠員の減点が消えた');
  rows.push({曲:pid,安定20人:+a.j.toFixed(1),苦手1人追加:+b.j.toFixed(1),苦手5人追加:+c.j.toFixed(1),安定39人:+d.j.toFixed(1),厚み加点:+d.a.fullness.toFixed(2)});
 }
-let s=choosePiece(assignRecruits(freshState(2026),autoAssign(freshState(2026))),'galop');
+let s=freshState(2026);s=choosePiece(assignRecruits(s,autoAssign(s)),'galop');
 s.members=fullBand({pitch:80,rhythm:80,tone:80,expr:80}).map((m,i)=>({...m,trait:'steady',sta:100,stats:i<5?{pitch:15,rhythm:15,tone:15,expr:15}:m.stats,fam:{galop:100,largo:100}}));
 s.week=14;s.cohesion=75;s.setPiece='largo';s=runAudition(s);
 const original=JSON.stringify(s),all=predictContest(s,new Set()),out=recommendLineup(s),best=predictContest(s,out);

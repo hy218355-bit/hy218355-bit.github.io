@@ -1,0 +1,200 @@
+{
+  "runs": 10,
+  "years": 3,
+  "results": [
+    {
+      "piece": "largo",
+      "scores": [
+        42.1,
+        66.1,
+        74.9
+      ]
+    },
+    {
+      "piece": "ode",
+      "scores": [
+        41.4,
+        69.0,
+        74.9
+      ]
+    },
+    {
+      "piece": "galop",
+      "scores": [
+        41.3,
+        66.9,
+        75.5
+      ]
+    },
+    {
+      "piece": "pomp",
+      "scores": [
+        39.7,
+        65.9,
+        72.6
+      ]
+    },
+    {
+      "piece": "aida",
+      "scores": [
+        40.9,
+        62.4,
+        73.6
+      ]
+    },
+    {
+      "piece": "hero",
+      "scores": [
+        41.4,
+        68.6,
+        74.8
+      ]
+    },
+    {
+      "piece": "holst",
+      "scores": [
+        38.1,
+        65.2,
+        72.5
+      ]
+    },
+    {
+      "piece": "hungarian",
+      "scores": [
+        40.7,
+        66.9,
+        74.2
+      ]
+    },
+    {
+      "piece": "flowers",
+      "scores": [
+        42.6,
+        67.2,
+        71.9
+      ]
+    },
+    {
+      "piece": "tell",
+      "scores": [
+        42.6,
+        67.5,
+        75.1
+      ]
+    },
+    {
+      "piece": "carmen",
+      "scores": [
+        41.2,
+        64.0,
+        71.7
+      ]
+    },
+    {
+      "piece": "valkyrie",
+      "scores": [
+        41.7,
+        66.4,
+        72.6
+      ]
+    },
+    {
+      "piece": "swan",
+      "scores": [
+        39.3,
+        65.1,
+        74.3
+      ]
+    },
+    {
+      "piece": "spring",
+      "scores": [
+        40.2,
+        68.7,
+        73.8
+      ]
+    },
+    {
+      "piece": "canon",
+      "scores": [
+        38.3,
+        67.4,
+        73.9
+      ]
+    }
+  ],
+  "outsideTarget": [
+    {
+      "piece": "ode",
+      "year": 2,
+      "score": 69.0,
+      "target": [
+        55,
+        67
+      ]
+    },
+    {
+      "piece": "galop",
+      "year": 3,
+      "score": 75.5,
+      "target": [
+        65,
+        75
+      ]
+    },
+    {
+      "piece": "hero",
+      "year": 2,
+      "score": 68.6,
+      "target": [
+        55,
+        67
+      ]
+    },
+    {
+      "piece": "flowers",
+      "year": 2,
+      "score": 67.2,
+      "target": [
+        55,
+        67
+      ]
+    },
+    {
+      "piece": "tell",
+      "year": 2,
+      "score": 67.5,
+      "target": [
+        55,
+        67
+      ]
+    },
+    {
+      "piece": "tell",
+      "year": 3,
+      "score": 75.1,
+      "target": [
+        65,
+        75
+      ]
+    },
+    {
+      "piece": "spring",
+      "year": 2,
+      "score": 68.7,
+      "target": [
+        55,
+        67
+      ]
+    },
+    {
+      "piece": "canon",
+      "year": 2,
+      "score": 67.4,
+      "target": [
+        55,
+        67
+      ]
+    }
+  ]
+}
