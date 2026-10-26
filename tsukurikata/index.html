@@ -299,6 +299,8 @@ select{background:var(--sheet);border:1.5px solid var(--rule);border-radius:8px;
 .mc-move>.mc-actions{margin-top:12px;justify-content:flex-end}
 .mc-move>.mc-actions .btn{min-width:96px;min-height:44px}
 .mc-move>.move-actions .move-stop{min-width:44px;padding:10px}
+.mc-move>.move-actions [data-mact="move"]:not(:disabled){background:var(--brass);border-color:var(--brass);color:var(--on-brass)}
+.mc-move>.move-actions [data-mact="move"]:disabled{opacity:1;background:var(--paper);border-color:var(--rule);color:var(--ink-soft);box-shadow:none}
 .move-groups{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:6px;margin-top:8px;padding:0 0 10px;border-bottom:1px solid var(--rule)}
 .move-groups button{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;min-width:0;min-height:62px;border:1px solid var(--rule);border-radius:7px;background:var(--sheet);color:var(--ink);font:11px var(--f-body);padding:6px 2px;overflow-wrap:anywhere;cursor:pointer}
 .move-groups .instrument-icon{width:24px;height:24px;color:var(--brass)}
@@ -1093,6 +1095,9 @@ button.wr-person:focus-visible{outline:2px solid var(--brass);outline-offset:2px
 @media(min-width:961px){#secGrid{grid-template-columns:repeat(auto-fill,minmax(120px,1fr))}#rosterTable th.num{width:48px}}
 /* 席選びの間は、確定と中止を親指の届く場所に置く。再生中は停止も残す。 */
 @media(max-width:960px){
+  .mc-move{scroll-margin-top:14px}
+  .move-groups button{display:grid;grid-template-columns:18px minmax(0,1fr);gap:4px;min-height:44px;padding:4px;font-size:11px;line-height:1.35;text-align:left}
+  .move-groups .instrument-icon{width:18px;height:18px}
   .move-preview{scroll-margin-bottom:calc(150px + env(safe-area-inset-bottom,0px))}
   .tabbed:has(.mini:not([hidden])) .move-preview{scroll-margin-bottom:calc(208px + env(safe-area-inset-bottom,0px))}
   .tabbed .stand:has(>#memberCard:not([hidden]) .mc-move[open])>.rehearsal-actions{display:none}
@@ -1672,7 +1677,7 @@ button.wr-person:focus-visible{outline:2px solid var(--brass);outline-offset:2px
 <script src="js/announce.js?v=result-journal-1"></script>
 <script src="js/tunegame.js"></script>
 <script src="js/fx.js"></script>
-<script src="js/ui.js?v=outing-faces-1"></script>
+<script src="js/ui.js?v=seat-compact-1"></script>
 <div class="tip" id="tip" role="tooltip" hidden></div>
 </body>
 </html>

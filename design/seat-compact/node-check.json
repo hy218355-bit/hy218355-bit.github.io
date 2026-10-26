@@ -1,0 +1,12 @@
+{
+  "checks": [
+    {
+      "command": "node tsukurikata/tools/check_member_move_undo.js",
+      "exitCode": 0
+    },
+    {
+      "command": "node tsukurikata/tools/check_current_member_listen.js",
+      "exitCode": 0
+    }
+  ]
+}

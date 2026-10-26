@@ -1,0 +1,10 @@
+{
+  "build": "Release iphoneos BUILD SUCCEEDED",
+  "sourceMatchesBundle": {
+    "index.html": "3352559a5ba528f49f1b7d55baa9f4f6fa01c9e140c9b2238205254214697395",
+    "js/ui.js": "9f135ad647303d7a4141438314d612f7a836d511b29c4119d81366bb3610068a"
+  },
+  "deviceCheck": "devicectl list devicesで実機のiPhoneがunavailable",
+  "installation": "最終版は未インストール",
+  "realDeviceVisualCheck": "未確認"
+}

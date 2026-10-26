@@ -1854,6 +1854,11 @@ function movePicker(m){
   const sec = m.seat ? SEAT[m.seat].sec : SECTIONS[0].id;
   return `<div class="move-groups" role="group" aria-label="楽器">${SECTIONS.map(s=>`<button type="button" data-mact="movegroup" data-sec="${s.id}" aria-pressed="${s.id===sec}">${instrumentIcon(SEATS.find(x=>x.sec===s.id).inst)}<span>${esc(s.name)}</span></button>`).join('')}</div><div class="move-choices" role="group" aria-label="移す先">${moveChoices(m,sec)}</div>`;
 }
+// 楽器の切り替えや選択の解除でも、移動先を画面の上から見渡せるようにする。
+function scrollMemberMoveChoices(){
+  const picker=$('#memberCard .mc-move');
+  if(picker?.isConnected && picker.open && narrow.matches)picker.scrollIntoView({block:'start',behavior:!fxCalm()&&U.fxMode==='full'?'smooth':'auto'});
+}
 function renderMemberMove(){
   const preview = $('#movePreview'), button = $('#memberCard [data-mact="move"]');
   if(!preview || !button) return;
@@ -1900,7 +1905,7 @@ function renderMemberCard(){
     <form class="mc-name-form" id="memberNameForm" data-mid="${m.id}" hidden novalidate><label for="memberName">名前<small>${MEMBER_NAME_MAX}文字まで</small></label><input id="memberName" name="memberName" type="text" value="${esc(m.name)}" maxlength="24" autocomplete="off" autocapitalize="off" spellcheck="false" enterkeyhint="done" aria-describedby="memberNameError"><p id="memberNameError" class="mc-name-error" role="alert" hidden></p><div><button class="btn quiet" type="button" data-mact="renamecancel">やめる</button><button class="btn primary" type="submit">保存する</button></div></form>
     ${canUndoMemberMove() && U.moveUndo.ids.includes(m.id) ? '<div class="mc-undo"><span>席を移した</span><button class="btn small" type="button" data-mact="moveundo">元に戻す</button></div>' : ''}
     ${seat || U.solo !== 'all' ? `<div class="mc-actions">${seat ? `<button class="btn small" type="button" data-mact="solo" aria-pressed="${U.solo===`member:${m.id}`}">${uiIcon('play')}この人だけ聴く</button><button class="btn small" type="button" data-mact="secsolo" aria-pressed="${U.solo===`sec:${seat.sec}`}">${uiIcon('play')}パートだけ聴く</button>` : ''}${U.solo !== 'all' ? '<button class="btn small quiet" type="button" data-mact="all">全員の音にもどす</button>' : ''}</div>` : ''}
-    <details class="mc-move" data-move-to=""><summary>席を移す</summary>${movePicker(m)}<div class="move-preview" id="movePreview" aria-live="polite" hidden></div><div class="mc-actions move-actions"><button class="btn quiet" type="button" data-mact="movecancel">やめる</button><button class="btn primary" type="button" data-mact="move" disabled>移す</button><button class="btn quiet move-stop" type="button" data-mact="movestop" aria-label="止める"${(U.playing || U.waitPlay) && !tabHidden('play') ? '' : ' hidden'}>${uiIcon('stop')}</button></div>
+    <details class="mc-move" data-move-to=""><summary>席を移す</summary>${movePicker(m)}<div class="move-preview" id="movePreview" aria-live="polite" hidden></div><div class="mc-actions move-actions"><button class="btn quiet" type="button" data-mact="movecancel">やめる</button><button class="btn brass" type="button" data-mact="move" disabled>移す</button><button class="btn quiet move-stop" type="button" data-mact="movestop" aria-label="止める"${(U.playing || U.waitPlay) && !tabHidden('play') ? '' : ' hidden'}>${uiIcon('stop')}</button></div>
     <p class="small">楽器が変わると、その楽器での音程と音色は基礎からやり直しになる。</p></details>
     ${memberCurrentRanks(m)}
     <p class="mc-say">${esc(memberSays(m))}</p>
@@ -1910,6 +1915,10 @@ function renderMemberCard(){
     <details class="mc-personality"><summary>スキル・癖</summary>${skillList(m)}${tr?`<p class="mc-trait">癖：${tr.name}。${tr.desc}</p>`:'<p class="mc-trait">目立った癖はない。</p>'}</details>
     ${memberStory(m)}`;
   for(const name of openDetails){ const detail=card.querySelector('details.'+name);if(detail)detail.open=true; }
+  // 開いたら移動先をすぐ選べる位置へ。本人の顔は少し上へ戻れば見られる。
+  card.querySelector('.mc-move').addEventListener('toggle',e=>{
+    if(e.target.isConnected && e.target.open)scrollMemberMoveChoices();
+  });
 }
 // 名簿の条件は画面だけに持つ。新しい部や新年度では、全員が見える状態へ戻す。
 function rosterFilter(){
@@ -2295,7 +2304,7 @@ function bind(){
       const picker=$('#memberCard .mc-move');picker.dataset.moveTo='';
       picker.querySelectorAll('[data-mact="movegroup"]').forEach(x=>x.setAttribute('aria-pressed',String(x===b)));
       picker.querySelector('.move-choices').innerHTML=moveChoices(m,section.id);
-      renderMemberMove();return;
+      renderMemberMove();scrollMemberMoveChoices();return;
     }
     if(act === 'movechoose'){
       const picker=$('#memberCard .mc-move');
@@ -2304,6 +2313,7 @@ function bind(){
       renderMemberMove();
       // 選んだだけでは移さず、二人の移動先を確定ボタンの上で見せる。
       if(narrow.matches && !$('#movePreview').hidden) $('#movePreview').scrollIntoView({block:'nearest',behavior:!fxCalm()&&U.fxMode==='full'?'smooth':'auto'});
+      else if(!picker.dataset.moveTo)scrollMemberMoveChoices();
       return;
     }
     if(act === 'rename'){
