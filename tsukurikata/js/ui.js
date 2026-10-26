@@ -1601,6 +1601,27 @@ function closeMemberNameForm(){
   const edit = $('#memberCard [data-mact="rename"]'); edit.setAttribute('aria-expanded', 'false'); edit.focus({preventScroll: true});
   if(narrow.matches) $('#memberCard').scrollIntoView({block: 'start'});
 }
+// 移動先を選ぶだけでは保存せず、実際の移動と同じ処理で二人の変化を確かめる。
+function selectedMemberMove(){
+  const m = U.sel && memberById(U.sel), value = $('#moveSel')?.value;
+  if(!m || !value || (value !== 'bench' && !SEAT[value])) return null;
+  const to = value === 'bench' ? null : value;
+  if(m.seat === to || (!m.seat && !to)) return null;
+  return {m, to, other:to && S.members.find(x => x.seat === to), next:moveMember(S, m.id, to)};
+}
+function renderMemberMove(){
+  const preview = $('#movePreview'), button = $('#memberCard [data-mact="move"]');
+  if(!preview || !button) return;
+  const plan = selectedMemberMove();
+  button.disabled = busy() || !plan;
+  preview.hidden = !plan;
+  if(!plan){ preview.innerHTML = ''; return; }
+  const people = [plan.m, plan.other].filter(Boolean);
+  preview.innerHTML = people.map(before => {
+    const after = plan.next.members.find(x => x.id === before.id), seat = after.seat && SEAT[after.seat];
+    return `<div class="move-person" data-move-preview="${before.id}"><div class="move-person-head">${memberFace(before,36)}<span><b>${esc(before.name)}</b><small>${seat ? instrumentIcon(seat.inst) + esc(seatLabel(after.seat)) : '控え（席なし）'}</small></span></div><div class="move-ranks">${['pitch','tone'].map(k => `<span data-move-rank="${k}" aria-label="${STAT_LABEL[k]} ${rankOf(before.stats[k])}から${rankOf(after.stats[k])}">${STAT_LABEL[k]}${rankBadge(before.stats[k])}${uiIcon('chevron')}${rankBadge(after.stats[k])}</span>`).join('')}</div></div>`;
+  }).join('');
+}
 function renderMemberCard(){
   const card = $('#memberCard');
   const m = U.sel && memberById(U.sel);
@@ -1623,7 +1644,7 @@ function renderMemberCard(){
     <details class="mc-personality"><summary>スキル・癖</summary>${skillList(m)}${tr?`<p class="mc-trait">癖：${tr.name}。${tr.desc}</p>`:'<p class="mc-trait">目立った癖はない。</p>'}</details>
     ${memberStory(m)}
 
-    <details class="mc-move"><summary>席を移す</summary><div class="mc-actions"><select id="moveSel" aria-label="移す先"><option value="">控え（席なし）</option>${seats}</select><button class="btn small" type="button" data-mact="move"${busy() ? ' disabled' : ''}>移す</button></div>
+    <details class="mc-move"><summary>席を移す</summary><div class="mc-actions"><select id="moveSel" aria-label="移す先"><option value="" selected disabled>移す先を選ぶ</option>${seat ? '<option value="bench">控え（席なし）</option>' : ''}${seats}</select><button class="btn small" type="button" data-mact="move" disabled>移す</button></div><div class="move-preview" id="movePreview" aria-live="polite" hidden></div>
     <p class="small">楽器が変わると、その楽器での音程と音色は基礎からやり直しになる。</p></details>`;
 }
 function renderRoster(){
@@ -1916,10 +1937,12 @@ function bind(){
     else if(act === 'secsolo'){ U.solo = `sec:${SEAT[m.seat].sec}`; renderSelectors(); applySolo(); renderMemberCard(); if(!U.playing) $('#btnNow').click(); }
     else if(act === 'all'){ U.solo = 'all'; renderSelectors(); applySolo(); renderMemberCard(); }
     else if(act === 'move'){
-      commit(moveMember(S, m.id, $('#moveSel').value || null));
+      const plan = selectedMemberMove(); if(busy() || !plan) return;
+      commit(plan.next);
       renderAll(); refreshNow();
     }
   });
+  $('#memberCard').addEventListener('change', e => { if(e.target.id === 'moveSel') renderMemberMove(); });
   $('#memberCard').addEventListener('submit', e => {
     const form = e.target.closest('#memberNameForm'); if(!form) return;
     e.preventDefault(); if(form.dataset.composing === 'true') return;

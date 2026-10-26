@@ -47,6 +47,9 @@ function record(){
  report.auditionExpected=S.audition?seated(S).filter(m=>!(U.draft||new Set()).has(m.id)).map(m=>m.id):[];
  const selected=U.sel&&S.members.find(m=>m.id===U.sel);
  report.selectedMember=selected?{id:selected.id,name:selected.name,originalName:selected.originalName,face:Faces.fingerprint(selected)}:null;
+ const move=selectedMemberMove();
+ const movePeople=state=>state.members.map(m=>({id:m.id,seat:m.seat,ranks:Object.fromEntries(STAT_KEYS.map(k=>[k,rankOf(m.stats[k])])),face:Faces.fingerprint(m)}));
+ report.move={value:$('#moveSel')?.value,enabled:!!$('#memberCard [data-mact="move"]')&&!$('#memberCard [data-mact="move"]').disabled,state:hash(JSON.stringify(S)),people:movePeople(S),expected:move?movePeople(move.next):null};
  report.assignOpen=Array.from(U.asg?.openParts||[]);
  report.recruits=(S.recruits||[]).map(r=>({id:r.id,name:r.name,hope:r.hope,exp:!!r.exp,talent:!!r.talent}));
  report.memberSeats=S.members.map(m=>({id:m.id,name:m.name,seat:m.seat,hope:m.hope}));
@@ -123,6 +126,7 @@ async function show(next){
  if(view==='journal-ambiguous'){s.members=[...s.members,{...s.members[0],id:'different-person'}];s.log=[{y:s.year,w:0,text:s.members[0].name+'が、スキルを身につけた。'}];}
  if(view==='journal-empty')s.log=[];
  if(view==='grad-old')s.members.forEach(m=>{delete m.first;m.story=[];});
+ if(q.has('busy')&&view.startsWith('member')){s.week=PREF_WEEK;s=beginStage(s);}
  S=s;U.sel=null;hideTip();renderAll();refreshNow();$('#toast').hidden=true;
  const cardView=view==='member'||view.startsWith('member-');
  setTab(['log','journal','journal-ambiguous','journal-empty'].includes(view)?'log':view==='members'?'members':cardView||view.startsWith('rehearsal')||['stage','reading-stage','conduct'].includes(view)?'play':'week');
@@ -155,7 +159,8 @@ for(const event of ['pointerdown','toggle'])$('#grCard').addEventListener(event,
 $('#grNext').addEventListener('click',()=>setTimeout(record,0));$('#grPrev').addEventListener('click',()=>setTimeout(record,0));
 for(const event of ['click','keydown','change'])$('#week').addEventListener(event,()=>setTimeout(record,0));
 new MutationObserver(()=>setTimeout(record,0)).observe($('#week'),{childList:true,subtree:true});
-for(const event of ['click','submit'])$('#memberCard').addEventListener(event,()=>setTimeout(record,0));
+for(const event of ['click','submit','change'])$('#memberCard').addEventListener(event,()=>setTimeout(record,0));
+$('#rosterTable').addEventListener('click',()=>setTimeout(record,0));
 for(const event of ['click','change','toggle'])$('.col-stage').addEventListener(event,()=>setTimeout(record,0),true);
 // 一度読み込んだ実ゲームで切り替え、毎回録音素材を読み込み直さない。
 if(q.has('keys'))document.addEventListener('keydown',async e=>{

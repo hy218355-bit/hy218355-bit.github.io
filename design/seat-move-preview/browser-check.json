@@ -1,0 +1,64 @@
+{
+  "unselected": {
+    "value": "",
+    "enabled": false
+  },
+  "selectionPreservedState": true,
+  "swap": {
+    "matches": true,
+    "labels": [
+      {
+        "id": "m2028-n1-cafe",
+        "ranks": [
+          "音程 CからE",
+          "音色 CからF"
+        ]
+      },
+      {
+        "id": "m2028-n37-cafe",
+        "ranks": [
+          "音程 CからE",
+          "音色 CからF"
+        ]
+      }
+    ],
+    "afterValue": "",
+    "afterEnabled": false
+  },
+  "width": 375,
+  "scrollWidth": 375,
+  "errors": [],
+  "bench": {
+    "stateUnchanged": true,
+    "matches": true,
+    "seat": null
+  },
+  "empty": {
+    "previewPeople": 1,
+    "stateUnchanged": true,
+    "matches": true
+  },
+  "sameInstrument": {
+    "labels": [
+      "音程 CからC",
+      "音色 CからC",
+      "音程 CからC",
+      "音色 CからC"
+    ],
+    "stateUnchanged": true,
+    "width": 375,
+    "scrollWidth": 375
+  },
+  "cancel": {
+    "stateUnchanged": true,
+    "value": "",
+    "enabled": false,
+    "previewHidden": true
+  },
+  "busy": {
+    "enabled": false,
+    "width": 375,
+    "scrollWidth": 375,
+    "errors": []
+  }
+}
