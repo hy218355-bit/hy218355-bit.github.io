@@ -1,0 +1,102 @@
+{
+  "controlsNearPortrait": true,
+  "currentRanksCorrect": true,
+  "historyClosedInitially": true,
+  "historyStaysOpenOnSolo": true,
+  "historyStaysOpenOnPart": true,
+  "historyStaysOpenOnAll": true,
+  "soloButtonSelected": true,
+  "partButtonSelected": true,
+  "audioKeepsState": true,
+  "moveUndoKeepsState": true,
+  "oldSaveShowsRanks": true,
+  "oldSaveHasNoInventedHistory": true,
+  "recordedRanksMatchSnapshot": true,
+  "recordedMoveAbsent": true,
+  "recordedAudioKeepsState": true,
+  "recordSoloButtonSelected": true,
+  "layout": {
+    "height": 720.6953125,
+    "audio": {
+      "top": 148,
+      "height": 44,
+      "visible": true
+    },
+    "move": {
+      "top": 203,
+      "height": 44,
+      "visible": true
+    },
+    "current": {
+      "top": 258,
+      "height": 119.6953125,
+      "visible": true
+    },
+    "history": {
+      "top": 485.6953125,
+      "height": 45,
+      "visible": true
+    },
+    "ranks": [
+      "音程 C",
+      "リズム B",
+      "音色 C",
+      "表現 C"
+    ],
+    "historyOpen": false,
+    "audioButtons": [
+      {
+        "action": "solo",
+        "pressed": "false"
+      },
+      {
+        "action": "secsolo",
+        "pressed": "false"
+      }
+    ]
+  },
+  "views": [
+    {
+      "view": "member",
+      "theme": "light",
+      "width": 375,
+      "scrollWidth": 375,
+      "errors": []
+    },
+    {
+      "view": "member",
+      "theme": "dark",
+      "width": 375,
+      "scrollWidth": 375,
+      "errors": []
+    },
+    {
+      "view": "member-old",
+      "theme": "light",
+      "width": 375,
+      "scrollWidth": 375,
+      "errors": []
+    },
+    {
+      "view": "member",
+      "theme": "light",
+      "width": 375,
+      "scrollWidth": 375,
+      "errors": []
+    },
+    {
+      "view": "recorded-history",
+      "theme": "light",
+      "width": 375,
+      "scrollWidth": 375,
+      "errors": []
+    },
+    {
+      "view": "member",
+      "theme": "dark",
+      "width": 375,
+      "scrollWidth": 375,
+      "errors": []
+    }
+  ]
+}

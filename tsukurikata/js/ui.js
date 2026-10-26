@@ -1687,6 +1687,10 @@ function renderMemberMove(){
     return `<div class="move-person" data-move-preview="${before.id}"><div class="move-person-head">${memberFace(before,36)}<span><b>${esc(before.name)}</b><small>${seat ? instrumentIcon(seat.inst) + esc(seatLabel(after.seat)) : '控え（席なし）'}</small></span></div><div class="move-ranks">${['pitch','tone'].map(k => `<span data-move-rank="${k}" aria-label="${STAT_LABEL[k]} ${rankOf(before.stats[k])}から${rankOf(after.stats[k])}">${STAT_LABEL[k]}${rankBadge(before.stats[k])}${uiIcon('chevron')}${rankBadge(after.stats[k])}</span>`).join('')}</div></div>`;
   }).join('');
 }
+// いまの力は小さなランクを横に並べ、入部時からの変化は別に開く。
+function memberCurrentRanks(m){
+  return `<div class="mc-current"><div class="mc-current-grid">${STAT_KEYS.map(k=>`<span aria-label="${STAT_LABEL[k]} ${rankOf(m.stats[k])}"><small>${STAT_LABEL[k]}</small>${rankBadge(m.stats[k])}</span>`).join('')}</div>${m.mental!=null?`<div class="mc-mental"><span>本番の強さ</span>${rankBadge(m.mental)}</div>`:''}</div>`;
+}
 // 録音時の部員は見る・聴くだけにし、いまの部員の名前や席を変える操作を出さない。
 function clearRecordedMember(){
   if(!U.recordMember) return;
@@ -1694,8 +1698,8 @@ function clearRecordedMember(){
   renderSelectors();renderMemberCard();renderRoster();
 }
 function renderRecordedMemberCard(card, m){
+  card.innerHTML=`<button class="help-button mc-close" type="button" data-mact="close" aria-label="閉じる">${uiIcon('close')}</button><div class="mc-portrait">${memberFace(m,112)}<div class="mc-head"><h3>${esc(m.name)}</h3><span class="sub">${instrumentIcon(SEAT[m.seat].inst)}${m.grade ? `${m.grade}年・` : ''}${esc(seatLabel(m.seat))}</span><span class="small">録音時</span></div></div><div class="mc-actions"><button class="btn small" type="button" data-mact="recordsolo" aria-pressed="${U.solo===`member:${m.id}`}">${uiIcon('play')}この人だけ聴く</button>${U.solo!=='all'?'<button class="btn small quiet" type="button" data-mact="recordall">全員の音にもどす</button>':''}</div>${memberCurrentRanks(m)}`;
   card.dataset.recorded=m.id;
-  card.innerHTML=`<button class="help-button mc-close" type="button" data-mact="close" aria-label="閉じる">${uiIcon('close')}</button><div class="mc-portrait">${memberFace(m,112)}<div class="mc-head"><h3>${esc(m.name)}</h3><span class="sub">${instrumentIcon(SEAT[m.seat].inst)}${m.grade ? `${m.grade}年・` : ''}${esc(seatLabel(m.seat))}</span><span class="small">録音時</span></div></div><div class="stats">${STAT_KEYS.map(k=>rankRow(STAT_LABEL[k],m.stats[k])).join('')}</div><div class="mc-actions"><button class="btn small" type="button" data-mact="recordsolo">${uiIcon('play')}この人だけ聴く</button>${U.solo!=='all'?'<button class="btn small quiet" type="button" data-mact="recordall">全員の音にもどす</button>':''}</div>`;
 }
 function renderMemberCard(){
   const card = $('#memberCard');
@@ -1704,22 +1708,25 @@ function renderMemberCard(){
   const m = U.sel && memberById(U.sel);
   if(!m){ card.hidden = true; return; }
   card.hidden = false;
+  // 同じ子の音を聴き直しても、開いている成長や思い出を閉じない。
+  const openDetails = card.dataset.member === m.id ? [...card.querySelectorAll(':scope > details[open]:not(.mc-move)')].map(d=>d.className) : [];
+  card.dataset.member = m.id;
   const seat = m.seat && SEAT[m.seat];
   const tr = m.trait && TRAITS[m.trait];
   card.innerHTML = `<button class="help-button mc-close" type="button" data-mact="close" aria-label="閉じる">${uiIcon('close')}</button><div class="mc-portrait">${memberFace(m,112)}<div class="mc-head"><h3>${esc(m.name)}</h3>${m.title ? `<span class="tag">${m.title}</span>` : ''}<span class="sub">${seat?instrumentIcon(seat.inst):''}${m.grade}年・${seat ? PART_LABEL[seat.part] : '控え（席なし）'}</span><button class="mc-name-edit" type="button" data-mact="rename" aria-expanded="false" aria-controls="memberNameForm">名前を変える</button></div></div>
     <form class="mc-name-form" id="memberNameForm" data-mid="${m.id}" hidden novalidate><label for="memberName">名前<small>${MEMBER_NAME_MAX}文字まで</small></label><input id="memberName" name="memberName" type="text" value="${esc(m.name)}" maxlength="24" autocomplete="off" autocapitalize="off" spellcheck="false" enterkeyhint="done" aria-describedby="memberNameError"><p id="memberNameError" class="mc-name-error" role="alert" hidden></p><div><button class="btn quiet" type="button" data-mact="renamecancel">やめる</button><button class="btn primary" type="submit">保存する</button></div></form>
     ${canUndoMemberMove() && U.moveUndo.ids.includes(m.id) ? '<div class="mc-undo"><span>席を移した</span><button class="btn small" type="button" data-mact="moveundo">元に戻す</button></div>' : ''}
+    ${seat || U.solo !== 'all' ? `<div class="mc-actions">${seat ? `<button class="btn small" type="button" data-mact="solo" aria-pressed="${U.solo===`member:${m.id}`}">${uiIcon('play')}この人だけ聴く</button><button class="btn small" type="button" data-mact="secsolo" aria-pressed="${U.solo===`sec:${seat.sec}`}">${uiIcon('play')}パートだけ聴く</button>` : ''}${U.solo !== 'all' ? '<button class="btn small quiet" type="button" data-mact="all">全員の音にもどす</button>' : ''}</div>` : ''}
+    <details class="mc-move" data-move-to=""><summary>席を移す</summary>${movePicker(m)}<div class="move-preview" id="movePreview" aria-live="polite" hidden></div><div class="mc-actions"><button class="btn primary" type="button" data-mact="move" disabled>移す</button></div>
+    <p class="small">楽器が変わると、その楽器での音程と音色は基礎からやり直しになる。</p></details>
+    ${memberCurrentRanks(m)}
     <p class="mc-say">${esc(memberSays(m))}</p>
-    ${seat || U.solo !== 'all' ? `<div class="mc-actions">${seat ? '<button class="btn small" type="button" data-mact="solo">▶ この人だけ聴く</button><button class="btn small" type="button" data-mact="secsolo">▶ パートだけ聴く</button>' : ''}${U.solo !== 'all' ? '<button class="btn small quiet" type="button" data-mact="all">全員の音にもどす</button>' : ''}</div>` : ''}
     ${dreamLine(m)}${loveLine(m)}
-    ${m.first?memberGrowth(m):`<div class="stats">${STAT_KEYS.map(k=>rankRow(STAT_LABEL[k],m.stats[k])).join('')}</div>`}
-    ${m.mental!=null?`<div class="stats">${rankRow('本番の強さ',m.mental)}</div>`:''}
+    ${m.first ? `<details class="mc-growth-history"><summary>入部からの成長</summary>${memberGrowth(m)}</details>` : ''}
     ${S.pieceId?`<details class="mc-reading"><summary>譜読み（${PIECES[S.pieceId].title}）</summary><div class="stats">${readUnits(S.pieceId).map(u=>rankRow(spanShort(u),readOf(m,S.pieceId)[u.i])).join('')}</div></details>`:''}
     <details class="mc-personality"><summary>スキル・癖</summary>${skillList(m)}${tr?`<p class="mc-trait">癖：${tr.name}。${tr.desc}</p>`:'<p class="mc-trait">目立った癖はない。</p>'}</details>
-    ${memberStory(m)}
-
-    <details class="mc-move" data-move-to=""><summary>席を移す</summary>${movePicker(m)}<div class="move-preview" id="movePreview" aria-live="polite" hidden></div><div class="mc-actions"><button class="btn primary" type="button" data-mact="move" disabled>移す</button></div>
-    <p class="small">楽器が変わると、その楽器での音程と音色は基礎からやり直しになる。</p></details>`;
+    ${memberStory(m)}`;
+  for(const name of openDetails){ const detail=card.querySelector('details.'+name);if(detail)detail.open=true; }
 }
 function renderRoster(){
   // だれもいないパートが、いまの曲でどれだけ減点になるか
