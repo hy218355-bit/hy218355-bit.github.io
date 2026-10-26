@@ -723,7 +723,7 @@ function renderWeekBody(){
   if(cv) parts.push(`<div class="episode consult"><div class="head">${memberFace(cv.m,56)}<div class="consult-person"><span class="tag">相談</span><b>${esc(cv.m.name)}</b><span class="who">${cv.m.seat?instrumentIcon(SEAT[cv.m.seat].inst):''}${cv.m.grade}年・${esc(instOf(cv.m))}${skillChips(cv.m)}</span></div><button class="help-button" type="button" aria-label="相談"${tipAttr('相談',`答え方で、${kun(cv.m)}の育ち方が変わる。答えずに練習を進めると、この相談は流れる。`)}>?</button></div><p class="txt">${esc(cv.text)}</p>
     <div class="choices">${cv.choices.map(c => `<button class="mbtn" type="button" data-cs="${c.k}"><b>${esc(c.label)}</b>${uiIcon('chevron')}</button>`).join('')}</div></div>`);
   if(S.lastConsult){
-    const speaker=S.members.find(m=>m.name===S.lastConsult.who);
+    const speakers=S.members.filter(m=>m.name===S.lastConsult.who||m.originalName===S.lastConsult.who),speaker=speakers.length===1?speakers[0]:null;
     parts.push(`<div class="consult-result">${speaker?memberFace(speaker,36):''}<p class="epres"><b>${esc(S.lastConsult.choice)}</b>${esc(S.lastConsult.result)}${effHtml(S.lastConsult)}</p></div>`);
   }
   // 行事の誘い：連れて行く部員を選ぶ（★は、行くと特に伸びる子）
@@ -1439,7 +1439,7 @@ function renderLog(){
   for(const r of S.recs||[])for(const m of r.snap?.members||[])people.set(m.id,m);
   for(const m of [...(S.gradMembers||[]),...S.members])people.set(m.id,m);
   const names=new Map();
-  for(const m of people.values()){if(!names.has(m.name))names.set(m.name,[]);names.get(m.name).push(m);}
+  for(const m of people.values())for(const name of new Set([m.name,m.originalName].filter(Boolean))){if(!names.has(name))names.set(name,[]);names.get(name).push(m);}
   const speaker=e=>{
     let found=null,pos=Infinity;
     for(const [name,ms] of names){
@@ -1534,6 +1534,14 @@ function memberSays(m){
   if(!lines.length) lines.push('「今日もよろしくお願いします」', '「合奏、楽しいです」');
   return lines[Math.floor(hash(m.id, S.year, S.week, 'say') * lines.length)];
 }
+function closeMemberNameForm(){
+  const form = $('#memberNameForm'); if(!form) return;
+  $('#memberName').value = memberById(form.dataset.mid)?.name || '';
+  $('#memberName').removeAttribute('aria-invalid'); $('#memberNameError').hidden = true;
+  form.hidden = true; form.dataset.composing = 'false';
+  const edit = $('#memberCard [data-mact="rename"]'); edit.setAttribute('aria-expanded', 'false'); edit.focus({preventScroll: true});
+  if(narrow.matches) $('#memberCard').scrollIntoView({block: 'start'});
+}
 function renderMemberCard(){
   const card = $('#memberCard');
   const m = U.sel && memberById(U.sel);
@@ -1545,7 +1553,8 @@ function renderMemberCard(){
     const o = S.members.find(x => x.seat === s.id);
     return `<option value="${s.id}">${seatLabel(s.id)}${o ? `・${esc(o.name)}と交代` : '・空席'}</option>`;
   }).join('');
-  card.innerHTML = `<button class="help-button mc-close" type="button" data-mact="close" aria-label="閉じる">${uiIcon('close')}</button><div class="mc-portrait">${memberFace(m,112)}<div class="mc-head"><h3>${esc(m.name)}</h3>${m.title ? `<span class="tag">${m.title}</span>` : ''}<span class="sub">${seat?instrumentIcon(seat.inst):''}${m.grade}年・${seat ? PART_LABEL[seat.part] : '控え（席なし）'}</span></div></div>
+  card.innerHTML = `<button class="help-button mc-close" type="button" data-mact="close" aria-label="閉じる">${uiIcon('close')}</button><div class="mc-portrait">${memberFace(m,112)}<div class="mc-head"><h3>${esc(m.name)}</h3>${m.title ? `<span class="tag">${m.title}</span>` : ''}<span class="sub">${seat?instrumentIcon(seat.inst):''}${m.grade}年・${seat ? PART_LABEL[seat.part] : '控え（席なし）'}</span><button class="mc-name-edit" type="button" data-mact="rename" aria-expanded="false" aria-controls="memberNameForm">名前を変える</button></div></div>
+    <form class="mc-name-form" id="memberNameForm" data-mid="${m.id}" hidden novalidate><label for="memberName">名前<small>${MEMBER_NAME_MAX}文字まで</small></label><input id="memberName" name="memberName" type="text" value="${esc(m.name)}" maxlength="24" autocomplete="off" autocapitalize="off" spellcheck="false" enterkeyhint="done" aria-describedby="memberNameError"><p id="memberNameError" class="mc-name-error" role="alert" hidden></p><div><button class="btn quiet" type="button" data-mact="renamecancel">やめる</button><button class="btn primary" type="submit">保存する</button></div></form>
     <p class="mc-say">${esc(memberSays(m))}</p>
     ${seat ? `<div class="mc-actions"><button class="btn small" type="button" data-mact="solo">▶ この人だけ聴く</button><button class="btn small" type="button" data-mact="secsolo">▶ パートだけ聴く</button>${U.solo !== 'all' ? '<button class="btn small quiet" type="button" data-mact="all">全員の音にもどす</button>' : ''}</div>` : ''}
     ${dreamLine(m)}${loveLine(m)}
@@ -1830,6 +1839,12 @@ function bind(){
       if(back){document.querySelector(`[data-mid="${back.id}"] .roster-open`)?.focus({preventScroll:true});window.scrollTo(0,back.top);}
       U.cardReturn=null;return;
     }
+    if(act === 'rename'){
+      $('#memberNameForm').hidden = false; b.setAttribute('aria-expanded', 'true');
+      $('#memberName').focus({preventScroll: true}); $('#memberName').select();
+      if(narrow.matches) $('#memberCard').scrollIntoView({block: 'start'}); return;
+    }
+    if(act === 'renamecancel'){ closeMemberNameForm(); return; }
     if(act === 'solo'){ U.solo = `member:${m.id}`; renderSelectors(); applySolo(); renderMemberCard(); if(!U.playing) $('#btnNow').click(); }
     else if(act === 'secsolo'){ U.solo = `sec:${SEAT[m.seat].sec}`; renderSelectors(); applySolo(); renderMemberCard(); if(!U.playing) $('#btnNow').click(); }
     else if(act === 'all'){ U.solo = 'all'; renderSelectors(); applySolo(); renderMemberCard(); }
@@ -1837,6 +1852,22 @@ function bind(){
       commit(moveMember(S, m.id, $('#moveSel').value || null));
       renderAll(); refreshNow();
     }
+  });
+  $('#memberCard').addEventListener('submit', e => {
+    const form = e.target.closest('#memberNameForm'); if(!form) return;
+    e.preventDefault(); if(form.dataset.composing === 'true') return;
+    const m = memberById(form.dataset.mid); if(!m) return;
+    const input = $('#memberName'), error = memberNameError(S, m.id, input.value);
+    if(error){ $('#memberNameError').textContent = error; $('#memberNameError').hidden = false; input.setAttribute('aria-invalid', 'true'); input.focus(); return; }
+    haptic('tap'); commit(renameMember(S, m.id, input.value)); renderAll(); refreshNow();
+    $('#memberCard [data-mact="rename"]')?.focus({preventScroll: true}); toast('名前を変えた。', 1800);
+    if(narrow.matches) $('#memberCard').scrollIntoView({block: 'start'});
+  });
+  for(const type of ['compositionstart', 'compositionend']) $('#memberCard').addEventListener(type, e => {
+    const form = e.target.closest('#memberNameForm'); if(form) form.dataset.composing = String(type === 'compositionstart');
+  });
+  $('#memberCard').addEventListener('keydown', e => {
+    if(e.key === 'Escape' && !e.isComposing && !$('#memberNameForm')?.hidden){ e.preventDefault(); closeMemberNameForm(); }
   });
   $('#week').addEventListener('keydown',e=>{if(e.key==='Escape'&&U.pick){e.preventDefault();closePracticePicker();}});
   $('#week').addEventListener('click', e => {

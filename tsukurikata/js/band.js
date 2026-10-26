@@ -102,7 +102,7 @@ const GIVEN = '陽菜 結衣 葵 凛 美咲 楓 莉子 真央 杏 彩花 七海 
 const GIVEN_MALE = '悠真 蓮 湊 陽翔 颯太 大翔 樹 悠斗 蒼 瑛太 拓海 健太 翔 航 透 智也 亮 隼 朔 健 誠 陸 海斗'.split(' ');
 const GIVEN_FEMALE = GIVEN.filter(name => !GIVEN_MALE.includes(name));
 function namePresentation(member){
-  const given = String(member?.name || '').trim().split(/\s+/).pop();
+  const given = String(member?.originalName || member?.name || '').trim().split(/\s+/).pop();
   if(GIVEN_MALE.includes(given)) return 'male';
   if(GIVEN_FEMALE.includes(given)) return 'female';
   return hash(member?.id || '', 'name-cast') < .35 ? 'male' : 'female';

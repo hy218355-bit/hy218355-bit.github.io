@@ -1062,6 +1062,22 @@ html[data-season="snow"]{--season-band:linear-gradient(90deg,#DDE8F3,#FFFFFF,#B9
  .asg-actions .btn{font-size:12px;padding:10px 6px;white-space:nowrap}
  .tabbed:has(.mini:not([hidden])) .asg-actions{bottom:calc(122px + env(safe-area-inset-bottom,0px))}
 }
+/* 名前は本人のカードの中で変え、長い名前もカードで全文を読めるようにする。 */
+.member-card .mc-head{min-width:0}
+.member-card .mc-head h3{max-width:100%;overflow-wrap:anywhere}
+.mc-name-edit{min-height:44px;margin:0;padding:7px 0;border:0;background:none;color:var(--ink-soft);font:12px var(--f-body);text-decoration:underline;text-underline-offset:4px;cursor:pointer}
+.mc-name-form{padding:14px;margin:4px 0;border:1px solid var(--brass);border-radius:12px;background:var(--paper)}
+.mc-name-form>label{display:flex;align-items:center;justify-content:space-between;font-size:13px;font-weight:700;margin-bottom:8px}
+.mc-name-form>label small{font-size:11px;font-weight:400;color:var(--ink-soft)}
+.mc-name-form input{width:100%;min-width:0;min-height:48px;padding:10px 12px;border:1.5px solid var(--rule);border-radius:8px;background:var(--sheet);color:var(--ink);font:16px var(--f-body)}
+.mc-name-form input[aria-invalid="true"]{border-color:var(--bad)}
+.mc-name-form>div{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:12px}
+.mc-name-form .btn{min-height:44px;font-size:13px}
+.mc-name-error{color:var(--bad);font-size:12px;line-height:1.6;margin:8px 0 0}
+#rosterTable .roster-person b{white-space:normal;overflow-wrap:anywhere}
+.plan .pm .who b{min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.plan .pm .who small{flex:none}
+.ens-person b,.cd-member .cm-head b,.consult-person b,.gr-name{overflow-wrap:anywhere}
 </style>
 </head>
 <body>
@@ -1262,14 +1278,14 @@ html[data-season="snow"]{--season-band:linear-gradient(90deg,#DDE8F3,#FFFFFF,#B9
 <script src="js/pieces/swan.js"></script>
 <script src="js/pieces/spring.js"></script>
 <script src="js/pieces/canon.js"></script>
-<script src="js/band.js?v=lineup-1"></script>
-<script src="js/game.js?v=cast100-1"></script>
+<script src="js/band.js?v=member-name-1"></script>
+<script src="js/game.js?v=member-name-1"></script>
 <script src="js/engine.js"></script>
 <script src="js/conduct.js?v=stage-faces-2"></script>
 <script src="js/announce.js?v=result-journal-1"></script>
 <script src="js/tunegame.js"></script>
 <script src="js/fx.js"></script>
-<script src="js/ui.js?v=intake-polish-1"></script>
+<script src="js/ui.js?v=member-name-1"></script>
 <div class="tip" id="tip" role="tooltip" hidden></div>
 </body>
 </html>

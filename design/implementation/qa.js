@@ -35,6 +35,8 @@ function record(){
  report.logSourceCount=source.length;report.logRenderedCount=shown.length;report.logPreserved=JSON.stringify(source)===JSON.stringify(shown);
  report.planOwn={...(S.plan||{})};report.policy=S.policy;report.week=S.week;report.statsFingerprint=hash(JSON.stringify(S.members.map(m=>m.stats)));
  report.assignPicks={...(U.asg?.picks||{})};report.assignSel=U.asg?.sel;
+ const selected=U.sel&&S.members.find(m=>m.id===U.sel);
+ report.selectedMember=selected?{id:selected.id,name:selected.name,originalName:selected.originalName,face:Faces.fingerprint(selected)}:null;
  report.assignOpen=Array.from(U.asg?.openParts||[]);
  report.recruits=(S.recruits||[]).map(r=>({id:r.id,name:r.name,hope:r.hope,exp:!!r.exp,talent:!!r.talent}));
  report.memberSeats=S.members.map(m=>({id:m.id,name:m.name,seat:m.seat,hope:m.hope}));
@@ -57,11 +59,13 @@ async function show(next){
   s.members=fullBand({pitch:55,rhythm:60,tone:50,expr:48}).slice(0,view==='intake-full'?39:32);s.year=2028;s.week=10;
   s.recruitSeed=12345;s.seq=100;s.recruits=makeRecruits(s,8);s.recruitWhen=s.week;
  }
- if(['year','journal'].includes(view)){
+ if(['year','journal','renamed-year'].includes(view)){
+  if(view==='renamed-year'){s=renameMember(s,s.members[0].id,'山田 花音');report.renamedBefore={id:s.members[0].id,name:s.members[0].name,face:Faces.fingerprint(s.members[0])};}
   const start=s.year;
   while(s.year===start&&report.steps++<160){s=advance(s);S=s;renderAll();await new Promise(r=>setTimeout(r,0));}
   if(s.year!==start+1)throw Error('新年度まで進まなかった');
   report.year=s.year;report.members=s.members.length;report.saveVersion=s.v;
+  if(report.renamedBefore){const m=s.members.find(m=>m.id===report.renamedBefore.id);report.renamedAfter=m?{id:m.id,name:m.name,face:Faces.fingerprint(m)}:null;}
  }else if(['consult','consult-result'].includes(view)){
   for(let i=0;i<100&&!s.consult;i++)s=advance(s);
   if(!s.consult)throw Error('相談の見本が作れなかった');
@@ -75,7 +79,7 @@ async function show(next){
  if(view==='practice-late'){s.week=15;s.members[0].sta=20;}
  if(view==='practice-a'){s.division='A';s.setPiece=setOffer(s)[0];s.split='auto';}
  if(view==='audition'){s.members.forEach((m,i)=>{m.stats={pitch:i<8?20:78,rhythm:i<8?20:78,tone:i<8?20:78,expr:70};m.fam={galop:100};});s=runAudition(s);U.lineup=true;U.draft=null;}else U.lineup=false;
- if(view!=='year'){checkAch(s,true);for(const key of ['skillUp','coachUp','mileUp','loveUp','dreamUp','rivalUp'])delete s[key];}
+ if(!['year','renamed-year'].includes(view)){checkAch(s,true);for(const key of ['skillUp','coachUp','mileUp','loveUp','dreamUp','rivalUp'])delete s[key];}
  if(view==='member-old')delete s.members[0].first;
  if(view==='member-bench')s.members[0].seat=null;
  if(view==='journal-ambiguous'){s.members=[...s.members,{...s.members[0],id:'different-person'}];s.log=[{y:s.year,w:0,text:s.members[0].name+'が、スキルを身につけた。'}];}
@@ -105,10 +109,12 @@ document.addEventListener('facesready',()=>setTimeout(record,0));
 for(const event of ['pointerdown','toggle'])$('#grCard').addEventListener(event,()=>setTimeout(record,0),{capture:true});
 $('#grNext').addEventListener('click',()=>setTimeout(record,0));$('#grPrev').addEventListener('click',()=>setTimeout(record,0));
 for(const event of ['click','keydown'])$('#week').addEventListener(event,()=>setTimeout(record,0));
+for(const event of ['click','submit'])$('#memberCard').addEventListener(event,()=>setTimeout(record,0));
 // 一度読み込んだ実ゲームで切り替え、毎回録音素材を読み込み直さない。
 if(q.has('keys'))document.addEventListener('keydown',async e=>{
  if(e.target.matches('input,select,textarea'))return;
  const key=e.key.toLowerCase();
+ if(key==='4'){e.preventDefault();await show('renamed-year');return;}
  if(key==='9'){e.preventDefault();await show('practice-a');return;}
  if(key==='1'||key==='2'){e.preventDefault();await show(key==='1'?'intake-existing':'intake-full');return;}
  if(key==='7'||key==='8'){e.preventDefault();await show(key==='7'?'practice':'practice-late');return;}

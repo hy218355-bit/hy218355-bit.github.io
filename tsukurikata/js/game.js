@@ -136,7 +136,7 @@ function perfCtx(s, o = {}){
 }
 function snapshot(s, extra = {}){
   return {
-    members: stagers(s).filter(m => !extra.only || extra.only.includes(m.id)).map(m => ({id: m.id, name: m.name, grade: m.grade, seat: m.seat, trait: m.trait, mental: m.mental, stats: {...m.stats},
+    members: stagers(s).filter(m => !extra.only || extra.only.includes(m.id)).map(m => ({id: m.id, name: m.name, ...(m.originalName ? {originalName: m.originalName} : {}), grade: m.grade, seat: m.seat, trait: m.trait, mental: m.mental, stats: {...m.stats},
       pfams: readOf(m, extra.pieceId || s.pieceId), sp: {...(m.sp || {})}})),
     cohesion: s.cohesion, interp: {...s.interp}, fatigue: fatigueOf(s), take: weekTake(s), ...extra,
   };
@@ -2198,6 +2198,25 @@ function assignRecruits(s0, map){
 }
 // 新しく入った部員の担当を決める画面を出すか（新入生は本入部の週、途中入部はすぐ）
 const recruitsDue = s => !!(s.recruits && s.recruits.length && (s.phase === 'choose' || s.week >= (s.recruitWhen ?? 0)));
+const MEMBER_NAME_MAX = 12;
+const cleanMemberName = value => typeof value === 'string' ? value.trim().replace(/\s+/gu, ' ') : '';
+function memberNameError(s, memberId, value){
+  const name = cleanMemberName(value);
+  if(!name) return '名前を入力してね。';
+  if(Array.from(name).length > MEMBER_NAME_MAX) return `名前は${MEMBER_NAME_MAX}文字までにしてね。`;
+  if(!/^[\p{L}\p{M}\p{N} ・.\-]+$/u.test(name) || !/[\p{L}\p{N}]/u.test(name)) return '文字・数字・空白で入力してね（・ー.-も使える）。';
+  if(s.members.some(m => m.id !== memberId && cleanMemberName(m.name) === name) || (s.recruits || []).some(m => cleanMemberName(m.name) === name)) return '同じ名前の部員がいるよ。';
+  return '';
+}
+// 表示名だけを変える。元の名前は顔の配役を保つために残し、過去の記録は書き換えない。
+function renameMember(s0, memberId, value){
+  const name = cleanMemberName(value), m = s0.members.find(x => x.id === memberId);
+  if(!m || m.name === name || memberNameError(s0, memberId, value)) return s0;
+  const s = clone(s0), who = s.members.find(x => x.id === memberId);
+  who.originalName ||= who.name;
+  who.name = name;
+  return s;
+}
 function moveMember(s0, memberId, seatId){
   const s = clone(s0);
   const m = s.members.find(x => x.id === memberId);
@@ -2219,6 +2238,8 @@ function load(){
   try{
     const s = JSON.parse(localStorage.getItem(SAVE_KEY) || 'null');
     if(s && s.v === 2 && Array.isArray(s.members)){
+      // 名前を変える前のセーブは、今の名前を元の名前として引きつぐ。顔や部員のidは変えない。
+      for(const m of [...s.members, ...(s.gradMembers || [])]) m.originalName ||= m.name;
       // 入れ替えた曲は近い曲に置き換える（指揮の記録と区間は、曲の長さが変わるので外す）
       const mv = id => PIECE_MOVED[id] || id;
       if(PIECE_MOVED[s.pieceId]) s.planSpan = {};   // 練習する区間の番号は、曲が変わると意味がなくなる

@@ -1,0 +1,27 @@
+{
+  "buildSucceeded": true,
+  "installed": true,
+  "launched": true,
+  "files": [
+    {
+      "file": "index.html",
+      "match": true,
+      "sha256": "d399538c08bc25c6431782006bcc504fe5bc74c68efad09c182e99b06726f35b"
+    },
+    {
+      "file": "js/ui.js",
+      "match": true,
+      "sha256": "6c7e16bbb8b6077ba1569aeb70dfcab8de367881b518cd0764f6e11b7520b333"
+    },
+    {
+      "file": "js/game.js",
+      "match": true,
+      "sha256": "eb82b4dfcbb26f1d3dfa738f3b1524acb671ed5a2e77515d208c0c6d2717f07c"
+    },
+    {
+      "file": "js/band.js",
+      "match": true,
+      "sha256": "a450d15d8c6bacc2de7086ae7879e4424d076b5ccdb8d3d77108088a04f893ac"
+    }
+  ]
+}

@@ -1,0 +1,109 @@
+{
+  "checks": [
+    {
+      "check": "カードから名前を保存しても顔・能力・週・本人のidを保つ",
+      "pass": true
+    },
+    {
+      "check": "空欄では保存せず入力欄で理由を知らせる",
+      "pass": true
+    },
+    {
+      "check": "ほかの部員と同じ名前は保存しない",
+      "pass": true
+    },
+    {
+      "check": "Escで取り消すと元の名前に戻り編集ボタンへ戻る",
+      "pass": true
+    },
+    {
+      "check": "13文字の名前では保存せず12文字の上限を知らせる",
+      "pass": true
+    },
+    {
+      "check": "12文字の名前も全文を表示し顔と力を保つ",
+      "pass": true
+    },
+    {
+      "check": "長い名前を名簿と今週の練習へ反映する",
+      "pass": true
+    },
+    {
+      "check": "名前と顔を変えずに新年度まで進む",
+      "pass": true
+    },
+    {
+      "check": "保存後は部員カードが見える位置と編集ボタンに戻る",
+      "pass": true
+    },
+    {
+      "check": "やめるボタンでも入力を取り消し保存済みの名前を保つ",
+      "pass": true
+    }
+  ],
+  "tabs": [
+    {
+      "tab": "week",
+      "scrollWidth": 375,
+      "theme": "dark",
+      "width": 375
+    },
+    {
+      "tab": "play",
+      "scrollWidth": 375,
+      "theme": "dark",
+      "width": 375
+    },
+    {
+      "tab": "members",
+      "scrollWidth": 375,
+      "theme": "dark",
+      "width": 375
+    },
+    {
+      "tab": "log",
+      "scrollWidth": 375,
+      "theme": "dark",
+      "width": 375
+    },
+    {
+      "tab": "week",
+      "scrollWidth": 375,
+      "theme": "light",
+      "width": 375
+    },
+    {
+      "tab": "play",
+      "scrollWidth": 375,
+      "theme": "light",
+      "width": 375
+    },
+    {
+      "tab": "members",
+      "scrollWidth": 375,
+      "theme": "light",
+      "width": 375
+    },
+    {
+      "tab": "log",
+      "scrollWidth": 375,
+      "theme": "light",
+      "width": 375
+    }
+  ],
+  "year": {
+    "year": 2027,
+    "steps": 50,
+    "before": {
+      "id": "m2026-n1-bd266be0",
+      "name": "山田 花音",
+      "face": 85
+    },
+    "after": {
+      "id": "m2026-n1-bd266be0",
+      "name": "山田 花音",
+      "face": 85
+    },
+    "errors": []
+  }
+}
