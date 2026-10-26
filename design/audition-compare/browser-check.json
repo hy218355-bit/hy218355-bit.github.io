@@ -1,0 +1,108 @@
+{
+  "allMatchesModel": true,
+  "positiveDelta": 29.6,
+  "negativeDelta": -1.4,
+  "displayedDifferenceMatches": true,
+  "recommendationUnchanged": true,
+  "aRecommendationUnchanged": true,
+  "aBaselineMatches": true,
+  "allRestoresOriginal": true,
+  "allHidesComparison": true,
+  "emptyHidesComparison": true,
+  "draftKeepsSavedState": true,
+  "allAfterSeatMoveUpdates": true,
+  "beforeSeatMoveBaseline": 37.333333333333336,
+  "afterSeatMoveBaseline": 38,
+  "afterSeatMoveEligible": 38,
+  "positiveSignals": [
+    {
+      "key": "steady",
+      "label": "安定感：そろっている。全員よりよい",
+      "lights": 3,
+      "change": "up"
+    },
+    {
+      "key": "layers",
+      "label": "厚み：重なっている。全員と同じ",
+      "lights": 3,
+      "change": "same"
+    },
+    {
+      "key": "parts",
+      "label": "楽器：欠けている。全員より低い",
+      "lights": 2,
+      "change": "down"
+    }
+  ],
+  "negativeSignals": [
+    {
+      "key": "steady",
+      "label": "安定感：乱れあり。全員と同じ",
+      "lights": 1,
+      "change": "same"
+    },
+    {
+      "key": "layers",
+      "label": "厚み：これから。全員より低い",
+      "lights": 2,
+      "change": "down"
+    },
+    {
+      "key": "parts",
+      "label": "楽器：欠けている。全員より低い",
+      "lights": 2,
+      "change": "down"
+    }
+  ],
+  "views": [
+    {
+      "view": "audition",
+      "theme": "light",
+      "width": 375,
+      "scrollWidth": 375,
+      "errors": []
+    },
+    {
+      "view": "audition",
+      "theme": "dark",
+      "width": 375,
+      "scrollWidth": 375,
+      "errors": []
+    },
+    {
+      "view": "audition",
+      "theme": "light",
+      "width": 375,
+      "scrollWidth": 375,
+      "errors": []
+    },
+    {
+      "view": "audition",
+      "theme": "light",
+      "width": 375,
+      "scrollWidth": 375,
+      "errors": []
+    },
+    {
+      "view": "audition-a",
+      "theme": "light",
+      "width": 375,
+      "scrollWidth": 375,
+      "errors": []
+    },
+    {
+      "view": "audition-decided",
+      "theme": "light",
+      "width": 375,
+      "scrollWidth": 375,
+      "errors": []
+    },
+    {
+      "view": "audition-decided",
+      "theme": "light",
+      "width": 375,
+      "scrollWidth": 375,
+      "errors": []
+    }
+  ]
+}

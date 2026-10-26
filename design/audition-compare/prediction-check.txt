@@ -1,0 +1,2 @@
+{"before":81,"afterWithCache":81,"afterFresh":81,"nWithCache":38,"nFresh":38}
+同じ週の席・楽器・曲・やる気の変更を予想に反映／前の部の保持：確認済み

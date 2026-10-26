@@ -1246,21 +1246,34 @@ function updateAuditionSelection(soon = false){
   updatePred(soon);
 }
 // 響きの理由は小さな印で見せ、文章は押して開いたときだけ出す。
-function auditionSound(p){
+function auditionSoundRows(p){
   const s = p.sound;
-  const rows = [
-    {key:'steady', name:'安定感', level:s.disruption >= 10 ? 0 : s.disruption >= 3 ? 1 : 2,
+  return [
+    {key:'steady', name:'安定感', value:-s.disruption, level:s.disruption >= 10 ? 0 : s.disruption >= 3 ? 1 : 2,
       state:s.disruption >= 10 ? '乱れあり' : s.disruption >= 3 ? '少し不安定' : 'そろっている',
       note:'音程やリズムが不安定な奏者の音が重なると、合奏全体の減点になる。'},
-    {key:'layers', name:'厚み', level:s.thin >= 6 ? 0 : s.fullness >= 2 ? 2 : 1,
+    {key:'layers', name:'厚み', value:s.fullness-s.thin, level:s.thin >= 6 ? 0 : s.fullness >= 2 ? 2 : 1,
       state:s.thin >= 6 ? '薄い' : s.fullness >= 2 ? '重なっている' : 'これから',
       note:'少人数では響きが薄くなる。安定して吹ける奏者が増えると、音の重なりが加点になる。'},
-    {key:'parts', name:'楽器', level:s.lack >= 6 ? 0 : s.lack > 0 ? 1 : 2,
+    {key:'parts', name:'楽器', value:-s.lack, level:s.lack >= 6 ? 0 : s.lack > 0 ? 1 : 2,
       state:s.lack > 0 ? '欠けている' : 'そろっている',
       note:s.missing.length ? `${lackNames(s.missing).join('・')}の受け持ちが足りず、減点になる。` : '曲で受け持ちのある楽器がそろっている。'},
   ];
-  const lights = rows.map(r => `<span class="aud-sound ${['bad','warn','good'][r.level]}" data-sound="${r.key}" aria-label="${r.name}：${r.state}"><span>${r.name}</span><svg viewBox="0 0 42 8" aria-hidden="true" focusable="false">${[0,1,2].map(i => `<rect x="${i*15}" y="0" width="12" height="8" rx="3" class="${i <= r.level ? 'on' : ''}"/>`).join('')}</svg></span>`).join('');
-  return {label:rows.map(r => `${r.name}：${r.state}`).join('。'), summary:`<span class="aud-sound-lights">${lights}</span>${uiIcon('chevron')}`, notes:`<dl class="aud-sound-notes">${rows.map(r => `<div><dt>${r.name}：${r.state}</dt><dd>${r.note}</dd></div>`).join('')}</dl>`};
+}
+function auditionSound(p, all){
+  const base = all && auditionSoundRows(all);
+  const rows = auditionSoundRows(p).map((r,i)=>{
+    const delta = base ? r.value-base[i].value : 0;
+    const change = !base ? '' : Math.abs(delta)<0.05 ? 'same' : delta>0 ? 'up' : 'down';
+    const comparison = {up:'全員よりよい',down:'全員より低い',same:'全員と同じ'}[change] || '';
+    return {...r,change,comparison};
+  });
+  const lights = rows.map(r => `<span class="aud-sound ${['bad','warn','good'][r.level]}" data-sound="${r.key}" aria-label="${r.name}：${r.state}${r.comparison ? '。'+r.comparison : ''}"><span class="aud-sound-name">${r.name}${r.change ? `<span class="aud-sound-change ${r.change}" data-sound-change="${r.change}" aria-hidden="true">${r.change==='same' ? '<span class="aud-sound-same"></span>' : uiIcon('up')}</span>` : ''}</span><svg viewBox="0 0 42 8" aria-hidden="true" focusable="false">${[0,1,2].map(i => `<rect x="${i*15}" y="0" width="12" height="8" rx="3" class="${i <= r.level ? 'on' : ''}"/>`).join('')}</svg></span>`).join('');
+  return {label:rows.map(r => `${r.name}：${r.state}${r.comparison ? '。'+r.comparison : ''}`).join('。'), summary:`<span class="aud-sound-lights">${lights}</span>${uiIcon('chevron')}`, notes:`${all ? `<p class="aud-compare-note">全員で出ると${all.avg.toFixed(1)}点。印は、全員との違い。</p>` : ''}<dl class="aud-sound-notes">${rows.map(r => `<div><dt>${r.name}：${r.state}${r.comparison ? '（'+r.comparison+'）' : ''}</dt><dd>${r.note}</dd></div>`).join('')}</dl>`};
+}
+function auditionComparison(p, all){
+  const delta=+(Number(p.avg.toFixed(1))-Number(all.avg.toFixed(1))).toFixed(1),kind=delta>0?'up':delta<0?'down':'same';
+  return `<div class="aud-compare ${kind}" data-comparison="${delta}"><span>全員より</span><b>${delta>0?'+':delta<0?'−':''}${Math.abs(delta).toFixed(1)}<small>点</small></b></div>`;
 }
 // 選んだメンバーで出たときの点の目安（メンバーを変えるたびに計算し直す）
 function updatePred(soon){
@@ -1273,15 +1286,22 @@ function updatePred(soon){
   const key = S.recruitSeed + ':' + S.year + ':' + S.week + ':' + [...out].sort().join(',');
   const show = p => {
     const nm = {gold: '金賞', silver: '銀賞', bronze: '銅賞'}[p.award];
-    const sound = auditionSound(p);
+    const compared = n < seated(state).length;
+    const sound = auditionSound(p, compared ? U.predAll : null);
     // 目安は、いまの方針のまま本番の週まで練習を続けたときの部で出す（自分で指揮すると、ここから上がる）
     el.setAttribute('aria-busy', 'false');
-    el.innerHTML = `<div class="aud-pred-top"><span>${L.name}の目安</span><span>${n}人で出る</span></div><div class="aud-pred-score"><b><span class="aud-score-number">${p.avg.toFixed(1)}</span><small>点</small></b><span class="aud-award ${p.award}">${uiIcon('award')}${nm}くらい</span></div><details class="aud-pred-notes"${U.audPredNotes ? ' open' : ''}><summary aria-label="響きと予想の見方。${sound.label}">${sound.summary}</summary>${sound.notes}<p>${left > 0 ? `あと${left}週、いまの方針で本番まで練習を続けたときの、審査員の平均点の目安。` : '審査員の平均点の目安。'}${setActive(S) ? '課題曲4割・自由曲6割で見ている。' : ''}金賞の目安は${L.gold}点、${L.rep ? `代表は3人ともA（${L.A}点）。` : ''}本番の日の調子や指揮でも上下する。</p></details>`;
+    el.innerHTML = `<div class="aud-pred-top"><span>${L.name}の目安</span><span>${n}人で出る</span></div><div class="aud-pred-score"><b><span class="aud-score-number">${p.avg.toFixed(1)}</span><small>点</small></b><span class="aud-award ${p.award}">${uiIcon('award')}${nm}くらい</span></div>${compared ? auditionComparison(p,U.predAll) : ''}<details class="aud-pred-notes"${U.audPredNotes ? ' open' : ''}><summary aria-label="響きと予想の見方。${sound.label}">${sound.summary}</summary>${sound.notes}<p>${left > 0 ? `あと${left}週、いまの方針で本番まで練習を続けたときの、審査員の平均点の目安。` : '審査員の平均点の目安。'}${setActive(S) ? '課題曲4割・自由曲6割で見ている。' : ''}金賞の目安は${L.gold}点、${L.rep ? `代表は3人ともA（${L.A}点）。` : ''}本番の日の調子や指揮でも上下する。</p></details>`;
   };
-  if(U.predState === state && U.predKey === key && U.pred){ show(U.pred); return; }
+  if(U.predState === state && U.predKey === key && U.pred && U.predAllState === state){ show(U.pred); return; }
   el.innerHTML = `<b>${n}人で出ると……</b><span class="small">計算中</span>`;
   el.setAttribute('aria-busy', 'true');
-  U.predT = setTimeout(() => { if(U.predRequest !== request || S !== state || !el.isConnected) return; U.pred = predictContest(state, out); U.predKey = key; U.predState = state; show(U.pred); }, soon ? 30 : 120);
+  U.predT = setTimeout(() => {
+    if(U.predRequest !== request || S !== state || !el.isConnected) return;
+    // 全員の予想は同じ部の間だけ使い回し、編成や曲を変えたら作り直す。
+    if(U.predAllState !== state){ U.predAll=predictContest(state,new Set());U.predAllState=state; }
+    U.pred = out.size ? predictContest(state,out) : U.predAll;
+    U.predKey = key; U.predState = state; show(U.pred);
+  }, soon ? 30 : 120);
 }
 // 今週の練習：部の方針（全員で1つ）と、部員ひとりずつの今週の練習
 // 練習で伸びるもの（練習を選ぶボタンに小さく出す）

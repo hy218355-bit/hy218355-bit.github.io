@@ -1146,7 +1146,16 @@ html[data-season="snow"]{--season-band:linear-gradient(90deg,#DDE8F3,#FFFFFF,#B9
 .aud-pred-notes[open] summary>.ui-icon{transform:rotate(180deg)}
 .aud-sound-lights{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;flex:1}
 .aud-sound{display:grid;gap:6px;font-size:11px;line-height:1.2;color:var(--ink-soft)}
-.aud-sound svg{width:42px;height:8px;fill:var(--rule)}
+.aud-sound>svg{width:42px;height:8px;fill:var(--rule)}
+.aud-sound-name{display:flex;align-items:center;gap:5px;min-height:15px}
+.aud-sound-change{display:inline-flex;align-items:center;justify-content:center;width:15px;height:15px}
+.aud-sound-change .ui-icon{width:15px;height:15px;fill:none;stroke-width:2.2}
+.aud-sound-change.up{color:var(--good)}.aud-sound-change.down{color:var(--bad);transform:rotate(180deg)}
+.aud-sound-same{width:9px;border-top:1.5px solid var(--ink-soft)}
+.aud-compare{display:flex;align-items:center;justify-content:flex-end;gap:8px;font-size:11px;color:var(--ink-soft)}
+.aud-compare b{font:20px/1.2 var(--f-lcd)}.aud-compare b small{font:11px var(--f-body);margin-left:3px}
+.aud-compare.up b{color:var(--good)}.aud-compare.down b{color:var(--bad)}
+.aud-pred-notes .aud-compare-note{margin:0 0 12px}
 .aud-sound.bad .on{fill:var(--bad)}.aud-sound.warn .on{fill:var(--warn)}.aud-sound.good .on{fill:var(--good)}
 .aud-sound-notes{margin:0 0 12px;font-size:12px;line-height:1.7}
 .aud-sound-notes>div+div{margin-top:10px}.aud-sound-notes dt{font-weight:700}.aud-sound-notes dd{margin:2px 0 0;color:var(--ink-soft)}
@@ -1432,13 +1441,13 @@ html[data-season="snow"]{--season-band:linear-gradient(90deg,#DDE8F3,#FFFFFF,#B9
 <script src="js/pieces/spring.js?v=score-balance-1"></script>
 <script src="js/pieces/canon.js?v=score-balance-1"></script>
 <script src="js/band.js?v=reading-difficulty-1"></script>
-<script src="js/game.js?v=audition-sound-1"></script>
+<script src="js/game.js?v=audition-compare-1"></script>
 <script src="js/engine.js"></script>
 <script src="js/conduct.js?v=rehearsal-range-1"></script>
 <script src="js/announce.js?v=result-journal-1"></script>
 <script src="js/tunegame.js"></script>
 <script src="js/fx.js"></script>
-<script src="js/ui.js?v=member-compact-1"></script>
+<script src="js/ui.js?v=audition-compare-1"></script>
 <div class="tip" id="tip" role="tooltip" hidden></div>
 </body>
 </html>

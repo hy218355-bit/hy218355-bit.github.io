@@ -1518,7 +1518,8 @@ let projMemo = null;
 function projectToContest(s0){
   const {w} = nextContest(s0);
   const key = [s0.recruitSeed, s0.year, s0.week, s0.seq, s0.policy, w, s0.members.length].join(':');
-  if(projMemo?.key === key) return projMemo.s;
+  // 同じ週でも、席や曲を変えた部には前の予想を使わない。
+  if(projMemo?.source === s0 && projMemo.key === key) return projMemo.s;
   let s = clone(s0), guard = 0;
   s.plan = {};
   while(s.week < w && guard++ < 24){
@@ -1529,7 +1530,7 @@ function projectToContest(s0){
     if(ev && (ev.kind === 'concert' || ev.kind === 'contest')) break;
     s = practiceWeek(s);
   }
-  projMemo = {key, s};
+  projMemo = {source:s0, key, s};
   return s;
 }
 function predictContest(s0, outIds){

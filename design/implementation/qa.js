@@ -49,7 +49,8 @@ function record(){
  report.assignPicks={...(U.asg?.picks||{})};report.assignSel=U.asg?.sel;
  report.auditionOut=[...(U.draft||[])];report.auditionDecided=!!S.audition?.decided;
  report.auditionSearching=!!U.audSearching;report.auditionPrediction=U.pred?.avg;report.auditionSound=U.pred?.sound;report.auditionScores=hash(JSON.stringify(S.audition?.scores));
- report.auditionSignals=Array.from(document.querySelectorAll('[data-sound]')).map(e=>({key:e.dataset.sound,label:e.getAttribute('aria-label'),lights:e.querySelectorAll('.on').length}));
+ report.auditionComparison=$('[data-comparison]')?Number($('[data-comparison]').dataset.comparison):null;report.auditionAllPrediction=U.predAll?.avg;
+ report.auditionSignals=Array.from(document.querySelectorAll('[data-sound]')).map(e=>({key:e.dataset.sound,label:e.getAttribute('aria-label'),lights:e.querySelectorAll('.on').length,change:e.querySelector('[data-sound-change]')?.dataset.soundChange}));
  report.auditionMembers=S.members.filter(m=>m.seat).map(m=>({id:m.id,name:m.name,out:!!m.out,rank:S.audition?rankOf(audScore(m).score):null}));
  report.auditionExpected=S.audition?seated(S).filter(m=>!(U.draft||new Set()).has(m.id)).map(m=>m.id):[];
  const selected=U.sel&&S.members.find(m=>m.id===U.sel);
