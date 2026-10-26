@@ -731,10 +731,10 @@ function renderWeekBody(){
     const seniors = S.members.filter(m => m.grade === 3);
     const lastStage = S.recs.slice().reverse().find(r => r.year === S.year && r.final) || S.recs.slice().reverse().find(r => r.year === S.year && r.result);
     w.innerHTML = `<div class="stagecard"><h3>${seniors.length ? '3年生が引退します' : 'この1年の本番が終わった'}</h3>
-      <p class="txt">${seniors.length ? `${seniors.map(m => esc(m.name)).join('、')}（${seniors.length}人）が、この演奏会で引退する。` : `部員は${S.members.length}人。引退する3年生はまだいない。`}冬には新しい部でアンサンブルコンテストに出て、3月に1年をふり返る。</p></div>
+      <p class="txt">${seniors.length ? `3年生${seniors.length}人が、この演奏会で引退する。` : `部員は${S.members.length}人。引退する3年生はまだいない。`}冬には新しい部でアンサンブルコンテストに出て、3月に1年をふり返る。</p></div>
+      ${seniors.length ? `<div class="seniors"><h3>引退する3年生</h3><p class="small">顔を押すと、その人の成長と音をふり返れます。</p><div class="senior-list">${seniors.map(m => seniorCard(m, lastStage)).join('')}</div></div>` : ''}
       ${firstClassEpilogue(seniors)}
-      ${seniors.length ? `<div class="seniors"><h3>引退する3年生</h3><p class="small">名前をタップすると、入部したころと最後の本番を、その人の音だけで聴き比べられる。</p>${seniors.map(m => seniorCard(m, lastStage)).join('')}</div>` : ''}
-      <div class="transport"><button class="btn primary" type="button" data-act="winter">${seniors.length ? '冬へ（3年生が引退する）' : '冬へ'}</button></div>`;
+      <div class="transport farewell-actions"><button class="btn primary" type="button" data-act="winter">${seniors.length ? '冬へ（3年生が引退する）' : '冬へ'}</button></div>`;
     return;
   }
   const stage = ev?.kind === 'contest' ? 'コンクール' : '本番';
@@ -940,7 +940,16 @@ const seatLabel = id => PART_LABEL[SEAT[id].part] + seatNth(id);
 /* ===== 卒業式：卒業していく3年生それぞれの3年間を、1人ずつ流す =====
    入部したとき・力の伸び・思い出・毎年のコンクール・スキル・最後のひとこと。後ろでは、その年の定期演奏会の録音を流す。
    9秒ごとに次の人へ。触れたり読み進めたりしている間は止め、下のボタンで前後へ進む。最後まで見ると新年度へ */
-const GR = {i: 0, slides: [], timer: 0, raf: 0};
+const GR = {i: 0, ids: [], slides: [], timer: 0, raf: 0, returnTo: null};
+// 表紙と最後の集合写真から、見たい本人へ戻れるようにする。
+function gradAlbum(ms){
+  return `<div class="grad-album">${ms.map(m => `<button type="button" data-grad-member="${esc(m.id)}" aria-label="${esc(m.name)}のふり返りを見る">${memberFace(m,48)}<b>${esc(m.name)}</b></button>`).join('')}</div>`;
+}
+function grSelect(mid){
+  const index = GR.ids.indexOf(mid); if(index < 0) return;
+  GR.i = index + 1; grShow(); pauseGradRoll(); grFocus();
+}
+function grFocus(){ const name=$('#grCard .gr-name');name.tabIndex=-1;name.focus({preventScroll:true}); }
 function gradYears(m){
   const out = [];
   for(let y = m.joined ?? S.year; y <= S.year; y++){
@@ -973,13 +982,15 @@ function gradSlide(m){
     ${m.dream ? `<p class="gr-res">夢：${esc(dreamText(m))}（夢のつづきは、この先へ）</p>` : ''}
     </details>`;
 }
-function openGradRoll(){
+function openGradRoll(mid = null){
   const ms = (S.gradMembers || []).slice().sort((a, b) => SEATS.findIndex(x => x.id === a.seat) - SEATS.findIndex(x => x.id === b.seat));
   if(!ms.length) return;
+  GR.returnTo = document.activeElement;
   stopPlay();
-  GR.slides = [`<span class="gr-tag">卒業式</span><b class="gr-name">${S.year}年度の卒業生</b><p class="gr-line">${ms.length}人の3年間を、ふり返ろう。</p>`,
+  GR.ids = ms.map(m => m.id);
+  GR.slides = [`<span class="gr-tag">卒業式</span><b class="gr-name">${S.year}年度の卒業生</b><p class="gr-line">${ms.length}人の部員を、ふり返ろう。</p>${gradAlbum(ms)}`,
     ...ms.map(gradSlide),
-    `<span class="gr-tag">卒業おめでとう</span><b class="gr-name">ありがとう、先輩たち</b><p class="gr-line">${ms.map(m => esc(m.name)).join('　')}</p><p class="gr-res">1・2年生が演奏で送り出した。春から、新しい部がはじまる。</p>`];
+    `<span class="gr-tag">卒業おめでとう</span><b class="gr-name">ありがとう、先輩たち</b>${gradAlbum(ms)}<p class="gr-res">1・2年生が演奏で送り出した。春から、新しい部がはじまる。</p>`];
   GR.i = 0;
   $('#gradRoll').hidden = false;
   $('#gradRoll').dataset.motion=fxCalm()||U.fxMode==='off'?'off':U.fxMode;
@@ -988,7 +999,7 @@ function openGradRoll(){
   // 後ろで、その年の定期演奏会の録音を流す
   const fin = S.recs.slice().reverse().find(r => r.year === S.year && r.final);
   if(fin) playRecording(fin, `${fin.label}（卒業式で）`);
-  grShow();
+  if(mid && GR.ids.includes(mid)) grSelect(mid); else { grShow(); grFocus(); }
 }
 function grShow(){
   pauseGradRoll();
@@ -997,7 +1008,7 @@ function grShow(){
   $('#grNext').textContent = last ? '4月へ（新年度）' : '次へ';
   $('#grPrev').disabled=GR.i===0;
   $('#grStep').textContent = `${GR.i + 1}／${GR.slides.length}`;
-  if(!last && !fxCalm() && U.fxMode !== 'off') GR.timer = setTimeout(grNext, GR.i === 0 ? 3500 : 9000);
+  if(!last && !fxCalm() && U.fxMode !== 'off') GR.timer = setTimeout(grNext, GR.i === 0 && U.fxMode === 'short' ? 3500 : 9000);
 }
 function grNext(){ if(GR.i < GR.slides.length - 1){ GR.i++; grShow(); } else closeGradRoll(true); }
 function pauseGradRoll(){clearTimeout(GR.timer);GR.timer=0;}
@@ -1008,6 +1019,9 @@ function closeGradRoll(done){
   document.documentElement.classList.remove('conducting');
   stopPlay();
   if(done){ commit({...S, winter: {...S.winter, gradDone: true}}); renderAll(); scrollTo(0, 0); }
+  if(done) $('#week [data-act="wnext"]')?.focus({preventScroll:true});
+  else if(GR.returnTo?.isConnected) GR.returnTo.focus({preventScroll:true});
+  GR.returnTo = null;
 }
 /* ===== 冬（11月 新体制 → 1月 アンサンブルコンテスト → 3月 卒業式） ===== */
 const ensembleSubmitLabel=k=>k>=ENS_MIN?`この${k}人で出る`:`あと${ENS_MIN-k}人を選ぶ`;
@@ -1069,8 +1083,9 @@ function renderWinter(w){
     w.innerHTML = yearSummaryHtml() + `<div class="transport year-actions"><button class="btn primary" type="button" data-act="wnext">4月へ（新年度）</button></div>`;
     return;
   }
-  w.innerHTML = `<div class="event"><span class="tag">3月・卒業式</span><span>${names.length ? `卒業式の日。${names.map(esc).join('、')}を、1・2年生の演奏で送ろう。` : '3月。春休みの音楽室で、新しい1年に向けて準備をしよう。'}</span></div>
-    <div class="transport">${grads.length ? `<button class="btn primary" type="button" data-act="gradroll">${grads.length}人の3年間をふり返って、送る</button><button class="btn quiet" type="button" data-act="graddone">ふり返らずに送る</button>` : `<button class="btn primary" type="button" data-act="graddone">${names.length ? '演奏で送る' : '1年をふり返る'}</button>`}</div>`;
+  w.innerHTML = `<div class="event"><span class="tag">3月・卒業式</span><span>${names.length ? `卒業式の日。${names.length}人を、1・2年生の演奏で送ろう。` : '3月。春休みの音楽室で、新しい1年に向けて準備をしよう。'}</span></div>
+    ${grads.length ? gradAlbum(grads) : ''}
+    <div class="transport farewell-actions">${grads.length ? `<button class="btn primary" type="button" data-act="gradroll">${grads.length}人をふり返って、送る</button><button class="btn quiet" type="button" data-act="graddone">ふり返らずに送る</button>` : `<button class="btn primary" type="button" data-act="graddone">${names.length ? '演奏で送る' : '1年をふり返る'}</button>`}</div>`;
 }
 /* ===== 新しく入った部員の担当を決める =====
    顔の札で部員を選び、楽器ごとの空き席から担当を決める。舞台からも同じように選べる。 */
@@ -1460,11 +1475,10 @@ function firstClassEpilogue(seniors){
   const years = [...S.history.filter(h => h.year >= y0), {year: S.year, piece: PIECES[S.contestPiece || S.pieceId]?.title, results: S.season, final: null}];
   const april = S.recs.find(r => r.year === y0 && r.keep && r.week <= 3 && firsts.some(m => recHas(r, m)));
   const last = S.recs.slice().reverse().find(r => r.year === S.year && r.final);
-  return `<div class="epilogue"><span class="tag">3年間の物語</span><h3>最初の1年生たちが、卒業していく</h3>
+  return `<details class="epilogue"><summary><span class="tag">3年間の物語</span><h3>最初の1年生たちが、卒業していく</h3></summary><div class="epilogue-body">
     <p class="txt">${y0}年の春、あなたが顧問になって最初に入部してきた${firsts.length}人。楽器を持つのもはじめての子もいた。</p>
     <ol>${years.map(h => `<li>${h.year}年度　${esc(h.piece || '')}　${h.results.length ? resultText(h.results) : ''}</li>`).join('')}</ol>
-    <p class="txt">${firsts.map(m => esc(m.name)).join('、')}。今日、この部を引退する。</p>
-    <div class="transport">${april ? `<button class="btn small" type="button" data-act="playrec" data-id="${april.id}">▶ 入部したばかりのころの合奏</button>` : ''}${last ? `<button class="btn small" type="button" data-act="playrec" data-id="${last.id}">▶ 最後の定期演奏会</button>` : ''}</div></div>`;
+    <div class="transport">${april ? `<button class="btn small" type="button" data-act="playrec" data-id="${april.id}">▶ 入部したころの合奏</button>` : ''}${last ? `<button class="btn small" type="button" data-act="playrec" data-id="${last.id}">▶ 最後の定期演奏会</button>` : ''}</div></div></details>`;
 }
 // 引退する3年生ひとりずつ：入部したとき（日誌をつけ始めたとき）と今、思い出、その人の音だけの録音
 const recHas = (r, m) => r.snap.members.some(x => x.id === m.id);
@@ -1482,12 +1496,12 @@ function seniorCard(m, last){
   const joinedHere = f && f.y === m.joined;
   const inst = m.seat ? INST[SEAT[m.seat].inst].name : '控え';
   const showFirst = first && (!last || first.id !== last.id);
-  return `<details class="senior"><summary><span class="senior-person">${memberFace(m,48)}<span><b class="nm">${esc(m.name)}</b><small class="sub">${m.seat?instrumentIcon(SEAT[m.seat].inst):''}${esc(inst)}${m.title?'・'+m.title:''}</small></span></span>${grow && rankOf(f.stats[grow[0]]) !== rankOf(m.stats[grow[0]]) ? `<span class="grow">${STAT_LABEL[grow[0]]}${rankBadge(f.stats[grow[0]])}→${rankBadge(m.stats[grow[0]])}</span>` : ''}</summary>
+  return `<details class="senior" data-senior="${esc(m.id)}"><summary aria-label="${esc(m.name)} ${esc(inst)}${grow && rankOf(f.stats[grow[0]]) !== rankOf(m.stats[grow[0]]) ? ` ${STAT_LABEL[grow[0]]} ${rankOf(f.stats[grow[0]])}から${rankOf(m.stats[grow[0]])}` : ''}"><span class="senior-person">${memberFace(m,48)}<span><b class="nm">${esc(m.name)}</b><small class="sub">${m.seat?instrumentIcon(SEAT[m.seat].inst):uiIcon('members')}<span class="senior-inst">${esc(inst)}${m.title?'・'+m.title:''}</span></small></span></span>${grow && rankOf(f.stats[grow[0]]) !== rankOf(m.stats[grow[0]]) ? `<span class="grow"><small>${STAT_LABEL[grow[0]]}</small><span>${rankBadge(f.stats[grow[0]])}→${rankBadge(m.stats[grow[0]])}</span></span>` : ''}</summary>
     <div class="body">
       ${f?memberGrowth(m):`<div class="stats">${STAT_KEYS.map(k=>rankRow(STAT_LABEL[k],m.stats[k])).join('')}</div>`}
+      <div class="transport">${showFirst ? `<button class="btn small" type="button" data-act="memplay" data-id="${first.id}" data-mid="${m.id}">▶ ${joinedHere ? '入部したころの音' : 'いちばん古い録音'}</button>` : ''}${last && recHas(last, m) ? `<button class="btn small" type="button" data-act="memplay" data-id="${last.id}" data-mid="${m.id}">▶ 最後の本番の音</button><button class="btn small" type="button" data-act="memsave" data-id="${last.id}" data-mid="${m.id}">⤓ 保存</button>` : ''}</div>
       ${(m.story || []).length ? `<ul class="mem">${m.story.map(x => `<li><time>${ymLabel(x.y, x.w)}</time>${esc(x.t)}</li>`).join('')}</ul>` : ''}
       <p class="bye">${farewellLine(m)}</p>
-      <div class="transport">${showFirst ? `<button class="btn small" type="button" data-act="memplay" data-id="${first.id}" data-mid="${m.id}">▶ ${joinedHere ? '入部したころ' : 'いちばん古い録音'}の音</button>` : ''}${last && recHas(last, m) ? `<button class="btn small" type="button" data-act="memplay" data-id="${last.id}" data-mid="${m.id}">▶ 最後の本番の音</button><button class="btn small" type="button" data-act="memsave" data-id="${last.id}" data-mid="${m.id}">⤓ 保存</button>` : ''}</div>
     </div></details>`;
 }
 const conductNote = p => {
@@ -2009,6 +2023,7 @@ function bind(){
   $('#btnRec').addEventListener('click', () => playRec($('#recSel').value));
   $('#btnStop').addEventListener('click', stopPlay);
   $('#grNext').addEventListener('click', e => { e.stopPropagation(); grNext(); });
+  $('#grCard').addEventListener('click', e => { const b=e.target.closest('[data-grad-member]');if(b)grSelect(b.dataset.gradMember); });
   $('#grSkip').addEventListener('click', e => { e.stopPropagation(); closeGradRoll(false); });
   $('#grPrev').addEventListener('click',e=>{e.stopPropagation();grPrev();});
   for(const name of ['pointerdown','keydown','scroll','toggle'])$('#grCard').addEventListener(name,pauseGradRoll,{passive:true,capture:true});
@@ -2191,6 +2206,7 @@ function bind(){
   $('#week').addEventListener('keydown',e=>{if(e.key==='Escape'&&U.pick){e.preventDefault();closePracticePicker();}});
   $('#week').addEventListener('click', e => {
     const b = e.target.closest('button'); if(!b || b.disabled) return;
+    if(b.dataset.gradMember){ openGradRoll(b.dataset.gradMember); return; }
     if(b.dataset.polall){ commit(setPolicy(S, b.dataset.polall)); renderWeek();document.querySelector(`[data-polall="${b.dataset.polall}"]`)?.focus({preventScroll:true});return; }
     // 今週の練習：ボタンで一覧を開き、選ぶと閉じる（パートの「まとめて選ぶ」は、そのパートの全員に）
     if(b.dataset.pick){ haptic('tap');openPracticePicker(b.dataset.pick);return; }
@@ -2300,6 +2316,11 @@ function bind(){
       return;
     }
   });
+  $('#week').addEventListener('toggle', e => {
+    const card=e.target;if(!card.matches('.senior-list>.senior') || !card.open)return;
+    for(const other of card.parentElement.querySelectorAll('.senior[open]'))if(other!==card)other.open=false;
+    if(narrow.matches)card.scrollIntoView({block:'start',behavior:!fxCalm()&&U.fxMode==='full'?'smooth':'auto'});
+  },true);
   const rs = $('#btnReset');
   rs.addEventListener('click', () => {
     if(!rs.classList.contains('armed')){

@@ -76,6 +76,12 @@ function record(){
  const stageCanvas=$('#stage'),stageBox=stageCanvas.getBoundingClientRect(),stageMap=stageGeom(Math.max(240,stageBox.width),true);
  report.stageSeats=SEATS.map(s=>({id:s.id,point:seatXY(s,stageMap),member:S.members.find(m=>m.seat===s.id)?.id}));
  report.gradIndex=GR.i;report.gradAuto=Boolean(GR.timer);
+ report.gradMotion=$('#gradRoll').dataset.motion;report.reducedMotion=fxCalm();
+ report.graduateIds=GR.ids;report.gradOpen=!$('#gradRoll').hidden;
+ const graduates=S.phase==='end'?S.members.filter(m=>m.grade===3):(S.gradMembers||[]);
+ report.graduates=graduates.map(m=>({id:m.id,name:m.name,face:Faces.fingerprint(m),ranks:Object.fromEntries(STAT_KEYS.map(k=>[k,rankOf(m.stats[k])])),first:m.first?Object.fromEntries(STAT_KEYS.map(k=>[k,rankOf(m.first.stats[k])])):null}));
+ report.gradShown=$('#grCard .gr-person [data-face]')?.dataset.face;
+ report.seniorOpen=Array.from(document.querySelectorAll('.senior-list>.senior[open]')).map(el=>el.dataset.senior);
  const source=S.log.slice().reverse().slice(0,80).map(e=>e.text).sort(),shown=Array.from(document.querySelectorAll('.log-preview,.log-notes>li>span:last-child')).map(e=>e.textContent).sort();
  report.logSourceCount=source.length;report.logRenderedCount=shown.length;report.logPreserved=JSON.stringify(source)===JSON.stringify(shown);
  report.planOwn={...(S.plan||{})};report.policy=S.policy;report.week=S.week;report.statsFingerprint=hash(JSON.stringify(S.members.map(m=>m.stats)));
@@ -155,6 +161,10 @@ async function show(next){
  if(view==='consult-music'){s.cohesion=39;s.consult={id:'atmos',mid:s.members.find(m=>m.grade===2).id};}
  if(view==='winter-music'){s.week=26;s=startWinter(s);}
  if(view==='retirement-listen'){
+  if(q.has('manyGrads'))s.members.forEach(m=>m.grade=3);
+  if(q.has('oldGrads'))s.members.filter(m=>m.grade===3).forEach(m=>{delete m.first;});
+  if(q.has('longGrads'))s=renameMember(s,s.members.find(m=>m.grade===3).id,'あいうえおかきくけこさし');
+  if(q.has('benchGrad'))s.members.find(m=>m.grade===3).seat=null;
   const early=clone(s);early.year=2026;early.week=0;early.recs=[];
   early.members.forEach(m=>{m.grade=1;m.stats={pitch:15,rhythm:12,tone:18,expr:10};m.fam={galop:0};});
   addRec(early,'2026年4月の録音',{venue:'room'}).keep=true;
@@ -209,7 +219,7 @@ async function show(next){
  if(view==='song-samples')for(const card of document.querySelectorAll('.pcard'))card.hidden=!['largo','galop','tell'].includes(card.querySelector('[data-pid]')?.dataset.pid);
  if(cardView){placeCard('stage');U.sel=s.members[0].id;renderMemberCard();}
  if(['grad','grad-old','grad-auto'].includes(view)){U.fxMode=view==='grad-auto'?'short':'off';S.gradMembers=s.members.filter(m=>m.grade===3);openGradRoll();GR.i=1;grShow();if(view!=='grad-auto')pauseGradRoll();}
- if(view==='senior'){$('#week').innerHTML='<div class="seniors">'+s.members.filter(m=>m.grade===3).map(m=>seniorCard(m,null)).join('')+'</div>';}
+ if(view==='senior'){$('#week').innerHTML='<div class="seniors"><div class="senior-list">'+s.members.filter(m=>m.grade===3).map(m=>seniorCard(m,null)).join('')+'</div></div>';}
  if(view==='conduct'){const perf=perform(currentCtx());openWatch(perf,'定期演奏会');drawStage(-1,$('#cdStage'),CD.who);}
  if(view==='announce'||view.startsWith('announce-')){
   if(view==='announce-cast'){const rec=addRec(S,'確認用の本番',{only:S.members.slice(12,15).map(m=>m.id)});S.pending={recId:rec.id};report.castIds=rec.snap.members.map(m=>m.id);}
@@ -233,10 +243,12 @@ async function show(next){
 await show(view);
 document.addEventListener('bootchecked',record);
 document.addEventListener('facesready',()=>setTimeout(record,0));
-for(const event of ['pointerdown','toggle'])$('#grCard').addEventListener(event,()=>setTimeout(record,0),{capture:true});
+for(const event of ['pointerdown','toggle','click','keydown','scroll'])$('#grCard').addEventListener(event,()=>setTimeout(record,0),{capture:true});
 $('#grNext').addEventListener('click',()=>setTimeout(record,0));$('#grPrev').addEventListener('click',()=>setTimeout(record,0));
 for(const event of ['click','keydown','change'])$('#week').addEventListener(event,()=>setTimeout(record,0));
+$('#week').addEventListener('toggle',()=>setTimeout(record,0),true);
 new MutationObserver(()=>setTimeout(record,0)).observe($('#week'),{childList:true,subtree:true});
+new MutationObserver(()=>setTimeout(record,0)).observe($('#grCard'),{childList:true,subtree:true});
 new MutationObserver(()=>setTimeout(record,0)).observe($('#nowPlaying'),{childList:true,subtree:true});
 for(const event of ['click','submit','change'])$('#memberCard').addEventListener(event,()=>setTimeout(record,0));
 $('#rosterTable').addEventListener('click',()=>setTimeout(record,0));

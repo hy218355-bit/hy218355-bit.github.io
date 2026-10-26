@@ -1030,6 +1030,42 @@ html[data-season="snow"]{--season-band:linear-gradient(90deg,#DDE8F3,#FFFFFF,#B9
 .senior-person .sub{display:block;font-size:11px;line-height:1.6;margin-top:4px}
 .senior-person .instrument-icon{width:17px;height:17px;vertical-align:-4px;margin-right:4px;color:var(--brass)}
 .senior .mem{margin:0;padding-left:12px;border-left:2px solid var(--rule)}
+.senior-list{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;align-items:start}
+.senior-list>.senior{min-width:0;scroll-margin-top:14px}
+.senior-list>.senior[open]{grid-column:1/-1}
+.senior-list>.senior:not([open])>summary{grid-template-columns:minmax(0,1fr);justify-items:center;align-content:start;gap:7px;min-height:152px;padding:12px 6px}
+.senior-list>.senior:not([open]) .senior-person{display:grid;justify-items:center;gap:7px;text-align:center}
+.senior-list>.senior:not([open]) .member-face{width:56px;height:56px;border-radius:10px}
+.senior-list>.senior:not([open]) .nm{font-size:12px;overflow-wrap:anywhere}
+.senior-list>.senior:not([open]) .sub{display:flex;justify-content:center;margin-top:4px;min-height:17px}
+.senior-list>.senior:not([open]) .sub>.instrument-icon,.senior-list>.senior:not([open]) .sub>.ui-icon{width:17px;height:17px;margin:0;color:var(--brass)}
+.senior-list>.senior:not([open]) .senior-inst{display:none}
+.senior summary .grow{display:grid;justify-items:center;gap:3px;margin:0}
+.senior .grow>small{font-size:10px;white-space:nowrap}
+.senior .grow>span{display:flex;align-items:center;gap:3px}
+.senior .grow .rk{width:18px;height:20px;font-size:11px}
+.senior .body>.transport .btn{min-height:44px}
+.epilogue>summary{position:relative;display:grid;justify-items:start;gap:8px;min-height:44px;cursor:pointer;list-style:none;padding-right:18px}
+.epilogue>summary::-webkit-details-marker{display:none}
+.epilogue>summary::after{content:'';position:absolute;right:0;top:6px;width:7px;height:7px;border-right:1.5px solid currentColor;border-bottom:1.5px solid currentColor;transform:rotate(45deg)}
+.epilogue[open]>summary::after{transform:rotate(225deg)}
+.epilogue>summary h3{font-size:17px;margin:0}
+.epilogue-body{display:grid;gap:10px;margin-top:12px}
+.grad-album{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;min-width:0}
+.grad-album>button{display:grid;justify-items:center;align-content:start;gap:6px;min-width:0;min-height:86px;padding:8px 5px;border:1px solid var(--rule);border-radius:10px;background:var(--paper);color:var(--ink);font-family:var(--f-body);cursor:pointer}
+.grad-album>button>.member-face{border-radius:9px}
+.grad-album>button>b{font-size:11px;line-height:1.5;overflow-wrap:anywhere}
+.grad-album>button:hover{border-color:var(--brass)}
+.grad-album>button:focus-visible{outline:2px solid var(--brass);outline-offset:2px}
+@media(min-width:600px){.grad-album{grid-template-columns:repeat(4,minmax(0,1fr))}}
+@media(max-width:960px){
+ .tabbed #week:has(.farewell-actions){padding-bottom:90px}
+ .tabbed:has(.mini:not([hidden])) #week:has(.farewell-actions){padding-bottom:148px}
+ .tabbed .farewell-actions{position:fixed;left:max(16px,env(safe-area-inset-left,0px));right:max(16px,env(safe-area-inset-right,0px));bottom:calc(60px + env(safe-area-inset-bottom,0px));z-index:45;display:flex;gap:8px;margin:0;padding:12px 0 8px;background:linear-gradient(transparent,var(--paper) 18%)}
+ .farewell-actions .btn{flex:1;min-width:0;min-height:44px;padding:10px 6px;font-size:12px}
+ .farewell-actions .btn.primary{flex-grow:1.5}
+ .tabbed:has(.mini:not([hidden])) .farewell-actions{bottom:calc(122px + env(safe-area-inset-bottom,0px))}
+}
 .senior .mem time{display:block;margin:0}
 .senior .transport .btn{min-height:44px}
 /* 自分たちの結果を大きく、日誌は日付ごとに開ける形へ。 */
@@ -1490,7 +1526,7 @@ html[data-season="snow"]{--season-band:linear-gradient(90deg,#DDE8F3,#FFFFFF,#B9
 <script src="js/announce.js?v=result-journal-1"></script>
 <script src="js/tunegame.js"></script>
 <script src="js/fx.js"></script>
-<script src="js/ui.js?v=audition-listen-1"></script>
+<script src="js/ui.js?v=graduation-album-1"></script>
 <div class="tip" id="tip" role="tooltip" hidden></div>
 </body>
 </html>

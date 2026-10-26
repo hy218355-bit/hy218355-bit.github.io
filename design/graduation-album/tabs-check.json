@@ -1,0 +1,82 @@
+[
+  {
+    "tab": "week",
+    "theme": "light",
+    "width": 375,
+    "scrollWidth": 375,
+    "errors": [],
+    "barVisible": true,
+    "buttonHeight": 44,
+    "buttonHit": true
+  },
+  {
+    "tab": "play",
+    "theme": "light",
+    "width": 375,
+    "scrollWidth": 375,
+    "errors": [],
+    "barVisible": false,
+    "buttonHeight": 0,
+    "buttonHit": false
+  },
+  {
+    "tab": "members",
+    "theme": "light",
+    "width": 375,
+    "scrollWidth": 375,
+    "errors": [],
+    "barVisible": false,
+    "buttonHeight": 0,
+    "buttonHit": false
+  },
+  {
+    "tab": "log",
+    "theme": "light",
+    "width": 375,
+    "scrollWidth": 375,
+    "errors": [],
+    "barVisible": false,
+    "buttonHeight": 0,
+    "buttonHit": false
+  },
+  {
+    "tab": "week",
+    "theme": "dark",
+    "width": 375,
+    "scrollWidth": 375,
+    "errors": [],
+    "barVisible": true,
+    "buttonHeight": 44,
+    "buttonHit": true
+  },
+  {
+    "tab": "play",
+    "theme": "dark",
+    "width": 375,
+    "scrollWidth": 375,
+    "errors": [],
+    "barVisible": false,
+    "buttonHeight": 0,
+    "buttonHit": false
+  },
+  {
+    "tab": "members",
+    "theme": "dark",
+    "width": 375,
+    "scrollWidth": 375,
+    "errors": [],
+    "barVisible": false,
+    "buttonHeight": 0,
+    "buttonHit": false
+  },
+  {
+    "tab": "log",
+    "theme": "dark",
+    "width": 375,
+    "scrollWidth": 375,
+    "errors": [],
+    "barVisible": false,
+    "buttonHeight": 0,
+    "buttonHit": false
+  }
+]
