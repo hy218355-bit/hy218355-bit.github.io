@@ -106,7 +106,7 @@
     asks: '音色・表現・バランス',
     focus: {pitch: 1.05, tone: 1.15, expr: 1.15, rhythm: 0.85, balance: 1.05},
     outGain: 1.41,   // 聴くときの音量。全15曲の大きさ（K特性のラウドネス）がそろうように測って決めた（2026年10月。静かな曲は少し小さいまま）
-    balRef: 7.9, ceiling: .97,
+    balRef: 7.9, ceiling: .945,
     spans: [{name: 'オーボエの主題', short: 'オーボエ', from: 0, to: 36}, {name: 'だんだん高まる', short: '高まり', from: 36, to: 72},
       {name: 'ホルンと全員・終わり', short: 'ホルン', from: 72, to: 125}],
     // 旋律のスラーは、ほとんどが小節の中でまとまっている

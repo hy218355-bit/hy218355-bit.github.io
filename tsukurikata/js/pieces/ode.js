@@ -84,7 +84,7 @@
     asks: 'リズム・バランス・音程',
     focus: {pitch: 1, tone: .95, expr: .9, rhythm: 1.2, balance: 1.1},
     outGain: 1.13,   // 聴くときの音量。全15曲の大きさ（K特性のラウドネス）がそろうように測って決めた（2026年10月。静かな曲は少し小さいまま）
-    balRef: 5.25, ceiling: .96,
+    balRef: 5.25, ceiling: .95,
     spans: [{name: '前半（低い音の旋律と対旋律）', from: 0, to: 32}, {name: '後半（高い音の旋律〜全員）', from: 32, to: 68}],
     slur: [[0, 'bar'], [48, 'tongue']],
     scale: [[0, [1, 2, 4, 6, 7, 9, 11]]],

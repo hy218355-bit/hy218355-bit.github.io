@@ -1,0 +1,22 @@
+<!doctype html><html lang="ja"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>練習と人選が、大会の点につながる</title>
+<style>
+:root{color-scheme:light dark;--paper:#f1f0e9;--ink:#263d43;--line:#d4d7c9;--gold:#936b2f}*{box-sizing:border-box}body{margin:0;background:var(--paper);color:var(--ink);font-family:system-ui,sans-serif}main{max-width:960px;margin:auto;padding:24px}h1{font-size:23px}h2{font-size:18px;margin-top:32px}p{font-size:14px;line-height:1.9}a{color:inherit}nav{display:flex;flex-wrap:wrap;gap:12px}nav a{padding:12px;border:1px solid var(--gold);border-radius:9px;text-decoration:none}.grid{display:grid;grid-template-columns:repeat(2,minmax(0,375px));gap:20px}figure{margin:0}figcaption{font-size:13px;margin:12px 0}img{display:block;width:100%;border:1px solid var(--line);border-radius:16px}table{border-collapse:collapse;width:100%;font-size:13px}th,td{text-align:left;border-bottom:1px solid var(--line);padding:12px 6px}td small{display:block;opacity:.7}details{margin:20px 0}summary{cursor:pointer;padding:12px 0} @media(prefers-color-scheme:dark){:root{--paper:#18282b;--ink:#edeade;--line:#455552;--gold:#d4b36f}}@media(max-width:600px){main{padding:16px}.grid{grid-template-columns:1fr}th,td{padding:10px 3px;font-size:11px}}
+</style>
+<main><h1>練習と人選が、大会の点につながる</h1>
+<p>2・3年目に点が高くなりすぎる曲の採点係数を調整しました。音・部員の成長・星による譜読みの時間差は保ちます。保存済みの点・賞も残ります。</p>
+<nav><a href="/design/implementation/qa.html?view=balanced-result&theme=light&keys=1">3年目の県大会</a><a href="../reading-difficulty/">前回の譜読みの難しさ</a></nav>
+<p>確認用画面は、いつものセーブや設定を書き換えません。</p>
+<h2>実際に3年進めた結果 · 375px</h2>
+<div class="grid"><figure><figcaption>ライト</figcaption><img src="screenshots/result-light.png" alt="3年目の県大会の審査結果・ライト"></figure><figure><figcaption>ダーク</figcaption><img src="screenshots/result-dark.png" alt="同じ県大会の審査結果・ダーク"></figure></div>
+<h2>全15曲を、同じ10組で比較</h2>
+<p>県大会の平均点。上が調整後、下が調整前。目安は1年目37〜47点、2年目55〜67点、3年目65〜75点です。自動練習・おすすめの人選・指揮なしで確認しました。</p>
+<table><thead><tr><th>曲</th><th>1年目</th><th>2年目</th><th>3年目</th></tr></thead><tbody id="scores"></tbody></table>
+<details><summary>別の10組でも確認</summary><p id="validation"></p><p><a href="balance.json">全曲の記録</a> · <a href="mechanics-check.txt">音・成長・過去の結果の確認</a> · <a href="lineup-check.json">人選と厚みの確認</a></p></details>
+</main><script>
+fetch('balance.json').then(r=>r.json()).then(data=>{
+ const body=document.querySelector('#scores');
+ for(const p of data.pieces){const row=document.createElement('tr');const title=document.createElement('th');title.textContent=p.title;row.append(title);p.after.forEach((v,i)=>{const cell=document.createElement('td');cell.append(v.toFixed(1));const before=document.createElement('small');before.textContent=p.before[i].toFixed(1);cell.append(before);row.append(cell);});body.append(row);}
+ document.querySelector('#validation').textContent=data.validation.every(p=>p.withinTargets)?'重ならない別の10組でも、全15曲・各年の平均が目安に収まりました。個々の部・本番の点にはばらつきがあります。':'別の10組の結果は、全曲の記録で確認できます。';
+});
+</script></html>

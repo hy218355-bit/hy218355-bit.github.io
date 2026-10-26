@@ -92,7 +92,7 @@
     asks: '音色・音程・バランス',
     focus: {pitch: 1.1, tone: 1.15, expr: 1.05, rhythm: .85, balance: 1.05},
     outGain: 0.74,   // 聴くときの音量。全15曲の大きさ（K特性のラウドネス）がそろうように測って決めた（2026年10月。静かな曲は少し小さいまま）
-    balRef: 6.6, ceiling: .98,
+    balRef: 6.6, ceiling: .97,
     spans: [{name: '1回目（やわらかく）', from: 0, to: 32}, {name: '2回目（全員で）', from: 32, to: 80}],
     // つなぎの駆け上がり（pesante）と、半音で下がる線（テヌート）は1音ずつ
     slur: [[0, 'bar'], [30, 'tongue'], [32, 'bar'], [60, 'tongue'], [64, 'bar']],

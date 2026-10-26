@@ -164,7 +164,7 @@
     asks: 'リズム・バランス・音色',
     focus: {pitch: .9, tone: 1.05, expr: .95, rhythm: 1.25, balance: 1.05},
     outGain: 1.28,   // 聴くときの音量。全15曲の大きさ（K特性のラウドネス）がそろうように測って決めた（2026年10月。静かな曲は少し小さいまま）
-    balRef: 4.4, ceiling: .96,
+    balRef: 4.4, ceiling: .935,
     spans: [{name: '前奏（トリルと駆け上がり）', short: '前奏', from: 0, to: 39}, {name: '主題（ホルンからトランペットへ）', short: '主題', from: 39, to: 78},
       {name: 'トロンボーンの主題と終わり', short: '終わり', from: 78, to: 94}],
     slur: 'bar',

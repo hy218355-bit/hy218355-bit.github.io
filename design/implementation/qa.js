@@ -63,14 +63,23 @@ async function show(next){
  clearTimeout(GR.timer);clearTimeout(AN.timer);cancelAnimationFrame(CD.raf);CD.phase='idle';
  for(const id of ['conduct','gradRoll','announce','fx'])$('#'+id).hidden=true;
  document.documentElement.classList.remove('conducting');
- let s=freshState(2026);
+ let s;
+ if(view==='balanced-result'){
+  const random=Math.random;let seed=20261027;
+  Math.random=()=>{seed=(Math.imul(seed,1664525)+1013904223)>>>0;return seed/4294967296;};
+  try{s=freshState(2026);}finally{Math.random=random;}
+ }else s=freshState(2026);
  if(!['intake','talent'].includes(view)){s=assignRecruits(s,autoAssign(s));if(!['song-choice','song-samples'].includes(view))s=choosePiece(s,view==='reading-year-hard'?'tell':'galop');}
  if(view==='talent'){s.recruitSeed=12345;s.seq=0;s.rep=90;s.recruits=null;const rs=makeRecruits(s,40);s.recruits=[...rs.filter(r=>r.talent).slice(0,1),...rs.filter(r=>!r.talent).slice(0,7)];}
  if(view==='intake-existing'||view==='intake-full'){
   s.members=fullBand({pitch:55,rhythm:60,tone:50,expr:48}).slice(0,view==='intake-full'?39:32);s.year=2028;s.week=10;
   s.recruitSeed=12345;s.seq=100;s.recruits=makeRecruits(s,8);s.recruitWhen=s.week;
  }
- if(['year','journal','renamed-year','reading-year-hard'].includes(view)){
+ if(view==='balanced-result'){
+  while(!(s.year===2028&&s.week===PREF_WEEK&&s.pending?.kind==='contest')&&report.steps++<400){s=advance(s);await new Promise(r=>setTimeout(r,0));}
+  if(s.year!==2028||s.week!==PREF_WEEK||!s.pending?.judge)throw Error('3年目の県大会まで進まなかった');
+  report.year=s.year;report.actualJudge=s.pending.judge;report.division=s.division;
+ }else if(['year','journal','renamed-year','reading-year-hard'].includes(view)){
   if(view==='renamed-year'){s=renameMember(s,s.members[0].id,'山田 花音');report.renamedBefore={id:s.members[0].id,name:s.members[0].name,face:Faces.fingerprint(s.members[0])};}
   const start=s.year;
   while(s.year===start&&report.steps++<160){s=advance(s);S=s;renderAll();await new Promise(r=>setTimeout(r,0));}
@@ -125,6 +134,7 @@ async function show(next){
   const award=view==='announce-silver'?'silver':view==='announce-bronze'?'bronze':'gold';
   showAnnounce({award,rep:award==='gold',avg:85},'pref',()=>{},view==='announce-bronze'?'B':'A');AN.skip();
  }
+ if(view==='balanced-result'){reveal();AN.skip();}
  if(view==='fx'){U.fxMode=q.get('fx')||'short';fxShow({kind:'cut',html:fxCutHtml('実績を達成','はじめての金賞','',''),ms:60000});clearTimeout(FX.timer);}
  if(view==='rehearsal-loading'){
   await SAMPLES.loading;const original=SAMPLES.loading;SAMPLES.ready=false;
