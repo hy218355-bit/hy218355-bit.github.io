@@ -1,0 +1,26 @@
+{
+  "buildSucceeded": true,
+  "installed": true,
+  "files": [
+    {
+      "file": "index.html",
+      "match": true,
+      "sha256": "1a253dd561fc4094f014c8b2877ec55e99367ab28500580212bff90bf282dffe"
+    },
+    {
+      "file": "js/ui.js",
+      "match": true,
+      "sha256": "d1881df329cf84e7ceb82675d4505b0529981e6458263c9246ff1ca8095b44dd"
+    },
+    {
+      "file": "js/instrument-icons.js",
+      "match": true,
+      "sha256": "3530c37274ffa9ae33b1d1e09648d16f54a375c9fc6d7c899ea92d215c79632d"
+    },
+    {
+      "file": "img/CREDITS.md",
+      "match": true,
+      "sha256": "2e0052ee94cd114ad05388d67ef3b029412f2d09a7adcab6b6fa18cacd3a3327"
+    }
+  ]
+}

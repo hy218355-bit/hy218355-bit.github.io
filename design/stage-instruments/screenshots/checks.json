@@ -1,0 +1,105 @@
+[
+  {
+    "view": "stage",
+    "errors": [],
+    "steps": 0,
+    "theme": "light",
+    "width": 375,
+    "scrollWidth": 375,
+    "faceCount": 78,
+    "stagePortraits": 39,
+    "watchPortraits": 0,
+    "stageCache": {
+      "images": 10,
+      "stamps": 37
+    }
+  },
+  {
+    "view": "stage",
+    "errors": [],
+    "steps": 0,
+    "theme": "dark",
+    "width": 375,
+    "scrollWidth": 375,
+    "faceCount": 78,
+    "stagePortraits": 39,
+    "watchPortraits": 0,
+    "stageCache": {
+      "images": 10,
+      "stamps": 37
+    }
+  },
+  {
+    "view": "conduct",
+    "errors": [],
+    "steps": 0,
+    "theme": "dark",
+    "width": 375,
+    "scrollWidth": 375,
+    "faceCount": 78,
+    "stagePortraits": 39,
+    "watchPortraits": 39,
+    "stageCache": {
+      "images": 10,
+      "stamps": 37
+    }
+  },
+  {
+    "view": "conduct",
+    "errors": [],
+    "steps": 0,
+    "theme": "light",
+    "width": 375,
+    "scrollWidth": 375,
+    "faceCount": 78,
+    "stagePortraits": 39,
+    "watchPortraits": 39,
+    "stageCache": {
+      "images": 10,
+      "stamps": 37
+    }
+  },
+  {
+    "view": "ensemble",
+    "light": {
+      "before": {
+        "background": "color(srgb 0.932235 0.897255 0.836549)",
+        "border": "rgb(147, 107, 47)",
+        "count": 5,
+        "height": 44,
+        "id": "m2028-n1-cafe",
+        "pressed": "true"
+      },
+      "after": {
+        "background": "rgb(255, 252, 245)",
+        "border": "rgb(212, 215, 201)",
+        "button": "この4人で出る",
+        "check": "none",
+        "count": 4,
+        "pressed": "false",
+        "scrollWidth": 375,
+        "width": 375
+      },
+      "reselect": "true"
+    },
+    "dark": {
+      "before": {
+        "border": "rgb(231, 195, 138)",
+        "pressed": "true"
+      },
+      "after": {
+        "border": "rgb(66, 86, 91)",
+        "pressed": "false",
+        "scrollWidth": 375,
+        "width": 375
+      }
+    }
+  },
+  {
+    "view": "interaction",
+    "playStarted": true,
+    "playStopped": true,
+    "instrumentTap": "picc1",
+    "openedCard": "田中 七海・1年・ピッコロ"
+  }
+]

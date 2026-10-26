@@ -188,7 +188,7 @@ function setVenue(id){
 function stageGeom(W, portraits = false){
   const H = Math.round(portraits ? clamp(W * .84, 282, 400) : clamp(W * 0.5, 210, 360));
   const R = Math.min((W / 2 - 18) / 0.78, (H - 46) / 0.92);
-  return {W, H, cx: W / 2, baseY: H - 28, R, portraits, r: portraits ? clamp((W - 36) / 7 * .42, 7.5, 17) : clamp(R * 0.038, 6, 13)};
+  return {W, H, cx: W / 2, baseY: H - 28, R, portraits, r: portraits ? clamp((W - 36) / 7 * .33, 7.5, 13.5) : clamp(R * 0.038, 6, 13)};
 }
 // 奥行きで5段へ分け、段の中は元の左右の順を保つ。音の位置は元の座席データを使う。
 const STAGE_FACE_ROWS=(()=>{const seats=SEATS.slice().sort((a,b)=>a.y-b.y||a.x-b.x),rows=[];for(let i=0;i<seats.length;i+=8)rows.push(seats.slice(i,i+8).sort((a,b)=>a.x-b.x));return rows;})();
@@ -289,11 +289,7 @@ function drawStage(t = -1, cv = $('#stage'), who = null){
       g.strokeStyle = C.ink; g.lineWidth = 3; g.globalAlpha = 1;
       g.beginPath(); g.arc(x, y, G.r + 3.5, 0, Math.PI * 2); g.stroke();
     }
-    if(G.r >= 12){
-      g.fillStyle = m ? C.ink : C.soft;
-      g.font = `700 ${G.r >= 13 ? 9 : 7}px ${C.fBody}`;
-      g.fillText(s.sec === 'perc' ? 'Perc' : INST[s.inst].short.replace('Sax', 'S'), x, G.portraits ? y+G.r+9 : y+.5);
-    }
+    drawInstrument(g,s.inst,x,y+G.r+11,18,m?C.ink:C.soft);
     g.globalAlpha = 1;
   }
   if(cv.dataset.portraitCount!==String(portraits))cv.dataset.portraitCount=String(portraits);
@@ -305,10 +301,11 @@ function seatAt(ev, cv = $('#stage')){
   let best = null, bd = Infinity;
   for(const s of SEATS){
     const [x, y] = seatXY(s, G);
-    const d = Math.hypot(x - px, y - py);
+    // 顔を小さくしても押せる範囲を保ち、楽器の絵を押しても同じ部員を開く。
+    const d = Math.hypot(x - px, y + (G.portraits?8:0) - py);
     if(d < bd){ bd = d; best = s; }
   }
-  return bd < G.r * 1.6 ? best : null;
+  return bd < (G.portraits?Math.max(24,G.r+13):G.r*1.6) ? best : null;
 }
 
 /* ===== 譜面台（音の見える化） ===== */
@@ -953,7 +950,7 @@ function renderWinter(w){
       const key = `${S.year}:ens`;
       if(U.ensKey !== key){ U.ensKey = key; U.ensPick = new Set(autoEnsemble(S)); }
       const k = U.ensPick.size, ok = k >= ENS_MIN && k <= ENS_MAX;
-      const chip = m => `<button class="chip" type="button" data-ens="${m.id}" aria-pressed="${U.ensPick.has(m.id)}">${esc(m.name)}<small>${m.grade}年・${rankBadge(avgStat(m))}</small></button>`;
+      const chip = m => `<button class="chip" type="button" data-ens="${m.id}" aria-pressed="${U.ensPick.has(m.id)}"><span class="ens-check" aria-hidden="true"></span>${esc(m.name)}<small>${m.grade}年・${rankBadge(avgStat(m))}</small></button>`;
       const secs = SECTIONS.map(sc => [sc, seated(S).filter(m => secOf(m) === sc.id)]).filter(([, l]) => l.length)
         .map(([sc, l]) => `<div class="chips opsec"><span class="oplab">${sc.name}</span>${l.map(chip).join('')}</div>`).join('');
       w.innerHTML = `${intro}<p class="small">出る部員を${ENS_MIN}〜${ENS_MAX}人選ぶ（名前の横は、力のランク）。はじめは、うまい部員のパートを中心に5人を選んである。</p>

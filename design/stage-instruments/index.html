@@ -1,0 +1,16 @@
+<!doctype html>
+<html lang="ja"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>演奏の楽器とアンサンブルの人選</title>
+<style>
+@font-face{font-family:body;src:url('/tsukurikata/fonts/zen-kaku-gothic-new-500.woff2')}*{box-sizing:border-box}body{margin:0;background:#f1f0e9;color:#263e47;font-family:body,sans-serif}main{max-width:1160px;margin:auto;padding:24px}h1{font-size:23px;margin:0 0 12px}h2{font-size:18px;margin-top:28px}p{line-height:1.8;font-size:14px}a{color:inherit}.grid{display:grid;grid-template-columns:repeat(2,minmax(0,375px));gap:20px}figure{margin:0}figcaption{font-size:13px;margin:8px 0}img{display:block;width:100%;border:1px solid #d4d7c9;border-radius:16px;box-shadow:0 5px 18px #263e4710}nav{display:flex;gap:12px;flex-wrap:wrap}nav a{padding:10px 16px;border:1px solid #936b2f;border-radius:8px;text-decoration:none}@media(max-width:600px){main{padding:16px}.grid{grid-template-columns:1fr}}
+</style>
+<main><h1>演奏の楽器と、人選のチェック</h1>
+<p>顔を約2割小さくし、下に楽器の形を追加。顔と楽器のどちらを押しても部員カードが開きます。人選は、金の線とチェックが付いている人が選択中です。</p>
+<nav><a href="/design/implementation/qa.html?view=stage&theme=light&keys=1">合奏をさわる</a><a href="/design/implementation/qa.html?view=ensemble&theme=light&keys=1">人選をさわる</a></nav>
+<h2>本番の舞台 · 375px</h2><div class="grid">
+<figure><figcaption>ライト</figcaption><img src="screenshots/performance-light.png" alt="小さくした顔の下に、それぞれの楽器を描いた舞台・ライト"></figure>
+<figure><figcaption>ダーク</figcaption><img src="screenshots/performance-dark.png" alt="楽器が明るい線で見える舞台・ダーク"></figure></div>
+<h2>アンサンブル · 375px</h2><p>いちばん上の田中七海さんを解除した状態。金の線とチェックが消え、隣の選択中の人と区別できます。</p><div class="grid">
+<figure><figcaption>ライト · 解除後</figcaption><img src="screenshots/ensemble-light.png" alt="選択中は金の線とチェック、解除すると通常の線になる人選・ライト"></figure>
+<figure><figcaption>ダーク · 解除後</figcaption><img src="screenshots/ensemble-dark.png" alt="ダークでも選択中と解除した人の線が異なる人選"></figure></div>
+</main></html>

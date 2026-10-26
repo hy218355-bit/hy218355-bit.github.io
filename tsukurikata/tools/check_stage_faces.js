@@ -16,6 +16,8 @@ for(const W of [240,309,343,720]){
   if(x-G.r<0||x+G.r>W||y-G.r<0||y+G.r>G.H)throw Error('顔が舞台の外: '+s.id);
   const cv={id:'stage',getBoundingClientRect:()=>({left:10,top:20,width:W})};
   if(seatAt({clientX:x+10,clientY:y+20},cv)?.id!==s.id)throw Error('顔とタップの席が違う');
+  if(seatAt({clientX:x+10,clientY:y+G.r+11+20},cv)?.id!==s.id)throw Error('楽器とタップの席が違う: '+s.id);
+  if(y+G.r+20>G.H)throw Error('楽器が舞台の外: '+s.id);
  }
  for(let i=0;i<points.length;i++)for(let j=i+1;j<points.length;j++)if(Math.hypot(points[i][1][0]-points[j][1][0],points[i][1][1]-points[j][1][1])<G.r*2+1.5)throw Error('顔が重なる: '+W);
  const old=stageGeom(W);for(const s of SEATS){const [x,y]=seatXY(s,old);if(x!==old.cx+s.x*old.R||y!==old.baseY-s.y*old.R*.95)throw Error('楽器決めの位置が変わった');}
@@ -23,6 +25,13 @@ for(const W of [240,309,343,720]){
 const S={members:[{id:'new',name:'佐藤 結衣',seat:'picc1',stats:{pitch:50}}],recs:[{members:[{id:'old',name:'佐藤 悠真',seat:'picc1',stats:{pitch:40}}]}]};
 const oldCast=stageMembers({notes:[{seat:'picc1',mid:'old'}],hits:[]});if(oldCast.get('picc1').id!=='old')throw Error('昔の録音が今の部員の顔になった');
 `,ctx);
+// 全座席の楽器に絵があり、同じ輪郭を毎フレーム作り直さない。
+let paths=0,strokes=0;
+ctx.Path2D=class{constructor(d){assert.ok(d.startsWith('M'));paths++;}};
+vm.runInContext(fs.readFileSync(path.join(root,'js/instrument-icons.js'),'utf8'),ctx);
+ctx.iconCanvas={save(){},restore(){},translate(){},scale(){},stroke(){strokes++;}};
+vm.runInContext("for(let frame=0;frame<100;frame++)for(const s of SEATS)if(!drawInstrument(iconCanvas,s.inst,20,20,18,'ink'))throw Error('楽器の絵がない: '+s.inst);",ctx);
+assert.equal(paths,15);assert.equal(strokes,3900);
 ctx.target={drawImage(){targetDraws++;}};
 vm.runInContext("for(let i=0;i<100;i++)if(Faces.draw(target,{id:'m2026-n1',name:'佐藤 陽菜'},20,20,24))throw Error('原画の読み込み前に描いた');",ctx);
 assert.equal(images.length,1);assert.equal(stamps,0);images[0].loaded();

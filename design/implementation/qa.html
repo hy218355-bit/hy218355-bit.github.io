@@ -290,6 +290,14 @@ select{background:var(--sheet);border:1.5px solid var(--rule);border-radius:8px;
 .chip{font-size:12.5px;line-height:1.4;padding:5px 10px;border-radius:999px;border:1.5px solid var(--rule);background:var(--sheet);color:var(--ink);cursor:pointer}
 .chip:hover{border-color:var(--brass)}
 .chip[aria-pressed="true"]{border-color:var(--brass);color:var(--brass);font-weight:700}
+/* 人選はタッチ後のhover色に頼らず、線・色・チェックで区別する。 */
+.ensp .chip[data-ens]{min-height:44px;border:2px solid var(--rule);background:var(--sheet);color:var(--ink);font-weight:400;display:inline-flex;align-items:center;gap:6px}
+.ensp .chip[data-ens]:hover{border-color:var(--rule)}
+.ensp .chip[data-ens][aria-pressed="true"]{border-color:var(--brass);background:color-mix(in srgb,var(--brass) 16%,var(--sheet));box-shadow:inset 0 0 0 1px var(--brass);font-weight:700}
+.ens-check{display:inline-grid;place-items:center;flex:none;width:16px;height:16px;border:1.5px solid var(--ink-soft);border-radius:4px}
+.chip[aria-pressed="true"] .ens-check{background:var(--brass);border-color:var(--brass);color:var(--sheet)}
+.chip[aria-pressed="true"] .ens-check::after{content:'';width:8px;height:4px;border-left:2px solid currentColor;border-bottom:2px solid currentColor;transform:translateY(-1px) rotate(-45deg)}
+.ensp .chip[data-ens]:focus-visible{outline:2px solid var(--ink);outline-offset:3px}
 .chip.none{border-style:dashed}
 /* はじめての人への案内：次に押すボタンがゆっくり光る */
 .btn.guide{outline:2px solid var(--brass);outline-offset:2px;animation:guide 1.8s ease-in-out infinite}
@@ -985,38 +993,39 @@ html[data-season="snow"]{--season-band:linear-gradient(90deg,#DDE8F3,#FFFFFF,#B9
   <button type="button" data-tabgo="log"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 5.5C4 4.7 4.7 4 5.5 4H11v16H5.5c-.8 0-1.5-.7-1.5-1.5z"/><path d="M20 5.5c0-.8-.7-1.5-1.5-1.5H13v16h5.5c.8 0 1.5-.7 1.5-1.5z"/></svg><span>日誌</span></button>
 </nav>
 
-<script src="js/util.js"></script>
-<script src="js/icons.js"></script>
+<script src="js/util.js?v=qa-stage-instruments-1"></script>
+<script src="js/icons.js?v=qa-stage-instruments-1"></script>
+<script src="js/instrument-icons.js?v=qa-stage-instruments-1"></script>
 <script src="js/face-cast.js?v=cast100-1"></script>
 <script src="js/faces.js?v=cast100-1"></script>
-<script src="js/instruments.js"></script>
-<script src="js/venues.js"></script>
-<script src="js/samples.js"></script>
-<script src="js/scores.js"></script>
-<script src="js/pieces/largo.js"></script>
-<script src="js/pieces/ode.js"></script>
-<script src="js/pieces/galop.js"></script>
-<script src="js/pieces/pomp.js"></script>
-<script src="js/pieces/aida.js"></script>
-<script src="js/pieces/hero.js"></script>
-<script src="js/pieces/holst.js"></script>
-<script src="js/pieces/hungarian.js"></script>
-<script src="js/pieces/flowers.js"></script>
-<script src="js/pieces/tell.js"></script>
-<script src="js/pieces/carmen.js"></script>
-<script src="js/pieces/valkyrie.js"></script>
-<script src="js/pieces/swan.js"></script>
-<script src="js/pieces/spring.js"></script>
-<script src="js/pieces/canon.js"></script>
+<script src="js/instruments.js?v=qa-stage-instruments-1"></script>
+<script src="js/venues.js?v=qa-stage-instruments-1"></script>
+<script src="js/samples.js?v=qa-stage-instruments-1"></script>
+<script src="js/scores.js?v=qa-stage-instruments-1"></script>
+<script src="js/pieces/largo.js?v=qa-stage-instruments-1"></script>
+<script src="js/pieces/ode.js?v=qa-stage-instruments-1"></script>
+<script src="js/pieces/galop.js?v=qa-stage-instruments-1"></script>
+<script src="js/pieces/pomp.js?v=qa-stage-instruments-1"></script>
+<script src="js/pieces/aida.js?v=qa-stage-instruments-1"></script>
+<script src="js/pieces/hero.js?v=qa-stage-instruments-1"></script>
+<script src="js/pieces/holst.js?v=qa-stage-instruments-1"></script>
+<script src="js/pieces/hungarian.js?v=qa-stage-instruments-1"></script>
+<script src="js/pieces/flowers.js?v=qa-stage-instruments-1"></script>
+<script src="js/pieces/tell.js?v=qa-stage-instruments-1"></script>
+<script src="js/pieces/carmen.js?v=qa-stage-instruments-1"></script>
+<script src="js/pieces/valkyrie.js?v=qa-stage-instruments-1"></script>
+<script src="js/pieces/swan.js?v=qa-stage-instruments-1"></script>
+<script src="js/pieces/spring.js?v=qa-stage-instruments-1"></script>
+<script src="js/pieces/canon.js?v=qa-stage-instruments-1"></script>
 <script src="js/band.js?v=lineup-1"></script>
 <script src="js/game.js?v=cast100-1"></script>
-<script src="js/engine.js"></script>
+<script src="js/engine.js?v=qa-stage-instruments-1"></script>
 <script src="js/conduct.js?v=stage-faces-2"></script>
-<script src="js/announce.js"></script>
-<script src="js/tunegame.js"></script>
-<script src="js/fx.js"></script>
-<script src="js/ui.js?v=cast100-1"></script>
+<script src="js/announce.js?v=qa-stage-instruments-1"></script>
+<script src="js/tunegame.js?v=qa-stage-instruments-1"></script>
+<script src="js/fx.js?v=qa-stage-instruments-1"></script>
+<script src="js/ui.js?v=stage-instruments-1"></script>
 <div class="tip" id="tip" role="tooltip" hidden></div>
-<script src="/design/implementation/qa.js?v=cast100-1"></script>
+<script src="/design/implementation/qa.js?v=stage-instruments-1"></script>
 </body>
 </html>
