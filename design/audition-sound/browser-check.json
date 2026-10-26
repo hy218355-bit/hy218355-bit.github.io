@@ -1,0 +1,116 @@
+{
+  "all": {
+    "score": 37.666666666666664,
+    "sound": {
+      "disruption": 20,
+      "fullness": 2.0988146291794494,
+      "thin": 0,
+      "lack": 0,
+      "missing": []
+    }
+  },
+  "selected": {
+    "score": 67.33333333333333,
+    "sound": {
+      "disruption": 0,
+      "fullness": 2.10180944914511,
+      "thin": 0,
+      "lack": 1.4,
+      "missing": [
+        "fl"
+      ]
+    },
+    "out": [
+      "m2028-n7-cafe",
+      "m2028-n1-cafe",
+      "m2028-n3-cafe",
+      "m2028-n4-cafe",
+      "m2028-n6-cafe",
+      "m2028-n5-cafe",
+      "m2028-n8-cafe",
+      "m2028-n2-cafe"
+    ],
+    "expected": [
+      "m2028-n7-cafe",
+      "m2028-n1-cafe",
+      "m2028-n3-cafe",
+      "m2028-n4-cafe",
+      "m2028-n6-cafe",
+      "m2028-n5-cafe",
+      "m2028-n8-cafe",
+      "m2028-n2-cafe"
+    ]
+  },
+  "oneBack": {
+    "score": 59.666666666666664,
+    "sound": {
+      "disruption": 3.4831116619157596,
+      "fullness": 2.10180944914511,
+      "thin": 0,
+      "lack": 0,
+      "missing": []
+    },
+    "out": [
+      "m2028-n7-cafe",
+      "m2028-n1-cafe",
+      "m2028-n3-cafe",
+      "m2028-n4-cafe",
+      "m2028-n6-cafe",
+      "m2028-n5-cafe",
+      "m2028-n8-cafe"
+    ]
+  },
+  "unchangedStats": true,
+  "unchangedAudition": true,
+  "width": 375,
+  "scrollWidth": 375,
+  "errors": [],
+  "aDivision": {
+    "width": 375,
+    "scrollWidth": 375,
+    "sound": {
+      "disruption": 18.92419323803062,
+      "fullness": 1.837456248900854,
+      "thin": 0,
+      "lack": 0,
+      "missing": []
+    },
+    "errors": [],
+    "notes": "安定感\n厚み\n楽器\n安定感：乱れあり\n音程やリズムが不安定な奏者の音が重なると、合奏全体の減点になる。\n厚み：これから\n少人数では響きが薄くなる。安定して吹ける奏者が増えると、音の重なりが加点になる。\n楽器：そろっている\n曲で受け持ちのある楽器がそろっている。\n\nあと6週、いまの方針で本番まで練習を続けたときの、審査員の平均点の目安。課題曲4割・自由曲6割で見ている。金賞の目安は72点、代表は3人ともA（78点）。本番の日の調子や指揮でも上下する。"
+  },
+  "year": {
+    "year": 2027,
+    "steps": 49,
+    "errors": [],
+    "width": 375,
+    "scrollWidth": 375
+  },
+  "zero": {
+    "text": "出る部員を選ぼう",
+    "confirmEnabled": false,
+    "listenEnabled": false
+  },
+  "restored": {
+    "out": [],
+    "signals": [
+      {
+        "key": "steady",
+        "label": "安定感：そろっている",
+        "lights": 3
+      },
+      {
+        "key": "layers",
+        "label": "厚み：薄い",
+        "lights": 1
+      },
+      {
+        "key": "parts",
+        "label": "楽器：欠けている",
+        "lights": 2
+      }
+    ],
+    "width": 375,
+    "scrollWidth": 375,
+    "errors": []
+  }
+}

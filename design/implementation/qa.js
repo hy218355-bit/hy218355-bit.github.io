@@ -41,7 +41,8 @@ function record(){
  report.planOwn={...(S.plan||{})};report.policy=S.policy;report.week=S.week;report.statsFingerprint=hash(JSON.stringify(S.members.map(m=>m.stats)));
  report.assignPicks={...(U.asg?.picks||{})};report.assignSel=U.asg?.sel;
  report.auditionOut=[...(U.draft||[])];report.auditionDecided=!!S.audition?.decided;
- report.auditionSearching=!!U.audSearching;report.auditionPrediction=U.pred?.avg;report.auditionScores=hash(JSON.stringify(S.audition?.scores));
+ report.auditionSearching=!!U.audSearching;report.auditionPrediction=U.pred?.avg;report.auditionSound=U.pred?.sound;report.auditionScores=hash(JSON.stringify(S.audition?.scores));
+ report.auditionSignals=Array.from(document.querySelectorAll('[data-sound]')).map(e=>({key:e.dataset.sound,label:e.getAttribute('aria-label'),lights:e.querySelectorAll('.on').length}));
  report.auditionMembers=S.members.filter(m=>m.seat).map(m=>({id:m.id,name:m.name,out:!!m.out,rank:S.audition?rankOf(audScore(m).score):null}));
  report.auditionExpected=S.audition?seated(S).filter(m=>!(U.draft||new Set()).has(m.id)).map(m=>m.id):[];
  const selected=U.sel&&S.members.find(m=>m.id===U.sel);
@@ -90,7 +91,7 @@ async function show(next){
   for(let i=0;i<100&&!s.consult;i++)s=advance(s);
   if(!s.consult)throw Error('相談の見本が作れなかった');
   if(view==='consult-result')s=resolveConsult(s,consultView(s).choices[0].k);
- }else if(['stage','reading-stage','song-set','song-final','rehearsal','rehearsal-records','rehearsal-a','rehearsal-loading','practice','practice-late','practice-a','members','member','member-old','member-bench','grad','grad-old','grad-auto','senior','conduct','announce','announce-silver','announce-bronze','announce-cast','fx','audition','audition-decided','audition-long','ensemble'].includes(view)){
+ }else if(['stage','reading-stage','song-set','song-final','rehearsal','rehearsal-records','rehearsal-a','rehearsal-loading','practice','practice-late','practice-a','members','member','member-old','member-bench','grad','grad-old','grad-auto','senior','conduct','announce','announce-silver','announce-bronze','announce-cast','fx','audition','audition-a','audition-decided','audition-long','ensemble'].includes(view)){
   const ms=fullBand({pitch:68,rhythm:72,tone:64,expr:61}),names=new Set();
   ms.forEach((m,i)=>{m.id='m2028-n'+(i+1)+'-cafe';m.name=makeName(names,'recruit',2028,i+1);m.grade=i%3+1;m.joined=2026;m.joinGrade=1;m.sta=95;m.first={y:2026,w:0,stats:{pitch:15,rhythm:12,tone:18,expr:10}};m.story=[{y:2026,w:0,t:'アルトサックスで入部。'},{y:2027,w:16,t:'はじめての金賞。'},{y:2028,w:26,t:'最後の定期演奏会。'}];});
   s.members=ms;s.year=2028;s.week=10;
@@ -107,6 +108,7 @@ async function show(next){
   if(view==='rehearsal-a'){s.division='A';s.setPiece=setOffer(s)[0];s.split='auto';}
  }
  if(view.startsWith('audition')){
+  if(view==='audition-a'){s.division='A';s.setPiece='tell';}
   if(view==='audition-small')s.members=s.members.slice(0,5);
   s.members.forEach((m,i)=>{m.stats={pitch:i<8?20:78,rhythm:i<8?20:78,tone:i<8?20:78,expr:70};m.fam={galop:100};});
   s=runAudition(s);

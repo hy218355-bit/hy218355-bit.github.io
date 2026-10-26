@@ -1,0 +1,15 @@
+<!doctype html><html lang="ja"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>人選で、響きがどう変わるか</title>
+<style>
+:root{color-scheme:light dark;--paper:#f1f0e9;--ink:#263d43;--line:#d4d7c9;--gold:#936b2f}*{box-sizing:border-box}body{margin:0;background:var(--paper);color:var(--ink);font-family:system-ui,sans-serif}main{max-width:960px;margin:auto;padding:24px}h1{font-size:23px}h2{font-size:18px;margin-top:32px}p{font-size:14px;line-height:1.9}a{color:inherit}nav{display:flex;flex-wrap:wrap;gap:12px}nav a{padding:12px;border:1px solid var(--gold);border-radius:9px;text-decoration:none}.grid{display:grid;grid-template-columns:repeat(2,minmax(0,375px));gap:20px}figure{margin:0}figcaption{font-size:13px;margin:12px 0}img{display:block;width:100%;border:1px solid var(--line);border-radius:16px}details{margin-top:24px}summary{cursor:pointer;padding:12px 0}@media(prefers-color-scheme:dark){:root{--paper:#18282b;--ink:#edeade;--line:#455552;--gold:#d4b36f}}@media(max-width:600px){main{padding:16px}.grid{grid-template-columns:1fr}}
+</style>
+<main><h1>人選で、響きがどう変わるか</h1>
+<p>予想欄の「安定感・厚み・楽器」を見ながら、人選を見直せます。小さな印は色と数で区別。押すと理由が開きます。</p>
+<nav><a href="/design/implementation/qa.html?view=audition&theme=light&keys=1&audit=1">人選を試す</a><a href="/design/implementation/qa.html?view=audition-a&theme=dark&keys=1&audit=1">課題曲のある年</a><a href="../score-balance/">前回の採点調整</a></nav>
+<p>確認用画面です。いつものセーブや設定を書き換えません。</p>
+<h2>全員で出る · 375px</h2><p>この確認例では39人で37.7点。音は厚くても、不安定な奏者が重なるため安定感に注意が出ています。</p>
+<div class="grid"><figure><figcaption>ライト</figcaption><img src="screenshots/all-light.png" alt="39人全員を選んだ人選画面・ライト"></figure><figure><figcaption>ダーク</figcaption><img src="screenshots/all-dark.png" alt="39人全員を選んだ人選画面・ダーク"></figure></div>
+<h2>おすすめに変える · 375px</h2><p>31人で67.3点。安定感が改善しても、フルートが欠ける注意は残ります。人数を減らせばいつでもよくなる、という表示にはしません。</p>
+<div class="grid"><figure><figcaption>ライト</figcaption><img src="screenshots/selected-light.png" alt="おすすめの31人と安定感・厚み・楽器の印・ライト"></figure><figure><figcaption>ダーク</figcaption><img src="screenshots/selected-dark.png" alt="同じ31人の人選・ダーク"></figure></div>
+<details><summary>一人ずつの選択と、理由の説明</summary><p>フルートを一人戻すと59.7点。この例では楽器の欠けを補う一方、安定感は少し下がります。説明と開いたパートを保ったまま選び直せます。</p><div class="grid"><figure><figcaption>押して理由を見る</figcaption><img src="screenshots/notes-light.png" alt="安定感・厚み・欠けた楽器を説明する折りたたみ"></figure><figure><figcaption>一人戻して見比べる</figcaption><img src="screenshots/one-back-light.png" alt="フルートを一人戻したときの予想と響きの印"></figure></div></details>
+<details><summary>確認したこと</summary><p>全15曲で、既存の採点結果と一致。課題曲がある年は、同じ採点用の分析を4割・6割で合わせます。部員の力・当日の出来・おすすめの選び方・採点式・保存形式は変えていません。個人の力はG〜Sです。</p><p><a href="mechanics-check.txt">予想と本番の一致の記録</a> · <a href="lineup-check.json">人選と厚みの確認</a> · <a href="browser-check.json">画面の確認記録</a></p></details>
+</main></html>

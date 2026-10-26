@@ -1542,8 +1542,14 @@ function predictContest(s0, outIds){
   const perf = perform(perfCtx(s, ctx));
   const a = analyze(perf);
   let j = judge(perf, a, ev.level);
-  if(setActive(s)){ const ps = perform(perfCtx(s, {...ctx, pieceId: s.setPiece})); j = mergeJudges(judge(ps, analyze(ps), ev.level), j, ev.level, SET_W); }
-  return {avg: j.avg, award: j.award, level: ev.level, n: members.length, thin: a.thin};
+  // 予想の理由も、採点に使った同じ演奏から取り出す。保存内容や採点は変えない。
+  let setAnalysis = null;
+  if(setActive(s)){ const ps = perform(perfCtx(s, {...ctx, pieceId: s.setPiece})); setAnalysis = analyze(ps); j = mergeJudges(judge(ps, setAnalysis, ev.level), j, ev.level, SET_W); }
+  const blend = key => setAnalysis ? SET_W * setAnalysis[key] + (1 - SET_W) * a[key] : a[key];
+  const sound = {disruption: blend('disruption'), fullness: blend('fullness'), thin: blend('thin'),
+    lack: setAnalysis ? SET_W * setAnalysis.lack.pts + (1 - SET_W) * a.lack.pts : a.lack.pts,
+    missing: [...new Set([...a.lack.miss, ...(setAnalysis?.lack.miss || [])])]};
+  return {avg: j.avg, award: j.award, level: ev.level, n: members.length, thin: a.thin, sound};
 }
 // おすすめ：オーディションの点が低い順に何人か控えに回して、いちばん点が上がる人数を探す
 function recommendLineup(s){

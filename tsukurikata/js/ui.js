@@ -1210,6 +1210,23 @@ function updateAuditionSelection(soon = false){
   if(U.audSearching){ clearTimeout(U.predT); U.predRequest = (U.predRequest || 0) + 1; $('#audPred').setAttribute('aria-busy', 'true'); $('#audPred').innerHTML = '<b>おすすめのメンバーを探しています……</b>'; return; }
   updatePred(soon);
 }
+// 響きの理由は小さな印で見せ、文章は押して開いたときだけ出す。
+function auditionSound(p){
+  const s = p.sound;
+  const rows = [
+    {key:'steady', name:'安定感', level:s.disruption >= 10 ? 0 : s.disruption >= 3 ? 1 : 2,
+      state:s.disruption >= 10 ? '乱れあり' : s.disruption >= 3 ? '少し不安定' : 'そろっている',
+      note:'音程やリズムが不安定な奏者の音が重なると、合奏全体の減点になる。'},
+    {key:'layers', name:'厚み', level:s.thin >= 6 ? 0 : s.fullness >= 2 ? 2 : 1,
+      state:s.thin >= 6 ? '薄い' : s.fullness >= 2 ? '重なっている' : 'これから',
+      note:'少人数では響きが薄くなる。安定して吹ける奏者が増えると、音の重なりが加点になる。'},
+    {key:'parts', name:'楽器', level:s.lack >= 6 ? 0 : s.lack > 0 ? 1 : 2,
+      state:s.lack > 0 ? '欠けている' : 'そろっている',
+      note:s.missing.length ? `${lackNames(s.missing).join('・')}の受け持ちが足りず、減点になる。` : '曲で受け持ちのある楽器がそろっている。'},
+  ];
+  const lights = rows.map(r => `<span class="aud-sound ${['bad','warn','good'][r.level]}" data-sound="${r.key}" aria-label="${r.name}：${r.state}"><span>${r.name}</span><svg viewBox="0 0 42 8" aria-hidden="true" focusable="false">${[0,1,2].map(i => `<rect x="${i*15}" y="0" width="12" height="8" rx="3" class="${i <= r.level ? 'on' : ''}"/>`).join('')}</svg></span>`).join('');
+  return {label:rows.map(r => `${r.name}：${r.state}`).join('。'), summary:`<span class="aud-sound-lights">${lights}</span>${uiIcon('chevron')}`, notes:`<dl class="aud-sound-notes">${rows.map(r => `<div><dt>${r.name}：${r.state}</dt><dd>${r.note}</dd></div>`).join('')}</dl>`};
+}
 // 選んだメンバーで出たときの点の目安（メンバーを変えるたびに計算し直す）
 function updatePred(soon){
   const el = $('#audPred'); if(!el) return;
@@ -1221,9 +1238,10 @@ function updatePred(soon){
   const key = S.recruitSeed + ':' + S.year + ':' + S.week + ':' + [...out].sort().join(',');
   const show = p => {
     const nm = {gold: '金賞', silver: '銀賞', bronze: '銅賞'}[p.award];
+    const sound = auditionSound(p);
     // 目安は、いまの方針のまま本番の週まで練習を続けたときの部で出す（自分で指揮すると、ここから上がる）
     el.setAttribute('aria-busy', 'false');
-    el.innerHTML = `<div class="aud-pred-top"><span>${L.name}の目安</span><span>${n}人で出る</span></div><div class="aud-pred-score"><b><span class="aud-score-number">${p.avg.toFixed(1)}</span><small>点</small></b><span class="aud-award ${p.award}">${uiIcon('award')}${nm}くらい</span></div><details class="aud-pred-notes"${U.audPredNotes ? ' open' : ''}><summary>予想の見方${left > 0 ? `・あと${left}週` : ''}</summary><p>${left > 0 ? 'いまの方針で本番まで練習を続けたときの、審査員の平均点の目安。' : '審査員の平均点の目安。'}金賞の目安は${L.gold}点、${L.rep ? `代表は3人ともA（${L.A}点）。` : ''}${p.thin >= 6 ? '人数が少ないぶん、響きが薄いと見られる。' : ''}本番の日の調子や指揮でも上下する。</p></details>`;
+    el.innerHTML = `<div class="aud-pred-top"><span>${L.name}の目安</span><span>${n}人で出る</span></div><div class="aud-pred-score"><b><span class="aud-score-number">${p.avg.toFixed(1)}</span><small>点</small></b><span class="aud-award ${p.award}">${uiIcon('award')}${nm}くらい</span></div><details class="aud-pred-notes"${U.audPredNotes ? ' open' : ''}><summary aria-label="響きと予想の見方。${sound.label}">${sound.summary}</summary>${sound.notes}<p>${left > 0 ? `あと${left}週、いまの方針で本番まで練習を続けたときの、審査員の平均点の目安。` : '審査員の平均点の目安。'}${setActive(S) ? '課題曲4割・自由曲6割で見ている。' : ''}金賞の目安は${L.gold}点、${L.rep ? `代表は3人ともA（${L.A}点）。` : ''}本番の日の調子や指揮でも上下する。</p></details>`;
   };
   if(U.predState === state && U.predKey === key && U.pred){ show(U.pred); return; }
   el.innerHTML = `<b>${n}人で出ると……</b><span class="small">計算中</span>`;

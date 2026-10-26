@@ -1093,6 +1093,15 @@ html[data-season="snow"]{--season-band:linear-gradient(90deg,#DDE8F3,#FFFFFF,#B9
 .aud-pred-notes{border-top:1px solid var(--rule);margin-top:2px}
 .aud-pred-notes summary{display:flex;align-items:center;min-height:44px;font-size:11px;color:var(--ink-soft);cursor:pointer}
 .aud-pred-notes p{font-size:12px;line-height:1.8;margin:0 0 5px;color:var(--ink-soft)}
+.aud-pred-notes summary{gap:10px;min-height:56px}
+.aud-pred-notes summary>.ui-icon{width:16px;height:16px;flex:none;transition:none}
+.aud-pred-notes[open] summary>.ui-icon{transform:rotate(180deg)}
+.aud-sound-lights{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;flex:1}
+.aud-sound{display:grid;gap:6px;font-size:11px;line-height:1.2;color:var(--ink-soft)}
+.aud-sound svg{width:42px;height:8px;fill:var(--rule)}
+.aud-sound.bad .on{fill:var(--bad)}.aud-sound.warn .on{fill:var(--warn)}.aud-sound.good .on{fill:var(--good)}
+.aud-sound-notes{margin:0 0 12px;font-size:12px;line-height:1.7}
+.aud-sound-notes>div+div{margin-top:10px}.aud-sound-notes dt{font-weight:700}.aud-sound-notes dd{margin:2px 0 0;color:var(--ink-soft)}
 .aud-tools{display:grid;grid-template-columns:1fr 1fr;gap:8px}
 .aud-tools .btn{display:flex;align-items:center;justify-content:center;gap:7px;min-height:44px;font-size:12px}
 .aud-tools [data-aud="listen"]{grid-column:1/-1}
@@ -1375,13 +1384,13 @@ html[data-season="snow"]{--season-band:linear-gradient(90deg,#DDE8F3,#FFFFFF,#B9
 <script src="js/pieces/spring.js?v=score-balance-1"></script>
 <script src="js/pieces/canon.js?v=score-balance-1"></script>
 <script src="js/band.js?v=reading-difficulty-1"></script>
-<script src="js/game.js?v=reading-difficulty-1"></script>
+<script src="js/game.js?v=audition-sound-1"></script>
 <script src="js/engine.js"></script>
 <script src="js/conduct.js?v=stage-faces-2"></script>
 <script src="js/announce.js?v=result-journal-1"></script>
 <script src="js/tunegame.js"></script>
 <script src="js/fx.js"></script>
-<script src="js/ui.js?v=reading-difficulty-1"></script>
+<script src="js/ui.js?v=audition-sound-2"></script>
 <div class="tip" id="tip" role="tooltip" hidden></div>
 </body>
 </html>

@@ -1,0 +1,19 @@
+{
+  "build": true,
+  "installed": true,
+  "launched": true,
+  "matchedFiles": [
+    {
+      "file": "index.html",
+      "sha256": "b6a6c22e0f8ad2431154f485b62828d57f9d3c21bedd6bd51b822e81bdcb7b21"
+    },
+    {
+      "file": "js/game.js",
+      "sha256": "ac15fb9c64739cf79ad96774211925637aea33b1c8192b43766ad8ab4d48f0c9"
+    },
+    {
+      "file": "js/ui.js",
+      "sha256": "16ae1ea4a951ba082c151b15e7e0521f9f1d45a73a9de3a88b0f15cb7cc45737"
+    }
+  ]
+}
