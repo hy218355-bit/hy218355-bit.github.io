@@ -56,7 +56,7 @@ function record(){
  report.selectedMember=selected?{id:selected.id,name:selected.name,originalName:selected.originalName,face:Faces.fingerprint(selected)}:null;
  const move=selectedMemberMove();
  const movePeople=state=>state.members.map(m=>({id:m.id,seat:m.seat,ranks:Object.fromEntries(STAT_KEYS.map(k=>[k,rankOf(m.stats[k])])),face:Faces.fingerprint(m)}));
- report.move={value:$('#moveSel')?.value,enabled:!!$('#memberCard [data-mact="move"]')&&!$('#memberCard [data-mact="move"]').disabled,state:hash(JSON.stringify(S)),people:movePeople(S),expected:move?movePeople(move.next):null};
+ report.move={value:$('#memberCard .mc-move')?.dataset.moveTo,enabled:!!$('#memberCard [data-mact="move"]')&&!$('#memberCard [data-mact="move"]').disabled,state:hash(JSON.stringify(S)),people:movePeople(S),expected:move?movePeople(move.next):null};
  report.assignOpen=Array.from(U.asg?.openParts||[]);
  report.recruits=(S.recruits||[]).map(r=>({id:r.id,name:r.name,hope:r.hope,exp:!!r.exp,talent:!!r.talent}));
  report.memberSeats=S.members.map(m=>({id:m.id,name:m.name,seat:m.seat,hope:m.hope}));

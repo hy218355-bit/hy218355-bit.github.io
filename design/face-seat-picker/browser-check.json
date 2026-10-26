@@ -1,0 +1,916 @@
+{
+  "selectionPreservedState": true,
+  "deselectsSafely": true,
+  "groupClearsSelection": true,
+  "swapMatches": true,
+  "benchMatches": true,
+  "emptyMatches": true,
+  "busyDisabled": true,
+  "keyboardSelect": true,
+  "views": [
+    {
+      "view": "member",
+      "theme": "light",
+      "width": 375,
+      "scrollWidth": 375,
+      "errors": []
+    },
+    {
+      "view": "member",
+      "theme": "dark",
+      "width": 375,
+      "scrollWidth": 375,
+      "errors": []
+    },
+    {
+      "view": "member",
+      "theme": "dark",
+      "width": 375,
+      "scrollWidth": 375,
+      "errors": []
+    },
+    {
+      "view": "member-new",
+      "theme": "light",
+      "width": 375,
+      "scrollWidth": 375,
+      "errors": []
+    },
+    {
+      "view": "member",
+      "theme": "light",
+      "width": 375,
+      "scrollWidth": 375,
+      "errors": []
+    },
+    {
+      "view": "members",
+      "theme": "light",
+      "width": 375,
+      "scrollWidth": 375,
+      "errors": []
+    }
+  ],
+  "swapPreview": [
+    {
+      "id": "m2028-n1-cafe",
+      "seat": "perc2",
+      "ranks": {
+        "pitch": "E",
+        "rhythm": "B",
+        "tone": "F",
+        "expr": "C"
+      },
+      "face": 46
+    },
+    {
+      "id": "m2028-n2-cafe",
+      "seat": "fl1a",
+      "ranks": {
+        "pitch": "C",
+        "rhythm": "B",
+        "tone": "C",
+        "expr": "C"
+      },
+      "face": 85
+    },
+    {
+      "id": "m2028-n3-cafe",
+      "seat": "fl1b",
+      "ranks": {
+        "pitch": "C",
+        "rhythm": "B",
+        "tone": "C",
+        "expr": "C"
+      },
+      "face": 24
+    },
+    {
+      "id": "m2028-n4-cafe",
+      "seat": "fl2a",
+      "ranks": {
+        "pitch": "C",
+        "rhythm": "B",
+        "tone": "C",
+        "expr": "C"
+      },
+      "face": 34
+    },
+    {
+      "id": "m2028-n5-cafe",
+      "seat": "ob1",
+      "ranks": {
+        "pitch": "C",
+        "rhythm": "B",
+        "tone": "C",
+        "expr": "C"
+      },
+      "face": 94
+    },
+    {
+      "id": "m2028-n6-cafe",
+      "seat": "cl1a",
+      "ranks": {
+        "pitch": "C",
+        "rhythm": "B",
+        "tone": "C",
+        "expr": "C"
+      },
+      "face": 92
+    },
+    {
+      "id": "m2028-n7-cafe",
+      "seat": "cl1b",
+      "ranks": {
+        "pitch": "C",
+        "rhythm": "B",
+        "tone": "C",
+        "expr": "C"
+      },
+      "face": 20
+    },
+    {
+      "id": "m2028-n8-cafe",
+      "seat": "cl1c",
+      "ranks": {
+        "pitch": "C",
+        "rhythm": "B",
+        "tone": "C",
+        "expr": "C"
+      },
+      "face": 80
+    },
+    {
+      "id": "m2028-n9-cafe",
+      "seat": "asax1",
+      "ranks": {
+        "pitch": "C",
+        "rhythm": "B",
+        "tone": "C",
+        "expr": "C"
+      },
+      "face": 77
+    },
+    {
+      "id": "m2028-n10-cafe",
+      "seat": "asax2",
+      "ranks": {
+        "pitch": "C",
+        "rhythm": "B",
+        "tone": "C",
+        "expr": "C"
+      },
+      "face": 31
+    },
+    {
+      "id": "m2028-n11-cafe",
+      "seat": "fg1",
+      "ranks": {
+        "pitch": "C",
+        "rhythm": "B",
+        "tone": "C",
+        "expr": "C"
+      },
+      "face": 9
+    },
+    {
+      "id": "m2028-n12-cafe",
+      "seat": "ebcl1",
+      "ranks": {
+        "pitch": "C",
+        "rhythm": "B",
+        "tone": "C",
+        "expr": "C"
+      },
+      "face": 93
+    },
+    {
+      "id": "m2028-n13-cafe",
+      "seat": "cl2a",
+      "ranks": {
+        "pitch": "C",
+        "rhythm": "B",
+        "tone": "C",
+        "expr": "C"
+      },
+      "face": 55
+    },
+    {
+      "id": "m2028-n14-cafe",
+      "seat": "cl2b",
+      "ranks": {
+        "pitch": "C",
+        "rhythm": "B",
+        "tone": "C",
+        "expr": "C"
+      },
+      "face": 60
+    },
+    {
+      "id": "m2028-n15-cafe",
+      "seat": "cl3a",
+      "ranks": {
+        "pitch": "C",
+        "rhythm": "B",
+        "tone": "C",
+        "expr": "C"
+      },
+      "face": 38
+    },
+    {
+      "id": "m2028-n16-cafe",
+      "seat": "cl3b",
+      "ranks": {
+        "pitch": "C",
+        "rhythm": "B",
+        "tone": "C",
+        "expr": "C"
+      },
+      "face": 12
+    },
+    {
+      "id": "m2028-n17-cafe",
+      "seat": "bcl1",
+      "ranks": {
+        "pitch": "C",
+        "rhythm": "B",
+        "tone": "C",
+        "expr": "C"
+      },
+      "face": 53
+    },
+    {
+      "id": "m2028-n18-cafe",
+      "seat": "tsax1",
+      "ranks": {
+        "pitch": "C",
+        "rhythm": "B",
+        "tone": "C",
+        "expr": "C"
+      },
+      "face": 83
+    },
+    {
+      "id": "m2028-n19-cafe",
+      "seat": "bsax1",
+      "ranks": {
+        "pitch": "C",
+        "rhythm": "B",
+        "tone": "C",
+        "expr": "C"
+      },
+      "face": 90
+    },
+    {
+      "id": "m2028-n20-cafe",
+      "seat": "hn1",
+      "ranks": {
+        "pitch": "C",
+        "rhythm": "B",
+        "tone": "C",
+        "expr": "C"
+      },
+      "face": 47
+    },
+    {
+      "id": "m2028-n21-cafe",
+      "seat": "hn2",
+      "ranks": {
+        "pitch": "C",
+        "rhythm": "B",
+        "tone": "C",
+        "expr": "C"
+      },
+      "face": 61
+    },
+    {
+      "id": "m2028-n22-cafe",
+      "seat": "hn3",
+      "ranks": {
+        "pitch": "C",
+        "rhythm": "B",
+        "tone": "C",
+        "expr": "C"
+      },
+      "face": 82
+    },
+    {
+      "id": "m2028-n23-cafe",
+      "seat": "hn4",
+      "ranks": {
+        "pitch": "C",
+        "rhythm": "B",
+        "tone": "C",
+        "expr": "C"
+      },
+      "face": 97
+    },
+    {
+      "id": "m2028-n24-cafe",
+      "seat": "tp1a",
+      "ranks": {
+        "pitch": "C",
+        "rhythm": "B",
+        "tone": "C",
+        "expr": "C"
+      },
+      "face": 28
+    },
+    {
+      "id": "m2028-n25-cafe",
+      "seat": "tp1b",
+      "ranks": {
+        "pitch": "C",
+        "rhythm": "B",
+        "tone": "C",
+        "expr": "C"
+      },
+      "face": 96
+    },
+    {
+      "id": "m2028-n26-cafe",
+      "seat": "tp2a",
+      "ranks": {
+        "pitch": "C",
+        "rhythm": "B",
+        "tone": "C",
+        "expr": "C"
+      },
+      "face": 6
+    },
+    {
+      "id": "m2028-n27-cafe",
+      "seat": "tp3a",
+      "ranks": {
+        "pitch": "C",
+        "rhythm": "B",
+        "tone": "C",
+        "expr": "C"
+      },
+      "face": 19
+    },
+    {
+      "id": "m2028-n28-cafe",
+      "seat": "tb1",
+      "ranks": {
+        "pitch": "C",
+        "rhythm": "B",
+        "tone": "C",
+        "expr": "C"
+      },
+      "face": 68
+    },
+    {
+      "id": "m2028-n29-cafe",
+      "seat": "tb2",
+      "ranks": {
+        "pitch": "C",
+        "rhythm": "B",
+        "tone": "C",
+        "expr": "C"
+      },
+      "face": 27
+    },
+    {
+      "id": "m2028-n30-cafe",
+      "seat": "btb1",
+      "ranks": {
+        "pitch": "C",
+        "rhythm": "B",
+        "tone": "C",
+        "expr": "C"
+      },
+      "face": 35
+    },
+    {
+      "id": "m2028-n31-cafe",
+      "seat": "euph1",
+      "ranks": {
+        "pitch": "C",
+        "rhythm": "B",
+        "tone": "C",
+        "expr": "C"
+      },
+      "face": 49
+    },
+    {
+      "id": "m2028-n32-cafe",
+      "seat": "euph2",
+      "ranks": {
+        "pitch": "C",
+        "rhythm": "B",
+        "tone": "C",
+        "expr": "C"
+      },
+      "face": 22
+    },
+    {
+      "id": "m2028-n33-cafe",
+      "seat": "tuba1",
+      "ranks": {
+        "pitch": "C",
+        "rhythm": "B",
+        "tone": "C",
+        "expr": "C"
+      },
+      "face": 15
+    },
+    {
+      "id": "m2028-n34-cafe",
+      "seat": "tuba2",
+      "ranks": {
+        "pitch": "C",
+        "rhythm": "B",
+        "tone": "C",
+        "expr": "C"
+      },
+      "face": 94
+    },
+    {
+      "id": "m2028-n35-cafe",
+      "seat": "cb1",
+      "ranks": {
+        "pitch": "C",
+        "rhythm": "B",
+        "tone": "C",
+        "expr": "C"
+      },
+      "face": 37
+    },
+    {
+      "id": "m2028-n36-cafe",
+      "seat": "perc1",
+      "ranks": {
+        "pitch": "C",
+        "rhythm": "B",
+        "tone": "C",
+        "expr": "C"
+      },
+      "face": 89
+    },
+    {
+      "id": "m2028-n37-cafe",
+      "seat": "picc1",
+      "ranks": {
+        "pitch": "E",
+        "rhythm": "B",
+        "tone": "F",
+        "expr": "C"
+      },
+      "face": 80
+    },
+    {
+      "id": "m2028-n38-cafe",
+      "seat": "perc3",
+      "ranks": {
+        "pitch": "C",
+        "rhythm": "B",
+        "tone": "C",
+        "expr": "C"
+      },
+      "face": 36
+    },
+    {
+      "id": "m2028-n39-cafe",
+      "seat": "perc4",
+      "ranks": {
+        "pitch": "C",
+        "rhythm": "B",
+        "tone": "C",
+        "expr": "C"
+      },
+      "face": 4
+    }
+  ],
+  "swapActual": [
+    {
+      "id": "m2028-n1-cafe",
+      "seat": "perc2",
+      "ranks": {
+        "pitch": "E",
+        "rhythm": "B",
+        "tone": "F",
+        "expr": "C"
+      },
+      "face": 46
+    },
+    {
+      "id": "m2028-n2-cafe",
+      "seat": "fl1a",
+      "ranks": {
+        "pitch": "C",
+        "rhythm": "B",
+        "tone": "C",
+        "expr": "C"
+      },
+      "face": 85
+    },
+    {
+      "id": "m2028-n3-cafe",
+      "seat": "fl1b",
+      "ranks": {
+        "pitch": "C",
+        "rhythm": "B",
+        "tone": "C",
+        "expr": "C"
+      },
+      "face": 24
+    },
+    {
+      "id": "m2028-n4-cafe",
+      "seat": "fl2a",
+      "ranks": {
+        "pitch": "C",
+        "rhythm": "B",
+        "tone": "C",
+        "expr": "C"
+      },
+      "face": 34
+    },
+    {
+      "id": "m2028-n5-cafe",
+      "seat": "ob1",
+      "ranks": {
+        "pitch": "C",
+        "rhythm": "B",
+        "tone": "C",
+        "expr": "C"
+      },
+      "face": 94
+    },
+    {
+      "id": "m2028-n6-cafe",
+      "seat": "cl1a",
+      "ranks": {
+        "pitch": "C",
+        "rhythm": "B",
+        "tone": "C",
+        "expr": "C"
+      },
+      "face": 92
+    },
+    {
+      "id": "m2028-n7-cafe",
+      "seat": "cl1b",
+      "ranks": {
+        "pitch": "C",
+        "rhythm": "B",
+        "tone": "C",
+        "expr": "C"
+      },
+      "face": 20
+    },
+    {
+      "id": "m2028-n8-cafe",
+      "seat": "cl1c",
+      "ranks": {
+        "pitch": "C",
+        "rhythm": "B",
+        "tone": "C",
+        "expr": "C"
+      },
+      "face": 80
+    },
+    {
+      "id": "m2028-n9-cafe",
+      "seat": "asax1",
+      "ranks": {
+        "pitch": "C",
+        "rhythm": "B",
+        "tone": "C",
+        "expr": "C"
+      },
+      "face": 77
+    },
+    {
+      "id": "m2028-n10-cafe",
+      "seat": "asax2",
+      "ranks": {
+        "pitch": "C",
+        "rhythm": "B",
+        "tone": "C",
+        "expr": "C"
+      },
+      "face": 31
+    },
+    {
+      "id": "m2028-n11-cafe",
+      "seat": "fg1",
+      "ranks": {
+        "pitch": "C",
+        "rhythm": "B",
+        "tone": "C",
+        "expr": "C"
+      },
+      "face": 9
+    },
+    {
+      "id": "m2028-n12-cafe",
+      "seat": "ebcl1",
+      "ranks": {
+        "pitch": "C",
+        "rhythm": "B",
+        "tone": "C",
+        "expr": "C"
+      },
+      "face": 93
+    },
+    {
+      "id": "m2028-n13-cafe",
+      "seat": "cl2a",
+      "ranks": {
+        "pitch": "C",
+        "rhythm": "B",
+        "tone": "C",
+        "expr": "C"
+      },
+      "face": 55
+    },
+    {
+      "id": "m2028-n14-cafe",
+      "seat": "cl2b",
+      "ranks": {
+        "pitch": "C",
+        "rhythm": "B",
+        "tone": "C",
+        "expr": "C"
+      },
+      "face": 60
+    },
+    {
+      "id": "m2028-n15-cafe",
+      "seat": "cl3a",
+      "ranks": {
+        "pitch": "C",
+        "rhythm": "B",
+        "tone": "C",
+        "expr": "C"
+      },
+      "face": 38
+    },
+    {
+      "id": "m2028-n16-cafe",
+      "seat": "cl3b",
+      "ranks": {
+        "pitch": "C",
+        "rhythm": "B",
+        "tone": "C",
+        "expr": "C"
+      },
+      "face": 12
+    },
+    {
+      "id": "m2028-n17-cafe",
+      "seat": "bcl1",
+      "ranks": {
+        "pitch": "C",
+        "rhythm": "B",
+        "tone": "C",
+        "expr": "C"
+      },
+      "face": 53
+    },
+    {
+      "id": "m2028-n18-cafe",
+      "seat": "tsax1",
+      "ranks": {
+        "pitch": "C",
+        "rhythm": "B",
+        "tone": "C",
+        "expr": "C"
+      },
+      "face": 83
+    },
+    {
+      "id": "m2028-n19-cafe",
+      "seat": "bsax1",
+      "ranks": {
+        "pitch": "C",
+        "rhythm": "B",
+        "tone": "C",
+        "expr": "C"
+      },
+      "face": 90
+    },
+    {
+      "id": "m2028-n20-cafe",
+      "seat": "hn1",
+      "ranks": {
+        "pitch": "C",
+        "rhythm": "B",
+        "tone": "C",
+        "expr": "C"
+      },
+      "face": 47
+    },
+    {
+      "id": "m2028-n21-cafe",
+      "seat": "hn2",
+      "ranks": {
+        "pitch": "C",
+        "rhythm": "B",
+        "tone": "C",
+        "expr": "C"
+      },
+      "face": 61
+    },
+    {
+      "id": "m2028-n22-cafe",
+      "seat": "hn3",
+      "ranks": {
+        "pitch": "C",
+        "rhythm": "B",
+        "tone": "C",
+        "expr": "C"
+      },
+      "face": 82
+    },
+    {
+      "id": "m2028-n23-cafe",
+      "seat": "hn4",
+      "ranks": {
+        "pitch": "C",
+        "rhythm": "B",
+        "tone": "C",
+        "expr": "C"
+      },
+      "face": 97
+    },
+    {
+      "id": "m2028-n24-cafe",
+      "seat": "tp1a",
+      "ranks": {
+        "pitch": "C",
+        "rhythm": "B",
+        "tone": "C",
+        "expr": "C"
+      },
+      "face": 28
+    },
+    {
+      "id": "m2028-n25-cafe",
+      "seat": "tp1b",
+      "ranks": {
+        "pitch": "C",
+        "rhythm": "B",
+        "tone": "C",
+        "expr": "C"
+      },
+      "face": 96
+    },
+    {
+      "id": "m2028-n26-cafe",
+      "seat": "tp2a",
+      "ranks": {
+        "pitch": "C",
+        "rhythm": "B",
+        "tone": "C",
+        "expr": "C"
+      },
+      "face": 6
+    },
+    {
+      "id": "m2028-n27-cafe",
+      "seat": "tp3a",
+      "ranks": {
+        "pitch": "C",
+        "rhythm": "B",
+        "tone": "C",
+        "expr": "C"
+      },
+      "face": 19
+    },
+    {
+      "id": "m2028-n28-cafe",
+      "seat": "tb1",
+      "ranks": {
+        "pitch": "C",
+        "rhythm": "B",
+        "tone": "C",
+        "expr": "C"
+      },
+      "face": 68
+    },
+    {
+      "id": "m2028-n29-cafe",
+      "seat": "tb2",
+      "ranks": {
+        "pitch": "C",
+        "rhythm": "B",
+        "tone": "C",
+        "expr": "C"
+      },
+      "face": 27
+    },
+    {
+      "id": "m2028-n30-cafe",
+      "seat": "btb1",
+      "ranks": {
+        "pitch": "C",
+        "rhythm": "B",
+        "tone": "C",
+        "expr": "C"
+      },
+      "face": 35
+    },
+    {
+      "id": "m2028-n31-cafe",
+      "seat": "euph1",
+      "ranks": {
+        "pitch": "C",
+        "rhythm": "B",
+        "tone": "C",
+        "expr": "C"
+      },
+      "face": 49
+    },
+    {
+      "id": "m2028-n32-cafe",
+      "seat": "euph2",
+      "ranks": {
+        "pitch": "C",
+        "rhythm": "B",
+        "tone": "C",
+        "expr": "C"
+      },
+      "face": 22
+    },
+    {
+      "id": "m2028-n33-cafe",
+      "seat": "tuba1",
+      "ranks": {
+        "pitch": "C",
+        "rhythm": "B",
+        "tone": "C",
+        "expr": "C"
+      },
+      "face": 15
+    },
+    {
+      "id": "m2028-n34-cafe",
+      "seat": "tuba2",
+      "ranks": {
+        "pitch": "C",
+        "rhythm": "B",
+        "tone": "C",
+        "expr": "C"
+      },
+      "face": 94
+    },
+    {
+      "id": "m2028-n35-cafe",
+      "seat": "cb1",
+      "ranks": {
+        "pitch": "C",
+        "rhythm": "B",
+        "tone": "C",
+        "expr": "C"
+      },
+      "face": 37
+    },
+    {
+      "id": "m2028-n36-cafe",
+      "seat": "perc1",
+      "ranks": {
+        "pitch": "C",
+        "rhythm": "B",
+        "tone": "C",
+        "expr": "C"
+      },
+      "face": 89
+    },
+    {
+      "id": "m2028-n37-cafe",
+      "seat": "picc1",
+      "ranks": {
+        "pitch": "E",
+        "rhythm": "B",
+        "tone": "F",
+        "expr": "C"
+      },
+      "face": 80
+    },
+    {
+      "id": "m2028-n38-cafe",
+      "seat": "perc3",
+      "ranks": {
+        "pitch": "C",
+        "rhythm": "B",
+        "tone": "C",
+        "expr": "C"
+      },
+      "face": 36
+    },
+    {
+      "id": "m2028-n39-cafe",
+      "seat": "perc4",
+      "ranks": {
+        "pitch": "C",
+        "rhythm": "B",
+        "tone": "C",
+        "expr": "C"
+      },
+      "face": 4
+    }
+  ]
+}

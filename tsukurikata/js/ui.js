@@ -1633,11 +1633,20 @@ function closeMemberNameForm(){
 }
 // 移動先を選ぶだけでは保存せず、実際の移動と同じ処理で二人の変化を確かめる。
 function selectedMemberMove(){
-  const m = U.sel && memberById(U.sel), value = $('#moveSel')?.value;
+  const m = U.sel && memberById(U.sel), value = $('#memberCard .mc-move')?.dataset.moveTo;
   if(!m || !value || (value !== 'bench' && !SEAT[value])) return null;
   const to = value === 'bench' ? null : value;
   if(m.seat === to || (!m.seat && !to)) return null;
   return {m, to, other:to && S.members.find(x => x.seat === to), next:moveMember(S, m.id, to)};
+}
+// 楽器のまとまりから顔を選ぶ。選び直しでも移動を確定しない。
+function moveChoices(m, sec){
+  const choice = (value, label, person, icon) => `<button class="move-choice" type="button" data-mact="movechoose" data-to="${value}" aria-pressed="false">${person ? memberFace(person,36) : `<span class="move-empty">${icon}</span>`}<span><b>${esc(person?.name || (value === 'bench' ? '控え' : '空席'))}</b><small>${esc(label)}</small></span><span class="move-check" aria-hidden="true">${uiIcon('check')}</span></button>`;
+  return SEATS.filter(s => s.sec === sec && s.id !== m.seat).map(s => choice(s.id,seatLabel(s.id),S.members.find(x=>x.seat===s.id),instrumentIcon(s.inst))).join('') + (m.seat ? choice('bench','席なし',null,uiIcon('members')) : '');
+}
+function movePicker(m){
+  const sec = m.seat ? SEAT[m.seat].sec : SECTIONS[0].id;
+  return `<details class="move-filter"><summary id="moveGroupLabel">${esc(SECTIONS.find(s=>s.id===sec).name)}</summary><div class="move-groups">${SECTIONS.map(s=>`<button type="button" data-mact="movegroup" data-sec="${s.id}" aria-pressed="${s.id===sec}">${instrumentIcon(SEATS.find(x=>x.sec===s.id).inst)}<span>${esc(s.name)}</span></button>`).join('')}</div></details><div class="move-choices" role="group" aria-label="移す先">${moveChoices(m,sec)}</div>`;
 }
 function renderMemberMove(){
   const preview = $('#movePreview'), button = $('#memberCard [data-mact="move"]');
@@ -1671,10 +1680,6 @@ function renderMemberCard(){
   card.hidden = false;
   const seat = m.seat && SEAT[m.seat];
   const tr = m.trait && TRAITS[m.trait];
-  const seats = SEATS.filter(s => s.id !== m.seat).map(s => {
-    const o = S.members.find(x => x.seat === s.id);
-    return `<option value="${s.id}">${seatLabel(s.id)}${o ? `・${esc(o.name)}と交代` : '・空席'}</option>`;
-  }).join('');
   card.innerHTML = `<button class="help-button mc-close" type="button" data-mact="close" aria-label="閉じる">${uiIcon('close')}</button><div class="mc-portrait">${memberFace(m,112)}<div class="mc-head"><h3>${esc(m.name)}</h3>${m.title ? `<span class="tag">${m.title}</span>` : ''}<span class="sub">${seat?instrumentIcon(seat.inst):''}${m.grade}年・${seat ? PART_LABEL[seat.part] : '控え（席なし）'}</span><button class="mc-name-edit" type="button" data-mact="rename" aria-expanded="false" aria-controls="memberNameForm">名前を変える</button></div></div>
     <form class="mc-name-form" id="memberNameForm" data-mid="${m.id}" hidden novalidate><label for="memberName">名前<small>${MEMBER_NAME_MAX}文字まで</small></label><input id="memberName" name="memberName" type="text" value="${esc(m.name)}" maxlength="24" autocomplete="off" autocapitalize="off" spellcheck="false" enterkeyhint="done" aria-describedby="memberNameError"><p id="memberNameError" class="mc-name-error" role="alert" hidden></p><div><button class="btn quiet" type="button" data-mact="renamecancel">やめる</button><button class="btn primary" type="submit">保存する</button></div></form>
     <p class="mc-say">${esc(memberSays(m))}</p>
@@ -1686,7 +1691,7 @@ function renderMemberCard(){
     <details class="mc-personality"><summary>スキル・癖</summary>${skillList(m)}${tr?`<p class="mc-trait">癖：${tr.name}。${tr.desc}</p>`:'<p class="mc-trait">目立った癖はない。</p>'}</details>
     ${memberStory(m)}
 
-    <details class="mc-move"><summary>席を移す</summary><div class="mc-actions"><select id="moveSel" aria-label="移す先"><option value="" selected disabled>移す先を選ぶ</option>${seat ? '<option value="bench">控え（席なし）</option>' : ''}${seats}</select><button class="btn small" type="button" data-mact="move" disabled>移す</button></div><div class="move-preview" id="movePreview" aria-live="polite" hidden></div>
+    <details class="mc-move" data-move-to=""><summary>席を移す</summary>${movePicker(m)}<div class="move-preview" id="movePreview" aria-live="polite" hidden></div><div class="mc-actions"><button class="btn primary" type="button" data-mact="move" disabled>移す</button></div>
     <p class="small">楽器が変わると、その楽器での音程と音色は基礎からやり直しになる。</p></details>`;
 }
 function renderRoster(){
@@ -1981,6 +1986,20 @@ function bind(){
       return;
     }
     const m = memberById(U.sel); if(!m) return;
+    if(act === 'movegroup'){
+      const section=SECTIONS.find(s=>s.id===b.dataset.sec);if(!section)return;
+      const picker=$('#memberCard .mc-move');picker.dataset.moveTo='';
+      $('#moveGroupLabel').textContent=section.name;
+      picker.querySelectorAll('[data-mact="movegroup"]').forEach(x=>x.setAttribute('aria-pressed',String(x===b)));
+      picker.querySelector('.move-choices').innerHTML=moveChoices(m,section.id);
+      picker.querySelector('.move-filter').open=false;renderMemberMove();$('#moveGroupLabel').focus({preventScroll:true});return;
+    }
+    if(act === 'movechoose'){
+      const picker=$('#memberCard .mc-move');
+      picker.dataset.moveTo=picker.dataset.moveTo===b.dataset.to?'':b.dataset.to;
+      picker.querySelectorAll('[data-mact="movechoose"]').forEach(x=>x.setAttribute('aria-pressed',String(x.dataset.to===picker.dataset.moveTo)));
+      renderMemberMove();return;
+    }
     if(act === 'rename'){
       $('#memberNameForm').hidden = false; b.setAttribute('aria-expanded', 'true');
       $('#memberName').focus({preventScroll: true}); $('#memberName').select();
@@ -2007,7 +2026,6 @@ function bind(){
       toast('席を移した。',1800);
     }
   });
-  $('#memberCard').addEventListener('change', e => { if(e.target.id === 'moveSel') renderMemberMove(); });
   $('#memberCard').addEventListener('submit', e => {
     const form = e.target.closest('#memberNameForm'); if(!form) return;
     e.preventDefault(); if(form.dataset.composing === 'true') return;

@@ -4,6 +4,7 @@ const UI_ICON_PATHS={
 conduct:'<path d="M5 20 18 4m-2-1 4 3M3 18l4 3"/>',
 play:'<path d="m8 4 12 8-12 8Z"/>',
 stop:'<rect x="5" y="5" width="14" height="14" rx="2"/>',
+check:'<path d="m5 12 4 4L19 6"/>',
 close:'<path d="m6 6 12 12M18 6 6 18"/>',
 breath:'<path d="M3 8h12a3 3 0 1 0-3-3M3 12h15a3 3 0 1 1-3 3M3 16h5a3 3 0 1 1-3 3"/>',
 tuning:'<path d="M8 3v8a4 4 0 0 0 8 0V3M12 15v7M6 3h4m4 0h4"/>',
