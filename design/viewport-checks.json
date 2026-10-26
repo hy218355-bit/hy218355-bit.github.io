@@ -1,0 +1,56 @@
+[
+  {
+    "p": "week",
+    "t": "light",
+    "buttonBottom": 734.65625,
+    "tabTop": 741,
+    "width": 375
+  },
+  {
+    "p": "week",
+    "t": "dark",
+    "buttonBottom": 734.65625,
+    "tabTop": 741,
+    "width": 375
+  },
+  {
+    "p": "stage",
+    "t": "light",
+    "tabTop": 741,
+    "width": 375
+  },
+  {
+    "p": "stage",
+    "t": "dark",
+    "tabTop": 741,
+    "width": 375
+  },
+  {
+    "p": "member",
+    "t": "light",
+    "buttonBottom": 668.15625,
+    "tabTop": 741,
+    "width": 375
+  },
+  {
+    "p": "member",
+    "t": "dark",
+    "buttonBottom": 668.15625,
+    "tabTop": 741,
+    "width": 375
+  },
+  {
+    "p": "grad",
+    "t": "light",
+    "buttonBottom": 672.3515625,
+    "tabTop": 741,
+    "width": 375
+  },
+  {
+    "p": "grad",
+    "t": "dark",
+    "buttonBottom": 672.3515625,
+    "tabTop": 741,
+    "width": 375
+  }
+]
