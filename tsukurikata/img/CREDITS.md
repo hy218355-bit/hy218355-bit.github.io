@@ -10,3 +10,8 @@
 - 元の原画は組み込みimage_genで本作品のために制作。前の12人は `design/after-school/assets/faces-art-direction-v4.prompt.txt`、追加27人は `design/after-school/cast39/assets/sheet02.prompt.txt`・`sheet03.prompt.txt` に最終プロンプトと原稿の保存先を記録。外部作品の絵は使っていない。
 - 対応する `.js` は同じSVGパーツの読み込み用。iPhoneのローカルファイルでも外部SVG参照に頼らず組み立てるためのもので、必要な顔だけ読み込み、idごとの結果をBlobの画像として使い回す。
 - 顔の型はidの通し番号の39人ごとにhashで並べ替え、髪・肌・目・眉・口・ほおの色の差をidからhashで決める。名前・性別・学年を入力にせず、セーブに何も追加しない。原画の女子35人／男子4人の構成を維持する。
+
+## アプリアイコン
+
+- `app-icon.svg`：LPとゲームの校章・音符を共通にした自作SVG。オーナーが承認した紺と真鍮の案を使用。
+- `../icon-180.png`・`../icon-64.png`・iOSの `icon-1024.png`：同じSVGをローカルブラウザで描画した1024px原稿から書き出し・縮小した。透過なし。外部素材・新しいダウンロードなし。
