@@ -47,6 +47,9 @@ function contestBoard(year, levelId, j, div = null){
 function showAnnounce(j, levelId, onDone, div = null){
   const {L, list, nRep} = contestBoard(S.year, levelId, j, div);
   const ours = list.find(r => r.ours);
+  const rec=S.recs.find(r=>r.id===S.pending?.recId);
+  const performers=rec?.snap?.members||stagers(S);
+  const crew=performers.slice(0,8).map(m=>memberFace(m,28)).join('');
   AN.onDone = onDone;
   const token = AN.token = {};
   $('#anTitle').textContent = `${L.name}${div ? `（${div}部門）` : ''}　審査結果発表`;
@@ -54,12 +57,13 @@ function showAnnounce(j, levelId, onDone, div = null){
   $('#anRep').innerHTML = '';
   $('#anSkip').hidden = false; $('#anDone').hidden = true;
   $('#announce').hidden = false;
+  $('#announce').dataset.motion=fxCalm()||U.fxMode==='off'?'off':U.fxMode;
   document.documentElement.classList.add('announcing');
   const steps = [];
   const row = r => {
     const li = document.createElement('li');
     li.className = r.ours ? 'ours' : r.rival ? 'rival' : '';
-    li.innerHTML = `<span class="no">${r.no}</span><span class="nm">${esc(r.name)}${r.rival ? '<small class="rtag">ライバル</small>' : ''}</span><span class="aw ${r.award}"></span>`;
+    li.innerHTML = `<span class="no">${r.no}</span><span class="nm">${esc(r.name)}${r.rival ? '<small class="rtag">ライバル</small>' : ''}</span><span class="aw ${r.award}"></span>${r.ours&&crew?`<span class="an-crew" aria-hidden="true">${crew}</span>`:''}`;
     return li;
   };
   const say = (el, text) => { el.innerHTML = (text === '……' ? '' : uiIcon('award')) + esc(text); el.classList.add('on'); };

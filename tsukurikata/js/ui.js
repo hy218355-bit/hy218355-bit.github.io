@@ -1375,8 +1375,30 @@ function renderHistory(){
   }).join('') : '');
 }
 function renderLog(){
-  $('#log').innerHTML = S.log.slice().reverse().slice(0, 80)
-    .map(e => `<li><time>${e.y !== S.year ? e.y + ' ' : ''}${wkShort(e.w)}</time><span>${esc(e.text)}</span></li>`).join('');
+  const root=$('#log'),stateKey=`${S.recruitSeed||0}:${S.year}`;
+  if(root.dataset.stateKey!==stateKey){root.dataset.stateKey=stateKey;U.journalOpen=new Map();}
+  // 昔の録音の本人も含める。同じ名前の別人がいる場合は、顔を決めつけない。
+  const people=new Map();
+  for(const r of S.recs||[])for(const m of r.snap?.members||[])people.set(m.id,m);
+  for(const m of [...(S.gradMembers||[]),...S.members])people.set(m.id,m);
+  const names=new Map();
+  for(const m of people.values()){if(!names.has(m.name))names.set(m.name,[]);names.get(m.name).push(m);}
+  const speaker=e=>{
+    let found=null,pos=Infinity;
+    for(const [name,ms] of names){
+      const text=String(e.text),i=text.indexOf(name),after=text[i+name.length]||'';
+      if(ms.length===1&&i>=0&&(!after||/[がはのにをとで（()）・、。「」『』\s]/u.test(after))&&(i<pos||i===pos&&name.length>(found?.name.length||0))){found=ms[0];pos=i;}
+    }
+    return found;
+  };
+  const mark=e=>{const m=speaker(e);return m?memberFace(m,32):uiIcon(/コンクール|大会|演奏会|金賞|銀賞|銅賞/.test(e.text)?'award':/今週の練習|合奏/.test(e.text)?'note':'journal');};
+  const groups=new Map();
+  for(const e of S.log.slice().reverse().slice(0,80)){const key=`${e.y}:${e.w}`;if(!groups.has(key))groups.set(key,[]);groups.get(key).push(e);}
+  root.innerHTML=[...groups].map(([key,entries],i)=>{
+    const pick=entries.findIndex(e=>speaker(e)||/【相談】|の夢「|コンクール.*[金銀銅]賞/.test(e.text)),head=entries[pick<0?0:pick];
+    const rest=entries.filter(e=>e!==head),open=U.journalOpen.has(key)?U.journalOpen.get(key):i===0;
+    return `<li class="log-week"><details data-logweek="${key}"${open?' open':''}><summary><time>${head.y!==S.year?head.y+' ':''}${wkShort(head.w)}</time><span class="log-item"><span class="log-mark" aria-hidden="true">${mark(head)}</span><span class="log-preview">${esc(head.text)}</span></span></summary>${rest.length?`<ul class="log-notes">${rest.map(e=>`<li><span class="log-mark" aria-hidden="true">${mark(e)}</span><span>${esc(e.text)}</span></li>`).join('')}</ul>`:''}</details></li>`;
+  }).join('');
 }
 
 /* ===== 部員カード・名簿 ===== */
@@ -1736,6 +1758,10 @@ function bind(){
     renderSelectors(); renderMemberCard(); renderRoster(); drawIdle();
     $('#memberCard').scrollIntoView({block:narrow.matches?'start':'nearest',behavior:!fxCalm()&&U.fxMode==='full'?'smooth':'auto'});
     $('#memberCard [data-mact="close"]').focus({preventScroll:true});
+  });
+  $('#log').addEventListener('click',e=>{
+    const summary=e.target.closest('summary');if(!summary)return;
+    const d=summary.closest('[data-logweek]');if(d)U.journalOpen.set(d.dataset.logweek,!d.open);
   });
   $('#memberCard').addEventListener('click', e => {
     const b = e.target.closest('[data-mact]'); if(!b) return;

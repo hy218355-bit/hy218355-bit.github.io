@@ -941,6 +941,35 @@ html[data-season="snow"]{--season-band:linear-gradient(90deg,#DDE8F3,#FFFFFF,#B9
 .senior .mem{margin:0;padding-left:12px;border-left:2px solid var(--rule)}
 .senior .mem time{display:block;margin:0}
 .senior .transport .btn{min-height:44px}
+/* 自分たちの結果を大きく、日誌は日付ごとに開ける形へ。 */
+.an-head{max-width:640px;width:100%;margin:0 auto;padding-bottom:12px;border-bottom:1px solid var(--scene-rule);flex:none}
+.announce .an-body{gap:14px}
+.announce .an-list,.announce .an-rep ol{padding:0;margin:0}
+.an-list li.ours{grid-template-columns:24px minmax(0,1fr);gap:8px 10px;padding:16px;border:1px solid var(--scene-brass);overflow:hidden}
+.an-list li.ours .no{grid-row:1;align-self:center}
+.an-list li.ours .nm{font-size:16px;font-weight:700}
+.an-list li.ours .aw{grid-column:2;font-size:27px;line-height:1.6;font-weight:700;letter-spacing:.02em;display:flex;align-items:center;gap:10px}
+.an-list li.ours .aw .ui-icon{width:27px;height:27px}
+.an-crew{grid-column:2;display:flex;flex-wrap:wrap;gap:4px;padding-top:2px;min-width:0}
+.an-crew .member-face{border-radius:50%;box-shadow:0 0 0 1px var(--scene-rule)}
+.an-foot .btn{min-height:46px;width:100%;font-size:14px}
+.announce[data-motion="off"] *{animation:none!important;transition:none!important}
+.announce[data-motion="short"] .aw.stamp-in{animation-duration:.2s}
+#log{gap:12px;font-size:14px;line-height:1.85}
+#log>.log-week{display:block;padding:0;border:1px solid var(--rule);border-radius:10px;overflow:hidden;background:var(--sheet)}
+.log-week>details>summary{position:relative;display:grid;gap:8px;padding:13px 32px 13px 12px;min-height:64px;cursor:pointer;list-style:none}
+.log-week summary::-webkit-details-marker{display:none}
+.log-week summary::after{content:'';position:absolute;right:14px;top:20px;width:7px;height:7px;border-right:1.5px solid var(--ink-soft);border-bottom:1.5px solid var(--ink-soft);transform:rotate(45deg)}
+.log-week details[open]>summary::after{transform:rotate(225deg);top:24px}
+.log-week details[open]>summary{background:var(--paper)}
+#log time{font:12px var(--f-lcd);padding:0;white-space:nowrap;color:var(--brass)}
+.log-item{display:grid;grid-template-columns:32px minmax(0,1fr);gap:9px;align-items:start}
+.log-mark{display:grid;place-items:center;width:32px;min-height:32px;color:var(--brass)}
+.log-mark>.ui-icon{width:21px;height:21px}
+.log-mark .member-face{border-radius:7px}
+.log-week details:not([open]) .log-preview{display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+#log .log-notes{list-style:none;margin:0;padding:0 12px 4px}
+#log .log-notes>li{display:grid;grid-template-columns:32px minmax(0,1fr);gap:9px;padding:12px 0;border:0;border-top:1px solid var(--rule)}
 </style>
 </head>
 <body>
@@ -1099,8 +1128,8 @@ html[data-season="snow"]{--season-band:linear-gradient(90deg,#DDE8F3,#FFFFFF,#B9
   </div>
 </section>
 <section class="announce" id="announce" hidden aria-labelledby="anTitle">
+  <div class="an-head"><p class="eyebrow">ホールの照明が落ちた</p><h2 id="anTitle"></h2></div>
   <div class="an-body">
-    <div><p class="eyebrow">ホールの照明が落ちた</p><h2 id="anTitle"></h2></div>
     <ol class="an-list" id="anList" aria-live="polite"></ol>
     <div class="an-rep" id="anRep" aria-live="polite"></div>
   </div>
@@ -1145,10 +1174,10 @@ html[data-season="snow"]{--season-band:linear-gradient(90deg,#DDE8F3,#FFFFFF,#B9
 <script src="js/game.js?v=cast100-1"></script>
 <script src="js/engine.js"></script>
 <script src="js/conduct.js?v=stage-faces-2"></script>
-<script src="js/announce.js"></script>
+<script src="js/announce.js?v=result-journal-1"></script>
 <script src="js/tunegame.js"></script>
 <script src="js/fx.js"></script>
-<script src="js/ui.js?v=story-polish-1"></script>
+<script src="js/ui.js?v=result-journal-1"></script>
 <div class="tip" id="tip" role="tooltip" hidden></div>
 </body>
 </html>

@@ -1,0 +1,16 @@
+<!doctype html><html lang="ja"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>自分たちの結果と、顔の見える日誌</title>
+<style>
+@font-face{font-family:body;src:url('/tsukurikata/fonts/zen-kaku-gothic-new-500.woff2')}*{box-sizing:border-box}body{margin:0;background:#f1f0e9;color:#263e47;font-family:body,sans-serif}main{max-width:1000px;margin:auto;padding:24px}h1{font-size:23px;margin:0 0 12px}h2{font-size:18px;margin-top:32px}p{font-size:14px;line-height:1.9;max-width:800px}a{color:inherit}.grid{display:grid;grid-template-columns:repeat(2,minmax(0,375px));gap:20px}figure{margin:0}figcaption{font-size:13px;margin:10px 0}img{display:block;width:100%;border-radius:16px;border:1px solid #d4d7c9;box-shadow:0 5px 18px #263e4710}nav{display:flex;flex-wrap:wrap;gap:10px}nav a{padding:10px 14px;border:1px solid #936b2f;border-radius:8px;text-decoration:none}@media(max-width:600px){main{padding:16px}.grid{grid-template-columns:1fr}}
+</style>
+<main><h1>自分たちの結果と、顔の見える日誌</h1>
+<p>自分の学校の賞を大きくし、本番に出た部員の顔を添えました。日誌は日付ごとに開けるカードへ。部員の出来事を見出しにして、元の文章はすべて残しています。</p>
+<nav><a href="/design/implementation/qa.html?view=announce&theme=light&keys=1">結果を見る</a><a href="/design/implementation/qa.html?view=journal&theme=light&keys=1">日誌をさわる</a><a href="../story-polish/">前回の相談・卒業式</a></nav>
+<h2>結果発表 · 375px</h2><p>発表の順番と、賞・代表が分かるタイミングはそのまま。顔は出場者から最大8人。上の大会名と下の「結果を見る」は、スクロールしても見える位置に置きました。</p><div class="grid">
+<figure><figcaption>ライト設定 · ホールの紺の画面</figcaption><img src="screenshots/result-light.png" alt="自分の学校の金賞と部員の顔を大きく見せる結果発表"></figure>
+<figure><figcaption>ダーク設定</figcaption><img src="screenshots/result-dark.png" alt="ダーク設定でも自分たちの賞をはっきり読める結果発表"></figure></div>
+<h2>部活日誌 · 375px</h2><p>矢印を押すと、その日の続きまで読めます。フルネームで本人を確かめられる記録だけ顔を添え、同姓同名の場合は顔を決めつけません。</p><div class="grid">
+<figure><figcaption>ライト</figcaption><img src="screenshots/journal-light.png" alt="日付ごとに開く、顔の付いた部活日誌・ライト"></figure>
+<figure><figcaption>ダーク</figcaption><img src="screenshots/journal-dark.png" alt="同じ記録を紺の紙で読める部活日誌・ダーク"></figure></div>
+<h2>銀賞も同じように</h2><div class="grid"><figure><figcaption>賞の色と文字を保持</figcaption><img src="screenshots/result-silver.png" alt="銀賞と本人たちの顔を見せる結果発表"></figure></div>
+</main></html>

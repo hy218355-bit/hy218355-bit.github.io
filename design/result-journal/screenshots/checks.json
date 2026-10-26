@@ -1,0 +1,181 @@
+[
+  {
+    "award": "ゴールド金賞",
+    "awardFont": "27px",
+    "crew": 8,
+    "footerHeight": 46,
+    "scrollWidth": 375,
+    "view": "gold",
+    "width": 375
+  },
+  {
+    "view": "silver",
+    "award": "銀賞"
+  },
+  {
+    "view": "bronze-B",
+    "award": "銅賞",
+    "representativeText": ""
+  },
+  {
+    "view": "recorded-cast",
+    "expected": [
+      "m2028-n13-cafe",
+      "m2028-n14-cafe",
+      "m2028-n15-cafe"
+    ],
+    "shown": [
+      "m2028-n13-cafe",
+      "m2028-n14-cafe",
+      "m2028-n15-cafe"
+    ]
+  },
+  {
+    "view": "journal",
+    "errors": [],
+    "steps": 50,
+    "year": 2027,
+    "members": 9,
+    "saveVersion": 2,
+    "theme": "dark",
+    "width": 375,
+    "scrollWidth": 375,
+    "faceCount": 47,
+    "stagePortraits": 9,
+    "watchPortraits": 0,
+    "stageCache": {
+      "images": 10,
+      "stamps": 41
+    },
+    "gradIndex": 0,
+    "gradAuto": false,
+    "logSourceCount": 80,
+    "logRenderedCount": 80,
+    "logPreserved": true
+  },
+  {
+    "view": "journal",
+    "open": true,
+    "scrollWidth": 375,
+    "width": 375,
+    "errors": [],
+    "steps": 50,
+    "year": 2027,
+    "members": 9,
+    "saveVersion": 2,
+    "theme": "light",
+    "faceCount": 47,
+    "stagePortraits": 9,
+    "watchPortraits": 0,
+    "stageCache": {
+      "images": 10,
+      "stamps": 41
+    },
+    "gradIndex": 0,
+    "gradAuto": false,
+    "logSourceCount": 80,
+    "logRenderedCount": 80,
+    "logPreserved": true
+  },
+  {
+    "view": "journal-ambiguous",
+    "faces": 0,
+    "errors": [],
+    "steps": 0,
+    "theme": "light",
+    "width": 375,
+    "scrollWidth": 375,
+    "faceCount": 14,
+    "stagePortraits": 5,
+    "watchPortraits": 0,
+    "stageCache": {
+      "images": 10,
+      "stamps": 44
+    },
+    "gradIndex": 0,
+    "gradAuto": false,
+    "logSourceCount": 1,
+    "logRenderedCount": 1,
+    "logPreserved": true
+  },
+  {
+    "view": "journal-empty",
+    "errors": [],
+    "steps": 0,
+    "theme": "light",
+    "width": 375,
+    "scrollWidth": 375,
+    "faceCount": 13,
+    "stagePortraits": 5,
+    "watchPortraits": 0,
+    "stageCache": {
+      "images": 10,
+      "stamps": 46
+    },
+    "gradIndex": 0,
+    "gradAuto": false,
+    "logSourceCount": 0,
+    "logRenderedCount": 0,
+    "logPreserved": true
+  },
+  {
+    "scrollWidth": 375,
+    "tab": "week",
+    "theme": "light",
+    "view": "tab",
+    "width": 375
+  },
+  {
+    "scrollWidth": 375,
+    "tab": "play",
+    "theme": "light",
+    "view": "tab",
+    "width": 375
+  },
+  {
+    "scrollWidth": 375,
+    "tab": "members",
+    "theme": "light",
+    "view": "tab",
+    "width": 375
+  },
+  {
+    "scrollWidth": 375,
+    "tab": "log",
+    "theme": "light",
+    "view": "tab",
+    "width": 375
+  },
+  {
+    "scrollWidth": 375,
+    "tab": "week",
+    "theme": "dark",
+    "view": "tab",
+    "width": 375
+  },
+  {
+    "scrollWidth": 375,
+    "tab": "play",
+    "theme": "dark",
+    "view": "tab",
+    "width": 375
+  },
+  {
+    "scrollWidth": 375,
+    "tab": "members",
+    "theme": "dark",
+    "view": "tab",
+    "width": 375
+  },
+  {
+    "scrollWidth": 375,
+    "tab": "log",
+    "theme": "dark",
+    "view": "tab",
+    "width": 375
+  },
+  {
+    "view": "close-announcement",
+    "hidden": true
+  }
+]
