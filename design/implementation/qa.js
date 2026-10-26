@@ -144,13 +144,20 @@ async function show(next){
   for(let i=0;i<100&&!s.consult;i++)s=advance(s);
   if(!s.consult)throw Error('相談の見本が作れなかった');
   if(view==='consult-result')s=resolveConsult(s,consultView(s).choices[0].k);
- }else if(['consult-music','winter-music','outing-music','stage','recorded-history','reading-stage','song-set','song-final','rehearsal','rehearsal-records','rehearsal-a','rehearsal-loading','practice','practice-late','practice-a','members','member','member-old','member-bench','grad','grad-old','grad-auto','senior','conduct','announce','announce-silver','announce-bronze','announce-cast','fx','audition','audition-a','audition-decided','audition-long','ensemble'].includes(view)){
+ }else if(['retirement-listen','consult-music','winter-music','outing-music','stage','recorded-history','reading-stage','song-set','song-final','rehearsal','rehearsal-records','rehearsal-a','rehearsal-loading','practice','practice-late','practice-a','members','member','member-old','member-bench','grad','grad-old','grad-auto','senior','conduct','announce','announce-silver','announce-bronze','announce-cast','fx','audition','audition-a','audition-decided','audition-long','ensemble'].includes(view)){
   const ms=fullBand({pitch:68,rhythm:72,tone:64,expr:61}),names=new Set();
   ms.forEach((m,i)=>{m.id='m2028-n'+(i+1)+'-cafe';m.name=makeName(names,'recruit',2028,i+1);m.grade=i%3+1;m.joined=2026;m.joinGrade=1;m.sta=95;m.first={y:2026,w:0,stats:{pitch:15,rhythm:12,tone:18,expr:10}};m.story=[{y:2026,w:0,t:'アルトサックスで入部。'},{y:2027,w:16,t:'はじめての金賞。'},{y:2028,w:26,t:'最後の定期演奏会。'}];});
   s.members=ms;s.year=2028;s.week=10;
  }
  if(view==='consult-music'){s.cohesion=39;s.consult={id:'atmos',mid:s.members.find(m=>m.grade===2).id};}
  if(view==='winter-music'){s.week=26;s=startWinter(s);}
+ if(view==='retirement-listen'){
+  const early=clone(s);early.year=2026;early.week=0;early.recs=[];
+  early.members.forEach(m=>{m.grade=1;m.stats={pitch:15,rhythm:12,tone:18,expr:10};m.fam={galop:0};});
+  addRec(early,'2026年4月の録音',{venue:'room'}).keep=true;
+  s.recs=clone(early.recs);s.week=26;
+  addRec(s,'2028年 定期演奏会',{venue:'hall'}).final=true;s=endSeason(s);
+ }
  if(view==='outing-music'){s.outing={id:'orch'};U.outPick=new Set();}
  if(view==='ensemble'){s.members.forEach((m,i)=>m.grade=i%2+1);s.phase='winter';s.winter={step:1,plan:'kiso'};U.ensKey=null;U.ensPick=null;}
  if(view==='practice-late'){s.week=15;s.members[0].sta=20;}

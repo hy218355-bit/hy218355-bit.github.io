@@ -147,13 +147,13 @@ function updateMini(){
 }
 
 /* ===== 再生 ===== */
-function playPerf(perf, label, onEnd, opts = {}){
+function playPerf(perf, label, onEnd, opts = {}, onWaitCancel = null){
   if(U.recordMember && U.recordPerf !== perf) clearRecordedMember();
   if(SAMPLES.use && !SAMPLES.ready && SAMPLES.loading && !SAMPLES.error){
-    const token = U.waitPlay = {};
+    const token = U.waitPlay = {perf, onCancel:onWaitCancel};
     $('#nowPlaying').textContent = '録音を読み込んでいます…（読み込めたら鳴ります）';
     E.unlock(); updateMini(); renderPlayButtons();
-    const go = () => { if(U.waitPlay === token){ U.waitPlay = null; playPerf(perf, label, onEnd, opts); } };
+    const go = () => { if(U.waitPlay === token){ U.waitPlay = null; playPerf(perf, label, onEnd, opts, onWaitCancel); } };
     SAMPLES.loading.then(go, go);
     return;
   }
@@ -201,9 +201,9 @@ function endPlay(natural = false){
   if(cb) cb(natural);
 }
 function stopPlay(){
-  const waiting = !!U.waitPlay;
+  const waiting = U.waitPlay;
   U.waitPlay = null; updateMini(); renderPlayButtons();
-  if(!U.playing){ if(waiting) setNowPlaying(); return; }
+  if(!U.playing){ if(waiting){ waiting.onCancel?.(); setNowPlaying(); } return; }
   E.stop();
   endPlay();
 }
@@ -551,7 +551,9 @@ function renderSelectors(){
   $('#recordingCount').textContent = recs.length ? `${recs.length}件` : 'まだない';
   $('#btnRec').disabled = !recs.length;
   $('#btnSave').disabled = !recs.length;
-  const sel = U.recordMember || (U.sel && memberById(U.sel));
+  const active = U.waitPlay?.perf || (U.playing ? U.shown : null), cast = active && STAGE_PERFORMERS.get(active);
+  const recSolo = cast?.recorded && U.solo.startsWith('member:') ? cast.members.find(m => m.id === U.solo.slice(7)) : null;
+  const sel = recSolo || U.recordMember || (U.sel && memberById(U.sel));
   $('#soloSel').innerHTML = `<option value="all">全員</option>` + SECTIONS.map(s => `<option value="sec:${s.id}">${s.name}だけ</option>`).join('')
     + (sel ? `<option value="member:${sel.id}">${esc(sel.name)}だけ</option>` : '');
   if(![...$('#soloSel').options].some(o => o.value === U.solo)){ U.solo = 'all'; applySolo(); }

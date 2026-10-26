@@ -1,0 +1,224 @@
+{
+  "waiting": {
+    "theme": "light",
+    "width": 375,
+    "scrollWidth": 375,
+    "playing": false,
+    "waiting": true,
+    "solo": "member:m2028-n3-cafe",
+    "engineSolo": {
+      "type": "member",
+      "id": "m2028-n3-cafe"
+    },
+    "shownLabel": "いまの音（10月 第3週・音楽室）",
+    "playbackId": null,
+    "audibleMemberIds": [],
+    "listening": {
+      "shownPiece": "galop",
+      "title": "「天国と地獄」",
+      "kind": "自由曲",
+      "range": "all",
+      "rangeLabel": "全部",
+      "rangeDisabled": false,
+      "conductDisabled": false,
+      "summary": "音楽室・全部・全員",
+      "engineVenue": "room"
+    },
+    "recordsFingerprint": 0.811259520240128,
+    "state": 0.3091013974044472,
+    "currentCount": 39,
+    "recordedCount": 0,
+    "errors": [],
+    "audio": {
+      "ready": false,
+      "voices": [],
+      "error": null
+    },
+    "boot": {
+      "scripts": 33,
+      "loaded": 33,
+      "failed": [],
+      "errors": []
+    }
+  },
+  "stopped": {
+    "theme": "light",
+    "width": 375,
+    "scrollWidth": 375,
+    "playing": false,
+    "waiting": false,
+    "solo": "member:m2028-n3-cafe",
+    "engineSolo": {
+      "type": "member",
+      "id": "m2028-n3-cafe"
+    },
+    "shownLabel": "いまの音（10月 第3週・音楽室）",
+    "playbackId": null,
+    "audibleMemberIds": [],
+    "listening": {
+      "shownPiece": "galop",
+      "title": "「天国と地獄」",
+      "kind": "自由曲",
+      "range": "all",
+      "rangeLabel": "全部",
+      "rangeDisabled": false,
+      "conductDisabled": false,
+      "summary": "音楽室・全部・全員",
+      "engineVenue": "room"
+    },
+    "recordsFingerprint": 0.811259520240128,
+    "state": 0.3091013974044472,
+    "currentCount": 39,
+    "recordedCount": 0,
+    "errors": [],
+    "audio": {
+      "ready": false,
+      "voices": [],
+      "error": null
+    },
+    "boot": {
+      "scripts": 33,
+      "loaded": 33,
+      "failed": [],
+      "errors": []
+    }
+  },
+  "nextPlay": {
+    "theme": "light",
+    "width": 375,
+    "scrollWidth": 375,
+    "playing": true,
+    "waiting": false,
+    "solo": "member:m2028-n3-cafe",
+    "engineSolo": {
+      "type": "member",
+      "id": "m2028-n3-cafe"
+    },
+    "shownLabel": "いまの音（10月 第3週・音楽室）",
+    "playbackId": 1,
+    "audibleMemberIds": [
+      "m2028-n3-cafe"
+    ],
+    "listening": {
+      "shownPiece": "galop",
+      "title": "「天国と地獄」",
+      "kind": "自由曲",
+      "range": "all",
+      "rangeLabel": "全部",
+      "rangeDisabled": false,
+      "conductDisabled": false,
+      "summary": "音楽室・全部・全員",
+      "engineVenue": "room"
+    },
+    "recordsFingerprint": 0.811259520240128,
+    "state": 0.3091013974044472,
+    "currentCount": 39,
+    "recordedCount": 39,
+    "errors": [],
+    "audio": {
+      "ready": true,
+      "voices": [
+        "SampleVoice"
+      ],
+      "error": null
+    },
+    "boot": {
+      "scripts": 33,
+      "loaded": 33,
+      "failed": [],
+      "errors": []
+    }
+  },
+  "personal": {
+    "theme": "light",
+    "width": 375,
+    "scrollWidth": 375,
+    "playing": true,
+    "waiting": false,
+    "solo": "member:m2028-n3-cafe",
+    "engineSolo": {
+      "type": "member",
+      "id": "m2028-n3-cafe"
+    },
+    "shownLabel": "松井 颯太の音だけ：2026年4月の録音",
+    "playbackId": 2,
+    "audibleMemberIds": [
+      "m2028-n3-cafe"
+    ],
+    "listening": {
+      "shownPiece": "galop",
+      "title": "「天国と地獄」",
+      "kind": "録音",
+      "range": "recorded",
+      "rangeLabel": "全部",
+      "rangeDisabled": true,
+      "conductDisabled": true,
+      "summary": "音楽室・全部・全員",
+      "engineVenue": "room"
+    },
+    "recordsFingerprint": 0.811259520240128,
+    "state": 0.3091013974044472,
+    "currentCount": 39,
+    "recordedCount": 39,
+    "errors": [],
+    "audio": {
+      "ready": true,
+      "voices": [
+        "SampleVoice"
+      ],
+      "error": null
+    },
+    "boot": {
+      "scripts": 33,
+      "loaded": 33,
+      "failed": [],
+      "errors": []
+    }
+  },
+  "whole": {
+    "theme": "light",
+    "width": 375,
+    "scrollWidth": 375,
+    "playing": true,
+    "waiting": false,
+    "solo": "member:m2028-n3-cafe",
+    "engineSolo": {
+      "type": "member",
+      "id": "m2028-n3-cafe"
+    },
+    "shownLabel": "2028年 定期演奏会（県民文化会館で録音）",
+    "playbackId": 3,
+    "audibleMemberIds": [
+      "m2028-n3-cafe"
+    ],
+    "listening": {
+      "shownPiece": "galop",
+      "title": "「天国と地獄」",
+      "kind": "録音",
+      "range": "recorded",
+      "rangeLabel": "全部",
+      "rangeDisabled": true,
+      "conductDisabled": true,
+      "summary": "県民文化会館・全部・全員",
+      "engineVenue": "hall"
+    },
+    "recordsFingerprint": 0.811259520240128,
+    "state": 0.3091013974044472,
+    "currentCount": 39,
+    "recordedCount": 39,
+    "errors": [],
+    "audio": {
+      "ready": true,
+      "voices": [
+        "SampleVoice"
+      ],
+      "error": null
+    },
+    "boot": {
+      "scripts": 33,
+      "loaded": 33,
+      "failed": [],
+      "errors": []
+    }
+  }
+}

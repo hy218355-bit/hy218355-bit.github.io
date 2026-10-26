@@ -275,19 +275,23 @@ function cdFinish(natural){
 
 /* ===== 録音の再生（指揮した録音は、そのときの拍の進み方で）と保存 ===== */
 const recPerf = rec => rememberStageMembers(perform({...recCtx(rec), ...(rec.span || {})}),rec.snap.members);
-function playRecording(rec, label, onEnd = null){
+function playRecording(rec, label, onEnd = null, onWaitCancel = null){
   if(!E.ensure()) return;
+  // 前の個人録音を終えてから切り替え、本人だけの指定を次へ残さない。
+  stopPlay();
   setVenue(rec.venue);
   const perf = recPerf(rec);
   const opts = rec.conduct ? {clock: BeatClock.fromSaved(rec.conduct.ev, E.ac.currentTime + 0.3, rec.conduct.taps), lv: rec.conduct.lv} : {};
-  playPerf(perf, label, onEnd, opts);
+  playPerf(perf, label, onEnd, opts, onWaitCancel);
 }
 // 録音の中の、ひとりの部員の音だけを聴く（鳴り終わったら全員に戻す）
 function playMemberRec(rec, m, label){
   stopPlay();
   U.solo = `member:${m.id}`;
   E.setSolo({type: 'member', id: m.id});
-  playRecording(rec, label, () => { U.solo = 'all'; E.setSolo({type: 'all'}); renderSelectors(); });
+  const reset = () => { U.solo = 'all'; E.setSolo({type: 'all'}); renderSelectors(); };
+  playRecording(rec, label, reset, reset);
+  if(!U.playing && !U.waitPlay) reset(); else renderSelectors();
 }
 
 const recFileName = rec => `吹奏楽部のつくりかた_${rec.year}年度_${rec.label.replace(/[\\/:*?"<>|（）()・]/g, '_').replace(/_+/g, '_').replace(/_$/, '')}`;
