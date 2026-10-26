@@ -85,6 +85,8 @@ function commit(next){
   U.moveUndo = null;
   $('#memberCard .mc-undo')?.remove();
   S = next; save(S);
+  // 次の再生では、保存後の部員と編成から音を作る。再生中の演奏は保つ。
+  U.perfNow = null;
 }
 
 /* ===== いまの演奏を作り直す ===== */
@@ -98,6 +100,8 @@ function currentPerformance(){
 }
 function refreshNow(){
   clearTimeout(U.refreshT);
+  // 描き直しを待たずに押しても、変更前の音を再生しない。
+  U.perfNow = null;
   U.refreshT = setTimeout(() => {
     U.perfNow = currentPerformance();
     U.diag = analyze(U.perfNow);
@@ -2145,8 +2149,8 @@ function bind(){
       return;
     }
     if(b.dataset.ep !== undefined){ haptic('tap'); commit(resolveEpisode(S, +b.dataset.ep)); renderAll(); refreshNow(); return; }
-    if(b.dataset.cs !== undefined){ haptic('tap'); commit(resolveConsult(S, +b.dataset.cs)); renderAll(); return; }
-    if(b.dataset.wplan){ haptic('tap'); commit(chooseWinterPlan(S, b.dataset.wplan)); renderAll(); scrollTo(0, 0); return; }
+    if(b.dataset.cs !== undefined){ haptic('tap'); commit(resolveConsult(S, +b.dataset.cs)); renderAll(); refreshNow(); return; }
+    if(b.dataset.wplan){ haptic('tap'); commit(chooseWinterPlan(S, b.dataset.wplan)); renderAll(); refreshNow(); scrollTo(0, 0); return; }
     if(b.dataset.ens){ const id = b.dataset.ens; if(U.ensPick.has(id)) U.ensPick.delete(id); else if(U.ensPick.size < ENS_MAX) U.ensPick.add(id); else return; haptic('tap'); updateEnsembleSelection(); return; }
     if(b.dataset.split){ haptic('tap'); commit(setSplit(S, b.dataset.split)); renderWeek();document.querySelector(`[data-split="${b.dataset.split}"]`)?.focus({preventScroll:true});return; }
     if(b.dataset.rid){ asgSelect(b.dataset.rid, narrow.matches); return; }
@@ -2158,7 +2162,7 @@ function bind(){
       if(U.outPick.has(id)) U.outPick.delete(id); else if(v && U.outPick.size < v.n) U.outPick.add(id); else return;
       haptic('tap'); renderWeek(); return;
     }
-    if(b.dataset.act === 'outing'){ haptic('tap'); commit(resolveOuting(S, [...U.outPick])); U.outPick = new Set(); renderAll(); return; }
+    if(b.dataset.act === 'outing'){ haptic('tap'); commit(resolveOuting(S, [...U.outPick])); U.outPick = new Set(); renderAll(); refreshNow(); return; }
     const act = b.dataset.act;
     if(act === 'preview' || act === 'model'){
       const pid = b.dataset.pid;
@@ -2201,7 +2205,7 @@ function bind(){
     else if(act === 'next'){ stopPlay(); commit(finishStage(S)); renderAll(); refreshNow(); }
     else if(act === 'newyear'){ stopPlay(); commit(newYear(S)); U.sel = null; U.piece = null; renderAll(); refreshNow(); }
     else if(act === 'gradroll') openGradRoll();
-    else if(act === 'winter'){ stopPlay(); commit(startWinter(S)); U.sel = null; renderAll(); scrollTo(0, 0); }
+    else if(act === 'winter'){ stopPlay(); commit(startWinter(S)); U.sel = null; renderAll(); refreshNow(); scrollTo(0, 0); }
     else if(act === 'ensgo'){ haptic('tap'); commit(runEnsemble(S, [...U.ensPick])); U.ensHide = S.year; renderAll(); playEnsemble(); }
     else if(act === 'ensskip'){ commit(skipEnsemble(S)); renderAll(); }
     else if(act === 'wnext'){ stopPlay(); const ny = winterStep(S).id === 'grad'; commit(winterNext(S)); if(ny){ U.sel = null; U.piece = null; } renderAll(); refreshNow(); scrollTo(0, 0); }

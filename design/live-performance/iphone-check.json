@@ -1,0 +1,15 @@
+{
+  "build": "succeeded",
+  "install": "succeeded",
+  "launch": "device_locked",
+  "files": {
+    "index.html": {
+      "source": "f7a4cecd8f9955265586c49edcf208317e30fd23fd3359c7d8196204957f6701",
+      "bundle": "f7a4cecd8f9955265586c49edcf208317e30fd23fd3359c7d8196204957f6701"
+    },
+    "js/ui.js": {
+      "source": "9efaa9d06d3b14eda220c804cbaa606533d6696de26a2062a805fd40e2935155",
+      "bundle": "9efaa9d06d3b14eda220c804cbaa606533d6696de26a2062a805fd40e2935155"
+    }
+  }
+}

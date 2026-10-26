@@ -1,0 +1,8 @@
+{
+  "expected": 0.6911756573244929,
+  "prepared": 0.6001881272532046,
+  "shown": 0.6001881272532046,
+  "expectedCohesion": 0.2,
+  "preparedCohesion": 0.2,
+  "shownCohesion": 0.2
+}
