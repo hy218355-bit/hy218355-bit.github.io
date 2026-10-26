@@ -538,6 +538,28 @@ th.num{text-align:center}
 .yr-mem{display:grid;grid-template-columns:auto minmax(0,1fr);gap:6px 12px;font-size:13px;line-height:1.6;margin:0}
 .yr-mem dt{color:var(--ink-soft);white-space:nowrap}
 .yr-mem dd{margin:0}
+.yr-grow-label,.yr-grow-list{grid-column:1/-1}
+.yr-grow-person{display:flex;align-items:center;gap:8px;min-height:40px;min-width:0}
+.yr-grow-person+.yr-grow-person{margin-top:6px}
+.yr-grow-person>.member-face{border-radius:7px}
+.yr-grow-person>b{flex:1;min-width:0;overflow-wrap:anywhere;font-size:13px}
+.yr-grow-ranks{display:flex;align-items:center;gap:5px;flex:none}
+.yr-grow-ranks .rk{width:24px;height:26px;font-size:14px}
+.yr-grow-ranks .ui-icon{width:13px;height:13px;transform:rotate(-90deg);color:var(--ink-soft)}
+.yr-more{border-top:1px solid var(--rule)}
+.yr-more>summary{min-height:44px;display:flex;align-items:center;justify-content:space-between;gap:10px;list-style:none;cursor:pointer;font-size:13px;color:var(--ink-soft)}
+.yr-more>summary::-webkit-details-marker{display:none}
+.yr-more>summary>.ui-icon{width:15px;height:15px;flex:none}
+.yr-more[open]>summary>.ui-icon{transform:rotate(180deg)}
+.yr-more p{font-size:12px;line-height:1.8;margin:0 0 12px;color:var(--ink-soft)}
+.year-actions .btn{min-height:46px}
+@media(max-width:960px){
+ .tabbed #week:has(.year-actions){padding-bottom:90px}
+ .tabbed .year-actions{position:fixed;left:max(16px,env(safe-area-inset-left,0px));right:max(16px,env(safe-area-inset-right,0px));bottom:calc(60px + env(safe-area-inset-bottom,0px));z-index:45;display:flex;gap:8px;padding:12px 0 8px;background:linear-gradient(transparent,var(--paper) 18%)}
+ .year-actions .btn{flex:1;font-size:12px;padding:10px 6px}
+ .tabbed:has(.mini:not([hidden])) .year-actions{bottom:calc(122px + env(safe-area-inset-bottom,0px))}
+}
+
 .result{display:grid;gap:14px}
 .award{display:flex;align-items:center;gap:18px}
 .stamp{flex:none;font-family:var(--f-display);font-size:34px;line-height:1;padding:14px 14px 12px;border:3px double var(--award);color:var(--award);border-radius:10px;transform:rotate(-5deg)}
@@ -1444,13 +1466,13 @@ html[data-season="snow"]{--season-band:linear-gradient(90deg,#DDE8F3,#FFFFFF,#B9
 <script src="js/pieces/spring.js?v=score-balance-1"></script>
 <script src="js/pieces/canon.js?v=score-balance-1"></script>
 <script src="js/band.js?v=reading-difficulty-1"></script>
-<script src="js/game.js?v=audition-compare-1"></script>
+<script src="js/game.js?v=first-year-audit-1"></script>
 <script src="js/engine.js"></script>
-<script src="js/conduct.js?v=rehearsal-range-1"></script>
+<script src="js/conduct.js?v=first-year-audit-1"></script>
 <script src="js/announce.js?v=result-journal-1"></script>
 <script src="js/tunegame.js"></script>
 <script src="js/fx.js"></script>
-<script src="js/ui.js?v=sample-retry-2"></script>
+<script src="js/ui.js?v=first-year-audit-1"></script>
 <div class="tip" id="tip" role="tooltip" hidden></div>
 </body>
 </html>

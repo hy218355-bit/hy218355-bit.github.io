@@ -1,0 +1,108 @@
+{
+  "reachedNextYear": true,
+  "recordedActions": 76,
+  "allFlowWithoutErrors": true,
+  "allFlowWithin375": true,
+  "beforeStopWasStale": true,
+  "afterStopMatchesCurrent": true,
+  "summaryUsesThreeFacesAndRanks": true,
+  "summaryGrowth": [
+    {
+      "id": "m2026-n1-723df5a6",
+      "name": "藤田 翔",
+      "ranks": "GからC"
+    },
+    {
+      "id": "m2026-n3-723df5a6",
+      "name": "高木 紬",
+      "ranks": "GからC"
+    },
+    {
+      "id": "m2026-n5-723df5a6",
+      "name": "安藤 蓮",
+      "ranks": "GからC"
+    }
+  ],
+  "summaryDateIsMarch": true,
+  "normalNewYearButton": {
+    "top": 698,
+    "bottom": 744,
+    "height": 46
+  },
+  "replayNewYearButton": {
+    "top": 636,
+    "bottom": 682,
+    "height": 46
+  },
+  "buttonReachableWithReplay": true,
+  "youngGuideOmitsSeniors": true,
+  "youngLogOmitsSeniorFarewell": true,
+  "seniorGuideKeepsFarewell": true,
+  "newYearButtonWorks": true,
+  "tabs": [
+    {
+      "theme": "light",
+      "tab": "week",
+      "width": 375,
+      "scrollWidth": 375,
+      "errors": [],
+      "newYearButtonVisible": true
+    },
+    {
+      "theme": "light",
+      "tab": "play",
+      "width": 375,
+      "scrollWidth": 375,
+      "errors": [],
+      "newYearButtonVisible": false
+    },
+    {
+      "theme": "light",
+      "tab": "members",
+      "width": 375,
+      "scrollWidth": 375,
+      "errors": [],
+      "newYearButtonVisible": false
+    },
+    {
+      "theme": "light",
+      "tab": "log",
+      "width": 375,
+      "scrollWidth": 375,
+      "errors": [],
+      "newYearButtonVisible": false
+    },
+    {
+      "theme": "dark",
+      "tab": "week",
+      "width": 375,
+      "scrollWidth": 375,
+      "errors": [],
+      "newYearButtonVisible": true
+    },
+    {
+      "theme": "dark",
+      "tab": "play",
+      "width": 375,
+      "scrollWidth": 375,
+      "errors": [],
+      "newYearButtonVisible": false
+    },
+    {
+      "theme": "dark",
+      "tab": "members",
+      "width": 375,
+      "scrollWidth": 375,
+      "errors": [],
+      "newYearButtonVisible": false
+    },
+    {
+      "theme": "dark",
+      "tab": "log",
+      "width": 375,
+      "scrollWidth": 375,
+      "errors": [],
+      "newYearButtonVisible": false
+    }
+  ]
+}

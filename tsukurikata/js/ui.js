@@ -66,7 +66,8 @@ function rangeSpan(pid){
   if(U.range === 'all') return {from: 0, to: pc.beats};
   return pc.spans[+U.range] || {from: 0, to: pc.beats};
 }
-const nowLabel = () => `いまの音（${S.phase === 'choose' || S.phase === 'chooseSet' ? '選曲前' : wkLabel(S.week)}・${VENUE[U.venue].name}）`;
+const nowWhen = () => S.phase === 'choose' || S.phase === 'chooseSet' ? '選曲前' : S.phase === 'winter' ? `${winterStep(S).m}月` : wkLabel(S.week);
+const nowLabel = () => `いまの音（${nowWhen()}・${VENUE[U.venue].name}）`;
 const busy = () => !!(S.pending && !S.pending.revealed);
 // 画面の設定は会場だけ残す（聴く位置は客席の中央、音はいつも楽器の録音で鳴らす）
 // 端末ごとの設定：聴く会場、効果音（sfx）、演出（fxMode：full ふつう／short 短く／off なし）
@@ -178,7 +179,6 @@ function playPerf(perf, label, onEnd, opts = {}){
 }
 // natural：最後まで鳴り終わったとき（止めるボタンなら false）
 function endPlay(natural = false){
-  const wasRecording = recordingPlayback();
   if(window.TSUKURIKATA_NATIVE) nativePost({type: 'log', msg: `play end ${natural ? 'natural' : 'stopped'} at ${(U.lastT ?? -1).toFixed(2)}s / ${U.shown?.total?.toFixed(1)}s, audio ${E.ac?.state}`});
   U.playing = false;
   nativePost({type: 'playing', on: false});
@@ -187,7 +187,8 @@ function endPlay(natural = false){
   setNowPlaying();
   clearRecordedMember();
   renderPiece();
-  if(wasRecording){U.perfNow=null;refreshNow();}
+  // 聴いている間に週が進んだときも、停止後は今の部と譜面へ戻す。
+  U.perfNow=null;refreshNow();
   drawIdle();
   const cb = U.onEnd; U.onEnd = null;
   if(cb) cb(natural);
@@ -754,7 +755,7 @@ function renderWeekBody(){
     return;
   }
   if(S.chooseFinal){
-    w.innerHTML = `<div class="event"><span class="tag">定期演奏会の曲</span><span>3年生の最後の本番、${wkLabel(S.finalWeek)}の定期演奏会で演奏する曲を決めよう。コンクールの曲をもう一度でも、新しい曲に挑戦してもいい（新しい曲は、譜読みが低いところから）。</span></div>`
+    w.innerHTML = `<div class="event"><span class="tag">定期演奏会の曲</span><span>${hasSeniors(S) ? '3年生の最後の本番、' : ''}${wkLabel(S.finalWeek)}の定期演奏会で演奏する曲を決めよう。コンクールの曲をもう一度でも、新しい曲に挑戦してもいい（新しい曲は、譜読みが低いところから）。</span></div>`
       + PIECE_IDS.map(id => pieceCard(id, {tag: id === S.contestPiece ? 'コンクールで演奏した曲' : '', note: `譜読み ${rankBadge(readAvg(S, id))}`, act: 'choosefinal', label: '決める'})).join('');
     return;
   }
@@ -834,9 +835,10 @@ function yearMembersHtml(){
   const skills = [...sk].map(([t, ns]) => `${t}：${ns.slice(0, 3).join('・')}${ns.length > 3 ? ` ほか${ns.length - 3}人` : ''}`);
   const outs = (S.outLog || []).filter(x => x.y === y).map(x => `${x.title}（${x.who}）`);
   const more = (l, n) => l.slice(0, n).join('・') + (l.length > n ? ` ほか${l.length - n}件` : '');
-  const rows = [grow.length && ['いちばん伸びた', grow.map(x => `${x.m.name} +${Math.round(x.d)}`).join('・')],
-    skills.length && ['身につけたスキル', skills.join('／')], outs.length && ['行事', more(outs, 4)]].filter(Boolean);
-  return rows.length ? `<dl class="yr-mem">${rows.map(([k, v]) => `<dt>${k}</dt><dd>${esc(v)}</dd>`).join('')}</dl>` : '';
+  const grown = grow.map(({m}) => `<span class="yr-grow-person" data-year-growth="${m.id}">${memberFace(m,32)}<b>${esc(m.name)}</b><span class="yr-grow-ranks" aria-label="${rankOf(base(m))}から${rankOf(avgStat(m))}">${rankBadge(base(m))}${uiIcon('chevron')}${rankBadge(avgStat(m))}</span></span>`).join('');
+  const growth = grow.length ? `<dl class="yr-mem"><dt class="yr-grow-label">いちばん伸びた</dt><dd class="yr-grow-list">${grown}</dd></dl>` : '';
+  const rows = [skills.length && ['身につけたスキル', skills.join('／')], outs.length && ['行事', more(outs, 4)]].filter(Boolean);
+  return growth + rows.map(([title, text])=>`<details class="yr-more"><summary>${title}${uiIcon('chevron')}</summary><p>${esc(text)}</p></details>`).join('');
 }
 /* ===== 演出のきっかけ =====
    月・年度が変わったら場面の扉、スキル・顧問の指導力・部の節目はカットインで（同じスキルはまとめて）。
@@ -1054,7 +1056,7 @@ function renderWinter(w){
   const grads = S.gradMembers || [];
   // 3月の終わり：卒業式で送ったあとに、1年のまとめ
   if(S.winter.gradDone){
-    w.innerHTML = yearSummaryHtml() + `<div class="transport"><button class="btn primary" type="button" data-act="wnext">4月へ（新年度）</button></div>`;
+    w.innerHTML = yearSummaryHtml() + `<div class="transport year-actions"><button class="btn primary" type="button" data-act="wnext">4月へ（新年度）</button></div>`;
     return;
   }
   w.innerHTML = `<div class="event"><span class="tag">3月・卒業式</span><span>${names.length ? `卒業式の日。${names.map(esc).join('、')}を、1・2年生の演奏で送ろう。` : '3月。春休みの音楽室で、新しい1年に向けて準備をしよう。'}</span></div>

@@ -1,0 +1,3581 @@
+[
+  {
+    "action": "担当と曲を決定",
+    "year": 2026,
+    "week": 0,
+    "phase": "week",
+    "pending": null,
+    "members": [
+      {
+        "id": "m2026-n1-723df5a6",
+        "name": "藤田 翔",
+        "seat": "fl1a"
+      },
+      {
+        "id": "m2026-n2-723df5a6",
+        "name": "内田 詩",
+        "seat": "hn1"
+      },
+      {
+        "id": "m2026-n3-723df5a6",
+        "name": "高木 紬",
+        "seat": "tuba1"
+      },
+      {
+        "id": "m2026-n4-723df5a6",
+        "name": "中山 詩",
+        "seat": "asax1"
+      },
+      {
+        "id": "m2026-n5-723df5a6",
+        "name": "安藤 蓮",
+        "seat": "bsax1"
+      }
+    ],
+    "width": 375,
+    "scrollWidth": 375,
+    "errors": [],
+    "shownLabel": "いまの音（4月 第1週・音楽室）",
+    "expectedNowLabel": "いまの音（4月 第1週・音楽室）",
+    "playing": false
+  },
+  {
+    "action": "新入生歓迎演奏を開始",
+    "year": 2026,
+    "week": 1,
+    "phase": "week",
+    "pending": {
+      "kind": "concert",
+      "revealed": false
+    },
+    "members": [
+      {
+        "id": "m2026-n1-723df5a6",
+        "name": "藤田 翔",
+        "seat": "fl1a"
+      },
+      {
+        "id": "m2026-n2-723df5a6",
+        "name": "内田 詩",
+        "seat": "hn1"
+      },
+      {
+        "id": "m2026-n3-723df5a6",
+        "name": "高木 紬",
+        "seat": "tuba1"
+      },
+      {
+        "id": "m2026-n4-723df5a6",
+        "name": "中山 詩",
+        "seat": "asax1"
+      },
+      {
+        "id": "m2026-n5-723df5a6",
+        "name": "安藤 蓮",
+        "seat": "bsax1"
+      }
+    ],
+    "width": 375,
+    "scrollWidth": 375,
+    "errors": [],
+    "shownLabel": "2026 新入生歓迎演奏",
+    "expectedNowLabel": "いまの音（4月 第2週・体育館）",
+    "playing": true
+  },
+  {
+    "action": "新入生歓迎演奏の結果へ",
+    "year": 2026,
+    "week": 1,
+    "phase": "week",
+    "pending": {
+      "kind": "concert",
+      "revealed": true
+    },
+    "members": [
+      {
+        "id": "m2026-n1-723df5a6",
+        "name": "藤田 翔",
+        "seat": "fl1a"
+      },
+      {
+        "id": "m2026-n2-723df5a6",
+        "name": "内田 詩",
+        "seat": "hn1"
+      },
+      {
+        "id": "m2026-n3-723df5a6",
+        "name": "高木 紬",
+        "seat": "tuba1"
+      },
+      {
+        "id": "m2026-n4-723df5a6",
+        "name": "中山 詩",
+        "seat": "asax1"
+      },
+      {
+        "id": "m2026-n5-723df5a6",
+        "name": "安藤 蓮",
+        "seat": "bsax1"
+      }
+    ],
+    "width": 375,
+    "scrollWidth": 375,
+    "errors": [],
+    "shownLabel": "いまの音（4月 第2週・体育館）",
+    "expectedNowLabel": "いまの音（4月 第2週・体育館）",
+    "playing": false
+  },
+  {
+    "action": "4月第3週へ",
+    "year": 2026,
+    "week": 2,
+    "phase": "week",
+    "pending": null,
+    "members": [
+      {
+        "id": "m2026-n1-723df5a6",
+        "name": "藤田 翔",
+        "seat": "fl1a"
+      },
+      {
+        "id": "m2026-n2-723df5a6",
+        "name": "内田 詩",
+        "seat": "hn1"
+      },
+      {
+        "id": "m2026-n3-723df5a6",
+        "name": "高木 紬",
+        "seat": "tuba1"
+      },
+      {
+        "id": "m2026-n4-723df5a6",
+        "name": "中山 詩",
+        "seat": "asax1"
+      },
+      {
+        "id": "m2026-n5-723df5a6",
+        "name": "安藤 蓮",
+        "seat": "bsax1"
+      }
+    ],
+    "width": 375,
+    "scrollWidth": 375,
+    "errors": [],
+    "shownLabel": "いまの音（4月 第3週・体育館）",
+    "expectedNowLabel": "いまの音（4月 第3週・体育館）",
+    "playing": false
+  },
+  {
+    "action": "リードの相談に答える",
+    "year": 2026,
+    "week": 2,
+    "phase": "week",
+    "pending": null,
+    "members": [
+      {
+        "id": "m2026-n1-723df5a6",
+        "name": "藤田 翔",
+        "seat": "fl1a"
+      },
+      {
+        "id": "m2026-n2-723df5a6",
+        "name": "内田 詩",
+        "seat": "hn1"
+      },
+      {
+        "id": "m2026-n3-723df5a6",
+        "name": "高木 紬",
+        "seat": "tuba1"
+      },
+      {
+        "id": "m2026-n4-723df5a6",
+        "name": "中山 詩",
+        "seat": "asax1"
+      },
+      {
+        "id": "m2026-n5-723df5a6",
+        "name": "安藤 蓮",
+        "seat": "bsax1"
+      }
+    ],
+    "width": 375,
+    "scrollWidth": 375,
+    "errors": [],
+    "shownLabel": "いまの音（4月 第3週・体育館）",
+    "expectedNowLabel": "いまの音（4月 第3週・体育館）",
+    "playing": false
+  },
+  {
+    "action": "合奏を開く",
+    "year": 2026,
+    "week": 2,
+    "phase": "week",
+    "pending": null,
+    "members": [
+      {
+        "id": "m2026-n1-723df5a6",
+        "name": "藤田 翔",
+        "seat": "fl1a"
+      },
+      {
+        "id": "m2026-n2-723df5a6",
+        "name": "内田 詩",
+        "seat": "hn1"
+      },
+      {
+        "id": "m2026-n3-723df5a6",
+        "name": "高木 紬",
+        "seat": "tuba1"
+      },
+      {
+        "id": "m2026-n4-723df5a6",
+        "name": "中山 詩",
+        "seat": "asax1"
+      },
+      {
+        "id": "m2026-n5-723df5a6",
+        "name": "安藤 蓮",
+        "seat": "bsax1"
+      }
+    ],
+    "width": 375,
+    "scrollWidth": 375,
+    "errors": [],
+    "shownLabel": "いまの音（4月 第3週・体育館）",
+    "expectedNowLabel": "いまの音（4月 第3週・体育館）",
+    "playing": false
+  },
+  {
+    "action": "4月第3週の合奏を聴く",
+    "year": 2026,
+    "week": 2,
+    "phase": "week",
+    "pending": null,
+    "members": [
+      {
+        "id": "m2026-n1-723df5a6",
+        "name": "藤田 翔",
+        "seat": "fl1a"
+      },
+      {
+        "id": "m2026-n2-723df5a6",
+        "name": "内田 詩",
+        "seat": "hn1"
+      },
+      {
+        "id": "m2026-n3-723df5a6",
+        "name": "高木 紬",
+        "seat": "tuba1"
+      },
+      {
+        "id": "m2026-n4-723df5a6",
+        "name": "中山 詩",
+        "seat": "asax1"
+      },
+      {
+        "id": "m2026-n5-723df5a6",
+        "name": "安藤 蓮",
+        "seat": "bsax1"
+      }
+    ],
+    "width": 375,
+    "scrollWidth": 375,
+    "errors": [],
+    "shownLabel": "いまの音（4月 第3週・体育館）",
+    "expectedNowLabel": "いまの音（4月 第3週・体育館）",
+    "playing": true
+  },
+  {
+    "action": "今週に戻る",
+    "year": 2026,
+    "week": 2,
+    "phase": "week",
+    "pending": null,
+    "members": [
+      {
+        "id": "m2026-n1-723df5a6",
+        "name": "藤田 翔",
+        "seat": "fl1a"
+      },
+      {
+        "id": "m2026-n2-723df5a6",
+        "name": "内田 詩",
+        "seat": "hn1"
+      },
+      {
+        "id": "m2026-n3-723df5a6",
+        "name": "高木 紬",
+        "seat": "tuba1"
+      },
+      {
+        "id": "m2026-n4-723df5a6",
+        "name": "中山 詩",
+        "seat": "asax1"
+      },
+      {
+        "id": "m2026-n5-723df5a6",
+        "name": "安藤 蓮",
+        "seat": "bsax1"
+      }
+    ],
+    "width": 375,
+    "scrollWidth": 375,
+    "errors": [],
+    "shownLabel": "いまの音（4月 第3週・体育館）",
+    "expectedNowLabel": "いまの音（4月 第3週・体育館）",
+    "playing": true
+  },
+  {
+    "action": "合奏を聴きながら1週間練習",
+    "year": 2026,
+    "week": 3,
+    "phase": "week",
+    "pending": null,
+    "members": [
+      {
+        "id": "m2026-n1-723df5a6",
+        "name": "藤田 翔",
+        "seat": "fl1a"
+      },
+      {
+        "id": "m2026-n2-723df5a6",
+        "name": "内田 詩",
+        "seat": "hn1"
+      },
+      {
+        "id": "m2026-n3-723df5a6",
+        "name": "高木 紬",
+        "seat": "tuba1"
+      },
+      {
+        "id": "m2026-n4-723df5a6",
+        "name": "中山 詩",
+        "seat": "asax1"
+      },
+      {
+        "id": "m2026-n5-723df5a6",
+        "name": "安藤 蓮",
+        "seat": "bsax1"
+      }
+    ],
+    "width": 375,
+    "scrollWidth": 375,
+    "errors": [],
+    "shownLabel": "いまの音（4月 第3週・体育館）",
+    "expectedNowLabel": "いまの音（4月 第4週・体育館）",
+    "playing": true
+  },
+  {
+    "action": "合奏を停止",
+    "year": 2026,
+    "week": 3,
+    "phase": "week",
+    "pending": null,
+    "members": [
+      {
+        "id": "m2026-n1-723df5a6",
+        "name": "藤田 翔",
+        "seat": "fl1a"
+      },
+      {
+        "id": "m2026-n2-723df5a6",
+        "name": "内田 詩",
+        "seat": "hn1"
+      },
+      {
+        "id": "m2026-n3-723df5a6",
+        "name": "高木 紬",
+        "seat": "tuba1"
+      },
+      {
+        "id": "m2026-n4-723df5a6",
+        "name": "中山 詩",
+        "seat": "asax1"
+      },
+      {
+        "id": "m2026-n5-723df5a6",
+        "name": "安藤 蓮",
+        "seat": "bsax1"
+      }
+    ],
+    "width": 375,
+    "scrollWidth": 375,
+    "errors": [],
+    "shownLabel": "いまの音（4月 第4週・体育館）",
+    "expectedNowLabel": "いまの音（4月 第4週・体育館）",
+    "playing": false
+  },
+  {
+    "action": "停止後の表示を確認",
+    "year": 2026,
+    "week": 3,
+    "phase": "week",
+    "pending": null,
+    "members": [
+      {
+        "id": "m2026-n1-723df5a6",
+        "name": "藤田 翔",
+        "seat": "fl1a"
+      },
+      {
+        "id": "m2026-n2-723df5a6",
+        "name": "内田 詩",
+        "seat": "hn1"
+      },
+      {
+        "id": "m2026-n3-723df5a6",
+        "name": "高木 紬",
+        "seat": "tuba1"
+      },
+      {
+        "id": "m2026-n4-723df5a6",
+        "name": "中山 詩",
+        "seat": "asax1"
+      },
+      {
+        "id": "m2026-n5-723df5a6",
+        "name": "安藤 蓮",
+        "seat": "bsax1"
+      }
+    ],
+    "width": 375,
+    "scrollWidth": 375,
+    "errors": [],
+    "shownLabel": "いまの音（4月 第4週・体育館）",
+    "expectedNowLabel": "いまの音（4月 第4週・体育館）",
+    "playing": false
+  },
+  {
+    "action": "4月第4週の担当決めへ",
+    "year": 2026,
+    "week": 3,
+    "phase": "week",
+    "pending": null,
+    "members": [
+      {
+        "id": "m2026-n1-723df5a6",
+        "name": "藤田 翔",
+        "seat": "fl1a"
+      },
+      {
+        "id": "m2026-n2-723df5a6",
+        "name": "内田 詩",
+        "seat": "hn1"
+      },
+      {
+        "id": "m2026-n3-723df5a6",
+        "name": "高木 紬",
+        "seat": "tuba1"
+      },
+      {
+        "id": "m2026-n4-723df5a6",
+        "name": "中山 詩",
+        "seat": "asax1"
+      },
+      {
+        "id": "m2026-n5-723df5a6",
+        "name": "安藤 蓮",
+        "seat": "bsax1"
+      }
+    ],
+    "width": 375,
+    "scrollWidth": 375,
+    "errors": [],
+    "shownLabel": "いまの音（4月 第4週・体育館）",
+    "expectedNowLabel": "いまの音（4月 第4週・体育館）",
+    "playing": false
+  },
+  {
+    "action": "合奏のダーク表示へ",
+    "year": 2026,
+    "week": 3,
+    "phase": "week",
+    "pending": null,
+    "members": [
+      {
+        "id": "m2026-n1-723df5a6",
+        "name": "藤田 翔",
+        "seat": "fl1a"
+      },
+      {
+        "id": "m2026-n2-723df5a6",
+        "name": "内田 詩",
+        "seat": "hn1"
+      },
+      {
+        "id": "m2026-n3-723df5a6",
+        "name": "高木 紬",
+        "seat": "tuba1"
+      },
+      {
+        "id": "m2026-n4-723df5a6",
+        "name": "中山 詩",
+        "seat": "asax1"
+      },
+      {
+        "id": "m2026-n5-723df5a6",
+        "name": "安藤 蓮",
+        "seat": "bsax1"
+      }
+    ],
+    "width": 375,
+    "scrollWidth": 375,
+    "errors": [],
+    "shownLabel": "いまの音（4月 第4週・体育館）",
+    "expectedNowLabel": "いまの音（4月 第4週・体育館）",
+    "playing": false
+  },
+  {
+    "action": "担当決めへ戻る",
+    "year": 2026,
+    "week": 3,
+    "phase": "week",
+    "pending": null,
+    "members": [
+      {
+        "id": "m2026-n1-723df5a6",
+        "name": "藤田 翔",
+        "seat": "fl1a"
+      },
+      {
+        "id": "m2026-n2-723df5a6",
+        "name": "内田 詩",
+        "seat": "hn1"
+      },
+      {
+        "id": "m2026-n3-723df5a6",
+        "name": "高木 紬",
+        "seat": "tuba1"
+      },
+      {
+        "id": "m2026-n4-723df5a6",
+        "name": "中山 詩",
+        "seat": "asax1"
+      },
+      {
+        "id": "m2026-n5-723df5a6",
+        "name": "安藤 蓮",
+        "seat": "bsax1"
+      }
+    ],
+    "width": 375,
+    "scrollWidth": 375,
+    "errors": [],
+    "shownLabel": "いまの音（4月 第4週・体育館）",
+    "expectedNowLabel": "いまの音（4月 第4週・体育館）",
+    "playing": false
+  },
+  {
+    "action": "新入部員の担当を決定",
+    "year": 2026,
+    "week": 3,
+    "phase": "week",
+    "pending": null,
+    "members": [
+      {
+        "id": "m2026-n1-723df5a6",
+        "name": "藤田 翔",
+        "seat": "fl1a"
+      },
+      {
+        "id": "m2026-n2-723df5a6",
+        "name": "内田 詩",
+        "seat": "hn1"
+      },
+      {
+        "id": "m2026-n3-723df5a6",
+        "name": "高木 紬",
+        "seat": "tuba1"
+      },
+      {
+        "id": "m2026-n4-723df5a6",
+        "name": "中山 詩",
+        "seat": "asax1"
+      },
+      {
+        "id": "m2026-n5-723df5a6",
+        "name": "安藤 蓮",
+        "seat": "bsax1"
+      },
+      {
+        "id": "m2026-n6-723df5a6",
+        "name": "宮崎 和奏",
+        "seat": "ebcl1"
+      }
+    ],
+    "width": 375,
+    "scrollWidth": 375,
+    "errors": [],
+    "shownLabel": "いまの音（4月 第4週・体育館）",
+    "expectedNowLabel": "いまの音（4月 第4週・体育館）",
+    "playing": false
+  },
+  {
+    "action": "5月第1週へ",
+    "year": 2026,
+    "week": 4,
+    "phase": "week",
+    "pending": null,
+    "members": [
+      {
+        "id": "m2026-n1-723df5a6",
+        "name": "藤田 翔",
+        "seat": "fl1a"
+      },
+      {
+        "id": "m2026-n2-723df5a6",
+        "name": "内田 詩",
+        "seat": "hn1"
+      },
+      {
+        "id": "m2026-n3-723df5a6",
+        "name": "高木 紬",
+        "seat": "tuba1"
+      },
+      {
+        "id": "m2026-n4-723df5a6",
+        "name": "中山 詩",
+        "seat": "asax1"
+      },
+      {
+        "id": "m2026-n5-723df5a6",
+        "name": "安藤 蓮",
+        "seat": "bsax1"
+      },
+      {
+        "id": "m2026-n6-723df5a6",
+        "name": "宮崎 和奏",
+        "seat": "ebcl1"
+      }
+    ],
+    "width": 375,
+    "scrollWidth": 375,
+    "errors": [],
+    "shownLabel": "いまの音（5月 第1週・体育館）",
+    "expectedNowLabel": "いまの音（5月 第1週・体育館）",
+    "playing": false
+  },
+  {
+    "action": "誕生日を祝う",
+    "year": 2026,
+    "week": 4,
+    "phase": "week",
+    "pending": null,
+    "members": [
+      {
+        "id": "m2026-n1-723df5a6",
+        "name": "藤田 翔",
+        "seat": "fl1a"
+      },
+      {
+        "id": "m2026-n2-723df5a6",
+        "name": "内田 詩",
+        "seat": "hn1"
+      },
+      {
+        "id": "m2026-n3-723df5a6",
+        "name": "高木 紬",
+        "seat": "tuba1"
+      },
+      {
+        "id": "m2026-n4-723df5a6",
+        "name": "中山 詩",
+        "seat": "asax1"
+      },
+      {
+        "id": "m2026-n5-723df5a6",
+        "name": "安藤 蓮",
+        "seat": "bsax1"
+      },
+      {
+        "id": "m2026-n6-723df5a6",
+        "name": "宮崎 和奏",
+        "seat": "ebcl1"
+      }
+    ],
+    "width": 375,
+    "scrollWidth": 375,
+    "errors": [],
+    "shownLabel": "いまの音（5月 第1週・体育館）",
+    "expectedNowLabel": "いまの音（5月 第1週・体育館）",
+    "playing": false
+  },
+  {
+    "action": "5月第2週へ",
+    "year": 2026,
+    "week": 5,
+    "phase": "week",
+    "pending": null,
+    "members": [
+      {
+        "id": "m2026-n1-723df5a6",
+        "name": "藤田 翔",
+        "seat": "fl1a"
+      },
+      {
+        "id": "m2026-n2-723df5a6",
+        "name": "内田 詩",
+        "seat": "hn1"
+      },
+      {
+        "id": "m2026-n3-723df5a6",
+        "name": "高木 紬",
+        "seat": "tuba1"
+      },
+      {
+        "id": "m2026-n4-723df5a6",
+        "name": "中山 詩",
+        "seat": "asax1"
+      },
+      {
+        "id": "m2026-n5-723df5a6",
+        "name": "安藤 蓮",
+        "seat": "bsax1"
+      },
+      {
+        "id": "m2026-n6-723df5a6",
+        "name": "宮崎 和奏",
+        "seat": "ebcl1"
+      }
+    ],
+    "width": 375,
+    "scrollWidth": 375,
+    "errors": [],
+    "shownLabel": "いまの音（5月 第2週・体育館）",
+    "expectedNowLabel": "いまの音（5月 第2週・体育館）",
+    "playing": false
+  },
+  {
+    "action": "ライブに連れて行く部員を選択",
+    "year": 2026,
+    "week": 5,
+    "phase": "week",
+    "pending": null,
+    "members": [
+      {
+        "id": "m2026-n1-723df5a6",
+        "name": "藤田 翔",
+        "seat": "fl1a"
+      },
+      {
+        "id": "m2026-n2-723df5a6",
+        "name": "内田 詩",
+        "seat": "hn1"
+      },
+      {
+        "id": "m2026-n3-723df5a6",
+        "name": "高木 紬",
+        "seat": "tuba1"
+      },
+      {
+        "id": "m2026-n4-723df5a6",
+        "name": "中山 詩",
+        "seat": "asax1"
+      },
+      {
+        "id": "m2026-n5-723df5a6",
+        "name": "安藤 蓮",
+        "seat": "bsax1"
+      },
+      {
+        "id": "m2026-n6-723df5a6",
+        "name": "宮崎 和奏",
+        "seat": "ebcl1"
+      }
+    ],
+    "width": 375,
+    "scrollWidth": 375,
+    "errors": [],
+    "shownLabel": "いまの音（5月 第2週・体育館）",
+    "expectedNowLabel": "いまの音（5月 第2週・体育館）",
+    "playing": false
+  },
+  {
+    "action": "ライブに連れて行く部員を選択",
+    "year": 2026,
+    "week": 5,
+    "phase": "week",
+    "pending": null,
+    "members": [
+      {
+        "id": "m2026-n1-723df5a6",
+        "name": "藤田 翔",
+        "seat": "fl1a"
+      },
+      {
+        "id": "m2026-n2-723df5a6",
+        "name": "内田 詩",
+        "seat": "hn1"
+      },
+      {
+        "id": "m2026-n3-723df5a6",
+        "name": "高木 紬",
+        "seat": "tuba1"
+      },
+      {
+        "id": "m2026-n4-723df5a6",
+        "name": "中山 詩",
+        "seat": "asax1"
+      },
+      {
+        "id": "m2026-n5-723df5a6",
+        "name": "安藤 蓮",
+        "seat": "bsax1"
+      },
+      {
+        "id": "m2026-n6-723df5a6",
+        "name": "宮崎 和奏",
+        "seat": "ebcl1"
+      }
+    ],
+    "width": 375,
+    "scrollWidth": 375,
+    "errors": [],
+    "shownLabel": "いまの音（5月 第2週・体育館）",
+    "expectedNowLabel": "いまの音（5月 第2週・体育館）",
+    "playing": false
+  },
+  {
+    "action": "ライブに連れて行く部員を選択",
+    "year": 2026,
+    "week": 5,
+    "phase": "week",
+    "pending": null,
+    "members": [
+      {
+        "id": "m2026-n1-723df5a6",
+        "name": "藤田 翔",
+        "seat": "fl1a"
+      },
+      {
+        "id": "m2026-n2-723df5a6",
+        "name": "内田 詩",
+        "seat": "hn1"
+      },
+      {
+        "id": "m2026-n3-723df5a6",
+        "name": "高木 紬",
+        "seat": "tuba1"
+      },
+      {
+        "id": "m2026-n4-723df5a6",
+        "name": "中山 詩",
+        "seat": "asax1"
+      },
+      {
+        "id": "m2026-n5-723df5a6",
+        "name": "安藤 蓮",
+        "seat": "bsax1"
+      },
+      {
+        "id": "m2026-n6-723df5a6",
+        "name": "宮崎 和奏",
+        "seat": "ebcl1"
+      }
+    ],
+    "width": 375,
+    "scrollWidth": 375,
+    "errors": [],
+    "shownLabel": "いまの音（5月 第2週・体育館）",
+    "expectedNowLabel": "いまの音（5月 第2週・体育館）",
+    "playing": false
+  },
+  {
+    "action": "3人でジャズのライブへ",
+    "year": 2026,
+    "week": 5,
+    "phase": "week",
+    "pending": null,
+    "members": [
+      {
+        "id": "m2026-n1-723df5a6",
+        "name": "藤田 翔",
+        "seat": "fl1a"
+      },
+      {
+        "id": "m2026-n2-723df5a6",
+        "name": "内田 詩",
+        "seat": "hn1"
+      },
+      {
+        "id": "m2026-n3-723df5a6",
+        "name": "高木 紬",
+        "seat": "tuba1"
+      },
+      {
+        "id": "m2026-n4-723df5a6",
+        "name": "中山 詩",
+        "seat": "asax1"
+      },
+      {
+        "id": "m2026-n5-723df5a6",
+        "name": "安藤 蓮",
+        "seat": "bsax1"
+      },
+      {
+        "id": "m2026-n6-723df5a6",
+        "name": "宮崎 和奏",
+        "seat": "ebcl1"
+      }
+    ],
+    "width": 375,
+    "scrollWidth": 375,
+    "errors": [],
+    "shownLabel": "いまの音（5月 第2週・体育館）",
+    "expectedNowLabel": "いまの音（5月 第2週・体育館）",
+    "playing": false
+  },
+  {
+    "action": "5月のステージへ",
+    "year": 2026,
+    "week": 6,
+    "phase": "week",
+    "pending": null,
+    "members": [
+      {
+        "id": "m2026-n1-723df5a6",
+        "name": "藤田 翔",
+        "seat": "fl1a"
+      },
+      {
+        "id": "m2026-n2-723df5a6",
+        "name": "内田 詩",
+        "seat": "hn1"
+      },
+      {
+        "id": "m2026-n3-723df5a6",
+        "name": "高木 紬",
+        "seat": "tuba1"
+      },
+      {
+        "id": "m2026-n4-723df5a6",
+        "name": "中山 詩",
+        "seat": "asax1"
+      },
+      {
+        "id": "m2026-n5-723df5a6",
+        "name": "安藤 蓮",
+        "seat": "bsax1"
+      },
+      {
+        "id": "m2026-n6-723df5a6",
+        "name": "宮崎 和奏",
+        "seat": "ebcl1"
+      }
+    ],
+    "width": 375,
+    "scrollWidth": 375,
+    "errors": [],
+    "shownLabel": "いまの音（5月 第3週・体育館）",
+    "expectedNowLabel": "いまの音（5月 第3週・体育館）",
+    "playing": false
+  },
+  {
+    "action": "みなと祭りの本番を開始",
+    "year": 2026,
+    "week": 6,
+    "phase": "week",
+    "pending": {
+      "kind": "concert",
+      "revealed": false
+    },
+    "members": [
+      {
+        "id": "m2026-n1-723df5a6",
+        "name": "藤田 翔",
+        "seat": "fl1a"
+      },
+      {
+        "id": "m2026-n2-723df5a6",
+        "name": "内田 詩",
+        "seat": "hn1"
+      },
+      {
+        "id": "m2026-n3-723df5a6",
+        "name": "高木 紬",
+        "seat": "tuba1"
+      },
+      {
+        "id": "m2026-n4-723df5a6",
+        "name": "中山 詩",
+        "seat": "asax1"
+      },
+      {
+        "id": "m2026-n5-723df5a6",
+        "name": "安藤 蓮",
+        "seat": "bsax1"
+      },
+      {
+        "id": "m2026-n6-723df5a6",
+        "name": "宮崎 和奏",
+        "seat": "ebcl1"
+      }
+    ],
+    "width": 375,
+    "scrollWidth": 375,
+    "errors": [],
+    "shownLabel": "2026 みなと祭りステージ",
+    "expectedNowLabel": "いまの音（5月 第3週・屋外ステージ）",
+    "playing": true
+  },
+  {
+    "action": "みなと祭りの結果へ",
+    "year": 2026,
+    "week": 6,
+    "phase": "week",
+    "pending": {
+      "kind": "concert",
+      "revealed": true
+    },
+    "members": [
+      {
+        "id": "m2026-n1-723df5a6",
+        "name": "藤田 翔",
+        "seat": "fl1a"
+      },
+      {
+        "id": "m2026-n2-723df5a6",
+        "name": "内田 詩",
+        "seat": "hn1"
+      },
+      {
+        "id": "m2026-n3-723df5a6",
+        "name": "高木 紬",
+        "seat": "tuba1"
+      },
+      {
+        "id": "m2026-n4-723df5a6",
+        "name": "中山 詩",
+        "seat": "asax1"
+      },
+      {
+        "id": "m2026-n5-723df5a6",
+        "name": "安藤 蓮",
+        "seat": "bsax1"
+      },
+      {
+        "id": "m2026-n6-723df5a6",
+        "name": "宮崎 和奏",
+        "seat": "ebcl1"
+      }
+    ],
+    "width": 375,
+    "scrollWidth": 375,
+    "errors": [],
+    "shownLabel": "いまの音（5月 第3週・屋外ステージ）",
+    "expectedNowLabel": "いまの音（5月 第3週・屋外ステージ）",
+    "playing": false
+  },
+  {
+    "action": "中間テストの週へ",
+    "year": 2026,
+    "week": 7,
+    "phase": "week",
+    "pending": null,
+    "members": [
+      {
+        "id": "m2026-n1-723df5a6",
+        "name": "藤田 翔",
+        "seat": "fl1a"
+      },
+      {
+        "id": "m2026-n2-723df5a6",
+        "name": "内田 詩",
+        "seat": "hn1"
+      },
+      {
+        "id": "m2026-n3-723df5a6",
+        "name": "高木 紬",
+        "seat": "tuba1"
+      },
+      {
+        "id": "m2026-n4-723df5a6",
+        "name": "中山 詩",
+        "seat": "asax1"
+      },
+      {
+        "id": "m2026-n5-723df5a6",
+        "name": "安藤 蓮",
+        "seat": "bsax1"
+      },
+      {
+        "id": "m2026-n6-723df5a6",
+        "name": "宮崎 和奏",
+        "seat": "ebcl1"
+      }
+    ],
+    "width": 375,
+    "scrollWidth": 375,
+    "errors": [],
+    "shownLabel": "いまの音（5月 第4週・屋外ステージ）",
+    "expectedNowLabel": "いまの音（5月 第4週・屋外ステージ）",
+    "playing": false
+  },
+  {
+    "action": "中間テストを終える",
+    "year": 2026,
+    "week": 8,
+    "phase": "week",
+    "pending": null,
+    "members": [
+      {
+        "id": "m2026-n1-723df5a6",
+        "name": "藤田 翔",
+        "seat": "fl1a"
+      },
+      {
+        "id": "m2026-n2-723df5a6",
+        "name": "内田 詩",
+        "seat": "hn1"
+      },
+      {
+        "id": "m2026-n3-723df5a6",
+        "name": "高木 紬",
+        "seat": "tuba1"
+      },
+      {
+        "id": "m2026-n4-723df5a6",
+        "name": "中山 詩",
+        "seat": "asax1"
+      },
+      {
+        "id": "m2026-n5-723df5a6",
+        "name": "安藤 蓮",
+        "seat": "bsax1"
+      },
+      {
+        "id": "m2026-n6-723df5a6",
+        "name": "宮崎 和奏",
+        "seat": "ebcl1"
+      }
+    ],
+    "width": 375,
+    "scrollWidth": 375,
+    "errors": [],
+    "shownLabel": "いまの音（6月 第1週・屋外ステージ）",
+    "expectedNowLabel": "いまの音（6月 第1週・屋外ステージ）",
+    "playing": false
+  },
+  {
+    "action": "フルートの部員の相談に答える",
+    "year": 2026,
+    "week": 8,
+    "phase": "week",
+    "pending": null,
+    "members": [
+      {
+        "id": "m2026-n1-723df5a6",
+        "name": "藤田 翔",
+        "seat": "fl1a"
+      },
+      {
+        "id": "m2026-n2-723df5a6",
+        "name": "内田 詩",
+        "seat": "hn1"
+      },
+      {
+        "id": "m2026-n3-723df5a6",
+        "name": "高木 紬",
+        "seat": "tuba1"
+      },
+      {
+        "id": "m2026-n4-723df5a6",
+        "name": "中山 詩",
+        "seat": "asax1"
+      },
+      {
+        "id": "m2026-n5-723df5a6",
+        "name": "安藤 蓮",
+        "seat": "bsax1"
+      },
+      {
+        "id": "m2026-n6-723df5a6",
+        "name": "宮崎 和奏",
+        "seat": "ebcl1"
+      }
+    ],
+    "width": 375,
+    "scrollWidth": 375,
+    "errors": [],
+    "shownLabel": "いまの音（6月 第1週・屋外ステージ）",
+    "expectedNowLabel": "いまの音（6月 第1週・屋外ステージ）",
+    "playing": false
+  },
+  {
+    "action": "6月の練習を1週進める",
+    "year": 2026,
+    "week": 9,
+    "phase": "week",
+    "pending": null,
+    "members": [
+      {
+        "id": "m2026-n1-723df5a6",
+        "name": "藤田 翔",
+        "seat": "fl1a"
+      },
+      {
+        "id": "m2026-n2-723df5a6",
+        "name": "内田 詩",
+        "seat": "hn1"
+      },
+      {
+        "id": "m2026-n3-723df5a6",
+        "name": "高木 紬",
+        "seat": "tuba1"
+      },
+      {
+        "id": "m2026-n4-723df5a6",
+        "name": "中山 詩",
+        "seat": "asax1"
+      },
+      {
+        "id": "m2026-n5-723df5a6",
+        "name": "安藤 蓮",
+        "seat": "bsax1"
+      },
+      {
+        "id": "m2026-n6-723df5a6",
+        "name": "宮崎 和奏",
+        "seat": "ebcl1"
+      }
+    ],
+    "width": 375,
+    "scrollWidth": 375,
+    "errors": [],
+    "shownLabel": "いまの音（6月 第2週・屋外ステージ）",
+    "expectedNowLabel": "いまの音（6月 第2週・屋外ステージ）",
+    "playing": false
+  },
+  {
+    "action": "できごとに対応",
+    "year": 2026,
+    "week": 9,
+    "phase": "week",
+    "pending": null,
+    "members": [
+      {
+        "id": "m2026-n1-723df5a6",
+        "name": "藤田 翔",
+        "seat": "fl1a"
+      },
+      {
+        "id": "m2026-n2-723df5a6",
+        "name": "内田 詩",
+        "seat": "hn1"
+      },
+      {
+        "id": "m2026-n3-723df5a6",
+        "name": "高木 紬",
+        "seat": "tuba1"
+      },
+      {
+        "id": "m2026-n4-723df5a6",
+        "name": "中山 詩",
+        "seat": "asax1"
+      },
+      {
+        "id": "m2026-n5-723df5a6",
+        "name": "安藤 蓮",
+        "seat": "bsax1"
+      },
+      {
+        "id": "m2026-n6-723df5a6",
+        "name": "宮崎 和奏",
+        "seat": "ebcl1"
+      }
+    ],
+    "width": 375,
+    "scrollWidth": 375,
+    "errors": [],
+    "shownLabel": "いまの音（6月 第2週・屋外ステージ）",
+    "expectedNowLabel": "いまの音（6月 第2週・屋外ステージ）",
+    "playing": false
+  },
+  {
+    "action": "6月の練習を1週進める",
+    "year": 2026,
+    "week": 10,
+    "phase": "week",
+    "pending": null,
+    "members": [
+      {
+        "id": "m2026-n1-723df5a6",
+        "name": "藤田 翔",
+        "seat": "fl1a"
+      },
+      {
+        "id": "m2026-n2-723df5a6",
+        "name": "内田 詩",
+        "seat": "hn1"
+      },
+      {
+        "id": "m2026-n3-723df5a6",
+        "name": "高木 紬",
+        "seat": "tuba1"
+      },
+      {
+        "id": "m2026-n4-723df5a6",
+        "name": "中山 詩",
+        "seat": "asax1"
+      },
+      {
+        "id": "m2026-n5-723df5a6",
+        "name": "安藤 蓮",
+        "seat": "bsax1"
+      },
+      {
+        "id": "m2026-n6-723df5a6",
+        "name": "宮崎 和奏",
+        "seat": "ebcl1"
+      }
+    ],
+    "width": 375,
+    "scrollWidth": 375,
+    "errors": [],
+    "shownLabel": "いまの音（6月 第3週・屋外ステージ）",
+    "expectedNowLabel": "いまの音（6月 第3週・屋外ステージ）",
+    "playing": false
+  },
+  {
+    "action": "6月の練習を1週進める",
+    "year": 2026,
+    "week": 11,
+    "phase": "week",
+    "pending": null,
+    "members": [
+      {
+        "id": "m2026-n1-723df5a6",
+        "name": "藤田 翔",
+        "seat": "fl1a"
+      },
+      {
+        "id": "m2026-n2-723df5a6",
+        "name": "内田 詩",
+        "seat": "hn1"
+      },
+      {
+        "id": "m2026-n3-723df5a6",
+        "name": "高木 紬",
+        "seat": "tuba1"
+      },
+      {
+        "id": "m2026-n4-723df5a6",
+        "name": "中山 詩",
+        "seat": "asax1"
+      },
+      {
+        "id": "m2026-n5-723df5a6",
+        "name": "安藤 蓮",
+        "seat": "bsax1"
+      },
+      {
+        "id": "m2026-n6-723df5a6",
+        "name": "宮崎 和奏",
+        "seat": "ebcl1"
+      }
+    ],
+    "width": 375,
+    "scrollWidth": 375,
+    "errors": [],
+    "shownLabel": "いまの音（6月 第4週・屋外ステージ）",
+    "expectedNowLabel": "いまの音（6月 第4週・屋外ステージ）",
+    "playing": false
+  },
+  {
+    "action": "合同演奏会前に全員で深呼吸",
+    "year": 2026,
+    "week": 11,
+    "phase": "week",
+    "pending": null,
+    "members": [
+      {
+        "id": "m2026-n1-723df5a6",
+        "name": "藤田 翔",
+        "seat": "fl1a"
+      },
+      {
+        "id": "m2026-n2-723df5a6",
+        "name": "内田 詩",
+        "seat": "hn1"
+      },
+      {
+        "id": "m2026-n3-723df5a6",
+        "name": "高木 紬",
+        "seat": "tuba1"
+      },
+      {
+        "id": "m2026-n4-723df5a6",
+        "name": "中山 詩",
+        "seat": "asax1"
+      },
+      {
+        "id": "m2026-n5-723df5a6",
+        "name": "安藤 蓮",
+        "seat": "bsax1"
+      },
+      {
+        "id": "m2026-n6-723df5a6",
+        "name": "宮崎 和奏",
+        "seat": "ebcl1"
+      }
+    ],
+    "width": 375,
+    "scrollWidth": 375,
+    "errors": [],
+    "shownLabel": "いまの音（6月 第4週・屋外ステージ）",
+    "expectedNowLabel": "いまの音（6月 第4週・屋外ステージ）",
+    "playing": false
+  },
+  {
+    "action": "合同演奏会を開始",
+    "year": 2026,
+    "week": 11,
+    "phase": "week",
+    "pending": {
+      "kind": "concert",
+      "revealed": false
+    },
+    "members": [
+      {
+        "id": "m2026-n1-723df5a6",
+        "name": "藤田 翔",
+        "seat": "fl1a"
+      },
+      {
+        "id": "m2026-n2-723df5a6",
+        "name": "内田 詩",
+        "seat": "hn1"
+      },
+      {
+        "id": "m2026-n3-723df5a6",
+        "name": "高木 紬",
+        "seat": "tuba1"
+      },
+      {
+        "id": "m2026-n4-723df5a6",
+        "name": "中山 詩",
+        "seat": "asax1"
+      },
+      {
+        "id": "m2026-n5-723df5a6",
+        "name": "安藤 蓮",
+        "seat": "bsax1"
+      },
+      {
+        "id": "m2026-n6-723df5a6",
+        "name": "宮崎 和奏",
+        "seat": "ebcl1"
+      }
+    ],
+    "width": 375,
+    "scrollWidth": 375,
+    "errors": [],
+    "shownLabel": "2026 合同演奏会",
+    "expectedNowLabel": "いまの音（6月 第4週・市民会館）",
+    "playing": true
+  },
+  {
+    "action": "合同演奏会の結果へ",
+    "year": 2026,
+    "week": 11,
+    "phase": "week",
+    "pending": {
+      "kind": "concert",
+      "revealed": true
+    },
+    "members": [
+      {
+        "id": "m2026-n1-723df5a6",
+        "name": "藤田 翔",
+        "seat": "fl1a"
+      },
+      {
+        "id": "m2026-n2-723df5a6",
+        "name": "内田 詩",
+        "seat": "hn1"
+      },
+      {
+        "id": "m2026-n3-723df5a6",
+        "name": "高木 紬",
+        "seat": "tuba1"
+      },
+      {
+        "id": "m2026-n4-723df5a6",
+        "name": "中山 詩",
+        "seat": "asax1"
+      },
+      {
+        "id": "m2026-n5-723df5a6",
+        "name": "安藤 蓮",
+        "seat": "bsax1"
+      },
+      {
+        "id": "m2026-n6-723df5a6",
+        "name": "宮崎 和奏",
+        "seat": "ebcl1"
+      }
+    ],
+    "width": 375,
+    "scrollWidth": 375,
+    "errors": [],
+    "shownLabel": "いまの音（6月 第4週・市民会館）",
+    "expectedNowLabel": "いまの音（6月 第4週・市民会館）",
+    "playing": false
+  },
+  {
+    "action": "7月第1週へ",
+    "year": 2026,
+    "week": 12,
+    "phase": "week",
+    "pending": null,
+    "members": [
+      {
+        "id": "m2026-n1-723df5a6",
+        "name": "藤田 翔",
+        "seat": "fl1a"
+      },
+      {
+        "id": "m2026-n2-723df5a6",
+        "name": "内田 詩",
+        "seat": "hn1"
+      },
+      {
+        "id": "m2026-n3-723df5a6",
+        "name": "高木 紬",
+        "seat": "tuba1"
+      },
+      {
+        "id": "m2026-n4-723df5a6",
+        "name": "中山 詩",
+        "seat": "asax1"
+      },
+      {
+        "id": "m2026-n5-723df5a6",
+        "name": "安藤 蓮",
+        "seat": "bsax1"
+      },
+      {
+        "id": "m2026-n6-723df5a6",
+        "name": "宮崎 和奏",
+        "seat": "ebcl1"
+      }
+    ],
+    "width": 375,
+    "scrollWidth": 375,
+    "errors": [],
+    "shownLabel": "いまの音（7月 第1週・市民会館）",
+    "expectedNowLabel": "いまの音（7月 第1週・市民会館）",
+    "playing": false
+  },
+  {
+    "action": "チューバの部員の相談に答える",
+    "year": 2026,
+    "week": 12,
+    "phase": "week",
+    "pending": null,
+    "members": [
+      {
+        "id": "m2026-n1-723df5a6",
+        "name": "藤田 翔",
+        "seat": "fl1a"
+      },
+      {
+        "id": "m2026-n2-723df5a6",
+        "name": "内田 詩",
+        "seat": "hn1"
+      },
+      {
+        "id": "m2026-n3-723df5a6",
+        "name": "高木 紬",
+        "seat": "tuba1"
+      },
+      {
+        "id": "m2026-n4-723df5a6",
+        "name": "中山 詩",
+        "seat": "asax1"
+      },
+      {
+        "id": "m2026-n5-723df5a6",
+        "name": "安藤 蓮",
+        "seat": "bsax1"
+      },
+      {
+        "id": "m2026-n6-723df5a6",
+        "name": "宮崎 和奏",
+        "seat": "ebcl1"
+      }
+    ],
+    "width": 375,
+    "scrollWidth": 375,
+    "errors": [],
+    "shownLabel": "いまの音（7月 第1週・市民会館）",
+    "expectedNowLabel": "いまの音（7月 第1週・市民会館）",
+    "playing": false
+  },
+  {
+    "action": "出場メンバーを決める画面へ",
+    "year": 2026,
+    "week": 12,
+    "phase": "week",
+    "pending": null,
+    "members": [
+      {
+        "id": "m2026-n1-723df5a6",
+        "name": "藤田 翔",
+        "seat": "fl1a"
+      },
+      {
+        "id": "m2026-n2-723df5a6",
+        "name": "内田 詩",
+        "seat": "hn1"
+      },
+      {
+        "id": "m2026-n3-723df5a6",
+        "name": "高木 紬",
+        "seat": "tuba1"
+      },
+      {
+        "id": "m2026-n4-723df5a6",
+        "name": "中山 詩",
+        "seat": "asax1"
+      },
+      {
+        "id": "m2026-n5-723df5a6",
+        "name": "安藤 蓮",
+        "seat": "bsax1"
+      },
+      {
+        "id": "m2026-n6-723df5a6",
+        "name": "宮崎 和奏",
+        "seat": "ebcl1"
+      }
+    ],
+    "width": 375,
+    "scrollWidth": 375,
+    "errors": [],
+    "shownLabel": "いまの音（7月 第1週・市民会館）",
+    "expectedNowLabel": "いまの音（7月 第1週・市民会館）",
+    "playing": false
+  },
+  {
+    "action": "初年度のおすすめの人選",
+    "year": 2026,
+    "week": 12,
+    "phase": "week",
+    "pending": null,
+    "members": [
+      {
+        "id": "m2026-n1-723df5a6",
+        "name": "藤田 翔",
+        "seat": "fl1a"
+      },
+      {
+        "id": "m2026-n2-723df5a6",
+        "name": "内田 詩",
+        "seat": "hn1"
+      },
+      {
+        "id": "m2026-n3-723df5a6",
+        "name": "高木 紬",
+        "seat": "tuba1"
+      },
+      {
+        "id": "m2026-n4-723df5a6",
+        "name": "中山 詩",
+        "seat": "asax1"
+      },
+      {
+        "id": "m2026-n5-723df5a6",
+        "name": "安藤 蓮",
+        "seat": "bsax1"
+      },
+      {
+        "id": "m2026-n6-723df5a6",
+        "name": "宮崎 和奏",
+        "seat": "ebcl1"
+      }
+    ],
+    "width": 375,
+    "scrollWidth": 375,
+    "errors": [],
+    "shownLabel": "いまの音（7月 第1週・市民会館）",
+    "expectedNowLabel": "いまの音（7月 第1週・市民会館）",
+    "playing": false
+  },
+  {
+    "action": "コンクールのメンバーを決定",
+    "year": 2026,
+    "week": 12,
+    "phase": "week",
+    "pending": null,
+    "members": [
+      {
+        "id": "m2026-n1-723df5a6",
+        "name": "藤田 翔",
+        "seat": "fl1a"
+      },
+      {
+        "id": "m2026-n2-723df5a6",
+        "name": "内田 詩",
+        "seat": "hn1"
+      },
+      {
+        "id": "m2026-n3-723df5a6",
+        "name": "高木 紬",
+        "seat": "tuba1"
+      },
+      {
+        "id": "m2026-n4-723df5a6",
+        "name": "中山 詩",
+        "seat": "asax1"
+      },
+      {
+        "id": "m2026-n5-723df5a6",
+        "name": "安藤 蓮",
+        "seat": "bsax1"
+      },
+      {
+        "id": "m2026-n6-723df5a6",
+        "name": "宮崎 和奏",
+        "seat": "ebcl1"
+      }
+    ],
+    "width": 375,
+    "scrollWidth": 375,
+    "errors": [],
+    "shownLabel": "いまの音（7月 第1週・市民会館）",
+    "expectedNowLabel": "いまの音（7月 第1週・市民会館）",
+    "playing": false
+  },
+  {
+    "action": "夏の練習を1週進める",
+    "year": 2026,
+    "week": 13,
+    "phase": "week",
+    "pending": null,
+    "members": [
+      {
+        "id": "m2026-n1-723df5a6",
+        "name": "藤田 翔",
+        "seat": "fl1a"
+      },
+      {
+        "id": "m2026-n2-723df5a6",
+        "name": "内田 詩",
+        "seat": "hn1"
+      },
+      {
+        "id": "m2026-n3-723df5a6",
+        "name": "高木 紬",
+        "seat": "tuba1"
+      },
+      {
+        "id": "m2026-n4-723df5a6",
+        "name": "中山 詩",
+        "seat": "asax1"
+      },
+      {
+        "id": "m2026-n5-723df5a6",
+        "name": "安藤 蓮",
+        "seat": "bsax1"
+      },
+      {
+        "id": "m2026-n6-723df5a6",
+        "name": "宮崎 和奏",
+        "seat": "ebcl1"
+      }
+    ],
+    "width": 375,
+    "scrollWidth": 375,
+    "errors": [],
+    "shownLabel": "いまの音（7月 第2週・市民会館）",
+    "expectedNowLabel": "いまの音（7月 第2週・市民会館）",
+    "playing": false
+  },
+  {
+    "action": "夏の練習を1週進める",
+    "year": 2026,
+    "week": 14,
+    "phase": "week",
+    "pending": null,
+    "members": [
+      {
+        "id": "m2026-n1-723df5a6",
+        "name": "藤田 翔",
+        "seat": "fl1a"
+      },
+      {
+        "id": "m2026-n2-723df5a6",
+        "name": "内田 詩",
+        "seat": "hn1"
+      },
+      {
+        "id": "m2026-n3-723df5a6",
+        "name": "高木 紬",
+        "seat": "tuba1"
+      },
+      {
+        "id": "m2026-n4-723df5a6",
+        "name": "中山 詩",
+        "seat": "asax1"
+      },
+      {
+        "id": "m2026-n5-723df5a6",
+        "name": "安藤 蓮",
+        "seat": "bsax1"
+      },
+      {
+        "id": "m2026-n6-723df5a6",
+        "name": "宮崎 和奏",
+        "seat": "ebcl1"
+      }
+    ],
+    "width": 375,
+    "scrollWidth": 375,
+    "errors": [],
+    "shownLabel": "いまの音（7月 第3週・市民会館）",
+    "expectedNowLabel": "いまの音（7月 第3週・市民会館）",
+    "playing": false
+  },
+  {
+    "action": "できごとに対応",
+    "year": 2026,
+    "week": 14,
+    "phase": "week",
+    "pending": null,
+    "members": [
+      {
+        "id": "m2026-n1-723df5a6",
+        "name": "藤田 翔",
+        "seat": "fl1a"
+      },
+      {
+        "id": "m2026-n2-723df5a6",
+        "name": "内田 詩",
+        "seat": "hn1"
+      },
+      {
+        "id": "m2026-n3-723df5a6",
+        "name": "高木 紬",
+        "seat": "tuba1"
+      },
+      {
+        "id": "m2026-n4-723df5a6",
+        "name": "中山 詩",
+        "seat": "asax1"
+      },
+      {
+        "id": "m2026-n5-723df5a6",
+        "name": "安藤 蓮",
+        "seat": "bsax1"
+      },
+      {
+        "id": "m2026-n6-723df5a6",
+        "name": "宮崎 和奏",
+        "seat": "ebcl1"
+      }
+    ],
+    "width": 375,
+    "scrollWidth": 375,
+    "errors": [],
+    "shownLabel": "いまの音（7月 第3週・市民会館）",
+    "expectedNowLabel": "いまの音（7月 第3週・市民会館）",
+    "playing": false
+  },
+  {
+    "action": "夏の練習を1週進める",
+    "year": 2026,
+    "week": 15,
+    "phase": "week",
+    "pending": null,
+    "members": [
+      {
+        "id": "m2026-n1-723df5a6",
+        "name": "藤田 翔",
+        "seat": "fl1a"
+      },
+      {
+        "id": "m2026-n2-723df5a6",
+        "name": "内田 詩",
+        "seat": "hn1"
+      },
+      {
+        "id": "m2026-n3-723df5a6",
+        "name": "高木 紬",
+        "seat": "tuba1"
+      },
+      {
+        "id": "m2026-n4-723df5a6",
+        "name": "中山 詩",
+        "seat": "asax1"
+      },
+      {
+        "id": "m2026-n5-723df5a6",
+        "name": "安藤 蓮",
+        "seat": "bsax1"
+      },
+      {
+        "id": "m2026-n6-723df5a6",
+        "name": "宮崎 和奏",
+        "seat": "ebcl1"
+      }
+    ],
+    "width": 375,
+    "scrollWidth": 375,
+    "errors": [],
+    "shownLabel": "いまの音（7月 第4週・市民会館）",
+    "expectedNowLabel": "いまの音（7月 第4週・市民会館）",
+    "playing": false
+  },
+  {
+    "action": "できごとに対応",
+    "year": 2026,
+    "week": 15,
+    "phase": "week",
+    "pending": null,
+    "members": [
+      {
+        "id": "m2026-n1-723df5a6",
+        "name": "藤田 翔",
+        "seat": "fl1a"
+      },
+      {
+        "id": "m2026-n2-723df5a6",
+        "name": "内田 詩",
+        "seat": "hn1"
+      },
+      {
+        "id": "m2026-n3-723df5a6",
+        "name": "高木 紬",
+        "seat": "tuba1"
+      },
+      {
+        "id": "m2026-n4-723df5a6",
+        "name": "中山 詩",
+        "seat": "asax1"
+      },
+      {
+        "id": "m2026-n5-723df5a6",
+        "name": "安藤 蓮",
+        "seat": "bsax1"
+      },
+      {
+        "id": "m2026-n6-723df5a6",
+        "name": "宮崎 和奏",
+        "seat": "ebcl1"
+      }
+    ],
+    "width": 375,
+    "scrollWidth": 375,
+    "errors": [],
+    "shownLabel": "いまの音（7月 第4週・市民会館）",
+    "expectedNowLabel": "いまの音（7月 第4週・市民会館）",
+    "playing": false
+  },
+  {
+    "action": "夏の練習を1週進める",
+    "year": 2026,
+    "week": 16,
+    "phase": "week",
+    "pending": null,
+    "members": [
+      {
+        "id": "m2026-n1-723df5a6",
+        "name": "藤田 翔",
+        "seat": "fl1a"
+      },
+      {
+        "id": "m2026-n2-723df5a6",
+        "name": "内田 詩",
+        "seat": "hn1"
+      },
+      {
+        "id": "m2026-n3-723df5a6",
+        "name": "高木 紬",
+        "seat": "tuba1"
+      },
+      {
+        "id": "m2026-n4-723df5a6",
+        "name": "中山 詩",
+        "seat": "asax1"
+      },
+      {
+        "id": "m2026-n5-723df5a6",
+        "name": "安藤 蓮",
+        "seat": "bsax1"
+      },
+      {
+        "id": "m2026-n6-723df5a6",
+        "name": "宮崎 和奏",
+        "seat": "ebcl1"
+      }
+    ],
+    "width": 375,
+    "scrollWidth": 375,
+    "errors": [],
+    "shownLabel": "いまの音（8月 第1週・市民会館）",
+    "expectedNowLabel": "いまの音（8月 第1週・市民会館）",
+    "playing": false
+  },
+  {
+    "action": "県大会の本番を開始",
+    "year": 2026,
+    "week": 16,
+    "phase": "week",
+    "pending": {
+      "kind": "contest",
+      "revealed": false
+    },
+    "members": [
+      {
+        "id": "m2026-n1-723df5a6",
+        "name": "藤田 翔",
+        "seat": "fl1a"
+      },
+      {
+        "id": "m2026-n2-723df5a6",
+        "name": "内田 詩",
+        "seat": "hn1"
+      },
+      {
+        "id": "m2026-n3-723df5a6",
+        "name": "高木 紬",
+        "seat": "tuba1"
+      },
+      {
+        "id": "m2026-n4-723df5a6",
+        "name": "中山 詩",
+        "seat": "asax1"
+      },
+      {
+        "id": "m2026-n5-723df5a6",
+        "name": "安藤 蓮",
+        "seat": "bsax1"
+      },
+      {
+        "id": "m2026-n6-723df5a6",
+        "name": "宮崎 和奏",
+        "seat": "ebcl1"
+      }
+    ],
+    "width": 375,
+    "scrollWidth": 375,
+    "errors": [],
+    "shownLabel": "2026 吹奏楽コンクール 県大会",
+    "expectedNowLabel": "いまの音（8月 第1週・県民文化会館）",
+    "playing": true
+  },
+  {
+    "action": "県大会の発表へ",
+    "year": 2026,
+    "week": 16,
+    "phase": "week",
+    "pending": {
+      "kind": "contest",
+      "revealed": true
+    },
+    "members": [
+      {
+        "id": "m2026-n1-723df5a6",
+        "name": "藤田 翔",
+        "seat": "fl1a"
+      },
+      {
+        "id": "m2026-n2-723df5a6",
+        "name": "内田 詩",
+        "seat": "hn1"
+      },
+      {
+        "id": "m2026-n3-723df5a6",
+        "name": "高木 紬",
+        "seat": "tuba1"
+      },
+      {
+        "id": "m2026-n4-723df5a6",
+        "name": "中山 詩",
+        "seat": "asax1"
+      },
+      {
+        "id": "m2026-n5-723df5a6",
+        "name": "安藤 蓮",
+        "seat": "bsax1"
+      },
+      {
+        "id": "m2026-n6-723df5a6",
+        "name": "宮崎 和奏",
+        "seat": "ebcl1"
+      }
+    ],
+    "width": 375,
+    "scrollWidth": 375,
+    "errors": [],
+    "shownLabel": "いまの音（8月 第1週・県民文化会館）",
+    "expectedNowLabel": "いまの音（8月 第1週・県民文化会館）",
+    "playing": false
+  },
+  {
+    "action": "県大会の結果を見る",
+    "year": 2026,
+    "week": 16,
+    "phase": "week",
+    "pending": {
+      "kind": "contest",
+      "revealed": true
+    },
+    "members": [
+      {
+        "id": "m2026-n1-723df5a6",
+        "name": "藤田 翔",
+        "seat": "fl1a"
+      },
+      {
+        "id": "m2026-n2-723df5a6",
+        "name": "内田 詩",
+        "seat": "hn1"
+      },
+      {
+        "id": "m2026-n3-723df5a6",
+        "name": "高木 紬",
+        "seat": "tuba1"
+      },
+      {
+        "id": "m2026-n4-723df5a6",
+        "name": "中山 詩",
+        "seat": "asax1"
+      },
+      {
+        "id": "m2026-n5-723df5a6",
+        "name": "安藤 蓮",
+        "seat": "bsax1"
+      },
+      {
+        "id": "m2026-n6-723df5a6",
+        "name": "宮崎 和奏",
+        "seat": "ebcl1"
+      }
+    ],
+    "width": 375,
+    "scrollWidth": 375,
+    "errors": [],
+    "shownLabel": "いまの音（8月 第1週・県民文化会館）",
+    "expectedNowLabel": "いまの音（8月 第1週・県民文化会館）",
+    "playing": false
+  },
+  {
+    "action": "大会後の進行へ",
+    "year": 2026,
+    "week": 20,
+    "phase": "week",
+    "pending": null,
+    "members": [
+      {
+        "id": "m2026-n1-723df5a6",
+        "name": "藤田 翔",
+        "seat": "fl1a"
+      },
+      {
+        "id": "m2026-n2-723df5a6",
+        "name": "内田 詩",
+        "seat": "hn1"
+      },
+      {
+        "id": "m2026-n3-723df5a6",
+        "name": "高木 紬",
+        "seat": "tuba1"
+      },
+      {
+        "id": "m2026-n4-723df5a6",
+        "name": "中山 詩",
+        "seat": "asax1"
+      },
+      {
+        "id": "m2026-n5-723df5a6",
+        "name": "安藤 蓮",
+        "seat": "bsax1"
+      },
+      {
+        "id": "m2026-n6-723df5a6",
+        "name": "宮崎 和奏",
+        "seat": "ebcl1"
+      }
+    ],
+    "width": 375,
+    "scrollWidth": 375,
+    "errors": [],
+    "shownLabel": "いまの音（9月 第1週・県民文化会館）",
+    "expectedNowLabel": "いまの音（9月 第1週・県民文化会館）",
+    "playing": false
+  },
+  {
+    "action": "定期演奏会も天国と地獄に決定",
+    "year": 2026,
+    "week": 20,
+    "phase": "week",
+    "pending": null,
+    "members": [
+      {
+        "id": "m2026-n1-723df5a6",
+        "name": "藤田 翔",
+        "seat": "fl1a"
+      },
+      {
+        "id": "m2026-n2-723df5a6",
+        "name": "内田 詩",
+        "seat": "hn1"
+      },
+      {
+        "id": "m2026-n3-723df5a6",
+        "name": "高木 紬",
+        "seat": "tuba1"
+      },
+      {
+        "id": "m2026-n4-723df5a6",
+        "name": "中山 詩",
+        "seat": "asax1"
+      },
+      {
+        "id": "m2026-n5-723df5a6",
+        "name": "安藤 蓮",
+        "seat": "bsax1"
+      },
+      {
+        "id": "m2026-n6-723df5a6",
+        "name": "宮崎 和奏",
+        "seat": "ebcl1"
+      }
+    ],
+    "width": 375,
+    "scrollWidth": 375,
+    "errors": [],
+    "shownLabel": "いまの音（9月 第1週・県民文化会館）",
+    "expectedNowLabel": "いまの音（9月 第1週・県民文化会館）",
+    "playing": false
+  },
+  {
+    "action": "秋の相談に答える",
+    "year": 2026,
+    "week": 20,
+    "phase": "week",
+    "pending": null,
+    "members": [
+      {
+        "id": "m2026-n1-723df5a6",
+        "name": "藤田 翔",
+        "seat": "fl1a"
+      },
+      {
+        "id": "m2026-n2-723df5a6",
+        "name": "内田 詩",
+        "seat": "hn1"
+      },
+      {
+        "id": "m2026-n3-723df5a6",
+        "name": "高木 紬",
+        "seat": "tuba1"
+      },
+      {
+        "id": "m2026-n4-723df5a6",
+        "name": "中山 詩",
+        "seat": "asax1"
+      },
+      {
+        "id": "m2026-n5-723df5a6",
+        "name": "安藤 蓮",
+        "seat": "bsax1"
+      },
+      {
+        "id": "m2026-n6-723df5a6",
+        "name": "宮崎 和奏",
+        "seat": "ebcl1"
+      }
+    ],
+    "width": 375,
+    "scrollWidth": 375,
+    "errors": [],
+    "shownLabel": "いまの音（9月 第1週・県民文化会館）",
+    "expectedNowLabel": "いまの音（9月 第1週・県民文化会館）",
+    "playing": false
+  },
+  {
+    "action": "秋の練習を1週進める",
+    "year": 2026,
+    "week": 21,
+    "phase": "week",
+    "pending": null,
+    "members": [
+      {
+        "id": "m2026-n1-723df5a6",
+        "name": "藤田 翔",
+        "seat": "fl1a"
+      },
+      {
+        "id": "m2026-n2-723df5a6",
+        "name": "内田 詩",
+        "seat": "hn1"
+      },
+      {
+        "id": "m2026-n3-723df5a6",
+        "name": "高木 紬",
+        "seat": "tuba1"
+      },
+      {
+        "id": "m2026-n4-723df5a6",
+        "name": "中山 詩",
+        "seat": "asax1"
+      },
+      {
+        "id": "m2026-n5-723df5a6",
+        "name": "安藤 蓮",
+        "seat": "bsax1"
+      },
+      {
+        "id": "m2026-n6-723df5a6",
+        "name": "宮崎 和奏",
+        "seat": "ebcl1"
+      }
+    ],
+    "width": 375,
+    "scrollWidth": 375,
+    "errors": [],
+    "shownLabel": "いまの音（9月 第2週・県民文化会館）",
+    "expectedNowLabel": "いまの音（9月 第2週・県民文化会館）",
+    "playing": false
+  },
+  {
+    "action": "秋の練習を1週進める",
+    "year": 2026,
+    "week": 22,
+    "phase": "week",
+    "pending": null,
+    "members": [
+      {
+        "id": "m2026-n1-723df5a6",
+        "name": "藤田 翔",
+        "seat": "fl1a"
+      },
+      {
+        "id": "m2026-n2-723df5a6",
+        "name": "内田 詩",
+        "seat": "hn1"
+      },
+      {
+        "id": "m2026-n3-723df5a6",
+        "name": "高木 紬",
+        "seat": "tuba1"
+      },
+      {
+        "id": "m2026-n4-723df5a6",
+        "name": "中山 詩",
+        "seat": "asax1"
+      },
+      {
+        "id": "m2026-n5-723df5a6",
+        "name": "安藤 蓮",
+        "seat": "bsax1"
+      },
+      {
+        "id": "m2026-n6-723df5a6",
+        "name": "宮崎 和奏",
+        "seat": "ebcl1"
+      }
+    ],
+    "width": 375,
+    "scrollWidth": 375,
+    "errors": [],
+    "shownLabel": "いまの音（9月 第3週・県民文化会館）",
+    "expectedNowLabel": "いまの音（9月 第3週・県民文化会館）",
+    "playing": false
+  },
+  {
+    "action": "文化祭ステージを開始",
+    "year": 2026,
+    "week": 22,
+    "phase": "week",
+    "pending": {
+      "kind": "concert",
+      "revealed": false
+    },
+    "members": [
+      {
+        "id": "m2026-n1-723df5a6",
+        "name": "藤田 翔",
+        "seat": "fl1a"
+      },
+      {
+        "id": "m2026-n2-723df5a6",
+        "name": "内田 詩",
+        "seat": "hn1"
+      },
+      {
+        "id": "m2026-n3-723df5a6",
+        "name": "高木 紬",
+        "seat": "tuba1"
+      },
+      {
+        "id": "m2026-n4-723df5a6",
+        "name": "中山 詩",
+        "seat": "asax1"
+      },
+      {
+        "id": "m2026-n5-723df5a6",
+        "name": "安藤 蓮",
+        "seat": "bsax1"
+      },
+      {
+        "id": "m2026-n6-723df5a6",
+        "name": "宮崎 和奏",
+        "seat": "ebcl1"
+      }
+    ],
+    "width": 375,
+    "scrollWidth": 375,
+    "errors": [],
+    "shownLabel": "2026 文化祭ステージ",
+    "expectedNowLabel": "いまの音（9月 第3週・体育館）",
+    "playing": true
+  },
+  {
+    "action": "文化祭ステージの結果へ",
+    "year": 2026,
+    "week": 22,
+    "phase": "week",
+    "pending": {
+      "kind": "concert",
+      "revealed": true
+    },
+    "members": [
+      {
+        "id": "m2026-n1-723df5a6",
+        "name": "藤田 翔",
+        "seat": "fl1a"
+      },
+      {
+        "id": "m2026-n2-723df5a6",
+        "name": "内田 詩",
+        "seat": "hn1"
+      },
+      {
+        "id": "m2026-n3-723df5a6",
+        "name": "高木 紬",
+        "seat": "tuba1"
+      },
+      {
+        "id": "m2026-n4-723df5a6",
+        "name": "中山 詩",
+        "seat": "asax1"
+      },
+      {
+        "id": "m2026-n5-723df5a6",
+        "name": "安藤 蓮",
+        "seat": "bsax1"
+      },
+      {
+        "id": "m2026-n6-723df5a6",
+        "name": "宮崎 和奏",
+        "seat": "ebcl1"
+      }
+    ],
+    "width": 375,
+    "scrollWidth": 375,
+    "errors": [],
+    "shownLabel": "いまの音（9月 第3週・体育館）",
+    "expectedNowLabel": "いまの音（9月 第3週・体育館）",
+    "playing": false
+  },
+  {
+    "action": "文化祭後の練習へ",
+    "year": 2026,
+    "week": 23,
+    "phase": "week",
+    "pending": null,
+    "members": [
+      {
+        "id": "m2026-n1-723df5a6",
+        "name": "藤田 翔",
+        "seat": "fl1a"
+      },
+      {
+        "id": "m2026-n2-723df5a6",
+        "name": "内田 詩",
+        "seat": "hn1"
+      },
+      {
+        "id": "m2026-n3-723df5a6",
+        "name": "高木 紬",
+        "seat": "tuba1"
+      },
+      {
+        "id": "m2026-n4-723df5a6",
+        "name": "中山 詩",
+        "seat": "asax1"
+      },
+      {
+        "id": "m2026-n5-723df5a6",
+        "name": "安藤 蓮",
+        "seat": "bsax1"
+      },
+      {
+        "id": "m2026-n6-723df5a6",
+        "name": "宮崎 和奏",
+        "seat": "ebcl1"
+      }
+    ],
+    "width": 375,
+    "scrollWidth": 375,
+    "errors": [],
+    "shownLabel": "いまの音（9月 第4週・体育館）",
+    "expectedNowLabel": "いまの音（9月 第4週・体育館）",
+    "playing": false
+  },
+  {
+    "action": "秋に入った部員の担当を決定",
+    "year": 2026,
+    "week": 23,
+    "phase": "week",
+    "pending": null,
+    "members": [
+      {
+        "id": "m2026-n1-723df5a6",
+        "name": "藤田 翔",
+        "seat": "fl1a"
+      },
+      {
+        "id": "m2026-n2-723df5a6",
+        "name": "内田 詩",
+        "seat": "hn1"
+      },
+      {
+        "id": "m2026-n3-723df5a6",
+        "name": "高木 紬",
+        "seat": "tuba1"
+      },
+      {
+        "id": "m2026-n4-723df5a6",
+        "name": "中山 詩",
+        "seat": "asax1"
+      },
+      {
+        "id": "m2026-n5-723df5a6",
+        "name": "安藤 蓮",
+        "seat": "bsax1"
+      },
+      {
+        "id": "m2026-n6-723df5a6",
+        "name": "宮崎 和奏",
+        "seat": "ebcl1"
+      },
+      {
+        "id": "m2026-j7-723df5a6",
+        "name": "高木 美咲",
+        "seat": "perc3"
+      },
+      {
+        "id": "m2026-j8-723df5a6",
+        "name": "山本 千尋",
+        "seat": "fl2a"
+      }
+    ],
+    "width": 375,
+    "scrollWidth": 375,
+    "errors": [],
+    "shownLabel": "いまの音（9月 第4週・体育館）",
+    "expectedNowLabel": "いまの音（9月 第4週・体育館）",
+    "playing": false
+  },
+  {
+    "action": "秋の相談に答える",
+    "year": 2026,
+    "week": 23,
+    "phase": "week",
+    "pending": null,
+    "members": [
+      {
+        "id": "m2026-n1-723df5a6",
+        "name": "藤田 翔",
+        "seat": "fl1a"
+      },
+      {
+        "id": "m2026-n2-723df5a6",
+        "name": "内田 詩",
+        "seat": "hn1"
+      },
+      {
+        "id": "m2026-n3-723df5a6",
+        "name": "高木 紬",
+        "seat": "tuba1"
+      },
+      {
+        "id": "m2026-n4-723df5a6",
+        "name": "中山 詩",
+        "seat": "asax1"
+      },
+      {
+        "id": "m2026-n5-723df5a6",
+        "name": "安藤 蓮",
+        "seat": "bsax1"
+      },
+      {
+        "id": "m2026-n6-723df5a6",
+        "name": "宮崎 和奏",
+        "seat": "ebcl1"
+      },
+      {
+        "id": "m2026-j7-723df5a6",
+        "name": "高木 美咲",
+        "seat": "perc3"
+      },
+      {
+        "id": "m2026-j8-723df5a6",
+        "name": "山本 千尋",
+        "seat": "fl2a"
+      }
+    ],
+    "width": 375,
+    "scrollWidth": 375,
+    "errors": [],
+    "shownLabel": "いまの音（9月 第4週・体育館）",
+    "expectedNowLabel": "いまの音（9月 第4週・体育館）",
+    "playing": false
+  },
+  {
+    "action": "秋の練習を1週進める",
+    "year": 2026,
+    "week": 24,
+    "phase": "week",
+    "pending": null,
+    "members": [
+      {
+        "id": "m2026-n1-723df5a6",
+        "name": "藤田 翔",
+        "seat": "fl1a"
+      },
+      {
+        "id": "m2026-n2-723df5a6",
+        "name": "内田 詩",
+        "seat": "hn1"
+      },
+      {
+        "id": "m2026-n3-723df5a6",
+        "name": "高木 紬",
+        "seat": "tuba1"
+      },
+      {
+        "id": "m2026-n4-723df5a6",
+        "name": "中山 詩",
+        "seat": "asax1"
+      },
+      {
+        "id": "m2026-n5-723df5a6",
+        "name": "安藤 蓮",
+        "seat": "bsax1"
+      },
+      {
+        "id": "m2026-n6-723df5a6",
+        "name": "宮崎 和奏",
+        "seat": "ebcl1"
+      },
+      {
+        "id": "m2026-j7-723df5a6",
+        "name": "高木 美咲",
+        "seat": "perc3"
+      },
+      {
+        "id": "m2026-j8-723df5a6",
+        "name": "山本 千尋",
+        "seat": "fl2a"
+      }
+    ],
+    "width": 375,
+    "scrollWidth": 375,
+    "errors": [],
+    "shownLabel": "いまの音（10月 第1週・体育館）",
+    "expectedNowLabel": "いまの音（10月 第1週・体育館）",
+    "playing": false
+  },
+  {
+    "action": "秋の練習を1週進める",
+    "year": 2026,
+    "week": 25,
+    "phase": "week",
+    "pending": null,
+    "members": [
+      {
+        "id": "m2026-n1-723df5a6",
+        "name": "藤田 翔",
+        "seat": "fl1a"
+      },
+      {
+        "id": "m2026-n2-723df5a6",
+        "name": "内田 詩",
+        "seat": "hn1"
+      },
+      {
+        "id": "m2026-n3-723df5a6",
+        "name": "高木 紬",
+        "seat": "tuba1"
+      },
+      {
+        "id": "m2026-n4-723df5a6",
+        "name": "中山 詩",
+        "seat": "asax1"
+      },
+      {
+        "id": "m2026-n5-723df5a6",
+        "name": "安藤 蓮",
+        "seat": "bsax1"
+      },
+      {
+        "id": "m2026-n6-723df5a6",
+        "name": "宮崎 和奏",
+        "seat": "ebcl1"
+      },
+      {
+        "id": "m2026-j7-723df5a6",
+        "name": "高木 美咲",
+        "seat": "perc3"
+      },
+      {
+        "id": "m2026-j8-723df5a6",
+        "name": "山本 千尋",
+        "seat": "fl2a"
+      }
+    ],
+    "width": 375,
+    "scrollWidth": 375,
+    "errors": [],
+    "shownLabel": "いまの音（10月 第2週・体育館）",
+    "expectedNowLabel": "いまの音（10月 第2週・体育館）",
+    "playing": false
+  },
+  {
+    "action": "秋の相談に答える",
+    "year": 2026,
+    "week": 25,
+    "phase": "week",
+    "pending": null,
+    "members": [
+      {
+        "id": "m2026-n1-723df5a6",
+        "name": "藤田 翔",
+        "seat": "fl1a"
+      },
+      {
+        "id": "m2026-n2-723df5a6",
+        "name": "内田 詩",
+        "seat": "hn1"
+      },
+      {
+        "id": "m2026-n3-723df5a6",
+        "name": "高木 紬",
+        "seat": "tuba1"
+      },
+      {
+        "id": "m2026-n4-723df5a6",
+        "name": "中山 詩",
+        "seat": "asax1"
+      },
+      {
+        "id": "m2026-n5-723df5a6",
+        "name": "安藤 蓮",
+        "seat": "bsax1"
+      },
+      {
+        "id": "m2026-n6-723df5a6",
+        "name": "宮崎 和奏",
+        "seat": "ebcl1"
+      },
+      {
+        "id": "m2026-j7-723df5a6",
+        "name": "高木 美咲",
+        "seat": "perc3"
+      },
+      {
+        "id": "m2026-j8-723df5a6",
+        "name": "山本 千尋",
+        "seat": "fl2a"
+      }
+    ],
+    "width": 375,
+    "scrollWidth": 375,
+    "errors": [],
+    "shownLabel": "いまの音（10月 第2週・体育館）",
+    "expectedNowLabel": "いまの音（10月 第2週・体育館）",
+    "playing": false
+  },
+  {
+    "action": "秋の練習を1週進める",
+    "year": 2026,
+    "week": 26,
+    "phase": "week",
+    "pending": null,
+    "members": [
+      {
+        "id": "m2026-n1-723df5a6",
+        "name": "藤田 翔",
+        "seat": "fl1a"
+      },
+      {
+        "id": "m2026-n2-723df5a6",
+        "name": "内田 詩",
+        "seat": "hn1"
+      },
+      {
+        "id": "m2026-n3-723df5a6",
+        "name": "高木 紬",
+        "seat": "tuba1"
+      },
+      {
+        "id": "m2026-n4-723df5a6",
+        "name": "中山 詩",
+        "seat": "asax1"
+      },
+      {
+        "id": "m2026-n5-723df5a6",
+        "name": "安藤 蓮",
+        "seat": "bsax1"
+      },
+      {
+        "id": "m2026-n6-723df5a6",
+        "name": "宮崎 和奏",
+        "seat": "ebcl1"
+      },
+      {
+        "id": "m2026-j7-723df5a6",
+        "name": "高木 美咲",
+        "seat": "perc3"
+      },
+      {
+        "id": "m2026-j8-723df5a6",
+        "name": "山本 千尋",
+        "seat": "fl2a"
+      }
+    ],
+    "width": 375,
+    "scrollWidth": 375,
+    "errors": [],
+    "shownLabel": "いまの音（10月 第3週・体育館）",
+    "expectedNowLabel": "いまの音（10月 第3週・体育館）",
+    "playing": false
+  },
+  {
+    "action": "定期演奏会を開始",
+    "year": 2026,
+    "week": 26,
+    "phase": "week",
+    "pending": {
+      "kind": "concert",
+      "revealed": false
+    },
+    "members": [
+      {
+        "id": "m2026-n1-723df5a6",
+        "name": "藤田 翔",
+        "seat": "fl1a"
+      },
+      {
+        "id": "m2026-n2-723df5a6",
+        "name": "内田 詩",
+        "seat": "hn1"
+      },
+      {
+        "id": "m2026-n3-723df5a6",
+        "name": "高木 紬",
+        "seat": "tuba1"
+      },
+      {
+        "id": "m2026-n4-723df5a6",
+        "name": "中山 詩",
+        "seat": "asax1"
+      },
+      {
+        "id": "m2026-n5-723df5a6",
+        "name": "安藤 蓮",
+        "seat": "bsax1"
+      },
+      {
+        "id": "m2026-n6-723df5a6",
+        "name": "宮崎 和奏",
+        "seat": "ebcl1"
+      },
+      {
+        "id": "m2026-j7-723df5a6",
+        "name": "高木 美咲",
+        "seat": "perc3"
+      },
+      {
+        "id": "m2026-j8-723df5a6",
+        "name": "山本 千尋",
+        "seat": "fl2a"
+      }
+    ],
+    "width": 375,
+    "scrollWidth": 375,
+    "errors": [],
+    "shownLabel": "2026 定期演奏会",
+    "expectedNowLabel": "いまの音（10月 第3週・市民会館）",
+    "playing": true
+  },
+  {
+    "action": "定期演奏会の結果へ",
+    "year": 2026,
+    "week": 26,
+    "phase": "week",
+    "pending": {
+      "kind": "concert",
+      "revealed": true
+    },
+    "members": [
+      {
+        "id": "m2026-n1-723df5a6",
+        "name": "藤田 翔",
+        "seat": "fl1a"
+      },
+      {
+        "id": "m2026-n2-723df5a6",
+        "name": "内田 詩",
+        "seat": "hn1"
+      },
+      {
+        "id": "m2026-n3-723df5a6",
+        "name": "高木 紬",
+        "seat": "tuba1"
+      },
+      {
+        "id": "m2026-n4-723df5a6",
+        "name": "中山 詩",
+        "seat": "asax1"
+      },
+      {
+        "id": "m2026-n5-723df5a6",
+        "name": "安藤 蓮",
+        "seat": "bsax1"
+      },
+      {
+        "id": "m2026-n6-723df5a6",
+        "name": "宮崎 和奏",
+        "seat": "ebcl1"
+      },
+      {
+        "id": "m2026-j7-723df5a6",
+        "name": "高木 美咲",
+        "seat": "perc3"
+      },
+      {
+        "id": "m2026-j8-723df5a6",
+        "name": "山本 千尋",
+        "seat": "fl2a"
+      }
+    ],
+    "width": 375,
+    "scrollWidth": 375,
+    "errors": [],
+    "shownLabel": "いまの音（10月 第3週・市民会館）",
+    "expectedNowLabel": "いまの音（10月 第3週・市民会館）",
+    "playing": false
+  },
+  {
+    "action": "定期演奏会の次へ",
+    "year": 2026,
+    "week": 26,
+    "phase": "end",
+    "pending": null,
+    "members": [
+      {
+        "id": "m2026-n1-723df5a6",
+        "name": "藤田 翔",
+        "seat": "fl1a"
+      },
+      {
+        "id": "m2026-n2-723df5a6",
+        "name": "内田 詩",
+        "seat": "hn1"
+      },
+      {
+        "id": "m2026-n3-723df5a6",
+        "name": "高木 紬",
+        "seat": "tuba1"
+      },
+      {
+        "id": "m2026-n4-723df5a6",
+        "name": "中山 詩",
+        "seat": "asax1"
+      },
+      {
+        "id": "m2026-n5-723df5a6",
+        "name": "安藤 蓮",
+        "seat": "bsax1"
+      },
+      {
+        "id": "m2026-n6-723df5a6",
+        "name": "宮崎 和奏",
+        "seat": "ebcl1"
+      },
+      {
+        "id": "m2026-j7-723df5a6",
+        "name": "高木 美咲",
+        "seat": "perc3"
+      },
+      {
+        "id": "m2026-j8-723df5a6",
+        "name": "山本 千尋",
+        "seat": "fl2a"
+      }
+    ],
+    "width": 375,
+    "scrollWidth": 375,
+    "errors": [],
+    "shownLabel": "いまの音（10月 第3週・市民会館）",
+    "expectedNowLabel": "いまの音（10月 第3週・市民会館）",
+    "playing": false
+  },
+  {
+    "action": "冬の新体制へ",
+    "year": 2026,
+    "week": 26,
+    "phase": "winter",
+    "pending": null,
+    "members": [
+      {
+        "id": "m2026-n1-723df5a6",
+        "name": "藤田 翔",
+        "seat": "fl1a"
+      },
+      {
+        "id": "m2026-n2-723df5a6",
+        "name": "内田 詩",
+        "seat": "hn1"
+      },
+      {
+        "id": "m2026-n3-723df5a6",
+        "name": "高木 紬",
+        "seat": "tuba1"
+      },
+      {
+        "id": "m2026-n4-723df5a6",
+        "name": "中山 詩",
+        "seat": "asax1"
+      },
+      {
+        "id": "m2026-n5-723df5a6",
+        "name": "安藤 蓮",
+        "seat": "bsax1"
+      },
+      {
+        "id": "m2026-n6-723df5a6",
+        "name": "宮崎 和奏",
+        "seat": "ebcl1"
+      },
+      {
+        "id": "m2026-j7-723df5a6",
+        "name": "高木 美咲",
+        "seat": "perc3"
+      },
+      {
+        "id": "m2026-j8-723df5a6",
+        "name": "山本 千尋",
+        "seat": "fl2a"
+      }
+    ],
+    "width": 375,
+    "scrollWidth": 375,
+    "errors": [],
+    "shownLabel": "いまの音（10月 第3週・市民会館）",
+    "expectedNowLabel": "いまの音（10月 第3週・市民会館）",
+    "playing": false
+  },
+  {
+    "action": "冬は基礎をじっくり練習",
+    "year": 2026,
+    "week": 26,
+    "phase": "winter",
+    "pending": null,
+    "members": [
+      {
+        "id": "m2026-n1-723df5a6",
+        "name": "藤田 翔",
+        "seat": "fl1a"
+      },
+      {
+        "id": "m2026-n2-723df5a6",
+        "name": "内田 詩",
+        "seat": "hn1"
+      },
+      {
+        "id": "m2026-n3-723df5a6",
+        "name": "高木 紬",
+        "seat": "tuba1"
+      },
+      {
+        "id": "m2026-n4-723df5a6",
+        "name": "中山 詩",
+        "seat": "asax1"
+      },
+      {
+        "id": "m2026-n5-723df5a6",
+        "name": "安藤 蓮",
+        "seat": "bsax1"
+      },
+      {
+        "id": "m2026-n6-723df5a6",
+        "name": "宮崎 和奏",
+        "seat": "ebcl1"
+      },
+      {
+        "id": "m2026-j7-723df5a6",
+        "name": "高木 美咲",
+        "seat": "perc3"
+      },
+      {
+        "id": "m2026-j8-723df5a6",
+        "name": "山本 千尋",
+        "seat": "fl2a"
+      }
+    ],
+    "width": 375,
+    "scrollWidth": 375,
+    "errors": [],
+    "shownLabel": "いまの音（10月 第3週・市民会館）",
+    "expectedNowLabel": "いまの音（10月 第3週・市民会館）",
+    "playing": false
+  },
+  {
+    "action": "アンサンブルの選択を1人解除",
+    "year": 2026,
+    "week": 26,
+    "phase": "winter",
+    "pending": null,
+    "members": [
+      {
+        "id": "m2026-n1-723df5a6",
+        "name": "藤田 翔",
+        "seat": "fl1a"
+      },
+      {
+        "id": "m2026-n2-723df5a6",
+        "name": "内田 詩",
+        "seat": "hn1"
+      },
+      {
+        "id": "m2026-n3-723df5a6",
+        "name": "高木 紬",
+        "seat": "tuba1"
+      },
+      {
+        "id": "m2026-n4-723df5a6",
+        "name": "中山 詩",
+        "seat": "asax1"
+      },
+      {
+        "id": "m2026-n5-723df5a6",
+        "name": "安藤 蓮",
+        "seat": "bsax1"
+      },
+      {
+        "id": "m2026-n6-723df5a6",
+        "name": "宮崎 和奏",
+        "seat": "ebcl1"
+      },
+      {
+        "id": "m2026-j7-723df5a6",
+        "name": "高木 美咲",
+        "seat": "perc3"
+      },
+      {
+        "id": "m2026-j8-723df5a6",
+        "name": "山本 千尋",
+        "seat": "fl2a"
+      }
+    ],
+    "width": 375,
+    "scrollWidth": 375,
+    "errors": [],
+    "shownLabel": "いまの音（10月 第3週・市民会館）",
+    "expectedNowLabel": "いまの音（10月 第3週・市民会館）",
+    "playing": false
+  },
+  {
+    "action": "アンサンブルの選択を戻す",
+    "year": 2026,
+    "week": 26,
+    "phase": "winter",
+    "pending": null,
+    "members": [
+      {
+        "id": "m2026-n1-723df5a6",
+        "name": "藤田 翔",
+        "seat": "fl1a"
+      },
+      {
+        "id": "m2026-n2-723df5a6",
+        "name": "内田 詩",
+        "seat": "hn1"
+      },
+      {
+        "id": "m2026-n3-723df5a6",
+        "name": "高木 紬",
+        "seat": "tuba1"
+      },
+      {
+        "id": "m2026-n4-723df5a6",
+        "name": "中山 詩",
+        "seat": "asax1"
+      },
+      {
+        "id": "m2026-n5-723df5a6",
+        "name": "安藤 蓮",
+        "seat": "bsax1"
+      },
+      {
+        "id": "m2026-n6-723df5a6",
+        "name": "宮崎 和奏",
+        "seat": "ebcl1"
+      },
+      {
+        "id": "m2026-j7-723df5a6",
+        "name": "高木 美咲",
+        "seat": "perc3"
+      },
+      {
+        "id": "m2026-j8-723df5a6",
+        "name": "山本 千尋",
+        "seat": "fl2a"
+      }
+    ],
+    "width": 375,
+    "scrollWidth": 375,
+    "errors": [],
+    "shownLabel": "いまの音（10月 第3週・市民会館）",
+    "expectedNowLabel": "いまの音（10月 第3週・市民会館）",
+    "playing": false
+  },
+  {
+    "action": "アンサンブルコンテストに出場",
+    "year": 2026,
+    "week": 26,
+    "phase": "winter",
+    "pending": null,
+    "members": [
+      {
+        "id": "m2026-n1-723df5a6",
+        "name": "藤田 翔",
+        "seat": "fl1a"
+      },
+      {
+        "id": "m2026-n2-723df5a6",
+        "name": "内田 詩",
+        "seat": "hn1"
+      },
+      {
+        "id": "m2026-n3-723df5a6",
+        "name": "高木 紬",
+        "seat": "tuba1"
+      },
+      {
+        "id": "m2026-n4-723df5a6",
+        "name": "中山 詩",
+        "seat": "asax1"
+      },
+      {
+        "id": "m2026-n5-723df5a6",
+        "name": "安藤 蓮",
+        "seat": "bsax1"
+      },
+      {
+        "id": "m2026-n6-723df5a6",
+        "name": "宮崎 和奏",
+        "seat": "ebcl1"
+      },
+      {
+        "id": "m2026-j7-723df5a6",
+        "name": "高木 美咲",
+        "seat": "perc3"
+      },
+      {
+        "id": "m2026-j8-723df5a6",
+        "name": "山本 千尋",
+        "seat": "fl2a"
+      }
+    ],
+    "width": 375,
+    "scrollWidth": 375,
+    "errors": [],
+    "shownLabel": "2026 アンサンブルコンテスト",
+    "expectedNowLabel": "いまの音（10月 第3週・市民会館）",
+    "playing": true
+  },
+  {
+    "action": "アンサンブルの結果へ",
+    "year": 2026,
+    "week": 26,
+    "phase": "winter",
+    "pending": null,
+    "members": [
+      {
+        "id": "m2026-n1-723df5a6",
+        "name": "藤田 翔",
+        "seat": "fl1a"
+      },
+      {
+        "id": "m2026-n2-723df5a6",
+        "name": "内田 詩",
+        "seat": "hn1"
+      },
+      {
+        "id": "m2026-n3-723df5a6",
+        "name": "高木 紬",
+        "seat": "tuba1"
+      },
+      {
+        "id": "m2026-n4-723df5a6",
+        "name": "中山 詩",
+        "seat": "asax1"
+      },
+      {
+        "id": "m2026-n5-723df5a6",
+        "name": "安藤 蓮",
+        "seat": "bsax1"
+      },
+      {
+        "id": "m2026-n6-723df5a6",
+        "name": "宮崎 和奏",
+        "seat": "ebcl1"
+      },
+      {
+        "id": "m2026-j7-723df5a6",
+        "name": "高木 美咲",
+        "seat": "perc3"
+      },
+      {
+        "id": "m2026-j8-723df5a6",
+        "name": "山本 千尋",
+        "seat": "fl2a"
+      }
+    ],
+    "width": 375,
+    "scrollWidth": 375,
+    "errors": [],
+    "shownLabel": "いまの音（10月 第3週・市民会館）",
+    "expectedNowLabel": "いまの音（10月 第3週・市民会館）",
+    "playing": false
+  },
+  {
+    "action": "3月へ",
+    "year": 2026,
+    "week": 26,
+    "phase": "winter",
+    "pending": null,
+    "members": [
+      {
+        "id": "m2026-n1-723df5a6",
+        "name": "藤田 翔",
+        "seat": "fl1a"
+      },
+      {
+        "id": "m2026-n2-723df5a6",
+        "name": "内田 詩",
+        "seat": "hn1"
+      },
+      {
+        "id": "m2026-n3-723df5a6",
+        "name": "高木 紬",
+        "seat": "tuba1"
+      },
+      {
+        "id": "m2026-n4-723df5a6",
+        "name": "中山 詩",
+        "seat": "asax1"
+      },
+      {
+        "id": "m2026-n5-723df5a6",
+        "name": "安藤 蓮",
+        "seat": "bsax1"
+      },
+      {
+        "id": "m2026-n6-723df5a6",
+        "name": "宮崎 和奏",
+        "seat": "ebcl1"
+      },
+      {
+        "id": "m2026-j7-723df5a6",
+        "name": "高木 美咲",
+        "seat": "perc3"
+      },
+      {
+        "id": "m2026-j8-723df5a6",
+        "name": "山本 千尋",
+        "seat": "fl2a"
+      }
+    ],
+    "width": 375,
+    "scrollWidth": 375,
+    "errors": [],
+    "shownLabel": "いまの音（10月 第3週・市民会館）",
+    "expectedNowLabel": "いまの音（10月 第3週・市民会館）",
+    "playing": false
+  },
+  {
+    "action": "初年度の1年をふり返る",
+    "year": 2026,
+    "week": 26,
+    "phase": "winter",
+    "pending": null,
+    "members": [
+      {
+        "id": "m2026-n1-723df5a6",
+        "name": "藤田 翔",
+        "seat": "fl1a"
+      },
+      {
+        "id": "m2026-n2-723df5a6",
+        "name": "内田 詩",
+        "seat": "hn1"
+      },
+      {
+        "id": "m2026-n3-723df5a6",
+        "name": "高木 紬",
+        "seat": "tuba1"
+      },
+      {
+        "id": "m2026-n4-723df5a6",
+        "name": "中山 詩",
+        "seat": "asax1"
+      },
+      {
+        "id": "m2026-n5-723df5a6",
+        "name": "安藤 蓮",
+        "seat": "bsax1"
+      },
+      {
+        "id": "m2026-n6-723df5a6",
+        "name": "宮崎 和奏",
+        "seat": "ebcl1"
+      },
+      {
+        "id": "m2026-j7-723df5a6",
+        "name": "高木 美咲",
+        "seat": "perc3"
+      },
+      {
+        "id": "m2026-j8-723df5a6",
+        "name": "山本 千尋",
+        "seat": "fl2a"
+      }
+    ],
+    "width": 375,
+    "scrollWidth": 375,
+    "errors": [],
+    "shownLabel": "いまの音（10月 第3週・市民会館）",
+    "expectedNowLabel": "いまの音（10月 第3週・市民会館）",
+    "playing": false
+  },
+  {
+    "action": "2026年度のまとめを確認",
+    "year": 2026,
+    "week": 26,
+    "phase": "winter",
+    "pending": null,
+    "members": [
+      {
+        "id": "m2026-n1-723df5a6",
+        "name": "藤田 翔",
+        "seat": "fl1a"
+      },
+      {
+        "id": "m2026-n2-723df5a6",
+        "name": "内田 詩",
+        "seat": "hn1"
+      },
+      {
+        "id": "m2026-n3-723df5a6",
+        "name": "高木 紬",
+        "seat": "tuba1"
+      },
+      {
+        "id": "m2026-n4-723df5a6",
+        "name": "中山 詩",
+        "seat": "asax1"
+      },
+      {
+        "id": "m2026-n5-723df5a6",
+        "name": "安藤 蓮",
+        "seat": "bsax1"
+      },
+      {
+        "id": "m2026-n6-723df5a6",
+        "name": "宮崎 和奏",
+        "seat": "ebcl1"
+      },
+      {
+        "id": "m2026-j7-723df5a6",
+        "name": "高木 美咲",
+        "seat": "perc3"
+      },
+      {
+        "id": "m2026-j8-723df5a6",
+        "name": "山本 千尋",
+        "seat": "fl2a"
+      }
+    ],
+    "width": 375,
+    "scrollWidth": 375,
+    "errors": [],
+    "shownLabel": "いまの音（10月 第3週・市民会館）",
+    "expectedNowLabel": "いまの音（10月 第3週・市民会館）",
+    "playing": false
+  },
+  {
+    "action": "2027年度の4月へ",
+    "year": 2027,
+    "week": 0,
+    "phase": "choose",
+    "pending": null,
+    "members": [
+      {
+        "id": "m2026-n1-723df5a6",
+        "name": "藤田 翔",
+        "seat": "fl1a"
+      },
+      {
+        "id": "m2026-n2-723df5a6",
+        "name": "内田 詩",
+        "seat": "hn1"
+      },
+      {
+        "id": "m2026-n3-723df5a6",
+        "name": "高木 紬",
+        "seat": "tuba1"
+      },
+      {
+        "id": "m2026-n4-723df5a6",
+        "name": "中山 詩",
+        "seat": "asax1"
+      },
+      {
+        "id": "m2026-n5-723df5a6",
+        "name": "安藤 蓮",
+        "seat": "bsax1"
+      },
+      {
+        "id": "m2026-n6-723df5a6",
+        "name": "宮崎 和奏",
+        "seat": "ebcl1"
+      },
+      {
+        "id": "m2026-j7-723df5a6",
+        "name": "高木 美咲",
+        "seat": "perc3"
+      },
+      {
+        "id": "m2026-j8-723df5a6",
+        "name": "山本 千尋",
+        "seat": "fl2a"
+      }
+    ],
+    "width": 375,
+    "scrollWidth": 375,
+    "errors": [],
+    "shownLabel": "いまの音（選曲前・市民会館）",
+    "expectedNowLabel": "いまの音（選曲前・市民会館）",
+    "playing": false
+  }
+]

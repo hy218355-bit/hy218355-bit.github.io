@@ -539,6 +539,28 @@ th.num{text-align:center}
 .yr-mem{display:grid;grid-template-columns:auto minmax(0,1fr);gap:6px 12px;font-size:13px;line-height:1.6;margin:0}
 .yr-mem dt{color:var(--ink-soft);white-space:nowrap}
 .yr-mem dd{margin:0}
+.yr-grow-label,.yr-grow-list{grid-column:1/-1}
+.yr-grow-person{display:flex;align-items:center;gap:8px;min-height:40px;min-width:0}
+.yr-grow-person+.yr-grow-person{margin-top:6px}
+.yr-grow-person>.member-face{border-radius:7px}
+.yr-grow-person>b{flex:1;min-width:0;overflow-wrap:anywhere;font-size:13px}
+.yr-grow-ranks{display:flex;align-items:center;gap:5px;flex:none}
+.yr-grow-ranks .rk{width:24px;height:26px;font-size:14px}
+.yr-grow-ranks .ui-icon{width:13px;height:13px;transform:rotate(-90deg);color:var(--ink-soft)}
+.yr-more{border-top:1px solid var(--rule)}
+.yr-more>summary{min-height:44px;display:flex;align-items:center;justify-content:space-between;gap:10px;list-style:none;cursor:pointer;font-size:13px;color:var(--ink-soft)}
+.yr-more>summary::-webkit-details-marker{display:none}
+.yr-more>summary>.ui-icon{width:15px;height:15px;flex:none}
+.yr-more[open]>summary>.ui-icon{transform:rotate(180deg)}
+.yr-more p{font-size:12px;line-height:1.8;margin:0 0 12px;color:var(--ink-soft)}
+.year-actions .btn{min-height:46px}
+@media(max-width:960px){
+ .tabbed #week:has(.year-actions){padding-bottom:90px}
+ .tabbed .year-actions{position:fixed;left:max(16px,env(safe-area-inset-left,0px));right:max(16px,env(safe-area-inset-right,0px));bottom:calc(60px + env(safe-area-inset-bottom,0px));z-index:45;display:flex;gap:8px;padding:12px 0 8px;background:linear-gradient(transparent,var(--paper) 18%)}
+ .year-actions .btn{flex:1;font-size:12px;padding:10px 6px}
+ .tabbed:has(.mini:not([hidden])) .year-actions{bottom:calc(122px + env(safe-area-inset-bottom,0px))}
+}
+
 .result{display:grid;gap:14px}
 .award{display:flex;align-items:center;gap:18px}
 .stamp{flex:none;font-family:var(--f-display);font-size:34px;line-height:1;padding:14px 14px 12px;border:3px double var(--award);color:var(--award);border-radius:10px;transform:rotate(-5deg)}
@@ -1420,39 +1442,39 @@ html[data-season="snow"]{--season-band:linear-gradient(90deg,#DDE8F3,#FFFFFF,#B9
   <button type="button" data-tabgo="log"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 5.5C4 4.7 4.7 4 5.5 4H11v16H5.5c-.8 0-1.5-.7-1.5-1.5z"/><path d="M20 5.5c0-.8-.7-1.5-1.5-1.5H13v16h5.5c.8 0 1.5-.7 1.5-1.5z"/></svg><span>日誌</span></button>
 </nav>
 
-<script src="js/util.js?v=qa-sample-retry-4"></script>
-<script src="js/icons.js?v=qa-sample-retry-4"></script>
-<script src="js/instrument-icons.js?v=qa-sample-retry-4"></script>
-<script src="js/face-cast.js?v=qa-sample-retry-4"></script>
-<script src="js/faces.js?v=qa-sample-retry-4"></script>
-<script src="js/instruments.js?v=qa-sample-retry-4"></script>
-<script src="js/venues.js?v=qa-sample-retry-4"></script>
-<script src="js/samples.js?v=qa-sample-retry-4"></script>
-<script src="js/scores.js?v=qa-sample-retry-4"></script>
-<script src="js/pieces/largo.js?v=qa-sample-retry-4"></script>
-<script src="js/pieces/ode.js?v=qa-sample-retry-4"></script>
-<script src="js/pieces/galop.js?v=qa-sample-retry-4"></script>
-<script src="js/pieces/pomp.js?v=qa-sample-retry-4"></script>
-<script src="js/pieces/aida.js?v=qa-sample-retry-4"></script>
-<script src="js/pieces/hero.js?v=qa-sample-retry-4"></script>
-<script src="js/pieces/holst.js?v=qa-sample-retry-4"></script>
-<script src="js/pieces/hungarian.js?v=qa-sample-retry-4"></script>
-<script src="js/pieces/flowers.js?v=qa-sample-retry-4"></script>
-<script src="js/pieces/tell.js?v=qa-sample-retry-4"></script>
-<script src="js/pieces/carmen.js?v=qa-sample-retry-4"></script>
-<script src="js/pieces/valkyrie.js?v=qa-sample-retry-4"></script>
-<script src="js/pieces/swan.js?v=qa-sample-retry-4"></script>
-<script src="js/pieces/spring.js?v=qa-sample-retry-4"></script>
-<script src="js/pieces/canon.js?v=qa-sample-retry-4"></script>
-<script src="js/band.js?v=qa-sample-retry-4"></script>
-<script src="js/game.js?v=qa-sample-retry-4"></script>
-<script src="js/engine.js?v=qa-sample-retry-4"></script>
-<script src="js/conduct.js?v=qa-sample-retry-4"></script>
-<script src="js/announce.js?v=qa-sample-retry-4"></script>
-<script src="js/tunegame.js?v=qa-sample-retry-4"></script>
-<script src="js/fx.js?v=qa-sample-retry-4"></script>
-<script src="js/ui.js?v=qa-sample-retry-4"></script>
+<script src="js/util.js?v=qa-first-year-5"></script>
+<script src="js/icons.js?v=qa-first-year-5"></script>
+<script src="js/instrument-icons.js?v=qa-first-year-5"></script>
+<script src="js/face-cast.js?v=qa-first-year-5"></script>
+<script src="js/faces.js?v=qa-first-year-5"></script>
+<script src="js/instruments.js?v=qa-first-year-5"></script>
+<script src="js/venues.js?v=qa-first-year-5"></script>
+<script src="js/samples.js?v=qa-first-year-5"></script>
+<script src="js/scores.js?v=qa-first-year-5"></script>
+<script src="js/pieces/largo.js?v=qa-first-year-5"></script>
+<script src="js/pieces/ode.js?v=qa-first-year-5"></script>
+<script src="js/pieces/galop.js?v=qa-first-year-5"></script>
+<script src="js/pieces/pomp.js?v=qa-first-year-5"></script>
+<script src="js/pieces/aida.js?v=qa-first-year-5"></script>
+<script src="js/pieces/hero.js?v=qa-first-year-5"></script>
+<script src="js/pieces/holst.js?v=qa-first-year-5"></script>
+<script src="js/pieces/hungarian.js?v=qa-first-year-5"></script>
+<script src="js/pieces/flowers.js?v=qa-first-year-5"></script>
+<script src="js/pieces/tell.js?v=qa-first-year-5"></script>
+<script src="js/pieces/carmen.js?v=qa-first-year-5"></script>
+<script src="js/pieces/valkyrie.js?v=qa-first-year-5"></script>
+<script src="js/pieces/swan.js?v=qa-first-year-5"></script>
+<script src="js/pieces/spring.js?v=qa-first-year-5"></script>
+<script src="js/pieces/canon.js?v=qa-first-year-5"></script>
+<script src="js/band.js?v=qa-first-year-5"></script>
+<script src="js/game.js?v=qa-first-year-5"></script>
+<script src="js/engine.js?v=qa-first-year-5"></script>
+<script src="js/conduct.js?v=qa-first-year-5"></script>
+<script src="js/announce.js?v=qa-first-year-5"></script>
+<script src="js/tunegame.js?v=qa-first-year-5"></script>
+<script src="js/fx.js?v=qa-first-year-5"></script>
+<script src="js/ui.js?v=qa-first-year-5"></script>
 <div class="tip" id="tip" role="tooltip" hidden></div>
-<script src="/design/implementation/qa.js?v=qa-sample-retry-4"></script>
+<script src="/design/implementation/qa.js?v=qa-first-year-5"></script>
 </body>
 </html>

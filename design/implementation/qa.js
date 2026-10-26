@@ -38,10 +38,14 @@ function advance(s){
 }
 function record(){
  report.audio={ready:SAMPLES.ready,progress:SAMPLES.progress,error:SAMPLES.error?{name:SAMPLES.error.name,message:SAMPLES.error.message}:null,banks:Object.keys(SAMPLES.banks),requests:{...audioRequests},preservedCount:audioBeforeRetry?.length,preservedBuffers:audioBeforeRetry?audioBeforeRetry.every(([name,bank])=>SAMPLES.banks[name]===bank):null,voices:[...new Set((E.pb?.voices||[]).map(v=>v.constructor.name))]};
+ const yearNext=$('#week .year-actions .btn')?.getBoundingClientRect();report.yearNext=yearNext?{top:yearNext.top,bottom:yearNext.bottom,height:yearNext.height}:null;
+ report.yearGrowth=Array.from(document.querySelectorAll('[data-year-growth]')).map(el=>({id:el.dataset.yearGrowth,name:el.querySelector('b').textContent,ranks:el.querySelector('.yr-grow-ranks').getAttribute('aria-label')}));
+ report.year=S.year;report.phase=S.phase;report.pending=S.pending?{kind:S.pending.kind,revealed:!!S.pending.revealed}:null;report.expectedNowLabel=nowLabel();
  report.theme=document.documentElement.dataset.theme;report.width=innerWidth;report.scrollWidth=document.documentElement.scrollWidth;
  report.faceCount=document.querySelectorAll('.member-face').length;
  report.stagePortraits=Number($('#stage').dataset.portraitCount||0);report.watchPortraits=Number($('#cdStage').dataset.portraitCount||0);
  report.stageCache=Faces.stageCacheSize();
+ report.shownMatchesPrepared=!!U.shown&&U.shown===U.perfNow;
  report.playing=U.playing;report.waiting=!!U.waitPlay;report.shownLabel=U.shownLabel;report.range=U.range;report.solo=U.solo;report.piece=playPiece();report.venue=U.venue;
  report.engineSolo=E.solo;report.viewPart=U.view;
  report.shownBounds=U.shown?{from:U.shown.from,to:U.shown.to}:null;report.preparedBounds=U.perfNow?{from:U.perfNow.from,to:U.perfNow.to}:null;
@@ -92,16 +96,21 @@ async function show(next){
  for(const id of ['conduct','gradRoll','announce','fx'])$('#'+id).hidden=true;
  document.documentElement.classList.remove('conducting');
  let s;
- if(view==='balanced-result'){
+ if(view==='balanced-result'||view==='first-year'||view==='first-summary'){
   const random=Math.random;let seed=20261027;
   Math.random=()=>{seed=(Math.imul(seed,1664525)+1013904223)>>>0;return seed/4294967296;};
   try{s=freshState(2026);}finally{Math.random=random;}
  }else s=freshState(2026);
- if(!['intake','talent'].includes(view)){s=assignRecruits(s,autoAssign(s));if(!['song-choice','song-samples'].includes(view))s=choosePiece(s,view==='reading-year-hard'?'tell':'galop');}
+ if(!['intake','talent','first-year'].includes(view)){s=assignRecruits(s,autoAssign(s));if(!['song-choice','song-samples'].includes(view))s=choosePiece(s,view==='reading-year-hard'?'tell':'galop');}
  if(view==='talent'){s.recruitSeed=12345;s.seq=0;s.rep=90;s.recruits=null;const rs=makeRecruits(s,40);s.recruits=[...rs.filter(r=>r.talent).slice(0,1),...rs.filter(r=>!r.talent).slice(0,7)];}
  if(view==='intake-existing'||view==='intake-full'){
   s.members=fullBand({pitch:55,rhythm:60,tone:50,expr:48}).slice(0,view==='intake-full'?39:32);s.year=2028;s.week=10;
   s.recruitSeed=12345;s.seq=100;s.recruits=makeRecruits(s,8);s.recruitWhen=s.week;
+ }
+ if(view==='first-summary'){
+  while(s.phase!=='end'&&report.steps++<400)s=advance(s);
+  if(s.phase!=='end')throw Error('年度の終わりまで進まなかった');
+  s=startWinter(s);s=chooseWinterPlan(s,Object.keys(WINTER_PLANS)[0]);s=runEnsemble(s,autoEnsemble(s));s=winterNext(s);s.winter.gradDone=true;
  }
  if(view==='balanced-result'){
   while(!(s.year===2028&&s.week===PREF_WEEK&&s.pending?.kind==='contest')&&report.steps++<400){s=advance(s);await new Promise(r=>setTimeout(r,0));}
@@ -140,7 +149,7 @@ async function show(next){
   if(q.has('a')){s.division='A';s.setPiece='ode';}
  }
  if(view==='song-set'){s.division='A';s.phase='chooseSet';}
- if(view==='song-final'){s.chooseFinal=true;s.contestPiece='galop';for(const m of s.members)m.fam={galop:[65,65,65]};}
+ if(view==='song-final'){if(q.has('young'))s.members.forEach(m=>m.grade=1);s=startAutumn(s);s.chooseFinal=true;s.contestPiece='galop';for(const m of s.members)m.fam={galop:[65,65,65]};}
  if(view.startsWith('rehearsal')){
   s.recs=[];
   if(view==='rehearsal-records'){s.week=0;addRec(s,'2028年 4月の合奏',{venue:'room'});s.week=10;addRec(s,'2028年 6月の合奏',{venue:'hall'});}
@@ -200,6 +209,7 @@ new MutationObserver(()=>setTimeout(record,0)).observe($('#week'),{childList:tru
 new MutationObserver(()=>setTimeout(record,0)).observe($('#nowPlaying'),{childList:true,subtree:true});
 for(const event of ['click','submit','change'])$('#memberCard').addEventListener(event,()=>setTimeout(record,0));
 $('#rosterTable').addEventListener('click',()=>setTimeout(record,0));
+$('#tabbar').addEventListener('click',()=>setTimeout(record,0));
 for(const event of ['click','change','toggle'])$('.col-stage').addEventListener(event,()=>setTimeout(record,0),true);
 $('#sndStatus').addEventListener('click',e=>{if(e.target.closest('[data-sndretry]'))audioBeforeRetry=Object.entries(SAMPLES.banks);setTimeout(record,0);},true);
 let audioReportT;new MutationObserver(()=>{clearTimeout(audioReportT);audioReportT=setTimeout(record,0);}).observe($('#sndStatus'),{childList:true,subtree:true,characterData:true});

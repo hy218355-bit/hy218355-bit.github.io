@@ -255,7 +255,7 @@ function cdFinish(natural){
     haptic(stab >= 85 ? 'success' : 'tap');
     return;
   }
-  const rec = addRec(S, `あなたの指揮：${pc.title}（${S.phase === 'choose' ? '選曲前' : wkLabel(S.week)}）`, {pieceId: CD.perf.pieceId, venue: U.venue});
+  const rec = addRec(S, `あなたの指揮：${pc.title}（${nowWhen()}）`, {pieceId: CD.perf.pieceId, venue: U.venue});
   rec.span = {from: CD.perf.from, to: CD.perf.to};
   rec.conduct = conduct;
   commit(S);

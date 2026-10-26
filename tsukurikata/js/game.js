@@ -1795,7 +1795,7 @@ function startAutumn(s){
   s.chooseFinal = true;
   if(s.members.some(m => m.out)) addLog(s, 'コンクールの控えだった部員も、秋からはまた全員で吹く。');
   for(const m of s.members) delete m.out;
-  addLog(s, `コンクールが終わった。3年生の最後の本番は、${wkLabel(s.finalWeek)}の定期演奏会。`);
+  addLog(s, `コンクールが終わった。${hasSeniors(s) ? '3年生の最後の本番' : '次の本番'}は、${wkLabel(s.finalWeek)}の定期演奏会。`);
   if(s.week < 19){ s.week = 19; addLog(s, '夏休みが明けて、2学期が始まった。'); }
   return nextWeek(s);
 }

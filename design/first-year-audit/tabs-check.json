@@ -1,0 +1,66 @@
+[
+  {
+    "theme": "light",
+    "tab": "week",
+    "width": 375,
+    "scrollWidth": 375,
+    "errors": [],
+    "newYearButtonVisible": true
+  },
+  {
+    "theme": "light",
+    "tab": "play",
+    "width": 375,
+    "scrollWidth": 375,
+    "errors": [],
+    "newYearButtonVisible": false
+  },
+  {
+    "theme": "light",
+    "tab": "members",
+    "width": 375,
+    "scrollWidth": 375,
+    "errors": [],
+    "newYearButtonVisible": false
+  },
+  {
+    "theme": "light",
+    "tab": "log",
+    "width": 375,
+    "scrollWidth": 375,
+    "errors": [],
+    "newYearButtonVisible": false
+  },
+  {
+    "theme": "dark",
+    "tab": "week",
+    "width": 375,
+    "scrollWidth": 375,
+    "errors": [],
+    "newYearButtonVisible": true
+  },
+  {
+    "theme": "dark",
+    "tab": "play",
+    "width": 375,
+    "scrollWidth": 375,
+    "errors": [],
+    "newYearButtonVisible": false
+  },
+  {
+    "theme": "dark",
+    "tab": "members",
+    "width": 375,
+    "scrollWidth": 375,
+    "errors": [],
+    "newYearButtonVisible": false
+  },
+  {
+    "theme": "dark",
+    "tab": "log",
+    "width": 375,
+    "scrollWidth": 375,
+    "errors": [],
+    "newYearButtonVisible": false
+  }
+]

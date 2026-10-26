@@ -1,0 +1,20 @@
+{
+  "build": true,
+  "installed": true,
+  "launched": false,
+  "reason": "device_locked",
+  "installAttempts": 2,
+  "firstInstallFailure": "connection_invalid",
+  "filesMatch": {
+    "index.html": true,
+    "js/ui.js": true,
+    "js/game.js": true,
+    "js/conduct.js": true
+  },
+  "sha256": {
+    "index.html": "bfeb51b5afe0bfd2ca24fa646d9fbdff1c2664a59947f7d74fbadea81be2a464",
+    "js/ui.js": "3edb138625bc1e51617d08e64f1cde49f1951f444dea03f1449b5b6c4caea27f",
+    "js/game.js": "9de0d6eb7a30bdafc316c71f8b2c574ae5dac16ddfdffd34b8c8313e8705fc7a",
+    "js/conduct.js": "5140405a8b23d00faa906315a9b03c0931585bd555a9d88125383bb87af1fa8d"
+  }
+}
