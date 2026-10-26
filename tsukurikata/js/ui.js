@@ -20,7 +20,7 @@ const UI_KEY = 'suibu-ui-v2';  // 前の名前のころからの保存先（SAVE
 const RANKS = [[90, 'S'], [80, 'A'], [70, 'B'], [60, 'C'], [50, 'D'], [40, 'E'], [20, 'F'], [0, 'G']];
 const rankOf = v => RANKS.find(([t]) => v >= t - 1e-9)[1];
 // up：この週にランクが上がった（光らせて ▲ をつける）
-const rankBadge = (v, up) => `<i class="rk rk-${rankOf(v).toLowerCase()}${up ? ' up' : ''}">${rankOf(v)}</i>`;
+const rankBadge = (v, up) => `<i class="rk rk-${rankOf(v).toLowerCase()}${up ? ' up' : ''}">${rankOf(v)}${up ? uiIcon('up') : ''}</i>`;
 const rankFill = v => `background:var(--rk-${rankOf(v).toLowerCase()})`;
 // 力の行（名前・ランクの色の棒・ランク）。部員カードと部の実力で使う
 const rankRow = (name, v, up, tip) => `<div class="stat rkrow"${tipAttr(name, tip)}><span class="nm">${name}</span><span class="track"><span class="fill" style="width:${clamp(v, 0, 100)}%;${rankFill(v)}"></span></span><span class="val">${rankBadge(v, up)}</span></div>`;
