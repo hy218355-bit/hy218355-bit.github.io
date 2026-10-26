@@ -106,7 +106,8 @@ GitHub Pages のサイト。いまの中心は、高校吹奏楽部の顧問に�
 
 ## 確かめ方
 
-- ブラウザで遊ぶ：`cd tsukurikata && python3 -m http.server 8000` → http://localhost:8000/
+- ブラウザで遊ぶ・デザインを見る：作業フォルダのルートで `python3 design/serve.py` → http://127.0.0.1:8005/tsukurikata/ （デザインは `/design/`）。localhostだけへ配信し、HTTP/1.1・接続待ち128・no-storeで確認する。標準の小さい接続待ちでは、同時取得時にスクリプトが抜けることがあった。比較の記録は `design/boot-audit/README.md`
+- 画面確認用のHTMLを製品にそろえる：`python3 design/implementation/build_qa.py --version qa-design-1`（versionは半角英数字とハイフン）。起動前の読み込み記録を保ったまま `design/implementation/qa.html` を作る。確認結果の`boot`で、`scripts`と`loaded`の数が一致し、`failed`・`errors`が空なのを確かめる。起動だけ繰り返す場合は `design/boot-audit/probe.html`（保存と音源取得を止めた診断専用）を使う
 - 何年分かを画面なしで早送りして、バランスを見る：`node tsukurikata/tools/sim.js 5 auto galop best`
   - 引数は年数・方針・曲・オーディション（`best` でおすすめのメンバー、`all` で全員）
   - 出来事などで毎回少しずつ結果が変わる。直す前とくらべるときは、10回ほど回した平均でくらべる：`bash tsukurikata/tools/sim_avg.sh galop aida`

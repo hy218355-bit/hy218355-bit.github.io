@@ -1,0 +1,611 @@
+{
+  "port": 8005,
+  "rounds": [
+    [
+      {
+        "file": "js/util.js",
+        "status": 200,
+        "bytes": 2477,
+        "same": true,
+        "ms": 4
+      },
+      {
+        "file": "js/icons.js",
+        "error": "ConnectionResetError",
+        "message": "[Errno 54] Connection reset by peer"
+      },
+      {
+        "file": "js/instrument-icons.js",
+        "error": "ConnectionResetError",
+        "message": "[Errno 54] Connection reset by peer"
+      },
+      {
+        "file": "js/face-cast.js",
+        "error": "ConnectionResetError",
+        "message": "[Errno 54] Connection reset by peer"
+      },
+      {
+        "file": "js/faces.js",
+        "status": 200,
+        "bytes": 4184,
+        "same": true,
+        "ms": 5
+      },
+      {
+        "file": "js/instruments.js",
+        "status": 200,
+        "bytes": 27017,
+        "same": true,
+        "ms": 5
+      },
+      {
+        "file": "js/venues.js",
+        "error": "OSError",
+        "message": "[Errno 22] Invalid argument"
+      },
+      {
+        "file": "js/samples.js",
+        "status": 200,
+        "bytes": 24801,
+        "same": true,
+        "ms": 5
+      },
+      {
+        "file": "js/scores.js",
+        "status": 200,
+        "bytes": 22132,
+        "same": true,
+        "ms": 5
+      },
+      {
+        "file": "js/pieces/largo.js",
+        "status": 200,
+        "bytes": 11341,
+        "same": true,
+        "ms": 5
+      },
+      {
+        "file": "js/pieces/ode.js",
+        "error": "ConnectionResetError",
+        "message": "[Errno 54] Connection reset by peer"
+      },
+      {
+        "file": "js/pieces/galop.js",
+        "error": "ConnectionResetError",
+        "message": "[Errno 54] Connection reset by peer"
+      },
+      {
+        "file": "js/pieces/pomp.js",
+        "status": 200,
+        "bytes": 19116,
+        "same": true,
+        "ms": 5
+      },
+      {
+        "file": "js/pieces/aida.js",
+        "status": 200,
+        "bytes": 20823,
+        "same": true,
+        "ms": 5
+      },
+      {
+        "file": "js/pieces/hero.js",
+        "status": 200,
+        "bytes": 21784,
+        "same": true,
+        "ms": 5
+      },
+      {
+        "file": "js/pieces/holst.js",
+        "status": 200,
+        "bytes": 18482,
+        "same": true,
+        "ms": 5
+      },
+      {
+        "file": "js/pieces/hungarian.js",
+        "error": "ConnectionResetError",
+        "message": "[Errno 54] Connection reset by peer"
+      },
+      {
+        "file": "js/pieces/flowers.js",
+        "error": "ConnectionResetError",
+        "message": "[Errno 54] Connection reset by peer"
+      },
+      {
+        "file": "js/pieces/tell.js",
+        "status": 200,
+        "bytes": 37082,
+        "same": true,
+        "ms": 6
+      },
+      {
+        "file": "js/pieces/carmen.js",
+        "error": "ConnectionResetError",
+        "message": "[Errno 54] Connection reset by peer"
+      },
+      {
+        "file": "js/pieces/valkyrie.js",
+        "error": "ConnectionResetError",
+        "message": "[Errno 54] Connection reset by peer"
+      },
+      {
+        "file": "js/pieces/swan.js",
+        "error": "ConnectionResetError",
+        "message": "[Errno 54] Connection reset by peer"
+      },
+      {
+        "file": "js/pieces/spring.js",
+        "status": 200,
+        "bytes": 17241,
+        "same": true,
+        "ms": 6
+      },
+      {
+        "file": "js/pieces/canon.js",
+        "status": 200,
+        "bytes": 13464,
+        "same": true,
+        "ms": 6
+      },
+      {
+        "file": "js/band.js",
+        "error": "ConnectionResetError",
+        "message": "[Errno 54] Connection reset by peer"
+      },
+      {
+        "file": "js/game.js",
+        "error": "ConnectionResetError",
+        "message": "[Errno 54] Connection reset by peer"
+      },
+      {
+        "file": "js/engine.js",
+        "error": "ConnectionResetError",
+        "message": "[Errno 54] Connection reset by peer"
+      },
+      {
+        "file": "js/conduct.js",
+        "status": 200,
+        "bytes": 21496,
+        "same": true,
+        "ms": 6
+      },
+      {
+        "file": "js/announce.js",
+        "error": "ConnectionResetError",
+        "message": "[Errno 54] Connection reset by peer"
+      },
+      {
+        "file": "js/tunegame.js",
+        "error": "ConnectionResetError",
+        "message": "[Errno 54] Connection reset by peer"
+      },
+      {
+        "file": "js/fx.js",
+        "error": "ConnectionResetError",
+        "message": "[Errno 54] Connection reset by peer"
+      },
+      {
+        "file": "js/ui.js",
+        "status": 200,
+        "bytes": 183470,
+        "same": true,
+        "ms": 5
+      }
+    ],
+    [
+      {
+        "file": "js/util.js",
+        "status": 200,
+        "bytes": 2477,
+        "same": true,
+        "ms": 3
+      },
+      {
+        "file": "js/icons.js",
+        "status": 200,
+        "bytes": 3957,
+        "same": true,
+        "ms": 3
+      },
+      {
+        "file": "js/instrument-icons.js",
+        "status": 200,
+        "bytes": 2590,
+        "same": true,
+        "ms": 2
+      },
+      {
+        "file": "js/face-cast.js",
+        "status": 200,
+        "bytes": 7048,
+        "same": true,
+        "ms": 2
+      },
+      {
+        "file": "js/faces.js",
+        "error": "ConnectionResetError",
+        "message": "[Errno 54] Connection reset by peer"
+      },
+      {
+        "file": "js/instruments.js",
+        "error": "ConnectionResetError",
+        "message": "[Errno 54] Connection reset by peer"
+      },
+      {
+        "file": "js/venues.js",
+        "status": 200,
+        "bytes": 12524,
+        "same": true,
+        "ms": 3
+      },
+      {
+        "file": "js/samples.js",
+        "status": 200,
+        "bytes": 24801,
+        "same": true,
+        "ms": 3
+      },
+      {
+        "file": "js/scores.js",
+        "status": 200,
+        "bytes": 22132,
+        "same": true,
+        "ms": 3
+      },
+      {
+        "file": "js/pieces/largo.js",
+        "error": "ConnectionResetError",
+        "message": "[Errno 54] Connection reset by peer"
+      },
+      {
+        "file": "js/pieces/ode.js",
+        "error": "ConnectionResetError",
+        "message": "[Errno 54] Connection reset by peer"
+      },
+      {
+        "file": "js/pieces/galop.js",
+        "error": "ConnectionResetError",
+        "message": "[Errno 54] Connection reset by peer"
+      },
+      {
+        "file": "js/pieces/pomp.js",
+        "error": "ConnectionResetError",
+        "message": "[Errno 54] Connection reset by peer"
+      },
+      {
+        "file": "js/pieces/aida.js",
+        "error": "ConnectionResetError",
+        "message": "[Errno 54] Connection reset by peer"
+      },
+      {
+        "file": "js/pieces/hero.js",
+        "status": 200,
+        "bytes": 21784,
+        "same": true,
+        "ms": 4
+      },
+      {
+        "file": "js/pieces/holst.js",
+        "status": 200,
+        "bytes": 18482,
+        "same": true,
+        "ms": 3
+      },
+      {
+        "file": "js/pieces/hungarian.js",
+        "error": "ConnectionResetError",
+        "message": "[Errno 54] Connection reset by peer"
+      },
+      {
+        "file": "js/pieces/flowers.js",
+        "error": "ConnectionResetError",
+        "message": "[Errno 54] Connection reset by peer"
+      },
+      {
+        "file": "js/pieces/tell.js",
+        "status": 200,
+        "bytes": 37082,
+        "same": true,
+        "ms": 3
+      },
+      {
+        "file": "js/pieces/carmen.js",
+        "error": "ConnectionResetError",
+        "message": "[Errno 54] Connection reset by peer"
+      },
+      {
+        "file": "js/pieces/valkyrie.js",
+        "status": 200,
+        "bytes": 20721,
+        "same": true,
+        "ms": 3
+      },
+      {
+        "file": "js/pieces/swan.js",
+        "error": "ConnectionResetError",
+        "message": "[Errno 54] Connection reset by peer"
+      },
+      {
+        "file": "js/pieces/spring.js",
+        "error": "ConnectionResetError",
+        "message": "[Errno 54] Connection reset by peer"
+      },
+      {
+        "file": "js/pieces/canon.js",
+        "status": 200,
+        "bytes": 13464,
+        "same": true,
+        "ms": 1
+      },
+      {
+        "file": "js/band.js",
+        "status": 200,
+        "bytes": 49840,
+        "same": true,
+        "ms": 3
+      },
+      {
+        "file": "js/game.js",
+        "status": 200,
+        "bytes": 188523,
+        "same": true,
+        "ms": 4
+      },
+      {
+        "file": "js/engine.js",
+        "error": "OSError",
+        "message": "[Errno 22] Invalid argument"
+      },
+      {
+        "file": "js/conduct.js",
+        "status": 200,
+        "bytes": 21496,
+        "same": true,
+        "ms": 3
+      },
+      {
+        "file": "js/announce.js",
+        "status": 200,
+        "bytes": 7939,
+        "same": true,
+        "ms": 4
+      },
+      {
+        "file": "js/tunegame.js",
+        "status": 200,
+        "bytes": 9322,
+        "same": true,
+        "ms": 4
+      },
+      {
+        "file": "js/fx.js",
+        "error": "ConnectionResetError",
+        "message": "[Errno 54] Connection reset by peer"
+      },
+      {
+        "file": "js/ui.js",
+        "status": 200,
+        "bytes": 183470,
+        "same": true,
+        "ms": 4
+      }
+    ],
+    [
+      {
+        "file": "js/util.js",
+        "error": "ConnectionResetError",
+        "message": "[Errno 54] Connection reset by peer"
+      },
+      {
+        "file": "js/icons.js",
+        "error": "ConnectionResetError",
+        "message": "[Errno 54] Connection reset by peer"
+      },
+      {
+        "file": "js/instrument-icons.js",
+        "error": "ConnectionResetError",
+        "message": "[Errno 54] Connection reset by peer"
+      },
+      {
+        "file": "js/face-cast.js",
+        "status": 200,
+        "bytes": 7048,
+        "same": true,
+        "ms": 2
+      },
+      {
+        "file": "js/faces.js",
+        "error": "ConnectionResetError",
+        "message": "[Errno 54] Connection reset by peer"
+      },
+      {
+        "file": "js/instruments.js",
+        "status": 200,
+        "bytes": 27017,
+        "same": true,
+        "ms": 3
+      },
+      {
+        "file": "js/venues.js",
+        "status": 200,
+        "bytes": 12524,
+        "same": true,
+        "ms": 3
+      },
+      {
+        "file": "js/samples.js",
+        "status": 200,
+        "bytes": 24801,
+        "same": true,
+        "ms": 2
+      },
+      {
+        "file": "js/scores.js",
+        "error": "ConnectionResetError",
+        "message": "[Errno 54] Connection reset by peer"
+      },
+      {
+        "file": "js/pieces/largo.js",
+        "error": "ConnectionResetError",
+        "message": "[Errno 54] Connection reset by peer"
+      },
+      {
+        "file": "js/pieces/ode.js",
+        "error": "OSError",
+        "message": "[Errno 22] Invalid argument"
+      },
+      {
+        "file": "js/pieces/galop.js",
+        "error": "ConnectionResetError",
+        "message": "[Errno 54] Connection reset by peer"
+      },
+      {
+        "file": "js/pieces/pomp.js",
+        "error": "ConnectionResetError",
+        "message": "[Errno 54] Connection reset by peer"
+      },
+      {
+        "file": "js/pieces/aida.js",
+        "error": "ConnectionResetError",
+        "message": "[Errno 54] Connection reset by peer"
+      },
+      {
+        "file": "js/pieces/hero.js",
+        "status": 200,
+        "bytes": 21784,
+        "same": true,
+        "ms": 2
+      },
+      {
+        "file": "js/pieces/holst.js",
+        "error": "ConnectionResetError",
+        "message": "[Errno 54] Connection reset by peer"
+      },
+      {
+        "file": "js/pieces/hungarian.js",
+        "status": 200,
+        "bytes": 29740,
+        "same": true,
+        "ms": 2
+      },
+      {
+        "file": "js/pieces/flowers.js",
+        "status": 200,
+        "bytes": 25824,
+        "same": true,
+        "ms": 3
+      },
+      {
+        "file": "js/pieces/tell.js",
+        "error": "ConnectionResetError",
+        "message": "[Errno 54] Connection reset by peer"
+      },
+      {
+        "file": "js/pieces/carmen.js",
+        "error": "ConnectionResetError",
+        "message": "[Errno 54] Connection reset by peer"
+      },
+      {
+        "file": "js/pieces/valkyrie.js",
+        "status": 200,
+        "bytes": 20721,
+        "same": true,
+        "ms": 3
+      },
+      {
+        "file": "js/pieces/swan.js",
+        "error": "OSError",
+        "message": "[Errno 22] Invalid argument"
+      },
+      {
+        "file": "js/pieces/spring.js",
+        "status": 200,
+        "bytes": 17241,
+        "same": true,
+        "ms": 2
+      },
+      {
+        "file": "js/pieces/canon.js",
+        "error": "ConnectionResetError",
+        "message": "[Errno 54] Connection reset by peer"
+      },
+      {
+        "file": "js/band.js",
+        "status": 200,
+        "bytes": 49840,
+        "same": true,
+        "ms": 3
+      },
+      {
+        "file": "js/game.js",
+        "status": 200,
+        "bytes": 188523,
+        "same": true,
+        "ms": 2
+      },
+      {
+        "file": "js/engine.js",
+        "error": "ConnectionResetError",
+        "message": "[Errno 54] Connection reset by peer"
+      },
+      {
+        "file": "js/conduct.js",
+        "status": 200,
+        "bytes": 21496,
+        "same": true,
+        "ms": 3
+      },
+      {
+        "file": "js/announce.js",
+        "error": "ConnectionResetError",
+        "message": "[Errno 54] Connection reset by peer"
+      },
+      {
+        "file": "js/tunegame.js",
+        "status": 200,
+        "bytes": 9322,
+        "same": true,
+        "ms": 2
+      },
+      {
+        "file": "js/fx.js",
+        "error": "ConnectionResetError",
+        "message": "[Errno 54] Connection reset by peer"
+      },
+      {
+        "file": "js/ui.js",
+        "status": 200,
+        "bytes": 183470,
+        "same": true,
+        "ms": 2
+      }
+    ]
+  ],
+  "persistent": [
+    {
+      "file": "js/util.js",
+      "status": 200,
+      "version": 10,
+      "connectionCloses": true,
+      "cache": "no-store",
+      "same": true
+    },
+    {
+      "file": "js/icons.js",
+      "status": 200,
+      "version": 10,
+      "connectionCloses": true,
+      "cache": "no-store",
+      "same": true
+    },
+    {
+      "file": "js/instrument-icons.js",
+      "status": 200,
+      "version": 10,
+      "connectionCloses": true,
+      "cache": "no-store",
+      "same": true
+    }
+  ]
+}

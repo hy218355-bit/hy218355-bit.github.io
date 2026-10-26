@@ -1,0 +1,11 @@
+{
+  "ready": true,
+  "banks": 41,
+  "voices": [
+    "SampleVoice"
+  ],
+  "errors": [],
+  "width": 375,
+  "scrollWidth": 375,
+  "saveUnchanged": true
+}

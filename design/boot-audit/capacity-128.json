@@ -1,0 +1,709 @@
+{
+  "port": 53854,
+  "rounds": [
+    [
+      {
+        "file": "js/util.js",
+        "status": 200,
+        "bytes": 2477,
+        "same": true,
+        "ms": 9
+      },
+      {
+        "file": "js/icons.js",
+        "status": 200,
+        "bytes": 3957,
+        "same": true,
+        "ms": 4
+      },
+      {
+        "file": "js/instrument-icons.js",
+        "status": 200,
+        "bytes": 2590,
+        "same": true,
+        "ms": 9
+      },
+      {
+        "file": "js/face-cast.js",
+        "status": 200,
+        "bytes": 7048,
+        "same": true,
+        "ms": 5
+      },
+      {
+        "file": "js/faces.js",
+        "status": 200,
+        "bytes": 4184,
+        "same": true,
+        "ms": 8
+      },
+      {
+        "file": "js/instruments.js",
+        "status": 200,
+        "bytes": 27017,
+        "same": true,
+        "ms": 5
+      },
+      {
+        "file": "js/venues.js",
+        "status": 200,
+        "bytes": 12524,
+        "same": true,
+        "ms": 6
+      },
+      {
+        "file": "js/samples.js",
+        "status": 200,
+        "bytes": 24801,
+        "same": true,
+        "ms": 7
+      },
+      {
+        "file": "js/scores.js",
+        "status": 200,
+        "bytes": 22132,
+        "same": true,
+        "ms": 7
+      },
+      {
+        "file": "js/pieces/largo.js",
+        "status": 200,
+        "bytes": 11341,
+        "same": true,
+        "ms": 5
+      },
+      {
+        "file": "js/pieces/ode.js",
+        "status": 200,
+        "bytes": 16000,
+        "same": true,
+        "ms": 6
+      },
+      {
+        "file": "js/pieces/galop.js",
+        "status": 200,
+        "bytes": 22631,
+        "same": true,
+        "ms": 5
+      },
+      {
+        "file": "js/pieces/pomp.js",
+        "status": 200,
+        "bytes": 19116,
+        "same": true,
+        "ms": 7
+      },
+      {
+        "file": "js/pieces/aida.js",
+        "status": 200,
+        "bytes": 20823,
+        "same": true,
+        "ms": 6
+      },
+      {
+        "file": "js/pieces/hero.js",
+        "status": 200,
+        "bytes": 21784,
+        "same": true,
+        "ms": 4
+      },
+      {
+        "file": "js/pieces/holst.js",
+        "status": 200,
+        "bytes": 18482,
+        "same": true,
+        "ms": 5
+      },
+      {
+        "file": "js/pieces/hungarian.js",
+        "status": 200,
+        "bytes": 29740,
+        "same": true,
+        "ms": 5
+      },
+      {
+        "file": "js/pieces/flowers.js",
+        "status": 200,
+        "bytes": 25824,
+        "same": true,
+        "ms": 5
+      },
+      {
+        "file": "js/pieces/tell.js",
+        "status": 200,
+        "bytes": 37082,
+        "same": true,
+        "ms": 6
+      },
+      {
+        "file": "js/pieces/carmen.js",
+        "status": 200,
+        "bytes": 25854,
+        "same": true,
+        "ms": 7
+      },
+      {
+        "file": "js/pieces/valkyrie.js",
+        "status": 200,
+        "bytes": 20721,
+        "same": true,
+        "ms": 7
+      },
+      {
+        "file": "js/pieces/swan.js",
+        "status": 200,
+        "bytes": 19332,
+        "same": true,
+        "ms": 7
+      },
+      {
+        "file": "js/pieces/spring.js",
+        "status": 200,
+        "bytes": 17241,
+        "same": true,
+        "ms": 7
+      },
+      {
+        "file": "js/pieces/canon.js",
+        "status": 200,
+        "bytes": 13464,
+        "same": true,
+        "ms": 7
+      },
+      {
+        "file": "js/band.js",
+        "status": 200,
+        "bytes": 49840,
+        "same": true,
+        "ms": 7
+      },
+      {
+        "file": "js/game.js",
+        "status": 200,
+        "bytes": 188523,
+        "same": true,
+        "ms": 9
+      },
+      {
+        "file": "js/engine.js",
+        "status": 200,
+        "bytes": 22254,
+        "same": true,
+        "ms": 8
+      },
+      {
+        "file": "js/conduct.js",
+        "status": 200,
+        "bytes": 21496,
+        "same": true,
+        "ms": 9
+      },
+      {
+        "file": "js/announce.js",
+        "status": 200,
+        "bytes": 7939,
+        "same": true,
+        "ms": 9
+      },
+      {
+        "file": "js/tunegame.js",
+        "status": 200,
+        "bytes": 9322,
+        "same": true,
+        "ms": 9
+      },
+      {
+        "file": "js/fx.js",
+        "status": 200,
+        "bytes": 11663,
+        "same": true,
+        "ms": 8
+      },
+      {
+        "file": "js/ui.js",
+        "status": 200,
+        "bytes": 183470,
+        "same": true,
+        "ms": 6
+      }
+    ],
+    [
+      {
+        "file": "js/util.js",
+        "status": 200,
+        "bytes": 2477,
+        "same": true,
+        "ms": 3
+      },
+      {
+        "file": "js/icons.js",
+        "status": 200,
+        "bytes": 3957,
+        "same": true,
+        "ms": 5
+      },
+      {
+        "file": "js/instrument-icons.js",
+        "status": 200,
+        "bytes": 2590,
+        "same": true,
+        "ms": 5
+      },
+      {
+        "file": "js/face-cast.js",
+        "status": 200,
+        "bytes": 7048,
+        "same": true,
+        "ms": 4
+      },
+      {
+        "file": "js/faces.js",
+        "status": 200,
+        "bytes": 4184,
+        "same": true,
+        "ms": 5
+      },
+      {
+        "file": "js/instruments.js",
+        "status": 200,
+        "bytes": 27017,
+        "same": true,
+        "ms": 5
+      },
+      {
+        "file": "js/venues.js",
+        "status": 200,
+        "bytes": 12524,
+        "same": true,
+        "ms": 6
+      },
+      {
+        "file": "js/samples.js",
+        "status": 200,
+        "bytes": 24801,
+        "same": true,
+        "ms": 6
+      },
+      {
+        "file": "js/scores.js",
+        "status": 200,
+        "bytes": 22132,
+        "same": true,
+        "ms": 7
+      },
+      {
+        "file": "js/pieces/largo.js",
+        "status": 200,
+        "bytes": 11341,
+        "same": true,
+        "ms": 6
+      },
+      {
+        "file": "js/pieces/ode.js",
+        "status": 200,
+        "bytes": 16000,
+        "same": true,
+        "ms": 6
+      },
+      {
+        "file": "js/pieces/galop.js",
+        "status": 200,
+        "bytes": 22631,
+        "same": true,
+        "ms": 5
+      },
+      {
+        "file": "js/pieces/pomp.js",
+        "status": 200,
+        "bytes": 19116,
+        "same": true,
+        "ms": 4
+      },
+      {
+        "file": "js/pieces/aida.js",
+        "status": 200,
+        "bytes": 20823,
+        "same": true,
+        "ms": 5
+      },
+      {
+        "file": "js/pieces/hero.js",
+        "status": 200,
+        "bytes": 21784,
+        "same": true,
+        "ms": 4
+      },
+      {
+        "file": "js/pieces/holst.js",
+        "status": 200,
+        "bytes": 18482,
+        "same": true,
+        "ms": 5
+      },
+      {
+        "file": "js/pieces/hungarian.js",
+        "status": 200,
+        "bytes": 29740,
+        "same": true,
+        "ms": 5
+      },
+      {
+        "file": "js/pieces/flowers.js",
+        "status": 200,
+        "bytes": 25824,
+        "same": true,
+        "ms": 4
+      },
+      {
+        "file": "js/pieces/tell.js",
+        "status": 200,
+        "bytes": 37082,
+        "same": true,
+        "ms": 5
+      },
+      {
+        "file": "js/pieces/carmen.js",
+        "status": 200,
+        "bytes": 25854,
+        "same": true,
+        "ms": 6
+      },
+      {
+        "file": "js/pieces/valkyrie.js",
+        "status": 200,
+        "bytes": 20721,
+        "same": true,
+        "ms": 5
+      },
+      {
+        "file": "js/pieces/swan.js",
+        "status": 200,
+        "bytes": 19332,
+        "same": true,
+        "ms": 5
+      },
+      {
+        "file": "js/pieces/spring.js",
+        "status": 200,
+        "bytes": 17241,
+        "same": true,
+        "ms": 6
+      },
+      {
+        "file": "js/pieces/canon.js",
+        "status": 200,
+        "bytes": 13464,
+        "same": true,
+        "ms": 6
+      },
+      {
+        "file": "js/band.js",
+        "status": 200,
+        "bytes": 49840,
+        "same": true,
+        "ms": 4
+      },
+      {
+        "file": "js/game.js",
+        "status": 200,
+        "bytes": 188523,
+        "same": true,
+        "ms": 7
+      },
+      {
+        "file": "js/engine.js",
+        "status": 200,
+        "bytes": 22254,
+        "same": true,
+        "ms": 6
+      },
+      {
+        "file": "js/conduct.js",
+        "status": 200,
+        "bytes": 21496,
+        "same": true,
+        "ms": 5
+      },
+      {
+        "file": "js/announce.js",
+        "status": 200,
+        "bytes": 7939,
+        "same": true,
+        "ms": 4
+      },
+      {
+        "file": "js/tunegame.js",
+        "status": 200,
+        "bytes": 9322,
+        "same": true,
+        "ms": 5
+      },
+      {
+        "file": "js/fx.js",
+        "status": 200,
+        "bytes": 11663,
+        "same": true,
+        "ms": 3
+      },
+      {
+        "file": "js/ui.js",
+        "status": 200,
+        "bytes": 183470,
+        "same": true,
+        "ms": 5
+      }
+    ],
+    [
+      {
+        "file": "js/util.js",
+        "status": 200,
+        "bytes": 2477,
+        "same": true,
+        "ms": 2
+      },
+      {
+        "file": "js/icons.js",
+        "status": 200,
+        "bytes": 3957,
+        "same": true,
+        "ms": 5
+      },
+      {
+        "file": "js/instrument-icons.js",
+        "status": 200,
+        "bytes": 2590,
+        "same": true,
+        "ms": 6
+      },
+      {
+        "file": "js/face-cast.js",
+        "status": 200,
+        "bytes": 7048,
+        "same": true,
+        "ms": 3
+      },
+      {
+        "file": "js/faces.js",
+        "status": 200,
+        "bytes": 4184,
+        "same": true,
+        "ms": 4
+      },
+      {
+        "file": "js/instruments.js",
+        "status": 200,
+        "bytes": 27017,
+        "same": true,
+        "ms": 5
+      },
+      {
+        "file": "js/venues.js",
+        "status": 200,
+        "bytes": 12524,
+        "same": true,
+        "ms": 4
+      },
+      {
+        "file": "js/samples.js",
+        "status": 200,
+        "bytes": 24801,
+        "same": true,
+        "ms": 4
+      },
+      {
+        "file": "js/scores.js",
+        "status": 200,
+        "bytes": 22132,
+        "same": true,
+        "ms": 4
+      },
+      {
+        "file": "js/pieces/largo.js",
+        "status": 200,
+        "bytes": 11341,
+        "same": true,
+        "ms": 5
+      },
+      {
+        "file": "js/pieces/ode.js",
+        "status": 200,
+        "bytes": 16000,
+        "same": true,
+        "ms": 3
+      },
+      {
+        "file": "js/pieces/galop.js",
+        "status": 200,
+        "bytes": 22631,
+        "same": true,
+        "ms": 4
+      },
+      {
+        "file": "js/pieces/pomp.js",
+        "status": 200,
+        "bytes": 19116,
+        "same": true,
+        "ms": 3
+      },
+      {
+        "file": "js/pieces/aida.js",
+        "status": 200,
+        "bytes": 20823,
+        "same": true,
+        "ms": 4
+      },
+      {
+        "file": "js/pieces/hero.js",
+        "status": 200,
+        "bytes": 21784,
+        "same": true,
+        "ms": 3
+      },
+      {
+        "file": "js/pieces/holst.js",
+        "status": 200,
+        "bytes": 18482,
+        "same": true,
+        "ms": 3
+      },
+      {
+        "file": "js/pieces/hungarian.js",
+        "status": 200,
+        "bytes": 29740,
+        "same": true,
+        "ms": 3
+      },
+      {
+        "file": "js/pieces/flowers.js",
+        "status": 200,
+        "bytes": 25824,
+        "same": true,
+        "ms": 5
+      },
+      {
+        "file": "js/pieces/tell.js",
+        "status": 200,
+        "bytes": 37082,
+        "same": true,
+        "ms": 3
+      },
+      {
+        "file": "js/pieces/carmen.js",
+        "status": 200,
+        "bytes": 25854,
+        "same": true,
+        "ms": 6
+      },
+      {
+        "file": "js/pieces/valkyrie.js",
+        "status": 200,
+        "bytes": 20721,
+        "same": true,
+        "ms": 4
+      },
+      {
+        "file": "js/pieces/swan.js",
+        "status": 200,
+        "bytes": 19332,
+        "same": true,
+        "ms": 3
+      },
+      {
+        "file": "js/pieces/spring.js",
+        "status": 200,
+        "bytes": 17241,
+        "same": true,
+        "ms": 5
+      },
+      {
+        "file": "js/pieces/canon.js",
+        "status": 200,
+        "bytes": 13464,
+        "same": true,
+        "ms": 6
+      },
+      {
+        "file": "js/band.js",
+        "status": 200,
+        "bytes": 49840,
+        "same": true,
+        "ms": 3
+      },
+      {
+        "file": "js/game.js",
+        "status": 200,
+        "bytes": 188523,
+        "same": true,
+        "ms": 4
+      },
+      {
+        "file": "js/engine.js",
+        "status": 200,
+        "bytes": 22254,
+        "same": true,
+        "ms": 3
+      },
+      {
+        "file": "js/conduct.js",
+        "status": 200,
+        "bytes": 21496,
+        "same": true,
+        "ms": 4
+      },
+      {
+        "file": "js/announce.js",
+        "status": 200,
+        "bytes": 7939,
+        "same": true,
+        "ms": 6
+      },
+      {
+        "file": "js/tunegame.js",
+        "status": 200,
+        "bytes": 9322,
+        "same": true,
+        "ms": 3
+      },
+      {
+        "file": "js/fx.js",
+        "status": 200,
+        "bytes": 11663,
+        "same": true,
+        "ms": 4
+      },
+      {
+        "file": "js/ui.js",
+        "status": 200,
+        "bytes": 183470,
+        "same": true,
+        "ms": 3
+      }
+    ]
+  ],
+  "persistent": [
+    {
+      "file": "js/util.js",
+      "status": 200,
+      "version": 10,
+      "connectionCloses": true,
+      "cache": "no-store",
+      "same": true
+    },
+    {
+      "file": "js/icons.js",
+      "status": 200,
+      "version": 10,
+      "connectionCloses": true,
+      "cache": "no-store",
+      "same": true
+    },
+    {
+      "file": "js/instrument-icons.js",
+      "status": 200,
+      "version": 10,
+      "connectionCloses": true,
+      "cache": "no-store",
+      "same": true
+    }
+  ]
+}

@@ -1,0 +1,61 @@
+{
+  "delivery-before": {
+    "requests": 96,
+    "failures": 49,
+    "errors": {
+      "ConnectionResetError": 45,
+      "OSError": 4
+    }
+  },
+  "delivery-after": {
+    "requests": 96,
+    "failures": 0,
+    "errors": {}
+  },
+  "delivery-final": {
+    "requests": 96,
+    "failures": 0,
+    "errors": {}
+  },
+  "capacity-5": {
+    "requests": 96,
+    "failures": 50,
+    "errors": {
+      "ConnectionResetError": 48,
+      "OSError": 2
+    }
+  },
+  "capacity-128": {
+    "requests": 96,
+    "failures": 0,
+    "errors": {}
+  },
+  "before": {
+    "runs": 12,
+    "failedRuns": 1,
+    "failedFiles": [
+      "/tsukurikata/js/pieces/flowers.js"
+    ]
+  },
+  "after": {
+    "runs": 24,
+    "failedRuns": 0,
+    "failedFiles": []
+  },
+  "final": {
+    "runs": 12,
+    "failedRuns": 0,
+    "failedFiles": []
+  },
+  "game": {
+    "ready": true,
+    "banks": 41,
+    "voices": [
+      "SampleVoice"
+    ],
+    "errors": [],
+    "width": 375,
+    "scrollWidth": 375,
+    "saveUnchanged": true
+  }
+}

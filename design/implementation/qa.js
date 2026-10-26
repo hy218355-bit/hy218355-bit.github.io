@@ -43,6 +43,7 @@ function advance(s){
  return practiceWeek(s);
 }
 function record(){
+ const bootResult=$('#bootResult');if(bootResult)report.boot=JSON.parse(bootResult.textContent);
  if(q.has('performanceAudit')){
   const key=[playPiece(),U.range,U.venue].join(':');
   if(!performanceMemo||performanceMemo.state!==S||performanceMemo.key!==key){performanceMemo={state:S,key,perf:perform(currentCtx())};}
@@ -220,6 +221,7 @@ async function show(next){
  record();console.log('画面確認',report);
 }
 await show(view);
+document.addEventListener('bootchecked',record);
 document.addEventListener('facesready',()=>setTimeout(record,0));
 for(const event of ['pointerdown','toggle'])$('#grCard').addEventListener(event,()=>setTimeout(record,0),{capture:true});
 $('#grNext').addEventListener('click',()=>setTimeout(record,0));$('#grPrev').addEventListener('click',()=>setTimeout(record,0));

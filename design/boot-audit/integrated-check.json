@@ -1,0 +1,413 @@
+{
+  "boot": {
+    "started": "2026-10-26T18:51:08.079Z",
+    "loaded": [
+      "/tsukurikata/js/util.js",
+      "/tsukurikata/js/icons.js",
+      "/tsukurikata/js/instrument-icons.js",
+      "/tsukurikata/js/face-cast.js",
+      "/tsukurikata/js/faces.js",
+      "/tsukurikata/js/instruments.js",
+      "/tsukurikata/js/venues.js",
+      "/tsukurikata/js/samples.js",
+      "/tsukurikata/js/scores.js",
+      "/tsukurikata/js/pieces/largo.js",
+      "/tsukurikata/js/pieces/ode.js",
+      "/tsukurikata/js/pieces/galop.js",
+      "/tsukurikata/js/pieces/pomp.js",
+      "/tsukurikata/js/pieces/aida.js",
+      "/tsukurikata/js/pieces/hero.js",
+      "/tsukurikata/js/pieces/holst.js",
+      "/tsukurikata/js/pieces/hungarian.js",
+      "/tsukurikata/js/pieces/flowers.js",
+      "/tsukurikata/js/pieces/tell.js",
+      "/tsukurikata/js/pieces/carmen.js",
+      "/tsukurikata/js/pieces/valkyrie.js",
+      "/tsukurikata/js/pieces/swan.js",
+      "/tsukurikata/js/pieces/spring.js",
+      "/tsukurikata/js/pieces/canon.js",
+      "/tsukurikata/js/band.js",
+      "/tsukurikata/js/game.js",
+      "/tsukurikata/js/engine.js",
+      "/tsukurikata/js/conduct.js",
+      "/tsukurikata/js/announce.js",
+      "/tsukurikata/js/tunegame.js",
+      "/tsukurikata/js/fx.js",
+      "/tsukurikata/js/ui.js",
+      "/design/implementation/qa.js"
+    ],
+    "failed": [],
+    "errors": [],
+    "ready": true,
+    "globals": {
+      "fx": "object",
+      "season": "function",
+      "engine": "function",
+      "pieces": "object",
+      "game": "function"
+    },
+    "scripts": [
+      "/tsukurikata/js/util.js",
+      "/tsukurikata/js/icons.js",
+      "/tsukurikata/js/instrument-icons.js",
+      "/tsukurikata/js/face-cast.js",
+      "/tsukurikata/js/faces.js",
+      "/tsukurikata/js/instruments.js",
+      "/tsukurikata/js/venues.js",
+      "/tsukurikata/js/samples.js",
+      "/tsukurikata/js/scores.js",
+      "/tsukurikata/js/pieces/largo.js",
+      "/tsukurikata/js/pieces/ode.js",
+      "/tsukurikata/js/pieces/galop.js",
+      "/tsukurikata/js/pieces/pomp.js",
+      "/tsukurikata/js/pieces/aida.js",
+      "/tsukurikata/js/pieces/hero.js",
+      "/tsukurikata/js/pieces/holst.js",
+      "/tsukurikata/js/pieces/hungarian.js",
+      "/tsukurikata/js/pieces/flowers.js",
+      "/tsukurikata/js/pieces/tell.js",
+      "/tsukurikata/js/pieces/carmen.js",
+      "/tsukurikata/js/pieces/valkyrie.js",
+      "/tsukurikata/js/pieces/swan.js",
+      "/tsukurikata/js/pieces/spring.js",
+      "/tsukurikata/js/pieces/canon.js",
+      "/tsukurikata/js/band.js",
+      "/tsukurikata/js/game.js",
+      "/tsukurikata/js/engine.js",
+      "/tsukurikata/js/conduct.js",
+      "/tsukurikata/js/announce.js",
+      "/tsukurikata/js/tunegame.js",
+      "/tsukurikata/js/fx.js",
+      "/tsukurikata/js/ui.js",
+      "/design/implementation/qa.js"
+    ],
+    "resources": [
+      {
+        "file": "/tsukurikata/js/util.js",
+        "status": 200,
+        "bytes": 2477,
+        "ms": 23
+      },
+      {
+        "file": "/tsukurikata/js/icons.js",
+        "status": 200,
+        "bytes": 3957,
+        "ms": 23
+      },
+      {
+        "file": "/tsukurikata/js/face-cast.js",
+        "status": 200,
+        "bytes": 7048,
+        "ms": 26
+      },
+      {
+        "file": "/tsukurikata/js/instrument-icons.js",
+        "status": 200,
+        "bytes": 2590,
+        "ms": 27
+      },
+      {
+        "file": "/tsukurikata/js/faces.js",
+        "status": 200,
+        "bytes": 4184,
+        "ms": 29
+      },
+      {
+        "file": "/tsukurikata/js/instruments.js",
+        "status": 200,
+        "bytes": 27017,
+        "ms": 30
+      },
+      {
+        "file": "/tsukurikata/js/samples.js",
+        "status": 200,
+        "bytes": 24801,
+        "ms": 29
+      },
+      {
+        "file": "/tsukurikata/js/venues.js",
+        "status": 200,
+        "bytes": 12524,
+        "ms": 30
+      },
+      {
+        "file": "/tsukurikata/js/scores.js",
+        "status": 200,
+        "bytes": 22132,
+        "ms": 31
+      },
+      {
+        "file": "/tsukurikata/js/pieces/largo.js",
+        "status": 200,
+        "bytes": 11341,
+        "ms": 31
+      },
+      {
+        "file": "/tsukurikata/js/pieces/ode.js",
+        "status": 200,
+        "bytes": 16000,
+        "ms": 31
+      },
+      {
+        "file": "/tsukurikata/js/pieces/pomp.js",
+        "status": 200,
+        "bytes": 19116,
+        "ms": 33
+      },
+      {
+        "file": "/tsukurikata/js/pieces/hero.js",
+        "status": 200,
+        "bytes": 21784,
+        "ms": 35
+      },
+      {
+        "file": "/tsukurikata/js/pieces/aida.js",
+        "status": 200,
+        "bytes": 20823,
+        "ms": 34
+      },
+      {
+        "file": "/tsukurikata/js/pieces/galop.js",
+        "status": 200,
+        "bytes": 22631,
+        "ms": 35
+      },
+      {
+        "file": "/tsukurikata/js/pieces/hungarian.js",
+        "status": 200,
+        "bytes": 29740,
+        "ms": 34
+      },
+      {
+        "file": "/tsukurikata/js/pieces/holst.js",
+        "status": 200,
+        "bytes": 18482,
+        "ms": 34
+      },
+      {
+        "file": "/tsukurikata/js/pieces/flowers.js",
+        "status": 200,
+        "bytes": 25824,
+        "ms": 36
+      },
+      {
+        "file": "/tsukurikata/js/pieces/tell.js",
+        "status": 200,
+        "bytes": 37082,
+        "ms": 37
+      },
+      {
+        "file": "/tsukurikata/js/pieces/carmen.js",
+        "status": 200,
+        "bytes": 25854,
+        "ms": 41
+      },
+      {
+        "file": "/tsukurikata/js/pieces/swan.js",
+        "status": 200,
+        "bytes": 19332,
+        "ms": 37
+      },
+      {
+        "file": "/tsukurikata/js/pieces/canon.js",
+        "status": 200,
+        "bytes": 13464,
+        "ms": 39
+      },
+      {
+        "file": "/tsukurikata/js/pieces/spring.js",
+        "status": 200,
+        "bytes": 17241,
+        "ms": 40
+      },
+      {
+        "file": "/tsukurikata/js/pieces/valkyrie.js",
+        "status": 200,
+        "bytes": 20721,
+        "ms": 39
+      },
+      {
+        "file": "/tsukurikata/js/band.js",
+        "status": 200,
+        "bytes": 49840,
+        "ms": 41
+      },
+      {
+        "file": "/tsukurikata/js/game.js",
+        "status": 200,
+        "bytes": 188523,
+        "ms": 44
+      },
+      {
+        "file": "/tsukurikata/js/conduct.js",
+        "status": 200,
+        "bytes": 21496,
+        "ms": 42
+      },
+      {
+        "file": "/tsukurikata/js/announce.js",
+        "status": 200,
+        "bytes": 7939,
+        "ms": 43
+      },
+      {
+        "file": "/tsukurikata/js/tunegame.js",
+        "status": 200,
+        "bytes": 9322,
+        "ms": 44
+      },
+      {
+        "file": "/tsukurikata/js/fx.js",
+        "status": 200,
+        "bytes": 11663,
+        "ms": 44
+      },
+      {
+        "file": "/tsukurikata/js/engine.js",
+        "status": 200,
+        "bytes": 22254,
+        "ms": 44
+      },
+      {
+        "file": "/tsukurikata/js/ui.js",
+        "status": 200,
+        "bytes": 183470,
+        "ms": 45
+      },
+      {
+        "file": "/design/implementation/qa.js",
+        "status": 200,
+        "bytes": 25086,
+        "ms": 44
+      }
+    ]
+  },
+  "audio": {
+    "ready": true,
+    "progress": 1,
+    "error": null,
+    "banks": [
+      "picc",
+      "oboe",
+      "flute",
+      "bassoon",
+      "clar",
+      "horn",
+      "sax",
+      "tsax",
+      "tpt",
+      "flute_st",
+      "tuba",
+      "oboe_st",
+      "bassoon_st",
+      "tbn",
+      "cbass",
+      "clar_st",
+      "horn_st",
+      "tpt_st",
+      "tbn_st",
+      "tsax_st",
+      "pizz",
+      "cbass_st",
+      "tuba_st",
+      "bd",
+      "cym",
+      "sd",
+      "tamb",
+      "tri",
+      "timp",
+      "sus",
+      "tamtam",
+      "xylo",
+      "glock",
+      "mrb",
+      "chime",
+      "vib",
+      "ebclar",
+      "bclar",
+      "bsax_st",
+      "btbn",
+      "bsax"
+    ],
+    "requests": {
+      "manifest.json": 1,
+      "flute.mp3": 1,
+      "picc.mp3": 1,
+      "oboe.mp3": 1,
+      "bassoon.mp3": 1,
+      "clar.mp3": 1,
+      "sax.mp3": 1,
+      "tsax.mp3": 1,
+      "horn.mp3": 1,
+      "tpt.mp3": 1,
+      "tbn.mp3": 1,
+      "tuba.mp3": 1,
+      "cbass.mp3": 1,
+      "flute_st.mp3": 1,
+      "oboe_st.mp3": 1,
+      "bassoon_st.mp3": 1,
+      "clar_st.mp3": 1,
+      "horn_st.mp3": 1,
+      "tpt_st.mp3": 1,
+      "tbn_st.mp3": 1,
+      "tuba_st.mp3": 1,
+      "cbass_st.mp3": 1,
+      "tsax_st.mp3": 1,
+      "pizz.mp3": 1,
+      "timp.mp3": 1,
+      "sd.mp3": 1,
+      "bd.mp3": 1,
+      "cym.mp3": 1,
+      "sus.mp3": 1,
+      "tri.mp3": 1,
+      "tamb.mp3": 1,
+      "tamtam.mp3": 1,
+      "glock.mp3": 1,
+      "xylo.mp3": 1,
+      "mrb.mp3": 1,
+      "vib.mp3": 1,
+      "chime.mp3": 1,
+      "ebclar.mp3": 1,
+      "bclar.mp3": 1,
+      "btbn.mp3": 1,
+      "bsax.mp3": 1,
+      "bsax_st.mp3": 1
+    },
+    "flow": {
+      "active": 0,
+      "peak": 4,
+      "finished": 41,
+      "failed": 0,
+      "started": 75.80000019073486,
+      "settledMs": 1634
+    },
+    "preservedBuffers": null,
+    "voices": []
+  },
+  "tabs": [
+    {
+      "name": "今週",
+      "width": 375,
+      "scrollWidth": 375,
+      "errors": []
+    },
+    {
+      "name": "合奏",
+      "width": 375,
+      "scrollWidth": 375,
+      "errors": []
+    },
+    {
+      "name": "部員",
+      "width": 375,
+      "scrollWidth": 375,
+      "errors": []
+    },
+    {
+      "name": "日誌",
+      "width": 375,
+      "scrollWidth": 375,
+      "errors": []
+    }
+  ]
+}

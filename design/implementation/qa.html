@@ -2,6 +2,34 @@
 <html lang="ja">
 <head>
 <base href="/tsukurikata/">
+<script>
+'use strict';
+/* 確認ページだけ、ゲームの前から読み込みと起動のエラーを記録する。 */
+(() => {
+  const state={started:new Date().toISOString(),loaded:[],failed:[],errors:[],ready:false};
+  const source=el=>el?.tagName==='SCRIPT'&&el.src?new URL(el.src).pathname:null;
+  document.addEventListener('load',e=>{const name=source(e.target);if(name)state.loaded.push(name);},true);
+  window.addEventListener('error',e=>{
+    const name=source(e.target);
+    if(name)state.failed.push(name);
+    else state.errors.push({message:e.message,file:e.filename,line:e.lineno});
+  },true);
+  window.addEventListener('unhandledrejection',e=>state.errors.push({message:String(e.reason?.stack||e.reason)}));
+  const type=read=>{try{return read();}catch(e){return e.message;}};
+  function write(){
+    state.globals={fx:type(()=>typeof FX),season:type(()=>typeof SEASON_OF),engine:type(()=>typeof Engine),pieces:type(()=>typeof PIECES),game:type(()=>typeof freshState)};
+    state.scripts=[...document.scripts].filter(s=>s.src).map(s=>new URL(s.src).pathname);
+    state.resources=performance.getEntriesByType('resource').filter(r=>r.initiatorType==='script').map(r=>({file:new URL(r.name).pathname,status:r.responseStatus,bytes:r.decodedBodySize,ms:Math.round(r.duration)}));
+    state.ready=true;
+    let out=document.getElementById('bootResult');
+    if(!out){out=document.createElement('output');out.id='bootResult';out.hidden=true;document.body.append(out);}
+    out.textContent=JSON.stringify(state);out.dataset.ready='true';
+    document.dispatchEvent(new Event('bootchecked'));
+  }
+  document.addEventListener('DOMContentLoaded',()=>{Promise.resolve(document.fonts?.ready).then(()=>setTimeout(write,100));},{once:true});
+})();
+
+</script>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>吹奏楽部のつくりかた</title>
@@ -1448,39 +1476,39 @@ html[data-season="snow"]{--season-band:linear-gradient(90deg,#DDE8F3,#FFFFFF,#B9
   <button type="button" data-tabgo="log"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 5.5C4 4.7 4.7 4 5.5 4H11v16H5.5c-.8 0-1.5-.7-1.5-1.5z"/><path d="M20 5.5c0-.8-.7-1.5-1.5-1.5H13v16h5.5c.8 0 1.5-.7 1.5-1.5z"/></svg><span>日誌</span></button>
 </nav>
 
-<script src="js/util.js?v=qa-current-listen-3"></script>
-<script src="js/icons.js?v=qa-current-listen-3"></script>
-<script src="js/instrument-icons.js?v=qa-current-listen-3"></script>
-<script src="js/face-cast.js?v=qa-current-listen-3"></script>
-<script src="js/faces.js?v=qa-current-listen-3"></script>
-<script src="js/instruments.js?v=qa-current-listen-3"></script>
-<script src="js/venues.js?v=qa-current-listen-3"></script>
-<script src="js/samples.js?v=qa-current-listen-3"></script>
-<script src="js/scores.js?v=qa-current-listen-3"></script>
-<script src="js/pieces/largo.js?v=qa-current-listen-3"></script>
-<script src="js/pieces/ode.js?v=qa-current-listen-3"></script>
-<script src="js/pieces/galop.js?v=qa-current-listen-3"></script>
-<script src="js/pieces/pomp.js?v=qa-current-listen-3"></script>
-<script src="js/pieces/aida.js?v=qa-current-listen-3"></script>
-<script src="js/pieces/hero.js?v=qa-current-listen-3"></script>
-<script src="js/pieces/holst.js?v=qa-current-listen-3"></script>
-<script src="js/pieces/hungarian.js?v=qa-current-listen-3"></script>
-<script src="js/pieces/flowers.js?v=qa-current-listen-3"></script>
-<script src="js/pieces/tell.js?v=qa-current-listen-3"></script>
-<script src="js/pieces/carmen.js?v=qa-current-listen-3"></script>
-<script src="js/pieces/valkyrie.js?v=qa-current-listen-3"></script>
-<script src="js/pieces/swan.js?v=qa-current-listen-3"></script>
-<script src="js/pieces/spring.js?v=qa-current-listen-3"></script>
-<script src="js/pieces/canon.js?v=qa-current-listen-3"></script>
-<script src="js/band.js?v=qa-current-listen-3"></script>
-<script src="js/game.js?v=qa-current-listen-3"></script>
-<script src="js/engine.js?v=qa-current-listen-3"></script>
-<script src="js/conduct.js?v=qa-current-listen-3"></script>
-<script src="js/announce.js?v=qa-current-listen-3"></script>
-<script src="js/tunegame.js?v=qa-current-listen-3"></script>
-<script src="js/fx.js?v=qa-current-listen-3"></script>
-<script src="js/ui.js?v=qa-current-listen-3"></script>
+<script src="js/util.js?v=qa-boot-audit-1"></script>
+<script src="js/icons.js?v=qa-boot-audit-1"></script>
+<script src="js/instrument-icons.js?v=qa-boot-audit-1"></script>
+<script src="js/face-cast.js?v=qa-boot-audit-1"></script>
+<script src="js/faces.js?v=qa-boot-audit-1"></script>
+<script src="js/instruments.js?v=qa-boot-audit-1"></script>
+<script src="js/venues.js?v=qa-boot-audit-1"></script>
+<script src="js/samples.js?v=qa-boot-audit-1"></script>
+<script src="js/scores.js?v=qa-boot-audit-1"></script>
+<script src="js/pieces/largo.js?v=qa-boot-audit-1"></script>
+<script src="js/pieces/ode.js?v=qa-boot-audit-1"></script>
+<script src="js/pieces/galop.js?v=qa-boot-audit-1"></script>
+<script src="js/pieces/pomp.js?v=qa-boot-audit-1"></script>
+<script src="js/pieces/aida.js?v=qa-boot-audit-1"></script>
+<script src="js/pieces/hero.js?v=qa-boot-audit-1"></script>
+<script src="js/pieces/holst.js?v=qa-boot-audit-1"></script>
+<script src="js/pieces/hungarian.js?v=qa-boot-audit-1"></script>
+<script src="js/pieces/flowers.js?v=qa-boot-audit-1"></script>
+<script src="js/pieces/tell.js?v=qa-boot-audit-1"></script>
+<script src="js/pieces/carmen.js?v=qa-boot-audit-1"></script>
+<script src="js/pieces/valkyrie.js?v=qa-boot-audit-1"></script>
+<script src="js/pieces/swan.js?v=qa-boot-audit-1"></script>
+<script src="js/pieces/spring.js?v=qa-boot-audit-1"></script>
+<script src="js/pieces/canon.js?v=qa-boot-audit-1"></script>
+<script src="js/band.js?v=qa-boot-audit-1"></script>
+<script src="js/game.js?v=qa-boot-audit-1"></script>
+<script src="js/engine.js?v=qa-boot-audit-1"></script>
+<script src="js/conduct.js?v=qa-boot-audit-1"></script>
+<script src="js/announce.js?v=qa-boot-audit-1"></script>
+<script src="js/tunegame.js?v=qa-boot-audit-1"></script>
+<script src="js/fx.js?v=qa-boot-audit-1"></script>
+<script src="js/ui.js?v=qa-boot-audit-1"></script>
 <div class="tip" id="tip" role="tooltip" hidden></div>
-<script src="/design/implementation/qa.js?v=qa-current-listen-3"></script>
+<script src="/design/implementation/qa.js?v=qa-boot-audit-1"></script>
 </body>
 </html>
