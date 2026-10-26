@@ -795,6 +795,9 @@ html[data-season="snow"]{--season-band:linear-gradient(90deg,#DDE8F3,#FFFFFF,#B9
 @media(prefers-reduced-motion:reduce){*,*::before,*::after{scroll-behavior:auto!important;transition:none!important;animation:none!important}}
 /* 操作の記号は共通のSVG。 */
 .ui-icon{display:inline-block;flex:none;width:1.1em;height:1.1em;vertical-align:-.13em;color:inherit}.brand-mark{width:23px;height:29px;vertical-align:-7px;margin-right:8px;color:var(--room-soft)}.btn .ui-icon{width:17px;height:17px}.tabbar .ui-icon{width:22px;height:22px}.mini-stop .ui-icon{width:16px;height:16px}.rk.up::after{content:none}.rk>.ui-icon{position:absolute;top:-9px;right:-5px;width:11px;height:11px;color:var(--good);stroke-width:3}.psecd>summary::after{content:'';width:8px;height:8px;border-right:1.5px solid var(--ink-soft);border-bottom:1.5px solid var(--ink-soft);transform:rotate(45deg);margin:0 4px 4px}.psecd[open]>summary::after{transform:rotate(225deg);margin-bottom:0}
+/* 部員の顔：同じidのSVGは使い回す。小さい行では名前を折り返さない。 */
+.member-face{display:inline-block;width:var(--face-size,36px);height:var(--face-size,36px);flex:none;object-fit:cover;border-radius:8px;background:var(--sheet-soft);vertical-align:middle}.mc-portrait{display:grid;grid-template-columns:112px minmax(0,1fr);align-items:center;gap:16px;padding:2px 0 5px}.mc-portrait .member-face{border:3px solid var(--sheet);box-shadow:0 5px 20px var(--shadow);border-radius:11px}.mc-portrait .mc-head{display:flex;flex-direction:column;align-items:flex-start;gap:5px}.mc-portrait .mc-close{margin:0;font-size:12px}.roster-person{display:flex;align-items:center;gap:9px;min-width:0}.roster-person>span{min-width:0}.roster-person b{display:block}.roster-person small{display:block}.pm .who>.member-face{border-radius:5px}.episode.consult{padding-left:62px}.episode.consult>.member-face{position:absolute;left:13px;top:15px}.gr-person{display:flex;align-items:center;gap:16px;padding-bottom:10px}.gr-person>div{display:grid;gap:8px}.gr-person .member-face{border:3px solid var(--sheet);border-radius:12px;box-shadow:0 6px 18px var(--shadow)}.senior summary{align-items:center}.cd-member .cm-head{grid-template-columns:auto minmax(0,1fr) auto}.cd-member .cm-head .member-face{border-radius:8px}.cd-member .cm-head b{display:block}.cd-member .cm-head small{font-size:11px}.episode.consult .who{font-size:11px}.mc-portrait .sub{font-size:12px;color:var(--ink-soft)}
+@media(max-width:960px){.mc-portrait{gap:12px}.mc-portrait .mc-head h3{font-size:20px}.roster-person{gap:7px}.roster-person>.member-face{width:32px;height:32px}.roster-person b{font-size:12px}.roster-person small{font-size:10px}.gr-name{font-size:25px}.gr-person{gap:12px}.gr-person .member-face{width:82px;height:82px}}
 </style>
 </head>
 <body>
@@ -973,6 +976,7 @@ html[data-season="snow"]{--season-band:linear-gradient(90deg,#DDE8F3,#FFFFFF,#B9
 
 <script src="js/util.js"></script>
 <script src="js/icons.js"></script>
+<script src="js/faces.js"></script>
 <script src="js/instruments.js"></script>
 <script src="js/venues.js"></script>
 <script src="js/samples.js"></script>

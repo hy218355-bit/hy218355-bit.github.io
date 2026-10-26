@@ -1,0 +1,236 @@
+[
+  {
+    "index": 0,
+    "file": "face-01.svg",
+    "bytes": 130744,
+    "skin": "#e9b28d"
+  },
+  {
+    "index": 1,
+    "file": "face-02.svg",
+    "bytes": 154269,
+    "skin": "#eebb9b"
+  },
+  {
+    "index": 2,
+    "file": "face-03.svg",
+    "bytes": 132544,
+    "skin": "#eebe9b"
+  },
+  {
+    "index": 3,
+    "file": "face-04.svg",
+    "bytes": 132006,
+    "skin": "#f1bc98"
+  },
+  {
+    "index": 4,
+    "file": "face-05.svg",
+    "bytes": 146011,
+    "skin": "#e8af8a"
+  },
+  {
+    "index": 5,
+    "file": "face-06.svg",
+    "bytes": 147195,
+    "skin": "#ecb996"
+  },
+  {
+    "index": 6,
+    "file": "face-07.svg",
+    "bytes": 140087,
+    "skin": "#efbe9d"
+  },
+  {
+    "index": 7,
+    "file": "face-08.svg",
+    "bytes": 134612,
+    "skin": "#e9b28d"
+  },
+  {
+    "index": 8,
+    "file": "face-09.svg",
+    "bytes": 157292,
+    "skin": "#edbd9b"
+  },
+  {
+    "index": 9,
+    "file": "face-10.svg",
+    "bytes": 130214,
+    "skin": "#ecb690"
+  },
+  {
+    "index": 10,
+    "file": "face-11.svg",
+    "bytes": 148889,
+    "skin": "#ebb794"
+  },
+  {
+    "index": 11,
+    "file": "face-12.svg",
+    "bytes": 140988,
+    "skin": "#e3ae8b"
+  },
+  {
+    "index": 12,
+    "file": "face-13.svg",
+    "bytes": 160935,
+    "skin": "#ecb691"
+  },
+  {
+    "index": 13,
+    "file": "face-14.svg",
+    "bytes": 137240,
+    "skin": "#efbe9b"
+  },
+  {
+    "index": 14,
+    "file": "face-15.svg",
+    "bytes": 161569,
+    "skin": "#eeb999"
+  },
+  {
+    "index": 15,
+    "file": "face-16.svg",
+    "bytes": 152387,
+    "skin": "#eeb996"
+  },
+  {
+    "index": 16,
+    "file": "face-17.svg",
+    "bytes": 152120,
+    "skin": "#eebb97"
+  },
+  {
+    "index": 17,
+    "file": "face-18.svg",
+    "bytes": 149641,
+    "skin": "#efbd9b"
+  },
+  {
+    "index": 18,
+    "file": "face-19.svg",
+    "bytes": 169285,
+    "skin": "#ecb996"
+  },
+  {
+    "index": 19,
+    "file": "face-20.svg",
+    "bytes": 155751,
+    "skin": "#e9af89"
+  },
+  {
+    "index": 20,
+    "file": "face-21.svg",
+    "bytes": 160998,
+    "skin": "#eebb99"
+  },
+  {
+    "index": 21,
+    "file": "face-22.svg",
+    "bytes": 140088,
+    "skin": "#eeb997"
+  },
+  {
+    "index": 22,
+    "file": "face-23.svg",
+    "bytes": 143915,
+    "skin": "#edb894"
+  },
+  {
+    "index": 23,
+    "file": "face-24.svg",
+    "bytes": 157087,
+    "skin": "#eab794"
+  },
+  {
+    "index": 24,
+    "file": "face-25.svg",
+    "bytes": 143299,
+    "skin": "#efb793"
+  },
+  {
+    "index": 25,
+    "file": "face-26.svg",
+    "bytes": 151297,
+    "skin": "#f2c1a1"
+  },
+  {
+    "index": 26,
+    "file": "face-27.svg",
+    "bytes": 160447,
+    "skin": "#f0bc9b"
+  },
+  {
+    "index": 27,
+    "file": "face-28.svg",
+    "bytes": 140479,
+    "skin": "#f0be9e"
+  },
+  {
+    "index": 28,
+    "file": "face-29.svg",
+    "bytes": 171206,
+    "skin": "#eab492"
+  },
+  {
+    "index": 29,
+    "file": "face-30.svg",
+    "bytes": 163070,
+    "skin": "#efbb99"
+  },
+  {
+    "index": 30,
+    "file": "face-31.svg",
+    "bytes": 134546,
+    "skin": "#f1bf9e"
+  },
+  {
+    "index": 31,
+    "file": "face-32.svg",
+    "bytes": 153309,
+    "skin": "#eebb9a"
+  },
+  {
+    "index": 32,
+    "file": "face-33.svg",
+    "bytes": 146746,
+    "skin": "#f1be9d"
+  },
+  {
+    "index": 33,
+    "file": "face-34.svg",
+    "bytes": 155685,
+    "skin": "#eeb895"
+  },
+  {
+    "index": 34,
+    "file": "face-35.svg",
+    "bytes": 160451,
+    "skin": "#f0be9c"
+  },
+  {
+    "index": 35,
+    "file": "face-36.svg",
+    "bytes": 139703,
+    "skin": "#efb998"
+  },
+  {
+    "index": 36,
+    "file": "face-37.svg",
+    "bytes": 165583,
+    "skin": "#efbb9a"
+  },
+  {
+    "index": 37,
+    "file": "face-38.svg",
+    "bytes": 154268,
+    "skin": "#eeb794"
+  },
+  {
+    "index": 38,
+    "file": "face-39.svg",
+    "bytes": 138872,
+    "skin": "#f1be9c"
+  }
+]

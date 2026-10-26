@@ -690,7 +690,7 @@ function renderWeekBody(){
   const effHtml = x => (x.effects || x.gains || []).map(g => `<span class="gain">${esc(g)}</span>`).join('');
   if(S.lastEpisode) parts.push(`<p class="epres"><b>${esc(S.lastEpisode.choice)}</b>${esc(S.lastEpisode.result)}${effHtml(S.lastEpisode)}</p>`);
   const cv = consultView(S);
-  if(cv) parts.push(`<div class="episode consult"><div class="head"><span class="tag">相談</span><span class="who">${cv.m.grade}年・${esc(instOf(cv.m))}・${esc(cv.m.name)}${skillChips(cv.m)}</span></div><p class="txt">${esc(cv.text)}</p>
+  if(cv) parts.push(`<div class="episode consult">${memberFace(cv.m,36)}<div class="head"><span class="tag">相談</span><span class="who">${cv.m.grade}年・${esc(instOf(cv.m))}・${esc(cv.m.name)}${skillChips(cv.m)}</span></div><p class="txt">${esc(cv.text)}</p>
     <div class="choices">${cv.choices.map(c => `<button class="mbtn" type="button" data-cs="${c.k}"><b>${esc(c.label)}</b></button>`).join('')}</div>
     <p class="small">答え方で、${esc(kun(cv.m))}の育ち方が変わる。答えずに練習を進めると、この相談は流れる。</p></div>`);
   if(S.lastConsult) parts.push(`<p class="epres"><b>${esc(S.lastConsult.choice)}</b>${esc(S.lastConsult.result)}${effHtml(S.lastConsult)}</p>`);
@@ -859,7 +859,7 @@ function gradSlide(m){
   // 部にいた年数と、思い出のころの学年（「3年生の7月」）
   const joined = m.joined ?? S.year, years = S.year - joined + 1, when = x => `${(m.joinGrade ?? 1) + (x.y - joined)}年生の${wkMonth(x.w)}月`;
   const sk = skillsOf(m).map(x => x.name + skillMark(x.lv)).join('・');
-  return `<span class="gr-tag">${years}年間</span><b class="gr-name">${esc(m.name)}</b><small class="gr-sub">${esc(inst)}${m.title ? '・' + m.title : ''}</small>
+  return `<div class="gr-person">${memberFace(m,88)}<div><span class="gr-tag">${years}年間</span><b class="gr-name">${esc(m.name)}</b><small class="gr-sub">${esc(inst)}${m.title ? '・' + m.title : ''}</small></div></div>
     ${joinedHere ? `<p class="gr-line">${f.y}年${wkMonth(f.w)}月、${(m.joinGrade ?? 1) > 1 ? `${m.joinGrade}年生の途中で` : '1年生で'}入部。${m.exp ? '中学から吹いていた。' : '楽器ははじめてだった。'}</p>` : ''}
     ${f ? `<div class="gbars">${STAT_KEYS.map(k => `<div class="gb"><span class="nm">${STAT_LABEL[k]}</span><span class="track"><span class="fill was" style="width:${clamp(f.stats[k], 0, 100)}%"></span><span class="fill" data-to="${clamp(m.stats[k], 0, 100)}" style="width:${clamp(f.stats[k], 0, 100)}%"></span></span><span class="val">${rankBadge(f.stats[k])}→${rankBadge(m.stats[k])}</span></div>`).join('')}</div>` : ''}
     ${mem.length ? `<ul class="gr-mem">${mem.map(x => `<li><time>${when(x)}</time>${esc(x.t)}</li>`).join('')}</ul>` : ''}
@@ -1137,7 +1137,7 @@ function planHtml(ev){
   // 部員の行：名前と体力・力の帯・今週の練習のボタン（押すと練習の一覧が開く）
   const rowOf = m => {
     const auto = decideMenu(S, m), own = ownPlan(m), id = own || auto, open = U.pick === m.id;
-    return `<li class="pm${own ? ' own' : ''}${m.out && m.seat ? ' out' : ''}"><span class="who"><b>${esc(m.name)}</b><small>${m.grade}年</small></span>
+    return `<li class="pm${own ? ' own' : ''}${m.out && m.seat ? ' out' : ''}"><span class="who">${memberFace(m,26)}<b>${esc(m.name)}</b><small>${m.grade}年</small></span>
       ${staBar(m)}${rankStrip(m)}
       <button class="pick" type="button" data-pick="${m.id}" aria-expanded="${open}" aria-label="${esc(m.name)}の今週の練習">${own ? '' : '<span class="pk">おまかせ</span>'}<b>${MENU_BY[id].name}</b></button>
       ${open ? pickGrid(m.id, own, auto) : ''}${id === 'piece' && S.pieceId ? spanChips(m) : ''}</li>`;
@@ -1203,7 +1203,7 @@ function seniorCard(m, last){
   const bars = f ? STAT_KEYS.map(k => `<div class="gb"><span class="nm">${STAT_LABEL[k]}</span><span class="track"><span class="fill was" style="width:${clamp(f.stats[k], 0, 100)}%"></span><span class="fill" style="width:${clamp(m.stats[k], 0, 100)}%"></span></span><span class="val">${rankBadge(f.stats[k])}→${rankBadge(m.stats[k])}</span></div>`).join('') : '';
   const inst = m.seat ? INST[SEAT[m.seat].inst].name : '控え';
   const showFirst = first && (!last || first.id !== last.id);
-  return `<details class="senior"><summary><span class="nm">${esc(m.name)}</span><span class="sub">${esc(inst)}${m.title ? '・' + m.title : ''}</span>${grow && rankOf(f.stats[grow[0]]) !== rankOf(m.stats[grow[0]]) ? `<span class="grow">${STAT_LABEL[grow[0]]}${rankBadge(f.stats[grow[0]])}→${rankBadge(m.stats[grow[0]])}</span>` : ''}</summary>
+  return `<details class="senior"><summary>${memberFace(m,36)}<span class="nm">${esc(m.name)}</span><span class="sub">${esc(inst)}${m.title ? '・' + m.title : ''}</span>${grow && rankOf(f.stats[grow[0]]) !== rankOf(m.stats[grow[0]]) ? `<span class="grow">${STAT_LABEL[grow[0]]}${rankBadge(f.stats[grow[0]])}→${rankBadge(m.stats[grow[0]])}</span>` : ''}</summary>
     <div class="body">
       ${f ? `<p class="small">${ymLabel(f.y, f.w)}${joinedHere ? 'に入部したころ' : '（この日誌をつけ始めたころ）'}と、いま</p><div class="gbars">${bars}</div>` : ''}
       ${(m.story || []).length ? `<ul class="mem">${m.story.map(x => `<li><time>${ymLabel(x.y, x.w)}</time>${esc(x.t)}</li>`).join('')}</ul>` : ''}
@@ -1371,10 +1371,10 @@ function showCdMember(id){
   if(!m){ el.hidden = true; drawStage(-1, $('#cdStage'), CD.who); return; }
   const C = tok(), mood = (CD.perf?.mental || []).find(x => x.mid === m.id)?.kind;
   const plays = CD.who?.has(m.id), solo = U.solo === `member:${m.id}`;
-  el.innerHTML = `<div class="cm-head"><span><b>${esc(m.name)}</b><small>${m.grade}年・${esc(PART_LABEL[SEAT[m.seat].part])}${m.title ? '・' + esc(m.title) : ''}</small></span><button class="btn small quiet" type="button" data-cdm="close">閉じる</button></div>
+  el.innerHTML = `<div class="cm-head">${memberFace(m,54,{mood})}<span><b>${esc(m.name)}</b><small>${m.grade}年・${esc(PART_LABEL[SEAT[m.seat].part])}${m.title ? '・' + esc(m.title) : ''}</small></span><button class="btn small quiet" type="button" data-cdm="close">閉じる</button></div>
     <p class="cm-say">${esc(memberSays(m))}</p>
     <div class="cm-stats">${STAT_KEYS.map(k => `<span class="cm-st">${STAT_LABEL[k]}<span class="track"><span class="fill" style="width:${clamp(m.stats[k], 0, 100)}%;background:${skillColor(C, m.stats[k])}"></span></span>${rankBadge(m.stats[k])}</span>`).join('')}</div>
-    <p class="cm-note">本番の強さ ${Math.round(m.mental ?? 40)}${mood === 'zone' ? '・今日は、いつも以上の音が出ている' : mood === 'freeze' ? '・今日は、緊張で頭が真っ白になっている' : ''}${plays ? '' : '・この本番には出ていない'}${skillChips(m)}</p>
+    <p class="cm-note">本番の強さ ${rankBadge(m.mental ?? 40)}${mood === 'zone' ? '・今日は、いつも以上の音が出ている' : mood === 'freeze' ? '・今日は、緊張で頭が真っ白になっている' : ''}${plays ? '' : '・この本番には出ていない'}${skillChips(m)}</p>
     ${plays ? `<div class="row"><button class="btn small" type="button" data-cdm="solo">${solo ? '全員の音にもどす' : 'この子の音だけ聴く'}</button></div>` : ''}`;
   el.hidden = false;
   if(!U.playing) drawStage(-1, $('#cdStage'), CD.who);
@@ -1409,7 +1409,7 @@ function renderMemberCard(){
     const o = S.members.find(x => x.seat === s.id);
     return `<option value="${s.id}">${seatLabel(s.id)}${o ? `・${esc(o.name)}と交代` : '・空席'}</option>`;
   }).join('');
-  card.innerHTML = `<div class="mc-head"><h3>${esc(m.name)}</h3>${m.title ? `<span class="tag">${m.title}</span>` : ''}<span class="sub">${m.grade}年・${seat ? PART_LABEL[seat.part] : '控え（席なし）'}</span><button class="link mc-close" type="button" data-mact="close">閉じる</button></div>
+  card.innerHTML = `<div class="mc-portrait">${memberFace(m,112)}<div class="mc-head"><h3>${esc(m.name)}</h3>${m.title ? `<span class="tag">${m.title}</span>` : ''}<span class="sub">${m.grade}年・${seat ? PART_LABEL[seat.part] : '控え（席なし）'}</span><button class="link mc-close" type="button" data-mact="close">閉じる</button></div></div>
     <p class="mc-say">${esc(memberSays(m))}</p>
     ${dreamLine(m)}${loveLine(m)}
     ${skillList(m)}
@@ -1448,7 +1448,7 @@ function renderRoster(){
 }
 function memberRow(m, part){
   const sub = [`${m.grade}年`, part + (m.out && m.seat ? '（コンクール控え）' : ''), m.trait ? TRAITS[m.trait].name : '', ...skillsOf(m).map(x => x.name + skillMark(x.lv))].filter(Boolean).join('・');
-  return `<tr class="mem${U.sel === m.id ? ' sel' : ''}" data-mid="${m.id}"><td><b>${esc(m.name)}</b>${m.title ? ` <span class="tag">${m.title}</span>` : ''}<small>${sub}</small></td>`
+  return `<tr class="mem${U.sel === m.id ? ' sel' : ''}" data-mid="${m.id}"><td><span class="roster-person">${memberFace(m,36)}<span><b>${esc(m.name)}</b>${m.title ? ` <span class="tag">${m.title}</span>` : ''}<small>${sub}</small></span></span></td>`
     + STAT_KEYS.map(k => `<td class="num">${rankBadge(m.stats[k])}</td>`).join('') + '</tr>';
 }
 
