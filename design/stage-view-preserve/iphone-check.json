@@ -12,8 +12,18 @@
       "local": "c5513d91180f4e17d75003597ce97d0f945c7810737f541fde53b0757ef3987b",
       "bundle": "c5513d91180f4e17d75003597ce97d0f945c7810737f541fde53b0757ef3987b",
       "match": true
+    },
+    {
+      "file": "js/conduct.js",
+      "local": "16010779283d02b27da6fb84e4413b5ab48ca346f36783510c80b883884b0a4d",
+      "bundle": "16010779283d02b27da6fb84e4413b5ab48ca346f36783510c80b883884b0a4d",
+      "match": true
     }
   ],
-  "deviceVerification": "deferred-by-owner",
-  "deviceOperations": "none"
+  "deviceVerification": "installed-and-launched",
+  "installedGameplayRevision": "9a45c1b",
+  "install": "succeeded",
+  "launch": "succeeded",
+  "runningProcessVerified": true,
+  "visualInteractionVerified": false
 }
