@@ -892,13 +892,21 @@ button.wr-person:focus-visible{outline:2px solid var(--brass);outline-offset:2px
   touch-action:none;-webkit-user-select:none;user-select:none;-webkit-touch-callout:none;outline-offset:4px;
   background:linear-gradient(180deg,color-mix(in srgb,var(--brass) 26%,var(--sheet)),var(--sheet) 60%,color-mix(in srgb,var(--navy) 10%,var(--sheet)));border:1.5px solid var(--rule)}
 .cd-pad[hidden]{display:none}
-.cd-pattern{position:absolute;inset:6% 10%;width:80%;height:88%}
-.cd-pattern circle{fill:var(--sheet);stroke:var(--ink-soft);stroke-width:1.5;transition:r .12s}
-.cd-pattern circle.on{fill:var(--brass);stroke:var(--brass)}
-.cd-pattern circle.tip{fill:var(--ink);stroke:none}
-.cd-pattern text{font-family:var(--f-lcd);font-size:14px;text-anchor:middle;fill:var(--ink);pointer-events:none}
+.cd-pattern{position:absolute;inset:0 5%;width:90%;height:100%;pointer-events:none}
+.cd-pattern text{font-family:var(--f-lcd);font-size:16px;text-anchor:middle;fill:var(--ink)}
+.cue-track{fill:none;stroke:var(--rule);stroke-width:2;stroke-linecap:round}
+.cue-baton{fill:var(--brass);stroke:var(--ink);stroke-width:3;stroke-linecap:round;stroke-linejoin:round}
+.cue-target{fill:var(--sheet);stroke:var(--brass);stroke-width:3}
+.cue-approach{fill:none;stroke:var(--brass);stroke-width:1;opacity:.45}
+.cue-now circle{fill:var(--brass-soft)}.cue-now.hit circle{fill:var(--brass)}
+.cue-now.hit text{fill:var(--on-brass)}.cue-now text{font-size:20px}
+.cue-next circle{fill:var(--sheet);stroke:var(--ink-soft);stroke-width:1.5}
+.cue-next.downbeat circle{stroke:var(--brass);stroke-width:2.5}
+.cue-steps path{stroke:var(--rule);stroke-width:3;stroke-linecap:round}.cue-steps .on{stroke:var(--brass)}
+.cue-count circle{fill:var(--sheet);stroke:var(--ink-soft);stroke-width:1}.cue-count .on{fill:var(--brass);stroke:var(--brass)}
+.cd-pattern[data-calm="true"] .cue-baton,.cd-pattern[data-calm="true"] .cue-approach{visibility:hidden}
 .cd-hint{position:absolute;right:14px;font-size:12px;font-weight:700;letter-spacing:.1em;color:var(--ink-soft);pointer-events:none}
-.cd-hint.top{top:12px}.cd-hint.bot{bottom:12px}
+.cd-hint.loud{top:12px}.cd-hint.soft{bottom:12px}
 .cd-ripple{position:absolute;width:20px;height:20px;margin:-10px 0 0 -10px;border-radius:50%;border:3px solid var(--brass);pointer-events:none;animation:cdr .55s ease-out forwards}
 @keyframes cdr{to{transform:scale(7);opacity:0}}
 .cd-judge{position:absolute;transform:translate(-50%,-150%);font-weight:700;font-size:17px;white-space:nowrap;pointer-events:none;animation:cdj .7s ease-out forwards;text-shadow:0 1px 0 var(--sheet)}
@@ -1660,9 +1668,9 @@ button.wr-person:focus-visible{outline:2px solid var(--brass);outline-offset:2px
   <div class="cd-band"><div class="cd-stagewrap"><canvas id="cdStage" role="img" aria-label="舞台の部員。音を出している部員が光る。"></canvas><div class="cd-curtain" aria-hidden="true"><i></i><i></i><div class="cd-intro"></div></div></div><div class="cd-prog" aria-hidden="true"><i id="cdProg"></i></div></div>
   <p class="legend stage-key cd-legend"><span data-tip="力は G・F・E・D・C・B・A・S の8段階。右ほどうまい" data-tipname="ランク" role="button" tabindex="0">色：部員の力<i class="rkscale"><i class="rk rk-g">G</i><i class="rk rk-f">F</i><i class="rk rk-e">E</i><i class="rk rk-d">D</i><i class="rk rk-c">C</i><i class="rk rk-b">B</i><i class="rk rk-a">A</i><i class="rk rk-s">S</i></i></span><button class="help-button" type="button" aria-label="舞台の見方" data-tipname="舞台の見方" data-tip="顔の下の絵は楽器。色は力のランク。光る部員はいま音を出している（赤く光ったら音を外した）。点線は空いている席。部員を押すと、その子の様子が出る。">?</button></p>
   <div class="cd-member" id="cdMember" hidden></div>
-  <div class="cd-pad" id="cdPad" role="button" tabindex="0" aria-label="拍に合わせてここをタップ（上ほど大きく、下ほど小さく）">
+  <div class="cd-pad" id="cdPad" role="button" tabindex="0" aria-label="合図に合わせてここをタップ（上ほど大きく、下ほど小さく）">
     <svg class="cd-pattern" id="cdPattern" viewBox="0 0 200 210" aria-hidden="true"></svg>
-    <span class="cd-hint top">大きく</span><span class="cd-hint bot">小さく</span>
+    <span class="cd-hint loud">大きく</span><span class="cd-hint soft">小さく</span>
   </div>
   <div class="cd-result" id="cdResult" hidden></div>
   <p class="cd-stats"><span>いまのテンポ <span class="cd-beat">♩</span>=<b id="cdTempo">--</b></span><span>指定 <span class="cd-beat">♩</span>=<b id="cdRef"></b></span><span class="combo" id="cdCombo" aria-live="off"></span></p>
@@ -1706,39 +1714,39 @@ button.wr-person:focus-visible{outline:2px solid var(--brass);outline-offset:2px
   <button type="button" data-tabgo="log"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 5.5C4 4.7 4.7 4 5.5 4H11v16H5.5c-.8 0-1.5-.7-1.5-1.5z"/><path d="M20 5.5c0-.8-.7-1.5-1.5-1.5H13v16h5.5c.8 0 1.5-.7 1.5-1.5z"/></svg><span>日誌</span></button>
 </nav>
 
-<script src="js/util.js?v=qa-audio-year-fix-2"></script>
-<script src="js/icons.js?v=qa-audio-year-fix-2"></script>
-<script src="js/instrument-icons.js?v=qa-audio-year-fix-2"></script>
-<script src="js/face-cast.js?v=qa-audio-year-fix-2"></script>
-<script src="js/faces.js?v=qa-audio-year-fix-2"></script>
-<script src="js/instruments.js?v=qa-audio-year-fix-2"></script>
-<script src="js/venues.js?v=qa-audio-year-fix-2"></script>
-<script src="js/samples.js?v=qa-audio-year-fix-2"></script>
-<script src="js/scores.js?v=qa-audio-year-fix-2"></script>
-<script src="js/pieces/largo.js?v=qa-audio-year-fix-2"></script>
-<script src="js/pieces/ode.js?v=qa-audio-year-fix-2"></script>
-<script src="js/pieces/galop.js?v=qa-audio-year-fix-2"></script>
-<script src="js/pieces/pomp.js?v=qa-audio-year-fix-2"></script>
-<script src="js/pieces/aida.js?v=qa-audio-year-fix-2"></script>
-<script src="js/pieces/hero.js?v=qa-audio-year-fix-2"></script>
-<script src="js/pieces/holst.js?v=qa-audio-year-fix-2"></script>
-<script src="js/pieces/hungarian.js?v=qa-audio-year-fix-2"></script>
-<script src="js/pieces/flowers.js?v=qa-audio-year-fix-2"></script>
-<script src="js/pieces/tell.js?v=qa-audio-year-fix-2"></script>
-<script src="js/pieces/carmen.js?v=qa-audio-year-fix-2"></script>
-<script src="js/pieces/valkyrie.js?v=qa-audio-year-fix-2"></script>
-<script src="js/pieces/swan.js?v=qa-audio-year-fix-2"></script>
-<script src="js/pieces/spring.js?v=qa-audio-year-fix-2"></script>
-<script src="js/pieces/canon.js?v=qa-audio-year-fix-2"></script>
-<script src="js/band.js?v=qa-audio-year-fix-2"></script>
-<script src="js/game.js?v=qa-audio-year-fix-2"></script>
-<script src="js/engine.js?v=qa-audio-year-fix-2"></script>
-<script src="js/conduct.js?v=qa-audio-year-fix-2"></script>
-<script src="js/announce.js?v=qa-audio-year-fix-2"></script>
-<script src="js/tunegame.js?v=qa-audio-year-fix-2"></script>
-<script src="js/fx.js?v=qa-audio-year-fix-2"></script>
-<script src="js/ui.js?v=qa-audio-year-fix-2"></script>
+<script src="js/util.js?v=qa-beat-cue-4"></script>
+<script src="js/icons.js?v=qa-beat-cue-4"></script>
+<script src="js/instrument-icons.js?v=qa-beat-cue-4"></script>
+<script src="js/face-cast.js?v=qa-beat-cue-4"></script>
+<script src="js/faces.js?v=qa-beat-cue-4"></script>
+<script src="js/instruments.js?v=qa-beat-cue-4"></script>
+<script src="js/venues.js?v=qa-beat-cue-4"></script>
+<script src="js/samples.js?v=qa-beat-cue-4"></script>
+<script src="js/scores.js?v=qa-beat-cue-4"></script>
+<script src="js/pieces/largo.js?v=qa-beat-cue-4"></script>
+<script src="js/pieces/ode.js?v=qa-beat-cue-4"></script>
+<script src="js/pieces/galop.js?v=qa-beat-cue-4"></script>
+<script src="js/pieces/pomp.js?v=qa-beat-cue-4"></script>
+<script src="js/pieces/aida.js?v=qa-beat-cue-4"></script>
+<script src="js/pieces/hero.js?v=qa-beat-cue-4"></script>
+<script src="js/pieces/holst.js?v=qa-beat-cue-4"></script>
+<script src="js/pieces/hungarian.js?v=qa-beat-cue-4"></script>
+<script src="js/pieces/flowers.js?v=qa-beat-cue-4"></script>
+<script src="js/pieces/tell.js?v=qa-beat-cue-4"></script>
+<script src="js/pieces/carmen.js?v=qa-beat-cue-4"></script>
+<script src="js/pieces/valkyrie.js?v=qa-beat-cue-4"></script>
+<script src="js/pieces/swan.js?v=qa-beat-cue-4"></script>
+<script src="js/pieces/spring.js?v=qa-beat-cue-4"></script>
+<script src="js/pieces/canon.js?v=qa-beat-cue-4"></script>
+<script src="js/band.js?v=qa-beat-cue-4"></script>
+<script src="js/game.js?v=qa-beat-cue-4"></script>
+<script src="js/engine.js?v=qa-beat-cue-4"></script>
+<script src="js/conduct.js?v=qa-beat-cue-4"></script>
+<script src="js/announce.js?v=qa-beat-cue-4"></script>
+<script src="js/tunegame.js?v=qa-beat-cue-4"></script>
+<script src="js/fx.js?v=qa-beat-cue-4"></script>
+<script src="js/ui.js?v=qa-beat-cue-4"></script>
 <div class="tip" id="tip" role="tooltip" hidden></div>
-<script src="/design/implementation/qa.js?v=qa-audio-year-fix-2"></script>
+<script src="/design/implementation/qa.js?v=qa-beat-cue-4"></script>
 </body>
 </html>

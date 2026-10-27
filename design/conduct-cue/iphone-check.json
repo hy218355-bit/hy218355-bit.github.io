@@ -1,0 +1,21 @@
+{
+  "build": "succeeded",
+  "install": "succeeded",
+  "launch": "succeeded",
+  "runningProcessVerified": true,
+  "visualInteractionVerified": false,
+  "bundleHashes": [
+    {
+      "file": "index.html",
+      "source": "20b7278a868c051c1a629cb7790c8db9244f789be6a035d6f4348708ca1fedac",
+      "bundle": "20b7278a868c051c1a629cb7790c8db9244f789be6a035d6f4348708ca1fedac",
+      "match": true
+    },
+    {
+      "file": "js/conduct.js",
+      "source": "8809996f18c0b693e53831fb097fe917c9848de1b8c5e3e0568d8c7ff3fc2963",
+      "bundle": "8809996f18c0b693e53831fb097fe917c9848de1b8c5e3e0568d8c7ff3fc2963",
+      "match": true
+    }
+  ]
+}

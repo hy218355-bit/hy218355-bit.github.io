@@ -1,0 +1,721 @@
+{
+  "readyLight": {
+    "pattern": {
+      "calm": "false",
+      "mode": "count",
+      "nextBeat": "1"
+    },
+    "msg": "まず4回、丸が輪に重なったらタップ。次の拍から演奏。",
+    "next": [
+      {
+        "beat": "1",
+        "transform": "translate(85.8 112)"
+      },
+      {
+        "beat": "2",
+        "transform": "translate(145.8 112)"
+      }
+    ],
+    "pad": {
+      "bottom": 750.6015625,
+      "height": 317.328125,
+      "left": 16,
+      "right": 359,
+      "top": 433.2734375,
+      "width": 343,
+      "x": 16,
+      "y": 433.2734375
+    },
+    "modal": {
+      "bottom": 812,
+      "height": 812,
+      "left": 0,
+      "right": 375,
+      "top": 0,
+      "width": 375,
+      "x": 0,
+      "y": 0
+    },
+    "width": 375,
+    "scrollWidth": 375,
+    "hintBackground": "none",
+    "conduct": {
+      "combo": 0,
+      "count": 0,
+      "events": 0,
+      "from": 0,
+      "judge": {
+        "e": 0,
+        "g": 0,
+        "l": 0,
+        "p": 0
+      },
+      "meter": 2,
+      "phase": "count",
+      "taps": 0,
+      "to": 80
+    },
+    "playing": false,
+    "voices": [],
+    "audioReady": true,
+    "errors": [],
+    "boot": {
+      "scripts": 33,
+      "loaded": 33,
+      "failed": [],
+      "errors": []
+    },
+    "state": 0.20664310385473073,
+    "members": 0.6864548486191779,
+    "records": 0.7712433410342783,
+    "recordings": []
+  },
+  "readyDark": {
+    "pattern": {
+      "calm": "false",
+      "mode": "count",
+      "nextBeat": "1"
+    },
+    "msg": "まず4回、丸が輪に重なったらタップ。次の拍から演奏。",
+    "next": [
+      {
+        "beat": "1",
+        "transform": "translate(61.9 112)"
+      },
+      {
+        "beat": "2",
+        "transform": "translate(121.9 112)"
+      }
+    ],
+    "pad": {
+      "bottom": 750.6015625,
+      "height": 317.328125,
+      "left": 16,
+      "right": 359,
+      "top": 433.2734375,
+      "width": 343,
+      "x": 16,
+      "y": 433.2734375
+    },
+    "modal": {
+      "bottom": 812,
+      "height": 812,
+      "left": 0,
+      "right": 375,
+      "top": 0,
+      "width": 375,
+      "x": 0,
+      "y": 0
+    },
+    "width": 375,
+    "scrollWidth": 375,
+    "hintBackground": "none",
+    "conduct": {
+      "combo": 0,
+      "count": 0,
+      "events": 0,
+      "from": 0,
+      "judge": {
+        "e": 0,
+        "g": 0,
+        "l": 0,
+        "p": 0
+      },
+      "meter": 2,
+      "phase": "count",
+      "taps": 0,
+      "to": 80
+    },
+    "playing": false,
+    "voices": [],
+    "audioReady": true,
+    "errors": [],
+    "boot": {
+      "scripts": 33,
+      "loaded": 33,
+      "failed": [],
+      "errors": []
+    },
+    "state": 0.20664310385473073,
+    "members": 0.6864548486191779,
+    "records": 0.7712433410342783,
+    "recordings": []
+  },
+  "started": {
+    "pattern": {
+      "calm": "false",
+      "mode": "play",
+      "nextBeat": "1"
+    },
+    "msg": "丸が輪に重なったらタップ。上は大きく、下は小さく。",
+    "next": [
+      {
+        "beat": "1",
+        "transform": "translate(101.3 112)"
+      },
+      {
+        "beat": "2",
+        "transform": "translate(161.3 112)"
+      }
+    ],
+    "pad": {
+      "bottom": 750.6015625,
+      "height": 317.328125,
+      "left": 16,
+      "right": 359,
+      "top": 433.2734375,
+      "width": 343,
+      "x": 16,
+      "y": 433.2734375
+    },
+    "modal": {
+      "bottom": 812,
+      "height": 812,
+      "left": 0,
+      "right": 375,
+      "top": 0,
+      "width": 375,
+      "x": 0,
+      "y": 0
+    },
+    "width": 375,
+    "scrollWidth": 375,
+    "hintBackground": "none",
+    "conduct": {
+      "combo": 0,
+      "count": 4,
+      "events": 1,
+      "from": 0,
+      "judge": {
+        "e": 0,
+        "g": 0,
+        "l": 0,
+        "p": 0
+      },
+      "meter": 2,
+      "phase": "play",
+      "taps": 0,
+      "to": 80
+    },
+    "playing": true,
+    "voices": [],
+    "audioReady": true,
+    "errors": [],
+    "boot": {
+      "scripts": 33,
+      "loaded": 33,
+      "failed": [],
+      "errors": []
+    },
+    "state": 0.8174695908091962,
+    "members": 0.6864548486191779,
+    "records": 0.7712433410342783,
+    "recordings": []
+  },
+  "playing": {
+    "pattern": {
+      "calm": "false",
+      "mode": "play",
+      "nextBeat": "2"
+    },
+    "msg": "ここからテンポがだんだん遅くなる。部員の音を聴きながら、振る速さを落としていこう。",
+    "next": [
+      {
+        "beat": "2",
+        "transform": "translate(80.4 112)"
+      },
+      {
+        "beat": "1",
+        "transform": "translate(140.4 112)"
+      }
+    ],
+    "pad": {
+      "bottom": 750.6015625,
+      "height": 317.328125,
+      "left": 16,
+      "right": 359,
+      "top": 433.2734375,
+      "width": 343,
+      "x": 16,
+      "y": 433.2734375
+    },
+    "modal": {
+      "bottom": 812,
+      "height": 812,
+      "left": 0,
+      "right": 375,
+      "top": 0,
+      "width": 375,
+      "x": 0,
+      "y": 0
+    },
+    "width": 375,
+    "scrollWidth": 375,
+    "hintBackground": "none",
+    "conduct": {
+      "combo": 1,
+      "count": 4,
+      "events": 9,
+      "from": 0,
+      "judge": {
+        "e": 0,
+        "g": 1,
+        "l": 3,
+        "p": 0
+      },
+      "meter": 2,
+      "phase": "play",
+      "taps": 4,
+      "to": 80
+    },
+    "playing": true,
+    "voices": [
+      "SampleVoice"
+    ],
+    "audioReady": true,
+    "errors": [],
+    "boot": {
+      "scripts": 33,
+      "loaded": 33,
+      "failed": [],
+      "errors": []
+    },
+    "state": 0.8174695908091962,
+    "members": 0.6864548486191779,
+    "records": 0.7712433410342783,
+    "recordings": []
+  },
+  "closed": {
+    "pattern": {
+      "calm": "false",
+      "mode": "play",
+      "nextBeat": "2"
+    },
+    "msg": "ここからテンポがだんだん遅くなる。部員の音を聴きながら、振る速さを落としていこう。",
+    "next": [
+      {
+        "beat": "2",
+        "transform": "translate(74.9 112)"
+      },
+      {
+        "beat": "1",
+        "transform": "translate(134.9 112)"
+      }
+    ],
+    "pad": {
+      "bottom": 0,
+      "height": 0,
+      "left": 0,
+      "right": 0,
+      "top": 0,
+      "width": 0,
+      "x": 0,
+      "y": 0
+    },
+    "modal": {
+      "bottom": 0,
+      "height": 0,
+      "left": 0,
+      "right": 0,
+      "top": 0,
+      "width": 0,
+      "x": 0,
+      "y": 0
+    },
+    "width": 375,
+    "scrollWidth": 375,
+    "hintBackground": "none",
+    "conduct": {
+      "combo": 1,
+      "count": 4,
+      "events": 9,
+      "from": 0,
+      "judge": {
+        "e": 0,
+        "g": 1,
+        "l": 3,
+        "p": 0
+      },
+      "meter": 2,
+      "phase": "idle",
+      "taps": 4,
+      "to": 80
+    },
+    "playing": false,
+    "voices": [],
+    "audioReady": true,
+    "errors": [],
+    "boot": {
+      "scripts": 33,
+      "loaded": 33,
+      "failed": [],
+      "errors": []
+    },
+    "state": 0.8174695908091962,
+    "members": 0.6864548486191779,
+    "records": 0.7712433410342783,
+    "recordings": []
+  },
+  "calmReady": {
+    "pattern": {
+      "calm": "true",
+      "mode": "count",
+      "nextBeat": "1"
+    },
+    "msg": "まず4回、輪が光ったらタップ。次の拍から演奏。",
+    "next": [
+      {
+        "beat": "1",
+        "transform": "translate(108 112)"
+      },
+      {
+        "beat": "2",
+        "transform": "translate(168 112)"
+      }
+    ],
+    "pad": {
+      "bottom": 750.6015625,
+      "height": 317.328125,
+      "left": 16,
+      "right": 359,
+      "top": 433.2734375,
+      "width": 343,
+      "x": 16,
+      "y": 433.2734375
+    },
+    "modal": {
+      "bottom": 812,
+      "height": 812,
+      "left": 0,
+      "right": 375,
+      "top": 0,
+      "width": 375,
+      "x": 0,
+      "y": 0
+    },
+    "width": 375,
+    "scrollWidth": 375,
+    "hintBackground": "none",
+    "conduct": {
+      "combo": 0,
+      "count": 0,
+      "events": 0,
+      "from": 0,
+      "judge": {
+        "e": 0,
+        "g": 0,
+        "l": 0,
+        "p": 0
+      },
+      "meter": 2,
+      "phase": "count",
+      "taps": 0,
+      "to": 32
+    },
+    "playing": false,
+    "voices": [],
+    "audioReady": true,
+    "errors": [],
+    "boot": {
+      "scripts": 33,
+      "loaded": 33,
+      "failed": [],
+      "errors": []
+    },
+    "state": 0.5948857385665178,
+    "members": 0.6864548486191779,
+    "records": 0.7712433410342783,
+    "recordings": []
+  },
+  "compact": {
+    "pattern": {
+      "calm": "true",
+      "mode": "count",
+      "nextBeat": "1"
+    },
+    "msg": "まず4回、輪が光ったらタップ。次の拍から演奏。",
+    "next": [
+      {
+        "beat": "1",
+        "transform": "translate(108 112)"
+      },
+      {
+        "beat": "2",
+        "transform": "translate(168 112)"
+      }
+    ],
+    "pad": {
+      "bottom": 605.6015625,
+      "height": 172.328125,
+      "left": 16,
+      "right": 359,
+      "top": 433.2734375,
+      "width": 343,
+      "x": 16,
+      "y": 433.2734375
+    },
+    "modal": {
+      "bottom": 667,
+      "height": 667,
+      "left": 0,
+      "right": 375,
+      "top": 0,
+      "width": 375,
+      "x": 0,
+      "y": 0
+    },
+    "width": 375,
+    "scrollWidth": 375,
+    "hintBackground": "none",
+    "conduct": {
+      "combo": 0,
+      "count": 0,
+      "events": 0,
+      "from": 0,
+      "judge": {
+        "e": 0,
+        "g": 0,
+        "l": 0,
+        "p": 0
+      },
+      "meter": 2,
+      "phase": "count",
+      "taps": 0,
+      "to": 32
+    },
+    "playing": false,
+    "voices": [],
+    "audioReady": true,
+    "errors": [],
+    "boot": {
+      "scripts": 33,
+      "loaded": 33,
+      "failed": [],
+      "errors": []
+    },
+    "state": 0.5948857385665178,
+    "members": 0.6864548486191779,
+    "records": 0.7712433410342783,
+    "recordings": []
+  },
+  "calmPlaying": {
+    "pattern": {
+      "calm": "true",
+      "mode": "play",
+      "nextBeat": "1"
+    },
+    "msg": "輪が光ったらタップ。上は大きく、下は小さく。",
+    "next": [
+      {
+        "beat": "1",
+        "transform": "translate(108 112)"
+      },
+      {
+        "beat": "2",
+        "transform": "translate(168 112)"
+      }
+    ],
+    "pad": {
+      "bottom": 726.8046875,
+      "height": 293.53125,
+      "left": 16,
+      "right": 359,
+      "top": 433.2734375,
+      "width": 343,
+      "x": 16,
+      "y": 433.2734375
+    },
+    "modal": {
+      "bottom": 812,
+      "height": 812,
+      "left": 0,
+      "right": 375,
+      "top": 0,
+      "width": 375,
+      "x": 0,
+      "y": 0
+    },
+    "width": 375,
+    "scrollWidth": 375,
+    "hintBackground": "none",
+    "conduct": {
+      "combo": 4,
+      "count": 4,
+      "events": 6,
+      "from": 0,
+      "judge": {
+        "e": 0,
+        "g": 0,
+        "l": 0,
+        "p": 4
+      },
+      "meter": 2,
+      "phase": "play",
+      "taps": 4,
+      "to": 32
+    },
+    "playing": true,
+    "voices": [
+      "SampleVoice"
+    ],
+    "audioReady": true,
+    "errors": [],
+    "boot": {
+      "scripts": 33,
+      "loaded": 33,
+      "failed": [],
+      "errors": []
+    },
+    "state": 0.5948857385665178,
+    "members": 0.6864548486191779,
+    "records": 0.7712433410342783,
+    "recordings": []
+  },
+  "finished": {
+    "pattern": {
+      "calm": "true",
+      "mode": "play",
+      "nextBeat": "1"
+    },
+    "msg": "",
+    "next": [
+      {
+        "beat": "1",
+        "transform": "translate(108 112)"
+      },
+      {
+        "beat": "2",
+        "transform": "translate(168 112)"
+      }
+    ],
+    "pad": {
+      "bottom": 0,
+      "height": 0,
+      "left": 0,
+      "right": 0,
+      "top": 0,
+      "width": 0,
+      "x": 0,
+      "y": 0
+    },
+    "modal": {
+      "bottom": 812,
+      "height": 812,
+      "left": 0,
+      "right": 375,
+      "top": 0,
+      "width": 375,
+      "x": 0,
+      "y": 0
+    },
+    "width": 375,
+    "scrollWidth": 375,
+    "hintBackground": "none",
+    "conduct": {
+      "combo": 4,
+      "count": 4,
+      "events": 6,
+      "from": 0,
+      "judge": {
+        "e": 0,
+        "g": 0,
+        "l": 0,
+        "p": 4
+      },
+      "meter": 2,
+      "phase": "done",
+      "taps": 4,
+      "to": 32
+    },
+    "playing": false,
+    "voices": [],
+    "audioReady": true,
+    "errors": [],
+    "boot": {
+      "scripts": 33,
+      "loaded": 33,
+      "failed": [],
+      "errors": []
+    },
+    "state": 0.5664743983652443,
+    "members": 0.6864548486191779,
+    "records": 0.7743973582983017,
+    "recordings": [
+      {
+        "id": "r2028-10-0-436125",
+        "label": "あなたの指揮：「歓喜の歌」（6月 第3週）"
+      }
+    ]
+  },
+  "finalReadyClosed": {
+    "pattern": {
+      "calm": "false",
+      "mode": "count",
+      "nextBeat": "1"
+    },
+    "msg": "まず4回、丸が輪に重なったらタップ。次の拍から演奏。",
+    "next": [
+      {
+        "beat": "1",
+        "transform": "translate(56.8 112)"
+      },
+      {
+        "beat": "2",
+        "transform": "translate(116.8 112)"
+      }
+    ],
+    "pad": {
+      "bottom": 0,
+      "height": 0,
+      "left": 0,
+      "right": 0,
+      "top": 0,
+      "width": 0,
+      "x": 0,
+      "y": 0
+    },
+    "modal": {
+      "bottom": 0,
+      "height": 0,
+      "left": 0,
+      "right": 0,
+      "top": 0,
+      "width": 0,
+      "x": 0,
+      "y": 0
+    },
+    "width": 375,
+    "scrollWidth": 375,
+    "hintBackground": "none",
+    "conduct": {
+      "combo": 0,
+      "count": 0,
+      "events": 0,
+      "from": 0,
+      "judge": {
+        "e": 0,
+        "g": 0,
+        "l": 0,
+        "p": 0
+      },
+      "meter": 2,
+      "phase": "idle",
+      "taps": 0,
+      "to": 80
+    },
+    "playing": false,
+    "voices": [],
+    "audioReady": true,
+    "errors": [],
+    "boot": {
+      "scripts": 33,
+      "loaded": 33,
+      "failed": [],
+      "errors": []
+    },
+    "state": 0.20664310385473073,
+    "members": 0.6864548486191779,
+    "records": 0.7712433410342783,
+    "recordings": []
+  }
+}

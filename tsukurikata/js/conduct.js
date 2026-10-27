@@ -6,15 +6,10 @@
 
 const CD = {phase: 'idle', perf: null, clock: null, count: [], lv: [], level: 1, raf: 0, lastTap: 0, rec: null};
 
-// 拍の図の点（4拍子なら 1:下 2:左 3:右 4:上）
-const CD_PATTERN = {
-  2: [[100, 168], [100, 46]],
-  3: [[100, 168], [160, 112], [100, 42]],
-  4: [[100, 170], [42, 118], [158, 118], [100, 40]],
-};
-const cdPts = () => CD_PATTERN[CD.perf?.meter] || CD_PATTERN[4];
 // 最初にテンポを示すタップの数（2拍子は2小節ぶん）
 const cdCountN = () => CD.perf.meter <= 2 ? CD.perf.meter * 2 : CD.perf.meter;
+const cdCueCalm = () => fxCalm() || U.fxMode !== 'full';
+const cdCueHint = () => cdCueCalm() ? '輪が光ったらタップ' : '丸が輪に重なったらタップ';
 
 // stage を渡すと本番の指揮（{rec, ev}）。終わると、その指揮で演奏した結果が採点される
 function openConduct(stage = null){
@@ -39,14 +34,19 @@ function openConduct(stage = null){
   $('#cdTempo').textContent = '--';
   $('#cdResult').hidden = true; $('#cdPad').hidden = false;
   const n = cdCountN();
-  const ready = () => cdMsg(`まず${n}回（${n / CD.perf.meter}小節ぶん）、テンポを示すようにタップ。次の拍から部員が入ってくる。`);
+  const ready = () => {
+    CD.cueStart=E.ac.currentTime;
+    cdMsg(`まず${n}回、${cdCueHint()}。次の拍から演奏。`);
+  };
+  CD.cuePeriod=clamp(60/bpmAt(pc,CD.perf.interp.tempo??1,CD.perf.from),0.3,1.6);
+  CD.cueNodes=null;
   if(SAMPLES.use && !SAMPLES.ready && SAMPLES.loading && !SAMPLES.error){
     // 録音を読み込み終わるまでは待ってもらう（合成音で始まらないように）
     CD.phase = 'wait';
     cdMsg('録音を読み込んでいます…');
     SAMPLES.loading.then(() => { if(CD.phase === 'wait'){ CD.phase = 'count'; ready(); } }, () => { if(CD.phase === 'wait'){ CD.phase = 'count'; ready(); } });
   } else ready();
-  cdDrawPattern(-1);
+  cdBuildCue();
   $('#conduct').hidden = false;
   document.documentElement.classList.add('conducting');
   renderRecordingLibrary();
@@ -119,7 +119,6 @@ function cdTap(e){
   if(CD.phase === 'count'){
     CD.count.push(now);
     cdClick(now, CD.count.length === 1);
-    cdDrawPattern(CD.count.length - 1);
     if(CD.count.length < cdCountN()){ cdMsg(`${CD.count.length}…`); return; }
     // 叩いた間隔の中央値をテンポにして、次の拍から始める
     const iv = CD.count.slice(1).map((t, i) => t - CD.count[i]).sort((a, b) => a - b);
@@ -128,7 +127,7 @@ function cdTap(e){
     CD.level = level; CD.lv = [[0, +level.toFixed(2)]];
     CD.phase = 'play';
     $('#cdTempo').textContent = Math.round(60 / P);
-    cdMsg('拍に合わせてタップし続けよう。上のほうを叩くと大きく、下のほうは小さく。');
+    cdMsg(`${cdCueHint()}。上は大きく、下は小さく。`);
     playPerf(CD.perf, CD.stage ? `${CD.stage.rec.label}（あなたの指揮）` : `あなたの指揮：${PIECES[CD.perf.pieceId].title}（${VENUE[U.venue].name}）`, cdFinish, {clock: CD.clock});
     E.pb?.setLevel(level, CD.clock.t0);
     return;
@@ -169,28 +168,61 @@ function cdJudge(e, pad, off){
   $('#cdCombo').textContent = CD.combo >= 4 ? `${CD.combo}連続` : '';
 }
 
-// 拍の図：点と、指揮棒の先（いまの拍の位置へなめらかに動く）
-function cdDrawPattern(beat){
-  const pts = cdPts(), n = pts.length;
-  const cur = beat < 0 ? -1 : ((Math.floor(beat) % n) + n) % n;
-  $('#cdPattern').innerHTML = pts.map(([x, y], i) =>
-    `<circle cx="${x}" cy="${y}" r="${i === cur ? 15 : 11}" class="${i === cur ? 'on' : ''}"/><text x="${x}" y="${y + 5}">${i + 1}</text>`).join('')
-    + '<circle id="cdTip" r="6" cx="100" cy="100" class="tip"/>';
+// 2拍先まで見せる。表示は音の時計を読むだけで、指揮や判定の時計を動かさない。
+function cdCueState(now){
+  if(CD.phase!=='count'&&CD.phase!=='play')return null;
+  let b;
+  if(CD.phase==='play')b=CD.clock.beatAt(now)-CD.perf.from;
+  else {
+    const count=CD.count,iv=count.slice(1).map((t,i)=>t-count[i]).sort((a,b)=>a-b);
+    const P=iv.length?clamp(iv[Math.floor(iv.length/2)],0.3,1.6):CD.cuePeriod;
+    b=count.length?count.length-1+(now-count[count.length-1])/P:(now-CD.cueStart)/P-1;
+  }
+  const i=Math.floor(b),f=b-i,meter=CD.perf.meter;
+  const beat=k=>((k%meter)+meter)%meter+1;
+  return {b,i,f,beat:beat(i),next:[1,2].map(d=>({k:i+d,beat:beat(i+d),distance:d-f,show:CD.phase==='count'||i+d<CD.perf.to-CD.perf.from})),count:CD.count.length};
+}
+function cdBuildCue(){
+  const svg=$('#cdPattern');
+  svg.innerHTML=`<path class="cue-track" d="M48 112H188"/>
+    <g class="cue-baton" id="cdCueBaton"><path d="m87 48 32-26"/><path d="m82 51 6-5 6 7-6 5Z"/></g>
+    <circle class="cue-target" cx="48" cy="112" r="24"/>
+    <circle class="cue-approach" id="cdCueApproach" cx="48" cy="112" r="24"/>
+    <g id="cdCueNow" class="cue-now"><circle cx="48" cy="112" r="17"/><text x="48" y="118"></text></g>
+    ${[0,1].map(i=>`<g id="cdCueNext${i}" class="cue-next"><circle r="12"/><text y="5"></text></g>`).join('')}
+    <g class="cue-steps">${[0,1,2,3].map(i=>`<path id="cdCueStep${i}" d="M${32+i*10} 147h6"/>`).join('')}</g>
+    <g id="cdCueCount" class="cue-count">${Array.from({length:cdCountN()},(_,i)=>`<circle cx="${100+(i-(cdCountN()-1)/2)*20}" cy="176" r="4"/>`).join('')}</g>`;
+  CD.cueNodes={svg,baton:$('#cdCueBaton'),approach:$('#cdCueApproach'),now:$('#cdCueNow'),next:[$('#cdCueNext0'),$('#cdCueNext1')],steps:[0,1,2,3].map(i=>$('#cdCueStep'+i)),count:$('#cdCueCount')};
+}
+function cdDrawCue(now){
+  const q=cdCueState(now),n=CD.cueNodes;
+  if(!n)return;
+  n.svg.style.visibility=q?'visible':'hidden';
+  if(!q)return;
+  const calm=cdCueCalm(),hit=q.f<0.14&&q.i>=0;
+  n.svg.dataset.calm=String(calm);n.svg.dataset.mode=CD.phase;n.svg.dataset.nextBeat=q.next[0].beat;
+  n.now.querySelector('text').textContent=hit?q.beat:calm?q.next[0].beat:'';
+  n.now.classList.toggle('hit',hit);
+  n.approach.setAttribute('r',calm?'24':(24+22*(1-q.f)).toFixed(1));
+  n.baton.setAttribute('transform',calm?'':`rotate(${(-24+48*q.f).toFixed(1)} 88 52)`);
+  for(let i=0;i<2;i++){
+    const el=n.next[i],next=q.next[i];
+    el.style.visibility=next.show?'visible':'hidden';
+    el.setAttribute('transform',`translate(${calm?108+i*60:(48+60*next.distance).toFixed(1)} 112)`);
+    el.querySelector('text').textContent=next.beat;
+    el.classList.toggle('downbeat',next.beat===1);
+  }
+  // 演出なし・短く・動きを減らす設定では、固定した4つの目印で拍までの残りを示す。
+  for(let i=0;i<4;i++)n.steps[i].classList.toggle('on',i<=Math.floor(q.f*4));
+  n.count.style.visibility=CD.phase==='count'?'visible':'hidden';
+  Array.from(n.count.children).forEach((el,i)=>el.classList.toggle('on',i<q.count));
 }
 function cdFrame(){
   CD.raf = requestAnimationFrame(cdFrame);
+  if(E.ac)cdDrawCue(E.ac.currentTime);
   if(CD.phase !== 'play' || !CD.clock || !E.ac) return;
   const b = CD.clock.beatAt(E.ac.currentTime) - CD.perf.from;
   if(b < 0) return;
-  const pts = cdPts(), n = pts.length, i = Math.floor(b), f = b - i;
-  const [x0, y0] = pts[i % n], [x1, y1] = pts[(i + 1) % n];
-  // 拍の点で一瞬止まり、拍の間で弧を描いて次の点へ
-  const s = f < 0.5 ? 2 * f * f : 1 - 2 * (1 - f) * (1 - f);
-  const tip = $('#cdTip');
-  if(!tip || CD.beatShown !== i){ cdDrawPattern(i); CD.beatShown = i; }
-  const t2 = $('#cdTip');
-  t2.setAttribute('cx', (x0 + (x1 - x0) * s).toFixed(1));
-  t2.setAttribute('cy', (y0 + (y1 - y0) * s - 26 * Math.sin(Math.PI * s)).toFixed(1));
   // 楽譜の上でテンポが変わる曲（だんだん速くなる、など）は、指定のテンポを表示しなおし、変わり始める少し前に知らせる
   const pc = PIECES[CD.perf.pieceId];
   if(pc.tmap || pc.tcurve){
