@@ -1,0 +1,149 @@
+{
+  "halo-light": {
+    "concept": "halo",
+    "faces": 39,
+    "footerBottom": 797.5,
+    "height": 812,
+    "scrollWidth": 375,
+    "secondaryButtons": [
+      {
+        "height": 44,
+        "width": 44
+      },
+      {
+        "height": 44,
+        "width": 44
+      },
+      {
+        "height": 44,
+        "width": 44
+      }
+    ],
+    "tap": {
+      "bottom": 586,
+      "height": 142,
+      "left": 116.5,
+      "right": 258.5,
+      "top": 444,
+      "width": 142,
+      "x": 116.5,
+      "y": 444
+    },
+    "theme": "light",
+    "width": 375
+  },
+  "halo-dark": {
+    "concept": "halo",
+    "faces": 39,
+    "footerBottom": 797.5,
+    "height": 812,
+    "scrollWidth": 375,
+    "secondaryButtons": [
+      {
+        "height": 44,
+        "width": 44
+      },
+      {
+        "height": 44,
+        "width": 44
+      },
+      {
+        "height": 44,
+        "width": 44
+      }
+    ],
+    "tap": {
+      "bottom": 586,
+      "height": 142,
+      "left": 116.5,
+      "right": 258.5,
+      "top": 444,
+      "width": 142,
+      "x": 116.5,
+      "y": 444
+    },
+    "theme": "dark",
+    "width": 375
+  },
+  "stage-light": {
+    "concept": "stage",
+    "faces": 39,
+    "footerBottom": 796.5,
+    "height": 812,
+    "scrollWidth": 375,
+    "secondaryButtons": [
+      {
+        "height": 44,
+        "width": 44
+      },
+      {
+        "height": 44,
+        "width": 44
+      },
+      {
+        "height": 44,
+        "width": 44
+      }
+    ],
+    "tap": {
+      "bottom": 643.3984375,
+      "height": 64,
+      "left": 24,
+      "right": 351,
+      "top": 579.3984375,
+      "width": 327,
+      "x": 24,
+      "y": 579.3984375
+    },
+    "theme": "light",
+    "width": 375
+  },
+  "stage-dark": {
+    "concept": "stage",
+    "faces": 39,
+    "footerBottom": 796.5,
+    "height": 812,
+    "scrollWidth": 375,
+    "secondaryButtons": [
+      {
+        "height": 44,
+        "width": 44
+      },
+      {
+        "height": 44,
+        "width": 44
+      },
+      {
+        "height": 44,
+        "width": 44
+      }
+    ],
+    "tap": {
+      "bottom": 643.3984375,
+      "height": 64,
+      "left": 24,
+      "right": 351,
+      "top": 579.3984375,
+      "width": 327,
+      "x": 24,
+      "y": 579.3984375
+    },
+    "theme": "dark",
+    "width": 375
+  },
+  "interactionA": {
+    "count": "4 / 4",
+    "orbitRadius": "104.22",
+    "prompt": "そのまま、音に合わせて"
+  },
+  "controlsA": {
+    "sound": "true",
+    "theme": "dark"
+  },
+  "interactionB": {
+    "concept": "stage",
+    "count": "1 / 4",
+    "prompt": "あと3回",
+    "runner": "174.10666667938233"
+  }
+}

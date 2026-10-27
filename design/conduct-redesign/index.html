@@ -1,0 +1,24 @@
+<!doctype html>
+<html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><title>指揮画面を見直す</title><link rel="stylesheet" href="style.css"></head>
+<body data-concept="halo" data-theme="light">
+<main class="app">
+ <header class="topbar"><button class="icon-button" id="leave" aria-label="指揮をやめる"><svg viewBox="0 0 24 24"><path d="m8 5-7 7 7 7M2 12h17"/></svg></button><div class="title"><span>指揮</span><h1>威風堂々</h1></div><button class="icon-button" id="theme" aria-label="ライトとダークを切り替える"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2v2m0 16v2M2 12h2m16 0h2M5 5l1.5 1.5m11 11L19 19M5 19l1.5-1.5m11-11L19 5"/></svg></button></header>
+ <section class="scene" aria-label="39人の部員がいる舞台"><div class="scene-glow"></div><div class="stage-back"></div><div class="band" id="band"></div><div class="floor"><i></i><i></i><i></i></div><div class="stage-meta"><span>音楽室</span><span>39人</span></div></section>
+ <div class="progress" aria-hidden="true"><i id="progress"></i></div>
+ <section class="interaction">
+  <div class="status"><span id="prompt">まず4回、拍に合わせて</span><span class="combo" id="combo"></span></div>
+  <div class="play-area" id="playArea">
+   <div class="volume" aria-hidden="true"><span>大きく</span><i><b id="volumeValue"></b></i><span>小さく</span></div>
+   <svg class="halo" viewBox="0 0 360 360" aria-hidden="true"><circle class="orbit two" id="orbit2" cx="180" cy="180" r="162"/><circle class="orbit one" id="orbit1" cx="180" cy="180" r="118"/><circle class="target" cx="180" cy="180" r="78"/><circle class="measure" cx="180" cy="180" r="82" pathLength="100"/></svg>
+   <svg class="runway" viewBox="0 0 343 190" aria-hidden="true"><path class="runway-line" d="M42 60H315"/><path class="arrival" d="M92 28V92"/><rect class="runner" id="runner1" x="180" y="38" width="9" height="44" rx="4.5"/><rect class="runner second" id="runner2" x="280" y="38" width="9" height="44" rx="4.5"/></svg>
+   <button class="tap" id="tap" aria-label="拍に合わせてタップ"><span class="tap-art"><svg viewBox="0 0 36 36"><path d="M16 26V8l13-3v18M16 13l13-3"/><ellipse cx="11" cy="27" rx="5" ry="3.5"/><ellipse cx="24" cy="24" rx="5" ry="3.5"/></svg></span><strong id="tapLabel">タップ</strong><span class="tap-sub" id="tapSub"></span></button>
+   <span class="feedback" id="feedback" role="status" aria-live="polite"></span>
+  </div>
+  <div class="beat-row" id="beatRow" aria-label="4拍の進み方"><i>1</i><i>2</i><i>3</i><i>4</i></div>
+  <p class="instruction" id="instruction">光が重なる瞬間に、タップ。</p>
+ </section>
+ <footer class="footer"><div class="tempo"><svg viewBox="0 0 24 24"><path d="m8 3-4 18h16L16 3ZM12 17l6-11M8 17h8"/></svg><b>80</b><span>指定 80</span></div><button class="sound" id="sound" aria-label="合図の音を切り替える" aria-pressed="false"><svg viewBox="0 0 24 24"><path d="M4 9h4l5-4v14l-5-4H4Z"/><path class="sound-on" d="M17 8q5 4 0 8"/><path class="sound-off" d="m17 9 5 6m0-6-5 6"/></svg></button></footer>
+ <nav class="concept-picker" aria-label="デザイン案"><button data-concept-pick="halo" aria-pressed="true">A · ひとつの拍</button><button data-concept-pick="stage" aria-pressed="false">B · 舞台の中へ</button></nav>
+</main>
+<script src="../../tsukurikata/js/util.js"></script><script src="../../tsukurikata/js/instruments.js"></script><script src="../../tsukurikata/js/band.js"></script><script src="../../tsukurikata/js/face-cast.js"></script><script src="../../tsukurikata/js/faces.js"></script><script src="mock.js"></script>
+</body></html>
