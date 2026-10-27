@@ -315,6 +315,7 @@ async function show(next){
 }
 await show(view);
 document.addEventListener('bootchecked',record);
+window.addEventListener('resize',()=>setTimeout(record,0));
 document.addEventListener('facesready',()=>setTimeout(record,0));
 for(const event of ['pointerdown','toggle','click','keydown','scroll'])$('#grCard').addEventListener(event,()=>setTimeout(record,0),{capture:true});
 $('#grNext').addEventListener('click',()=>setTimeout(record,0));$('#grPrev').addEventListener('click',()=>setTimeout(record,0));

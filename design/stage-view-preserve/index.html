@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="ja">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="color-scheme" content="light dark">
+<title>部員を見て、同じ舞台へ戻る</title>
+<style>
+:root{--paper:#f2efe7;--sheet:#fffdf8;--ink:#26383e;--soft:#626d6d;--rule:#d4d0c6;--gold:#8c6e35;color-scheme:light dark}*{box-sizing:border-box}body{margin:0;background:var(--paper);color:var(--ink);font:15px/1.9 system-ui,sans-serif}main{max-width:880px;margin:auto;padding:38px 22px 60px}h1{font-size:clamp(23px,5vw,32px);line-height:1.5;margin:8px 0 18px}h2{font-size:19px;margin-top:38px}p{max-width:680px}a{color:var(--gold);text-underline-offset:4px}.tag,.note,figcaption{font-size:13px;color:var(--soft)}.actions{display:flex;flex-wrap:wrap;gap:12px;margin:25px 0 32px}.actions a{padding:9px 16px;border:1px solid var(--rule);border-radius:9px;background:var(--sheet)}.pair{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:22px;margin:26px 0 40px}figure{min-width:0;margin:0}figcaption{margin-bottom:10px}img{display:block;max-width:375px;width:100%;height:auto;border:1px solid var(--rule);border-radius:14px}details{margin-top:30px;border-top:1px solid var(--rule);padding-top:16px}summary{cursor:pointer}a:focus-visible,summary:focus-visible{outline:2px solid var(--gold);outline-offset:4px}
+@media(prefers-color-scheme:dark){:root{--paper:#15252d;--sheet:#20353e;--ink:#ede9dd;--soft:#b1bbb9;--rule:#47565a;--gold:#d7b777}}
+@media(max-width:560px){main{padding:26px 16px 48px}.pair{grid-template-columns:1fr;gap:28px}figure{max-width:375px;margin-inline:auto}}
+</style>
+<main>
+<div class="tag">吹奏楽部のつくりかた · 舞台の改善</div>
+<h1>部員を見て、同じ舞台へ戻る。</h1>
+<p>カードを開いて閉じても、周りの顔が薄いままにならないようにしました。自分で選んだパートの表示も、そのまま保ちます。</p>
+<nav class="actions" aria-label="確認ページ"><a href="../implementation/qa.html?view=stage&amp;theme=light&amp;keys=1">ライトで試す</a><a href="../implementation/qa.html?view=stage&amp;theme=dark&amp;keys=1">ダークで試す</a><a href="README.md">確認記録</a></nav>
+<div class="pair">
+<figure><figcaption>375px · ライト / カードを閉じた後</figcaption><img src="screenshots/after-light.png" width="375" height="812" alt="部員カードを閉じても、舞台全体の顔が見えているライト表示"></figure>
+<figure><figcaption>375px · ダーク / 表示範囲を保つ</figcaption><img src="screenshots/after-dark.png" width="375" height="812" alt="カードを閉じた後も全体の舞台表示が保たれるダーク表示"></figure>
+</div>
+<h2>自分が選んだ見方を、そのまま。</h2>
+<p>「音の動き」でパートを選んだら、別のパートの部員を見ても表示は変わりません。カードの選択の印は付けたまま、見ていた範囲へ戻れます。名簿の検索と再生も続きます。</p>
+<div class="pair">
+<figure><figcaption>トランペットを表示したまま、フルートの本人を開く</figcaption><img loading="lazy" src="screenshots/manual-dark.png" width="375" height="812" alt="選んだトランペットの表示を保ち、別のパートの本人だけに選択の印を付けた画面"></figure>
+<figure><figcaption>320px · 端の部員を閉じた後も全体表示</figcaption><img loading="lazy" src="screenshots/small-light.png" width="320" height="568" alt="小さい画面で端の部員を閉じても、舞台全体の表示が保たれる画面"></figure>
+</div>
+<details><summary>修正前の表示を見る</summary><p class="note">本人を開いた際にそのパートへ自動で絞られ、閉じた後も他の部員が薄いまま残っていました。</p><figure><img loading="lazy" src="screenshots/before-light.png" width="375" height="812" alt="修正前。部員カードを閉じた後も、フルート以外の顔が薄くなっている画面"></figure></details>
+<p class="note">375px両テーマ・4タブ、320px、名簿の検索、再生中と昔の録音で確認。音・能力・採点・保存は変更していません。iPhone用Releaseビルド成功。実機の操作は後での確認に合わせて保留しています。</p>
+</main>
+</html>

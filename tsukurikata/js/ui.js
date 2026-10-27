@@ -2375,7 +2375,7 @@ function bind(){
     const m = recorded ? U.stageMembers.get(s.id) : U.playing && U.stageMembers ? S.members.find(x => x.id === U.stageMembers.get(s.id)?.id) : S.members.find(x => x.seat === s.id);
     U.recordMember=recorded&&m?m:null;U.recordPerf=U.recordMember?U.shown:null;
     U.sel = m ? m.id : null;
-    U.view = s.sec;
+    // 部員を開いても、舞台と音の動きの表示範囲は保つ。
     placeCard('stage');
     renderSelectors(); renderMemberCard(); renderRoster(); drawIdle();
     if(m) $('#memberCard').scrollIntoView({block:narrow.matches?'start':'nearest',behavior:!fxCalm()&&U.fxMode==='full'?'smooth':'auto'});
@@ -2413,8 +2413,6 @@ function bind(){
     clearRecordedMember();
     U.cardReturn={id:tr.dataset.mid,top:scrollY};
     U.sel = tr.dataset.mid;
-    const m = memberById(U.sel);
-    if(m?.seat) U.view = SEAT[m.seat].sec;
     if(narrow.matches) placeCard('roster');
     renderSelectors(); renderMemberCard(); renderRoster(); drawIdle();
     $('#memberCard').scrollIntoView({block:narrow.matches?'start':'nearest',behavior:!fxCalm()&&U.fxMode==='full'?'smooth':'auto'});

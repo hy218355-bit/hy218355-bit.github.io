@@ -1,0 +1,3117 @@
+{
+  "cases": {
+    "beforeInitial": {
+      "cardHidden": true,
+      "rendered": null,
+      "scrollWidth": 375,
+      "view": "mel",
+      "width": 375,
+      "state": 0.574726824881509,
+      "solo": "all",
+      "engineSolo": {
+        "type": "all"
+      },
+      "playback": null,
+      "playing": false,
+      "waiting": false,
+      "stats": 0.771712013753131,
+      "records": 0.7911327672190964,
+      "viewPart": "mel",
+      "selected": null,
+      "recordedCard": null,
+      "performance": {
+        "expected": 0.4994142900686711,
+        "prepared": 0.4994142900686711,
+        "shown": 0.4994142900686711,
+        "expectedCohesion": 0.2,
+        "preparedCohesion": 0.2,
+        "shownCohesion": 0.2
+      },
+      "library": {
+        "open": false,
+        "selected": "r2026-0-0-583709",
+        "active": null,
+        "waiting": false,
+        "blocked": false,
+        "saving": null,
+        "years": [
+          "2026年度"
+        ],
+        "rows": [
+          {
+            "id": "r2026-0-0-583709",
+            "active": "false",
+            "label": "2026年4月の録音・「天国と地獄」・音楽室を聴く",
+            "pressed": "false",
+            "disabled": false,
+            "saveDisabled": false,
+            "faces": [
+              "m2026-n1-e24aa79a",
+              "m2026-n2-e24aa79a",
+              "m2026-n3-e24aa79a"
+            ]
+          }
+        ],
+        "source": [
+          {
+            "id": "r2026-0-0-583709",
+            "label": "2026年4月の録音",
+            "year": 2026,
+            "piece": "galop",
+            "venue": "room",
+            "count": 5,
+            "faces": [
+              {
+                "id": "m2026-n1-e24aa79a",
+                "name": "阿部 七海",
+                "face": 51
+              },
+              {
+                "id": "m2026-n2-e24aa79a",
+                "name": "菅原 結衣",
+                "face": 7
+              },
+              {
+                "id": "m2026-n3-e24aa79a",
+                "name": "石川 碧",
+                "face": 69
+              }
+            ]
+          }
+        ]
+      },
+      "roster": {
+        "name": "",
+        "grade": "all",
+        "sec": "all"
+      },
+      "boot": {
+        "scripts": 33,
+        "loaded": 33,
+        "failed": [],
+        "errors": []
+      },
+      "errors": []
+    },
+    "beforeOpened": {
+      "cardHidden": false,
+      "cardName": "田中 七海",
+      "rendered": "m2028-n1-cafe",
+      "scrollWidth": 375,
+      "view": "fl",
+      "width": 375,
+      "state": 0.574726824881509,
+      "solo": "all",
+      "engineSolo": {
+        "type": "all"
+      },
+      "playback": null,
+      "playing": false,
+      "waiting": false,
+      "stats": 0.771712013753131,
+      "records": 0.7911327672190964,
+      "viewPart": "fl",
+      "selected": {
+        "id": "m2028-n1-cafe",
+        "name": "田中 七海",
+        "face": 46
+      },
+      "recordedCard": null,
+      "performance": {
+        "expected": 0.4994142900686711,
+        "prepared": 0.4994142900686711,
+        "shown": 0.4994142900686711,
+        "expectedCohesion": 0.2,
+        "preparedCohesion": 0.2,
+        "shownCohesion": 0.2
+      },
+      "library": {
+        "open": false,
+        "selected": "r2026-0-0-583709",
+        "active": null,
+        "waiting": false,
+        "blocked": false,
+        "saving": null,
+        "years": [
+          "2026年度"
+        ],
+        "rows": [
+          {
+            "id": "r2026-0-0-583709",
+            "active": "false",
+            "label": "2026年4月の録音・「天国と地獄」・音楽室を聴く",
+            "pressed": "false",
+            "disabled": false,
+            "saveDisabled": false,
+            "faces": [
+              "m2026-n1-e24aa79a",
+              "m2026-n2-e24aa79a",
+              "m2026-n3-e24aa79a"
+            ]
+          }
+        ],
+        "source": [
+          {
+            "id": "r2026-0-0-583709",
+            "label": "2026年4月の録音",
+            "year": 2026,
+            "piece": "galop",
+            "venue": "room",
+            "count": 5,
+            "faces": [
+              {
+                "id": "m2026-n1-e24aa79a",
+                "name": "阿部 七海",
+                "face": 51
+              },
+              {
+                "id": "m2026-n2-e24aa79a",
+                "name": "菅原 結衣",
+                "face": 7
+              },
+              {
+                "id": "m2026-n3-e24aa79a",
+                "name": "石川 碧",
+                "face": 69
+              }
+            ]
+          }
+        ]
+      },
+      "roster": {
+        "name": "",
+        "grade": "all",
+        "sec": "all"
+      },
+      "boot": {
+        "scripts": 33,
+        "loaded": 33,
+        "failed": [],
+        "errors": []
+      },
+      "errors": []
+    },
+    "beforeClosed": {
+      "cardHidden": true,
+      "cardName": "田中 七海",
+      "rendered": null,
+      "scrollWidth": 375,
+      "view": "fl",
+      "width": 375,
+      "state": 0.574726824881509,
+      "solo": "all",
+      "engineSolo": {
+        "type": "all"
+      },
+      "playback": null,
+      "playing": false,
+      "waiting": false,
+      "stats": 0.771712013753131,
+      "records": 0.7911327672190964,
+      "viewPart": "fl",
+      "selected": null,
+      "recordedCard": null,
+      "performance": {
+        "expected": 0.4994142900686711,
+        "prepared": 0.4994142900686711,
+        "shown": 0.4994142900686711,
+        "expectedCohesion": 0.2,
+        "preparedCohesion": 0.2,
+        "shownCohesion": 0.2
+      },
+      "library": {
+        "open": false,
+        "selected": "r2026-0-0-583709",
+        "active": null,
+        "waiting": false,
+        "blocked": false,
+        "saving": null,
+        "years": [
+          "2026年度"
+        ],
+        "rows": [
+          {
+            "id": "r2026-0-0-583709",
+            "active": "false",
+            "label": "2026年4月の録音・「天国と地獄」・音楽室を聴く",
+            "pressed": "false",
+            "disabled": false,
+            "saveDisabled": false,
+            "faces": [
+              "m2026-n1-e24aa79a",
+              "m2026-n2-e24aa79a",
+              "m2026-n3-e24aa79a"
+            ]
+          }
+        ],
+        "source": [
+          {
+            "id": "r2026-0-0-583709",
+            "label": "2026年4月の録音",
+            "year": 2026,
+            "piece": "galop",
+            "venue": "room",
+            "count": 5,
+            "faces": [
+              {
+                "id": "m2026-n1-e24aa79a",
+                "name": "阿部 七海",
+                "face": 51
+              },
+              {
+                "id": "m2026-n2-e24aa79a",
+                "name": "菅原 結衣",
+                "face": 7
+              },
+              {
+                "id": "m2026-n3-e24aa79a",
+                "name": "石川 碧",
+                "face": 69
+              }
+            ]
+          }
+        ]
+      },
+      "roster": {
+        "name": "",
+        "grade": "all",
+        "sec": "all"
+      },
+      "boot": {
+        "scripts": 33,
+        "loaded": 33,
+        "failed": [],
+        "errors": []
+      },
+      "errors": []
+    },
+    "initial": {
+      "cardHidden": true,
+      "rendered": null,
+      "scrollWidth": 375,
+      "view": "mel",
+      "width": 375,
+      "state": 0.8489355854690075,
+      "solo": "all",
+      "engineSolo": {
+        "type": "all"
+      },
+      "playback": null,
+      "playing": false,
+      "waiting": false,
+      "stats": 0.771712013753131,
+      "records": 0.3084747416432947,
+      "viewPart": "mel",
+      "selected": null,
+      "recordedCard": null,
+      "performance": {
+        "expected": 0.4994142900686711,
+        "prepared": 0.4994142900686711,
+        "shown": 0.4994142900686711,
+        "expectedCohesion": 0.2,
+        "preparedCohesion": 0.2,
+        "shownCohesion": 0.2
+      },
+      "library": {
+        "open": false,
+        "selected": "r2026-0-0-583709",
+        "active": null,
+        "waiting": false,
+        "blocked": false,
+        "saving": null,
+        "years": [
+          "2026年度"
+        ],
+        "rows": [
+          {
+            "id": "r2026-0-0-583709",
+            "active": "false",
+            "label": "2026年4月の録音・「天国と地獄」・音楽室を聴く",
+            "pressed": "false",
+            "disabled": false,
+            "saveDisabled": false,
+            "faces": [
+              "m2026-n1-26b0a1a1",
+              "m2026-n2-26b0a1a1",
+              "m2026-n3-26b0a1a1"
+            ]
+          }
+        ],
+        "source": [
+          {
+            "id": "r2026-0-0-583709",
+            "label": "2026年4月の録音",
+            "year": 2026,
+            "piece": "galop",
+            "venue": "room",
+            "count": 5,
+            "faces": [
+              {
+                "id": "m2026-n1-26b0a1a1",
+                "name": "後藤 真琴",
+                "face": 7
+              },
+              {
+                "id": "m2026-n2-26b0a1a1",
+                "name": "伊藤 花音",
+                "face": 50
+              },
+              {
+                "id": "m2026-n3-26b0a1a1",
+                "name": "中野 七海",
+                "face": 5
+              }
+            ]
+          }
+        ]
+      },
+      "roster": {
+        "name": "",
+        "grade": "all",
+        "sec": "all"
+      },
+      "boot": {
+        "scripts": 33,
+        "loaded": 33,
+        "failed": [],
+        "errors": []
+      },
+      "errors": []
+    },
+    "opened": {
+      "cardHidden": false,
+      "cardName": "田中 七海",
+      "rendered": "m2028-n1-cafe",
+      "scrollWidth": 375,
+      "view": "mel",
+      "width": 375,
+      "state": 0.8489355854690075,
+      "solo": "all",
+      "engineSolo": {
+        "type": "all"
+      },
+      "playback": null,
+      "playing": false,
+      "waiting": false,
+      "stats": 0.771712013753131,
+      "records": 0.3084747416432947,
+      "viewPart": "mel",
+      "selected": {
+        "id": "m2028-n1-cafe",
+        "name": "田中 七海",
+        "face": 46
+      },
+      "recordedCard": null,
+      "performance": {
+        "expected": 0.4994142900686711,
+        "prepared": 0.4994142900686711,
+        "shown": 0.4994142900686711,
+        "expectedCohesion": 0.2,
+        "preparedCohesion": 0.2,
+        "shownCohesion": 0.2
+      },
+      "library": {
+        "open": false,
+        "selected": "r2026-0-0-583709",
+        "active": null,
+        "waiting": false,
+        "blocked": false,
+        "saving": null,
+        "years": [
+          "2026年度"
+        ],
+        "rows": [
+          {
+            "id": "r2026-0-0-583709",
+            "active": "false",
+            "label": "2026年4月の録音・「天国と地獄」・音楽室を聴く",
+            "pressed": "false",
+            "disabled": false,
+            "saveDisabled": false,
+            "faces": [
+              "m2026-n1-26b0a1a1",
+              "m2026-n2-26b0a1a1",
+              "m2026-n3-26b0a1a1"
+            ]
+          }
+        ],
+        "source": [
+          {
+            "id": "r2026-0-0-583709",
+            "label": "2026年4月の録音",
+            "year": 2026,
+            "piece": "galop",
+            "venue": "room",
+            "count": 5,
+            "faces": [
+              {
+                "id": "m2026-n1-26b0a1a1",
+                "name": "後藤 真琴",
+                "face": 7
+              },
+              {
+                "id": "m2026-n2-26b0a1a1",
+                "name": "伊藤 花音",
+                "face": 50
+              },
+              {
+                "id": "m2026-n3-26b0a1a1",
+                "name": "中野 七海",
+                "face": 5
+              }
+            ]
+          }
+        ]
+      },
+      "roster": {
+        "name": "",
+        "grade": "all",
+        "sec": "all"
+      },
+      "boot": {
+        "scripts": 33,
+        "loaded": 33,
+        "failed": [],
+        "errors": []
+      },
+      "errors": []
+    },
+    "closed": {
+      "cardHidden": true,
+      "cardName": "田中 七海",
+      "rendered": null,
+      "scrollWidth": 375,
+      "view": "mel",
+      "width": 375,
+      "state": 0.8489355854690075,
+      "solo": "all",
+      "engineSolo": {
+        "type": "all"
+      },
+      "playback": null,
+      "playing": false,
+      "waiting": false,
+      "stats": 0.771712013753131,
+      "records": 0.3084747416432947,
+      "viewPart": "mel",
+      "selected": null,
+      "recordedCard": null,
+      "performance": {
+        "expected": 0.4994142900686711,
+        "prepared": 0.4994142900686711,
+        "shown": 0.4994142900686711,
+        "expectedCohesion": 0.2,
+        "preparedCohesion": 0.2,
+        "shownCohesion": 0.2
+      },
+      "library": {
+        "open": false,
+        "selected": "r2026-0-0-583709",
+        "active": null,
+        "waiting": false,
+        "blocked": false,
+        "saving": null,
+        "years": [
+          "2026年度"
+        ],
+        "rows": [
+          {
+            "id": "r2026-0-0-583709",
+            "active": "false",
+            "label": "2026年4月の録音・「天国と地獄」・音楽室を聴く",
+            "pressed": "false",
+            "disabled": false,
+            "saveDisabled": false,
+            "faces": [
+              "m2026-n1-26b0a1a1",
+              "m2026-n2-26b0a1a1",
+              "m2026-n3-26b0a1a1"
+            ]
+          }
+        ],
+        "source": [
+          {
+            "id": "r2026-0-0-583709",
+            "label": "2026年4月の録音",
+            "year": 2026,
+            "piece": "galop",
+            "venue": "room",
+            "count": 5,
+            "faces": [
+              {
+                "id": "m2026-n1-26b0a1a1",
+                "name": "後藤 真琴",
+                "face": 7
+              },
+              {
+                "id": "m2026-n2-26b0a1a1",
+                "name": "伊藤 花音",
+                "face": 50
+              },
+              {
+                "id": "m2026-n3-26b0a1a1",
+                "name": "中野 七海",
+                "face": 5
+              }
+            ]
+          }
+        ]
+      },
+      "roster": {
+        "name": "",
+        "grade": "all",
+        "sec": "all"
+      },
+      "boot": {
+        "scripts": 33,
+        "loaded": 33,
+        "failed": [],
+        "errors": []
+      },
+      "errors": []
+    },
+    "darkClosed": {
+      "cardHidden": true,
+      "cardName": "田中 七海",
+      "rendered": null,
+      "scrollWidth": 375,
+      "view": "mel",
+      "width": 375,
+      "state": 0.8489355854690075,
+      "solo": "all",
+      "engineSolo": {
+        "type": "all"
+      },
+      "playback": null,
+      "playing": false,
+      "waiting": false,
+      "stats": 0.771712013753131,
+      "records": 0.3084747416432947,
+      "viewPart": "mel",
+      "selected": null,
+      "recordedCard": null,
+      "performance": {
+        "expected": 0.4994142900686711,
+        "prepared": 0.4994142900686711,
+        "shown": 0.4994142900686711,
+        "expectedCohesion": 0.2,
+        "preparedCohesion": 0.2,
+        "shownCohesion": 0.2
+      },
+      "library": {
+        "open": false,
+        "selected": "r2026-0-0-583709",
+        "active": null,
+        "waiting": false,
+        "blocked": false,
+        "saving": null,
+        "years": [
+          "2026年度"
+        ],
+        "rows": [
+          {
+            "id": "r2026-0-0-583709",
+            "active": "false",
+            "label": "2026年4月の録音・「天国と地獄」・音楽室を聴く",
+            "pressed": "false",
+            "disabled": false,
+            "saveDisabled": false,
+            "faces": [
+              "m2026-n1-26b0a1a1",
+              "m2026-n2-26b0a1a1",
+              "m2026-n3-26b0a1a1"
+            ]
+          }
+        ],
+        "source": [
+          {
+            "id": "r2026-0-0-583709",
+            "label": "2026年4月の録音",
+            "year": 2026,
+            "piece": "galop",
+            "venue": "room",
+            "count": 5,
+            "faces": [
+              {
+                "id": "m2026-n1-26b0a1a1",
+                "name": "後藤 真琴",
+                "face": 7
+              },
+              {
+                "id": "m2026-n2-26b0a1a1",
+                "name": "伊藤 花音",
+                "face": 50
+              },
+              {
+                "id": "m2026-n3-26b0a1a1",
+                "name": "中野 七海",
+                "face": 5
+              }
+            ]
+          }
+        ]
+      },
+      "roster": {
+        "name": "",
+        "grade": "all",
+        "sec": "all"
+      },
+      "boot": {
+        "scripts": 33,
+        "loaded": 33,
+        "failed": [],
+        "errors": []
+      },
+      "errors": []
+    },
+    "manualInitial": {
+      "cardHidden": true,
+      "cardName": "田中 七海",
+      "rendered": null,
+      "scrollWidth": 375,
+      "view": "tp",
+      "width": 375,
+      "state": 0.8489355854690075,
+      "solo": "all",
+      "engineSolo": {
+        "type": "all"
+      },
+      "playback": null,
+      "playing": false,
+      "waiting": false,
+      "stats": 0.771712013753131,
+      "records": 0.3084747416432947,
+      "viewPart": "tp",
+      "selected": null,
+      "recordedCard": null,
+      "performance": {
+        "expected": 0.4994142900686711,
+        "prepared": 0.4994142900686711,
+        "shown": 0.4994142900686711,
+        "expectedCohesion": 0.2,
+        "preparedCohesion": 0.2,
+        "shownCohesion": 0.2
+      },
+      "library": {
+        "open": false,
+        "selected": "r2026-0-0-583709",
+        "active": null,
+        "waiting": false,
+        "blocked": false,
+        "saving": null,
+        "years": [
+          "2026年度"
+        ],
+        "rows": [
+          {
+            "id": "r2026-0-0-583709",
+            "active": "false",
+            "label": "2026年4月の録音・「天国と地獄」・音楽室を聴く",
+            "pressed": "false",
+            "disabled": false,
+            "saveDisabled": false,
+            "faces": [
+              "m2026-n1-26b0a1a1",
+              "m2026-n2-26b0a1a1",
+              "m2026-n3-26b0a1a1"
+            ]
+          }
+        ],
+        "source": [
+          {
+            "id": "r2026-0-0-583709",
+            "label": "2026年4月の録音",
+            "year": 2026,
+            "piece": "galop",
+            "venue": "room",
+            "count": 5,
+            "faces": [
+              {
+                "id": "m2026-n1-26b0a1a1",
+                "name": "後藤 真琴",
+                "face": 7
+              },
+              {
+                "id": "m2026-n2-26b0a1a1",
+                "name": "伊藤 花音",
+                "face": 50
+              },
+              {
+                "id": "m2026-n3-26b0a1a1",
+                "name": "中野 七海",
+                "face": 5
+              }
+            ]
+          }
+        ]
+      },
+      "roster": {
+        "name": "",
+        "grade": "all",
+        "sec": "all"
+      },
+      "boot": {
+        "scripts": 33,
+        "loaded": 33,
+        "failed": [],
+        "errors": []
+      },
+      "errors": []
+    },
+    "manualOpened": {
+      "cardHidden": false,
+      "cardName": "田中 七海",
+      "rendered": "m2028-n1-cafe",
+      "scrollWidth": 375,
+      "view": "tp",
+      "width": 375,
+      "state": 0.8489355854690075,
+      "solo": "all",
+      "engineSolo": {
+        "type": "all"
+      },
+      "playback": null,
+      "playing": false,
+      "waiting": false,
+      "stats": 0.771712013753131,
+      "records": 0.3084747416432947,
+      "viewPart": "tp",
+      "selected": {
+        "id": "m2028-n1-cafe",
+        "name": "田中 七海",
+        "face": 46
+      },
+      "recordedCard": null,
+      "performance": {
+        "expected": 0.4994142900686711,
+        "prepared": 0.4994142900686711,
+        "shown": 0.4994142900686711,
+        "expectedCohesion": 0.2,
+        "preparedCohesion": 0.2,
+        "shownCohesion": 0.2
+      },
+      "library": {
+        "open": false,
+        "selected": "r2026-0-0-583709",
+        "active": null,
+        "waiting": false,
+        "blocked": false,
+        "saving": null,
+        "years": [
+          "2026年度"
+        ],
+        "rows": [
+          {
+            "id": "r2026-0-0-583709",
+            "active": "false",
+            "label": "2026年4月の録音・「天国と地獄」・音楽室を聴く",
+            "pressed": "false",
+            "disabled": false,
+            "saveDisabled": false,
+            "faces": [
+              "m2026-n1-26b0a1a1",
+              "m2026-n2-26b0a1a1",
+              "m2026-n3-26b0a1a1"
+            ]
+          }
+        ],
+        "source": [
+          {
+            "id": "r2026-0-0-583709",
+            "label": "2026年4月の録音",
+            "year": 2026,
+            "piece": "galop",
+            "venue": "room",
+            "count": 5,
+            "faces": [
+              {
+                "id": "m2026-n1-26b0a1a1",
+                "name": "後藤 真琴",
+                "face": 7
+              },
+              {
+                "id": "m2026-n2-26b0a1a1",
+                "name": "伊藤 花音",
+                "face": 50
+              },
+              {
+                "id": "m2026-n3-26b0a1a1",
+                "name": "中野 七海",
+                "face": 5
+              }
+            ]
+          }
+        ]
+      },
+      "roster": {
+        "name": "",
+        "grade": "all",
+        "sec": "all"
+      },
+      "boot": {
+        "scripts": 33,
+        "loaded": 33,
+        "failed": [],
+        "errors": []
+      },
+      "errors": []
+    },
+    "manualChanged": {
+      "cardHidden": false,
+      "cardName": "田中 七海",
+      "rendered": "m2028-n1-cafe",
+      "scrollWidth": 375,
+      "view": "cl",
+      "width": 375,
+      "state": 0.8489355854690075,
+      "solo": "all",
+      "engineSolo": {
+        "type": "all"
+      },
+      "playback": null,
+      "playing": false,
+      "waiting": false,
+      "stats": 0.771712013753131,
+      "records": 0.3084747416432947,
+      "viewPart": "cl",
+      "selected": {
+        "id": "m2028-n1-cafe",
+        "name": "田中 七海",
+        "face": 46
+      },
+      "recordedCard": null,
+      "performance": {
+        "expected": 0.4994142900686711,
+        "prepared": 0.4994142900686711,
+        "shown": 0.4994142900686711,
+        "expectedCohesion": 0.2,
+        "preparedCohesion": 0.2,
+        "shownCohesion": 0.2
+      },
+      "library": {
+        "open": false,
+        "selected": "r2026-0-0-583709",
+        "active": null,
+        "waiting": false,
+        "blocked": false,
+        "saving": null,
+        "years": [
+          "2026年度"
+        ],
+        "rows": [
+          {
+            "id": "r2026-0-0-583709",
+            "active": "false",
+            "label": "2026年4月の録音・「天国と地獄」・音楽室を聴く",
+            "pressed": "false",
+            "disabled": false,
+            "saveDisabled": false,
+            "faces": [
+              "m2026-n1-26b0a1a1",
+              "m2026-n2-26b0a1a1",
+              "m2026-n3-26b0a1a1"
+            ]
+          }
+        ],
+        "source": [
+          {
+            "id": "r2026-0-0-583709",
+            "label": "2026年4月の録音",
+            "year": 2026,
+            "piece": "galop",
+            "venue": "room",
+            "count": 5,
+            "faces": [
+              {
+                "id": "m2026-n1-26b0a1a1",
+                "name": "後藤 真琴",
+                "face": 7
+              },
+              {
+                "id": "m2026-n2-26b0a1a1",
+                "name": "伊藤 花音",
+                "face": 50
+              },
+              {
+                "id": "m2026-n3-26b0a1a1",
+                "name": "中野 七海",
+                "face": 5
+              }
+            ]
+          }
+        ]
+      },
+      "roster": {
+        "name": "",
+        "grade": "all",
+        "sec": "all"
+      },
+      "boot": {
+        "scripts": 33,
+        "loaded": 33,
+        "failed": [],
+        "errors": []
+      },
+      "errors": []
+    },
+    "manualClosed": {
+      "cardHidden": true,
+      "cardName": "田中 七海",
+      "rendered": null,
+      "scrollWidth": 375,
+      "view": "cl",
+      "width": 375,
+      "state": 0.8489355854690075,
+      "solo": "all",
+      "engineSolo": {
+        "type": "all"
+      },
+      "playback": null,
+      "playing": false,
+      "waiting": false,
+      "stats": 0.771712013753131,
+      "records": 0.3084747416432947,
+      "viewPart": "cl",
+      "selected": null,
+      "recordedCard": null,
+      "performance": {
+        "expected": 0.4994142900686711,
+        "prepared": 0.4994142900686711,
+        "shown": 0.4994142900686711,
+        "expectedCohesion": 0.2,
+        "preparedCohesion": 0.2,
+        "shownCohesion": 0.2
+      },
+      "library": {
+        "open": false,
+        "selected": "r2026-0-0-583709",
+        "active": null,
+        "waiting": false,
+        "blocked": false,
+        "saving": null,
+        "years": [
+          "2026年度"
+        ],
+        "rows": [
+          {
+            "id": "r2026-0-0-583709",
+            "active": "false",
+            "label": "2026年4月の録音・「天国と地獄」・音楽室を聴く",
+            "pressed": "false",
+            "disabled": false,
+            "saveDisabled": false,
+            "faces": [
+              "m2026-n1-26b0a1a1",
+              "m2026-n2-26b0a1a1",
+              "m2026-n3-26b0a1a1"
+            ]
+          }
+        ],
+        "source": [
+          {
+            "id": "r2026-0-0-583709",
+            "label": "2026年4月の録音",
+            "year": 2026,
+            "piece": "galop",
+            "venue": "room",
+            "count": 5,
+            "faces": [
+              {
+                "id": "m2026-n1-26b0a1a1",
+                "name": "後藤 真琴",
+                "face": 7
+              },
+              {
+                "id": "m2026-n2-26b0a1a1",
+                "name": "伊藤 花音",
+                "face": 50
+              },
+              {
+                "id": "m2026-n3-26b0a1a1",
+                "name": "中野 七海",
+                "face": 5
+              }
+            ]
+          }
+        ]
+      },
+      "roster": {
+        "name": "",
+        "grade": "all",
+        "sec": "all"
+      },
+      "boot": {
+        "scripts": 33,
+        "loaded": 33,
+        "failed": [],
+        "errors": []
+      },
+      "errors": []
+    },
+    "playingInitial": {
+      "cardHidden": true,
+      "cardName": "田中 七海",
+      "rendered": null,
+      "scrollWidth": 375,
+      "view": "cl",
+      "width": 375,
+      "state": 0.8489355854690075,
+      "solo": "all",
+      "engineSolo": {
+        "type": "all"
+      },
+      "playback": 1,
+      "playing": true,
+      "waiting": false,
+      "stats": 0.771712013753131,
+      "records": 0.3084747416432947,
+      "viewPart": "cl",
+      "selected": null,
+      "recordedCard": null,
+      "performance": {
+        "expected": 0.4994142900686711,
+        "prepared": 0.4994142900686711,
+        "shown": 0.4994142900686711,
+        "expectedCohesion": 0.2,
+        "preparedCohesion": 0.2,
+        "shownCohesion": 0.2
+      },
+      "library": {
+        "open": false,
+        "selected": "r2026-0-0-583709",
+        "active": null,
+        "waiting": false,
+        "blocked": false,
+        "saving": null,
+        "years": [
+          "2026年度"
+        ],
+        "rows": [
+          {
+            "id": "r2026-0-0-583709",
+            "active": "false",
+            "label": "2026年4月の録音・「天国と地獄」・音楽室を聴く",
+            "pressed": "false",
+            "disabled": false,
+            "saveDisabled": false,
+            "faces": [
+              "m2026-n1-26b0a1a1",
+              "m2026-n2-26b0a1a1",
+              "m2026-n3-26b0a1a1"
+            ]
+          }
+        ],
+        "source": [
+          {
+            "id": "r2026-0-0-583709",
+            "label": "2026年4月の録音",
+            "year": 2026,
+            "piece": "galop",
+            "venue": "room",
+            "count": 5,
+            "faces": [
+              {
+                "id": "m2026-n1-26b0a1a1",
+                "name": "後藤 真琴",
+                "face": 7
+              },
+              {
+                "id": "m2026-n2-26b0a1a1",
+                "name": "伊藤 花音",
+                "face": 50
+              },
+              {
+                "id": "m2026-n3-26b0a1a1",
+                "name": "中野 七海",
+                "face": 5
+              }
+            ]
+          }
+        ]
+      },
+      "roster": {
+        "name": "",
+        "grade": "all",
+        "sec": "all"
+      },
+      "boot": {
+        "scripts": 33,
+        "loaded": 33,
+        "failed": [],
+        "errors": []
+      },
+      "errors": []
+    },
+    "playingOpened": {
+      "cardHidden": false,
+      "cardName": "中村 絢",
+      "rendered": "m2028-n24-cafe",
+      "scrollWidth": 375,
+      "view": "cl",
+      "width": 375,
+      "state": 0.8489355854690075,
+      "solo": "all",
+      "engineSolo": {
+        "type": "all"
+      },
+      "playback": 1,
+      "playing": true,
+      "waiting": false,
+      "stats": 0.771712013753131,
+      "records": 0.3084747416432947,
+      "viewPart": "cl",
+      "selected": {
+        "id": "m2028-n24-cafe",
+        "name": "中村 絢",
+        "face": 28
+      },
+      "recordedCard": null,
+      "performance": {
+        "expected": 0.4994142900686711,
+        "prepared": 0.4994142900686711,
+        "shown": 0.4994142900686711,
+        "expectedCohesion": 0.2,
+        "preparedCohesion": 0.2,
+        "shownCohesion": 0.2
+      },
+      "library": {
+        "open": false,
+        "selected": "r2026-0-0-583709",
+        "active": null,
+        "waiting": false,
+        "blocked": false,
+        "saving": null,
+        "years": [
+          "2026年度"
+        ],
+        "rows": [
+          {
+            "id": "r2026-0-0-583709",
+            "active": "false",
+            "label": "2026年4月の録音・「天国と地獄」・音楽室を聴く",
+            "pressed": "false",
+            "disabled": false,
+            "saveDisabled": false,
+            "faces": [
+              "m2026-n1-26b0a1a1",
+              "m2026-n2-26b0a1a1",
+              "m2026-n3-26b0a1a1"
+            ]
+          }
+        ],
+        "source": [
+          {
+            "id": "r2026-0-0-583709",
+            "label": "2026年4月の録音",
+            "year": 2026,
+            "piece": "galop",
+            "venue": "room",
+            "count": 5,
+            "faces": [
+              {
+                "id": "m2026-n1-26b0a1a1",
+                "name": "後藤 真琴",
+                "face": 7
+              },
+              {
+                "id": "m2026-n2-26b0a1a1",
+                "name": "伊藤 花音",
+                "face": 50
+              },
+              {
+                "id": "m2026-n3-26b0a1a1",
+                "name": "中野 七海",
+                "face": 5
+              }
+            ]
+          }
+        ]
+      },
+      "roster": {
+        "name": "",
+        "grade": "all",
+        "sec": "all"
+      },
+      "boot": {
+        "scripts": 33,
+        "loaded": 33,
+        "failed": [],
+        "errors": []
+      },
+      "errors": []
+    },
+    "playingClosed": {
+      "cardHidden": true,
+      "cardName": "中村 絢",
+      "rendered": null,
+      "scrollWidth": 375,
+      "view": "cl",
+      "width": 375,
+      "state": 0.8489355854690075,
+      "solo": "all",
+      "engineSolo": {
+        "type": "all"
+      },
+      "playback": 1,
+      "playing": true,
+      "waiting": false,
+      "stats": 0.771712013753131,
+      "records": 0.3084747416432947,
+      "viewPart": "cl",
+      "selected": null,
+      "recordedCard": null,
+      "performance": {
+        "expected": 0.4994142900686711,
+        "prepared": 0.4994142900686711,
+        "shown": 0.4994142900686711,
+        "expectedCohesion": 0.2,
+        "preparedCohesion": 0.2,
+        "shownCohesion": 0.2
+      },
+      "library": {
+        "open": false,
+        "selected": "r2026-0-0-583709",
+        "active": null,
+        "waiting": false,
+        "blocked": false,
+        "saving": null,
+        "years": [
+          "2026年度"
+        ],
+        "rows": [
+          {
+            "id": "r2026-0-0-583709",
+            "active": "false",
+            "label": "2026年4月の録音・「天国と地獄」・音楽室を聴く",
+            "pressed": "false",
+            "disabled": false,
+            "saveDisabled": false,
+            "faces": [
+              "m2026-n1-26b0a1a1",
+              "m2026-n2-26b0a1a1",
+              "m2026-n3-26b0a1a1"
+            ]
+          }
+        ],
+        "source": [
+          {
+            "id": "r2026-0-0-583709",
+            "label": "2026年4月の録音",
+            "year": 2026,
+            "piece": "galop",
+            "venue": "room",
+            "count": 5,
+            "faces": [
+              {
+                "id": "m2026-n1-26b0a1a1",
+                "name": "後藤 真琴",
+                "face": 7
+              },
+              {
+                "id": "m2026-n2-26b0a1a1",
+                "name": "伊藤 花音",
+                "face": 50
+              },
+              {
+                "id": "m2026-n3-26b0a1a1",
+                "name": "中野 七海",
+                "face": 5
+              }
+            ]
+          }
+        ]
+      },
+      "roster": {
+        "name": "",
+        "grade": "all",
+        "sec": "all"
+      },
+      "boot": {
+        "scripts": 33,
+        "loaded": 33,
+        "failed": [],
+        "errors": []
+      },
+      "errors": []
+    },
+    "rosterInitial": {
+      "cardHidden": true,
+      "cardName": "中村 絢",
+      "rendered": null,
+      "scrollWidth": 375,
+      "view": "cl",
+      "width": 375,
+      "state": 0.8489355854690075,
+      "solo": "all",
+      "engineSolo": {
+        "type": "all"
+      },
+      "playback": 1,
+      "playing": true,
+      "waiting": false,
+      "stats": 0.771712013753131,
+      "records": 0.3084747416432947,
+      "viewPart": "cl",
+      "selected": null,
+      "recordedCard": null,
+      "performance": {
+        "expected": 0.4994142900686711,
+        "prepared": 0.4994142900686711,
+        "shown": 0.4994142900686711,
+        "expectedCohesion": 0.2,
+        "preparedCohesion": 0.2,
+        "shownCohesion": 0.2
+      },
+      "library": {
+        "open": false,
+        "selected": "r2026-0-0-583709",
+        "active": null,
+        "waiting": false,
+        "blocked": false,
+        "saving": null,
+        "years": [
+          "2026年度"
+        ],
+        "rows": [
+          {
+            "id": "r2026-0-0-583709",
+            "active": "false",
+            "label": "2026年4月の録音・「天国と地獄」・音楽室を聴く",
+            "pressed": "false",
+            "disabled": false,
+            "saveDisabled": false,
+            "faces": [
+              "m2026-n1-26b0a1a1",
+              "m2026-n2-26b0a1a1",
+              "m2026-n3-26b0a1a1"
+            ]
+          }
+        ],
+        "source": [
+          {
+            "id": "r2026-0-0-583709",
+            "label": "2026年4月の録音",
+            "year": 2026,
+            "piece": "galop",
+            "venue": "room",
+            "count": 5,
+            "faces": [
+              {
+                "id": "m2026-n1-26b0a1a1",
+                "name": "後藤 真琴",
+                "face": 7
+              },
+              {
+                "id": "m2026-n2-26b0a1a1",
+                "name": "伊藤 花音",
+                "face": 50
+              },
+              {
+                "id": "m2026-n3-26b0a1a1",
+                "name": "中野 七海",
+                "face": 5
+              }
+            ]
+          }
+        ]
+      },
+      "roster": {
+        "name": "悠",
+        "grade": "2",
+        "sec": "all"
+      },
+      "boot": {
+        "scripts": 33,
+        "loaded": 33,
+        "failed": [],
+        "errors": []
+      },
+      "errors": []
+    },
+    "rosterOpened": {
+      "cardHidden": false,
+      "cardName": "小川 悠斗",
+      "rendered": null,
+      "scrollWidth": 375,
+      "view": "cl",
+      "width": 375,
+      "state": 0.8489355854690075,
+      "solo": "all",
+      "engineSolo": {
+        "type": "all"
+      },
+      "playback": 1,
+      "playing": true,
+      "waiting": false,
+      "stats": 0.771712013753131,
+      "records": 0.3084747416432947,
+      "viewPart": "cl",
+      "selected": {
+        "id": "m2028-n2-cafe",
+        "name": "小川 悠斗",
+        "face": 85
+      },
+      "recordedCard": null,
+      "performance": {
+        "expected": 0.4994142900686711,
+        "prepared": 0.4994142900686711,
+        "shown": 0.4994142900686711,
+        "expectedCohesion": 0.2,
+        "preparedCohesion": 0.2,
+        "shownCohesion": 0.2
+      },
+      "library": {
+        "open": false,
+        "selected": "r2026-0-0-583709",
+        "active": null,
+        "waiting": false,
+        "blocked": false,
+        "saving": null,
+        "years": [
+          "2026年度"
+        ],
+        "rows": [
+          {
+            "id": "r2026-0-0-583709",
+            "active": "false",
+            "label": "2026年4月の録音・「天国と地獄」・音楽室を聴く",
+            "pressed": "false",
+            "disabled": false,
+            "saveDisabled": false,
+            "faces": [
+              "m2026-n1-26b0a1a1",
+              "m2026-n2-26b0a1a1",
+              "m2026-n3-26b0a1a1"
+            ]
+          }
+        ],
+        "source": [
+          {
+            "id": "r2026-0-0-583709",
+            "label": "2026年4月の録音",
+            "year": 2026,
+            "piece": "galop",
+            "venue": "room",
+            "count": 5,
+            "faces": [
+              {
+                "id": "m2026-n1-26b0a1a1",
+                "name": "後藤 真琴",
+                "face": 7
+              },
+              {
+                "id": "m2026-n2-26b0a1a1",
+                "name": "伊藤 花音",
+                "face": 50
+              },
+              {
+                "id": "m2026-n3-26b0a1a1",
+                "name": "中野 七海",
+                "face": 5
+              }
+            ]
+          }
+        ]
+      },
+      "roster": {
+        "name": "悠",
+        "grade": "2",
+        "sec": "all"
+      },
+      "boot": {
+        "scripts": 33,
+        "loaded": 33,
+        "failed": [],
+        "errors": []
+      },
+      "errors": []
+    },
+    "rosterClosed": {
+      "cardHidden": true,
+      "cardName": "小川 悠斗",
+      "rendered": null,
+      "scrollWidth": 375,
+      "view": "cl",
+      "width": 375,
+      "state": 0.8489355854690075,
+      "solo": "all",
+      "engineSolo": {
+        "type": "all"
+      },
+      "playback": 1,
+      "playing": true,
+      "waiting": false,
+      "stats": 0.771712013753131,
+      "records": 0.3084747416432947,
+      "viewPart": "cl",
+      "selected": null,
+      "recordedCard": null,
+      "performance": {
+        "expected": 0.4994142900686711,
+        "prepared": 0.4994142900686711,
+        "shown": 0.4994142900686711,
+        "expectedCohesion": 0.2,
+        "preparedCohesion": 0.2,
+        "shownCohesion": 0.2
+      },
+      "library": {
+        "open": false,
+        "selected": "r2026-0-0-583709",
+        "active": null,
+        "waiting": false,
+        "blocked": false,
+        "saving": null,
+        "years": [
+          "2026年度"
+        ],
+        "rows": [
+          {
+            "id": "r2026-0-0-583709",
+            "active": "false",
+            "label": "2026年4月の録音・「天国と地獄」・音楽室を聴く",
+            "pressed": "false",
+            "disabled": false,
+            "saveDisabled": false,
+            "faces": [
+              "m2026-n1-26b0a1a1",
+              "m2026-n2-26b0a1a1",
+              "m2026-n3-26b0a1a1"
+            ]
+          }
+        ],
+        "source": [
+          {
+            "id": "r2026-0-0-583709",
+            "label": "2026年4月の録音",
+            "year": 2026,
+            "piece": "galop",
+            "venue": "room",
+            "count": 5,
+            "faces": [
+              {
+                "id": "m2026-n1-26b0a1a1",
+                "name": "後藤 真琴",
+                "face": 7
+              },
+              {
+                "id": "m2026-n2-26b0a1a1",
+                "name": "伊藤 花音",
+                "face": 50
+              },
+              {
+                "id": "m2026-n3-26b0a1a1",
+                "name": "中野 七海",
+                "face": 5
+              }
+            ]
+          }
+        ]
+      },
+      "roster": {
+        "name": "悠",
+        "grade": "2",
+        "sec": "all"
+      },
+      "boot": {
+        "scripts": 33,
+        "loaded": 33,
+        "failed": [],
+        "errors": []
+      },
+      "errors": []
+    },
+    "recordInitial": {
+      "cardHidden": true,
+      "rendered": null,
+      "scrollWidth": 375,
+      "view": "tp",
+      "width": 375,
+      "state": 0.38074682489968836,
+      "solo": "all",
+      "engineSolo": {
+        "type": "all"
+      },
+      "playback": 1,
+      "playing": true,
+      "waiting": false,
+      "stats": 0.771712013753131,
+      "records": 0.8007528416346759,
+      "viewPart": "tp",
+      "selected": null,
+      "recordedCard": null,
+      "performance": {
+        "expected": 0.6905609536916018,
+        "prepared": 0.6905609536916018,
+        "shown": 0.8497014506720006,
+        "expectedCohesion": 0.2,
+        "preparedCohesion": 0.2,
+        "shownCohesion": 0.8
+      },
+      "library": {
+        "open": true,
+        "selected": "r2026-26-0-790160",
+        "active": "r2026-26-0-790160",
+        "waiting": false,
+        "blocked": false,
+        "saving": null,
+        "years": [
+          "2027年度",
+          "2026年度"
+        ],
+        "rows": [
+          {
+            "id": "r2027-26-1-339903",
+            "active": "false",
+            "label": "2027年 定期演奏会・「歓喜の歌」・県民文化会館を聴く",
+            "pressed": "false",
+            "disabled": false,
+            "saveDisabled": false,
+            "faces": [
+              "m2028-n1-cafe",
+              "m2026-n2-f00d",
+              "m2026-n3-f00d"
+            ]
+          },
+          {
+            "id": "r2026-26-0-790160",
+            "active": "true",
+            "label": "2026年 定期演奏会・《新世界より》第2楽章・前半・県民文化会館を止める",
+            "pressed": "true",
+            "disabled": false,
+            "saveDisabled": false,
+            "faces": [
+              "m2028-n1-cafe",
+              "m2026-n2-f00d",
+              "m2026-n3-f00d"
+            ]
+          }
+        ],
+        "source": [
+          {
+            "id": "r2026-26-0-790160",
+            "label": "2026年 定期演奏会",
+            "year": 2026,
+            "piece": "largo",
+            "venue": "hall",
+            "span": {
+              "from": 0,
+              "to": 32
+            },
+            "count": 39,
+            "faces": [
+              {
+                "id": "m2028-n1-cafe",
+                "name": "田中 七海",
+                "face": 46
+              },
+              {
+                "id": "m2026-n2-f00d",
+                "name": "小川 悠斗",
+                "face": 93
+              },
+              {
+                "id": "m2026-n3-f00d",
+                "name": "松井 颯太",
+                "face": 94
+              }
+            ]
+          },
+          {
+            "id": "r2027-26-1-339903",
+            "label": "2027年 定期演奏会",
+            "year": 2027,
+            "piece": "ode",
+            "venue": "hall",
+            "count": 39,
+            "faces": [
+              {
+                "id": "m2028-n1-cafe",
+                "name": "田中 葵",
+                "face": 46
+              },
+              {
+                "id": "m2026-n2-f00d",
+                "name": "小川 悠斗",
+                "face": 93
+              },
+              {
+                "id": "m2026-n3-f00d",
+                "name": "松井 颯太",
+                "face": 94
+              }
+            ]
+          }
+        ],
+        "expected": 0.8497014506720006,
+        "actual": 0.8497014506720006
+      },
+      "roster": {
+        "name": "",
+        "grade": "all",
+        "sec": "all"
+      },
+      "boot": {
+        "scripts": 33,
+        "loaded": 33,
+        "failed": [],
+        "errors": []
+      },
+      "errors": []
+    },
+    "recordOpened": {
+      "cardHidden": false,
+      "cardName": "田中 七海",
+      "rendered": "m2028-n1-cafe",
+      "scrollWidth": 375,
+      "view": "tp",
+      "width": 375,
+      "state": 0.38074682489968836,
+      "solo": "all",
+      "engineSolo": {
+        "type": "all"
+      },
+      "playback": 1,
+      "playing": true,
+      "waiting": false,
+      "stats": 0.771712013753131,
+      "records": 0.8007528416346759,
+      "viewPart": "tp",
+      "selected": {
+        "id": "m2028-n1-cafe",
+        "name": "田中 花音",
+        "originalName": "田中 七海",
+        "face": 46
+      },
+      "recordedCard": {
+        "id": "m2028-n1-cafe",
+        "name": "田中 七海",
+        "grade": 3,
+        "seat": "picc1",
+        "ranks": {
+          "pitch": "A",
+          "rhythm": "A",
+          "tone": "A",
+          "expr": "A"
+        }
+      },
+      "performance": {
+        "expected": 0.6905609536916018,
+        "prepared": 0.6905609536916018,
+        "shown": 0.8497014506720006,
+        "expectedCohesion": 0.2,
+        "preparedCohesion": 0.2,
+        "shownCohesion": 0.8
+      },
+      "library": {
+        "open": true,
+        "selected": "r2026-26-0-790160",
+        "active": "r2026-26-0-790160",
+        "waiting": false,
+        "blocked": false,
+        "saving": null,
+        "years": [
+          "2027年度",
+          "2026年度"
+        ],
+        "rows": [
+          {
+            "id": "r2027-26-1-339903",
+            "active": "false",
+            "label": "2027年 定期演奏会・「歓喜の歌」・県民文化会館を聴く",
+            "pressed": "false",
+            "disabled": false,
+            "saveDisabled": false,
+            "faces": [
+              "m2028-n1-cafe",
+              "m2026-n2-f00d",
+              "m2026-n3-f00d"
+            ]
+          },
+          {
+            "id": "r2026-26-0-790160",
+            "active": "true",
+            "label": "2026年 定期演奏会・《新世界より》第2楽章・前半・県民文化会館を止める",
+            "pressed": "true",
+            "disabled": false,
+            "saveDisabled": false,
+            "faces": [
+              "m2028-n1-cafe",
+              "m2026-n2-f00d",
+              "m2026-n3-f00d"
+            ]
+          }
+        ],
+        "source": [
+          {
+            "id": "r2026-26-0-790160",
+            "label": "2026年 定期演奏会",
+            "year": 2026,
+            "piece": "largo",
+            "venue": "hall",
+            "span": {
+              "from": 0,
+              "to": 32
+            },
+            "count": 39,
+            "faces": [
+              {
+                "id": "m2028-n1-cafe",
+                "name": "田中 七海",
+                "face": 46
+              },
+              {
+                "id": "m2026-n2-f00d",
+                "name": "小川 悠斗",
+                "face": 93
+              },
+              {
+                "id": "m2026-n3-f00d",
+                "name": "松井 颯太",
+                "face": 94
+              }
+            ]
+          },
+          {
+            "id": "r2027-26-1-339903",
+            "label": "2027年 定期演奏会",
+            "year": 2027,
+            "piece": "ode",
+            "venue": "hall",
+            "count": 39,
+            "faces": [
+              {
+                "id": "m2028-n1-cafe",
+                "name": "田中 葵",
+                "face": 46
+              },
+              {
+                "id": "m2026-n2-f00d",
+                "name": "小川 悠斗",
+                "face": 93
+              },
+              {
+                "id": "m2026-n3-f00d",
+                "name": "松井 颯太",
+                "face": 94
+              }
+            ]
+          }
+        ],
+        "expected": 0.8497014506720006,
+        "actual": 0.8497014506720006
+      },
+      "roster": {
+        "name": "",
+        "grade": "all",
+        "sec": "all"
+      },
+      "boot": {
+        "scripts": 33,
+        "loaded": 33,
+        "failed": [],
+        "errors": []
+      },
+      "errors": []
+    },
+    "recordClosed": {
+      "cardHidden": true,
+      "cardName": "田中 七海",
+      "rendered": null,
+      "scrollWidth": 375,
+      "view": "tp",
+      "width": 375,
+      "state": 0.38074682489968836,
+      "solo": "all",
+      "engineSolo": {
+        "type": "all"
+      },
+      "playback": 1,
+      "playing": true,
+      "waiting": false,
+      "stats": 0.771712013753131,
+      "records": 0.8007528416346759,
+      "viewPart": "tp",
+      "selected": null,
+      "recordedCard": null,
+      "performance": {
+        "expected": 0.6905609536916018,
+        "prepared": 0.6905609536916018,
+        "shown": 0.8497014506720006,
+        "expectedCohesion": 0.2,
+        "preparedCohesion": 0.2,
+        "shownCohesion": 0.8
+      },
+      "library": {
+        "open": true,
+        "selected": "r2026-26-0-790160",
+        "active": "r2026-26-0-790160",
+        "waiting": false,
+        "blocked": false,
+        "saving": null,
+        "years": [
+          "2027年度",
+          "2026年度"
+        ],
+        "rows": [
+          {
+            "id": "r2027-26-1-339903",
+            "active": "false",
+            "label": "2027年 定期演奏会・「歓喜の歌」・県民文化会館を聴く",
+            "pressed": "false",
+            "disabled": false,
+            "saveDisabled": false,
+            "faces": [
+              "m2028-n1-cafe",
+              "m2026-n2-f00d",
+              "m2026-n3-f00d"
+            ]
+          },
+          {
+            "id": "r2026-26-0-790160",
+            "active": "true",
+            "label": "2026年 定期演奏会・《新世界より》第2楽章・前半・県民文化会館を止める",
+            "pressed": "true",
+            "disabled": false,
+            "saveDisabled": false,
+            "faces": [
+              "m2028-n1-cafe",
+              "m2026-n2-f00d",
+              "m2026-n3-f00d"
+            ]
+          }
+        ],
+        "source": [
+          {
+            "id": "r2026-26-0-790160",
+            "label": "2026年 定期演奏会",
+            "year": 2026,
+            "piece": "largo",
+            "venue": "hall",
+            "span": {
+              "from": 0,
+              "to": 32
+            },
+            "count": 39,
+            "faces": [
+              {
+                "id": "m2028-n1-cafe",
+                "name": "田中 七海",
+                "face": 46
+              },
+              {
+                "id": "m2026-n2-f00d",
+                "name": "小川 悠斗",
+                "face": 93
+              },
+              {
+                "id": "m2026-n3-f00d",
+                "name": "松井 颯太",
+                "face": 94
+              }
+            ]
+          },
+          {
+            "id": "r2027-26-1-339903",
+            "label": "2027年 定期演奏会",
+            "year": 2027,
+            "piece": "ode",
+            "venue": "hall",
+            "count": 39,
+            "faces": [
+              {
+                "id": "m2028-n1-cafe",
+                "name": "田中 葵",
+                "face": 46
+              },
+              {
+                "id": "m2026-n2-f00d",
+                "name": "小川 悠斗",
+                "face": 93
+              },
+              {
+                "id": "m2026-n3-f00d",
+                "name": "松井 颯太",
+                "face": 94
+              }
+            ]
+          }
+        ],
+        "expected": 0.8497014506720006,
+        "actual": 0.8497014506720006
+      },
+      "roster": {
+        "name": "",
+        "grade": "all",
+        "sec": "all"
+      },
+      "boot": {
+        "scripts": 33,
+        "loaded": 33,
+        "failed": [],
+        "errors": []
+      },
+      "errors": []
+    },
+    "recordToCurrent": {
+      "cardHidden": false,
+      "cardName": "田中 花音",
+      "rendered": "m2028-n1-cafe",
+      "scrollWidth": 375,
+      "view": "tp",
+      "width": 375,
+      "state": 0.38074682489968836,
+      "solo": "all",
+      "engineSolo": {
+        "type": "all"
+      },
+      "playback": 2,
+      "playing": true,
+      "waiting": false,
+      "stats": 0.771712013753131,
+      "records": 0.8007528416346759,
+      "viewPart": "tp",
+      "selected": {
+        "id": "m2028-n1-cafe",
+        "name": "田中 花音",
+        "originalName": "田中 七海",
+        "face": 46
+      },
+      "recordedCard": null,
+      "performance": {
+        "expected": 0.6905609536916018,
+        "prepared": 0.6905609536916018,
+        "shown": 0.6905609536916018,
+        "expectedCohesion": 0.2,
+        "preparedCohesion": 0.2,
+        "shownCohesion": 0.2
+      },
+      "library": {
+        "open": true,
+        "selected": "r2026-26-0-790160",
+        "active": null,
+        "waiting": false,
+        "blocked": false,
+        "saving": null,
+        "years": [
+          "2027年度",
+          "2026年度"
+        ],
+        "rows": [
+          {
+            "id": "r2027-26-1-339903",
+            "active": "false",
+            "label": "2027年 定期演奏会・「歓喜の歌」・県民文化会館を聴く",
+            "pressed": "false",
+            "disabled": false,
+            "saveDisabled": false,
+            "faces": [
+              "m2028-n1-cafe",
+              "m2026-n2-f00d",
+              "m2026-n3-f00d"
+            ]
+          },
+          {
+            "id": "r2026-26-0-790160",
+            "active": "false",
+            "label": "2026年 定期演奏会・《新世界より》第2楽章・前半・県民文化会館を聴く",
+            "pressed": "false",
+            "disabled": false,
+            "saveDisabled": false,
+            "faces": [
+              "m2028-n1-cafe",
+              "m2026-n2-f00d",
+              "m2026-n3-f00d"
+            ]
+          }
+        ],
+        "source": [
+          {
+            "id": "r2026-26-0-790160",
+            "label": "2026年 定期演奏会",
+            "year": 2026,
+            "piece": "largo",
+            "venue": "hall",
+            "span": {
+              "from": 0,
+              "to": 32
+            },
+            "count": 39,
+            "faces": [
+              {
+                "id": "m2028-n1-cafe",
+                "name": "田中 七海",
+                "face": 46
+              },
+              {
+                "id": "m2026-n2-f00d",
+                "name": "小川 悠斗",
+                "face": 93
+              },
+              {
+                "id": "m2026-n3-f00d",
+                "name": "松井 颯太",
+                "face": 94
+              }
+            ]
+          },
+          {
+            "id": "r2027-26-1-339903",
+            "label": "2027年 定期演奏会",
+            "year": 2027,
+            "piece": "ode",
+            "venue": "hall",
+            "count": 39,
+            "faces": [
+              {
+                "id": "m2028-n1-cafe",
+                "name": "田中 葵",
+                "face": 46
+              },
+              {
+                "id": "m2026-n2-f00d",
+                "name": "小川 悠斗",
+                "face": 93
+              },
+              {
+                "id": "m2026-n3-f00d",
+                "name": "松井 颯太",
+                "face": 94
+              }
+            ]
+          }
+        ]
+      },
+      "roster": {
+        "name": "",
+        "grade": "all",
+        "sec": "all"
+      },
+      "boot": {
+        "scripts": 33,
+        "loaded": 33,
+        "failed": [],
+        "errors": []
+      },
+      "errors": []
+    },
+    "partTileSelected": {
+      "cardHidden": true,
+      "rendered": null,
+      "scrollWidth": 375,
+      "view": "tp",
+      "width": 375,
+      "state": 0.7503208196721971,
+      "solo": "all",
+      "engineSolo": {
+        "type": "all"
+      },
+      "playback": null,
+      "playing": false,
+      "waiting": false,
+      "stats": 0.771712013753131,
+      "records": 0.14949304680339992,
+      "viewPart": "tp",
+      "selected": null,
+      "recordedCard": null,
+      "performance": {
+        "expected": 0.4994142900686711,
+        "prepared": 0.4994142900686711,
+        "shown": 0.4994142900686711,
+        "expectedCohesion": 0.2,
+        "preparedCohesion": 0.2,
+        "shownCohesion": 0.2
+      },
+      "library": {
+        "open": false,
+        "selected": "r2026-0-0-583709",
+        "active": null,
+        "waiting": false,
+        "blocked": false,
+        "saving": null,
+        "years": [
+          "2026年度"
+        ],
+        "rows": [
+          {
+            "id": "r2026-0-0-583709",
+            "active": "false",
+            "label": "2026年4月の録音・「天国と地獄」・音楽室を聴く",
+            "pressed": "false",
+            "disabled": false,
+            "saveDisabled": false,
+            "faces": [
+              "m2026-n1-5471730c",
+              "m2026-n2-5471730c",
+              "m2026-n3-5471730c"
+            ]
+          }
+        ],
+        "source": [
+          {
+            "id": "r2026-0-0-583709",
+            "label": "2026年4月の録音",
+            "year": 2026,
+            "piece": "galop",
+            "venue": "room",
+            "count": 5,
+            "faces": [
+              {
+                "id": "m2026-n1-5471730c",
+                "name": "岡田 陽菜",
+                "face": 18
+              },
+              {
+                "id": "m2026-n2-5471730c",
+                "name": "渡辺 杏",
+                "face": 64
+              },
+              {
+                "id": "m2026-n3-5471730c",
+                "name": "山崎 優奈",
+                "face": 62
+              }
+            ]
+          }
+        ]
+      },
+      "roster": {
+        "name": "",
+        "grade": "all",
+        "sec": "all"
+      },
+      "boot": {
+        "scripts": 33,
+        "loaded": 33,
+        "failed": [],
+        "errors": []
+      },
+      "errors": []
+    },
+    "partTileOpened": {
+      "cardHidden": false,
+      "cardName": "田中 七海",
+      "rendered": "m2028-n1-cafe",
+      "scrollWidth": 375,
+      "view": "tp",
+      "width": 375,
+      "state": 0.7503208196721971,
+      "solo": "all",
+      "engineSolo": {
+        "type": "all"
+      },
+      "playback": null,
+      "playing": false,
+      "waiting": false,
+      "stats": 0.771712013753131,
+      "records": 0.14949304680339992,
+      "viewPart": "tp",
+      "selected": {
+        "id": "m2028-n1-cafe",
+        "name": "田中 七海",
+        "face": 46
+      },
+      "recordedCard": null,
+      "performance": {
+        "expected": 0.4994142900686711,
+        "prepared": 0.4994142900686711,
+        "shown": 0.4994142900686711,
+        "expectedCohesion": 0.2,
+        "preparedCohesion": 0.2,
+        "shownCohesion": 0.2
+      },
+      "library": {
+        "open": false,
+        "selected": "r2026-0-0-583709",
+        "active": null,
+        "waiting": false,
+        "blocked": false,
+        "saving": null,
+        "years": [
+          "2026年度"
+        ],
+        "rows": [
+          {
+            "id": "r2026-0-0-583709",
+            "active": "false",
+            "label": "2026年4月の録音・「天国と地獄」・音楽室を聴く",
+            "pressed": "false",
+            "disabled": false,
+            "saveDisabled": false,
+            "faces": [
+              "m2026-n1-5471730c",
+              "m2026-n2-5471730c",
+              "m2026-n3-5471730c"
+            ]
+          }
+        ],
+        "source": [
+          {
+            "id": "r2026-0-0-583709",
+            "label": "2026年4月の録音",
+            "year": 2026,
+            "piece": "galop",
+            "venue": "room",
+            "count": 5,
+            "faces": [
+              {
+                "id": "m2026-n1-5471730c",
+                "name": "岡田 陽菜",
+                "face": 18
+              },
+              {
+                "id": "m2026-n2-5471730c",
+                "name": "渡辺 杏",
+                "face": 64
+              },
+              {
+                "id": "m2026-n3-5471730c",
+                "name": "山崎 優奈",
+                "face": 62
+              }
+            ]
+          }
+        ]
+      },
+      "roster": {
+        "name": "",
+        "grade": "all",
+        "sec": "all"
+      },
+      "boot": {
+        "scripts": 33,
+        "loaded": 33,
+        "failed": [],
+        "errors": []
+      },
+      "errors": []
+    },
+    "partTileReset": {
+      "cardHidden": true,
+      "cardName": "田中 七海",
+      "rendered": null,
+      "scrollWidth": 375,
+      "view": "mel",
+      "width": 375,
+      "state": 0.7503208196721971,
+      "solo": "all",
+      "engineSolo": {
+        "type": "all"
+      },
+      "playback": null,
+      "playing": false,
+      "waiting": false,
+      "stats": 0.771712013753131,
+      "records": 0.14949304680339992,
+      "viewPart": "mel",
+      "selected": null,
+      "recordedCard": null,
+      "performance": {
+        "expected": 0.4994142900686711,
+        "prepared": 0.4994142900686711,
+        "shown": 0.4994142900686711,
+        "expectedCohesion": 0.2,
+        "preparedCohesion": 0.2,
+        "shownCohesion": 0.2
+      },
+      "library": {
+        "open": false,
+        "selected": "r2026-0-0-583709",
+        "active": null,
+        "waiting": false,
+        "blocked": false,
+        "saving": null,
+        "years": [
+          "2026年度"
+        ],
+        "rows": [
+          {
+            "id": "r2026-0-0-583709",
+            "active": "false",
+            "label": "2026年4月の録音・「天国と地獄」・音楽室を聴く",
+            "pressed": "false",
+            "disabled": false,
+            "saveDisabled": false,
+            "faces": [
+              "m2026-n1-5471730c",
+              "m2026-n2-5471730c",
+              "m2026-n3-5471730c"
+            ]
+          }
+        ],
+        "source": [
+          {
+            "id": "r2026-0-0-583709",
+            "label": "2026年4月の録音",
+            "year": 2026,
+            "piece": "galop",
+            "venue": "room",
+            "count": 5,
+            "faces": [
+              {
+                "id": "m2026-n1-5471730c",
+                "name": "岡田 陽菜",
+                "face": 18
+              },
+              {
+                "id": "m2026-n2-5471730c",
+                "name": "渡辺 杏",
+                "face": 64
+              },
+              {
+                "id": "m2026-n3-5471730c",
+                "name": "山崎 優奈",
+                "face": 62
+              }
+            ]
+          }
+        ]
+      },
+      "roster": {
+        "name": "",
+        "grade": "all",
+        "sec": "all"
+      },
+      "boot": {
+        "scripts": 33,
+        "loaded": 33,
+        "failed": [],
+        "errors": []
+      },
+      "errors": []
+    },
+    "smallOpened": {
+      "cardHidden": false,
+      "cardName": "横山 透",
+      "rendered": "m2028-n39-cafe",
+      "scrollWidth": 320,
+      "view": "mel",
+      "width": 320,
+      "state": 0.7503208196721971,
+      "solo": "all",
+      "engineSolo": {
+        "type": "all"
+      },
+      "playback": null,
+      "playing": false,
+      "waiting": false,
+      "stats": 0.771712013753131,
+      "records": 0.14949304680339992,
+      "viewPart": "mel",
+      "selected": {
+        "id": "m2028-n39-cafe",
+        "name": "横山 透",
+        "face": 4
+      },
+      "recordedCard": null,
+      "performance": {
+        "expected": 0.4994142900686711,
+        "prepared": 0.4994142900686711,
+        "shown": 0.4994142900686711,
+        "expectedCohesion": 0.2,
+        "preparedCohesion": 0.2,
+        "shownCohesion": 0.2
+      },
+      "library": {
+        "open": false,
+        "selected": "r2026-0-0-583709",
+        "active": null,
+        "waiting": false,
+        "blocked": false,
+        "saving": null,
+        "years": [
+          "2026年度"
+        ],
+        "rows": [
+          {
+            "id": "r2026-0-0-583709",
+            "active": "false",
+            "label": "2026年4月の録音・「天国と地獄」・音楽室を聴く",
+            "pressed": "false",
+            "disabled": false,
+            "saveDisabled": false,
+            "faces": [
+              "m2026-n1-5471730c",
+              "m2026-n2-5471730c",
+              "m2026-n3-5471730c"
+            ]
+          }
+        ],
+        "source": [
+          {
+            "id": "r2026-0-0-583709",
+            "label": "2026年4月の録音",
+            "year": 2026,
+            "piece": "galop",
+            "venue": "room",
+            "count": 5,
+            "faces": [
+              {
+                "id": "m2026-n1-5471730c",
+                "name": "岡田 陽菜",
+                "face": 18
+              },
+              {
+                "id": "m2026-n2-5471730c",
+                "name": "渡辺 杏",
+                "face": 64
+              },
+              {
+                "id": "m2026-n3-5471730c",
+                "name": "山崎 優奈",
+                "face": 62
+              }
+            ]
+          }
+        ]
+      },
+      "roster": {
+        "name": "",
+        "grade": "all",
+        "sec": "all"
+      },
+      "boot": {
+        "scripts": 33,
+        "loaded": 33,
+        "failed": [],
+        "errors": []
+      },
+      "errors": []
+    },
+    "smallClosed": {
+      "cardHidden": true,
+      "cardName": "横山 透",
+      "rendered": null,
+      "scrollWidth": 320,
+      "view": "mel",
+      "width": 320,
+      "state": 0.7503208196721971,
+      "solo": "all",
+      "engineSolo": {
+        "type": "all"
+      },
+      "playback": null,
+      "playing": false,
+      "waiting": false,
+      "stats": 0.771712013753131,
+      "records": 0.14949304680339992,
+      "viewPart": "mel",
+      "selected": null,
+      "recordedCard": null,
+      "performance": {
+        "expected": 0.4994142900686711,
+        "prepared": 0.4994142900686711,
+        "shown": 0.4994142900686711,
+        "expectedCohesion": 0.2,
+        "preparedCohesion": 0.2,
+        "shownCohesion": 0.2
+      },
+      "library": {
+        "open": false,
+        "selected": "r2026-0-0-583709",
+        "active": null,
+        "waiting": false,
+        "blocked": false,
+        "saving": null,
+        "years": [
+          "2026年度"
+        ],
+        "rows": [
+          {
+            "id": "r2026-0-0-583709",
+            "active": "false",
+            "label": "2026年4月の録音・「天国と地獄」・音楽室を聴く",
+            "pressed": "false",
+            "disabled": false,
+            "saveDisabled": false,
+            "faces": [
+              "m2026-n1-5471730c",
+              "m2026-n2-5471730c",
+              "m2026-n3-5471730c"
+            ]
+          }
+        ],
+        "source": [
+          {
+            "id": "r2026-0-0-583709",
+            "label": "2026年4月の録音",
+            "year": 2026,
+            "piece": "galop",
+            "venue": "room",
+            "count": 5,
+            "faces": [
+              {
+                "id": "m2026-n1-5471730c",
+                "name": "岡田 陽菜",
+                "face": 18
+              },
+              {
+                "id": "m2026-n2-5471730c",
+                "name": "渡辺 杏",
+                "face": 64
+              },
+              {
+                "id": "m2026-n3-5471730c",
+                "name": "山崎 優奈",
+                "face": 62
+              }
+            ]
+          }
+        ]
+      },
+      "roster": {
+        "name": "",
+        "grade": "all",
+        "sec": "all"
+      },
+      "boot": {
+        "scripts": 33,
+        "loaded": 33,
+        "failed": [],
+        "errors": []
+      },
+      "errors": []
+    },
+    "emptyInitial": {
+      "cardHidden": false,
+      "cardName": "田中 七海",
+      "rendered": null,
+      "scrollWidth": 375,
+      "view": "mel",
+      "width": 375,
+      "state": 0.6495783482678235,
+      "solo": "all",
+      "engineSolo": {
+        "type": "all"
+      },
+      "playback": null,
+      "playing": false,
+      "waiting": false,
+      "stats": 0.771712013753131,
+      "records": 0.9069631760939956,
+      "viewPart": "mel",
+      "selected": {
+        "id": "m2028-n1-cafe",
+        "name": "田中 七海",
+        "face": 46
+      },
+      "recordedCard": null,
+      "library": {
+        "open": false,
+        "selected": "r2026-0-0-583709",
+        "active": null,
+        "waiting": false,
+        "blocked": false,
+        "saving": null,
+        "years": [
+          "2026年度"
+        ],
+        "rows": [
+          {
+            "id": "r2026-0-0-583709",
+            "active": "false",
+            "label": "2026年4月の録音・「天国と地獄」・音楽室を聴く",
+            "pressed": "false",
+            "disabled": false,
+            "saveDisabled": false,
+            "faces": [
+              "m2026-n1-9021e9f8",
+              "m2026-n2-9021e9f8",
+              "m2026-n3-9021e9f8"
+            ]
+          }
+        ],
+        "source": [
+          {
+            "id": "r2026-0-0-583709",
+            "label": "2026年4月の録音",
+            "year": 2026,
+            "piece": "galop",
+            "venue": "room",
+            "count": 5,
+            "faces": [
+              {
+                "id": "m2026-n1-9021e9f8",
+                "name": "松井 隼",
+                "face": 90
+              },
+              {
+                "id": "m2026-n2-9021e9f8",
+                "name": "小島 航",
+                "face": 92
+              },
+              {
+                "id": "m2026-n3-9021e9f8",
+                "name": "佐藤 文香",
+                "face": 21
+              }
+            ]
+          }
+        ]
+      },
+      "roster": {
+        "name": "",
+        "grade": "all",
+        "sec": "all"
+      },
+      "boot": {
+        "scripts": 33,
+        "loaded": 33,
+        "failed": [],
+        "errors": []
+      },
+      "errors": []
+    },
+    "emptyTapped": {
+      "cardHidden": true,
+      "cardName": "田中 七海",
+      "rendered": null,
+      "scrollWidth": 375,
+      "view": "mel",
+      "width": 375,
+      "state": 0.6495783482678235,
+      "solo": "all",
+      "engineSolo": {
+        "type": "all"
+      },
+      "playback": null,
+      "playing": false,
+      "waiting": false,
+      "stats": 0.771712013753131,
+      "records": 0.9069631760939956,
+      "viewPart": "mel",
+      "selected": null,
+      "recordedCard": null,
+      "library": {
+        "open": false,
+        "selected": "r2026-0-0-583709",
+        "active": null,
+        "waiting": false,
+        "blocked": false,
+        "saving": null,
+        "years": [
+          "2026年度"
+        ],
+        "rows": [
+          {
+            "id": "r2026-0-0-583709",
+            "active": "false",
+            "label": "2026年4月の録音・「天国と地獄」・音楽室を聴く",
+            "pressed": "false",
+            "disabled": false,
+            "saveDisabled": false,
+            "faces": [
+              "m2026-n1-9021e9f8",
+              "m2026-n2-9021e9f8",
+              "m2026-n3-9021e9f8"
+            ]
+          }
+        ],
+        "source": [
+          {
+            "id": "r2026-0-0-583709",
+            "label": "2026年4月の録音",
+            "year": 2026,
+            "piece": "galop",
+            "venue": "room",
+            "count": 5,
+            "faces": [
+              {
+                "id": "m2026-n1-9021e9f8",
+                "name": "松井 隼",
+                "face": 90
+              },
+              {
+                "id": "m2026-n2-9021e9f8",
+                "name": "小島 航",
+                "face": 92
+              },
+              {
+                "id": "m2026-n3-9021e9f8",
+                "name": "佐藤 文香",
+                "face": 21
+              }
+            ]
+          }
+        ]
+      },
+      "roster": {
+        "name": "",
+        "grade": "all",
+        "sec": "all"
+      },
+      "boot": {
+        "scripts": 33,
+        "loaded": 33,
+        "failed": [],
+        "errors": []
+      },
+      "errors": []
+    },
+    "tabsInitial": {
+      "cardHidden": false,
+      "cardName": "小川 悠斗",
+      "rendered": "m2028-n2-cafe",
+      "scrollWidth": 375,
+      "view": "sax",
+      "width": 375,
+      "state": 0.6495783482678235,
+      "solo": "all",
+      "engineSolo": {
+        "type": "all"
+      },
+      "playback": null,
+      "playing": false,
+      "waiting": false,
+      "stats": 0.771712013753131,
+      "records": 0.9069631760939956,
+      "viewPart": "sax",
+      "selected": {
+        "id": "m2028-n2-cafe",
+        "name": "小川 悠斗",
+        "face": 85
+      },
+      "recordedCard": null,
+      "library": {
+        "open": false,
+        "selected": "r2026-0-0-583709",
+        "active": null,
+        "waiting": false,
+        "blocked": false,
+        "saving": null,
+        "years": [
+          "2026年度"
+        ],
+        "rows": [
+          {
+            "id": "r2026-0-0-583709",
+            "active": "false",
+            "label": "2026年4月の録音・「天国と地獄」・音楽室を聴く",
+            "pressed": "false",
+            "disabled": false,
+            "saveDisabled": false,
+            "faces": [
+              "m2026-n1-9021e9f8",
+              "m2026-n2-9021e9f8",
+              "m2026-n3-9021e9f8"
+            ]
+          }
+        ],
+        "source": [
+          {
+            "id": "r2026-0-0-583709",
+            "label": "2026年4月の録音",
+            "year": 2026,
+            "piece": "galop",
+            "venue": "room",
+            "count": 5,
+            "faces": [
+              {
+                "id": "m2026-n1-9021e9f8",
+                "name": "松井 隼",
+                "face": 90
+              },
+              {
+                "id": "m2026-n2-9021e9f8",
+                "name": "小島 航",
+                "face": 92
+              },
+              {
+                "id": "m2026-n3-9021e9f8",
+                "name": "佐藤 文香",
+                "face": 21
+              }
+            ]
+          }
+        ]
+      },
+      "roster": {
+        "name": "",
+        "grade": "all",
+        "sec": "all"
+      },
+      "boot": {
+        "scripts": 33,
+        "loaded": 33,
+        "failed": [],
+        "errors": []
+      },
+      "errors": []
+    },
+    "tabsClosed": {
+      "cardHidden": true,
+      "cardName": "小川 悠斗",
+      "rendered": null,
+      "scrollWidth": 375,
+      "view": "sax",
+      "width": 375,
+      "state": 0.6495783482678235,
+      "solo": "all",
+      "engineSolo": {
+        "type": "all"
+      },
+      "playback": null,
+      "playing": false,
+      "waiting": false,
+      "stats": 0.771712013753131,
+      "records": 0.9069631760939956,
+      "viewPart": "sax",
+      "selected": null,
+      "recordedCard": null,
+      "library": {
+        "open": false,
+        "selected": "r2026-0-0-583709",
+        "active": null,
+        "waiting": false,
+        "blocked": false,
+        "saving": null,
+        "years": [
+          "2026年度"
+        ],
+        "rows": [
+          {
+            "id": "r2026-0-0-583709",
+            "active": "false",
+            "label": "2026年4月の録音・「天国と地獄」・音楽室を聴く",
+            "pressed": "false",
+            "disabled": false,
+            "saveDisabled": false,
+            "faces": [
+              "m2026-n1-9021e9f8",
+              "m2026-n2-9021e9f8",
+              "m2026-n3-9021e9f8"
+            ]
+          }
+        ],
+        "source": [
+          {
+            "id": "r2026-0-0-583709",
+            "label": "2026年4月の録音",
+            "year": 2026,
+            "piece": "galop",
+            "venue": "room",
+            "count": 5,
+            "faces": [
+              {
+                "id": "m2026-n1-9021e9f8",
+                "name": "松井 隼",
+                "face": 90
+              },
+              {
+                "id": "m2026-n2-9021e9f8",
+                "name": "小島 航",
+                "face": 92
+              },
+              {
+                "id": "m2026-n3-9021e9f8",
+                "name": "佐藤 文香",
+                "face": 21
+              }
+            ]
+          }
+        ]
+      },
+      "roster": {
+        "name": "",
+        "grade": "all",
+        "sec": "all"
+      },
+      "boot": {
+        "scripts": 33,
+        "loaded": 33,
+        "failed": [],
+        "errors": []
+      },
+      "errors": []
+    }
+  },
+  "tabs": [
+    {
+      "theme": "dark",
+      "tab": "week",
+      "view": "sax",
+      "state": 0.6495783482678235,
+      "width": 375,
+      "scrollWidth": 375,
+      "selected": "m2028-n2-cafe",
+      "rendered": "m2028-n2-cafe",
+      "errors": []
+    },
+    {
+      "theme": "dark",
+      "tab": "play",
+      "view": "sax",
+      "state": 0.6495783482678235,
+      "width": 375,
+      "scrollWidth": 375,
+      "selected": "m2028-n2-cafe",
+      "rendered": "m2028-n2-cafe",
+      "errors": []
+    },
+    {
+      "theme": "dark",
+      "tab": "members",
+      "view": "sax",
+      "state": 0.6495783482678235,
+      "width": 375,
+      "scrollWidth": 375,
+      "selected": "m2028-n2-cafe",
+      "rendered": "m2028-n2-cafe",
+      "errors": []
+    },
+    {
+      "theme": "dark",
+      "tab": "log",
+      "view": "sax",
+      "state": 0.6495783482678235,
+      "width": 375,
+      "scrollWidth": 375,
+      "selected": "m2028-n2-cafe",
+      "rendered": "m2028-n2-cafe",
+      "errors": []
+    },
+    {
+      "theme": "light",
+      "tab": "week",
+      "view": "sax",
+      "state": 0.6495783482678235,
+      "width": 375,
+      "scrollWidth": 375,
+      "selected": "m2028-n2-cafe",
+      "rendered": "m2028-n2-cafe",
+      "errors": []
+    },
+    {
+      "theme": "light",
+      "tab": "play",
+      "view": "sax",
+      "state": 0.6495783482678235,
+      "width": 375,
+      "scrollWidth": 375,
+      "selected": "m2028-n2-cafe",
+      "rendered": "m2028-n2-cafe",
+      "errors": []
+    },
+    {
+      "theme": "light",
+      "tab": "members",
+      "view": "sax",
+      "state": 0.6495783482678235,
+      "width": 375,
+      "scrollWidth": 375,
+      "selected": "m2028-n2-cafe",
+      "rendered": "m2028-n2-cafe",
+      "errors": []
+    },
+    {
+      "theme": "light",
+      "tab": "log",
+      "view": "sax",
+      "state": 0.6495783482678235,
+      "width": 375,
+      "scrollWidth": 375,
+      "selected": "m2028-n2-cafe",
+      "rendered": "m2028-n2-cafe",
+      "errors": []
+    }
+  ]
+}
