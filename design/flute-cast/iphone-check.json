@@ -1,0 +1,27 @@
+{
+  "build": "succeeded",
+  "install": "succeeded",
+  "launch": "succeeded",
+  "runningProcessVerified": true,
+  "visualInteractionVerified": false,
+  "bundleHashes": [
+    {
+      "file": "index.html",
+      "source": "c0698c347ab189dbdf0fa9468b3ae649d15987409197c48746c2fba2b47f75eb",
+      "bundle": "c0698c347ab189dbdf0fa9468b3ae649d15987409197c48746c2fba2b47f75eb",
+      "match": true
+    },
+    {
+      "file": "js/band.js",
+      "source": "da0ff4516585a96bd4d529a984935ab5b33ef08c96c329ae421ac9a1dbfa61aa",
+      "bundle": "da0ff4516585a96bd4d529a984935ab5b33ef08c96c329ae421ac9a1dbfa61aa",
+      "match": true
+    },
+    {
+      "file": "js/game.js",
+      "source": "af85b72fdb52bf44397c22e5de1a43b4420c9623a7b36fca32f6ea76e21b503f",
+      "bundle": "af85b72fdb52bf44397c22e5de1a43b4420c9623a7b36fca32f6ea76e21b503f",
+      "match": true
+    }
+  ]
+}

@@ -149,7 +149,11 @@ async function show(next){
   Math.random=()=>{seed=(Math.imul(seed,1664525)+1013904223)>>>0;return seed/4294967296;};
   try{s=freshState(2026);}finally{Math.random=random;}
  }else s=freshState(2026);
- if(!['intake','talent','first-year'].includes(view)){s=assignRecruits(s,autoAssign(s));if(!['song-choice','song-samples'].includes(view))s=choosePiece(s,view==='reading-year-hard'?'tell':'galop');}
+ if(!['intake','talent','first-year','flute-cast'].includes(view)){s=assignRecruits(s,autoAssign(s));if(!['song-choice','song-samples'].includes(view))s=choosePiece(s,view==='reading-year-hard'?'tell':'galop');}
+ if(view==='flute-cast'){
+  s.recruits=null;s.seq=0;s.recruitSeed=20261027;s.log=[];
+  s.recruits=makeRecruits(s,39);s=assignRecruits(s,autoAssign(s));s=choosePiece(s,'pomp');
+ }
  if(view==='talent'){s.recruitSeed=12345;s.seq=0;s.rep=90;s.recruits=null;const rs=makeRecruits(s,40);s.recruits=[...rs.filter(r=>r.talent).slice(0,1),...rs.filter(r=>!r.talent).slice(0,7)];}
  if(view==='intake-existing'||view==='intake-full'){
   s.members=fullBand({pitch:55,rhythm:60,tone:50,expr:48}).slice(0,view==='intake-full'?39:32);s.year=2028;s.week=10;
@@ -294,7 +298,7 @@ async function show(next){
  if(['full','short','off'].includes(q.get('cueFx')))U.fxMode=q.get('cueFx');
  S=s;U.sel=null;hideTip();renderAll();refreshNow();$('#toast').hidden=true;
  const cardView=view==='member'||view.startsWith('member-');
- setTab(['log','journal','journal-ambiguous','journal-empty'].includes(view)?'log':view==='members'?'members':cardView||view==='diag-practice'||view.startsWith('rehearsal')||['stage','recorded-history','record-library','reading-stage','conduct'].includes(view)?'play':'week');
+ setTab(['log','journal','journal-ambiguous','journal-empty'].includes(view)?'log':['members','flute-cast'].includes(view)?'members':cardView||view==='diag-practice'||view.startsWith('rehearsal')||['stage','recorded-history','record-library','reading-stage','conduct'].includes(view)?'play':'week');
  if(view==='song-samples')for(const card of document.querySelectorAll('.pcard'))card.hidden=!['largo','galop','tell'].includes(card.querySelector('[data-pid]')?.dataset.pid);
  if(cardView){placeCard('stage');U.sel=s.members[0].id;renderMemberCard();}
  if(['grad','grad-old','grad-auto'].includes(view)){U.fxMode=view==='grad-auto'?'short':'off';S.gradMembers=s.members.filter(m=>m.grade===3);openGradRoll();GR.i=1;grShow();if(view!=='grad-auto')pauseGradRoll();}

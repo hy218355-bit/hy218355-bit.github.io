@@ -2149,6 +2149,15 @@ function makeRecruits(s, n, opts = {}){
     const grade = opts.joiners && s.week > 0 && s.week < 20 && hash(...seed, 'grade') < 0.25 ? 2 : 1;
     out.push({id, name: makeName(used, ...seed), hope, exp, grade, trait: pickTrait(...seed), ...(talent ? {talent: true} : {})});
   }
+  // 新しい子の配役だけをそろえる。希望・席・力はそのまま、フルートとピッコロは女子にする。
+  const placement=autoAssign({...s,recruits:[...(s.recruits||[]),...out]});
+  for(const r of out){
+    const fl=r.hope==='fl'||r.hope==='picc'||SEAT[placement[r.id]]?.sec==='fl';
+    if(fl&&namePresentation(r)!=='female'){
+      used.delete(r.name);
+      r.name=makeNameFromPool(used,GIVEN_FEMALE,'fl-cast',r.id);
+    }
+  }
   return out;
 }
 // その楽器の空いている席のうち、どこに座ってもらうのがよいか：誰もいないパート → 1stの席 → 和音が欠けやすい席の順

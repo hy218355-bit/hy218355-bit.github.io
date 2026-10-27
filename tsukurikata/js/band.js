@@ -108,13 +108,14 @@ function namePresentation(member){
   return hash(member?.id || '', 'name-cast') < .35 ? 'male' : 'female';
 }
 
-function makeName(used, ...seed){
+function makeNameFromPool(used, given, ...seed){
   for(let k = 0; k < 50; k++){
-    const n = SURNAMES[Math.floor(hash(...seed, 's', k) * SURNAMES.length)] + ' ' + GIVEN[Math.floor(hash(...seed, 'g', k) * GIVEN.length)];
+    const n = SURNAMES[Math.floor(hash(...seed, 's', k) * SURNAMES.length)] + ' ' + given[Math.floor(hash(...seed, 'g', k) * given.length)];
     if(!used.has(n)){ used.add(n); return n; }
   }
   return '新入部員';
 }
+function makeName(used, ...seed){ return makeNameFromPool(used, GIVEN, ...seed); }
 function makeStats(base, spread, ...seed){
   const st = {};
   for(const k of STAT_KEYS){
