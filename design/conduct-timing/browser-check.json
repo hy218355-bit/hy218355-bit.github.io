@@ -1,0 +1,682 @@
+{
+  "ready": {
+    "boot": {
+      "errors": [],
+      "failed": [],
+      "loaded": 33,
+      "scripts": 33
+    },
+    "conduct": {
+      "combo": 0,
+      "count": 0,
+      "events": 0,
+      "from": 0,
+      "judge": {
+        "e": 0,
+        "g": 0,
+        "l": 0,
+        "p": 0
+      },
+      "meter": 2,
+      "phase": "count",
+      "taps": 0,
+      "to": 80
+    },
+    "errors": [],
+    "members": 0.6864548486191779,
+    "pad": {
+      "bottom": 750.6015625,
+      "height": 317.328125,
+      "left": 16,
+      "right": 359,
+      "top": 433.2734375,
+      "width": 343,
+      "x": 16,
+      "y": 433.2734375
+    },
+    "pattern": {
+      "calm": "false",
+      "mode": "count",
+      "nextBeat": "1"
+    },
+    "playing": false,
+    "recordings": [],
+    "records": 0.7712433410342783,
+    "scrollWidth": 375,
+    "state": 0.942725855857134,
+    "theme": "light",
+    "timing": {
+      "frames": 3,
+      "inputs": [],
+      "textChanges": 2
+    },
+    "voices": [],
+    "width": 375
+  },
+  "loadedPlaying": {
+    "boot": {
+      "errors": [],
+      "failed": [],
+      "loaded": 33,
+      "scripts": 33
+    },
+    "conduct": {
+      "combo": 4,
+      "count": 4,
+      "events": 7,
+      "from": 0,
+      "judge": {
+        "e": 0,
+        "g": 0,
+        "l": 0,
+        "p": 4
+      },
+      "meter": 2,
+      "phase": "play",
+      "taps": 4,
+      "to": 80
+    },
+    "errors": [],
+    "members": 0.6864548486191779,
+    "pad": {
+      "bottom": 750.6015625,
+      "height": 317.328125,
+      "left": 16,
+      "right": 359,
+      "top": 433.2734375,
+      "width": 343,
+      "x": 16,
+      "y": 433.2734375
+    },
+    "pattern": {
+      "calm": "false",
+      "mode": "play",
+      "nextBeat": "1"
+    },
+    "playing": true,
+    "recordings": [],
+    "records": 0.7712433410342783,
+    "scrollWidth": 375,
+    "state": 0.942725855857134,
+    "theme": "light",
+    "timing": {
+      "frames": 496,
+      "inputs": [
+        {
+          "actual": 0.4313999998569489,
+          "delay": 80,
+          "errorMs": -0.3,
+          "expected": 0.4316999998092651,
+          "raw": 0.512
+        },
+        {
+          "actual": 1.0542666665712994,
+          "delay": 140,
+          "errorMs": 0,
+          "expected": 1.0542666665712994,
+          "raw": 1.1946666666666668
+        },
+        {
+          "actual": 1.6886333332856498,
+          "delay": 60,
+          "errorMs": 0,
+          "expected": 1.6886333332856498,
+          "raw": 1.7493333333333334
+        },
+        {
+          "actual": 2.314166666666667,
+          "delay": 160,
+          "errorMs": -0.1,
+          "expected": 2.314266666571299,
+          "raw": 2.474666666666667
+        },
+        {
+          "actual": 2.928933333237966,
+          "delay": 100,
+          "errorMs": -0.1,
+          "expected": 2.9290333331425984,
+          "raw": 3.029333333333333
+        },
+        {
+          "actual": 3.545566666762034,
+          "delay": 80,
+          "errorMs": -0.1,
+          "expected": 3.5456666666666665,
+          "raw": 3.6266666666666665
+        },
+        {
+          "actual": 4.19036666671435,
+          "delay": 140,
+          "errorMs": 0,
+          "expected": 4.19036666671435,
+          "raw": 4.330666666666667
+        },
+        {
+          "actual": 4.803699999809265,
+          "delay": 60,
+          "errorMs": 0,
+          "expected": 4.803699999809265,
+          "raw": 4.864
+        }
+      ],
+      "textChanges": 27
+    },
+    "voices": [
+      "SampleVoice"
+    ],
+    "width": 375
+  },
+  "loadedDark": {
+    "boot": {
+      "errors": [],
+      "failed": [],
+      "loaded": 33,
+      "scripts": 33
+    },
+    "conduct": {
+      "combo": 4,
+      "count": 4,
+      "events": 7,
+      "from": 0,
+      "judge": {
+        "e": 0,
+        "g": 0,
+        "l": 0,
+        "p": 4
+      },
+      "meter": 2,
+      "phase": "play",
+      "taps": 4,
+      "to": 80
+    },
+    "errors": [],
+    "members": 0.6864548486191779,
+    "pad": {
+      "bottom": 750.6015625,
+      "height": 317.328125,
+      "left": 16,
+      "right": 359,
+      "top": 433.2734375,
+      "width": 343,
+      "x": 16,
+      "y": 433.2734375
+    },
+    "pattern": {
+      "calm": "false",
+      "mode": "play",
+      "nextBeat": "1"
+    },
+    "playing": true,
+    "recordings": [],
+    "records": 0.7712433410342783,
+    "scrollWidth": 375,
+    "state": 0.942725855857134,
+    "theme": "dark",
+    "timing": {
+      "frames": 4544,
+      "inputs": [
+        {
+          "actual": 0.4313999998569489,
+          "delay": 80,
+          "errorMs": -0.3,
+          "expected": 0.4316999998092651,
+          "raw": 0.512
+        },
+        {
+          "actual": 1.0542666665712994,
+          "delay": 140,
+          "errorMs": 0,
+          "expected": 1.0542666665712994,
+          "raw": 1.1946666666666668
+        },
+        {
+          "actual": 1.6886333332856498,
+          "delay": 60,
+          "errorMs": 0,
+          "expected": 1.6886333332856498,
+          "raw": 1.7493333333333334
+        },
+        {
+          "actual": 2.314166666666667,
+          "delay": 160,
+          "errorMs": -0.1,
+          "expected": 2.314266666571299,
+          "raw": 2.474666666666667
+        },
+        {
+          "actual": 2.928933333237966,
+          "delay": 100,
+          "errorMs": -0.1,
+          "expected": 2.9290333331425984,
+          "raw": 3.029333333333333
+        },
+        {
+          "actual": 3.545566666762034,
+          "delay": 80,
+          "errorMs": -0.1,
+          "expected": 3.5456666666666665,
+          "raw": 3.6266666666666665
+        },
+        {
+          "actual": 4.19036666671435,
+          "delay": 140,
+          "errorMs": 0,
+          "expected": 4.19036666671435,
+          "raw": 4.330666666666667
+        },
+        {
+          "actual": 4.803699999809265,
+          "delay": 60,
+          "errorMs": 0,
+          "expected": 4.803699999809265,
+          "raw": 4.864
+        }
+      ],
+      "textChanges": 244
+    },
+    "voices": [
+      "SampleVoice"
+    ],
+    "width": 375
+  },
+  "closed": {
+    "boot": {
+      "errors": [],
+      "failed": [],
+      "loaded": 33,
+      "scripts": 33
+    },
+    "conduct": {
+      "combo": 4,
+      "count": 4,
+      "events": 7,
+      "from": 0,
+      "judge": {
+        "e": 0,
+        "g": 0,
+        "l": 0,
+        "p": 4
+      },
+      "meter": 2,
+      "phase": "idle",
+      "taps": 4,
+      "to": 80
+    },
+    "errors": [],
+    "members": 0.6864548486191779,
+    "pad": {
+      "bottom": 0,
+      "height": 0,
+      "left": 0,
+      "right": 0,
+      "top": 0,
+      "width": 0,
+      "x": 0,
+      "y": 0
+    },
+    "pattern": {
+      "calm": "false",
+      "mode": "play",
+      "nextBeat": "1"
+    },
+    "playing": false,
+    "recordings": [],
+    "records": 0.7712433410342783,
+    "scrollWidth": 375,
+    "state": 0.942725855857134,
+    "theme": "dark",
+    "timing": {
+      "frames": 4576,
+      "inputs": [
+        {
+          "actual": 0.4313999998569489,
+          "delay": 80,
+          "errorMs": -0.3,
+          "expected": 0.4316999998092651,
+          "raw": 0.512
+        },
+        {
+          "actual": 1.0542666665712994,
+          "delay": 140,
+          "errorMs": 0,
+          "expected": 1.0542666665712994,
+          "raw": 1.1946666666666668
+        },
+        {
+          "actual": 1.6886333332856498,
+          "delay": 60,
+          "errorMs": 0,
+          "expected": 1.6886333332856498,
+          "raw": 1.7493333333333334
+        },
+        {
+          "actual": 2.314166666666667,
+          "delay": 160,
+          "errorMs": -0.1,
+          "expected": 2.314266666571299,
+          "raw": 2.474666666666667
+        },
+        {
+          "actual": 2.928933333237966,
+          "delay": 100,
+          "errorMs": -0.1,
+          "expected": 2.9290333331425984,
+          "raw": 3.029333333333333
+        },
+        {
+          "actual": 3.545566666762034,
+          "delay": 80,
+          "errorMs": -0.1,
+          "expected": 3.5456666666666665,
+          "raw": 3.6266666666666665
+        },
+        {
+          "actual": 4.19036666671435,
+          "delay": 140,
+          "errorMs": 0,
+          "expected": 4.19036666671435,
+          "raw": 4.330666666666667
+        },
+        {
+          "actual": 4.803699999809265,
+          "delay": 60,
+          "errorMs": 0,
+          "expected": 4.803699999809265,
+          "raw": 4.864
+        }
+      ],
+      "textChanges": 244
+    },
+    "voices": [],
+    "width": 375
+  },
+  "normalReady": {
+    "boot": {
+      "errors": [],
+      "failed": [],
+      "loaded": 33,
+      "scripts": 33
+    },
+    "conduct": {
+      "combo": 0,
+      "count": 0,
+      "events": 0,
+      "from": 0,
+      "judge": {
+        "e": 0,
+        "g": 0,
+        "l": 0,
+        "p": 0
+      },
+      "meter": 4,
+      "phase": "count",
+      "taps": 0,
+      "to": 32
+    },
+    "errors": [],
+    "members": 0.6864548486191779,
+    "pad": {
+      "bottom": 750.6015625,
+      "height": 294.046875,
+      "left": 16,
+      "right": 359,
+      "top": 456.5546875,
+      "width": 343,
+      "x": 16,
+      "y": 456.5546875
+    },
+    "pattern": {
+      "calm": "true",
+      "mode": "count",
+      "nextBeat": "1"
+    },
+    "playing": false,
+    "recordings": [],
+    "records": 0.7712433410342783,
+    "scrollWidth": 375,
+    "state": 0.03805450117215514,
+    "theme": "light",
+    "timing": {
+      "frames": 1,
+      "inputs": [],
+      "textChanges": 3
+    },
+    "voices": [],
+    "width": 375
+  },
+  "keyboardPlaying": {
+    "boot": {
+      "errors": [],
+      "failed": [],
+      "loaded": 33,
+      "scripts": 33
+    },
+    "conduct": {
+      "combo": 4,
+      "count": 4,
+      "events": 6,
+      "from": 0,
+      "judge": {
+        "e": 0,
+        "g": 0,
+        "l": 0,
+        "p": 4
+      },
+      "meter": 4,
+      "phase": "play",
+      "taps": 4,
+      "to": 32
+    },
+    "errors": [],
+    "members": 0.6864548486191779,
+    "pad": {
+      "bottom": 750.6015625,
+      "height": 294.046875,
+      "left": 16,
+      "right": 359,
+      "top": 456.5546875,
+      "width": 343,
+      "x": 16,
+      "y": 456.5546875
+    },
+    "pattern": {
+      "calm": "true",
+      "mode": "play",
+      "nextBeat": "1"
+    },
+    "playing": true,
+    "recordings": [],
+    "records": 0.7712433410342783,
+    "scrollWidth": 375,
+    "state": 0.03805450117215514,
+    "theme": "light",
+    "timing": {
+      "frames": 392,
+      "inputs": [],
+      "textChanges": 26
+    },
+    "voices": [
+      "SampleVoice"
+    ],
+    "width": 375
+  },
+  "finished": {
+    "boot": {
+      "errors": [],
+      "failed": [],
+      "loaded": 33,
+      "scripts": 33
+    },
+    "conduct": {
+      "combo": 4,
+      "count": 4,
+      "events": 6,
+      "from": 0,
+      "judge": {
+        "e": 0,
+        "g": 0,
+        "l": 0,
+        "p": 4
+      },
+      "meter": 4,
+      "phase": "done",
+      "taps": 4,
+      "to": 32
+    },
+    "errors": [],
+    "members": 0.6864548486191779,
+    "pad": {
+      "bottom": 0,
+      "height": 0,
+      "left": 0,
+      "right": 0,
+      "top": 0,
+      "width": 0,
+      "x": 0,
+      "y": 0
+    },
+    "pattern": {
+      "calm": "true",
+      "mode": "play",
+      "nextBeat": "3"
+    },
+    "playing": false,
+    "recordings": [
+      {
+        "id": "r2028-10-0-395491",
+        "label": "あなたの指揮：《新世界より》第2楽章（6月 第3週）"
+      }
+    ],
+    "records": 0.32371105207130313,
+    "scrollWidth": 375,
+    "state": 0.9429021291434764,
+    "theme": "light",
+    "timing": {
+      "frames": 1905,
+      "inputs": [],
+      "textChanges": 117
+    },
+    "voices": [],
+    "width": 375
+  },
+  "recordPlayback": {
+    "boot": {
+      "errors": [],
+      "failed": [],
+      "loaded": 33,
+      "scripts": 33
+    },
+    "conduct": {
+      "combo": 4,
+      "count": 4,
+      "events": 6,
+      "from": 0,
+      "judge": {
+        "e": 0,
+        "g": 0,
+        "l": 0,
+        "p": 4
+      },
+      "meter": 4,
+      "phase": "idle",
+      "taps": 4,
+      "to": 32
+    },
+    "errors": [],
+    "members": 0.6864548486191779,
+    "pad": {
+      "bottom": 0,
+      "height": 0,
+      "left": 0,
+      "right": 0,
+      "top": 0,
+      "width": 0,
+      "x": 0,
+      "y": 0
+    },
+    "pattern": {
+      "calm": "true",
+      "mode": "play",
+      "nextBeat": "3"
+    },
+    "playing": true,
+    "recordings": [
+      {
+        "id": "r2028-10-0-395491",
+        "label": "あなたの指揮：《新世界より》第2楽章（6月 第3週）"
+      }
+    ],
+    "records": 0.32371105207130313,
+    "scrollWidth": 375,
+    "state": 0.9429021291434764,
+    "theme": "light",
+    "timing": {
+      "frames": 1905,
+      "inputs": [],
+      "textChanges": 117
+    },
+    "voices": [
+      "SampleVoice"
+    ],
+    "width": 375
+  },
+  "stoppedReplay": {
+    "boot": {
+      "errors": [],
+      "failed": [],
+      "loaded": 33,
+      "scripts": 33
+    },
+    "conduct": {
+      "combo": 4,
+      "count": 4,
+      "events": 6,
+      "from": 0,
+      "judge": {
+        "e": 0,
+        "g": 0,
+        "l": 0,
+        "p": 4
+      },
+      "meter": 4,
+      "phase": "idle",
+      "taps": 4,
+      "to": 32
+    },
+    "errors": [],
+    "members": 0.6864548486191779,
+    "pad": {
+      "bottom": 0,
+      "height": 0,
+      "left": 0,
+      "right": 0,
+      "top": 0,
+      "width": 0,
+      "x": 0,
+      "y": 0
+    },
+    "pattern": {
+      "calm": "true",
+      "mode": "play",
+      "nextBeat": "3"
+    },
+    "playing": false,
+    "recordings": [
+      {
+        "id": "r2028-10-0-395491",
+        "label": "あなたの指揮：《新世界より》第2楽章（6月 第3週）"
+      }
+    ],
+    "records": 0.32371105207130313,
+    "scrollWidth": 375,
+    "state": 0.9429021291434764,
+    "theme": "light",
+    "timing": {
+      "frames": 1905,
+      "inputs": [],
+      "textChanges": 117
+    },
+    "voices": [],
+    "width": 375
+  }
+}

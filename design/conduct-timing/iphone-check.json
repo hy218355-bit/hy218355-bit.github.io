@@ -1,0 +1,22 @@
+{
+  "build": "succeeded",
+  "install": "succeeded",
+  "launch": "blocked-device-locked",
+  "runningProcessVerified": false,
+  "visualInteractionVerified": false,
+  "mirroringUsed": false,
+  "bundleHashes": [
+    {
+      "file": "index.html",
+      "source": "1b8e60d2828a1fc29378cc9a3acc6c969fbc5cac46da5ecec0c4a6836a5b2610",
+      "bundle": "1b8e60d2828a1fc29378cc9a3acc6c969fbc5cac46da5ecec0c4a6836a5b2610",
+      "match": true
+    },
+    {
+      "file": "js/conduct.js",
+      "source": "ca1316276590a5b07ded302a6e965585a6fa353fdeb887aa247e489c6a082a56",
+      "bundle": "ca1316276590a5b07ded302a6e965585a6fa353fdeb887aa247e489c6a082a56",
+      "match": true
+    }
+  ]
+}

@@ -1,0 +1,10 @@
+<!doctype html>
+<html lang="ja"><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>指揮のタイミングを安定させる</title>
+<style>:root{color-scheme:light dark;font-family:system-ui,sans-serif;background:#f2efe8;color:#253640}*{box-sizing:border-box}body{max-width:960px;margin:auto;padding:24px}h1{font-size:25px}h2{font-size:20px}p{line-height:1.8}a{color:inherit}section{margin:30px 0}.pair{display:flex;gap:20px;flex-wrap:wrap}figure{margin:0;max-width:375px;flex:1 1 300px}img{display:block;width:100%;height:auto;border:1px solid #9ba49c;border-radius:14px}figcaption{padding:8px 0;font-size:14px}table{width:100%;border-collapse:collapse}th,td{padding:12px;border-bottom:1px solid #9ba49c;text-align:left}@media(prefers-color-scheme:dark){:root{background:#17272d;color:#e6e9df}}</style>
+<h1>指揮のタイミングを安定させる</h1><p>画面処理が重いときも、指が触れた時刻でテンポと判定をそろえるようにしました。予告の数字の更新も減らしています。</p>
+<p><a href="../implementation/qa.html?view=rehearsal&amp;audioPiece=pomp&amp;cueFx=full&amp;theme=light">合奏を開いて試す</a> · <a href="README.md">検証の詳細</a></p>
+<section><h2>一定間隔の5タップで比較</h2><p>50〜160msの処理待ちを加えて確認しました。</p><table><thead><tr><th>判定</th><th>修正前</th><th>修正後</th></tr></thead><tbody><tr><td>ぴったり</td><td>0回</td><td>5回</td></tr><tr><td>いい感じ</td><td>2回</td><td>0回</td></tr><tr><td>早い・遅い</td><td>3回</td><td>0回</td></tr></tbody></table></section>
+<section><h2>375px · ライトとダーク</h2><div class="pair"><figure><img src="screenshots/ready-light.png" alt="ライトの指揮の予告"><figcaption>ライト</figcaption></figure><figure><img src="screenshots/playing-dark.png" alt="処理負荷のある状態で指揮したダークの画面"><figcaption>ダーク・負荷を掛けた操作</figcaption></figure></div></section>
+<section><h2>演出なしと録音</h2><div class="pair"><figure><img src="screenshots/calm-light.png" alt="固定した目印で知らせる指揮"><figcaption>演出なし</figcaption></figure><figure><img src="screenshots/result-light.png" alt="ぴったり4回で演奏が終わり、録音を残した結果"><figcaption>自然終了と録音</figcaption></figure></div></section>
+<p>iPhoneへ導入済み。本体がロック中のため自動起動はできませんでした。実機の操作感は未確認です。ミラーリングは使っていません。</p><p>codex/design · pushなし</p>
+</html>

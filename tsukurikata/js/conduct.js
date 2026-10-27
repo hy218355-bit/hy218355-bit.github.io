@@ -105,25 +105,40 @@ function cdClick(at, strong){
   o.connect(g); g.connect(ac.destination); o.start(at); o.stop(at + 0.06);
 }
 
+// 入力が届くまで待たされた時間を除く。時刻を取れない端末はこれまでの音の時計を使う。
+function cdInputTime(e, now, received = performance.now()){
+  let stamp=e.timeStamp;
+  if(!Number.isFinite(stamp)||stamp<=0)return now;
+  // 昔のブラウザが使う時刻の起点にも合わせる。
+  if(stamp>1e12){
+    if(!Number.isFinite(performance.timeOrigin))return now;
+    stamp-=performance.timeOrigin;
+  }
+  const age=received-stamp;
+  if(!Number.isFinite(age)||age < -5)return now;
+  if(age>250)return null;
+  return Math.max(0,now-Math.max(0,age)/1000);
+}
 function cdTap(e){
   if(CD.phase !== 'count' && CD.phase !== 'play') return;
+  if(e.isPrimary===false||(e.pointerType==='mouse'&&e.button!==0))return;
   e.preventDefault();
-  const now = E.ac.currentTime;
-  if(now - CD.lastTap < 0.12) return;   // 二度押し
-  CD.lastTap = now;
+  const now = E.ac.currentTime, tapped = cdInputTime(e,now);
+  if(tapped===null||tapped-CD.lastTap<0.12)return; // 遅れて届いた入力と二度押し
+  CD.lastTap = tapped;
   haptic('tap');
   const pad = $('#cdPad').getBoundingClientRect();
   const y = e.clientY != null ? e.clientY : pad.top + pad.height / 2;
   const level = clamp(0.5 + 0.95 * (1 - (y - pad.top) / pad.height), 0.5, 1.45);
   cdRipple(e, pad);
   if(CD.phase === 'count'){
-    CD.count.push(now);
+    CD.count.push(tapped);
     cdClick(now, CD.count.length === 1);
     if(CD.count.length < cdCountN()){ cdMsg(`${CD.count.length}…`); return; }
     // 叩いた間隔の中央値をテンポにして、次の拍から始める
     const iv = CD.count.slice(1).map((t, i) => t - CD.count[i]).sort((a, b) => a - b);
     const P = clamp(iv[Math.floor(iv.length / 2)], 0.3, 1.6);
-    CD.clock = BeatClock.start(now + P, CD.perf.from, P);
+    CD.clock = BeatClock.start(tapped + P, CD.perf.from, P);
     CD.level = level; CD.lv = [[0, +level.toFixed(2)]];
     CD.phase = 'play';
     $('#cdTempo').textContent = Math.round(60 / P);
@@ -132,7 +147,7 @@ function cdTap(e){
     E.pb?.setLevel(level, CD.clock.t0);
     return;
   }
-  CD.clock.tap(now);
+  CD.clock.tap(tapped);
   cdJudge(e, pad, CD.clock.taps[CD.clock.taps.length - 1].off);
   CD.idleHint = false;
   $('#cdTempo').textContent = Math.round(60 / CD.clock.P);
@@ -194,6 +209,11 @@ function cdBuildCue(){
     <g id="cdCueCount" class="cue-count">${Array.from({length:cdCountN()},(_,i)=>`<circle cx="${100+(i-(cdCountN()-1)/2)*20}" cy="176" r="4"/>`).join('')}</g>`;
   CD.cueNodes={svg,baton:$('#cdCueBaton'),approach:$('#cdCueApproach'),now:$('#cdCueNow'),next:[$('#cdCueNext0'),$('#cdCueNext1')],steps:[0,1,2,3].map(i=>$('#cdCueStep'+i)),count:$('#cdCueCount')};
 }
+// 同じ数字で毎フレーム文字のノードを作り直さない。
+function cdCueText(el,value){
+  const text=String(value);
+  if(el.textContent!==text)el.textContent=text;
+}
 function cdDrawCue(now){
   const q=cdCueState(now),n=CD.cueNodes;
   if(!n)return;
@@ -201,7 +221,7 @@ function cdDrawCue(now){
   if(!q)return;
   const calm=cdCueCalm(),hit=q.f<0.14&&q.i>=0;
   n.svg.dataset.calm=String(calm);n.svg.dataset.mode=CD.phase;n.svg.dataset.nextBeat=q.next[0].beat;
-  n.now.querySelector('text').textContent=hit?q.beat:calm?q.next[0].beat:'';
+  cdCueText(n.now.querySelector('text'),hit?q.beat:calm?q.next[0].beat:'');
   n.now.classList.toggle('hit',hit);
   n.approach.setAttribute('r',calm?'24':(24+22*(1-q.f)).toFixed(1));
   n.baton.setAttribute('transform',calm?'':`rotate(${(-24+48*q.f).toFixed(1)} 88 52)`);
@@ -209,7 +229,7 @@ function cdDrawCue(now){
     const el=n.next[i],next=q.next[i];
     el.style.visibility=next.show?'visible':'hidden';
     el.setAttribute('transform',`translate(${calm?108+i*60:(48+60*next.distance).toFixed(1)} 112)`);
-    el.querySelector('text').textContent=next.beat;
+    cdCueText(el.querySelector('text'),next.beat);
     el.classList.toggle('downbeat',next.beat===1);
   }
   // 演出なし・短く・動きを減らす設定では、固定した4つの目印で拍までの残りを示す。

@@ -9,6 +9,7 @@ const engine=fs.readFileSync(path.join(root,'js/engine.js'),'utf8');
 vm.runInContext(engine.slice(engine.indexOf('const CD_FOLLOW'),engine.indexOf('// ステージの奥行き')),ctx);
 vm.runInContext(`
 const node=()=>({style:{},textContent:'',appendChild(){},remove(){},getBoundingClientRect:()=>({left:0,top:0,width:300,height:300})});
+const performance={now:()=>1000};
 const nodes={},$=id=>nodes[id]||=(node()),document={createElement:node};
 const E={ac:{currentTime:0},pb:{setLevel(){}}},U={venue:'room',fxMode:'full'};let played,calm=false;
 const fxCalm=()=>calm;

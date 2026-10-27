@@ -21,6 +21,24 @@ window.fetch=(input,init)=>{
 };
 if(document.readyState==='loading')await new Promise(r=>document.addEventListener('DOMContentLoaded',r,{once:true}));
 const q=new URLSearchParams(location.search);let view=q.get('view')||'week';
+const timingAudit={frames:0,textChanges:0,inputs:[]};
+if(q.has('timingAudit')){
+ // 確認専用。実際の入力を処理する直前に負荷を掛け、判定時刻との違いを記録する。
+ $('#cdPad').addEventListener('pointerdown',e=>{
+  if(!['count','play'].includes(CD.phase))return;
+  const delay=q.get('inputDelay')==='variable'?[80,140,60,160,100][timingAudit.inputs.length%5]:0;
+  const begin=performance.now();while(performance.now()-begin<delay){}
+  const raw=E.ac.currentTime,expected=raw-Math.max(0,performance.now()-e.timeStamp)/1000;
+  const entry={delay,raw,expected};timingAudit.inputs.push(entry);
+  setTimeout(()=>{entry.actual=CD.lastTap;entry.errorMs=+(1000*(entry.actual-entry.expected)).toFixed(3);record();},0);
+ },true);
+ new MutationObserver(records=>{
+  for(const r of records){
+   if(r.type==='attributes'&&r.target.id==='cdCueBaton')timingAudit.frames++;
+   if(r.type==='childList'&&r.target.nodeName==='text')timingAudit.textChanges++;
+  }
+ }).observe($('#cdPattern'),{subtree:true,childList:true,attributes:true,attributeFilter:['transform']});
+}
 document.documentElement.dataset.theme=q.get('theme')==='dark'?'dark':'light';
 U.sfx=false;U.fxMode='off';FX.q=[];clearTimeout(FX.timer);FX.on=false;$('#fx').hidden=true;
 let report,releaseSamples,performanceMemo,releaseLibraryExport;
@@ -57,6 +75,7 @@ function record(){
  report.listeningMix=E.pb?{nodes:E.pb.listenOutputs.length,live:E.pb.listenLive,gain:E.pb.listenOutputs.map(n=>n.gain.value)}:null;
  report.hallExp=S.hallExp;
  report.conduct={phase:CD.phase,count:CD.count.length,taps:CD.clock?.taps.length||0,judge:CD.judge?{...CD.judge}:null,combo:CD.combo,events:CD.clock?.ev.length||0,meter:CD.perf?.meter,from:CD.perf?.from,to:CD.perf?.to};
+ if(q.has('timingAudit'))report.conductTiming={...timingAudit,inputs:timingAudit.inputs.map(x=>({...x}))};
  const yearNext=$('#week .year-actions .btn')?.getBoundingClientRect();report.yearNext=yearNext?{top:yearNext.top,bottom:yearNext.bottom,height:yearNext.height}:null;
  report.yearGrowth=Array.from(document.querySelectorAll('[data-year-growth]')).map(el=>({id:el.dataset.yearGrowth,name:el.querySelector('b').textContent,ranks:el.querySelector('.yr-grow-ranks').getAttribute('aria-label')}));
  report.year=S.year;report.phase=S.phase;report.pending=S.pending?{kind:S.pending.kind,revealed:!!S.pending.revealed}:null;report.expectedNowLabel=nowLabel();
