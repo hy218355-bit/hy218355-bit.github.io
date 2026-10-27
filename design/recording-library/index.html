@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="ja">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="color-scheme" content="light dark">
+<title>録音を、顔と曲で選ぶ</title>
+<style>
+:root{--paper:#f2efe7;--sheet:#fffdf8;--ink:#26383e;--soft:#626d6d;--rule:#d4d0c6;--gold:#8c6e35;color-scheme:light dark}
+*{box-sizing:border-box}body{margin:0;background:var(--paper);color:var(--ink);font:15px/1.9 system-ui,sans-serif}main{max-width:880px;margin:0 auto;padding:38px 22px 64px}h1{font-size:clamp(23px,5vw,32px);line-height:1.5;margin:8px 0 18px}p{max-width:680px}a{color:var(--gold);text-underline-offset:4px}.tag{color:var(--soft);font-size:12px;letter-spacing:.12em}.actions{display:flex;flex-wrap:wrap;gap:12px;margin:24px 0 36px}.actions a{padding:9px 16px;border:1px solid var(--rule);border-radius:9px;background:var(--sheet)}.pair{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:22px;margin:30px 0 44px}figure{margin:0;min-width:0}figcaption{color:var(--soft);font-size:13px;margin-bottom:10px}img{display:block;width:100%;max-width:375px;height:auto;border:1px solid var(--rule);border-radius:14px}h2{font-size:18px;margin:36px 0 10px}.note{color:var(--soft);font-size:13px}.small img{max-width:320px}details{border-top:1px solid var(--rule);padding-top:15px}summary{cursor:pointer}a:focus-visible,summary:focus-visible{outline:2px solid var(--gold);outline-offset:4px}
+@media(prefers-color-scheme:dark){:root{--paper:#15252d;--sheet:#20353e;--ink:#ede9dd;--soft:#b1bbb9;--rule:#47565a;--gold:#d7b777}}
+@media(max-width:560px){main{padding:26px 16px 48px}.pair{gap:30px;grid-template-columns:1fr}figure{max-width:375px;margin-inline:auto}}
+</style>
+<main>
+<div class="tag">吹奏楽部のつくりかた · 合奏の改善</div>
+<h1>録音を、顔と曲で選ぶ。</h1>
+<p>あの年の部員と、あの曲をもう一度。年度ごとに並ぶ録音を押して聴き、画面下の「いまの音」で現在の部と聴き比べられます。</p>
+<nav class="actions" aria-label="確認ページ">
+<a href="../implementation/qa.html?view=record-library&amp;theme=light&amp;different=1&amp;keys=1">ライトで試す</a>
+<a href="../implementation/qa.html?view=record-library&amp;theme=dark&amp;different=1&amp;keys=1">ダークで試す</a>
+<a href="README.md">確認記録</a>
+</nav>
+<div class="pair">
+<figure><figcaption>375px · ライト / 再生中は金の枠</figcaption><img src="screenshots/playing-light.png" width="375" height="812" alt="年度別の録音を顔と曲名で選び、画面下からいまの音を聴けるライト表示"></figure>
+<figure><figcaption>375px · ダーク / 同じ操作</figcaption><img src="screenshots/playing-dark.png" width="375" height="812" alt="再生中の録音が金枠と停止の印で分かるダーク表示"></figure>
+</div>
+<h2>選ぶ・止めるは、その行から。</h2>
+<p>録音には曲・会場・当時の部員の顔を添えました。右端は保存。再生中の行をもう一度押すと止まります。同じ名前の録音も、それぞれ選べます。</p>
+<div class="pair">
+<figure><figcaption>何年分たまっても、一覧の高さを保つ</figcaption><img loading="lazy" src="screenshots/many-light.png" width="375" height="812" alt="68件の確認用録音一覧を最古の年度までスクロールした表示"></figure>
+<figure class="small"><figcaption>320px · 長い題名も横にはみ出さない</figcaption><img loading="lazy" src="screenshots/long-small-dark.png" width="320" height="568" alt="長い録音名を折り返し、保存ボタンの幅を保つ小さい画面"></figure>
+</div>
+<details><summary>録音の中には、あのころの部員がいる</summary>
+<p>卒業・改名・席替え後も、昔の録音では当時の顔・名前・学年・席を表示。舞台の顔を押すと、その人の音も聴けます。</p>
+<figure><img loading="lazy" src="screenshots/recorded-person-dark.png" width="375" height="812" alt="録音時の3年生の部員カード。今の名簿とは違う当時の名前・席・力を表示"></figure>
+</details>
+<h2>動作確認</h2>
+<p class="note">375pxの4タブ・ライトとダーク、320px、読み込み待ち、同名の録音、1年の進行を確認。採点・成長・セーブ・録音の音は変更していません。iPhone用Releaseビルドは成功。実機は現在接続できないため、インストール確認は残っています。</p>
+<p class="note">確認ページは本物のセーブを書き換えません。録音の書き出し・共有自体は従来の処理を使い、今回のブラウザ確認では書き出し先の選択までを検証しています。</p>
+</main>
+</html>

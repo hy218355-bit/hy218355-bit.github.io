@@ -1,0 +1,52 @@
+[
+  {
+    "status": "fulfilled",
+    "value": {
+      "chunk_id": "5d218c",
+      "wall_time_seconds": 2.05472025,
+      "exit_code": 0,
+      "original_token_count": 56,
+      "output": "個人録音の待機中止・実際の停止・全員や別の本人への切替／古い待機が鳴らない／本番の終了処理を呼ばない／次の音を止めない／部と録音を変えない：確認済み\n"
+    }
+  },
+  {
+    "status": "fulfilled",
+    "value": {
+      "chunk_id": "284c01",
+      "wall_time_seconds": 3.392634667,
+      "exit_code": 0,
+      "original_token_count": 55,
+      "output": "昔の録音・同じidの昔の力から今の本人とパートへ／現在の合奏は止めずに切替／育った後も今の力／停止時の席変更を再確認／部員と録音を変えない：確認済み\n"
+    }
+  },
+  {
+    "status": "fulfilled",
+    "value": {
+      "chunk_id": "1fc4c8",
+      "wall_time_seconds": 3.428743875,
+      "exit_code": 0,
+      "original_token_count": 49,
+      "output": "相談・冬の練習・行事・新体制後の初回再生／範囲と会場の変更直後／連続更新／再生中の録音を保つ／再生でセーブを書き換えない：確認済み\n"
+    }
+  },
+  {
+    "status": "fulfilled",
+    "value": {
+      "chunk_id": "53996c",
+      "wall_time_seconds": 2.409080875,
+      "exit_code": 0,
+      "original_token_count": 61,
+      "output": "前の本人指定を解消／選択と全員と本人の実際の音／チェックと保存を保つ／選び直しと待機中止／古い予約の無効化／自然終了と別の音への切替／0人と本番中の制限：確認済み\n"
+    }
+  },
+  {
+    "status": "fulfilled",
+    "value": {
+      "chunk_id": "5a4cb2",
+      "wall_time_seconds": 0.368107625,
+      "exit_code": 0,
+      "original_token_count": 52,
+      "output": "週を進めたあとの停止で今の音と譜面へ戻る／元の部を変えない／終了の通知は1回／次の本番を上書きしない／終了処理後の最新状態を使う：確認済み\n"
+    }
+  }
+]

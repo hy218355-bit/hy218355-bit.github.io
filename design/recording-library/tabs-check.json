@@ -1,0 +1,235 @@
+{
+  "baseline": {
+    "clientHeight": 268,
+    "focus": "r2027-26-1-339903",
+    "rows": [
+      {
+        "height": 88,
+        "id": "r2027-26-1-339903",
+        "left": 48,
+        "right": 327,
+        "saveHeight": 44,
+        "saveWidth": 44
+      },
+      {
+        "height": 88,
+        "id": "r2026-26-0-790160",
+        "left": 48,
+        "right": 327,
+        "saveHeight": 44,
+        "saveWidth": 44
+      }
+    ],
+    "scrollHeight": 268,
+    "scrollTop": 0,
+    "scrollWidth": 375,
+    "width": 375,
+    "theme": "light",
+    "year": 2031,
+    "week": 10,
+    "state": 0.9919875559862703,
+    "stats": 0.771712013753131,
+    "records": 0.8007528416346759,
+    "library": {
+      "open": true,
+      "selected": "r2027-26-1-339903",
+      "active": "r2027-26-1-339903",
+      "waiting": true,
+      "blocked": false,
+      "saving": null,
+      "years": [
+        "2027年度",
+        "2026年度"
+      ],
+      "rows": [
+        {
+          "id": "r2027-26-1-339903",
+          "active": "true",
+          "label": "2027年 定期演奏会・「歓喜の歌」・県民文化会館を読み込みをやめる",
+          "pressed": "true",
+          "disabled": false,
+          "saveDisabled": false,
+          "faces": [
+            "m2028-n1-cafe",
+            "m2026-n2-f00d",
+            "m2026-n3-f00d"
+          ]
+        },
+        {
+          "id": "r2026-26-0-790160",
+          "active": "false",
+          "label": "2026年 定期演奏会・《新世界より》第2楽章・前半・県民文化会館を聴く",
+          "pressed": "false",
+          "disabled": false,
+          "saveDisabled": false,
+          "faces": [
+            "m2028-n1-cafe",
+            "m2026-n2-f00d",
+            "m2026-n3-f00d"
+          ]
+        }
+      ],
+      "source": [
+        {
+          "id": "r2026-26-0-790160",
+          "label": "2026年 定期演奏会",
+          "year": 2026,
+          "piece": "largo",
+          "venue": "hall",
+          "span": {
+            "from": 0,
+            "to": 32
+          },
+          "count": 39,
+          "faces": [
+            {
+              "id": "m2028-n1-cafe",
+              "name": "田中 七海",
+              "face": 46
+            },
+            {
+              "id": "m2026-n2-f00d",
+              "name": "小川 悠斗",
+              "face": 93
+            },
+            {
+              "id": "m2026-n3-f00d",
+              "name": "松井 颯太",
+              "face": 94
+            }
+          ]
+        },
+        {
+          "id": "r2027-26-1-339903",
+          "label": "2027年 定期演奏会",
+          "year": 2027,
+          "piece": "ode",
+          "venue": "hall",
+          "count": 39,
+          "faces": [
+            {
+              "id": "m2028-n1-cafe",
+              "name": "田中 葵",
+              "face": 46
+            },
+            {
+              "id": "m2026-n2-f00d",
+              "name": "小川 悠斗",
+              "face": 93
+            },
+            {
+              "id": "m2026-n3-f00d",
+              "name": "松井 颯太",
+              "face": 94
+            }
+          ]
+        }
+      ],
+      "expected": 0.9452541864011437,
+      "actual": 0.9452541864011437
+    },
+    "playing": false,
+    "waiting": true,
+    "playback": null,
+    "audible": [],
+    "solo": "all",
+    "shown": "いまの音（6月 第3週・県民文化会館）",
+    "performance": {
+      "expected": 0.6905609536916018,
+      "prepared": 0.6905609536916018,
+      "shown": 0.6905609536916018,
+      "expectedCohesion": 0.2,
+      "preparedCohesion": 0.2,
+      "shownCohesion": 0.2
+    },
+    "boot": {
+      "scripts": 33,
+      "loaded": 33,
+      "failed": [],
+      "errors": []
+    },
+    "errors": []
+  },
+  "tabs": [
+    {
+      "theme": "light",
+      "tab": "week",
+      "width": 375,
+      "scrollWidth": 375,
+      "playing": true,
+      "active": "r2027-26-1-339903",
+      "state": 0.9919875559862703,
+      "errors": []
+    },
+    {
+      "theme": "light",
+      "tab": "play",
+      "width": 375,
+      "scrollWidth": 375,
+      "playing": true,
+      "active": "r2027-26-1-339903",
+      "state": 0.9919875559862703,
+      "errors": []
+    },
+    {
+      "theme": "light",
+      "tab": "members",
+      "width": 375,
+      "scrollWidth": 375,
+      "playing": true,
+      "active": "r2027-26-1-339903",
+      "state": 0.9919875559862703,
+      "errors": []
+    },
+    {
+      "theme": "light",
+      "tab": "log",
+      "width": 375,
+      "scrollWidth": 375,
+      "playing": true,
+      "active": "r2027-26-1-339903",
+      "state": 0.9919875559862703,
+      "errors": []
+    },
+    {
+      "theme": "dark",
+      "tab": "week",
+      "width": 375,
+      "scrollWidth": 375,
+      "playing": true,
+      "active": "r2027-26-1-339903",
+      "state": 0.9919875559862703,
+      "errors": []
+    },
+    {
+      "theme": "dark",
+      "tab": "play",
+      "width": 375,
+      "scrollWidth": 375,
+      "playing": true,
+      "active": "r2027-26-1-339903",
+      "state": 0.9919875559862703,
+      "errors": []
+    },
+    {
+      "theme": "dark",
+      "tab": "members",
+      "width": 375,
+      "scrollWidth": 375,
+      "playing": true,
+      "active": "r2027-26-1-339903",
+      "state": 0.9919875559862703,
+      "errors": []
+    },
+    {
+      "theme": "dark",
+      "tab": "log",
+      "width": 375,
+      "scrollWidth": 375,
+      "playing": true,
+      "active": "r2027-26-1-339903",
+      "state": 0.9919875559862703,
+      "errors": []
+    }
+  ]
+}

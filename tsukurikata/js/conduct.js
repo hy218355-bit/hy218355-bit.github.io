@@ -49,6 +49,7 @@ function openConduct(stage = null){
   cdDrawPattern(-1);
   $('#conduct').hidden = false;
   document.documentElement.classList.add('conducting');
+  renderRecordingLibrary();
   drawStage(-1, $('#cdStage'), CD.who); $('#cdProg').style.width = '0';
   $('#cdPad').focus({preventScroll: true});
   cancelAnimationFrame(CD.raf);
@@ -69,6 +70,7 @@ function openWatch(perf, title){
   $('#conduct').hidden = false;
   document.documentElement.classList.add('conducting');
   drawStage(-1, $('#cdStage'), CD.who); $('#cdProg').style.width = '0';
+  renderRecordingLibrary();
 }
 function closeWatch(){
   if(CD.phase !== 'watch') return;
@@ -79,6 +81,7 @@ function closeWatch(){
   CD.sel = null; $('#cdMember').hidden = true; soloAll();
   $('#conduct').hidden = true; $('#conduct').classList.remove('watch'); $('#cdClose').textContent = 'やめる'; $('#cdEyebrow').textContent = '指揮';
   document.documentElement.classList.remove('conducting');
+  renderRecordingLibrary();
 }
 function closeConduct(){
   // 見ているだけの本番は、止めて結果へ（入場の途中や、課題曲と自由曲のあいだなら、鳴っていないので、そのまま結果へ）
@@ -90,6 +93,7 @@ function closeConduct(){
   if(CD.stage && S.pending && !S.pending.revealed){ CD.stage = null; renderAll(); }
   $('#conduct').hidden = true;
   document.documentElement.classList.remove('conducting');
+  renderRecordingLibrary();
 }
 const cdMsg = s => { $('#cdMsg').textContent = s; };
 
@@ -274,7 +278,7 @@ function cdFinish(natural){
 }
 
 /* ===== 録音の再生（指揮した録音は、そのときの拍の進み方で）と保存 ===== */
-const recPerf = rec => rememberStageMembers(perform({...recCtx(rec), ...(rec.span || {})}),rec.snap.members);
+const recPerf = rec => rememberStageMembers(perform({...recCtx(rec), ...(rec.span || {})}),rec.snap.members,true,rec);
 function playRecording(rec, label, onEnd = null, onWaitCancel = null){
   if(!E.ensure()) return;
   // 前の個人録音を終えてから切り替え、本人だけの指定を次へ残さない。

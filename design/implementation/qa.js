@@ -23,7 +23,9 @@ if(document.readyState==='loading')await new Promise(r=>document.addEventListene
 const q=new URLSearchParams(location.search);let view=q.get('view')||'week';
 document.documentElement.dataset.theme=q.get('theme')==='dark'?'dark':'light';
 U.sfx=false;U.fxMode='off';FX.q=[];clearTimeout(FX.timer);FX.on=false;$('#fx').hidden=true;
-let report,releaseSamples,performanceMemo;
+let report,releaseSamples,performanceMemo,releaseLibraryExport;
+const libraryExpected=new WeakMap();
+if(q.has('exportAudit'))saveRecording=rec=>{report.libraryExport={id:rec.id,label:rec.label,snapshot:hash(JSON.stringify(rec.snap))};return q.has('holdExport')?new Promise(resolve=>{releaseLibraryExport=resolve;}):Promise.resolve();};
 const playbackIds=new WeakMap();let playbackCount=0;
 window.addEventListener('error',e=>{if(report)report.errors.push(e.message);});
 function advance(s){
@@ -71,6 +73,9 @@ function record(){
  report.recordedCard=U.recordMember?{id:U.recordMember.id,name:U.recordMember.name,grade:U.recordMember.grade,seat:U.recordMember.seat,ranks:Object.fromEntries(STAT_KEYS.map(k=>[k,rankOf(U.recordMember.stats[k])]))}:null;
  report.recordedCast=U.stageMembers?Array.from(U.stageMembers,([seat,m])=>({seat,id:m.id,name:m.name,grade:m.grade,ranks:Object.fromEntries(STAT_KEYS.map(k=>[k,rankOf(m.stats[k])]))})):[];
  report.recordings=S.recs.map(r=>({id:r.id,label:r.label}));
+ const libraryActive=activeLibraryRecording(),libraryPerf=U.waitPlay?.perf || (U.playing?U.shown:null);
+ report.library={open:$('#recordingPanel').open,selected:$('#recSel').value,active:libraryActive?.id||null,waiting:!!U.waitPlay,blocked:libraryBlocked(),saving:U.librarySaving||null,years:[...document.querySelectorAll('.recording-year>h3')].map(el=>el.textContent),rows:[...document.querySelectorAll('[data-record-item]')].map(el=>({id:el.dataset.recordItem,active:el.dataset.active,label:el.querySelector('[data-record-play]').getAttribute('aria-label'),pressed:el.querySelector('[data-record-play]').getAttribute('aria-pressed'),disabled:el.querySelector('[data-record-play]').disabled,saveDisabled:el.querySelector('[data-record-save]').disabled,faces:[...el.querySelectorAll('[data-face]')].map(f=>f.dataset.face)})),source:S.recs.map(r=>({id:r.id,label:r.label,year:r.year,piece:r.pieceId,venue:r.venue,span:r.span,count:r.snap.members.length,faces:r.snap.members.slice(0,3).map(m=>({id:m.id,name:m.name,originalName:m.originalName,face:Faces.fingerprint(m)}))}))};
+ if(q.has('libraryAudit')&&libraryActive){if(!libraryExpected.has(libraryActive))libraryExpected.set(libraryActive,hash(JSON.stringify(perform({...recCtx(libraryActive),...(libraryActive.span||{})}))));report.library.expected=libraryExpected.get(libraryActive);report.library.actual=hash(JSON.stringify(libraryPerf));}
  report.listening={shownPiece:U.shown?.pieceId,title:$('#piece').textContent,kind:$('#pieceEyebrow').textContent,range:$('#rangeSel').value,rangeLabel:$('#rangeSel').selectedOptions[0]?.textContent,rangeDisabled:$('#rangeSel').disabled,conductDisabled:$('#btnConduct').disabled,summary:$('#listeningSummary').textContent,engineVenue:E.venueId};
  report.readings=PIECE_IDS.map(id=>({id,level:pieceDifficulty(id),load:readingLoad(id),average:readAvg(S,id)}));
  const stageCanvas=$('#stage'),stageBox=stageCanvas.getBoundingClientRect(),stageMap=stageGeom(Math.max(240,stageBox.width),true);
@@ -164,7 +169,7 @@ async function show(next){
   for(let i=0;i<100&&!s.consult;i++)s=advance(s);
   if(!s.consult)throw Error('相談の見本が作れなかった');
   if(view==='consult-result')s=resolveConsult(s,consultView(s).choices[0].k);
- }else if(['retirement-listen','consult-music','winter-music','outing-music','diag-practice','stage','recorded-history','reading-stage','song-set','song-final','rehearsal','rehearsal-records','rehearsal-a','rehearsal-loading','practice','practice-late','practice-a','practice-care','practice-growth','members','member','member-old','member-bench','grad','grad-old','grad-auto','senior','conduct','announce','announce-silver','announce-bronze','announce-cast','fx','audition','audition-a','audition-decided','audition-long','ensemble'].includes(view)||view.startsWith('prep-')){
+ }else if(['retirement-listen','consult-music','winter-music','outing-music','diag-practice','stage','recorded-history','record-library','reading-stage','song-set','song-final','rehearsal','rehearsal-records','rehearsal-a','rehearsal-loading','practice','practice-late','practice-a','practice-care','practice-growth','members','member','member-old','member-bench','grad','grad-old','grad-auto','senior','conduct','announce','announce-silver','announce-bronze','announce-cast','fx','audition','audition-a','audition-decided','audition-long','ensemble'].includes(view)||view.startsWith('prep-')){
   const ms=fullBand({pitch:68,rhythm:72,tone:64,expr:61}),names=new Set();
   ms.forEach((m,i)=>{m.id='m2028-n'+(i+1)+'-cafe';m.name=makeName(names,'recruit',2028,i+1);m.grade=i%3+1;m.joined=2026;m.joinGrade=1;m.sta=95;m.first={y:2026,w:0,stats:{pitch:15,rhythm:12,tone:18,expr:10}};m.story=[{y:2026,w:0,t:'アルトサックスで入部。'},{y:2027,w:16,t:'はじめての金賞。'},{y:2028,w:26,t:'最後の定期演奏会。'}];});
   s.members=ms;s.year=2028;s.week=10;
@@ -227,7 +232,7 @@ async function show(next){
  }
  if(view==='practice-a'){s.division='A';s.setPiece=setOffer(s)[0];s.split='auto';}
  if(view==='reading-stage')s.pieceId='tell';
- if(view==='recorded-history'){
+ if(view==='recorded-history'||view==='record-library'){
   s.recs=[];const old=clone(s);old.year=2026;old.week=26;old.cohesion=80;
   old.members.forEach((m,i)=>{if(i)m.id='m2026-n'+(i+1)+'-f00d';m.grade=3;m.stats={pitch:80,rhythm:80,tone:80,expr:80};m.fam={galop:100};});
   if(q.has('different')){old.pieceId='largo';old.members.forEach(m=>m.fam={galop:100,largo:100,ode:100});}
@@ -238,6 +243,14 @@ async function show(next){
   s.recs=clone(old.recs);s.year=2031;s.gradMembers=[];
   s=renameMember(s,s.members[0].id,'田中 花音');const other=s.members.find(m=>m.seat==='perc2');other.seat='picc1';s.members[0].seat='perc2';
   if(q.has('a')){s.division='A';s.setPiece='ode';}
+  if(view==='record-library'){
+   if(q.has('many')){const originals=clone(s.recs);s.recs=Array.from({length:68},(_,i)=>{const r=clone(originals[i%2]),year=2023+Math.floor(i/8);return {...r,id:'library-'+i,year,label:year+'年 '+(i%2?'定期演奏会':'合奏の録音')};});}
+   if(q.has('sameLabel'))s.recs.forEach(r=>{r.label='2027年 合奏の録音';r.year=2027;r.pieceId='galop';});
+   if(q.has('longRecord'))s.recs.at(-1).label='2027年 定期演奏会・先輩たちの最後の本番をもう一度聴く';
+   if(q.has('shortRecord'))s.recs.forEach(r=>r.span={from:0,to:.25});
+   if(q.has('oneRecord'))s.recs=s.recs.slice(0,1);
+   if(q.has('noRecord'))s.recs=[];
+  }
  }
  if(view==='song-set'){s.division='A';s.phase='chooseSet';}
  if(view==='song-final'){if(q.has('young'))s.members.forEach(m=>m.grade=1);s=startAutumn(s);s.chooseFinal=true;s.contestPiece='galop';for(const m of s.members)m.fam={galop:[65,65,65]};}
@@ -271,7 +284,7 @@ async function show(next){
  if(q.has('busy')&&view.startsWith('member')){s.week=PREF_WEEK;s=beginStage(s);}
  S=s;U.sel=null;hideTip();renderAll();refreshNow();$('#toast').hidden=true;
  const cardView=view==='member'||view.startsWith('member-');
- setTab(['log','journal','journal-ambiguous','journal-empty'].includes(view)?'log':view==='members'?'members':cardView||view==='diag-practice'||view.startsWith('rehearsal')||['stage','recorded-history','reading-stage','conduct'].includes(view)?'play':'week');
+ setTab(['log','journal','journal-ambiguous','journal-empty'].includes(view)?'log':view==='members'?'members':cardView||view==='diag-practice'||view.startsWith('rehearsal')||['stage','recorded-history','record-library','reading-stage','conduct'].includes(view)?'play':'week');
  if(view==='song-samples')for(const card of document.querySelectorAll('.pcard'))card.hidden=!['largo','galop','tell'].includes(card.querySelector('[data-pid]')?.dataset.pid);
  if(cardView){placeCard('stage');U.sel=s.members[0].id;renderMemberCard();}
  if(['grad','grad-old','grad-auto'].includes(view)){U.fxMode=view==='grad-auto'?'short':'off';S.gradMembers=s.members.filter(m=>m.grade===3);openGradRoll();GR.i=1;grShow();if(view!=='grad-auto')pauseGradRoll();}
@@ -309,6 +322,8 @@ new MutationObserver(()=>setTimeout(record,0)).observe($('#nowPlaying'),{childLi
 for(const event of ['click','submit','change'])$('#memberCard').addEventListener(event,()=>setTimeout(record,0));
 $('#rosterTable').addEventListener('click',()=>setTimeout(record,0));
 for(const event of ['click','keydown','toggle'])$('#diagPractice').addEventListener(event,()=>setTimeout(record,0));
+for(const event of ['click','keydown'])$('#recordingList').addEventListener(event,()=>setTimeout(record,0));
+new MutationObserver(()=>setTimeout(record,0)).observe($('#recordingList'),{childList:true,subtree:true,attributes:true,attributeFilter:['aria-pressed','disabled','data-active']});
 for(const event of ['click','input','change','keydown','compositionend','submit'])$('#rosterFind').addEventListener(event,()=>setTimeout(record,0));
 $('#rosterParts').addEventListener('toggle',()=>setTimeout(record,0));
 $('#tabbar').addEventListener('click',()=>setTimeout(record,0));
@@ -319,6 +334,7 @@ let audioReportT;new MutationObserver(()=>{clearTimeout(audioReportT);audioRepor
 if(q.has('keys'))document.addEventListener('keydown',async e=>{
  if(e.target.matches('input,select,textarea'))return;
  const key=e.key.toLowerCase();
+ if(releaseLibraryExport&&key==='j'){e.preventDefault();const done=releaseLibraryExport;releaseLibraryExport=null;done();setTimeout(record,0);return;}
  if(releaseSamples&&key==='j'){e.preventDefault();releaseSamples();releaseSamples=null;report.loadingReleased=true;setTimeout(record,30);return;}
  if(key==='3'){e.preventDefault();await show('audition-decided');return;}
  if(key==='4'){e.preventDefault();await show('renamed-year');return;}

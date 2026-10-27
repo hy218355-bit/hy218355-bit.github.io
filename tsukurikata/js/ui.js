@@ -122,6 +122,7 @@ function renderPlayButtons(){
   if(moveStop) moveStop.hidden = !on || tabHidden('play');
   renderAuditionListening();
   renderDiagPractice();
+  renderRecordingLibrary();
 }
 
 /* ===== スマホ・タブレット縦：画面下のタブ ===== */
@@ -233,7 +234,7 @@ const seatXY = (s, G) => {
 };
 // 再生する録音そのものの部員情報を、演奏の音やセーブとは別に覚える。
 const STAGE_PERFORMERS = new WeakMap();
-function rememberStageMembers(perf, members, recorded=true){ STAGE_PERFORMERS.set(perf,{members:members || [],recorded}); return perf; }
+function rememberStageMembers(perf, members, recorded=true, record=null){ STAGE_PERFORMERS.set(perf,{members:members || [],recorded,record}); return perf; }
 function recordingPlayback(){ return !!(U.playing && U.shown && STAGE_PERFORMERS.get(U.shown)?.recorded); }
 function recordedRangeLabel(perf){
   const pc=PIECES[perf.pieceId];
@@ -563,10 +564,73 @@ function renderSelectors(){
   $('#viewSel').innerHTML = `<option value="mel">旋律を吹いている部員</option>` + SECTIONS.map(s => `<option value="${s.id}">${s.name}パート</option>`).join('');
   $('#viewSel').value = U.view;
   renderListeningSummary();
+  renderRecordingLibrary();
 }
 function applySolo(){
   const [type, id] = U.solo.split(':');
   E.setSolo(type === 'all' ? {type: 'all'} : {type: type === 'sec' ? 'sec' : 'member', id});
+}
+// 録音の参照は演奏の外に持ち、同じ題名の別の録音でも取り違えない。
+function activeLibraryRecording(){
+  const perf=U.waitPlay?.perf || (U.playing?U.shown:null);
+  return perf?STAGE_PERFORMERS.get(perf)?.record:null;
+}
+const libraryBlocked=()=>busy() || CD.phase!=='idle';
+function recordingRangeNote(rec){
+  if(!rec.span)return '';
+  const pc=PIECES[rec.pieceId],from=rec.span.from??0,to=rec.span.to??pc.beats;
+  if(from===0 && to===pc.beats)return '';
+  const span=pc.spans.find(s=>Math.abs(s.from-from)<1e-6&&Math.abs(s.to-to)<1e-6);
+  return span?spanShort(span):'録音の範囲';
+}
+function renderRecordingLibrary(){
+  const list=$('#recordingList');if(!list || !S)return;
+  const recs=S.recs.slice().reverse(),seed=String(S.recruitSeed||0),active=activeLibraryRecording(),perf=U.waitPlay?.perf || (U.playing?U.shown:null);
+  $('#btnLiveNow').hidden=!active;$('#btnConduct').hidden=!!active;
+  if(U.librarySeed!==seed){U.librarySeed=seed;U.libraryKey=null;U.libraryPerf=null;list.scrollTop=0;}
+  if(active && perf!==U.libraryPerf && recs.some(r=>r.id===active.id))$('#recSel').value=active.id;
+  U.libraryPerf=perf;
+  const key=JSON.stringify(recs.map(r=>[r.id,r.label,r.year,r.pieceId,r.venue,r.span,r.snap?.members?.length,(r.snap?.members||[]).slice(0,3).map(m=>[m.id,m.name,m.originalName])]));
+  if(U.libraryKey!==key){
+    const top=list.scrollTop,years=new Map();
+    for(const r of recs){const y=Number.isFinite(Number(r.year))?String(r.year):'';if(!years.has(y))years.set(y,[]);years.get(y).push(r);}
+    list.innerHTML=[...years].sort(([a],[b])=>Number(b)-Number(a)).map(([y,rs])=>`<section class="recording-year"><h3>${y?`${esc(y)}年度`:'録音'}</h3>${rs.map(r=>{
+      const title=String(r.label||'').replace(new RegExp(`^${Number(r.year)}年?(?:度)?\\s+`),'')||PIECES[r.pieceId].title,people=r.snap?.members||[],range=recordingRangeNote(r),song=PIECES[r.pieceId].title+(range?'・'+range:''),venue=VENUE[r.venue]?.name||'';
+      const label=`${r.label}・${song}${venue?'・'+venue:''}`;
+      return `<div class="recording-item" data-record-item="${esc(r.id)}"><button class="recording-play" type="button" data-record-play="${esc(r.id)}" data-record-label="${esc(label)}" aria-pressed="false"><span class="recording-copy"><b>${esc(title)}</b><small class="recording-song">${esc(song)}</small><span class="recording-meta"><small>${esc(venue)}${people.length?'・'+people.length+'人':''}</small><span class="recording-faces" aria-hidden="true">${people.slice(0,3).map(m=>memberFace(m,20)).join('')}</span></span></span><span class="recording-state" aria-hidden="true">${uiIcon('play')}</span></button><button class="recording-save" type="button" data-record-save="${esc(r.id)}" aria-label="${esc(label)}を保存" title="保存">${uiIcon('download')}</button></div>`;
+    }).join('')}</section>`).join('') || '<p class="small recording-empty">録音はまだない</p>';
+    U.libraryKey=key;list.scrollTop=top;
+  }
+  const blocked=libraryBlocked();
+  for(const b of list.querySelectorAll('[data-record-play]')){
+    const on=active?.id===b.dataset.recordPlay,state=String(on);
+    if(b.getAttribute('aria-pressed')!==state){b.setAttribute('aria-pressed',state);b.querySelector('.recording-state').innerHTML=uiIcon(on?'stop':'play');}
+    const row=b.closest('.recording-item');if(row.dataset.active!==state)row.dataset.active=state;
+    if(b.disabled!==blocked)b.disabled=blocked;
+    const label=`${b.dataset.recordLabel}を${on?(U.waitPlay?'読み込みをやめる':'止める'):'聴く'}`;
+    if(b.getAttribute('aria-label')!==label)b.setAttribute('aria-label',label);
+  }
+  const saving=blocked || !!U.saving || !!U.librarySaving;
+  for(const b of list.querySelectorAll('[data-record-save]'))if(b.disabled!==saving)b.disabled=saving;
+}
+// 一覧の再生は全員の音から。別の本人だけの指定や、前の読み込み待ちは残さない。
+function listenLibraryRecording(id){
+  if(libraryBlocked())return;
+  const rec=S.recs.find(r=>r.id===id);if(!rec)return;
+  $('#recSel').value=id;
+  if(activeLibraryRecording()?.id===id){stopPlay();return;}
+  stopPlay();U.solo='all';U.sel=null;U.recordMember=null;U.recordPerf=null;U.cardReturn=null;
+  applySolo();renderSelectors();renderMemberCard();renderRoster();playRec(id);
+}
+async function saveLibraryRecording(id){
+  if(libraryBlocked() || U.saving || U.librarySaving)return;
+  const rec=S.recs.find(r=>r.id===id);if(!rec)return;
+  const origin=document.activeElement;
+  $('#recSel').value=id;U.librarySaving=id;renderRecordingLibrary();
+  try{await saveRecording(rec);}finally{
+    U.librarySaving=null;renderRecordingLibrary();
+    if(document.activeElement===document.body && origin?.isConnected && !origin.disabled && $('#recordingPanel').open && !tabHidden('play'))origin.focus({preventScroll:true});
+  }
 }
 
 /* ===== ホワイトボード ===== */
@@ -2190,6 +2254,20 @@ function playRec(id){
   playRecording(rec, `${rec.label}（${VENUE[rec.venue].name}で録音）`);
 }
 function bind(){
+  $('#recordingList').addEventListener('click',e=>{
+    const b=e.target.closest('button');if(!b || b.disabled)return;
+    if(b.dataset.recordPlay)listenLibraryRecording(b.dataset.recordPlay);
+    else if(b.dataset.recordSave)saveLibraryRecording(b.dataset.recordSave);
+  });
+  $('#recordingPanel').addEventListener('toggle',e=>{
+    if(!e.target.open)return;
+    const list=$('#recordingList'),id=activeLibraryRecording()?.id || $('#recSel').value,row=[...list.querySelectorAll('[data-record-item]')].find(el=>el.dataset.recordItem===id);
+    if(row)list.scrollTop+=row.getBoundingClientRect().top-list.getBoundingClientRect().top-30;
+    if(narrow.matches)e.target.scrollIntoView({block:'start',behavior:!fxCalm()&&U.fxMode==='full'?'smooth':'auto'});
+  });
+  $('#recordingPanel').addEventListener('keydown',e=>{
+    const panel=$('#recordingPanel');if(e.key==='Escape' && panel.open && $('#tip').hidden){e.preventDefault();panel.open=false;panel.querySelector('summary').focus({preventScroll:true});}
+  });
   $('#diagPractice').addEventListener('toggle',e=>{
     const state=U.diagPractice;if(!state || !diagPracticeView())return;
     if(e.target.open && narrow.matches)e.target.scrollIntoView({block:'start',behavior:!fxCalm()&&U.fxMode==='full'?'smooth':'auto'});
@@ -2202,7 +2280,7 @@ function bind(){
   $('#diagPractice').addEventListener('keydown',e=>{
     const el=$('#diagPractice');if(e.key==='Escape' && el.open && $('#tip').hidden){e.preventDefault();el.open=false;el.querySelector('summary').focus({preventScroll:true});}
   });
-  for(const [id, icon, label] of [['btnNow','play','いまの音で合奏'],['btnStop','stop','止める'],['btnConduct','conduct','指揮する'],['btnRec','play','聴く'],['btnSave','download','保存']]) $('#'+id).innerHTML = uiIcon(icon) + label;
+  for(const [id, icon, label] of [['btnNow','play','いまの音で合奏'],['btnStop','stop','止める'],['btnLiveNow','play','いまの音'],['btnConduct','conduct','指揮する'],['btnRec','play','聴く'],['btnSave','download','保存']]) $('#'+id).innerHTML = uiIcon(icon) + label;
   $('#rollPanel').addEventListener('toggle', e => { if(e.target.open) drawRoll(U.shown, U.playing ? E.now() : -1); });
   $('#btnNow').addEventListener('click', () => {
     // すぐ再生したときは、予約した作り直しをここで行い、同じ音を二度作らない。
@@ -2210,7 +2288,11 @@ function bind(){
     if(!U.perfNow){ U.perfNow = currentPerformance(); U.diag = analyze(U.perfNow); renderDiag(); }
     playPerf(U.perfNow, nowLabel());
   });
-  $('#btnRec').addEventListener('click', () => playRec($('#recSel').value));
+  $('#btnLiveNow').addEventListener('click',()=>{
+    if(libraryBlocked())return;
+    stopPlay();soloAll();clearRecordedMember();$('#btnNow').click();
+  });
+  $('#btnRec').addEventListener('click', () => listenLibraryRecording($('#recSel').value));
   $('#btnStop').addEventListener('click', stopPlay);
   $('#grNext').addEventListener('click', e => { e.stopPropagation(); grNext(); });
   $('#grCard').addEventListener('click', e => { const b=e.target.closest('[data-grad-member]');if(b)grSelect(b.dataset.gradMember); });

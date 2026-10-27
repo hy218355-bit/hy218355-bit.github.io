@@ -25,6 +25,7 @@ const E={solo:{type:'all'},pb:null,ensure:()=>true,unlock(){},setSolo(s){this.so
  this.pb={perf};plays.push({perf,solo:{...this.solo}});return this.pb;
 }};
 const tabHidden=()=>true,clearRecordedMember=()=>{},updateMini=()=>{},renderPiece=()=>{},drawIdle=()=>{},renderSelectors=()=>{},updatePred=()=>{};
+const renderDiagPractice=()=>{},renderRecordingLibrary=()=>{};
 const setNowPlaying=()=>renderPlayButtons(),refreshNow=()=>{U.perfNow=null;},setVenue=id=>{U.venue=id;};
 const uiIcon=name=>'<svg>'+name+'</svg>',memberById=id=>S.members.find(m=>m.id===id),busy=()=>!!(S.pending&&!S.pending.revealed);
 function fresh(ready=true){

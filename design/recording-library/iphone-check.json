@@ -1,0 +1,32 @@
+{
+  "releaseBuild": "succeeded",
+  "bundleHashes": [
+    {
+      "file": "index.html",
+      "local": "4c71be83c0203cdb12cd78905477329ddb2bb0d4c73cbf261f4cf78c360f5eae",
+      "bundle": "4c71be83c0203cdb12cd78905477329ddb2bb0d4c73cbf261f4cf78c360f5eae",
+      "match": true
+    },
+    {
+      "file": "js/ui.js",
+      "local": "ed510d09432563679bedb80c8b1d6ae070e17128222ce1d8603be2d3b7ff1439",
+      "bundle": "ed510d09432563679bedb80c8b1d6ae070e17128222ce1d8603be2d3b7ff1439",
+      "match": true
+    },
+    {
+      "file": "js/conduct.js",
+      "local": "16010779283d02b27da6fb84e4413b5ab48ca346f36783510c80b883884b0a4d",
+      "bundle": "16010779283d02b27da6fb84e4413b5ab48ca346f36783510c80b883884b0a4d",
+      "match": true
+    }
+  ],
+  "devices": [
+    {
+      "model": "iPhone 17",
+      "reality": "physical",
+      "state": "unavailable",
+      "ddiServicesAvailable": false
+    }
+  ],
+  "installation": "not-attempted-unavailable"
+}

@@ -1447,6 +1447,17 @@ button.wr-person:focus-visible{outline:2px solid var(--brass);outline-offset:2px
 .play-detail .recrow{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:12px}
 .play-detail .recrow select{grid-column:1/-1;width:100%;min-width:0;min-height:48px;font-size:16px}
 .play-detail .recrow .btn{min-height:44px;font-size:12px}
+.recording-list{position:relative;display:grid;gap:8px;max-height:min(320px,max(128px,calc(100dvh - 300px)));overflow:auto;overscroll-behavior:contain;padding:0 2px 10px;scroll-padding-top:30px}
+.recording-year{min-width:0}.recording-year>h3{position:sticky;top:0;z-index:1;display:flex;align-items:center;min-height:30px;margin:0;background:var(--sheet);color:var(--ink-soft);font:13px var(--f-lcd)}
+.recording-item{display:grid;grid-template-columns:minmax(0,1fr) 44px;gap:5px;min-width:0;margin-bottom:7px;border:1px solid var(--rule);border-radius:9px;background:var(--paper)}
+.recording-play{display:grid;grid-template-columns:minmax(0,1fr) 20px;align-items:center;gap:7px;min-width:0;min-height:84px;padding:10px 4px 10px 10px;border:0;background:transparent;color:var(--ink);font:13px var(--f-body);text-align:left;cursor:pointer}
+.recording-copy{display:grid;gap:5px;min-width:0}.recording-copy>b{font-size:13px;line-height:1.5;overflow-wrap:anywhere}.recording-song{font-size:11px;line-height:1.5;color:var(--ink-soft);overflow-wrap:anywhere}
+.recording-meta{display:flex;align-items:center;flex-wrap:wrap;gap:5px 8px;min-width:0}.recording-meta>small{font-size:10px;color:var(--ink-soft);overflow-wrap:anywhere}.recording-faces{display:flex;gap:3px;margin-left:auto}.recording-faces>.member-face{border-radius:50%}
+.recording-state{display:grid;place-items:center;color:var(--brass)}.recording-state>.ui-icon{width:20px;height:20px}
+.recording-save{display:grid;place-items:center;align-self:center;width:44px;min-height:44px;border:0;border-left:1px solid var(--rule);background:transparent;color:var(--ink-soft);cursor:pointer}.recording-save>.ui-icon{width:18px;height:18px}
+.recording-item[data-active="true"]{border-color:var(--brass);box-shadow:inset 0 0 0 1px var(--brass);background:var(--brass-soft)}
+.recording-item button:disabled{opacity:.45;cursor:default}.recording-item button:focus-visible{outline:2px solid var(--brass);outline-offset:-2px;border-radius:7px}.recording-empty{margin:10px 0}
+#recordingPanel{scroll-margin-top:14px}
 .play-detail .options{margin:0 0 12px;gap:10px}
 .play-detail .options label{font-size:12px}
 .play-detail select{min-width:0;max-width:100%;min-height:44px;font-size:16px}
@@ -1509,10 +1520,11 @@ button.wr-person:focus-visible{outline:2px solid var(--brass);outline-offset:2px
         <div class="transport rehearsal-actions">
           <button class="btn primary" id="btnNow" type="button">▶ いまの音で合奏</button>
           <button class="btn quiet" id="btnStop" type="button" hidden>■ 止める</button>
+          <button class="btn brass" id="btnLiveNow" type="button" aria-label="いまの部員の音を聴く" hidden>いまの音</button>
           <button class="btn brass" id="btnConduct" type="button">指揮する</button>
         </div>
         <p class="now-playing"><span id="nowPlaying" aria-live="polite"></span> <span id="sndStatus" aria-live="polite"></span></p>
-        <details class="play-detail" id="recordingPanel"><summary><b>録音を聴く</b><small id="recordingCount"></small></summary><div class="recrow">
+        <details class="play-detail" id="recordingPanel"><summary><b>録音を聴く</b><small id="recordingCount"></small></summary><div class="recording-list" id="recordingList"></div><div class="recrow" hidden>
           <select id="recSel" aria-label="録音を選ぶ"></select>
           <button class="btn small" id="btnRec" type="button">▶ 聴く</button>
           <button class="btn small" id="btnSave" type="button" title="会場の響きつきで音声ファイルに書き出す">⤓ 保存</button>
@@ -1687,11 +1699,11 @@ button.wr-person:focus-visible{outline:2px solid var(--brass);outline-offset:2px
 <script src="js/band.js?v=reading-difficulty-1"></script>
 <script src="js/game.js?v=first-year-audit-1"></script>
 <script src="js/engine.js"></script>
-<script src="js/conduct.js?v=member-record-stop-1"></script>
+<script src="js/conduct.js?v=recording-library-1"></script>
 <script src="js/announce.js?v=result-journal-1"></script>
 <script src="js/tunegame.js"></script>
 <script src="js/fx.js"></script>
-<script src="js/ui.js?v=diagnosis-practice-1"></script>
+<script src="js/ui.js?v=recording-library-1"></script>
 <div class="tip" id="tip" role="tooltip" hidden></div>
 </body>
 </html>
