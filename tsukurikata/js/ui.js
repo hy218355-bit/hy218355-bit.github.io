@@ -304,7 +304,7 @@ function drawStage(t = -1, cv = $('#stage'), who = null){
 
   const viewSec = main && U.view !== 'mel' ? U.view : null;
   const sel = main ? U.recordMember || (U.sel && memberById(U.sel)) : CD.sel && memberById(CD.sel);
-  let portraits=0;
+  let portraits=0,focus=null;
   for(const s of SEATS){
     const [x, y] = seatXY(s, G);
     const cast=main ? (t>=0 ? U.stageMembers : null) : CD.stageMembers;
@@ -332,13 +332,24 @@ function drawStage(t = -1, cv = $('#stage'), who = null){
       g.setLineDash([3, 3]); g.strokeStyle = C.soft; g.lineWidth = 1.2;
       g.beginPath(); g.arc(x, y, G.r - 1, 0, Math.PI * 2); g.stroke(); g.setLineDash([]);
     }
-    if(sel && sel.seat === s.id){
-      g.strokeStyle = C.ink; g.lineWidth = 3; g.globalAlpha = 1;
-      g.beginPath(); g.arc(x, y, G.r + 3.5, 0, Math.PI * 2); g.stroke();
-    }
+    if(m && sel?.id === m.id)focus={s,m,x,y};
     drawInstrument(g,s.inst,x,y+G.r+11,18,m?C.ink:C.soft);
     g.globalAlpha = 1;
   }
+  // 選んだ本人を最後に重ね、輪と楽器の背景を周りの描画で隠さない。
+  if(focus){
+    const {s,m,x,y}=focus,r=Math.min(G.r+1.5,14);
+    g.fillStyle=C.sheet;g.beginPath();g.arc(x,y,r+3,0,Math.PI*2);g.fill();
+    g.fillStyle=skillColor(C,avgStats(m));g.beginPath();g.arc(x,y,r,0,Math.PI*2);g.fill();
+    Faces.draw(g,m,x,y,r*2-2);
+    g.strokeStyle=skillColor(C,avgStats(m));g.lineWidth=2;g.beginPath();g.arc(x,y,r,0,Math.PI*2);g.stroke();
+    if(m.grade===1){g.strokeStyle=C.sheet;g.lineWidth=1;g.beginPath();g.arc(x,y,r-1.7,0,Math.PI*2);g.stroke();}
+    g.strokeStyle=C.ink;g.lineWidth=1.5;g.beginPath();g.arc(x,y,r+2.5,0,Math.PI*2);g.stroke();
+    g.fillStyle=C.ink;rrect(g,x-13,y+G.r+2.5,26,17,5);g.fill();
+    drawInstrument(g,s.inst,x,y+G.r+11,15,C.sheet);
+  }
+  const selected=focus?.m.id||'';
+  if(cv.dataset.selectedMember!==selected)cv.dataset.selectedMember=selected;
   if(cv.dataset.portraitCount!==String(portraits))cv.dataset.portraitCount=String(portraits);
 }
 function seatAt(ev, cv = $('#stage')){
@@ -348,8 +359,8 @@ function seatAt(ev, cv = $('#stage')){
   let best = null, bd = Infinity;
   for(const s of SEATS){
     const [x, y] = seatXY(s, G);
-    // 顔を小さくしても押せる範囲を保ち、楽器の絵を押しても同じ部員を開く。
-    const d = Math.hypot(x - px, y + (G.portraits?8:0) - py);
+    // 顔と楽器の中間から測り、楽器の背景の下端でも下の列の人を選ばない。
+    const d = Math.hypot(x - px, y + (G.portraits?(G.r+11)/2:0) - py);
     if(d < bd){ bd = d; best = s; }
   }
   return bd < (G.portraits?Math.max(24,G.r+13):G.r*1.6) ? best : null;

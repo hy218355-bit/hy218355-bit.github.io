@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="ja">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="color-scheme" content="light dark">
+<title>舞台の、どの子を見ているか</title>
+<style>
+:root{--paper:#f2efe7;--sheet:#fffdf8;--ink:#26383e;--soft:#626d6d;--rule:#d4d0c6;--gold:#8c6e35;color-scheme:light dark}*{box-sizing:border-box}body{margin:0;background:var(--paper);color:var(--ink);font:15px/1.9 system-ui,sans-serif}main{max-width:880px;margin:auto;padding:38px 22px 60px}h1{font-size:clamp(23px,5vw,32px);line-height:1.5;margin:8px 0 18px}h2{font-size:19px;margin-top:38px}p{max-width:680px}a{color:var(--gold);text-underline-offset:4px}.tag,.note,figcaption{font-size:13px;color:var(--soft)}.actions{display:flex;flex-wrap:wrap;gap:12px;margin:25px 0 32px}.actions a{padding:9px 16px;border:1px solid var(--rule);border-radius:9px;background:var(--sheet)}.pair{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:22px;margin:26px 0 40px}figure{min-width:0;margin:0}figcaption{margin-bottom:10px}img{display:block;max-width:375px;width:100%;height:auto;border:1px solid var(--rule);border-radius:14px}details{margin-top:30px;border-top:1px solid var(--rule);padding-top:16px}summary{cursor:pointer}a:focus-visible,summary:focus-visible{outline:2px solid var(--gold);outline-offset:4px}
+@media(prefers-color-scheme:dark){:root{--paper:#15252d;--sheet:#20353e;--ink:#ede9dd;--soft:#b1bbb9;--rule:#47565a;--gold:#d7b777}}
+@media(max-width:560px){main{padding:26px 16px 48px}.pair{grid-template-columns:1fr;gap:28px}figure{max-width:375px;margin-inline:auto}}
+</style>
+<main>
+<div class="tag">吹奏楽部のつくりかた · 舞台の改善</div>
+<h1>舞台の、どの子を見ているか。</h1>
+<p>選んだ顔を少し大きく、楽器の印にも背景を。部員カードと舞台の席を見比べやすくしました。</p>
+<nav class="actions" aria-label="確認ページ"><a href="../implementation/qa.html?view=member&amp;theme=light&amp;keys=1">ライトで試す</a><a href="../implementation/qa.html?view=member&amp;theme=dark&amp;keys=1">ダークで試す</a><a href="README.md">確認記録</a></nav>
+<div class="pair">
+<figure><figcaption>375px · ライト</figcaption><img src="screenshots/selected-light.png" width="375" height="812" alt="選択中の顔を少し大きくし、楽器に濃い背景を付けた舞台のライト表示"></figure>
+<figure><figcaption>375px · ダーク</figcaption><img src="screenshots/selected-dark.png" width="375" height="812" alt="ダーク表示では明るい楽器の背景で選択位置を見つけやすくした舞台"></figure>
+</div>
+<h2>顔でも、楽器でも、同じ本人へ。</h2>
+<p>楽器の背景の下端で、下の列の部員を選んでしまう境界も修正。39席すべてで、顔と楽器の下端から同じ本人を開けることを確認しました。</p>
+<div class="pair">
+<figure><figcaption>端の席も、選んだ楽器を見つけやすい</figcaption><img loading="lazy" src="screenshots/edge-dark.png" width="375" height="812" alt="右端の打楽器の顔と楽器を強調し、本人の部員カードを開いた画面"></figure>
+<figure><figcaption>昔の録音では、あのころの本人を</figcaption><img loading="lazy" src="screenshots/recorded-dark.png" width="375" height="812" alt="改名・席替え前の録音の本人を舞台で選んだ表示"></figure>
+</div>
+<details><summary>本番と、小さい画面でも</summary><div class="pair"><figure><figcaption>本番の舞台でも、本人とカードがつながる</figcaption><img loading="lazy" src="screenshots/watch-dark.png" width="375" height="812" alt="本番の舞台で選んだ本人の顔と楽器を強調した表示"></figure><figure><figcaption>320px · 端の席も表示</figcaption><img loading="lazy" src="screenshots/small-edge-light.png" width="320" height="568" alt="320px幅で端の打楽器を選んだ舞台"></figure></div></details>
+<p class="note">375px両テーマ・4タブ、320px、昔の録音、本番表示を確認。席の位置・力の色・音・採点・成長・保存は変更していません。iPhone用Releaseビルド成功。実機は現在接続できず、実機表示は未確認です。</p>
+</main>
+</html>

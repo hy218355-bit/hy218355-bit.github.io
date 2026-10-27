@@ -17,6 +17,7 @@ for(const W of [240,309,343,720]){
   const cv={id:'stage',getBoundingClientRect:()=>({left:10,top:20,width:W})};
   if(seatAt({clientX:x+10,clientY:y+20},cv)?.id!==s.id)throw Error('顔とタップの席が違う');
   if(seatAt({clientX:x+10,clientY:y+G.r+11+20},cv)?.id!==s.id)throw Error('楽器とタップの席が違う: '+s.id);
+  for(const dx of [-8,0,8])if(seatAt({clientX:x+dx+10,clientY:y+G.r+19+20},cv)?.id!==s.id)throw Error('楽器の背景の下端で別の部員を開いた: '+W+' '+s.id);
   if(y+G.r+20>G.H)throw Error('楽器が舞台の外: '+s.id);
  }
  for(let i=0;i<points.length;i++)for(let j=i+1;j<points.length;j++)if(Math.hypot(points[i][1][0]-points[j][1][0],points[i][1][1]-points[j][1][1])<G.r*2+1.5)throw Error('顔が重なる: '+W);

@@ -1,0 +1,29 @@
+{
+  "relatedListeningChecks": [
+    {
+      "status": "fulfilled",
+      "value": {
+        "chunk_id": "07f507",
+        "wall_time_seconds": 2.993163125,
+        "exit_code": 0,
+        "original_token_count": 55,
+        "output": "昔の録音・同じidの昔の力から今の本人とパートへ／現在の合奏は止めずに切替／育った後も今の力／停止時の席変更を再確認／部員と録音を変えない：確認済み\n"
+      }
+    },
+    {
+      "status": "fulfilled",
+      "value": {
+        "chunk_id": "adc702",
+        "wall_time_seconds": 1.756026167,
+        "exit_code": 0,
+        "original_token_count": 56,
+        "output": "個人録音の待機中止・実際の停止・全員や別の本人への切替／古い待機が鳴らない／本番の終了処理を呼ばない／次の音を止めない／部と録音を変えない：確認済み\n"
+      }
+    }
+  ],
+  "stageFaces": {
+    "command": "node tsukurikata/tools/check_stage_faces.js",
+    "exitCode": 0,
+    "scope": "240〜720pxの顔と楽器のタップ、背景の下端3点、録音の本人、100人の画像再利用"
+  }
+}

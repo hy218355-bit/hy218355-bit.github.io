@@ -60,6 +60,7 @@ function record(){
  report.theme=document.documentElement.dataset.theme;report.width=innerWidth;report.scrollWidth=document.documentElement.scrollWidth;
  report.faceCount=document.querySelectorAll('.member-face').length;
  report.stagePortraits=Number($('#stage').dataset.portraitCount||0);report.watchPortraits=Number($('#cdStage').dataset.portraitCount||0);
+ report.stageSelected=$('#stage').dataset.selectedMember||null;report.watchSelected=$('#cdStage').dataset.selectedMember||null;
  report.stageCache=Faces.stageCacheSize();
  report.shownMatchesPrepared=!!U.shown&&U.shown===U.perfNow;
  report.playing=U.playing;report.waiting=!!U.waitPlay;report.shownLabel=U.shownLabel;report.range=U.range;report.solo=U.solo;report.piece=playPiece();report.venue=U.venue;
@@ -80,6 +81,8 @@ function record(){
  report.readings=PIECE_IDS.map(id=>({id,level:pieceDifficulty(id),load:readingLoad(id),average:readAvg(S,id)}));
  const stageCanvas=$('#stage'),stageBox=stageCanvas.getBoundingClientRect(),stageMap=stageGeom(Math.max(240,stageBox.width),true);
  report.stageSeats=SEATS.map(s=>({id:s.id,point:seatXY(s,stageMap),member:S.members.find(m=>m.seat===s.id)?.id}));
+ const watchBox=$('#cdStage').getBoundingClientRect(),watchMap=stageGeom(Math.max(240,watchBox.width),true);
+ report.watchSeats=SEATS.map(s=>({id:s.id,point:seatXY(s,watchMap),member:CD.stageMembers?.get(s.id)?.id||null}));
  report.gradIndex=GR.i;report.gradAuto=Boolean(GR.timer);
  report.gradMotion=$('#gradRoll').dataset.motion;report.reducedMotion=fxCalm();
  report.graduateIds=GR.ids;report.gradOpen=!$('#gradRoll').hidden;
