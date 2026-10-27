@@ -1,0 +1,5018 @@
+[
+  {
+    "tab": "今週",
+    "view": "diag-practice",
+    "width": 375,
+    "scrollWidth": 375,
+    "theme": "light",
+    "year": 2028,
+    "week": 8,
+    "state": 0.8122529918327928,
+    "stats": 0.9732121941633523,
+    "records": 0.018823215970769525,
+    "plan": {},
+    "diag": {
+      "visible": true,
+      "open": true,
+      "topic": "tone",
+      "key": "2870353080:2028:8:galop",
+      "back": null,
+      "diagnosis": 0.13752670190297067,
+      "pid": "galop",
+      "selectedPiece": "galop",
+      "tab": "week",
+      "rows": [
+        {
+          "id": "m2028-n16-cafe",
+          "label": "野口 陽翔 音色 F、今週の練習を見る",
+          "rank": "F",
+          "face": "m2028-n16-cafe"
+        },
+        {
+          "id": "m2028-n36-cafe",
+          "label": "佐藤 誠 音色 F、今週の練習を見る",
+          "rank": "F",
+          "face": "m2028-n36-cafe"
+        },
+        {
+          "id": "m2028-n3-cafe",
+          "label": "松井 颯太 音色 F、今週の練習を見る",
+          "rank": "F",
+          "face": "m2028-n3-cafe"
+        }
+      ],
+      "source": [
+        {
+          "id": "m2028-n1-cafe",
+          "name": "田中 七海",
+          "seat": "picc1",
+          "out": false,
+          "stats": {
+            "pitch": 15,
+            "rhythm": 53,
+            "tone": 70,
+            "expr": 46
+          },
+          "reading": 0
+        },
+        {
+          "id": "m2028-n2-cafe",
+          "name": "小川 悠斗",
+          "seat": "fl1a",
+          "out": true,
+          "stats": {
+            "pitch": 22,
+            "rhythm": 64,
+            "tone": 79,
+            "expr": 59
+          },
+          "reading": 2.5
+        },
+        {
+          "id": "m2028-n3-cafe",
+          "name": "松井 颯太",
+          "seat": "fl1b",
+          "out": false,
+          "stats": {
+            "pitch": 29,
+            "rhythm": 75,
+            "tone": 28,
+            "expr": 72
+          },
+          "reading": 5
+        },
+        {
+          "id": "m2028-n4-cafe",
+          "name": "菅原 菜月",
+          "seat": "fl2a",
+          "out": false,
+          "stats": {
+            "pitch": 36,
+            "rhythm": 21,
+            "tone": 37,
+            "expr": 20
+          },
+          "reading": 7.5
+        },
+        {
+          "id": "m2028-n5-cafe",
+          "name": "岡本 智也",
+          "seat": "ob1",
+          "out": false,
+          "stats": {
+            "pitch": 43,
+            "rhythm": 32,
+            "tone": 46,
+            "expr": 33
+          },
+          "reading": 10
+        },
+        {
+          "id": "m2028-n6-cafe",
+          "name": "山口 大翔",
+          "seat": "cl1a",
+          "out": false,
+          "stats": {
+            "pitch": 50,
+            "rhythm": 43,
+            "tone": 55,
+            "expr": 46
+          },
+          "reading": 12.5
+        },
+        {
+          "id": "m2028-n7-cafe",
+          "name": "山下 彩花",
+          "seat": "cl1b",
+          "out": false,
+          "stats": {
+            "pitch": 57,
+            "rhythm": 54,
+            "tone": 64,
+            "expr": 59
+          },
+          "reading": 15
+        },
+        {
+          "id": "m2028-n8-cafe",
+          "name": "高木 瑛太",
+          "seat": "cl1c",
+          "out": false,
+          "stats": {
+            "pitch": 64,
+            "rhythm": 65,
+            "tone": 73,
+            "expr": 72
+          },
+          "reading": 17.5
+        },
+        {
+          "id": "m2028-n9-cafe",
+          "name": "清水 菜月",
+          "seat": "asax1",
+          "out": false,
+          "stats": {
+            "pitch": 71,
+            "rhythm": 76,
+            "tone": 82,
+            "expr": 20
+          },
+          "reading": 20
+        },
+        {
+          "id": "m2028-n10-cafe",
+          "name": "山本 凛",
+          "seat": "asax2",
+          "out": false,
+          "stats": {
+            "pitch": 78,
+            "rhythm": 22,
+            "tone": 31,
+            "expr": 33
+          },
+          "reading": 22.5
+        },
+        {
+          "id": "m2028-n11-cafe",
+          "name": "山田 悠真",
+          "seat": "fg1",
+          "out": false,
+          "stats": {
+            "pitch": 15,
+            "rhythm": 33,
+            "tone": 40,
+            "expr": 46
+          },
+          "reading": 25
+        },
+        {
+          "id": "m2028-n12-cafe",
+          "name": "西村 樹",
+          "seat": "ebcl1",
+          "out": false,
+          "stats": {
+            "pitch": 22,
+            "rhythm": 44,
+            "tone": 49,
+            "expr": 59
+          },
+          "reading": 27.5
+        },
+        {
+          "id": "m2028-n13-cafe",
+          "name": "松井 美咲",
+          "seat": "cl2a",
+          "out": false,
+          "stats": {
+            "pitch": 29,
+            "rhythm": 55,
+            "tone": 58,
+            "expr": 72
+          },
+          "reading": 30
+        },
+        {
+          "id": "m2028-n14-cafe",
+          "name": "阿部 和奏",
+          "seat": "cl2b",
+          "out": false,
+          "stats": {
+            "pitch": 36,
+            "rhythm": 66,
+            "tone": 67,
+            "expr": 20
+          },
+          "reading": 32.5
+        },
+        {
+          "id": "m2028-n15-cafe",
+          "name": "前田 紬",
+          "seat": "cl3a",
+          "out": false,
+          "stats": {
+            "pitch": 43,
+            "rhythm": 77,
+            "tone": 76,
+            "expr": 33
+          },
+          "reading": 35
+        },
+        {
+          "id": "m2028-n16-cafe",
+          "name": "野口 陽翔",
+          "seat": "cl3b",
+          "out": false,
+          "stats": {
+            "pitch": 50,
+            "rhythm": 23,
+            "tone": 25,
+            "expr": 46
+          },
+          "reading": 37.5
+        },
+        {
+          "id": "m2028-n17-cafe",
+          "name": "工藤 美月",
+          "seat": "bcl1",
+          "out": false,
+          "stats": {
+            "pitch": 57,
+            "rhythm": 34,
+            "tone": 34,
+            "expr": 59
+          },
+          "reading": 40
+        },
+        {
+          "id": "m2028-n18-cafe",
+          "name": "中野 透",
+          "seat": "tsax1",
+          "out": false,
+          "stats": {
+            "pitch": 64,
+            "rhythm": 45,
+            "tone": 43,
+            "expr": 72
+          },
+          "reading": 42.5
+        },
+        {
+          "id": "m2028-n19-cafe",
+          "name": "木村 湊",
+          "seat": "bsax1",
+          "out": false,
+          "stats": {
+            "pitch": 71,
+            "rhythm": 56,
+            "tone": 52,
+            "expr": 20
+          },
+          "reading": 45
+        },
+        {
+          "id": "m2028-n20-cafe",
+          "name": "佐々木 彩花",
+          "seat": "hn1",
+          "out": false,
+          "stats": {
+            "pitch": 78,
+            "rhythm": 67,
+            "tone": 61,
+            "expr": 33
+          },
+          "reading": 47.5
+        },
+        {
+          "id": "m2028-n21-cafe",
+          "name": "井上 優",
+          "seat": "hn2",
+          "out": false,
+          "stats": {
+            "pitch": 15,
+            "rhythm": 78,
+            "tone": 70,
+            "expr": 46
+          },
+          "reading": 50
+        },
+        {
+          "id": "m2028-n22-cafe",
+          "name": "酒井 陸",
+          "seat": "hn3",
+          "out": false,
+          "stats": {
+            "pitch": 22,
+            "rhythm": 24,
+            "tone": 79,
+            "expr": 59
+          },
+          "reading": 52.5
+        },
+        {
+          "id": "m2028-n23-cafe",
+          "name": "松田 拓海",
+          "seat": "hn4",
+          "out": false,
+          "stats": {
+            "pitch": 29,
+            "rhythm": 35,
+            "tone": 28,
+            "expr": 72
+          },
+          "reading": 55
+        },
+        {
+          "id": "m2028-n24-cafe",
+          "name": "中村 絢",
+          "seat": "tp1a",
+          "out": false,
+          "stats": {
+            "pitch": 36,
+            "rhythm": 46,
+            "tone": 37,
+            "expr": 20
+          },
+          "reading": 57.5
+        },
+        {
+          "id": "m2028-n25-cafe",
+          "name": "林 亮",
+          "seat": "tp1b",
+          "out": false,
+          "stats": {
+            "pitch": 43,
+            "rhythm": 57,
+            "tone": 46,
+            "expr": 33
+          },
+          "reading": 60
+        },
+        {
+          "id": "m2028-n26-cafe",
+          "name": "岩崎 結衣",
+          "seat": "tp2a",
+          "out": false,
+          "stats": {
+            "pitch": 50,
+            "rhythm": 68,
+            "tone": 55,
+            "expr": 46
+          },
+          "reading": 62.5
+        },
+        {
+          "id": "m2028-n27-cafe",
+          "name": "千葉 陸",
+          "seat": "tp3a",
+          "out": false,
+          "stats": {
+            "pitch": 57,
+            "rhythm": 79,
+            "tone": 64,
+            "expr": 59
+          },
+          "reading": 65
+        },
+        {
+          "id": "m2028-n28-cafe",
+          "name": "竹内 花音",
+          "seat": "tb1",
+          "out": false,
+          "stats": {
+            "pitch": 64,
+            "rhythm": 25,
+            "tone": 73,
+            "expr": 72
+          },
+          "reading": 67.5
+        },
+        {
+          "id": "m2028-n29-cafe",
+          "name": "井上 雫",
+          "seat": "tb2",
+          "out": false,
+          "stats": {
+            "pitch": 71,
+            "rhythm": 36,
+            "tone": 82,
+            "expr": 20
+          },
+          "reading": 70
+        },
+        {
+          "id": "m2028-n30-cafe",
+          "name": "石井 透",
+          "seat": "btb1",
+          "out": false,
+          "stats": {
+            "pitch": 78,
+            "rhythm": 47,
+            "tone": 31,
+            "expr": 33
+          },
+          "reading": 72.5
+        },
+        {
+          "id": "m2028-n31-cafe",
+          "name": "山下 茜",
+          "seat": "euph1",
+          "out": false,
+          "stats": {
+            "pitch": 15,
+            "rhythm": 58,
+            "tone": 40,
+            "expr": 46
+          },
+          "reading": 75
+        },
+        {
+          "id": "m2028-n32-cafe",
+          "name": "渡辺 渚",
+          "seat": "euph2",
+          "out": false,
+          "stats": {
+            "pitch": 22,
+            "rhythm": 69,
+            "tone": 49,
+            "expr": 59
+          },
+          "reading": 77.5
+        },
+        {
+          "id": "m2028-n33-cafe",
+          "name": "坂本 雫",
+          "seat": "tuba1",
+          "out": false,
+          "stats": {
+            "pitch": 29,
+            "rhythm": 80,
+            "tone": 58,
+            "expr": 72
+          },
+          "reading": 80
+        },
+        {
+          "id": "m2028-n34-cafe",
+          "name": "菅原 智也",
+          "seat": "tuba2",
+          "out": false,
+          "stats": {
+            "pitch": 36,
+            "rhythm": 26,
+            "tone": 67,
+            "expr": 20
+          },
+          "reading": 82.5
+        },
+        {
+          "id": "m2028-n35-cafe",
+          "name": "高木 明里",
+          "seat": "cb1",
+          "out": false,
+          "stats": {
+            "pitch": 43,
+            "rhythm": 37,
+            "tone": 76,
+            "expr": 33
+          },
+          "reading": 85
+        },
+        {
+          "id": "m2028-n36-cafe",
+          "name": "佐藤 誠",
+          "seat": "perc1",
+          "out": false,
+          "stats": {
+            "pitch": 50,
+            "rhythm": 48,
+            "tone": 25,
+            "expr": 46
+          },
+          "reading": 87.5
+        },
+        {
+          "id": "m2028-n37-cafe",
+          "name": "山田 蓮",
+          "seat": "perc2",
+          "out": false,
+          "stats": {
+            "pitch": 57,
+            "rhythm": 59,
+            "tone": 34,
+            "expr": 59
+          },
+          "reading": 90
+        },
+        {
+          "id": "m2028-n38-cafe",
+          "name": "原 杏",
+          "seat": "perc3",
+          "out": false,
+          "stats": {
+            "pitch": 64,
+            "rhythm": 70,
+            "tone": 43,
+            "expr": 72
+          },
+          "reading": 92.5
+        },
+        {
+          "id": "m2028-n39-cafe",
+          "name": "横山 透",
+          "seat": null,
+          "out": false,
+          "stats": {
+            "pitch": 0,
+            "rhythm": 0,
+            "tone": 0,
+            "expr": 0
+          },
+          "reading": 95
+        }
+      ],
+      "menus": []
+    },
+    "practice": null,
+    "from": null,
+    "playing": false,
+    "waiting": false,
+    "playback": null,
+    "audible": [],
+    "boot": {
+      "scripts": 33,
+      "loaded": 33,
+      "failed": [],
+      "errors": []
+    },
+    "errors": [],
+    "layout": {
+      "actions": {
+        "bottom": 752,
+        "height": 73,
+        "left": 16,
+        "right": 359,
+        "top": 679,
+        "width": 343
+      },
+      "component": {
+        "bottom": 0,
+        "height": 0,
+        "left": 0,
+        "right": 0,
+        "top": 0,
+        "width": 0
+      },
+      "focus": "BUTTON",
+      "mini": null,
+      "people": [
+        {
+          "bottom": 0,
+          "height": 0,
+          "id": "m2028-n16-cafe",
+          "left": 0,
+          "right": 0,
+          "top": 0,
+          "width": 0
+        },
+        {
+          "bottom": 0,
+          "height": 0,
+          "id": "m2028-n36-cafe",
+          "left": 0,
+          "right": 0,
+          "top": 0,
+          "width": 0
+        },
+        {
+          "bottom": 0,
+          "height": 0,
+          "id": "m2028-n3-cafe",
+          "left": 0,
+          "right": 0,
+          "top": 0,
+          "width": 0
+        }
+      ],
+      "picker": null,
+      "playActions": {
+        "bottom": 0,
+        "height": 0,
+        "left": 0,
+        "right": 0,
+        "top": 0,
+        "width": 0
+      },
+      "scroll": 0
+    },
+    "version": "qa-diagnosis-practice-5"
+  },
+  {
+    "tab": "合奏",
+    "view": "diag-practice",
+    "width": 375,
+    "scrollWidth": 375,
+    "theme": "light",
+    "year": 2028,
+    "week": 8,
+    "state": 0.8122529918327928,
+    "stats": 0.9732121941633523,
+    "records": 0.018823215970769525,
+    "plan": {},
+    "diag": {
+      "visible": true,
+      "open": true,
+      "topic": "tone",
+      "key": "2870353080:2028:8:galop",
+      "back": null,
+      "diagnosis": 0.13752670190297067,
+      "pid": "galop",
+      "selectedPiece": "galop",
+      "tab": "play",
+      "rows": [
+        {
+          "id": "m2028-n16-cafe",
+          "label": "野口 陽翔 音色 F、今週の練習を見る",
+          "rank": "F",
+          "face": "m2028-n16-cafe"
+        },
+        {
+          "id": "m2028-n36-cafe",
+          "label": "佐藤 誠 音色 F、今週の練習を見る",
+          "rank": "F",
+          "face": "m2028-n36-cafe"
+        },
+        {
+          "id": "m2028-n3-cafe",
+          "label": "松井 颯太 音色 F、今週の練習を見る",
+          "rank": "F",
+          "face": "m2028-n3-cafe"
+        }
+      ],
+      "source": [
+        {
+          "id": "m2028-n1-cafe",
+          "name": "田中 七海",
+          "seat": "picc1",
+          "out": false,
+          "stats": {
+            "pitch": 15,
+            "rhythm": 53,
+            "tone": 70,
+            "expr": 46
+          },
+          "reading": 0
+        },
+        {
+          "id": "m2028-n2-cafe",
+          "name": "小川 悠斗",
+          "seat": "fl1a",
+          "out": true,
+          "stats": {
+            "pitch": 22,
+            "rhythm": 64,
+            "tone": 79,
+            "expr": 59
+          },
+          "reading": 2.5
+        },
+        {
+          "id": "m2028-n3-cafe",
+          "name": "松井 颯太",
+          "seat": "fl1b",
+          "out": false,
+          "stats": {
+            "pitch": 29,
+            "rhythm": 75,
+            "tone": 28,
+            "expr": 72
+          },
+          "reading": 5
+        },
+        {
+          "id": "m2028-n4-cafe",
+          "name": "菅原 菜月",
+          "seat": "fl2a",
+          "out": false,
+          "stats": {
+            "pitch": 36,
+            "rhythm": 21,
+            "tone": 37,
+            "expr": 20
+          },
+          "reading": 7.5
+        },
+        {
+          "id": "m2028-n5-cafe",
+          "name": "岡本 智也",
+          "seat": "ob1",
+          "out": false,
+          "stats": {
+            "pitch": 43,
+            "rhythm": 32,
+            "tone": 46,
+            "expr": 33
+          },
+          "reading": 10
+        },
+        {
+          "id": "m2028-n6-cafe",
+          "name": "山口 大翔",
+          "seat": "cl1a",
+          "out": false,
+          "stats": {
+            "pitch": 50,
+            "rhythm": 43,
+            "tone": 55,
+            "expr": 46
+          },
+          "reading": 12.5
+        },
+        {
+          "id": "m2028-n7-cafe",
+          "name": "山下 彩花",
+          "seat": "cl1b",
+          "out": false,
+          "stats": {
+            "pitch": 57,
+            "rhythm": 54,
+            "tone": 64,
+            "expr": 59
+          },
+          "reading": 15
+        },
+        {
+          "id": "m2028-n8-cafe",
+          "name": "高木 瑛太",
+          "seat": "cl1c",
+          "out": false,
+          "stats": {
+            "pitch": 64,
+            "rhythm": 65,
+            "tone": 73,
+            "expr": 72
+          },
+          "reading": 17.5
+        },
+        {
+          "id": "m2028-n9-cafe",
+          "name": "清水 菜月",
+          "seat": "asax1",
+          "out": false,
+          "stats": {
+            "pitch": 71,
+            "rhythm": 76,
+            "tone": 82,
+            "expr": 20
+          },
+          "reading": 20
+        },
+        {
+          "id": "m2028-n10-cafe",
+          "name": "山本 凛",
+          "seat": "asax2",
+          "out": false,
+          "stats": {
+            "pitch": 78,
+            "rhythm": 22,
+            "tone": 31,
+            "expr": 33
+          },
+          "reading": 22.5
+        },
+        {
+          "id": "m2028-n11-cafe",
+          "name": "山田 悠真",
+          "seat": "fg1",
+          "out": false,
+          "stats": {
+            "pitch": 15,
+            "rhythm": 33,
+            "tone": 40,
+            "expr": 46
+          },
+          "reading": 25
+        },
+        {
+          "id": "m2028-n12-cafe",
+          "name": "西村 樹",
+          "seat": "ebcl1",
+          "out": false,
+          "stats": {
+            "pitch": 22,
+            "rhythm": 44,
+            "tone": 49,
+            "expr": 59
+          },
+          "reading": 27.5
+        },
+        {
+          "id": "m2028-n13-cafe",
+          "name": "松井 美咲",
+          "seat": "cl2a",
+          "out": false,
+          "stats": {
+            "pitch": 29,
+            "rhythm": 55,
+            "tone": 58,
+            "expr": 72
+          },
+          "reading": 30
+        },
+        {
+          "id": "m2028-n14-cafe",
+          "name": "阿部 和奏",
+          "seat": "cl2b",
+          "out": false,
+          "stats": {
+            "pitch": 36,
+            "rhythm": 66,
+            "tone": 67,
+            "expr": 20
+          },
+          "reading": 32.5
+        },
+        {
+          "id": "m2028-n15-cafe",
+          "name": "前田 紬",
+          "seat": "cl3a",
+          "out": false,
+          "stats": {
+            "pitch": 43,
+            "rhythm": 77,
+            "tone": 76,
+            "expr": 33
+          },
+          "reading": 35
+        },
+        {
+          "id": "m2028-n16-cafe",
+          "name": "野口 陽翔",
+          "seat": "cl3b",
+          "out": false,
+          "stats": {
+            "pitch": 50,
+            "rhythm": 23,
+            "tone": 25,
+            "expr": 46
+          },
+          "reading": 37.5
+        },
+        {
+          "id": "m2028-n17-cafe",
+          "name": "工藤 美月",
+          "seat": "bcl1",
+          "out": false,
+          "stats": {
+            "pitch": 57,
+            "rhythm": 34,
+            "tone": 34,
+            "expr": 59
+          },
+          "reading": 40
+        },
+        {
+          "id": "m2028-n18-cafe",
+          "name": "中野 透",
+          "seat": "tsax1",
+          "out": false,
+          "stats": {
+            "pitch": 64,
+            "rhythm": 45,
+            "tone": 43,
+            "expr": 72
+          },
+          "reading": 42.5
+        },
+        {
+          "id": "m2028-n19-cafe",
+          "name": "木村 湊",
+          "seat": "bsax1",
+          "out": false,
+          "stats": {
+            "pitch": 71,
+            "rhythm": 56,
+            "tone": 52,
+            "expr": 20
+          },
+          "reading": 45
+        },
+        {
+          "id": "m2028-n20-cafe",
+          "name": "佐々木 彩花",
+          "seat": "hn1",
+          "out": false,
+          "stats": {
+            "pitch": 78,
+            "rhythm": 67,
+            "tone": 61,
+            "expr": 33
+          },
+          "reading": 47.5
+        },
+        {
+          "id": "m2028-n21-cafe",
+          "name": "井上 優",
+          "seat": "hn2",
+          "out": false,
+          "stats": {
+            "pitch": 15,
+            "rhythm": 78,
+            "tone": 70,
+            "expr": 46
+          },
+          "reading": 50
+        },
+        {
+          "id": "m2028-n22-cafe",
+          "name": "酒井 陸",
+          "seat": "hn3",
+          "out": false,
+          "stats": {
+            "pitch": 22,
+            "rhythm": 24,
+            "tone": 79,
+            "expr": 59
+          },
+          "reading": 52.5
+        },
+        {
+          "id": "m2028-n23-cafe",
+          "name": "松田 拓海",
+          "seat": "hn4",
+          "out": false,
+          "stats": {
+            "pitch": 29,
+            "rhythm": 35,
+            "tone": 28,
+            "expr": 72
+          },
+          "reading": 55
+        },
+        {
+          "id": "m2028-n24-cafe",
+          "name": "中村 絢",
+          "seat": "tp1a",
+          "out": false,
+          "stats": {
+            "pitch": 36,
+            "rhythm": 46,
+            "tone": 37,
+            "expr": 20
+          },
+          "reading": 57.5
+        },
+        {
+          "id": "m2028-n25-cafe",
+          "name": "林 亮",
+          "seat": "tp1b",
+          "out": false,
+          "stats": {
+            "pitch": 43,
+            "rhythm": 57,
+            "tone": 46,
+            "expr": 33
+          },
+          "reading": 60
+        },
+        {
+          "id": "m2028-n26-cafe",
+          "name": "岩崎 結衣",
+          "seat": "tp2a",
+          "out": false,
+          "stats": {
+            "pitch": 50,
+            "rhythm": 68,
+            "tone": 55,
+            "expr": 46
+          },
+          "reading": 62.5
+        },
+        {
+          "id": "m2028-n27-cafe",
+          "name": "千葉 陸",
+          "seat": "tp3a",
+          "out": false,
+          "stats": {
+            "pitch": 57,
+            "rhythm": 79,
+            "tone": 64,
+            "expr": 59
+          },
+          "reading": 65
+        },
+        {
+          "id": "m2028-n28-cafe",
+          "name": "竹内 花音",
+          "seat": "tb1",
+          "out": false,
+          "stats": {
+            "pitch": 64,
+            "rhythm": 25,
+            "tone": 73,
+            "expr": 72
+          },
+          "reading": 67.5
+        },
+        {
+          "id": "m2028-n29-cafe",
+          "name": "井上 雫",
+          "seat": "tb2",
+          "out": false,
+          "stats": {
+            "pitch": 71,
+            "rhythm": 36,
+            "tone": 82,
+            "expr": 20
+          },
+          "reading": 70
+        },
+        {
+          "id": "m2028-n30-cafe",
+          "name": "石井 透",
+          "seat": "btb1",
+          "out": false,
+          "stats": {
+            "pitch": 78,
+            "rhythm": 47,
+            "tone": 31,
+            "expr": 33
+          },
+          "reading": 72.5
+        },
+        {
+          "id": "m2028-n31-cafe",
+          "name": "山下 茜",
+          "seat": "euph1",
+          "out": false,
+          "stats": {
+            "pitch": 15,
+            "rhythm": 58,
+            "tone": 40,
+            "expr": 46
+          },
+          "reading": 75
+        },
+        {
+          "id": "m2028-n32-cafe",
+          "name": "渡辺 渚",
+          "seat": "euph2",
+          "out": false,
+          "stats": {
+            "pitch": 22,
+            "rhythm": 69,
+            "tone": 49,
+            "expr": 59
+          },
+          "reading": 77.5
+        },
+        {
+          "id": "m2028-n33-cafe",
+          "name": "坂本 雫",
+          "seat": "tuba1",
+          "out": false,
+          "stats": {
+            "pitch": 29,
+            "rhythm": 80,
+            "tone": 58,
+            "expr": 72
+          },
+          "reading": 80
+        },
+        {
+          "id": "m2028-n34-cafe",
+          "name": "菅原 智也",
+          "seat": "tuba2",
+          "out": false,
+          "stats": {
+            "pitch": 36,
+            "rhythm": 26,
+            "tone": 67,
+            "expr": 20
+          },
+          "reading": 82.5
+        },
+        {
+          "id": "m2028-n35-cafe",
+          "name": "高木 明里",
+          "seat": "cb1",
+          "out": false,
+          "stats": {
+            "pitch": 43,
+            "rhythm": 37,
+            "tone": 76,
+            "expr": 33
+          },
+          "reading": 85
+        },
+        {
+          "id": "m2028-n36-cafe",
+          "name": "佐藤 誠",
+          "seat": "perc1",
+          "out": false,
+          "stats": {
+            "pitch": 50,
+            "rhythm": 48,
+            "tone": 25,
+            "expr": 46
+          },
+          "reading": 87.5
+        },
+        {
+          "id": "m2028-n37-cafe",
+          "name": "山田 蓮",
+          "seat": "perc2",
+          "out": false,
+          "stats": {
+            "pitch": 57,
+            "rhythm": 59,
+            "tone": 34,
+            "expr": 59
+          },
+          "reading": 90
+        },
+        {
+          "id": "m2028-n38-cafe",
+          "name": "原 杏",
+          "seat": "perc3",
+          "out": false,
+          "stats": {
+            "pitch": 64,
+            "rhythm": 70,
+            "tone": 43,
+            "expr": 72
+          },
+          "reading": 92.5
+        },
+        {
+          "id": "m2028-n39-cafe",
+          "name": "横山 透",
+          "seat": null,
+          "out": false,
+          "stats": {
+            "pitch": 0,
+            "rhythm": 0,
+            "tone": 0,
+            "expr": 0
+          },
+          "reading": 95
+        }
+      ],
+      "menus": []
+    },
+    "practice": null,
+    "from": null,
+    "playing": false,
+    "waiting": false,
+    "playback": null,
+    "audible": [],
+    "boot": {
+      "scripts": 33,
+      "loaded": 33,
+      "failed": [],
+      "errors": []
+    },
+    "errors": [],
+    "layout": {
+      "actions": {
+        "bottom": 0,
+        "height": 0,
+        "left": 0,
+        "right": 0,
+        "top": 0,
+        "width": 0
+      },
+      "component": {
+        "bottom": 644.9765625,
+        "height": 366,
+        "left": 30,
+        "right": 345,
+        "top": 278.9765625,
+        "width": 315
+      },
+      "focus": "BUTTON",
+      "mini": null,
+      "people": [
+        {
+          "bottom": 497.9765625,
+          "height": 60,
+          "id": "m2028-n16-cafe",
+          "left": 43,
+          "right": 332,
+          "top": 437.9765625,
+          "width": 289
+        },
+        {
+          "bottom": 564.9765625,
+          "height": 60,
+          "id": "m2028-n36-cafe",
+          "left": 43,
+          "right": 332,
+          "top": 504.9765625,
+          "width": 289
+        },
+        {
+          "bottom": 631.9765625,
+          "height": 60,
+          "id": "m2028-n3-cafe",
+          "left": 43,
+          "right": 332,
+          "top": 571.9765625,
+          "width": 289
+        }
+      ],
+      "picker": null,
+      "playActions": {
+        "bottom": 752,
+        "height": 68,
+        "left": 16,
+        "right": 359,
+        "top": 684,
+        "width": 343
+      },
+      "scroll": 867
+    },
+    "version": "qa-diagnosis-practice-5"
+  },
+  {
+    "tab": "部員",
+    "view": "diag-practice",
+    "width": 375,
+    "scrollWidth": 375,
+    "theme": "light",
+    "year": 2028,
+    "week": 8,
+    "state": 0.8122529918327928,
+    "stats": 0.9732121941633523,
+    "records": 0.018823215970769525,
+    "plan": {},
+    "diag": {
+      "visible": true,
+      "open": true,
+      "topic": "tone",
+      "key": "2870353080:2028:8:galop",
+      "back": null,
+      "diagnosis": 0.13752670190297067,
+      "pid": "galop",
+      "selectedPiece": "galop",
+      "tab": "members",
+      "rows": [
+        {
+          "id": "m2028-n16-cafe",
+          "label": "野口 陽翔 音色 F、今週の練習を見る",
+          "rank": "F",
+          "face": "m2028-n16-cafe"
+        },
+        {
+          "id": "m2028-n36-cafe",
+          "label": "佐藤 誠 音色 F、今週の練習を見る",
+          "rank": "F",
+          "face": "m2028-n36-cafe"
+        },
+        {
+          "id": "m2028-n3-cafe",
+          "label": "松井 颯太 音色 F、今週の練習を見る",
+          "rank": "F",
+          "face": "m2028-n3-cafe"
+        }
+      ],
+      "source": [
+        {
+          "id": "m2028-n1-cafe",
+          "name": "田中 七海",
+          "seat": "picc1",
+          "out": false,
+          "stats": {
+            "pitch": 15,
+            "rhythm": 53,
+            "tone": 70,
+            "expr": 46
+          },
+          "reading": 0
+        },
+        {
+          "id": "m2028-n2-cafe",
+          "name": "小川 悠斗",
+          "seat": "fl1a",
+          "out": true,
+          "stats": {
+            "pitch": 22,
+            "rhythm": 64,
+            "tone": 79,
+            "expr": 59
+          },
+          "reading": 2.5
+        },
+        {
+          "id": "m2028-n3-cafe",
+          "name": "松井 颯太",
+          "seat": "fl1b",
+          "out": false,
+          "stats": {
+            "pitch": 29,
+            "rhythm": 75,
+            "tone": 28,
+            "expr": 72
+          },
+          "reading": 5
+        },
+        {
+          "id": "m2028-n4-cafe",
+          "name": "菅原 菜月",
+          "seat": "fl2a",
+          "out": false,
+          "stats": {
+            "pitch": 36,
+            "rhythm": 21,
+            "tone": 37,
+            "expr": 20
+          },
+          "reading": 7.5
+        },
+        {
+          "id": "m2028-n5-cafe",
+          "name": "岡本 智也",
+          "seat": "ob1",
+          "out": false,
+          "stats": {
+            "pitch": 43,
+            "rhythm": 32,
+            "tone": 46,
+            "expr": 33
+          },
+          "reading": 10
+        },
+        {
+          "id": "m2028-n6-cafe",
+          "name": "山口 大翔",
+          "seat": "cl1a",
+          "out": false,
+          "stats": {
+            "pitch": 50,
+            "rhythm": 43,
+            "tone": 55,
+            "expr": 46
+          },
+          "reading": 12.5
+        },
+        {
+          "id": "m2028-n7-cafe",
+          "name": "山下 彩花",
+          "seat": "cl1b",
+          "out": false,
+          "stats": {
+            "pitch": 57,
+            "rhythm": 54,
+            "tone": 64,
+            "expr": 59
+          },
+          "reading": 15
+        },
+        {
+          "id": "m2028-n8-cafe",
+          "name": "高木 瑛太",
+          "seat": "cl1c",
+          "out": false,
+          "stats": {
+            "pitch": 64,
+            "rhythm": 65,
+            "tone": 73,
+            "expr": 72
+          },
+          "reading": 17.5
+        },
+        {
+          "id": "m2028-n9-cafe",
+          "name": "清水 菜月",
+          "seat": "asax1",
+          "out": false,
+          "stats": {
+            "pitch": 71,
+            "rhythm": 76,
+            "tone": 82,
+            "expr": 20
+          },
+          "reading": 20
+        },
+        {
+          "id": "m2028-n10-cafe",
+          "name": "山本 凛",
+          "seat": "asax2",
+          "out": false,
+          "stats": {
+            "pitch": 78,
+            "rhythm": 22,
+            "tone": 31,
+            "expr": 33
+          },
+          "reading": 22.5
+        },
+        {
+          "id": "m2028-n11-cafe",
+          "name": "山田 悠真",
+          "seat": "fg1",
+          "out": false,
+          "stats": {
+            "pitch": 15,
+            "rhythm": 33,
+            "tone": 40,
+            "expr": 46
+          },
+          "reading": 25
+        },
+        {
+          "id": "m2028-n12-cafe",
+          "name": "西村 樹",
+          "seat": "ebcl1",
+          "out": false,
+          "stats": {
+            "pitch": 22,
+            "rhythm": 44,
+            "tone": 49,
+            "expr": 59
+          },
+          "reading": 27.5
+        },
+        {
+          "id": "m2028-n13-cafe",
+          "name": "松井 美咲",
+          "seat": "cl2a",
+          "out": false,
+          "stats": {
+            "pitch": 29,
+            "rhythm": 55,
+            "tone": 58,
+            "expr": 72
+          },
+          "reading": 30
+        },
+        {
+          "id": "m2028-n14-cafe",
+          "name": "阿部 和奏",
+          "seat": "cl2b",
+          "out": false,
+          "stats": {
+            "pitch": 36,
+            "rhythm": 66,
+            "tone": 67,
+            "expr": 20
+          },
+          "reading": 32.5
+        },
+        {
+          "id": "m2028-n15-cafe",
+          "name": "前田 紬",
+          "seat": "cl3a",
+          "out": false,
+          "stats": {
+            "pitch": 43,
+            "rhythm": 77,
+            "tone": 76,
+            "expr": 33
+          },
+          "reading": 35
+        },
+        {
+          "id": "m2028-n16-cafe",
+          "name": "野口 陽翔",
+          "seat": "cl3b",
+          "out": false,
+          "stats": {
+            "pitch": 50,
+            "rhythm": 23,
+            "tone": 25,
+            "expr": 46
+          },
+          "reading": 37.5
+        },
+        {
+          "id": "m2028-n17-cafe",
+          "name": "工藤 美月",
+          "seat": "bcl1",
+          "out": false,
+          "stats": {
+            "pitch": 57,
+            "rhythm": 34,
+            "tone": 34,
+            "expr": 59
+          },
+          "reading": 40
+        },
+        {
+          "id": "m2028-n18-cafe",
+          "name": "中野 透",
+          "seat": "tsax1",
+          "out": false,
+          "stats": {
+            "pitch": 64,
+            "rhythm": 45,
+            "tone": 43,
+            "expr": 72
+          },
+          "reading": 42.5
+        },
+        {
+          "id": "m2028-n19-cafe",
+          "name": "木村 湊",
+          "seat": "bsax1",
+          "out": false,
+          "stats": {
+            "pitch": 71,
+            "rhythm": 56,
+            "tone": 52,
+            "expr": 20
+          },
+          "reading": 45
+        },
+        {
+          "id": "m2028-n20-cafe",
+          "name": "佐々木 彩花",
+          "seat": "hn1",
+          "out": false,
+          "stats": {
+            "pitch": 78,
+            "rhythm": 67,
+            "tone": 61,
+            "expr": 33
+          },
+          "reading": 47.5
+        },
+        {
+          "id": "m2028-n21-cafe",
+          "name": "井上 優",
+          "seat": "hn2",
+          "out": false,
+          "stats": {
+            "pitch": 15,
+            "rhythm": 78,
+            "tone": 70,
+            "expr": 46
+          },
+          "reading": 50
+        },
+        {
+          "id": "m2028-n22-cafe",
+          "name": "酒井 陸",
+          "seat": "hn3",
+          "out": false,
+          "stats": {
+            "pitch": 22,
+            "rhythm": 24,
+            "tone": 79,
+            "expr": 59
+          },
+          "reading": 52.5
+        },
+        {
+          "id": "m2028-n23-cafe",
+          "name": "松田 拓海",
+          "seat": "hn4",
+          "out": false,
+          "stats": {
+            "pitch": 29,
+            "rhythm": 35,
+            "tone": 28,
+            "expr": 72
+          },
+          "reading": 55
+        },
+        {
+          "id": "m2028-n24-cafe",
+          "name": "中村 絢",
+          "seat": "tp1a",
+          "out": false,
+          "stats": {
+            "pitch": 36,
+            "rhythm": 46,
+            "tone": 37,
+            "expr": 20
+          },
+          "reading": 57.5
+        },
+        {
+          "id": "m2028-n25-cafe",
+          "name": "林 亮",
+          "seat": "tp1b",
+          "out": false,
+          "stats": {
+            "pitch": 43,
+            "rhythm": 57,
+            "tone": 46,
+            "expr": 33
+          },
+          "reading": 60
+        },
+        {
+          "id": "m2028-n26-cafe",
+          "name": "岩崎 結衣",
+          "seat": "tp2a",
+          "out": false,
+          "stats": {
+            "pitch": 50,
+            "rhythm": 68,
+            "tone": 55,
+            "expr": 46
+          },
+          "reading": 62.5
+        },
+        {
+          "id": "m2028-n27-cafe",
+          "name": "千葉 陸",
+          "seat": "tp3a",
+          "out": false,
+          "stats": {
+            "pitch": 57,
+            "rhythm": 79,
+            "tone": 64,
+            "expr": 59
+          },
+          "reading": 65
+        },
+        {
+          "id": "m2028-n28-cafe",
+          "name": "竹内 花音",
+          "seat": "tb1",
+          "out": false,
+          "stats": {
+            "pitch": 64,
+            "rhythm": 25,
+            "tone": 73,
+            "expr": 72
+          },
+          "reading": 67.5
+        },
+        {
+          "id": "m2028-n29-cafe",
+          "name": "井上 雫",
+          "seat": "tb2",
+          "out": false,
+          "stats": {
+            "pitch": 71,
+            "rhythm": 36,
+            "tone": 82,
+            "expr": 20
+          },
+          "reading": 70
+        },
+        {
+          "id": "m2028-n30-cafe",
+          "name": "石井 透",
+          "seat": "btb1",
+          "out": false,
+          "stats": {
+            "pitch": 78,
+            "rhythm": 47,
+            "tone": 31,
+            "expr": 33
+          },
+          "reading": 72.5
+        },
+        {
+          "id": "m2028-n31-cafe",
+          "name": "山下 茜",
+          "seat": "euph1",
+          "out": false,
+          "stats": {
+            "pitch": 15,
+            "rhythm": 58,
+            "tone": 40,
+            "expr": 46
+          },
+          "reading": 75
+        },
+        {
+          "id": "m2028-n32-cafe",
+          "name": "渡辺 渚",
+          "seat": "euph2",
+          "out": false,
+          "stats": {
+            "pitch": 22,
+            "rhythm": 69,
+            "tone": 49,
+            "expr": 59
+          },
+          "reading": 77.5
+        },
+        {
+          "id": "m2028-n33-cafe",
+          "name": "坂本 雫",
+          "seat": "tuba1",
+          "out": false,
+          "stats": {
+            "pitch": 29,
+            "rhythm": 80,
+            "tone": 58,
+            "expr": 72
+          },
+          "reading": 80
+        },
+        {
+          "id": "m2028-n34-cafe",
+          "name": "菅原 智也",
+          "seat": "tuba2",
+          "out": false,
+          "stats": {
+            "pitch": 36,
+            "rhythm": 26,
+            "tone": 67,
+            "expr": 20
+          },
+          "reading": 82.5
+        },
+        {
+          "id": "m2028-n35-cafe",
+          "name": "高木 明里",
+          "seat": "cb1",
+          "out": false,
+          "stats": {
+            "pitch": 43,
+            "rhythm": 37,
+            "tone": 76,
+            "expr": 33
+          },
+          "reading": 85
+        },
+        {
+          "id": "m2028-n36-cafe",
+          "name": "佐藤 誠",
+          "seat": "perc1",
+          "out": false,
+          "stats": {
+            "pitch": 50,
+            "rhythm": 48,
+            "tone": 25,
+            "expr": 46
+          },
+          "reading": 87.5
+        },
+        {
+          "id": "m2028-n37-cafe",
+          "name": "山田 蓮",
+          "seat": "perc2",
+          "out": false,
+          "stats": {
+            "pitch": 57,
+            "rhythm": 59,
+            "tone": 34,
+            "expr": 59
+          },
+          "reading": 90
+        },
+        {
+          "id": "m2028-n38-cafe",
+          "name": "原 杏",
+          "seat": "perc3",
+          "out": false,
+          "stats": {
+            "pitch": 64,
+            "rhythm": 70,
+            "tone": 43,
+            "expr": 72
+          },
+          "reading": 92.5
+        },
+        {
+          "id": "m2028-n39-cafe",
+          "name": "横山 透",
+          "seat": null,
+          "out": false,
+          "stats": {
+            "pitch": 0,
+            "rhythm": 0,
+            "tone": 0,
+            "expr": 0
+          },
+          "reading": 95
+        }
+      ],
+      "menus": []
+    },
+    "practice": null,
+    "from": null,
+    "playing": false,
+    "waiting": false,
+    "playback": null,
+    "audible": [],
+    "boot": {
+      "scripts": 33,
+      "loaded": 33,
+      "failed": [],
+      "errors": []
+    },
+    "errors": [],
+    "layout": {
+      "actions": {
+        "bottom": 0,
+        "height": 0,
+        "left": 0,
+        "right": 0,
+        "top": 0,
+        "width": 0
+      },
+      "component": {
+        "bottom": 0,
+        "height": 0,
+        "left": 0,
+        "right": 0,
+        "top": 0,
+        "width": 0
+      },
+      "focus": "BUTTON",
+      "mini": null,
+      "people": [
+        {
+          "bottom": 0,
+          "height": 0,
+          "id": "m2028-n16-cafe",
+          "left": 0,
+          "right": 0,
+          "top": 0,
+          "width": 0
+        },
+        {
+          "bottom": 0,
+          "height": 0,
+          "id": "m2028-n36-cafe",
+          "left": 0,
+          "right": 0,
+          "top": 0,
+          "width": 0
+        },
+        {
+          "bottom": 0,
+          "height": 0,
+          "id": "m2028-n3-cafe",
+          "left": 0,
+          "right": 0,
+          "top": 0,
+          "width": 0
+        }
+      ],
+      "picker": null,
+      "playActions": {
+        "bottom": 0,
+        "height": 0,
+        "left": 0,
+        "right": 0,
+        "top": 0,
+        "width": 0
+      },
+      "scroll": 0
+    },
+    "version": "qa-diagnosis-practice-5"
+  },
+  {
+    "tab": "日誌",
+    "view": "diag-practice",
+    "width": 375,
+    "scrollWidth": 375,
+    "theme": "light",
+    "year": 2028,
+    "week": 8,
+    "state": 0.8122529918327928,
+    "stats": 0.9732121941633523,
+    "records": 0.018823215970769525,
+    "plan": {},
+    "diag": {
+      "visible": true,
+      "open": true,
+      "topic": "tone",
+      "key": "2870353080:2028:8:galop",
+      "back": null,
+      "diagnosis": 0.13752670190297067,
+      "pid": "galop",
+      "selectedPiece": "galop",
+      "tab": "log",
+      "rows": [
+        {
+          "id": "m2028-n16-cafe",
+          "label": "野口 陽翔 音色 F、今週の練習を見る",
+          "rank": "F",
+          "face": "m2028-n16-cafe"
+        },
+        {
+          "id": "m2028-n36-cafe",
+          "label": "佐藤 誠 音色 F、今週の練習を見る",
+          "rank": "F",
+          "face": "m2028-n36-cafe"
+        },
+        {
+          "id": "m2028-n3-cafe",
+          "label": "松井 颯太 音色 F、今週の練習を見る",
+          "rank": "F",
+          "face": "m2028-n3-cafe"
+        }
+      ],
+      "source": [
+        {
+          "id": "m2028-n1-cafe",
+          "name": "田中 七海",
+          "seat": "picc1",
+          "out": false,
+          "stats": {
+            "pitch": 15,
+            "rhythm": 53,
+            "tone": 70,
+            "expr": 46
+          },
+          "reading": 0
+        },
+        {
+          "id": "m2028-n2-cafe",
+          "name": "小川 悠斗",
+          "seat": "fl1a",
+          "out": true,
+          "stats": {
+            "pitch": 22,
+            "rhythm": 64,
+            "tone": 79,
+            "expr": 59
+          },
+          "reading": 2.5
+        },
+        {
+          "id": "m2028-n3-cafe",
+          "name": "松井 颯太",
+          "seat": "fl1b",
+          "out": false,
+          "stats": {
+            "pitch": 29,
+            "rhythm": 75,
+            "tone": 28,
+            "expr": 72
+          },
+          "reading": 5
+        },
+        {
+          "id": "m2028-n4-cafe",
+          "name": "菅原 菜月",
+          "seat": "fl2a",
+          "out": false,
+          "stats": {
+            "pitch": 36,
+            "rhythm": 21,
+            "tone": 37,
+            "expr": 20
+          },
+          "reading": 7.5
+        },
+        {
+          "id": "m2028-n5-cafe",
+          "name": "岡本 智也",
+          "seat": "ob1",
+          "out": false,
+          "stats": {
+            "pitch": 43,
+            "rhythm": 32,
+            "tone": 46,
+            "expr": 33
+          },
+          "reading": 10
+        },
+        {
+          "id": "m2028-n6-cafe",
+          "name": "山口 大翔",
+          "seat": "cl1a",
+          "out": false,
+          "stats": {
+            "pitch": 50,
+            "rhythm": 43,
+            "tone": 55,
+            "expr": 46
+          },
+          "reading": 12.5
+        },
+        {
+          "id": "m2028-n7-cafe",
+          "name": "山下 彩花",
+          "seat": "cl1b",
+          "out": false,
+          "stats": {
+            "pitch": 57,
+            "rhythm": 54,
+            "tone": 64,
+            "expr": 59
+          },
+          "reading": 15
+        },
+        {
+          "id": "m2028-n8-cafe",
+          "name": "高木 瑛太",
+          "seat": "cl1c",
+          "out": false,
+          "stats": {
+            "pitch": 64,
+            "rhythm": 65,
+            "tone": 73,
+            "expr": 72
+          },
+          "reading": 17.5
+        },
+        {
+          "id": "m2028-n9-cafe",
+          "name": "清水 菜月",
+          "seat": "asax1",
+          "out": false,
+          "stats": {
+            "pitch": 71,
+            "rhythm": 76,
+            "tone": 82,
+            "expr": 20
+          },
+          "reading": 20
+        },
+        {
+          "id": "m2028-n10-cafe",
+          "name": "山本 凛",
+          "seat": "asax2",
+          "out": false,
+          "stats": {
+            "pitch": 78,
+            "rhythm": 22,
+            "tone": 31,
+            "expr": 33
+          },
+          "reading": 22.5
+        },
+        {
+          "id": "m2028-n11-cafe",
+          "name": "山田 悠真",
+          "seat": "fg1",
+          "out": false,
+          "stats": {
+            "pitch": 15,
+            "rhythm": 33,
+            "tone": 40,
+            "expr": 46
+          },
+          "reading": 25
+        },
+        {
+          "id": "m2028-n12-cafe",
+          "name": "西村 樹",
+          "seat": "ebcl1",
+          "out": false,
+          "stats": {
+            "pitch": 22,
+            "rhythm": 44,
+            "tone": 49,
+            "expr": 59
+          },
+          "reading": 27.5
+        },
+        {
+          "id": "m2028-n13-cafe",
+          "name": "松井 美咲",
+          "seat": "cl2a",
+          "out": false,
+          "stats": {
+            "pitch": 29,
+            "rhythm": 55,
+            "tone": 58,
+            "expr": 72
+          },
+          "reading": 30
+        },
+        {
+          "id": "m2028-n14-cafe",
+          "name": "阿部 和奏",
+          "seat": "cl2b",
+          "out": false,
+          "stats": {
+            "pitch": 36,
+            "rhythm": 66,
+            "tone": 67,
+            "expr": 20
+          },
+          "reading": 32.5
+        },
+        {
+          "id": "m2028-n15-cafe",
+          "name": "前田 紬",
+          "seat": "cl3a",
+          "out": false,
+          "stats": {
+            "pitch": 43,
+            "rhythm": 77,
+            "tone": 76,
+            "expr": 33
+          },
+          "reading": 35
+        },
+        {
+          "id": "m2028-n16-cafe",
+          "name": "野口 陽翔",
+          "seat": "cl3b",
+          "out": false,
+          "stats": {
+            "pitch": 50,
+            "rhythm": 23,
+            "tone": 25,
+            "expr": 46
+          },
+          "reading": 37.5
+        },
+        {
+          "id": "m2028-n17-cafe",
+          "name": "工藤 美月",
+          "seat": "bcl1",
+          "out": false,
+          "stats": {
+            "pitch": 57,
+            "rhythm": 34,
+            "tone": 34,
+            "expr": 59
+          },
+          "reading": 40
+        },
+        {
+          "id": "m2028-n18-cafe",
+          "name": "中野 透",
+          "seat": "tsax1",
+          "out": false,
+          "stats": {
+            "pitch": 64,
+            "rhythm": 45,
+            "tone": 43,
+            "expr": 72
+          },
+          "reading": 42.5
+        },
+        {
+          "id": "m2028-n19-cafe",
+          "name": "木村 湊",
+          "seat": "bsax1",
+          "out": false,
+          "stats": {
+            "pitch": 71,
+            "rhythm": 56,
+            "tone": 52,
+            "expr": 20
+          },
+          "reading": 45
+        },
+        {
+          "id": "m2028-n20-cafe",
+          "name": "佐々木 彩花",
+          "seat": "hn1",
+          "out": false,
+          "stats": {
+            "pitch": 78,
+            "rhythm": 67,
+            "tone": 61,
+            "expr": 33
+          },
+          "reading": 47.5
+        },
+        {
+          "id": "m2028-n21-cafe",
+          "name": "井上 優",
+          "seat": "hn2",
+          "out": false,
+          "stats": {
+            "pitch": 15,
+            "rhythm": 78,
+            "tone": 70,
+            "expr": 46
+          },
+          "reading": 50
+        },
+        {
+          "id": "m2028-n22-cafe",
+          "name": "酒井 陸",
+          "seat": "hn3",
+          "out": false,
+          "stats": {
+            "pitch": 22,
+            "rhythm": 24,
+            "tone": 79,
+            "expr": 59
+          },
+          "reading": 52.5
+        },
+        {
+          "id": "m2028-n23-cafe",
+          "name": "松田 拓海",
+          "seat": "hn4",
+          "out": false,
+          "stats": {
+            "pitch": 29,
+            "rhythm": 35,
+            "tone": 28,
+            "expr": 72
+          },
+          "reading": 55
+        },
+        {
+          "id": "m2028-n24-cafe",
+          "name": "中村 絢",
+          "seat": "tp1a",
+          "out": false,
+          "stats": {
+            "pitch": 36,
+            "rhythm": 46,
+            "tone": 37,
+            "expr": 20
+          },
+          "reading": 57.5
+        },
+        {
+          "id": "m2028-n25-cafe",
+          "name": "林 亮",
+          "seat": "tp1b",
+          "out": false,
+          "stats": {
+            "pitch": 43,
+            "rhythm": 57,
+            "tone": 46,
+            "expr": 33
+          },
+          "reading": 60
+        },
+        {
+          "id": "m2028-n26-cafe",
+          "name": "岩崎 結衣",
+          "seat": "tp2a",
+          "out": false,
+          "stats": {
+            "pitch": 50,
+            "rhythm": 68,
+            "tone": 55,
+            "expr": 46
+          },
+          "reading": 62.5
+        },
+        {
+          "id": "m2028-n27-cafe",
+          "name": "千葉 陸",
+          "seat": "tp3a",
+          "out": false,
+          "stats": {
+            "pitch": 57,
+            "rhythm": 79,
+            "tone": 64,
+            "expr": 59
+          },
+          "reading": 65
+        },
+        {
+          "id": "m2028-n28-cafe",
+          "name": "竹内 花音",
+          "seat": "tb1",
+          "out": false,
+          "stats": {
+            "pitch": 64,
+            "rhythm": 25,
+            "tone": 73,
+            "expr": 72
+          },
+          "reading": 67.5
+        },
+        {
+          "id": "m2028-n29-cafe",
+          "name": "井上 雫",
+          "seat": "tb2",
+          "out": false,
+          "stats": {
+            "pitch": 71,
+            "rhythm": 36,
+            "tone": 82,
+            "expr": 20
+          },
+          "reading": 70
+        },
+        {
+          "id": "m2028-n30-cafe",
+          "name": "石井 透",
+          "seat": "btb1",
+          "out": false,
+          "stats": {
+            "pitch": 78,
+            "rhythm": 47,
+            "tone": 31,
+            "expr": 33
+          },
+          "reading": 72.5
+        },
+        {
+          "id": "m2028-n31-cafe",
+          "name": "山下 茜",
+          "seat": "euph1",
+          "out": false,
+          "stats": {
+            "pitch": 15,
+            "rhythm": 58,
+            "tone": 40,
+            "expr": 46
+          },
+          "reading": 75
+        },
+        {
+          "id": "m2028-n32-cafe",
+          "name": "渡辺 渚",
+          "seat": "euph2",
+          "out": false,
+          "stats": {
+            "pitch": 22,
+            "rhythm": 69,
+            "tone": 49,
+            "expr": 59
+          },
+          "reading": 77.5
+        },
+        {
+          "id": "m2028-n33-cafe",
+          "name": "坂本 雫",
+          "seat": "tuba1",
+          "out": false,
+          "stats": {
+            "pitch": 29,
+            "rhythm": 80,
+            "tone": 58,
+            "expr": 72
+          },
+          "reading": 80
+        },
+        {
+          "id": "m2028-n34-cafe",
+          "name": "菅原 智也",
+          "seat": "tuba2",
+          "out": false,
+          "stats": {
+            "pitch": 36,
+            "rhythm": 26,
+            "tone": 67,
+            "expr": 20
+          },
+          "reading": 82.5
+        },
+        {
+          "id": "m2028-n35-cafe",
+          "name": "高木 明里",
+          "seat": "cb1",
+          "out": false,
+          "stats": {
+            "pitch": 43,
+            "rhythm": 37,
+            "tone": 76,
+            "expr": 33
+          },
+          "reading": 85
+        },
+        {
+          "id": "m2028-n36-cafe",
+          "name": "佐藤 誠",
+          "seat": "perc1",
+          "out": false,
+          "stats": {
+            "pitch": 50,
+            "rhythm": 48,
+            "tone": 25,
+            "expr": 46
+          },
+          "reading": 87.5
+        },
+        {
+          "id": "m2028-n37-cafe",
+          "name": "山田 蓮",
+          "seat": "perc2",
+          "out": false,
+          "stats": {
+            "pitch": 57,
+            "rhythm": 59,
+            "tone": 34,
+            "expr": 59
+          },
+          "reading": 90
+        },
+        {
+          "id": "m2028-n38-cafe",
+          "name": "原 杏",
+          "seat": "perc3",
+          "out": false,
+          "stats": {
+            "pitch": 64,
+            "rhythm": 70,
+            "tone": 43,
+            "expr": 72
+          },
+          "reading": 92.5
+        },
+        {
+          "id": "m2028-n39-cafe",
+          "name": "横山 透",
+          "seat": null,
+          "out": false,
+          "stats": {
+            "pitch": 0,
+            "rhythm": 0,
+            "tone": 0,
+            "expr": 0
+          },
+          "reading": 95
+        }
+      ],
+      "menus": []
+    },
+    "practice": null,
+    "from": null,
+    "playing": false,
+    "waiting": false,
+    "playback": null,
+    "audible": [],
+    "boot": {
+      "scripts": 33,
+      "loaded": 33,
+      "failed": [],
+      "errors": []
+    },
+    "errors": [],
+    "layout": {
+      "actions": {
+        "bottom": 0,
+        "height": 0,
+        "left": 0,
+        "right": 0,
+        "top": 0,
+        "width": 0
+      },
+      "component": {
+        "bottom": 0,
+        "height": 0,
+        "left": 0,
+        "right": 0,
+        "top": 0,
+        "width": 0
+      },
+      "focus": "BUTTON",
+      "mini": null,
+      "people": [
+        {
+          "bottom": 0,
+          "height": 0,
+          "id": "m2028-n16-cafe",
+          "left": 0,
+          "right": 0,
+          "top": 0,
+          "width": 0
+        },
+        {
+          "bottom": 0,
+          "height": 0,
+          "id": "m2028-n36-cafe",
+          "left": 0,
+          "right": 0,
+          "top": 0,
+          "width": 0
+        },
+        {
+          "bottom": 0,
+          "height": 0,
+          "id": "m2028-n3-cafe",
+          "left": 0,
+          "right": 0,
+          "top": 0,
+          "width": 0
+        }
+      ],
+      "picker": null,
+      "playActions": {
+        "bottom": 0,
+        "height": 0,
+        "left": 0,
+        "right": 0,
+        "top": 0,
+        "width": 0
+      },
+      "scroll": 0
+    },
+    "version": "qa-diagnosis-practice-5"
+  },
+  {
+    "tab": "今週",
+    "view": "diag-practice",
+    "width": 375,
+    "scrollWidth": 375,
+    "theme": "dark",
+    "year": 2028,
+    "week": 8,
+    "state": 0.8122529918327928,
+    "stats": 0.9732121941633523,
+    "records": 0.018823215970769525,
+    "plan": {},
+    "diag": {
+      "visible": true,
+      "open": true,
+      "topic": "tone",
+      "key": "2870353080:2028:8:galop",
+      "back": null,
+      "diagnosis": 0.13752670190297067,
+      "pid": "galop",
+      "selectedPiece": "galop",
+      "tab": "week",
+      "rows": [
+        {
+          "id": "m2028-n16-cafe",
+          "label": "野口 陽翔 音色 F、今週の練習を見る",
+          "rank": "F",
+          "face": "m2028-n16-cafe"
+        },
+        {
+          "id": "m2028-n36-cafe",
+          "label": "佐藤 誠 音色 F、今週の練習を見る",
+          "rank": "F",
+          "face": "m2028-n36-cafe"
+        },
+        {
+          "id": "m2028-n3-cafe",
+          "label": "松井 颯太 音色 F、今週の練習を見る",
+          "rank": "F",
+          "face": "m2028-n3-cafe"
+        }
+      ],
+      "source": [
+        {
+          "id": "m2028-n1-cafe",
+          "name": "田中 七海",
+          "seat": "picc1",
+          "out": false,
+          "stats": {
+            "pitch": 15,
+            "rhythm": 53,
+            "tone": 70,
+            "expr": 46
+          },
+          "reading": 0
+        },
+        {
+          "id": "m2028-n2-cafe",
+          "name": "小川 悠斗",
+          "seat": "fl1a",
+          "out": true,
+          "stats": {
+            "pitch": 22,
+            "rhythm": 64,
+            "tone": 79,
+            "expr": 59
+          },
+          "reading": 2.5
+        },
+        {
+          "id": "m2028-n3-cafe",
+          "name": "松井 颯太",
+          "seat": "fl1b",
+          "out": false,
+          "stats": {
+            "pitch": 29,
+            "rhythm": 75,
+            "tone": 28,
+            "expr": 72
+          },
+          "reading": 5
+        },
+        {
+          "id": "m2028-n4-cafe",
+          "name": "菅原 菜月",
+          "seat": "fl2a",
+          "out": false,
+          "stats": {
+            "pitch": 36,
+            "rhythm": 21,
+            "tone": 37,
+            "expr": 20
+          },
+          "reading": 7.5
+        },
+        {
+          "id": "m2028-n5-cafe",
+          "name": "岡本 智也",
+          "seat": "ob1",
+          "out": false,
+          "stats": {
+            "pitch": 43,
+            "rhythm": 32,
+            "tone": 46,
+            "expr": 33
+          },
+          "reading": 10
+        },
+        {
+          "id": "m2028-n6-cafe",
+          "name": "山口 大翔",
+          "seat": "cl1a",
+          "out": false,
+          "stats": {
+            "pitch": 50,
+            "rhythm": 43,
+            "tone": 55,
+            "expr": 46
+          },
+          "reading": 12.5
+        },
+        {
+          "id": "m2028-n7-cafe",
+          "name": "山下 彩花",
+          "seat": "cl1b",
+          "out": false,
+          "stats": {
+            "pitch": 57,
+            "rhythm": 54,
+            "tone": 64,
+            "expr": 59
+          },
+          "reading": 15
+        },
+        {
+          "id": "m2028-n8-cafe",
+          "name": "高木 瑛太",
+          "seat": "cl1c",
+          "out": false,
+          "stats": {
+            "pitch": 64,
+            "rhythm": 65,
+            "tone": 73,
+            "expr": 72
+          },
+          "reading": 17.5
+        },
+        {
+          "id": "m2028-n9-cafe",
+          "name": "清水 菜月",
+          "seat": "asax1",
+          "out": false,
+          "stats": {
+            "pitch": 71,
+            "rhythm": 76,
+            "tone": 82,
+            "expr": 20
+          },
+          "reading": 20
+        },
+        {
+          "id": "m2028-n10-cafe",
+          "name": "山本 凛",
+          "seat": "asax2",
+          "out": false,
+          "stats": {
+            "pitch": 78,
+            "rhythm": 22,
+            "tone": 31,
+            "expr": 33
+          },
+          "reading": 22.5
+        },
+        {
+          "id": "m2028-n11-cafe",
+          "name": "山田 悠真",
+          "seat": "fg1",
+          "out": false,
+          "stats": {
+            "pitch": 15,
+            "rhythm": 33,
+            "tone": 40,
+            "expr": 46
+          },
+          "reading": 25
+        },
+        {
+          "id": "m2028-n12-cafe",
+          "name": "西村 樹",
+          "seat": "ebcl1",
+          "out": false,
+          "stats": {
+            "pitch": 22,
+            "rhythm": 44,
+            "tone": 49,
+            "expr": 59
+          },
+          "reading": 27.5
+        },
+        {
+          "id": "m2028-n13-cafe",
+          "name": "松井 美咲",
+          "seat": "cl2a",
+          "out": false,
+          "stats": {
+            "pitch": 29,
+            "rhythm": 55,
+            "tone": 58,
+            "expr": 72
+          },
+          "reading": 30
+        },
+        {
+          "id": "m2028-n14-cafe",
+          "name": "阿部 和奏",
+          "seat": "cl2b",
+          "out": false,
+          "stats": {
+            "pitch": 36,
+            "rhythm": 66,
+            "tone": 67,
+            "expr": 20
+          },
+          "reading": 32.5
+        },
+        {
+          "id": "m2028-n15-cafe",
+          "name": "前田 紬",
+          "seat": "cl3a",
+          "out": false,
+          "stats": {
+            "pitch": 43,
+            "rhythm": 77,
+            "tone": 76,
+            "expr": 33
+          },
+          "reading": 35
+        },
+        {
+          "id": "m2028-n16-cafe",
+          "name": "野口 陽翔",
+          "seat": "cl3b",
+          "out": false,
+          "stats": {
+            "pitch": 50,
+            "rhythm": 23,
+            "tone": 25,
+            "expr": 46
+          },
+          "reading": 37.5
+        },
+        {
+          "id": "m2028-n17-cafe",
+          "name": "工藤 美月",
+          "seat": "bcl1",
+          "out": false,
+          "stats": {
+            "pitch": 57,
+            "rhythm": 34,
+            "tone": 34,
+            "expr": 59
+          },
+          "reading": 40
+        },
+        {
+          "id": "m2028-n18-cafe",
+          "name": "中野 透",
+          "seat": "tsax1",
+          "out": false,
+          "stats": {
+            "pitch": 64,
+            "rhythm": 45,
+            "tone": 43,
+            "expr": 72
+          },
+          "reading": 42.5
+        },
+        {
+          "id": "m2028-n19-cafe",
+          "name": "木村 湊",
+          "seat": "bsax1",
+          "out": false,
+          "stats": {
+            "pitch": 71,
+            "rhythm": 56,
+            "tone": 52,
+            "expr": 20
+          },
+          "reading": 45
+        },
+        {
+          "id": "m2028-n20-cafe",
+          "name": "佐々木 彩花",
+          "seat": "hn1",
+          "out": false,
+          "stats": {
+            "pitch": 78,
+            "rhythm": 67,
+            "tone": 61,
+            "expr": 33
+          },
+          "reading": 47.5
+        },
+        {
+          "id": "m2028-n21-cafe",
+          "name": "井上 優",
+          "seat": "hn2",
+          "out": false,
+          "stats": {
+            "pitch": 15,
+            "rhythm": 78,
+            "tone": 70,
+            "expr": 46
+          },
+          "reading": 50
+        },
+        {
+          "id": "m2028-n22-cafe",
+          "name": "酒井 陸",
+          "seat": "hn3",
+          "out": false,
+          "stats": {
+            "pitch": 22,
+            "rhythm": 24,
+            "tone": 79,
+            "expr": 59
+          },
+          "reading": 52.5
+        },
+        {
+          "id": "m2028-n23-cafe",
+          "name": "松田 拓海",
+          "seat": "hn4",
+          "out": false,
+          "stats": {
+            "pitch": 29,
+            "rhythm": 35,
+            "tone": 28,
+            "expr": 72
+          },
+          "reading": 55
+        },
+        {
+          "id": "m2028-n24-cafe",
+          "name": "中村 絢",
+          "seat": "tp1a",
+          "out": false,
+          "stats": {
+            "pitch": 36,
+            "rhythm": 46,
+            "tone": 37,
+            "expr": 20
+          },
+          "reading": 57.5
+        },
+        {
+          "id": "m2028-n25-cafe",
+          "name": "林 亮",
+          "seat": "tp1b",
+          "out": false,
+          "stats": {
+            "pitch": 43,
+            "rhythm": 57,
+            "tone": 46,
+            "expr": 33
+          },
+          "reading": 60
+        },
+        {
+          "id": "m2028-n26-cafe",
+          "name": "岩崎 結衣",
+          "seat": "tp2a",
+          "out": false,
+          "stats": {
+            "pitch": 50,
+            "rhythm": 68,
+            "tone": 55,
+            "expr": 46
+          },
+          "reading": 62.5
+        },
+        {
+          "id": "m2028-n27-cafe",
+          "name": "千葉 陸",
+          "seat": "tp3a",
+          "out": false,
+          "stats": {
+            "pitch": 57,
+            "rhythm": 79,
+            "tone": 64,
+            "expr": 59
+          },
+          "reading": 65
+        },
+        {
+          "id": "m2028-n28-cafe",
+          "name": "竹内 花音",
+          "seat": "tb1",
+          "out": false,
+          "stats": {
+            "pitch": 64,
+            "rhythm": 25,
+            "tone": 73,
+            "expr": 72
+          },
+          "reading": 67.5
+        },
+        {
+          "id": "m2028-n29-cafe",
+          "name": "井上 雫",
+          "seat": "tb2",
+          "out": false,
+          "stats": {
+            "pitch": 71,
+            "rhythm": 36,
+            "tone": 82,
+            "expr": 20
+          },
+          "reading": 70
+        },
+        {
+          "id": "m2028-n30-cafe",
+          "name": "石井 透",
+          "seat": "btb1",
+          "out": false,
+          "stats": {
+            "pitch": 78,
+            "rhythm": 47,
+            "tone": 31,
+            "expr": 33
+          },
+          "reading": 72.5
+        },
+        {
+          "id": "m2028-n31-cafe",
+          "name": "山下 茜",
+          "seat": "euph1",
+          "out": false,
+          "stats": {
+            "pitch": 15,
+            "rhythm": 58,
+            "tone": 40,
+            "expr": 46
+          },
+          "reading": 75
+        },
+        {
+          "id": "m2028-n32-cafe",
+          "name": "渡辺 渚",
+          "seat": "euph2",
+          "out": false,
+          "stats": {
+            "pitch": 22,
+            "rhythm": 69,
+            "tone": 49,
+            "expr": 59
+          },
+          "reading": 77.5
+        },
+        {
+          "id": "m2028-n33-cafe",
+          "name": "坂本 雫",
+          "seat": "tuba1",
+          "out": false,
+          "stats": {
+            "pitch": 29,
+            "rhythm": 80,
+            "tone": 58,
+            "expr": 72
+          },
+          "reading": 80
+        },
+        {
+          "id": "m2028-n34-cafe",
+          "name": "菅原 智也",
+          "seat": "tuba2",
+          "out": false,
+          "stats": {
+            "pitch": 36,
+            "rhythm": 26,
+            "tone": 67,
+            "expr": 20
+          },
+          "reading": 82.5
+        },
+        {
+          "id": "m2028-n35-cafe",
+          "name": "高木 明里",
+          "seat": "cb1",
+          "out": false,
+          "stats": {
+            "pitch": 43,
+            "rhythm": 37,
+            "tone": 76,
+            "expr": 33
+          },
+          "reading": 85
+        },
+        {
+          "id": "m2028-n36-cafe",
+          "name": "佐藤 誠",
+          "seat": "perc1",
+          "out": false,
+          "stats": {
+            "pitch": 50,
+            "rhythm": 48,
+            "tone": 25,
+            "expr": 46
+          },
+          "reading": 87.5
+        },
+        {
+          "id": "m2028-n37-cafe",
+          "name": "山田 蓮",
+          "seat": "perc2",
+          "out": false,
+          "stats": {
+            "pitch": 57,
+            "rhythm": 59,
+            "tone": 34,
+            "expr": 59
+          },
+          "reading": 90
+        },
+        {
+          "id": "m2028-n38-cafe",
+          "name": "原 杏",
+          "seat": "perc3",
+          "out": false,
+          "stats": {
+            "pitch": 64,
+            "rhythm": 70,
+            "tone": 43,
+            "expr": 72
+          },
+          "reading": 92.5
+        },
+        {
+          "id": "m2028-n39-cafe",
+          "name": "横山 透",
+          "seat": null,
+          "out": false,
+          "stats": {
+            "pitch": 0,
+            "rhythm": 0,
+            "tone": 0,
+            "expr": 0
+          },
+          "reading": 95
+        }
+      ],
+      "menus": []
+    },
+    "practice": null,
+    "from": null,
+    "playing": false,
+    "waiting": false,
+    "playback": null,
+    "audible": [],
+    "boot": {
+      "scripts": 33,
+      "loaded": 33,
+      "failed": [],
+      "errors": []
+    },
+    "errors": [],
+    "layout": {
+      "actions": {
+        "bottom": 752,
+        "height": 73,
+        "left": 16,
+        "right": 359,
+        "top": 679,
+        "width": 343
+      },
+      "component": {
+        "bottom": 0,
+        "height": 0,
+        "left": 0,
+        "right": 0,
+        "top": 0,
+        "width": 0
+      },
+      "focus": "BUTTON",
+      "mini": null,
+      "people": [
+        {
+          "bottom": 0,
+          "height": 0,
+          "id": "m2028-n16-cafe",
+          "left": 0,
+          "right": 0,
+          "top": 0,
+          "width": 0
+        },
+        {
+          "bottom": 0,
+          "height": 0,
+          "id": "m2028-n36-cafe",
+          "left": 0,
+          "right": 0,
+          "top": 0,
+          "width": 0
+        },
+        {
+          "bottom": 0,
+          "height": 0,
+          "id": "m2028-n3-cafe",
+          "left": 0,
+          "right": 0,
+          "top": 0,
+          "width": 0
+        }
+      ],
+      "picker": null,
+      "playActions": {
+        "bottom": 0,
+        "height": 0,
+        "left": 0,
+        "right": 0,
+        "top": 0,
+        "width": 0
+      },
+      "scroll": 0
+    },
+    "version": "qa-diagnosis-practice-5"
+  },
+  {
+    "tab": "合奏",
+    "view": "diag-practice",
+    "width": 375,
+    "scrollWidth": 375,
+    "theme": "dark",
+    "year": 2028,
+    "week": 8,
+    "state": 0.8122529918327928,
+    "stats": 0.9732121941633523,
+    "records": 0.018823215970769525,
+    "plan": {},
+    "diag": {
+      "visible": true,
+      "open": true,
+      "topic": "tone",
+      "key": "2870353080:2028:8:galop",
+      "back": null,
+      "diagnosis": 0.13752670190297067,
+      "pid": "galop",
+      "selectedPiece": "galop",
+      "tab": "play",
+      "rows": [
+        {
+          "id": "m2028-n16-cafe",
+          "label": "野口 陽翔 音色 F、今週の練習を見る",
+          "rank": "F",
+          "face": "m2028-n16-cafe"
+        },
+        {
+          "id": "m2028-n36-cafe",
+          "label": "佐藤 誠 音色 F、今週の練習を見る",
+          "rank": "F",
+          "face": "m2028-n36-cafe"
+        },
+        {
+          "id": "m2028-n3-cafe",
+          "label": "松井 颯太 音色 F、今週の練習を見る",
+          "rank": "F",
+          "face": "m2028-n3-cafe"
+        }
+      ],
+      "source": [
+        {
+          "id": "m2028-n1-cafe",
+          "name": "田中 七海",
+          "seat": "picc1",
+          "out": false,
+          "stats": {
+            "pitch": 15,
+            "rhythm": 53,
+            "tone": 70,
+            "expr": 46
+          },
+          "reading": 0
+        },
+        {
+          "id": "m2028-n2-cafe",
+          "name": "小川 悠斗",
+          "seat": "fl1a",
+          "out": true,
+          "stats": {
+            "pitch": 22,
+            "rhythm": 64,
+            "tone": 79,
+            "expr": 59
+          },
+          "reading": 2.5
+        },
+        {
+          "id": "m2028-n3-cafe",
+          "name": "松井 颯太",
+          "seat": "fl1b",
+          "out": false,
+          "stats": {
+            "pitch": 29,
+            "rhythm": 75,
+            "tone": 28,
+            "expr": 72
+          },
+          "reading": 5
+        },
+        {
+          "id": "m2028-n4-cafe",
+          "name": "菅原 菜月",
+          "seat": "fl2a",
+          "out": false,
+          "stats": {
+            "pitch": 36,
+            "rhythm": 21,
+            "tone": 37,
+            "expr": 20
+          },
+          "reading": 7.5
+        },
+        {
+          "id": "m2028-n5-cafe",
+          "name": "岡本 智也",
+          "seat": "ob1",
+          "out": false,
+          "stats": {
+            "pitch": 43,
+            "rhythm": 32,
+            "tone": 46,
+            "expr": 33
+          },
+          "reading": 10
+        },
+        {
+          "id": "m2028-n6-cafe",
+          "name": "山口 大翔",
+          "seat": "cl1a",
+          "out": false,
+          "stats": {
+            "pitch": 50,
+            "rhythm": 43,
+            "tone": 55,
+            "expr": 46
+          },
+          "reading": 12.5
+        },
+        {
+          "id": "m2028-n7-cafe",
+          "name": "山下 彩花",
+          "seat": "cl1b",
+          "out": false,
+          "stats": {
+            "pitch": 57,
+            "rhythm": 54,
+            "tone": 64,
+            "expr": 59
+          },
+          "reading": 15
+        },
+        {
+          "id": "m2028-n8-cafe",
+          "name": "高木 瑛太",
+          "seat": "cl1c",
+          "out": false,
+          "stats": {
+            "pitch": 64,
+            "rhythm": 65,
+            "tone": 73,
+            "expr": 72
+          },
+          "reading": 17.5
+        },
+        {
+          "id": "m2028-n9-cafe",
+          "name": "清水 菜月",
+          "seat": "asax1",
+          "out": false,
+          "stats": {
+            "pitch": 71,
+            "rhythm": 76,
+            "tone": 82,
+            "expr": 20
+          },
+          "reading": 20
+        },
+        {
+          "id": "m2028-n10-cafe",
+          "name": "山本 凛",
+          "seat": "asax2",
+          "out": false,
+          "stats": {
+            "pitch": 78,
+            "rhythm": 22,
+            "tone": 31,
+            "expr": 33
+          },
+          "reading": 22.5
+        },
+        {
+          "id": "m2028-n11-cafe",
+          "name": "山田 悠真",
+          "seat": "fg1",
+          "out": false,
+          "stats": {
+            "pitch": 15,
+            "rhythm": 33,
+            "tone": 40,
+            "expr": 46
+          },
+          "reading": 25
+        },
+        {
+          "id": "m2028-n12-cafe",
+          "name": "西村 樹",
+          "seat": "ebcl1",
+          "out": false,
+          "stats": {
+            "pitch": 22,
+            "rhythm": 44,
+            "tone": 49,
+            "expr": 59
+          },
+          "reading": 27.5
+        },
+        {
+          "id": "m2028-n13-cafe",
+          "name": "松井 美咲",
+          "seat": "cl2a",
+          "out": false,
+          "stats": {
+            "pitch": 29,
+            "rhythm": 55,
+            "tone": 58,
+            "expr": 72
+          },
+          "reading": 30
+        },
+        {
+          "id": "m2028-n14-cafe",
+          "name": "阿部 和奏",
+          "seat": "cl2b",
+          "out": false,
+          "stats": {
+            "pitch": 36,
+            "rhythm": 66,
+            "tone": 67,
+            "expr": 20
+          },
+          "reading": 32.5
+        },
+        {
+          "id": "m2028-n15-cafe",
+          "name": "前田 紬",
+          "seat": "cl3a",
+          "out": false,
+          "stats": {
+            "pitch": 43,
+            "rhythm": 77,
+            "tone": 76,
+            "expr": 33
+          },
+          "reading": 35
+        },
+        {
+          "id": "m2028-n16-cafe",
+          "name": "野口 陽翔",
+          "seat": "cl3b",
+          "out": false,
+          "stats": {
+            "pitch": 50,
+            "rhythm": 23,
+            "tone": 25,
+            "expr": 46
+          },
+          "reading": 37.5
+        },
+        {
+          "id": "m2028-n17-cafe",
+          "name": "工藤 美月",
+          "seat": "bcl1",
+          "out": false,
+          "stats": {
+            "pitch": 57,
+            "rhythm": 34,
+            "tone": 34,
+            "expr": 59
+          },
+          "reading": 40
+        },
+        {
+          "id": "m2028-n18-cafe",
+          "name": "中野 透",
+          "seat": "tsax1",
+          "out": false,
+          "stats": {
+            "pitch": 64,
+            "rhythm": 45,
+            "tone": 43,
+            "expr": 72
+          },
+          "reading": 42.5
+        },
+        {
+          "id": "m2028-n19-cafe",
+          "name": "木村 湊",
+          "seat": "bsax1",
+          "out": false,
+          "stats": {
+            "pitch": 71,
+            "rhythm": 56,
+            "tone": 52,
+            "expr": 20
+          },
+          "reading": 45
+        },
+        {
+          "id": "m2028-n20-cafe",
+          "name": "佐々木 彩花",
+          "seat": "hn1",
+          "out": false,
+          "stats": {
+            "pitch": 78,
+            "rhythm": 67,
+            "tone": 61,
+            "expr": 33
+          },
+          "reading": 47.5
+        },
+        {
+          "id": "m2028-n21-cafe",
+          "name": "井上 優",
+          "seat": "hn2",
+          "out": false,
+          "stats": {
+            "pitch": 15,
+            "rhythm": 78,
+            "tone": 70,
+            "expr": 46
+          },
+          "reading": 50
+        },
+        {
+          "id": "m2028-n22-cafe",
+          "name": "酒井 陸",
+          "seat": "hn3",
+          "out": false,
+          "stats": {
+            "pitch": 22,
+            "rhythm": 24,
+            "tone": 79,
+            "expr": 59
+          },
+          "reading": 52.5
+        },
+        {
+          "id": "m2028-n23-cafe",
+          "name": "松田 拓海",
+          "seat": "hn4",
+          "out": false,
+          "stats": {
+            "pitch": 29,
+            "rhythm": 35,
+            "tone": 28,
+            "expr": 72
+          },
+          "reading": 55
+        },
+        {
+          "id": "m2028-n24-cafe",
+          "name": "中村 絢",
+          "seat": "tp1a",
+          "out": false,
+          "stats": {
+            "pitch": 36,
+            "rhythm": 46,
+            "tone": 37,
+            "expr": 20
+          },
+          "reading": 57.5
+        },
+        {
+          "id": "m2028-n25-cafe",
+          "name": "林 亮",
+          "seat": "tp1b",
+          "out": false,
+          "stats": {
+            "pitch": 43,
+            "rhythm": 57,
+            "tone": 46,
+            "expr": 33
+          },
+          "reading": 60
+        },
+        {
+          "id": "m2028-n26-cafe",
+          "name": "岩崎 結衣",
+          "seat": "tp2a",
+          "out": false,
+          "stats": {
+            "pitch": 50,
+            "rhythm": 68,
+            "tone": 55,
+            "expr": 46
+          },
+          "reading": 62.5
+        },
+        {
+          "id": "m2028-n27-cafe",
+          "name": "千葉 陸",
+          "seat": "tp3a",
+          "out": false,
+          "stats": {
+            "pitch": 57,
+            "rhythm": 79,
+            "tone": 64,
+            "expr": 59
+          },
+          "reading": 65
+        },
+        {
+          "id": "m2028-n28-cafe",
+          "name": "竹内 花音",
+          "seat": "tb1",
+          "out": false,
+          "stats": {
+            "pitch": 64,
+            "rhythm": 25,
+            "tone": 73,
+            "expr": 72
+          },
+          "reading": 67.5
+        },
+        {
+          "id": "m2028-n29-cafe",
+          "name": "井上 雫",
+          "seat": "tb2",
+          "out": false,
+          "stats": {
+            "pitch": 71,
+            "rhythm": 36,
+            "tone": 82,
+            "expr": 20
+          },
+          "reading": 70
+        },
+        {
+          "id": "m2028-n30-cafe",
+          "name": "石井 透",
+          "seat": "btb1",
+          "out": false,
+          "stats": {
+            "pitch": 78,
+            "rhythm": 47,
+            "tone": 31,
+            "expr": 33
+          },
+          "reading": 72.5
+        },
+        {
+          "id": "m2028-n31-cafe",
+          "name": "山下 茜",
+          "seat": "euph1",
+          "out": false,
+          "stats": {
+            "pitch": 15,
+            "rhythm": 58,
+            "tone": 40,
+            "expr": 46
+          },
+          "reading": 75
+        },
+        {
+          "id": "m2028-n32-cafe",
+          "name": "渡辺 渚",
+          "seat": "euph2",
+          "out": false,
+          "stats": {
+            "pitch": 22,
+            "rhythm": 69,
+            "tone": 49,
+            "expr": 59
+          },
+          "reading": 77.5
+        },
+        {
+          "id": "m2028-n33-cafe",
+          "name": "坂本 雫",
+          "seat": "tuba1",
+          "out": false,
+          "stats": {
+            "pitch": 29,
+            "rhythm": 80,
+            "tone": 58,
+            "expr": 72
+          },
+          "reading": 80
+        },
+        {
+          "id": "m2028-n34-cafe",
+          "name": "菅原 智也",
+          "seat": "tuba2",
+          "out": false,
+          "stats": {
+            "pitch": 36,
+            "rhythm": 26,
+            "tone": 67,
+            "expr": 20
+          },
+          "reading": 82.5
+        },
+        {
+          "id": "m2028-n35-cafe",
+          "name": "高木 明里",
+          "seat": "cb1",
+          "out": false,
+          "stats": {
+            "pitch": 43,
+            "rhythm": 37,
+            "tone": 76,
+            "expr": 33
+          },
+          "reading": 85
+        },
+        {
+          "id": "m2028-n36-cafe",
+          "name": "佐藤 誠",
+          "seat": "perc1",
+          "out": false,
+          "stats": {
+            "pitch": 50,
+            "rhythm": 48,
+            "tone": 25,
+            "expr": 46
+          },
+          "reading": 87.5
+        },
+        {
+          "id": "m2028-n37-cafe",
+          "name": "山田 蓮",
+          "seat": "perc2",
+          "out": false,
+          "stats": {
+            "pitch": 57,
+            "rhythm": 59,
+            "tone": 34,
+            "expr": 59
+          },
+          "reading": 90
+        },
+        {
+          "id": "m2028-n38-cafe",
+          "name": "原 杏",
+          "seat": "perc3",
+          "out": false,
+          "stats": {
+            "pitch": 64,
+            "rhythm": 70,
+            "tone": 43,
+            "expr": 72
+          },
+          "reading": 92.5
+        },
+        {
+          "id": "m2028-n39-cafe",
+          "name": "横山 透",
+          "seat": null,
+          "out": false,
+          "stats": {
+            "pitch": 0,
+            "rhythm": 0,
+            "tone": 0,
+            "expr": 0
+          },
+          "reading": 95
+        }
+      ],
+      "menus": []
+    },
+    "practice": null,
+    "from": null,
+    "playing": false,
+    "waiting": false,
+    "playback": null,
+    "audible": [],
+    "boot": {
+      "scripts": 33,
+      "loaded": 33,
+      "failed": [],
+      "errors": []
+    },
+    "errors": [],
+    "layout": {
+      "actions": {
+        "bottom": 0,
+        "height": 0,
+        "left": 0,
+        "right": 0,
+        "top": 0,
+        "width": 0
+      },
+      "component": {
+        "bottom": 644.9765625,
+        "height": 366,
+        "left": 30,
+        "right": 345,
+        "top": 278.9765625,
+        "width": 315
+      },
+      "focus": "BUTTON",
+      "mini": null,
+      "people": [
+        {
+          "bottom": 497.9765625,
+          "height": 60,
+          "id": "m2028-n16-cafe",
+          "left": 43,
+          "right": 332,
+          "top": 437.9765625,
+          "width": 289
+        },
+        {
+          "bottom": 564.9765625,
+          "height": 60,
+          "id": "m2028-n36-cafe",
+          "left": 43,
+          "right": 332,
+          "top": 504.9765625,
+          "width": 289
+        },
+        {
+          "bottom": 631.9765625,
+          "height": 60,
+          "id": "m2028-n3-cafe",
+          "left": 43,
+          "right": 332,
+          "top": 571.9765625,
+          "width": 289
+        }
+      ],
+      "picker": null,
+      "playActions": {
+        "bottom": 752,
+        "height": 68,
+        "left": 16,
+        "right": 359,
+        "top": 684,
+        "width": 343
+      },
+      "scroll": 867
+    },
+    "version": "qa-diagnosis-practice-5"
+  },
+  {
+    "tab": "部員",
+    "view": "diag-practice",
+    "width": 375,
+    "scrollWidth": 375,
+    "theme": "dark",
+    "year": 2028,
+    "week": 8,
+    "state": 0.8122529918327928,
+    "stats": 0.9732121941633523,
+    "records": 0.018823215970769525,
+    "plan": {},
+    "diag": {
+      "visible": true,
+      "open": true,
+      "topic": "tone",
+      "key": "2870353080:2028:8:galop",
+      "back": null,
+      "diagnosis": 0.13752670190297067,
+      "pid": "galop",
+      "selectedPiece": "galop",
+      "tab": "members",
+      "rows": [
+        {
+          "id": "m2028-n16-cafe",
+          "label": "野口 陽翔 音色 F、今週の練習を見る",
+          "rank": "F",
+          "face": "m2028-n16-cafe"
+        },
+        {
+          "id": "m2028-n36-cafe",
+          "label": "佐藤 誠 音色 F、今週の練習を見る",
+          "rank": "F",
+          "face": "m2028-n36-cafe"
+        },
+        {
+          "id": "m2028-n3-cafe",
+          "label": "松井 颯太 音色 F、今週の練習を見る",
+          "rank": "F",
+          "face": "m2028-n3-cafe"
+        }
+      ],
+      "source": [
+        {
+          "id": "m2028-n1-cafe",
+          "name": "田中 七海",
+          "seat": "picc1",
+          "out": false,
+          "stats": {
+            "pitch": 15,
+            "rhythm": 53,
+            "tone": 70,
+            "expr": 46
+          },
+          "reading": 0
+        },
+        {
+          "id": "m2028-n2-cafe",
+          "name": "小川 悠斗",
+          "seat": "fl1a",
+          "out": true,
+          "stats": {
+            "pitch": 22,
+            "rhythm": 64,
+            "tone": 79,
+            "expr": 59
+          },
+          "reading": 2.5
+        },
+        {
+          "id": "m2028-n3-cafe",
+          "name": "松井 颯太",
+          "seat": "fl1b",
+          "out": false,
+          "stats": {
+            "pitch": 29,
+            "rhythm": 75,
+            "tone": 28,
+            "expr": 72
+          },
+          "reading": 5
+        },
+        {
+          "id": "m2028-n4-cafe",
+          "name": "菅原 菜月",
+          "seat": "fl2a",
+          "out": false,
+          "stats": {
+            "pitch": 36,
+            "rhythm": 21,
+            "tone": 37,
+            "expr": 20
+          },
+          "reading": 7.5
+        },
+        {
+          "id": "m2028-n5-cafe",
+          "name": "岡本 智也",
+          "seat": "ob1",
+          "out": false,
+          "stats": {
+            "pitch": 43,
+            "rhythm": 32,
+            "tone": 46,
+            "expr": 33
+          },
+          "reading": 10
+        },
+        {
+          "id": "m2028-n6-cafe",
+          "name": "山口 大翔",
+          "seat": "cl1a",
+          "out": false,
+          "stats": {
+            "pitch": 50,
+            "rhythm": 43,
+            "tone": 55,
+            "expr": 46
+          },
+          "reading": 12.5
+        },
+        {
+          "id": "m2028-n7-cafe",
+          "name": "山下 彩花",
+          "seat": "cl1b",
+          "out": false,
+          "stats": {
+            "pitch": 57,
+            "rhythm": 54,
+            "tone": 64,
+            "expr": 59
+          },
+          "reading": 15
+        },
+        {
+          "id": "m2028-n8-cafe",
+          "name": "高木 瑛太",
+          "seat": "cl1c",
+          "out": false,
+          "stats": {
+            "pitch": 64,
+            "rhythm": 65,
+            "tone": 73,
+            "expr": 72
+          },
+          "reading": 17.5
+        },
+        {
+          "id": "m2028-n9-cafe",
+          "name": "清水 菜月",
+          "seat": "asax1",
+          "out": false,
+          "stats": {
+            "pitch": 71,
+            "rhythm": 76,
+            "tone": 82,
+            "expr": 20
+          },
+          "reading": 20
+        },
+        {
+          "id": "m2028-n10-cafe",
+          "name": "山本 凛",
+          "seat": "asax2",
+          "out": false,
+          "stats": {
+            "pitch": 78,
+            "rhythm": 22,
+            "tone": 31,
+            "expr": 33
+          },
+          "reading": 22.5
+        },
+        {
+          "id": "m2028-n11-cafe",
+          "name": "山田 悠真",
+          "seat": "fg1",
+          "out": false,
+          "stats": {
+            "pitch": 15,
+            "rhythm": 33,
+            "tone": 40,
+            "expr": 46
+          },
+          "reading": 25
+        },
+        {
+          "id": "m2028-n12-cafe",
+          "name": "西村 樹",
+          "seat": "ebcl1",
+          "out": false,
+          "stats": {
+            "pitch": 22,
+            "rhythm": 44,
+            "tone": 49,
+            "expr": 59
+          },
+          "reading": 27.5
+        },
+        {
+          "id": "m2028-n13-cafe",
+          "name": "松井 美咲",
+          "seat": "cl2a",
+          "out": false,
+          "stats": {
+            "pitch": 29,
+            "rhythm": 55,
+            "tone": 58,
+            "expr": 72
+          },
+          "reading": 30
+        },
+        {
+          "id": "m2028-n14-cafe",
+          "name": "阿部 和奏",
+          "seat": "cl2b",
+          "out": false,
+          "stats": {
+            "pitch": 36,
+            "rhythm": 66,
+            "tone": 67,
+            "expr": 20
+          },
+          "reading": 32.5
+        },
+        {
+          "id": "m2028-n15-cafe",
+          "name": "前田 紬",
+          "seat": "cl3a",
+          "out": false,
+          "stats": {
+            "pitch": 43,
+            "rhythm": 77,
+            "tone": 76,
+            "expr": 33
+          },
+          "reading": 35
+        },
+        {
+          "id": "m2028-n16-cafe",
+          "name": "野口 陽翔",
+          "seat": "cl3b",
+          "out": false,
+          "stats": {
+            "pitch": 50,
+            "rhythm": 23,
+            "tone": 25,
+            "expr": 46
+          },
+          "reading": 37.5
+        },
+        {
+          "id": "m2028-n17-cafe",
+          "name": "工藤 美月",
+          "seat": "bcl1",
+          "out": false,
+          "stats": {
+            "pitch": 57,
+            "rhythm": 34,
+            "tone": 34,
+            "expr": 59
+          },
+          "reading": 40
+        },
+        {
+          "id": "m2028-n18-cafe",
+          "name": "中野 透",
+          "seat": "tsax1",
+          "out": false,
+          "stats": {
+            "pitch": 64,
+            "rhythm": 45,
+            "tone": 43,
+            "expr": 72
+          },
+          "reading": 42.5
+        },
+        {
+          "id": "m2028-n19-cafe",
+          "name": "木村 湊",
+          "seat": "bsax1",
+          "out": false,
+          "stats": {
+            "pitch": 71,
+            "rhythm": 56,
+            "tone": 52,
+            "expr": 20
+          },
+          "reading": 45
+        },
+        {
+          "id": "m2028-n20-cafe",
+          "name": "佐々木 彩花",
+          "seat": "hn1",
+          "out": false,
+          "stats": {
+            "pitch": 78,
+            "rhythm": 67,
+            "tone": 61,
+            "expr": 33
+          },
+          "reading": 47.5
+        },
+        {
+          "id": "m2028-n21-cafe",
+          "name": "井上 優",
+          "seat": "hn2",
+          "out": false,
+          "stats": {
+            "pitch": 15,
+            "rhythm": 78,
+            "tone": 70,
+            "expr": 46
+          },
+          "reading": 50
+        },
+        {
+          "id": "m2028-n22-cafe",
+          "name": "酒井 陸",
+          "seat": "hn3",
+          "out": false,
+          "stats": {
+            "pitch": 22,
+            "rhythm": 24,
+            "tone": 79,
+            "expr": 59
+          },
+          "reading": 52.5
+        },
+        {
+          "id": "m2028-n23-cafe",
+          "name": "松田 拓海",
+          "seat": "hn4",
+          "out": false,
+          "stats": {
+            "pitch": 29,
+            "rhythm": 35,
+            "tone": 28,
+            "expr": 72
+          },
+          "reading": 55
+        },
+        {
+          "id": "m2028-n24-cafe",
+          "name": "中村 絢",
+          "seat": "tp1a",
+          "out": false,
+          "stats": {
+            "pitch": 36,
+            "rhythm": 46,
+            "tone": 37,
+            "expr": 20
+          },
+          "reading": 57.5
+        },
+        {
+          "id": "m2028-n25-cafe",
+          "name": "林 亮",
+          "seat": "tp1b",
+          "out": false,
+          "stats": {
+            "pitch": 43,
+            "rhythm": 57,
+            "tone": 46,
+            "expr": 33
+          },
+          "reading": 60
+        },
+        {
+          "id": "m2028-n26-cafe",
+          "name": "岩崎 結衣",
+          "seat": "tp2a",
+          "out": false,
+          "stats": {
+            "pitch": 50,
+            "rhythm": 68,
+            "tone": 55,
+            "expr": 46
+          },
+          "reading": 62.5
+        },
+        {
+          "id": "m2028-n27-cafe",
+          "name": "千葉 陸",
+          "seat": "tp3a",
+          "out": false,
+          "stats": {
+            "pitch": 57,
+            "rhythm": 79,
+            "tone": 64,
+            "expr": 59
+          },
+          "reading": 65
+        },
+        {
+          "id": "m2028-n28-cafe",
+          "name": "竹内 花音",
+          "seat": "tb1",
+          "out": false,
+          "stats": {
+            "pitch": 64,
+            "rhythm": 25,
+            "tone": 73,
+            "expr": 72
+          },
+          "reading": 67.5
+        },
+        {
+          "id": "m2028-n29-cafe",
+          "name": "井上 雫",
+          "seat": "tb2",
+          "out": false,
+          "stats": {
+            "pitch": 71,
+            "rhythm": 36,
+            "tone": 82,
+            "expr": 20
+          },
+          "reading": 70
+        },
+        {
+          "id": "m2028-n30-cafe",
+          "name": "石井 透",
+          "seat": "btb1",
+          "out": false,
+          "stats": {
+            "pitch": 78,
+            "rhythm": 47,
+            "tone": 31,
+            "expr": 33
+          },
+          "reading": 72.5
+        },
+        {
+          "id": "m2028-n31-cafe",
+          "name": "山下 茜",
+          "seat": "euph1",
+          "out": false,
+          "stats": {
+            "pitch": 15,
+            "rhythm": 58,
+            "tone": 40,
+            "expr": 46
+          },
+          "reading": 75
+        },
+        {
+          "id": "m2028-n32-cafe",
+          "name": "渡辺 渚",
+          "seat": "euph2",
+          "out": false,
+          "stats": {
+            "pitch": 22,
+            "rhythm": 69,
+            "tone": 49,
+            "expr": 59
+          },
+          "reading": 77.5
+        },
+        {
+          "id": "m2028-n33-cafe",
+          "name": "坂本 雫",
+          "seat": "tuba1",
+          "out": false,
+          "stats": {
+            "pitch": 29,
+            "rhythm": 80,
+            "tone": 58,
+            "expr": 72
+          },
+          "reading": 80
+        },
+        {
+          "id": "m2028-n34-cafe",
+          "name": "菅原 智也",
+          "seat": "tuba2",
+          "out": false,
+          "stats": {
+            "pitch": 36,
+            "rhythm": 26,
+            "tone": 67,
+            "expr": 20
+          },
+          "reading": 82.5
+        },
+        {
+          "id": "m2028-n35-cafe",
+          "name": "高木 明里",
+          "seat": "cb1",
+          "out": false,
+          "stats": {
+            "pitch": 43,
+            "rhythm": 37,
+            "tone": 76,
+            "expr": 33
+          },
+          "reading": 85
+        },
+        {
+          "id": "m2028-n36-cafe",
+          "name": "佐藤 誠",
+          "seat": "perc1",
+          "out": false,
+          "stats": {
+            "pitch": 50,
+            "rhythm": 48,
+            "tone": 25,
+            "expr": 46
+          },
+          "reading": 87.5
+        },
+        {
+          "id": "m2028-n37-cafe",
+          "name": "山田 蓮",
+          "seat": "perc2",
+          "out": false,
+          "stats": {
+            "pitch": 57,
+            "rhythm": 59,
+            "tone": 34,
+            "expr": 59
+          },
+          "reading": 90
+        },
+        {
+          "id": "m2028-n38-cafe",
+          "name": "原 杏",
+          "seat": "perc3",
+          "out": false,
+          "stats": {
+            "pitch": 64,
+            "rhythm": 70,
+            "tone": 43,
+            "expr": 72
+          },
+          "reading": 92.5
+        },
+        {
+          "id": "m2028-n39-cafe",
+          "name": "横山 透",
+          "seat": null,
+          "out": false,
+          "stats": {
+            "pitch": 0,
+            "rhythm": 0,
+            "tone": 0,
+            "expr": 0
+          },
+          "reading": 95
+        }
+      ],
+      "menus": []
+    },
+    "practice": null,
+    "from": null,
+    "playing": false,
+    "waiting": false,
+    "playback": null,
+    "audible": [],
+    "boot": {
+      "scripts": 33,
+      "loaded": 33,
+      "failed": [],
+      "errors": []
+    },
+    "errors": [],
+    "layout": {
+      "actions": {
+        "bottom": 0,
+        "height": 0,
+        "left": 0,
+        "right": 0,
+        "top": 0,
+        "width": 0
+      },
+      "component": {
+        "bottom": 0,
+        "height": 0,
+        "left": 0,
+        "right": 0,
+        "top": 0,
+        "width": 0
+      },
+      "focus": "BUTTON",
+      "mini": null,
+      "people": [
+        {
+          "bottom": 0,
+          "height": 0,
+          "id": "m2028-n16-cafe",
+          "left": 0,
+          "right": 0,
+          "top": 0,
+          "width": 0
+        },
+        {
+          "bottom": 0,
+          "height": 0,
+          "id": "m2028-n36-cafe",
+          "left": 0,
+          "right": 0,
+          "top": 0,
+          "width": 0
+        },
+        {
+          "bottom": 0,
+          "height": 0,
+          "id": "m2028-n3-cafe",
+          "left": 0,
+          "right": 0,
+          "top": 0,
+          "width": 0
+        }
+      ],
+      "picker": null,
+      "playActions": {
+        "bottom": 0,
+        "height": 0,
+        "left": 0,
+        "right": 0,
+        "top": 0,
+        "width": 0
+      },
+      "scroll": 0
+    },
+    "version": "qa-diagnosis-practice-5"
+  },
+  {
+    "tab": "日誌",
+    "view": "diag-practice",
+    "width": 375,
+    "scrollWidth": 375,
+    "theme": "dark",
+    "year": 2028,
+    "week": 8,
+    "state": 0.8122529918327928,
+    "stats": 0.9732121941633523,
+    "records": 0.018823215970769525,
+    "plan": {},
+    "diag": {
+      "visible": true,
+      "open": true,
+      "topic": "tone",
+      "key": "2870353080:2028:8:galop",
+      "back": null,
+      "diagnosis": 0.13752670190297067,
+      "pid": "galop",
+      "selectedPiece": "galop",
+      "tab": "log",
+      "rows": [
+        {
+          "id": "m2028-n16-cafe",
+          "label": "野口 陽翔 音色 F、今週の練習を見る",
+          "rank": "F",
+          "face": "m2028-n16-cafe"
+        },
+        {
+          "id": "m2028-n36-cafe",
+          "label": "佐藤 誠 音色 F、今週の練習を見る",
+          "rank": "F",
+          "face": "m2028-n36-cafe"
+        },
+        {
+          "id": "m2028-n3-cafe",
+          "label": "松井 颯太 音色 F、今週の練習を見る",
+          "rank": "F",
+          "face": "m2028-n3-cafe"
+        }
+      ],
+      "source": [
+        {
+          "id": "m2028-n1-cafe",
+          "name": "田中 七海",
+          "seat": "picc1",
+          "out": false,
+          "stats": {
+            "pitch": 15,
+            "rhythm": 53,
+            "tone": 70,
+            "expr": 46
+          },
+          "reading": 0
+        },
+        {
+          "id": "m2028-n2-cafe",
+          "name": "小川 悠斗",
+          "seat": "fl1a",
+          "out": true,
+          "stats": {
+            "pitch": 22,
+            "rhythm": 64,
+            "tone": 79,
+            "expr": 59
+          },
+          "reading": 2.5
+        },
+        {
+          "id": "m2028-n3-cafe",
+          "name": "松井 颯太",
+          "seat": "fl1b",
+          "out": false,
+          "stats": {
+            "pitch": 29,
+            "rhythm": 75,
+            "tone": 28,
+            "expr": 72
+          },
+          "reading": 5
+        },
+        {
+          "id": "m2028-n4-cafe",
+          "name": "菅原 菜月",
+          "seat": "fl2a",
+          "out": false,
+          "stats": {
+            "pitch": 36,
+            "rhythm": 21,
+            "tone": 37,
+            "expr": 20
+          },
+          "reading": 7.5
+        },
+        {
+          "id": "m2028-n5-cafe",
+          "name": "岡本 智也",
+          "seat": "ob1",
+          "out": false,
+          "stats": {
+            "pitch": 43,
+            "rhythm": 32,
+            "tone": 46,
+            "expr": 33
+          },
+          "reading": 10
+        },
+        {
+          "id": "m2028-n6-cafe",
+          "name": "山口 大翔",
+          "seat": "cl1a",
+          "out": false,
+          "stats": {
+            "pitch": 50,
+            "rhythm": 43,
+            "tone": 55,
+            "expr": 46
+          },
+          "reading": 12.5
+        },
+        {
+          "id": "m2028-n7-cafe",
+          "name": "山下 彩花",
+          "seat": "cl1b",
+          "out": false,
+          "stats": {
+            "pitch": 57,
+            "rhythm": 54,
+            "tone": 64,
+            "expr": 59
+          },
+          "reading": 15
+        },
+        {
+          "id": "m2028-n8-cafe",
+          "name": "高木 瑛太",
+          "seat": "cl1c",
+          "out": false,
+          "stats": {
+            "pitch": 64,
+            "rhythm": 65,
+            "tone": 73,
+            "expr": 72
+          },
+          "reading": 17.5
+        },
+        {
+          "id": "m2028-n9-cafe",
+          "name": "清水 菜月",
+          "seat": "asax1",
+          "out": false,
+          "stats": {
+            "pitch": 71,
+            "rhythm": 76,
+            "tone": 82,
+            "expr": 20
+          },
+          "reading": 20
+        },
+        {
+          "id": "m2028-n10-cafe",
+          "name": "山本 凛",
+          "seat": "asax2",
+          "out": false,
+          "stats": {
+            "pitch": 78,
+            "rhythm": 22,
+            "tone": 31,
+            "expr": 33
+          },
+          "reading": 22.5
+        },
+        {
+          "id": "m2028-n11-cafe",
+          "name": "山田 悠真",
+          "seat": "fg1",
+          "out": false,
+          "stats": {
+            "pitch": 15,
+            "rhythm": 33,
+            "tone": 40,
+            "expr": 46
+          },
+          "reading": 25
+        },
+        {
+          "id": "m2028-n12-cafe",
+          "name": "西村 樹",
+          "seat": "ebcl1",
+          "out": false,
+          "stats": {
+            "pitch": 22,
+            "rhythm": 44,
+            "tone": 49,
+            "expr": 59
+          },
+          "reading": 27.5
+        },
+        {
+          "id": "m2028-n13-cafe",
+          "name": "松井 美咲",
+          "seat": "cl2a",
+          "out": false,
+          "stats": {
+            "pitch": 29,
+            "rhythm": 55,
+            "tone": 58,
+            "expr": 72
+          },
+          "reading": 30
+        },
+        {
+          "id": "m2028-n14-cafe",
+          "name": "阿部 和奏",
+          "seat": "cl2b",
+          "out": false,
+          "stats": {
+            "pitch": 36,
+            "rhythm": 66,
+            "tone": 67,
+            "expr": 20
+          },
+          "reading": 32.5
+        },
+        {
+          "id": "m2028-n15-cafe",
+          "name": "前田 紬",
+          "seat": "cl3a",
+          "out": false,
+          "stats": {
+            "pitch": 43,
+            "rhythm": 77,
+            "tone": 76,
+            "expr": 33
+          },
+          "reading": 35
+        },
+        {
+          "id": "m2028-n16-cafe",
+          "name": "野口 陽翔",
+          "seat": "cl3b",
+          "out": false,
+          "stats": {
+            "pitch": 50,
+            "rhythm": 23,
+            "tone": 25,
+            "expr": 46
+          },
+          "reading": 37.5
+        },
+        {
+          "id": "m2028-n17-cafe",
+          "name": "工藤 美月",
+          "seat": "bcl1",
+          "out": false,
+          "stats": {
+            "pitch": 57,
+            "rhythm": 34,
+            "tone": 34,
+            "expr": 59
+          },
+          "reading": 40
+        },
+        {
+          "id": "m2028-n18-cafe",
+          "name": "中野 透",
+          "seat": "tsax1",
+          "out": false,
+          "stats": {
+            "pitch": 64,
+            "rhythm": 45,
+            "tone": 43,
+            "expr": 72
+          },
+          "reading": 42.5
+        },
+        {
+          "id": "m2028-n19-cafe",
+          "name": "木村 湊",
+          "seat": "bsax1",
+          "out": false,
+          "stats": {
+            "pitch": 71,
+            "rhythm": 56,
+            "tone": 52,
+            "expr": 20
+          },
+          "reading": 45
+        },
+        {
+          "id": "m2028-n20-cafe",
+          "name": "佐々木 彩花",
+          "seat": "hn1",
+          "out": false,
+          "stats": {
+            "pitch": 78,
+            "rhythm": 67,
+            "tone": 61,
+            "expr": 33
+          },
+          "reading": 47.5
+        },
+        {
+          "id": "m2028-n21-cafe",
+          "name": "井上 優",
+          "seat": "hn2",
+          "out": false,
+          "stats": {
+            "pitch": 15,
+            "rhythm": 78,
+            "tone": 70,
+            "expr": 46
+          },
+          "reading": 50
+        },
+        {
+          "id": "m2028-n22-cafe",
+          "name": "酒井 陸",
+          "seat": "hn3",
+          "out": false,
+          "stats": {
+            "pitch": 22,
+            "rhythm": 24,
+            "tone": 79,
+            "expr": 59
+          },
+          "reading": 52.5
+        },
+        {
+          "id": "m2028-n23-cafe",
+          "name": "松田 拓海",
+          "seat": "hn4",
+          "out": false,
+          "stats": {
+            "pitch": 29,
+            "rhythm": 35,
+            "tone": 28,
+            "expr": 72
+          },
+          "reading": 55
+        },
+        {
+          "id": "m2028-n24-cafe",
+          "name": "中村 絢",
+          "seat": "tp1a",
+          "out": false,
+          "stats": {
+            "pitch": 36,
+            "rhythm": 46,
+            "tone": 37,
+            "expr": 20
+          },
+          "reading": 57.5
+        },
+        {
+          "id": "m2028-n25-cafe",
+          "name": "林 亮",
+          "seat": "tp1b",
+          "out": false,
+          "stats": {
+            "pitch": 43,
+            "rhythm": 57,
+            "tone": 46,
+            "expr": 33
+          },
+          "reading": 60
+        },
+        {
+          "id": "m2028-n26-cafe",
+          "name": "岩崎 結衣",
+          "seat": "tp2a",
+          "out": false,
+          "stats": {
+            "pitch": 50,
+            "rhythm": 68,
+            "tone": 55,
+            "expr": 46
+          },
+          "reading": 62.5
+        },
+        {
+          "id": "m2028-n27-cafe",
+          "name": "千葉 陸",
+          "seat": "tp3a",
+          "out": false,
+          "stats": {
+            "pitch": 57,
+            "rhythm": 79,
+            "tone": 64,
+            "expr": 59
+          },
+          "reading": 65
+        },
+        {
+          "id": "m2028-n28-cafe",
+          "name": "竹内 花音",
+          "seat": "tb1",
+          "out": false,
+          "stats": {
+            "pitch": 64,
+            "rhythm": 25,
+            "tone": 73,
+            "expr": 72
+          },
+          "reading": 67.5
+        },
+        {
+          "id": "m2028-n29-cafe",
+          "name": "井上 雫",
+          "seat": "tb2",
+          "out": false,
+          "stats": {
+            "pitch": 71,
+            "rhythm": 36,
+            "tone": 82,
+            "expr": 20
+          },
+          "reading": 70
+        },
+        {
+          "id": "m2028-n30-cafe",
+          "name": "石井 透",
+          "seat": "btb1",
+          "out": false,
+          "stats": {
+            "pitch": 78,
+            "rhythm": 47,
+            "tone": 31,
+            "expr": 33
+          },
+          "reading": 72.5
+        },
+        {
+          "id": "m2028-n31-cafe",
+          "name": "山下 茜",
+          "seat": "euph1",
+          "out": false,
+          "stats": {
+            "pitch": 15,
+            "rhythm": 58,
+            "tone": 40,
+            "expr": 46
+          },
+          "reading": 75
+        },
+        {
+          "id": "m2028-n32-cafe",
+          "name": "渡辺 渚",
+          "seat": "euph2",
+          "out": false,
+          "stats": {
+            "pitch": 22,
+            "rhythm": 69,
+            "tone": 49,
+            "expr": 59
+          },
+          "reading": 77.5
+        },
+        {
+          "id": "m2028-n33-cafe",
+          "name": "坂本 雫",
+          "seat": "tuba1",
+          "out": false,
+          "stats": {
+            "pitch": 29,
+            "rhythm": 80,
+            "tone": 58,
+            "expr": 72
+          },
+          "reading": 80
+        },
+        {
+          "id": "m2028-n34-cafe",
+          "name": "菅原 智也",
+          "seat": "tuba2",
+          "out": false,
+          "stats": {
+            "pitch": 36,
+            "rhythm": 26,
+            "tone": 67,
+            "expr": 20
+          },
+          "reading": 82.5
+        },
+        {
+          "id": "m2028-n35-cafe",
+          "name": "高木 明里",
+          "seat": "cb1",
+          "out": false,
+          "stats": {
+            "pitch": 43,
+            "rhythm": 37,
+            "tone": 76,
+            "expr": 33
+          },
+          "reading": 85
+        },
+        {
+          "id": "m2028-n36-cafe",
+          "name": "佐藤 誠",
+          "seat": "perc1",
+          "out": false,
+          "stats": {
+            "pitch": 50,
+            "rhythm": 48,
+            "tone": 25,
+            "expr": 46
+          },
+          "reading": 87.5
+        },
+        {
+          "id": "m2028-n37-cafe",
+          "name": "山田 蓮",
+          "seat": "perc2",
+          "out": false,
+          "stats": {
+            "pitch": 57,
+            "rhythm": 59,
+            "tone": 34,
+            "expr": 59
+          },
+          "reading": 90
+        },
+        {
+          "id": "m2028-n38-cafe",
+          "name": "原 杏",
+          "seat": "perc3",
+          "out": false,
+          "stats": {
+            "pitch": 64,
+            "rhythm": 70,
+            "tone": 43,
+            "expr": 72
+          },
+          "reading": 92.5
+        },
+        {
+          "id": "m2028-n39-cafe",
+          "name": "横山 透",
+          "seat": null,
+          "out": false,
+          "stats": {
+            "pitch": 0,
+            "rhythm": 0,
+            "tone": 0,
+            "expr": 0
+          },
+          "reading": 95
+        }
+      ],
+      "menus": []
+    },
+    "practice": null,
+    "from": null,
+    "playing": false,
+    "waiting": false,
+    "playback": null,
+    "audible": [],
+    "boot": {
+      "scripts": 33,
+      "loaded": 33,
+      "failed": [],
+      "errors": []
+    },
+    "errors": [],
+    "layout": {
+      "actions": {
+        "bottom": 0,
+        "height": 0,
+        "left": 0,
+        "right": 0,
+        "top": 0,
+        "width": 0
+      },
+      "component": {
+        "bottom": 0,
+        "height": 0,
+        "left": 0,
+        "right": 0,
+        "top": 0,
+        "width": 0
+      },
+      "focus": "BUTTON",
+      "mini": null,
+      "people": [
+        {
+          "bottom": 0,
+          "height": 0,
+          "id": "m2028-n16-cafe",
+          "left": 0,
+          "right": 0,
+          "top": 0,
+          "width": 0
+        },
+        {
+          "bottom": 0,
+          "height": 0,
+          "id": "m2028-n36-cafe",
+          "left": 0,
+          "right": 0,
+          "top": 0,
+          "width": 0
+        },
+        {
+          "bottom": 0,
+          "height": 0,
+          "id": "m2028-n3-cafe",
+          "left": 0,
+          "right": 0,
+          "top": 0,
+          "width": 0
+        }
+      ],
+      "picker": null,
+      "playActions": {
+        "bottom": 0,
+        "height": 0,
+        "left": 0,
+        "right": 0,
+        "top": 0,
+        "width": 0
+      },
+      "scroll": 0
+    },
+    "version": "qa-diagnosis-practice-5"
+  }
+]

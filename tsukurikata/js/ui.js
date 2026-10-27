@@ -121,6 +121,7 @@ function renderPlayButtons(){
   const moveStop = $('#memberCard [data-mact="movestop"]');
   if(moveStop) moveStop.hidden = !on || tabHidden('play');
   renderAuditionListening();
+  renderDiagPractice();
 }
 
 /* ===== スマホ・タブレット縦：画面下のタブ ===== */
@@ -646,8 +647,9 @@ function renderStats(){
 }
 function renderDiag(){
   const a = U.diag;
+  U.diagPerf=U.perfNow;U.diagAt=`${S.recruitSeed||0}:${S.year}:${S.week}:${playPiece()}`;
   $('#diagVenue').textContent = `${VENUE[U.venue].name}・${PIECES[playPiece()].title}`;
-  if(!a){ $('#diag').innerHTML = ''; return; }
+  if(!a){ $('#diag').innerHTML = ''; renderDiagPractice(); return; }
   $('#diag').innerHTML = Object.keys(DIM_LABEL).map(k => {
     const v = a.score[k], c = v >= 70 ? 'good' : v >= 45 ? 'warn' : 'bad';
     return statRow(DIM_LABEL[k], v, k === 'tone' && a.cracks ? `音の裏返り ${a.cracks}回` : '', '', c, DIAG_TIPS[k]);
@@ -661,6 +663,42 @@ function renderDiag(){
   if(a.wrong) notes.push(`まだ譜読みが終わっておらず、${a.wrong}か所で音を間違えている。`);
   if(a.lack.miss.length) notes.push(`この曲でいない楽器：${lackNames(a.lack.miss).join('・')}${lackPts(a.lack)}。`);
   $('#diagNote').textContent = notes.join(' ') || '大きな問題はない。ここからは細部の磨き込み。';
+  renderDiagPractice();
+}
+// 診断の点を個人の原因と決めつけず、今の部員の力から練習を見直す。
+function diagPracticeView(){
+  if(!S)return null;
+  const active=U.waitPlay?.perf || (U.playing?U.shown:null),pid=playPiece();
+  if(S.phase!=='week' || S.pending || U.lineup || !U.diag || !$('#week .plan') || ![S.pieceId,...(setActive(S)?[S.setPiece]:[])].includes(pid) || U.diagPerf?.pieceId!==pid || active&&active!==U.diagPerf)return null;
+  const key=`${S.recruitSeed||0}:${S.year}:${S.week}:${pid}`;if(U.diagAt!==key)return null;
+  const members=stagers(S);if(!members.length)return null;
+  return {pid,members,key};
+}
+function renderDiagPractice(){
+  const el=$('#diagPractice');if(!el)return;
+  const view=diagPracticeView();el.hidden=!view;el.dataset.piece=view?.pid||'';if(!view)return;
+  if(U.diagPractice?.key!==view.key){
+    const topic=U.diag.wrong?'fam':STAT_KEYS.reduce((a,b)=>U.diag.score[a]<=U.diag.score[b]?a:b);
+    U.diagPractice={key:view.key,topic};el.open=false;U.diagReturn=null;
+  }
+  const state=U.diagPractice,labels={fam:'譜読み',...STAT_LABEL},value=m=>state.topic==='fam'?readMean(m,view.pid):m.stats[state.topic];
+  const members=view.members.slice().sort((a,b)=>value(a)-value(b)).slice(0,3);
+  const html=`<summary><span>${uiIcon('week')}練習を見直す</span><span class="diag-peek" aria-hidden="true">${members.map(m=>memberFace(m,20)).join('')}</span></summary><div class="diag-topics" role="group" aria-label="練習を見直す力">${['fam',...STAT_KEYS].map(k=>`<button type="button" data-diag-topic="${k}" aria-pressed="${state.topic===k}">${labels[k]}</button>`).join('')}<button type="button" aria-label="練習の見直しについて"${tipAttr('練習の見直し','いまの部員の力を低い順に3人まで表示。演奏の点には体力や譜読みも効く。顔を押すと今週の練習へ進む。曲の練習は今週の配分のまま。選ぶまでは指示を変えない。')}>?</button></div><div class="diag-people">${members.map(m=>`<button class="diag-person" type="button" data-diag-member="${esc(m.id)}" aria-label="${esc(m.name)} ${labels[state.topic]} ${rankOf(value(m))}、今週の練習を見る">${memberFace(m,36)}<span><b>${esc(m.name)}</b><small>${m.grade}年・${esc(instOf(m))}</small></span>${rankBadge(value(m))}${uiIcon('chevron')}</button>`).join('')}</div>`;
+  if(U.diagHtml!==html){el.innerHTML=html;U.diagHtml=html;}
+}
+function openDiagPracticeMember(mid){
+  const view=diagPracticeView(),m=view?.members.find(m=>m.id===mid);if(!m || !document.querySelector(`[data-practice-row="${mid}"]`))return;
+  const topic=U.diagPractice.topic;
+  U.diagReturn={key:view.key,mid,scroll:scrollY,menu:topic==='fam'?(readMean(m,view.pid)>=70?'tutti':'piece'):{pitch:'tune',rhythm:'metro',tone:'long',expr:'phrase'}[topic]};
+  hideTip();setTab('week');focusPracticeMember(mid,'diag');
+}
+function returnToDiagPractice(mid){
+  const back=U.diagReturn;U.diagReturn=null;
+  if(!back || back.mid!==mid || diagPracticeView()?.key!==back.key)return false;
+  renderDiagPractice();
+  const target=document.querySelector(`[data-diag-member="${mid}"]`);if(!target)return false;
+  setTab('play');
+  target.focus({preventScroll:true});window.scrollTo(0,back.scroll);return true;
 }
 // 舞台袖：部全体の空気と、緊張している部員。声をかける・全員で深呼吸する（あわせて2回まで）
 function wingsHtml(){
@@ -692,6 +730,7 @@ function moodText(n){
 const GUIDE_WEEKS = 3, GUIDE_ACTS = ['assign', 'reveal', 'next', 'stage', 'practice'];
 function renderWeek(){
   renderWeekBody();
+  renderDiagPractice();
   // 長い説明は見出しの吹き出しへ。文章そのものは保持する。
   const intro=$('#week .plan > p.small:first-child');
   if(intro){ $('#h-week').insertAdjacentHTML('beforeend', '<button class="help-button" type="button"'+tipAttr('今週の練習',intro.textContent)+'>?</button>');intro.hidden=true; }
@@ -1468,16 +1507,22 @@ const staBar = m => `<span class="sta" title="体力 ${Math.round(m.sta)}"><span
 const practiceIcon=id=>uiIcon({long:'breath',tune:'tuning',metro:'metronome',phrase:'note',piece:'journal',tutti:'members',hall:'stage',rest:'rest'}[id]||'week');
 const pickGrid = (key, cur, auto) => `<div class="pgrid" role="group" aria-label="今週の練習">`
   + `<button class="pchip" type="button" data-pset="${key}" data-menu="" aria-pressed="${cur === ''}">${practiceIcon('auto')}<span><b>おまかせ</b><small>${auto ? MENU_BY[auto].name : '部員ごと'}</small></span></button>`
-  + MENU.filter(x => menuOpen(S, x.id)).sort((a,b)=>['care','prep-rest'].includes(U.pickReturn)?Number(b.id==='rest')-Number(a.id==='rest'):0).map(x => `<button class="pchip" type="button" data-pset="${key}" data-menu="${x.id}" aria-pressed="${cur === x.id}">${practiceIcon(x.id)}<span><b>${x.name}</b><small>${menuUp(x.id)}</small></span></button>`).join('') + '</div>';
+  + MENU.filter(x => menuOpen(S, x.id)).sort((a,b)=>{const first=['care','prep-rest'].includes(U.pickReturn)?'rest':U.pickReturn==='diag'?U.diagReturn?.menu:null;return Number(b.id===first)-Number(a.id===first);}).map(x => `<button class="pchip" type="button" data-pset="${key}" data-menu="${x.id}" aria-pressed="${cur === x.id}">${practiceIcon(x.id)}<span><b>${x.name}</b><small>${menuUp(x.id)}</small></span></button>`).join('') + '</div>';
 // 選ぶ前の行へ戻れるようにし、キーボードの位置も保つ。
 function closePracticePicker(){
   const key=U.pick,top=U.pickScroll,from=U.pickReturn;U.pick=null;U.pickReturn=null;renderWeek();
+  if(from==='diag'){
+    if(returnToDiagPractice(key))return;
+    const row=[...document.querySelectorAll('#week [data-practice-row]')].find(el=>el.dataset.practiceRow===key);
+    if(row){row.closest('details[data-sec]').open=true;row.querySelector('[data-pick]')?.focus({preventScroll:true});row.scrollIntoView({block:'start'});return;}
+  }
   const origin=from && [...document.querySelectorAll('#week [data-practice-member]')].find(b=>b.dataset.practiceMember===key&&b.dataset.practiceSource===from);
   (origin || document.querySelector(`[data-pick="${key}"]`))?.focus({preventScroll:true});
   if(top!=null)window.scrollTo(0,top);
 }
 function openPracticePicker(key, from = null){
   if(U.pick===key){closePracticePicker();return;}
+  if(from!=='diag')U.diagReturn=null;
   U.pickScroll=scrollY;U.pickReturn=from;U.pick=key;renderWeek();
   const grid=$('#week .pgrid');if(!grid)return;
   (grid.querySelector('[aria-pressed="true"]')||grid.querySelector('button'))?.focus({preventScroll:true});
@@ -2145,6 +2190,18 @@ function playRec(id){
   playRecording(rec, `${rec.label}（${VENUE[rec.venue].name}で録音）`);
 }
 function bind(){
+  $('#diagPractice').addEventListener('toggle',e=>{
+    const state=U.diagPractice;if(!state || !diagPracticeView())return;
+    if(e.target.open && narrow.matches)e.target.scrollIntoView({block:'start',behavior:!fxCalm()&&U.fxMode==='full'?'smooth':'auto'});
+  });
+  $('#diagPractice').addEventListener('click',e=>{
+    const b=e.target.closest('button');if(!b)return;
+    if(b.dataset.diagTopic){U.diagPractice.topic=b.dataset.diagTopic;renderDiagPractice();document.querySelector(`[data-diag-topic="${b.dataset.diagTopic}"]`)?.focus({preventScroll:true});}
+    else if(b.dataset.diagMember)openDiagPracticeMember(b.dataset.diagMember);
+  });
+  $('#diagPractice').addEventListener('keydown',e=>{
+    const el=$('#diagPractice');if(e.key==='Escape' && el.open && $('#tip').hidden){e.preventDefault();el.open=false;el.querySelector('summary').focus({preventScroll:true});}
+  });
   for(const [id, icon, label] of [['btnNow','play','いまの音で合奏'],['btnStop','stop','止める'],['btnConduct','conduct','指揮する'],['btnRec','play','聴く'],['btnSave','download','保存']]) $('#'+id).innerHTML = uiIcon(icon) + label;
   $('#rollPanel').addEventListener('toggle', e => { if(e.target.open) drawRoll(U.shown, U.playing ? E.now() : -1); });
   $('#btnNow').addEventListener('click', () => {

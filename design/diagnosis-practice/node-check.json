@@ -1,0 +1,16 @@
+{
+  "checks": [
+    {
+      "command": "node tsukurikata/tools/check_live_performance.js",
+      "exitCode": 0
+    },
+    {
+      "command": "node tsukurikata/tools/check_current_member_listen.js",
+      "exitCode": 0
+    },
+    {
+      "command": "node tsukurikata/tools/check_stop_current.js",
+      "exitCode": 0
+    }
+  ]
+}

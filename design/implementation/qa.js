@@ -89,6 +89,7 @@ function record(){
  const outing=outingView(S);report.outing=outing?{id:S.outing.id,n:outing.n,fit:[...outing.fit],selected:[...U.outPick],more:!!U.outMore,eligible:seated(S).map(m=>m.id),buttons:[...document.querySelectorAll('#week [data-op]')].map(el=>({id:el.dataset.op,pressed:el.getAttribute('aria-pressed'),disabled:el.disabled,face:el.querySelector('[data-face]')?.dataset.face})),confirm:$('#week [data-act="outing"]')?.textContent}:null;
  report.outingResult={last:S.lastOuting,faces:[...document.querySelectorAll('[data-out-result]')].map(el=>({id:el.dataset.outResult,name:el.title})),gains:[...document.querySelectorAll('.outing-gains .gain')].map(el=>el.textContent),gainsOpen:!!$('.outing-gains')?.open,log:hash(JSON.stringify(S.outLog||[])),coach:S.coach};
  if(outing&&U.outPick.size&&q.has('outingAudit')){const expected=resolveOuting(S,[...U.outPick]);report.expectedOuting={members:hash(JSON.stringify(expected.members)),last:expected.lastOuting,log:hash(JSON.stringify(expected.outLog||[])),coach:expected.coach};}
+ const diagBox=$('#diagPractice');report.diagPractice={visible:!diagBox.hidden,open:diagBox.open,topic:U.diagPractice?.topic,key:U.diagPractice?.key,back:U.diagReturn,diagnosis:hash(JSON.stringify(U.diag)),pid:diagBox.dataset.piece,selectedPiece:playPiece(),tab:U.tab,rows:[...diagBox.querySelectorAll('[data-diag-member]')].map(el=>({id:el.dataset.diagMember,label:el.getAttribute('aria-label'),rank:el.querySelector('.rk')?.textContent,face:el.querySelector('[data-face]')?.dataset.face})),source:S.members.map(m=>({id:m.id,name:m.name,seat:m.seat,out:!!m.out,stats:m.stats,reading:readMean(m,playPiece())})),menus:[...document.querySelectorAll('#week .pgrid [data-menu]')].map(el=>({id:el.dataset.menu,pressed:el.getAttribute('aria-pressed')}))};
  report.practice={pick:U.pick,from:U.pickReturn,open:[...document.querySelectorAll('#week details[data-sec][open]')].map(el=>el.dataset.sec),tired:S.members.filter(m=>m.sta<30).map(m=>({id:m.id,name:m.name,menu:planFor(S,m),face:Faces.fingerprint(m)})),growth:[...document.querySelectorAll('.wr-person')].map(el=>({id:el.dataset.practiceMember,face:el.querySelector('[data-face]')?.dataset.face,name:el.querySelector('b')?.textContent,ranks:el.querySelector('.wr-ranks')?.getAttribute('aria-label'),interactive:el.tagName==='BUTTON'})),before:U.weekRes?.b.stats,members:S.members.map(m=>({id:m.id,name:m.name,stats:m.stats})),resultKey:U.weekRes?.key};
  report.assignPicks={...(U.asg?.picks||{})};report.assignSel=U.asg?.sel;
  report.auditionOut=[...(U.draft||[])];report.auditionDecided=!!S.audition?.decided;
@@ -163,7 +164,7 @@ async function show(next){
   for(let i=0;i<100&&!s.consult;i++)s=advance(s);
   if(!s.consult)throw Error('相談の見本が作れなかった');
   if(view==='consult-result')s=resolveConsult(s,consultView(s).choices[0].k);
- }else if(['retirement-listen','consult-music','winter-music','outing-music','stage','recorded-history','reading-stage','song-set','song-final','rehearsal','rehearsal-records','rehearsal-a','rehearsal-loading','practice','practice-late','practice-a','practice-care','practice-growth','members','member','member-old','member-bench','grad','grad-old','grad-auto','senior','conduct','announce','announce-silver','announce-bronze','announce-cast','fx','audition','audition-a','audition-decided','audition-long','ensemble'].includes(view)||view.startsWith('prep-')){
+ }else if(['retirement-listen','consult-music','winter-music','outing-music','diag-practice','stage','recorded-history','reading-stage','song-set','song-final','rehearsal','rehearsal-records','rehearsal-a','rehearsal-loading','practice','practice-late','practice-a','practice-care','practice-growth','members','member','member-old','member-bench','grad','grad-old','grad-auto','senior','conduct','announce','announce-silver','announce-bronze','announce-cast','fx','audition','audition-a','audition-decided','audition-long','ensemble'].includes(view)||view.startsWith('prep-')){
   const ms=fullBand({pitch:68,rhythm:72,tone:64,expr:61}),names=new Set();
   ms.forEach((m,i)=>{m.id='m2028-n'+(i+1)+'-cafe';m.name=makeName(names,'recruit',2028,i+1);m.grade=i%3+1;m.joined=2026;m.joinGrade=1;m.sta=95;m.first={y:2026,w:0,stats:{pitch:15,rhythm:12,tone:18,expr:10}};m.story=[{y:2026,w:0,t:'アルトサックスで入部。'},{y:2027,w:16,t:'はじめての金賞。'},{y:2028,w:26,t:'最後の定期演奏会。'}];});
   s.members=ms;s.year=2028;s.week=10;
@@ -180,6 +181,16 @@ async function show(next){
   addRec(early,'2026年4月の録音',{venue:'room'}).keep=true;
   s.recs=clone(early.recs);s.week=26;
   addRec(s,'2028年 定期演奏会',{venue:'hall'}).final=true;s=endSeason(s);
+ }
+ if(view==='diag-practice'){
+  s.week=8;s.consult=null;s.episode=null;s.outing=null;
+  s.members.forEach((m,i)=>{m.stats={pitch:15+i*7%70,rhythm:20+(i+3)*11%65,tone:25+(i+5)*9%60,expr:20+(i+7)*13%65};m.sta=95;m.fam={galop:[i*2.5,i*2.5,i*2.5],ode:[100-i*2.5,100-i*2.5,100-i*2.5]};});
+  s.members.at(-1).seat=null;s.members.at(-1).stats={pitch:0,rhythm:0,tone:0,expr:0};s.members[1].out=true;
+  if(q.has('two')){s.division='A';s.setPiece='ode';}
+  if(q.has('diagHigh'))s.members.forEach(m=>m.fam.galop=[90,90,90]);
+  if(q.has('diagLong'))s=renameMember(s,s.members[0].id,'あいうえおかきくけこさし');
+  if(q.has('diagOne'))s.members=s.members.slice(0,1);
+  if(q.has('diagEmpty'))s.members.forEach(m=>m.seat=null);
  }
  if(view==='outing-music'){
   s.week=8;s.episode=null;s.consult=null;s.outing={id:OUTING_BY[q.get('kind')]?q.get('kind'):'orch'};U.outPick=new Set();
@@ -260,7 +271,7 @@ async function show(next){
  if(q.has('busy')&&view.startsWith('member')){s.week=PREF_WEEK;s=beginStage(s);}
  S=s;U.sel=null;hideTip();renderAll();refreshNow();$('#toast').hidden=true;
  const cardView=view==='member'||view.startsWith('member-');
- setTab(['log','journal','journal-ambiguous','journal-empty'].includes(view)?'log':view==='members'?'members':cardView||view.startsWith('rehearsal')||['stage','recorded-history','reading-stage','conduct'].includes(view)?'play':'week');
+ setTab(['log','journal','journal-ambiguous','journal-empty'].includes(view)?'log':view==='members'?'members':cardView||view==='diag-practice'||view.startsWith('rehearsal')||['stage','recorded-history','reading-stage','conduct'].includes(view)?'play':'week');
  if(view==='song-samples')for(const card of document.querySelectorAll('.pcard'))card.hidden=!['largo','galop','tell'].includes(card.querySelector('[data-pid]')?.dataset.pid);
  if(cardView){placeCard('stage');U.sel=s.members[0].id;renderMemberCard();}
  if(['grad','grad-old','grad-auto'].includes(view)){U.fxMode=view==='grad-auto'?'short':'off';S.gradMembers=s.members.filter(m=>m.grade===3);openGradRoll();GR.i=1;grShow();if(view!=='grad-auto')pauseGradRoll();}
@@ -297,6 +308,7 @@ new MutationObserver(()=>setTimeout(record,0)).observe($('#grCard'),{childList:t
 new MutationObserver(()=>setTimeout(record,0)).observe($('#nowPlaying'),{childList:true,subtree:true});
 for(const event of ['click','submit','change'])$('#memberCard').addEventListener(event,()=>setTimeout(record,0));
 $('#rosterTable').addEventListener('click',()=>setTimeout(record,0));
+for(const event of ['click','keydown','toggle'])$('#diagPractice').addEventListener(event,()=>setTimeout(record,0));
 for(const event of ['click','input','change','keydown','compositionend','submit'])$('#rosterFind').addEventListener(event,()=>setTimeout(record,0));
 $('#rosterParts').addEventListener('toggle',()=>setTimeout(record,0));
 $('#tabbar').addEventListener('click',()=>setTimeout(record,0));

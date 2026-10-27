@@ -391,6 +391,19 @@ select{background:var(--sheet);border:1.5px solid var(--rule);border-radius:8px;
 .vital .row{display:flex;justify-content:space-between;gap:4px}
 .vital .row b{font-family:var(--f-lcd);font-weight:400;font-size:14px}
 .diag-note{font-family:var(--f-hand);font-size:15px;line-height:1.65}
+.diag-practice{border:1px solid var(--rule);border-radius:10px;background:var(--sheet);padding:0 12px;scroll-margin-top:14px}
+.diag-practice>summary{display:flex;align-items:center;gap:8px;min-height:48px;list-style:none;cursor:pointer;font-size:13px;font-weight:700}
+.diag-practice>summary::-webkit-details-marker{display:none}.diag-practice>summary::after{content:'';flex:none;width:7px;height:7px;border-right:1.5px solid currentColor;border-bottom:1.5px solid currentColor;transform:rotate(45deg);margin:0 3px 4px 0}.diag-practice[open]>summary::after{transform:rotate(225deg);margin-bottom:0}
+.diag-practice>summary>span:first-child{display:flex;align-items:center;gap:6px}.diag-practice>summary .ui-icon{width:18px;height:18px;color:var(--brass)}
+.diag-peek{display:flex;gap:3px;margin-left:auto}.diag-peek .member-face{border-radius:50%}
+.diag-topics{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:6px;margin:6px 0 10px}
+.diag-topics>button{display:flex;align-items:center;justify-content:center;gap:6px;min-width:0;min-height:44px;border:1px solid var(--rule);border-radius:7px;background:var(--paper);color:var(--ink);font:12px var(--f-body);cursor:pointer}
+.diag-topics>button[aria-pressed="true"]{border-color:var(--brass);box-shadow:inset 0 0 0 1px var(--brass)}
+.diag-people{display:grid;gap:7px;padding-bottom:12px}
+.diag-person{display:grid;grid-template-columns:36px minmax(0,1fr) 26px 14px;align-items:center;gap:9px;min-width:0;min-height:60px;padding:8px;border:1px solid var(--rule);border-radius:8px;background:var(--paper);color:var(--ink);text-align:left;font:13px var(--f-body);cursor:pointer;scroll-margin-block:14px 150px}
+.diag-person>.member-face{border-radius:50%}.diag-person>span{min-width:0}.diag-person b{display:block;overflow-wrap:anywhere;font-size:13px}.diag-person small{display:block;font-size:10px;line-height:1.5;color:var(--ink-soft);overflow-wrap:anywhere}
+.diag-person>.rk{width:26px;height:28px;font-size:15px}.diag-person>.ui-icon{width:14px;height:14px;color:var(--ink-soft);transform:rotate(-90deg)}
+.diag-practice button:focus-visible{outline:2px solid var(--brass);outline-offset:2px}
 .event{font-family:var(--f-hand);font-size:15px;line-height:1.65;display:grid;gap:4px}
 .event .tag{font-family:var(--f-body);justify-self:start}
 .focus{display:grid;gap:6px;font-size:13px;color:var(--ink-soft)}
@@ -1561,6 +1574,7 @@ button.wr-person:focus-visible{outline:2px solid var(--brass);outline-offset:2px
         <h2 id="h-diag">いまの合奏の診断 <small id="diagVenue"></small></h2>
         <div class="stats" id="diag"></div>
         <p class="diag-note" id="diagNote"></p>
+        <details class="diag-practice" id="diagPractice" hidden></details>
       </section>
       <section class="panel" data-tab="log" aria-labelledby="h-log">
         <h2 id="h-log">部活日誌</h2>
@@ -1675,39 +1689,39 @@ button.wr-person:focus-visible{outline:2px solid var(--brass);outline-offset:2px
   <button type="button" data-tabgo="log"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 5.5C4 4.7 4.7 4 5.5 4H11v16H5.5c-.8 0-1.5-.7-1.5-1.5z"/><path d="M20 5.5c0-.8-.7-1.5-1.5-1.5H13v16h5.5c.8 0 1.5-.7 1.5-1.5z"/></svg><span>日誌</span></button>
 </nav>
 
-<script src="js/util.js?v=qa-seat-compact-3"></script>
-<script src="js/icons.js?v=qa-seat-compact-3"></script>
-<script src="js/instrument-icons.js?v=qa-seat-compact-3"></script>
-<script src="js/face-cast.js?v=qa-seat-compact-3"></script>
-<script src="js/faces.js?v=qa-seat-compact-3"></script>
-<script src="js/instruments.js?v=qa-seat-compact-3"></script>
-<script src="js/venues.js?v=qa-seat-compact-3"></script>
-<script src="js/samples.js?v=qa-seat-compact-3"></script>
-<script src="js/scores.js?v=qa-seat-compact-3"></script>
-<script src="js/pieces/largo.js?v=qa-seat-compact-3"></script>
-<script src="js/pieces/ode.js?v=qa-seat-compact-3"></script>
-<script src="js/pieces/galop.js?v=qa-seat-compact-3"></script>
-<script src="js/pieces/pomp.js?v=qa-seat-compact-3"></script>
-<script src="js/pieces/aida.js?v=qa-seat-compact-3"></script>
-<script src="js/pieces/hero.js?v=qa-seat-compact-3"></script>
-<script src="js/pieces/holst.js?v=qa-seat-compact-3"></script>
-<script src="js/pieces/hungarian.js?v=qa-seat-compact-3"></script>
-<script src="js/pieces/flowers.js?v=qa-seat-compact-3"></script>
-<script src="js/pieces/tell.js?v=qa-seat-compact-3"></script>
-<script src="js/pieces/carmen.js?v=qa-seat-compact-3"></script>
-<script src="js/pieces/valkyrie.js?v=qa-seat-compact-3"></script>
-<script src="js/pieces/swan.js?v=qa-seat-compact-3"></script>
-<script src="js/pieces/spring.js?v=qa-seat-compact-3"></script>
-<script src="js/pieces/canon.js?v=qa-seat-compact-3"></script>
-<script src="js/band.js?v=qa-seat-compact-3"></script>
-<script src="js/game.js?v=qa-seat-compact-3"></script>
-<script src="js/engine.js?v=qa-seat-compact-3"></script>
-<script src="js/conduct.js?v=qa-seat-compact-3"></script>
-<script src="js/announce.js?v=qa-seat-compact-3"></script>
-<script src="js/tunegame.js?v=qa-seat-compact-3"></script>
-<script src="js/fx.js?v=qa-seat-compact-3"></script>
-<script src="js/ui.js?v=qa-seat-compact-3"></script>
+<script src="js/util.js?v=qa-diagnosis-practice-7"></script>
+<script src="js/icons.js?v=qa-diagnosis-practice-7"></script>
+<script src="js/instrument-icons.js?v=qa-diagnosis-practice-7"></script>
+<script src="js/face-cast.js?v=qa-diagnosis-practice-7"></script>
+<script src="js/faces.js?v=qa-diagnosis-practice-7"></script>
+<script src="js/instruments.js?v=qa-diagnosis-practice-7"></script>
+<script src="js/venues.js?v=qa-diagnosis-practice-7"></script>
+<script src="js/samples.js?v=qa-diagnosis-practice-7"></script>
+<script src="js/scores.js?v=qa-diagnosis-practice-7"></script>
+<script src="js/pieces/largo.js?v=qa-diagnosis-practice-7"></script>
+<script src="js/pieces/ode.js?v=qa-diagnosis-practice-7"></script>
+<script src="js/pieces/galop.js?v=qa-diagnosis-practice-7"></script>
+<script src="js/pieces/pomp.js?v=qa-diagnosis-practice-7"></script>
+<script src="js/pieces/aida.js?v=qa-diagnosis-practice-7"></script>
+<script src="js/pieces/hero.js?v=qa-diagnosis-practice-7"></script>
+<script src="js/pieces/holst.js?v=qa-diagnosis-practice-7"></script>
+<script src="js/pieces/hungarian.js?v=qa-diagnosis-practice-7"></script>
+<script src="js/pieces/flowers.js?v=qa-diagnosis-practice-7"></script>
+<script src="js/pieces/tell.js?v=qa-diagnosis-practice-7"></script>
+<script src="js/pieces/carmen.js?v=qa-diagnosis-practice-7"></script>
+<script src="js/pieces/valkyrie.js?v=qa-diagnosis-practice-7"></script>
+<script src="js/pieces/swan.js?v=qa-diagnosis-practice-7"></script>
+<script src="js/pieces/spring.js?v=qa-diagnosis-practice-7"></script>
+<script src="js/pieces/canon.js?v=qa-diagnosis-practice-7"></script>
+<script src="js/band.js?v=qa-diagnosis-practice-7"></script>
+<script src="js/game.js?v=qa-diagnosis-practice-7"></script>
+<script src="js/engine.js?v=qa-diagnosis-practice-7"></script>
+<script src="js/conduct.js?v=qa-diagnosis-practice-7"></script>
+<script src="js/announce.js?v=qa-diagnosis-practice-7"></script>
+<script src="js/tunegame.js?v=qa-diagnosis-practice-7"></script>
+<script src="js/fx.js?v=qa-diagnosis-practice-7"></script>
+<script src="js/ui.js?v=qa-diagnosis-practice-7"></script>
 <div class="tip" id="tip" role="tooltip" hidden></div>
-<script src="/design/implementation/qa.js?v=qa-seat-compact-3"></script>
+<script src="/design/implementation/qa.js?v=qa-diagnosis-practice-7"></script>
 </body>
 </html>
