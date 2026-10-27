@@ -1,0 +1,1220 @@
+{
+  "readyDark": {
+    "band": {
+      "bottom": 391.3984375,
+      "height": 315,
+      "left": 0,
+      "right": 375,
+      "top": 76.3984375,
+      "width": 375,
+      "x": 0,
+      "y": 76.3984375
+    },
+    "boot": {
+      "scripts": 33,
+      "loaded": 33,
+      "errors": [],
+      "failed": []
+    },
+    "conduct": {
+      "beat": "1",
+      "combo": 0,
+      "count": 0,
+      "events": 0,
+      "from": 0,
+      "judge": {
+        "e": 0,
+        "g": 0,
+        "l": 0,
+        "p": 0
+      },
+      "level": 1,
+      "meter": 2,
+      "phase": "count",
+      "taps": 0,
+      "to": 80
+    },
+    "errors": [],
+    "pad": {
+      "bottom": 626.9921875,
+      "height": 80,
+      "left": 24,
+      "right": 351,
+      "top": 546.9921875,
+      "width": 327,
+      "x": 24,
+      "y": 546.9921875
+    },
+    "portraits": 39,
+    "scroll": 375,
+    "width": 375
+  },
+  "playingDark": {
+    "beatMarks": [
+      {
+        "active": true,
+        "text": "1"
+      },
+      {
+        "active": false,
+        "text": "2"
+      }
+    ],
+    "boot": {
+      "scripts": 33,
+      "loaded": 33,
+      "errors": [],
+      "failed": []
+    },
+    "conduct": {
+      "beat": "2",
+      "combo": 0,
+      "count": 4,
+      "events": 6,
+      "from": 0,
+      "judge": {
+        "e": 3,
+        "g": 0,
+        "l": 0,
+        "p": 1
+      },
+      "level": 0.975,
+      "meter": 2,
+      "period": 0.8384042000807217,
+      "phase": "play",
+      "taps": 4,
+      "to": 80
+    },
+    "controls": {
+      "bottom": 667.9921875,
+      "height": 223,
+      "left": 24,
+      "right": 351,
+      "top": 444.9921875,
+      "width": 327,
+      "x": 24,
+      "y": 444.9921875
+    },
+    "errors": [],
+    "pattern": {
+      "calm": "false",
+      "mode": "play",
+      "nextBeat": "2"
+    },
+    "playing": true,
+    "portraits": 39,
+    "timing": {
+      "frames": 4858,
+      "inputs": [
+        {
+          "actual": 32.25540000009537,
+          "delay": 0,
+          "errorMs": -0.1,
+          "expected": 32.2555,
+          "raw": 32.256
+        },
+        {
+          "actual": 33.279299999952315,
+          "delay": 0,
+          "errorMs": -0.1,
+          "expected": 33.27940000009537,
+          "raw": 33.28
+        },
+        {
+          "actual": 34.30379999995232,
+          "delay": 0,
+          "errorMs": 0,
+          "expected": 34.30379999995232,
+          "raw": 34.304
+        },
+        {
+          "actual": 35.327700000047685,
+          "delay": 0,
+          "errorMs": 0,
+          "expected": 35.327700000047685,
+          "raw": 35.328
+        }
+      ],
+      "textChanges": 0
+    }
+  },
+  "high": {
+    "beat": "2",
+    "combo": 0,
+    "count": 4,
+    "events": 8,
+    "from": 0,
+    "judge": {
+      "e": 4,
+      "g": 0,
+      "l": 0,
+      "p": 1
+    },
+    "level": 1.3667822265625,
+    "meter": 2,
+    "period": 0.8384042000807217,
+    "phase": "play",
+    "taps": 5,
+    "to": 80
+  },
+  "low": {
+    "beat": "1",
+    "combo": 0,
+    "count": 4,
+    "events": 9,
+    "from": 0,
+    "judge": {
+      "e": 5,
+      "g": 0,
+      "l": 0,
+      "p": 1
+    },
+    "level": 0.5949072265625,
+    "meter": 2,
+    "period": 0.7210276120694207,
+    "phase": "play",
+    "taps": 6,
+    "to": 80
+  },
+  "closed": {
+    "errors": [],
+    "phase": "idle",
+    "playing": false,
+    "recordings": []
+  },
+  "readyLight": {
+    "audio": {
+      "banks": 41,
+      "ready": true,
+      "voices": []
+    },
+    "band": {
+      "bottom": 391.3984375,
+      "height": 315,
+      "left": 0,
+      "right": 375,
+      "top": 76.3984375,
+      "width": 375,
+      "x": 0,
+      "y": 76.3984375
+    },
+    "boot": {
+      "errors": [],
+      "failed": [],
+      "loaded": 33,
+      "scripts": 33
+    },
+    "conduct": {
+      "beat": "1",
+      "combo": 0,
+      "count": 0,
+      "events": 0,
+      "from": 0,
+      "judge": {
+        "e": 0,
+        "g": 0,
+        "l": 0,
+        "p": 0
+      },
+      "level": 1,
+      "meter": 4,
+      "phase": "count",
+      "taps": 0,
+      "to": 64
+    },
+    "controls": {
+      "bottom": 667.9921875,
+      "height": 223,
+      "left": 24,
+      "right": 351,
+      "top": 444.9921875,
+      "width": 327,
+      "x": 24,
+      "y": 444.9921875
+    },
+    "errors": [],
+    "height": 812,
+    "members": 0.6864548486191779,
+    "pad": {
+      "bottom": 626.9921875,
+      "height": 80,
+      "left": 24,
+      "right": 351,
+      "top": 546.9921875,
+      "width": 327,
+      "x": 24,
+      "y": 546.9921875
+    },
+    "pattern": {
+      "calm": "true",
+      "mode": "count",
+      "nextBeat": "1"
+    },
+    "playing": false,
+    "portraits": 39,
+    "recordings": [],
+    "records": 0.7712433410342783,
+    "scrollHeight": 812,
+    "scrollWidth": 375,
+    "stats": {
+      "bottom": 794,
+      "height": 51,
+      "left": 24,
+      "right": 351,
+      "top": 743,
+      "width": 327,
+      "x": 24,
+      "y": 743
+    },
+    "theme": "light",
+    "transforms": [
+      "translate(192 0)",
+      "translate(292 0)"
+    ],
+    "width": 375
+  },
+  "playingLight": {
+    "audio": {
+      "banks": 41,
+      "ready": true,
+      "voices": [
+        "SampleVoice"
+      ]
+    },
+    "band": {
+      "bottom": 391.3984375,
+      "height": 315,
+      "left": 0,
+      "right": 375,
+      "top": 76.3984375,
+      "width": 375,
+      "x": 0,
+      "y": 76.3984375
+    },
+    "boot": {
+      "errors": [],
+      "failed": [],
+      "loaded": 33,
+      "scripts": 33
+    },
+    "conduct": {
+      "beat": "4",
+      "combo": 4,
+      "count": 4,
+      "events": 7,
+      "from": 0,
+      "judge": {
+        "e": 0,
+        "g": 0,
+        "l": 0,
+        "p": 4
+      },
+      "level": 0.975,
+      "meter": 4,
+      "period": 0.41604505718602697,
+      "phase": "play",
+      "taps": 4,
+      "to": 64
+    },
+    "controls": {
+      "bottom": 667.9921875,
+      "height": 223,
+      "left": 24,
+      "right": 351,
+      "top": 444.9921875,
+      "width": 327,
+      "x": 24,
+      "y": 444.9921875
+    },
+    "errors": [],
+    "height": 812,
+    "members": 0.6864548486191779,
+    "pad": {
+      "bottom": 626.9921875,
+      "height": 80,
+      "left": 24,
+      "right": 351,
+      "top": 546.9921875,
+      "width": 327,
+      "x": 24,
+      "y": 546.9921875
+    },
+    "pattern": {
+      "calm": "true",
+      "mode": "play",
+      "nextBeat": "1"
+    },
+    "playing": true,
+    "portraits": 39,
+    "recordings": [],
+    "records": 0.7712433410342783,
+    "scrollHeight": 812,
+    "scrollWidth": 375,
+    "stats": {
+      "bottom": 794,
+      "height": 51,
+      "left": 24,
+      "right": 351,
+      "top": 743,
+      "width": 327,
+      "x": 24,
+      "y": 743
+    },
+    "theme": "light",
+    "transforms": [
+      "translate(192 0)",
+      "translate(292 0)"
+    ],
+    "width": 375
+  },
+  "compact": {
+    "audio": {
+      "banks": 41,
+      "ready": true,
+      "voices": [
+        "SampleVoice"
+      ]
+    },
+    "band": {
+      "bottom": 335.59375,
+      "height": 270,
+      "left": 0,
+      "right": 375,
+      "top": 65.59375,
+      "width": 375,
+      "x": 0,
+      "y": 65.59375
+    },
+    "boot": {
+      "errors": [],
+      "failed": [],
+      "loaded": 33,
+      "scripts": 33
+    },
+    "conduct": {
+      "beat": "1",
+      "combo": 4,
+      "count": 4,
+      "events": 7,
+      "from": 0,
+      "judge": {
+        "e": 0,
+        "g": 0,
+        "l": 0,
+        "p": 4
+      },
+      "level": 0.975,
+      "meter": 4,
+      "period": 0.41604505718602697,
+      "phase": "play",
+      "taps": 4,
+      "to": 64
+    },
+    "controls": {
+      "bottom": 567.1875,
+      "height": 186,
+      "left": 24,
+      "right": 351,
+      "top": 381.1875,
+      "width": 327,
+      "x": 24,
+      "y": 381.1875
+    },
+    "errors": [],
+    "height": 667,
+    "members": 0.6864548486191779,
+    "pad": {
+      "bottom": 531.1875,
+      "height": 72,
+      "left": 24,
+      "right": 351,
+      "top": 459.1875,
+      "width": 327,
+      "x": 24,
+      "y": 459.1875
+    },
+    "pattern": {
+      "calm": "true",
+      "mode": "play",
+      "nextBeat": "1"
+    },
+    "playing": true,
+    "portraits": 39,
+    "recordings": [],
+    "records": 0.7712433410342783,
+    "scrollHeight": 667,
+    "scrollWidth": 375,
+    "stats": {
+      "bottom": 657,
+      "height": 45,
+      "left": 24,
+      "right": 351,
+      "top": 612,
+      "width": 327,
+      "x": 24,
+      "y": 612
+    },
+    "theme": "light",
+    "transforms": [
+      "translate(192 0)",
+      "translate(292 0)"
+    ],
+    "width": 375
+  },
+  "result": {
+    "audio": {
+      "banks": 41,
+      "ready": true,
+      "voices": []
+    },
+    "band": {
+      "bottom": 0,
+      "height": 0,
+      "left": 0,
+      "right": 0,
+      "top": 0,
+      "width": 0,
+      "x": 0,
+      "y": 0
+    },
+    "boot": {
+      "errors": [],
+      "failed": [],
+      "loaded": 33,
+      "scripts": 33
+    },
+    "conduct": {
+      "beat": "4",
+      "combo": 4,
+      "count": 4,
+      "events": 7,
+      "from": 0,
+      "judge": {
+        "e": 0,
+        "g": 0,
+        "l": 0,
+        "p": 4
+      },
+      "level": 0.975,
+      "meter": 4,
+      "period": 0.41604505718602697,
+      "phase": "done",
+      "taps": 4,
+      "to": 64
+    },
+    "controls": {
+      "bottom": 0,
+      "height": 0,
+      "left": 0,
+      "right": 0,
+      "top": 0,
+      "width": 0,
+      "x": 0,
+      "y": 0
+    },
+    "errors": [],
+    "height": 812,
+    "members": 0.6864548486191779,
+    "pad": {
+      "bottom": 0,
+      "height": 0,
+      "left": 0,
+      "right": 0,
+      "top": 0,
+      "width": 0,
+      "x": 0,
+      "y": 0
+    },
+    "pattern": {
+      "calm": "true",
+      "mode": "play",
+      "nextBeat": "4"
+    },
+    "playing": false,
+    "portraits": 39,
+    "recordings": [
+      {
+        "id": "r2028-10-0-395491",
+        "label": "あなたの指揮：《新世界より》第2楽章（6月 第3週）"
+      }
+    ],
+    "records": 0.22814949858002365,
+    "scrollHeight": 812,
+    "scrollWidth": 375,
+    "stats": {
+      "bottom": 0,
+      "height": 0,
+      "left": 0,
+      "right": 0,
+      "top": 0,
+      "width": 0,
+      "x": 0,
+      "y": 0
+    },
+    "theme": "light",
+    "transforms": [
+      "translate(192 0)",
+      "translate(292 0)"
+    ],
+    "width": 375
+  },
+  "replay": {
+    "audio": {
+      "banks": 41,
+      "ready": true,
+      "voices": []
+    },
+    "band": {
+      "bottom": 0,
+      "height": 0,
+      "left": 0,
+      "right": 0,
+      "top": 0,
+      "width": 0,
+      "x": 0,
+      "y": 0
+    },
+    "boot": {
+      "errors": [],
+      "failed": [],
+      "loaded": 33,
+      "scripts": 33
+    },
+    "conduct": {
+      "beat": "4",
+      "combo": 4,
+      "count": 4,
+      "events": 7,
+      "from": 0,
+      "judge": {
+        "e": 0,
+        "g": 0,
+        "l": 0,
+        "p": 4
+      },
+      "level": 0.975,
+      "meter": 4,
+      "period": 0.41604505718602697,
+      "phase": "done",
+      "taps": 4,
+      "to": 64
+    },
+    "controls": {
+      "bottom": 0,
+      "height": 0,
+      "left": 0,
+      "right": 0,
+      "top": 0,
+      "width": 0,
+      "x": 0,
+      "y": 0
+    },
+    "errors": [],
+    "height": 812,
+    "members": 0.6864548486191779,
+    "pad": {
+      "bottom": 0,
+      "height": 0,
+      "left": 0,
+      "right": 0,
+      "top": 0,
+      "width": 0,
+      "x": 0,
+      "y": 0
+    },
+    "pattern": {
+      "calm": "true",
+      "mode": "play",
+      "nextBeat": "4"
+    },
+    "playing": true,
+    "portraits": 39,
+    "recordings": [
+      {
+        "id": "r2028-10-0-395491",
+        "label": "あなたの指揮：《新世界より》第2楽章（6月 第3週）"
+      }
+    ],
+    "records": 0.22814949858002365,
+    "scrollHeight": 812,
+    "scrollWidth": 375,
+    "stats": {
+      "bottom": 0,
+      "height": 0,
+      "left": 0,
+      "right": 0,
+      "top": 0,
+      "width": 0,
+      "x": 0,
+      "y": 0
+    },
+    "theme": "light",
+    "transforms": [
+      "translate(192 0)",
+      "translate(292 0)"
+    ],
+    "width": 375
+  },
+  "replayClosed": {
+    "audio": {
+      "banks": 41,
+      "ready": true,
+      "voices": []
+    },
+    "band": {
+      "bottom": 0,
+      "height": 0,
+      "left": 0,
+      "right": 0,
+      "top": 0,
+      "width": 0,
+      "x": 0,
+      "y": 0
+    },
+    "boot": {
+      "errors": [],
+      "failed": [],
+      "loaded": 33,
+      "scripts": 33
+    },
+    "conduct": {
+      "beat": "4",
+      "combo": 4,
+      "count": 4,
+      "events": 7,
+      "from": 0,
+      "judge": {
+        "e": 0,
+        "g": 0,
+        "l": 0,
+        "p": 4
+      },
+      "level": 0.975,
+      "meter": 4,
+      "period": 0.41604505718602697,
+      "phase": "idle",
+      "taps": 4,
+      "to": 64
+    },
+    "controls": {
+      "bottom": 0,
+      "height": 0,
+      "left": 0,
+      "right": 0,
+      "top": 0,
+      "width": 0,
+      "x": 0,
+      "y": 0
+    },
+    "errors": [],
+    "height": 812,
+    "members": 0.6864548486191779,
+    "pad": {
+      "bottom": 0,
+      "height": 0,
+      "left": 0,
+      "right": 0,
+      "top": 0,
+      "width": 0,
+      "x": 0,
+      "y": 0
+    },
+    "pattern": {
+      "calm": "true",
+      "mode": "play",
+      "nextBeat": "4"
+    },
+    "playing": false,
+    "portraits": 39,
+    "recordings": [
+      {
+        "id": "r2028-10-0-395491",
+        "label": "あなたの指揮：《新世界より》第2楽章（6月 第3週）"
+      }
+    ],
+    "records": 0.22814949858002365,
+    "scrollHeight": 0,
+    "scrollWidth": 0,
+    "stats": {
+      "bottom": 0,
+      "height": 0,
+      "left": 0,
+      "right": 0,
+      "top": 0,
+      "width": 0,
+      "x": 0,
+      "y": 0
+    },
+    "theme": "light",
+    "transforms": [
+      "translate(192 0)",
+      "translate(292 0)"
+    ],
+    "width": 375
+  },
+  "watch": {
+    "audio": {
+      "banks": 41,
+      "ready": true,
+      "voices": []
+    },
+    "band": {
+      "bottom": 543.1015625,
+      "height": 315,
+      "left": 0,
+      "right": 375,
+      "top": 228.1015625,
+      "width": 375,
+      "x": 0,
+      "y": 228.1015625
+    },
+    "boot": {
+      "errors": [],
+      "failed": [],
+      "loaded": 33,
+      "scripts": 33
+    },
+    "conduct": {
+      "count": 0,
+      "events": 0,
+      "from": 0,
+      "judge": null,
+      "level": 1,
+      "meter": 2,
+      "phase": "watch",
+      "taps": 0,
+      "to": 81
+    },
+    "controls": {
+      "bottom": 0,
+      "height": 0,
+      "left": 0,
+      "right": 0,
+      "top": 0,
+      "width": 0,
+      "x": 0,
+      "y": 0
+    },
+    "errors": [],
+    "height": 812,
+    "members": 0.6864548486191779,
+    "pad": {
+      "bottom": 0,
+      "height": 0,
+      "left": 0,
+      "right": 0,
+      "top": 0,
+      "width": 0,
+      "x": 0,
+      "y": 0
+    },
+    "pattern": {},
+    "playing": false,
+    "portraits": 39,
+    "recordings": [
+      {
+        "id": "r2026-0-0-583709",
+        "label": "2026年4月の録音"
+      }
+    ],
+    "records": 0.8535414952784777,
+    "scrollHeight": 812,
+    "scrollWidth": 375,
+    "stats": {
+      "bottom": 0,
+      "height": 0,
+      "left": 0,
+      "right": 0,
+      "top": 0,
+      "width": 0,
+      "x": 0,
+      "y": 0
+    },
+    "theme": "dark",
+    "transforms": [],
+    "width": 375
+  },
+  "watchMember": {
+    "card": "佐藤 誠3年・パーカッション1（ティンパニ）閉じる\n    この子の音だけ聴く\n    「自由曲、まだ楽譜を追うので精一杯です」\n    音程CリズムB音色C表現C\n    本番の強さ D\n    ",
+    "errors": [],
+    "scrollWidth": 375,
+    "selected": "m2028-n36-cafe",
+    "visible": true
+  },
+  "year": {
+    "boot": {
+      "loaded": 33,
+      "scripts": 33
+    },
+    "errors": [],
+    "scrollWidth": 375,
+    "steps": 49,
+    "width": 375,
+    "year": 2027
+  },
+  "finalLight": {
+    "audio": {
+      "banks": 41,
+      "ready": true,
+      "voices": []
+    },
+    "band": {
+      "bottom": 391.3984375,
+      "height": 315,
+      "left": 0,
+      "right": 375,
+      "top": 76.3984375,
+      "width": 375,
+      "x": 0,
+      "y": 76.3984375
+    },
+    "boot": {
+      "errors": [],
+      "failed": [],
+      "loaded": 33,
+      "scripts": 33
+    },
+    "conduct": {
+      "beat": "1",
+      "combo": 0,
+      "count": 0,
+      "events": 0,
+      "from": 0,
+      "judge": {
+        "e": 0,
+        "g": 0,
+        "l": 0,
+        "p": 0
+      },
+      "level": 1,
+      "meter": 2,
+      "phase": "count",
+      "taps": 0,
+      "to": 80
+    },
+    "controls": {
+      "bottom": 667.9921875,
+      "height": 223,
+      "left": 24,
+      "right": 351,
+      "top": 444.9921875,
+      "width": 327,
+      "x": 24,
+      "y": 444.9921875
+    },
+    "errors": [],
+    "height": 812,
+    "members": 0.6864548486191779,
+    "pad": {
+      "bottom": 626.9921875,
+      "height": 80,
+      "left": 24,
+      "right": 351,
+      "top": 546.9921875,
+      "width": 327,
+      "x": 24,
+      "y": 546.9921875
+    },
+    "pattern": {
+      "calm": "false",
+      "mode": "count",
+      "nextBeat": "1"
+    },
+    "playing": false,
+    "portraits": 39,
+    "recordings": [],
+    "records": 0.7712433410342783,
+    "scrollHeight": 812,
+    "scrollWidth": 375,
+    "stats": {
+      "bottom": 794,
+      "height": 51,
+      "left": 24,
+      "right": 351,
+      "top": 743,
+      "width": 327,
+      "x": 24,
+      "y": 743
+    },
+    "theme": "light",
+    "transforms": [
+      "translate(149.3 0)",
+      "translate(249.3 0)"
+    ],
+    "width": 375
+  },
+  "cancelledLight": {
+    "audio": {
+      "banks": 41,
+      "ready": true,
+      "voices": []
+    },
+    "band": {
+      "bottom": 0,
+      "height": 0,
+      "left": 0,
+      "right": 0,
+      "top": 0,
+      "width": 0,
+      "x": 0,
+      "y": 0
+    },
+    "boot": {
+      "errors": [],
+      "failed": [],
+      "loaded": 33,
+      "scripts": 33
+    },
+    "conduct": {
+      "beat": "1",
+      "combo": 0,
+      "count": 0,
+      "events": 0,
+      "from": 0,
+      "judge": {
+        "e": 0,
+        "g": 0,
+        "l": 0,
+        "p": 0
+      },
+      "level": 1,
+      "meter": 2,
+      "phase": "idle",
+      "taps": 0,
+      "to": 80
+    },
+    "controls": {
+      "bottom": 0,
+      "height": 0,
+      "left": 0,
+      "right": 0,
+      "top": 0,
+      "width": 0,
+      "x": 0,
+      "y": 0
+    },
+    "errors": [],
+    "height": 812,
+    "members": 0.6864548486191779,
+    "pad": {
+      "bottom": 0,
+      "height": 0,
+      "left": 0,
+      "right": 0,
+      "top": 0,
+      "width": 0,
+      "x": 0,
+      "y": 0
+    },
+    "pattern": {
+      "calm": "false",
+      "mode": "count",
+      "nextBeat": "1"
+    },
+    "playing": false,
+    "portraits": 39,
+    "recordings": [],
+    "records": 0.7712433410342783,
+    "scrollHeight": 0,
+    "scrollWidth": 0,
+    "stats": {
+      "bottom": 0,
+      "height": 0,
+      "left": 0,
+      "right": 0,
+      "top": 0,
+      "width": 0,
+      "x": 0,
+      "y": 0
+    },
+    "theme": "light",
+    "transforms": [
+      "translate(138.0 0)",
+      "translate(238.0 0)"
+    ],
+    "width": 375
+  },
+  "short": {
+    "audio": {
+      "banks": 41,
+      "ready": true,
+      "voices": []
+    },
+    "band": {
+      "bottom": 335.59375,
+      "height": 270,
+      "left": 0,
+      "right": 375,
+      "top": 65.59375,
+      "width": 375,
+      "x": 0,
+      "y": 65.59375
+    },
+    "boot": {
+      "errors": [],
+      "failed": [],
+      "loaded": 33,
+      "scripts": 33
+    },
+    "conduct": {
+      "beat": "1",
+      "combo": 0,
+      "count": 0,
+      "events": 0,
+      "from": 0,
+      "judge": {
+        "e": 0,
+        "g": 0,
+        "l": 0,
+        "p": 0
+      },
+      "level": 1,
+      "meter": 2,
+      "phase": "count",
+      "taps": 0,
+      "to": 80
+    },
+    "controls": {
+      "bottom": 567.1875,
+      "height": 186,
+      "left": 24,
+      "right": 351,
+      "top": 381.1875,
+      "width": 327,
+      "x": 24,
+      "y": 381.1875
+    },
+    "errors": [],
+    "height": 667,
+    "members": 0.6864548486191779,
+    "pad": {
+      "bottom": 531.1875,
+      "height": 72,
+      "left": 24,
+      "right": 351,
+      "top": 459.1875,
+      "width": 327,
+      "x": 24,
+      "y": 459.1875
+    },
+    "pattern": {
+      "calm": "true",
+      "mode": "count",
+      "nextBeat": "1"
+    },
+    "playing": false,
+    "portraits": 39,
+    "recordings": [],
+    "records": 0.7712433410342783,
+    "scrollHeight": 667,
+    "scrollWidth": 375,
+    "stats": {
+      "bottom": 657,
+      "height": 45,
+      "left": 24,
+      "right": 351,
+      "top": 612,
+      "width": 327,
+      "x": 24,
+      "y": 612
+    },
+    "theme": "dark",
+    "transforms": [
+      "translate(192 0)",
+      "translate(292 0)"
+    ],
+    "width": 375
+  },
+  "shortLater": {
+    "audio": {
+      "banks": 41,
+      "ready": true,
+      "voices": []
+    },
+    "band": {
+      "bottom": 335.59375,
+      "height": 270,
+      "left": 0,
+      "right": 375,
+      "top": 65.59375,
+      "width": 375,
+      "x": 0,
+      "y": 65.59375
+    },
+    "boot": {
+      "errors": [],
+      "failed": [],
+      "loaded": 33,
+      "scripts": 33
+    },
+    "conduct": {
+      "beat": "1",
+      "combo": 0,
+      "count": 0,
+      "events": 0,
+      "from": 0,
+      "judge": {
+        "e": 0,
+        "g": 0,
+        "l": 0,
+        "p": 0
+      },
+      "level": 1,
+      "meter": 2,
+      "phase": "count",
+      "taps": 0,
+      "to": 80
+    },
+    "controls": {
+      "bottom": 567.1875,
+      "height": 186,
+      "left": 24,
+      "right": 351,
+      "top": 381.1875,
+      "width": 327,
+      "x": 24,
+      "y": 381.1875
+    },
+    "errors": [],
+    "height": 667,
+    "members": 0.6864548486191779,
+    "pad": {
+      "bottom": 531.1875,
+      "height": 72,
+      "left": 24,
+      "right": 351,
+      "top": 459.1875,
+      "width": 327,
+      "x": 24,
+      "y": 459.1875
+    },
+    "pattern": {
+      "calm": "true",
+      "mode": "count",
+      "nextBeat": "1"
+    },
+    "playing": false,
+    "portraits": 39,
+    "recordings": [],
+    "records": 0.7712433410342783,
+    "scrollHeight": 667,
+    "scrollWidth": 375,
+    "stats": {
+      "bottom": 657,
+      "height": 45,
+      "left": 24,
+      "right": 351,
+      "top": 612,
+      "width": 327,
+      "x": 24,
+      "y": 612
+    },
+    "theme": "dark",
+    "transforms": [
+      "translate(192 0)",
+      "translate(292 0)"
+    ],
+    "width": 375
+  },
+  "console": []
+}

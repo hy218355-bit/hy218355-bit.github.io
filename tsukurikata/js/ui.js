@@ -33,6 +33,7 @@ function tok(){
     rkInk:g('--rk-ink'), floor: g('--floor'), floorLine: g('--floor-line'), good: g('--good'), warn: g('--warn'), bad: g('--bad'),
     lcdInk: g('--lcd-ink'), lcdDim: g('--lcd-dim'), fBody: g('--f-body'), fLcd: g('--f-lcd'), fHand: g('--f-hand'),
     rk: Object.fromEntries(RANKS.map(([, r]) => [r, g(`--rk-${r.toLowerCase()}`)])),
+    conduct:{paper:g('--cd-paper'),sheet:g('--cd-stage'),floor:g('--cd-stage'),floorLine:g('--cd-floor'),ink:g('--cd-ink'),soft:g('--cd-soft'),brass:g('--cd-accent'),rule:g('--cd-line')},
   };
 }
 function rgb(hex){
@@ -276,6 +277,13 @@ function levelAt(p, t){
 // cv を渡すと、そのキャンバス（指揮の画面）に描く。who を渡すと、その部員だけが舞台にいる（本番の出場メンバー）
 // 舞台の床とひな壇、指揮台
 function stageFloor(g, G, C){
+  // 指揮中は、床の細い線を減らし、部員と届く合図へ目線を集める。
+  if(G.conducting){
+    const bg=g.createLinearGradient(0,0,0,G.H);bg.addColorStop(0,C.sheet);bg.addColorStop(1,C.floorLine);g.fillStyle=bg;g.fillRect(0,0,G.W,G.H);
+    g.strokeStyle=C.rule;g.lineWidth=1;g.globalAlpha=.4;
+    for(let r=0;r<5;r++){const y=stageRowY(r,G)+G.r+20;g.beginPath();g.moveTo(12,y+6);g.quadraticCurveTo(G.cx,y-5,G.W-12,y+6);g.stroke();}
+    g.globalAlpha=1;return;
+  }
   /* 座席の座標はそのままに、奥の壁と木の床、控えめな照明を重ねる。 */
   g.fillStyle=C.paper;g.fillRect(0,0,G.W,G.H);
   const wall=g.createLinearGradient(0,0,0,G.H);wall.addColorStop(0,C.sheet);wall.addColorStop(1,C.paper);g.fillStyle=wall;g.fillRect(0,0,G.W,G.H);
@@ -298,8 +306,11 @@ function stageFloor(g, G, C){
 function drawStage(t = -1, cv = $('#stage'), who = null){
   const main = cv.id === 'stage';
   const G = stageGeom(Math.max(240, cv.parentElement.clientWidth), true);
+  G.conducting=cv.id==='cdStage'&&!$('#conduct').classList.contains('watch');
+  if(G.conducting){G.H=Math.round(Math.min(G.H,Math.max(270,window.innerHeight*.39)));G.r=Math.min(G.r,(G.H-100)/4/3.7);}
   const {g, W, H} = fitCanvas(cv, G.H);
   const C = tok();
+  if(G.conducting)Object.assign(C,C.conduct);
   stageFloor(g, G, C);
 
   const viewSec = main && U.view !== 'mel' ? U.view : null;

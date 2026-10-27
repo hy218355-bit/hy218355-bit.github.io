@@ -9,7 +9,7 @@ const CD = {phase: 'idle', perf: null, clock: null, count: [], lv: [], level: 1,
 // 最初にテンポを示すタップの数（2拍子は2小節ぶん）
 const cdCountN = () => CD.perf.meter <= 2 ? CD.perf.meter * 2 : CD.perf.meter;
 const cdCueCalm = () => fxCalm() || U.fxMode !== 'full';
-const cdCueHint = () => cdCueCalm() ? '輪が光ったらタップ' : '丸が輪に重なったらタップ';
+const cdCueHint = () => cdCueCalm() ? 'ラインが光ったらタップ' : '光がラインに届いたらタップ';
 
 // stage を渡すと本番の指揮（{rec, ev}）。終わると、その指揮で演奏した結果が採点される
 function openConduct(stage = null){
@@ -28,7 +28,10 @@ function openConduct(stage = null){
   CD.judge = {p: 0, g: 0, e: 0, l: 0}; CD.combo = 0; CD.best = 0;
   $('#cdCombo').textContent = '';
   const pc = PIECES[CD.perf.pieceId];
-  $('#cdTitle').textContent = stage ? `${stage.ev.title}：${pc.title}` : `${pc.title}（${VENUE[U.venue].name}）`;
+  $('#cdTitle').textContent = pc.title;
+  $('#cdEyebrow').textContent = stage ? stage.ev.title : '指揮';
+  $('#cdVenue').textContent = VENUE[CD.perf.venue || U.venue].name;
+  $('#cdPlayers').textContent = `${CD.stageMembers.size}人`;
   $('#cdRef').textContent = bpmAt(pc, CD.perf.interp.tempo ?? 1, CD.perf.from);
   for(const el of document.querySelectorAll('#conduct .cd-beat')) el.textContent = beatName(pc);
   $('#cdTempo').textContent = '--';
@@ -36,7 +39,7 @@ function openConduct(stage = null){
   const n = cdCountN();
   const ready = () => {
     CD.cueStart=E.ac.currentTime;
-    cdMsg(`まず${n}回、${cdCueHint()}。次の拍から演奏。`);
+    cdMsg(`まず${n}回、${cdCueHint()}`);
   };
   CD.cuePeriod=clamp(60/bpmAt(pc,CD.perf.interp.tempo??1,CD.perf.from),0.3,1.6);
   CD.cueNodes=null;
@@ -131,10 +134,11 @@ function cdTap(e){
   const y = e.clientY != null ? e.clientY : pad.top + pad.height / 2;
   const level = clamp(0.5 + 0.95 * (1 - (y - pad.top) / pad.height), 0.5, 1.45);
   cdRipple(e, pad);
+  $('#cdLevel').style.top = `${(1.45-level)/.95*100}%`;
   if(CD.phase === 'count'){
     CD.count.push(tapped);
     cdClick(now, CD.count.length === 1);
-    if(CD.count.length < cdCountN()){ cdMsg(`${CD.count.length}…`); return; }
+    if(CD.count.length < cdCountN()){ cdMsg(`あと${cdCountN()-CD.count.length}回`); return; }
     // 叩いた間隔の中央値をテンポにして、次の拍から始める
     const iv = CD.count.slice(1).map((t, i) => t - CD.count[i]).sort((a, b) => a - b);
     const P = clamp(iv[Math.floor(iv.length / 2)], 0.3, 1.6);
@@ -142,7 +146,7 @@ function cdTap(e){
     CD.level = level; CD.lv = [[0, +level.toFixed(2)]];
     CD.phase = 'play';
     $('#cdTempo').textContent = Math.round(60 / P);
-    cdMsg(`${cdCueHint()}。上は大きく、下は小さく。`);
+    cdMsg(cdCueHint());
     playPerf(CD.perf, CD.stage ? `${CD.stage.rec.label}（あなたの指揮）` : `あなたの指揮：${PIECES[CD.perf.pieceId].title}（${VENUE[U.venue].name}）`, cdFinish, {clock: CD.clock});
     E.pb?.setLevel(level, CD.clock.t0);
     return;
@@ -199,20 +203,14 @@ function cdCueState(now){
 }
 function cdBuildCue(){
   const svg=$('#cdPattern');
-  svg.innerHTML=`<path class="cue-track" d="M48 112H188"/>
-    <g class="cue-baton" id="cdCueBaton"><path d="m87 48 32-26"/><path d="m82 51 6-5 6 7-6 5Z"/></g>
-    <circle class="cue-target" cx="48" cy="112" r="24"/>
-    <circle class="cue-approach" id="cdCueApproach" cx="48" cy="112" r="24"/>
-    <g id="cdCueNow" class="cue-now"><circle cx="48" cy="112" r="17"/><text x="48" y="118"></text></g>
-    ${[0,1].map(i=>`<g id="cdCueNext${i}" class="cue-next"><circle r="12"/><text y="5"></text></g>`).join('')}
-    <g class="cue-steps">${[0,1,2,3].map(i=>`<path id="cdCueStep${i}" d="M${32+i*10} 147h6"/>`).join('')}</g>
-    <g id="cdCueCount" class="cue-count">${Array.from({length:cdCountN()},(_,i)=>`<circle cx="${100+(i-(cdCountN()-1)/2)*20}" cy="176" r="4"/>`).join('')}</g>`;
-  CD.cueNodes={svg,baton:$('#cdCueBaton'),approach:$('#cdCueApproach'),now:$('#cdCueNow'),next:[$('#cdCueNext0'),$('#cdCueNext1')],steps:[0,1,2,3].map(i=>$('#cdCueStep'+i)),count:$('#cdCueCount')};
-}
-// 同じ数字で毎フレーム文字のノードを作り直さない。
-function cdCueText(el,value){
-  const text=String(value);
-  if(el.textContent!==text)el.textContent=text;
+  svg.innerHTML=`<path class="cue-track" d="M24 44H319"/>
+    <path class="cue-target" d="M92 13V75"/>
+    <g id="cdCueNow" class="cue-now"><rect x="84" y="20" width="16" height="48" rx="8"/></g>
+    ${[0,1].map(i=>`<g id="cdCueNext${i}" class="cue-next"><rect x="-4" y="23" width="8" height="42" rx="4"/></g>`).join('')}
+    <g class="cue-steps">${[0,1,2,3].map(i=>`<path id="cdCueStep${i}" d="M${77+i*9} 85h4"/>`).join('')}</g>`;
+  $('#cdBeatRow').innerHTML=Array.from({length:CD.perf.meter},(_,i)=>`<i>${i+1}</i>`).join('');
+  $('#cdLevel').style.top='47.4%';
+  CD.cueNodes={svg,now:$('#cdCueNow'),next:[$('#cdCueNext0'),$('#cdCueNext1')],steps:[0,1,2,3].map(i=>$('#cdCueStep'+i)),beats:Array.from($('#cdBeatRow').children),pad:$('#cdPad')};
 }
 function cdDrawCue(now){
   const q=cdCueState(now),n=CD.cueNodes;
@@ -221,21 +219,20 @@ function cdDrawCue(now){
   if(!q)return;
   const calm=cdCueCalm(),hit=q.f<0.14&&q.i>=0;
   n.svg.dataset.calm=String(calm);n.svg.dataset.mode=CD.phase;n.svg.dataset.nextBeat=q.next[0].beat;
-  cdCueText(n.now.querySelector('text'),hit?q.beat:calm?q.next[0].beat:'');
   n.now.classList.toggle('hit',hit);
-  n.approach.setAttribute('r',calm?'24':(24+22*(1-q.f)).toFixed(1));
-  n.baton.setAttribute('transform',calm?'':`rotate(${(-24+48*q.f).toFixed(1)} 88 52)`);
+  n.pad.classList.toggle('on-beat',hit);
   for(let i=0;i<2;i++){
     const el=n.next[i],next=q.next[i];
     el.style.visibility=next.show?'visible':'hidden';
-    el.setAttribute('transform',`translate(${calm?108+i*60:(48+60*next.distance).toFixed(1)} 112)`);
-    cdCueText(el.querySelector('text'),next.beat);
+    el.setAttribute('transform',`translate(${calm?192+i*100:(92+100*next.distance).toFixed(1)} 0)`);
     el.classList.toggle('downbeat',next.beat===1);
   }
   // 演出なし・短く・動きを減らす設定では、固定した4つの目印で拍までの残りを示す。
   for(let i=0;i<4;i++)n.steps[i].classList.toggle('on',i<=Math.floor(q.f*4));
-  n.count.style.visibility=CD.phase==='count'?'visible':'hidden';
-  Array.from(n.count.children).forEach((el,i)=>el.classList.toggle('on',i<q.count));
+  n.beats.forEach((el,i)=>{
+    el.classList.toggle('on',q.i>=0&&i===q.beat-1);
+    el.classList.toggle('counted',CD.phase==='count'&&i<q.count%CD.perf.meter);
+  });
 }
 function cdFrame(){
   CD.raf = requestAnimationFrame(cdFrame);

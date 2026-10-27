@@ -49,15 +49,16 @@ for(const [off,kind]of [[-.2,'e'],[.05,'p'],[.1,'g'],[.2,'l']]){
  CD.judge={p:0,g:0,e:0,l:0};cdJudge({},$('#cdPad').getBoundingClientRect(),off);assert.equal(CD.judge[kind],1,'判定の幅は変えない');
 }
 CD.phase='wait';assert.equal(cdCueState(0),null);CD.phase='idle';assert.equal(cdCueState(0),null);CD.phase='done';assert.equal(cdCueState(0),null);
-// 動かせない設定でも、固定した予告と到着の強調を残す。
+// 動かせない設定でも、光は固定し、到着線・操作面・拍の印を同時に点灯する。
 const el=()=>({style:{},dataset:{},attrs:{},textContent:'',children:[],setAttribute(k,v){this.attrs[k]=v;},querySelector(){return this.text||=(el());},classList:{values:new Set(),toggle(k,on){on?this.values.add(k):this.values.delete(k);}}});
-const n={svg:el(),baton:el(),approach:el(),now:el(),next:[el(),el()],steps:[el(),el(),el(),el()],count:el()};
+const n={svg:el(),now:el(),next:[el(),el()],steps:[el(),el(),el(),el()],beats:[el(),el(),el(),el()],pad:el()};
 CD.cueNodes=n;CD.perf={meter:4,from:0,to:16};CD.phase='play';CD.clock=BeatClock.start(10,0,.5);
-U.fxMode='full';cdDrawCue(10.1);assert.equal(n.now.querySelector('text').textContent,'','輪に入る前に数字を重ねない');const moving=n.next[0].attrs.transform;cdDrawCue(10.3);assert.notEqual(n.next[0].attrs.transform,moving);
+U.fxMode='full';cdDrawCue(10.1);assert.ok(!n.now.classList.values.has('hit'),'到着前に線を光らせない');const moving=n.next[0].attrs.transform;cdDrawCue(10.3);assert.notEqual(n.next[0].attrs.transform,moving);
+cdDrawCue(10.499);assert.equal(n.next[0].attrs.transform,'translate(92.2 0)','到着線へ向かって2拍先の光が近づく');
 for(const mode of ['short','off','reduce']){
  U.fxMode=mode==='reduce'?'full':mode;calm=mode==='reduce';cdDrawCue(10.1);const fixed=n.next[0].attrs.transform;
- cdDrawCue(10.3);assert.equal(n.next[0].attrs.transform,fixed);assert.equal(n.approach.attrs.r,'24');assert.equal(n.baton.attrs.transform,'');
- assert.equal(cdCueHint(),'輪が光ったらタップ');cdDrawCue(10.5);assert.ok(n.now.classList.values.has('hit'));
+ cdDrawCue(10.3);assert.equal(n.next[0].attrs.transform,fixed);assert.equal(fixed,'translate(192 0)');
+ assert.equal(cdCueHint(),'ラインが光ったらタップ');cdDrawCue(10.5);assert.ok(n.now.classList.values.has('hit'));assert.ok(n.pad.classList.values.has('on-beat'));assert.ok(n.beats[1].classList.values.has('on'));
 }
 `,ctx);
 console.log('2・3・4・8拍の予告と入り／実際のタップから演奏開始・ぴったり判定／全15曲の区間・テンポ変更／演奏と時計の不変／終端・待機・終了／演出なし・短く・動きを減らす設定：確認済み');
