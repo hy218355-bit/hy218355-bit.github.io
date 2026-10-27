@@ -1,0 +1,1473 @@
+{
+  "annualBefore": {
+    "theme": "light",
+    "year": 2026,
+    "phase": "winter",
+    "week": 26,
+    "hall": 72,
+    "state": 0.5428479802794755,
+    "records": 0.3389957519248128,
+    "stats": 0.8807530903723091,
+    "playing": false,
+    "waiting": false,
+    "mix": null,
+    "audio": {
+      "ready": false,
+      "banks": 7,
+      "voices": [],
+      "error": null
+    },
+    "boot": {
+      "scripts": 33,
+      "loaded": 33,
+      "failed": [],
+      "errors": []
+    },
+    "errors": [],
+    "dom": {
+      "buttons": [
+        {
+          "act": "playrec",
+          "text": "4月の録音"
+        },
+        {
+          "act": "playrec",
+          "text": "最後の本番"
+        },
+        {
+          "act": "saverec",
+          "text": "保存"
+        },
+        {
+          "act": "wnext",
+          "text": "4月へ（新年度）"
+        }
+      ],
+      "scrollWidth": 375,
+      "vitals": "体力42やる気100会場慣れ72評判1720をこえると、入部したい生徒が来る顧問の指導力Lv2\n    部活に慣れてきた顧問・練習の効果 +4%部員の力の平均D\n    今年\n    県大会\n    \n      \n      \n      \n      \n    4月5月6月7月8月9月10月",
+      "warning": [],
+      "width": 375
+    }
+  },
+  "annualAfter": {
+    "theme": "light",
+    "year": 2027,
+    "phase": "choose",
+    "week": 0,
+    "hall": 72,
+    "state": 0.22926039877347648,
+    "records": 0.3389957519248128,
+    "stats": 0.9321446397807449,
+    "playing": false,
+    "waiting": false,
+    "mix": null,
+    "audio": {
+      "ready": true,
+      "banks": 41,
+      "voices": [],
+      "error": null
+    },
+    "boot": {
+      "scripts": 33,
+      "loaded": 33,
+      "failed": [],
+      "errors": []
+    },
+    "errors": [],
+    "dom": {
+      "buttons": [
+        {
+          "act": "assign",
+          "text": "この配置で決める"
+        }
+      ],
+      "scrollWidth": 375,
+      "vitals": "体力100やる気70会場慣れ72評判1616をこえると、入部したい生徒が来る顧問の指導力Lv2\n    部活に慣れてきた顧問・練習の効果 +4%部員の力の平均\n    今年去年\n    県大会\n    \n      \n      \n      \n      \n    4月5月6月7月8月9月10月",
+      "warning": [],
+      "width": 375
+    }
+  },
+  "annualAssigned": {
+    "theme": "light",
+    "year": 2027,
+    "phase": "choose",
+    "week": 0,
+    "hall": 72,
+    "state": 0.030070273438468575,
+    "records": 0.3389957519248128,
+    "stats": 0.5174368510488421,
+    "playing": false,
+    "waiting": false,
+    "mix": null,
+    "audio": {
+      "ready": true,
+      "banks": 41,
+      "voices": [],
+      "error": null
+    },
+    "boot": {
+      "scripts": 33,
+      "loaded": 33,
+      "failed": [],
+      "errors": []
+    },
+    "errors": [],
+    "dom": {
+      "buttons": [
+        {
+          "act": "model",
+          "text": "お手本"
+        },
+        {
+          "act": "preview",
+          "text": "いまの部で"
+        },
+        {
+          "act": "choose",
+          "text": "決める"
+        },
+        {
+          "act": "model",
+          "text": "お手本"
+        },
+        {
+          "act": "preview",
+          "text": "いまの部で"
+        },
+        {
+          "act": "choose",
+          "text": "決める"
+        },
+        {
+          "act": "model",
+          "text": "お手本"
+        },
+        {
+          "act": "preview",
+          "text": "いまの部で"
+        },
+        {
+          "act": "choose",
+          "text": "決める"
+        },
+        {
+          "act": "model",
+          "text": "お手本"
+        },
+        {
+          "act": "preview",
+          "text": "いまの部で"
+        },
+        {
+          "act": "choose",
+          "text": "決める"
+        },
+        {
+          "act": "model",
+          "text": "お手本"
+        },
+        {
+          "act": "preview",
+          "text": "いまの部で"
+        },
+        {
+          "act": "choose",
+          "text": "決める"
+        },
+        {
+          "act": "model",
+          "text": "お手本"
+        },
+        {
+          "act": "preview",
+          "text": "いまの部で"
+        },
+        {
+          "act": "choose",
+          "text": "決める"
+        },
+        {
+          "act": "model",
+          "text": "お手本"
+        },
+        {
+          "act": "preview",
+          "text": "いまの部で"
+        },
+        {
+          "act": "choose",
+          "text": "決める"
+        },
+        {
+          "act": "model",
+          "text": "お手本"
+        },
+        {
+          "act": "preview",
+          "text": "いまの部で"
+        },
+        {
+          "act": "choose",
+          "text": "決める"
+        },
+        {
+          "act": "model",
+          "text": "お手本"
+        },
+        {
+          "act": "preview",
+          "text": "いまの部で"
+        },
+        {
+          "act": "choose",
+          "text": "決める"
+        },
+        {
+          "act": "model",
+          "text": "お手本"
+        },
+        {
+          "act": "preview",
+          "text": "いまの部で"
+        },
+        {
+          "act": "choose",
+          "text": "決める"
+        },
+        {
+          "act": "model",
+          "text": "お手本"
+        },
+        {
+          "act": "preview",
+          "text": "いまの部で"
+        },
+        {
+          "act": "choose",
+          "text": "決める"
+        },
+        {
+          "act": "model",
+          "text": "お手本"
+        },
+        {
+          "act": "preview",
+          "text": "いまの部で"
+        },
+        {
+          "act": "choose",
+          "text": "決める"
+        },
+        {
+          "act": "model",
+          "text": "お手本"
+        },
+        {
+          "act": "preview",
+          "text": "いまの部で"
+        },
+        {
+          "act": "choose",
+          "text": "決める"
+        },
+        {
+          "act": "model",
+          "text": "お手本"
+        },
+        {
+          "act": "preview",
+          "text": "いまの部で"
+        },
+        {
+          "act": "choose",
+          "text": "決める"
+        },
+        {
+          "act": "model",
+          "text": "お手本"
+        },
+        {
+          "act": "preview",
+          "text": "いまの部で"
+        },
+        {
+          "act": "choose",
+          "text": "決める"
+        }
+      ],
+      "scrollWidth": 375,
+      "vitals": "体力100やる気73会場慣れ72評判1616をこえると、入部したい生徒が来る顧問の指導力Lv2\n    部活に慣れてきた顧問・練習の効果 +4%部員の力の平均\n    今年去年\n    県大会\n    \n      \n      \n      \n      \n    4月5月6月7月8月9月10月",
+      "warning": [],
+      "width": 375
+    }
+  },
+  "annualChosen": {
+    "theme": "light",
+    "year": 2027,
+    "phase": "week",
+    "week": 0,
+    "hall": 72,
+    "state": 0.8159642273094505,
+    "records": 0.9419050489086658,
+    "stats": 0.5174368510488421,
+    "playing": false,
+    "waiting": false,
+    "mix": null,
+    "audio": {
+      "ready": true,
+      "banks": 41,
+      "voices": [],
+      "error": null
+    },
+    "boot": {
+      "scripts": 33,
+      "loaded": 33,
+      "failed": [],
+      "errors": []
+    },
+    "errors": [],
+    "dom": {
+      "buttons": [
+        {
+          "act": "practice",
+          "text": "この内容で1週間すすめる"
+        },
+        {
+          "act": "practicemany",
+          "text": "次の予定まで進める"
+        },
+        {
+          "act": "tunegame",
+          "text": "耳でチューニング"
+        }
+      ],
+      "scrollWidth": 375,
+      "vitals": "体力100やる気73会場慣れ72評判1616をこえると、入部したい生徒が来る顧問の指導力Lv2\n    部活に慣れてきた顧問・練習の効果 +4%部員の力の平均\n    今年去年\n    県大会\n    \n      \n      \n      \n      \n    4月5月6月7月8月9月10月",
+      "warning": [],
+      "width": 375
+    }
+  },
+  "annualFinal": {
+    "theme": "light",
+    "year": 2027,
+    "phase": "week",
+    "week": 0,
+    "hall": 72,
+    "state": 0.8159642273094505,
+    "records": 0.9419050489086658,
+    "stats": 0.5174368510488421,
+    "playing": false,
+    "waiting": false,
+    "mix": null,
+    "audio": {
+      "ready": true,
+      "banks": 41,
+      "voices": [],
+      "error": null
+    },
+    "boot": {
+      "scripts": 33,
+      "loaded": 33,
+      "failed": [],
+      "errors": []
+    },
+    "errors": [],
+    "dom": {
+      "buttons": [
+        {
+          "act": "practice",
+          "text": "この内容で1週間すすめる"
+        },
+        {
+          "act": "practicemany",
+          "text": "次の予定まで進める"
+        },
+        {
+          "act": "tunegame",
+          "text": "耳でチューニング"
+        }
+      ],
+      "scrollWidth": 375,
+      "vitals": "体力100やる気73会場慣れ72評判1616をこえると、入部したい生徒が来る顧問の指導力Lv2\n    部活に慣れてきた顧問・練習の効果 +4%部員の力の平均\n    今年去年\n    県大会\n    \n      \n      \n      \n      \n    4月5月6月7月8月9月10月",
+      "warning": [],
+      "width": 375
+    }
+  },
+  "choicesLight": {
+    "theme": "light",
+    "year": 2026,
+    "phase": "choose",
+    "week": 0,
+    "hall": 0,
+    "state": 0.15909131825901568,
+    "records": 0.7712433410342783,
+    "stats": 0.8814990327227861,
+    "playing": false,
+    "waiting": false,
+    "mix": null,
+    "audio": {
+      "ready": false,
+      "banks": 4,
+      "voices": [],
+      "error": null
+    },
+    "boot": {
+      "scripts": 33,
+      "loaded": 33,
+      "failed": [],
+      "errors": []
+    },
+    "errors": [],
+    "dom": {
+      "buttons": [
+        {
+          "act": "model",
+          "text": "お手本"
+        },
+        {
+          "act": "preview",
+          "text": "いまの部で"
+        },
+        {
+          "act": "choose",
+          "text": "決める"
+        },
+        {
+          "act": "model",
+          "text": "お手本"
+        },
+        {
+          "act": "preview",
+          "text": "いまの部で"
+        },
+        {
+          "act": "choose",
+          "text": "決める"
+        },
+        {
+          "act": "model",
+          "text": "お手本"
+        },
+        {
+          "act": "preview",
+          "text": "いまの部で"
+        },
+        {
+          "act": "choose",
+          "text": "決める"
+        },
+        {
+          "act": "model",
+          "text": "お手本"
+        },
+        {
+          "act": "preview",
+          "text": "いまの部で"
+        },
+        {
+          "act": "choose",
+          "text": "決める"
+        },
+        {
+          "act": "model",
+          "text": "お手本"
+        },
+        {
+          "act": "preview",
+          "text": "いまの部で"
+        },
+        {
+          "act": "choose",
+          "text": "決める"
+        },
+        {
+          "act": "model",
+          "text": "お手本"
+        },
+        {
+          "act": "preview",
+          "text": "いまの部で"
+        },
+        {
+          "act": "choose",
+          "text": "決める"
+        },
+        {
+          "act": "model",
+          "text": "お手本"
+        },
+        {
+          "act": "preview",
+          "text": "いまの部で"
+        },
+        {
+          "act": "choose",
+          "text": "決める"
+        },
+        {
+          "act": "model",
+          "text": "お手本"
+        },
+        {
+          "act": "preview",
+          "text": "いまの部で"
+        },
+        {
+          "act": "choose",
+          "text": "決める"
+        },
+        {
+          "act": "model",
+          "text": "お手本"
+        },
+        {
+          "act": "preview",
+          "text": "いまの部で"
+        },
+        {
+          "act": "choose",
+          "text": "決める"
+        },
+        {
+          "act": "model",
+          "text": "お手本"
+        },
+        {
+          "act": "preview",
+          "text": "いまの部で"
+        },
+        {
+          "act": "choose",
+          "text": "決める"
+        },
+        {
+          "act": "model",
+          "text": "お手本"
+        },
+        {
+          "act": "preview",
+          "text": "いまの部で"
+        },
+        {
+          "act": "choose",
+          "text": "決める"
+        },
+        {
+          "act": "model",
+          "text": "お手本"
+        },
+        {
+          "act": "preview",
+          "text": "いまの部で"
+        },
+        {
+          "act": "choose",
+          "text": "決める"
+        },
+        {
+          "act": "model",
+          "text": "お手本"
+        },
+        {
+          "act": "preview",
+          "text": "いまの部で"
+        },
+        {
+          "act": "choose",
+          "text": "決める"
+        },
+        {
+          "act": "model",
+          "text": "お手本"
+        },
+        {
+          "act": "preview",
+          "text": "いまの部で"
+        },
+        {
+          "act": "choose",
+          "text": "決める"
+        },
+        {
+          "act": "model",
+          "text": "お手本"
+        },
+        {
+          "act": "preview",
+          "text": "いまの部で"
+        },
+        {
+          "act": "choose",
+          "text": "決める"
+        }
+      ],
+      "scrollWidth": 375,
+      "vitals": "体力100やる気83会場慣れ0評判58をこえると、入部したい生徒が来る顧問の指導力Lv1\n    新米顧問・練習の効果 +0%",
+      "warning": [],
+      "width": 375
+    }
+  },
+  "choicesDark": {
+    "theme": "dark",
+    "year": 2026,
+    "phase": "choose",
+    "week": 0,
+    "hall": 0,
+    "state": 0.15909131825901568,
+    "records": 0.7712433410342783,
+    "stats": 0.8814990327227861,
+    "playing": false,
+    "waiting": false,
+    "mix": null,
+    "audio": {
+      "ready": true,
+      "banks": 41,
+      "voices": [],
+      "error": null
+    },
+    "boot": {
+      "scripts": 33,
+      "loaded": 33,
+      "failed": [],
+      "errors": []
+    },
+    "errors": [],
+    "dom": {
+      "buttons": [
+        {
+          "act": "model",
+          "text": "お手本"
+        },
+        {
+          "act": "preview",
+          "text": "いまの部で"
+        },
+        {
+          "act": "choose",
+          "text": "決める"
+        },
+        {
+          "act": "model",
+          "text": "お手本"
+        },
+        {
+          "act": "preview",
+          "text": "いまの部で"
+        },
+        {
+          "act": "choose",
+          "text": "決める"
+        },
+        {
+          "act": "model",
+          "text": "お手本"
+        },
+        {
+          "act": "preview",
+          "text": "いまの部で"
+        },
+        {
+          "act": "choose",
+          "text": "決める"
+        },
+        {
+          "act": "model",
+          "text": "お手本"
+        },
+        {
+          "act": "preview",
+          "text": "いまの部で"
+        },
+        {
+          "act": "choose",
+          "text": "決める"
+        },
+        {
+          "act": "model",
+          "text": "お手本"
+        },
+        {
+          "act": "preview",
+          "text": "いまの部で"
+        },
+        {
+          "act": "choose",
+          "text": "決める"
+        },
+        {
+          "act": "model",
+          "text": "お手本"
+        },
+        {
+          "act": "preview",
+          "text": "いまの部で"
+        },
+        {
+          "act": "choose",
+          "text": "決める"
+        },
+        {
+          "act": "model",
+          "text": "お手本"
+        },
+        {
+          "act": "preview",
+          "text": "いまの部で"
+        },
+        {
+          "act": "choose",
+          "text": "決める"
+        },
+        {
+          "act": "model",
+          "text": "お手本"
+        },
+        {
+          "act": "preview",
+          "text": "いまの部で"
+        },
+        {
+          "act": "choose",
+          "text": "決める"
+        },
+        {
+          "act": "model",
+          "text": "お手本"
+        },
+        {
+          "act": "preview",
+          "text": "いまの部で"
+        },
+        {
+          "act": "choose",
+          "text": "決める"
+        },
+        {
+          "act": "model",
+          "text": "お手本"
+        },
+        {
+          "act": "preview",
+          "text": "いまの部で"
+        },
+        {
+          "act": "choose",
+          "text": "決める"
+        },
+        {
+          "act": "model",
+          "text": "お手本"
+        },
+        {
+          "act": "preview",
+          "text": "いまの部で"
+        },
+        {
+          "act": "choose",
+          "text": "決める"
+        },
+        {
+          "act": "model",
+          "text": "お手本"
+        },
+        {
+          "act": "preview",
+          "text": "いまの部で"
+        },
+        {
+          "act": "choose",
+          "text": "決める"
+        },
+        {
+          "act": "model",
+          "text": "お手本"
+        },
+        {
+          "act": "preview",
+          "text": "いまの部で"
+        },
+        {
+          "act": "choose",
+          "text": "決める"
+        },
+        {
+          "act": "model",
+          "text": "お手本"
+        },
+        {
+          "act": "preview",
+          "text": "いまの部で"
+        },
+        {
+          "act": "choose",
+          "text": "決める"
+        },
+        {
+          "act": "model",
+          "text": "お手本"
+        },
+        {
+          "act": "preview",
+          "text": "いまの部で"
+        },
+        {
+          "act": "choose",
+          "text": "決める"
+        }
+      ],
+      "scrollWidth": 375,
+      "vitals": "体力100やる気83会場慣れ0評判58をこえると、入部したい生徒が来る顧問の指導力Lv1\n    新米顧問・練習の効果 +0%",
+      "warning": [],
+      "width": 375
+    }
+  },
+  "pompIntro": {
+    "theme": "light",
+    "year": 2028,
+    "phase": "week",
+    "week": 10,
+    "hall": 0,
+    "state": 0.906961663858965,
+    "records": 0.7712433410342783,
+    "stats": 0.771712013753131,
+    "playing": true,
+    "waiting": false,
+    "mix": {
+      "nodes": 2,
+      "live": false,
+      "gain": [
+        1.600000023841858,
+        1.600000023841858
+      ]
+    },
+    "audio": {
+      "ready": true,
+      "banks": 41,
+      "voices": [
+        "SampleVoice"
+      ],
+      "error": null
+    },
+    "boot": {
+      "scripts": 33,
+      "loaded": 33,
+      "failed": [],
+      "errors": []
+    },
+    "errors": [],
+    "dom": {
+      "buttons": [],
+      "scrollWidth": 375,
+      "vitals": "体力100やる気83会場慣れ0評判58をこえると、入部したい生徒が来る顧問の指導力Lv1\n    新米顧問・練習の効果 +0%",
+      "warning": [],
+      "width": 375
+    }
+  },
+  "pompRange": {
+    "theme": "light",
+    "year": 2028,
+    "phase": "week",
+    "week": 10,
+    "hall": 0,
+    "state": 0.906961663858965,
+    "records": 0.7712433410342783,
+    "stats": 0.771712013753131,
+    "playing": false,
+    "waiting": false,
+    "mix": null,
+    "audio": {
+      "ready": true,
+      "banks": 41,
+      "voices": [],
+      "error": null
+    },
+    "boot": {
+      "scripts": 33,
+      "loaded": 33,
+      "failed": [],
+      "errors": []
+    },
+    "errors": [],
+    "dom": {
+      "buttons": [],
+      "scrollWidth": 375,
+      "vitals": "体力100やる気83会場慣れ0評判58をこえると、入部したい生徒が来る顧問の指導力Lv1\n    新米顧問・練習の効果 +0%",
+      "warning": [],
+      "width": 375
+    }
+  },
+  "pompTutti": {
+    "theme": "light",
+    "year": 2028,
+    "phase": "week",
+    "week": 10,
+    "hall": 0,
+    "state": 0.906961663858965,
+    "records": 0.7712433410342783,
+    "stats": 0.771712013753131,
+    "playing": true,
+    "waiting": false,
+    "mix": {
+      "nodes": 0,
+      "live": false,
+      "gain": []
+    },
+    "audio": {
+      "ready": true,
+      "banks": 41,
+      "voices": [
+        "SampleVoice"
+      ],
+      "error": null
+    },
+    "boot": {
+      "scripts": 33,
+      "loaded": 33,
+      "failed": [],
+      "errors": []
+    },
+    "errors": [],
+    "dom": {
+      "buttons": [],
+      "scrollWidth": 375,
+      "vitals": "体力100やる気83会場慣れ0評判58をこえると、入部したい生徒が来る顧問の指導力Lv1\n    新米顧問・練習の効果 +0%",
+      "warning": [],
+      "width": 375
+    }
+  },
+  "pompStopped": {
+    "theme": "light",
+    "year": 2028,
+    "phase": "week",
+    "week": 10,
+    "hall": 0,
+    "state": 0.906961663858965,
+    "records": 0.7712433410342783,
+    "stats": 0.771712013753131,
+    "playing": false,
+    "waiting": false,
+    "mix": null,
+    "audio": {
+      "ready": true,
+      "banks": 41,
+      "voices": [],
+      "error": null
+    },
+    "boot": {
+      "scripts": 33,
+      "loaded": 33,
+      "failed": [],
+      "errors": []
+    },
+    "errors": [],
+    "dom": {
+      "buttons": [],
+      "scrollWidth": 375,
+      "vitals": "体力100やる気83会場慣れ0評判58をこえると、入部したい生徒が来る顧問の指導力Lv1\n    新米顧問・練習の効果 +0%",
+      "warning": [],
+      "width": 375
+    }
+  },
+  "rehearsalDark": {
+    "theme": "dark",
+    "year": 2028,
+    "phase": "week",
+    "week": 10,
+    "hall": 0,
+    "state": 0.906961663858965,
+    "records": 0.7712433410342783,
+    "stats": 0.771712013753131,
+    "playing": false,
+    "waiting": false,
+    "mix": null,
+    "audio": {
+      "ready": true,
+      "banks": 41,
+      "voices": [],
+      "error": null
+    },
+    "boot": {
+      "scripts": 33,
+      "loaded": 33,
+      "failed": [],
+      "errors": []
+    },
+    "errors": [],
+    "dom": {
+      "buttons": [],
+      "scrollWidth": 375,
+      "vitals": "体力100やる気83会場慣れ0評判58をこえると、入部したい生徒が来る顧問の指導力Lv1\n    新米顧問・練習の効果 +0%",
+      "warning": [],
+      "width": 375
+    }
+  },
+  "rehearsalLight": {
+    "theme": "light",
+    "year": 2028,
+    "phase": "week",
+    "week": 10,
+    "hall": 0,
+    "state": 0.5948150337208062,
+    "records": 0.2242295506875962,
+    "stats": 0.771712013753131,
+    "playing": false,
+    "waiting": false,
+    "mix": null,
+    "audio": {
+      "ready": true,
+      "banks": 41,
+      "voices": [],
+      "error": null
+    },
+    "boot": {
+      "scripts": 33,
+      "loaded": 33,
+      "failed": [],
+      "errors": []
+    },
+    "errors": [],
+    "dom": {
+      "buttons": [],
+      "scrollWidth": 375,
+      "vitals": "体力100やる気83会場慣れ0評判58をこえると、入部したい生徒が来る顧問の指導力Lv1\n    新米顧問・練習の効果 +0%",
+      "warning": [],
+      "width": 375
+    }
+  },
+  "week-dark": {
+    "theme": "dark",
+    "year": 2028,
+    "phase": "week",
+    "week": 10,
+    "hall": 0,
+    "state": 0.5948150337208062,
+    "records": 0.2242295506875962,
+    "stats": 0.771712013753131,
+    "playing": false,
+    "waiting": false,
+    "mix": null,
+    "audio": {
+      "ready": true,
+      "banks": 41,
+      "voices": [],
+      "error": null
+    },
+    "boot": {
+      "scripts": 33,
+      "loaded": 33,
+      "failed": [],
+      "errors": []
+    },
+    "errors": [],
+    "dom": {
+      "buttons": [],
+      "scrollWidth": 375,
+      "vitals": "体力100やる気83会場慣れ0評判58をこえると、入部したい生徒が来る顧問の指導力Lv1\n    新米顧問・練習の効果 +0%",
+      "warning": [],
+      "width": 375
+    }
+  },
+  "play-dark": {
+    "theme": "dark",
+    "year": 2028,
+    "phase": "week",
+    "week": 10,
+    "hall": 0,
+    "state": 0.5948150337208062,
+    "records": 0.2242295506875962,
+    "stats": 0.771712013753131,
+    "playing": false,
+    "waiting": false,
+    "mix": null,
+    "audio": {
+      "ready": true,
+      "banks": 41,
+      "voices": [],
+      "error": null
+    },
+    "boot": {
+      "scripts": 33,
+      "loaded": 33,
+      "failed": [],
+      "errors": []
+    },
+    "errors": [],
+    "dom": {
+      "buttons": [],
+      "scrollWidth": 375,
+      "vitals": "体力100やる気83会場慣れ0評判58をこえると、入部したい生徒が来る顧問の指導力Lv1\n    新米顧問・練習の効果 +0%",
+      "warning": [],
+      "width": 375
+    }
+  },
+  "members-dark": {
+    "theme": "dark",
+    "year": 2028,
+    "phase": "week",
+    "week": 10,
+    "hall": 0,
+    "state": 0.5948150337208062,
+    "records": 0.2242295506875962,
+    "stats": 0.771712013753131,
+    "playing": false,
+    "waiting": false,
+    "mix": null,
+    "audio": {
+      "ready": true,
+      "banks": 41,
+      "voices": [],
+      "error": null
+    },
+    "boot": {
+      "scripts": 33,
+      "loaded": 33,
+      "failed": [],
+      "errors": []
+    },
+    "errors": [],
+    "dom": {
+      "buttons": [],
+      "scrollWidth": 375,
+      "vitals": "体力100やる気83会場慣れ0評判58をこえると、入部したい生徒が来る顧問の指導力Lv1\n    新米顧問・練習の効果 +0%",
+      "warning": [],
+      "width": 375
+    }
+  },
+  "log-dark": {
+    "theme": "dark",
+    "year": 2028,
+    "phase": "week",
+    "week": 10,
+    "hall": 0,
+    "state": 0.5948150337208062,
+    "records": 0.2242295506875962,
+    "stats": 0.771712013753131,
+    "playing": false,
+    "waiting": false,
+    "mix": null,
+    "audio": {
+      "ready": true,
+      "banks": 41,
+      "voices": [],
+      "error": null
+    },
+    "boot": {
+      "scripts": 33,
+      "loaded": 33,
+      "failed": [],
+      "errors": []
+    },
+    "errors": [],
+    "dom": {
+      "buttons": [],
+      "scrollWidth": 375,
+      "vitals": "体力100やる気83会場慣れ0評判58をこえると、入部したい生徒が来る顧問の指導力Lv1\n    新米顧問・練習の効果 +0%",
+      "warning": [],
+      "width": 375
+    }
+  },
+  "week-light": {
+    "theme": "light",
+    "year": 2028,
+    "phase": "week",
+    "week": 10,
+    "hall": 0,
+    "state": 0.5948150337208062,
+    "records": 0.2242295506875962,
+    "stats": 0.771712013753131,
+    "playing": false,
+    "waiting": false,
+    "mix": null,
+    "audio": {
+      "ready": true,
+      "banks": 41,
+      "voices": [],
+      "error": null
+    },
+    "boot": {
+      "scripts": 33,
+      "loaded": 33,
+      "failed": [],
+      "errors": []
+    },
+    "errors": [],
+    "dom": {
+      "buttons": [],
+      "scrollWidth": 375,
+      "vitals": "体力100やる気83会場慣れ0評判58をこえると、入部したい生徒が来る顧問の指導力Lv1\n    新米顧問・練習の効果 +0%",
+      "warning": [],
+      "width": 375
+    }
+  },
+  "play-light": {
+    "theme": "light",
+    "year": 2028,
+    "phase": "week",
+    "week": 10,
+    "hall": 0,
+    "state": 0.5948150337208062,
+    "records": 0.2242295506875962,
+    "stats": 0.771712013753131,
+    "playing": false,
+    "waiting": false,
+    "mix": null,
+    "audio": {
+      "ready": true,
+      "banks": 41,
+      "voices": [],
+      "error": null
+    },
+    "boot": {
+      "scripts": 33,
+      "loaded": 33,
+      "failed": [],
+      "errors": []
+    },
+    "errors": [],
+    "dom": {
+      "buttons": [],
+      "scrollWidth": 375,
+      "vitals": "体力100やる気83会場慣れ0評判58をこえると、入部したい生徒が来る顧問の指導力Lv1\n    新米顧問・練習の効果 +0%",
+      "warning": [],
+      "width": 375
+    }
+  },
+  "members-light": {
+    "theme": "light",
+    "year": 2028,
+    "phase": "week",
+    "week": 10,
+    "hall": 0,
+    "state": 0.5948150337208062,
+    "records": 0.2242295506875962,
+    "stats": 0.771712013753131,
+    "playing": false,
+    "waiting": false,
+    "mix": null,
+    "audio": {
+      "ready": true,
+      "banks": 41,
+      "voices": [],
+      "error": null
+    },
+    "boot": {
+      "scripts": 33,
+      "loaded": 33,
+      "failed": [],
+      "errors": []
+    },
+    "errors": [],
+    "dom": {
+      "buttons": [],
+      "scrollWidth": 375,
+      "vitals": "体力100やる気83会場慣れ0評判58をこえると、入部したい生徒が来る顧問の指導力Lv1\n    新米顧問・練習の効果 +0%",
+      "warning": [],
+      "width": 375
+    }
+  },
+  "log-light": {
+    "theme": "light",
+    "year": 2028,
+    "phase": "week",
+    "week": 10,
+    "hall": 0,
+    "state": 0.5948150337208062,
+    "records": 0.2242295506875962,
+    "stats": 0.771712013753131,
+    "playing": false,
+    "waiting": false,
+    "mix": null,
+    "audio": {
+      "ready": true,
+      "banks": 41,
+      "voices": [],
+      "error": null
+    },
+    "boot": {
+      "scripts": 33,
+      "loaded": 33,
+      "failed": [],
+      "errors": []
+    },
+    "errors": [],
+    "dom": {
+      "buttons": [],
+      "scrollWidth": 375,
+      "vitals": "体力100やる気83会場慣れ0評判58をこえると、入部したい生徒が来る顧問の指導力Lv1\n    新米顧問・練習の効果 +0%",
+      "warning": [],
+      "width": 375
+    }
+  },
+  "intake": {
+    "theme": "light",
+    "year": 2028,
+    "phase": "week",
+    "week": 10,
+    "hall": 0,
+    "state": 0.8809221731498837,
+    "records": 0.12918480020016432,
+    "stats": 0.3893433781340718,
+    "playing": false,
+    "waiting": false,
+    "mix": null,
+    "audio": {
+      "ready": false,
+      "banks": 3,
+      "voices": [],
+      "error": null
+    },
+    "boot": {
+      "scripts": 33,
+      "loaded": 33,
+      "failed": [],
+      "errors": []
+    },
+    "errors": [],
+    "dom": {
+      "buttons": [
+        {
+          "act": "assign",
+          "text": "この配置で決める"
+        }
+      ],
+      "scrollWidth": 375,
+      "vitals": "体力100やる気83会場慣れ0評判58をこえると、入部したい生徒が来る顧問の指導力Lv1\n    新米顧問・練習の効果 +0%",
+      "warning": [],
+      "width": 375
+    }
+  },
+  "intakeAssigned": {
+    "theme": "light",
+    "year": 2028,
+    "phase": "week",
+    "week": 10,
+    "hall": 0,
+    "state": 0.31366936583071947,
+    "records": 0.12918480020016432,
+    "stats": 0.6575969220139086,
+    "playing": false,
+    "waiting": false,
+    "mix": null,
+    "audio": {
+      "ready": false,
+      "banks": 24,
+      "voices": [],
+      "error": null
+    },
+    "boot": {
+      "scripts": 33,
+      "loaded": 33,
+      "failed": [],
+      "errors": []
+    },
+    "errors": [],
+    "dom": {
+      "buttons": [
+        {
+          "act": "lineupopen",
+          "text": "メンバーを決める"
+        },
+        {
+          "act": "practice",
+          "text": "この内容で1週間すすめる"
+        },
+        {
+          "act": "practicemany",
+          "text": "次の予定まで進める"
+        },
+        {
+          "act": "tunegame",
+          "text": "耳でチューニング"
+        }
+      ],
+      "scrollWidth": 375,
+      "vitals": "体力100やる気87会場慣れ0評判58をこえると、入部したい生徒が来る顧問の指導力Lv1\n    新米顧問・練習の効果 +0%",
+      "warning": [],
+      "width": 375
+    }
+  },
+  "yearFinal": {
+    "theme": "light",
+    "year": 2027,
+    "phase": "choose",
+    "week": 0,
+    "hall": 0,
+    "state": 0.5263124958146363,
+    "records": 0.43590967427007854,
+    "stats": 0.8680166606791317,
+    "playing": false,
+    "waiting": false,
+    "mix": null,
+    "audio": {
+      "ready": true,
+      "banks": 41,
+      "voices": [],
+      "error": null
+    },
+    "boot": {
+      "scripts": 33,
+      "loaded": 33,
+      "failed": [],
+      "errors": []
+    },
+    "errors": [],
+    "dom": {
+      "buttons": [
+        {
+          "act": "assign",
+          "text": "この配置で決める"
+        }
+      ],
+      "scrollWidth": 375,
+      "vitals": "体力100やる気70会場慣れ0評判1516をこえると、入部したい生徒が来る顧問の指導力Lv2\n    部活に慣れてきた顧問・練習の効果 +4%部員の力の平均\n    今年去年\n    県大会\n    \n      \n      \n      \n      \n    4月5月6月7月8月9月10月",
+      "warning": [],
+      "width": 375
+    }
+  },
+  "hallAgain": {
+    "theme": "light",
+    "year": 2027,
+    "phase": "week",
+    "week": 0,
+    "hall": 72,
+    "state": 0.9276010713074356,
+    "records": 0.5313539269845933,
+    "stats": 0.9110754518769681,
+    "playing": false,
+    "waiting": false,
+    "mix": null,
+    "audio": {
+      "ready": true,
+      "banks": 41,
+      "voices": [],
+      "error": null
+    },
+    "boot": {
+      "scripts": 33,
+      "loaded": 33,
+      "failed": [],
+      "errors": []
+    },
+    "errors": [],
+    "dom": {
+      "buttons": [
+        {
+          "act": "practice",
+          "text": "この内容で1週間すすめる"
+        },
+        {
+          "act": "practicemany",
+          "text": "次の予定まで進める"
+        },
+        {
+          "act": "tunegame",
+          "text": "耳でチューニング"
+        }
+      ],
+      "scrollWidth": 375,
+      "vitals": "体力100やる気73会場慣れ72評判1620をこえると、入部したい生徒が来る顧問の指導力Lv2\n    部活に慣れてきた顧問・練習の効果 +4%部員の力の平均\n    今年去年\n    県大会\n    \n      \n      \n      \n      \n    4月5月6月7月8月9月10月",
+      "warning": [],
+      "width": 375
+    }
+  }
+}

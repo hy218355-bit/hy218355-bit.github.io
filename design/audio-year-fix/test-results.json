@@ -1,0 +1,30 @@
+[
+  {
+    "command": "node tsukurikata/tools/check_hall_carry.js",
+    "exitCode": 0
+  },
+  {
+    "command": "node tsukurikata/tools/check_listening_mix.js",
+    "exitCode": 0
+  },
+  {
+    "command": "node tsukurikata/tools/check_current_member_listen.js",
+    "exitCode": 0
+  },
+  {
+    "command": "node tsukurikata/tools/check_member_record_stop.js",
+    "exitCode": 0
+  },
+  {
+    "command": "node tsukurikata/tools/check_live_performance.js",
+    "exitCode": 0
+  },
+  {
+    "command": "node tsukurikata/tools/check_audition_listen.js",
+    "exitCode": 0
+  },
+  {
+    "command": "node tsukurikata/tools/check_audition_sound.js",
+    "exitCode": 0
+  }
+]

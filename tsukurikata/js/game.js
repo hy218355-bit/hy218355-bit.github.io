@@ -2084,7 +2084,9 @@ function newYear(s0){
     m.fam[k] = readOf(m, k).map(v => Math.round(v * 0.5));
     if(m.fam[k].every(v => !v)) delete m.fam[k];
   }
-  s.cohesion = Math.round(s.cohesion * 0.6); s.morale = 70; s.hallExp = 0; s.lastDelta = {}; s.plan = {}; s.planSpan = {}; s.recruitWhen = null;
+  // 会場で積んだ経験は年度をまたいで残す。週ごとの減少はこれまでどおり。
+  s.hallExp = clamp(s.hallExp ?? 0, 0, 100);
+  s.cohesion = Math.round(s.cohesion * 0.6); s.morale = 70; s.lastDelta = {}; s.plan = {}; s.planSpan = {}; s.recruitWhen = null;
   // 評判は、年が変わると少しだけ忘れられる
   s.rep = Math.round((s.rep ?? 30) * 0.9 * 10) / 10;
   for(const m of s.members){ m.sta = 100; for(const k of STAT_KEYS) m.stats[k] = Math.round(Math.max(0, m.stats[k] - 2) * 10) / 10; }

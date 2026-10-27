@@ -1,0 +1,174 @@
+{
+  "status": "done",
+  "rows": [
+    {
+      "profile": "model",
+      "pid": "pomp",
+      "outGain": 0.74,
+      "listenGain": [
+        [
+          0,
+          1.6
+        ],
+        [
+          30,
+          1.6
+        ],
+        [
+          32,
+          1
+        ]
+      ],
+      "players": 39,
+      "LUFS": -13.8,
+      "大きいところ": -12.5,
+      "ピーク": -1.5,
+      "first": {
+        "LUFS": -24.5,
+        "大きいところ": -23.7,
+        "ピーク": -7.2
+      },
+      "tutti": {
+        "LUFS": -13.1,
+        "大きいところ": -12.4,
+        "ピーク": -1.5
+      }
+    },
+    {
+      "profile": "model",
+      "pid": "galop",
+      "outGain": 0.85,
+      "listenGain": null,
+      "players": 39,
+      "LUFS": -13.7,
+      "大きいところ": -11.7,
+      "ピーク": -1.2
+    },
+    {
+      "profile": "model",
+      "pid": "ode",
+      "outGain": 1.13,
+      "listenGain": null,
+      "players": 39,
+      "LUFS": -14.7,
+      "大きいところ": -10.9,
+      "ピーク": -0.8
+    },
+    {
+      "profile": "mid",
+      "pid": "pomp",
+      "outGain": 0.74,
+      "listenGain": [
+        [
+          0,
+          1.6
+        ],
+        [
+          30,
+          1.6
+        ],
+        [
+          32,
+          1
+        ]
+      ],
+      "players": 39,
+      "LUFS": -16.4,
+      "大きいところ": -14.2,
+      "ピーク": -2.8,
+      "first": {
+        "LUFS": -22.4,
+        "大きいところ": -21.2,
+        "ピーク": -7.6
+      },
+      "tutti": {
+        "LUFS": -14.8,
+        "大きいところ": -14.1,
+        "ピーク": -2.8
+      }
+    },
+    {
+      "profile": "mid",
+      "pid": "galop",
+      "outGain": 0.85,
+      "listenGain": null,
+      "players": 39,
+      "LUFS": -15,
+      "大きいところ": -12.8,
+      "ピーク": -1.9
+    },
+    {
+      "profile": "mid",
+      "pid": "ode",
+      "outGain": 1.13,
+      "listenGain": null,
+      "players": 39,
+      "LUFS": -16.9,
+      "大きいところ": -13.2,
+      "ピーク": -1.1
+    },
+    {
+      "profile": "five",
+      "pid": "pomp",
+      "outGain": 0.74,
+      "listenGain": [
+        [
+          0,
+          1.6
+        ],
+        [
+          30,
+          1.6
+        ],
+        [
+          32,
+          1
+        ]
+      ],
+      "players": 5,
+      "LUFS": -20.9,
+      "大きいところ": -19,
+      "ピーク": -7.3,
+      "first": {
+        "LUFS": -25.3,
+        "大きいところ": -22.9,
+        "ピーク": -11.2
+      },
+      "tutti": {
+        "LUFS": -19.5,
+        "大きいところ": -18.8,
+        "ピーク": -7.3
+      }
+    },
+    {
+      "profile": "five",
+      "pid": "galop",
+      "outGain": 0.85,
+      "listenGain": null,
+      "players": 5,
+      "LUFS": -20,
+      "大きいところ": -18.4,
+      "ピーク": -7
+    },
+    {
+      "profile": "five",
+      "pid": "ode",
+      "outGain": 1.13,
+      "listenGain": null,
+      "players": 5,
+      "LUFS": -21.5,
+      "大きいところ": -17.5,
+      "ピーク": -6.7
+    }
+  ],
+  "errors": [],
+  "samples": {
+    "ready": true,
+    "banks": 41,
+    "ir": true
+  },
+  "current": {
+    "profile": "five",
+    "pid": "ode"
+  }
+}

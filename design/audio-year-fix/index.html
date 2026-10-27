@@ -1,0 +1,14 @@
+<!doctype html>
+<html lang="ja"><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>演奏音と新年度の改善</title>
+<style>
+:root{color-scheme:light dark;font-family:system-ui,sans-serif;background:#f2efe8;color:#253640}*{box-sizing:border-box}body{max-width:1080px;margin:auto;padding:24px}h1{font-size:24px}p{line-height:1.8}a{color:inherit}section{margin:32px 0}.pair{display:flex;gap:20px;flex-wrap:wrap}figure{margin:0;max-width:375px;flex:1 1 300px}img{display:block;width:100%;height:auto;border:1px solid #9ba49c;border-radius:12px}figcaption{padding:8px 0;font-size:14px}table{border-collapse:collapse;width:100%;font-size:14px}td,th{border-bottom:1px solid #a4aaa4;padding:10px;text-align:left}.scroll{overflow:auto}@media(prefers-color-scheme:dark){:root{background:#17272d;color:#e6e9df}}
+</style>
+<h1>演奏音と新年度の改善</h1>
+<p>いない楽器の審査表示を削除。会場慣れは新年度へ持ち越し。威風堂々の静かな前半を補い、つながる音の音色も滑らかにしました。</p>
+<p><a href="../implementation/qa.html?view=rehearsal&amp;audioPiece=pomp&amp;theme=light&amp;keys=1">確認用の合奏を開く</a> · <a href="README.md">確認の詳細</a></p>
+<section><h2>選曲画面 · 375px</h2><div class="pair"><figure><img src="screenshots/choices-light.png" alt="ライトの選曲画面。いない楽器の審査説明を削除"><figcaption>ライト</figcaption></figure><figure><img src="screenshots/choices-dark.png" alt="ダークの選曲画面。いない楽器の審査説明を削除"><figcaption>ダーク</figcaption></figure></div></section>
+<section><h2>合奏 · 375px</h2><div class="pair"><figure><img src="screenshots/rehearsal-light.png" alt="ライトの威風堂々の合奏画面"><figcaption>ライト</figcaption></figure><figure><img src="screenshots/rehearsal-dark.png" alt="ダークの威風堂々の合奏画面"><figcaption>ダーク</figcaption></figure></div></section>
+<section><h2>威風堂々の音量</h2><p>前半は約4dB聴き取りやすく。後半と最大ピークは同じです。実際の音源とホールで計測しました。</p><div class="scroll"><table><thead><tr><th>編成</th><th>前半 LUFS</th><th>後半 LUFS</th><th>最大ピーク dBFS</th></tr></thead><tbody><tr><td>お手本39人</td><td>−28.2 → −24.5</td><td>−13.1 → −13.1</td><td>−1.5 → −1.5</td></tr><tr><td>能力65・39人</td><td>−26.3 → −22.4</td><td>−14.8 → −14.8</td><td>−2.8 → −2.8</td></tr><tr><td>能力65・5人</td><td>−29.2 → −25.3</td><td>−19.5 → −19.5</td><td>−7.3 → −7.3</td></tr></tbody></table></div></section>
+<section><h2>会場慣れを持ち越す</h2><p>年度末72 → 新年度72。楽器決めと選曲を終えた後も維持しています。週ごとの減少はこれまでどおりです。</p><figure><img src="screenshots/hall-carry-light.png" alt="翌年度の会場慣れが72のまま残った画面"></figure></section>
+<section><h2>確認結果</h2><p>4月から翌年度まで69操作で進めてエラーなし。全15曲の自動育成比較は修正前と同じ結果。iPhoneへ更新し、起動と実行中プロセスまで確認しました。実機での聴感は未確認です。</p><p>ブランチ：codex/design · pushなし</p></section>
+</html>

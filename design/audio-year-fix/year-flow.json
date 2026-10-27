@@ -1,0 +1,1145 @@
+[
+  {
+    "action": "この配置で決める",
+    "year": 2026,
+    "week": 0,
+    "phase": "choose",
+    "pending": null,
+    "members": 5,
+    "width": 375,
+    "scrollWidth": 375,
+    "rosterFilter": {
+      "name": "",
+      "grade": "all",
+      "sec": "all"
+    },
+    "errors": []
+  },
+  {
+    "action": "決める",
+    "year": 2026,
+    "week": 0,
+    "phase": "week",
+    "pending": null,
+    "members": 5,
+    "width": 375,
+    "scrollWidth": 375,
+    "rosterFilter": {
+      "name": "",
+      "grade": "all",
+      "sec": "all"
+    },
+    "errors": []
+  },
+  {
+    "action": "1週間すすめる",
+    "year": 2026,
+    "week": 1,
+    "phase": "week",
+    "pending": null,
+    "members": 5,
+    "width": 375,
+    "scrollWidth": 375,
+    "rosterFilter": {
+      "name": "",
+      "grade": "all",
+      "sec": "all"
+    },
+    "errors": []
+  },
+  {
+    "action": "本番の演奏をはじめる",
+    "year": 2026,
+    "week": 1,
+    "phase": "week",
+    "pending": {
+      "kind": "concert",
+      "revealed": false
+    },
+    "members": 5,
+    "width": 375,
+    "scrollWidth": 375,
+    "rosterFilter": {
+      "name": "",
+      "grade": "all",
+      "sec": "all"
+    },
+    "errors": []
+  },
+  {
+    "action": "本番をとばして結果へ",
+    "year": 2026,
+    "week": 1,
+    "phase": "week",
+    "pending": {
+      "kind": "concert",
+      "revealed": true
+    },
+    "members": 5,
+    "width": 375,
+    "scrollWidth": 375,
+    "rosterFilter": {
+      "name": "",
+      "grade": "all",
+      "sec": "all"
+    },
+    "errors": []
+  },
+  {
+    "action": "次の週へ",
+    "year": 2026,
+    "week": 2,
+    "phase": "week",
+    "pending": null,
+    "members": 5,
+    "width": 375,
+    "scrollWidth": 375,
+    "rosterFilter": {
+      "name": "",
+      "grade": "all",
+      "sec": "all"
+    },
+    "errors": []
+  },
+  {
+    "action": "部費で新しい箱を買う",
+    "year": 2026,
+    "week": 2,
+    "phase": "week",
+    "pending": null,
+    "members": 5,
+    "width": 375,
+    "scrollWidth": 375,
+    "rosterFilter": {
+      "name": "",
+      "grade": "all",
+      "sec": "all"
+    },
+    "errors": []
+  },
+  {
+    "action": "1週間すすめる",
+    "year": 2026,
+    "week": 3,
+    "phase": "week",
+    "pending": null,
+    "members": 5,
+    "width": 375,
+    "scrollWidth": 375,
+    "rosterFilter": {
+      "name": "",
+      "grade": "all",
+      "sec": "all"
+    },
+    "errors": []
+  },
+  {
+    "action": "この配置で決める",
+    "year": 2026,
+    "week": 3,
+    "phase": "week",
+    "pending": null,
+    "members": 6,
+    "width": 375,
+    "scrollWidth": 375,
+    "rosterFilter": {
+      "name": "",
+      "grade": "all",
+      "sec": "all"
+    },
+    "errors": []
+  },
+  {
+    "action": "1週間すすめる",
+    "year": 2026,
+    "week": 4,
+    "phase": "week",
+    "pending": null,
+    "members": 6,
+    "width": 375,
+    "scrollWidth": 375,
+    "rosterFilter": {
+      "name": "",
+      "grade": "all",
+      "sec": "all"
+    },
+    "errors": []
+  },
+  {
+    "action": "練習の前に少しだけお祝いする",
+    "year": 2026,
+    "week": 4,
+    "phase": "week",
+    "pending": null,
+    "members": 6,
+    "width": 375,
+    "scrollWidth": 375,
+    "rosterFilter": {
+      "name": "",
+      "grade": "all",
+      "sec": "all"
+    },
+    "errors": []
+  },
+  {
+    "action": "1週間すすめる",
+    "year": 2026,
+    "week": 5,
+    "phase": "week",
+    "pending": null,
+    "members": 6,
+    "width": 375,
+    "scrollWidth": 375,
+    "rosterFilter": {
+      "name": "",
+      "grade": "all",
+      "sec": "all"
+    },
+    "errors": []
+  },
+  {
+    "action": "行事の部員を選ぶ",
+    "year": 2026,
+    "week": 5,
+    "phase": "week",
+    "pending": null,
+    "members": 6,
+    "width": 375,
+    "scrollWidth": 375,
+    "rosterFilter": {
+      "name": "",
+      "grade": "all",
+      "sec": "all"
+    },
+    "errors": []
+  },
+  {
+    "action": "この1人で行く",
+    "year": 2026,
+    "week": 5,
+    "phase": "week",
+    "pending": null,
+    "members": 6,
+    "width": 375,
+    "scrollWidth": 375,
+    "rosterFilter": {
+      "name": "",
+      "grade": "all",
+      "sec": "all"
+    },
+    "errors": []
+  },
+  {
+    "action": "1週間すすめる",
+    "year": 2026,
+    "week": 6,
+    "phase": "week",
+    "pending": null,
+    "members": 6,
+    "width": 375,
+    "scrollWidth": 375,
+    "rosterFilter": {
+      "name": "",
+      "grade": "all",
+      "sec": "all"
+    },
+    "errors": []
+  },
+  {
+    "action": "本番の演奏をはじめる",
+    "year": 2026,
+    "week": 6,
+    "phase": "week",
+    "pending": {
+      "kind": "concert",
+      "revealed": false
+    },
+    "members": 6,
+    "width": 375,
+    "scrollWidth": 375,
+    "rosterFilter": {
+      "name": "",
+      "grade": "all",
+      "sec": "all"
+    },
+    "errors": []
+  },
+  {
+    "action": "本番をとばして結果へ",
+    "year": 2026,
+    "week": 6,
+    "phase": "week",
+    "pending": {
+      "kind": "concert",
+      "revealed": true
+    },
+    "members": 6,
+    "width": 375,
+    "scrollWidth": 375,
+    "rosterFilter": {
+      "name": "",
+      "grade": "all",
+      "sec": "all"
+    },
+    "errors": []
+  },
+  {
+    "action": "次の週へ",
+    "year": 2026,
+    "week": 7,
+    "phase": "week",
+    "pending": null,
+    "members": 6,
+    "width": 375,
+    "scrollWidth": 375,
+    "rosterFilter": {
+      "name": "",
+      "grade": "all",
+      "sec": "all"
+    },
+    "errors": []
+  },
+  {
+    "action": "テスト勉強に集中する1週すすむ・体力が回復",
+    "year": 2026,
+    "week": 8,
+    "phase": "week",
+    "pending": null,
+    "members": 6,
+    "width": 375,
+    "scrollWidth": 375,
+    "rosterFilter": {
+      "name": "",
+      "grade": "all",
+      "sec": "all"
+    },
+    "errors": []
+  },
+  {
+    "action": "ここで、もう少しいっしょに吹いてみない？",
+    "year": 2026,
+    "week": 8,
+    "phase": "week",
+    "pending": null,
+    "members": 6,
+    "width": 375,
+    "scrollWidth": 375,
+    "rosterFilter": {
+      "name": "",
+      "grade": "all",
+      "sec": "all"
+    },
+    "errors": []
+  },
+  {
+    "action": "1週間すすめる",
+    "year": 2026,
+    "week": 9,
+    "phase": "week",
+    "pending": null,
+    "members": 6,
+    "width": 375,
+    "scrollWidth": 375,
+    "rosterFilter": {
+      "name": "",
+      "grade": "all",
+      "sec": "all"
+    },
+    "errors": []
+  },
+  {
+    "action": "今週は軽めにさせる",
+    "year": 2026,
+    "week": 9,
+    "phase": "week",
+    "pending": null,
+    "members": 6,
+    "width": 375,
+    "scrollWidth": 375,
+    "rosterFilter": {
+      "name": "",
+      "grade": "all",
+      "sec": "all"
+    },
+    "errors": []
+  },
+  {
+    "action": "1週間すすめる",
+    "year": 2026,
+    "week": 10,
+    "phase": "week",
+    "pending": null,
+    "members": 6,
+    "width": 375,
+    "scrollWidth": 375,
+    "rosterFilter": {
+      "name": "",
+      "grade": "all",
+      "sec": "all"
+    },
+    "errors": []
+  },
+  {
+    "action": "行事の部員を選ぶ",
+    "year": 2026,
+    "week": 10,
+    "phase": "week",
+    "pending": null,
+    "members": 6,
+    "width": 375,
+    "scrollWidth": 375,
+    "rosterFilter": {
+      "name": "",
+      "grade": "all",
+      "sec": "all"
+    },
+    "errors": []
+  },
+  {
+    "action": "この1人で行く",
+    "year": 2026,
+    "week": 10,
+    "phase": "week",
+    "pending": null,
+    "members": 6,
+    "width": 375,
+    "scrollWidth": 375,
+    "rosterFilter": {
+      "name": "",
+      "grade": "all",
+      "sec": "all"
+    },
+    "errors": []
+  },
+  {
+    "action": "1週間すすめる",
+    "year": 2026,
+    "week": 11,
+    "phase": "week",
+    "pending": null,
+    "members": 6,
+    "width": 375,
+    "scrollWidth": 375,
+    "rosterFilter": {
+      "name": "",
+      "grade": "all",
+      "sec": "all"
+    },
+    "errors": []
+  },
+  {
+    "action": "本番の演奏をはじめる",
+    "year": 2026,
+    "week": 11,
+    "phase": "week",
+    "pending": {
+      "kind": "concert",
+      "revealed": false
+    },
+    "members": 6,
+    "width": 375,
+    "scrollWidth": 375,
+    "rosterFilter": {
+      "name": "",
+      "grade": "all",
+      "sec": "all"
+    },
+    "errors": []
+  },
+  {
+    "action": "本番をとばして結果へ",
+    "year": 2026,
+    "week": 11,
+    "phase": "week",
+    "pending": {
+      "kind": "concert",
+      "revealed": true
+    },
+    "members": 6,
+    "width": 375,
+    "scrollWidth": 375,
+    "rosterFilter": {
+      "name": "",
+      "grade": "all",
+      "sec": "all"
+    },
+    "errors": []
+  },
+  {
+    "action": "次の週へ",
+    "year": 2026,
+    "week": 12,
+    "phase": "week",
+    "pending": null,
+    "members": 6,
+    "width": 375,
+    "scrollWidth": 375,
+    "rosterFilter": {
+      "name": "",
+      "grade": "all",
+      "sec": "all"
+    },
+    "errors": []
+  },
+  {
+    "action": "その気持ちが、音楽なんだよ",
+    "year": 2026,
+    "week": 12,
+    "phase": "week",
+    "pending": null,
+    "members": 6,
+    "width": 375,
+    "scrollWidth": 375,
+    "rosterFilter": {
+      "name": "",
+      "grade": "all",
+      "sec": "all"
+    },
+    "errors": []
+  },
+  {
+    "action": "1週間すすめる",
+    "year": 2026,
+    "week": 13,
+    "phase": "week",
+    "pending": null,
+    "members": 6,
+    "width": 375,
+    "scrollWidth": 375,
+    "rosterFilter": {
+      "name": "",
+      "grade": "all",
+      "sec": "all"
+    },
+    "errors": []
+  },
+  {
+    "action": "行事の部員を選ぶ",
+    "year": 2026,
+    "week": 13,
+    "phase": "week",
+    "pending": null,
+    "members": 6,
+    "width": 375,
+    "scrollWidth": 375,
+    "rosterFilter": {
+      "name": "",
+      "grade": "all",
+      "sec": "all"
+    },
+    "errors": []
+  },
+  {
+    "action": "この1人で行く",
+    "year": 2026,
+    "week": 13,
+    "phase": "week",
+    "pending": null,
+    "members": 6,
+    "width": 375,
+    "scrollWidth": 375,
+    "rosterFilter": {
+      "name": "",
+      "grade": "all",
+      "sec": "all"
+    },
+    "errors": []
+  },
+  {
+    "action": "1週間すすめる",
+    "year": 2026,
+    "week": 14,
+    "phase": "week",
+    "pending": null,
+    "members": 6,
+    "width": 375,
+    "scrollWidth": 375,
+    "rosterFilter": {
+      "name": "",
+      "grade": "all",
+      "sec": "all"
+    },
+    "errors": []
+  },
+  {
+    "action": "みんなの前でほめる",
+    "year": 2026,
+    "week": 14,
+    "phase": "week",
+    "pending": null,
+    "members": 6,
+    "width": 375,
+    "scrollWidth": 375,
+    "rosterFilter": {
+      "name": "",
+      "grade": "all",
+      "sec": "all"
+    },
+    "errors": []
+  },
+  {
+    "action": "1週間すすめる",
+    "year": 2026,
+    "week": 15,
+    "phase": "week",
+    "pending": null,
+    "members": 6,
+    "width": 375,
+    "scrollWidth": 375,
+    "rosterFilter": {
+      "name": "",
+      "grade": "all",
+      "sec": "all"
+    },
+    "errors": []
+  },
+  {
+    "action": "通してから帰す",
+    "year": 2026,
+    "week": 15,
+    "phase": "week",
+    "pending": null,
+    "members": 6,
+    "width": 375,
+    "scrollWidth": 375,
+    "rosterFilter": {
+      "name": "",
+      "grade": "all",
+      "sec": "all"
+    },
+    "errors": []
+  },
+  {
+    "action": "1週間すすめる",
+    "year": 2026,
+    "week": 16,
+    "phase": "week",
+    "pending": null,
+    "members": 6,
+    "width": 375,
+    "scrollWidth": 375,
+    "rosterFilter": {
+      "name": "",
+      "grade": "all",
+      "sec": "all"
+    },
+    "errors": []
+  },
+  {
+    "action": "本番の演奏をはじめる",
+    "year": 2026,
+    "week": 16,
+    "phase": "week",
+    "pending": {
+      "kind": "contest",
+      "revealed": false
+    },
+    "members": 6,
+    "width": 375,
+    "scrollWidth": 375,
+    "rosterFilter": {
+      "name": "",
+      "grade": "all",
+      "sec": "all"
+    },
+    "errors": []
+  },
+  {
+    "action": "本番をとばして結果へ",
+    "year": 2026,
+    "week": 16,
+    "phase": "week",
+    "pending": {
+      "kind": "contest",
+      "revealed": true
+    },
+    "members": 6,
+    "width": 375,
+    "scrollWidth": 375,
+    "rosterFilter": {
+      "name": "",
+      "grade": "all",
+      "sec": "all"
+    },
+    "errors": []
+  },
+  {
+    "action": "結果を見る",
+    "year": 2026,
+    "week": 16,
+    "phase": "week",
+    "pending": {
+      "kind": "contest",
+      "revealed": true
+    },
+    "members": 6,
+    "width": 375,
+    "scrollWidth": 375,
+    "rosterFilter": {
+      "name": "",
+      "grade": "all",
+      "sec": "all"
+    },
+    "errors": []
+  },
+  {
+    "action": "シーズンを終える",
+    "year": 2026,
+    "week": 20,
+    "phase": "week",
+    "pending": null,
+    "members": 6,
+    "width": 375,
+    "scrollWidth": 375,
+    "rosterFilter": {
+      "name": "",
+      "grade": "all",
+      "sec": "all"
+    },
+    "errors": []
+  },
+  {
+    "action": "決める",
+    "year": 2026,
+    "week": 20,
+    "phase": "week",
+    "pending": null,
+    "members": 6,
+    "width": 375,
+    "scrollWidth": 375,
+    "rosterFilter": {
+      "name": "",
+      "grade": "all",
+      "sec": "all"
+    },
+    "errors": []
+  },
+  {
+    "action": "部の楽器を大事に使って、いつかね",
+    "year": 2026,
+    "week": 20,
+    "phase": "week",
+    "pending": null,
+    "members": 6,
+    "width": 375,
+    "scrollWidth": 375,
+    "rosterFilter": {
+      "name": "",
+      "grade": "all",
+      "sec": "all"
+    },
+    "errors": []
+  },
+  {
+    "action": "1週間すすめる",
+    "year": 2026,
+    "week": 21,
+    "phase": "week",
+    "pending": null,
+    "members": 6,
+    "width": 375,
+    "scrollWidth": 375,
+    "rosterFilter": {
+      "name": "",
+      "grade": "all",
+      "sec": "all"
+    },
+    "errors": []
+  },
+  {
+    "action": "行事の部員を選ぶ",
+    "year": 2026,
+    "week": 21,
+    "phase": "week",
+    "pending": null,
+    "members": 6,
+    "width": 375,
+    "scrollWidth": 375,
+    "rosterFilter": {
+      "name": "",
+      "grade": "all",
+      "sec": "all"
+    },
+    "errors": []
+  },
+  {
+    "action": "この1人で行く",
+    "year": 2026,
+    "week": 21,
+    "phase": "week",
+    "pending": null,
+    "members": 6,
+    "width": 375,
+    "scrollWidth": 375,
+    "rosterFilter": {
+      "name": "",
+      "grade": "all",
+      "sec": "all"
+    },
+    "errors": []
+  },
+  {
+    "action": "1週間すすめる",
+    "year": 2026,
+    "week": 22,
+    "phase": "week",
+    "pending": null,
+    "members": 6,
+    "width": 375,
+    "scrollWidth": 375,
+    "rosterFilter": {
+      "name": "",
+      "grade": "all",
+      "sec": "all"
+    },
+    "errors": []
+  },
+  {
+    "action": "本番の演奏をはじめる",
+    "year": 2026,
+    "week": 22,
+    "phase": "week",
+    "pending": {
+      "kind": "concert",
+      "revealed": false
+    },
+    "members": 6,
+    "width": 375,
+    "scrollWidth": 375,
+    "rosterFilter": {
+      "name": "",
+      "grade": "all",
+      "sec": "all"
+    },
+    "errors": []
+  },
+  {
+    "action": "本番をとばして結果へ",
+    "year": 2026,
+    "week": 22,
+    "phase": "week",
+    "pending": {
+      "kind": "concert",
+      "revealed": true
+    },
+    "members": 6,
+    "width": 375,
+    "scrollWidth": 375,
+    "rosterFilter": {
+      "name": "",
+      "grade": "all",
+      "sec": "all"
+    },
+    "errors": []
+  },
+  {
+    "action": "次の週へ",
+    "year": 2026,
+    "week": 23,
+    "phase": "week",
+    "pending": null,
+    "members": 6,
+    "width": 375,
+    "scrollWidth": 375,
+    "rosterFilter": {
+      "name": "",
+      "grade": "all",
+      "sec": "all"
+    },
+    "errors": []
+  },
+  {
+    "action": "この配置で決める",
+    "year": 2026,
+    "week": 23,
+    "phase": "week",
+    "pending": null,
+    "members": 8,
+    "width": 375,
+    "scrollWidth": 375,
+    "rosterFilter": {
+      "name": "",
+      "grade": "all",
+      "sec": "all"
+    },
+    "errors": []
+  },
+  {
+    "action": "一人で抱えないで、副部長やパートリーダーと分けよう",
+    "year": 2026,
+    "week": 23,
+    "phase": "week",
+    "pending": null,
+    "members": 8,
+    "width": 375,
+    "scrollWidth": 375,
+    "rosterFilter": {
+      "name": "",
+      "grade": "all",
+      "sec": "all"
+    },
+    "errors": []
+  },
+  {
+    "action": "1週間すすめる",
+    "year": 2026,
+    "week": 24,
+    "phase": "week",
+    "pending": null,
+    "members": 8,
+    "width": 375,
+    "scrollWidth": 375,
+    "rosterFilter": {
+      "name": "",
+      "grade": "all",
+      "sec": "all"
+    },
+    "errors": []
+  },
+  {
+    "action": "行事の部員を選ぶ",
+    "year": 2026,
+    "week": 24,
+    "phase": "week",
+    "pending": null,
+    "members": 8,
+    "width": 375,
+    "scrollWidth": 375,
+    "rosterFilter": {
+      "name": "",
+      "grade": "all",
+      "sec": "all"
+    },
+    "errors": []
+  },
+  {
+    "action": "この1人で行く",
+    "year": 2026,
+    "week": 24,
+    "phase": "week",
+    "pending": null,
+    "members": 8,
+    "width": 375,
+    "scrollWidth": 375,
+    "rosterFilter": {
+      "name": "",
+      "grade": "all",
+      "sec": "all"
+    },
+    "errors": []
+  },
+  {
+    "action": "1週間すすめる",
+    "year": 2026,
+    "week": 25,
+    "phase": "week",
+    "pending": null,
+    "members": 8,
+    "width": 375,
+    "scrollWidth": 375,
+    "rosterFilter": {
+      "name": "",
+      "grade": "all",
+      "sec": "all"
+    },
+    "errors": []
+  },
+  {
+    "action": "部で勉強会をしよう",
+    "year": 2026,
+    "week": 25,
+    "phase": "week",
+    "pending": null,
+    "members": 8,
+    "width": 375,
+    "scrollWidth": 375,
+    "rosterFilter": {
+      "name": "",
+      "grade": "all",
+      "sec": "all"
+    },
+    "errors": []
+  },
+  {
+    "action": "1週間すすめる",
+    "year": 2026,
+    "week": 26,
+    "phase": "week",
+    "pending": null,
+    "members": 8,
+    "width": 375,
+    "scrollWidth": 375,
+    "rosterFilter": {
+      "name": "",
+      "grade": "all",
+      "sec": "all"
+    },
+    "errors": []
+  },
+  {
+    "action": "本番の演奏をはじめる",
+    "year": 2026,
+    "week": 26,
+    "phase": "week",
+    "pending": {
+      "kind": "concert",
+      "revealed": false
+    },
+    "members": 8,
+    "width": 375,
+    "scrollWidth": 375,
+    "rosterFilter": {
+      "name": "",
+      "grade": "all",
+      "sec": "all"
+    },
+    "errors": []
+  },
+  {
+    "action": "本番をとばして結果へ",
+    "year": 2026,
+    "week": 26,
+    "phase": "week",
+    "pending": {
+      "kind": "concert",
+      "revealed": true
+    },
+    "members": 8,
+    "width": 375,
+    "scrollWidth": 375,
+    "rosterFilter": {
+      "name": "",
+      "grade": "all",
+      "sec": "all"
+    },
+    "errors": []
+  },
+  {
+    "action": "冬へ",
+    "year": 2026,
+    "week": 26,
+    "phase": "end",
+    "pending": null,
+    "members": 8,
+    "width": 375,
+    "scrollWidth": 375,
+    "rosterFilter": {
+      "name": "",
+      "grade": "all",
+      "sec": "all"
+    },
+    "errors": []
+  },
+  {
+    "action": "冬へ",
+    "year": 2026,
+    "week": 26,
+    "phase": "winter",
+    "pending": null,
+    "members": 8,
+    "width": 375,
+    "scrollWidth": 375,
+    "rosterFilter": {
+      "name": "",
+      "grade": "all",
+      "sec": "all"
+    },
+    "errors": []
+  },
+  {
+    "action": "基礎をじっくりロングトーンとスケールを冬じゅう続ける。部員それぞれの苦手な力が伸びる",
+    "year": 2026,
+    "week": 26,
+    "phase": "winter",
+    "pending": null,
+    "members": 8,
+    "width": 375,
+    "scrollWidth": 375,
+    "rosterFilter": {
+      "name": "",
+      "grade": "all",
+      "sec": "all"
+    },
+    "errors": []
+  },
+  {
+    "action": "この5人で出る",
+    "year": 2026,
+    "week": 26,
+    "phase": "winter",
+    "pending": null,
+    "members": 8,
+    "width": 375,
+    "scrollWidth": 375,
+    "rosterFilter": {
+      "name": "",
+      "grade": "all",
+      "sec": "all"
+    },
+    "errors": []
+  },
+  {
+    "action": "本番をとばして結果へ",
+    "year": 2026,
+    "week": 26,
+    "phase": "winter",
+    "pending": null,
+    "members": 8,
+    "width": 375,
+    "scrollWidth": 375,
+    "rosterFilter": {
+      "name": "",
+      "grade": "all",
+      "sec": "all"
+    },
+    "errors": []
+  },
+  {
+    "action": "3月へ",
+    "year": 2026,
+    "week": 26,
+    "phase": "winter",
+    "pending": null,
+    "members": 8,
+    "width": 375,
+    "scrollWidth": 375,
+    "rosterFilter": {
+      "name": "",
+      "grade": "all",
+      "sec": "all"
+    },
+    "errors": []
+  },
+  {
+    "action": "1年をふり返る",
+    "year": 2026,
+    "week": 26,
+    "phase": "winter",
+    "pending": null,
+    "members": 8,
+    "width": 375,
+    "scrollWidth": 375,
+    "rosterFilter": {
+      "name": "",
+      "grade": "all",
+      "sec": "all"
+    },
+    "errors": []
+  },
+  {
+    "action": "4月へ（新年度）",
+    "year": 2027,
+    "week": 0,
+    "phase": "choose",
+    "pending": null,
+    "members": 8,
+    "width": 375,
+    "scrollWidth": 375,
+    "rosterFilter": {
+      "name": "",
+      "grade": "all",
+      "sec": "all"
+    },
+    "errors": []
+  }
+]

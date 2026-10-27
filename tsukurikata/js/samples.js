@@ -242,7 +242,9 @@ class SampleVoice {
     const f = mtof(n.midi);
     // 明るさ：弱い音・音色の育っていない奏者ほどこもる。低く下げて使う録音（バスクラなど）は lp で丸める
     const cut = clamp(f * (cfg.lp || 40) * lerp(0.55, 1, vMax) * (0.45 + 0.55 * (n.T ?? 1)), 300, 16000);
-    this.lp.frequency.setValueAtTime(cut, s);
+    // つながる音では、前の音の尾を急に別の明るさへ切り替えない。
+    if(joined)this.lp.frequency.setTargetAtTime(cut,s,smooth?0.025:0.008);
+    else this.lp.frequency.setValueAtTime(cut,s);
 
     // 出だしの張り（金管のアタック）。録音を借りている楽器は、その楽器らしい強さに（cfg.blat）
     const blat = 1 + (n.blat - 1) * (cfg.blat ?? 1);

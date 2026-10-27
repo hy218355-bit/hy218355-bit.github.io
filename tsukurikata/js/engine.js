@@ -219,9 +219,13 @@ class Playback {
     // 5人の部は39人の部より 9dB ほど小さいが、録音のマイクを近づけるように、差を 4dB ほどにして聴かせる（部が大きくなると音も大きくなるのは残す）
     const players = new Set([...perf.notes.map(x => x.mid), ...perf.hits.map(h => h.mid)]).size;
     this.out = (PIECES[perf.pieceId]?.outGain ?? 1) * Math.pow(SEATS.length / clamp(players, 1, SEATS.length), 0.15);
+    this.listenCurve=PIECES[perf.pieceId]?.listenGain;
+    this.listenOutputs=[];
+    this.listenLive=!!this.clock?.last;
+    this.listenValue=this.listenCurve?interp(this.listenCurve,perf.from):1;
     this.bus = ac.createGain();
     this.bus.gain.value = this.out;
-    this.bus.connect(engine.chain.input);
+    this.connectListeningOutput(this.bus,engine.chain.input);
     this.mem = {};
     this.srcs = [];
     this.voices = [];
@@ -242,7 +246,7 @@ class Playback {
     for(const h of perf.hits) seatOf[h.mid] ||= h.seat;
     this.wet = ac.createGain();
     this.wet.gain.value = this.out;
-    if(engine.chain.wetIn) this.wet.connect(engine.chain.wetIn);
+    if(engine.chain.wetIn) this.connectListeningOutput(this.wet,engine.chain.wetIn);
     for(const [mid, seat] of Object.entries(seatOf)){
       const st = SEAT[seat];
       const rd = st.inst === 'hn' ? HORN_DEPTH : ROW_DEPTH[st.row] || ROW_DEPTH[0];
@@ -265,6 +269,27 @@ class Playback {
     this.timer = setInterval(() => this.pump(), 60);
     this.ended = false;
   }
+  // 小さい音の区間だけを補う。直接音と残響を同じ倍率にし、指揮の強弱とは別に扱う。
+  connectListeningOutput(input,dest){
+    const curve=this.listenCurve,pf=this.perf;
+    if(!curve||pf.from>=curve[curve.length-1][0]&&this.listenValue===1){input.connect(dest);return;}
+    const node=this.ac.createGain();node.gain.value=this.listenValue;
+    input.connect(node);node.connect(dest);this.listenOutputs.push(node);
+    if(!this.listenLive){
+      const points=[...curve.filter(([b])=>b>pf.from&&b<pf.to),[pf.to,interp(curve,pf.to)]];
+      node.gain.setValueAtTime(this.listenValue,this.T0);
+      for(const [b,v]of points)node.gain.linearRampToValueAtTime(v,this.clock?this.clock.timeOf(b):this.T0+pf.b2t(b));
+    }
+  }
+  updateListeningGain(){
+    if(!this.listenLive||!this.listenOutputs.length||this.listenDone)return;
+    const b=Math.max(this.perf.from,this.clock.beatAt(this.ac.currentTime)),v=interp(this.listenCurve,b);
+    if(Math.abs(v-this.listenValue)>0.0001){
+      for(const node of this.listenOutputs)node.gain.setTargetAtTime(v,this.ac.currentTime,0.06);
+      this.listenValue=v;
+    }
+    if(b>=this.listenCurve[this.listenCurve.length-1][0])this.listenDone=true;
+  }
   warp(n){ return n && this.clock ? warpNote(n, this.clock, this.perf, this.T0) : n; }
   // 指揮の振りの大きさ（全体の音量）
   setLevel(g, at = this.ac.currentTime){
@@ -272,6 +297,7 @@ class Playback {
     this.wet.gain.setTargetAtTime(g * this.out, at, 0.12);
   }
   pump(until = this.ac.currentTime + (this.clock ? 0.3 : 1.4)){
+    this.updateListeningGain();
     const W = n => this.warp(n);
     for(const q of this.queues){
       while(q.i < q.list.length){
@@ -332,16 +358,16 @@ class Playback {
     this.wet.gain.setTargetAtTime(0, now, 0.04);
     for(const v of this.voices) v.stop(now + 0.3);
     for(const s of this.srcs){ try{ s.stop(now + 0.3); }catch(e){} }
-    const bus = this.bus, wet = this.wet;
-    setTimeout(() => { try{ bus.disconnect(); wet.disconnect(); }catch(e){} }, 800);
+    const outputs=[this.bus,this.wet,...this.listenOutputs];
+    setTimeout(() => { for(const node of outputs)try{node.disconnect();}catch(e){} }, 800);
   }
   // 自然に終わったとき：残響が消えるまで待ってから片づける
   finish(){
     if(this.ended) return;
     this.ended = true;
     clearInterval(this.timer);
-    const bus = this.bus, wet = this.wet;
-    setTimeout(() => { try{ bus.disconnect(); wet.disconnect(); }catch(e){} }, 4000);
+    const outputs=[this.bus,this.wet,...this.listenOutputs];
+    setTimeout(() => { for(const node of outputs)try{node.disconnect();}catch(e){} }, 4000);
   }
 }
 

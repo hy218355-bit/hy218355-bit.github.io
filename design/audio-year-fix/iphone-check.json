@@ -1,0 +1,45 @@
+{
+  "releaseBuild": "succeeded",
+  "install": "succeeded",
+  "launch": "succeeded",
+  "runningProcessVerified": true,
+  "visualInteractionVerified": false,
+  "bundleHashes": [
+    {
+      "file": "index.html",
+      "local": "81dc602b429e3cecd9427e378ed37d792660f588940f397c83133c85e0dce1ed",
+      "bundle": "81dc602b429e3cecd9427e378ed37d792660f588940f397c83133c85e0dce1ed",
+      "match": true
+    },
+    {
+      "file": "js/ui.js",
+      "local": "394d03b5c0caac17fb625b4b7fefa6c70fc2971b2d2d6de3a9b2e1b17311fd18",
+      "bundle": "394d03b5c0caac17fb625b4b7fefa6c70fc2971b2d2d6de3a9b2e1b17311fd18",
+      "match": true
+    },
+    {
+      "file": "js/game.js",
+      "local": "e4d965a7c44e418f368d9c14f5905a3b810db35e4a8474bc3842b79eaf011c09",
+      "bundle": "e4d965a7c44e418f368d9c14f5905a3b810db35e4a8474bc3842b79eaf011c09",
+      "match": true
+    },
+    {
+      "file": "js/engine.js",
+      "local": "5b25cd61f5fb95319411f9c1ae8f1e1e60a1ee53820e63ecbe89d82812ff8b9d",
+      "bundle": "5b25cd61f5fb95319411f9c1ae8f1e1e60a1ee53820e63ecbe89d82812ff8b9d",
+      "match": true
+    },
+    {
+      "file": "js/samples.js",
+      "local": "08ce536e221d2bec121bb7f028d8d238fa5a63767d31285cab26152cae07fded",
+      "bundle": "08ce536e221d2bec121bb7f028d8d238fa5a63767d31285cab26152cae07fded",
+      "match": true
+    },
+    {
+      "file": "js/pieces/pomp.js",
+      "local": "f474fe905007a31cd82878ca7ac49569d4d33a8b892dce2ae6ead29f231493f0",
+      "bundle": "f474fe905007a31cd82878ca7ac49569d4d33a8b892dce2ae6ead29f231493f0",
+      "match": true
+    }
+  ]
+}

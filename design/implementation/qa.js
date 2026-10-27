@@ -54,6 +54,8 @@ function record(){
  }
  if(audioFlow.settledMs===null&&(SAMPLES.ready||SAMPLES.error))audioFlow.settledMs=Math.round(performance.now()-audioFlow.started);
  report.audio={ready:SAMPLES.ready,progress:SAMPLES.progress,error:SAMPLES.error?{name:SAMPLES.error.name,message:SAMPLES.error.message}:null,banks:Object.keys(SAMPLES.banks),requests:{...audioRequests},flow:{...audioFlow},preservedCount:audioBeforeRetry?.length,preservedBuffers:audioBeforeRetry?audioBeforeRetry.every(([name,bank])=>SAMPLES.banks[name]===bank):null,voices:[...new Set((E.pb?.voices||[]).map(v=>v.constructor.name))]};
+ report.listeningMix=E.pb?{nodes:E.pb.listenOutputs.length,live:E.pb.listenLive,gain:E.pb.listenOutputs.map(n=>n.gain.value)}:null;
+ report.hallExp=S.hallExp;
  const yearNext=$('#week .year-actions .btn')?.getBoundingClientRect();report.yearNext=yearNext?{top:yearNext.top,bottom:yearNext.bottom,height:yearNext.height}:null;
  report.yearGrowth=Array.from(document.querySelectorAll('[data-year-growth]')).map(el=>({id:el.dataset.yearGrowth,name:el.querySelector('b').textContent,ranks:el.querySelector('.yr-grow-ranks').getAttribute('aria-label')}));
  report.year=S.year;report.phase=S.phase;report.pending=S.pending?{kind:S.pending.kind,revealed:!!S.pending.revealed}:null;report.expectedNowLabel=nowLabel();
@@ -286,6 +288,8 @@ async function show(next){
  if(view==='grad-old')s.members.forEach(m=>{delete m.first;m.story=[];});
  if(q.has('concertrec')&&view.startsWith('grad')){const fin=addRec(s,'2028年 定期演奏会',{venue:'hall',pieceId:'largo'});fin.final=true;report.beforeConcertVenue=U.venue;}
  if(q.has('busy')&&view.startsWith('member')){s.week=PREF_WEEK;s=beginStage(s);}
+ if(q.has('hallCarry'))s.hallExp=72;
+ if(PIECES[q.get('audioPiece')])s.pieceId=q.get('audioPiece');
  S=s;U.sel=null;hideTip();renderAll();refreshNow();$('#toast').hidden=true;
  const cardView=view==='member'||view.startsWith('member-');
  setTab(['log','journal','journal-ambiguous','journal-empty'].includes(view)?'log':view==='members'?'members':cardView||view==='diag-practice'||view.startsWith('rehearsal')||['stage','recorded-history','record-library','reading-stage','conduct'].includes(view)?'play':'week');

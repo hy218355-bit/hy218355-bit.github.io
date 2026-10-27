@@ -336,7 +336,7 @@ function drawStage(t = -1, cv = $('#stage'), who = null){
     drawInstrument(g,s.inst,x,y+G.r+11,18,m?C.ink:C.soft);
     g.globalAlpha = 1;
   }
-  // 選んだ本人を最後に重ね、輪と楽器の背景を周りの描画で隠さない。
+  // 選んだ本人を最後に重ね、輪と楽器の囲みを周りの描画で隠さない。
   if(focus){
     const {s,m,x,y}=focus,r=Math.min(G.r+1.5,14);
     g.fillStyle=C.sheet;g.beginPath();g.arc(x,y,r+3,0,Math.PI*2);g.fill();
@@ -359,7 +359,7 @@ function seatAt(ev, cv = $('#stage')){
   let best = null, bd = Infinity;
   for(const s of SEATS){
     const [x, y] = seatXY(s, G);
-    // 顔と楽器の中間から測り、楽器の背景の下端でも下の列の人を選ばない。
+    // 顔と楽器の中間から測り、楽器の囲みの下端でも下の列の人を選ばない。
     const d = Math.hypot(x - px, y + (G.portraits?(G.r+11)/2:0) - py);
     if(d < bd){ bd = d; best = s; }
   }
@@ -736,7 +736,6 @@ function renderDiag(){
   if(a.score[weak] < 72) notes.push(commentFor(weak, a, false));
   if(a.score[strong] >= 70) notes.push(commentFor(strong, a, true));
   if(a.wrong) notes.push(`まだ譜読みが終わっておらず、${a.wrong}か所で音を間違えている。`);
-  if(a.lack.miss.length) notes.push(`この曲でいない楽器：${lackNames(a.lack.miss).join('・')}${lackPts(a.lack)}。`);
   $('#diagNote').textContent = notes.join(' ') || '大きな問題はない。ここからは細部の磨き込み。';
   renderDiagPractice();
 }
@@ -1259,7 +1258,6 @@ function renderAssign(w, ev){
       <div class="stage-wrap"><canvas id="asgStage" role="img" aria-label="舞台の席。部員を選んでから、空いている席をタップすると座る。"></canvas></div>
       <p class="legend" id="asgLegend"></p>
     </details>
-    <p class="asg-lack" id="asgLack"></p>
     <div class="transport asg-actions"><button class="btn quiet" type="button" data-asg="bench">控え（席なし）に</button><button class="btn primary" type="button" data-act="assign">この配置で決める</button></div>`;
   $('#asgStage').addEventListener('click', asgTap);
   $('.asg-overview').addEventListener('toggle', e => { if(e.target.open) drawAssignStage(); });
@@ -1270,8 +1268,6 @@ function renderAssign(w, ev){
   }, true);
   asgUpdate();
 }
-// いない楽器の減点の目安
-const lackPts = lk => lk.pts >= 1 ? `（審査で −${Math.round(lk.pts)}点ほど）` : '（出番が少ないので、審査にはほぼ響かない）';
 // 札・説明・舞台を描き直す
 function asgUpdate(){
   const A = U.asg, list = $('#asgList');
@@ -1298,12 +1294,6 @@ function asgUpdate(){
     $('[data-asg="bench"]').disabled = !seat;
   }
   $('#asgLegend').innerHTML = `${r ? `<span><i class="sw sw-hope"></i>光る席：${esc(r.name)}の希望（${INST[r.hope].name}）</span>` : ''}<span><i class="sw sw-new"></i>新しい部員</span><span><i class="sw sw-old"></i>いまの部員</span>${S.pieceId ? '<span>♪：この曲で旋律を吹く席</span>' : ''}`;
-  // この配置で、曲に受け持ちがあるのに一人もいない楽器
-  if(S.pieceId){
-    const secs = [...S.members.filter(m => m.seat).map(m => SEAT[m.seat].sec), ...Object.values(A.picks).filter(Boolean).map(id => SEAT[id].sec)];
-    const lk = lackOf(S.pieceId, secs);
-    $('#asgLack').innerHTML = lk.miss.length ? `この曲でいない楽器：<b>${lackNames(lk.miss).join('・')}</b>${lackPts(lk)}` : '<b>この曲の楽器は、全部そろっている</b>';
-  }
   if($('.asg-overview').open) drawAssignStage();
 }
 function asgSelect(id, scroll = false){
@@ -1518,7 +1508,7 @@ function auditionSoundRows(p){
       note:'少人数では響きが薄くなる。安定して吹ける奏者が増えると、音の重なりが加点になる。'},
     {key:'parts', name:'楽器', value:-s.lack, level:s.lack >= 6 ? 0 : s.lack > 0 ? 1 : 2,
       state:s.lack > 0 ? '欠けている' : 'そろっている',
-      note:s.missing.length ? `${lackNames(s.missing).join('・')}の受け持ちが足りず、減点になる。` : '曲で受け持ちのある楽器がそろっている。'},
+      note:s.missing.length ? `${lackNames(s.missing).join('・')}の受け持ちが足りない。` : '曲で受け持ちのある楽器がそろっている。'},
   ];
 }
 function auditionSound(p, all){
@@ -2131,12 +2121,9 @@ function difficultyBadge(pid){
 }
 function pieceCard(id, {tag = '', note = '', act, label}){
   const pc = PIECES[id];
-  // いまの部員で吹くと、いない楽器（審査で減点になる）
-  const lk = seated(S).length ? lackOf(id, seated(S).map(m => SEAT[m.seat].sec)) : null;
-  // 作曲者は「どんな曲？」の中に。いない楽器は、いちばん大事なものだけ
+  // 作曲者と曲の説明は「どんな曲？」の中に置く。
   return `<div class="pcard">${tag ? `<span class="tag fit">${tag}</span>` : ''}<div class="piece-heading"><h3>${pc.title}</h3>${difficultyBadge(id)}</div>${note ? `<p>${note}</p>` : ''}
     <p class="asks">問われる力：<b>${pc.asks}</b></p>
-    ${lk ? `<p class="asks">${lk.pts >= 1 ? `いない楽器で <b>−${Math.round(lk.pts)}点</b>（とくに${lackNames(lk.miss.slice(0, 1))[0]}）` : lk.miss.length ? 'いない楽器は、審査にほぼ響かない' : 'いまの部で、楽器はそろっている'}</p>` : ''}
     <details class="pdesc"><summary>どんな曲？</summary><p>${pc.composer}。${pc.full}。${pc.desc}</p></details>
     <div class="row"><button class="btn small" type="button" data-act="model" data-pid="${id}">${uiIcon('play')}お手本</button><button class="btn small" type="button" data-act="preview" data-pid="${id}">${uiIcon('play')}いまの部で</button><button class="btn small primary" type="button" data-act="${act}" data-pid="${id}">${label}</button></div></div>`;
 }
