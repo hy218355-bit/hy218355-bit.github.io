@@ -1,0 +1,20 @@
+{
+  "releaseBuild": "succeeded",
+  "bundleHashes": [
+    {
+      "file": "index.html",
+      "local": "83b78e4b78a59059eb58bb2b243e7ef3009ed0a957fa2391663759214b38f903",
+      "bundle": "83b78e4b78a59059eb58bb2b243e7ef3009ed0a957fa2391663759214b38f903",
+      "match": true
+    },
+    {
+      "file": "js/ui.js",
+      "local": "992ab2ddedb1bfa18e0d976764bc89ebf3633809c245a7639ddbc0b1fe7e11df",
+      "bundle": "992ab2ddedb1bfa18e0d976764bc89ebf3633809c245a7639ddbc0b1fe7e11df",
+      "match": true
+    }
+  ],
+  "realDeviceVerification": "not-performed",
+  "lastKnownPhysicalDeviceState": "unavailable",
+  "lastDeviceCheck": "recording-library batch"
+}

@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="ja">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="color-scheme" content="light dark">
+<title>名前も、交代も、迷わず選ぶ</title>
+<style>
+:root{--paper:#f2efe7;--sheet:#fffdf8;--ink:#26383e;--soft:#626d6d;--rule:#d4d0c6;--gold:#8c6e35;color-scheme:light dark}*{box-sizing:border-box}body{margin:0;background:var(--paper);color:var(--ink);font:15px/1.9 system-ui,sans-serif}main{max-width:880px;margin:auto;padding:38px 22px 60px}h1{font-size:clamp(23px,5vw,32px);line-height:1.5;margin:8px 0 18px}h2{font-size:19px;margin-top:38px}p{max-width:680px}a{color:var(--gold);text-underline-offset:4px}.tag,.note,figcaption{font-size:13px;color:var(--soft)}.actions{display:flex;flex-wrap:wrap;gap:12px;margin:25px 0 32px}.actions a{padding:9px 16px;border:1px solid var(--rule);border-radius:9px;background:var(--sheet)}.pair{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:22px;margin:26px 0 40px}figure{min-width:0;margin:0}figcaption{margin-bottom:10px}img{display:block;max-width:375px;width:100%;height:auto;border:1px solid var(--rule);border-radius:14px}details{margin-top:30px;border-top:1px solid var(--rule);padding-top:16px}summary{cursor:pointer}a:focus-visible,summary:focus-visible{outline:2px solid var(--gold);outline-offset:4px}
+@media(prefers-color-scheme:dark){:root{--paper:#15252d;--sheet:#20353e;--ink:#ede9dd;--soft:#b1bbb9;--rule:#47565a;--gold:#d7b777}}
+@media(max-width:560px){main{padding:26px 16px 48px}.pair{grid-template-columns:1fr;gap:28px}figure{max-width:375px;margin-inline:auto}}
+</style>
+<main>
+<div class="tag">吹奏楽部のつくりかた · 席選びの改善</div>
+<h1>名前も、交代も、迷わず選ぶ。</h1>
+<p>顔の下に名前を置いて、だれを選ぶか見やすく。決定ボタンは、相手がいれば「交代する」、控えを選べば「控えにする」に変わります。</p>
+<nav class="actions" aria-label="確認ページ"><a href="../implementation/qa.html?view=member&amp;theme=light&amp;keys=1">ライトで試す</a><a href="../implementation/qa.html?view=member&amp;theme=dark&amp;keys=1">ダークで試す</a><a href="README.md">確認記録</a></nav>
+<div class="pair">
+<figure><figcaption>375px · ライト / 名前を1行で読める</figcaption><img src="screenshots/choices-light.png" width="375" height="812" alt="顔の下に名前と席を置いたライト表示。通常の部員名が1行で読める"></figure>
+<figure><figcaption>375px · ダーク / 同じ並び</figcaption><img src="screenshots/choices-dark.png" width="375" height="812" alt="顔と名前の幅を確保したダーク表示"></figure>
+</div>
+<h2>決める前に、二人の行き先を。</h2>
+<p>選んだだけでは移しません。二人の顔と行き先を見て、「交代する」で決定。取り消したいときは、移動後のカードから「元に戻す」を使えます。</p>
+<div class="pair">
+<figure><figcaption>交代する相手と、変わるランクを確認</figcaption><img loading="lazy" src="screenshots/swap-light.png" width="375" height="812" alt="交代する二人の移動先とランクを表示し、決定ボタンに交代すると表示"></figure>
+<figure><figcaption>控えを選ぶと「控えにする」</figcaption><img loading="lazy" src="screenshots/bench-dark.png" width="375" height="812" alt="控えを選んだ時の移動先と、控えにするボタン"></figure>
+</div>
+<details><summary>小さい画面や、長い名前も</summary><p>320px幅で12文字の名前も省略せず、折り返して表示します。顔と選択のチェックは、名前に重ねません。</p><figure><img loading="lazy" src="screenshots/long-small-dark.png" width="320" height="568" alt="320px幅で12文字の部員名を2行で表示した席選び"></figure></details>
+<p class="note">375px両テーマ、4タブ、部員一覧、小さい画面、交代・控え・空席と取り消しを確認。移動・能力変化・保存の仕組みは変更していません。iPhone用Releaseビルド成功、実機表示は未確認です。</p>
+</main>
+</html>

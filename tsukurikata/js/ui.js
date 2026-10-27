@@ -1973,6 +1973,7 @@ function renderMemberMove(){
   if(!preview || !button) return;
   const plan = selectedMemberMove();
   button.disabled = busy() || !plan;
+  button.textContent = !plan ? '移す' : !plan.to ? '控えにする' : plan.other ? '交代する' : 'この席へ移す';
   preview.hidden = !plan;
   if(!plan){ preview.innerHTML = ''; return; }
   const people = [plan.m, plan.other].filter(Boolean);

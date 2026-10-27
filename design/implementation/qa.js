@@ -114,7 +114,7 @@ function record(){
  const memberPosition=selector=>{const el=$('#memberCard '+selector);if(!el)return null;const r=el.getBoundingClientRect();return {top:r.top-cardBox.top,height:r.height,visible:r.height>0};};
  report.memberLayout={height:cardBox.height,audio:memberPosition('.mc-actions'),move:memberPosition('.mc-move>summary'),current:memberPosition('.mc-current'),history:memberPosition('.mc-growth-history'),ranks:Array.from(document.querySelectorAll('#memberCard .mc-current-grid>[aria-label]')).map(el=>el.getAttribute('aria-label')),historyOpen:!!$('#memberCard .mc-growth-history')?.open,audioButtons:Array.from(document.querySelectorAll('#memberCard .mc-actions>[aria-pressed]')).map(el=>({action:el.dataset.mact,pressed:el.getAttribute('aria-pressed')}))};
  report.moveUndo={available:canUndoMemberMove(),visible:!!$('#memberCard [data-mact="moveundo"]'),saved:!!U.moveUndo,before:U.moveUndo?hash(JSON.stringify(U.moveUndo.before)):null};
- report.move={value:$('#memberCard .mc-move')?.dataset.moveTo,enabled:!!$('#memberCard [data-mact="move"]')&&!$('#memberCard [data-mact="move"]').disabled,state:hash(JSON.stringify(S)),people:movePeople(S),expected:move?movePeople(move.next):null};
+ report.move={value:$('#memberCard .mc-move')?.dataset.moveTo,enabled:!!$('#memberCard [data-mact="move"]')&&!$('#memberCard [data-mact="move"]').disabled,label:$('#memberCard [data-mact="move"]')?.textContent,state:hash(JSON.stringify(S)),people:movePeople(S),expected:move?movePeople(move.next):null};
  report.assignOpen=Array.from(U.asg?.openParts||[]);
  report.recruits=(S.recruits||[]).map(r=>({id:r.id,name:r.name,hope:r.hope,exp:!!r.exp,talent:!!r.talent}));
  report.memberSeats=S.members.map(m=>({id:m.id,name:m.name,seat:m.seat,hope:m.hope}));
@@ -272,6 +272,7 @@ async function show(next){
  if(!['year','renamed-year','reading-year-hard'].includes(view)){checkAch(s,true);for(const key of ['skillUp','coachUp','mileUp','loveUp','dreamUp','rivalUp'])delete s[key];}
  if(view==='member-old')delete s.members[0].first;
  if(view==='member-bench')s.members[0].seat=null;
+ if(q.has('longMove')&&view.startsWith('member'))s=renameMember(s,s.members[1].id,'あいうえおかきくけこさし');
  if(view==='members'){
   if(q.has('rosterBench'))s.members.at(-1).seat=null;
   if(q.has('rosterNames')){s=renameMember(s,s.members[0].id,'さとう はる');s=renameMember(s,s.members[1].id,'Ａｋｉ　あおい');}
