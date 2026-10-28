@@ -1,0 +1,957 @@
+[
+  {
+    "case": "member-light",
+    "data": {
+      "audible": [
+        "m2028-n1-cafe"
+      ],
+      "errors": [],
+      "mini": {
+        "bar": {
+          "bottom": 748,
+          "height": 56,
+          "left": 12,
+          "right": 363,
+          "top": 692,
+          "width": 351,
+          "x": 12,
+          "y": 692
+        },
+        "button": {
+          "bottom": 742,
+          "height": 44,
+          "left": 26,
+          "right": 305,
+          "top": 698,
+          "width": 279,
+          "x": 26,
+          "y": 698
+        },
+        "face": "m2028-n1-cafe",
+        "faceStyle": "--face-size:28px;background-image:url('http://127.0.0.1:8005/tsukurikata/img/faces/classmates-04.webp?v=cast100-20261026-1');background-size:500% 200%;background-position:50% 100%",
+        "focus": "",
+        "footer": {
+          "bottom": 0,
+          "height": 0,
+          "left": 0,
+          "right": 0,
+          "top": 0,
+          "width": 0,
+          "x": 0,
+          "y": 0
+        },
+        "hidden": false,
+        "label": "田中 七海だけ。いまの音（6月 第3週・音楽室）。合奏を開く",
+        "recorded": false,
+        "source": {
+          "face": 46,
+          "html": "<span class=\"member-face\" aria-hidden=\"true\" data-template=\"46\" data-presentation=\"female\" data-standout=\"false\" data-face=\"m2028-n1-cafe\" data-mood=\"normal\" style=\"--face-size:28px;background-image:url('http://127.0.0.1:8005/tsukurikata/img/faces/classmates-04.webp?v=cast100-20261026-1');background-size:500% 200%;background-position:50% 100%\"></span>",
+          "id": "m2028-n1-cafe",
+          "name": "田中 七海",
+          "seat": "picc1"
+        },
+        "state": 0.4271777924150229,
+        "stop": {
+          "bottom": 742,
+          "height": 44,
+          "left": 313,
+          "right": 357,
+          "top": 698,
+          "width": 44,
+          "x": 313,
+          "y": 698
+        },
+        "tabs": {
+          "bottom": 812,
+          "height": 61,
+          "left": 0,
+          "right": 375,
+          "top": 751,
+          "width": 375,
+          "x": 0,
+          "y": 751
+        },
+        "text": "田中 七海だけ・「天国と地獄」"
+      },
+      "playback": 1,
+      "playing": true,
+      "records": 0.9285991184879094,
+      "scrollWidth": 375,
+      "solo": {
+        "id": "m2028-n1-cafe",
+        "type": "member"
+      },
+      "theme": "light",
+      "waiting": false,
+      "width": 375
+    }
+  },
+  {
+    "case": "member-dark",
+    "data": {
+      "audible": [
+        "m2028-n1-cafe"
+      ],
+      "errors": [],
+      "mini": {
+        "bar": {
+          "bottom": 748,
+          "height": 56,
+          "left": 12,
+          "right": 363,
+          "top": 692,
+          "width": 351,
+          "x": 12,
+          "y": 692
+        },
+        "button": {
+          "bottom": 742,
+          "height": 44,
+          "left": 26,
+          "right": 305,
+          "top": 698,
+          "width": 279,
+          "x": 26,
+          "y": 698
+        },
+        "face": "m2028-n1-cafe",
+        "faceStyle": "--face-size:28px;background-image:url('http://127.0.0.1:8005/tsukurikata/img/faces/classmates-04.webp?v=cast100-20261026-1');background-size:500% 200%;background-position:50% 100%",
+        "focus": "miniLabel",
+        "footer": {
+          "bottom": 0,
+          "height": 0,
+          "left": 0,
+          "right": 0,
+          "top": 0,
+          "width": 0,
+          "x": 0,
+          "y": 0
+        },
+        "hidden": false,
+        "label": "田中 七海だけ。いまの音（6月 第3週・音楽室）。合奏を開く",
+        "recorded": false,
+        "source": {
+          "face": 46,
+          "html": "<span class=\"member-face\" aria-hidden=\"true\" data-template=\"46\" data-presentation=\"female\" data-standout=\"false\" data-face=\"m2028-n1-cafe\" data-mood=\"normal\" style=\"--face-size:28px;background-image:url('http://127.0.0.1:8005/tsukurikata/img/faces/classmates-04.webp?v=cast100-20261026-1');background-size:500% 200%;background-position:50% 100%\"></span>",
+          "id": "m2028-n1-cafe",
+          "name": "田中 七海",
+          "seat": "picc1"
+        },
+        "state": 0.4271777924150229,
+        "stop": {
+          "bottom": 742,
+          "height": 44,
+          "left": 313,
+          "right": 357,
+          "top": 698,
+          "width": 44,
+          "x": 313,
+          "y": 698
+        },
+        "tabs": {
+          "bottom": 812,
+          "height": 61,
+          "left": 0,
+          "right": 375,
+          "top": 751,
+          "width": 375,
+          "x": 0,
+          "y": 751
+        },
+        "text": "田中 七海だけ・「天国と地獄」"
+      },
+      "playback": 1,
+      "playing": true,
+      "records": 0.9285991184879094,
+      "scrollWidth": 375,
+      "solo": {
+        "id": "m2028-n1-cafe",
+        "type": "member"
+      },
+      "theme": "dark",
+      "waiting": false,
+      "width": 375
+    }
+  },
+  {
+    "case": "return-play",
+    "data": {
+      "audible": [
+        "m2028-n1-cafe"
+      ],
+      "errors": [],
+      "mini": {
+        "bar": {
+          "bottom": 0,
+          "height": 0,
+          "left": 0,
+          "right": 0,
+          "top": 0,
+          "width": 0,
+          "x": 0,
+          "y": 0
+        },
+        "button": {
+          "bottom": 0,
+          "height": 0,
+          "left": 0,
+          "right": 0,
+          "top": 0,
+          "width": 0,
+          "x": 0,
+          "y": 0
+        },
+        "face": "m2028-n1-cafe",
+        "faceStyle": "--face-size:28px;background-image:url('http://127.0.0.1:8005/tsukurikata/img/faces/classmates-04.webp?v=cast100-20261026-1');background-size:500% 200%;background-position:50% 100%",
+        "focus": "miniLabel",
+        "footer": {
+          "bottom": 0,
+          "height": 0,
+          "left": 0,
+          "right": 0,
+          "top": 0,
+          "width": 0,
+          "x": 0,
+          "y": 0
+        },
+        "hidden": true,
+        "label": "田中 七海だけ。いまの音（6月 第3週・音楽室）。合奏を開く",
+        "recorded": false,
+        "source": {
+          "face": 46,
+          "html": "<span class=\"member-face\" aria-hidden=\"true\" data-template=\"46\" data-presentation=\"female\" data-standout=\"false\" data-face=\"m2028-n1-cafe\" data-mood=\"normal\" style=\"--face-size:28px;background-image:url('http://127.0.0.1:8005/tsukurikata/img/faces/classmates-04.webp?v=cast100-20261026-1');background-size:500% 200%;background-position:50% 100%\"></span>",
+          "id": "m2028-n1-cafe",
+          "name": "田中 七海",
+          "seat": "picc1"
+        },
+        "state": 0.4271777924150229,
+        "stop": {
+          "bottom": 0,
+          "height": 0,
+          "left": 0,
+          "right": 0,
+          "top": 0,
+          "width": 0,
+          "x": 0,
+          "y": 0
+        },
+        "tabs": {
+          "bottom": 812,
+          "height": 61,
+          "left": 0,
+          "right": 375,
+          "top": 751,
+          "width": 375,
+          "x": 0,
+          "y": 751
+        },
+        "text": "田中 七海だけ・「天国と地獄」"
+      },
+      "playback": 1,
+      "playing": true,
+      "records": 0.9285991184879094,
+      "scrollWidth": 375,
+      "solo": {
+        "id": "m2028-n1-cafe",
+        "type": "member"
+      },
+      "theme": "dark",
+      "waiting": false,
+      "width": 375
+    }
+  },
+  {
+    "case": "section-week",
+    "data": {
+      "audible": [
+        "m2028-n1-cafe",
+        "m2028-n2-cafe",
+        "m2028-n3-cafe",
+        "m2028-n4-cafe"
+      ],
+      "errors": [],
+      "mini": {
+        "bar": {
+          "bottom": 748,
+          "height": 56,
+          "left": 12,
+          "right": 363,
+          "top": 692,
+          "width": 351,
+          "x": 12,
+          "y": 692
+        },
+        "button": {
+          "bottom": 742,
+          "height": 44,
+          "left": 26,
+          "right": 305,
+          "top": 698,
+          "width": 279,
+          "x": 26,
+          "y": 698
+        },
+        "focus": "",
+        "footer": {
+          "bottom": 690,
+          "height": 73,
+          "left": 16,
+          "right": 359,
+          "top": 617,
+          "width": 343,
+          "x": 16,
+          "y": 617
+        },
+        "hidden": false,
+        "label": "フルートだけ。いまの音（6月 第3週・音楽室）。合奏を開く",
+        "recorded": false,
+        "source": null,
+        "state": 0.4271777924150229,
+        "stop": {
+          "bottom": 742,
+          "height": 44,
+          "left": 313,
+          "right": 357,
+          "top": 698,
+          "width": 44,
+          "x": 313,
+          "y": 698
+        },
+        "tabs": {
+          "bottom": 812,
+          "height": 61,
+          "left": 0,
+          "right": 375,
+          "top": 751,
+          "width": 375,
+          "x": 0,
+          "y": 751
+        },
+        "text": "フルートだけ・「天国と地獄」"
+      },
+      "playback": 1,
+      "playing": true,
+      "records": 0.9285991184879094,
+      "scrollWidth": 375,
+      "solo": {
+        "id": "fl",
+        "type": "sec"
+      },
+      "theme": "dark",
+      "waiting": false,
+      "width": 375
+    }
+  },
+  {
+    "case": "all-members",
+    "data": {
+      "audible": [
+        "m2028-n1-cafe",
+        "m2028-n2-cafe",
+        "m2028-n3-cafe",
+        "m2028-n4-cafe",
+        "m2028-n5-cafe",
+        "m2028-n6-cafe",
+        "m2028-n7-cafe",
+        "m2028-n8-cafe",
+        "m2028-n9-cafe",
+        "m2028-n10-cafe",
+        "m2028-n11-cafe",
+        "m2028-n12-cafe",
+        "m2028-n13-cafe",
+        "m2028-n14-cafe",
+        "m2028-n15-cafe",
+        "m2028-n16-cafe",
+        "m2028-n17-cafe",
+        "m2028-n18-cafe",
+        "m2028-n19-cafe",
+        "m2028-n20-cafe",
+        "m2028-n21-cafe",
+        "m2028-n22-cafe",
+        "m2028-n23-cafe",
+        "m2028-n24-cafe",
+        "m2028-n25-cafe",
+        "m2028-n26-cafe",
+        "m2028-n27-cafe",
+        "m2028-n28-cafe",
+        "m2028-n29-cafe",
+        "m2028-n30-cafe",
+        "m2028-n31-cafe",
+        "m2028-n32-cafe",
+        "m2028-n33-cafe",
+        "m2028-n34-cafe",
+        "m2028-n35-cafe",
+        "m2028-n36-cafe",
+        "m2028-n37-cafe",
+        "m2028-n39-cafe",
+        "m2028-n38-cafe"
+      ],
+      "errors": [],
+      "mini": {
+        "bar": {
+          "bottom": 748,
+          "height": 56,
+          "left": 12,
+          "right": 363,
+          "top": 692,
+          "width": 351,
+          "x": 12,
+          "y": 692
+        },
+        "button": {
+          "bottom": 742,
+          "height": 44,
+          "left": 26,
+          "right": 305,
+          "top": 698,
+          "width": 279,
+          "x": 26,
+          "y": 698
+        },
+        "focus": "",
+        "footer": {
+          "bottom": 0,
+          "height": 0,
+          "left": 0,
+          "right": 0,
+          "top": 0,
+          "width": 0,
+          "x": 0,
+          "y": 0
+        },
+        "hidden": false,
+        "label": "いまの音（6月 第3週・音楽室）。合奏を開く",
+        "recorded": false,
+        "source": null,
+        "state": 0.4271777924150229,
+        "stop": {
+          "bottom": 742,
+          "height": 44,
+          "left": 313,
+          "right": 357,
+          "top": 698,
+          "width": 44,
+          "x": 313,
+          "y": 698
+        },
+        "tabs": {
+          "bottom": 812,
+          "height": 61,
+          "left": 0,
+          "right": 375,
+          "top": 751,
+          "width": 375,
+          "x": 0,
+          "y": 751
+        },
+        "text": "いまの音（6月 第3週・音楽室）"
+      },
+      "playback": 1,
+      "playing": true,
+      "records": 0.9285991184879094,
+      "scrollWidth": 375,
+      "solo": {
+        "type": "all"
+      },
+      "theme": "dark",
+      "waiting": false,
+      "width": 375
+    }
+  },
+  {
+    "case": "stopped",
+    "data": {
+      "audible": [],
+      "errors": [],
+      "mini": {
+        "bar": {
+          "bottom": 0,
+          "height": 0,
+          "left": 0,
+          "right": 0,
+          "top": 0,
+          "width": 0,
+          "x": 0,
+          "y": 0
+        },
+        "button": {
+          "bottom": 0,
+          "height": 0,
+          "left": 0,
+          "right": 0,
+          "top": 0,
+          "width": 0,
+          "x": 0,
+          "y": 0
+        },
+        "focus": "",
+        "footer": {
+          "bottom": 0,
+          "height": 0,
+          "left": 0,
+          "right": 0,
+          "top": 0,
+          "width": 0,
+          "x": 0,
+          "y": 0
+        },
+        "hidden": true,
+        "label": "いまの音（6月 第3週・音楽室）。合奏を開く",
+        "recorded": false,
+        "source": null,
+        "state": 0.4271777924150229,
+        "stop": {
+          "bottom": 0,
+          "height": 0,
+          "left": 0,
+          "right": 0,
+          "top": 0,
+          "width": 0,
+          "x": 0,
+          "y": 0
+        },
+        "tabs": {
+          "bottom": 812,
+          "height": 61,
+          "left": 0,
+          "right": 375,
+          "top": 751,
+          "width": 375,
+          "x": 0,
+          "y": 751
+        },
+        "text": "いまの音（6月 第3週・音楽室）"
+      },
+      "playback": null,
+      "playing": false,
+      "records": 0.9285991184879094,
+      "scrollWidth": 375,
+      "solo": {
+        "type": "all"
+      },
+      "theme": "dark",
+      "waiting": false,
+      "width": 375
+    }
+  },
+  {
+    "case": "long-member-wait",
+    "data": {
+      "audible": [],
+      "errors": [],
+      "mini": {
+        "bar": {
+          "bottom": 603,
+          "height": 56,
+          "left": 12,
+          "right": 363,
+          "top": 547,
+          "width": 351,
+          "x": 12,
+          "y": 547
+        },
+        "button": {
+          "bottom": 597,
+          "height": 44,
+          "left": 26,
+          "right": 305,
+          "top": 553,
+          "width": 279,
+          "x": 26,
+          "y": 553
+        },
+        "face": "m2028-n2-cafe",
+        "faceStyle": "--face-size:28px;background-image:url('http://127.0.0.1:8005/tsukurikata/img/faces/classmates-08.webp?v=cast100-20261026-1');background-size:500% 200%;background-position:25% 100%",
+        "focus": "",
+        "footer": {
+          "bottom": 0,
+          "height": 0,
+          "left": 0,
+          "right": 0,
+          "top": 0,
+          "width": 0,
+          "x": 0,
+          "y": 0
+        },
+        "hidden": false,
+        "label": "あいうえおかきくけこさしだけ。いまの音（6月 第3週・音楽室）、録音を読み込み中。合奏を開く",
+        "recorded": false,
+        "source": {
+          "face": 85,
+          "html": "<span class=\"member-face\" aria-hidden=\"true\" data-template=\"85\" data-presentation=\"male\" data-standout=\"false\" data-face=\"m2028-n2-cafe\" data-mood=\"normal\" style=\"--face-size:28px;background-image:url('http://127.0.0.1:8005/tsukurikata/img/faces/classmates-08.webp?v=cast100-20261026-1');background-size:500% 200%;background-position:25% 100%\"></span>",
+          "id": "m2028-n2-cafe",
+          "name": "あいうえおかきくけこさし",
+          "seat": "fl1a"
+        },
+        "state": 0.12282038759440184,
+        "stop": {
+          "bottom": 597,
+          "height": 44,
+          "left": 313,
+          "right": 357,
+          "top": 553,
+          "width": 44,
+          "x": 313,
+          "y": 553
+        },
+        "tabs": {
+          "bottom": 667,
+          "height": 61,
+          "left": 0,
+          "right": 375,
+          "top": 606,
+          "width": 375,
+          "x": 0,
+          "y": 606
+        },
+        "text": "あいうえおかきくけこさしだけ・読み込み中"
+      },
+      "playback": null,
+      "playing": false,
+      "records": 0.15579202701337636,
+      "scrollWidth": 375,
+      "solo": {
+        "id": "m2028-n2-cafe",
+        "type": "member"
+      },
+      "theme": "light",
+      "waiting": true,
+      "width": 375
+    }
+  },
+  {
+    "case": "long-member-playing",
+    "data": {
+      "audible": [
+        "m2028-n2-cafe"
+      ],
+      "errors": [],
+      "mini": {
+        "bar": {
+          "bottom": 603,
+          "height": 56,
+          "left": 12,
+          "right": 363,
+          "top": 547,
+          "width": 351,
+          "x": 12,
+          "y": 547
+        },
+        "button": {
+          "bottom": 597,
+          "height": 44,
+          "left": 26,
+          "right": 305,
+          "top": 553,
+          "width": 279,
+          "x": 26,
+          "y": 553
+        },
+        "face": "m2028-n2-cafe",
+        "faceStyle": "--face-size:28px;background-image:url('http://127.0.0.1:8005/tsukurikata/img/faces/classmates-08.webp?v=cast100-20261026-1');background-size:500% 200%;background-position:25% 100%",
+        "focus": "",
+        "footer": {
+          "bottom": 0,
+          "height": 0,
+          "left": 0,
+          "right": 0,
+          "top": 0,
+          "width": 0,
+          "x": 0,
+          "y": 0
+        },
+        "hidden": false,
+        "label": "あいうえおかきくけこさしだけ。いまの音（6月 第3週・音楽室）。合奏を開く",
+        "recorded": false,
+        "source": {
+          "face": 85,
+          "html": "<span class=\"member-face\" aria-hidden=\"true\" data-template=\"85\" data-presentation=\"male\" data-standout=\"false\" data-face=\"m2028-n2-cafe\" data-mood=\"normal\" style=\"--face-size:28px;background-image:url('http://127.0.0.1:8005/tsukurikata/img/faces/classmates-08.webp?v=cast100-20261026-1');background-size:500% 200%;background-position:25% 100%\"></span>",
+          "id": "m2028-n2-cafe",
+          "name": "あいうえおかきくけこさし",
+          "seat": "fl1a"
+        },
+        "state": 0.12282038759440184,
+        "stop": {
+          "bottom": 597,
+          "height": 44,
+          "left": 313,
+          "right": 357,
+          "top": 553,
+          "width": 44,
+          "x": 313,
+          "y": 553
+        },
+        "tabs": {
+          "bottom": 667,
+          "height": 61,
+          "left": 0,
+          "right": 375,
+          "top": 606,
+          "width": 375,
+          "x": 0,
+          "y": 606
+        },
+        "text": "あいうえおかきくけこさしだけ・「天国と地獄」"
+      },
+      "playback": 1,
+      "playing": true,
+      "records": 0.15579202701337636,
+      "scrollWidth": 375,
+      "solo": {
+        "id": "m2028-n2-cafe",
+        "type": "member"
+      },
+      "theme": "light",
+      "waiting": false,
+      "width": 375
+    }
+  },
+  {
+    "case": "live-section",
+    "data": {
+      "audible": [
+        "m2028-n1-cafe",
+        "m2028-n2-cafe",
+        "m2028-n3-cafe",
+        "m2028-n4-cafe"
+      ],
+      "errors": [],
+      "mini": {
+        "bar": {
+          "bottom": 603,
+          "height": 56,
+          "left": 12,
+          "right": 363,
+          "top": 547,
+          "width": 351,
+          "x": 12,
+          "y": 547
+        },
+        "button": {
+          "bottom": 597,
+          "height": 44,
+          "left": 26,
+          "right": 305,
+          "top": 553,
+          "width": 279,
+          "x": 26,
+          "y": 553
+        },
+        "focus": "",
+        "footer": {
+          "bottom": 0,
+          "height": 0,
+          "left": 0,
+          "right": 0,
+          "top": 0,
+          "width": 0,
+          "x": 0,
+          "y": 0
+        },
+        "hidden": false,
+        "label": "フルートだけ。いまの音（6月 第3週・音楽室）。合奏を開く",
+        "recorded": false,
+        "source": null,
+        "state": 0.12282038759440184,
+        "stop": {
+          "bottom": 597,
+          "height": 44,
+          "left": 313,
+          "right": 357,
+          "top": 553,
+          "width": 44,
+          "x": 313,
+          "y": 553
+        },
+        "tabs": {
+          "bottom": 667,
+          "height": 61,
+          "left": 0,
+          "right": 375,
+          "top": 606,
+          "width": 375,
+          "x": 0,
+          "y": 606
+        },
+        "text": "フルートだけ・「天国と地獄」"
+      },
+      "playback": 1,
+      "playing": true,
+      "records": 0.15579202701337636,
+      "scrollWidth": 375,
+      "solo": {
+        "id": "fl",
+        "type": "sec"
+      },
+      "theme": "light",
+      "waiting": false,
+      "width": 375
+    }
+  },
+  {
+    "case": "live-member",
+    "data": {
+      "audible": [
+        "m2028-n2-cafe"
+      ],
+      "errors": [],
+      "mini": {
+        "bar": {
+          "bottom": 603,
+          "height": 56,
+          "left": 12,
+          "right": 363,
+          "top": 547,
+          "width": 351,
+          "x": 12,
+          "y": 547
+        },
+        "button": {
+          "bottom": 597,
+          "height": 44,
+          "left": 26,
+          "right": 305,
+          "top": 553,
+          "width": 279,
+          "x": 26,
+          "y": 553
+        },
+        "face": "m2028-n2-cafe",
+        "faceStyle": "--face-size:28px;background-image:url('http://127.0.0.1:8005/tsukurikata/img/faces/classmates-08.webp?v=cast100-20261026-1');background-size:500% 200%;background-position:25% 100%",
+        "focus": "",
+        "footer": {
+          "bottom": 0,
+          "height": 0,
+          "left": 0,
+          "right": 0,
+          "top": 0,
+          "width": 0,
+          "x": 0,
+          "y": 0
+        },
+        "hidden": false,
+        "label": "あいうえおかきくけこさしだけ。いまの音（6月 第3週・音楽室）。合奏を開く",
+        "recorded": false,
+        "source": {
+          "face": 85,
+          "html": "<span class=\"member-face\" aria-hidden=\"true\" data-template=\"85\" data-presentation=\"male\" data-standout=\"false\" data-face=\"m2028-n2-cafe\" data-mood=\"normal\" style=\"--face-size:28px;background-image:url('http://127.0.0.1:8005/tsukurikata/img/faces/classmates-08.webp?v=cast100-20261026-1');background-size:500% 200%;background-position:25% 100%\"></span>",
+          "id": "m2028-n2-cafe",
+          "name": "あいうえおかきくけこさし",
+          "seat": "fl1a"
+        },
+        "state": 0.12282038759440184,
+        "stop": {
+          "bottom": 597,
+          "height": 44,
+          "left": 313,
+          "right": 357,
+          "top": 553,
+          "width": 44,
+          "x": 313,
+          "y": 553
+        },
+        "tabs": {
+          "bottom": 667,
+          "height": 61,
+          "left": 0,
+          "right": 375,
+          "top": 606,
+          "width": 375,
+          "x": 0,
+          "y": 606
+        },
+        "text": "あいうえおかきくけこさしだけ・「天国と地獄」"
+      },
+      "playback": 1,
+      "playing": true,
+      "records": 0.15579202701337636,
+      "scrollWidth": 375,
+      "solo": {
+        "id": "m2028-n2-cafe",
+        "type": "member"
+      },
+      "theme": "light",
+      "waiting": false,
+      "width": 375
+    }
+  },
+  {
+    "case": "wait-cohort-stopped",
+    "data": {
+      "audible": [],
+      "errors": [],
+      "mini": {
+        "bar": {
+          "bottom": 0,
+          "height": 0,
+          "left": 0,
+          "right": 0,
+          "top": 0,
+          "width": 0,
+          "x": 0,
+          "y": 0
+        },
+        "button": {
+          "bottom": 0,
+          "height": 0,
+          "left": 0,
+          "right": 0,
+          "top": 0,
+          "width": 0,
+          "x": 0,
+          "y": 0
+        },
+        "face": "m2028-n2-cafe",
+        "faceStyle": "--face-size:28px;background-image:url('http://127.0.0.1:8005/tsukurikata/img/faces/classmates-08.webp?v=cast100-20261026-1');background-size:500% 200%;background-position:25% 100%",
+        "focus": "",
+        "footer": {
+          "bottom": 0,
+          "height": 0,
+          "left": 0,
+          "right": 0,
+          "top": 0,
+          "width": 0,
+          "x": 0,
+          "y": 0
+        },
+        "hidden": true,
+        "label": "あいうえおかきくけこさしだけ。いまの音（6月 第3週・音楽室）。合奏を開く",
+        "recorded": false,
+        "source": null,
+        "state": 0.12282038759440184,
+        "stop": {
+          "bottom": 0,
+          "height": 0,
+          "left": 0,
+          "right": 0,
+          "top": 0,
+          "width": 0,
+          "x": 0,
+          "y": 0
+        },
+        "tabs": {
+          "bottom": 667,
+          "height": 61,
+          "left": 0,
+          "right": 375,
+          "top": 606,
+          "width": 375,
+          "x": 0,
+          "y": 606
+        },
+        "text": "あいうえおかきくけこさしだけ・「天国と地獄」"
+      },
+      "playback": null,
+      "playing": false,
+      "records": 0.15579202701337636,
+      "scrollWidth": 375,
+      "solo": {
+        "id": "m2028-n2-cafe",
+        "type": "member"
+      },
+      "theme": "light",
+      "waiting": false,
+      "width": 375
+    }
+  }
+]

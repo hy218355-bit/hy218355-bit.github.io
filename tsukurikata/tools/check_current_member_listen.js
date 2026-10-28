@@ -28,6 +28,7 @@ const ui=fs.readFileSync(path.join(root,'js/ui.js'),'utf8');
 vm.runInContext(ui.slice(ui.indexOf('function rangeSpan('),ui.indexOf('const busy =')),ctx);
 vm.runInContext(ui.slice(ui.indexOf('const PERFORMANCE_PLAYERS ='),ui.indexOf('function rememberStageMembers(')),ctx);
 vm.runInContext(ui.slice(ui.indexOf('function currentCtx(){'),ui.indexOf('function refreshNow(){')),ctx);
+vm.runInContext('const updateMini=()=>{};',ctx);
 vm.runInContext(ui.slice(ui.indexOf('function applySolo(){'),ui.indexOf('/* ===== ホワイトボード')),ctx);
 vm.runInContext(ui.slice(ui.indexOf('function listenCurrentMember('),ui.indexOf('function startStage(){')),ctx);
 const start=ui.indexOf("  $('#btnNow').addEventListener('click'");

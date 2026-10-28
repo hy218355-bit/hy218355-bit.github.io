@@ -17,6 +17,7 @@ const renderListeningSummary=()=>{},renderRecordingLibrary=()=>{},memberById=id=
 const pieceListening=()=>null;
 `,ctx);
 vm.runInContext(ui.slice(ui.indexOf('const STAGE_PERFORMERS ='),ui.indexOf('function levelAt(')),ctx);
+vm.runInContext('const updateMini=()=>{};',ctx);
 vm.runInContext(ui.slice(ui.indexOf('function renderSelectors(){'),ui.indexOf('// 録音の参照は')),ctx);
 vm.runInContext(ui.slice(ui.indexOf('function toggleRecordedMemberSolo('),ui.indexOf('function closeMemberCard(')),ctx);
 vm.runInContext(ui.slice(ui.indexOf('function renderRecordedMemberCard('),ui.indexOf('function renderMemberCard(')),ctx);

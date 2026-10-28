@@ -10,6 +10,7 @@ let S;const U={piece:null,range:'all',venue:'hall',solo:'all',sel:null,recordMem
 const E={solo:{type:'all'},setSolo(s){this.solo=s;}};
 const nodes={},$=s=>nodes[s]||=({value:'',options:[],set innerHTML(s){this.html=s;this.options=[...s.matchAll(/<option value="([^"]*)">([^<]*)<\\/option>/g)].map(m=>({value:m[1],textContent:m[2]}));if(!this.options.some(o=>o.value===this.value))this.value=this.options[0]?.value||'';},get innerHTML(){return this.html||'';},get selectedOptions(){return this.options.filter(o=>o.value===this.value);},setAttribute(){}});
 const playPiece=()=>U.piece||S.pieceId||'largo',busy=()=>false,ensembleListening=()=>null,renderRecordingLibrary=()=>{},difficultyBadge=()=>'',memberById=id=>S.members.find(m=>m.id===id);
+const updateMini=()=>{};
 `,ctx);
 vm.runInContext(ui.slice(ui.indexOf('const RANKS ='),ui.indexOf('const rankBadge =')),ctx);
 vm.runInContext(ui.slice(ui.indexOf('const spanShort ='),ui.indexOf('const avgStats =')),ctx);

@@ -184,6 +184,10 @@ function record(){
  if(E.pb&&!playbackIds.has(E.pb))playbackIds.set(E.pb,++playbackCount);
  report.playbackId=E.pb?playbackIds.get(E.pb):null;
  report.audibleMemberIds=E.pb?Object.keys(E.pb.mem).filter(mid=>E.pb.audible(mid,E.solo)):[];
+ if(q.has('miniAudit')){
+  const perf=U.waitPlay?.perf||(U.playing?U.shown:null),cast=STAGE_PERFORMERS.get(perf),person=cast?.members.find(m=>m.id===E.solo.id),button=$('#miniLabel'),face=button.querySelector('[data-face]');
+  report.mini={state:hash(JSON.stringify(S)),hidden:$('#mini').hidden,text:button.textContent,label:button.getAttribute('aria-label'),face:face?.dataset.face,faceStyle:face?.getAttribute('style'),source:person?{id:person.id,name:person.name,seat:person.seat,face:Faces.fingerprint(person),html:memberFace(person,28)}:null,recorded:!!cast?.recorded,focus:document.activeElement.id,button:button.getBoundingClientRect().toJSON(),stop:$('#miniStop').getBoundingClientRect().toJSON(),bar:$('#mini').getBoundingClientRect().toJSON(),tabs:$('#tabbar').getBoundingClientRect().toJSON(),footer:$('#week .plan>.transport')?.getBoundingClientRect().toJSON()};
+ }
  report.shownBounds=U.shown?{from:U.shown.from,to:U.shown.to}:null;report.preparedBounds=U.perfNow?{from:U.perfNow.from,to:U.perfNow.to}:null;
  report.shownPlayers=U.shown?Object.entries(buildPtr(U.shown)).map(([seat,p])=>({seat,id:p.mid})):[];
  report.recordsFingerprint=hash(JSON.stringify(S.recs));
@@ -472,6 +476,7 @@ new MutationObserver(()=>setTimeout(record,0)).observe($('#recordingList'),{chil
 for(const event of ['click','input','change','keydown','compositionend','submit'])$('#rosterFind').addEventListener(event,()=>setTimeout(record,0));
 $('#rosterParts').addEventListener('toggle',()=>setTimeout(record,0));
 $('#tabbar').addEventListener('click',()=>setTimeout(record,0));
+$('#mini').addEventListener('click',()=>setTimeout(record,0));
 for(const event of ['click','change','toggle'])$('.col-stage').addEventListener(event,()=>setTimeout(record,0),true);
 for(const event of ['pointerdown','keydown','click'])$('#conduct').addEventListener(event,()=>setTimeout(record,0),true);
 $('#sndStatus').addEventListener('click',e=>{if(e.target.closest('[data-sndretry]'))audioBeforeRetry=Object.entries(SAMPLES.banks);setTimeout(record,0);},true);

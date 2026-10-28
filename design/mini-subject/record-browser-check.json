@@ -1,0 +1,312 @@
+[
+  {
+    "case": "recorded-person",
+    "data": {
+      "audible": [
+        "m2028-n1-cafe"
+      ],
+      "current": {
+        "name": "田中 花音",
+        "seat": "perc2"
+      },
+      "errors": [],
+      "mini": {
+        "bar": {
+          "bottom": 603,
+          "height": 56,
+          "left": 12,
+          "right": 363,
+          "top": 547,
+          "width": 351,
+          "x": 12,
+          "y": 547
+        },
+        "button": {
+          "bottom": 597,
+          "height": 44,
+          "left": 26,
+          "right": 305,
+          "top": 553,
+          "width": 279,
+          "x": 26,
+          "y": 553
+        },
+        "face": "m2028-n1-cafe",
+        "faceStyle": "--face-size:28px;background-image:url('http://127.0.0.1:8005/tsukurikata/img/faces/classmates-04.webp?v=cast100-20261026-1');background-size:500% 200%;background-position:50% 100%",
+        "focus": "",
+        "footer": {
+          "bottom": 0,
+          "height": 0,
+          "left": 0,
+          "right": 0,
+          "top": 0,
+          "width": 0,
+          "x": 0,
+          "y": 0
+        },
+        "hidden": false,
+        "label": "田中 葵だけ。2027年 定期演奏会（県民文化会館で録音）。合奏を開く",
+        "recorded": true,
+        "source": {
+          "face": 46,
+          "html": "<span class=\"member-face\" aria-hidden=\"true\" data-template=\"46\" data-presentation=\"female\" data-standout=\"false\" data-face=\"m2028-n1-cafe\" data-mood=\"normal\" style=\"--face-size:28px;background-image:url('http://127.0.0.1:8005/tsukurikata/img/faces/classmates-04.webp?v=cast100-20261026-1');background-size:500% 200%;background-position:50% 100%\"></span>",
+          "id": "m2028-n1-cafe",
+          "name": "田中 葵",
+          "seat": "picc1"
+        },
+        "state": 0.11140006873756648,
+        "stop": {
+          "bottom": 597,
+          "height": 44,
+          "left": 313,
+          "right": 357,
+          "top": 553,
+          "width": 44,
+          "x": 313,
+          "y": 553
+        },
+        "tabs": {
+          "bottom": 667,
+          "height": 61,
+          "left": 0,
+          "right": 375,
+          "top": 606,
+          "width": 375,
+          "x": 0,
+          "y": 606
+        },
+        "text": "田中 葵だけ・「天国と地獄」"
+      },
+      "playback": 1,
+      "playing": true,
+      "recorded": {
+        "grade": 3,
+        "id": "m2028-n1-cafe",
+        "name": "田中 葵",
+        "ranks": {
+          "expr": "D",
+          "pitch": "D",
+          "rhythm": "D",
+          "tone": "D"
+        },
+        "seat": "picc1"
+      },
+      "records": 0.29388283868320286,
+      "scrollWidth": 375,
+      "solo": {
+        "id": "m2028-n1-cafe",
+        "type": "member"
+      },
+      "waiting": false,
+      "width": 375
+    }
+  },
+  {
+    "case": "recorded-all",
+    "data": {
+      "audible": [
+        "m2028-n1-cafe",
+        "m2026-n2-f00d",
+        "m2026-n3-f00d",
+        "m2026-n4-f00d",
+        "m2026-n5-f00d",
+        "m2026-n6-f00d",
+        "m2026-n7-f00d",
+        "m2026-n8-f00d",
+        "m2026-n9-f00d",
+        "m2026-n10-f00d",
+        "m2026-n11-f00d",
+        "m2026-n12-f00d",
+        "m2026-n13-f00d",
+        "m2026-n14-f00d",
+        "m2026-n15-f00d",
+        "m2026-n16-f00d",
+        "m2026-n17-f00d",
+        "m2026-n18-f00d",
+        "m2026-n19-f00d",
+        "m2026-n20-f00d",
+        "m2026-n21-f00d",
+        "m2026-n22-f00d",
+        "m2026-n23-f00d",
+        "m2026-n24-f00d",
+        "m2026-n25-f00d",
+        "m2026-n26-f00d",
+        "m2026-n27-f00d",
+        "m2026-n28-f00d",
+        "m2026-n29-f00d",
+        "m2026-n30-f00d",
+        "m2026-n31-f00d",
+        "m2026-n32-f00d",
+        "m2026-n33-f00d",
+        "m2026-n34-f00d",
+        "m2026-n35-f00d",
+        "m2026-n36-f00d",
+        "m2026-n38-f00d",
+        "m2026-n37-f00d",
+        "m2026-n39-f00d"
+      ],
+      "current": {
+        "name": "田中 花音",
+        "seat": "perc2"
+      },
+      "errors": [],
+      "mini": {
+        "bar": {
+          "bottom": 603,
+          "height": 56,
+          "left": 12,
+          "right": 363,
+          "top": 547,
+          "width": 351,
+          "x": 12,
+          "y": 547
+        },
+        "button": {
+          "bottom": 597,
+          "height": 44,
+          "left": 26,
+          "right": 305,
+          "top": 553,
+          "width": 279,
+          "x": 26,
+          "y": 553
+        },
+        "focus": "",
+        "footer": {
+          "bottom": 0,
+          "height": 0,
+          "left": 0,
+          "right": 0,
+          "top": 0,
+          "width": 0,
+          "x": 0,
+          "y": 0
+        },
+        "hidden": false,
+        "label": "2027年 定期演奏会（県民文化会館で録音）。合奏を開く",
+        "recorded": true,
+        "source": null,
+        "state": 0.11140006873756648,
+        "stop": {
+          "bottom": 597,
+          "height": 44,
+          "left": 313,
+          "right": 357,
+          "top": 553,
+          "width": 44,
+          "x": 313,
+          "y": 553
+        },
+        "tabs": {
+          "bottom": 667,
+          "height": 61,
+          "left": 0,
+          "right": 375,
+          "top": 606,
+          "width": 375,
+          "x": 0,
+          "y": 606
+        },
+        "text": "2027年 定期演奏会（県民文化会館で録音）"
+      },
+      "playback": 1,
+      "playing": true,
+      "recorded": {
+        "grade": 3,
+        "id": "m2028-n1-cafe",
+        "name": "田中 葵",
+        "ranks": {
+          "expr": "D",
+          "pitch": "D",
+          "rhythm": "D",
+          "tone": "D"
+        },
+        "seat": "picc1"
+      },
+      "records": 0.29388283868320286,
+      "scrollWidth": 375,
+      "solo": {
+        "type": "all"
+      },
+      "waiting": false,
+      "width": 375
+    }
+  },
+  {
+    "case": "recorded-stopped",
+    "data": {
+      "audible": [],
+      "current": null,
+      "errors": [],
+      "mini": {
+        "bar": {
+          "bottom": 0,
+          "height": 0,
+          "left": 0,
+          "right": 0,
+          "top": 0,
+          "width": 0,
+          "x": 0,
+          "y": 0
+        },
+        "button": {
+          "bottom": 0,
+          "height": 0,
+          "left": 0,
+          "right": 0,
+          "top": 0,
+          "width": 0,
+          "x": 0,
+          "y": 0
+        },
+        "focus": "",
+        "footer": {
+          "bottom": 0,
+          "height": 0,
+          "left": 0,
+          "right": 0,
+          "top": 0,
+          "width": 0,
+          "x": 0,
+          "y": 0
+        },
+        "hidden": true,
+        "label": "2027年 定期演奏会（県民文化会館で録音）。合奏を開く",
+        "recorded": false,
+        "source": null,
+        "state": 0.11140006873756648,
+        "stop": {
+          "bottom": 0,
+          "height": 0,
+          "left": 0,
+          "right": 0,
+          "top": 0,
+          "width": 0,
+          "x": 0,
+          "y": 0
+        },
+        "tabs": {
+          "bottom": 667,
+          "height": 61,
+          "left": 0,
+          "right": 375,
+          "top": 606,
+          "width": 375,
+          "x": 0,
+          "y": 606
+        },
+        "text": "2027年 定期演奏会（県民文化会館で録音）"
+      },
+      "playback": null,
+      "playing": false,
+      "recorded": null,
+      "records": 0.29388283868320286,
+      "scrollWidth": 375,
+      "solo": {
+        "type": "all"
+      },
+      "waiting": false,
+      "width": 375
+    }
+  }
+]

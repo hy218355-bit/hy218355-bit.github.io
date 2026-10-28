@@ -1046,8 +1046,10 @@ button.wr-person:focus-visible{outline:2px solid var(--brass);outline-offset:2px
   .tabbar button[aria-current="page"] svg{stroke-width:2.1}
   .mini:not([hidden]){display:flex;align-items:center;gap:8px;position:fixed;left:max(12px,env(safe-area-inset-left,0px));right:max(12px,env(safe-area-inset-right,0px));
     bottom:calc(64px + env(safe-area-inset-bottom,0px));z-index:59;padding:6px 6px 6px 14px;border-radius:14px;background:var(--ink);color:var(--paper);box-shadow:0 8px 24px var(--shadow)}
-  .mini-label{flex:1;min-width:0;border:0;background:none;color:inherit;font:inherit;font-size:13px;text-align:left;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;cursor:pointer;padding:6px 0}
-  .mini-stop{flex:none;width:40px;height:40px;border-radius:10px;border:0;background:var(--brass);color:var(--on-brass);font-size:15px;cursor:pointer}
+  .mini-label{display:flex;align-items:center;gap:7px;flex:1;min-width:0;min-height:44px;border:0;background:none;color:inherit;font:inherit;font-size:13px;text-align:left;cursor:pointer;padding:0}
+  .mini-copy{min-width:0;overflow:hidden;white-space:nowrap;text-overflow:ellipsis}
+  .mini-label>.ui-icon{width:20px;height:20px}.mini-label>.instrument-icon{flex:none;width:16px;height:16px}.mini-label>.member-face{border-radius:6px}
+  .mini-stop{flex:none;width:44px;height:44px;border-radius:10px;border:0;background:var(--brass);color:var(--on-brass);font-size:15px;cursor:pointer}
 }
 @media (prefers-reduced-motion: reduce){*{transition:none!important}}
 
@@ -1831,39 +1833,39 @@ button.wr-person:focus-visible{outline:2px solid var(--brass);outline-offset:2px
   <button type="button" data-tabgo="log"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 5.5C4 4.7 4.7 4 5.5 4H11v16H5.5c-.8 0-1.5-.7-1.5-1.5z"/><path d="M20 5.5c0-.8-.7-1.5-1.5-1.5H13v16h5.5c.8 0 1.5-.7 1.5-1.5z"/></svg><span>日誌</span></button>
 </nav>
 
-<script src="js/util.js?v=qa-practice-escape-1"></script>
-<script src="js/icons.js?v=qa-practice-escape-1"></script>
-<script src="js/instrument-icons.js?v=qa-practice-escape-1"></script>
-<script src="js/face-cast.js?v=qa-practice-escape-1"></script>
-<script src="js/faces.js?v=qa-practice-escape-1"></script>
-<script src="js/instruments.js?v=qa-practice-escape-1"></script>
-<script src="js/venues.js?v=qa-practice-escape-1"></script>
-<script src="js/samples.js?v=qa-practice-escape-1"></script>
-<script src="js/scores.js?v=qa-practice-escape-1"></script>
-<script src="js/pieces/largo.js?v=qa-practice-escape-1"></script>
-<script src="js/pieces/ode.js?v=qa-practice-escape-1"></script>
-<script src="js/pieces/galop.js?v=qa-practice-escape-1"></script>
-<script src="js/pieces/pomp.js?v=qa-practice-escape-1"></script>
-<script src="js/pieces/aida.js?v=qa-practice-escape-1"></script>
-<script src="js/pieces/hero.js?v=qa-practice-escape-1"></script>
-<script src="js/pieces/holst.js?v=qa-practice-escape-1"></script>
-<script src="js/pieces/hungarian.js?v=qa-practice-escape-1"></script>
-<script src="js/pieces/flowers.js?v=qa-practice-escape-1"></script>
-<script src="js/pieces/tell.js?v=qa-practice-escape-1"></script>
-<script src="js/pieces/carmen.js?v=qa-practice-escape-1"></script>
-<script src="js/pieces/valkyrie.js?v=qa-practice-escape-1"></script>
-<script src="js/pieces/swan.js?v=qa-practice-escape-1"></script>
-<script src="js/pieces/spring.js?v=qa-practice-escape-1"></script>
-<script src="js/pieces/canon.js?v=qa-practice-escape-1"></script>
-<script src="js/band.js?v=qa-practice-escape-1"></script>
-<script src="js/game.js?v=qa-practice-escape-1"></script>
-<script src="js/engine.js?v=qa-practice-escape-1"></script>
-<script src="js/conduct.js?v=qa-practice-escape-1"></script>
-<script src="js/announce.js?v=qa-practice-escape-1"></script>
-<script src="js/tunegame.js?v=qa-practice-escape-1"></script>
-<script src="js/fx.js?v=qa-practice-escape-1"></script>
-<script src="js/ui.js?v=qa-practice-escape-1"></script>
+<script src="js/util.js?v=qa-mini-subject-1"></script>
+<script src="js/icons.js?v=qa-mini-subject-1"></script>
+<script src="js/instrument-icons.js?v=qa-mini-subject-1"></script>
+<script src="js/face-cast.js?v=qa-mini-subject-1"></script>
+<script src="js/faces.js?v=qa-mini-subject-1"></script>
+<script src="js/instruments.js?v=qa-mini-subject-1"></script>
+<script src="js/venues.js?v=qa-mini-subject-1"></script>
+<script src="js/samples.js?v=qa-mini-subject-1"></script>
+<script src="js/scores.js?v=qa-mini-subject-1"></script>
+<script src="js/pieces/largo.js?v=qa-mini-subject-1"></script>
+<script src="js/pieces/ode.js?v=qa-mini-subject-1"></script>
+<script src="js/pieces/galop.js?v=qa-mini-subject-1"></script>
+<script src="js/pieces/pomp.js?v=qa-mini-subject-1"></script>
+<script src="js/pieces/aida.js?v=qa-mini-subject-1"></script>
+<script src="js/pieces/hero.js?v=qa-mini-subject-1"></script>
+<script src="js/pieces/holst.js?v=qa-mini-subject-1"></script>
+<script src="js/pieces/hungarian.js?v=qa-mini-subject-1"></script>
+<script src="js/pieces/flowers.js?v=qa-mini-subject-1"></script>
+<script src="js/pieces/tell.js?v=qa-mini-subject-1"></script>
+<script src="js/pieces/carmen.js?v=qa-mini-subject-1"></script>
+<script src="js/pieces/valkyrie.js?v=qa-mini-subject-1"></script>
+<script src="js/pieces/swan.js?v=qa-mini-subject-1"></script>
+<script src="js/pieces/spring.js?v=qa-mini-subject-1"></script>
+<script src="js/pieces/canon.js?v=qa-mini-subject-1"></script>
+<script src="js/band.js?v=qa-mini-subject-1"></script>
+<script src="js/game.js?v=qa-mini-subject-1"></script>
+<script src="js/engine.js?v=qa-mini-subject-1"></script>
+<script src="js/conduct.js?v=qa-mini-subject-1"></script>
+<script src="js/announce.js?v=qa-mini-subject-1"></script>
+<script src="js/tunegame.js?v=qa-mini-subject-1"></script>
+<script src="js/fx.js?v=qa-mini-subject-1"></script>
+<script src="js/ui.js?v=qa-mini-subject-1"></script>
 <div class="tip" id="tip" role="tooltip" hidden></div>
-<script src="/design/implementation/qa.js?v=qa-practice-escape-1"></script>
+<script src="/design/implementation/qa.js?v=qa-mini-subject-1"></script>
 </body>
 </html>

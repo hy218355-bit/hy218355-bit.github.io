@@ -7,7 +7,7 @@ let S = null;
 const U = {
   venue: 'room', pos: 'center', range: 'all', view: 'mel', sel: null, piece: null, solo: 'all',
   shown: null, shownLabel: '', perfNow: null, diag: null, ptr: null, raf: 0, onEnd: null, playing: false, refreshT: 0,
-  tab: 'week', tabScroll: {},
+  tab: 'week', tabScroll: {}, miniMarkup: '',
   recordMember: null, recordPerf: null, memberCardMember: null, moveUndo: null,
   lineup: false, draft: null, audListen: null, ensListen: null, pieceListen: null, pred: null, predKey: '', predT: 0, outKey: '', outPick: new Set(),
   sfx: true, fxMode: 'full',
@@ -153,7 +153,17 @@ function setTab(t, keep){
 function updateMini(){
   const mini = $('#mini'); if(!mini) return;
   mini.hidden = !((U.playing || U.waitPlay) && tabHidden('play') && !(U.tab==='week'&&ensembleListening()));
-  if(!mini.hidden) $('#miniLabel').textContent = U.waitPlay && !U.playing ? '♪ 楽器の録音を読み込んでいます…（読み込めたら鳴ります）' : `♪ ${U.shownLabel}`;
+  if(mini.hidden)return;
+  const perf=U.waitPlay?.perf||U.shown,solo=E.solo,waiting=!!U.waitPlay&&!U.playing;
+  // 昔の録音も、実際に鳴らしている演奏の本人から顔と楽器を取る。
+  const person=solo.type==='member'&&performanceMemberSounds(perf,solo.id)?STAGE_PERFORMERS.get(perf)?.members.find(m=>m.id===solo.id)||[...(U.stageMembers?.values()||[])].find(m=>m.id===solo.id):null;
+  const section=solo.type==='sec'&&performanceSectionSounds(perf,solo.id)?SECTIONS.find(s=>s.id===solo.id):null;
+  const who=person?`${person.name}だけ`:section?`${section.name}だけ`:'';
+  const text=who?`${who}・${waiting?'読み込み中':PIECES[perf.pieceId].title}`:waiting?'楽器の録音を読み込み中':U.shownLabel;
+  const icon=person?memberFace(person,28)+(SEAT[person.seat]?instrumentIcon(SEAT[person.seat].inst):''):uiIcon(section?'members':'note');
+  const html=icon+`<span class="mini-copy">${esc(text)}</span>`,button=$('#miniLabel');
+  if(U.miniMarkup!==html){button.innerHTML=html;U.miniMarkup=html;}
+  button.setAttribute('aria-label',`${who?who+'。':''}${U.shownLabel}${waiting?'、録音を読み込み中':''}。合奏を開く`);
 }
 
 /* ===== 再生 ===== */
@@ -640,6 +650,7 @@ function renderSelectors(){
 function applySolo(){
   const [type, id] = U.solo.split(':');
   E.setSolo(type === 'all' ? {type: 'all'} : {type: type === 'sec' ? 'sec' : 'member', id});
+  updateMini();
 }
 // 録音の参照は演奏の外に持ち、同じ題名の別の録音でも取り違えない。
 function activeLibraryRecording(){

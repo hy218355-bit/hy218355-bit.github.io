@@ -16,6 +16,7 @@ const $=s=>s==='#memberCard'?card:s==='#btnNow'?{click(){plays++;U.playing=true;
 const memberById=id=>S.members.find(m=>m.id===id),playPiece=()=>U.piece||S.pieceId;
 const uiIcon=n=>'['+n+']',cdVisible=b=>!!b&&!b.hidden,renderListeningSummary=()=>{},renderRecordingLibrary=()=>{},pieceListening=()=>null,renderDiag=()=>{},renderMemberCard=()=>{},stopPlay=()=>{stops++;U.playing=false;U.waitPlay=null;U.perfNow=null;};
 `,ctx);
+vm.runInContext('const updateMini=()=>{};',ctx);
 for(const [a,b] of [['function rangeSpan(','const busy ='],['function currentCtx(){','function refreshNow(){'],['const STAGE_PERFORMERS =','function levelAt('],['function renderSelectors(){','// 録音の参照は'],['function currentMemberListening(','function memberCurrentRanks('],['function listenCurrentMember(','function startStage(){']])vm.runInContext(ui.slice(ui.indexOf(a),ui.indexOf(b)),ctx);
 vm.runInContext(`
 let ranges=0,rests=0,sounds=0,sectionRests=0;
