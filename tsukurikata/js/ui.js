@@ -195,6 +195,7 @@ function playPerf(perf, label, onEnd, opts = {}, onWaitCancel = null){
 }
 // natural：最後まで鳴り終わったとき（止めるボタンなら false）
 function endPlay(natural = false){
+  const focus=playbackStopFocus();
   if(window.TSUKURIKATA_NATIVE) nativePost({type: 'log', msg: `play end ${natural ? 'natural' : 'stopped'} at ${(U.lastT ?? -1).toFixed(2)}s / ${U.shown?.total?.toFixed(1)}s, audio ${E.ac?.state}`});
   U.playing = false;
   nativePost({type: 'playing', on: false});
@@ -208,8 +209,10 @@ function endPlay(natural = false){
   drawIdle();
   const cb = U.onEnd; U.onEnd = null;
   if(cb) cb(natural);
+  restorePlaybackStopFocus(focus);
 }
 function stopPlay(){
+  const focus=playbackStopFocus();
   const waiting = U.waitPlay;
   U.waitPlay = null; updateMini(); renderPlayButtons();
   if(!U.playing){
@@ -218,10 +221,23 @@ function stopPlay(){
       // 中止の通知が次の再生を始めた場合は、その曲やカードを消さない。
       if(!U.playing && !U.waitPlay){clearRecordedMember();refreshNow();renderPiece();setNowPlaying();drawIdle();}
     }
+    restorePlaybackStopFocus(focus);
     return;
   }
   E.stop();
   endPlay();
+}
+// 消える停止ボタンだけを引き継ぎ、終了後の画面や別の操作の操作先は奪わない。
+function playbackStopFocus(){
+  const active=document.activeElement;
+  return active&&(active===$('#btnStop')||active===$('#miniStop'))?active:null;
+}
+function restorePlaybackStopFocus(origin){
+  if(!origin||U.playing||U.waitPlay)return;
+  const active=document.activeElement;
+  if(active!==origin&&active!==document.body&&active!==document.documentElement&&cdVisible(active))return;
+  const target=origin===$('#btnStop')?$('#btnNow'):$('#tabbar [aria-current="page"]');
+  if(cdVisible(target))target.focus({preventScroll:true});
 }
 function setVenue(id){
   U.venue = id; saveUI();

@@ -118,6 +118,10 @@ function record(){
  report.audio={ready:SAMPLES.ready,progress:SAMPLES.progress,error:SAMPLES.error?{name:SAMPLES.error.name,message:SAMPLES.error.message}:null,banks:Object.keys(SAMPLES.banks),requests:{...audioRequests},flow:{...audioFlow},preservedCount:audioBeforeRetry?.length,preservedBuffers:audioBeforeRetry?audioBeforeRetry.every(([name,bank])=>SAMPLES.banks[name]===bank):null,voices:[...new Set((E.pb?.voices||[]).map(v=>v.constructor.name))]};
  report.listeningMix=E.pb?{nodes:E.pb.listenOutputs.length,live:E.pb.listenLive,gain:E.pb.listenOutputs.map(n=>n.gain.value)}:null;
  report.hallExp=S.hallExp;
+ if(q.has('stopAudit')){
+  const current=document.activeElement,rect=el=>el.getBoundingClientRect().toJSON();
+  report.stopUi={state:hash(JSON.stringify(S)),focus:current.id||current.dataset.tabgo||current.tagName,tab:U.tab,scroll:scrollY,mainHidden:$('#btnStop').hidden,nowHidden:$('#btnNow').hidden,miniHidden:$('#mini').hidden,now:rect($('#btnNow')),miniStop:rect($('#miniStop')),tabButton:rect($('#tabbar [aria-current="page"]')),seconds:U.playing?E.now():null};
+ }
  if(q.has('pieceAudit')){
   const active=pieceListening();if(active&&!pieceExpected.has(active))pieceExpected.set(active,hash(JSON.stringify(active.kind==='model'?modelPerf(active.pid):perform(currentCtx()))));
   report.sourceUi={kind:$('#pieceEyebrow').textContent,liveHidden:$('#btnLiveNow').hidden,conductHidden:$('#btnConduct').hidden,conductDisabled:$('#btnConduct').disabled,rangeDisabled:$('#rangeSel').disabled,rangeOptions:[...$('#rangeSel').options].map(o=>({value:o.value,text:o.textContent})),options:[...$('#soloSel').options].map(o=>({value:o.value,text:o.textContent})),memberHidden:$('#memberCard').hidden,selected:U.sel,stagePortraits:Number($('#stage').dataset.portraitCount||0),focus:document.activeElement.id||document.activeElement.dataset.mact||document.activeElement.tagName,view:U.view,sections:[...new Set([...(U.shown?.notes||[]),...(U.shown?.hits||[])].map(n=>n.sec))]};
@@ -356,6 +360,7 @@ async function show(next){
   addRec(old,'2026年 定期演奏会',{venue:'hall'});
   if(q.has('different')){if(!q.has('fullRecord'))old.recs.at(-1).span={from:PIECES.largo.spans[0].from,to:PIECES.largo.spans[0].to};old.pieceId='ode';}
   if(q.has('short'))old.recs.at(-1).span={from:0,to:.25};
+  if(q.has('shortStop'))old.recs.at(-1).span={from:0,to:8};
   old.year=2027;old.members[0].name='田中 葵';old.members[0].stats={pitch:55,rhythm:55,tone:55,expr:55};addRec(old,'2027年 定期演奏会',{venue:'hall'});
   s.recs=clone(old.recs);s.year=2031;s.gradMembers=[];
   s=renameMember(s,s.members[0].id,'田中 花音');const other=s.members.find(m=>m.seat==='perc2');other.seat='picc1';s.members[0].seat='perc2';

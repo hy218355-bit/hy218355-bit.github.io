@@ -1,0 +1,1767 @@
+[
+  {
+    "case": "initial",
+    "data": {
+      "current": {
+        "expected": 0.1260019768960774,
+        "expectedCohesion": 0.2,
+        "prepared": 0.1260019768960774,
+        "preparedCohesion": 0.2,
+        "shown": 0.1260019768960774,
+        "shownCohesion": 0.2
+      },
+      "errors": [],
+      "form": null,
+      "library": {
+        "active": null
+      },
+      "phase": "week",
+      "playing": false,
+      "records": 0.7712433410342783,
+      "scrollWidth": 375,
+      "solo": {
+        "type": "all"
+      },
+      "ui": {
+        "focus": "BODY",
+        "mainHidden": true,
+        "miniHidden": true,
+        "miniStop": {
+          "bottom": 0,
+          "height": 0,
+          "left": 0,
+          "right": 0,
+          "top": 0,
+          "width": 0,
+          "x": 0,
+          "y": 0
+        },
+        "now": {
+          "bottom": 744,
+          "height": 48,
+          "left": 16,
+          "right": 214.2578125,
+          "top": 696,
+          "width": 198.2578125,
+          "x": 16,
+          "y": 696
+        },
+        "nowHidden": false,
+        "scroll": 0,
+        "seconds": null,
+        "state": 0.14550945605151355,
+        "tab": "play",
+        "tabButton": {
+          "bottom": 805,
+          "height": 46,
+          "left": 100.75,
+          "right": 185.5,
+          "top": 759,
+          "width": 84.75,
+          "x": 100.75,
+          "y": 759
+        }
+      },
+      "waiting": false,
+      "width": 375
+    }
+  },
+  {
+    "case": "main-playing",
+    "data": {
+      "current": {
+        "expected": 0.1260019768960774,
+        "expectedCohesion": 0.2,
+        "prepared": 0.1260019768960774,
+        "preparedCohesion": 0.2,
+        "shown": 0.1260019768960774,
+        "shownCohesion": 0.2
+      },
+      "errors": [],
+      "form": null,
+      "library": {
+        "active": null
+      },
+      "phase": "week",
+      "playing": true,
+      "records": 0.7712433410342783,
+      "scrollWidth": 375,
+      "solo": {
+        "type": "all"
+      },
+      "ui": {
+        "focus": "BODY",
+        "mainHidden": false,
+        "miniHidden": true,
+        "miniStop": {
+          "bottom": 0,
+          "height": 0,
+          "left": 0,
+          "right": 0,
+          "top": 0,
+          "width": 0,
+          "x": 0,
+          "y": 0
+        },
+        "now": {
+          "bottom": 0,
+          "height": 0,
+          "left": 0,
+          "right": 0,
+          "top": 0,
+          "width": 0,
+          "x": 0,
+          "y": 0
+        },
+        "nowHidden": true,
+        "scroll": 0,
+        "seconds": -0.20733333333333337,
+        "state": 0.14550945605151355,
+        "tab": "play",
+        "tabButton": {
+          "bottom": 805,
+          "height": 46,
+          "left": 100.75,
+          "right": 185.5,
+          "top": 759,
+          "width": 84.75,
+          "x": 100.75,
+          "y": 759
+        }
+      },
+      "waiting": false,
+      "width": 375
+    }
+  },
+  {
+    "case": "main-stop-light",
+    "data": {
+      "current": {
+        "expected": 0.1260019768960774,
+        "expectedCohesion": 0.2,
+        "prepared": 0.1260019768960774,
+        "preparedCohesion": 0.2,
+        "shown": 0.1260019768960774,
+        "shownCohesion": 0.2
+      },
+      "errors": [],
+      "form": null,
+      "library": {
+        "active": null
+      },
+      "phase": "week",
+      "playing": false,
+      "records": 0.7712433410342783,
+      "scrollWidth": 375,
+      "solo": {
+        "type": "all"
+      },
+      "ui": {
+        "focus": "btnNow",
+        "mainHidden": true,
+        "miniHidden": true,
+        "miniStop": {
+          "bottom": 0,
+          "height": 0,
+          "left": 0,
+          "right": 0,
+          "top": 0,
+          "width": 0,
+          "x": 0,
+          "y": 0
+        },
+        "now": {
+          "bottom": 744,
+          "height": 48,
+          "left": 16,
+          "right": 214.2578125,
+          "top": 696,
+          "width": 198.2578125,
+          "x": 16,
+          "y": 696
+        },
+        "nowHidden": false,
+        "scroll": 0,
+        "seconds": null,
+        "state": 0.14550945605151355,
+        "tab": "play",
+        "tabButton": {
+          "bottom": 805,
+          "height": 46,
+          "left": 100.75,
+          "right": 185.5,
+          "top": 759,
+          "width": 84.75,
+          "x": 100.75,
+          "y": 759
+        }
+      },
+      "waiting": false,
+      "width": 375
+    }
+  },
+  {
+    "case": "main-stop-dark",
+    "data": {
+      "current": {
+        "expected": 0.1260019768960774,
+        "expectedCohesion": 0.2,
+        "prepared": 0.1260019768960774,
+        "preparedCohesion": 0.2,
+        "shown": 0.1260019768960774,
+        "shownCohesion": 0.2
+      },
+      "errors": [],
+      "form": null,
+      "library": {
+        "active": null
+      },
+      "phase": "week",
+      "playing": false,
+      "records": 0.7712433410342783,
+      "scrollWidth": 375,
+      "solo": {
+        "type": "all"
+      },
+      "ui": {
+        "focus": "btnNow",
+        "mainHidden": true,
+        "miniHidden": true,
+        "miniStop": {
+          "bottom": 0,
+          "height": 0,
+          "left": 0,
+          "right": 0,
+          "top": 0,
+          "width": 0,
+          "x": 0,
+          "y": 0
+        },
+        "now": {
+          "bottom": 744,
+          "height": 48,
+          "left": 16,
+          "right": 214.2578125,
+          "top": 696,
+          "width": 198.2578125,
+          "x": 16,
+          "y": 696
+        },
+        "nowHidden": false,
+        "scroll": 0,
+        "seconds": null,
+        "state": 0.14550945605151355,
+        "tab": "play",
+        "tabButton": {
+          "bottom": 805,
+          "height": 46,
+          "left": 100.75,
+          "right": 185.5,
+          "top": 759,
+          "width": 84.75,
+          "x": 100.75,
+          "y": 759
+        }
+      },
+      "waiting": false,
+      "width": 375
+    }
+  },
+  {
+    "case": "mini-playing",
+    "data": {
+      "current": {
+        "expected": 0.1260019768960774,
+        "expectedCohesion": 0.2,
+        "prepared": 0.1260019768960774,
+        "preparedCohesion": 0.2,
+        "shown": 0.1260019768960774,
+        "shownCohesion": 0.2
+      },
+      "errors": [],
+      "form": null,
+      "library": {
+        "active": null
+      },
+      "phase": "week",
+      "playing": true,
+      "records": 0.7712433410342783,
+      "scrollWidth": 375,
+      "solo": {
+        "type": "all"
+      },
+      "ui": {
+        "focus": "members",
+        "mainHidden": false,
+        "miniHidden": false,
+        "miniStop": {
+          "bottom": 742,
+          "height": 40,
+          "left": 317,
+          "right": 357,
+          "top": 702,
+          "width": 40,
+          "x": 317,
+          "y": 702
+        },
+        "now": {
+          "bottom": 0,
+          "height": 0,
+          "left": 0,
+          "right": 0,
+          "top": 0,
+          "width": 0,
+          "x": 0,
+          "y": 0
+        },
+        "nowHidden": true,
+        "scroll": 0,
+        "seconds": 0.11266666666666668,
+        "state": 0.14550945605151355,
+        "tab": "members",
+        "tabButton": {
+          "bottom": 805,
+          "height": 46,
+          "left": 189.5,
+          "right": 274.25,
+          "top": 759,
+          "width": 84.75,
+          "x": 189.5,
+          "y": 759
+        }
+      },
+      "waiting": false,
+      "width": 375
+    }
+  },
+  {
+    "case": "mini-stop-members",
+    "data": {
+      "current": {
+        "expected": 0.1260019768960774,
+        "expectedCohesion": 0.2,
+        "prepared": 0.1260019768960774,
+        "preparedCohesion": 0.2,
+        "shown": 0.1260019768960774,
+        "shownCohesion": 0.2
+      },
+      "errors": [],
+      "form": null,
+      "library": {
+        "active": null
+      },
+      "phase": "week",
+      "playing": false,
+      "records": 0.7712433410342783,
+      "scrollWidth": 375,
+      "solo": {
+        "type": "all"
+      },
+      "ui": {
+        "focus": "members",
+        "mainHidden": true,
+        "miniHidden": true,
+        "miniStop": {
+          "bottom": 0,
+          "height": 0,
+          "left": 0,
+          "right": 0,
+          "top": 0,
+          "width": 0,
+          "x": 0,
+          "y": 0
+        },
+        "now": {
+          "bottom": 0,
+          "height": 0,
+          "left": 0,
+          "right": 0,
+          "top": 0,
+          "width": 0,
+          "x": 0,
+          "y": 0
+        },
+        "nowHidden": false,
+        "scroll": 0,
+        "seconds": null,
+        "state": 0.14550945605151355,
+        "tab": "members",
+        "tabButton": {
+          "bottom": 805,
+          "height": 46,
+          "left": 189.5,
+          "right": 274.25,
+          "top": 759,
+          "width": 84.75,
+          "x": 189.5,
+          "y": 759
+        }
+      },
+      "waiting": false,
+      "width": 375
+    }
+  },
+  {
+    "case": "mini-before-week",
+    "data": {
+      "current": {
+        "expected": 0.1260019768960774,
+        "expectedCohesion": 0.2,
+        "prepared": 0.1260019768960774,
+        "preparedCohesion": 0.2,
+        "shown": 0.1260019768960774,
+        "shownCohesion": 0.2
+      },
+      "errors": [],
+      "form": null,
+      "library": {
+        "active": null
+      },
+      "phase": "week",
+      "playing": true,
+      "records": 0.7712433410342783,
+      "scrollWidth": 375,
+      "solo": {
+        "type": "all"
+      },
+      "ui": {
+        "focus": "miniStop",
+        "mainHidden": false,
+        "miniHidden": false,
+        "miniStop": {
+          "bottom": 742,
+          "height": 40,
+          "left": 317,
+          "right": 357,
+          "top": 702,
+          "width": 40,
+          "x": 317,
+          "y": 702
+        },
+        "now": {
+          "bottom": 0,
+          "height": 0,
+          "left": 0,
+          "right": 0,
+          "top": 0,
+          "width": 0,
+          "x": 0,
+          "y": 0
+        },
+        "nowHidden": true,
+        "scroll": 0,
+        "seconds": 0.4540000000000078,
+        "state": 0.14550945605151355,
+        "tab": "week",
+        "tabButton": {
+          "bottom": 805,
+          "height": 46,
+          "left": 12,
+          "right": 96.75,
+          "top": 759,
+          "width": 84.75,
+          "x": 12,
+          "y": 759
+        }
+      },
+      "waiting": false,
+      "width": 375
+    }
+  },
+  {
+    "case": "mini-after-week",
+    "data": {
+      "current": {
+        "expected": 0.1260019768960774,
+        "expectedCohesion": 0.2,
+        "prepared": 0.1260019768960774,
+        "preparedCohesion": 0.2,
+        "shown": 0.1260019768960774,
+        "shownCohesion": 0.2
+      },
+      "errors": [],
+      "form": null,
+      "library": {
+        "active": null
+      },
+      "phase": "week",
+      "playing": false,
+      "records": 0.7712433410342783,
+      "scrollWidth": 375,
+      "solo": {
+        "type": "all"
+      },
+      "ui": {
+        "focus": "week",
+        "mainHidden": true,
+        "miniHidden": true,
+        "miniStop": {
+          "bottom": 0,
+          "height": 0,
+          "left": 0,
+          "right": 0,
+          "top": 0,
+          "width": 0,
+          "x": 0,
+          "y": 0
+        },
+        "now": {
+          "bottom": 0,
+          "height": 0,
+          "left": 0,
+          "right": 0,
+          "top": 0,
+          "width": 0,
+          "x": 0,
+          "y": 0
+        },
+        "nowHidden": false,
+        "scroll": 0,
+        "seconds": null,
+        "state": 0.14550945605151355,
+        "tab": "week",
+        "tabButton": {
+          "bottom": 805,
+          "height": 46,
+          "left": 12,
+          "right": 96.75,
+          "top": 759,
+          "width": 84.75,
+          "x": 12,
+          "y": 759
+        }
+      },
+      "waiting": false,
+      "width": 375
+    }
+  },
+  {
+    "case": "mini-before-members",
+    "data": {
+      "current": {
+        "expected": 0.1260019768960774,
+        "expectedCohesion": 0.2,
+        "prepared": 0.1260019768960774,
+        "preparedCohesion": 0.2,
+        "shown": 0.1260019768960774,
+        "shownCohesion": 0.2
+      },
+      "errors": [],
+      "form": null,
+      "library": {
+        "active": null
+      },
+      "phase": "week",
+      "playing": true,
+      "records": 0.7712433410342783,
+      "scrollWidth": 375,
+      "solo": {
+        "type": "all"
+      },
+      "ui": {
+        "focus": "miniStop",
+        "mainHidden": false,
+        "miniHidden": false,
+        "miniStop": {
+          "bottom": 742,
+          "height": 40,
+          "left": 317,
+          "right": 357,
+          "top": 702,
+          "width": 40,
+          "x": 317,
+          "y": 702
+        },
+        "now": {
+          "bottom": 0,
+          "height": 0,
+          "left": 0,
+          "right": 0,
+          "top": 0,
+          "width": 0,
+          "x": 0,
+          "y": 0
+        },
+        "nowHidden": true,
+        "scroll": 812,
+        "seconds": 0.8593333333333248,
+        "state": 0.14550945605151355,
+        "tab": "members",
+        "tabButton": {
+          "bottom": 805,
+          "height": 46,
+          "left": 189.5,
+          "right": 274.25,
+          "top": 759,
+          "width": 84.75,
+          "x": 189.5,
+          "y": 759
+        }
+      },
+      "waiting": false,
+      "width": 375
+    }
+  },
+  {
+    "case": "mini-after-members",
+    "data": {
+      "current": {
+        "expected": 0.1260019768960774,
+        "expectedCohesion": 0.2,
+        "prepared": 0.1260019768960774,
+        "preparedCohesion": 0.2,
+        "shown": 0.1260019768960774,
+        "shownCohesion": 0.2
+      },
+      "errors": [],
+      "form": null,
+      "library": {
+        "active": null
+      },
+      "phase": "week",
+      "playing": false,
+      "records": 0.7712433410342783,
+      "scrollWidth": 375,
+      "solo": {
+        "type": "all"
+      },
+      "ui": {
+        "focus": "members",
+        "mainHidden": true,
+        "miniHidden": true,
+        "miniStop": {
+          "bottom": 0,
+          "height": 0,
+          "left": 0,
+          "right": 0,
+          "top": 0,
+          "width": 0,
+          "x": 0,
+          "y": 0
+        },
+        "now": {
+          "bottom": 0,
+          "height": 0,
+          "left": 0,
+          "right": 0,
+          "top": 0,
+          "width": 0,
+          "x": 0,
+          "y": 0
+        },
+        "nowHidden": false,
+        "scroll": 812,
+        "seconds": null,
+        "state": 0.14550945605151355,
+        "tab": "members",
+        "tabButton": {
+          "bottom": 805,
+          "height": 46,
+          "left": 189.5,
+          "right": 274.25,
+          "top": 759,
+          "width": 84.75,
+          "x": 189.5,
+          "y": 759
+        }
+      },
+      "waiting": false,
+      "width": 375
+    }
+  },
+  {
+    "case": "mini-before-log",
+    "data": {
+      "current": {
+        "expected": 0.1260019768960774,
+        "expectedCohesion": 0.2,
+        "prepared": 0.1260019768960774,
+        "preparedCohesion": 0.2,
+        "shown": 0.1260019768960774,
+        "shownCohesion": 0.2
+      },
+      "errors": [],
+      "form": null,
+      "library": {
+        "active": null
+      },
+      "phase": "week",
+      "playing": true,
+      "records": 0.7712433410342783,
+      "scrollWidth": 375,
+      "solo": {
+        "type": "all"
+      },
+      "ui": {
+        "focus": "miniStop",
+        "mainHidden": false,
+        "miniHidden": false,
+        "miniStop": {
+          "bottom": 742,
+          "height": 40,
+          "left": 317,
+          "right": 357,
+          "top": 702,
+          "width": 40,
+          "x": 317,
+          "y": 702
+        },
+        "now": {
+          "bottom": 0,
+          "height": 0,
+          "left": 0,
+          "right": 0,
+          "top": 0,
+          "width": 0,
+          "x": 0,
+          "y": 0
+        },
+        "nowHidden": true,
+        "scroll": 0,
+        "seconds": 0.43266666666667675,
+        "state": 0.14550945605151355,
+        "tab": "log",
+        "tabButton": {
+          "bottom": 805,
+          "height": 46,
+          "left": 278.25,
+          "right": 363,
+          "top": 759,
+          "width": 84.75,
+          "x": 278.25,
+          "y": 759
+        }
+      },
+      "waiting": false,
+      "width": 375
+    }
+  },
+  {
+    "case": "mini-after-log",
+    "data": {
+      "current": {
+        "expected": 0.1260019768960774,
+        "expectedCohesion": 0.2,
+        "prepared": 0.1260019768960774,
+        "preparedCohesion": 0.2,
+        "shown": 0.1260019768960774,
+        "shownCohesion": 0.2
+      },
+      "errors": [],
+      "form": null,
+      "library": {
+        "active": null
+      },
+      "phase": "week",
+      "playing": false,
+      "records": 0.7712433410342783,
+      "scrollWidth": 375,
+      "solo": {
+        "type": "all"
+      },
+      "ui": {
+        "focus": "log",
+        "mainHidden": true,
+        "miniHidden": true,
+        "miniStop": {
+          "bottom": 0,
+          "height": 0,
+          "left": 0,
+          "right": 0,
+          "top": 0,
+          "width": 0,
+          "x": 0,
+          "y": 0
+        },
+        "now": {
+          "bottom": 0,
+          "height": 0,
+          "left": 0,
+          "right": 0,
+          "top": 0,
+          "width": 0,
+          "x": 0,
+          "y": 0
+        },
+        "nowHidden": false,
+        "scroll": 0,
+        "seconds": null,
+        "state": 0.14550945605151355,
+        "tab": "log",
+        "tabButton": {
+          "bottom": 805,
+          "height": 46,
+          "left": 278.25,
+          "right": 363,
+          "top": 759,
+          "width": 84.75,
+          "x": 278.25,
+          "y": 759
+        }
+      },
+      "waiting": false,
+      "width": 375
+    }
+  },
+  {
+    "case": "wait-initial",
+    "data": {
+      "current": {
+        "expected": 0.4994142900686711,
+        "expectedCohesion": 0.2,
+        "prepared": 0.4994142900686711,
+        "preparedCohesion": 0.2,
+        "shown": 0.4994142900686711,
+        "shownCohesion": 0.2
+      },
+      "errors": [],
+      "form": null,
+      "library": {
+        "active": null
+      },
+      "phase": "week",
+      "playing": false,
+      "records": 0.7712433410342783,
+      "scrollWidth": 375,
+      "solo": {
+        "type": "all"
+      },
+      "ui": {
+        "focus": "BODY",
+        "mainHidden": true,
+        "miniHidden": true,
+        "miniStop": {
+          "bottom": 0,
+          "height": 0,
+          "left": 0,
+          "right": 0,
+          "top": 0,
+          "width": 0,
+          "x": 0,
+          "y": 0
+        },
+        "now": {
+          "bottom": 599,
+          "height": 48,
+          "left": 16,
+          "right": 214.2578125,
+          "top": 551,
+          "width": 198.2578125,
+          "x": 16,
+          "y": 551
+        },
+        "nowHidden": false,
+        "scroll": 0,
+        "seconds": null,
+        "state": 0.2030313666909933,
+        "tab": "play",
+        "tabButton": {
+          "bottom": 660,
+          "height": 46,
+          "left": 100.75,
+          "right": 185.5,
+          "top": 614,
+          "width": 84.75,
+          "x": 100.75,
+          "y": 614
+        }
+      },
+      "waiting": false,
+      "width": 375
+    }
+  },
+  {
+    "case": "main-wait-light",
+    "data": {
+      "current": {
+        "expected": 0.4994142900686711,
+        "expectedCohesion": 0.2,
+        "prepared": 0.4994142900686711,
+        "preparedCohesion": 0.2,
+        "shown": 0.4994142900686711,
+        "shownCohesion": 0.2
+      },
+      "errors": [],
+      "form": null,
+      "library": {
+        "active": null
+      },
+      "phase": "week",
+      "playing": false,
+      "records": 0.7712433410342783,
+      "scrollWidth": 375,
+      "solo": {
+        "type": "all"
+      },
+      "ui": {
+        "focus": "BODY",
+        "mainHidden": false,
+        "miniHidden": true,
+        "miniStop": {
+          "bottom": 0,
+          "height": 0,
+          "left": 0,
+          "right": 0,
+          "top": 0,
+          "width": 0,
+          "x": 0,
+          "y": 0
+        },
+        "now": {
+          "bottom": 0,
+          "height": 0,
+          "left": 0,
+          "right": 0,
+          "top": 0,
+          "width": 0,
+          "x": 0,
+          "y": 0
+        },
+        "nowHidden": true,
+        "scroll": 0,
+        "seconds": null,
+        "state": 0.2030313666909933,
+        "tab": "play",
+        "tabButton": {
+          "bottom": 660,
+          "height": 46,
+          "left": 100.75,
+          "right": 185.5,
+          "top": 614,
+          "width": 84.75,
+          "x": 100.75,
+          "y": 614
+        }
+      },
+      "waiting": true,
+      "width": 375
+    }
+  },
+  {
+    "case": "wait-stop-light",
+    "data": {
+      "current": {
+        "expected": 0.4994142900686711,
+        "expectedCohesion": 0.2,
+        "prepared": 0.4994142900686711,
+        "preparedCohesion": 0.2,
+        "shown": 0.4994142900686711,
+        "shownCohesion": 0.2
+      },
+      "errors": [],
+      "form": null,
+      "library": {
+        "active": null
+      },
+      "phase": "week",
+      "playing": false,
+      "records": 0.7712433410342783,
+      "scrollWidth": 375,
+      "solo": {
+        "type": "all"
+      },
+      "ui": {
+        "focus": "btnNow",
+        "mainHidden": true,
+        "miniHidden": true,
+        "miniStop": {
+          "bottom": 0,
+          "height": 0,
+          "left": 0,
+          "right": 0,
+          "top": 0,
+          "width": 0,
+          "x": 0,
+          "y": 0
+        },
+        "now": {
+          "bottom": 599,
+          "height": 48,
+          "left": 16,
+          "right": 214.2578125,
+          "top": 551,
+          "width": 198.2578125,
+          "x": 16,
+          "y": 551
+        },
+        "nowHidden": false,
+        "scroll": 0,
+        "seconds": null,
+        "state": 0.2030313666909933,
+        "tab": "play",
+        "tabButton": {
+          "bottom": 660,
+          "height": 46,
+          "left": 100.75,
+          "right": 185.5,
+          "top": 614,
+          "width": 84.75,
+          "x": 100.75,
+          "y": 614
+        }
+      },
+      "waiting": false,
+      "width": 375
+    }
+  },
+  {
+    "case": "wait-stop-dark",
+    "data": {
+      "current": {
+        "expected": 0.4994142900686711,
+        "expectedCohesion": 0.2,
+        "prepared": 0.4994142900686711,
+        "preparedCohesion": 0.2,
+        "shown": 0.4994142900686711,
+        "shownCohesion": 0.2
+      },
+      "errors": [],
+      "form": null,
+      "library": {
+        "active": null
+      },
+      "phase": "week",
+      "playing": false,
+      "records": 0.7712433410342783,
+      "scrollWidth": 375,
+      "solo": {
+        "type": "all"
+      },
+      "ui": {
+        "focus": "btnNow",
+        "mainHidden": true,
+        "miniHidden": true,
+        "miniStop": {
+          "bottom": 0,
+          "height": 0,
+          "left": 0,
+          "right": 0,
+          "top": 0,
+          "width": 0,
+          "x": 0,
+          "y": 0
+        },
+        "now": {
+          "bottom": 599,
+          "height": 48,
+          "left": 16,
+          "right": 214.2578125,
+          "top": 551,
+          "width": 198.2578125,
+          "x": 16,
+          "y": 551
+        },
+        "nowHidden": false,
+        "scroll": 0,
+        "seconds": null,
+        "state": 0.2030313666909933,
+        "tab": "play",
+        "tabButton": {
+          "bottom": 660,
+          "height": 46,
+          "left": 100.75,
+          "right": 185.5,
+          "top": 614,
+          "width": 84.75,
+          "x": 100.75,
+          "y": 614
+        }
+      },
+      "waiting": false,
+      "width": 375
+    }
+  },
+  {
+    "case": "wait-release",
+    "data": {
+      "current": {
+        "expected": 0.4994142900686711,
+        "expectedCohesion": 0.2,
+        "prepared": 0.4994142900686711,
+        "preparedCohesion": 0.2,
+        "shown": 0.4994142900686711,
+        "shownCohesion": 0.2
+      },
+      "errors": [],
+      "form": null,
+      "library": {
+        "active": null
+      },
+      "phase": "week",
+      "playing": false,
+      "records": 0.7712433410342783,
+      "scrollWidth": 375,
+      "solo": {
+        "type": "all"
+      },
+      "ui": {
+        "focus": "btnNow",
+        "mainHidden": true,
+        "miniHidden": true,
+        "miniStop": {
+          "bottom": 0,
+          "height": 0,
+          "left": 0,
+          "right": 0,
+          "top": 0,
+          "width": 0,
+          "x": 0,
+          "y": 0
+        },
+        "now": {
+          "bottom": 599,
+          "height": 48,
+          "left": 16,
+          "right": 214.2578125,
+          "top": 551,
+          "width": 198.2578125,
+          "x": 16,
+          "y": 551
+        },
+        "nowHidden": false,
+        "scroll": 0,
+        "seconds": null,
+        "state": 0.2030313666909933,
+        "tab": "play",
+        "tabButton": {
+          "bottom": 660,
+          "height": 46,
+          "left": 100.75,
+          "right": 185.5,
+          "top": 614,
+          "width": 84.75,
+          "x": 100.75,
+          "y": 614
+        }
+      },
+      "waiting": false,
+      "width": 375
+    }
+  },
+  {
+    "case": "small-mini-playing",
+    "data": {
+      "current": {
+        "expected": 0.4994142900686711,
+        "expectedCohesion": 0.2,
+        "prepared": 0.4994142900686711,
+        "preparedCohesion": 0.2,
+        "shown": 0.4994142900686711,
+        "shownCohesion": 0.2
+      },
+      "errors": [],
+      "form": null,
+      "library": {
+        "active": null
+      },
+      "phase": "week",
+      "playing": true,
+      "records": 0.7712433410342783,
+      "scrollWidth": 375,
+      "solo": {
+        "type": "all"
+      },
+      "ui": {
+        "focus": "miniStop",
+        "mainHidden": false,
+        "miniHidden": false,
+        "miniStop": {
+          "bottom": 597,
+          "height": 40,
+          "left": 317,
+          "right": 357,
+          "top": 557,
+          "width": 40,
+          "x": 317,
+          "y": 557
+        },
+        "now": {
+          "bottom": 0,
+          "height": 0,
+          "left": 0,
+          "right": 0,
+          "top": 0,
+          "width": 0,
+          "x": 0,
+          "y": 0
+        },
+        "nowHidden": true,
+        "scroll": 667,
+        "seconds": 0.902,
+        "state": 0.2030313666909933,
+        "tab": "members",
+        "tabButton": {
+          "bottom": 660,
+          "height": 46,
+          "left": 189.5,
+          "right": 274.25,
+          "top": 614,
+          "width": 84.75,
+          "x": 189.5,
+          "y": 614
+        }
+      },
+      "waiting": false,
+      "width": 375
+    }
+  },
+  {
+    "case": "small-mini-dark",
+    "data": {
+      "current": {
+        "expected": 0.4994142900686711,
+        "expectedCohesion": 0.2,
+        "prepared": 0.4994142900686711,
+        "preparedCohesion": 0.2,
+        "shown": 0.4994142900686711,
+        "shownCohesion": 0.2
+      },
+      "errors": [],
+      "form": null,
+      "library": {
+        "active": null
+      },
+      "phase": "week",
+      "playing": false,
+      "records": 0.7712433410342783,
+      "scrollWidth": 375,
+      "solo": {
+        "type": "all"
+      },
+      "ui": {
+        "focus": "members",
+        "mainHidden": true,
+        "miniHidden": true,
+        "miniStop": {
+          "bottom": 0,
+          "height": 0,
+          "left": 0,
+          "right": 0,
+          "top": 0,
+          "width": 0,
+          "x": 0,
+          "y": 0
+        },
+        "now": {
+          "bottom": 0,
+          "height": 0,
+          "left": 0,
+          "right": 0,
+          "top": 0,
+          "width": 0,
+          "x": 0,
+          "y": 0
+        },
+        "nowHidden": false,
+        "scroll": 667,
+        "seconds": null,
+        "state": 0.2030313666909933,
+        "tab": "members",
+        "tabButton": {
+          "bottom": 660,
+          "height": 46,
+          "left": 189.5,
+          "right": 274.25,
+          "top": 614,
+          "width": 84.75,
+          "x": 189.5,
+          "y": 614
+        }
+      },
+      "waiting": false,
+      "width": 375
+    }
+  },
+  {
+    "case": "small-mini-light",
+    "data": {
+      "current": {
+        "expected": 0.4994142900686711,
+        "expectedCohesion": 0.2,
+        "prepared": 0.4994142900686711,
+        "preparedCohesion": 0.2,
+        "shown": 0.4994142900686711,
+        "shownCohesion": 0.2
+      },
+      "errors": [],
+      "form": null,
+      "library": {
+        "active": null
+      },
+      "phase": "week",
+      "playing": false,
+      "records": 0.7712433410342783,
+      "scrollWidth": 375,
+      "solo": {
+        "type": "all"
+      },
+      "ui": {
+        "focus": "members",
+        "mainHidden": true,
+        "miniHidden": true,
+        "miniStop": {
+          "bottom": 0,
+          "height": 0,
+          "left": 0,
+          "right": 0,
+          "top": 0,
+          "width": 0,
+          "x": 0,
+          "y": 0
+        },
+        "now": {
+          "bottom": 0,
+          "height": 0,
+          "left": 0,
+          "right": 0,
+          "top": 0,
+          "width": 0,
+          "x": 0,
+          "y": 0
+        },
+        "nowHidden": false,
+        "scroll": 667,
+        "seconds": null,
+        "state": 0.2030313666909933,
+        "tab": "members",
+        "tabButton": {
+          "bottom": 660,
+          "height": 46,
+          "left": 189.5,
+          "right": 274.25,
+          "top": 614,
+          "width": 84.75,
+          "x": 189.5,
+          "y": 614
+        }
+      },
+      "waiting": false,
+      "width": 375
+    }
+  },
+  {
+    "case": "natural-initial",
+    "data": {
+      "errors": [],
+      "form": null,
+      "library": {
+        "active": null
+      },
+      "phase": "week",
+      "playing": false,
+      "records": 0.5313914341386408,
+      "scrollWidth": 375,
+      "solo": {
+        "type": "all"
+      },
+      "ui": {
+        "focus": "BODY",
+        "mainHidden": true,
+        "miniHidden": true,
+        "miniStop": {
+          "bottom": 0,
+          "height": 0,
+          "left": 0,
+          "right": 0,
+          "top": 0,
+          "width": 0,
+          "x": 0,
+          "y": 0
+        },
+        "now": {
+          "bottom": 744,
+          "height": 48,
+          "left": 16,
+          "right": 214.2578125,
+          "top": 696,
+          "width": 198.2578125,
+          "x": 16,
+          "y": 696
+        },
+        "nowHidden": false,
+        "scroll": 0,
+        "seconds": null,
+        "state": 0.3462606486864388,
+        "tab": "play",
+        "tabButton": {
+          "bottom": 805,
+          "height": 46,
+          "left": 100.75,
+          "right": 185.5,
+          "top": 759,
+          "width": 84.75,
+          "x": 100.75,
+          "y": 759
+        }
+      },
+      "waiting": false,
+      "width": 375
+    }
+  },
+  {
+    "case": "natural-main-before",
+    "data": {
+      "errors": [],
+      "form": null,
+      "library": {
+        "active": "r2026-26-0-790160",
+        "actual": 0.5669260926079005,
+        "expected": 0.5669260926079005
+      },
+      "phase": "week",
+      "playing": true,
+      "records": 0.5313914341386408,
+      "scrollWidth": 375,
+      "solo": {
+        "type": "all"
+      },
+      "ui": {
+        "focus": "btnStop",
+        "mainHidden": false,
+        "miniHidden": true,
+        "miniStop": {
+          "bottom": 0,
+          "height": 0,
+          "left": 0,
+          "right": 0,
+          "top": 0,
+          "width": 0,
+          "x": 0,
+          "y": 0
+        },
+        "now": {
+          "bottom": 0,
+          "height": 0,
+          "left": 0,
+          "right": 0,
+          "top": 0,
+          "width": 0,
+          "x": 0,
+          "y": 0
+        },
+        "nowHidden": true,
+        "scroll": 405.5,
+        "seconds": 0.11266666666666668,
+        "state": 0.3462606486864388,
+        "tab": "play",
+        "tabButton": {
+          "bottom": 805,
+          "height": 46,
+          "left": 100.75,
+          "right": 185.5,
+          "top": 759,
+          "width": 84.75,
+          "x": 100.75,
+          "y": 759
+        }
+      },
+      "waiting": false,
+      "width": 375
+    }
+  },
+  {
+    "case": "natural-main-after",
+    "data": {
+      "errors": [],
+      "form": null,
+      "library": {
+        "active": null
+      },
+      "phase": "week",
+      "playing": false,
+      "records": 0.5313914341386408,
+      "scrollWidth": 375,
+      "solo": {
+        "type": "all"
+      },
+      "ui": {
+        "focus": "btnNow",
+        "mainHidden": true,
+        "miniHidden": true,
+        "miniStop": {
+          "bottom": 0,
+          "height": 0,
+          "left": 0,
+          "right": 0,
+          "top": 0,
+          "width": 0,
+          "x": 0,
+          "y": 0
+        },
+        "now": {
+          "bottom": 744,
+          "height": 48,
+          "left": 16,
+          "right": 214.2578125,
+          "top": 696,
+          "width": 198.2578125,
+          "x": 16,
+          "y": 696
+        },
+        "nowHidden": false,
+        "scroll": 405.5,
+        "seconds": null,
+        "state": 0.3462606486864388,
+        "tab": "play",
+        "tabButton": {
+          "bottom": 805,
+          "height": 46,
+          "left": 100.75,
+          "right": 185.5,
+          "top": 759,
+          "width": 84.75,
+          "x": 100.75,
+          "y": 759
+        }
+      },
+      "waiting": false,
+      "width": 375
+    }
+  },
+  {
+    "case": "natural-mini-before",
+    "data": {
+      "errors": [],
+      "form": null,
+      "library": {
+        "active": "r2026-26-0-790160",
+        "actual": 0.5669260926079005,
+        "expected": 0.5669260926079005
+      },
+      "phase": "week",
+      "playing": true,
+      "records": 0.5313914341386408,
+      "scrollWidth": 375,
+      "solo": {
+        "type": "all"
+      },
+      "ui": {
+        "focus": "miniStop",
+        "mainHidden": false,
+        "miniHidden": false,
+        "miniStop": {
+          "bottom": 742,
+          "height": 40,
+          "left": 317,
+          "right": 357,
+          "top": 702,
+          "width": 40,
+          "x": 317,
+          "y": 702
+        },
+        "now": {
+          "bottom": 0,
+          "height": 0,
+          "left": 0,
+          "right": 0,
+          "top": 0,
+          "width": 0,
+          "x": 0,
+          "y": 0
+        },
+        "nowHidden": true,
+        "scroll": 0,
+        "seconds": 0.5180000000000007,
+        "state": 0.3462606486864388,
+        "tab": "members",
+        "tabButton": {
+          "bottom": 805,
+          "height": 46,
+          "left": 189.5,
+          "right": 274.25,
+          "top": 759,
+          "width": 84.75,
+          "x": 189.5,
+          "y": 759
+        }
+      },
+      "waiting": false,
+      "width": 375
+    }
+  },
+  {
+    "case": "natural-mini-after",
+    "data": {
+      "errors": [],
+      "form": null,
+      "library": {
+        "active": null
+      },
+      "phase": "week",
+      "playing": false,
+      "records": 0.5313914341386408,
+      "scrollWidth": 375,
+      "solo": {
+        "type": "all"
+      },
+      "ui": {
+        "focus": "members",
+        "mainHidden": true,
+        "miniHidden": true,
+        "miniStop": {
+          "bottom": 0,
+          "height": 0,
+          "left": 0,
+          "right": 0,
+          "top": 0,
+          "width": 0,
+          "x": 0,
+          "y": 0
+        },
+        "now": {
+          "bottom": 0,
+          "height": 0,
+          "left": 0,
+          "right": 0,
+          "top": 0,
+          "width": 0,
+          "x": 0,
+          "y": 0
+        },
+        "nowHidden": false,
+        "scroll": 0,
+        "seconds": null,
+        "state": 0.3462606486864388,
+        "tab": "members",
+        "tabButton": {
+          "bottom": 805,
+          "height": 46,
+          "left": 189.5,
+          "right": 274.25,
+          "top": 759,
+          "width": 84.75,
+          "x": 189.5,
+          "y": 759
+        }
+      },
+      "waiting": false,
+      "width": 375
+    }
+  },
+  {
+    "case": "editing-before-end",
+    "data": {
+      "errors": [],
+      "form": {
+        "hidden": false,
+        "value": "名前の入力中"
+      },
+      "library": {
+        "active": "r2026-26-0-790160",
+        "actual": 0.5669260926079005,
+        "expected": 0.5669260926079005
+      },
+      "phase": "week",
+      "playing": true,
+      "records": 0.5313914341386408,
+      "scrollWidth": 375,
+      "solo": {
+        "type": "all"
+      },
+      "ui": {
+        "focus": "memberName",
+        "mainHidden": false,
+        "miniHidden": false,
+        "miniStop": {
+          "bottom": 742,
+          "height": 40,
+          "left": 317,
+          "right": 357,
+          "top": 702,
+          "width": 40,
+          "x": 317,
+          "y": 702
+        },
+        "now": {
+          "bottom": 0,
+          "height": 0,
+          "left": 0,
+          "right": 0,
+          "top": 0,
+          "width": 0,
+          "x": 0,
+          "y": 0
+        },
+        "nowHidden": true,
+        "scroll": 62,
+        "seconds": 0.8806666666666558,
+        "state": 0.3462606486864388,
+        "tab": "members",
+        "tabButton": {
+          "bottom": 805,
+          "height": 46,
+          "left": 189.5,
+          "right": 274.25,
+          "top": 759,
+          "width": 84.75,
+          "x": 189.5,
+          "y": 759
+        }
+      },
+      "waiting": false,
+      "width": 375
+    }
+  },
+  {
+    "case": "editing-after-end",
+    "data": {
+      "errors": [],
+      "form": {
+        "hidden": false,
+        "value": "名前の入力中"
+      },
+      "library": {
+        "active": null
+      },
+      "phase": "week",
+      "playing": false,
+      "records": 0.5313914341386408,
+      "scrollWidth": 375,
+      "solo": {
+        "type": "all"
+      },
+      "ui": {
+        "focus": "memberName",
+        "mainHidden": true,
+        "miniHidden": true,
+        "miniStop": {
+          "bottom": 0,
+          "height": 0,
+          "left": 0,
+          "right": 0,
+          "top": 0,
+          "width": 0,
+          "x": 0,
+          "y": 0
+        },
+        "now": {
+          "bottom": 0,
+          "height": 0,
+          "left": 0,
+          "right": 0,
+          "top": 0,
+          "width": 0,
+          "x": 0,
+          "y": 0
+        },
+        "nowHidden": false,
+        "scroll": 0,
+        "seconds": null,
+        "state": 0.3462606486864388,
+        "tab": "members",
+        "tabButton": {
+          "bottom": 805,
+          "height": 46,
+          "left": 189.5,
+          "right": 274.25,
+          "top": 759,
+          "width": 84.75,
+          "x": 189.5,
+          "y": 759
+        }
+      },
+      "waiting": false,
+      "width": 375
+    }
+  }
+]

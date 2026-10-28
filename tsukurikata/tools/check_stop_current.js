@@ -8,6 +8,7 @@ let S={week:1},calls=[];
 const U={playing:true,shown:{week:0},shownLabel:'前の週',perfNow:{week:1},refreshT:0,onEnd:null};
 const nodes={};const $=s=>nodes[s]||=( {} );
 const window={},nativePost=()=>{},cancelAnimationFrame=()=>{},clearRecordedMember=()=>{},renderPiece=()=>{},setNowPlaying=()=>{},renderDiag=()=>{},drawIdle=()=>{};
+const playbackStopFocus=()=>null,restorePlaybackStopFocus=()=>{};
 const currentPerformance=()=>({week:S.week}),analyze=perf=>({week:perf.week}),nowLabel=()=>'第'+S.week+'週';
 const wait=()=>new Promise(r=>setTimeout(r,40));
 `,ctx);

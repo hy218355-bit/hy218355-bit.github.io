@@ -10,6 +10,7 @@ let S,release,plays=[],selectorStates=[];
 const SAMPLES={use:true,ready:false,error:null,loading:null};
 const U={venue:'room',solo:'all',playing:false,waitPlay:null,shown:null,shownLabel:'',perfNow:null,onEnd:null};
 const window={},nodes={},$=s=>nodes[s]||=({});
+const document={activeElement:null};
 const E={solo:{type:'all'},pb:null,ac:{currentTime:0},ensure:()=>true,unlock(){},setSolo(s){this.solo=s;},stop(){this.pb=null;},play(perf){
  this.stop();this.pb={perf};plays.push({perf,solo:{...this.solo}});return this.pb;
 }};

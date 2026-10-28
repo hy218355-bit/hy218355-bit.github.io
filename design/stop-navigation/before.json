@@ -1,0 +1,18 @@
+{
+  "main": {
+    "active": "BODY",
+    "nowHidden": false,
+    "playing": false,
+    "scroll": 0,
+    "stopHidden": true,
+    "waiting": false
+  },
+  "mini": {
+    "active": "BODY",
+    "miniHidden": true,
+    "playing": false,
+    "scroll": 0,
+    "tab": "members",
+    "waiting": false
+  }
+}

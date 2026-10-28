@@ -1,0 +1,12 @@
+{
+  "build": "succeeded",
+  "install": "succeeded",
+  "launch": "blocked_device_locked",
+  "runningProcessVerified": false,
+  "visualInteractionVerified": false,
+  "mirroringUsed": false,
+  "bundledSourceSHA256": {
+    "index.html": "1c6634c47fc64609875390ba8046f7fbe24b15af841d7eadb0087c76b729f75d",
+    "js/ui.js": "67f0e1eba4214563e5001aecf5ae436329ae3a51640e4d78b8c2dbce56e016d0"
+  }
+}
