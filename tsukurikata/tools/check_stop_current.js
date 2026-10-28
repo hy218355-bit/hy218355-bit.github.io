@@ -31,6 +31,10 @@ S.phase='week';assert.equal(nowWhen(),'週26');
  U.playing=true;U.shown={week:0};U.shownLabel='前の週';
  U.onEnd=natural=>{assert.equal(natural,true);U.playing=true;U.shown={kind:'次の本番'};U.shownLabel='自由曲';};
  endPlay(true);await wait();assert.equal(U.shown.kind,'次の本番');assert.equal(U.shownLabel,'自由曲');assert.equal(U.playing,true);
+ // 作り直しのタイマーは、音源待ちの曲と表示名を上書きしない。
+ U.playing=false;const queued={kind:'音源待ち'};U.waitPlay={perf:queued};U.shown=queued;U.shownLabel='待っている曲';
+ refreshNow();await wait();assert.equal(U.shown,queued);assert.equal(U.shownLabel,'待っている曲');assert.equal(U.perfNow.week,1);
+ U.waitPlay=null;
  U.playing=true;U.onEnd=()=>{S={week:2};};endPlay(false);await wait();
  assert.equal(U.shown.week,2);assert.equal(U.shownLabel,'第2週');assert.equal(U.shown,U.perfNow);assert.equal(U.onEnd,null);
  })()`,ctx);

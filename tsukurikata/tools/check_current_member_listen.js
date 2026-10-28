@@ -12,14 +12,14 @@ const E={solo:{type:'all'},setSolo(s){this.solo=s;}};
 const nodes={};const $=s=>nodes[s]||=({addEventListener(_,fn){this.click=fn;}});
 const playPiece=()=>U.piece||S.pieceId||'largo',rememberStageMembers=perf=>perf;
 const renderSelectors=()=>{},renderMemberCard=()=>{},renderDiag=()=>{},memberById=id=>S.members.find(m=>m.id===id);
-const stopPlay=()=>{stops++;U.playing=false;U.perfNow=null;const cb=afterStop;afterStop=null;cb?.();};
+const stopPlay=()=>{stops++;U.playing=false;U.waitPlay=null;U.perfNow=null;const cb=afterStop;afterStop=null;cb?.();};
 const playPerf=(perf,label)=>{plays.push(perf);U.shown=perf;U.shownLabel=label;U.playing=true;};
 function fresh(){
  S=freshState(2026);S=assignRecruits(S,autoAssign(S));S=choosePiece(S,'galop');
  S.members=fullBand({pitch:68,rhythm:72,tone:64,expr:61});S.members.forEach((m,i)=>m.id='now-'+i);S.year=2031;S.week=10;
  const old=clone(S);old.year=2027;old.members.forEach((m,i)=>{m.id='then-'+i;m.stats={pitch:30,rhythm:30,tone:30,expr:30};m.fam={galop:100};});
  old.recs=[];addRec(old,'昔の本番',{venue:'room'});S.recs=clone(old.recs);
- U.piece=null;U.range='all';U.venue='room';U.perfNow=currentPerformance();U.shown=U.perfNow;U.playing=true;U.solo='all';U.sel=S.members[0].id;plays=[];stops=0;afterStop=null;
+ U.piece=null;U.range='all';U.venue='room';U.perfNow=currentPerformance();U.shown=U.perfNow;U.playing=true;U.waitPlay=null;U.solo='all';U.sel=S.members[0].id;plays=[];stops=0;afterStop=null;
 }
 const sound=p=>JSON.stringify(p),members=p=>new Set([...p.notes,...p.hits].map(n=>n.mid));
 `,ctx);
@@ -40,6 +40,9 @@ for(const section of [false,true]){
  assert.equal(E.solo.type,section?'sec':'member');assert.equal(E.solo.id,section?SEAT[S.members[1].seat].sec:id);
  assert.equal(JSON.stringify(S),before,'試聴で部員も昔の録音も書き換えない');
 }
+// 読み込み待ちの別の人選を中止してから、今いる本人の音を作る。
+fresh();U.playing=false;U.shown=perform(recCtx(S.recs[0]));U.waitPlay={perf:U.shown};
+listenCurrentMember(S.members[1].id);assert.equal(stops,1);assert.equal(U.waitPlay,null);assert.equal(plays.length,1);assert.equal(U.solo,'member:'+S.members[1].id);
 // 同じidでも、昔の力で鳴らしていたら今の演奏へ切り替える。
 fresh();const same=clone(S);same.members[0].stats.pitch=20;U.shown=perform(perfCtx(same));const expected=sound(perform(currentCtx()));
 listenCurrentMember(S.members[0].id);assert.equal(stops,1);assert.ok(sound(U.shown)===expected);

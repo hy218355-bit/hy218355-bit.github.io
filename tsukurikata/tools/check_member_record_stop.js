@@ -33,7 +33,10 @@ vm.runInContext(conduct.slice(conduct.indexOf('const recPerf ='),conduct.indexOf
 (async()=>{
  await vm.runInContext(`(async()=>{
  fresh();let before=JSON.stringify(S),m=S.members[2];playMemberRec(S.recs[0],m,'本人');
- assert.ok(U.waitPlay);assert.equal(U.solo,'member:'+m.id);stopPlay();
+ assert.ok(U.waitPlay);assert.equal(U.solo,'member:'+m.id);
+ assert.equal(U.shown,U.waitPlay.perf);assert.equal(U.shownLabel,'本人');assert.ok(recordingPlayback());
+ assert.deepEqual([...U.stageMembers.values()].map(m=>m.id).sort(),S.recs[0].snap.members.map(m=>m.id).sort());
+ stopPlay();assert.equal(recordingPlayback(),false);
  assert.equal(U.waitPlay,null);assert.equal(U.solo,'all');assert.equal(E.solo.type,'all');
  release();await tick();assert.equal(plays.length,0);assert.equal(U.playing,false);assert.equal(JSON.stringify(S),before);
  // 読み込み待ちの個人録音を、全員の録音へ切り替える。
@@ -55,6 +58,10 @@ vm.runInContext(conduct.slice(conduct.indexOf('const recPerf ='),conduct.indexOf
  // 中止の通知は一度だけ。通知の中で始めた次の音を止めない。
  fresh();let cancelled=0;const next=recPerf(S.recs[1]);playPerf(recPerf(S.recs[0]),'待機',null,{},()=>{cancelled++;SAMPLES.ready=true;playPerf(next,'次の音');});
  stopPlay();assert.equal(cancelled,1);assert.equal(U.playing,true);assert.equal(U.shown,next);assert.equal(U.shownLabel,'次の音');
+ // 通知の中で別の読み込み待ちを始めた場合も、次の曲と本人の表示を保つ。
+ fresh();const queuedNext=recPerf(S.recs[1]);playPerf(recPerf(S.recs[0]),'前の待機',null,{},()=>playPerf(queuedNext,'次の待機'));
+ stopPlay();assert.equal(U.waitPlay.perf,queuedNext);assert.equal(U.shown,queuedNext);assert.equal(U.shownLabel,'次の待機');assert.ok(recordingPlayback());
+ release();await tick();assert.equal(plays.length,1);assert.equal(plays[0].perf,queuedNext);
  })()`,ctx);
  console.log('個人録音の待機中止・実際の停止・全員や別の本人への切替／古い待機が鳴らない／本番の終了処理を呼ばない／次の音を止めない／部と録音を変えない：確認済み');
 })().catch(e=>{console.error(e);process.exitCode=1;});

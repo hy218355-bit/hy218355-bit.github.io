@@ -107,13 +107,13 @@ function refreshNow(){
   U.refreshT = setTimeout(() => {
     U.perfNow = currentPerformance();
     U.diag = analyze(U.perfNow);
-    if(!U.playing){ U.shown = U.perfNow; U.shownLabel = nowLabel(); setNowPlaying(); }
+    if(!U.playing && !U.waitPlay){ U.shown = U.perfNow; U.shownLabel = nowLabel(); setNowPlaying(); }
     renderDiag();
     drawIdle();
   }, 20);
 }
 function setNowPlaying(){
-  $('#nowPlaying').innerHTML = U.playing ? `<b>再生中</b>：${esc(U.shownLabel)}` : `表示中：${esc(U.shownLabel)}`;
+  $('#nowPlaying').innerHTML = U.waitPlay ? '録音を読み込んでいます…（読み込めたら鳴ります）' : U.playing ? `<b>再生中</b>：${esc(U.shownLabel)}` : `表示中：${esc(U.shownLabel)}`;
   renderPlayButtons();
   updateMini();
 }
@@ -157,8 +157,9 @@ function playPerf(perf, label, onEnd, opts = {}, onWaitCancel = null){
   if(U.recordMember && U.recordPerf !== perf) clearRecordedMember();
   if(SAMPLES.use && !SAMPLES.ready && SAMPLES.loading && !SAMPLES.error){
     const token = U.waitPlay = {perf, onCancel:onWaitCancel};
-    $('#nowPlaying').textContent = '録音を読み込んでいます…（読み込めたら鳴ります）';
-    E.unlock(); updateMini(); renderPlayButtons();
+    // 音が鳴る前から、待っている曲と本人たちを見せる。通常の描き直しで上書きしない。
+    U.shown=perf;U.shownLabel=label;U.stageMembers=stageMembers(perf);
+    E.unlock();renderPiece();setNowPlaying();drawIdle();
     const go = () => { if(U.waitPlay === token){ U.waitPlay = null; playPerf(perf, label, onEnd, opts, onWaitCancel); } };
     SAMPLES.loading.then(go, go);
     return;
@@ -209,7 +210,14 @@ function endPlay(natural = false){
 function stopPlay(){
   const waiting = U.waitPlay;
   U.waitPlay = null; updateMini(); renderPlayButtons();
-  if(!U.playing){ if(waiting){ waiting.onCancel?.(); setNowPlaying(); } return; }
+  if(!U.playing){
+    if(waiting){
+      waiting.onCancel?.();
+      // 中止の通知が次の再生を始めた場合は、その曲やカードを消さない。
+      if(!U.playing && !U.waitPlay){clearRecordedMember();refreshNow();renderPiece();setNowPlaying();drawIdle();}
+    }
+    return;
+  }
   E.stop();
   endPlay();
 }
@@ -238,7 +246,7 @@ const seatXY = (s, G) => {
 // 再生する録音そのものの部員情報を、演奏の音やセーブとは別に覚える。
 const STAGE_PERFORMERS = new WeakMap();
 function rememberStageMembers(perf, members, recorded=true, record=null){ STAGE_PERFORMERS.set(perf,{members:members || [],recorded,record}); return perf; }
-function recordingPlayback(){ return !!(U.playing && U.shown && STAGE_PERFORMERS.get(U.shown)?.recorded); }
+function recordingPlayback(){ return !!((U.playing || U.waitPlay) && U.shown && STAGE_PERFORMERS.get(U.shown)?.recorded); }
 function recordedRangeLabel(perf){
   const pc=PIECES[perf.pieceId];
   if(perf.from===0&&perf.to===pc.beats)return '全部';
@@ -320,7 +328,7 @@ function drawStage(t = -1, cv = $('#stage'), who = null){
   let portraits=0,focus=null;
   for(const s of SEATS){
     const [x, y] = seatXY(s, G);
-    const cast=main ? (t>=0 ? U.stageMembers : null) : CD.stageMembers;
+    const cast=main ? (t>=0 || U.waitPlay ? U.stageMembers : null) : CD.stageMembers;
     const m = cast ? cast.get(s.id) : S.members.find(mm => mm.seat === s.id && (!who || who.has(mm.id)));
     const dim = viewSec && s.sec !== viewSec;
     g.globalAlpha = dim ? 0.3 : 1;
@@ -2257,7 +2265,7 @@ function soloAll(){ const was = U.solo !== 'all'; U.solo = 'all'; applySolo(); i
 // 今の部員の試聴は今の部から鳴らす。昔の録音やお手本の中から探さない。
 function listenCurrentMember(id, section = false){
   if(!memberById(id)?.seat) return;
-  if(U.playing && U.shown !== U.perfNow) stopPlay();
+  if((U.playing || U.waitPlay) && U.shown !== U.perfNow) stopPlay();
   // 停止時の処理で部が変わることもあるので、今いる本人を取り直す。
   const m = memberById(id); if(!m?.seat) return;
   U.sel = m.id;
@@ -2452,7 +2460,7 @@ function bind(){
     if(!s) return;
     // 録音は当時の部員を開き、同じ席の現部員と取り違えない。
     const recorded = recordingPlayback();
-    const m = recorded ? U.stageMembers.get(s.id) : U.playing && U.stageMembers ? S.members.find(x => x.id === U.stageMembers.get(s.id)?.id) : S.members.find(x => x.seat === s.id);
+    const m = recorded ? U.stageMembers.get(s.id) : (U.playing || U.waitPlay) && U.stageMembers ? S.members.find(x => x.id === U.stageMembers.get(s.id)?.id) : S.members.find(x => x.seat === s.id);
     U.recordMember=recorded&&m?m:null;U.recordPerf=U.recordMember?U.shown:null;
     U.sel = m ? m.id : null;
     // 部員を開いても、舞台と音の動きの表示範囲は保つ。

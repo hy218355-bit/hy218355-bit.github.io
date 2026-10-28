@@ -1,0 +1,7145 @@
+[
+  {
+    "case": "ensemble-light-wait",
+    "data": {
+      "audio": [],
+      "card": null,
+      "cast": [
+        {
+          "grade": 1,
+          "id": "m2028-n1-cafe",
+          "name": "田中 七海",
+          "ranks": {
+            "expr": "C",
+            "pitch": "C",
+            "rhythm": "B",
+            "tone": "C"
+          },
+          "seat": "picc1"
+        },
+        {
+          "grade": 2,
+          "id": "m2028-n2-cafe",
+          "name": "小川 悠斗",
+          "ranks": {
+            "expr": "C",
+            "pitch": "C",
+            "rhythm": "B",
+            "tone": "C"
+          },
+          "seat": "fl1a"
+        },
+        {
+          "grade": 1,
+          "id": "m2028-n3-cafe",
+          "name": "松井 颯太",
+          "ranks": {
+            "expr": "C",
+            "pitch": "C",
+            "rhythm": "B",
+            "tone": "C"
+          },
+          "seat": "fl1b"
+        },
+        {
+          "grade": 2,
+          "id": "m2028-n4-cafe",
+          "name": "菅原 菜月",
+          "ranks": {
+            "expr": "C",
+            "pitch": "C",
+            "rhythm": "B",
+            "tone": "C"
+          },
+          "seat": "fl2a"
+        },
+        {
+          "grade": 1,
+          "id": "m2028-n5-cafe",
+          "name": "岡本 智也",
+          "ranks": {
+            "expr": "C",
+            "pitch": "C",
+            "rhythm": "B",
+            "tone": "C"
+          },
+          "seat": "ob1"
+        }
+      ],
+      "ensemble": {
+        "active": true,
+        "button": {
+          "animation": "none",
+          "disabled": false,
+          "label": "5人の音を読み込み中。押すと中止",
+          "motion": "off",
+          "pressed": "true",
+          "rect": {
+            "bottom": 0,
+            "height": 0,
+            "left": 0,
+            "right": 0,
+            "top": 0,
+            "width": 0,
+            "x": 0,
+            "y": 0
+          },
+          "waiting": "true"
+        },
+        "cast": [
+          "m2028-n1-cafe",
+          "m2028-n2-cafe",
+          "m2028-n3-cafe",
+          "m2028-n4-cafe",
+          "m2028-n5-cafe"
+        ],
+        "focus": "",
+        "fullState": 0.018045577220618725,
+        "miniHidden": true,
+        "performance": 0.6326754721812904,
+        "pieceChoice": "ode",
+        "rangeChoice": "all",
+        "resultPerformance": null,
+        "selected": [
+          "m2028-n1-cafe",
+          "m2028-n2-cafe",
+          "m2028-n3-cafe",
+          "m2028-n4-cafe",
+          "m2028-n5-cafe"
+        ],
+        "waiting": true
+      },
+      "errors": [],
+      "listening": {
+        "conductDisabled": true,
+        "engineVenue": "civic",
+        "kind": "アンサンブルの試聴",
+        "range": "all",
+        "rangeDisabled": true,
+        "rangeLabel": "全部",
+        "shownPiece": "ode",
+        "summary": "市民会館・全部・全員",
+        "title": "「歓喜の歌」"
+      },
+      "now": "録音を読み込んでいます…（読み込めたら鳴ります）",
+      "piece": "ode",
+      "playing": false,
+      "portraits": 5,
+      "records": 0.3668241517152637,
+      "scrollWidth": 375,
+      "solo": "all",
+      "waiting": true,
+      "width": 375
+    }
+  },
+  {
+    "case": "ensemble-dark-wait",
+    "data": {
+      "audio": [],
+      "card": null,
+      "cast": [
+        {
+          "grade": 1,
+          "id": "m2028-n1-cafe",
+          "name": "田中 七海",
+          "ranks": {
+            "expr": "C",
+            "pitch": "C",
+            "rhythm": "B",
+            "tone": "C"
+          },
+          "seat": "picc1"
+        },
+        {
+          "grade": 2,
+          "id": "m2028-n2-cafe",
+          "name": "小川 悠斗",
+          "ranks": {
+            "expr": "C",
+            "pitch": "C",
+            "rhythm": "B",
+            "tone": "C"
+          },
+          "seat": "fl1a"
+        },
+        {
+          "grade": 1,
+          "id": "m2028-n3-cafe",
+          "name": "松井 颯太",
+          "ranks": {
+            "expr": "C",
+            "pitch": "C",
+            "rhythm": "B",
+            "tone": "C"
+          },
+          "seat": "fl1b"
+        },
+        {
+          "grade": 2,
+          "id": "m2028-n4-cafe",
+          "name": "菅原 菜月",
+          "ranks": {
+            "expr": "C",
+            "pitch": "C",
+            "rhythm": "B",
+            "tone": "C"
+          },
+          "seat": "fl2a"
+        },
+        {
+          "grade": 1,
+          "id": "m2028-n5-cafe",
+          "name": "岡本 智也",
+          "ranks": {
+            "expr": "C",
+            "pitch": "C",
+            "rhythm": "B",
+            "tone": "C"
+          },
+          "seat": "ob1"
+        }
+      ],
+      "ensemble": {
+        "active": true,
+        "button": {
+          "animation": "none",
+          "disabled": false,
+          "label": "5人の音を読み込み中。押すと中止",
+          "motion": "off",
+          "pressed": "true",
+          "rect": {
+            "bottom": 0,
+            "height": 0,
+            "left": 0,
+            "right": 0,
+            "top": 0,
+            "width": 0,
+            "x": 0,
+            "y": 0
+          },
+          "waiting": "true"
+        },
+        "cast": [
+          "m2028-n1-cafe",
+          "m2028-n2-cafe",
+          "m2028-n3-cafe",
+          "m2028-n4-cafe",
+          "m2028-n5-cafe"
+        ],
+        "focus": "",
+        "fullState": 0.018045577220618725,
+        "miniHidden": true,
+        "performance": 0.6326754721812904,
+        "pieceChoice": "ode",
+        "rangeChoice": "all",
+        "resultPerformance": null,
+        "selected": [
+          "m2028-n1-cafe",
+          "m2028-n2-cafe",
+          "m2028-n3-cafe",
+          "m2028-n4-cafe",
+          "m2028-n5-cafe"
+        ],
+        "waiting": true
+      },
+      "errors": [],
+      "listening": {
+        "conductDisabled": true,
+        "engineVenue": "civic",
+        "kind": "アンサンブルの試聴",
+        "range": "all",
+        "rangeDisabled": true,
+        "rangeLabel": "全部",
+        "shownPiece": "ode",
+        "summary": "市民会館・全部・全員",
+        "title": "「歓喜の歌」"
+      },
+      "now": "録音を読み込んでいます…（読み込めたら鳴ります）",
+      "piece": "ode",
+      "playing": false,
+      "portraits": 5,
+      "records": 0.3668241517152637,
+      "scrollWidth": 375,
+      "solo": "all",
+      "waiting": true,
+      "width": 375
+    }
+  },
+  {
+    "case": "ensemble-cancel",
+    "data": {
+      "audio": [],
+      "card": null,
+      "cast": [
+        {
+          "grade": 1,
+          "id": "m2028-n1-cafe",
+          "name": "田中 七海",
+          "ranks": {
+            "expr": "C",
+            "pitch": "C",
+            "rhythm": "B",
+            "tone": "C"
+          },
+          "seat": "picc1"
+        },
+        {
+          "grade": 2,
+          "id": "m2028-n2-cafe",
+          "name": "小川 悠斗",
+          "ranks": {
+            "expr": "C",
+            "pitch": "C",
+            "rhythm": "B",
+            "tone": "C"
+          },
+          "seat": "fl1a"
+        },
+        {
+          "grade": 1,
+          "id": "m2028-n3-cafe",
+          "name": "松井 颯太",
+          "ranks": {
+            "expr": "C",
+            "pitch": "C",
+            "rhythm": "B",
+            "tone": "C"
+          },
+          "seat": "fl1b"
+        },
+        {
+          "grade": 2,
+          "id": "m2028-n4-cafe",
+          "name": "菅原 菜月",
+          "ranks": {
+            "expr": "C",
+            "pitch": "C",
+            "rhythm": "B",
+            "tone": "C"
+          },
+          "seat": "fl2a"
+        },
+        {
+          "grade": 1,
+          "id": "m2028-n5-cafe",
+          "name": "岡本 智也",
+          "ranks": {
+            "expr": "C",
+            "pitch": "C",
+            "rhythm": "B",
+            "tone": "C"
+          },
+          "seat": "ob1"
+        }
+      ],
+      "ensemble": {
+        "active": false,
+        "button": {
+          "animation": "none",
+          "disabled": false,
+          "label": "選んだ5人で聴く",
+          "motion": "off",
+          "pressed": "false",
+          "rect": {
+            "bottom": 0,
+            "height": 0,
+            "left": 0,
+            "right": 0,
+            "top": 0,
+            "width": 0,
+            "x": 0,
+            "y": 0
+          },
+          "waiting": "false"
+        },
+        "cast": [],
+        "focus": "",
+        "fullState": 0.018045577220618725,
+        "miniHidden": true,
+        "performance": null,
+        "pieceChoice": null,
+        "rangeChoice": "all",
+        "resultPerformance": null,
+        "selected": [
+          "m2028-n1-cafe",
+          "m2028-n2-cafe",
+          "m2028-n3-cafe",
+          "m2028-n4-cafe",
+          "m2028-n5-cafe"
+        ],
+        "waiting": false
+      },
+      "errors": [],
+      "listening": {
+        "conductDisabled": false,
+        "engineVenue": "civic",
+        "kind": "自由曲",
+        "range": "all",
+        "rangeDisabled": false,
+        "rangeLabel": "全部",
+        "shownPiece": "galop",
+        "summary": "市民会館・全部・全員",
+        "title": "「天国と地獄」"
+      },
+      "now": "表示中：いまの音（1月・市民会館）",
+      "piece": "galop",
+      "playing": false,
+      "portraits": 39,
+      "records": 0.3668241517152637,
+      "scrollWidth": 375,
+      "solo": "all",
+      "waiting": false,
+      "width": 375
+    }
+  },
+  {
+    "case": "ensemble-cancel-released",
+    "data": {
+      "audio": [],
+      "card": null,
+      "cast": [
+        {
+          "grade": 1,
+          "id": "m2028-n1-cafe",
+          "name": "田中 七海",
+          "ranks": {
+            "expr": "C",
+            "pitch": "C",
+            "rhythm": "B",
+            "tone": "C"
+          },
+          "seat": "picc1"
+        },
+        {
+          "grade": 2,
+          "id": "m2028-n2-cafe",
+          "name": "小川 悠斗",
+          "ranks": {
+            "expr": "C",
+            "pitch": "C",
+            "rhythm": "B",
+            "tone": "C"
+          },
+          "seat": "fl1a"
+        },
+        {
+          "grade": 1,
+          "id": "m2028-n3-cafe",
+          "name": "松井 颯太",
+          "ranks": {
+            "expr": "C",
+            "pitch": "C",
+            "rhythm": "B",
+            "tone": "C"
+          },
+          "seat": "fl1b"
+        },
+        {
+          "grade": 2,
+          "id": "m2028-n4-cafe",
+          "name": "菅原 菜月",
+          "ranks": {
+            "expr": "C",
+            "pitch": "C",
+            "rhythm": "B",
+            "tone": "C"
+          },
+          "seat": "fl2a"
+        },
+        {
+          "grade": 1,
+          "id": "m2028-n5-cafe",
+          "name": "岡本 智也",
+          "ranks": {
+            "expr": "C",
+            "pitch": "C",
+            "rhythm": "B",
+            "tone": "C"
+          },
+          "seat": "ob1"
+        }
+      ],
+      "ensemble": {
+        "active": false,
+        "button": {
+          "animation": "none",
+          "disabled": false,
+          "label": "選んだ5人で聴く",
+          "motion": "off",
+          "pressed": "false",
+          "rect": {
+            "bottom": 0,
+            "height": 0,
+            "left": 0,
+            "right": 0,
+            "top": 0,
+            "width": 0,
+            "x": 0,
+            "y": 0
+          },
+          "waiting": "false"
+        },
+        "cast": [],
+        "focus": "",
+        "fullState": 0.018045577220618725,
+        "miniHidden": true,
+        "performance": null,
+        "pieceChoice": null,
+        "rangeChoice": "all",
+        "resultPerformance": null,
+        "selected": [
+          "m2028-n1-cafe",
+          "m2028-n2-cafe",
+          "m2028-n3-cafe",
+          "m2028-n4-cafe",
+          "m2028-n5-cafe"
+        ],
+        "waiting": false
+      },
+      "errors": [],
+      "listening": {
+        "conductDisabled": false,
+        "engineVenue": "civic",
+        "kind": "自由曲",
+        "range": "all",
+        "rangeDisabled": false,
+        "rangeLabel": "全部",
+        "shownPiece": "galop",
+        "summary": "市民会館・全部・全員",
+        "title": "「天国と地獄」"
+      },
+      "now": "表示中：いまの音（1月・市民会館）",
+      "piece": "galop",
+      "playing": false,
+      "portraits": 39,
+      "records": 0.3668241517152637,
+      "scrollWidth": 375,
+      "solo": "all",
+      "waiting": false,
+      "width": 375
+    }
+  },
+  {
+    "case": "ensemble-playing",
+    "data": {
+      "audio": [
+        "SampleVoice"
+      ],
+      "card": null,
+      "cast": [
+        {
+          "grade": 1,
+          "id": "m2028-n1-cafe",
+          "name": "田中 七海",
+          "ranks": {
+            "expr": "C",
+            "pitch": "C",
+            "rhythm": "B",
+            "tone": "C"
+          },
+          "seat": "picc1"
+        },
+        {
+          "grade": 2,
+          "id": "m2028-n2-cafe",
+          "name": "小川 悠斗",
+          "ranks": {
+            "expr": "C",
+            "pitch": "C",
+            "rhythm": "B",
+            "tone": "C"
+          },
+          "seat": "fl1a"
+        },
+        {
+          "grade": 1,
+          "id": "m2028-n3-cafe",
+          "name": "松井 颯太",
+          "ranks": {
+            "expr": "C",
+            "pitch": "C",
+            "rhythm": "B",
+            "tone": "C"
+          },
+          "seat": "fl1b"
+        },
+        {
+          "grade": 2,
+          "id": "m2028-n4-cafe",
+          "name": "菅原 菜月",
+          "ranks": {
+            "expr": "C",
+            "pitch": "C",
+            "rhythm": "B",
+            "tone": "C"
+          },
+          "seat": "fl2a"
+        },
+        {
+          "grade": 1,
+          "id": "m2028-n5-cafe",
+          "name": "岡本 智也",
+          "ranks": {
+            "expr": "C",
+            "pitch": "C",
+            "rhythm": "B",
+            "tone": "C"
+          },
+          "seat": "ob1"
+        }
+      ],
+      "ensemble": {
+        "active": true,
+        "button": {
+          "animation": "none",
+          "disabled": false,
+          "label": "5人の試聴を止める",
+          "motion": "off",
+          "pressed": "true",
+          "rect": {
+            "bottom": 744,
+            "height": 46,
+            "left": 16,
+            "right": 62,
+            "top": 698,
+            "width": 46,
+            "x": 16,
+            "y": 698
+          },
+          "waiting": "false"
+        },
+        "cast": [
+          "m2028-n1-cafe",
+          "m2028-n2-cafe",
+          "m2028-n3-cafe",
+          "m2028-n4-cafe",
+          "m2028-n5-cafe"
+        ],
+        "focus": "enslisten",
+        "fullState": 0.018045577220618725,
+        "miniHidden": true,
+        "performance": 0.6326754721812904,
+        "pieceChoice": "ode",
+        "rangeChoice": "all",
+        "resultPerformance": null,
+        "selected": [
+          "m2028-n1-cafe",
+          "m2028-n2-cafe",
+          "m2028-n3-cafe",
+          "m2028-n4-cafe",
+          "m2028-n5-cafe"
+        ],
+        "waiting": false
+      },
+      "errors": [],
+      "listening": {
+        "conductDisabled": true,
+        "engineVenue": "civic",
+        "kind": "アンサンブルの試聴",
+        "range": "all",
+        "rangeDisabled": true,
+        "rangeLabel": "全部",
+        "shownPiece": "ode",
+        "summary": "市民会館・全部・全員",
+        "title": "「歓喜の歌」"
+      },
+      "now": "再生中：アンサンブルの試聴（5人・市民会館）",
+      "piece": "ode",
+      "playing": true,
+      "portraits": 39,
+      "records": 0.3668241517152637,
+      "scrollWidth": 375,
+      "solo": "all",
+      "waiting": false,
+      "width": 375
+    }
+  },
+  {
+    "case": "recorded-member-wait",
+    "data": {
+      "audio": [],
+      "card": {
+        "grade": 3,
+        "id": "m2028-n1-cafe",
+        "name": "田中 七海",
+        "ranks": {
+          "expr": "A",
+          "pitch": "A",
+          "rhythm": "A",
+          "tone": "A"
+        },
+        "seat": "picc1"
+      },
+      "cast": [
+        {
+          "grade": 3,
+          "id": "m2026-n5-f00d",
+          "name": "岡本 智也",
+          "ranks": {
+            "expr": "A",
+            "pitch": "A",
+            "rhythm": "A",
+            "tone": "A"
+          },
+          "seat": "ob1"
+        },
+        {
+          "grade": 3,
+          "id": "m2026-n6-f00d",
+          "name": "山口 大翔",
+          "ranks": {
+            "expr": "A",
+            "pitch": "A",
+            "rhythm": "A",
+            "tone": "A"
+          },
+          "seat": "cl1a"
+        },
+        {
+          "grade": 3,
+          "id": "m2026-n7-f00d",
+          "name": "山下 彩花",
+          "ranks": {
+            "expr": "A",
+            "pitch": "A",
+            "rhythm": "A",
+            "tone": "A"
+          },
+          "seat": "cl1b"
+        },
+        {
+          "grade": 3,
+          "id": "m2026-n8-f00d",
+          "name": "高木 瑛太",
+          "ranks": {
+            "expr": "A",
+            "pitch": "A",
+            "rhythm": "A",
+            "tone": "A"
+          },
+          "seat": "cl1c"
+        },
+        {
+          "grade": 3,
+          "id": "m2026-n11-f00d",
+          "name": "山田 悠真",
+          "ranks": {
+            "expr": "A",
+            "pitch": "A",
+            "rhythm": "A",
+            "tone": "A"
+          },
+          "seat": "fg1"
+        },
+        {
+          "grade": 3,
+          "id": "m2026-n13-f00d",
+          "name": "松井 美咲",
+          "ranks": {
+            "expr": "A",
+            "pitch": "A",
+            "rhythm": "A",
+            "tone": "A"
+          },
+          "seat": "cl2a"
+        },
+        {
+          "grade": 3,
+          "id": "m2026-n14-f00d",
+          "name": "阿部 和奏",
+          "ranks": {
+            "expr": "A",
+            "pitch": "A",
+            "rhythm": "A",
+            "tone": "A"
+          },
+          "seat": "cl2b"
+        },
+        {
+          "grade": 3,
+          "id": "m2026-n15-f00d",
+          "name": "前田 紬",
+          "ranks": {
+            "expr": "A",
+            "pitch": "A",
+            "rhythm": "A",
+            "tone": "A"
+          },
+          "seat": "cl3a"
+        },
+        {
+          "grade": 3,
+          "id": "m2026-n16-f00d",
+          "name": "野口 陽翔",
+          "ranks": {
+            "expr": "A",
+            "pitch": "A",
+            "rhythm": "A",
+            "tone": "A"
+          },
+          "seat": "cl3b"
+        },
+        {
+          "grade": 3,
+          "id": "m2026-n17-f00d",
+          "name": "工藤 美月",
+          "ranks": {
+            "expr": "A",
+            "pitch": "A",
+            "rhythm": "A",
+            "tone": "A"
+          },
+          "seat": "bcl1"
+        },
+        {
+          "grade": 3,
+          "id": "m2026-n18-f00d",
+          "name": "中野 透",
+          "ranks": {
+            "expr": "A",
+            "pitch": "A",
+            "rhythm": "A",
+            "tone": "A"
+          },
+          "seat": "tsax1"
+        },
+        {
+          "grade": 3,
+          "id": "m2026-n20-f00d",
+          "name": "佐々木 彩花",
+          "ranks": {
+            "expr": "A",
+            "pitch": "A",
+            "rhythm": "A",
+            "tone": "A"
+          },
+          "seat": "hn1"
+        },
+        {
+          "grade": 3,
+          "id": "m2026-n21-f00d",
+          "name": "井上 優",
+          "ranks": {
+            "expr": "A",
+            "pitch": "A",
+            "rhythm": "A",
+            "tone": "A"
+          },
+          "seat": "hn2"
+        },
+        {
+          "grade": 3,
+          "id": "m2026-n31-f00d",
+          "name": "山下 茜",
+          "ranks": {
+            "expr": "A",
+            "pitch": "A",
+            "rhythm": "A",
+            "tone": "A"
+          },
+          "seat": "euph1"
+        },
+        {
+          "grade": 3,
+          "id": "m2026-n32-f00d",
+          "name": "渡辺 渚",
+          "ranks": {
+            "expr": "A",
+            "pitch": "A",
+            "rhythm": "A",
+            "tone": "A"
+          },
+          "seat": "euph2"
+        },
+        {
+          "grade": 3,
+          "id": "m2026-n33-f00d",
+          "name": "坂本 雫",
+          "ranks": {
+            "expr": "A",
+            "pitch": "A",
+            "rhythm": "A",
+            "tone": "A"
+          },
+          "seat": "tuba1"
+        },
+        {
+          "grade": 3,
+          "id": "m2026-n34-f00d",
+          "name": "菅原 智也",
+          "ranks": {
+            "expr": "A",
+            "pitch": "A",
+            "rhythm": "A",
+            "tone": "A"
+          },
+          "seat": "tuba2"
+        },
+        {
+          "grade": 3,
+          "id": "m2026-n35-f00d",
+          "name": "高木 明里",
+          "ranks": {
+            "expr": "A",
+            "pitch": "A",
+            "rhythm": "A",
+            "tone": "A"
+          },
+          "seat": "cb1"
+        },
+        {
+          "grade": 3,
+          "id": "m2028-n1-cafe",
+          "name": "田中 七海",
+          "ranks": {
+            "expr": "A",
+            "pitch": "A",
+            "rhythm": "A",
+            "tone": "A"
+          },
+          "seat": "picc1"
+        },
+        {
+          "grade": 3,
+          "id": "m2026-n2-f00d",
+          "name": "小川 悠斗",
+          "ranks": {
+            "expr": "A",
+            "pitch": "A",
+            "rhythm": "A",
+            "tone": "A"
+          },
+          "seat": "fl1a"
+        },
+        {
+          "grade": 3,
+          "id": "m2026-n3-f00d",
+          "name": "松井 颯太",
+          "ranks": {
+            "expr": "A",
+            "pitch": "A",
+            "rhythm": "A",
+            "tone": "A"
+          },
+          "seat": "fl1b"
+        },
+        {
+          "grade": 3,
+          "id": "m2026-n4-f00d",
+          "name": "菅原 菜月",
+          "ranks": {
+            "expr": "A",
+            "pitch": "A",
+            "rhythm": "A",
+            "tone": "A"
+          },
+          "seat": "fl2a"
+        },
+        {
+          "grade": 3,
+          "id": "m2026-n9-f00d",
+          "name": "清水 菜月",
+          "ranks": {
+            "expr": "A",
+            "pitch": "A",
+            "rhythm": "A",
+            "tone": "A"
+          },
+          "seat": "asax1"
+        },
+        {
+          "grade": 3,
+          "id": "m2026-n10-f00d",
+          "name": "山本 凛",
+          "ranks": {
+            "expr": "A",
+            "pitch": "A",
+            "rhythm": "A",
+            "tone": "A"
+          },
+          "seat": "asax2"
+        },
+        {
+          "grade": 3,
+          "id": "m2026-n12-f00d",
+          "name": "西村 樹",
+          "ranks": {
+            "expr": "A",
+            "pitch": "A",
+            "rhythm": "A",
+            "tone": "A"
+          },
+          "seat": "ebcl1"
+        },
+        {
+          "grade": 3,
+          "id": "m2026-n19-f00d",
+          "name": "木村 湊",
+          "ranks": {
+            "expr": "A",
+            "pitch": "A",
+            "rhythm": "A",
+            "tone": "A"
+          },
+          "seat": "bsax1"
+        },
+        {
+          "grade": 3,
+          "id": "m2026-n22-f00d",
+          "name": "酒井 陸",
+          "ranks": {
+            "expr": "A",
+            "pitch": "A",
+            "rhythm": "A",
+            "tone": "A"
+          },
+          "seat": "hn3"
+        },
+        {
+          "grade": 3,
+          "id": "m2026-n23-f00d",
+          "name": "松田 拓海",
+          "ranks": {
+            "expr": "A",
+            "pitch": "A",
+            "rhythm": "A",
+            "tone": "A"
+          },
+          "seat": "hn4"
+        },
+        {
+          "grade": 3,
+          "id": "m2026-n24-f00d",
+          "name": "中村 絢",
+          "ranks": {
+            "expr": "A",
+            "pitch": "A",
+            "rhythm": "A",
+            "tone": "A"
+          },
+          "seat": "tp1a"
+        },
+        {
+          "grade": 3,
+          "id": "m2026-n25-f00d",
+          "name": "林 亮",
+          "ranks": {
+            "expr": "A",
+            "pitch": "A",
+            "rhythm": "A",
+            "tone": "A"
+          },
+          "seat": "tp1b"
+        },
+        {
+          "grade": 3,
+          "id": "m2026-n26-f00d",
+          "name": "岩崎 結衣",
+          "ranks": {
+            "expr": "A",
+            "pitch": "A",
+            "rhythm": "A",
+            "tone": "A"
+          },
+          "seat": "tp2a"
+        },
+        {
+          "grade": 3,
+          "id": "m2026-n27-f00d",
+          "name": "千葉 陸",
+          "ranks": {
+            "expr": "A",
+            "pitch": "A",
+            "rhythm": "A",
+            "tone": "A"
+          },
+          "seat": "tp3a"
+        },
+        {
+          "grade": 3,
+          "id": "m2026-n28-f00d",
+          "name": "竹内 花音",
+          "ranks": {
+            "expr": "A",
+            "pitch": "A",
+            "rhythm": "A",
+            "tone": "A"
+          },
+          "seat": "tb1"
+        },
+        {
+          "grade": 3,
+          "id": "m2026-n29-f00d",
+          "name": "井上 雫",
+          "ranks": {
+            "expr": "A",
+            "pitch": "A",
+            "rhythm": "A",
+            "tone": "A"
+          },
+          "seat": "tb2"
+        },
+        {
+          "grade": 3,
+          "id": "m2026-n30-f00d",
+          "name": "石井 透",
+          "ranks": {
+            "expr": "A",
+            "pitch": "A",
+            "rhythm": "A",
+            "tone": "A"
+          },
+          "seat": "btb1"
+        },
+        {
+          "grade": 3,
+          "id": "m2026-n36-f00d",
+          "name": "佐藤 誠",
+          "ranks": {
+            "expr": "A",
+            "pitch": "A",
+            "rhythm": "A",
+            "tone": "A"
+          },
+          "seat": "perc1"
+        },
+        {
+          "grade": 3,
+          "id": "m2026-n37-f00d",
+          "name": "山田 蓮",
+          "ranks": {
+            "expr": "A",
+            "pitch": "A",
+            "rhythm": "A",
+            "tone": "A"
+          },
+          "seat": "perc2"
+        },
+        {
+          "grade": 3,
+          "id": "m2026-n38-f00d",
+          "name": "原 杏",
+          "ranks": {
+            "expr": "A",
+            "pitch": "A",
+            "rhythm": "A",
+            "tone": "A"
+          },
+          "seat": "perc3"
+        },
+        {
+          "grade": 3,
+          "id": "m2026-n39-f00d",
+          "name": "横山 透",
+          "ranks": {
+            "expr": "A",
+            "pitch": "A",
+            "rhythm": "A",
+            "tone": "A"
+          },
+          "seat": "perc4"
+        }
+      ],
+      "errors": [],
+      "listening": {
+        "conductDisabled": true,
+        "engineVenue": "hall",
+        "kind": "録音",
+        "range": "recorded",
+        "rangeDisabled": true,
+        "rangeLabel": "前半",
+        "shownPiece": "largo",
+        "summary": "県民文化会館・前半・全員",
+        "title": "《新世界より》第2楽章"
+      },
+      "now": "録音を読み込んでいます…（読み込めたら鳴ります）",
+      "piece": "galop",
+      "playing": false,
+      "portraits": 39,
+      "records": 0.8007528416346759,
+      "scrollWidth": 375,
+      "solo": "all",
+      "waiting": true,
+      "width": 375
+    }
+  },
+  {
+    "case": "recorded-wait-card",
+    "data": {
+      "audio": [],
+      "card": {
+        "grade": 3,
+        "id": "m2028-n1-cafe",
+        "name": "田中 七海",
+        "ranks": {
+          "expr": "A",
+          "pitch": "A",
+          "rhythm": "A",
+          "tone": "A"
+        },
+        "seat": "picc1"
+      },
+      "cardHidden": false,
+      "cast": [
+        {
+          "grade": 3,
+          "id": "m2026-n5-f00d",
+          "name": "岡本 智也",
+          "ranks": {
+            "expr": "A",
+            "pitch": "A",
+            "rhythm": "A",
+            "tone": "A"
+          },
+          "seat": "ob1"
+        },
+        {
+          "grade": 3,
+          "id": "m2026-n6-f00d",
+          "name": "山口 大翔",
+          "ranks": {
+            "expr": "A",
+            "pitch": "A",
+            "rhythm": "A",
+            "tone": "A"
+          },
+          "seat": "cl1a"
+        },
+        {
+          "grade": 3,
+          "id": "m2026-n7-f00d",
+          "name": "山下 彩花",
+          "ranks": {
+            "expr": "A",
+            "pitch": "A",
+            "rhythm": "A",
+            "tone": "A"
+          },
+          "seat": "cl1b"
+        },
+        {
+          "grade": 3,
+          "id": "m2026-n8-f00d",
+          "name": "高木 瑛太",
+          "ranks": {
+            "expr": "A",
+            "pitch": "A",
+            "rhythm": "A",
+            "tone": "A"
+          },
+          "seat": "cl1c"
+        },
+        {
+          "grade": 3,
+          "id": "m2026-n11-f00d",
+          "name": "山田 悠真",
+          "ranks": {
+            "expr": "A",
+            "pitch": "A",
+            "rhythm": "A",
+            "tone": "A"
+          },
+          "seat": "fg1"
+        },
+        {
+          "grade": 3,
+          "id": "m2026-n13-f00d",
+          "name": "松井 美咲",
+          "ranks": {
+            "expr": "A",
+            "pitch": "A",
+            "rhythm": "A",
+            "tone": "A"
+          },
+          "seat": "cl2a"
+        },
+        {
+          "grade": 3,
+          "id": "m2026-n14-f00d",
+          "name": "阿部 和奏",
+          "ranks": {
+            "expr": "A",
+            "pitch": "A",
+            "rhythm": "A",
+            "tone": "A"
+          },
+          "seat": "cl2b"
+        },
+        {
+          "grade": 3,
+          "id": "m2026-n15-f00d",
+          "name": "前田 紬",
+          "ranks": {
+            "expr": "A",
+            "pitch": "A",
+            "rhythm": "A",
+            "tone": "A"
+          },
+          "seat": "cl3a"
+        },
+        {
+          "grade": 3,
+          "id": "m2026-n16-f00d",
+          "name": "野口 陽翔",
+          "ranks": {
+            "expr": "A",
+            "pitch": "A",
+            "rhythm": "A",
+            "tone": "A"
+          },
+          "seat": "cl3b"
+        },
+        {
+          "grade": 3,
+          "id": "m2026-n17-f00d",
+          "name": "工藤 美月",
+          "ranks": {
+            "expr": "A",
+            "pitch": "A",
+            "rhythm": "A",
+            "tone": "A"
+          },
+          "seat": "bcl1"
+        },
+        {
+          "grade": 3,
+          "id": "m2026-n18-f00d",
+          "name": "中野 透",
+          "ranks": {
+            "expr": "A",
+            "pitch": "A",
+            "rhythm": "A",
+            "tone": "A"
+          },
+          "seat": "tsax1"
+        },
+        {
+          "grade": 3,
+          "id": "m2026-n20-f00d",
+          "name": "佐々木 彩花",
+          "ranks": {
+            "expr": "A",
+            "pitch": "A",
+            "rhythm": "A",
+            "tone": "A"
+          },
+          "seat": "hn1"
+        },
+        {
+          "grade": 3,
+          "id": "m2026-n21-f00d",
+          "name": "井上 優",
+          "ranks": {
+            "expr": "A",
+            "pitch": "A",
+            "rhythm": "A",
+            "tone": "A"
+          },
+          "seat": "hn2"
+        },
+        {
+          "grade": 3,
+          "id": "m2026-n31-f00d",
+          "name": "山下 茜",
+          "ranks": {
+            "expr": "A",
+            "pitch": "A",
+            "rhythm": "A",
+            "tone": "A"
+          },
+          "seat": "euph1"
+        },
+        {
+          "grade": 3,
+          "id": "m2026-n32-f00d",
+          "name": "渡辺 渚",
+          "ranks": {
+            "expr": "A",
+            "pitch": "A",
+            "rhythm": "A",
+            "tone": "A"
+          },
+          "seat": "euph2"
+        },
+        {
+          "grade": 3,
+          "id": "m2026-n33-f00d",
+          "name": "坂本 雫",
+          "ranks": {
+            "expr": "A",
+            "pitch": "A",
+            "rhythm": "A",
+            "tone": "A"
+          },
+          "seat": "tuba1"
+        },
+        {
+          "grade": 3,
+          "id": "m2026-n34-f00d",
+          "name": "菅原 智也",
+          "ranks": {
+            "expr": "A",
+            "pitch": "A",
+            "rhythm": "A",
+            "tone": "A"
+          },
+          "seat": "tuba2"
+        },
+        {
+          "grade": 3,
+          "id": "m2026-n35-f00d",
+          "name": "高木 明里",
+          "ranks": {
+            "expr": "A",
+            "pitch": "A",
+            "rhythm": "A",
+            "tone": "A"
+          },
+          "seat": "cb1"
+        },
+        {
+          "grade": 3,
+          "id": "m2028-n1-cafe",
+          "name": "田中 七海",
+          "ranks": {
+            "expr": "A",
+            "pitch": "A",
+            "rhythm": "A",
+            "tone": "A"
+          },
+          "seat": "picc1"
+        },
+        {
+          "grade": 3,
+          "id": "m2026-n2-f00d",
+          "name": "小川 悠斗",
+          "ranks": {
+            "expr": "A",
+            "pitch": "A",
+            "rhythm": "A",
+            "tone": "A"
+          },
+          "seat": "fl1a"
+        },
+        {
+          "grade": 3,
+          "id": "m2026-n3-f00d",
+          "name": "松井 颯太",
+          "ranks": {
+            "expr": "A",
+            "pitch": "A",
+            "rhythm": "A",
+            "tone": "A"
+          },
+          "seat": "fl1b"
+        },
+        {
+          "grade": 3,
+          "id": "m2026-n4-f00d",
+          "name": "菅原 菜月",
+          "ranks": {
+            "expr": "A",
+            "pitch": "A",
+            "rhythm": "A",
+            "tone": "A"
+          },
+          "seat": "fl2a"
+        },
+        {
+          "grade": 3,
+          "id": "m2026-n9-f00d",
+          "name": "清水 菜月",
+          "ranks": {
+            "expr": "A",
+            "pitch": "A",
+            "rhythm": "A",
+            "tone": "A"
+          },
+          "seat": "asax1"
+        },
+        {
+          "grade": 3,
+          "id": "m2026-n10-f00d",
+          "name": "山本 凛",
+          "ranks": {
+            "expr": "A",
+            "pitch": "A",
+            "rhythm": "A",
+            "tone": "A"
+          },
+          "seat": "asax2"
+        },
+        {
+          "grade": 3,
+          "id": "m2026-n12-f00d",
+          "name": "西村 樹",
+          "ranks": {
+            "expr": "A",
+            "pitch": "A",
+            "rhythm": "A",
+            "tone": "A"
+          },
+          "seat": "ebcl1"
+        },
+        {
+          "grade": 3,
+          "id": "m2026-n19-f00d",
+          "name": "木村 湊",
+          "ranks": {
+            "expr": "A",
+            "pitch": "A",
+            "rhythm": "A",
+            "tone": "A"
+          },
+          "seat": "bsax1"
+        },
+        {
+          "grade": 3,
+          "id": "m2026-n22-f00d",
+          "name": "酒井 陸",
+          "ranks": {
+            "expr": "A",
+            "pitch": "A",
+            "rhythm": "A",
+            "tone": "A"
+          },
+          "seat": "hn3"
+        },
+        {
+          "grade": 3,
+          "id": "m2026-n23-f00d",
+          "name": "松田 拓海",
+          "ranks": {
+            "expr": "A",
+            "pitch": "A",
+            "rhythm": "A",
+            "tone": "A"
+          },
+          "seat": "hn4"
+        },
+        {
+          "grade": 3,
+          "id": "m2026-n24-f00d",
+          "name": "中村 絢",
+          "ranks": {
+            "expr": "A",
+            "pitch": "A",
+            "rhythm": "A",
+            "tone": "A"
+          },
+          "seat": "tp1a"
+        },
+        {
+          "grade": 3,
+          "id": "m2026-n25-f00d",
+          "name": "林 亮",
+          "ranks": {
+            "expr": "A",
+            "pitch": "A",
+            "rhythm": "A",
+            "tone": "A"
+          },
+          "seat": "tp1b"
+        },
+        {
+          "grade": 3,
+          "id": "m2026-n26-f00d",
+          "name": "岩崎 結衣",
+          "ranks": {
+            "expr": "A",
+            "pitch": "A",
+            "rhythm": "A",
+            "tone": "A"
+          },
+          "seat": "tp2a"
+        },
+        {
+          "grade": 3,
+          "id": "m2026-n27-f00d",
+          "name": "千葉 陸",
+          "ranks": {
+            "expr": "A",
+            "pitch": "A",
+            "rhythm": "A",
+            "tone": "A"
+          },
+          "seat": "tp3a"
+        },
+        {
+          "grade": 3,
+          "id": "m2026-n28-f00d",
+          "name": "竹内 花音",
+          "ranks": {
+            "expr": "A",
+            "pitch": "A",
+            "rhythm": "A",
+            "tone": "A"
+          },
+          "seat": "tb1"
+        },
+        {
+          "grade": 3,
+          "id": "m2026-n29-f00d",
+          "name": "井上 雫",
+          "ranks": {
+            "expr": "A",
+            "pitch": "A",
+            "rhythm": "A",
+            "tone": "A"
+          },
+          "seat": "tb2"
+        },
+        {
+          "grade": 3,
+          "id": "m2026-n30-f00d",
+          "name": "石井 透",
+          "ranks": {
+            "expr": "A",
+            "pitch": "A",
+            "rhythm": "A",
+            "tone": "A"
+          },
+          "seat": "btb1"
+        },
+        {
+          "grade": 3,
+          "id": "m2026-n36-f00d",
+          "name": "佐藤 誠",
+          "ranks": {
+            "expr": "A",
+            "pitch": "A",
+            "rhythm": "A",
+            "tone": "A"
+          },
+          "seat": "perc1"
+        },
+        {
+          "grade": 3,
+          "id": "m2026-n37-f00d",
+          "name": "山田 蓮",
+          "ranks": {
+            "expr": "A",
+            "pitch": "A",
+            "rhythm": "A",
+            "tone": "A"
+          },
+          "seat": "perc2"
+        },
+        {
+          "grade": 3,
+          "id": "m2026-n38-f00d",
+          "name": "原 杏",
+          "ranks": {
+            "expr": "A",
+            "pitch": "A",
+            "rhythm": "A",
+            "tone": "A"
+          },
+          "seat": "perc3"
+        },
+        {
+          "grade": 3,
+          "id": "m2026-n39-f00d",
+          "name": "横山 透",
+          "ranks": {
+            "expr": "A",
+            "pitch": "A",
+            "rhythm": "A",
+            "tone": "A"
+          },
+          "seat": "perc4"
+        }
+      ],
+      "errors": [],
+      "library": {
+        "active": "r2026-26-0-790160",
+        "actual": 0.8497014506720006,
+        "blocked": false,
+        "expected": 0.8497014506720006,
+        "open": false,
+        "rows": [
+          {
+            "active": "false",
+            "disabled": false,
+            "faces": [
+              "m2028-n1-cafe",
+              "m2026-n2-f00d",
+              "m2026-n3-f00d"
+            ],
+            "id": "r2027-26-1-339903",
+            "label": "2027年 定期演奏会・「歓喜の歌」・県民文化会館を聴く",
+            "pressed": "false",
+            "saveDisabled": false
+          },
+          {
+            "active": "true",
+            "disabled": false,
+            "faces": [
+              "m2028-n1-cafe",
+              "m2026-n2-f00d",
+              "m2026-n3-f00d"
+            ],
+            "id": "r2026-26-0-790160",
+            "label": "2026年 定期演奏会・《新世界より》第2楽章・前半・県民文化会館を読み込みをやめる",
+            "pressed": "true",
+            "saveDisabled": false
+          }
+        ],
+        "saving": null,
+        "selected": "r2026-26-0-790160",
+        "source": [
+          {
+            "count": 39,
+            "faces": [
+              {
+                "face": 46,
+                "id": "m2028-n1-cafe",
+                "name": "田中 七海"
+              },
+              {
+                "face": 93,
+                "id": "m2026-n2-f00d",
+                "name": "小川 悠斗"
+              },
+              {
+                "face": 94,
+                "id": "m2026-n3-f00d",
+                "name": "松井 颯太"
+              }
+            ],
+            "id": "r2026-26-0-790160",
+            "label": "2026年 定期演奏会",
+            "piece": "largo",
+            "span": {
+              "from": 0,
+              "to": 32
+            },
+            "venue": "hall",
+            "year": 2026
+          },
+          {
+            "count": 39,
+            "faces": [
+              {
+                "face": 46,
+                "id": "m2028-n1-cafe",
+                "name": "田中 葵"
+              },
+              {
+                "face": 93,
+                "id": "m2026-n2-f00d",
+                "name": "小川 悠斗"
+              },
+              {
+                "face": 94,
+                "id": "m2026-n3-f00d",
+                "name": "松井 颯太"
+              }
+            ],
+            "id": "r2027-26-1-339903",
+            "label": "2027年 定期演奏会",
+            "piece": "ode",
+            "venue": "hall",
+            "year": 2027
+          }
+        ],
+        "waiting": true,
+        "years": [
+          "2027年度",
+          "2026年度"
+        ]
+      },
+      "listening": {
+        "conductDisabled": true,
+        "engineVenue": "hall",
+        "kind": "録音",
+        "range": "recorded",
+        "rangeDisabled": true,
+        "rangeLabel": "前半",
+        "shownPiece": "largo",
+        "summary": "県民文化会館・前半・全員",
+        "title": "《新世界より》第2楽章"
+      },
+      "now": "録音を読み込んでいます…（読み込めたら鳴ります）",
+      "piece": "galop",
+      "playing": false,
+      "portraits": 39,
+      "records": 0.8007528416346759,
+      "scrollWidth": 375,
+      "solo": "all",
+      "stats": 0.771712013753131,
+      "waiting": true,
+      "width": 375
+    }
+  },
+  {
+    "case": "recorded-cancel",
+    "data": {
+      "audio": [],
+      "card": null,
+      "cardHidden": true,
+      "cast": [
+        {
+          "grade": 3,
+          "id": "m2026-n5-f00d",
+          "name": "岡本 智也",
+          "ranks": {
+            "expr": "A",
+            "pitch": "A",
+            "rhythm": "A",
+            "tone": "A"
+          },
+          "seat": "ob1"
+        },
+        {
+          "grade": 3,
+          "id": "m2026-n6-f00d",
+          "name": "山口 大翔",
+          "ranks": {
+            "expr": "A",
+            "pitch": "A",
+            "rhythm": "A",
+            "tone": "A"
+          },
+          "seat": "cl1a"
+        },
+        {
+          "grade": 3,
+          "id": "m2026-n7-f00d",
+          "name": "山下 彩花",
+          "ranks": {
+            "expr": "A",
+            "pitch": "A",
+            "rhythm": "A",
+            "tone": "A"
+          },
+          "seat": "cl1b"
+        },
+        {
+          "grade": 3,
+          "id": "m2026-n8-f00d",
+          "name": "高木 瑛太",
+          "ranks": {
+            "expr": "A",
+            "pitch": "A",
+            "rhythm": "A",
+            "tone": "A"
+          },
+          "seat": "cl1c"
+        },
+        {
+          "grade": 3,
+          "id": "m2026-n11-f00d",
+          "name": "山田 悠真",
+          "ranks": {
+            "expr": "A",
+            "pitch": "A",
+            "rhythm": "A",
+            "tone": "A"
+          },
+          "seat": "fg1"
+        },
+        {
+          "grade": 3,
+          "id": "m2026-n13-f00d",
+          "name": "松井 美咲",
+          "ranks": {
+            "expr": "A",
+            "pitch": "A",
+            "rhythm": "A",
+            "tone": "A"
+          },
+          "seat": "cl2a"
+        },
+        {
+          "grade": 3,
+          "id": "m2026-n14-f00d",
+          "name": "阿部 和奏",
+          "ranks": {
+            "expr": "A",
+            "pitch": "A",
+            "rhythm": "A",
+            "tone": "A"
+          },
+          "seat": "cl2b"
+        },
+        {
+          "grade": 3,
+          "id": "m2026-n15-f00d",
+          "name": "前田 紬",
+          "ranks": {
+            "expr": "A",
+            "pitch": "A",
+            "rhythm": "A",
+            "tone": "A"
+          },
+          "seat": "cl3a"
+        },
+        {
+          "grade": 3,
+          "id": "m2026-n16-f00d",
+          "name": "野口 陽翔",
+          "ranks": {
+            "expr": "A",
+            "pitch": "A",
+            "rhythm": "A",
+            "tone": "A"
+          },
+          "seat": "cl3b"
+        },
+        {
+          "grade": 3,
+          "id": "m2026-n17-f00d",
+          "name": "工藤 美月",
+          "ranks": {
+            "expr": "A",
+            "pitch": "A",
+            "rhythm": "A",
+            "tone": "A"
+          },
+          "seat": "bcl1"
+        },
+        {
+          "grade": 3,
+          "id": "m2026-n18-f00d",
+          "name": "中野 透",
+          "ranks": {
+            "expr": "A",
+            "pitch": "A",
+            "rhythm": "A",
+            "tone": "A"
+          },
+          "seat": "tsax1"
+        },
+        {
+          "grade": 3,
+          "id": "m2026-n20-f00d",
+          "name": "佐々木 彩花",
+          "ranks": {
+            "expr": "A",
+            "pitch": "A",
+            "rhythm": "A",
+            "tone": "A"
+          },
+          "seat": "hn1"
+        },
+        {
+          "grade": 3,
+          "id": "m2026-n21-f00d",
+          "name": "井上 優",
+          "ranks": {
+            "expr": "A",
+            "pitch": "A",
+            "rhythm": "A",
+            "tone": "A"
+          },
+          "seat": "hn2"
+        },
+        {
+          "grade": 3,
+          "id": "m2026-n31-f00d",
+          "name": "山下 茜",
+          "ranks": {
+            "expr": "A",
+            "pitch": "A",
+            "rhythm": "A",
+            "tone": "A"
+          },
+          "seat": "euph1"
+        },
+        {
+          "grade": 3,
+          "id": "m2026-n32-f00d",
+          "name": "渡辺 渚",
+          "ranks": {
+            "expr": "A",
+            "pitch": "A",
+            "rhythm": "A",
+            "tone": "A"
+          },
+          "seat": "euph2"
+        },
+        {
+          "grade": 3,
+          "id": "m2026-n33-f00d",
+          "name": "坂本 雫",
+          "ranks": {
+            "expr": "A",
+            "pitch": "A",
+            "rhythm": "A",
+            "tone": "A"
+          },
+          "seat": "tuba1"
+        },
+        {
+          "grade": 3,
+          "id": "m2026-n34-f00d",
+          "name": "菅原 智也",
+          "ranks": {
+            "expr": "A",
+            "pitch": "A",
+            "rhythm": "A",
+            "tone": "A"
+          },
+          "seat": "tuba2"
+        },
+        {
+          "grade": 3,
+          "id": "m2026-n35-f00d",
+          "name": "高木 明里",
+          "ranks": {
+            "expr": "A",
+            "pitch": "A",
+            "rhythm": "A",
+            "tone": "A"
+          },
+          "seat": "cb1"
+        },
+        {
+          "grade": 3,
+          "id": "m2028-n1-cafe",
+          "name": "田中 七海",
+          "ranks": {
+            "expr": "A",
+            "pitch": "A",
+            "rhythm": "A",
+            "tone": "A"
+          },
+          "seat": "picc1"
+        },
+        {
+          "grade": 3,
+          "id": "m2026-n2-f00d",
+          "name": "小川 悠斗",
+          "ranks": {
+            "expr": "A",
+            "pitch": "A",
+            "rhythm": "A",
+            "tone": "A"
+          },
+          "seat": "fl1a"
+        },
+        {
+          "grade": 3,
+          "id": "m2026-n3-f00d",
+          "name": "松井 颯太",
+          "ranks": {
+            "expr": "A",
+            "pitch": "A",
+            "rhythm": "A",
+            "tone": "A"
+          },
+          "seat": "fl1b"
+        },
+        {
+          "grade": 3,
+          "id": "m2026-n4-f00d",
+          "name": "菅原 菜月",
+          "ranks": {
+            "expr": "A",
+            "pitch": "A",
+            "rhythm": "A",
+            "tone": "A"
+          },
+          "seat": "fl2a"
+        },
+        {
+          "grade": 3,
+          "id": "m2026-n9-f00d",
+          "name": "清水 菜月",
+          "ranks": {
+            "expr": "A",
+            "pitch": "A",
+            "rhythm": "A",
+            "tone": "A"
+          },
+          "seat": "asax1"
+        },
+        {
+          "grade": 3,
+          "id": "m2026-n10-f00d",
+          "name": "山本 凛",
+          "ranks": {
+            "expr": "A",
+            "pitch": "A",
+            "rhythm": "A",
+            "tone": "A"
+          },
+          "seat": "asax2"
+        },
+        {
+          "grade": 3,
+          "id": "m2026-n12-f00d",
+          "name": "西村 樹",
+          "ranks": {
+            "expr": "A",
+            "pitch": "A",
+            "rhythm": "A",
+            "tone": "A"
+          },
+          "seat": "ebcl1"
+        },
+        {
+          "grade": 3,
+          "id": "m2026-n19-f00d",
+          "name": "木村 湊",
+          "ranks": {
+            "expr": "A",
+            "pitch": "A",
+            "rhythm": "A",
+            "tone": "A"
+          },
+          "seat": "bsax1"
+        },
+        {
+          "grade": 3,
+          "id": "m2026-n22-f00d",
+          "name": "酒井 陸",
+          "ranks": {
+            "expr": "A",
+            "pitch": "A",
+            "rhythm": "A",
+            "tone": "A"
+          },
+          "seat": "hn3"
+        },
+        {
+          "grade": 3,
+          "id": "m2026-n23-f00d",
+          "name": "松田 拓海",
+          "ranks": {
+            "expr": "A",
+            "pitch": "A",
+            "rhythm": "A",
+            "tone": "A"
+          },
+          "seat": "hn4"
+        },
+        {
+          "grade": 3,
+          "id": "m2026-n24-f00d",
+          "name": "中村 絢",
+          "ranks": {
+            "expr": "A",
+            "pitch": "A",
+            "rhythm": "A",
+            "tone": "A"
+          },
+          "seat": "tp1a"
+        },
+        {
+          "grade": 3,
+          "id": "m2026-n25-f00d",
+          "name": "林 亮",
+          "ranks": {
+            "expr": "A",
+            "pitch": "A",
+            "rhythm": "A",
+            "tone": "A"
+          },
+          "seat": "tp1b"
+        },
+        {
+          "grade": 3,
+          "id": "m2026-n26-f00d",
+          "name": "岩崎 結衣",
+          "ranks": {
+            "expr": "A",
+            "pitch": "A",
+            "rhythm": "A",
+            "tone": "A"
+          },
+          "seat": "tp2a"
+        },
+        {
+          "grade": 3,
+          "id": "m2026-n27-f00d",
+          "name": "千葉 陸",
+          "ranks": {
+            "expr": "A",
+            "pitch": "A",
+            "rhythm": "A",
+            "tone": "A"
+          },
+          "seat": "tp3a"
+        },
+        {
+          "grade": 3,
+          "id": "m2026-n28-f00d",
+          "name": "竹内 花音",
+          "ranks": {
+            "expr": "A",
+            "pitch": "A",
+            "rhythm": "A",
+            "tone": "A"
+          },
+          "seat": "tb1"
+        },
+        {
+          "grade": 3,
+          "id": "m2026-n29-f00d",
+          "name": "井上 雫",
+          "ranks": {
+            "expr": "A",
+            "pitch": "A",
+            "rhythm": "A",
+            "tone": "A"
+          },
+          "seat": "tb2"
+        },
+        {
+          "grade": 3,
+          "id": "m2026-n30-f00d",
+          "name": "石井 透",
+          "ranks": {
+            "expr": "A",
+            "pitch": "A",
+            "rhythm": "A",
+            "tone": "A"
+          },
+          "seat": "btb1"
+        },
+        {
+          "grade": 3,
+          "id": "m2026-n36-f00d",
+          "name": "佐藤 誠",
+          "ranks": {
+            "expr": "A",
+            "pitch": "A",
+            "rhythm": "A",
+            "tone": "A"
+          },
+          "seat": "perc1"
+        },
+        {
+          "grade": 3,
+          "id": "m2026-n37-f00d",
+          "name": "山田 蓮",
+          "ranks": {
+            "expr": "A",
+            "pitch": "A",
+            "rhythm": "A",
+            "tone": "A"
+          },
+          "seat": "perc2"
+        },
+        {
+          "grade": 3,
+          "id": "m2026-n38-f00d",
+          "name": "原 杏",
+          "ranks": {
+            "expr": "A",
+            "pitch": "A",
+            "rhythm": "A",
+            "tone": "A"
+          },
+          "seat": "perc3"
+        },
+        {
+          "grade": 3,
+          "id": "m2026-n39-f00d",
+          "name": "横山 透",
+          "ranks": {
+            "expr": "A",
+            "pitch": "A",
+            "rhythm": "A",
+            "tone": "A"
+          },
+          "seat": "perc4"
+        }
+      ],
+      "errors": [],
+      "library": {
+        "active": null,
+        "blocked": false,
+        "open": false,
+        "rows": [
+          {
+            "active": "false",
+            "disabled": false,
+            "faces": [
+              "m2028-n1-cafe",
+              "m2026-n2-f00d",
+              "m2026-n3-f00d"
+            ],
+            "id": "r2027-26-1-339903",
+            "label": "2027年 定期演奏会・「歓喜の歌」・県民文化会館を聴く",
+            "pressed": "false",
+            "saveDisabled": false
+          },
+          {
+            "active": "false",
+            "disabled": false,
+            "faces": [
+              "m2028-n1-cafe",
+              "m2026-n2-f00d",
+              "m2026-n3-f00d"
+            ],
+            "id": "r2026-26-0-790160",
+            "label": "2026年 定期演奏会・《新世界より》第2楽章・前半・県民文化会館を聴く",
+            "pressed": "false",
+            "saveDisabled": false
+          }
+        ],
+        "saving": null,
+        "selected": "r2026-26-0-790160",
+        "source": [
+          {
+            "count": 39,
+            "faces": [
+              {
+                "face": 46,
+                "id": "m2028-n1-cafe",
+                "name": "田中 七海"
+              },
+              {
+                "face": 93,
+                "id": "m2026-n2-f00d",
+                "name": "小川 悠斗"
+              },
+              {
+                "face": 94,
+                "id": "m2026-n3-f00d",
+                "name": "松井 颯太"
+              }
+            ],
+            "id": "r2026-26-0-790160",
+            "label": "2026年 定期演奏会",
+            "piece": "largo",
+            "span": {
+              "from": 0,
+              "to": 32
+            },
+            "venue": "hall",
+            "year": 2026
+          },
+          {
+            "count": 39,
+            "faces": [
+              {
+                "face": 46,
+                "id": "m2028-n1-cafe",
+                "name": "田中 葵"
+              },
+              {
+                "face": 93,
+                "id": "m2026-n2-f00d",
+                "name": "小川 悠斗"
+              },
+              {
+                "face": 94,
+                "id": "m2026-n3-f00d",
+                "name": "松井 颯太"
+              }
+            ],
+            "id": "r2027-26-1-339903",
+            "label": "2027年 定期演奏会",
+            "piece": "ode",
+            "venue": "hall",
+            "year": 2027
+          }
+        ],
+        "waiting": false,
+        "years": [
+          "2027年度",
+          "2026年度"
+        ]
+      },
+      "listening": {
+        "conductDisabled": false,
+        "engineVenue": "hall",
+        "kind": "自由曲",
+        "range": "all",
+        "rangeDisabled": false,
+        "rangeLabel": "全部",
+        "shownPiece": "galop",
+        "summary": "県民文化会館・全部・全員",
+        "title": "「天国と地獄」"
+      },
+      "now": "表示中：いまの音（6月 第3週・県民文化会館）",
+      "piece": "galop",
+      "playing": false,
+      "portraits": 39,
+      "records": 0.8007528416346759,
+      "scrollWidth": 375,
+      "solo": "all",
+      "stats": 0.771712013753131,
+      "waiting": false,
+      "width": 375
+    }
+  },
+  {
+    "case": "recorded-cancel-released",
+    "data": {
+      "audio": [],
+      "card": null,
+      "cardHidden": true,
+      "cast": [
+        {
+          "grade": 3,
+          "id": "m2026-n5-f00d",
+          "name": "岡本 智也",
+          "ranks": {
+            "expr": "A",
+            "pitch": "A",
+            "rhythm": "A",
+            "tone": "A"
+          },
+          "seat": "ob1"
+        },
+        {
+          "grade": 3,
+          "id": "m2026-n6-f00d",
+          "name": "山口 大翔",
+          "ranks": {
+            "expr": "A",
+            "pitch": "A",
+            "rhythm": "A",
+            "tone": "A"
+          },
+          "seat": "cl1a"
+        },
+        {
+          "grade": 3,
+          "id": "m2026-n7-f00d",
+          "name": "山下 彩花",
+          "ranks": {
+            "expr": "A",
+            "pitch": "A",
+            "rhythm": "A",
+            "tone": "A"
+          },
+          "seat": "cl1b"
+        },
+        {
+          "grade": 3,
+          "id": "m2026-n8-f00d",
+          "name": "高木 瑛太",
+          "ranks": {
+            "expr": "A",
+            "pitch": "A",
+            "rhythm": "A",
+            "tone": "A"
+          },
+          "seat": "cl1c"
+        },
+        {
+          "grade": 3,
+          "id": "m2026-n11-f00d",
+          "name": "山田 悠真",
+          "ranks": {
+            "expr": "A",
+            "pitch": "A",
+            "rhythm": "A",
+            "tone": "A"
+          },
+          "seat": "fg1"
+        },
+        {
+          "grade": 3,
+          "id": "m2026-n13-f00d",
+          "name": "松井 美咲",
+          "ranks": {
+            "expr": "A",
+            "pitch": "A",
+            "rhythm": "A",
+            "tone": "A"
+          },
+          "seat": "cl2a"
+        },
+        {
+          "grade": 3,
+          "id": "m2026-n14-f00d",
+          "name": "阿部 和奏",
+          "ranks": {
+            "expr": "A",
+            "pitch": "A",
+            "rhythm": "A",
+            "tone": "A"
+          },
+          "seat": "cl2b"
+        },
+        {
+          "grade": 3,
+          "id": "m2026-n15-f00d",
+          "name": "前田 紬",
+          "ranks": {
+            "expr": "A",
+            "pitch": "A",
+            "rhythm": "A",
+            "tone": "A"
+          },
+          "seat": "cl3a"
+        },
+        {
+          "grade": 3,
+          "id": "m2026-n16-f00d",
+          "name": "野口 陽翔",
+          "ranks": {
+            "expr": "A",
+            "pitch": "A",
+            "rhythm": "A",
+            "tone": "A"
+          },
+          "seat": "cl3b"
+        },
+        {
+          "grade": 3,
+          "id": "m2026-n17-f00d",
+          "name": "工藤 美月",
+          "ranks": {
+            "expr": "A",
+            "pitch": "A",
+            "rhythm": "A",
+            "tone": "A"
+          },
+          "seat": "bcl1"
+        },
+        {
+          "grade": 3,
+          "id": "m2026-n18-f00d",
+          "name": "中野 透",
+          "ranks": {
+            "expr": "A",
+            "pitch": "A",
+            "rhythm": "A",
+            "tone": "A"
+          },
+          "seat": "tsax1"
+        },
+        {
+          "grade": 3,
+          "id": "m2026-n20-f00d",
+          "name": "佐々木 彩花",
+          "ranks": {
+            "expr": "A",
+            "pitch": "A",
+            "rhythm": "A",
+            "tone": "A"
+          },
+          "seat": "hn1"
+        },
+        {
+          "grade": 3,
+          "id": "m2026-n21-f00d",
+          "name": "井上 優",
+          "ranks": {
+            "expr": "A",
+            "pitch": "A",
+            "rhythm": "A",
+            "tone": "A"
+          },
+          "seat": "hn2"
+        },
+        {
+          "grade": 3,
+          "id": "m2026-n31-f00d",
+          "name": "山下 茜",
+          "ranks": {
+            "expr": "A",
+            "pitch": "A",
+            "rhythm": "A",
+            "tone": "A"
+          },
+          "seat": "euph1"
+        },
+        {
+          "grade": 3,
+          "id": "m2026-n32-f00d",
+          "name": "渡辺 渚",
+          "ranks": {
+            "expr": "A",
+            "pitch": "A",
+            "rhythm": "A",
+            "tone": "A"
+          },
+          "seat": "euph2"
+        },
+        {
+          "grade": 3,
+          "id": "m2026-n33-f00d",
+          "name": "坂本 雫",
+          "ranks": {
+            "expr": "A",
+            "pitch": "A",
+            "rhythm": "A",
+            "tone": "A"
+          },
+          "seat": "tuba1"
+        },
+        {
+          "grade": 3,
+          "id": "m2026-n34-f00d",
+          "name": "菅原 智也",
+          "ranks": {
+            "expr": "A",
+            "pitch": "A",
+            "rhythm": "A",
+            "tone": "A"
+          },
+          "seat": "tuba2"
+        },
+        {
+          "grade": 3,
+          "id": "m2026-n35-f00d",
+          "name": "高木 明里",
+          "ranks": {
+            "expr": "A",
+            "pitch": "A",
+            "rhythm": "A",
+            "tone": "A"
+          },
+          "seat": "cb1"
+        },
+        {
+          "grade": 3,
+          "id": "m2028-n1-cafe",
+          "name": "田中 七海",
+          "ranks": {
+            "expr": "A",
+            "pitch": "A",
+            "rhythm": "A",
+            "tone": "A"
+          },
+          "seat": "picc1"
+        },
+        {
+          "grade": 3,
+          "id": "m2026-n2-f00d",
+          "name": "小川 悠斗",
+          "ranks": {
+            "expr": "A",
+            "pitch": "A",
+            "rhythm": "A",
+            "tone": "A"
+          },
+          "seat": "fl1a"
+        },
+        {
+          "grade": 3,
+          "id": "m2026-n3-f00d",
+          "name": "松井 颯太",
+          "ranks": {
+            "expr": "A",
+            "pitch": "A",
+            "rhythm": "A",
+            "tone": "A"
+          },
+          "seat": "fl1b"
+        },
+        {
+          "grade": 3,
+          "id": "m2026-n4-f00d",
+          "name": "菅原 菜月",
+          "ranks": {
+            "expr": "A",
+            "pitch": "A",
+            "rhythm": "A",
+            "tone": "A"
+          },
+          "seat": "fl2a"
+        },
+        {
+          "grade": 3,
+          "id": "m2026-n9-f00d",
+          "name": "清水 菜月",
+          "ranks": {
+            "expr": "A",
+            "pitch": "A",
+            "rhythm": "A",
+            "tone": "A"
+          },
+          "seat": "asax1"
+        },
+        {
+          "grade": 3,
+          "id": "m2026-n10-f00d",
+          "name": "山本 凛",
+          "ranks": {
+            "expr": "A",
+            "pitch": "A",
+            "rhythm": "A",
+            "tone": "A"
+          },
+          "seat": "asax2"
+        },
+        {
+          "grade": 3,
+          "id": "m2026-n12-f00d",
+          "name": "西村 樹",
+          "ranks": {
+            "expr": "A",
+            "pitch": "A",
+            "rhythm": "A",
+            "tone": "A"
+          },
+          "seat": "ebcl1"
+        },
+        {
+          "grade": 3,
+          "id": "m2026-n19-f00d",
+          "name": "木村 湊",
+          "ranks": {
+            "expr": "A",
+            "pitch": "A",
+            "rhythm": "A",
+            "tone": "A"
+          },
+          "seat": "bsax1"
+        },
+        {
+          "grade": 3,
+          "id": "m2026-n22-f00d",
+          "name": "酒井 陸",
+          "ranks": {
+            "expr": "A",
+            "pitch": "A",
+            "rhythm": "A",
+            "tone": "A"
+          },
+          "seat": "hn3"
+        },
+        {
+          "grade": 3,
+          "id": "m2026-n23-f00d",
+          "name": "松田 拓海",
+          "ranks": {
+            "expr": "A",
+            "pitch": "A",
+            "rhythm": "A",
+            "tone": "A"
+          },
+          "seat": "hn4"
+        },
+        {
+          "grade": 3,
+          "id": "m2026-n24-f00d",
+          "name": "中村 絢",
+          "ranks": {
+            "expr": "A",
+            "pitch": "A",
+            "rhythm": "A",
+            "tone": "A"
+          },
+          "seat": "tp1a"
+        },
+        {
+          "grade": 3,
+          "id": "m2026-n25-f00d",
+          "name": "林 亮",
+          "ranks": {
+            "expr": "A",
+            "pitch": "A",
+            "rhythm": "A",
+            "tone": "A"
+          },
+          "seat": "tp1b"
+        },
+        {
+          "grade": 3,
+          "id": "m2026-n26-f00d",
+          "name": "岩崎 結衣",
+          "ranks": {
+            "expr": "A",
+            "pitch": "A",
+            "rhythm": "A",
+            "tone": "A"
+          },
+          "seat": "tp2a"
+        },
+        {
+          "grade": 3,
+          "id": "m2026-n27-f00d",
+          "name": "千葉 陸",
+          "ranks": {
+            "expr": "A",
+            "pitch": "A",
+            "rhythm": "A",
+            "tone": "A"
+          },
+          "seat": "tp3a"
+        },
+        {
+          "grade": 3,
+          "id": "m2026-n28-f00d",
+          "name": "竹内 花音",
+          "ranks": {
+            "expr": "A",
+            "pitch": "A",
+            "rhythm": "A",
+            "tone": "A"
+          },
+          "seat": "tb1"
+        },
+        {
+          "grade": 3,
+          "id": "m2026-n29-f00d",
+          "name": "井上 雫",
+          "ranks": {
+            "expr": "A",
+            "pitch": "A",
+            "rhythm": "A",
+            "tone": "A"
+          },
+          "seat": "tb2"
+        },
+        {
+          "grade": 3,
+          "id": "m2026-n30-f00d",
+          "name": "石井 透",
+          "ranks": {
+            "expr": "A",
+            "pitch": "A",
+            "rhythm": "A",
+            "tone": "A"
+          },
+          "seat": "btb1"
+        },
+        {
+          "grade": 3,
+          "id": "m2026-n36-f00d",
+          "name": "佐藤 誠",
+          "ranks": {
+            "expr": "A",
+            "pitch": "A",
+            "rhythm": "A",
+            "tone": "A"
+          },
+          "seat": "perc1"
+        },
+        {
+          "grade": 3,
+          "id": "m2026-n37-f00d",
+          "name": "山田 蓮",
+          "ranks": {
+            "expr": "A",
+            "pitch": "A",
+            "rhythm": "A",
+            "tone": "A"
+          },
+          "seat": "perc2"
+        },
+        {
+          "grade": 3,
+          "id": "m2026-n38-f00d",
+          "name": "原 杏",
+          "ranks": {
+            "expr": "A",
+            "pitch": "A",
+            "rhythm": "A",
+            "tone": "A"
+          },
+          "seat": "perc3"
+        },
+        {
+          "grade": 3,
+          "id": "m2026-n39-f00d",
+          "name": "横山 透",
+          "ranks": {
+            "expr": "A",
+            "pitch": "A",
+            "rhythm": "A",
+            "tone": "A"
+          },
+          "seat": "perc4"
+        }
+      ],
+      "errors": [],
+      "library": {
+        "active": null,
+        "blocked": false,
+        "open": false,
+        "rows": [
+          {
+            "active": "false",
+            "disabled": false,
+            "faces": [
+              "m2028-n1-cafe",
+              "m2026-n2-f00d",
+              "m2026-n3-f00d"
+            ],
+            "id": "r2027-26-1-339903",
+            "label": "2027年 定期演奏会・「歓喜の歌」・県民文化会館を聴く",
+            "pressed": "false",
+            "saveDisabled": false
+          },
+          {
+            "active": "false",
+            "disabled": false,
+            "faces": [
+              "m2028-n1-cafe",
+              "m2026-n2-f00d",
+              "m2026-n3-f00d"
+            ],
+            "id": "r2026-26-0-790160",
+            "label": "2026年 定期演奏会・《新世界より》第2楽章・前半・県民文化会館を聴く",
+            "pressed": "false",
+            "saveDisabled": false
+          }
+        ],
+        "saving": null,
+        "selected": "r2026-26-0-790160",
+        "source": [
+          {
+            "count": 39,
+            "faces": [
+              {
+                "face": 46,
+                "id": "m2028-n1-cafe",
+                "name": "田中 七海"
+              },
+              {
+                "face": 93,
+                "id": "m2026-n2-f00d",
+                "name": "小川 悠斗"
+              },
+              {
+                "face": 94,
+                "id": "m2026-n3-f00d",
+                "name": "松井 颯太"
+              }
+            ],
+            "id": "r2026-26-0-790160",
+            "label": "2026年 定期演奏会",
+            "piece": "largo",
+            "span": {
+              "from": 0,
+              "to": 32
+            },
+            "venue": "hall",
+            "year": 2026
+          },
+          {
+            "count": 39,
+            "faces": [
+              {
+                "face": 46,
+                "id": "m2028-n1-cafe",
+                "name": "田中 葵"
+              },
+              {
+                "face": 93,
+                "id": "m2026-n2-f00d",
+                "name": "小川 悠斗"
+              },
+              {
+                "face": 94,
+                "id": "m2026-n3-f00d",
+                "name": "松井 颯太"
+              }
+            ],
+            "id": "r2027-26-1-339903",
+            "label": "2027年 定期演奏会",
+            "piece": "ode",
+            "venue": "hall",
+            "year": 2027
+          }
+        ],
+        "waiting": false,
+        "years": [
+          "2027年度",
+          "2026年度"
+        ]
+      },
+      "listening": {
+        "conductDisabled": false,
+        "engineVenue": "hall",
+        "kind": "自由曲",
+        "range": "all",
+        "rangeDisabled": false,
+        "rangeLabel": "全部",
+        "shownPiece": "galop",
+        "summary": "県民文化会館・全部・全員",
+        "title": "「天国と地獄」"
+      },
+      "now": "表示中：いまの音（6月 第3週・県民文化会館）",
+      "piece": "galop",
+      "playing": false,
+      "portraits": 39,
+      "records": 0.8007528416346759,
+      "scrollWidth": 375,
+      "solo": "all",
+      "stats": 0.771712013753131,
+      "waiting": false,
+      "width": 375
+    }
+  },
+  {
+    "case": "switch-baseline",
+    "data": {
+      "audio": [],
+      "card": null,
+      "cardHidden": true,
+      "cast": [],
+      "errors": [],
+      "library": {
+        "active": null,
+        "blocked": false,
+        "open": false,
+        "rows": [
+          {
+            "active": "false",
+            "disabled": false,
+            "faces": [
+              "m2028-n1-cafe",
+              "m2026-n2-f00d",
+              "m2026-n3-f00d"
+            ],
+            "id": "r2027-26-1-339903",
+            "label": "2027年 定期演奏会・「歓喜の歌」・県民文化会館を聴く",
+            "pressed": "false",
+            "saveDisabled": false
+          },
+          {
+            "active": "false",
+            "disabled": false,
+            "faces": [
+              "m2028-n1-cafe",
+              "m2026-n2-f00d",
+              "m2026-n3-f00d"
+            ],
+            "id": "r2026-26-0-790160",
+            "label": "2026年 定期演奏会・《新世界より》第2楽章・前半・県民文化会館を聴く",
+            "pressed": "false",
+            "saveDisabled": false
+          }
+        ],
+        "saving": null,
+        "selected": "r2027-26-1-339903",
+        "source": [
+          {
+            "count": 39,
+            "faces": [
+              {
+                "face": 46,
+                "id": "m2028-n1-cafe",
+                "name": "田中 七海"
+              },
+              {
+                "face": 93,
+                "id": "m2026-n2-f00d",
+                "name": "小川 悠斗"
+              },
+              {
+                "face": 94,
+                "id": "m2026-n3-f00d",
+                "name": "松井 颯太"
+              }
+            ],
+            "id": "r2026-26-0-790160",
+            "label": "2026年 定期演奏会",
+            "piece": "largo",
+            "span": {
+              "from": 0,
+              "to": 32
+            },
+            "venue": "hall",
+            "year": 2026
+          },
+          {
+            "count": 39,
+            "faces": [
+              {
+                "face": 46,
+                "id": "m2028-n1-cafe",
+                "name": "田中 葵"
+              },
+              {
+                "face": 93,
+                "id": "m2026-n2-f00d",
+                "name": "小川 悠斗"
+              },
+              {
+                "face": 94,
+                "id": "m2026-n3-f00d",
+                "name": "松井 颯太"
+              }
+            ],
+            "id": "r2027-26-1-339903",
+            "label": "2027年 定期演奏会",
+            "piece": "ode",
+            "venue": "hall",
+            "year": 2027
+          }
+        ],
+        "waiting": false,
+        "years": [
+          "2027年度",
+          "2026年度"
+        ]
+      },
+      "listening": {
+        "conductDisabled": false,
+        "engineVenue": "room",
+        "kind": "自由曲",
+        "range": "all",
+        "rangeDisabled": false,
+        "rangeLabel": "全部",
+        "shownPiece": "galop",
+        "summary": "音楽室・全部・全員",
+        "title": "「天国と地獄」"
+      },
+      "now": "表示中：いまの音（6月 第3週・音楽室）",
+      "playing": false,
+      "portraits": 39,
+      "records": 0.8007528416346759,
+      "state": 0.5090051502920687,
+      "waiting": false
+    }
+  },
+  {
+    "case": "switch-old-wait",
+    "data": {
+      "audio": [],
+      "card": null,
+      "cardHidden": true,
+      "cast": [
+        {
+          "grade": 3,
+          "id": "m2026-n5-f00d",
+          "name": "岡本 智也",
+          "ranks": {
+            "expr": "A",
+            "pitch": "A",
+            "rhythm": "A",
+            "tone": "A"
+          },
+          "seat": "ob1"
+        },
+        {
+          "grade": 3,
+          "id": "m2026-n6-f00d",
+          "name": "山口 大翔",
+          "ranks": {
+            "expr": "A",
+            "pitch": "A",
+            "rhythm": "A",
+            "tone": "A"
+          },
+          "seat": "cl1a"
+        },
+        {
+          "grade": 3,
+          "id": "m2026-n7-f00d",
+          "name": "山下 彩花",
+          "ranks": {
+            "expr": "A",
+            "pitch": "A",
+            "rhythm": "A",
+            "tone": "A"
+          },
+          "seat": "cl1b"
+        },
+        {
+          "grade": 3,
+          "id": "m2026-n8-f00d",
+          "name": "高木 瑛太",
+          "ranks": {
+            "expr": "A",
+            "pitch": "A",
+            "rhythm": "A",
+            "tone": "A"
+          },
+          "seat": "cl1c"
+        },
+        {
+          "grade": 3,
+          "id": "m2026-n11-f00d",
+          "name": "山田 悠真",
+          "ranks": {
+            "expr": "A",
+            "pitch": "A",
+            "rhythm": "A",
+            "tone": "A"
+          },
+          "seat": "fg1"
+        },
+        {
+          "grade": 3,
+          "id": "m2026-n13-f00d",
+          "name": "松井 美咲",
+          "ranks": {
+            "expr": "A",
+            "pitch": "A",
+            "rhythm": "A",
+            "tone": "A"
+          },
+          "seat": "cl2a"
+        },
+        {
+          "grade": 3,
+          "id": "m2026-n14-f00d",
+          "name": "阿部 和奏",
+          "ranks": {
+            "expr": "A",
+            "pitch": "A",
+            "rhythm": "A",
+            "tone": "A"
+          },
+          "seat": "cl2b"
+        },
+        {
+          "grade": 3,
+          "id": "m2026-n15-f00d",
+          "name": "前田 紬",
+          "ranks": {
+            "expr": "A",
+            "pitch": "A",
+            "rhythm": "A",
+            "tone": "A"
+          },
+          "seat": "cl3a"
+        },
+        {
+          "grade": 3,
+          "id": "m2026-n16-f00d",
+          "name": "野口 陽翔",
+          "ranks": {
+            "expr": "A",
+            "pitch": "A",
+            "rhythm": "A",
+            "tone": "A"
+          },
+          "seat": "cl3b"
+        },
+        {
+          "grade": 3,
+          "id": "m2026-n17-f00d",
+          "name": "工藤 美月",
+          "ranks": {
+            "expr": "A",
+            "pitch": "A",
+            "rhythm": "A",
+            "tone": "A"
+          },
+          "seat": "bcl1"
+        },
+        {
+          "grade": 3,
+          "id": "m2026-n18-f00d",
+          "name": "中野 透",
+          "ranks": {
+            "expr": "A",
+            "pitch": "A",
+            "rhythm": "A",
+            "tone": "A"
+          },
+          "seat": "tsax1"
+        },
+        {
+          "grade": 3,
+          "id": "m2026-n20-f00d",
+          "name": "佐々木 彩花",
+          "ranks": {
+            "expr": "A",
+            "pitch": "A",
+            "rhythm": "A",
+            "tone": "A"
+          },
+          "seat": "hn1"
+        },
+        {
+          "grade": 3,
+          "id": "m2026-n21-f00d",
+          "name": "井上 優",
+          "ranks": {
+            "expr": "A",
+            "pitch": "A",
+            "rhythm": "A",
+            "tone": "A"
+          },
+          "seat": "hn2"
+        },
+        {
+          "grade": 3,
+          "id": "m2026-n31-f00d",
+          "name": "山下 茜",
+          "ranks": {
+            "expr": "A",
+            "pitch": "A",
+            "rhythm": "A",
+            "tone": "A"
+          },
+          "seat": "euph1"
+        },
+        {
+          "grade": 3,
+          "id": "m2026-n32-f00d",
+          "name": "渡辺 渚",
+          "ranks": {
+            "expr": "A",
+            "pitch": "A",
+            "rhythm": "A",
+            "tone": "A"
+          },
+          "seat": "euph2"
+        },
+        {
+          "grade": 3,
+          "id": "m2026-n33-f00d",
+          "name": "坂本 雫",
+          "ranks": {
+            "expr": "A",
+            "pitch": "A",
+            "rhythm": "A",
+            "tone": "A"
+          },
+          "seat": "tuba1"
+        },
+        {
+          "grade": 3,
+          "id": "m2026-n34-f00d",
+          "name": "菅原 智也",
+          "ranks": {
+            "expr": "A",
+            "pitch": "A",
+            "rhythm": "A",
+            "tone": "A"
+          },
+          "seat": "tuba2"
+        },
+        {
+          "grade": 3,
+          "id": "m2026-n35-f00d",
+          "name": "高木 明里",
+          "ranks": {
+            "expr": "A",
+            "pitch": "A",
+            "rhythm": "A",
+            "tone": "A"
+          },
+          "seat": "cb1"
+        },
+        {
+          "grade": 3,
+          "id": "m2028-n1-cafe",
+          "name": "田中 七海",
+          "ranks": {
+            "expr": "A",
+            "pitch": "A",
+            "rhythm": "A",
+            "tone": "A"
+          },
+          "seat": "picc1"
+        },
+        {
+          "grade": 3,
+          "id": "m2026-n2-f00d",
+          "name": "小川 悠斗",
+          "ranks": {
+            "expr": "A",
+            "pitch": "A",
+            "rhythm": "A",
+            "tone": "A"
+          },
+          "seat": "fl1a"
+        },
+        {
+          "grade": 3,
+          "id": "m2026-n3-f00d",
+          "name": "松井 颯太",
+          "ranks": {
+            "expr": "A",
+            "pitch": "A",
+            "rhythm": "A",
+            "tone": "A"
+          },
+          "seat": "fl1b"
+        },
+        {
+          "grade": 3,
+          "id": "m2026-n4-f00d",
+          "name": "菅原 菜月",
+          "ranks": {
+            "expr": "A",
+            "pitch": "A",
+            "rhythm": "A",
+            "tone": "A"
+          },
+          "seat": "fl2a"
+        },
+        {
+          "grade": 3,
+          "id": "m2026-n9-f00d",
+          "name": "清水 菜月",
+          "ranks": {
+            "expr": "A",
+            "pitch": "A",
+            "rhythm": "A",
+            "tone": "A"
+          },
+          "seat": "asax1"
+        },
+        {
+          "grade": 3,
+          "id": "m2026-n10-f00d",
+          "name": "山本 凛",
+          "ranks": {
+            "expr": "A",
+            "pitch": "A",
+            "rhythm": "A",
+            "tone": "A"
+          },
+          "seat": "asax2"
+        },
+        {
+          "grade": 3,
+          "id": "m2026-n12-f00d",
+          "name": "西村 樹",
+          "ranks": {
+            "expr": "A",
+            "pitch": "A",
+            "rhythm": "A",
+            "tone": "A"
+          },
+          "seat": "ebcl1"
+        },
+        {
+          "grade": 3,
+          "id": "m2026-n19-f00d",
+          "name": "木村 湊",
+          "ranks": {
+            "expr": "A",
+            "pitch": "A",
+            "rhythm": "A",
+            "tone": "A"
+          },
+          "seat": "bsax1"
+        },
+        {
+          "grade": 3,
+          "id": "m2026-n22-f00d",
+          "name": "酒井 陸",
+          "ranks": {
+            "expr": "A",
+            "pitch": "A",
+            "rhythm": "A",
+            "tone": "A"
+          },
+          "seat": "hn3"
+        },
+        {
+          "grade": 3,
+          "id": "m2026-n23-f00d",
+          "name": "松田 拓海",
+          "ranks": {
+            "expr": "A",
+            "pitch": "A",
+            "rhythm": "A",
+            "tone": "A"
+          },
+          "seat": "hn4"
+        },
+        {
+          "grade": 3,
+          "id": "m2026-n24-f00d",
+          "name": "中村 絢",
+          "ranks": {
+            "expr": "A",
+            "pitch": "A",
+            "rhythm": "A",
+            "tone": "A"
+          },
+          "seat": "tp1a"
+        },
+        {
+          "grade": 3,
+          "id": "m2026-n25-f00d",
+          "name": "林 亮",
+          "ranks": {
+            "expr": "A",
+            "pitch": "A",
+            "rhythm": "A",
+            "tone": "A"
+          },
+          "seat": "tp1b"
+        },
+        {
+          "grade": 3,
+          "id": "m2026-n26-f00d",
+          "name": "岩崎 結衣",
+          "ranks": {
+            "expr": "A",
+            "pitch": "A",
+            "rhythm": "A",
+            "tone": "A"
+          },
+          "seat": "tp2a"
+        },
+        {
+          "grade": 3,
+          "id": "m2026-n27-f00d",
+          "name": "千葉 陸",
+          "ranks": {
+            "expr": "A",
+            "pitch": "A",
+            "rhythm": "A",
+            "tone": "A"
+          },
+          "seat": "tp3a"
+        },
+        {
+          "grade": 3,
+          "id": "m2026-n28-f00d",
+          "name": "竹内 花音",
+          "ranks": {
+            "expr": "A",
+            "pitch": "A",
+            "rhythm": "A",
+            "tone": "A"
+          },
+          "seat": "tb1"
+        },
+        {
+          "grade": 3,
+          "id": "m2026-n29-f00d",
+          "name": "井上 雫",
+          "ranks": {
+            "expr": "A",
+            "pitch": "A",
+            "rhythm": "A",
+            "tone": "A"
+          },
+          "seat": "tb2"
+        },
+        {
+          "grade": 3,
+          "id": "m2026-n30-f00d",
+          "name": "石井 透",
+          "ranks": {
+            "expr": "A",
+            "pitch": "A",
+            "rhythm": "A",
+            "tone": "A"
+          },
+          "seat": "btb1"
+        },
+        {
+          "grade": 3,
+          "id": "m2026-n36-f00d",
+          "name": "佐藤 誠",
+          "ranks": {
+            "expr": "A",
+            "pitch": "A",
+            "rhythm": "A",
+            "tone": "A"
+          },
+          "seat": "perc1"
+        },
+        {
+          "grade": 3,
+          "id": "m2026-n37-f00d",
+          "name": "山田 蓮",
+          "ranks": {
+            "expr": "A",
+            "pitch": "A",
+            "rhythm": "A",
+            "tone": "A"
+          },
+          "seat": "perc2"
+        },
+        {
+          "grade": 3,
+          "id": "m2026-n38-f00d",
+          "name": "原 杏",
+          "ranks": {
+            "expr": "A",
+            "pitch": "A",
+            "rhythm": "A",
+            "tone": "A"
+          },
+          "seat": "perc3"
+        },
+        {
+          "grade": 3,
+          "id": "m2026-n39-f00d",
+          "name": "横山 透",
+          "ranks": {
+            "expr": "A",
+            "pitch": "A",
+            "rhythm": "A",
+            "tone": "A"
+          },
+          "seat": "perc4"
+        }
+      ],
+      "errors": [],
+      "library": {
+        "active": "r2026-26-0-790160",
+        "actual": 0.8497014506720006,
+        "blocked": false,
+        "expected": 0.8497014506720006,
+        "open": true,
+        "rows": [
+          {
+            "active": "false",
+            "disabled": false,
+            "faces": [
+              "m2028-n1-cafe",
+              "m2026-n2-f00d",
+              "m2026-n3-f00d"
+            ],
+            "id": "r2027-26-1-339903",
+            "label": "2027年 定期演奏会・「歓喜の歌」・県民文化会館を聴く",
+            "pressed": "false",
+            "saveDisabled": false
+          },
+          {
+            "active": "true",
+            "disabled": false,
+            "faces": [
+              "m2028-n1-cafe",
+              "m2026-n2-f00d",
+              "m2026-n3-f00d"
+            ],
+            "id": "r2026-26-0-790160",
+            "label": "2026年 定期演奏会・《新世界より》第2楽章・前半・県民文化会館を読み込みをやめる",
+            "pressed": "true",
+            "saveDisabled": false
+          }
+        ],
+        "saving": null,
+        "selected": "r2026-26-0-790160",
+        "source": [
+          {
+            "count": 39,
+            "faces": [
+              {
+                "face": 46,
+                "id": "m2028-n1-cafe",
+                "name": "田中 七海"
+              },
+              {
+                "face": 93,
+                "id": "m2026-n2-f00d",
+                "name": "小川 悠斗"
+              },
+              {
+                "face": 94,
+                "id": "m2026-n3-f00d",
+                "name": "松井 颯太"
+              }
+            ],
+            "id": "r2026-26-0-790160",
+            "label": "2026年 定期演奏会",
+            "piece": "largo",
+            "span": {
+              "from": 0,
+              "to": 32
+            },
+            "venue": "hall",
+            "year": 2026
+          },
+          {
+            "count": 39,
+            "faces": [
+              {
+                "face": 46,
+                "id": "m2028-n1-cafe",
+                "name": "田中 葵"
+              },
+              {
+                "face": 93,
+                "id": "m2026-n2-f00d",
+                "name": "小川 悠斗"
+              },
+              {
+                "face": 94,
+                "id": "m2026-n3-f00d",
+                "name": "松井 颯太"
+              }
+            ],
+            "id": "r2027-26-1-339903",
+            "label": "2027年 定期演奏会",
+            "piece": "ode",
+            "venue": "hall",
+            "year": 2027
+          }
+        ],
+        "waiting": true,
+        "years": [
+          "2027年度",
+          "2026年度"
+        ]
+      },
+      "listening": {
+        "conductDisabled": true,
+        "engineVenue": "hall",
+        "kind": "録音",
+        "range": "recorded",
+        "rangeDisabled": true,
+        "rangeLabel": "前半",
+        "shownPiece": "largo",
+        "summary": "県民文化会館・前半・全員",
+        "title": "《新世界より》第2楽章"
+      },
+      "now": "録音を読み込んでいます…（読み込めたら鳴ります）",
+      "playing": false,
+      "portraits": 39,
+      "records": 0.8007528416346759,
+      "state": 0.5090051502920687,
+      "waiting": true
+    }
+  },
+  {
+    "case": "switch-new-wait",
+    "data": {
+      "audio": [],
+      "card": null,
+      "cardHidden": true,
+      "cast": [
+        {
+          "grade": 3,
+          "id": "m2028-n1-cafe",
+          "name": "田中 葵",
+          "ranks": {
+            "expr": "D",
+            "pitch": "D",
+            "rhythm": "D",
+            "tone": "D"
+          },
+          "seat": "picc1"
+        },
+        {
+          "grade": 3,
+          "id": "m2026-n2-f00d",
+          "name": "小川 悠斗",
+          "ranks": {
+            "expr": "A",
+            "pitch": "A",
+            "rhythm": "A",
+            "tone": "A"
+          },
+          "seat": "fl1a"
+        },
+        {
+          "grade": 3,
+          "id": "m2026-n3-f00d",
+          "name": "松井 颯太",
+          "ranks": {
+            "expr": "A",
+            "pitch": "A",
+            "rhythm": "A",
+            "tone": "A"
+          },
+          "seat": "fl1b"
+        },
+        {
+          "grade": 3,
+          "id": "m2026-n4-f00d",
+          "name": "菅原 菜月",
+          "ranks": {
+            "expr": "A",
+            "pitch": "A",
+            "rhythm": "A",
+            "tone": "A"
+          },
+          "seat": "fl2a"
+        },
+        {
+          "grade": 3,
+          "id": "m2026-n5-f00d",
+          "name": "岡本 智也",
+          "ranks": {
+            "expr": "A",
+            "pitch": "A",
+            "rhythm": "A",
+            "tone": "A"
+          },
+          "seat": "ob1"
+        },
+        {
+          "grade": 3,
+          "id": "m2026-n6-f00d",
+          "name": "山口 大翔",
+          "ranks": {
+            "expr": "A",
+            "pitch": "A",
+            "rhythm": "A",
+            "tone": "A"
+          },
+          "seat": "cl1a"
+        },
+        {
+          "grade": 3,
+          "id": "m2026-n7-f00d",
+          "name": "山下 彩花",
+          "ranks": {
+            "expr": "A",
+            "pitch": "A",
+            "rhythm": "A",
+            "tone": "A"
+          },
+          "seat": "cl1b"
+        },
+        {
+          "grade": 3,
+          "id": "m2026-n8-f00d",
+          "name": "高木 瑛太",
+          "ranks": {
+            "expr": "A",
+            "pitch": "A",
+            "rhythm": "A",
+            "tone": "A"
+          },
+          "seat": "cl1c"
+        },
+        {
+          "grade": 3,
+          "id": "m2026-n9-f00d",
+          "name": "清水 菜月",
+          "ranks": {
+            "expr": "A",
+            "pitch": "A",
+            "rhythm": "A",
+            "tone": "A"
+          },
+          "seat": "asax1"
+        },
+        {
+          "grade": 3,
+          "id": "m2026-n10-f00d",
+          "name": "山本 凛",
+          "ranks": {
+            "expr": "A",
+            "pitch": "A",
+            "rhythm": "A",
+            "tone": "A"
+          },
+          "seat": "asax2"
+        },
+        {
+          "grade": 3,
+          "id": "m2026-n11-f00d",
+          "name": "山田 悠真",
+          "ranks": {
+            "expr": "A",
+            "pitch": "A",
+            "rhythm": "A",
+            "tone": "A"
+          },
+          "seat": "fg1"
+        },
+        {
+          "grade": 3,
+          "id": "m2026-n12-f00d",
+          "name": "西村 樹",
+          "ranks": {
+            "expr": "A",
+            "pitch": "A",
+            "rhythm": "A",
+            "tone": "A"
+          },
+          "seat": "ebcl1"
+        },
+        {
+          "grade": 3,
+          "id": "m2026-n13-f00d",
+          "name": "松井 美咲",
+          "ranks": {
+            "expr": "A",
+            "pitch": "A",
+            "rhythm": "A",
+            "tone": "A"
+          },
+          "seat": "cl2a"
+        },
+        {
+          "grade": 3,
+          "id": "m2026-n14-f00d",
+          "name": "阿部 和奏",
+          "ranks": {
+            "expr": "A",
+            "pitch": "A",
+            "rhythm": "A",
+            "tone": "A"
+          },
+          "seat": "cl2b"
+        },
+        {
+          "grade": 3,
+          "id": "m2026-n15-f00d",
+          "name": "前田 紬",
+          "ranks": {
+            "expr": "A",
+            "pitch": "A",
+            "rhythm": "A",
+            "tone": "A"
+          },
+          "seat": "cl3a"
+        },
+        {
+          "grade": 3,
+          "id": "m2026-n16-f00d",
+          "name": "野口 陽翔",
+          "ranks": {
+            "expr": "A",
+            "pitch": "A",
+            "rhythm": "A",
+            "tone": "A"
+          },
+          "seat": "cl3b"
+        },
+        {
+          "grade": 3,
+          "id": "m2026-n17-f00d",
+          "name": "工藤 美月",
+          "ranks": {
+            "expr": "A",
+            "pitch": "A",
+            "rhythm": "A",
+            "tone": "A"
+          },
+          "seat": "bcl1"
+        },
+        {
+          "grade": 3,
+          "id": "m2026-n18-f00d",
+          "name": "中野 透",
+          "ranks": {
+            "expr": "A",
+            "pitch": "A",
+            "rhythm": "A",
+            "tone": "A"
+          },
+          "seat": "tsax1"
+        },
+        {
+          "grade": 3,
+          "id": "m2026-n19-f00d",
+          "name": "木村 湊",
+          "ranks": {
+            "expr": "A",
+            "pitch": "A",
+            "rhythm": "A",
+            "tone": "A"
+          },
+          "seat": "bsax1"
+        },
+        {
+          "grade": 3,
+          "id": "m2026-n20-f00d",
+          "name": "佐々木 彩花",
+          "ranks": {
+            "expr": "A",
+            "pitch": "A",
+            "rhythm": "A",
+            "tone": "A"
+          },
+          "seat": "hn1"
+        },
+        {
+          "grade": 3,
+          "id": "m2026-n21-f00d",
+          "name": "井上 優",
+          "ranks": {
+            "expr": "A",
+            "pitch": "A",
+            "rhythm": "A",
+            "tone": "A"
+          },
+          "seat": "hn2"
+        },
+        {
+          "grade": 3,
+          "id": "m2026-n22-f00d",
+          "name": "酒井 陸",
+          "ranks": {
+            "expr": "A",
+            "pitch": "A",
+            "rhythm": "A",
+            "tone": "A"
+          },
+          "seat": "hn3"
+        },
+        {
+          "grade": 3,
+          "id": "m2026-n23-f00d",
+          "name": "松田 拓海",
+          "ranks": {
+            "expr": "A",
+            "pitch": "A",
+            "rhythm": "A",
+            "tone": "A"
+          },
+          "seat": "hn4"
+        },
+        {
+          "grade": 3,
+          "id": "m2026-n24-f00d",
+          "name": "中村 絢",
+          "ranks": {
+            "expr": "A",
+            "pitch": "A",
+            "rhythm": "A",
+            "tone": "A"
+          },
+          "seat": "tp1a"
+        },
+        {
+          "grade": 3,
+          "id": "m2026-n25-f00d",
+          "name": "林 亮",
+          "ranks": {
+            "expr": "A",
+            "pitch": "A",
+            "rhythm": "A",
+            "tone": "A"
+          },
+          "seat": "tp1b"
+        },
+        {
+          "grade": 3,
+          "id": "m2026-n26-f00d",
+          "name": "岩崎 結衣",
+          "ranks": {
+            "expr": "A",
+            "pitch": "A",
+            "rhythm": "A",
+            "tone": "A"
+          },
+          "seat": "tp2a"
+        },
+        {
+          "grade": 3,
+          "id": "m2026-n27-f00d",
+          "name": "千葉 陸",
+          "ranks": {
+            "expr": "A",
+            "pitch": "A",
+            "rhythm": "A",
+            "tone": "A"
+          },
+          "seat": "tp3a"
+        },
+        {
+          "grade": 3,
+          "id": "m2026-n28-f00d",
+          "name": "竹内 花音",
+          "ranks": {
+            "expr": "A",
+            "pitch": "A",
+            "rhythm": "A",
+            "tone": "A"
+          },
+          "seat": "tb1"
+        },
+        {
+          "grade": 3,
+          "id": "m2026-n29-f00d",
+          "name": "井上 雫",
+          "ranks": {
+            "expr": "A",
+            "pitch": "A",
+            "rhythm": "A",
+            "tone": "A"
+          },
+          "seat": "tb2"
+        },
+        {
+          "grade": 3,
+          "id": "m2026-n30-f00d",
+          "name": "石井 透",
+          "ranks": {
+            "expr": "A",
+            "pitch": "A",
+            "rhythm": "A",
+            "tone": "A"
+          },
+          "seat": "btb1"
+        },
+        {
+          "grade": 3,
+          "id": "m2026-n31-f00d",
+          "name": "山下 茜",
+          "ranks": {
+            "expr": "A",
+            "pitch": "A",
+            "rhythm": "A",
+            "tone": "A"
+          },
+          "seat": "euph1"
+        },
+        {
+          "grade": 3,
+          "id": "m2026-n32-f00d",
+          "name": "渡辺 渚",
+          "ranks": {
+            "expr": "A",
+            "pitch": "A",
+            "rhythm": "A",
+            "tone": "A"
+          },
+          "seat": "euph2"
+        },
+        {
+          "grade": 3,
+          "id": "m2026-n33-f00d",
+          "name": "坂本 雫",
+          "ranks": {
+            "expr": "A",
+            "pitch": "A",
+            "rhythm": "A",
+            "tone": "A"
+          },
+          "seat": "tuba1"
+        },
+        {
+          "grade": 3,
+          "id": "m2026-n34-f00d",
+          "name": "菅原 智也",
+          "ranks": {
+            "expr": "A",
+            "pitch": "A",
+            "rhythm": "A",
+            "tone": "A"
+          },
+          "seat": "tuba2"
+        },
+        {
+          "grade": 3,
+          "id": "m2026-n35-f00d",
+          "name": "高木 明里",
+          "ranks": {
+            "expr": "A",
+            "pitch": "A",
+            "rhythm": "A",
+            "tone": "A"
+          },
+          "seat": "cb1"
+        },
+        {
+          "grade": 3,
+          "id": "m2026-n39-f00d",
+          "name": "横山 透",
+          "ranks": {
+            "expr": "A",
+            "pitch": "A",
+            "rhythm": "A",
+            "tone": "A"
+          },
+          "seat": "perc4"
+        },
+        {
+          "grade": 3,
+          "id": "m2026-n36-f00d",
+          "name": "佐藤 誠",
+          "ranks": {
+            "expr": "A",
+            "pitch": "A",
+            "rhythm": "A",
+            "tone": "A"
+          },
+          "seat": "perc1"
+        },
+        {
+          "grade": 3,
+          "id": "m2026-n38-f00d",
+          "name": "原 杏",
+          "ranks": {
+            "expr": "A",
+            "pitch": "A",
+            "rhythm": "A",
+            "tone": "A"
+          },
+          "seat": "perc3"
+        },
+        {
+          "grade": 3,
+          "id": "m2026-n37-f00d",
+          "name": "山田 蓮",
+          "ranks": {
+            "expr": "A",
+            "pitch": "A",
+            "rhythm": "A",
+            "tone": "A"
+          },
+          "seat": "perc2"
+        }
+      ],
+      "errors": [],
+      "library": {
+        "active": "r2027-26-1-339903",
+        "actual": 0.9452541864011436,
+        "blocked": false,
+        "expected": 0.9452541864011436,
+        "open": true,
+        "rows": [
+          {
+            "active": "true",
+            "disabled": false,
+            "faces": [
+              "m2028-n1-cafe",
+              "m2026-n2-f00d",
+              "m2026-n3-f00d"
+            ],
+            "id": "r2027-26-1-339903",
+            "label": "2027年 定期演奏会・「歓喜の歌」・県民文化会館を読み込みをやめる",
+            "pressed": "true",
+            "saveDisabled": false
+          },
+          {
+            "active": "false",
+            "disabled": false,
+            "faces": [
+              "m2028-n1-cafe",
+              "m2026-n2-f00d",
+              "m2026-n3-f00d"
+            ],
+            "id": "r2026-26-0-790160",
+            "label": "2026年 定期演奏会・《新世界より》第2楽章・前半・県民文化会館を聴く",
+            "pressed": "false",
+            "saveDisabled": false
+          }
+        ],
+        "saving": null,
+        "selected": "r2027-26-1-339903",
+        "source": [
+          {
+            "count": 39,
+            "faces": [
+              {
+                "face": 46,
+                "id": "m2028-n1-cafe",
+                "name": "田中 七海"
+              },
+              {
+                "face": 93,
+                "id": "m2026-n2-f00d",
+                "name": "小川 悠斗"
+              },
+              {
+                "face": 94,
+                "id": "m2026-n3-f00d",
+                "name": "松井 颯太"
+              }
+            ],
+            "id": "r2026-26-0-790160",
+            "label": "2026年 定期演奏会",
+            "piece": "largo",
+            "span": {
+              "from": 0,
+              "to": 32
+            },
+            "venue": "hall",
+            "year": 2026
+          },
+          {
+            "count": 39,
+            "faces": [
+              {
+                "face": 46,
+                "id": "m2028-n1-cafe",
+                "name": "田中 葵"
+              },
+              {
+                "face": 93,
+                "id": "m2026-n2-f00d",
+                "name": "小川 悠斗"
+              },
+              {
+                "face": 94,
+                "id": "m2026-n3-f00d",
+                "name": "松井 颯太"
+              }
+            ],
+            "id": "r2027-26-1-339903",
+            "label": "2027年 定期演奏会",
+            "piece": "ode",
+            "venue": "hall",
+            "year": 2027
+          }
+        ],
+        "waiting": true,
+        "years": [
+          "2027年度",
+          "2026年度"
+        ]
+      },
+      "listening": {
+        "conductDisabled": true,
+        "engineVenue": "hall",
+        "kind": "録音",
+        "range": "recorded",
+        "rangeDisabled": true,
+        "rangeLabel": "全部",
+        "shownPiece": "ode",
+        "summary": "県民文化会館・全部・全員",
+        "title": "「歓喜の歌」"
+      },
+      "now": "録音を読み込んでいます…（読み込めたら鳴ります）",
+      "playing": false,
+      "portraits": 39,
+      "records": 0.8007528416346759,
+      "state": 0.5090051502920687,
+      "waiting": true
+    }
+  },
+  {
+    "case": "switch-new-playing",
+    "data": {
+      "audio": [
+        "SampleVoice"
+      ],
+      "card": null,
+      "cardHidden": true,
+      "cast": [
+        {
+          "grade": 3,
+          "id": "m2028-n1-cafe",
+          "name": "田中 葵",
+          "ranks": {
+            "expr": "D",
+            "pitch": "D",
+            "rhythm": "D",
+            "tone": "D"
+          },
+          "seat": "picc1"
+        },
+        {
+          "grade": 3,
+          "id": "m2026-n2-f00d",
+          "name": "小川 悠斗",
+          "ranks": {
+            "expr": "A",
+            "pitch": "A",
+            "rhythm": "A",
+            "tone": "A"
+          },
+          "seat": "fl1a"
+        },
+        {
+          "grade": 3,
+          "id": "m2026-n3-f00d",
+          "name": "松井 颯太",
+          "ranks": {
+            "expr": "A",
+            "pitch": "A",
+            "rhythm": "A",
+            "tone": "A"
+          },
+          "seat": "fl1b"
+        },
+        {
+          "grade": 3,
+          "id": "m2026-n4-f00d",
+          "name": "菅原 菜月",
+          "ranks": {
+            "expr": "A",
+            "pitch": "A",
+            "rhythm": "A",
+            "tone": "A"
+          },
+          "seat": "fl2a"
+        },
+        {
+          "grade": 3,
+          "id": "m2026-n5-f00d",
+          "name": "岡本 智也",
+          "ranks": {
+            "expr": "A",
+            "pitch": "A",
+            "rhythm": "A",
+            "tone": "A"
+          },
+          "seat": "ob1"
+        },
+        {
+          "grade": 3,
+          "id": "m2026-n6-f00d",
+          "name": "山口 大翔",
+          "ranks": {
+            "expr": "A",
+            "pitch": "A",
+            "rhythm": "A",
+            "tone": "A"
+          },
+          "seat": "cl1a"
+        },
+        {
+          "grade": 3,
+          "id": "m2026-n7-f00d",
+          "name": "山下 彩花",
+          "ranks": {
+            "expr": "A",
+            "pitch": "A",
+            "rhythm": "A",
+            "tone": "A"
+          },
+          "seat": "cl1b"
+        },
+        {
+          "grade": 3,
+          "id": "m2026-n8-f00d",
+          "name": "高木 瑛太",
+          "ranks": {
+            "expr": "A",
+            "pitch": "A",
+            "rhythm": "A",
+            "tone": "A"
+          },
+          "seat": "cl1c"
+        },
+        {
+          "grade": 3,
+          "id": "m2026-n9-f00d",
+          "name": "清水 菜月",
+          "ranks": {
+            "expr": "A",
+            "pitch": "A",
+            "rhythm": "A",
+            "tone": "A"
+          },
+          "seat": "asax1"
+        },
+        {
+          "grade": 3,
+          "id": "m2026-n10-f00d",
+          "name": "山本 凛",
+          "ranks": {
+            "expr": "A",
+            "pitch": "A",
+            "rhythm": "A",
+            "tone": "A"
+          },
+          "seat": "asax2"
+        },
+        {
+          "grade": 3,
+          "id": "m2026-n11-f00d",
+          "name": "山田 悠真",
+          "ranks": {
+            "expr": "A",
+            "pitch": "A",
+            "rhythm": "A",
+            "tone": "A"
+          },
+          "seat": "fg1"
+        },
+        {
+          "grade": 3,
+          "id": "m2026-n12-f00d",
+          "name": "西村 樹",
+          "ranks": {
+            "expr": "A",
+            "pitch": "A",
+            "rhythm": "A",
+            "tone": "A"
+          },
+          "seat": "ebcl1"
+        },
+        {
+          "grade": 3,
+          "id": "m2026-n13-f00d",
+          "name": "松井 美咲",
+          "ranks": {
+            "expr": "A",
+            "pitch": "A",
+            "rhythm": "A",
+            "tone": "A"
+          },
+          "seat": "cl2a"
+        },
+        {
+          "grade": 3,
+          "id": "m2026-n14-f00d",
+          "name": "阿部 和奏",
+          "ranks": {
+            "expr": "A",
+            "pitch": "A",
+            "rhythm": "A",
+            "tone": "A"
+          },
+          "seat": "cl2b"
+        },
+        {
+          "grade": 3,
+          "id": "m2026-n15-f00d",
+          "name": "前田 紬",
+          "ranks": {
+            "expr": "A",
+            "pitch": "A",
+            "rhythm": "A",
+            "tone": "A"
+          },
+          "seat": "cl3a"
+        },
+        {
+          "grade": 3,
+          "id": "m2026-n16-f00d",
+          "name": "野口 陽翔",
+          "ranks": {
+            "expr": "A",
+            "pitch": "A",
+            "rhythm": "A",
+            "tone": "A"
+          },
+          "seat": "cl3b"
+        },
+        {
+          "grade": 3,
+          "id": "m2026-n17-f00d",
+          "name": "工藤 美月",
+          "ranks": {
+            "expr": "A",
+            "pitch": "A",
+            "rhythm": "A",
+            "tone": "A"
+          },
+          "seat": "bcl1"
+        },
+        {
+          "grade": 3,
+          "id": "m2026-n18-f00d",
+          "name": "中野 透",
+          "ranks": {
+            "expr": "A",
+            "pitch": "A",
+            "rhythm": "A",
+            "tone": "A"
+          },
+          "seat": "tsax1"
+        },
+        {
+          "grade": 3,
+          "id": "m2026-n19-f00d",
+          "name": "木村 湊",
+          "ranks": {
+            "expr": "A",
+            "pitch": "A",
+            "rhythm": "A",
+            "tone": "A"
+          },
+          "seat": "bsax1"
+        },
+        {
+          "grade": 3,
+          "id": "m2026-n20-f00d",
+          "name": "佐々木 彩花",
+          "ranks": {
+            "expr": "A",
+            "pitch": "A",
+            "rhythm": "A",
+            "tone": "A"
+          },
+          "seat": "hn1"
+        },
+        {
+          "grade": 3,
+          "id": "m2026-n21-f00d",
+          "name": "井上 優",
+          "ranks": {
+            "expr": "A",
+            "pitch": "A",
+            "rhythm": "A",
+            "tone": "A"
+          },
+          "seat": "hn2"
+        },
+        {
+          "grade": 3,
+          "id": "m2026-n22-f00d",
+          "name": "酒井 陸",
+          "ranks": {
+            "expr": "A",
+            "pitch": "A",
+            "rhythm": "A",
+            "tone": "A"
+          },
+          "seat": "hn3"
+        },
+        {
+          "grade": 3,
+          "id": "m2026-n23-f00d",
+          "name": "松田 拓海",
+          "ranks": {
+            "expr": "A",
+            "pitch": "A",
+            "rhythm": "A",
+            "tone": "A"
+          },
+          "seat": "hn4"
+        },
+        {
+          "grade": 3,
+          "id": "m2026-n24-f00d",
+          "name": "中村 絢",
+          "ranks": {
+            "expr": "A",
+            "pitch": "A",
+            "rhythm": "A",
+            "tone": "A"
+          },
+          "seat": "tp1a"
+        },
+        {
+          "grade": 3,
+          "id": "m2026-n25-f00d",
+          "name": "林 亮",
+          "ranks": {
+            "expr": "A",
+            "pitch": "A",
+            "rhythm": "A",
+            "tone": "A"
+          },
+          "seat": "tp1b"
+        },
+        {
+          "grade": 3,
+          "id": "m2026-n26-f00d",
+          "name": "岩崎 結衣",
+          "ranks": {
+            "expr": "A",
+            "pitch": "A",
+            "rhythm": "A",
+            "tone": "A"
+          },
+          "seat": "tp2a"
+        },
+        {
+          "grade": 3,
+          "id": "m2026-n27-f00d",
+          "name": "千葉 陸",
+          "ranks": {
+            "expr": "A",
+            "pitch": "A",
+            "rhythm": "A",
+            "tone": "A"
+          },
+          "seat": "tp3a"
+        },
+        {
+          "grade": 3,
+          "id": "m2026-n28-f00d",
+          "name": "竹内 花音",
+          "ranks": {
+            "expr": "A",
+            "pitch": "A",
+            "rhythm": "A",
+            "tone": "A"
+          },
+          "seat": "tb1"
+        },
+        {
+          "grade": 3,
+          "id": "m2026-n29-f00d",
+          "name": "井上 雫",
+          "ranks": {
+            "expr": "A",
+            "pitch": "A",
+            "rhythm": "A",
+            "tone": "A"
+          },
+          "seat": "tb2"
+        },
+        {
+          "grade": 3,
+          "id": "m2026-n30-f00d",
+          "name": "石井 透",
+          "ranks": {
+            "expr": "A",
+            "pitch": "A",
+            "rhythm": "A",
+            "tone": "A"
+          },
+          "seat": "btb1"
+        },
+        {
+          "grade": 3,
+          "id": "m2026-n31-f00d",
+          "name": "山下 茜",
+          "ranks": {
+            "expr": "A",
+            "pitch": "A",
+            "rhythm": "A",
+            "tone": "A"
+          },
+          "seat": "euph1"
+        },
+        {
+          "grade": 3,
+          "id": "m2026-n32-f00d",
+          "name": "渡辺 渚",
+          "ranks": {
+            "expr": "A",
+            "pitch": "A",
+            "rhythm": "A",
+            "tone": "A"
+          },
+          "seat": "euph2"
+        },
+        {
+          "grade": 3,
+          "id": "m2026-n33-f00d",
+          "name": "坂本 雫",
+          "ranks": {
+            "expr": "A",
+            "pitch": "A",
+            "rhythm": "A",
+            "tone": "A"
+          },
+          "seat": "tuba1"
+        },
+        {
+          "grade": 3,
+          "id": "m2026-n34-f00d",
+          "name": "菅原 智也",
+          "ranks": {
+            "expr": "A",
+            "pitch": "A",
+            "rhythm": "A",
+            "tone": "A"
+          },
+          "seat": "tuba2"
+        },
+        {
+          "grade": 3,
+          "id": "m2026-n35-f00d",
+          "name": "高木 明里",
+          "ranks": {
+            "expr": "A",
+            "pitch": "A",
+            "rhythm": "A",
+            "tone": "A"
+          },
+          "seat": "cb1"
+        },
+        {
+          "grade": 3,
+          "id": "m2026-n39-f00d",
+          "name": "横山 透",
+          "ranks": {
+            "expr": "A",
+            "pitch": "A",
+            "rhythm": "A",
+            "tone": "A"
+          },
+          "seat": "perc4"
+        },
+        {
+          "grade": 3,
+          "id": "m2026-n36-f00d",
+          "name": "佐藤 誠",
+          "ranks": {
+            "expr": "A",
+            "pitch": "A",
+            "rhythm": "A",
+            "tone": "A"
+          },
+          "seat": "perc1"
+        },
+        {
+          "grade": 3,
+          "id": "m2026-n38-f00d",
+          "name": "原 杏",
+          "ranks": {
+            "expr": "A",
+            "pitch": "A",
+            "rhythm": "A",
+            "tone": "A"
+          },
+          "seat": "perc3"
+        },
+        {
+          "grade": 3,
+          "id": "m2026-n37-f00d",
+          "name": "山田 蓮",
+          "ranks": {
+            "expr": "A",
+            "pitch": "A",
+            "rhythm": "A",
+            "tone": "A"
+          },
+          "seat": "perc2"
+        }
+      ],
+      "errors": [],
+      "library": {
+        "active": "r2027-26-1-339903",
+        "actual": 0.9452541864011436,
+        "blocked": false,
+        "expected": 0.9452541864011436,
+        "open": true,
+        "rows": [
+          {
+            "active": "true",
+            "disabled": false,
+            "faces": [
+              "m2028-n1-cafe",
+              "m2026-n2-f00d",
+              "m2026-n3-f00d"
+            ],
+            "id": "r2027-26-1-339903",
+            "label": "2027年 定期演奏会・「歓喜の歌」・県民文化会館を止める",
+            "pressed": "true",
+            "saveDisabled": false
+          },
+          {
+            "active": "false",
+            "disabled": false,
+            "faces": [
+              "m2028-n1-cafe",
+              "m2026-n2-f00d",
+              "m2026-n3-f00d"
+            ],
+            "id": "r2026-26-0-790160",
+            "label": "2026年 定期演奏会・《新世界より》第2楽章・前半・県民文化会館を聴く",
+            "pressed": "false",
+            "saveDisabled": false
+          }
+        ],
+        "saving": null,
+        "selected": "r2027-26-1-339903",
+        "source": [
+          {
+            "count": 39,
+            "faces": [
+              {
+                "face": 46,
+                "id": "m2028-n1-cafe",
+                "name": "田中 七海"
+              },
+              {
+                "face": 93,
+                "id": "m2026-n2-f00d",
+                "name": "小川 悠斗"
+              },
+              {
+                "face": 94,
+                "id": "m2026-n3-f00d",
+                "name": "松井 颯太"
+              }
+            ],
+            "id": "r2026-26-0-790160",
+            "label": "2026年 定期演奏会",
+            "piece": "largo",
+            "span": {
+              "from": 0,
+              "to": 32
+            },
+            "venue": "hall",
+            "year": 2026
+          },
+          {
+            "count": 39,
+            "faces": [
+              {
+                "face": 46,
+                "id": "m2028-n1-cafe",
+                "name": "田中 葵"
+              },
+              {
+                "face": 93,
+                "id": "m2026-n2-f00d",
+                "name": "小川 悠斗"
+              },
+              {
+                "face": 94,
+                "id": "m2026-n3-f00d",
+                "name": "松井 颯太"
+              }
+            ],
+            "id": "r2027-26-1-339903",
+            "label": "2027年 定期演奏会",
+            "piece": "ode",
+            "venue": "hall",
+            "year": 2027
+          }
+        ],
+        "waiting": false,
+        "years": [
+          "2027年度",
+          "2026年度"
+        ]
+      },
+      "listening": {
+        "conductDisabled": true,
+        "engineVenue": "hall",
+        "kind": "録音",
+        "range": "recorded",
+        "rangeDisabled": true,
+        "rangeLabel": "全部",
+        "shownPiece": "ode",
+        "summary": "県民文化会館・全部・全員",
+        "title": "「歓喜の歌」"
+      },
+      "now": "再生中：2027年 定期演奏会（県民文化会館で録音）",
+      "playing": true,
+      "portraits": 39,
+      "records": 0.8007528416346759,
+      "state": 0.5090051502920687,
+      "waiting": false
+    }
+  },
+  {
+    "case": "switch-stop",
+    "data": {
+      "audio": [],
+      "card": null,
+      "cardHidden": true,
+      "cast": [
+        {
+          "grade": 3,
+          "id": "m2028-n1-cafe",
+          "name": "田中 葵",
+          "ranks": {
+            "expr": "D",
+            "pitch": "D",
+            "rhythm": "D",
+            "tone": "D"
+          },
+          "seat": "picc1"
+        },
+        {
+          "grade": 3,
+          "id": "m2026-n2-f00d",
+          "name": "小川 悠斗",
+          "ranks": {
+            "expr": "A",
+            "pitch": "A",
+            "rhythm": "A",
+            "tone": "A"
+          },
+          "seat": "fl1a"
+        },
+        {
+          "grade": 3,
+          "id": "m2026-n3-f00d",
+          "name": "松井 颯太",
+          "ranks": {
+            "expr": "A",
+            "pitch": "A",
+            "rhythm": "A",
+            "tone": "A"
+          },
+          "seat": "fl1b"
+        },
+        {
+          "grade": 3,
+          "id": "m2026-n4-f00d",
+          "name": "菅原 菜月",
+          "ranks": {
+            "expr": "A",
+            "pitch": "A",
+            "rhythm": "A",
+            "tone": "A"
+          },
+          "seat": "fl2a"
+        },
+        {
+          "grade": 3,
+          "id": "m2026-n5-f00d",
+          "name": "岡本 智也",
+          "ranks": {
+            "expr": "A",
+            "pitch": "A",
+            "rhythm": "A",
+            "tone": "A"
+          },
+          "seat": "ob1"
+        },
+        {
+          "grade": 3,
+          "id": "m2026-n6-f00d",
+          "name": "山口 大翔",
+          "ranks": {
+            "expr": "A",
+            "pitch": "A",
+            "rhythm": "A",
+            "tone": "A"
+          },
+          "seat": "cl1a"
+        },
+        {
+          "grade": 3,
+          "id": "m2026-n7-f00d",
+          "name": "山下 彩花",
+          "ranks": {
+            "expr": "A",
+            "pitch": "A",
+            "rhythm": "A",
+            "tone": "A"
+          },
+          "seat": "cl1b"
+        },
+        {
+          "grade": 3,
+          "id": "m2026-n8-f00d",
+          "name": "高木 瑛太",
+          "ranks": {
+            "expr": "A",
+            "pitch": "A",
+            "rhythm": "A",
+            "tone": "A"
+          },
+          "seat": "cl1c"
+        },
+        {
+          "grade": 3,
+          "id": "m2026-n9-f00d",
+          "name": "清水 菜月",
+          "ranks": {
+            "expr": "A",
+            "pitch": "A",
+            "rhythm": "A",
+            "tone": "A"
+          },
+          "seat": "asax1"
+        },
+        {
+          "grade": 3,
+          "id": "m2026-n10-f00d",
+          "name": "山本 凛",
+          "ranks": {
+            "expr": "A",
+            "pitch": "A",
+            "rhythm": "A",
+            "tone": "A"
+          },
+          "seat": "asax2"
+        },
+        {
+          "grade": 3,
+          "id": "m2026-n11-f00d",
+          "name": "山田 悠真",
+          "ranks": {
+            "expr": "A",
+            "pitch": "A",
+            "rhythm": "A",
+            "tone": "A"
+          },
+          "seat": "fg1"
+        },
+        {
+          "grade": 3,
+          "id": "m2026-n12-f00d",
+          "name": "西村 樹",
+          "ranks": {
+            "expr": "A",
+            "pitch": "A",
+            "rhythm": "A",
+            "tone": "A"
+          },
+          "seat": "ebcl1"
+        },
+        {
+          "grade": 3,
+          "id": "m2026-n13-f00d",
+          "name": "松井 美咲",
+          "ranks": {
+            "expr": "A",
+            "pitch": "A",
+            "rhythm": "A",
+            "tone": "A"
+          },
+          "seat": "cl2a"
+        },
+        {
+          "grade": 3,
+          "id": "m2026-n14-f00d",
+          "name": "阿部 和奏",
+          "ranks": {
+            "expr": "A",
+            "pitch": "A",
+            "rhythm": "A",
+            "tone": "A"
+          },
+          "seat": "cl2b"
+        },
+        {
+          "grade": 3,
+          "id": "m2026-n15-f00d",
+          "name": "前田 紬",
+          "ranks": {
+            "expr": "A",
+            "pitch": "A",
+            "rhythm": "A",
+            "tone": "A"
+          },
+          "seat": "cl3a"
+        },
+        {
+          "grade": 3,
+          "id": "m2026-n16-f00d",
+          "name": "野口 陽翔",
+          "ranks": {
+            "expr": "A",
+            "pitch": "A",
+            "rhythm": "A",
+            "tone": "A"
+          },
+          "seat": "cl3b"
+        },
+        {
+          "grade": 3,
+          "id": "m2026-n17-f00d",
+          "name": "工藤 美月",
+          "ranks": {
+            "expr": "A",
+            "pitch": "A",
+            "rhythm": "A",
+            "tone": "A"
+          },
+          "seat": "bcl1"
+        },
+        {
+          "grade": 3,
+          "id": "m2026-n18-f00d",
+          "name": "中野 透",
+          "ranks": {
+            "expr": "A",
+            "pitch": "A",
+            "rhythm": "A",
+            "tone": "A"
+          },
+          "seat": "tsax1"
+        },
+        {
+          "grade": 3,
+          "id": "m2026-n19-f00d",
+          "name": "木村 湊",
+          "ranks": {
+            "expr": "A",
+            "pitch": "A",
+            "rhythm": "A",
+            "tone": "A"
+          },
+          "seat": "bsax1"
+        },
+        {
+          "grade": 3,
+          "id": "m2026-n20-f00d",
+          "name": "佐々木 彩花",
+          "ranks": {
+            "expr": "A",
+            "pitch": "A",
+            "rhythm": "A",
+            "tone": "A"
+          },
+          "seat": "hn1"
+        },
+        {
+          "grade": 3,
+          "id": "m2026-n21-f00d",
+          "name": "井上 優",
+          "ranks": {
+            "expr": "A",
+            "pitch": "A",
+            "rhythm": "A",
+            "tone": "A"
+          },
+          "seat": "hn2"
+        },
+        {
+          "grade": 3,
+          "id": "m2026-n22-f00d",
+          "name": "酒井 陸",
+          "ranks": {
+            "expr": "A",
+            "pitch": "A",
+            "rhythm": "A",
+            "tone": "A"
+          },
+          "seat": "hn3"
+        },
+        {
+          "grade": 3,
+          "id": "m2026-n23-f00d",
+          "name": "松田 拓海",
+          "ranks": {
+            "expr": "A",
+            "pitch": "A",
+            "rhythm": "A",
+            "tone": "A"
+          },
+          "seat": "hn4"
+        },
+        {
+          "grade": 3,
+          "id": "m2026-n24-f00d",
+          "name": "中村 絢",
+          "ranks": {
+            "expr": "A",
+            "pitch": "A",
+            "rhythm": "A",
+            "tone": "A"
+          },
+          "seat": "tp1a"
+        },
+        {
+          "grade": 3,
+          "id": "m2026-n25-f00d",
+          "name": "林 亮",
+          "ranks": {
+            "expr": "A",
+            "pitch": "A",
+            "rhythm": "A",
+            "tone": "A"
+          },
+          "seat": "tp1b"
+        },
+        {
+          "grade": 3,
+          "id": "m2026-n26-f00d",
+          "name": "岩崎 結衣",
+          "ranks": {
+            "expr": "A",
+            "pitch": "A",
+            "rhythm": "A",
+            "tone": "A"
+          },
+          "seat": "tp2a"
+        },
+        {
+          "grade": 3,
+          "id": "m2026-n27-f00d",
+          "name": "千葉 陸",
+          "ranks": {
+            "expr": "A",
+            "pitch": "A",
+            "rhythm": "A",
+            "tone": "A"
+          },
+          "seat": "tp3a"
+        },
+        {
+          "grade": 3,
+          "id": "m2026-n28-f00d",
+          "name": "竹内 花音",
+          "ranks": {
+            "expr": "A",
+            "pitch": "A",
+            "rhythm": "A",
+            "tone": "A"
+          },
+          "seat": "tb1"
+        },
+        {
+          "grade": 3,
+          "id": "m2026-n29-f00d",
+          "name": "井上 雫",
+          "ranks": {
+            "expr": "A",
+            "pitch": "A",
+            "rhythm": "A",
+            "tone": "A"
+          },
+          "seat": "tb2"
+        },
+        {
+          "grade": 3,
+          "id": "m2026-n30-f00d",
+          "name": "石井 透",
+          "ranks": {
+            "expr": "A",
+            "pitch": "A",
+            "rhythm": "A",
+            "tone": "A"
+          },
+          "seat": "btb1"
+        },
+        {
+          "grade": 3,
+          "id": "m2026-n31-f00d",
+          "name": "山下 茜",
+          "ranks": {
+            "expr": "A",
+            "pitch": "A",
+            "rhythm": "A",
+            "tone": "A"
+          },
+          "seat": "euph1"
+        },
+        {
+          "grade": 3,
+          "id": "m2026-n32-f00d",
+          "name": "渡辺 渚",
+          "ranks": {
+            "expr": "A",
+            "pitch": "A",
+            "rhythm": "A",
+            "tone": "A"
+          },
+          "seat": "euph2"
+        },
+        {
+          "grade": 3,
+          "id": "m2026-n33-f00d",
+          "name": "坂本 雫",
+          "ranks": {
+            "expr": "A",
+            "pitch": "A",
+            "rhythm": "A",
+            "tone": "A"
+          },
+          "seat": "tuba1"
+        },
+        {
+          "grade": 3,
+          "id": "m2026-n34-f00d",
+          "name": "菅原 智也",
+          "ranks": {
+            "expr": "A",
+            "pitch": "A",
+            "rhythm": "A",
+            "tone": "A"
+          },
+          "seat": "tuba2"
+        },
+        {
+          "grade": 3,
+          "id": "m2026-n35-f00d",
+          "name": "高木 明里",
+          "ranks": {
+            "expr": "A",
+            "pitch": "A",
+            "rhythm": "A",
+            "tone": "A"
+          },
+          "seat": "cb1"
+        },
+        {
+          "grade": 3,
+          "id": "m2026-n39-f00d",
+          "name": "横山 透",
+          "ranks": {
+            "expr": "A",
+            "pitch": "A",
+            "rhythm": "A",
+            "tone": "A"
+          },
+          "seat": "perc4"
+        },
+        {
+          "grade": 3,
+          "id": "m2026-n36-f00d",
+          "name": "佐藤 誠",
+          "ranks": {
+            "expr": "A",
+            "pitch": "A",
+            "rhythm": "A",
+            "tone": "A"
+          },
+          "seat": "perc1"
+        },
+        {
+          "grade": 3,
+          "id": "m2026-n38-f00d",
+          "name": "原 杏",
+          "ranks": {
+            "expr": "A",
+            "pitch": "A",
+            "rhythm": "A",
+            "tone": "A"
+          },
+          "seat": "perc3"
+        },
+        {
+          "grade": 3,
+          "id": "m2026-n37-f00d",
+          "name": "山田 蓮",
+          "ranks": {
+            "expr": "A",
+            "pitch": "A",
+            "rhythm": "A",
+            "tone": "A"
+          },
+          "seat": "perc2"
+        }
+      ],
+      "errors": [],
+      "library": {
+        "active": null,
+        "blocked": false,
+        "open": true,
+        "rows": [
+          {
+            "active": "false",
+            "disabled": false,
+            "faces": [
+              "m2028-n1-cafe",
+              "m2026-n2-f00d",
+              "m2026-n3-f00d"
+            ],
+            "id": "r2027-26-1-339903",
+            "label": "2027年 定期演奏会・「歓喜の歌」・県民文化会館を聴く",
+            "pressed": "false",
+            "saveDisabled": false
+          },
+          {
+            "active": "false",
+            "disabled": false,
+            "faces": [
+              "m2028-n1-cafe",
+              "m2026-n2-f00d",
+              "m2026-n3-f00d"
+            ],
+            "id": "r2026-26-0-790160",
+            "label": "2026年 定期演奏会・《新世界より》第2楽章・前半・県民文化会館を聴く",
+            "pressed": "false",
+            "saveDisabled": false
+          }
+        ],
+        "saving": null,
+        "selected": "r2027-26-1-339903",
+        "source": [
+          {
+            "count": 39,
+            "faces": [
+              {
+                "face": 46,
+                "id": "m2028-n1-cafe",
+                "name": "田中 七海"
+              },
+              {
+                "face": 93,
+                "id": "m2026-n2-f00d",
+                "name": "小川 悠斗"
+              },
+              {
+                "face": 94,
+                "id": "m2026-n3-f00d",
+                "name": "松井 颯太"
+              }
+            ],
+            "id": "r2026-26-0-790160",
+            "label": "2026年 定期演奏会",
+            "piece": "largo",
+            "span": {
+              "from": 0,
+              "to": 32
+            },
+            "venue": "hall",
+            "year": 2026
+          },
+          {
+            "count": 39,
+            "faces": [
+              {
+                "face": 46,
+                "id": "m2028-n1-cafe",
+                "name": "田中 葵"
+              },
+              {
+                "face": 93,
+                "id": "m2026-n2-f00d",
+                "name": "小川 悠斗"
+              },
+              {
+                "face": 94,
+                "id": "m2026-n3-f00d",
+                "name": "松井 颯太"
+              }
+            ],
+            "id": "r2027-26-1-339903",
+            "label": "2027年 定期演奏会",
+            "piece": "ode",
+            "venue": "hall",
+            "year": 2027
+          }
+        ],
+        "waiting": false,
+        "years": [
+          "2027年度",
+          "2026年度"
+        ]
+      },
+      "listening": {
+        "conductDisabled": false,
+        "engineVenue": "hall",
+        "kind": "自由曲",
+        "range": "all",
+        "rangeDisabled": false,
+        "rangeLabel": "全部",
+        "shownPiece": "galop",
+        "summary": "県民文化会館・全部・全員",
+        "title": "「天国と地獄」"
+      },
+      "now": "表示中：いまの音（6月 第3週・県民文化会館）",
+      "playing": false,
+      "portraits": 39,
+      "records": 0.8007528416346759,
+      "state": 0.5090051502920687,
+      "waiting": false
+    }
+  },
+  {
+    "case": "member-before-switch",
+    "data": {
+      "audio": [],
+      "card": null,
+      "cardHidden": true,
+      "cast": [
+        {
+          "grade": 1,
+          "id": "m2028-n1-cafe",
+          "name": "田中 七海",
+          "ranks": {
+            "expr": "C",
+            "pitch": "C",
+            "rhythm": "B",
+            "tone": "C"
+          },
+          "seat": "picc1"
+        },
+        {
+          "grade": 2,
+          "id": "m2028-n2-cafe",
+          "name": "小川 悠斗",
+          "ranks": {
+            "expr": "C",
+            "pitch": "C",
+            "rhythm": "B",
+            "tone": "C"
+          },
+          "seat": "fl1a"
+        },
+        {
+          "grade": 1,
+          "id": "m2028-n3-cafe",
+          "name": "松井 颯太",
+          "ranks": {
+            "expr": "C",
+            "pitch": "C",
+            "rhythm": "B",
+            "tone": "C"
+          },
+          "seat": "fl1b"
+        },
+        {
+          "grade": 2,
+          "id": "m2028-n4-cafe",
+          "name": "菅原 菜月",
+          "ranks": {
+            "expr": "C",
+            "pitch": "C",
+            "rhythm": "B",
+            "tone": "C"
+          },
+          "seat": "fl2a"
+        },
+        {
+          "grade": 1,
+          "id": "m2028-n5-cafe",
+          "name": "岡本 智也",
+          "ranks": {
+            "expr": "C",
+            "pitch": "C",
+            "rhythm": "B",
+            "tone": "C"
+          },
+          "seat": "ob1"
+        }
+      ],
+      "ensemble": {
+        "active": true,
+        "button": {
+          "animation": "none",
+          "disabled": false,
+          "label": "5人の音を読み込み中。押すと中止",
+          "motion": "off",
+          "pressed": "true",
+          "rect": {
+            "bottom": 0,
+            "height": 0,
+            "left": 0,
+            "right": 0,
+            "top": 0,
+            "width": 0,
+            "x": 0,
+            "y": 0
+          },
+          "waiting": "true"
+        },
+        "cast": [
+          "m2028-n1-cafe",
+          "m2028-n2-cafe",
+          "m2028-n3-cafe",
+          "m2028-n4-cafe",
+          "m2028-n5-cafe"
+        ],
+        "focus": "",
+        "fullState": 0.42741761705838144,
+        "miniHidden": false,
+        "performance": 0.6326754721812904,
+        "pieceChoice": "ode",
+        "rangeChoice": "all",
+        "resultPerformance": null,
+        "selected": [
+          "m2028-n1-cafe",
+          "m2028-n2-cafe",
+          "m2028-n3-cafe",
+          "m2028-n4-cafe",
+          "m2028-n5-cafe"
+        ],
+        "waiting": true
+      },
+      "errors": [],
+      "library": {
+        "active": null,
+        "blocked": false,
+        "open": false,
+        "rows": [
+          {
+            "active": "false",
+            "disabled": false,
+            "faces": [
+              "m2026-n1-26adea64",
+              "m2026-n2-26adea64",
+              "m2026-n3-26adea64"
+            ],
+            "id": "r2026-0-0-583709",
+            "label": "2026年4月の録音・「天国と地獄」・音楽室を聴く",
+            "pressed": "false",
+            "saveDisabled": false
+          }
+        ],
+        "saving": null,
+        "selected": "r2026-0-0-583709",
+        "source": [
+          {
+            "count": 5,
+            "faces": [
+              {
+                "face": 49,
+                "id": "m2026-n1-26adea64",
+                "name": "山本 陽菜"
+              },
+              {
+                "face": 3,
+                "id": "m2026-n2-26adea64",
+                "name": "松田 和奏"
+              },
+              {
+                "face": 26,
+                "id": "m2026-n3-26adea64",
+                "name": "千葉 莉子"
+              }
+            ],
+            "id": "r2026-0-0-583709",
+            "label": "2026年4月の録音",
+            "piece": "galop",
+            "venue": "room",
+            "year": 2026
+          }
+        ],
+        "waiting": true,
+        "years": [
+          "2026年度"
+        ]
+      },
+      "listening": {
+        "conductDisabled": true,
+        "engineVenue": "civic",
+        "kind": "アンサンブルの試聴",
+        "range": "all",
+        "rangeDisabled": true,
+        "rangeLabel": "全部",
+        "shownPiece": "ode",
+        "summary": "市民会館・全部・全員",
+        "title": "「歓喜の歌」"
+      },
+      "now": "録音を読み込んでいます…（読み込めたら鳴ります）",
+      "piece": "ode",
+      "playing": false,
+      "portraits": 5,
+      "records": 0.6689258052501827,
+      "scrollWidth": 375,
+      "solo": "all",
+      "stats": 0.771712013753131,
+      "waiting": true,
+      "width": 375
+    }
+  },
+  {
+    "case": "member-new-wait",
+    "data": {
+      "audio": [],
+      "card": null,
+      "cardHidden": false,
+      "cast": [
+        {
+          "grade": 1,
+          "id": "m2028-n1-cafe",
+          "name": "田中 七海",
+          "ranks": {
+            "expr": "C",
+            "pitch": "C",
+            "rhythm": "B",
+            "tone": "C"
+          },
+          "seat": "picc1"
+        },
+        {
+          "grade": 2,
+          "id": "m2028-n2-cafe",
+          "name": "小川 悠斗",
+          "ranks": {
+            "expr": "C",
+            "pitch": "C",
+            "rhythm": "B",
+            "tone": "C"
+          },
+          "seat": "fl1a"
+        },
+        {
+          "grade": 1,
+          "id": "m2028-n3-cafe",
+          "name": "松井 颯太",
+          "ranks": {
+            "expr": "C",
+            "pitch": "C",
+            "rhythm": "B",
+            "tone": "C"
+          },
+          "seat": "fl1b"
+        },
+        {
+          "grade": 2,
+          "id": "m2028-n4-cafe",
+          "name": "菅原 菜月",
+          "ranks": {
+            "expr": "C",
+            "pitch": "C",
+            "rhythm": "B",
+            "tone": "C"
+          },
+          "seat": "fl2a"
+        },
+        {
+          "grade": 1,
+          "id": "m2028-n5-cafe",
+          "name": "岡本 智也",
+          "ranks": {
+            "expr": "C",
+            "pitch": "C",
+            "rhythm": "B",
+            "tone": "C"
+          },
+          "seat": "ob1"
+        },
+        {
+          "grade": 2,
+          "id": "m2028-n6-cafe",
+          "name": "山口 大翔",
+          "ranks": {
+            "expr": "C",
+            "pitch": "C",
+            "rhythm": "B",
+            "tone": "C"
+          },
+          "seat": "cl1a"
+        },
+        {
+          "grade": 1,
+          "id": "m2028-n7-cafe",
+          "name": "山下 彩花",
+          "ranks": {
+            "expr": "C",
+            "pitch": "C",
+            "rhythm": "B",
+            "tone": "C"
+          },
+          "seat": "cl1b"
+        },
+        {
+          "grade": 2,
+          "id": "m2028-n8-cafe",
+          "name": "高木 瑛太",
+          "ranks": {
+            "expr": "C",
+            "pitch": "C",
+            "rhythm": "B",
+            "tone": "C"
+          },
+          "seat": "cl1c"
+        },
+        {
+          "grade": 1,
+          "id": "m2028-n9-cafe",
+          "name": "清水 菜月",
+          "ranks": {
+            "expr": "C",
+            "pitch": "C",
+            "rhythm": "B",
+            "tone": "C"
+          },
+          "seat": "asax1"
+        },
+        {
+          "grade": 2,
+          "id": "m2028-n10-cafe",
+          "name": "山本 凛",
+          "ranks": {
+            "expr": "C",
+            "pitch": "C",
+            "rhythm": "B",
+            "tone": "C"
+          },
+          "seat": "asax2"
+        },
+        {
+          "grade": 1,
+          "id": "m2028-n11-cafe",
+          "name": "山田 悠真",
+          "ranks": {
+            "expr": "C",
+            "pitch": "C",
+            "rhythm": "B",
+            "tone": "C"
+          },
+          "seat": "fg1"
+        },
+        {
+          "grade": 2,
+          "id": "m2028-n12-cafe",
+          "name": "西村 樹",
+          "ranks": {
+            "expr": "C",
+            "pitch": "C",
+            "rhythm": "B",
+            "tone": "C"
+          },
+          "seat": "ebcl1"
+        },
+        {
+          "grade": 1,
+          "id": "m2028-n13-cafe",
+          "name": "松井 美咲",
+          "ranks": {
+            "expr": "C",
+            "pitch": "C",
+            "rhythm": "B",
+            "tone": "C"
+          },
+          "seat": "cl2a"
+        },
+        {
+          "grade": 2,
+          "id": "m2028-n14-cafe",
+          "name": "阿部 和奏",
+          "ranks": {
+            "expr": "C",
+            "pitch": "C",
+            "rhythm": "B",
+            "tone": "C"
+          },
+          "seat": "cl2b"
+        },
+        {
+          "grade": 1,
+          "id": "m2028-n15-cafe",
+          "name": "前田 紬",
+          "ranks": {
+            "expr": "C",
+            "pitch": "C",
+            "rhythm": "B",
+            "tone": "C"
+          },
+          "seat": "cl3a"
+        },
+        {
+          "grade": 2,
+          "id": "m2028-n16-cafe",
+          "name": "野口 陽翔",
+          "ranks": {
+            "expr": "C",
+            "pitch": "C",
+            "rhythm": "B",
+            "tone": "C"
+          },
+          "seat": "cl3b"
+        },
+        {
+          "grade": 1,
+          "id": "m2028-n17-cafe",
+          "name": "工藤 美月",
+          "ranks": {
+            "expr": "C",
+            "pitch": "C",
+            "rhythm": "B",
+            "tone": "C"
+          },
+          "seat": "bcl1"
+        },
+        {
+          "grade": 2,
+          "id": "m2028-n18-cafe",
+          "name": "中野 透",
+          "ranks": {
+            "expr": "C",
+            "pitch": "C",
+            "rhythm": "B",
+            "tone": "C"
+          },
+          "seat": "tsax1"
+        },
+        {
+          "grade": 1,
+          "id": "m2028-n19-cafe",
+          "name": "木村 湊",
+          "ranks": {
+            "expr": "C",
+            "pitch": "C",
+            "rhythm": "B",
+            "tone": "C"
+          },
+          "seat": "bsax1"
+        },
+        {
+          "grade": 2,
+          "id": "m2028-n20-cafe",
+          "name": "佐々木 彩花",
+          "ranks": {
+            "expr": "C",
+            "pitch": "C",
+            "rhythm": "B",
+            "tone": "C"
+          },
+          "seat": "hn1"
+        },
+        {
+          "grade": 1,
+          "id": "m2028-n21-cafe",
+          "name": "井上 優",
+          "ranks": {
+            "expr": "C",
+            "pitch": "C",
+            "rhythm": "B",
+            "tone": "C"
+          },
+          "seat": "hn2"
+        },
+        {
+          "grade": 2,
+          "id": "m2028-n22-cafe",
+          "name": "酒井 陸",
+          "ranks": {
+            "expr": "C",
+            "pitch": "C",
+            "rhythm": "B",
+            "tone": "C"
+          },
+          "seat": "hn3"
+        },
+        {
+          "grade": 1,
+          "id": "m2028-n23-cafe",
+          "name": "松田 拓海",
+          "ranks": {
+            "expr": "C",
+            "pitch": "C",
+            "rhythm": "B",
+            "tone": "C"
+          },
+          "seat": "hn4"
+        },
+        {
+          "grade": 2,
+          "id": "m2028-n24-cafe",
+          "name": "中村 絢",
+          "ranks": {
+            "expr": "C",
+            "pitch": "C",
+            "rhythm": "B",
+            "tone": "C"
+          },
+          "seat": "tp1a"
+        },
+        {
+          "grade": 1,
+          "id": "m2028-n25-cafe",
+          "name": "林 亮",
+          "ranks": {
+            "expr": "C",
+            "pitch": "C",
+            "rhythm": "B",
+            "tone": "C"
+          },
+          "seat": "tp1b"
+        },
+        {
+          "grade": 2,
+          "id": "m2028-n26-cafe",
+          "name": "岩崎 結衣",
+          "ranks": {
+            "expr": "C",
+            "pitch": "C",
+            "rhythm": "B",
+            "tone": "C"
+          },
+          "seat": "tp2a"
+        },
+        {
+          "grade": 1,
+          "id": "m2028-n27-cafe",
+          "name": "千葉 陸",
+          "ranks": {
+            "expr": "C",
+            "pitch": "C",
+            "rhythm": "B",
+            "tone": "C"
+          },
+          "seat": "tp3a"
+        },
+        {
+          "grade": 2,
+          "id": "m2028-n28-cafe",
+          "name": "竹内 花音",
+          "ranks": {
+            "expr": "C",
+            "pitch": "C",
+            "rhythm": "B",
+            "tone": "C"
+          },
+          "seat": "tb1"
+        },
+        {
+          "grade": 1,
+          "id": "m2028-n29-cafe",
+          "name": "井上 雫",
+          "ranks": {
+            "expr": "C",
+            "pitch": "C",
+            "rhythm": "B",
+            "tone": "C"
+          },
+          "seat": "tb2"
+        },
+        {
+          "grade": 2,
+          "id": "m2028-n30-cafe",
+          "name": "石井 透",
+          "ranks": {
+            "expr": "C",
+            "pitch": "C",
+            "rhythm": "B",
+            "tone": "C"
+          },
+          "seat": "btb1"
+        },
+        {
+          "grade": 1,
+          "id": "m2028-n31-cafe",
+          "name": "山下 茜",
+          "ranks": {
+            "expr": "C",
+            "pitch": "C",
+            "rhythm": "B",
+            "tone": "C"
+          },
+          "seat": "euph1"
+        },
+        {
+          "grade": 2,
+          "id": "m2028-n32-cafe",
+          "name": "渡辺 渚",
+          "ranks": {
+            "expr": "C",
+            "pitch": "C",
+            "rhythm": "B",
+            "tone": "C"
+          },
+          "seat": "euph2"
+        },
+        {
+          "grade": 1,
+          "id": "m2028-n33-cafe",
+          "name": "坂本 雫",
+          "ranks": {
+            "expr": "C",
+            "pitch": "C",
+            "rhythm": "B",
+            "tone": "C"
+          },
+          "seat": "tuba1"
+        },
+        {
+          "grade": 2,
+          "id": "m2028-n34-cafe",
+          "name": "菅原 智也",
+          "ranks": {
+            "expr": "C",
+            "pitch": "C",
+            "rhythm": "B",
+            "tone": "C"
+          },
+          "seat": "tuba2"
+        },
+        {
+          "grade": 1,
+          "id": "m2028-n35-cafe",
+          "name": "高木 明里",
+          "ranks": {
+            "expr": "C",
+            "pitch": "C",
+            "rhythm": "B",
+            "tone": "C"
+          },
+          "seat": "cb1"
+        },
+        {
+          "grade": 2,
+          "id": "m2028-n36-cafe",
+          "name": "佐藤 誠",
+          "ranks": {
+            "expr": "C",
+            "pitch": "C",
+            "rhythm": "B",
+            "tone": "C"
+          },
+          "seat": "perc1"
+        },
+        {
+          "grade": 1,
+          "id": "m2028-n37-cafe",
+          "name": "山田 蓮",
+          "ranks": {
+            "expr": "C",
+            "pitch": "C",
+            "rhythm": "B",
+            "tone": "C"
+          },
+          "seat": "perc2"
+        },
+        {
+          "grade": 1,
+          "id": "m2028-n39-cafe",
+          "name": "横山 透",
+          "ranks": {
+            "expr": "C",
+            "pitch": "C",
+            "rhythm": "B",
+            "tone": "C"
+          },
+          "seat": "perc4"
+        },
+        {
+          "grade": 2,
+          "id": "m2028-n38-cafe",
+          "name": "原 杏",
+          "ranks": {
+            "expr": "C",
+            "pitch": "C",
+            "rhythm": "B",
+            "tone": "C"
+          },
+          "seat": "perc3"
+        }
+      ],
+      "ensemble": {
+        "active": false,
+        "button": {
+          "animation": "none",
+          "disabled": false,
+          "label": "選んだ5人で聴く",
+          "motion": "off",
+          "pressed": "false",
+          "rect": {
+            "bottom": 0,
+            "height": 0,
+            "left": 0,
+            "right": 0,
+            "top": 0,
+            "width": 0,
+            "x": 0,
+            "y": 0
+          },
+          "waiting": "false"
+        },
+        "cast": [],
+        "focus": "",
+        "fullState": 0.42741761705838144,
+        "miniHidden": false,
+        "performance": null,
+        "pieceChoice": null,
+        "rangeChoice": "all",
+        "resultPerformance": null,
+        "selected": [
+          "m2028-n1-cafe",
+          "m2028-n2-cafe",
+          "m2028-n3-cafe",
+          "m2028-n4-cafe",
+          "m2028-n5-cafe"
+        ],
+        "waiting": true
+      },
+      "errors": [],
+      "library": {
+        "active": null,
+        "blocked": false,
+        "open": false,
+        "rows": [
+          {
+            "active": "false",
+            "disabled": false,
+            "faces": [
+              "m2026-n1-26adea64",
+              "m2026-n2-26adea64",
+              "m2026-n3-26adea64"
+            ],
+            "id": "r2026-0-0-583709",
+            "label": "2026年4月の録音・「天国と地獄」・音楽室を聴く",
+            "pressed": "false",
+            "saveDisabled": false
+          }
+        ],
+        "saving": null,
+        "selected": "r2026-0-0-583709",
+        "source": [
+          {
+            "count": 5,
+            "faces": [
+              {
+                "face": 49,
+                "id": "m2026-n1-26adea64",
+                "name": "山本 陽菜"
+              },
+              {
+                "face": 3,
+                "id": "m2026-n2-26adea64",
+                "name": "松田 和奏"
+              },
+              {
+                "face": 26,
+                "id": "m2026-n3-26adea64",
+                "name": "千葉 莉子"
+              }
+            ],
+            "id": "r2026-0-0-583709",
+            "label": "2026年4月の録音",
+            "piece": "galop",
+            "venue": "room",
+            "year": 2026
+          }
+        ],
+        "waiting": true,
+        "years": [
+          "2026年度"
+        ]
+      },
+      "listening": {
+        "conductDisabled": false,
+        "engineVenue": "civic",
+        "kind": "自由曲",
+        "range": "all",
+        "rangeDisabled": false,
+        "rangeLabel": "全部",
+        "shownPiece": "galop",
+        "summary": "市民会館・全部・山口 大翔だけ",
+        "title": "「天国と地獄」"
+      },
+      "now": "録音を読み込んでいます…（読み込めたら鳴ります）",
+      "piece": "galop",
+      "playing": false,
+      "portraits": 39,
+      "records": 0.6689258052501827,
+      "scrollWidth": 375,
+      "solo": "member:m2028-n6-cafe",
+      "stats": 0.771712013753131,
+      "waiting": true,
+      "width": 375
+    }
+  },
+  {
+    "case": "member-new-playing",
+    "data": {
+      "audio": [
+        "SampleVoice"
+      ],
+      "card": null,
+      "cardHidden": false,
+      "cast": [
+        {
+          "grade": 1,
+          "id": "m2028-n1-cafe",
+          "name": "田中 七海",
+          "ranks": {
+            "expr": "C",
+            "pitch": "C",
+            "rhythm": "B",
+            "tone": "C"
+          },
+          "seat": "picc1"
+        },
+        {
+          "grade": 2,
+          "id": "m2028-n2-cafe",
+          "name": "小川 悠斗",
+          "ranks": {
+            "expr": "C",
+            "pitch": "C",
+            "rhythm": "B",
+            "tone": "C"
+          },
+          "seat": "fl1a"
+        },
+        {
+          "grade": 1,
+          "id": "m2028-n3-cafe",
+          "name": "松井 颯太",
+          "ranks": {
+            "expr": "C",
+            "pitch": "C",
+            "rhythm": "B",
+            "tone": "C"
+          },
+          "seat": "fl1b"
+        },
+        {
+          "grade": 2,
+          "id": "m2028-n4-cafe",
+          "name": "菅原 菜月",
+          "ranks": {
+            "expr": "C",
+            "pitch": "C",
+            "rhythm": "B",
+            "tone": "C"
+          },
+          "seat": "fl2a"
+        },
+        {
+          "grade": 1,
+          "id": "m2028-n5-cafe",
+          "name": "岡本 智也",
+          "ranks": {
+            "expr": "C",
+            "pitch": "C",
+            "rhythm": "B",
+            "tone": "C"
+          },
+          "seat": "ob1"
+        },
+        {
+          "grade": 2,
+          "id": "m2028-n6-cafe",
+          "name": "山口 大翔",
+          "ranks": {
+            "expr": "C",
+            "pitch": "C",
+            "rhythm": "B",
+            "tone": "C"
+          },
+          "seat": "cl1a"
+        },
+        {
+          "grade": 1,
+          "id": "m2028-n7-cafe",
+          "name": "山下 彩花",
+          "ranks": {
+            "expr": "C",
+            "pitch": "C",
+            "rhythm": "B",
+            "tone": "C"
+          },
+          "seat": "cl1b"
+        },
+        {
+          "grade": 2,
+          "id": "m2028-n8-cafe",
+          "name": "高木 瑛太",
+          "ranks": {
+            "expr": "C",
+            "pitch": "C",
+            "rhythm": "B",
+            "tone": "C"
+          },
+          "seat": "cl1c"
+        },
+        {
+          "grade": 1,
+          "id": "m2028-n9-cafe",
+          "name": "清水 菜月",
+          "ranks": {
+            "expr": "C",
+            "pitch": "C",
+            "rhythm": "B",
+            "tone": "C"
+          },
+          "seat": "asax1"
+        },
+        {
+          "grade": 2,
+          "id": "m2028-n10-cafe",
+          "name": "山本 凛",
+          "ranks": {
+            "expr": "C",
+            "pitch": "C",
+            "rhythm": "B",
+            "tone": "C"
+          },
+          "seat": "asax2"
+        },
+        {
+          "grade": 1,
+          "id": "m2028-n11-cafe",
+          "name": "山田 悠真",
+          "ranks": {
+            "expr": "C",
+            "pitch": "C",
+            "rhythm": "B",
+            "tone": "C"
+          },
+          "seat": "fg1"
+        },
+        {
+          "grade": 2,
+          "id": "m2028-n12-cafe",
+          "name": "西村 樹",
+          "ranks": {
+            "expr": "C",
+            "pitch": "C",
+            "rhythm": "B",
+            "tone": "C"
+          },
+          "seat": "ebcl1"
+        },
+        {
+          "grade": 1,
+          "id": "m2028-n13-cafe",
+          "name": "松井 美咲",
+          "ranks": {
+            "expr": "C",
+            "pitch": "C",
+            "rhythm": "B",
+            "tone": "C"
+          },
+          "seat": "cl2a"
+        },
+        {
+          "grade": 2,
+          "id": "m2028-n14-cafe",
+          "name": "阿部 和奏",
+          "ranks": {
+            "expr": "C",
+            "pitch": "C",
+            "rhythm": "B",
+            "tone": "C"
+          },
+          "seat": "cl2b"
+        },
+        {
+          "grade": 1,
+          "id": "m2028-n15-cafe",
+          "name": "前田 紬",
+          "ranks": {
+            "expr": "C",
+            "pitch": "C",
+            "rhythm": "B",
+            "tone": "C"
+          },
+          "seat": "cl3a"
+        },
+        {
+          "grade": 2,
+          "id": "m2028-n16-cafe",
+          "name": "野口 陽翔",
+          "ranks": {
+            "expr": "C",
+            "pitch": "C",
+            "rhythm": "B",
+            "tone": "C"
+          },
+          "seat": "cl3b"
+        },
+        {
+          "grade": 1,
+          "id": "m2028-n17-cafe",
+          "name": "工藤 美月",
+          "ranks": {
+            "expr": "C",
+            "pitch": "C",
+            "rhythm": "B",
+            "tone": "C"
+          },
+          "seat": "bcl1"
+        },
+        {
+          "grade": 2,
+          "id": "m2028-n18-cafe",
+          "name": "中野 透",
+          "ranks": {
+            "expr": "C",
+            "pitch": "C",
+            "rhythm": "B",
+            "tone": "C"
+          },
+          "seat": "tsax1"
+        },
+        {
+          "grade": 1,
+          "id": "m2028-n19-cafe",
+          "name": "木村 湊",
+          "ranks": {
+            "expr": "C",
+            "pitch": "C",
+            "rhythm": "B",
+            "tone": "C"
+          },
+          "seat": "bsax1"
+        },
+        {
+          "grade": 2,
+          "id": "m2028-n20-cafe",
+          "name": "佐々木 彩花",
+          "ranks": {
+            "expr": "C",
+            "pitch": "C",
+            "rhythm": "B",
+            "tone": "C"
+          },
+          "seat": "hn1"
+        },
+        {
+          "grade": 1,
+          "id": "m2028-n21-cafe",
+          "name": "井上 優",
+          "ranks": {
+            "expr": "C",
+            "pitch": "C",
+            "rhythm": "B",
+            "tone": "C"
+          },
+          "seat": "hn2"
+        },
+        {
+          "grade": 2,
+          "id": "m2028-n22-cafe",
+          "name": "酒井 陸",
+          "ranks": {
+            "expr": "C",
+            "pitch": "C",
+            "rhythm": "B",
+            "tone": "C"
+          },
+          "seat": "hn3"
+        },
+        {
+          "grade": 1,
+          "id": "m2028-n23-cafe",
+          "name": "松田 拓海",
+          "ranks": {
+            "expr": "C",
+            "pitch": "C",
+            "rhythm": "B",
+            "tone": "C"
+          },
+          "seat": "hn4"
+        },
+        {
+          "grade": 2,
+          "id": "m2028-n24-cafe",
+          "name": "中村 絢",
+          "ranks": {
+            "expr": "C",
+            "pitch": "C",
+            "rhythm": "B",
+            "tone": "C"
+          },
+          "seat": "tp1a"
+        },
+        {
+          "grade": 1,
+          "id": "m2028-n25-cafe",
+          "name": "林 亮",
+          "ranks": {
+            "expr": "C",
+            "pitch": "C",
+            "rhythm": "B",
+            "tone": "C"
+          },
+          "seat": "tp1b"
+        },
+        {
+          "grade": 2,
+          "id": "m2028-n26-cafe",
+          "name": "岩崎 結衣",
+          "ranks": {
+            "expr": "C",
+            "pitch": "C",
+            "rhythm": "B",
+            "tone": "C"
+          },
+          "seat": "tp2a"
+        },
+        {
+          "grade": 1,
+          "id": "m2028-n27-cafe",
+          "name": "千葉 陸",
+          "ranks": {
+            "expr": "C",
+            "pitch": "C",
+            "rhythm": "B",
+            "tone": "C"
+          },
+          "seat": "tp3a"
+        },
+        {
+          "grade": 2,
+          "id": "m2028-n28-cafe",
+          "name": "竹内 花音",
+          "ranks": {
+            "expr": "C",
+            "pitch": "C",
+            "rhythm": "B",
+            "tone": "C"
+          },
+          "seat": "tb1"
+        },
+        {
+          "grade": 1,
+          "id": "m2028-n29-cafe",
+          "name": "井上 雫",
+          "ranks": {
+            "expr": "C",
+            "pitch": "C",
+            "rhythm": "B",
+            "tone": "C"
+          },
+          "seat": "tb2"
+        },
+        {
+          "grade": 2,
+          "id": "m2028-n30-cafe",
+          "name": "石井 透",
+          "ranks": {
+            "expr": "C",
+            "pitch": "C",
+            "rhythm": "B",
+            "tone": "C"
+          },
+          "seat": "btb1"
+        },
+        {
+          "grade": 1,
+          "id": "m2028-n31-cafe",
+          "name": "山下 茜",
+          "ranks": {
+            "expr": "C",
+            "pitch": "C",
+            "rhythm": "B",
+            "tone": "C"
+          },
+          "seat": "euph1"
+        },
+        {
+          "grade": 2,
+          "id": "m2028-n32-cafe",
+          "name": "渡辺 渚",
+          "ranks": {
+            "expr": "C",
+            "pitch": "C",
+            "rhythm": "B",
+            "tone": "C"
+          },
+          "seat": "euph2"
+        },
+        {
+          "grade": 1,
+          "id": "m2028-n33-cafe",
+          "name": "坂本 雫",
+          "ranks": {
+            "expr": "C",
+            "pitch": "C",
+            "rhythm": "B",
+            "tone": "C"
+          },
+          "seat": "tuba1"
+        },
+        {
+          "grade": 2,
+          "id": "m2028-n34-cafe",
+          "name": "菅原 智也",
+          "ranks": {
+            "expr": "C",
+            "pitch": "C",
+            "rhythm": "B",
+            "tone": "C"
+          },
+          "seat": "tuba2"
+        },
+        {
+          "grade": 1,
+          "id": "m2028-n35-cafe",
+          "name": "高木 明里",
+          "ranks": {
+            "expr": "C",
+            "pitch": "C",
+            "rhythm": "B",
+            "tone": "C"
+          },
+          "seat": "cb1"
+        },
+        {
+          "grade": 2,
+          "id": "m2028-n36-cafe",
+          "name": "佐藤 誠",
+          "ranks": {
+            "expr": "C",
+            "pitch": "C",
+            "rhythm": "B",
+            "tone": "C"
+          },
+          "seat": "perc1"
+        },
+        {
+          "grade": 1,
+          "id": "m2028-n37-cafe",
+          "name": "山田 蓮",
+          "ranks": {
+            "expr": "C",
+            "pitch": "C",
+            "rhythm": "B",
+            "tone": "C"
+          },
+          "seat": "perc2"
+        },
+        {
+          "grade": 1,
+          "id": "m2028-n39-cafe",
+          "name": "横山 透",
+          "ranks": {
+            "expr": "C",
+            "pitch": "C",
+            "rhythm": "B",
+            "tone": "C"
+          },
+          "seat": "perc4"
+        },
+        {
+          "grade": 2,
+          "id": "m2028-n38-cafe",
+          "name": "原 杏",
+          "ranks": {
+            "expr": "C",
+            "pitch": "C",
+            "rhythm": "B",
+            "tone": "C"
+          },
+          "seat": "perc3"
+        }
+      ],
+      "ensemble": {
+        "active": false,
+        "button": {
+          "animation": "none",
+          "disabled": false,
+          "label": "選んだ5人で聴く",
+          "motion": "off",
+          "pressed": "false",
+          "rect": {
+            "bottom": 0,
+            "height": 0,
+            "left": 0,
+            "right": 0,
+            "top": 0,
+            "width": 0,
+            "x": 0,
+            "y": 0
+          },
+          "waiting": "false"
+        },
+        "cast": [],
+        "focus": "",
+        "fullState": 0.42741761705838144,
+        "miniHidden": false,
+        "performance": null,
+        "pieceChoice": null,
+        "rangeChoice": "all",
+        "resultPerformance": null,
+        "selected": [
+          "m2028-n1-cafe",
+          "m2028-n2-cafe",
+          "m2028-n3-cafe",
+          "m2028-n4-cafe",
+          "m2028-n5-cafe"
+        ],
+        "waiting": false
+      },
+      "errors": [],
+      "library": {
+        "active": null,
+        "blocked": false,
+        "open": false,
+        "rows": [
+          {
+            "active": "false",
+            "disabled": false,
+            "faces": [
+              "m2026-n1-26adea64",
+              "m2026-n2-26adea64",
+              "m2026-n3-26adea64"
+            ],
+            "id": "r2026-0-0-583709",
+            "label": "2026年4月の録音・「天国と地獄」・音楽室を聴く",
+            "pressed": "false",
+            "saveDisabled": false
+          }
+        ],
+        "saving": null,
+        "selected": "r2026-0-0-583709",
+        "source": [
+          {
+            "count": 5,
+            "faces": [
+              {
+                "face": 49,
+                "id": "m2026-n1-26adea64",
+                "name": "山本 陽菜"
+              },
+              {
+                "face": 3,
+                "id": "m2026-n2-26adea64",
+                "name": "松田 和奏"
+              },
+              {
+                "face": 26,
+                "id": "m2026-n3-26adea64",
+                "name": "千葉 莉子"
+              }
+            ],
+            "id": "r2026-0-0-583709",
+            "label": "2026年4月の録音",
+            "piece": "galop",
+            "venue": "room",
+            "year": 2026
+          }
+        ],
+        "waiting": false,
+        "years": [
+          "2026年度"
+        ]
+      },
+      "listening": {
+        "conductDisabled": false,
+        "engineVenue": "civic",
+        "kind": "自由曲",
+        "range": "all",
+        "rangeDisabled": false,
+        "rangeLabel": "全部",
+        "shownPiece": "galop",
+        "summary": "市民会館・全部・山口 大翔だけ",
+        "title": "「天国と地獄」"
+      },
+      "now": "再生中：いまの音（1月・市民会館）",
+      "piece": "galop",
+      "playing": true,
+      "portraits": 39,
+      "records": 0.6689258052501827,
+      "scrollWidth": 375,
+      "solo": "member:m2028-n6-cafe",
+      "stats": 0.771712013753131,
+      "waiting": false,
+      "width": 375
+    }
+  },
+  {
+    "case": "member-audible",
+    "data": {
+      "audible": [
+        "m2028-n6-cafe"
+      ],
+      "selected": {
+        "face": 92,
+        "id": "m2028-n6-cafe",
+        "name": "山口 大翔"
+      },
+      "solo": {
+        "id": "m2028-n6-cafe",
+        "type": "member"
+      },
+      "state": 0.42741761705838144
+    }
+  },
+  {
+    "case": "one-year",
+    "data": {
+      "boot": {
+        "errors": [],
+        "failed": [],
+        "globals": {
+          "engine": "function",
+          "fx": "object",
+          "game": "function",
+          "pieces": "object",
+          "season": "function"
+        },
+        "loaded": [
+          "/tsukurikata/js/util.js",
+          "/tsukurikata/js/icons.js",
+          "/tsukurikata/js/instrument-icons.js",
+          "/tsukurikata/js/face-cast.js",
+          "/tsukurikata/js/faces.js",
+          "/tsukurikata/js/instruments.js",
+          "/tsukurikata/js/venues.js",
+          "/tsukurikata/js/samples.js",
+          "/tsukurikata/js/scores.js",
+          "/tsukurikata/js/pieces/largo.js",
+          "/tsukurikata/js/pieces/ode.js",
+          "/tsukurikata/js/pieces/galop.js",
+          "/tsukurikata/js/pieces/pomp.js",
+          "/tsukurikata/js/pieces/aida.js",
+          "/tsukurikata/js/pieces/hero.js",
+          "/tsukurikata/js/pieces/holst.js",
+          "/tsukurikata/js/pieces/hungarian.js",
+          "/tsukurikata/js/pieces/flowers.js",
+          "/tsukurikata/js/pieces/tell.js",
+          "/tsukurikata/js/pieces/carmen.js",
+          "/tsukurikata/js/pieces/valkyrie.js",
+          "/tsukurikata/js/pieces/swan.js",
+          "/tsukurikata/js/pieces/spring.js",
+          "/tsukurikata/js/pieces/canon.js",
+          "/tsukurikata/js/band.js",
+          "/tsukurikata/js/game.js",
+          "/tsukurikata/js/engine.js",
+          "/tsukurikata/js/conduct.js",
+          "/tsukurikata/js/announce.js",
+          "/tsukurikata/js/tunegame.js",
+          "/tsukurikata/js/fx.js",
+          "/tsukurikata/js/ui.js",
+          "/design/implementation/qa.js"
+        ],
+        "ready": true,
+        "resources": [
+          {
+            "bytes": 2477,
+            "file": "/tsukurikata/js/util.js",
+            "ms": 23,
+            "status": 200
+          },
+          {
+            "bytes": 4867,
+            "file": "/tsukurikata/js/icons.js",
+            "ms": 24,
+            "status": 200
+          },
+          {
+            "bytes": 2590,
+            "file": "/tsukurikata/js/instrument-icons.js",
+            "ms": 31,
+            "status": 200
+          },
+          {
+            "bytes": 12524,
+            "file": "/tsukurikata/js/venues.js",
+            "ms": 30,
+            "status": 200
+          },
+          {
+            "bytes": 7048,
+            "file": "/tsukurikata/js/face-cast.js",
+            "ms": 31,
+            "status": 200
+          },
+          {
+            "bytes": 24975,
+            "file": "/tsukurikata/js/samples.js",
+            "ms": 33,
+            "status": 200
+          },
+          {
+            "bytes": 22132,
+            "file": "/tsukurikata/js/scores.js",
+            "ms": 34,
+            "status": 200
+          },
+          {
+            "bytes": 4184,
+            "file": "/tsukurikata/js/faces.js",
+            "ms": 34,
+            "status": 200
+          },
+          {
+            "bytes": 27017,
+            "file": "/tsukurikata/js/instruments.js",
+            "ms": 34,
+            "status": 200
+          },
+          {
+            "bytes": 22631,
+            "file": "/tsukurikata/js/pieces/galop.js",
+            "ms": 39,
+            "status": 200
+          },
+          {
+            "bytes": 11341,
+            "file": "/tsukurikata/js/pieces/largo.js",
+            "ms": 39,
+            "status": 200
+          },
+          {
+            "bytes": 16000,
+            "file": "/tsukurikata/js/pieces/ode.js",
+            "ms": 41,
+            "status": 200
+          },
+          {
+            "bytes": 19299,
+            "file": "/tsukurikata/js/pieces/pomp.js",
+            "ms": 39,
+            "status": 200
+          },
+          {
+            "bytes": 20823,
+            "file": "/tsukurikata/js/pieces/aida.js",
+            "ms": 40,
+            "status": 200
+          },
+          {
+            "bytes": 18482,
+            "file": "/tsukurikata/js/pieces/holst.js",
+            "ms": 42,
+            "status": 200
+          },
+          {
+            "bytes": 29740,
+            "file": "/tsukurikata/js/pieces/hungarian.js",
+            "ms": 43,
+            "status": 200
+          },
+          {
+            "bytes": 19332,
+            "file": "/tsukurikata/js/pieces/swan.js",
+            "ms": 45,
+            "status": 200
+          },
+          {
+            "bytes": 37082,
+            "file": "/tsukurikata/js/pieces/tell.js",
+            "ms": 45,
+            "status": 200
+          },
+          {
+            "bytes": 25824,
+            "file": "/tsukurikata/js/pieces/flowers.js",
+            "ms": 46,
+            "status": 200
+          },
+          {
+            "bytes": 25854,
+            "file": "/tsukurikata/js/pieces/carmen.js",
+            "ms": 46,
+            "status": 200
+          },
+          {
+            "bytes": 21784,
+            "file": "/tsukurikata/js/pieces/hero.js",
+            "ms": 47,
+            "status": 200
+          },
+          {
+            "bytes": 20721,
+            "file": "/tsukurikata/js/pieces/valkyrie.js",
+            "ms": 46,
+            "status": 200
+          },
+          {
+            "bytes": 17241,
+            "file": "/tsukurikata/js/pieces/spring.js",
+            "ms": 48,
+            "status": 200
+          },
+          {
+            "bytes": 49938,
+            "file": "/tsukurikata/js/band.js",
+            "ms": 48,
+            "status": 200
+          },
+          {
+            "bytes": 13464,
+            "file": "/tsukurikata/js/pieces/canon.js",
+            "ms": 50,
+            "status": 200
+          },
+          {
+            "bytes": 28344,
+            "file": "/tsukurikata/js/conduct.js",
+            "ms": 49,
+            "status": 200
+          },
+          {
+            "bytes": 10527,
+            "file": "/tsukurikata/js/announce.js",
+            "ms": 52,
+            "status": 200
+          },
+          {
+            "bytes": 23801,
+            "file": "/tsukurikata/js/engine.js",
+            "ms": 50,
+            "status": 200
+          },
+          {
+            "bytes": 189121,
+            "file": "/tsukurikata/js/game.js",
+            "ms": 48,
+            "status": 200
+          },
+          {
+            "bytes": 9322,
+            "file": "/tsukurikata/js/tunegame.js",
+            "ms": 53,
+            "status": 200
+          },
+          {
+            "bytes": 11663,
+            "file": "/tsukurikata/js/fx.js",
+            "ms": 54,
+            "status": 200
+          },
+          {
+            "bytes": 47351,
+            "file": "/design/implementation/qa.js",
+            "ms": 54,
+            "status": 200
+          },
+          {
+            "bytes": 224633,
+            "file": "/tsukurikata/js/ui.js",
+            "ms": 53,
+            "status": 200
+          }
+        ],
+        "scripts": [
+          "/tsukurikata/js/util.js",
+          "/tsukurikata/js/icons.js",
+          "/tsukurikata/js/instrument-icons.js",
+          "/tsukurikata/js/face-cast.js",
+          "/tsukurikata/js/faces.js",
+          "/tsukurikata/js/instruments.js",
+          "/tsukurikata/js/venues.js",
+          "/tsukurikata/js/samples.js",
+          "/tsukurikata/js/scores.js",
+          "/tsukurikata/js/pieces/largo.js",
+          "/tsukurikata/js/pieces/ode.js",
+          "/tsukurikata/js/pieces/galop.js",
+          "/tsukurikata/js/pieces/pomp.js",
+          "/tsukurikata/js/pieces/aida.js",
+          "/tsukurikata/js/pieces/hero.js",
+          "/tsukurikata/js/pieces/holst.js",
+          "/tsukurikata/js/pieces/hungarian.js",
+          "/tsukurikata/js/pieces/flowers.js",
+          "/tsukurikata/js/pieces/tell.js",
+          "/tsukurikata/js/pieces/carmen.js",
+          "/tsukurikata/js/pieces/valkyrie.js",
+          "/tsukurikata/js/pieces/swan.js",
+          "/tsukurikata/js/pieces/spring.js",
+          "/tsukurikata/js/pieces/canon.js",
+          "/tsukurikata/js/band.js",
+          "/tsukurikata/js/game.js",
+          "/tsukurikata/js/engine.js",
+          "/tsukurikata/js/conduct.js",
+          "/tsukurikata/js/announce.js",
+          "/tsukurikata/js/tunegame.js",
+          "/tsukurikata/js/fx.js",
+          "/tsukurikata/js/ui.js",
+          "/design/implementation/qa.js"
+        ],
+        "started": "2026-10-28T14:44:25.632Z"
+      },
+      "errors": [],
+      "steps": 49,
+      "year": 2027
+    }
+  }
+]

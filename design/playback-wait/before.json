@@ -1,0 +1,64 @@
+{
+  "ensemble": {
+    "active": true,
+    "button": {
+      "animation": "none",
+      "disabled": false,
+      "label": "5人の音を読み込み中。押すと中止",
+      "motion": "off",
+      "pressed": "true",
+      "rect": {
+        "bottom": 0,
+        "height": 0,
+        "left": 0,
+        "right": 0,
+        "top": 0,
+        "width": 0,
+        "x": 0,
+        "y": 0
+      },
+      "waiting": "true"
+    },
+    "cast": [
+      "m2028-n1-cafe",
+      "m2028-n2-cafe",
+      "m2028-n3-cafe",
+      "m2028-n4-cafe",
+      "m2028-n5-cafe"
+    ],
+    "focus": "",
+    "fullState": 0.5168111461680382,
+    "miniHidden": true,
+    "performance": 0.6326754721812904,
+    "pieceChoice": "ode",
+    "rangeChoice": "all",
+    "resultPerformance": null,
+    "selected": [
+      "m2028-n1-cafe",
+      "m2028-n2-cafe",
+      "m2028-n3-cafe",
+      "m2028-n4-cafe",
+      "m2028-n5-cafe"
+    ],
+    "waiting": true
+  },
+  "listening": {
+    "conductDisabled": false,
+    "engineVenue": "civic",
+    "kind": "自由曲",
+    "range": "all",
+    "rangeDisabled": false,
+    "rangeLabel": "全部",
+    "shownPiece": "ode",
+    "summary": "市民会館・全部・全員",
+    "title": "「天国と地獄」"
+  },
+  "now": "表示中：いまの音（1月・市民会館）",
+  "playing": false,
+  "recordedCast": [],
+  "stage": {
+    "portraitCount": "39",
+    "selectedMember": ""
+  },
+  "waiting": true
+}
