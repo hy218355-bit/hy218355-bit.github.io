@@ -21,6 +21,14 @@ window.fetch=(input,init)=>{
 };
 if(document.readyState==='loading')await new Promise(r=>document.addEventListener('DOMContentLoaded',r,{once:true}));
 const q=new URLSearchParams(location.search);let view=q.get('view')||'week';
+const countinHistory=[];
+if(q.has('countinAudit')){
+ const ready=cdCountReady;
+ cdCountReady=now=>{
+  const previous=CD.count.slice();ready(now);
+  countinHistory.push({at:now,from:CD.perf.from,previous});setTimeout(record,0);
+ };
+}
 const cadenceClicks=[],cadenceArrivals=[];
 if(q.has('downbeatAudit')){
  const click=cdClick;
@@ -106,6 +114,7 @@ function record(){
  report.listeningMix=E.pb?{nodes:E.pb.listenOutputs.length,live:E.pb.listenLive,gain:E.pb.listenOutputs.map(n=>n.gain.value)}:null;
  report.hallExp=S.hallExp;
  report.conduct={period:CD.clock?.P,level:CD.level,beat:$('#cdPattern').dataset.nextBeat,phase:CD.phase,count:CD.count.length,taps:CD.clock?.taps.length||0,judge:CD.judge?{...CD.judge}:null,combo:CD.combo,events:CD.clock?.ev.length||0,meter:CD.perf?.meter,from:CD.perf?.from,to:CD.perf?.to};
+ if(q.has('countinAudit'))report.countin={history:countinHistory.slice(),times:CD.count.slice(),cueStart:CD.cueStart,lastTap:CD.lastTap,message:$('#cdMsg').textContent,shown:$('#cdPattern').dataset.nextBeat};
  if(q.has('focusAudit')){
   const active=document.activeElement;
   report.conductKeys=focusKeys.slice(-32);

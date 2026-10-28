@@ -10,6 +10,18 @@ const CD = {phase: 'idle', perf: null, clock: null, count: [], lv: [], level: 1,
 const cdCountN = () => CD.perf.meter <= 2 ? CD.perf.meter * 2 : CD.perf.meter;
 const cdCueCalm = () => fxCalm() || U.fxMode !== 'full';
 const cdCueHint = () => cdCueCalm() ? 'ラインが光ったらタップ' : '光がラインに届いたらタップ';
+const cdCountPeriod = () => {
+  const iv=CD.count.slice(1).map((t,i)=>t-CD.count[i]).sort((a,b)=>a-b);
+  return iv.length?clamp(iv[Math.floor(iv.length/2)],0.3,1.6):CD.cuePeriod;
+};
+function cdCountReady(now){
+  CD.count=[];CD.cueStart=now;CD.lastTap=0;CD.tapUntil=0;
+  cdMsg(`まず${cdCountN()}回、${cdCueHint()}`);
+}
+function cdResetCount(now){
+  // 演奏前だけ、長い中断を新しいテンポの間隔へ混ぜずに数え直す。
+  if(CD.phase==='count'&&CD.count.length&&now-CD.count.at(-1)>4*cdCountPeriod())cdCountReady(now);
+}
 const cdBeatLabel = pc => pc.beatUnit===2?'2分音符':pc.beatUnit===1.5?'付点4分音符':pc.beatUnit===.5?'8分音符':'4分音符';
 const cdBeatMark = pc => `<span class="cd-beat" role="img" aria-label="${cdBeatLabel(pc)}">${uiBeatIcon(pc.beatUnit)}</span>`;
 const cdAverageTempo = (pc,bpm) => `<b class="cd-average">${cdBeatMark(pc)}<span aria-hidden="true">=</span>${bpm}</b>`;
@@ -96,11 +108,7 @@ function openConduct(stage = null){
   }
   $('#cdTempo').textContent = '--';
   $('#cdResult').hidden = true; $('#cdPad').hidden = false;
-  const n = cdCountN();
-  const ready = () => {
-    CD.cueStart=E.ac.currentTime;
-    cdMsg(`まず${n}回、${cdCueHint()}`);
-  };
+  const ready = () => cdCountReady(E.ac.currentTime);
   CD.cuePeriod=clamp(60/bpmAt(pc,CD.perf.interp.tempo??1,CD.perf.from),0.3,1.6);
   CD.cueNodes=null;
   if(SAMPLES.use && !SAMPLES.ready && SAMPLES.loading && !SAMPLES.error){
@@ -191,7 +199,9 @@ function cdTap(e){
   if(e.isPrimary===false||(e.pointerType==='mouse'&&e.button!==0))return;
   e.preventDefault();
   const now = E.ac.currentTime, tapped = cdInputTime(e,now);
-  if(tapped===null||tapped-CD.lastTap<0.12)return; // 遅れて届いた入力と二度押し
+  if(tapped===null)return;
+  cdResetCount(tapped);
+  if(tapped-CD.lastTap<0.12)return; // 二度押し
   CD.lastTap = tapped;
   haptic('tap');
   const pad = $('#cdPad').getBoundingClientRect();
@@ -204,8 +214,7 @@ function cdTap(e){
     cdClick(now, (CD.perf.from + CD.count.length - 1) % CD.perf.meter === 0);
     if(CD.count.length < cdCountN()){ cdMsg(`あと${cdCountN()-CD.count.length}回`); return; }
     // 叩いた間隔の中央値をテンポにして、次の拍から始める
-    const iv = CD.count.slice(1).map((t, i) => t - CD.count[i]).sort((a, b) => a - b);
-    const P = clamp(iv[Math.floor(iv.length / 2)], 0.3, 1.6);
+    const P = cdCountPeriod();
     CD.clock = BeatClock.start(tapped + P, CD.perf.from, P);
     CD.level = level; CD.lv = [[0, +level.toFixed(2)]];
     CD.phase = 'play';
@@ -255,8 +264,7 @@ function cdCueState(now){
   let b;
   if(CD.phase==='play')b=CD.clock.beatAt(now)-CD.perf.from;
   else {
-    const count=CD.count,iv=count.slice(1).map((t,i)=>t-count[i]).sort((a,b)=>a-b);
-    const P=iv.length?clamp(iv[Math.floor(iv.length/2)],0.3,1.6):CD.cuePeriod;
+    const count=CD.count,P=cdCountPeriod();
     b=count.length?count.length-1+(now-count[count.length-1])/P:(now-CD.cueStart)/P-1;
   }
   const i=Math.floor(b),f=b-i,meter=CD.perf.meter;
@@ -303,7 +311,7 @@ function cdDrawCue(now){
 }
 function cdFrame(){
   CD.raf = requestAnimationFrame(cdFrame);
-  if(E.ac)cdDrawCue(E.ac.currentTime);
+  if(E.ac){cdResetCount(E.ac.currentTime);cdDrawCue(E.ac.currentTime);}
   if(CD.phase !== 'play' || !CD.clock || !E.ac) return;
   const b = CD.clock.beatAt(E.ac.currentTime) - CD.perf.from;
   if(b < 0) return;

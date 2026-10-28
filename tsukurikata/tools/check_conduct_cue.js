@@ -9,7 +9,7 @@ const engine=fs.readFileSync(path.join(root,'js/engine.js'),'utf8');
 vm.runInContext(engine.slice(engine.indexOf('const CD_FOLLOW'),engine.indexOf('// ステージの奥行き')),ctx);
 vm.runInContext(`
 const node=()=>({style:{},textContent:'',appendChild(){},remove(){},getBoundingClientRect:()=>({left:0,top:0,width:300,height:300})});
-const performance={now:()=>1000};
+const performance={now:()=>1000},requestAnimationFrame=()=>1;
 const nodes={},$=id=>nodes[id]||=(node()),document={createElement:node};
 const E={ac:{currentTime:0},pb:{setLevel(){}}},U={venue:'room',fxMode:'full'};let played,calm=false;
 const fxCalm=()=>calm;
@@ -63,6 +63,30 @@ for(const [from,first,accent]of [[54,3,[false,false,true,false]],[111,4,[false,t
  assert.deepEqual(clicks,accent);assert.equal(cdCueState(CD.clock.t0).beat,first);
  assert.equal(cdCueState(CD.clock.timeOf(from+(5-first)%4)).beat,1);
 }
+// テンポ出しを中断したら数え直し、古い間隔を新しいテンポへ混ぜない。
+for(const mode of ['full','short','off']){
+ U.fxMode=mode;CD.cueNodes=null;CD.perf={meter:4,pieceId:'spring',from:111,to:140,interp:{tempo:1}};
+ CD.phase='count';CD.count=[];CD.lastTap=0;CD.cuePeriod=.5;CD.cueStart=10;
+ const perf=JSON.stringify(CD.perf);
+ for(const t of [10,10.5]){E.ac.currentTime=t;cdTap({preventDefault(){}});}
+ E.ac.currentTime=12.5;cdFrame();assert.equal(CD.count.length,2,'4拍までは続きを受け付ける');
+ E.ac.currentTime=12.501;cdFrame();assert.equal(CD.count.length,0,'4拍を超えた中断で最初から数え直す');
+ assert.equal(CD.phase,'count');assert.equal($('#cdMsg').textContent,'まず4回、'+cdCueHint());near(CD.cueStart,12.501);
+ assert.equal(cdCueState(12.501).next[0].beat,4,'途中の区間の開始拍から予告を戻す');
+ for(const t of [13,13.5,14,14.5]){E.ac.currentTime=t;cdTap({preventDefault(){}});}
+ assert.equal(CD.phase,'play');assert.deepEqual(CD.count,[13,13.5,14,14.5]);near(CD.clock.P,.5);near(CD.clock.t0,15);
+ const before=JSON.stringify(CD.count);E.ac.currentTime=20;cdFrame();assert.equal(JSON.stringify(CD.count),before,'演奏中は数え直さない');
+ assert.equal(JSON.stringify(CD.perf),perf);
+}
+// 描画がしばらく止まっていた場合も、次の入力で古い数え始めを引き継がない。
+CD.phase='count';CD.count=[10,10.5];CD.lastTap=10.5;CD.cuePeriod=.5;E.ac.currentTime=14;
+cdTap({preventDefault(){}});assert.deepEqual(CD.count,[14]);assert.equal(CD.phase,'count');assert.equal($('#cdMsg').textContent,'あと3回');
+// 2・3・8拍子も、最初の1入力だけで長く離れたときは待ち直す。
+for(const meter of [2,3,8]){
+ CD.perf={meter,pieceId:'pomp',from:0,to:80};CD.phase='count';CD.count=[10];CD.lastTap=10;CD.cuePeriod=.75;
+ E.ac.currentTime=13;cdFrame();assert.equal(CD.count.length,1);
+ E.ac.currentTime=13.01;cdFrame();assert.equal(CD.count.length,0);assert.equal($('#cdMsg').textContent,'まず'+cdCountN()+'回、'+cdCueHint());
+}
 for(const [off,kind]of [[-.2,'e'],[.05,'p'],[.1,'g'],[.2,'l']]){
  CD.judge={p:0,g:0,e:0,l:0};cdJudge({},$('#cdPad').getBoundingClientRect(),off);assert.equal(CD.judge[kind],1,'判定の幅は変えない');
 }
@@ -84,4 +108,4 @@ for(const mode of ['short','off','reduce']){
  assert.equal(cdCueHint(),'ラインが光ったらタップ');cdDrawCue(10.5);assert.ok(n.now.classList.values.has('hit'));assert.ok(n.pad.classList.values.has('on-beat'));assert.ok(n.beats[1].classList.values.has('on'));
 }
 `,ctx);
-console.log('2・3・4・8拍の予告と入り／実際のタップから演奏開始・ぴったり判定／全15曲の区間・テンポ変更／途中の拍と小節の先頭・数え始めの音／演奏と時計の不変／終端・待機・終了／演出なし・短く・動きを減らす設定：確認済み');
+console.log('2・3・4・8拍の予告と入り／実際のタップから演奏開始・ぴったり判定／全15曲の区間・テンポ変更／途中の拍と小節の先頭・数え始めの音／テンポ出しの中断と数え直し／演奏と時計の不変／終端・待機・終了／演出なし・短く・動きを減らす設定：確認済み');

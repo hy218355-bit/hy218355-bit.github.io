@@ -1,0 +1,480 @@
+[
+  {
+    "case": "before-input",
+    "data": {
+      "conduct": {
+        "beat": "4",
+        "combo": 0,
+        "count": 0,
+        "events": 0,
+        "from": 111,
+        "judge": {
+          "e": 0,
+          "g": 0,
+          "l": 0,
+          "p": 0
+        },
+        "level": 1,
+        "meter": 4,
+        "phase": "count",
+        "taps": 0,
+        "to": 140
+      },
+      "countin": {
+        "cueStart": 0.32,
+        "history": [
+          {
+            "at": 0.32,
+            "from": 111,
+            "previous": []
+          }
+        ],
+        "lastTap": 0,
+        "message": "まず4回、光がラインに届いたらタップ",
+        "shown": "4",
+        "times": []
+      },
+      "members": 0.6864548486191779,
+      "records": 0.7712433410342783
+    }
+  },
+  {
+    "case": "light-reset",
+    "data": {
+      "active": "cdPad",
+      "beatrings": [],
+      "conduct": {
+        "beat": "4",
+        "combo": 0,
+        "count": 0,
+        "events": 0,
+        "from": 111,
+        "judge": {
+          "e": 0,
+          "g": 0,
+          "l": 0,
+          "p": 0
+        },
+        "level": 1,
+        "meter": 4,
+        "phase": "count",
+        "taps": 0,
+        "to": 140
+      },
+      "countin": {
+        "cueStart": 14.357333333333331,
+        "history": [
+          {
+            "at": 0.32,
+            "from": 111,
+            "previous": []
+          },
+          {
+            "at": 14.357333333333331,
+            "from": 111,
+            "previous": [
+              12.307433333476384,
+              12.71436666671435
+            ]
+          }
+        ],
+        "lastTap": 0,
+        "message": "まず4回、光がラインに届いたらタップ",
+        "shown": "4",
+        "times": []
+      },
+      "errors": [],
+      "members": 0.6864548486191779,
+      "records": 0.7712433410342783,
+      "scrollWidth": 375,
+      "width": 375
+    }
+  },
+  {
+    "case": "resume-play",
+    "data": {
+      "audio": [
+        "SampleVoice"
+      ],
+      "cadence": {
+        "arrivals": [
+          {
+            "beat": "1",
+            "fill": "rgb(147, 107, 47)",
+            "from": 111,
+            "pad": "cd-pad on-beat downbeat",
+            "phase": "count"
+          },
+          {
+            "beat": "1",
+            "fill": "rgb(147, 107, 47)",
+            "from": 111,
+            "pad": "cd-pad is-pressed on-beat downbeat",
+            "phase": "play"
+          }
+        ],
+        "beats": [
+          {
+            "color": "rgba(0, 0, 0, 0)",
+            "counted": false,
+            "on": false,
+            "text": "1"
+          },
+          {
+            "color": "rgba(0, 0, 0, 0)",
+            "counted": false,
+            "on": false,
+            "text": "2"
+          },
+          {
+            "color": "rgb(57, 121, 111)",
+            "counted": false,
+            "on": true,
+            "text": "3"
+          },
+          {
+            "color": "rgba(0, 0, 0, 0)",
+            "counted": false,
+            "on": false,
+            "text": "4"
+          }
+        ],
+        "calm": "false",
+        "clicks": [
+          {
+            "at": 12.309333333333331,
+            "strong": false
+          },
+          {
+            "at": 12.714666666666666,
+            "strong": true
+          },
+          {
+            "at": 40.42666666666667,
+            "strong": false
+          },
+          {
+            "at": 40.85333333333333,
+            "strong": true
+          },
+          {
+            "at": 41.28,
+            "strong": false
+          },
+          {
+            "at": 41.68533333333333,
+            "strong": false
+          }
+        ],
+        "cue": {
+          "b": 3.030090920397754,
+          "beat": 3,
+          "count": 4,
+          "f": 0.03009092039775396,
+          "i": 3,
+          "next": [
+            {
+              "beat": 4,
+              "distance": 0.969909079602246,
+              "k": 4,
+              "show": true
+            },
+            {
+              "beat": 1,
+              "distance": 1.969909079602246,
+              "k": 5,
+              "show": true
+            }
+          ]
+        },
+        "from": 111,
+        "meter": 4,
+        "next": [
+          {
+            "downbeat": false,
+            "fill": "rgb(57, 121, 111)",
+            "stroke": "1px"
+          },
+          {
+            "downbeat": true,
+            "fill": "rgb(147, 107, 47)",
+            "stroke": "4px"
+          }
+        ],
+        "now": {
+          "downbeat": false,
+          "fill": "rgb(57, 121, 111)",
+          "stroke": "1px"
+        }
+      },
+      "conduct": {
+        "beat": "4",
+        "combo": 4,
+        "count": 4,
+        "events": 7,
+        "from": 111,
+        "judge": {
+          "e": 0,
+          "g": 0,
+          "l": 0,
+          "p": 4
+        },
+        "level": 0.975,
+        "meter": 4,
+        "period": 0.4187239160638995,
+        "phase": "play",
+        "taps": 4,
+        "to": 140
+      },
+      "countin": {
+        "cueStart": 14.357333333333331,
+        "history": [
+          {
+            "at": 0.32,
+            "from": 111,
+            "previous": []
+          },
+          {
+            "at": 14.357333333333331,
+            "from": 111,
+            "previous": [
+              12.307433333476384,
+              12.71436666671435
+            ]
+          }
+        ],
+        "lastTap": 43.3492333334287,
+        "message": "光がラインに届いたらタップ",
+        "shown": "4",
+        "times": [
+          40.42606666652362,
+          40.85283333333333,
+          41.27979999995232,
+          41.685033333381014
+        ]
+      },
+      "errors": [],
+      "members": 0.6864548486191779
+    }
+  },
+  {
+    "case": "play-idle",
+    "data": {
+      "conduct": {
+        "beat": "4",
+        "combo": 4,
+        "count": 4,
+        "events": 7,
+        "from": 111,
+        "judge": {
+          "e": 0,
+          "g": 0,
+          "l": 0,
+          "p": 4
+        },
+        "level": 0.975,
+        "meter": 4,
+        "period": 0.4187239160638995,
+        "phase": "play",
+        "taps": 4,
+        "to": 140
+      },
+      "countin": {
+        "cueStart": 14.357333333333331,
+        "history": [
+          {
+            "at": 0.32,
+            "from": 111,
+            "previous": []
+          },
+          {
+            "at": 14.357333333333331,
+            "from": 111,
+            "previous": [
+              12.307433333476384,
+              12.71436666671435
+            ]
+          }
+        ],
+        "lastTap": 43.3492333334287,
+        "message": "光がラインに届いたらタップ",
+        "shown": "4",
+        "times": [
+          40.42606666652362,
+          40.85283333333333,
+          41.27979999995232,
+          41.685033333381014
+        ]
+      },
+      "feedback": "",
+      "message": "タップが止まっても、部員は最後のテンポで吹き続ける。",
+      "padHidden": false
+    }
+  },
+  {
+    "case": "natural-finish",
+    "data": {
+      "boot": {
+        "errors": [],
+        "failed": [],
+        "loaded": 33,
+        "scripts": 33
+      },
+      "conduct": {
+        "beat": "4",
+        "combo": 4,
+        "count": 4,
+        "events": 7,
+        "from": 111,
+        "judge": {
+          "e": 0,
+          "g": 0,
+          "l": 0,
+          "p": 4
+        },
+        "level": 0.975,
+        "meter": 4,
+        "period": 0.4187239160638995,
+        "phase": "done",
+        "taps": 4,
+        "to": 140
+      },
+      "countin": {
+        "cueStart": 14.357333333333331,
+        "history": [
+          {
+            "at": 0.32,
+            "from": 111,
+            "previous": []
+          },
+          {
+            "at": 14.357333333333331,
+            "from": 111,
+            "previous": [
+              12.307433333476384,
+              12.71436666671435
+            ]
+          }
+        ],
+        "lastTap": 43.3492333334287,
+        "message": "",
+        "shown": "4",
+        "times": [
+          40.42606666652362,
+          40.85283333333333,
+          41.27979999995232,
+          41.685033333381014
+        ]
+      },
+      "errors": [],
+      "members": 0.6864548486191779,
+      "recordings": [
+        {
+          "id": "r2028-10-0-293645",
+          "label": "あなたの指揮：《四季》より「春」（6月 第3週）"
+        }
+      ]
+    }
+  },
+  {
+    "case": "dark-reset",
+    "data": {
+      "active": "cdPad",
+      "conduct": {
+        "beat": "1",
+        "combo": 0,
+        "count": 0,
+        "events": 0,
+        "from": 0,
+        "judge": {
+          "e": 0,
+          "g": 0,
+          "l": 0,
+          "p": 0
+        },
+        "level": 1,
+        "meter": 2,
+        "phase": "count",
+        "taps": 0,
+        "to": 80
+      },
+      "countin": {
+        "cueStart": 29.226666666666667,
+        "history": [
+          {
+            "at": 0.064,
+            "from": 0,
+            "previous": []
+          },
+          {
+            "at": 29.226666666666667,
+            "from": 0,
+            "previous": [
+              27.07120000004768,
+              27.498066666523613
+            ]
+          }
+        ],
+        "lastTap": 0,
+        "message": "まず4回、ラインが光ったらタップ",
+        "shown": "1",
+        "times": []
+      },
+      "errors": [],
+      "scrollWidth": 375,
+      "width": 375
+    }
+  },
+  {
+    "case": "dark-start",
+    "data": {
+      "conduct": {
+        "beat": "1",
+        "combo": 0,
+        "count": 4,
+        "events": 1,
+        "from": 0,
+        "judge": {
+          "e": 0,
+          "g": 0,
+          "l": 0,
+          "p": 0
+        },
+        "level": 0.975,
+        "meter": 2,
+        "period": 0.4264666666189818,
+        "phase": "play",
+        "taps": 0,
+        "to": 80
+      },
+      "countin": {
+        "cueStart": 29.226666666666667,
+        "history": [
+          {
+            "at": 0.064,
+            "from": 0,
+            "previous": []
+          },
+          {
+            "at": 29.226666666666667,
+            "from": 0,
+            "previous": [
+              27.07120000004768,
+              27.498066666523613
+            ]
+          }
+        ],
+        "lastTap": 30.69826666680972,
+        "message": "ラインが光ったらタップ",
+        "shown": "1",
+        "times": [
+          29.439799999952317,
+          29.8662666665713,
+          30.27159999990463,
+          30.69826666680972
+        ]
+      },
+      "errors": []
+    }
+  }
+]
