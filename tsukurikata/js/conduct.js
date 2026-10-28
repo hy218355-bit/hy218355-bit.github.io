@@ -81,6 +81,15 @@ function cdDialogKey(e){
   }
 }
 
+// 音を作る条件は保ち、音符がない出場者も当日の記録から舞台に残す。
+function stagePerformance(rec){return rememberStageMembers(perform(recCtx(rec)),rec.snap.members,false);}
+function cdSetMembers(perf){
+  CD.stageMembers=stageMembers(perf);
+  CD.who=new Set([...CD.stageMembers.values()].map(m=>m.id));
+  CD.sounding=new Set([...perf.notes,...perf.hits].map(n=>n.mid));
+}
+function cdMemberById(id){return id&&[...(CD.stageMembers?.values()||[])].find(m=>m.id===id);}
+
 // stage を渡すと本番の指揮（{rec, ev}）。終わると、その指揮で演奏した結果が採点される
 function openConduct(stage = null){
   if(!stage && busy()) return;
@@ -91,10 +100,9 @@ function openConduct(stage = null){
   CD.sel=null;$('#cdMember').hidden=true;
   $('#conduct').classList.remove('watch'); $('#cdClose').textContent = 'やめる'; $('#cdEyebrow').textContent = '指揮';
   soloAll();   // 指揮するときは、全員の音で
-  CD.perf = stage ? rememberStageMembers(perform(recCtx(stage.rec)),stage.rec.snap.members,false) : currentPerformance();
-  CD.stageMembers = stageMembers(CD.perf);
+  CD.perf = stage ? stagePerformance(stage.rec) : currentPerformance();
   // 舞台にいる部員（本番ならオーディションで選んだメンバー）を、指揮台から見えるように描く
-  CD.who = new Set([...CD.perf.notes, ...CD.perf.hits].map(n => n.mid));
+  cdSetMembers(CD.perf);
   CD.phase = 'count'; CD.count = []; CD.lv = []; CD.level = 1; CD.clock = null; CD.rec = null; CD.lastTap = 0; CD.idleHint = false; CD.beatShown = -1; CD.tmHint = null; CD.tapUntil = 0;
   CD.judge = {p: 0, g: 0, e: 0, l: 0}; CD.combo = 0; CD.best = 0;
   cdClearJudge();
@@ -133,8 +141,7 @@ function openWatch(perf, title){
   cancelAnimationFrame(CD.raf);
   CD.sel=null;$('#cdMember').hidden=true;soloAll();
   CD.phase = 'watch'; CD.stage = null; CD.perf = perf;
-  CD.stageMembers = stageMembers(perf);
-  CD.who = new Set([...perf.notes, ...perf.hits].map(n => n.mid));
+  cdSetMembers(perf);
   $('#cdTitle').textContent = title;
   $('#cdEyebrow').textContent = '本番';
   $('#cdClose').textContent = 'とばす';

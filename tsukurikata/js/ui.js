@@ -324,12 +324,13 @@ function drawStage(t = -1, cv = $('#stage'), who = null){
   stageFloor(g, G, C);
 
   const viewSec = main && U.view !== 'mel' ? U.view : null;
-  const sel = main ? U.recordMember || (U.sel && memberById(U.sel)) : CD.sel && memberById(CD.sel);
+  const sel = main ? U.recordMember || (U.sel && memberById(U.sel)) : cdMemberById(CD.sel);
   let portraits=0,focus=null;
   for(const s of SEATS){
     const [x, y] = seatXY(s, G);
     const cast=main ? (t>=0 || U.waitPlay ? U.stageMembers : null) : CD.stageMembers;
-    const m = cast ? cast.get(s.id) : S.members.find(mm => mm.seat === s.id && (!who || who.has(mm.id)));
+    const person = cast ? cast.get(s.id) : S.members.find(mm => mm.seat === s.id);
+    const m = person && (!who || who.has(person.id)) ? person : null;
     const dim = viewSec && s.sec !== viewSec;
     g.globalAlpha = dim ? 0.3 : 1;
     const p = t >= 0 && U.ptr?.[s.id];
@@ -1957,7 +1958,7 @@ function skillList(m){
 // 部員のひとこと：いまの様子（体力・最近の伸び・苦手・癖・学年・役）に合うものから、週ごとに1つ
 // 本番を見ているときに部員をタップしたら、その子の様子（力・本番の強さ・今日の調子・スキル）を舞台の下に出す
 function showCdMember(id){
-  const el = $('#cdMember'), m = id && memberById(id);
+  const el = $('#cdMember'), m = cdMemberById(id);
   // 別の子へ移る・閉じるときは、一人だけの音を見えないまま残さない。
   if((!m||m.id!==CD.sel)&&U.solo.startsWith('member:')){U.solo='all';applySolo();}
   CD.sel = m ? m.id : null;
@@ -1967,12 +1968,12 @@ function showCdMember(id){
     return;
   }
   const C = tok(), mood = (CD.perf?.mental || []).find(x => x.mid === m.id)?.kind;
-  const plays = CD.who?.has(m.id), solo = U.solo === `member:${m.id}`;
+  const plays = CD.sounding?.has(m.id), solo = U.solo === `member:${m.id}`;
   el.innerHTML = `<div class="cm-head">${memberFace(m,54,{mood})}<span><b id="cdMemberName">${esc(m.name)}</b><small>${m.grade}年・${esc(PART_LABEL[SEAT[m.seat].part])}${m.title ? '・' + esc(m.title) : ''}</small></span><button class="btn small quiet" type="button" data-cdm="close">閉じる</button></div>
     ${plays ? `<div class="row"><button class="btn small" type="button" data-cdm="solo" aria-pressed="${solo}">${solo ? '全員の音にもどす' : 'この子の音だけ聴く'}</button></div>` : ''}
-    <p class="cm-say">${esc(memberSays(m))}</p>
+    <p class="cm-say">${esc(plays?memberSays(m,CD.perf.pieceId):'「みんなの音を、よく聴いています」')}</p>
     <div class="cm-stats">${STAT_KEYS.map(k => `<span class="cm-st">${STAT_LABEL[k]}<span class="track"><span class="fill" style="width:${clamp(m.stats[k], 0, 100)}%;background:${skillColor(C, m.stats[k])}"></span></span>${rankBadge(m.stats[k])}</span>`).join('')}</div>
-    <p class="cm-note">本番の強さ ${rankBadge(m.mental ?? 40)}${mood === 'zone' ? '・今日は、いつも以上の音が出ている' : mood === 'freeze' ? '・今日は、緊張で頭が真っ白になっている' : ''}${plays ? '' : '・この本番には出ていない'}${skillChips(m)}</p>
+    <p class="cm-note">本番の強さ ${rankBadge(m.mental ?? 40)}${mood === 'zone' ? '・今日は、いつも以上の音が出ている' : mood === 'freeze' ? '・今日は、緊張で頭が真っ白になっている' : ''}${plays ? '' : '・この曲は休み'}${skillChips(m)}</p>
     `;
   el.hidden = false;
   if(CD.phase==='watch')el.querySelector('[data-cdm="close"]').focus({preventScroll:true});
@@ -1981,13 +1982,13 @@ function showCdMember(id){
 }
 function toggleCdMemberSolo(){
   const button=$('#cdMember [data-cdm="solo"]');
-  if(CD.phase!=='watch'||!button||!CD.who?.has(CD.sel))return;
+  if(CD.phase!=='watch'||!button||!CD.sounding?.has(CD.sel))return;
   const solo=U.solo!==`member:${CD.sel}`;
   U.solo=solo?`member:${CD.sel}`:'all';applySolo();
   // ボタンを作り直さず、操作先と読んでいるカードの位置を保つ。
   button.setAttribute('aria-pressed',String(solo));button.textContent=solo?'全員の音にもどす':'この子の音だけ聴く';
 }
-function memberSays(m){
+function memberSays(m,pieceId=S.pieceId){
   const lines = [], wk = STAT_LABEL[weakest(m)], up = m.last?.d ? Math.max(0, ...STAT_KEYS.map(k => m.last.d[k] || 0)) : 0;
   if((m.sta ?? 100) < 30) lines.push('「ちょっと、疲れがたまってるかもしれません……」', '「体が重くて、思うように息が入らないです」');
   if(up >= 4) lines.push('「最近、音がよく出るようになってきました！」', '「先週の練習、手ごたえがありました」');
@@ -2001,8 +2002,10 @@ function memberSays(m){
   if(m.title === '部長') lines.push('「みんなが同じ方を向けるように、がんばります」');
   if(m.title === '学生指揮') lines.push('「合奏の前に、スコアをもう一回見ておきます」');
   if(m.title === 'パートリーダー') lines.push('「パートの音が、少しずつそろってきました」');
-  if(S.pieceId && readMean(m, S.pieceId) < 40) lines.push('「自由曲、まだ楽譜を追うので精一杯です」');
-  if(S.pieceId && readMean(m, S.pieceId) >= 90) lines.push('「自由曲、だいぶ歌えるようになってきました」');
+  const pc=PIECES[pieceId],song=pieceId===S.pieceId?'自由曲':'この曲';
+  const reading=!pc?0:m.pfams?pc.spans.reduce((sum,sp,i)=>sum+(m.pfams[i]??0)*(sp.to-sp.from),0)/pc.spans.reduce((sum,sp)=>sum+sp.to-sp.from,0):m.pfam??readMean(m,pieceId);
+  if(pieceId && reading < 40) lines.push(`「${song}、まだ楽譜を追うので精一杯です」`);
+  if(pieceId && reading >= 90) lines.push(`「${song}、だいぶ歌えるようになってきました」`);
   if(!lines.length) lines.push('「今日もよろしくお願いします」', '「合奏、楽しいです」');
   return lines[Math.floor(hash(m.id, S.year, S.week, 'say') * lines.length)];
 }
@@ -2282,7 +2285,7 @@ function startStage(){
   setVenue(rec.venue);
   renderAll();
   // 指揮しないときも、舞台の部員が見えるように。A部門は課題曲・自由曲の順に続けて
-  const ev = eventAt(S, S.week), seq = setRec ? [setRec, rec] : [rec], perfs = seq.map(r => perform(recCtx(r)));
+  const ev = eventAt(S, S.week), seq = setRec ? [setRec, rec] : [rec], perfs = seq.map(stagePerformance);
   const title = r => `${ev.title}：${PIECES[r.pieceId].title}${setRec ? (r === setRec ? '（課題曲）' : '（自由曲）') : ''}`;
   openWatch(perfs[0], title(seq[0]));
   const playAt = i => playPerf(perfs[i], seq[i].label, natural => {
@@ -2308,7 +2311,7 @@ function startStageConduct(){
   const ev = eventAt(S, S.week);
   if(!setRec) return openConduct({rec, ev});
   // A部門：課題曲は部員まかせで吹くのを聴いてから、続けて自由曲を指揮する（とばすと、指揮せずに結果へ）
-  const perf = perform(recCtx(setRec));
+  const perf = stagePerformance(setRec);
   openWatch(perf, `${ev.title}：${PIECES[setRec.pieceId].title}（課題曲）`);
   const go = () => playPerf(perf, setRec.label, natural => {
     if(!natural) return reveal();
@@ -2339,7 +2342,7 @@ function playEnsemble(){
   const e = S.winter?.ens, rec = e && S.recs.find(r => r.id === e.recId);
   if(!rec) return;
   stopPlay(); soloAll(); setVenue(rec.venue);
-  const perf = perform(recCtx(rec));
+  const perf = stagePerformance(rec);
   const done = () => { closeWatch(); if(U.ensHide === S.year){ U.ensHide = null; renderAll(); haptic(e.award === 'gold' ? 'success' : 'tap'); } };
   openWatch(perf, `アンサンブルコンテスト：${PIECES[rec.pieceId].title}（${e.names.length}人）`);
   const go = () => playPerf(perf, rec.label, natural => {
@@ -2447,7 +2450,7 @@ function bind(){
   // 本番を見ているあいだ：舞台の部員をタップすると、その子の様子
   $('#cdStage').addEventListener('click', e => {
     if(CD.phase !== 'watch' || CD.intro) return;
-    const s = seatAt(e, $('#cdStage')), m = s && S.members.find(x => x.seat === s.id && CD.who.has(x.id));
+    const s = seatAt(e, $('#cdStage')), m = s && CD.stageMembers?.get(s.id);
     haptic('tap'); showCdMember(m && m.id !== CD.sel ? m.id : null);
   });
   $('#cdMember').addEventListener('click', e => {

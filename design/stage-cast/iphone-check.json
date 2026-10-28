@@ -1,0 +1,14 @@
+{
+  "build": "succeeded",
+  "install": "succeeded",
+  "launch": "blocked_device_locked",
+  "runningProcessVerified": false,
+  "visualInteractionVerified": false,
+  "mirroringUsed": false,
+  "bundledSourceSHA256": {
+    "index.html": "6cdd9f96276fac2b12b809479ba2abdeae6d6e71374498112c9d0d32a9a53060",
+    "js/ui.js": "db59e94fa3ea1f60a36c240cb2769d3b1fc7d18065cb0957e013c55fe281edb0",
+    "js/conduct.js": "1e18b06668b2b07b5acdd911e1ab2ad406e8366abe9c212747877c1f5a097bf3",
+    "js/fx.js": "d52a6dbc378fef7b5842918c3c5a8c082afa269f6cbedb20a220ccb20f13e901"
+  }
+}

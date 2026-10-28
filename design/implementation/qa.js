@@ -40,6 +40,10 @@ if(q.has('downbeatAudit')){
   cadenceArrivals.push({phase:CD.phase,from:CD.perf.from,fill:getComputedStyle(now.querySelector('rect')).fill,pad:$('#cdPad').className,beat:$('#cdBeatRow .on')?.textContent});
  }).observe($('#cdPattern'),{subtree:true,attributes:true,attributeFilter:['class']});
 }
+const castEntrance=[];
+if(q.has('watchCardAudit'))new MutationObserver(()=>{
+ castEntrance.push({count:Number($('#cdStage').dataset.portraitCount),phase:CD.phase,playing:U.playing});
+}).observe($('#cdStage'),{attributes:true,attributeFilter:['data-portrait-count']});
 const focusKeys=[];
 if(q.has('focusAudit'))window.addEventListener('keydown',e=>{
  if(['Escape','Tab',' ','Enter'].includes(e.key))focusKeys.push({key:e.key,repeat:e.repeat,tipOpen:!$('#tip').hidden,target:e.target.id||e.target.tagName});
@@ -145,6 +149,8 @@ function record(){
  if(q.has('watchCardAudit')){
   const card=$('#cdMember'),button=card.querySelector('[data-cdm="solo"]'),rect=el=>el?.getBoundingClientRect().toJSON();
   report.watchCard={selected:CD.sel,hidden:card.hidden,name:card.querySelector('#cdMemberName')?.textContent,pressed:button?.getAttribute('aria-pressed'),button:rect(button),close:rect(card.querySelector('[data-cdm="close"]')),card:rect(card),scroll:$('#conduct').scrollTop,active:document.activeElement.id||document.activeElement.dataset.cdm||document.activeElement.tagName,stats:getComputedStyle($('.cd-stats')).display};
+  const source=STAGE_PERFORMERS.get(CD.perf),rec=S.recs.find(r=>r.snap.members===source?.members),person=m=>({id:m.id,name:m.name,grade:m.grade,seat:m.seat,ranks:Object.fromEntries(STAT_KEYS.map(k=>[k,rankOf(m.stats[k])])),mental:rankOf(m.mental??40)});
+  report.watchCast={entrance:castEntrance.slice(),members:[...(CD.stageMembers?.values()||[])].map(person),who:[...(CD.who||[])],sounding:[...(CD.sounding||[])],selected:cdMemberById(CD.sel)?person(cdMemberById(CD.sel)):null,current:CD.sel&&memberById(CD.sel)?person(memberById(CD.sel)):null,source:source?.members.map(person),record:rec?.id,performance:CD.perf?hash(JSON.stringify(CD.perf)):null,expected:rec?hash(JSON.stringify(perform(recCtx(rec)))):null,note:card.querySelector('.cm-note')?.textContent,say:card.querySelector('.cm-say')?.textContent,soloButton:!!button};
  }
  if(q.has('announceAudit')){
   const dialog=$('#announce'),body=dialog.querySelector('.an-body');
@@ -301,6 +307,7 @@ async function show(next){
   if(q.has('outOldResult')){s=resolveOuting(s,seated(s).slice(0,3).map(m=>m.id));U.outResult=null;}
  }
  if(view==='ensemble'){s.members.forEach((m,i)=>m.grade=i%2+1);s.phase='winter';s.winter={step:1,plan:'kiso'};U.ensKey=null;U.ensPick=null;}
+ if(view==='ensemble'&&q.has('watchSnapshot'))s.members.forEach(m=>{m.stats.pitch=39.7;m.stats.tone=49.7;m.mental=39;});
  if(view==='ensemble'&&q.has('ensembleDifferent'))s.contestPiece='ode';
  if(view==='ensemble'&&q.has('ensLong'))s=renameMember(s,s.members[0].id,'あいうえおかきくけこさし');
  if(view==='practice-late'){s.week=15;s.members[0].sta=20;}
@@ -411,7 +418,7 @@ async function show(next){
 }
 await show(view);
 document.addEventListener('bootchecked',record);
-if(q.has('focusAudit'))document.addEventListener('focusin',()=>setTimeout(record,0));
+if(q.has('focusAudit')||q.has('watchCardAudit'))document.addEventListener('focusin',()=>setTimeout(record,0));
 window.addEventListener('resize',()=>setTimeout(record,0));
 document.addEventListener('facesready',()=>setTimeout(record,0));
 for(const event of ['pointerdown','toggle','click','keydown','scroll'])$('#grCard').addEventListener(event,()=>setTimeout(record,0),{capture:true});

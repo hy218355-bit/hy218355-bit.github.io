@@ -1,0 +1,5 @@
+zen-kaku-gothic-new-400.woff2 6 ▶♩♮⤓常𝄪
+zen-kaku-gothic-new-500.woff2 6 ▶♩♮⤓常𝄪
+zen-kaku-gothic-new-700.woff2 6 ▶♩♮⤓常𝄪
+「常」は既存のコードコメントのみ。今回追加した画面の文言は本文の全3ウェイトに収録済み。
+ひとことに使うKlee One 600でも、追加した表示文言の全字を収録済み。
