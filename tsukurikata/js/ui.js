@@ -251,6 +251,15 @@ function restorePlaybackStopFocus(origin){
   const target=origin===$('#btnStop')?$('#btnNow'):$('#tabbar [aria-current="page"]');
   if(cdVisible(target))target.focus({preventScroll:true});
 }
+// 合奏を直接始めたときは舞台を見せ、消える再生ボタンから停止へ操作先を渡す。
+function revealStagePlayback(){
+  if((!U.playing&&!U.waitPlay)||tabHidden('play'))return;
+  const stop=$('#btnStop');if(cdVisible(stop))stop.focus({preventScroll:true});
+  if(!narrow.matches)return;
+  const panel=$('.col-stage'),stage=$('#stage').getBoundingClientRect(),actions=$('.rehearsal-actions').getBoundingClientRect();
+  const top=parseFloat(getComputedStyle(panel).scrollMarginTop)||0;
+  if(stage.top<top||stage.bottom>actions.top-12)panel.scrollIntoView({block:'start',behavior:'auto'});
+}
 function setVenue(id){
   U.venue = id; saveUI();
   E.setVenue(id);
@@ -2546,11 +2555,12 @@ function bind(){
   });
   for(const [id, icon, label] of [['btnNow','play','いまの音で合奏'],['btnStop','stop','止める'],['btnLiveNow','play','いまの音'],['btnConduct','conduct','指揮する'],['btnRec','play','聴く'],['btnSave','download','保存']]) $('#'+id).innerHTML = uiIcon(icon) + label;
   $('#rollPanel').addEventListener('toggle', e => { if(e.target.open) drawRoll(U.shown, U.playing ? E.now() : -1); });
-  $('#btnNow').addEventListener('click', () => {
+  $('#btnNow').addEventListener('click', e => {
     // すぐ再生したときは、予約した作り直しをここで行い、同じ音を二度作らない。
     clearTimeout(U.refreshT);
     if(!U.perfNow){ U.perfNow = currentPerformance(); U.diag = analyze(U.perfNow); renderDiag(); }
     playPerf(U.perfNow, nowLabel());
+    if(e?.isTrusted)revealStagePlayback();
   });
   $('#btnLiveNow').addEventListener('click',()=>{
     if(libraryBlocked())return;

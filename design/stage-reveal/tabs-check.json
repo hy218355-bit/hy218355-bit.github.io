@@ -1,0 +1,22 @@
+[
+  {
+    "scrollWidth": 375,
+    "tab": "week",
+    "width": 375
+  },
+  {
+    "scrollWidth": 375,
+    "tab": "play",
+    "width": 375
+  },
+  {
+    "scrollWidth": 375,
+    "tab": "members",
+    "width": 375
+  },
+  {
+    "scrollWidth": 375,
+    "tab": "log",
+    "width": 375
+  }
+]

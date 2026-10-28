@@ -203,7 +203,7 @@ button,select{font:inherit;color:inherit}
 /* レイアウト */
 .grid{display:grid;grid-template-columns:minmax(0,1.65fr) minmax(0,1fr);gap:28px;align-items:start}
 @media (max-width:960px){.grid{grid-template-columns:minmax(0,1fr)}}
-.col-stage{display:grid;gap:18px;min-width:0}
+.col-stage{display:grid;gap:18px;min-width:0;scroll-margin-top:calc(14px + env(safe-area-inset-top,0px))}
 
 /* ステージと譜面台 */
 .stand{background:var(--sheet);border:1px solid var(--rule);border-radius:6px;padding:20px clamp(14px,2.4vw,24px) 22px;display:grid;grid-template-columns:minmax(0,1fr);gap:14px;min-width:0;box-shadow:0 18px 34px -26px var(--shadow)}
@@ -1835,7 +1835,7 @@ button.wr-person:focus-visible{outline:2px solid var(--brass);outline-offset:2px
 <script src="js/announce.js?v=announce-navigation-1"></script>
 <script src="js/tunegame.js"></script>
 <script src="js/fx.js?v=stage-cast-1"></script>
-<script src="js/ui.js?v=mini-subject-1"></script>
+<script src="js/ui.js?v=stage-reveal-1"></script>
 <div class="tip" id="tip" role="tooltip" hidden></div>
 </body>
 </html>

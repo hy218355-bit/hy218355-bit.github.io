@@ -1,0 +1,930 @@
+[
+  {
+    "case": "initial-idle",
+    "data": {
+      "errors": [],
+      "performance": {
+        "expected": 0.4994142900686711,
+        "expectedCohesion": 0.2,
+        "prepared": 0.4994142900686711,
+        "preparedCohesion": 0.2,
+        "shown": 0.4994142900686711,
+        "shownCohesion": 0.2
+      },
+      "playback": null,
+      "playing": false,
+      "portraits": 39,
+      "records": 0.7712433410342783,
+      "scrollWidth": 375,
+      "ui": {
+        "actions": {
+          "bottom": 607,
+          "height": 68,
+          "left": 16,
+          "right": 359,
+          "top": 539,
+          "width": 343,
+          "x": 16,
+          "y": 539
+        },
+        "focus": "BODY",
+        "margin": "14px",
+        "panel": {
+          "bottom": 738.5859375,
+          "height": 722.5859375,
+          "left": 16,
+          "right": 359,
+          "top": 16,
+          "width": 343,
+          "x": 16,
+          "y": 16
+        },
+        "scroll": 0,
+        "stage": {
+          "bottom": 445.4921875,
+          "height": 282,
+          "left": 33,
+          "right": 342,
+          "top": 163.4921875,
+          "width": 309,
+          "x": 33,
+          "y": 163.4921875
+        },
+        "state": 0.38102425006218255,
+        "tab": "play"
+      },
+      "waiting": false,
+      "width": 375
+    }
+  },
+  {
+    "case": "initial-playing",
+    "data": {
+      "errors": [],
+      "performance": {
+        "expected": 0.4994142900686711,
+        "expectedCohesion": 0.2,
+        "prepared": 0.4994142900686711,
+        "preparedCohesion": 0.2,
+        "shown": 0.4994142900686711,
+        "shownCohesion": 0.2
+      },
+      "playback": 1,
+      "playing": true,
+      "portraits": 39,
+      "records": 0.7712433410342783,
+      "scrollWidth": 375,
+      "ui": {
+        "actions": {
+          "bottom": 607,
+          "height": 68,
+          "left": 16,
+          "right": 359,
+          "top": 539,
+          "width": 343,
+          "x": 16,
+          "y": 539
+        },
+        "focus": "btnStop",
+        "margin": "14px",
+        "panel": {
+          "bottom": 738.5859375,
+          "height": 722.5859375,
+          "left": 16,
+          "right": 359,
+          "top": 16,
+          "width": 343,
+          "x": 16,
+          "y": 16
+        },
+        "scroll": 0,
+        "stage": {
+          "bottom": 445.4921875,
+          "height": 282,
+          "left": 33,
+          "right": 342,
+          "top": 163.4921875,
+          "width": 309,
+          "x": 33,
+          "y": 163.4921875
+        },
+        "state": 0.38102425006218255,
+        "tab": "play"
+      },
+      "waiting": false,
+      "width": 375
+    }
+  },
+  {
+    "case": "diagnosis-idle",
+    "data": {
+      "errors": [],
+      "performance": {
+        "expected": 0.4994142900686711,
+        "expectedCohesion": 0.2,
+        "prepared": 0.4994142900686711,
+        "preparedCohesion": 0.2,
+        "shown": 0.4994142900686711,
+        "shownCohesion": 0.2
+      },
+      "playback": null,
+      "playing": false,
+      "portraits": 39,
+      "records": 0.7712433410342783,
+      "scrollWidth": 375,
+      "ui": {
+        "actions": {
+          "bottom": 607,
+          "height": 68,
+          "left": 16,
+          "right": 359,
+          "top": 539,
+          "width": 343,
+          "x": 16,
+          "y": 539
+        },
+        "focus": "SUMMARY",
+        "margin": "14px",
+        "panel": {
+          "bottom": -386.4140625,
+          "height": 722.5859375,
+          "left": 16,
+          "right": 359,
+          "top": -1109,
+          "width": 343,
+          "x": 16,
+          "y": -1109
+        },
+        "scroll": 1125,
+        "stage": {
+          "bottom": -679.5078125,
+          "height": 282,
+          "left": 33,
+          "right": 342,
+          "top": -961.5078125,
+          "width": 309,
+          "x": 33,
+          "y": -961.5078125
+        },
+        "state": 0.38102425006218255,
+        "tab": "play"
+      },
+      "waiting": false,
+      "width": 375
+    }
+  },
+  {
+    "case": "diagnosis-playing",
+    "data": {
+      "errors": [],
+      "performance": {
+        "expected": 0.4994142900686711,
+        "expectedCohesion": 0.2,
+        "prepared": 0.4994142900686711,
+        "preparedCohesion": 0.2,
+        "shown": 0.4994142900686711,
+        "shownCohesion": 0.2
+      },
+      "playback": 2,
+      "playing": true,
+      "portraits": 39,
+      "records": 0.7712433410342783,
+      "scrollWidth": 375,
+      "ui": {
+        "actions": {
+          "bottom": 607,
+          "height": 68,
+          "left": 16,
+          "right": 359,
+          "top": 539,
+          "width": 343,
+          "x": 16,
+          "y": 539
+        },
+        "focus": "btnStop",
+        "margin": "14px",
+        "panel": {
+          "bottom": 736.5859375,
+          "height": 722.5859375,
+          "left": 16,
+          "right": 359,
+          "top": 14,
+          "width": 343,
+          "x": 16,
+          "y": 14
+        },
+        "scroll": 2,
+        "stage": {
+          "bottom": 443.4921875,
+          "height": 282,
+          "left": 33,
+          "right": 342,
+          "top": 161.4921875,
+          "width": 309,
+          "x": 33,
+          "y": 161.4921875
+        },
+        "state": 0.38102425006218255,
+        "tab": "play"
+      },
+      "waiting": false,
+      "width": 375
+    }
+  },
+  {
+    "case": "diagnosis-dark",
+    "data": {
+      "errors": [],
+      "performance": {
+        "expected": 0.4994142900686711,
+        "expectedCohesion": 0.2,
+        "prepared": 0.4994142900686711,
+        "preparedCohesion": 0.2,
+        "shown": 0.4994142900686711,
+        "shownCohesion": 0.2
+      },
+      "playback": 2,
+      "playing": true,
+      "portraits": 39,
+      "records": 0.7712433410342783,
+      "scrollWidth": 375,
+      "ui": {
+        "actions": {
+          "bottom": 607,
+          "height": 68,
+          "left": 16,
+          "right": 359,
+          "top": 539,
+          "width": 343,
+          "x": 16,
+          "y": 539
+        },
+        "focus": "btnStop",
+        "margin": "14px",
+        "panel": {
+          "bottom": 736.5859375,
+          "height": 722.5859375,
+          "left": 16,
+          "right": 359,
+          "top": 14,
+          "width": 343,
+          "x": 16,
+          "y": 14
+        },
+        "scroll": 2,
+        "stage": {
+          "bottom": 443.4921875,
+          "height": 282,
+          "left": 33,
+          "right": 342,
+          "top": 161.4921875,
+          "width": 309,
+          "x": 33,
+          "y": 161.4921875
+        },
+        "state": 0.38102425006218255,
+        "tab": "play"
+      },
+      "waiting": false,
+      "width": 375
+    }
+  },
+  {
+    "case": "keyboard-stopped",
+    "data": {
+      "errors": [],
+      "performance": {
+        "expected": 0.4994142900686711,
+        "expectedCohesion": 0.2,
+        "prepared": 0.4994142900686711,
+        "preparedCohesion": 0.2,
+        "shown": 0.4994142900686711,
+        "shownCohesion": 0.2
+      },
+      "playback": null,
+      "playing": false,
+      "portraits": 39,
+      "records": 0.7712433410342783,
+      "scrollWidth": 375,
+      "ui": {
+        "actions": {
+          "bottom": 607,
+          "height": 68,
+          "left": 16,
+          "right": 359,
+          "top": 539,
+          "width": 343,
+          "x": 16,
+          "y": 539
+        },
+        "focus": "btnNow",
+        "margin": "14px",
+        "panel": {
+          "bottom": 736.5859375,
+          "height": 722.5859375,
+          "left": 16,
+          "right": 359,
+          "top": 14,
+          "width": 343,
+          "x": 16,
+          "y": 14
+        },
+        "scroll": 2,
+        "stage": {
+          "bottom": 443.4921875,
+          "height": 282,
+          "left": 33,
+          "right": 342,
+          "top": 161.4921875,
+          "width": 309,
+          "x": 33,
+          "y": 161.4921875
+        },
+        "state": 0.38102425006218255,
+        "tab": "play"
+      },
+      "waiting": false,
+      "width": 375
+    }
+  },
+  {
+    "case": "keyboard-playing",
+    "data": {
+      "errors": [],
+      "performance": {
+        "expected": 0.4994142900686711,
+        "expectedCohesion": 0.2,
+        "prepared": 0.4994142900686711,
+        "preparedCohesion": 0.2,
+        "shown": 0.4994142900686711,
+        "shownCohesion": 0.2
+      },
+      "playback": 3,
+      "playing": true,
+      "portraits": 39,
+      "records": 0.7712433410342783,
+      "scrollWidth": 375,
+      "ui": {
+        "actions": {
+          "bottom": 607,
+          "height": 68,
+          "left": 16,
+          "right": 359,
+          "top": 539,
+          "width": 343,
+          "x": 16,
+          "y": 539
+        },
+        "focus": "btnStop",
+        "margin": "14px",
+        "panel": {
+          "bottom": 736.5859375,
+          "height": 722.5859375,
+          "left": 16,
+          "right": 359,
+          "top": 14,
+          "width": 343,
+          "x": 16,
+          "y": 14
+        },
+        "scroll": 2,
+        "stage": {
+          "bottom": 443.4921875,
+          "height": 282,
+          "left": 33,
+          "right": 342,
+          "top": 161.4921875,
+          "width": 309,
+          "x": 33,
+          "y": 161.4921875
+        },
+        "state": 0.38102425006218255,
+        "tab": "play"
+      },
+      "waiting": false,
+      "width": 375
+    }
+  },
+  {
+    "case": "member-idle",
+    "data": {
+      "errors": [],
+      "performance": {
+        "expected": 0.4994142900686711,
+        "expectedCohesion": 0.2,
+        "prepared": 0.4994142900686711,
+        "preparedCohesion": 0.2,
+        "shown": 0.4994142900686711,
+        "shownCohesion": 0.2
+      },
+      "playback": null,
+      "playing": false,
+      "portraits": 39,
+      "records": 0.9756515661720186,
+      "scrollWidth": 375,
+      "ui": {
+        "actions": {
+          "bottom": 607,
+          "height": 68,
+          "left": 16,
+          "right": 359,
+          "top": 539,
+          "width": 343,
+          "x": 16,
+          "y": 539
+        },
+        "focus": "BODY",
+        "margin": "14px",
+        "panel": {
+          "bottom": 971.78125,
+          "height": 1455.28125,
+          "left": 16,
+          "right": 359,
+          "top": -483.5,
+          "width": 343,
+          "x": 16,
+          "y": -483.5
+        },
+        "scroll": 499.5,
+        "stage": {
+          "bottom": -54.0078125,
+          "height": 282,
+          "left": 33,
+          "right": 342,
+          "top": -336.0078125,
+          "width": 309,
+          "x": 33,
+          "y": -336.0078125
+        },
+        "state": 0.9433253842871636,
+        "tab": "play"
+      },
+      "waiting": false,
+      "width": 375
+    }
+  },
+  {
+    "case": "member-playing",
+    "data": {
+      "errors": [],
+      "performance": {
+        "expected": 0.4994142900686711,
+        "expectedCohesion": 0.2,
+        "prepared": 0.4994142900686711,
+        "preparedCohesion": 0.2,
+        "shown": 0.4994142900686711,
+        "shownCohesion": 0.2
+      },
+      "playback": 1,
+      "playing": true,
+      "portraits": 39,
+      "records": 0.9756515661720186,
+      "scrollWidth": 375,
+      "ui": {
+        "actions": {
+          "bottom": 607,
+          "height": 68,
+          "left": 16,
+          "right": 359,
+          "top": 539,
+          "width": 343,
+          "x": 16,
+          "y": 539
+        },
+        "focus": "solo",
+        "margin": "14px",
+        "panel": {
+          "bottom": 1173.28125,
+          "height": 1507.28125,
+          "left": 16,
+          "right": 359,
+          "top": -334,
+          "width": 343,
+          "x": 16,
+          "y": -334
+        },
+        "scroll": 350,
+        "stage": {
+          "bottom": 95.4921875,
+          "height": 282,
+          "left": 33,
+          "right": 342,
+          "top": -186.5078125,
+          "width": 309,
+          "x": 33,
+          "y": -186.5078125
+        },
+        "state": 0.9433253842871636,
+        "tab": "play"
+      },
+      "waiting": false,
+      "width": 375
+    }
+  },
+  {
+    "case": "member-section",
+    "data": {
+      "errors": [],
+      "performance": {
+        "expected": 0.4994142900686711,
+        "expectedCohesion": 0.2,
+        "prepared": 0.4994142900686711,
+        "preparedCohesion": 0.2,
+        "shown": 0.4994142900686711,
+        "shownCohesion": 0.2
+      },
+      "playback": 1,
+      "playing": true,
+      "portraits": 39,
+      "records": 0.9756515661720186,
+      "scrollWidth": 375,
+      "ui": {
+        "actions": {
+          "bottom": 607,
+          "height": 68,
+          "left": 16,
+          "right": 359,
+          "top": 539,
+          "width": 343,
+          "x": 16,
+          "y": 539
+        },
+        "focus": "secsolo",
+        "margin": "14px",
+        "panel": {
+          "bottom": 1173.28125,
+          "height": 1507.28125,
+          "left": 16,
+          "right": 359,
+          "top": -334,
+          "width": 343,
+          "x": 16,
+          "y": -334
+        },
+        "scroll": 350,
+        "stage": {
+          "bottom": 95.4921875,
+          "height": 282,
+          "left": 33,
+          "right": 342,
+          "top": -186.5078125,
+          "width": 309,
+          "x": 33,
+          "y": -186.5078125
+        },
+        "state": 0.9433253842871636,
+        "tab": "play"
+      },
+      "waiting": false,
+      "width": 375
+    }
+  },
+  {
+    "case": "waiting-diagnosis",
+    "data": {
+      "errors": [],
+      "performance": {
+        "expected": 0.4994142900686711,
+        "expectedCohesion": 0.2,
+        "prepared": 0.4994142900686711,
+        "preparedCohesion": 0.2,
+        "shown": 0.4994142900686711,
+        "shownCohesion": 0.2
+      },
+      "playback": null,
+      "playing": false,
+      "portraits": 39,
+      "records": 0.7712433410342783,
+      "scrollWidth": 375,
+      "ui": {
+        "actions": {
+          "bottom": 607,
+          "height": 68,
+          "left": 16,
+          "right": 359,
+          "top": 539,
+          "width": 343,
+          "x": 16,
+          "y": 539
+        },
+        "focus": "SUMMARY",
+        "margin": "14px",
+        "panel": {
+          "bottom": -386.4140625,
+          "height": 722.5859375,
+          "left": 16,
+          "right": 359,
+          "top": -1109,
+          "width": 343,
+          "x": 16,
+          "y": -1109
+        },
+        "scroll": 1125,
+        "stage": {
+          "bottom": -679.5078125,
+          "height": 282,
+          "left": 33,
+          "right": 342,
+          "top": -961.5078125,
+          "width": 309,
+          "x": 33,
+          "y": -961.5078125
+        },
+        "state": 0.9325381282251328,
+        "tab": "play"
+      },
+      "waiting": false,
+      "width": 375
+    }
+  },
+  {
+    "case": "waiting-stage",
+    "data": {
+      "errors": [],
+      "performance": {
+        "expected": 0.4994142900686711,
+        "expectedCohesion": 0.2,
+        "prepared": 0.4994142900686711,
+        "preparedCohesion": 0.2,
+        "shown": 0.4994142900686711,
+        "shownCohesion": 0.2
+      },
+      "playback": null,
+      "playing": false,
+      "portraits": 39,
+      "records": 0.7712433410342783,
+      "scrollWidth": 375,
+      "ui": {
+        "actions": {
+          "bottom": 607,
+          "height": 68,
+          "left": 16,
+          "right": 359,
+          "top": 539,
+          "width": 343,
+          "x": 16,
+          "y": 539
+        },
+        "focus": "btnStop",
+        "margin": "14px",
+        "panel": {
+          "bottom": 758.6796875,
+          "height": 744.6796875,
+          "left": 16,
+          "right": 359,
+          "top": 14,
+          "width": 343,
+          "x": 16,
+          "y": 14
+        },
+        "scroll": 2,
+        "stage": {
+          "bottom": 443.4921875,
+          "height": 282,
+          "left": 33,
+          "right": 342,
+          "top": 161.4921875,
+          "width": 309,
+          "x": 33,
+          "y": 161.4921875
+        },
+        "state": 0.9325381282251328,
+        "tab": "play"
+      },
+      "waiting": true,
+      "width": 375
+    }
+  },
+  {
+    "case": "waiting-cancelled",
+    "data": {
+      "errors": [],
+      "performance": {
+        "expected": 0.4994142900686711,
+        "expectedCohesion": 0.2,
+        "prepared": 0.4994142900686711,
+        "preparedCohesion": 0.2,
+        "shown": 0.4994142900686711,
+        "shownCohesion": 0.2
+      },
+      "playback": null,
+      "playing": false,
+      "portraits": 39,
+      "records": 0.7712433410342783,
+      "scrollWidth": 375,
+      "ui": {
+        "actions": {
+          "bottom": 607,
+          "height": 68,
+          "left": 16,
+          "right": 359,
+          "top": 539,
+          "width": 343,
+          "x": 16,
+          "y": 539
+        },
+        "focus": "btnNow",
+        "margin": "14px",
+        "panel": {
+          "bottom": 736.5859375,
+          "height": 722.5859375,
+          "left": 16,
+          "right": 359,
+          "top": 14,
+          "width": 343,
+          "x": 16,
+          "y": 14
+        },
+        "scroll": 2,
+        "stage": {
+          "bottom": 443.4921875,
+          "height": 282,
+          "left": 33,
+          "right": 342,
+          "top": 161.4921875,
+          "width": 309,
+          "x": 33,
+          "y": 161.4921875
+        },
+        "state": 0.9325381282251328,
+        "tab": "play"
+      },
+      "waiting": false,
+      "width": 375
+    }
+  },
+  {
+    "case": "waiting-released",
+    "data": {
+      "errors": [],
+      "performance": {
+        "expected": 0.4994142900686711,
+        "expectedCohesion": 0.2,
+        "prepared": 0.4994142900686711,
+        "preparedCohesion": 0.2,
+        "shown": 0.4994142900686711,
+        "shownCohesion": 0.2
+      },
+      "playback": null,
+      "playing": false,
+      "portraits": 39,
+      "records": 0.7712433410342783,
+      "scrollWidth": 375,
+      "ui": {
+        "actions": {
+          "bottom": 607,
+          "height": 68,
+          "left": 16,
+          "right": 359,
+          "top": 539,
+          "width": 343,
+          "x": 16,
+          "y": 539
+        },
+        "focus": "btnNow",
+        "margin": "14px",
+        "panel": {
+          "bottom": 736.5859375,
+          "height": 722.5859375,
+          "left": 16,
+          "right": 359,
+          "top": 14,
+          "width": 343,
+          "x": 16,
+          "y": 14
+        },
+        "scroll": 2,
+        "stage": {
+          "bottom": 443.4921875,
+          "height": 282,
+          "left": 33,
+          "right": 342,
+          "top": 161.4921875,
+          "width": 309,
+          "x": 33,
+          "y": 161.4921875
+        },
+        "state": 0.9325381282251328,
+        "tab": "play"
+      },
+      "waiting": false,
+      "width": 375
+    }
+  },
+  {
+    "case": "member-focused",
+    "data": {
+      "errors": [],
+      "performance": {
+        "expected": 0.4994142900686711,
+        "expectedCohesion": 0.2,
+        "prepared": 0.4994142900686711,
+        "preparedCohesion": 0.2,
+        "shown": 0.4994142900686711,
+        "shownCohesion": 0.2
+      },
+      "playback": null,
+      "playing": false,
+      "portraits": 39,
+      "records": 0.5956713620107621,
+      "scrollWidth": 375,
+      "ui": {
+        "actions": {
+          "bottom": 607,
+          "height": 68,
+          "left": 16,
+          "right": 359,
+          "top": 539,
+          "width": 343,
+          "x": 16,
+          "y": 539
+        },
+        "focus": "solo",
+        "margin": "14px",
+        "panel": {
+          "bottom": 1121.28125,
+          "height": 1455.28125,
+          "left": 16,
+          "right": 359,
+          "top": -334,
+          "width": 343,
+          "x": 16,
+          "y": -334
+        },
+        "scroll": 350,
+        "stage": {
+          "bottom": 95.4921875,
+          "height": 282,
+          "left": 33,
+          "right": 342,
+          "top": -186.5078125,
+          "width": 309,
+          "x": 33,
+          "y": -186.5078125
+        },
+        "state": 0.28520945319905877,
+        "tab": "play"
+      },
+      "waiting": false,
+      "width": 375
+    }
+  },
+  {
+    "case": "member-keeps-focus",
+    "data": {
+      "errors": [],
+      "performance": {
+        "expected": 0.4994142900686711,
+        "expectedCohesion": 0.2,
+        "prepared": 0.4994142900686711,
+        "preparedCohesion": 0.2,
+        "shown": 0.4994142900686711,
+        "shownCohesion": 0.2
+      },
+      "playback": 1,
+      "playing": true,
+      "portraits": 39,
+      "records": 0.5956713620107621,
+      "scrollWidth": 375,
+      "ui": {
+        "actions": {
+          "bottom": 607,
+          "height": 68,
+          "left": 16,
+          "right": 359,
+          "top": 539,
+          "width": 343,
+          "x": 16,
+          "y": 539
+        },
+        "focus": "solo",
+        "margin": "14px",
+        "panel": {
+          "bottom": 1173.28125,
+          "height": 1507.28125,
+          "left": 16,
+          "right": 359,
+          "top": -334,
+          "width": 343,
+          "x": 16,
+          "y": -334
+        },
+        "scroll": 350,
+        "stage": {
+          "bottom": 95.4921875,
+          "height": 282,
+          "left": 33,
+          "right": 342,
+          "top": -186.5078125,
+          "width": 309,
+          "x": 33,
+          "y": -186.5078125
+        },
+        "state": 0.28520945319905877,
+        "tab": "play"
+      },
+      "waiting": false,
+      "width": 375
+    }
+  }
+]

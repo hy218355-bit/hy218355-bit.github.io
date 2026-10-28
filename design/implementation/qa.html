@@ -232,7 +232,7 @@ button,select{font:inherit;color:inherit}
 /* レイアウト */
 .grid{display:grid;grid-template-columns:minmax(0,1.65fr) minmax(0,1fr);gap:28px;align-items:start}
 @media (max-width:960px){.grid{grid-template-columns:minmax(0,1fr)}}
-.col-stage{display:grid;gap:18px;min-width:0}
+.col-stage{display:grid;gap:18px;min-width:0;scroll-margin-top:calc(14px + env(safe-area-inset-top,0px))}
 
 /* ステージと譜面台 */
 .stand{background:var(--sheet);border:1px solid var(--rule);border-radius:6px;padding:20px clamp(14px,2.4vw,24px) 22px;display:grid;grid-template-columns:minmax(0,1fr);gap:14px;min-width:0;box-shadow:0 18px 34px -26px var(--shadow)}
@@ -1833,39 +1833,39 @@ button.wr-person:focus-visible{outline:2px solid var(--brass);outline-offset:2px
   <button type="button" data-tabgo="log"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 5.5C4 4.7 4.7 4 5.5 4H11v16H5.5c-.8 0-1.5-.7-1.5-1.5z"/><path d="M20 5.5c0-.8-.7-1.5-1.5-1.5H13v16h5.5c.8 0 1.5-.7 1.5-1.5z"/></svg><span>日誌</span></button>
 </nav>
 
-<script src="js/util.js?v=qa-mini-subject-1"></script>
-<script src="js/icons.js?v=qa-mini-subject-1"></script>
-<script src="js/instrument-icons.js?v=qa-mini-subject-1"></script>
-<script src="js/face-cast.js?v=qa-mini-subject-1"></script>
-<script src="js/faces.js?v=qa-mini-subject-1"></script>
-<script src="js/instruments.js?v=qa-mini-subject-1"></script>
-<script src="js/venues.js?v=qa-mini-subject-1"></script>
-<script src="js/samples.js?v=qa-mini-subject-1"></script>
-<script src="js/scores.js?v=qa-mini-subject-1"></script>
-<script src="js/pieces/largo.js?v=qa-mini-subject-1"></script>
-<script src="js/pieces/ode.js?v=qa-mini-subject-1"></script>
-<script src="js/pieces/galop.js?v=qa-mini-subject-1"></script>
-<script src="js/pieces/pomp.js?v=qa-mini-subject-1"></script>
-<script src="js/pieces/aida.js?v=qa-mini-subject-1"></script>
-<script src="js/pieces/hero.js?v=qa-mini-subject-1"></script>
-<script src="js/pieces/holst.js?v=qa-mini-subject-1"></script>
-<script src="js/pieces/hungarian.js?v=qa-mini-subject-1"></script>
-<script src="js/pieces/flowers.js?v=qa-mini-subject-1"></script>
-<script src="js/pieces/tell.js?v=qa-mini-subject-1"></script>
-<script src="js/pieces/carmen.js?v=qa-mini-subject-1"></script>
-<script src="js/pieces/valkyrie.js?v=qa-mini-subject-1"></script>
-<script src="js/pieces/swan.js?v=qa-mini-subject-1"></script>
-<script src="js/pieces/spring.js?v=qa-mini-subject-1"></script>
-<script src="js/pieces/canon.js?v=qa-mini-subject-1"></script>
-<script src="js/band.js?v=qa-mini-subject-1"></script>
-<script src="js/game.js?v=qa-mini-subject-1"></script>
-<script src="js/engine.js?v=qa-mini-subject-1"></script>
-<script src="js/conduct.js?v=qa-mini-subject-1"></script>
-<script src="js/announce.js?v=qa-mini-subject-1"></script>
-<script src="js/tunegame.js?v=qa-mini-subject-1"></script>
-<script src="js/fx.js?v=qa-mini-subject-1"></script>
-<script src="js/ui.js?v=qa-mini-subject-1"></script>
+<script src="js/util.js?v=qa-stage-reveal-1"></script>
+<script src="js/icons.js?v=qa-stage-reveal-1"></script>
+<script src="js/instrument-icons.js?v=qa-stage-reveal-1"></script>
+<script src="js/face-cast.js?v=qa-stage-reveal-1"></script>
+<script src="js/faces.js?v=qa-stage-reveal-1"></script>
+<script src="js/instruments.js?v=qa-stage-reveal-1"></script>
+<script src="js/venues.js?v=qa-stage-reveal-1"></script>
+<script src="js/samples.js?v=qa-stage-reveal-1"></script>
+<script src="js/scores.js?v=qa-stage-reveal-1"></script>
+<script src="js/pieces/largo.js?v=qa-stage-reveal-1"></script>
+<script src="js/pieces/ode.js?v=qa-stage-reveal-1"></script>
+<script src="js/pieces/galop.js?v=qa-stage-reveal-1"></script>
+<script src="js/pieces/pomp.js?v=qa-stage-reveal-1"></script>
+<script src="js/pieces/aida.js?v=qa-stage-reveal-1"></script>
+<script src="js/pieces/hero.js?v=qa-stage-reveal-1"></script>
+<script src="js/pieces/holst.js?v=qa-stage-reveal-1"></script>
+<script src="js/pieces/hungarian.js?v=qa-stage-reveal-1"></script>
+<script src="js/pieces/flowers.js?v=qa-stage-reveal-1"></script>
+<script src="js/pieces/tell.js?v=qa-stage-reveal-1"></script>
+<script src="js/pieces/carmen.js?v=qa-stage-reveal-1"></script>
+<script src="js/pieces/valkyrie.js?v=qa-stage-reveal-1"></script>
+<script src="js/pieces/swan.js?v=qa-stage-reveal-1"></script>
+<script src="js/pieces/spring.js?v=qa-stage-reveal-1"></script>
+<script src="js/pieces/canon.js?v=qa-stage-reveal-1"></script>
+<script src="js/band.js?v=qa-stage-reveal-1"></script>
+<script src="js/game.js?v=qa-stage-reveal-1"></script>
+<script src="js/engine.js?v=qa-stage-reveal-1"></script>
+<script src="js/conduct.js?v=qa-stage-reveal-1"></script>
+<script src="js/announce.js?v=qa-stage-reveal-1"></script>
+<script src="js/tunegame.js?v=qa-stage-reveal-1"></script>
+<script src="js/fx.js?v=qa-stage-reveal-1"></script>
+<script src="js/ui.js?v=qa-stage-reveal-1"></script>
 <div class="tip" id="tip" role="tooltip" hidden></div>
-<script src="/design/implementation/qa.js?v=qa-mini-subject-1"></script>
+<script src="/design/implementation/qa.js?v=qa-stage-reveal-1"></script>
 </body>
 </html>

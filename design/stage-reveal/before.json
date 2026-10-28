@@ -1,0 +1,50 @@
+{
+  "initial": {
+    "actions": {
+      "bottom": 607,
+      "height": 68,
+      "left": 16,
+      "right": 359,
+      "top": 539,
+      "width": 343,
+      "x": 16,
+      "y": 539
+    },
+    "focus": "BODY",
+    "scroll": 0,
+    "stage": {
+      "bottom": 445.4921875,
+      "height": 282,
+      "left": 33,
+      "right": 342,
+      "top": 163.4921875,
+      "width": 309,
+      "x": 33,
+      "y": 163.4921875
+    }
+  },
+  "afterDiagnosis": {
+    "actions": {
+      "bottom": 607,
+      "height": 68,
+      "left": 16,
+      "right": 359,
+      "top": 539,
+      "width": 343,
+      "x": 16,
+      "y": 539
+    },
+    "focus": "BODY",
+    "scroll": 1125,
+    "stage": {
+      "bottom": -679.5078125,
+      "height": 282,
+      "left": 33,
+      "right": 342,
+      "top": -961.5078125,
+      "width": 309,
+      "x": 33,
+      "y": -961.5078125
+    }
+  }
+}
