@@ -17,7 +17,7 @@ const playPerf=perf=>{played=perf;};
 `,ctx);
 vm.runInContext(fs.readFileSync(path.join(root,'js/conduct.js'),'utf8'),ctx);
 vm.runInContext(`
-cdClick=()=>{};cdRipple=()=>{};
+cdClick=()=>{};cdPress=()=>{};
 const near=(a,b)=>assert.ok(Math.abs(a-b)<1e-7,a+' ≠ '+b);
 for(const meter of [2,3,4,8]){
  CD.perf={meter,pieceId:'pomp',from:8,to:40,interp:{tempo:1}};

@@ -1,0 +1,12 @@
+{
+  "build": "succeeded",
+  "install": "succeeded",
+  "launch": "succeeded",
+  "mirroringUsed": false,
+  "visualInteractionVerified": false,
+  "runningProcessVerified": true,
+  "bundleMatches": {
+    "index.html": true,
+    "js/conduct.js": true
+  }
+}

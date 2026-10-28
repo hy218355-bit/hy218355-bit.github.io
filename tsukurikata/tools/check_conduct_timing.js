@@ -14,7 +14,7 @@ const fxCalm=()=>false,playPerf=()=>{};
 `,ctx);
 vm.runInContext(fs.readFileSync(path.join(root,'js/conduct.js'),'utf8'),ctx);
 vm.runInContext(`
-cdClick=()=>{};cdRipple=()=>{};
+cdClick=()=>{};cdPress=()=>{};
 const near=(a,b)=>assert.ok(Math.abs(a-b)<1e-7,a+' ≠ '+b);
 function fresh(phase='play'){
  CD.phase=phase;CD.perf={pieceId:'pomp',meter:4,from:0,to:80,interp:{tempo:1}};CD.stage=null;

@@ -1,0 +1,4411 @@
+{
+  "light": {
+    "audio": {
+      "banks": 41,
+      "ready": true,
+      "voices": [
+        "SampleVoice"
+      ]
+    },
+    "audit": [
+      {
+        "aboveCue": true,
+        "inPad": false,
+        "kind": "cd-feedback p",
+        "pad": {
+          "bottom": 650.9921875,
+          "height": 80,
+          "left": 24,
+          "right": 351,
+          "top": 570.9921875,
+          "width": 327,
+          "x": 24,
+          "y": 570.9921875
+        },
+        "rect": {
+          "bottom": 468.9921875,
+          "height": 24,
+          "left": 282.59375,
+          "right": 345,
+          "top": 444.9921875,
+          "width": 62.40625,
+          "x": 282.59375,
+          "y": 444.9921875
+        },
+        "text": "ぴったり",
+        "visibleRatio": 1
+      },
+      {
+        "aboveCue": true,
+        "inPad": false,
+        "kind": "cd-feedback p",
+        "pad": {
+          "bottom": 650.9921875,
+          "height": 80,
+          "left": 24,
+          "right": 351,
+          "top": 570.9921875,
+          "width": 327,
+          "x": 24,
+          "y": 570.9921875
+        },
+        "rect": {
+          "bottom": 468.9921875,
+          "height": 24,
+          "left": 282.59375,
+          "right": 345,
+          "top": 444.9921875,
+          "width": 62.40625,
+          "x": 282.59375,
+          "y": 444.9921875
+        },
+        "text": "ぴったり",
+        "visibleRatio": 1
+      },
+      {
+        "aboveCue": true,
+        "inPad": false,
+        "kind": "cd-feedback p",
+        "pad": {
+          "bottom": 650.9921875,
+          "height": 80,
+          "left": 24,
+          "right": 351,
+          "top": 570.9921875,
+          "width": 327,
+          "x": 24,
+          "y": 570.9921875
+        },
+        "rect": {
+          "bottom": 468.9921875,
+          "height": 24,
+          "left": 282.59375,
+          "right": 345,
+          "top": 444.9921875,
+          "width": 62.40625,
+          "x": 282.59375,
+          "y": 444.9921875
+        },
+        "text": "ぴったり",
+        "visibleRatio": 1
+      },
+      {
+        "aboveCue": true,
+        "inPad": false,
+        "kind": "cd-feedback p",
+        "pad": {
+          "bottom": 650.9921875,
+          "height": 80,
+          "left": 24,
+          "right": 351,
+          "top": 570.9921875,
+          "width": 327,
+          "x": 24,
+          "y": 570.9921875
+        },
+        "rect": {
+          "bottom": 468.9921875,
+          "height": 24,
+          "left": 282.59375,
+          "right": 345,
+          "top": 444.9921875,
+          "width": 62.40625,
+          "x": 282.59375,
+          "y": 444.9921875
+        },
+        "text": "ぴったり",
+        "visibleRatio": 1
+      },
+      {
+        "aboveCue": true,
+        "inPad": false,
+        "kind": "cd-feedback p",
+        "pad": {
+          "bottom": 650.9921875,
+          "height": 80,
+          "left": 24,
+          "right": 351,
+          "top": 570.9921875,
+          "width": 327,
+          "x": 24,
+          "y": 570.9921875
+        },
+        "rect": {
+          "bottom": 468.9921875,
+          "height": 24,
+          "left": 282.59375,
+          "right": 345,
+          "top": 444.9921875,
+          "width": 62.40625,
+          "x": 282.59375,
+          "y": 444.9921875
+        },
+        "text": "ぴったり",
+        "visibleRatio": 1
+      },
+      {
+        "aboveCue": true,
+        "inPad": false,
+        "kind": "cd-feedback p",
+        "pad": {
+          "bottom": 650.9921875,
+          "height": 80,
+          "left": 24,
+          "right": 351,
+          "top": 570.9921875,
+          "width": 327,
+          "x": 24,
+          "y": 570.9921875
+        },
+        "rect": {
+          "bottom": 468.9921875,
+          "height": 24,
+          "left": 282.59375,
+          "right": 345,
+          "top": 444.9921875,
+          "width": 62.40625,
+          "x": 282.59375,
+          "y": 444.9921875
+        },
+        "text": "ぴったり",
+        "visibleRatio": 1
+      },
+      {
+        "aboveCue": true,
+        "inPad": false,
+        "kind": "cd-feedback p",
+        "pad": {
+          "bottom": 650.9921875,
+          "height": 80,
+          "left": 24,
+          "right": 351,
+          "top": 570.9921875,
+          "width": 327,
+          "x": 24,
+          "y": 570.9921875
+        },
+        "rect": {
+          "bottom": 468.9921875,
+          "height": 24,
+          "left": 282.59375,
+          "right": 345,
+          "top": 444.9921875,
+          "width": 62.40625,
+          "x": 282.59375,
+          "y": 444.9921875
+        },
+        "text": "ぴったり",
+        "visibleRatio": 1
+      }
+    ],
+    "boot": {
+      "errors": [],
+      "failed": [],
+      "loaded": 33,
+      "scripts": 33
+    },
+    "conduct": {
+      "beat": "1",
+      "combo": 4,
+      "count": 4,
+      "events": 8,
+      "from": 0,
+      "judge": {
+        "e": 0,
+        "g": 0,
+        "l": 0,
+        "p": 4
+      },
+      "level": 0.975,
+      "meter": 4,
+      "period": 0.4180376268395484,
+      "phase": "play",
+      "taps": 4,
+      "to": 64
+    },
+    "errors": [],
+    "feedback": {
+      "animation": "none",
+      "count": 1,
+      "rect": {
+        "bottom": 468.9921875,
+        "height": 24,
+        "left": 282.59375,
+        "right": 345,
+        "top": 444.9921875,
+        "width": 62.40625,
+        "x": 282.59375,
+        "y": 444.9921875
+      },
+      "text": "ぴったり"
+    },
+    "height": 812,
+    "members": 0.6864548486191779,
+    "msg": "光がラインに届いたらタップ",
+    "pad": {
+      "bottom": 650.9921875,
+      "height": 80,
+      "left": 24,
+      "right": 351,
+      "top": 570.9921875,
+      "width": 327,
+      "x": 24,
+      "y": 570.9921875
+    },
+    "recordings": [],
+    "records": 0.7712433410342783,
+    "scrollHeight": 812,
+    "scrollWidth": 375,
+    "stats": {
+      "bottom": 794,
+      "height": 51,
+      "left": 24,
+      "right": 351,
+      "top": 743,
+      "width": 327,
+      "x": 24,
+      "y": 743
+    },
+    "theme": "light",
+    "width": 375
+  },
+  "ready": {
+    "audio": {
+      "banks": 41,
+      "ready": true,
+      "voices": []
+    },
+    "audit": [],
+    "boot": {
+      "errors": [],
+      "failed": [],
+      "loaded": 33,
+      "scripts": 33
+    },
+    "conduct": {
+      "beat": "1",
+      "combo": 0,
+      "count": 0,
+      "events": 0,
+      "from": 0,
+      "judge": {
+        "e": 0,
+        "g": 0,
+        "l": 0,
+        "p": 0
+      },
+      "level": 1,
+      "meter": 4,
+      "phase": "count",
+      "taps": 0,
+      "to": 64
+    },
+    "errors": [],
+    "feedback": {
+      "animation": "none",
+      "count": 1,
+      "rect": {
+        "bottom": 0,
+        "height": 0,
+        "left": 0,
+        "right": 0,
+        "top": 0,
+        "width": 0,
+        "x": 0,
+        "y": 0
+      },
+      "text": ""
+    },
+    "height": 812,
+    "members": 0.6864548486191779,
+    "msg": "まず4回、光がラインに届いたらタップ",
+    "pad": {
+      "bottom": 626.9921875,
+      "height": 80,
+      "left": 24,
+      "right": 351,
+      "top": 546.9921875,
+      "width": 327,
+      "x": 24,
+      "y": 546.9921875
+    },
+    "recordings": [],
+    "records": 0.7712433410342783,
+    "scrollHeight": 812,
+    "scrollWidth": 375,
+    "stats": {
+      "bottom": 794,
+      "height": 51,
+      "left": 24,
+      "right": 351,
+      "top": 743,
+      "width": 327,
+      "x": 24,
+      "y": 743
+    },
+    "theme": "light",
+    "width": 375
+  },
+  "idle": {
+    "audio": {
+      "banks": 41,
+      "ready": true,
+      "voices": [
+        "SampleVoice"
+      ]
+    },
+    "audit": [
+      {
+        "inPad": false,
+        "kind": "cd-feedback p",
+        "pad": {
+          "bottom": 626.9921875,
+          "height": 80,
+          "left": 24,
+          "right": 351,
+          "top": 546.9921875,
+          "width": 327,
+          "x": 24,
+          "y": 546.9921875
+        },
+        "rect": {
+          "bottom": 468.9921875,
+          "height": 24,
+          "left": 282.59375,
+          "right": 345,
+          "top": 444.9921875,
+          "width": 62.40625,
+          "x": 282.59375,
+          "y": 444.9921875
+        },
+        "text": "ぴったり",
+        "visibleRatio": 1
+      },
+      {
+        "inPad": false,
+        "kind": "cd-feedback p",
+        "pad": {
+          "bottom": 626.9921875,
+          "height": 80,
+          "left": 24,
+          "right": 351,
+          "top": 546.9921875,
+          "width": 327,
+          "x": 24,
+          "y": 546.9921875
+        },
+        "rect": {
+          "bottom": 468.9921875,
+          "height": 24,
+          "left": 282.59375,
+          "right": 345,
+          "top": 444.9921875,
+          "width": 62.40625,
+          "x": 282.59375,
+          "y": 444.9921875
+        },
+        "text": "ぴったり",
+        "visibleRatio": 1
+      },
+      {
+        "inPad": false,
+        "kind": "cd-feedback p",
+        "pad": {
+          "bottom": 626.9921875,
+          "height": 80,
+          "left": 24,
+          "right": 351,
+          "top": 546.9921875,
+          "width": 327,
+          "x": 24,
+          "y": 546.9921875
+        },
+        "rect": {
+          "bottom": 468.9921875,
+          "height": 24,
+          "left": 282.59375,
+          "right": 345,
+          "top": 444.9921875,
+          "width": 62.40625,
+          "x": 282.59375,
+          "y": 444.9921875
+        },
+        "text": "ぴったり",
+        "visibleRatio": 1
+      },
+      {
+        "inPad": false,
+        "kind": "cd-feedback p",
+        "pad": {
+          "bottom": 626.9921875,
+          "height": 80,
+          "left": 24,
+          "right": 351,
+          "top": 546.9921875,
+          "width": 327,
+          "x": 24,
+          "y": 546.9921875
+        },
+        "rect": {
+          "bottom": 468.9921875,
+          "height": 24,
+          "left": 282.59375,
+          "right": 345,
+          "top": 444.9921875,
+          "width": 62.40625,
+          "x": 282.59375,
+          "y": 444.9921875
+        },
+        "text": "ぴったり",
+        "visibleRatio": 1
+      },
+      {
+        "inPad": false,
+        "kind": "cd-feedback p",
+        "pad": {
+          "bottom": 626.9921875,
+          "height": 80,
+          "left": 24,
+          "right": 351,
+          "top": 546.9921875,
+          "width": 327,
+          "x": 24,
+          "y": 546.9921875
+        },
+        "rect": {
+          "bottom": 468.9921875,
+          "height": 24,
+          "left": 282.59375,
+          "right": 345,
+          "top": 444.9921875,
+          "width": 62.40625,
+          "x": 282.59375,
+          "y": 444.9921875
+        },
+        "text": "ぴったり",
+        "visibleRatio": 1
+      },
+      {
+        "inPad": false,
+        "kind": "cd-feedback p",
+        "pad": {
+          "bottom": 626.9921875,
+          "height": 80,
+          "left": 24,
+          "right": 351,
+          "top": 546.9921875,
+          "width": 327,
+          "x": 24,
+          "y": 546.9921875
+        },
+        "rect": {
+          "bottom": 468.9921875,
+          "height": 24,
+          "left": 282.59375,
+          "right": 345,
+          "top": 444.9921875,
+          "width": 62.40625,
+          "x": 282.59375,
+          "y": 444.9921875
+        },
+        "text": "ぴったり",
+        "visibleRatio": 1
+      },
+      {
+        "inPad": false,
+        "kind": "cd-feedback p",
+        "pad": {
+          "bottom": 626.9921875,
+          "height": 80,
+          "left": 24,
+          "right": 351,
+          "top": 546.9921875,
+          "width": 327,
+          "x": 24,
+          "y": 546.9921875
+        },
+        "rect": {
+          "bottom": 468.9921875,
+          "height": 24,
+          "left": 282.59375,
+          "right": 345,
+          "top": 444.9921875,
+          "width": 62.40625,
+          "x": 282.59375,
+          "y": 444.9921875
+        },
+        "text": "ぴったり",
+        "visibleRatio": 1
+      },
+      {
+        "inPad": false,
+        "kind": "cd-feedback p",
+        "pad": {
+          "bottom": 626.9921875,
+          "height": 80,
+          "left": 24,
+          "right": 351,
+          "top": 546.9921875,
+          "width": 327,
+          "x": 24,
+          "y": 546.9921875
+        },
+        "rect": {
+          "bottom": 468.9921875,
+          "height": 24,
+          "left": 282.59375,
+          "right": 345,
+          "top": 444.9921875,
+          "width": 62.40625,
+          "x": 282.59375,
+          "y": 444.9921875
+        },
+        "text": "ぴったり",
+        "visibleRatio": 1
+      },
+      {
+        "inPad": false,
+        "kind": "cd-feedback p",
+        "pad": {
+          "bottom": 626.9921875,
+          "height": 80,
+          "left": 24,
+          "right": 351,
+          "top": 546.9921875,
+          "width": 327,
+          "x": 24,
+          "y": 546.9921875
+        },
+        "rect": {
+          "bottom": 468.9921875,
+          "height": 24,
+          "left": 282.59375,
+          "right": 345,
+          "top": 444.9921875,
+          "width": 62.40625,
+          "x": 282.59375,
+          "y": 444.9921875
+        },
+        "text": "ぴったり",
+        "visibleRatio": 1
+      },
+      {
+        "inPad": false,
+        "kind": "cd-feedback p",
+        "pad": {
+          "bottom": 626.9921875,
+          "height": 80,
+          "left": 24,
+          "right": 351,
+          "top": 546.9921875,
+          "width": 327,
+          "x": 24,
+          "y": 546.9921875
+        },
+        "rect": {
+          "bottom": 468.9921875,
+          "height": 24,
+          "left": 282.59375,
+          "right": 345,
+          "top": 444.9921875,
+          "width": 62.40625,
+          "x": 282.59375,
+          "y": 444.9921875
+        },
+        "text": "ぴったり",
+        "visibleRatio": 1
+      }
+    ],
+    "boot": {
+      "errors": [],
+      "failed": [],
+      "loaded": 33,
+      "scripts": 33
+    },
+    "conduct": {
+      "beat": "2",
+      "combo": 1,
+      "count": 4,
+      "events": 3,
+      "from": 0,
+      "judge": {
+        "e": 0,
+        "g": 0,
+        "l": 0,
+        "p": 1
+      },
+      "level": 0.975,
+      "meter": 4,
+      "period": 0.42660166657369414,
+      "phase": "play",
+      "taps": 1,
+      "to": 64
+    },
+    "errors": [],
+    "feedback": {
+      "animation": "none",
+      "count": 1,
+      "rect": {
+        "bottom": 0,
+        "height": 0,
+        "left": 0,
+        "right": 0,
+        "top": 0,
+        "width": 0,
+        "x": 0,
+        "y": 0
+      },
+      "text": ""
+    },
+    "height": 812,
+    "members": 0.6864548486191779,
+    "msg": "タップが止まっても、部員は最後のテンポで吹き続ける。",
+    "pad": {
+      "bottom": 626.9921875,
+      "height": 80,
+      "left": 24,
+      "right": 351,
+      "top": 546.9921875,
+      "width": 327,
+      "x": 24,
+      "y": 546.9921875
+    },
+    "recordings": [
+      {
+        "id": "r2028-10-0-395491",
+        "label": "あなたの指揮：《新世界より》第2楽章（6月 第3週）"
+      }
+    ],
+    "records": 0.6259548333473504,
+    "scrollHeight": 812,
+    "scrollWidth": 375,
+    "stats": {
+      "bottom": 794,
+      "height": 51,
+      "left": 24,
+      "right": 351,
+      "top": 743,
+      "width": 327,
+      "x": 24,
+      "y": 743
+    },
+    "theme": "light",
+    "width": 375
+  },
+  "finished": {
+    "audio": {
+      "banks": 41,
+      "ready": true,
+      "voices": []
+    },
+    "audit": [
+      {
+        "inPad": false,
+        "kind": "cd-feedback p",
+        "pad": {
+          "bottom": 626.9921875,
+          "height": 80,
+          "left": 24,
+          "right": 351,
+          "top": 546.9921875,
+          "width": 327,
+          "x": 24,
+          "y": 546.9921875
+        },
+        "rect": {
+          "bottom": 468.9921875,
+          "height": 24,
+          "left": 282.59375,
+          "right": 345,
+          "top": 444.9921875,
+          "width": 62.40625,
+          "x": 282.59375,
+          "y": 444.9921875
+        },
+        "text": "ぴったり",
+        "visibleRatio": 1
+      },
+      {
+        "inPad": false,
+        "kind": "cd-feedback p",
+        "pad": {
+          "bottom": 626.9921875,
+          "height": 80,
+          "left": 24,
+          "right": 351,
+          "top": 546.9921875,
+          "width": 327,
+          "x": 24,
+          "y": 546.9921875
+        },
+        "rect": {
+          "bottom": 468.9921875,
+          "height": 24,
+          "left": 282.59375,
+          "right": 345,
+          "top": 444.9921875,
+          "width": 62.40625,
+          "x": 282.59375,
+          "y": 444.9921875
+        },
+        "text": "ぴったり",
+        "visibleRatio": 1
+      },
+      {
+        "inPad": false,
+        "kind": "cd-feedback p",
+        "pad": {
+          "bottom": 626.9921875,
+          "height": 80,
+          "left": 24,
+          "right": 351,
+          "top": 546.9921875,
+          "width": 327,
+          "x": 24,
+          "y": 546.9921875
+        },
+        "rect": {
+          "bottom": 468.9921875,
+          "height": 24,
+          "left": 282.59375,
+          "right": 345,
+          "top": 444.9921875,
+          "width": 62.40625,
+          "x": 282.59375,
+          "y": 444.9921875
+        },
+        "text": "ぴったり",
+        "visibleRatio": 1
+      },
+      {
+        "inPad": false,
+        "kind": "cd-feedback p",
+        "pad": {
+          "bottom": 626.9921875,
+          "height": 80,
+          "left": 24,
+          "right": 351,
+          "top": 546.9921875,
+          "width": 327,
+          "x": 24,
+          "y": 546.9921875
+        },
+        "rect": {
+          "bottom": 468.9921875,
+          "height": 24,
+          "left": 282.59375,
+          "right": 345,
+          "top": 444.9921875,
+          "width": 62.40625,
+          "x": 282.59375,
+          "y": 444.9921875
+        },
+        "text": "ぴったり",
+        "visibleRatio": 1
+      },
+      {
+        "inPad": false,
+        "kind": "cd-feedback p",
+        "pad": {
+          "bottom": 626.9921875,
+          "height": 80,
+          "left": 24,
+          "right": 351,
+          "top": 546.9921875,
+          "width": 327,
+          "x": 24,
+          "y": 546.9921875
+        },
+        "rect": {
+          "bottom": 468.9921875,
+          "height": 24,
+          "left": 282.59375,
+          "right": 345,
+          "top": 444.9921875,
+          "width": 62.40625,
+          "x": 282.59375,
+          "y": 444.9921875
+        },
+        "text": "ぴったり",
+        "visibleRatio": 1
+      },
+      {
+        "inPad": false,
+        "kind": "cd-feedback p",
+        "pad": {
+          "bottom": 626.9921875,
+          "height": 80,
+          "left": 24,
+          "right": 351,
+          "top": 546.9921875,
+          "width": 327,
+          "x": 24,
+          "y": 546.9921875
+        },
+        "rect": {
+          "bottom": 468.9921875,
+          "height": 24,
+          "left": 282.59375,
+          "right": 345,
+          "top": 444.9921875,
+          "width": 62.40625,
+          "x": 282.59375,
+          "y": 444.9921875
+        },
+        "text": "ぴったり",
+        "visibleRatio": 1
+      },
+      {
+        "inPad": false,
+        "kind": "cd-feedback p",
+        "pad": {
+          "bottom": 626.9921875,
+          "height": 80,
+          "left": 24,
+          "right": 351,
+          "top": 546.9921875,
+          "width": 327,
+          "x": 24,
+          "y": 546.9921875
+        },
+        "rect": {
+          "bottom": 468.9921875,
+          "height": 24,
+          "left": 282.59375,
+          "right": 345,
+          "top": 444.9921875,
+          "width": 62.40625,
+          "x": 282.59375,
+          "y": 444.9921875
+        },
+        "text": "ぴったり",
+        "visibleRatio": 1
+      },
+      {
+        "inPad": false,
+        "kind": "cd-feedback p",
+        "pad": {
+          "bottom": 626.9921875,
+          "height": 80,
+          "left": 24,
+          "right": 351,
+          "top": 546.9921875,
+          "width": 327,
+          "x": 24,
+          "y": 546.9921875
+        },
+        "rect": {
+          "bottom": 468.9921875,
+          "height": 24,
+          "left": 282.59375,
+          "right": 345,
+          "top": 444.9921875,
+          "width": 62.40625,
+          "x": 282.59375,
+          "y": 444.9921875
+        },
+        "text": "ぴったり",
+        "visibleRatio": 1
+      }
+    ],
+    "boot": {
+      "errors": [],
+      "failed": [],
+      "loaded": 33,
+      "scripts": 33
+    },
+    "conduct": {
+      "beat": "4",
+      "combo": 4,
+      "count": 4,
+      "events": 6,
+      "from": 0,
+      "judge": {
+        "e": 0,
+        "g": 0,
+        "l": 0,
+        "p": 4
+      },
+      "level": 0.975,
+      "meter": 4,
+      "period": 0.40754434598250194,
+      "phase": "done",
+      "taps": 4,
+      "to": 64
+    },
+    "errors": [],
+    "feedback": {
+      "animation": "none",
+      "count": 1,
+      "rect": {
+        "bottom": 0,
+        "height": 0,
+        "left": 0,
+        "right": 0,
+        "top": 0,
+        "width": 0,
+        "x": 0,
+        "y": 0
+      },
+      "text": ""
+    },
+    "height": 812,
+    "members": 0.6864548486191779,
+    "msg": "",
+    "pad": {
+      "bottom": 0,
+      "height": 0,
+      "left": 0,
+      "right": 0,
+      "top": 0,
+      "width": 0,
+      "x": 0,
+      "y": 0
+    },
+    "recordings": [
+      {
+        "id": "r2028-10-0-395491",
+        "label": "あなたの指揮：《新世界より》第2楽章（6月 第3週）"
+      }
+    ],
+    "records": 0.6259548333473504,
+    "scrollHeight": 812,
+    "scrollWidth": 375,
+    "stats": {
+      "bottom": 0,
+      "height": 0,
+      "left": 0,
+      "right": 0,
+      "top": 0,
+      "width": 0,
+      "x": 0,
+      "y": 0
+    },
+    "theme": "light",
+    "width": 375
+  },
+  "resumed": {
+    "audio": {
+      "banks": 41,
+      "ready": true,
+      "voices": [
+        "SampleVoice"
+      ]
+    },
+    "audit": [
+      {
+        "inPad": false,
+        "kind": "cd-feedback p",
+        "pad": {
+          "bottom": 626.9921875,
+          "height": 80,
+          "left": 24,
+          "right": 351,
+          "top": 546.9921875,
+          "width": 327,
+          "x": 24,
+          "y": 546.9921875
+        },
+        "rect": {
+          "bottom": 468.9921875,
+          "height": 24,
+          "left": 282.59375,
+          "right": 345,
+          "top": 444.9921875,
+          "width": 62.40625,
+          "x": 282.59375,
+          "y": 444.9921875
+        },
+        "text": "ぴったり",
+        "visibleRatio": 1
+      },
+      {
+        "inPad": false,
+        "kind": "cd-feedback p",
+        "pad": {
+          "bottom": 626.9921875,
+          "height": 80,
+          "left": 24,
+          "right": 351,
+          "top": 546.9921875,
+          "width": 327,
+          "x": 24,
+          "y": 546.9921875
+        },
+        "rect": {
+          "bottom": 468.9921875,
+          "height": 24,
+          "left": 282.59375,
+          "right": 345,
+          "top": 444.9921875,
+          "width": 62.40625,
+          "x": 282.59375,
+          "y": 444.9921875
+        },
+        "text": "ぴったり",
+        "visibleRatio": 1
+      },
+      {
+        "inPad": false,
+        "kind": "cd-feedback p",
+        "pad": {
+          "bottom": 626.9921875,
+          "height": 80,
+          "left": 24,
+          "right": 351,
+          "top": 546.9921875,
+          "width": 327,
+          "x": 24,
+          "y": 546.9921875
+        },
+        "rect": {
+          "bottom": 468.9921875,
+          "height": 24,
+          "left": 282.59375,
+          "right": 345,
+          "top": 444.9921875,
+          "width": 62.40625,
+          "x": 282.59375,
+          "y": 444.9921875
+        },
+        "text": "ぴったり",
+        "visibleRatio": 1
+      },
+      {
+        "inPad": false,
+        "kind": "cd-feedback p",
+        "pad": {
+          "bottom": 626.9921875,
+          "height": 80,
+          "left": 24,
+          "right": 351,
+          "top": 546.9921875,
+          "width": 327,
+          "x": 24,
+          "y": 546.9921875
+        },
+        "rect": {
+          "bottom": 468.9921875,
+          "height": 24,
+          "left": 282.59375,
+          "right": 345,
+          "top": 444.9921875,
+          "width": 62.40625,
+          "x": 282.59375,
+          "y": 444.9921875
+        },
+        "text": "ぴったり",
+        "visibleRatio": 1
+      },
+      {
+        "inPad": false,
+        "kind": "cd-feedback p",
+        "pad": {
+          "bottom": 626.9921875,
+          "height": 80,
+          "left": 24,
+          "right": 351,
+          "top": 546.9921875,
+          "width": 327,
+          "x": 24,
+          "y": 546.9921875
+        },
+        "rect": {
+          "bottom": 468.9921875,
+          "height": 24,
+          "left": 282.59375,
+          "right": 345,
+          "top": 444.9921875,
+          "width": 62.40625,
+          "x": 282.59375,
+          "y": 444.9921875
+        },
+        "text": "ぴったり",
+        "visibleRatio": 1
+      },
+      {
+        "inPad": false,
+        "kind": "cd-feedback p",
+        "pad": {
+          "bottom": 626.9921875,
+          "height": 80,
+          "left": 24,
+          "right": 351,
+          "top": 546.9921875,
+          "width": 327,
+          "x": 24,
+          "y": 546.9921875
+        },
+        "rect": {
+          "bottom": 468.9921875,
+          "height": 24,
+          "left": 282.59375,
+          "right": 345,
+          "top": 444.9921875,
+          "width": 62.40625,
+          "x": 282.59375,
+          "y": 444.9921875
+        },
+        "text": "ぴったり",
+        "visibleRatio": 1
+      },
+      {
+        "inPad": false,
+        "kind": "cd-feedback p",
+        "pad": {
+          "bottom": 626.9921875,
+          "height": 80,
+          "left": 24,
+          "right": 351,
+          "top": 546.9921875,
+          "width": 327,
+          "x": 24,
+          "y": 546.9921875
+        },
+        "rect": {
+          "bottom": 468.9921875,
+          "height": 24,
+          "left": 282.59375,
+          "right": 345,
+          "top": 444.9921875,
+          "width": 62.40625,
+          "x": 282.59375,
+          "y": 444.9921875
+        },
+        "text": "ぴったり",
+        "visibleRatio": 1
+      },
+      {
+        "inPad": false,
+        "kind": "cd-feedback p",
+        "pad": {
+          "bottom": 626.9921875,
+          "height": 80,
+          "left": 24,
+          "right": 351,
+          "top": 546.9921875,
+          "width": 327,
+          "x": 24,
+          "y": 546.9921875
+        },
+        "rect": {
+          "bottom": 468.9921875,
+          "height": 24,
+          "left": 282.59375,
+          "right": 345,
+          "top": 444.9921875,
+          "width": 62.40625,
+          "x": 282.59375,
+          "y": 444.9921875
+        },
+        "text": "ぴったり",
+        "visibleRatio": 1
+      },
+      {
+        "inPad": false,
+        "kind": "cd-feedback p",
+        "pad": {
+          "bottom": 626.9921875,
+          "height": 80,
+          "left": 24,
+          "right": 351,
+          "top": 546.9921875,
+          "width": 327,
+          "x": 24,
+          "y": 546.9921875
+        },
+        "rect": {
+          "bottom": 468.9921875,
+          "height": 24,
+          "left": 282.59375,
+          "right": 345,
+          "top": 444.9921875,
+          "width": 62.40625,
+          "x": 282.59375,
+          "y": 444.9921875
+        },
+        "text": "ぴったり",
+        "visibleRatio": 1
+      },
+      {
+        "inPad": false,
+        "kind": "cd-feedback p",
+        "pad": {
+          "bottom": 626.9921875,
+          "height": 80,
+          "left": 24,
+          "right": 351,
+          "top": 546.9921875,
+          "width": 327,
+          "x": 24,
+          "y": 546.9921875
+        },
+        "rect": {
+          "bottom": 468.9921875,
+          "height": 24,
+          "left": 282.59375,
+          "right": 345,
+          "top": 444.9921875,
+          "width": 62.40625,
+          "x": 282.59375,
+          "y": 444.9921875
+        },
+        "text": "ぴったり",
+        "visibleRatio": 1
+      },
+      {
+        "inPad": false,
+        "kind": "cd-feedback l",
+        "pad": {
+          "bottom": 626.9921875,
+          "height": 80,
+          "left": 24,
+          "right": 351,
+          "top": 546.9921875,
+          "width": 327,
+          "x": 24,
+          "y": 546.9921875
+        },
+        "rect": {
+          "bottom": 468.9921875,
+          "height": 24,
+          "left": 313.796875,
+          "right": 345,
+          "top": 444.9921875,
+          "width": 31.203125,
+          "x": 313.796875,
+          "y": 444.9921875
+        },
+        "text": "遅い",
+        "visibleRatio": 1
+      }
+    ],
+    "boot": {
+      "errors": [],
+      "failed": [],
+      "loaded": 33,
+      "scripts": 33
+    },
+    "conduct": {
+      "beat": "2",
+      "combo": 0,
+      "count": 4,
+      "events": 5,
+      "from": 0,
+      "judge": {
+        "e": 0,
+        "g": 0,
+        "l": 1,
+        "p": 1
+      },
+      "level": 0.975,
+      "meter": 4,
+      "period": 0.4378244166062343,
+      "phase": "play",
+      "taps": 2,
+      "to": 64
+    },
+    "errors": [],
+    "feedback": {
+      "animation": "none",
+      "count": 1,
+      "rect": {
+        "bottom": 468.9921875,
+        "height": 24,
+        "left": 313.796875,
+        "right": 345,
+        "top": 444.9921875,
+        "width": 31.203125,
+        "x": 313.796875,
+        "y": 444.9921875
+      },
+      "text": "遅い"
+    },
+    "height": 812,
+    "members": 0.6864548486191779,
+    "msg": "光がラインに届いたらタップ",
+    "pad": {
+      "bottom": 626.9921875,
+      "height": 80,
+      "left": 24,
+      "right": 351,
+      "top": 546.9921875,
+      "width": 327,
+      "x": 24,
+      "y": 546.9921875
+    },
+    "recordings": [
+      {
+        "id": "r2028-10-0-395491",
+        "label": "あなたの指揮：《新世界より》第2楽章（6月 第3週）"
+      }
+    ],
+    "records": 0.6259548333473504,
+    "scrollHeight": 812,
+    "scrollWidth": 375,
+    "stats": {
+      "bottom": 794,
+      "height": 51,
+      "left": 24,
+      "right": 351,
+      "top": 743,
+      "width": 327,
+      "x": 24,
+      "y": 743
+    },
+    "theme": "light",
+    "width": 375
+  },
+  "edge": {
+    "audio": {
+      "banks": 41,
+      "ready": true,
+      "voices": [
+        "SampleVoice"
+      ]
+    },
+    "audit": [
+      {
+        "inPad": false,
+        "kind": "cd-feedback p",
+        "pad": {
+          "bottom": 626.9921875,
+          "height": 80,
+          "left": 24,
+          "right": 351,
+          "top": 546.9921875,
+          "width": 327,
+          "x": 24,
+          "y": 546.9921875
+        },
+        "rect": {
+          "bottom": 468.9921875,
+          "height": 24,
+          "left": 282.59375,
+          "right": 345,
+          "top": 444.9921875,
+          "width": 62.40625,
+          "x": 282.59375,
+          "y": 444.9921875
+        },
+        "text": "ぴったり",
+        "visibleRatio": 1
+      },
+      {
+        "inPad": false,
+        "kind": "cd-feedback p",
+        "pad": {
+          "bottom": 626.9921875,
+          "height": 80,
+          "left": 24,
+          "right": 351,
+          "top": 546.9921875,
+          "width": 327,
+          "x": 24,
+          "y": 546.9921875
+        },
+        "rect": {
+          "bottom": 468.9921875,
+          "height": 24,
+          "left": 282.59375,
+          "right": 345,
+          "top": 444.9921875,
+          "width": 62.40625,
+          "x": 282.59375,
+          "y": 444.9921875
+        },
+        "text": "ぴったり",
+        "visibleRatio": 1
+      },
+      {
+        "inPad": false,
+        "kind": "cd-feedback p",
+        "pad": {
+          "bottom": 626.9921875,
+          "height": 80,
+          "left": 24,
+          "right": 351,
+          "top": 546.9921875,
+          "width": 327,
+          "x": 24,
+          "y": 546.9921875
+        },
+        "rect": {
+          "bottom": 468.9921875,
+          "height": 24,
+          "left": 282.59375,
+          "right": 345,
+          "top": 444.9921875,
+          "width": 62.40625,
+          "x": 282.59375,
+          "y": 444.9921875
+        },
+        "text": "ぴったり",
+        "visibleRatio": 1
+      },
+      {
+        "inPad": false,
+        "kind": "cd-feedback p",
+        "pad": {
+          "bottom": 626.9921875,
+          "height": 80,
+          "left": 24,
+          "right": 351,
+          "top": 546.9921875,
+          "width": 327,
+          "x": 24,
+          "y": 546.9921875
+        },
+        "rect": {
+          "bottom": 468.9921875,
+          "height": 24,
+          "left": 282.59375,
+          "right": 345,
+          "top": 444.9921875,
+          "width": 62.40625,
+          "x": 282.59375,
+          "y": 444.9921875
+        },
+        "text": "ぴったり",
+        "visibleRatio": 1
+      },
+      {
+        "inPad": false,
+        "kind": "cd-feedback p",
+        "pad": {
+          "bottom": 626.9921875,
+          "height": 80,
+          "left": 24,
+          "right": 351,
+          "top": 546.9921875,
+          "width": 327,
+          "x": 24,
+          "y": 546.9921875
+        },
+        "rect": {
+          "bottom": 468.9921875,
+          "height": 24,
+          "left": 282.59375,
+          "right": 345,
+          "top": 444.9921875,
+          "width": 62.40625,
+          "x": 282.59375,
+          "y": 444.9921875
+        },
+        "text": "ぴったり",
+        "visibleRatio": 1
+      },
+      {
+        "inPad": false,
+        "kind": "cd-feedback p",
+        "pad": {
+          "bottom": 626.9921875,
+          "height": 80,
+          "left": 24,
+          "right": 351,
+          "top": 546.9921875,
+          "width": 327,
+          "x": 24,
+          "y": 546.9921875
+        },
+        "rect": {
+          "bottom": 468.9921875,
+          "height": 24,
+          "left": 282.59375,
+          "right": 345,
+          "top": 444.9921875,
+          "width": 62.40625,
+          "x": 282.59375,
+          "y": 444.9921875
+        },
+        "text": "ぴったり",
+        "visibleRatio": 1
+      },
+      {
+        "inPad": false,
+        "kind": "cd-feedback p",
+        "pad": {
+          "bottom": 626.9921875,
+          "height": 80,
+          "left": 24,
+          "right": 351,
+          "top": 546.9921875,
+          "width": 327,
+          "x": 24,
+          "y": 546.9921875
+        },
+        "rect": {
+          "bottom": 468.9921875,
+          "height": 24,
+          "left": 282.59375,
+          "right": 345,
+          "top": 444.9921875,
+          "width": 62.40625,
+          "x": 282.59375,
+          "y": 444.9921875
+        },
+        "text": "ぴったり",
+        "visibleRatio": 1
+      },
+      {
+        "inPad": false,
+        "kind": "cd-feedback p",
+        "pad": {
+          "bottom": 626.9921875,
+          "height": 80,
+          "left": 24,
+          "right": 351,
+          "top": 546.9921875,
+          "width": 327,
+          "x": 24,
+          "y": 546.9921875
+        },
+        "rect": {
+          "bottom": 468.9921875,
+          "height": 24,
+          "left": 282.59375,
+          "right": 345,
+          "top": 444.9921875,
+          "width": 62.40625,
+          "x": 282.59375,
+          "y": 444.9921875
+        },
+        "text": "ぴったり",
+        "visibleRatio": 1
+      },
+      {
+        "inPad": false,
+        "kind": "cd-feedback p",
+        "pad": {
+          "bottom": 626.9921875,
+          "height": 80,
+          "left": 24,
+          "right": 351,
+          "top": 546.9921875,
+          "width": 327,
+          "x": 24,
+          "y": 546.9921875
+        },
+        "rect": {
+          "bottom": 468.9921875,
+          "height": 24,
+          "left": 282.59375,
+          "right": 345,
+          "top": 444.9921875,
+          "width": 62.40625,
+          "x": 282.59375,
+          "y": 444.9921875
+        },
+        "text": "ぴったり",
+        "visibleRatio": 1
+      },
+      {
+        "inPad": false,
+        "kind": "cd-feedback p",
+        "pad": {
+          "bottom": 626.9921875,
+          "height": 80,
+          "left": 24,
+          "right": 351,
+          "top": 546.9921875,
+          "width": 327,
+          "x": 24,
+          "y": 546.9921875
+        },
+        "rect": {
+          "bottom": 468.9921875,
+          "height": 24,
+          "left": 282.59375,
+          "right": 345,
+          "top": 444.9921875,
+          "width": 62.40625,
+          "x": 282.59375,
+          "y": 444.9921875
+        },
+        "text": "ぴったり",
+        "visibleRatio": 1
+      },
+      {
+        "inPad": false,
+        "kind": "cd-feedback l",
+        "pad": {
+          "bottom": 626.9921875,
+          "height": 80,
+          "left": 24,
+          "right": 351,
+          "top": 546.9921875,
+          "width": 327,
+          "x": 24,
+          "y": 546.9921875
+        },
+        "rect": {
+          "bottom": 468.9921875,
+          "height": 24,
+          "left": 313.796875,
+          "right": 345,
+          "top": 444.9921875,
+          "width": 31.203125,
+          "x": 313.796875,
+          "y": 444.9921875
+        },
+        "text": "遅い",
+        "visibleRatio": 1
+      },
+      {
+        "inPad": false,
+        "kind": "cd-feedback l",
+        "pad": {
+          "bottom": 626.9921875,
+          "height": 80,
+          "left": 24,
+          "right": 351,
+          "top": 546.9921875,
+          "width": 327,
+          "x": 24,
+          "y": 546.9921875
+        },
+        "rect": {
+          "bottom": 468.9921875,
+          "height": 24,
+          "left": 313.796875,
+          "right": 345,
+          "top": 444.9921875,
+          "width": 31.203125,
+          "x": 313.796875,
+          "y": 444.9921875
+        },
+        "text": "遅い",
+        "visibleRatio": 1
+      }
+    ],
+    "boot": {
+      "errors": [],
+      "failed": [],
+      "loaded": 33,
+      "scripts": 33
+    },
+    "conduct": {
+      "beat": "2",
+      "combo": 0,
+      "count": 4,
+      "events": 5,
+      "from": 0,
+      "judge": {
+        "e": 0,
+        "g": 0,
+        "l": 1,
+        "p": 1
+      },
+      "level": 0.975,
+      "meter": 4,
+      "period": 0.4378244166062343,
+      "phase": "play",
+      "taps": 2,
+      "to": 64
+    },
+    "errors": [],
+    "feedback": {
+      "animation": "none",
+      "count": 1,
+      "rect": {
+        "bottom": 468.9921875,
+        "height": 24,
+        "left": 313.796875,
+        "right": 345,
+        "top": 444.9921875,
+        "width": 31.203125,
+        "x": 313.796875,
+        "y": 444.9921875
+      },
+      "text": "遅い"
+    },
+    "height": 812,
+    "members": 0.6864548486191779,
+    "msg": "光がラインに届いたらタップ",
+    "pad": {
+      "bottom": 626.9921875,
+      "height": 80,
+      "left": 24,
+      "right": 351,
+      "top": 546.9921875,
+      "width": 327,
+      "x": 24,
+      "y": 546.9921875
+    },
+    "recordings": [
+      {
+        "id": "r2028-10-0-395491",
+        "label": "あなたの指揮：《新世界より》第2楽章（6月 第3週）"
+      }
+    ],
+    "records": 0.6259548333473504,
+    "scrollHeight": 812,
+    "scrollWidth": 375,
+    "stats": {
+      "bottom": 794,
+      "height": 51,
+      "left": 24,
+      "right": 351,
+      "top": 743,
+      "width": 327,
+      "x": 24,
+      "y": 743
+    },
+    "theme": "light",
+    "width": 375
+  },
+  "closed": {
+    "audio": {
+      "banks": 41,
+      "ready": true,
+      "voices": []
+    },
+    "audit": [
+      {
+        "inPad": false,
+        "kind": "cd-feedback p",
+        "pad": {
+          "bottom": 626.9921875,
+          "height": 80,
+          "left": 24,
+          "right": 351,
+          "top": 546.9921875,
+          "width": 327,
+          "x": 24,
+          "y": 546.9921875
+        },
+        "rect": {
+          "bottom": 468.9921875,
+          "height": 24,
+          "left": 282.59375,
+          "right": 345,
+          "top": 444.9921875,
+          "width": 62.40625,
+          "x": 282.59375,
+          "y": 444.9921875
+        },
+        "text": "ぴったり",
+        "visibleRatio": 1
+      },
+      {
+        "inPad": false,
+        "kind": "cd-feedback p",
+        "pad": {
+          "bottom": 626.9921875,
+          "height": 80,
+          "left": 24,
+          "right": 351,
+          "top": 546.9921875,
+          "width": 327,
+          "x": 24,
+          "y": 546.9921875
+        },
+        "rect": {
+          "bottom": 468.9921875,
+          "height": 24,
+          "left": 282.59375,
+          "right": 345,
+          "top": 444.9921875,
+          "width": 62.40625,
+          "x": 282.59375,
+          "y": 444.9921875
+        },
+        "text": "ぴったり",
+        "visibleRatio": 1
+      },
+      {
+        "inPad": false,
+        "kind": "cd-feedback p",
+        "pad": {
+          "bottom": 626.9921875,
+          "height": 80,
+          "left": 24,
+          "right": 351,
+          "top": 546.9921875,
+          "width": 327,
+          "x": 24,
+          "y": 546.9921875
+        },
+        "rect": {
+          "bottom": 468.9921875,
+          "height": 24,
+          "left": 282.59375,
+          "right": 345,
+          "top": 444.9921875,
+          "width": 62.40625,
+          "x": 282.59375,
+          "y": 444.9921875
+        },
+        "text": "ぴったり",
+        "visibleRatio": 1
+      },
+      {
+        "inPad": false,
+        "kind": "cd-feedback p",
+        "pad": {
+          "bottom": 626.9921875,
+          "height": 80,
+          "left": 24,
+          "right": 351,
+          "top": 546.9921875,
+          "width": 327,
+          "x": 24,
+          "y": 546.9921875
+        },
+        "rect": {
+          "bottom": 468.9921875,
+          "height": 24,
+          "left": 282.59375,
+          "right": 345,
+          "top": 444.9921875,
+          "width": 62.40625,
+          "x": 282.59375,
+          "y": 444.9921875
+        },
+        "text": "ぴったり",
+        "visibleRatio": 1
+      },
+      {
+        "inPad": false,
+        "kind": "cd-feedback p",
+        "pad": {
+          "bottom": 626.9921875,
+          "height": 80,
+          "left": 24,
+          "right": 351,
+          "top": 546.9921875,
+          "width": 327,
+          "x": 24,
+          "y": 546.9921875
+        },
+        "rect": {
+          "bottom": 468.9921875,
+          "height": 24,
+          "left": 282.59375,
+          "right": 345,
+          "top": 444.9921875,
+          "width": 62.40625,
+          "x": 282.59375,
+          "y": 444.9921875
+        },
+        "text": "ぴったり",
+        "visibleRatio": 1
+      },
+      {
+        "inPad": false,
+        "kind": "cd-feedback p",
+        "pad": {
+          "bottom": 626.9921875,
+          "height": 80,
+          "left": 24,
+          "right": 351,
+          "top": 546.9921875,
+          "width": 327,
+          "x": 24,
+          "y": 546.9921875
+        },
+        "rect": {
+          "bottom": 468.9921875,
+          "height": 24,
+          "left": 282.59375,
+          "right": 345,
+          "top": 444.9921875,
+          "width": 62.40625,
+          "x": 282.59375,
+          "y": 444.9921875
+        },
+        "text": "ぴったり",
+        "visibleRatio": 1
+      },
+      {
+        "inPad": false,
+        "kind": "cd-feedback p",
+        "pad": {
+          "bottom": 626.9921875,
+          "height": 80,
+          "left": 24,
+          "right": 351,
+          "top": 546.9921875,
+          "width": 327,
+          "x": 24,
+          "y": 546.9921875
+        },
+        "rect": {
+          "bottom": 468.9921875,
+          "height": 24,
+          "left": 282.59375,
+          "right": 345,
+          "top": 444.9921875,
+          "width": 62.40625,
+          "x": 282.59375,
+          "y": 444.9921875
+        },
+        "text": "ぴったり",
+        "visibleRatio": 1
+      },
+      {
+        "inPad": false,
+        "kind": "cd-feedback p",
+        "pad": {
+          "bottom": 626.9921875,
+          "height": 80,
+          "left": 24,
+          "right": 351,
+          "top": 546.9921875,
+          "width": 327,
+          "x": 24,
+          "y": 546.9921875
+        },
+        "rect": {
+          "bottom": 468.9921875,
+          "height": 24,
+          "left": 282.59375,
+          "right": 345,
+          "top": 444.9921875,
+          "width": 62.40625,
+          "x": 282.59375,
+          "y": 444.9921875
+        },
+        "text": "ぴったり",
+        "visibleRatio": 1
+      },
+      {
+        "inPad": false,
+        "kind": "cd-feedback p",
+        "pad": {
+          "bottom": 626.9921875,
+          "height": 80,
+          "left": 24,
+          "right": 351,
+          "top": 546.9921875,
+          "width": 327,
+          "x": 24,
+          "y": 546.9921875
+        },
+        "rect": {
+          "bottom": 468.9921875,
+          "height": 24,
+          "left": 282.59375,
+          "right": 345,
+          "top": 444.9921875,
+          "width": 62.40625,
+          "x": 282.59375,
+          "y": 444.9921875
+        },
+        "text": "ぴったり",
+        "visibleRatio": 1
+      },
+      {
+        "inPad": false,
+        "kind": "cd-feedback p",
+        "pad": {
+          "bottom": 626.9921875,
+          "height": 80,
+          "left": 24,
+          "right": 351,
+          "top": 546.9921875,
+          "width": 327,
+          "x": 24,
+          "y": 546.9921875
+        },
+        "rect": {
+          "bottom": 468.9921875,
+          "height": 24,
+          "left": 282.59375,
+          "right": 345,
+          "top": 444.9921875,
+          "width": 62.40625,
+          "x": 282.59375,
+          "y": 444.9921875
+        },
+        "text": "ぴったり",
+        "visibleRatio": 1
+      },
+      {
+        "inPad": false,
+        "kind": "cd-feedback l",
+        "pad": {
+          "bottom": 626.9921875,
+          "height": 80,
+          "left": 24,
+          "right": 351,
+          "top": 546.9921875,
+          "width": 327,
+          "x": 24,
+          "y": 546.9921875
+        },
+        "rect": {
+          "bottom": 468.9921875,
+          "height": 24,
+          "left": 313.796875,
+          "right": 345,
+          "top": 444.9921875,
+          "width": 31.203125,
+          "x": 313.796875,
+          "y": 444.9921875
+        },
+        "text": "遅い",
+        "visibleRatio": 1
+      },
+      {
+        "inPad": false,
+        "kind": "cd-feedback l",
+        "pad": {
+          "bottom": 626.9921875,
+          "height": 80,
+          "left": 24,
+          "right": 351,
+          "top": 546.9921875,
+          "width": 327,
+          "x": 24,
+          "y": 546.9921875
+        },
+        "rect": {
+          "bottom": 468.9921875,
+          "height": 24,
+          "left": 313.796875,
+          "right": 345,
+          "top": 444.9921875,
+          "width": 31.203125,
+          "x": 313.796875,
+          "y": 444.9921875
+        },
+        "text": "遅い",
+        "visibleRatio": 1
+      }
+    ],
+    "boot": {
+      "errors": [],
+      "failed": [],
+      "loaded": 33,
+      "scripts": 33
+    },
+    "conduct": {
+      "beat": "2",
+      "combo": 0,
+      "count": 4,
+      "events": 5,
+      "from": 0,
+      "judge": {
+        "e": 0,
+        "g": 0,
+        "l": 1,
+        "p": 1
+      },
+      "level": 0.975,
+      "meter": 4,
+      "period": 0.4378244166062343,
+      "phase": "idle",
+      "taps": 2,
+      "to": 64
+    },
+    "errors": [],
+    "feedback": {
+      "animation": "none",
+      "count": 1,
+      "rect": {
+        "bottom": 0,
+        "height": 0,
+        "left": 0,
+        "right": 0,
+        "top": 0,
+        "width": 0,
+        "x": 0,
+        "y": 0
+      },
+      "text": ""
+    },
+    "height": 812,
+    "members": 0.6864548486191779,
+    "msg": "光がラインに届いたらタップ",
+    "pad": {
+      "bottom": 0,
+      "height": 0,
+      "left": 0,
+      "right": 0,
+      "top": 0,
+      "width": 0,
+      "x": 0,
+      "y": 0
+    },
+    "recordings": [
+      {
+        "id": "r2028-10-0-395491",
+        "label": "あなたの指揮：《新世界より》第2楽章（6月 第3週）"
+      }
+    ],
+    "records": 0.6259548333473504,
+    "scrollHeight": 0,
+    "scrollWidth": 0,
+    "stats": {
+      "bottom": 0,
+      "height": 0,
+      "left": 0,
+      "right": 0,
+      "top": 0,
+      "width": 0,
+      "x": 0,
+      "y": 0
+    },
+    "theme": "light",
+    "width": 375
+  },
+  "reopened": {
+    "audio": {
+      "banks": 41,
+      "ready": true,
+      "voices": []
+    },
+    "audit": [
+      {
+        "inPad": false,
+        "kind": "cd-feedback p",
+        "pad": {
+          "bottom": 626.9921875,
+          "height": 80,
+          "left": 24,
+          "right": 351,
+          "top": 546.9921875,
+          "width": 327,
+          "x": 24,
+          "y": 546.9921875
+        },
+        "rect": {
+          "bottom": 468.9921875,
+          "height": 24,
+          "left": 282.59375,
+          "right": 345,
+          "top": 444.9921875,
+          "width": 62.40625,
+          "x": 282.59375,
+          "y": 444.9921875
+        },
+        "text": "ぴったり",
+        "visibleRatio": 1
+      },
+      {
+        "inPad": false,
+        "kind": "cd-feedback p",
+        "pad": {
+          "bottom": 626.9921875,
+          "height": 80,
+          "left": 24,
+          "right": 351,
+          "top": 546.9921875,
+          "width": 327,
+          "x": 24,
+          "y": 546.9921875
+        },
+        "rect": {
+          "bottom": 468.9921875,
+          "height": 24,
+          "left": 282.59375,
+          "right": 345,
+          "top": 444.9921875,
+          "width": 62.40625,
+          "x": 282.59375,
+          "y": 444.9921875
+        },
+        "text": "ぴったり",
+        "visibleRatio": 1
+      },
+      {
+        "inPad": false,
+        "kind": "cd-feedback p",
+        "pad": {
+          "bottom": 626.9921875,
+          "height": 80,
+          "left": 24,
+          "right": 351,
+          "top": 546.9921875,
+          "width": 327,
+          "x": 24,
+          "y": 546.9921875
+        },
+        "rect": {
+          "bottom": 468.9921875,
+          "height": 24,
+          "left": 282.59375,
+          "right": 345,
+          "top": 444.9921875,
+          "width": 62.40625,
+          "x": 282.59375,
+          "y": 444.9921875
+        },
+        "text": "ぴったり",
+        "visibleRatio": 1
+      },
+      {
+        "inPad": false,
+        "kind": "cd-feedback p",
+        "pad": {
+          "bottom": 626.9921875,
+          "height": 80,
+          "left": 24,
+          "right": 351,
+          "top": 546.9921875,
+          "width": 327,
+          "x": 24,
+          "y": 546.9921875
+        },
+        "rect": {
+          "bottom": 468.9921875,
+          "height": 24,
+          "left": 282.59375,
+          "right": 345,
+          "top": 444.9921875,
+          "width": 62.40625,
+          "x": 282.59375,
+          "y": 444.9921875
+        },
+        "text": "ぴったり",
+        "visibleRatio": 1
+      },
+      {
+        "inPad": false,
+        "kind": "cd-feedback p",
+        "pad": {
+          "bottom": 626.9921875,
+          "height": 80,
+          "left": 24,
+          "right": 351,
+          "top": 546.9921875,
+          "width": 327,
+          "x": 24,
+          "y": 546.9921875
+        },
+        "rect": {
+          "bottom": 468.9921875,
+          "height": 24,
+          "left": 282.59375,
+          "right": 345,
+          "top": 444.9921875,
+          "width": 62.40625,
+          "x": 282.59375,
+          "y": 444.9921875
+        },
+        "text": "ぴったり",
+        "visibleRatio": 1
+      },
+      {
+        "inPad": false,
+        "kind": "cd-feedback p",
+        "pad": {
+          "bottom": 626.9921875,
+          "height": 80,
+          "left": 24,
+          "right": 351,
+          "top": 546.9921875,
+          "width": 327,
+          "x": 24,
+          "y": 546.9921875
+        },
+        "rect": {
+          "bottom": 468.9921875,
+          "height": 24,
+          "left": 282.59375,
+          "right": 345,
+          "top": 444.9921875,
+          "width": 62.40625,
+          "x": 282.59375,
+          "y": 444.9921875
+        },
+        "text": "ぴったり",
+        "visibleRatio": 1
+      },
+      {
+        "inPad": false,
+        "kind": "cd-feedback p",
+        "pad": {
+          "bottom": 626.9921875,
+          "height": 80,
+          "left": 24,
+          "right": 351,
+          "top": 546.9921875,
+          "width": 327,
+          "x": 24,
+          "y": 546.9921875
+        },
+        "rect": {
+          "bottom": 468.9921875,
+          "height": 24,
+          "left": 282.59375,
+          "right": 345,
+          "top": 444.9921875,
+          "width": 62.40625,
+          "x": 282.59375,
+          "y": 444.9921875
+        },
+        "text": "ぴったり",
+        "visibleRatio": 1
+      },
+      {
+        "inPad": false,
+        "kind": "cd-feedback p",
+        "pad": {
+          "bottom": 626.9921875,
+          "height": 80,
+          "left": 24,
+          "right": 351,
+          "top": 546.9921875,
+          "width": 327,
+          "x": 24,
+          "y": 546.9921875
+        },
+        "rect": {
+          "bottom": 468.9921875,
+          "height": 24,
+          "left": 282.59375,
+          "right": 345,
+          "top": 444.9921875,
+          "width": 62.40625,
+          "x": 282.59375,
+          "y": 444.9921875
+        },
+        "text": "ぴったり",
+        "visibleRatio": 1
+      },
+      {
+        "inPad": false,
+        "kind": "cd-feedback p",
+        "pad": {
+          "bottom": 626.9921875,
+          "height": 80,
+          "left": 24,
+          "right": 351,
+          "top": 546.9921875,
+          "width": 327,
+          "x": 24,
+          "y": 546.9921875
+        },
+        "rect": {
+          "bottom": 468.9921875,
+          "height": 24,
+          "left": 282.59375,
+          "right": 345,
+          "top": 444.9921875,
+          "width": 62.40625,
+          "x": 282.59375,
+          "y": 444.9921875
+        },
+        "text": "ぴったり",
+        "visibleRatio": 1
+      },
+      {
+        "inPad": false,
+        "kind": "cd-feedback p",
+        "pad": {
+          "bottom": 626.9921875,
+          "height": 80,
+          "left": 24,
+          "right": 351,
+          "top": 546.9921875,
+          "width": 327,
+          "x": 24,
+          "y": 546.9921875
+        },
+        "rect": {
+          "bottom": 468.9921875,
+          "height": 24,
+          "left": 282.59375,
+          "right": 345,
+          "top": 444.9921875,
+          "width": 62.40625,
+          "x": 282.59375,
+          "y": 444.9921875
+        },
+        "text": "ぴったり",
+        "visibleRatio": 1
+      },
+      {
+        "inPad": false,
+        "kind": "cd-feedback l",
+        "pad": {
+          "bottom": 626.9921875,
+          "height": 80,
+          "left": 24,
+          "right": 351,
+          "top": 546.9921875,
+          "width": 327,
+          "x": 24,
+          "y": 546.9921875
+        },
+        "rect": {
+          "bottom": 468.9921875,
+          "height": 24,
+          "left": 313.796875,
+          "right": 345,
+          "top": 444.9921875,
+          "width": 31.203125,
+          "x": 313.796875,
+          "y": 444.9921875
+        },
+        "text": "遅い",
+        "visibleRatio": 1
+      },
+      {
+        "inPad": false,
+        "kind": "cd-feedback l",
+        "pad": {
+          "bottom": 626.9921875,
+          "height": 80,
+          "left": 24,
+          "right": 351,
+          "top": 546.9921875,
+          "width": 327,
+          "x": 24,
+          "y": 546.9921875
+        },
+        "rect": {
+          "bottom": 468.9921875,
+          "height": 24,
+          "left": 313.796875,
+          "right": 345,
+          "top": 444.9921875,
+          "width": 31.203125,
+          "x": 313.796875,
+          "y": 444.9921875
+        },
+        "text": "遅い",
+        "visibleRatio": 1
+      }
+    ],
+    "boot": {
+      "errors": [],
+      "failed": [],
+      "loaded": 33,
+      "scripts": 33
+    },
+    "conduct": {
+      "beat": "1",
+      "combo": 0,
+      "count": 0,
+      "events": 0,
+      "from": 0,
+      "judge": {
+        "e": 0,
+        "g": 0,
+        "l": 0,
+        "p": 0
+      },
+      "level": 1,
+      "meter": 4,
+      "phase": "count",
+      "taps": 0,
+      "to": 64
+    },
+    "errors": [],
+    "feedback": {
+      "animation": "none",
+      "count": 1,
+      "rect": {
+        "bottom": 0,
+        "height": 0,
+        "left": 0,
+        "right": 0,
+        "top": 0,
+        "width": 0,
+        "x": 0,
+        "y": 0
+      },
+      "text": ""
+    },
+    "height": 812,
+    "members": 0.6864548486191779,
+    "msg": "まず4回、光がラインに届いたらタップ",
+    "pad": {
+      "bottom": 626.9921875,
+      "height": 80,
+      "left": 24,
+      "right": 351,
+      "top": 546.9921875,
+      "width": 327,
+      "x": 24,
+      "y": 546.9921875
+    },
+    "recordings": [
+      {
+        "id": "r2028-10-0-395491",
+        "label": "あなたの指揮：《新世界より》第2楽章（6月 第3週）"
+      }
+    ],
+    "records": 0.6259548333473504,
+    "scrollHeight": 812,
+    "scrollWidth": 375,
+    "stats": {
+      "bottom": 794,
+      "height": 51,
+      "left": 24,
+      "right": 351,
+      "top": 743,
+      "width": 327,
+      "x": 24,
+      "y": 743
+    },
+    "theme": "light",
+    "width": 375
+  },
+  "darkCompact": {
+    "audio": {
+      "banks": 41,
+      "ready": true,
+      "voices": [
+        "SampleVoice"
+      ]
+    },
+    "audit": [
+      {
+        "aboveCue": true,
+        "inPad": false,
+        "kind": "cd-feedback p",
+        "pad": {
+          "bottom": 555.1875,
+          "height": 72,
+          "left": 24,
+          "right": 351,
+          "top": 483.1875,
+          "width": 327,
+          "x": 24,
+          "y": 483.1875
+        },
+        "rect": {
+          "bottom": 405.1875,
+          "height": 24,
+          "left": 282.59375,
+          "right": 345,
+          "top": 381.1875,
+          "width": 62.40625,
+          "x": 282.59375,
+          "y": 381.1875
+        },
+        "text": "ぴったり",
+        "visibleRatio": 1
+      },
+      {
+        "aboveCue": true,
+        "inPad": false,
+        "kind": "cd-feedback p",
+        "pad": {
+          "bottom": 555.1875,
+          "height": 72,
+          "left": 24,
+          "right": 351,
+          "top": 483.1875,
+          "width": 327,
+          "x": 24,
+          "y": 483.1875
+        },
+        "rect": {
+          "bottom": 405.1875,
+          "height": 24,
+          "left": 282.59375,
+          "right": 345,
+          "top": 381.1875,
+          "width": 62.40625,
+          "x": 282.59375,
+          "y": 381.1875
+        },
+        "text": "ぴったり",
+        "visibleRatio": 1
+      },
+      {
+        "aboveCue": true,
+        "inPad": false,
+        "kind": "cd-feedback p",
+        "pad": {
+          "bottom": 555.1875,
+          "height": 72,
+          "left": 24,
+          "right": 351,
+          "top": 483.1875,
+          "width": 327,
+          "x": 24,
+          "y": 483.1875
+        },
+        "rect": {
+          "bottom": 405.1875,
+          "height": 24,
+          "left": 282.59375,
+          "right": 345,
+          "top": 381.1875,
+          "width": 62.40625,
+          "x": 282.59375,
+          "y": 381.1875
+        },
+        "text": "ぴったり",
+        "visibleRatio": 1
+      },
+      {
+        "aboveCue": true,
+        "inPad": false,
+        "kind": "cd-feedback p",
+        "pad": {
+          "bottom": 555.1875,
+          "height": 72,
+          "left": 24,
+          "right": 351,
+          "top": 483.1875,
+          "width": 327,
+          "x": 24,
+          "y": 483.1875
+        },
+        "rect": {
+          "bottom": 405.1875,
+          "height": 24,
+          "left": 282.59375,
+          "right": 345,
+          "top": 381.1875,
+          "width": 62.40625,
+          "x": 282.59375,
+          "y": 381.1875
+        },
+        "text": "ぴったり",
+        "visibleRatio": 1
+      },
+      {
+        "aboveCue": true,
+        "inPad": false,
+        "kind": "cd-feedback p",
+        "pad": {
+          "bottom": 555.1875,
+          "height": 72,
+          "left": 24,
+          "right": 351,
+          "top": 483.1875,
+          "width": 327,
+          "x": 24,
+          "y": 483.1875
+        },
+        "rect": {
+          "bottom": 405.1875,
+          "height": 24,
+          "left": 282.59375,
+          "right": 345,
+          "top": 381.1875,
+          "width": 62.40625,
+          "x": 282.59375,
+          "y": 381.1875
+        },
+        "text": "ぴったり",
+        "visibleRatio": 1
+      },
+      {
+        "aboveCue": true,
+        "inPad": false,
+        "kind": "cd-feedback p",
+        "pad": {
+          "bottom": 555.1875,
+          "height": 72,
+          "left": 24,
+          "right": 351,
+          "top": 483.1875,
+          "width": 327,
+          "x": 24,
+          "y": 483.1875
+        },
+        "rect": {
+          "bottom": 405.1875,
+          "height": 24,
+          "left": 282.59375,
+          "right": 345,
+          "top": 381.1875,
+          "width": 62.40625,
+          "x": 282.59375,
+          "y": 381.1875
+        },
+        "text": "ぴったり",
+        "visibleRatio": 1
+      },
+      {
+        "aboveCue": true,
+        "inPad": false,
+        "kind": "cd-feedback p",
+        "pad": {
+          "bottom": 555.1875,
+          "height": 72,
+          "left": 24,
+          "right": 351,
+          "top": 483.1875,
+          "width": 327,
+          "x": 24,
+          "y": 483.1875
+        },
+        "rect": {
+          "bottom": 405.1875,
+          "height": 24,
+          "left": 282.59375,
+          "right": 345,
+          "top": 381.1875,
+          "width": 62.40625,
+          "x": 282.59375,
+          "y": 381.1875
+        },
+        "text": "ぴったり",
+        "visibleRatio": 1
+      }
+    ],
+    "boot": {
+      "errors": [],
+      "failed": [],
+      "loaded": 33,
+      "scripts": 33
+    },
+    "conduct": {
+      "beat": "1",
+      "combo": 4,
+      "count": 4,
+      "events": 8,
+      "from": 0,
+      "judge": {
+        "e": 0,
+        "g": 0,
+        "l": 0,
+        "p": 4
+      },
+      "level": 0.975,
+      "meter": 4,
+      "period": 0.42380710832536417,
+      "phase": "play",
+      "taps": 4,
+      "to": 64
+    },
+    "errors": [],
+    "feedback": {
+      "animation": "none",
+      "count": 1,
+      "rect": {
+        "bottom": 405.1875,
+        "height": 24,
+        "left": 282.59375,
+        "right": 345,
+        "top": 381.1875,
+        "width": 62.40625,
+        "x": 282.59375,
+        "y": 381.1875
+      },
+      "text": "ぴったり"
+    },
+    "height": 667,
+    "members": 0.6864548486191779,
+    "msg": "ラインが光ったらタップ",
+    "pad": {
+      "bottom": 555.1875,
+      "height": 72,
+      "left": 24,
+      "right": 351,
+      "top": 483.1875,
+      "width": 327,
+      "x": 24,
+      "y": 483.1875
+    },
+    "recordings": [],
+    "records": 0.7712433410342783,
+    "scrollHeight": 667,
+    "scrollWidth": 375,
+    "stats": {
+      "bottom": 657,
+      "height": 45,
+      "left": 24,
+      "right": 351,
+      "top": 612,
+      "width": 327,
+      "x": 24,
+      "y": 612
+    },
+    "theme": "dark",
+    "width": 375
+  },
+  "darkEdge": {
+    "audio": {
+      "banks": 41,
+      "ready": true,
+      "voices": [
+        "SampleVoice"
+      ]
+    },
+    "audit": [
+      {
+        "aboveCue": true,
+        "inPad": false,
+        "kind": "cd-feedback p",
+        "pad": {
+          "bottom": 555.1875,
+          "height": 72,
+          "left": 24,
+          "right": 351,
+          "top": 483.1875,
+          "width": 327,
+          "x": 24,
+          "y": 483.1875
+        },
+        "rect": {
+          "bottom": 405.1875,
+          "height": 24,
+          "left": 282.59375,
+          "right": 345,
+          "top": 381.1875,
+          "width": 62.40625,
+          "x": 282.59375,
+          "y": 381.1875
+        },
+        "text": "ぴったり",
+        "visibleRatio": 1
+      },
+      {
+        "aboveCue": true,
+        "inPad": false,
+        "kind": "cd-feedback p",
+        "pad": {
+          "bottom": 555.1875,
+          "height": 72,
+          "left": 24,
+          "right": 351,
+          "top": 483.1875,
+          "width": 327,
+          "x": 24,
+          "y": 483.1875
+        },
+        "rect": {
+          "bottom": 405.1875,
+          "height": 24,
+          "left": 282.59375,
+          "right": 345,
+          "top": 381.1875,
+          "width": 62.40625,
+          "x": 282.59375,
+          "y": 381.1875
+        },
+        "text": "ぴったり",
+        "visibleRatio": 1
+      },
+      {
+        "aboveCue": true,
+        "inPad": false,
+        "kind": "cd-feedback p",
+        "pad": {
+          "bottom": 555.1875,
+          "height": 72,
+          "left": 24,
+          "right": 351,
+          "top": 483.1875,
+          "width": 327,
+          "x": 24,
+          "y": 483.1875
+        },
+        "rect": {
+          "bottom": 405.1875,
+          "height": 24,
+          "left": 282.59375,
+          "right": 345,
+          "top": 381.1875,
+          "width": 62.40625,
+          "x": 282.59375,
+          "y": 381.1875
+        },
+        "text": "ぴったり",
+        "visibleRatio": 1
+      },
+      {
+        "aboveCue": true,
+        "inPad": false,
+        "kind": "cd-feedback p",
+        "pad": {
+          "bottom": 555.1875,
+          "height": 72,
+          "left": 24,
+          "right": 351,
+          "top": 483.1875,
+          "width": 327,
+          "x": 24,
+          "y": 483.1875
+        },
+        "rect": {
+          "bottom": 405.1875,
+          "height": 24,
+          "left": 282.59375,
+          "right": 345,
+          "top": 381.1875,
+          "width": 62.40625,
+          "x": 282.59375,
+          "y": 381.1875
+        },
+        "text": "ぴったり",
+        "visibleRatio": 1
+      },
+      {
+        "aboveCue": true,
+        "inPad": false,
+        "kind": "cd-feedback p",
+        "pad": {
+          "bottom": 555.1875,
+          "height": 72,
+          "left": 24,
+          "right": 351,
+          "top": 483.1875,
+          "width": 327,
+          "x": 24,
+          "y": 483.1875
+        },
+        "rect": {
+          "bottom": 405.1875,
+          "height": 24,
+          "left": 282.59375,
+          "right": 345,
+          "top": 381.1875,
+          "width": 62.40625,
+          "x": 282.59375,
+          "y": 381.1875
+        },
+        "text": "ぴったり",
+        "visibleRatio": 1
+      },
+      {
+        "aboveCue": true,
+        "inPad": false,
+        "kind": "cd-feedback p",
+        "pad": {
+          "bottom": 555.1875,
+          "height": 72,
+          "left": 24,
+          "right": 351,
+          "top": 483.1875,
+          "width": 327,
+          "x": 24,
+          "y": 483.1875
+        },
+        "rect": {
+          "bottom": 405.1875,
+          "height": 24,
+          "left": 282.59375,
+          "right": 345,
+          "top": 381.1875,
+          "width": 62.40625,
+          "x": 282.59375,
+          "y": 381.1875
+        },
+        "text": "ぴったり",
+        "visibleRatio": 1
+      },
+      {
+        "aboveCue": true,
+        "inPad": false,
+        "kind": "cd-feedback p",
+        "pad": {
+          "bottom": 555.1875,
+          "height": 72,
+          "left": 24,
+          "right": 351,
+          "top": 483.1875,
+          "width": 327,
+          "x": 24,
+          "y": 483.1875
+        },
+        "rect": {
+          "bottom": 405.1875,
+          "height": 24,
+          "left": 282.59375,
+          "right": 345,
+          "top": 381.1875,
+          "width": 62.40625,
+          "x": 282.59375,
+          "y": 381.1875
+        },
+        "text": "ぴったり",
+        "visibleRatio": 1
+      },
+      {
+        "aboveCue": true,
+        "inPad": false,
+        "kind": "cd-feedback e",
+        "pad": {
+          "bottom": 555.1875,
+          "height": 72,
+          "left": 24,
+          "right": 351,
+          "top": 483.1875,
+          "width": 327,
+          "x": 24,
+          "y": 483.1875
+        },
+        "rect": {
+          "bottom": 405.1875,
+          "height": 24,
+          "left": 313.796875,
+          "right": 345,
+          "top": 381.1875,
+          "width": 31.203125,
+          "x": 313.796875,
+          "y": 381.1875
+        },
+        "text": "早い",
+        "visibleRatio": 1
+      },
+      {
+        "aboveCue": true,
+        "inPad": false,
+        "kind": "cd-feedback e",
+        "pad": {
+          "bottom": 555.1875,
+          "height": 72,
+          "left": 24,
+          "right": 351,
+          "top": 483.1875,
+          "width": 327,
+          "x": 24,
+          "y": 483.1875
+        },
+        "rect": {
+          "bottom": 405.1875,
+          "height": 24,
+          "left": 313.796875,
+          "right": 345,
+          "top": 381.1875,
+          "width": 31.203125,
+          "x": 313.796875,
+          "y": 381.1875
+        },
+        "text": "早い",
+        "visibleRatio": 1
+      },
+      {
+        "aboveCue": true,
+        "inPad": false,
+        "kind": "cd-feedback e",
+        "pad": {
+          "bottom": 555.1875,
+          "height": 72,
+          "left": 24,
+          "right": 351,
+          "top": 483.1875,
+          "width": 327,
+          "x": 24,
+          "y": 483.1875
+        },
+        "rect": {
+          "bottom": 405.1875,
+          "height": 24,
+          "left": 313.796875,
+          "right": 345,
+          "top": 381.1875,
+          "width": 31.203125,
+          "x": 313.796875,
+          "y": 381.1875
+        },
+        "text": "早い",
+        "visibleRatio": 1
+      },
+      {
+        "aboveCue": true,
+        "inPad": false,
+        "kind": "cd-feedback l",
+        "pad": {
+          "bottom": 555.1875,
+          "height": 72,
+          "left": 24,
+          "right": 351,
+          "top": 483.1875,
+          "width": 327,
+          "x": 24,
+          "y": 483.1875
+        },
+        "rect": {
+          "bottom": 405.1875,
+          "height": 24,
+          "left": 313.796875,
+          "right": 345,
+          "top": 381.1875,
+          "width": 31.203125,
+          "x": 313.796875,
+          "y": 381.1875
+        },
+        "text": "遅い",
+        "visibleRatio": 1
+      },
+      {
+        "aboveCue": true,
+        "inPad": false,
+        "kind": "cd-feedback l",
+        "pad": {
+          "bottom": 555.1875,
+          "height": 72,
+          "left": 24,
+          "right": 351,
+          "top": 483.1875,
+          "width": 327,
+          "x": 24,
+          "y": 483.1875
+        },
+        "rect": {
+          "bottom": 405.1875,
+          "height": 24,
+          "left": 313.796875,
+          "right": 345,
+          "top": 381.1875,
+          "width": 31.203125,
+          "x": 313.796875,
+          "y": 381.1875
+        },
+        "text": "遅い",
+        "visibleRatio": 1
+      }
+    ],
+    "boot": {
+      "errors": [],
+      "failed": [],
+      "loaded": 33,
+      "scripts": 33
+    },
+    "conduct": {
+      "beat": "3",
+      "combo": 0,
+      "count": 4,
+      "events": 11,
+      "from": 0,
+      "judge": {
+        "e": 1,
+        "g": 0,
+        "l": 1,
+        "p": 4
+      },
+      "level": 1.3865017361111112,
+      "meter": 4,
+      "period": 0.4011748402205452,
+      "phase": "play",
+      "taps": 6,
+      "to": 64
+    },
+    "errors": [],
+    "feedback": {
+      "animation": "none",
+      "count": 1,
+      "rect": {
+        "bottom": 405.1875,
+        "height": 24,
+        "left": 313.796875,
+        "right": 345,
+        "top": 381.1875,
+        "width": 31.203125,
+        "x": 313.796875,
+        "y": 381.1875
+      },
+      "text": "遅い"
+    },
+    "height": 667,
+    "members": 0.6864548486191779,
+    "msg": "ラインが光ったらタップ",
+    "pad": {
+      "bottom": 555.1875,
+      "height": 72,
+      "left": 24,
+      "right": 351,
+      "top": 483.1875,
+      "width": 327,
+      "x": 24,
+      "y": 483.1875
+    },
+    "recordings": [],
+    "records": 0.7712433410342783,
+    "scrollHeight": 667,
+    "scrollWidth": 375,
+    "stats": {
+      "bottom": 657,
+      "height": 45,
+      "left": 24,
+      "right": 351,
+      "top": 612,
+      "width": 327,
+      "x": 24,
+      "y": 612
+    },
+    "theme": "dark",
+    "width": 375
+  },
+  "darkTall": {
+    "audio": {
+      "banks": 41,
+      "ready": true,
+      "voices": [
+        "SampleVoice"
+      ]
+    },
+    "audit": [
+      {
+        "aboveCue": true,
+        "inPad": false,
+        "kind": "cd-feedback p",
+        "pad": {
+          "bottom": 555.1875,
+          "height": 72,
+          "left": 24,
+          "right": 351,
+          "top": 483.1875,
+          "width": 327,
+          "x": 24,
+          "y": 483.1875
+        },
+        "rect": {
+          "bottom": 405.1875,
+          "height": 24,
+          "left": 282.59375,
+          "right": 345,
+          "top": 381.1875,
+          "width": 62.40625,
+          "x": 282.59375,
+          "y": 381.1875
+        },
+        "text": "ぴったり",
+        "visibleRatio": 1
+      },
+      {
+        "aboveCue": true,
+        "inPad": false,
+        "kind": "cd-feedback p",
+        "pad": {
+          "bottom": 555.1875,
+          "height": 72,
+          "left": 24,
+          "right": 351,
+          "top": 483.1875,
+          "width": 327,
+          "x": 24,
+          "y": 483.1875
+        },
+        "rect": {
+          "bottom": 405.1875,
+          "height": 24,
+          "left": 282.59375,
+          "right": 345,
+          "top": 381.1875,
+          "width": 62.40625,
+          "x": 282.59375,
+          "y": 381.1875
+        },
+        "text": "ぴったり",
+        "visibleRatio": 1
+      },
+      {
+        "aboveCue": true,
+        "inPad": false,
+        "kind": "cd-feedback p",
+        "pad": {
+          "bottom": 555.1875,
+          "height": 72,
+          "left": 24,
+          "right": 351,
+          "top": 483.1875,
+          "width": 327,
+          "x": 24,
+          "y": 483.1875
+        },
+        "rect": {
+          "bottom": 405.1875,
+          "height": 24,
+          "left": 282.59375,
+          "right": 345,
+          "top": 381.1875,
+          "width": 62.40625,
+          "x": 282.59375,
+          "y": 381.1875
+        },
+        "text": "ぴったり",
+        "visibleRatio": 1
+      },
+      {
+        "aboveCue": true,
+        "inPad": false,
+        "kind": "cd-feedback p",
+        "pad": {
+          "bottom": 555.1875,
+          "height": 72,
+          "left": 24,
+          "right": 351,
+          "top": 483.1875,
+          "width": 327,
+          "x": 24,
+          "y": 483.1875
+        },
+        "rect": {
+          "bottom": 405.1875,
+          "height": 24,
+          "left": 282.59375,
+          "right": 345,
+          "top": 381.1875,
+          "width": 62.40625,
+          "x": 282.59375,
+          "y": 381.1875
+        },
+        "text": "ぴったり",
+        "visibleRatio": 1
+      },
+      {
+        "aboveCue": true,
+        "inPad": false,
+        "kind": "cd-feedback p",
+        "pad": {
+          "bottom": 555.1875,
+          "height": 72,
+          "left": 24,
+          "right": 351,
+          "top": 483.1875,
+          "width": 327,
+          "x": 24,
+          "y": 483.1875
+        },
+        "rect": {
+          "bottom": 405.1875,
+          "height": 24,
+          "left": 282.59375,
+          "right": 345,
+          "top": 381.1875,
+          "width": 62.40625,
+          "x": 282.59375,
+          "y": 381.1875
+        },
+        "text": "ぴったり",
+        "visibleRatio": 1
+      },
+      {
+        "aboveCue": true,
+        "inPad": false,
+        "kind": "cd-feedback p",
+        "pad": {
+          "bottom": 555.1875,
+          "height": 72,
+          "left": 24,
+          "right": 351,
+          "top": 483.1875,
+          "width": 327,
+          "x": 24,
+          "y": 483.1875
+        },
+        "rect": {
+          "bottom": 405.1875,
+          "height": 24,
+          "left": 282.59375,
+          "right": 345,
+          "top": 381.1875,
+          "width": 62.40625,
+          "x": 282.59375,
+          "y": 381.1875
+        },
+        "text": "ぴったり",
+        "visibleRatio": 1
+      },
+      {
+        "aboveCue": true,
+        "inPad": false,
+        "kind": "cd-feedback p",
+        "pad": {
+          "bottom": 555.1875,
+          "height": 72,
+          "left": 24,
+          "right": 351,
+          "top": 483.1875,
+          "width": 327,
+          "x": 24,
+          "y": 483.1875
+        },
+        "rect": {
+          "bottom": 405.1875,
+          "height": 24,
+          "left": 282.59375,
+          "right": 345,
+          "top": 381.1875,
+          "width": 62.40625,
+          "x": 282.59375,
+          "y": 381.1875
+        },
+        "text": "ぴったり",
+        "visibleRatio": 1
+      },
+      {
+        "aboveCue": true,
+        "inPad": false,
+        "kind": "cd-feedback e",
+        "pad": {
+          "bottom": 555.1875,
+          "height": 72,
+          "left": 24,
+          "right": 351,
+          "top": 483.1875,
+          "width": 327,
+          "x": 24,
+          "y": 483.1875
+        },
+        "rect": {
+          "bottom": 405.1875,
+          "height": 24,
+          "left": 313.796875,
+          "right": 345,
+          "top": 381.1875,
+          "width": 31.203125,
+          "x": 313.796875,
+          "y": 381.1875
+        },
+        "text": "早い",
+        "visibleRatio": 1
+      },
+      {
+        "aboveCue": true,
+        "inPad": false,
+        "kind": "cd-feedback e",
+        "pad": {
+          "bottom": 555.1875,
+          "height": 72,
+          "left": 24,
+          "right": 351,
+          "top": 483.1875,
+          "width": 327,
+          "x": 24,
+          "y": 483.1875
+        },
+        "rect": {
+          "bottom": 405.1875,
+          "height": 24,
+          "left": 313.796875,
+          "right": 345,
+          "top": 381.1875,
+          "width": 31.203125,
+          "x": 313.796875,
+          "y": 381.1875
+        },
+        "text": "早い",
+        "visibleRatio": 1
+      },
+      {
+        "aboveCue": true,
+        "inPad": false,
+        "kind": "cd-feedback e",
+        "pad": {
+          "bottom": 555.1875,
+          "height": 72,
+          "left": 24,
+          "right": 351,
+          "top": 483.1875,
+          "width": 327,
+          "x": 24,
+          "y": 483.1875
+        },
+        "rect": {
+          "bottom": 405.1875,
+          "height": 24,
+          "left": 313.796875,
+          "right": 345,
+          "top": 381.1875,
+          "width": 31.203125,
+          "x": 313.796875,
+          "y": 381.1875
+        },
+        "text": "早い",
+        "visibleRatio": 1
+      },
+      {
+        "aboveCue": true,
+        "inPad": false,
+        "kind": "cd-feedback l",
+        "pad": {
+          "bottom": 555.1875,
+          "height": 72,
+          "left": 24,
+          "right": 351,
+          "top": 483.1875,
+          "width": 327,
+          "x": 24,
+          "y": 483.1875
+        },
+        "rect": {
+          "bottom": 405.1875,
+          "height": 24,
+          "left": 313.796875,
+          "right": 345,
+          "top": 381.1875,
+          "width": 31.203125,
+          "x": 313.796875,
+          "y": 381.1875
+        },
+        "text": "遅い",
+        "visibleRatio": 1
+      },
+      {
+        "aboveCue": true,
+        "inPad": false,
+        "kind": "cd-feedback l",
+        "pad": {
+          "bottom": 555.1875,
+          "height": 72,
+          "left": 24,
+          "right": 351,
+          "top": 483.1875,
+          "width": 327,
+          "x": 24,
+          "y": 483.1875
+        },
+        "rect": {
+          "bottom": 405.1875,
+          "height": 24,
+          "left": 313.796875,
+          "right": 345,
+          "top": 381.1875,
+          "width": 31.203125,
+          "x": 313.796875,
+          "y": 381.1875
+        },
+        "text": "遅い",
+        "visibleRatio": 1
+      },
+      {
+        "aboveCue": true,
+        "inPad": false,
+        "kind": "cd-feedback p",
+        "pad": {
+          "bottom": 650.9921875,
+          "height": 80,
+          "left": 24,
+          "right": 351,
+          "top": 570.9921875,
+          "width": 327,
+          "x": 24,
+          "y": 570.9921875
+        },
+        "rect": {
+          "bottom": 468.9921875,
+          "height": 24,
+          "left": 282.59375,
+          "right": 345,
+          "top": 444.9921875,
+          "width": 62.40625,
+          "x": 282.59375,
+          "y": 444.9921875
+        },
+        "text": "ぴったり",
+        "visibleRatio": 1
+      }
+    ],
+    "boot": {
+      "errors": [],
+      "failed": [],
+      "loaded": 33,
+      "scripts": 33
+    },
+    "conduct": {
+      "beat": "1",
+      "combo": 1,
+      "count": 4,
+      "events": 13,
+      "from": 0,
+      "judge": {
+        "e": 1,
+        "g": 0,
+        "l": 1,
+        "p": 5
+      },
+      "level": 0.975,
+      "meter": 4,
+      "period": 0.4011748402205452,
+      "phase": "play",
+      "taps": 7,
+      "to": 64
+    },
+    "errors": [],
+    "feedback": {
+      "animation": "none",
+      "count": 1,
+      "rect": {
+        "bottom": 468.9921875,
+        "height": 24,
+        "left": 282.59375,
+        "right": 345,
+        "top": 444.9921875,
+        "width": 62.40625,
+        "x": 282.59375,
+        "y": 444.9921875
+      },
+      "text": "ぴったり"
+    },
+    "height": 812,
+    "members": 0.6864548486191779,
+    "msg": "ラインが光ったらタップ",
+    "pad": {
+      "bottom": 650.9921875,
+      "height": 80,
+      "left": 24,
+      "right": 351,
+      "top": 570.9921875,
+      "width": 327,
+      "x": 24,
+      "y": 570.9921875
+    },
+    "recordings": [],
+    "records": 0.7712433410342783,
+    "scrollHeight": 812,
+    "scrollWidth": 375,
+    "stats": {
+      "bottom": 794,
+      "height": 51,
+      "left": 24,
+      "right": 351,
+      "top": 743,
+      "width": 327,
+      "x": 24,
+      "y": 743
+    },
+    "theme": "dark",
+    "width": 375
+  },
+  "readyFinal": {
+    "audio": {
+      "banks": 41,
+      "ready": true,
+      "voices": []
+    },
+    "audit": [],
+    "boot": {
+      "errors": [],
+      "failed": [],
+      "loaded": 33,
+      "scripts": 33
+    },
+    "conduct": {
+      "beat": "1",
+      "combo": 0,
+      "count": 0,
+      "events": 0,
+      "from": 0,
+      "judge": {
+        "e": 0,
+        "g": 0,
+        "l": 0,
+        "p": 0
+      },
+      "level": 1,
+      "meter": 4,
+      "phase": "count",
+      "taps": 0,
+      "to": 64
+    },
+    "errors": [],
+    "feedback": {
+      "animation": "none",
+      "count": 1,
+      "rect": {
+        "bottom": 0,
+        "height": 0,
+        "left": 0,
+        "right": 0,
+        "top": 0,
+        "width": 0,
+        "x": 0,
+        "y": 0
+      },
+      "text": ""
+    },
+    "height": 812,
+    "members": 0.6864548486191779,
+    "msg": "まず4回、光がラインに届いたらタップ",
+    "pad": {
+      "bottom": 650.9921875,
+      "height": 80,
+      "left": 24,
+      "right": 351,
+      "top": 570.9921875,
+      "width": 327,
+      "x": 24,
+      "y": 570.9921875
+    },
+    "recordings": [],
+    "records": 0.7712433410342783,
+    "scrollHeight": 812,
+    "scrollWidth": 375,
+    "stats": {
+      "bottom": 794,
+      "height": 51,
+      "left": 24,
+      "right": 351,
+      "top": 743,
+      "width": 327,
+      "x": 24,
+      "y": 743
+    },
+    "theme": "light",
+    "width": 375
+  },
+  "lightCompact": {
+    "audio": {
+      "banks": 41,
+      "ready": true,
+      "voices": [
+        "SampleVoice"
+      ]
+    },
+    "audit": [
+      {
+        "aboveCue": true,
+        "inPad": false,
+        "kind": "cd-feedback p",
+        "pad": {
+          "bottom": 650.9921875,
+          "height": 80,
+          "left": 24,
+          "right": 351,
+          "top": 570.9921875,
+          "width": 327,
+          "x": 24,
+          "y": 570.9921875
+        },
+        "rect": {
+          "bottom": 468.9921875,
+          "height": 24,
+          "left": 282.59375,
+          "right": 345,
+          "top": 444.9921875,
+          "width": 62.40625,
+          "x": 282.59375,
+          "y": 444.9921875
+        },
+        "text": "ぴったり",
+        "visibleRatio": 1
+      },
+      {
+        "aboveCue": true,
+        "inPad": false,
+        "kind": "cd-feedback p",
+        "pad": {
+          "bottom": 650.9921875,
+          "height": 80,
+          "left": 24,
+          "right": 351,
+          "top": 570.9921875,
+          "width": 327,
+          "x": 24,
+          "y": 570.9921875
+        },
+        "rect": {
+          "bottom": 468.9921875,
+          "height": 24,
+          "left": 282.59375,
+          "right": 345,
+          "top": 444.9921875,
+          "width": 62.40625,
+          "x": 282.59375,
+          "y": 444.9921875
+        },
+        "text": "ぴったり",
+        "visibleRatio": 1
+      },
+      {
+        "aboveCue": true,
+        "inPad": false,
+        "kind": "cd-feedback p",
+        "pad": {
+          "bottom": 650.9921875,
+          "height": 80,
+          "left": 24,
+          "right": 351,
+          "top": 570.9921875,
+          "width": 327,
+          "x": 24,
+          "y": 570.9921875
+        },
+        "rect": {
+          "bottom": 468.9921875,
+          "height": 24,
+          "left": 282.59375,
+          "right": 345,
+          "top": 444.9921875,
+          "width": 62.40625,
+          "x": 282.59375,
+          "y": 444.9921875
+        },
+        "text": "ぴったり",
+        "visibleRatio": 1
+      },
+      {
+        "aboveCue": true,
+        "inPad": false,
+        "kind": "cd-feedback p",
+        "pad": {
+          "bottom": 650.9921875,
+          "height": 80,
+          "left": 24,
+          "right": 351,
+          "top": 570.9921875,
+          "width": 327,
+          "x": 24,
+          "y": 570.9921875
+        },
+        "rect": {
+          "bottom": 468.9921875,
+          "height": 24,
+          "left": 282.59375,
+          "right": 345,
+          "top": 444.9921875,
+          "width": 62.40625,
+          "x": 282.59375,
+          "y": 444.9921875
+        },
+        "text": "ぴったり",
+        "visibleRatio": 1
+      },
+      {
+        "aboveCue": true,
+        "inPad": false,
+        "kind": "cd-feedback p",
+        "pad": {
+          "bottom": 650.9921875,
+          "height": 80,
+          "left": 24,
+          "right": 351,
+          "top": 570.9921875,
+          "width": 327,
+          "x": 24,
+          "y": 570.9921875
+        },
+        "rect": {
+          "bottom": 468.9921875,
+          "height": 24,
+          "left": 282.59375,
+          "right": 345,
+          "top": 444.9921875,
+          "width": 62.40625,
+          "x": 282.59375,
+          "y": 444.9921875
+        },
+        "text": "ぴったり",
+        "visibleRatio": 1
+      },
+      {
+        "aboveCue": true,
+        "inPad": false,
+        "kind": "cd-feedback p",
+        "pad": {
+          "bottom": 650.9921875,
+          "height": 80,
+          "left": 24,
+          "right": 351,
+          "top": 570.9921875,
+          "width": 327,
+          "x": 24,
+          "y": 570.9921875
+        },
+        "rect": {
+          "bottom": 468.9921875,
+          "height": 24,
+          "left": 282.59375,
+          "right": 345,
+          "top": 444.9921875,
+          "width": 62.40625,
+          "x": 282.59375,
+          "y": 444.9921875
+        },
+        "text": "ぴったり",
+        "visibleRatio": 1
+      },
+      {
+        "aboveCue": true,
+        "inPad": false,
+        "kind": "cd-feedback p",
+        "pad": {
+          "bottom": 650.9921875,
+          "height": 80,
+          "left": 24,
+          "right": 351,
+          "top": 570.9921875,
+          "width": 327,
+          "x": 24,
+          "y": 570.9921875
+        },
+        "rect": {
+          "bottom": 468.9921875,
+          "height": 24,
+          "left": 282.59375,
+          "right": 345,
+          "top": 444.9921875,
+          "width": 62.40625,
+          "x": 282.59375,
+          "y": 444.9921875
+        },
+        "text": "ぴったり",
+        "visibleRatio": 1
+      },
+      {
+        "aboveCue": true,
+        "inPad": false,
+        "kind": "cd-feedback p",
+        "pad": {
+          "bottom": 555.1875,
+          "height": 72,
+          "left": 24,
+          "right": 351,
+          "top": 483.1875,
+          "width": 327,
+          "x": 24,
+          "y": 483.1875
+        },
+        "rect": {
+          "bottom": 405.1875,
+          "height": 24,
+          "left": 282.59375,
+          "right": 345,
+          "top": 381.1875,
+          "width": 62.40625,
+          "x": 282.59375,
+          "y": 381.1875
+        },
+        "text": "ぴったり",
+        "visibleRatio": 1
+      },
+      {
+        "aboveCue": true,
+        "inPad": false,
+        "kind": "cd-feedback e",
+        "pad": {
+          "bottom": 555.1875,
+          "height": 72,
+          "left": 24,
+          "right": 351,
+          "top": 483.1875,
+          "width": 327,
+          "x": 24,
+          "y": 483.1875
+        },
+        "rect": {
+          "bottom": 405.1875,
+          "height": 24,
+          "left": 313.796875,
+          "right": 345,
+          "top": 381.1875,
+          "width": 31.203125,
+          "x": 313.796875,
+          "y": 381.1875
+        },
+        "text": "早い",
+        "visibleRatio": 1
+      }
+    ],
+    "boot": {
+      "errors": [],
+      "failed": [],
+      "loaded": 33,
+      "scripts": 33
+    },
+    "conduct": {
+      "beat": "1",
+      "combo": 0,
+      "count": 4,
+      "events": 9,
+      "from": 0,
+      "judge": {
+        "e": 1,
+        "g": 0,
+        "l": 0,
+        "p": 4
+      },
+      "level": 0.975,
+      "meter": 4,
+      "period": 0.35951235908201157,
+      "phase": "play",
+      "taps": 5,
+      "to": 64
+    },
+    "errors": [],
+    "feedback": {
+      "animation": "none",
+      "count": 1,
+      "rect": {
+        "bottom": 405.1875,
+        "height": 24,
+        "left": 313.796875,
+        "right": 345,
+        "top": 381.1875,
+        "width": 31.203125,
+        "x": 313.796875,
+        "y": 381.1875
+      },
+      "text": "早い"
+    },
+    "height": 667,
+    "members": 0.6864548486191779,
+    "msg": "光がラインに届いたらタップ",
+    "pad": {
+      "bottom": 555.1875,
+      "height": 72,
+      "left": 24,
+      "right": 351,
+      "top": 483.1875,
+      "width": 327,
+      "x": 24,
+      "y": 483.1875
+    },
+    "recordings": [],
+    "records": 0.7712433410342783,
+    "scrollHeight": 667,
+    "scrollWidth": 375,
+    "stats": {
+      "bottom": 657,
+      "height": 45,
+      "left": 24,
+      "right": 351,
+      "top": 612,
+      "width": 327,
+      "x": 24,
+      "y": 612
+    },
+    "theme": "light",
+    "width": 375
+  },
+  "finishedFinal": {
+    "audio": {
+      "banks": 41,
+      "ready": true,
+      "voices": []
+    },
+    "audit": [
+      {
+        "aboveCue": true,
+        "inPad": false,
+        "kind": "cd-feedback p",
+        "pad": {
+          "bottom": 650.9921875,
+          "height": 80,
+          "left": 24,
+          "right": 351,
+          "top": 570.9921875,
+          "width": 327,
+          "x": 24,
+          "y": 570.9921875
+        },
+        "rect": {
+          "bottom": 468.9921875,
+          "height": 24,
+          "left": 282.59375,
+          "right": 345,
+          "top": 444.9921875,
+          "width": 62.40625,
+          "x": 282.59375,
+          "y": 444.9921875
+        },
+        "text": "ぴったり",
+        "visibleRatio": 1
+      },
+      {
+        "aboveCue": true,
+        "inPad": false,
+        "kind": "cd-feedback p",
+        "pad": {
+          "bottom": 650.9921875,
+          "height": 80,
+          "left": 24,
+          "right": 351,
+          "top": 570.9921875,
+          "width": 327,
+          "x": 24,
+          "y": 570.9921875
+        },
+        "rect": {
+          "bottom": 468.9921875,
+          "height": 24,
+          "left": 282.59375,
+          "right": 345,
+          "top": 444.9921875,
+          "width": 62.40625,
+          "x": 282.59375,
+          "y": 444.9921875
+        },
+        "text": "ぴったり",
+        "visibleRatio": 1
+      },
+      {
+        "aboveCue": true,
+        "inPad": false,
+        "kind": "cd-feedback p",
+        "pad": {
+          "bottom": 650.9921875,
+          "height": 80,
+          "left": 24,
+          "right": 351,
+          "top": 570.9921875,
+          "width": 327,
+          "x": 24,
+          "y": 570.9921875
+        },
+        "rect": {
+          "bottom": 468.9921875,
+          "height": 24,
+          "left": 282.59375,
+          "right": 345,
+          "top": 444.9921875,
+          "width": 62.40625,
+          "x": 282.59375,
+          "y": 444.9921875
+        },
+        "text": "ぴったり",
+        "visibleRatio": 1
+      },
+      {
+        "aboveCue": true,
+        "inPad": false,
+        "kind": "cd-feedback p",
+        "pad": {
+          "bottom": 650.9921875,
+          "height": 80,
+          "left": 24,
+          "right": 351,
+          "top": 570.9921875,
+          "width": 327,
+          "x": 24,
+          "y": 570.9921875
+        },
+        "rect": {
+          "bottom": 468.9921875,
+          "height": 24,
+          "left": 282.59375,
+          "right": 345,
+          "top": 444.9921875,
+          "width": 62.40625,
+          "x": 282.59375,
+          "y": 444.9921875
+        },
+        "text": "ぴったり",
+        "visibleRatio": 1
+      },
+      {
+        "aboveCue": true,
+        "inPad": false,
+        "kind": "cd-feedback p",
+        "pad": {
+          "bottom": 650.9921875,
+          "height": 80,
+          "left": 24,
+          "right": 351,
+          "top": 570.9921875,
+          "width": 327,
+          "x": 24,
+          "y": 570.9921875
+        },
+        "rect": {
+          "bottom": 468.9921875,
+          "height": 24,
+          "left": 282.59375,
+          "right": 345,
+          "top": 444.9921875,
+          "width": 62.40625,
+          "x": 282.59375,
+          "y": 444.9921875
+        },
+        "text": "ぴったり",
+        "visibleRatio": 1
+      },
+      {
+        "aboveCue": true,
+        "inPad": false,
+        "kind": "cd-feedback p",
+        "pad": {
+          "bottom": 650.9921875,
+          "height": 80,
+          "left": 24,
+          "right": 351,
+          "top": 570.9921875,
+          "width": 327,
+          "x": 24,
+          "y": 570.9921875
+        },
+        "rect": {
+          "bottom": 468.9921875,
+          "height": 24,
+          "left": 282.59375,
+          "right": 345,
+          "top": 444.9921875,
+          "width": 62.40625,
+          "x": 282.59375,
+          "y": 444.9921875
+        },
+        "text": "ぴったり",
+        "visibleRatio": 1
+      },
+      {
+        "aboveCue": true,
+        "inPad": false,
+        "kind": "cd-feedback p",
+        "pad": {
+          "bottom": 650.9921875,
+          "height": 80,
+          "left": 24,
+          "right": 351,
+          "top": 570.9921875,
+          "width": 327,
+          "x": 24,
+          "y": 570.9921875
+        },
+        "rect": {
+          "bottom": 468.9921875,
+          "height": 24,
+          "left": 282.59375,
+          "right": 345,
+          "top": 444.9921875,
+          "width": 62.40625,
+          "x": 282.59375,
+          "y": 444.9921875
+        },
+        "text": "ぴったり",
+        "visibleRatio": 1
+      },
+      {
+        "aboveCue": true,
+        "inPad": false,
+        "kind": "cd-feedback p",
+        "pad": {
+          "bottom": 555.1875,
+          "height": 72,
+          "left": 24,
+          "right": 351,
+          "top": 483.1875,
+          "width": 327,
+          "x": 24,
+          "y": 483.1875
+        },
+        "rect": {
+          "bottom": 405.1875,
+          "height": 24,
+          "left": 282.59375,
+          "right": 345,
+          "top": 381.1875,
+          "width": 62.40625,
+          "x": 282.59375,
+          "y": 381.1875
+        },
+        "text": "ぴったり",
+        "visibleRatio": 1
+      },
+      {
+        "aboveCue": true,
+        "inPad": false,
+        "kind": "cd-feedback e",
+        "pad": {
+          "bottom": 555.1875,
+          "height": 72,
+          "left": 24,
+          "right": 351,
+          "top": 483.1875,
+          "width": 327,
+          "x": 24,
+          "y": 483.1875
+        },
+        "rect": {
+          "bottom": 405.1875,
+          "height": 24,
+          "left": 313.796875,
+          "right": 345,
+          "top": 381.1875,
+          "width": 31.203125,
+          "x": 313.796875,
+          "y": 381.1875
+        },
+        "text": "早い",
+        "visibleRatio": 1
+      },
+      {
+        "aboveCue": true,
+        "inPad": false,
+        "kind": "cd-feedback e",
+        "pad": {
+          "bottom": 555.1875,
+          "height": 72,
+          "left": 24,
+          "right": 351,
+          "top": 483.1875,
+          "width": 327,
+          "x": 24,
+          "y": 483.1875
+        },
+        "rect": {
+          "bottom": 405.1875,
+          "height": 24,
+          "left": 313.796875,
+          "right": 345,
+          "top": 381.1875,
+          "width": 31.203125,
+          "x": 313.796875,
+          "y": 381.1875
+        },
+        "text": "早い",
+        "visibleRatio": 1
+      }
+    ],
+    "boot": {
+      "errors": [],
+      "failed": [],
+      "loaded": 33,
+      "scripts": 33
+    },
+    "conduct": {
+      "beat": "4",
+      "combo": 0,
+      "count": 4,
+      "events": 9,
+      "from": 0,
+      "judge": {
+        "e": 1,
+        "g": 0,
+        "l": 0,
+        "p": 4
+      },
+      "level": 0.975,
+      "meter": 4,
+      "period": 0.35951235908201157,
+      "phase": "done",
+      "taps": 5,
+      "to": 64
+    },
+    "errors": [],
+    "feedback": {
+      "animation": "none",
+      "count": 1,
+      "rect": {
+        "bottom": 0,
+        "height": 0,
+        "left": 0,
+        "right": 0,
+        "top": 0,
+        "width": 0,
+        "x": 0,
+        "y": 0
+      },
+      "text": ""
+    },
+    "height": 667,
+    "members": 0.6864548486191779,
+    "msg": "",
+    "pad": {
+      "bottom": 0,
+      "height": 0,
+      "left": 0,
+      "right": 0,
+      "top": 0,
+      "width": 0,
+      "x": 0,
+      "y": 0
+    },
+    "recordings": [
+      {
+        "id": "r2028-10-0-395491",
+        "label": "あなたの指揮：《新世界より》第2楽章（6月 第3週）"
+      }
+    ],
+    "records": 0.3119980888441205,
+    "scrollHeight": 667,
+    "scrollWidth": 375,
+    "stats": {
+      "bottom": 0,
+      "height": 0,
+      "left": 0,
+      "right": 0,
+      "top": 0,
+      "width": 0,
+      "x": 0,
+      "y": 0
+    },
+    "theme": "light",
+    "width": 375
+  },
+  "console": []
+}

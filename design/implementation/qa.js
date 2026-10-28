@@ -39,6 +39,21 @@ if(q.has('timingAudit')){
   }
  }).observe($('#cdPattern'),{subtree:true,childList:true,attributes:true,attributeFilter:['transform']});
 }
+// 確認専用。判定の文字が操作面の外へ切れていないか、入力ごとの位置を残す。
+const feedbackAudit=[];
+if(q.has('judgeAudit'))new MutationObserver(records=>{
+ if(!records.some(r=>r.type==='childList'))return;
+ const el=$('#cdFeedback')||$('#cdPad .cd-judge');
+ if(!el?.textContent)return;
+ const sample=()=>{
+  if(!el.isConnected||!el.textContent)return;
+  const rect=el.getBoundingClientRect(),pad=$('#cdPad').getBoundingClientRect();
+  const inPad=!!el.closest('#cdPad'),visibleHeight=inPad?Math.max(0,Math.min(rect.bottom,pad.bottom)-Math.max(rect.top,pad.top)):rect.height;
+  feedbackAudit.push({text:el.textContent,kind:el.className,rect:rect.toJSON(),pad:pad.toJSON(),inPad,aboveCue:rect.bottom<=$('#cdPattern').getBoundingClientRect().top,visibleRatio:rect.height?visibleHeight/rect.height:0});
+  record();
+ };
+ sample();setTimeout(sample,200);
+}).observe($('#conduct'),{subtree:true,childList:true});
 document.documentElement.dataset.theme=q.get('theme')==='dark'?'dark':'light';
 U.sfx=false;U.fxMode='off';FX.q=[];clearTimeout(FX.timer);FX.on=false;$('#fx').hidden=true;
 let report,releaseSamples,performanceMemo,releaseLibraryExport;
@@ -75,6 +90,7 @@ function record(){
  report.listeningMix=E.pb?{nodes:E.pb.listenOutputs.length,live:E.pb.listenLive,gain:E.pb.listenOutputs.map(n=>n.gain.value)}:null;
  report.hallExp=S.hallExp;
  report.conduct={period:CD.clock?.P,level:CD.level,beat:$('#cdPattern').dataset.nextBeat,phase:CD.phase,count:CD.count.length,taps:CD.clock?.taps.length||0,judge:CD.judge?{...CD.judge}:null,combo:CD.combo,events:CD.clock?.ev.length||0,meter:CD.perf?.meter,from:CD.perf?.from,to:CD.perf?.to};
+ if(q.has('judgeAudit'))report.conductFeedback=feedbackAudit.slice(-24);
  if(q.has('timingAudit'))report.conductTiming={...timingAudit,inputs:timingAudit.inputs.map(x=>({...x}))};
  const yearNext=$('#week .year-actions .btn')?.getBoundingClientRect();report.yearNext=yearNext?{top:yearNext.top,bottom:yearNext.bottom,height:yearNext.height}:null;
  report.yearGrowth=Array.from(document.querySelectorAll('[data-year-growth]')).map(el=>({id:el.dataset.yearGrowth,name:el.querySelector('b').textContent,ranks:el.querySelector('.yr-grow-ranks').getAttribute('aria-label')}));

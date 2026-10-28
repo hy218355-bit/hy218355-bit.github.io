@@ -24,8 +24,9 @@ function openConduct(stage = null){
   CD.stageMembers = stageMembers(CD.perf);
   // 舞台にいる部員（本番ならオーディションで選んだメンバー）を、指揮台から見えるように描く
   CD.who = new Set([...CD.perf.notes, ...CD.perf.hits].map(n => n.mid));
-  CD.phase = 'count'; CD.count = []; CD.lv = []; CD.level = 1; CD.clock = null; CD.rec = null; CD.lastTap = 0; CD.idleHint = false; CD.beatShown = -1; CD.tmHint = null;
+  CD.phase = 'count'; CD.count = []; CD.lv = []; CD.level = 1; CD.clock = null; CD.rec = null; CD.lastTap = 0; CD.idleHint = false; CD.beatShown = -1; CD.tmHint = null; CD.tapUntil = 0;
   CD.judge = {p: 0, g: 0, e: 0, l: 0}; CD.combo = 0; CD.best = 0;
+  cdClearJudge();
   $('#cdCombo').textContent = '';
   const pc = PIECES[CD.perf.pieceId];
   $('#cdTitle').textContent = pc.title;
@@ -90,6 +91,7 @@ function closeConduct(){
   // 見ているだけの本番は、止めて結果へ（入場の途中や、課題曲と自由曲のあいだなら、鳴っていないので、そのまま結果へ）
   if(CD.phase === 'watch'){ const idle = !!CD.intro || !U.playing; stopPlay(); closeWatch(); if(idle) reveal(); return; }
   cancelAnimationFrame(CD.raf);
+  cdClearJudge();
   const playing = CD.phase === 'play';
   CD.phase = 'idle';
   if(playing) stopPlay();
@@ -133,7 +135,7 @@ function cdTap(e){
   const pad = $('#cdPad').getBoundingClientRect();
   const y = e.clientY != null ? e.clientY : pad.top + pad.height / 2;
   const level = clamp(0.5 + 0.95 * (1 - (y - pad.top) / pad.height), 0.5, 1.45);
-  cdRipple(e, pad);
+  cdPress();
   $('#cdLevel').style.top = `${(1.45-level)/.95*100}%`;
   if(CD.phase === 'count'){
     CD.count.push(tapped);
@@ -153,6 +155,7 @@ function cdTap(e){
   }
   CD.clock.tap(tapped);
   cdJudge(e, pad, CD.clock.taps[CD.clock.taps.length - 1].off);
+  if(CD.idleHint)cdMsg(cdCueHint());
   CD.idleHint = false;
   $('#cdTempo').textContent = Math.round(60 / CD.clock.P);
   if(Math.abs(level - CD.level) > 0.04){
@@ -161,29 +164,26 @@ function cdTap(e){
     CD.lv.push([+(now - CD.clock.t0).toFixed(3), +level.toFixed(2)]);
   }
 }
-function cdRipple(e, pad){
-  const r = document.createElement('span');
-  r.className = 'cd-ripple';
-  r.style.left = `${(e.clientX ?? pad.left + pad.width / 2) - pad.left}px`;
-  r.style.top = `${(e.clientY ?? pad.top + pad.height / 2) - pad.top}px`;
-  $('#cdPad').appendChild(r);
-  setTimeout(() => r.remove(), 600);
+function cdPress(){
+  // 押した反応は面の色だけ。合図や文字を隠す円を毎回作らない。
+  CD.tapUntil=E.ac.currentTime+.12;
 }
 
 // 1打ごとの判定：部員がちょうどその拍にいたか（叩くのが早いとテンポが前へ、遅いと後ろへ引っぱられる）
 const CD_JUDGE = {p: 'ぴったり', g: 'いい感じ', e: '早い', l: '遅い'};
+function cdClearJudge(){
+  const el=$('#cdFeedback');
+  el.textContent='';el.className='cd-feedback';
+}
 function cdJudge(e, pad, off){
   const a = Math.abs(off), kind = a <= 0.07 ? 'p' : a <= 0.15 ? 'g' : off < 0 ? 'e' : 'l';
   CD.judge[kind]++;
   CD.combo = kind === 'p' || kind === 'g' ? CD.combo + 1 : 0;
   CD.best = Math.max(CD.best, CD.combo);
-  const el = document.createElement('span');
-  el.className = 'cd-judge ' + kind;
+  // 同じ場所に文字を置き、操作面や指で隠れず、速い拍でも重ならないようにする。
+  const el = $('#cdFeedback');
+  el.className = 'cd-feedback ' + kind;
   el.textContent = CD_JUDGE[kind];
-  el.style.left = `${(e.clientX ?? pad.left + pad.width / 2) - pad.left}px`;
-  el.style.top = `${(e.clientY ?? pad.top + pad.height / 2) - pad.top}px`;
-  $('#cdPad').appendChild(el);
-  setTimeout(() => el.remove(), 700);
   $('#cdCombo').textContent = CD.combo >= 4 ? `${CD.combo}連続` : '';
 }
 
@@ -221,6 +221,7 @@ function cdDrawCue(now){
   n.svg.dataset.calm=String(calm);n.svg.dataset.mode=CD.phase;n.svg.dataset.nextBeat=q.next[0].beat;
   n.now.classList.toggle('hit',hit);
   n.pad.classList.toggle('on-beat',hit);
+  n.pad.classList.toggle('is-pressed',now<CD.tapUntil);
   for(let i=0;i<2;i++){
     const el=n.next[i],next=q.next[i];
     el.style.visibility=next.show?'visible':'hidden';
@@ -253,6 +254,7 @@ function cdFrame(){
   }
   if(E.ac.currentTime - (CD.clock.last?.t ?? CD.clock.t0) > 4 * CD.clock.P && !CD.idleHint){
     CD.idleHint = true;
+    cdClearJudge();
     cdMsg('タップが止まっても、部員は最後のテンポで吹き続ける。');
   }
 }
@@ -261,6 +263,7 @@ function cdFrame(){
 function cdFinish(natural){
   if(CD.phase !== 'play') return;
   CD.phase = 'done';
+  cdClearJudge();
   if(!natural){
     $('#cdPad').hidden = true; cdMsg('');
     $('#cdResult').hidden = false;
