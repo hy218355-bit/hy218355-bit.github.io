@@ -92,7 +92,7 @@ final class GameViewController: UIViewController {
             let url = dir.appendingPathComponent(safe)
             try? FileManager.default.removeItem(at: url)
             FileManager.default.createFile(atPath: url.path, contents: nil)
-            guard let handle = try? FileHandle(forWritingTo: url) else { fileDone(false); return }
+            guard let handle = try? FileHandle(forWritingTo: url) else { fileDone(false, id: id); return }
             incoming = (id, url, handle)
         }
         guard let file = incoming, file.id == id else { return }
@@ -102,18 +102,18 @@ final class GameViewController: UIViewController {
         incoming = nil
         // 録音（WAV）は m4a にしてから、それ以外（セーブの書き出しなど）はそのまま共有シートへ
         if file.url.pathExtension.lowercased() == "wav" {
-            exportM4A(wav: file.url, title: msg["title"] as? String, artist: msg["artist"] as? String, album: msg["album"] as? String)
+            exportM4A(wav: file.url, id: id, title: msg["title"] as? String, artist: msg["artist"] as? String, album: msg["album"] as? String)
         } else {
-            deliver(file.url)
+            deliver(file.url, id: id)
         }
     }
 
     /// AAC（m4a）にすると WAV の5分の1ほどの大きさになる。題名・学校名・年度も書き込む
-    private func exportM4A(wav: URL, title: String?, artist: String?, album: String?) {
+    private func exportM4A(wav: URL, id: String, title: String?, artist: String?, album: String?) {
         let out = wav.deletingPathExtension().appendingPathExtension("m4a")
         try? FileManager.default.removeItem(at: out)
         guard let session = AVAssetExportSession(asset: AVURLAsset(url: wav), presetName: AVAssetExportPresetAppleM4A) else {
-            deliver(wav); return
+            deliver(wav, id: id); return
         }
         session.outputURL = out
         session.outputFileType = .m4a
@@ -130,17 +130,17 @@ final class GameViewController: UIViewController {
             let ok = session.status == .completed
             DispatchQueue.main.async {
                 if ok { try? FileManager.default.removeItem(at: wav) }
-                self?.deliver(ok ? out : wav)
+                self?.deliver(ok ? out : wav, id: id)
             }
         }
     }
 
-    private func deliver(_ url: URL) {
+    private func deliver(_ url: URL, id: String) {
         if selfTest {
             // 動作確認：共有シートは出さず、できたファイルの大きさを記録する
             let size = (try? FileManager.default.attributesOfItem(atPath: url.path)[.size] as? Int) ?? 0
             Self.output("FILE \(url.pathExtension) \(size) bytes")
-            fileDone(size > 0)
+            fileDone(size > 0, id: id)
             return
         }
         let share = UIActivityViewController(activityItems: [url], applicationActivities: nil)
@@ -149,12 +149,15 @@ final class GameViewController: UIViewController {
             pop.sourceRect = CGRect(x: view.bounds.midX, y: view.bounds.maxY - 120, width: 1, height: 1)
             pop.permittedArrowDirections = []
         }
-        share.completionWithItemsHandler = { [weak self] _, _, _, _ in self?.fileDone(true) }
+        share.completionWithItemsHandler = { [weak self] _, _, _, _ in self?.fileDone(true, id: id) }
         present(share, animated: true)
     }
 
-    private func fileDone(_ ok: Bool) {
-        webView.evaluateJavaScript("window.onNativeFileDone && window.onNativeFileDone(\(ok))", completionHandler: nil)
+    private func fileDone(_ ok: Bool, id: String) {
+        // 別のファイルの古い完了通知で、次の保存を終わらせない。
+        guard let data = try? JSONSerialization.data(withJSONObject: [ok, id] as [Any]),
+              let args = String(data: data, encoding: .utf8) else { return }
+        webView.evaluateJavaScript("window.onNativeFileDone && window.onNativeFileDone.apply(null, \(args))", completionHandler: nil)
     }
 
     private static func output(_ line: String) {

@@ -928,7 +928,8 @@ button.wr-person:focus-visible{outline:2px solid var(--brass);outline-offset:2px
 .cd-result h3{font-family:var(--f-display);font-weight:400;font-size:24px}
 .cd-num{display:flex;gap:24px}.cd-num span{display:grid;font-size:13px;color:var(--ink-soft)}.cd-num b{font-family:var(--f-lcd);font-size:30px;color:var(--ink)}
 .toast{position:fixed;left:50%;transform:translateX(-50%);bottom:calc(24px + env(safe-area-inset-bottom,0px));z-index:90;display:flex;align-items:center;gap:12px;
-  max-width:calc(100% - 32px);padding:10px 12px 10px 16px;border-radius:14px;background:var(--ink);color:var(--paper);font-size:14px;box-shadow:0 8px 24px var(--shadow)}
+  width:max-content;max-width:calc(100% - 32px);padding:10px 12px 10px 16px;border-radius:14px;background:var(--ink);color:var(--paper);font-size:14px;box-shadow:0 8px 24px var(--shadow)}
+.toast>span{min-width:0;overflow-wrap:anywhere}.toast>button.btn{flex-shrink:0;min-height:44px}
 .toast[hidden]{display:none}
 .tabbed .toast{bottom:calc(126px + env(safe-area-inset-bottom,0px))}
 /* 部の歴史・最初の代の卒業 */
@@ -1508,6 +1509,11 @@ button.wr-person:focus-visible{outline:2px solid var(--brass);outline-offset:2px
 .recording-meta{display:flex;align-items:center;flex-wrap:wrap;gap:5px 8px;min-width:0}.recording-meta>small{font-size:10px;color:var(--ink-soft);overflow-wrap:anywhere}.recording-faces{display:flex;gap:3px;margin-left:auto}.recording-faces>.member-face{border-radius:50%}
 .recording-state{display:grid;place-items:center;color:var(--brass)}.recording-state>.ui-icon{width:20px;height:20px}
 .recording-save{display:grid;place-items:center;align-self:center;width:44px;min-height:44px;border:0;border-left:1px solid var(--rule);background:transparent;color:var(--ink-soft);cursor:pointer}.recording-save>.ui-icon{width:18px;height:18px}
+.recording-save[data-saving="true"]:disabled{position:relative;opacity:1;color:var(--brass);background:color-mix(in srgb,var(--brass) 12%,var(--sheet))}
+.recording-save[data-saving="true"]>.ui-icon{opacity:.35}
+.recording-save[data-saving="true"]::after{content:'';position:absolute;width:26px;height:26px;border:2px solid var(--rule);border-top-color:var(--brass);border-right-color:var(--brass);border-radius:50%;pointer-events:none}
+html[data-fx-mode="full"] .recording-save[data-saving="true"]::after{animation:fxspin 1s linear infinite}
+@media(prefers-reduced-motion:reduce){.recording-save[data-saving="true"]::after{animation:none!important}}
 .recording-item[data-active="true"]{border-color:var(--brass);box-shadow:inset 0 0 0 1px var(--brass);background:var(--brass-soft)}
 .recording-item button:disabled{opacity:.45;cursor:default}.recording-item button:focus-visible{outline:2px solid var(--brass);outline-offset:-2px;border-radius:7px}.recording-empty{margin:10px 0}
 #recordingPanel{scroll-margin-top:14px}
@@ -1834,11 +1840,11 @@ button.wr-person:focus-visible{outline:2px solid var(--brass);outline-offset:2px
 <script src="js/band.js?v=flute-cast-1"></script>
 <script src="js/game.js?v=flute-cast-1"></script>
 <script src="js/engine.js?v=playback-stop-1"></script>
-<script src="js/conduct.js?v=conduct-recording-1"></script>
+<script src="js/conduct.js?v=native-export-1"></script>
 <script src="js/announce.js?v=announce-navigation-1"></script>
 <script src="js/tunegame.js"></script>
 <script src="js/fx.js?v=stage-cast-1"></script>
-<script src="js/ui.js?v=ensemble-picked-1"></script>
+<script src="js/ui.js?v=native-export-1"></script>
 <div class="tip" id="tip" role="tooltip" hidden></div>
 </body>
 </html>

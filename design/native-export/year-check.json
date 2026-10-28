@@ -1,0 +1,13 @@
+{
+  "boot": {
+    "errors": [],
+    "failed": [],
+    "loaded": 33,
+    "scripts": 33
+  },
+  "phase": "choose",
+  "scrollWidth": 375,
+  "steps": 49,
+  "width": 375,
+  "year": 2027
+}

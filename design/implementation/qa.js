@@ -21,6 +21,15 @@ window.fetch=(input,init)=>{
 };
 if(document.readyState==='loading')await new Promise(r=>document.addEventListener('DOMContentLoaded',r,{once:true}));
 const q=new URLSearchParams(location.search);let view=q.get('view')||'week';
+const fileBridge={messages:[],lastId:null,acknowledgements:[]};
+if(q.has('nativeExportAudit')){
+ // 確認専用。端末へ送らず、ファイルの受け渡しと完了通知を手動で確かめる。
+ window.TSUKURIKATA_NATIVE=true;
+ window.webkit={messageHandlers:{native:{postMessage:m=>{
+  if(m.type!=='file')return;
+  fileBridge.lastId=m.id;fileBridge.messages.push({id:m.id,i:m.i,n:m.n,name:m.name,bytes:m.data.length});setTimeout(record,0);
+ }}}};
+}
 const countinHistory=[];
 const playbackStops=[];
 if(q.has('playbackStopAudit')){
@@ -119,6 +128,7 @@ function advance(s){
  return practiceWeek(s);
 }
 function record(){
+ if(q.has('nativeExportAudit'))report.nativeExport={...fileBridge,saving:!!U.saving,librarySaving:U.librarySaving||null,toast:$('#toast').textContent,toastHidden:$('#toast').hidden,state:hash(JSON.stringify(S)),records:hash(JSON.stringify(S.recs)),buttons:[...document.querySelectorAll('[data-record-save]')].map(b=>({id:b.dataset.recordSave,disabled:b.disabled,busy:b.getAttribute('aria-busy'),saving:b.dataset.saving,label:b.getAttribute('aria-label')}))};
  if(q.has('playbackStopAudit'))report.playbackStops=playbackStops;
  const bootResult=$('#bootResult');if(bootResult)report.boot=JSON.parse(bootResult.textContent);
  if(q.has('performanceAudit')){
@@ -449,6 +459,10 @@ async function show(next){
  if(['grad','grad-old','grad-auto'].includes(view)){U.fxMode=view==='grad-auto'?'short':'off';S.gradMembers=s.members.filter(m=>m.grade===3);openGradRoll();GR.i=1;grShow();if(view!=='grad-auto')pauseGradRoll();}
  if(view==='senior'){$('#week').innerHTML='<div class="seniors"><div class="senior-list">'+s.members.filter(m=>m.grade===3).map(m=>seniorCard(m,null)).join('')+'</div></div>';}
  if(view==='conduct'){const perf=perform(currentCtx());openWatch(perf,'定期演奏会');drawStage(-1,$('#cdStage'),CD.who);}
+ if(q.has('nativeSaveResult')){
+  await SAMPLES.loading?.catch(()=>{});openConduct();
+  CD.perf=perform({...currentCtx(),from:0,to:.25});CD.clock=BeatClock.start(0,0,.5);CD.phase='play';CD.lv=[[0,1]];cdFinish(true);
+ }
  if(view==='announce'||view.startsWith('announce-')){
   if(view==='announce-cast'){const rec=addRec(S,'確認用の本番',{only:S.members.slice(12,15).map(m=>m.id)});S.pending={recId:rec.id};report.castIds=rec.snap.members.map(m=>m.id);}
   const award=view==='announce-silver'?'silver':view==='announce-bronze'?'bronze':'gold';
@@ -501,6 +515,10 @@ let audioReportT;new MutationObserver(()=>{clearTimeout(audioReportT);audioRepor
 if(q.has('keys'))document.addEventListener('keydown',async e=>{
  if(e.target.matches('input,select,textarea'))return;
  const key=e.key.toLowerCase();
+ if(q.has('nativeExportAudit')&&['k','f','z'].includes(key)){
+  e.preventDefault();const ok=key!=='f',id=key==='z'?'別のファイル':fileBridge.lastId;
+  fileBridge.acknowledgements.push({ok,id});window.onNativeFileDone(ok,id);setTimeout(record,0);return;
+ }
  if(q.has('conductResultAudit')&&key==='h'){
   e.preventDefault();
   if(CD.phase==='done'&&!U.playing&&!U.waitPlay&&!releaseSamples){

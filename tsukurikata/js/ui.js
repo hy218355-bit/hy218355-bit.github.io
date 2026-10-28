@@ -689,7 +689,7 @@ function renderRecordingLibrary(){
     list.innerHTML=[...years].sort(([a],[b])=>Number(b)-Number(a)).map(([y,rs])=>`<section class="recording-year"><h3>${y?`${esc(y)}年度`:'録音'}</h3>${rs.map(r=>{
       const title=String(r.label||'').replace(new RegExp(`^${Number(r.year)}年?(?:度)?\\s+`),'')||PIECES[r.pieceId].title,people=r.snap?.members||[],range=recordingRangeNote(r),song=PIECES[r.pieceId].title+(range?'・'+range:''),venue=VENUE[r.venue]?.name||'';
       const label=`${r.label}・${song}${venue?'・'+venue:''}`;
-      return `<div class="recording-item" data-record-item="${esc(r.id)}"><button class="recording-play" type="button" data-record-play="${esc(r.id)}" data-record-label="${esc(label)}" aria-pressed="false"><span class="recording-copy"><b>${esc(title)}</b><small class="recording-song">${esc(song)}</small><span class="recording-meta"><small>${esc(venue)}${people.length?'・'+people.length+'人':''}</small><span class="recording-faces" aria-hidden="true">${people.slice(0,3).map(m=>memberFace(m,20)).join('')}</span></span></span><span class="recording-state" aria-hidden="true">${uiIcon('play')}</span></button><button class="recording-save" type="button" data-record-save="${esc(r.id)}" aria-label="${esc(label)}を保存" title="保存">${uiIcon('download')}</button></div>`;
+      return `<div class="recording-item" data-record-item="${esc(r.id)}"><button class="recording-play" type="button" data-record-play="${esc(r.id)}" data-record-label="${esc(label)}" aria-pressed="false"><span class="recording-copy"><b>${esc(title)}</b><small class="recording-song">${esc(song)}</small><span class="recording-meta"><small>${esc(venue)}${people.length?'・'+people.length+'人':''}</small><span class="recording-faces" aria-hidden="true">${people.slice(0,3).map(m=>memberFace(m,20)).join('')}</span></span></span><span class="recording-state" aria-hidden="true">${uiIcon('play')}</span></button><button class="recording-save" type="button" data-record-save="${esc(r.id)}" data-save-label="${esc(label)}" aria-label="${esc(label)}を保存" title="保存">${uiIcon('download')}</button></div>`;
     }).join('')}</section>`).join('') || '<p class="small recording-empty">録音はまだない</p>';
     U.libraryKey=key;list.scrollTop=top;
   }
@@ -702,8 +702,15 @@ function renderRecordingLibrary(){
     const label=`${b.dataset.recordLabel}を${on?(U.waitPlay?'読み込みをやめる':'止める'):'聴く'}`;
     if(b.getAttribute('aria-label')!==label)b.setAttribute('aria-label',label);
   }
-  const saving=blocked || !!U.saving || !!U.librarySaving;
-  for(const b of list.querySelectorAll('[data-record-save]'))if(b.disabled!==saving)b.disabled=saving;
+  const saving=blocked || !!U.saving || !!U.librarySaving || !!U.nativeFile;
+  for(const b of list.querySelectorAll('[data-record-save]')){
+    if(b.disabled!==saving)b.disabled=saving;
+    const on=!!U.saving&&U.savingRecording===b.dataset.recordSave,state=String(on);
+    if(b.dataset.saving!==state){
+      b.dataset.saving=state;b.setAttribute('aria-busy',state);
+      b.setAttribute('aria-label',`${b.dataset.saveLabel}を${on?'保存中':'保存'}`);
+    }
+  }
 }
 // 一覧の再生は全員の音から。別の本人だけの指定や、前の読み込み待ちは残さない。
 function listenLibraryRecording(id){
@@ -1901,7 +1908,7 @@ async function saveAction(kind){
   const msg = t => { $('#svMsg').textContent = t; };
   if(kind === 'file' || kind === 'copy'){
     const code = await saveCode();
-    if(kind === 'file'){ await deliverFile(new TextEncoder().encode(code + '\n'), `吹奏楽部のつくりかた_セーブ_${S.year}年度.txt`, {title: 'セーブ', type: 'text/plain'}); msg(`${S.year}年度（${S.phase === 'winter' ? `${winterStep(S).m}月` : wkLabel(S.week)}）のセーブを書き出した。`); return; }
+    if(kind === 'file'){ if(await deliverFile(new TextEncoder().encode(code + '\n'), `吹奏楽部のつくりかた_セーブ_${S.year}年度.txt`, {title: 'セーブ', type: 'text/plain'})===false){msg('書き出せませんでした。もう一度試してください。');return;} msg(`${S.year}年度（${S.phase === 'winter' ? `${winterStep(S).m}月` : wkLabel(S.week)}）のセーブを書き出した。`); return; }
     let ok = false;
     try{ await navigator.clipboard.writeText(code); ok = true; }catch(e){}
     if(!ok){ const t = $('#svCode'); t.value = code; t.select(); try{ ok = document.execCommand('copy'); }catch(e){} }

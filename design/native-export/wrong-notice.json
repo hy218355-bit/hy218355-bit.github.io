@@ -1,0 +1,113 @@
+{
+  "boot": {
+    "errors": [],
+    "failed": [],
+    "loaded": 33,
+    "scripts": 33
+  },
+  "buttons": [
+    {
+      "animation": "none",
+      "id": "r2027-26-1-339903",
+      "rect": {
+        "bottom": 428.0859375,
+        "height": 44,
+        "left": 282,
+        "right": 326,
+        "top": 384.0859375,
+        "width": 44,
+        "x": 282,
+        "y": 384.0859375
+      }
+    },
+    {
+      "animation": "none",
+      "id": "r2026-26-0-790160",
+      "rect": {
+        "bottom": 561.0859375,
+        "height": 44,
+        "left": 282,
+        "right": 326,
+        "top": 517.0859375,
+        "width": 44,
+        "x": 282,
+        "y": 517.0859375
+      }
+    }
+  ],
+  "export": {
+    "acknowledgements": [],
+    "buttons": [
+      {
+        "busy": "true",
+        "disabled": true,
+        "id": "r2027-26-1-339903",
+        "label": "2027年 定期演奏会・「天国と地獄」・録音の範囲・県民文化会館を保存中",
+        "saving": "true"
+      },
+      {
+        "busy": "false",
+        "disabled": true,
+        "id": "r2026-26-0-790160",
+        "label": "2026年 定期演奏会・「天国と地獄」・録音の範囲・県民文化会館を保存",
+        "saving": "false"
+      }
+    ],
+    "lastId": "f1793228967832-1",
+    "librarySaving": "r2027-26-1-339903",
+    "messages": [
+      {
+        "bytes": 524288,
+        "i": 0,
+        "id": "f1793228967832-1",
+        "n": 3,
+        "name": "吹奏楽部のつくりかた_2027年度_2027年 定期演奏会.wav"
+      },
+      {
+        "bytes": 524288,
+        "i": 1,
+        "id": "f1793228967832-1",
+        "n": 3,
+        "name": "吹奏楽部のつくりかた_2027年度_2027年 定期演奏会.wav"
+      },
+      {
+        "bytes": 385596,
+        "i": 2,
+        "id": "f1793228967832-1",
+        "n": 3,
+        "name": "吹奏楽部のつくりかた_2027年度_2027年 定期演奏会.wav"
+      }
+    ],
+    "records": 0.799655759241432,
+    "saving": true,
+    "state": 0.524259602651,
+    "toast": "保存の準備をしています…",
+    "toastHidden": false
+  },
+  "focus": "play",
+  "playbackId": null,
+  "playing": false,
+  "scrollWidth": 375,
+  "tabs": {
+    "bottom": 812,
+    "height": 61,
+    "left": 0,
+    "right": 375,
+    "top": 751,
+    "width": 375,
+    "x": 0,
+    "y": 751
+  },
+  "theme": "light",
+  "toast": {
+    "bottom": 686,
+    "height": 43.796875,
+    "left": 90.04296875,
+    "right": 284.95703125,
+    "top": 642.203125,
+    "width": 194.9140625,
+    "x": 90.04296875,
+    "y": 642.203125
+  },
+  "width": 375
+}

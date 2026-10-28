@@ -1,0 +1,35 @@
+{
+  "buildSucceeded": true,
+  "installed": false,
+  "launched": false,
+  "installPhase": "device_not_found",
+  "deviceUnavailable": true,
+  "binaryNewerThanNativeSource": true,
+  "files": [
+    {
+      "file": "tsukurikata/index.html",
+      "source": "90192b70109806acb283222686d953b0ad63ecc38e3068cd9be3fa2d043df576",
+      "bundle": "90192b70109806acb283222686d953b0ad63ecc38e3068cd9be3fa2d043df576",
+      "match": true
+    },
+    {
+      "file": "tsukurikata/js/conduct.js",
+      "source": "b0bf66880bf09baafeeb5ecea732d1fe830b12590e6b04cc507ac2c541e9234f",
+      "bundle": "b0bf66880bf09baafeeb5ecea732d1fe830b12590e6b04cc507ac2c541e9234f",
+      "match": true
+    },
+    {
+      "file": "tsukurikata/js/ui.js",
+      "source": "ee9277e16e84c0e6e3f73bd18ee866bc21202402e4d5a86a102e22018c4c92be",
+      "bundle": "ee9277e16e84c0e6e3f73bd18ee866bc21202402e4d5a86a102e22018c4c92be",
+      "match": true
+    },
+    {
+      "file": "tsukurikata-ios/Tsukurikata/selftest.js",
+      "source": "765df5da485e1523faf4affd3ce99a18341ae751a3c6cbfb59b1bd34bad5ed1f",
+      "bundle": "765df5da485e1523faf4affd3ce99a18341ae751a3c6cbfb59b1bd34bad5ed1f",
+      "match": true
+    }
+  ],
+  "mirroringUsed": false
+}

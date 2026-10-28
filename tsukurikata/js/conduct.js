@@ -417,6 +417,8 @@ function cdFinish(natural){
 
 // 結果の同じボタンで聴く・止める。別の録音の再生や待機を取り違えない。
 function renderConductResultPlayback(){
+  const save=$('#cdResult [data-cd="save"]');
+  if(save){save.disabled=!!U.saving||!!U.nativeFile;save.setAttribute('aria-busy',String(!!U.saving&&U.savingRecording===CD.rec?.id));}
   const button=$('#cdResult [data-cd="again"]');if(!button)return;
   const on=CD.phase==='done'&&!!CD.rec&&activeLibraryRecording()?.id===CD.rec.id;
   const waiting=on&&!!U.waitPlay,label=waiting?'読み込みをやめる':on?'止める':'もう一度聴く';
@@ -453,8 +455,9 @@ function playMemberRec(rec, m, label){
 const recFileName = rec => `吹奏楽部のつくりかた_${rec.year}年度_${rec.label.replace(/[\\/:*?"<>|（）()・]/g, '_').replace(/_+/g, '_').replace(/_$/, '')}`;
 // who を渡すと、その部員の音だけを書き出す
 async function saveRecording(rec, who = null){
-  if(U.saving) return;
-  U.saving = true;
+  if(U.saving || U.nativeFile) return;
+  U.saving = true;U.savingRecording=rec.id;
+  renderRecordingLibrary();renderConductResultPlayback();
   toast('録音を書き出しています… 0%');
   try{
     if(SAMPLES.loading) await SAMPLES.loading.catch(() => {});
@@ -464,25 +467,34 @@ async function saveRecording(rec, who = null){
     const school = $('#school').textContent.replace(/\s*\d+年度.*$/, '').replace(/\s+/g, '');
     const meta = {title: rec.label + (who ? `（${who.name}）` : ''), artist: school, album: `吹奏楽部のつくりかた ${rec.year}年度`, comment: `${VENUE[rec.venue].name}で録音`};
     const wav = encodeWav(buf, meta);
-    await deliverFile(wav, recFileName(rec) + (who ? '_' + who.name.replace(/\s+/g, '') : '') + '.wav', meta);
+    if(await deliverFile(wav, recFileName(rec) + (who ? '_' + who.name.replace(/\s+/g, '') : '') + '.wav', meta)===false)throw new Error('保存できなかった');
   }catch(e){
     toast('書き出せませんでした。もう一度試してください。', 4000);
+  }finally{
+    U.saving = false;U.savingRecording=null;
+    renderRecordingLibrary();renderConductResultPlayback();
   }
-  U.saving = false;
 }
+let nativeFileSerial=0;
 async function deliverFile(buf, name, meta){
   if(window.TSUKURIKATA_NATIVE){
-    // アプリ：少しずつ渡し、アプリ側で m4a にして共有シートを出す
+    // アプリ：共有シートを閉じるまで待ち、同じ一時ファイルへ重ねて渡さない。
+    if(U.nativeFile)return false;
     toast('保存の準備をしています…');
-    const u8 = new Uint8Array(buf), CH = 393216, n = Math.ceil(u8.length / CH), id = 'f' + Date.now();
-    for(let i = 0; i < n; i++){
-      const part = u8.subarray(i * CH, (i + 1) * CH);
-      let s = '';
-      for(let j = 0; j < part.length; j += 8192) s += String.fromCharCode.apply(null, part.subarray(j, j + 8192));
-      nativePost({type: 'file', id, i, n, name, data: btoa(s), title: meta.title, artist: meta.artist, album: meta.album});
-      if(i % 6 === 5) await new Promise(r => setTimeout(r, 0));
-    }
-    return;
+    const u8 = new Uint8Array(buf), CH = 393216, n = Math.ceil(u8.length / CH), id = 'f' + Date.now() + '-' + (++nativeFileSerial);
+    const done=new Promise(resolve=>{U.nativeFile={id,resolve};});
+    renderRecordingLibrary();renderConductResultPlayback();
+    try{
+      for(let i = 0; i < n; i++){
+        if(U.nativeFile?.id!==id)break;
+        const part = u8.subarray(i * CH, (i + 1) * CH);
+        let s = '';
+        for(let j = 0; j < part.length; j += 8192) s += String.fromCharCode.apply(null, part.subarray(j, j + 8192));
+        window.webkit.messageHandlers.native.postMessage({type: 'file', id, i, n, name, data: btoa(s), title: meta.title, artist: meta.artist, album: meta.album});
+        if(i % 6 === 5) await new Promise(r => setTimeout(r, 0));
+      }
+    }catch(e){window.onNativeFileDone(false,id);}
+    return done;
   }
   // ブラウザ：書き出しに時間がかかると共有の許可が切れるので、ボタンを押してもらってから共有・ダウンロードする
   const file = new File([buf], name, {type: meta.type || 'audio/wav'});
@@ -498,7 +510,13 @@ async function deliverFile(buf, name, meta){
   });
 }
 // アプリ側の保存が終わったとき
-window.onNativeFileDone = ok => toast(ok ? '' : '保存できませんでした。', ok ? 0 : 4000);
+window.onNativeFileDone = (ok,id) => {
+  const file=U.nativeFile;if(!file||file.id!==id)return;
+  U.nativeFile=null;
+  renderRecordingLibrary();renderConductResultPlayback();
+  toast(ok ? '' : '保存できませんでした。', ok ? 0 : 4000);
+  file.resolve(!!ok);
+};
 
 // 画面下の小さな知らせ（ボタンつきもある）。空文字で消す
 function toast(text, ms = 0, action = null, onAction = null){

@@ -53,7 +53,7 @@
     for(let k = 1; k <= 8; k++) clock.tap(0.5 + k * 0.47);
     const wavBuf = await renderPerf(perf, {venue: 'hall', conduct: {ev: clock.saved(), lv: [[0, 1], [2, 1.3]]}});
     const wav = encodeWav(wavBuf, {title: 'セルフテスト', artist: '県立みなと高校吹奏楽部'});
-    const fileOk = await new Promise(res => { window.onNativeFileDone = ok => res(ok); deliverFile(wav, 'selftest.wav', {title: 'セルフテスト', artist: '県立みなと高校吹奏楽部'}); setTimeout(() => res(false), 60000); });
+    const fileOk = await Promise.race([deliverFile(wav, 'selftest.wav', {title: 'セルフテスト', artist: '県立みなと高校吹奏楽部'}), new Promise(res => setTimeout(() => res(false), 60000))]);
     detail += `, wav ${(wav.byteLength / 1e6).toFixed(2)}MB -> file ${fileOk ? 'ok' : 'FAILED'}`;
     post({type: 'selftest', ok: nan === 0 && pk > 0.05 && pk <= 1.0 && rms > -40 && ir > 0 && fileOk, detail});
   }catch(e){

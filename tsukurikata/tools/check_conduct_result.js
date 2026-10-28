@@ -9,7 +9,7 @@ let S,release,plays=[],released=0;
 const U={playing:false,waitPlay:null,shown:null,shownLabel:'',onEnd:null,solo:'all',perfNow:null},CD={phase:'done',rec:null,stage:null};
 const SAMPLES={use:true,ready:true,error:null,loading:null},window={};
 const button={attrs:{},dataset:{},innerHTML:'',setAttribute(k,v){this.attrs[k]=v;}};
-const nodes={'#cdResult [data-cd="again"]':button,'#conduct':{hidden:false}},$=s=>nodes[s]||=({});
+const nodes={'#cdResult [data-cd="again"]':button,'#cdResult [data-cd="save"]':{setAttribute(k,v){this[k]=v;}},'#conduct':{hidden:false}},$=s=>nodes[s]||=({});
 const E={pb:null,ac:{currentTime:0},ensure:()=>true,unlock(){},setSolo(){},stop(){this.pb=null;},play(perf){this.pb={perf};plays.push(perf);return this.pb;}};
 const document={documentElement:{classList:{remove(){}}}},cancelAnimationFrame=()=>{},requestAnimationFrame=()=>0;
 const updateMini=()=>{},clearRecordedMember=()=>{},renderPiece=()=>{},drawIdle=()=>{},renderAll=()=>{},renderRecordingLibrary=()=>{},cdClearJudge=()=>{};

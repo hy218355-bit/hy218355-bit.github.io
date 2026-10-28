@@ -1,0 +1,25 @@
+{
+  "busy": "true",
+  "dialog": {
+    "bottom": 812,
+    "height": 812,
+    "left": 0,
+    "right": 375,
+    "top": 0,
+    "width": 375,
+    "x": 0,
+    "y": 0
+  },
+  "disabled": true,
+  "toast": {
+    "bottom": 686,
+    "height": 43.796875,
+    "left": 90.04296875,
+    "right": 284.95703125,
+    "top": 642.203125,
+    "width": 194.9140625,
+    "x": 90.04296875,
+    "y": 642.203125
+  },
+  "toastInside": true
+}
