@@ -1,0 +1,44 @@
+[
+  {
+    "afterAccent": "rgb(147, 107, 47)",
+    "afterPaper": "rgb(240, 238, 229)",
+    "background": "rgb(240, 238, 229)",
+    "beforeAccent": "rgb(162, 111, 20)",
+    "beforePaper": "rgb(236, 239, 243)",
+    "icon": {
+      "bottom": 86,
+      "height": 60,
+      "left": 20,
+      "right": 80,
+      "top": 26,
+      "width": 60,
+      "x": 20,
+      "y": 26
+    },
+    "note": "配色プレビューです。実機の起動画面ではありません。",
+    "scrollWidth": 375,
+    "theme": "light",
+    "width": 375
+  },
+  {
+    "afterAccent": "rgb(231, 195, 138)",
+    "afterPaper": "rgb(18, 37, 47)",
+    "background": "rgb(18, 37, 47)",
+    "beforeAccent": "rgb(221, 174, 85)",
+    "beforePaper": "rgb(13, 19, 32)",
+    "icon": {
+      "bottom": 86,
+      "height": 60,
+      "left": 20,
+      "right": 80,
+      "top": 26,
+      "width": 60,
+      "x": 20,
+      "y": 26
+    },
+    "note": "配色プレビューです。実機の起動画面ではありません。",
+    "scrollWidth": 375,
+    "theme": "dark",
+    "width": 375
+  }
+]

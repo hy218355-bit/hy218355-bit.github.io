@@ -1,0 +1,68 @@
+[
+  {
+    "AssetType": "Color",
+    "Color components": [
+      0.5764705882352941,
+      0.4196078431372549,
+      0.1843137254901961,
+      1
+    ],
+    "Colorspace": "srgb",
+    "Idiom": "universal",
+    "Name": "AccentColor",
+    "NameIdentifier": 20419,
+    "Scale": 1,
+    "SHA1Digest": "FFAB4BCF31FC34EA7F848FC975C23E0C3CC95A78DE68B0347ABCBB3CA9C5B38A",
+    "SizeOnDisk": 260
+  },
+  {
+    "Appearance": "UIAppearanceDark",
+    "AssetType": "Color",
+    "Color components": [
+      0.9058823529411765,
+      0.7647058823529411,
+      0.5411764705882353,
+      1
+    ],
+    "Colorspace": "srgb",
+    "Idiom": "universal",
+    "Name": "AccentColor",
+    "NameIdentifier": 20419,
+    "Scale": 1,
+    "SHA1Digest": "3A8820E806E3DD0E9E143441295232025B7FB59ED2C2CB309A5265DB60C90969",
+    "SizeOnDisk": 260
+  },
+  {
+    "AssetType": "Color",
+    "Color components": [
+      0.9411764705882353,
+      0.9333333333333333,
+      0.8980392156862745,
+      1
+    ],
+    "Colorspace": "srgb",
+    "Idiom": "universal",
+    "Name": "Paper",
+    "NameIdentifier": 55976,
+    "Scale": 1,
+    "SHA1Digest": "C60C490A3200097E433417F89009A3B328075967AB5E84F3C1360145C74EBFEF",
+    "SizeOnDisk": 260
+  },
+  {
+    "Appearance": "UIAppearanceDark",
+    "AssetType": "Color",
+    "Color components": [
+      0.07058823529411765,
+      0.1450980392156863,
+      0.1843137254901961,
+      1
+    ],
+    "Colorspace": "srgb",
+    "Idiom": "universal",
+    "Name": "Paper",
+    "NameIdentifier": 55976,
+    "Scale": 1,
+    "SHA1Digest": "C3ADFDBE3632C7D05054DB214DD95908957C0827B5414F098846D2EF0D911DBB",
+    "SizeOnDisk": 260
+  }
+]

@@ -1,0 +1,108 @@
+{
+  "Paper": {
+    "css": "--paper",
+    "variants": [
+      {
+        "theme": "light",
+        "before": "#ECEFF3",
+        "after": "#F0EEE5"
+      },
+      {
+        "theme": "dark",
+        "before": "#0D1320",
+        "after": "#12252F"
+      }
+    ],
+    "beforeAsset": {
+      "colors": [
+        {
+          "color": {
+            "color-space": "srgb",
+            "components": {
+              "alpha": "1.000",
+              "red": "0xEC",
+              "green": "0xEF",
+              "blue": "0xF3"
+            }
+          },
+          "idiom": "universal"
+        },
+        {
+          "appearances": [
+            {
+              "appearance": "luminosity",
+              "value": "dark"
+            }
+          ],
+          "color": {
+            "color-space": "srgb",
+            "components": {
+              "alpha": "1.000",
+              "red": "0x0D",
+              "green": "0x13",
+              "blue": "0x20"
+            }
+          },
+          "idiom": "universal"
+        }
+      ],
+      "info": {
+        "author": "xcode",
+        "version": 1
+      }
+    }
+  },
+  "AccentColor": {
+    "css": "--brass",
+    "variants": [
+      {
+        "theme": "light",
+        "before": "#A26F14",
+        "after": "#936B2F"
+      },
+      {
+        "theme": "dark",
+        "before": "#DDAE55",
+        "after": "#E7C38A"
+      }
+    ],
+    "beforeAsset": {
+      "colors": [
+        {
+          "color": {
+            "color-space": "srgb",
+            "components": {
+              "alpha": "1.000",
+              "red": "0xA2",
+              "green": "0x6F",
+              "blue": "0x14"
+            }
+          },
+          "idiom": "universal"
+        },
+        {
+          "appearances": [
+            {
+              "appearance": "luminosity",
+              "value": "dark"
+            }
+          ],
+          "color": {
+            "color-space": "srgb",
+            "components": {
+              "alpha": "1.000",
+              "red": "0xDD",
+              "green": "0xAE",
+              "blue": "0x55"
+            }
+          },
+          "idiom": "universal"
+        }
+      ],
+      "info": {
+        "author": "xcode",
+        "version": 1
+      }
+    }
+  }
+}

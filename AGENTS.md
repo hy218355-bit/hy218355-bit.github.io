@@ -99,6 +99,7 @@ GitHub Pages のサイト。いまの中心は、高校吹奏楽部の顧問に�
 - **置き場所**：絵は `tsukurikata/img/` に置く（なければ作る）。iOS アプリはビルドのときに `tsukurikata/` を丸ごと同梱するので、ここに置けばアプリにも入る。ネットから読み込まない（アプリはオフラインで動く）。アプリのアイコンは `tsukurikata/icon-180.png`・`icon-64.png` と、`tsukurikata-ios/Tsukurikata/Assets.xcassets/AppIcon.appiconset`。
 - **形式と大きさ**：線や面の絵は SVG（色は `currentColor` か CSS の色の名前で）、それ以外は PNG か WebP。表示する大きさの2倍で作る。1枚 200KB くらいまで。
 - **色**：`index.html` の `:root` にある色の名前（`--paper` 背景・`--sheet` 紙・`--ink` 文字・`--ink-soft` うすい文字・`--rule` 線・`--brass` 金・`--good`/`--warn`/`--bad`、力のランクの `--rk-g`〜`--rk-s` など）を使い、色を直に書かない。ダークモードは、端末の設定（`prefers-color-scheme`）と `data-theme` の両方で色が入れかわる。ライトとダークの両方で見えること。
+- iOSの`Assets.xcassets/Paper.colorset`はWebの`--paper`、`AccentColor.colorset`は`--brass`へ、ライト・ダークともそろえる。起動画面・SwiftUIの背景・WKWebViewの背景は共通の`Paper`を使う。ネイティブの色を変えたら、ビルド済み`Assets.car`の4種類の色もWebと照合する
 - **字**：見出しは Dela Gothic One（`--f-display`）、本文は Zen Kaku Gothic New（`--f-body`）、手書きの日誌は Klee One（`--f-hand`）、数字の表示は Share Tech Mono（`--f-lcd`）。同梱のフォントは使う字だけに絞ってあるので、新しい字を出したらフォントを作り直す。
 - **どこに描いているか**：
   - 画面の見た目（CSS）は `index.html`、画面の中身は `ui.js`

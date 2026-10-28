@@ -1,0 +1,14 @@
+{
+  "build": "succeeded",
+  "install": "succeeded",
+  "launch": "blocked_device_locked",
+  "launchColor": "Paper",
+  "compiledColorsMatchWeb": true,
+  "visualInteractionVerified": false,
+  "mirroringUsed": false,
+  "compiledAssetSHA256": "7bdfa6ebf0bc3292d0bd0018dbf81a3ad4f33f3ea733b1a0cda46385e983bf4e",
+  "bundledGameSHA256": {
+    "index.html": "02fcc5cbb2b74cd6f8210c622665f1713d872b84923ce0549d7c02ec2dd2e575",
+    "js/ui.js": "7cd9a93df0b9da6a6d96b37f1a4fe43c6181bb97543561ebab62cb8bf3307998"
+  }
+}
