@@ -1896,19 +1896,34 @@ function skillList(m){
 // 本番を見ているときに部員をタップしたら、その子の様子（力・本番の強さ・今日の調子・スキル）を舞台の下に出す
 function showCdMember(id){
   const el = $('#cdMember'), m = id && memberById(id);
+  // 別の子へ移る・閉じるときは、一人だけの音を見えないまま残さない。
+  if((!m||m.id!==CD.sel)&&U.solo.startsWith('member:')){U.solo='all';applySolo();}
   CD.sel = m ? m.id : null;
-  if(!m){ el.hidden = true; drawStage(-1, $('#cdStage'), CD.who); return; }
+  if(!m){
+    el.hidden = true;drawStage(-1, $('#cdStage'), CD.who);
+    if(CD.phase==='watch'&&!$('#conduct').hidden){$('#cdStage').focus({preventScroll:true});$('#cdStage').scrollIntoView({block:'nearest',behavior:!fxCalm()&&U.fxMode==='full'?'smooth':'auto'});}
+    return;
+  }
   const C = tok(), mood = (CD.perf?.mental || []).find(x => x.mid === m.id)?.kind;
   const plays = CD.who?.has(m.id), solo = U.solo === `member:${m.id}`;
-  el.innerHTML = `<div class="cm-head">${memberFace(m,54,{mood})}<span><b>${esc(m.name)}</b><small>${m.grade}年・${esc(PART_LABEL[SEAT[m.seat].part])}${m.title ? '・' + esc(m.title) : ''}</small></span><button class="btn small quiet" type="button" data-cdm="close">閉じる</button></div>
-    ${plays ? `<div class="row"><button class="btn small" type="button" data-cdm="solo">${solo ? '全員の音にもどす' : 'この子の音だけ聴く'}</button></div>` : ''}
+  el.innerHTML = `<div class="cm-head">${memberFace(m,54,{mood})}<span><b id="cdMemberName">${esc(m.name)}</b><small>${m.grade}年・${esc(PART_LABEL[SEAT[m.seat].part])}${m.title ? '・' + esc(m.title) : ''}</small></span><button class="btn small quiet" type="button" data-cdm="close">閉じる</button></div>
+    ${plays ? `<div class="row"><button class="btn small" type="button" data-cdm="solo" aria-pressed="${solo}">${solo ? '全員の音にもどす' : 'この子の音だけ聴く'}</button></div>` : ''}
     <p class="cm-say">${esc(memberSays(m))}</p>
     <div class="cm-stats">${STAT_KEYS.map(k => `<span class="cm-st">${STAT_LABEL[k]}<span class="track"><span class="fill" style="width:${clamp(m.stats[k], 0, 100)}%;background:${skillColor(C, m.stats[k])}"></span></span>${rankBadge(m.stats[k])}</span>`).join('')}</div>
     <p class="cm-note">本番の強さ ${rankBadge(m.mental ?? 40)}${mood === 'zone' ? '・今日は、いつも以上の音が出ている' : mood === 'freeze' ? '・今日は、緊張で頭が真っ白になっている' : ''}${plays ? '' : '・この本番には出ていない'}${skillChips(m)}</p>
     `;
   el.hidden = false;
+  if(CD.phase==='watch')el.querySelector('[data-cdm="close"]').focus({preventScroll:true});
   if(CD.phase==='watch'&&narrow.matches)el.scrollIntoView({block:'nearest',behavior:!fxCalm()&&U.fxMode==='full'?'smooth':'auto'});
   if(!U.playing) drawStage(-1, $('#cdStage'), CD.who);
+}
+function toggleCdMemberSolo(){
+  const button=$('#cdMember [data-cdm="solo"]');
+  if(CD.phase!=='watch'||!button||!CD.who?.has(CD.sel))return;
+  const solo=U.solo!==`member:${CD.sel}`;
+  U.solo=solo?`member:${CD.sel}`:'all';applySolo();
+  // ボタンを作り直さず、操作先と読んでいるカードの位置を保つ。
+  button.setAttribute('aria-pressed',String(solo));button.textContent=solo?'全員の音にもどす':'この子の音だけ聴く';
 }
 function memberSays(m){
   const lines = [], wk = STAT_LABEL[weakest(m)], up = m.last?.d ? Math.max(0, ...STAT_KEYS.map(k => m.last.d[k] || 0)) : 0;
@@ -2376,7 +2391,7 @@ function bind(){
   $('#cdMember').addEventListener('click', e => {
     const b = e.target.closest('[data-cdm]'); if(!b) return;
     if(b.dataset.cdm === 'close') showCdMember(null);
-    else if(b.dataset.cdm === 'solo'){ U.solo = U.solo === `member:${CD.sel}` ? 'all' : `member:${CD.sel}`; applySolo(); showCdMember(CD.sel); }
+    else if(b.dataset.cdm === 'solo')toggleCdMemberSolo();
   });
   $('#stage').addEventListener('click', e => {
     const s = seatAt(e);

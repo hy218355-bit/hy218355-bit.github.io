@@ -138,6 +138,10 @@ function record(){
  report.shownMatchesPrepared=!!U.shown&&U.shown===U.perfNow;
  report.playing=U.playing;report.waiting=!!U.waitPlay;report.shownLabel=U.shownLabel;report.range=U.range;report.solo=U.solo;report.piece=playPiece();report.venue=U.venue;
  report.engineSolo=E.solo;report.viewPart=U.view;
+ if(q.has('watchCardAudit')){
+  const card=$('#cdMember'),button=card.querySelector('[data-cdm="solo"]'),rect=el=>el?.getBoundingClientRect().toJSON();
+  report.watchCard={selected:CD.sel,hidden:card.hidden,name:card.querySelector('#cdMemberName')?.textContent,pressed:button?.getAttribute('aria-pressed'),button:rect(button),close:rect(card.querySelector('[data-cdm="close"]')),card:rect(card),scroll:$('#conduct').scrollTop,active:document.activeElement.id||document.activeElement.dataset.cdm||document.activeElement.tagName,stats:getComputedStyle($('.cd-stats')).display};
+ }
  if(E.pb&&!playbackIds.has(E.pb))playbackIds.set(E.pb,++playbackCount);
  report.playbackId=E.pb?playbackIds.get(E.pb):null;
  report.audibleMemberIds=E.pb?Object.keys(E.pb.mem).filter(mid=>E.pb.audible(mid,E.solo)):[];
@@ -365,6 +369,7 @@ async function show(next){
  if(q.has('concertrec')&&view.startsWith('grad')){const fin=addRec(s,'2028年 定期演奏会',{venue:'hall',pieceId:'largo'});fin.final=true;report.beforeConcertVenue=U.venue;}
  if(q.has('busy')&&view.startsWith('member')){s.week=PREF_WEEK;s=beginStage(s);}
  if(q.has('hallCarry'))s.hallExp=72;
+ if(view==='conduct'&&q.has('longWatch'))s=renameMember(s,s.members[0].id,'あいうえおかきくけこさし');
  if(PIECES[q.get('audioPiece')])s.pieceId=q.get('audioPiece');
  if(['full','short','off'].includes(q.get('cueFx')))U.fxMode=q.get('cueFx');
  S=s;U.sel=null;hideTip();renderAll();refreshNow();$('#toast').hidden=true;

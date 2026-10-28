@@ -1,0 +1,14 @@
+{
+  "build": "succeeded",
+  "install": "succeeded",
+  "launch": "blocked_device_locked",
+  "mirroringUsed": false,
+  "visualInteractionVerified": false,
+  "runningProcessVerified": false,
+  "bundleMatches": {
+    "index.html": true,
+    "js/conduct.js": true,
+    "js/ui.js": true
+  },
+  "reason": "端末がロック中のため起動できない"
+}

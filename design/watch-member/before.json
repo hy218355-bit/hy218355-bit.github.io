@@ -1,0 +1,34 @@
+[
+  {
+    "case": "solo-on",
+    "data": {
+      "active": "BODY",
+      "engine": {
+        "id": "m2028-n1-cafe",
+        "type": "member"
+      },
+      "pressed": null,
+      "solo": "member:m2028-n1-cafe",
+      "stats": "grid"
+    }
+  },
+  {
+    "case": "card-closed",
+    "data": {
+      "active": "BODY",
+      "cardHidden": true,
+      "engine": {
+        "id": "m2028-n1-cafe",
+        "type": "member"
+      },
+      "solo": "member:m2028-n1-cafe"
+    }
+  },
+  {
+    "case": "escape-card",
+    "data": {
+      "cardHidden": true,
+      "watchHidden": true
+    }
+  }
+]

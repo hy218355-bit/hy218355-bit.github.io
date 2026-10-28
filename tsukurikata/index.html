@@ -884,6 +884,7 @@ button.wr-person:focus-visible{outline:2px solid var(--brass);outline-offset:2px
 .cd-member .cm-st b{font-family:var(--f-lcd);font-weight:400;font-size:13px;color:var(--ink);text-align:right}
 .cd-member .cm-note{font-size:12.5px;color:var(--ink-soft);line-height:1.5}
 .cd-member .row{display:flex;flex-wrap:wrap;gap:8px}
+.cd-member [data-cdm="solo"][aria-pressed="true"]{border-color:var(--brass);background:var(--brass-soft);box-shadow:inset 0 0 0 1px var(--brass)}
 .cd-prog{height:4px;border-radius:2px;background:var(--rule);overflow:hidden;margin-top:6px}
 .cd-prog i{display:block;height:100%;width:0;background:var(--brass);transition:width .25s linear}
 .cd-pad{position:relative;flex:1;min-height:0;max-width:720px;width:100%;margin:0 auto;border-radius:22px;overflow:hidden;cursor:pointer;
@@ -1570,7 +1571,8 @@ button.wr-person:focus-visible{outline:2px solid var(--brass);outline-offset:2px
 #conduct .cd-result .cd-num span{color:var(--cd-soft)}
 #conduct .cd-result .cd-num b{color:var(--cd-ink)}
 #conduct .cd-legend,#conduct .cd-member{order:2}
-#conduct.watch .cd-stage-meta,#conduct.watch .cd-controls,#conduct:has(.cd-result:not([hidden])) .cd-controls,#conduct:has(.cd-result:not([hidden])) .cd-stats{display:none}
+#conduct .cd-member .btn{min-height:44px}
+#conduct.watch .cd-stage-meta,#conduct.watch .cd-controls,#conduct.watch .cd-stats,#conduct:has(.cd-result:not([hidden])) .cd-controls,#conduct:has(.cd-result:not([hidden])) .cd-stats{display:none}
 #conduct.watch .cd-top{background:var(--cd-paper)}
 #conduct.watch .cd-band{flex:1 0 auto}
 #conduct.watch .cd-msg{margin-top:12px;min-height:0;margin-bottom:12px}
@@ -1722,9 +1724,9 @@ button.wr-person:focus-visible{outline:2px solid var(--brass);outline-offset:2px
     <button class="btn small quiet" type="button" id="cdClose">やめる</button>
   </div>
   <p class="cd-msg" id="cdMsg" aria-live="polite"></p>
-  <div class="cd-band"><div class="cd-stagewrap"><canvas id="cdStage" role="img" aria-label="舞台の部員。音を出している部員が光る。"></canvas><div class="cd-curtain" aria-hidden="true"><i></i><i></i><div class="cd-intro"></div></div><div class="cd-stage-meta" aria-hidden="true"><span id="cdVenue"></span><span id="cdPlayers"></span></div></div><div class="cd-prog" aria-hidden="true"><i id="cdProg"></i></div></div>
+  <div class="cd-band"><div class="cd-stagewrap"><canvas id="cdStage" role="img" tabindex="-1" aria-label="舞台の部員。音を出している部員が光る。"></canvas><div class="cd-curtain" aria-hidden="true"><i></i><i></i><div class="cd-intro"></div></div><div class="cd-stage-meta" aria-hidden="true"><span id="cdVenue"></span><span id="cdPlayers"></span></div></div><div class="cd-prog" aria-hidden="true"><i id="cdProg"></i></div></div>
   <p class="legend stage-key cd-legend"><span data-tip="力は G・F・E・D・C・B・A・S の8段階。右ほどうまい" data-tipname="ランク" role="button" tabindex="0">色：部員の力<i class="rkscale"><i class="rk rk-g">G</i><i class="rk rk-f">F</i><i class="rk rk-e">E</i><i class="rk rk-d">D</i><i class="rk rk-c">C</i><i class="rk rk-b">B</i><i class="rk rk-a">A</i><i class="rk rk-s">S</i></i></span><button class="help-button" type="button" aria-label="舞台の見方" data-tipname="舞台の見方" data-tip="顔の下の絵は楽器。色は力のランク。光る部員はいま音を出している（赤く光ったら音を外した）。点線は空いている席。部員を押すと、その子の様子が出る。">?</button></p>
-  <div class="cd-member" id="cdMember" hidden></div>
+  <div class="cd-member" id="cdMember" role="region" aria-labelledby="cdMemberName" hidden></div>
   <div class="cd-controls">
     <span class="cd-feedback" id="cdFeedback" aria-live="off"></span>
     <svg class="cd-pattern" id="cdPattern" viewBox="0 0 343 94" aria-hidden="true"></svg>
@@ -1807,11 +1809,11 @@ button.wr-person:focus-visible{outline:2px solid var(--brass);outline-offset:2px
 <script src="js/band.js?v=flute-cast-1"></script>
 <script src="js/game.js?v=flute-cast-1"></script>
 <script src="js/engine.js?v=quiet-intro-1"></script>
-<script src="js/conduct.js?v=countin-1"></script>
+<script src="js/conduct.js?v=watch-member-1"></script>
 <script src="js/announce.js?v=result-journal-1"></script>
 <script src="js/tunegame.js"></script>
 <script src="js/fx.js"></script>
-<script src="js/ui.js?v=dialog-navigation-1"></script>
+<script src="js/ui.js?v=watch-member-1"></script>
 <div class="tip" id="tip" role="tooltip" hidden></div>
 </body>
 </html>

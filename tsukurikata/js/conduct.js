@@ -70,6 +70,7 @@ function cdDialogKey(e){
     e.preventDefault();e.stopImmediatePropagation();
     if(e.isComposing||e.repeat)return;
     if(!$('#tip').hidden){hideTip();return;}
+    if(CD.phase==='watch'&&!$('#cdMember').hidden){showCdMember(null);return;}
     closeConduct();
   }else if(e.key==='Tab'){
     const items=Array.from(dialog.querySelectorAll('button,[href],input,select,textarea,summary,[tabindex]:not([tabindex="-1"])')).filter(cdVisible),first=items[0],last=items.at(-1),active=document.activeElement;
@@ -87,6 +88,7 @@ function openConduct(stage = null){
   if(!E.ensure()) return;
   if(E.ac.state === 'suspended') E.ac.resume();
   CD.stage = stage;
+  CD.sel=null;$('#cdMember').hidden=true;
   $('#conduct').classList.remove('watch'); $('#cdClose').textContent = 'やめる'; $('#cdEyebrow').textContent = '指揮';
   soloAll();   // 指揮するときは、全員の音で
   CD.perf = stage ? rememberStageMembers(perform(recCtx(stage.rec)),stage.rec.snap.members,false) : currentPerformance();
@@ -129,6 +131,7 @@ function openConduct(stage = null){
 // 指揮しないで本番を聴くとき：タップする所は出さず、舞台の部員だけを大きく見せる
 function openWatch(perf, title){
   cancelAnimationFrame(CD.raf);
+  CD.sel=null;$('#cdMember').hidden=true;soloAll();
   CD.phase = 'watch'; CD.stage = null; CD.perf = perf;
   CD.stageMembers = stageMembers(perf);
   CD.who = new Set([...perf.notes, ...perf.hits].map(n => n.mid));

@@ -1,0 +1,629 @@
+[
+  {
+    "case": "watch-start",
+    "data": {
+      "members": 0.8418836034834385,
+      "pending": {
+        "kind": "contest",
+        "revealed": false
+      },
+      "phase": "watch",
+      "playback": 1,
+      "playing": true,
+      "records": 0.8318066792562604,
+      "voices": [
+        "SampleVoice"
+      ]
+    }
+  },
+  {
+    "case": "solo-light",
+    "data": {
+      "card": {
+        "active": "solo",
+        "button": {
+          "bottom": 669.9140625,
+          "height": 44,
+          "left": 37.5,
+          "right": 155.5,
+          "top": 625.9140625,
+          "width": 118,
+          "x": 37.5,
+          "y": 625.9140625
+        },
+        "card": {
+          "bottom": 794,
+          "height": 239.5859375,
+          "left": 24,
+          "right": 351,
+          "top": 554.4140625,
+          "width": 327,
+          "x": 24,
+          "y": 554.4140625
+        },
+        "close": {
+          "bottom": 614.9140625,
+          "height": 44,
+          "left": 279.5,
+          "right": 337.5,
+          "top": 570.9140625,
+          "width": 58,
+          "x": 279.5,
+          "y": 570.9140625
+        },
+        "hidden": false,
+        "name": "岡本 智也",
+        "pressed": "true",
+        "scroll": 0,
+        "selected": "m2028-n5-cafe",
+        "stats": "none"
+      },
+      "engine": {
+        "id": "m2028-n5-cafe",
+        "type": "member"
+      },
+      "members": 0.8418836034834385,
+      "pending": {
+        "kind": "contest",
+        "revealed": false
+      },
+      "playback": 1,
+      "playing": true,
+      "records": 0.8318066792562604,
+      "scrollWidth": 375,
+      "solo": "member:m2028-n5-cafe",
+      "width": 375
+    }
+  },
+  {
+    "case": "escape-card",
+    "data": {
+      "card": {
+        "active": "cdStage",
+        "button": {
+          "bottom": 0,
+          "height": 0,
+          "left": 0,
+          "right": 0,
+          "top": 0,
+          "width": 0,
+          "x": 0,
+          "y": 0
+        },
+        "card": {
+          "bottom": 0,
+          "height": 0,
+          "left": 0,
+          "right": 0,
+          "top": 0,
+          "width": 0,
+          "x": 0,
+          "y": 0
+        },
+        "close": {
+          "bottom": 0,
+          "height": 0,
+          "left": 0,
+          "right": 0,
+          "top": 0,
+          "width": 0,
+          "x": 0,
+          "y": 0
+        },
+        "hidden": true,
+        "name": "岡本 智也",
+        "pressed": "true",
+        "scroll": 0,
+        "selected": null,
+        "stats": "none"
+      },
+      "engine": {
+        "type": "all"
+      },
+      "pending": {
+        "kind": "contest",
+        "revealed": false
+      },
+      "phase": "watch",
+      "playback": 1,
+      "playing": true,
+      "solo": "all"
+    }
+  },
+  {
+    "case": "another-member",
+    "data": {
+      "card": {
+        "active": "close",
+        "button": {
+          "bottom": 669.9140625,
+          "height": 44,
+          "left": 37.5,
+          "right": 167.5,
+          "top": 625.9140625,
+          "width": 130,
+          "x": 37.5,
+          "y": 625.9140625
+        },
+        "card": {
+          "bottom": 794,
+          "height": 239.5859375,
+          "left": 24,
+          "right": 351,
+          "top": 554.4140625,
+          "width": 327,
+          "x": 24,
+          "y": 554.4140625
+        },
+        "close": {
+          "bottom": 614.9140625,
+          "height": 44,
+          "left": 279.5,
+          "right": 337.5,
+          "top": 570.9140625,
+          "width": 58,
+          "x": 279.5,
+          "y": 570.9140625
+        },
+        "hidden": false,
+        "name": "山口 大翔",
+        "pressed": "false",
+        "scroll": 0,
+        "selected": "m2028-n6-cafe",
+        "stats": "none"
+      },
+      "engine": {
+        "type": "all"
+      },
+      "phase": "watch",
+      "playback": 1,
+      "playing": true,
+      "solo": "all"
+    }
+  },
+  {
+    "case": "next-piece",
+    "data": {
+      "card": {
+        "active": "SPAN",
+        "button": {
+          "bottom": 0,
+          "height": 0,
+          "left": 0,
+          "right": 0,
+          "top": 0,
+          "width": 0,
+          "x": 0,
+          "y": 0
+        },
+        "card": {
+          "bottom": 0,
+          "height": 0,
+          "left": 0,
+          "right": 0,
+          "top": 0,
+          "width": 0,
+          "x": 0,
+          "y": 0
+        },
+        "close": {
+          "bottom": 0,
+          "height": 0,
+          "left": 0,
+          "right": 0,
+          "top": 0,
+          "width": 0,
+          "x": 0,
+          "y": 0
+        },
+        "hidden": true,
+        "name": "山口 大翔",
+        "pressed": "false",
+        "scroll": 0,
+        "selected": null,
+        "stats": "none"
+      },
+      "engine": {
+        "type": "all"
+      },
+      "errors": [],
+      "members": 0.8418836034834385,
+      "pending": {
+        "kind": "contest",
+        "revealed": false
+      },
+      "playback": 2,
+      "playing": true,
+      "records": 0.8318066792562604,
+      "solo": "all",
+      "title": "吹奏楽コンクール 県大会：「天国と地獄」（自由曲）"
+    }
+  },
+  {
+    "case": "solo-dark",
+    "data": {
+      "card": {
+        "active": "solo",
+        "button": {
+          "bottom": 669.9140625,
+          "height": 44,
+          "left": 37.5,
+          "right": 155.5,
+          "top": 625.9140625,
+          "width": 118,
+          "x": 37.5,
+          "y": 625.9140625
+        },
+        "card": {
+          "bottom": 794,
+          "height": 239.5859375,
+          "left": 24,
+          "right": 351,
+          "top": 554.4140625,
+          "width": 327,
+          "x": 24,
+          "y": 554.4140625
+        },
+        "close": {
+          "bottom": 614.9140625,
+          "height": 44,
+          "left": 279.5,
+          "right": 337.5,
+          "top": 570.9140625,
+          "width": 58,
+          "x": 279.5,
+          "y": 570.9140625
+        },
+        "hidden": false,
+        "name": "岡本 智也",
+        "pressed": "true",
+        "scroll": 0,
+        "selected": "m2028-n5-cafe",
+        "stats": "none"
+      },
+      "engine": {
+        "id": "m2028-n5-cafe",
+        "type": "member"
+      },
+      "playback": 2,
+      "playing": true,
+      "scrollWidth": 375,
+      "solo": "member:m2028-n5-cafe",
+      "theme": "dark",
+      "width": 375
+    }
+  },
+  {
+    "case": "natural-finish",
+    "data": {
+      "boot": {
+        "errors": [],
+        "failed": [],
+        "loaded": 33,
+        "scripts": 33
+      },
+      "card": {
+        "active": "BODY",
+        "button": {
+          "bottom": 0,
+          "height": 0,
+          "left": 0,
+          "right": 0,
+          "top": 0,
+          "width": 0,
+          "x": 0,
+          "y": 0
+        },
+        "card": {
+          "bottom": 0,
+          "height": 0,
+          "left": 0,
+          "right": 0,
+          "top": 0,
+          "width": 0,
+          "x": 0,
+          "y": 0
+        },
+        "close": {
+          "bottom": 0,
+          "height": 0,
+          "left": 0,
+          "right": 0,
+          "top": 0,
+          "width": 0,
+          "x": 0,
+          "y": 0
+        },
+        "hidden": true,
+        "name": "岡本 智也",
+        "pressed": "true",
+        "scroll": 0,
+        "selected": null,
+        "stats": "grid"
+      },
+      "engine": {
+        "type": "all"
+      },
+      "errors": [],
+      "members": 0.8418836034834385,
+      "pending": {
+        "kind": "contest",
+        "revealed": true
+      },
+      "playing": false,
+      "records": 0.8318066792562604,
+      "solo": "all"
+    }
+  },
+  {
+    "case": "before-next-with-solo",
+    "data": {
+      "card": {
+        "active": "solo",
+        "button": {
+          "bottom": 669.9140625,
+          "height": 44,
+          "left": 37.5,
+          "right": 155.5,
+          "top": 625.9140625,
+          "width": 118,
+          "x": 37.5,
+          "y": 625.9140625
+        },
+        "card": {
+          "bottom": 794,
+          "height": 239.5859375,
+          "left": 24,
+          "right": 351,
+          "top": 554.4140625,
+          "width": 327,
+          "x": 24,
+          "y": 554.4140625
+        },
+        "close": {
+          "bottom": 614.9140625,
+          "height": 44,
+          "left": 279.5,
+          "right": 337.5,
+          "top": 570.9140625,
+          "width": 58,
+          "x": 279.5,
+          "y": 570.9140625
+        },
+        "hidden": false,
+        "name": "岡本 智也",
+        "pressed": "true",
+        "scroll": 0,
+        "selected": "m2028-n5-cafe",
+        "stats": "none"
+      },
+      "playback": 1,
+      "playing": true,
+      "solo": "member:m2028-n5-cafe"
+    }
+  },
+  {
+    "case": "next-piece-after-solo",
+    "data": {
+      "card": {
+        "active": "cdClose",
+        "button": {
+          "bottom": 0,
+          "height": 0,
+          "left": 0,
+          "right": 0,
+          "top": 0,
+          "width": 0,
+          "x": 0,
+          "y": 0
+        },
+        "card": {
+          "bottom": 0,
+          "height": 0,
+          "left": 0,
+          "right": 0,
+          "top": 0,
+          "width": 0,
+          "x": 0,
+          "y": 0
+        },
+        "close": {
+          "bottom": 0,
+          "height": 0,
+          "left": 0,
+          "right": 0,
+          "top": 0,
+          "width": 0,
+          "x": 0,
+          "y": 0
+        },
+        "hidden": true,
+        "name": "岡本 智也",
+        "pressed": "true",
+        "scroll": 0,
+        "selected": null,
+        "stats": "none"
+      },
+      "engine": {
+        "type": "all"
+      },
+      "errors": [],
+      "pending": {
+        "kind": "contest",
+        "revealed": false
+      },
+      "playback": 2,
+      "playing": true,
+      "solo": "all",
+      "title": "吹奏楽コンクール 県大会：「天国と地獄」（自由曲）"
+    }
+  },
+  {
+    "case": "small-long-name",
+    "data": {
+      "card": {
+        "active": "close",
+        "button": {
+          "bottom": 542.6796875,
+          "height": 44,
+          "left": 37.5,
+          "right": 167.5,
+          "top": 498.6796875,
+          "width": 130,
+          "x": 37.5,
+          "y": 498.6796875
+        },
+        "card": {
+          "bottom": 666.765625,
+          "height": 265.4765625,
+          "left": 24,
+          "right": 351,
+          "top": 401.2890625,
+          "width": 327,
+          "x": 24,
+          "y": 401.2890625
+        },
+        "close": {
+          "bottom": 474.734375,
+          "height": 44,
+          "left": 279.5,
+          "right": 337.5,
+          "top": 430.734375,
+          "width": 58,
+          "x": 279.5,
+          "y": 430.734375
+        },
+        "hidden": false,
+        "name": "あいうえおかきくけこさし",
+        "pressed": "false",
+        "scroll": 78.5,
+        "selected": "m2028-n1-cafe",
+        "stats": "none"
+      },
+      "errors": [],
+      "scrollWidth": 375,
+      "theme": "dark",
+      "width": 375
+    }
+  },
+  {
+    "case": "tip-before-card",
+    "data": {
+      "cardHidden": false,
+      "dialogHidden": false,
+      "tipHidden": true
+    }
+  },
+  {
+    "case": "close-button",
+    "data": {
+      "card": {
+        "active": "cdStage",
+        "button": {
+          "bottom": 0,
+          "height": 0,
+          "left": 0,
+          "right": 0,
+          "top": 0,
+          "width": 0,
+          "x": 0,
+          "y": 0
+        },
+        "card": {
+          "bottom": 0,
+          "height": 0,
+          "left": 0,
+          "right": 0,
+          "top": 0,
+          "width": 0,
+          "x": 0,
+          "y": 0
+        },
+        "close": {
+          "bottom": 0,
+          "height": 0,
+          "left": 0,
+          "right": 0,
+          "top": 0,
+          "width": 0,
+          "x": 0,
+          "y": 0
+        },
+        "hidden": true,
+        "name": "あいうえおかきくけこさし",
+        "pressed": "false",
+        "scroll": 0,
+        "selected": null,
+        "stats": "none"
+      },
+      "dialogHidden": false,
+      "engine": {
+        "type": "all"
+      },
+      "phase": "watch",
+      "solo": "all"
+    }
+  },
+  {
+    "case": "conduct-after-watch",
+    "data": {
+      "active": "cdPad",
+      "card": {
+        "active": "cdPad",
+        "button": {
+          "bottom": 0,
+          "height": 0,
+          "left": 0,
+          "right": 0,
+          "top": 0,
+          "width": 0,
+          "x": 0,
+          "y": 0
+        },
+        "card": {
+          "bottom": 0,
+          "height": 0,
+          "left": 0,
+          "right": 0,
+          "top": 0,
+          "width": 0,
+          "x": 0,
+          "y": 0
+        },
+        "close": {
+          "bottom": 0,
+          "height": 0,
+          "left": 0,
+          "right": 0,
+          "top": 0,
+          "width": 0,
+          "x": 0,
+          "y": 0
+        },
+        "hidden": true,
+        "name": "あいうえおかきくけこさし",
+        "pressed": "false",
+        "scroll": 0,
+        "selected": null,
+        "stats": "grid"
+      },
+      "phase": "count",
+      "solo": "all"
+    }
+  },
+  {
+    "case": "one-year",
+    "data": {
+      "boot": {
+        "errors": [],
+        "failed": [],
+        "loaded": 33,
+        "scripts": 33
+      },
+      "errors": [],
+      "phase": "choose",
+      "steps": 49,
+      "year": 2027
+    }
+  }
+]

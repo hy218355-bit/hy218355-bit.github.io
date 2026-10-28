@@ -913,6 +913,7 @@ button.wr-person:focus-visible{outline:2px solid var(--brass);outline-offset:2px
 .cd-member .cm-st b{font-family:var(--f-lcd);font-weight:400;font-size:13px;color:var(--ink);text-align:right}
 .cd-member .cm-note{font-size:12.5px;color:var(--ink-soft);line-height:1.5}
 .cd-member .row{display:flex;flex-wrap:wrap;gap:8px}
+.cd-member [data-cdm="solo"][aria-pressed="true"]{border-color:var(--brass);background:var(--brass-soft);box-shadow:inset 0 0 0 1px var(--brass)}
 .cd-prog{height:4px;border-radius:2px;background:var(--rule);overflow:hidden;margin-top:6px}
 .cd-prog i{display:block;height:100%;width:0;background:var(--brass);transition:width .25s linear}
 .cd-pad{position:relative;flex:1;min-height:0;max-width:720px;width:100%;margin:0 auto;border-radius:22px;overflow:hidden;cursor:pointer;
@@ -1599,7 +1600,8 @@ button.wr-person:focus-visible{outline:2px solid var(--brass);outline-offset:2px
 #conduct .cd-result .cd-num span{color:var(--cd-soft)}
 #conduct .cd-result .cd-num b{color:var(--cd-ink)}
 #conduct .cd-legend,#conduct .cd-member{order:2}
-#conduct.watch .cd-stage-meta,#conduct.watch .cd-controls,#conduct:has(.cd-result:not([hidden])) .cd-controls,#conduct:has(.cd-result:not([hidden])) .cd-stats{display:none}
+#conduct .cd-member .btn{min-height:44px}
+#conduct.watch .cd-stage-meta,#conduct.watch .cd-controls,#conduct.watch .cd-stats,#conduct:has(.cd-result:not([hidden])) .cd-controls,#conduct:has(.cd-result:not([hidden])) .cd-stats{display:none}
 #conduct.watch .cd-top{background:var(--cd-paper)}
 #conduct.watch .cd-band{flex:1 0 auto}
 #conduct.watch .cd-msg{margin-top:12px;min-height:0;margin-bottom:12px}
@@ -1751,9 +1753,9 @@ button.wr-person:focus-visible{outline:2px solid var(--brass);outline-offset:2px
     <button class="btn small quiet" type="button" id="cdClose">やめる</button>
   </div>
   <p class="cd-msg" id="cdMsg" aria-live="polite"></p>
-  <div class="cd-band"><div class="cd-stagewrap"><canvas id="cdStage" role="img" aria-label="舞台の部員。音を出している部員が光る。"></canvas><div class="cd-curtain" aria-hidden="true"><i></i><i></i><div class="cd-intro"></div></div><div class="cd-stage-meta" aria-hidden="true"><span id="cdVenue"></span><span id="cdPlayers"></span></div></div><div class="cd-prog" aria-hidden="true"><i id="cdProg"></i></div></div>
+  <div class="cd-band"><div class="cd-stagewrap"><canvas id="cdStage" role="img" tabindex="-1" aria-label="舞台の部員。音を出している部員が光る。"></canvas><div class="cd-curtain" aria-hidden="true"><i></i><i></i><div class="cd-intro"></div></div><div class="cd-stage-meta" aria-hidden="true"><span id="cdVenue"></span><span id="cdPlayers"></span></div></div><div class="cd-prog" aria-hidden="true"><i id="cdProg"></i></div></div>
   <p class="legend stage-key cd-legend"><span data-tip="力は G・F・E・D・C・B・A・S の8段階。右ほどうまい" data-tipname="ランク" role="button" tabindex="0">色：部員の力<i class="rkscale"><i class="rk rk-g">G</i><i class="rk rk-f">F</i><i class="rk rk-e">E</i><i class="rk rk-d">D</i><i class="rk rk-c">C</i><i class="rk rk-b">B</i><i class="rk rk-a">A</i><i class="rk rk-s">S</i></i></span><button class="help-button" type="button" aria-label="舞台の見方" data-tipname="舞台の見方" data-tip="顔の下の絵は楽器。色は力のランク。光る部員はいま音を出している（赤く光ったら音を外した）。点線は空いている席。部員を押すと、その子の様子が出る。">?</button></p>
-  <div class="cd-member" id="cdMember" hidden></div>
+  <div class="cd-member" id="cdMember" role="region" aria-labelledby="cdMemberName" hidden></div>
   <div class="cd-controls">
     <span class="cd-feedback" id="cdFeedback" aria-live="off"></span>
     <svg class="cd-pattern" id="cdPattern" viewBox="0 0 343 94" aria-hidden="true"></svg>
@@ -1809,39 +1811,39 @@ button.wr-person:focus-visible{outline:2px solid var(--brass);outline-offset:2px
   <button type="button" data-tabgo="log"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 5.5C4 4.7 4.7 4 5.5 4H11v16H5.5c-.8 0-1.5-.7-1.5-1.5z"/><path d="M20 5.5c0-.8-.7-1.5-1.5-1.5H13v16h5.5c.8 0 1.5-.7 1.5-1.5z"/></svg><span>日誌</span></button>
 </nav>
 
-<script src="js/util.js?v=qa-countin-1"></script>
-<script src="js/icons.js?v=qa-countin-1"></script>
-<script src="js/instrument-icons.js?v=qa-countin-1"></script>
-<script src="js/face-cast.js?v=qa-countin-1"></script>
-<script src="js/faces.js?v=qa-countin-1"></script>
-<script src="js/instruments.js?v=qa-countin-1"></script>
-<script src="js/venues.js?v=qa-countin-1"></script>
-<script src="js/samples.js?v=qa-countin-1"></script>
-<script src="js/scores.js?v=qa-countin-1"></script>
-<script src="js/pieces/largo.js?v=qa-countin-1"></script>
-<script src="js/pieces/ode.js?v=qa-countin-1"></script>
-<script src="js/pieces/galop.js?v=qa-countin-1"></script>
-<script src="js/pieces/pomp.js?v=qa-countin-1"></script>
-<script src="js/pieces/aida.js?v=qa-countin-1"></script>
-<script src="js/pieces/hero.js?v=qa-countin-1"></script>
-<script src="js/pieces/holst.js?v=qa-countin-1"></script>
-<script src="js/pieces/hungarian.js?v=qa-countin-1"></script>
-<script src="js/pieces/flowers.js?v=qa-countin-1"></script>
-<script src="js/pieces/tell.js?v=qa-countin-1"></script>
-<script src="js/pieces/carmen.js?v=qa-countin-1"></script>
-<script src="js/pieces/valkyrie.js?v=qa-countin-1"></script>
-<script src="js/pieces/swan.js?v=qa-countin-1"></script>
-<script src="js/pieces/spring.js?v=qa-countin-1"></script>
-<script src="js/pieces/canon.js?v=qa-countin-1"></script>
-<script src="js/band.js?v=qa-countin-1"></script>
-<script src="js/game.js?v=qa-countin-1"></script>
-<script src="js/engine.js?v=qa-countin-1"></script>
-<script src="js/conduct.js?v=qa-countin-1"></script>
-<script src="js/announce.js?v=qa-countin-1"></script>
-<script src="js/tunegame.js?v=qa-countin-1"></script>
-<script src="js/fx.js?v=qa-countin-1"></script>
-<script src="js/ui.js?v=qa-countin-1"></script>
+<script src="js/util.js?v=qa-watch-member-1"></script>
+<script src="js/icons.js?v=qa-watch-member-1"></script>
+<script src="js/instrument-icons.js?v=qa-watch-member-1"></script>
+<script src="js/face-cast.js?v=qa-watch-member-1"></script>
+<script src="js/faces.js?v=qa-watch-member-1"></script>
+<script src="js/instruments.js?v=qa-watch-member-1"></script>
+<script src="js/venues.js?v=qa-watch-member-1"></script>
+<script src="js/samples.js?v=qa-watch-member-1"></script>
+<script src="js/scores.js?v=qa-watch-member-1"></script>
+<script src="js/pieces/largo.js?v=qa-watch-member-1"></script>
+<script src="js/pieces/ode.js?v=qa-watch-member-1"></script>
+<script src="js/pieces/galop.js?v=qa-watch-member-1"></script>
+<script src="js/pieces/pomp.js?v=qa-watch-member-1"></script>
+<script src="js/pieces/aida.js?v=qa-watch-member-1"></script>
+<script src="js/pieces/hero.js?v=qa-watch-member-1"></script>
+<script src="js/pieces/holst.js?v=qa-watch-member-1"></script>
+<script src="js/pieces/hungarian.js?v=qa-watch-member-1"></script>
+<script src="js/pieces/flowers.js?v=qa-watch-member-1"></script>
+<script src="js/pieces/tell.js?v=qa-watch-member-1"></script>
+<script src="js/pieces/carmen.js?v=qa-watch-member-1"></script>
+<script src="js/pieces/valkyrie.js?v=qa-watch-member-1"></script>
+<script src="js/pieces/swan.js?v=qa-watch-member-1"></script>
+<script src="js/pieces/spring.js?v=qa-watch-member-1"></script>
+<script src="js/pieces/canon.js?v=qa-watch-member-1"></script>
+<script src="js/band.js?v=qa-watch-member-1"></script>
+<script src="js/game.js?v=qa-watch-member-1"></script>
+<script src="js/engine.js?v=qa-watch-member-1"></script>
+<script src="js/conduct.js?v=qa-watch-member-1"></script>
+<script src="js/announce.js?v=qa-watch-member-1"></script>
+<script src="js/tunegame.js?v=qa-watch-member-1"></script>
+<script src="js/fx.js?v=qa-watch-member-1"></script>
+<script src="js/ui.js?v=qa-watch-member-1"></script>
 <div class="tip" id="tip" role="tooltip" hidden></div>
-<script src="/design/implementation/qa.js?v=qa-countin-1"></script>
+<script src="/design/implementation/qa.js?v=qa-watch-member-1"></script>
 </body>
 </html>
