@@ -1,0 +1,1362 @@
+[
+  {
+    "case": "bottom-light",
+    "data": {
+      "actions": {
+        "bottom": 607,
+        "height": 66,
+        "left": 16,
+        "right": 359,
+        "top": 541,
+        "width": 343,
+        "x": 16,
+        "y": 541
+      },
+      "audible": [],
+      "ensemble": {
+        "active": false,
+        "button": {
+          "animation": "none",
+          "disabled": false,
+          "label": "選んだ5人で聴く",
+          "motion": "off",
+          "pressed": "false",
+          "rect": {
+            "bottom": 599,
+            "height": 46,
+            "left": 16,
+            "right": 62,
+            "top": 553,
+            "width": 46,
+            "x": 16,
+            "y": 553
+          },
+          "waiting": "false"
+        },
+        "cast": [],
+        "focus": "enslisten",
+        "fullState": 0.012763981241732836,
+        "miniHidden": true,
+        "performance": null,
+        "picked": {
+          "cards": [
+            "m2028-n1-cafe",
+            "m2028-n2-cafe",
+            "m2028-n3-cafe",
+            "m2028-n4-cafe",
+            "m2028-n5-cafe"
+          ],
+          "faces": [
+            "m2028-n1-cafe",
+            "m2028-n2-cafe",
+            "m2028-n3-cafe",
+            "m2028-n4-cafe",
+            "m2028-n5-cafe"
+          ],
+          "label": "選んだ5人：田中 七海、小川 悠斗、松井 颯太、菅原 菜月、岡本 智也",
+          "names": [
+            "田中 七海",
+            "小川 悠斗",
+            "松井 颯太",
+            "菅原 菜月",
+            "岡本 智也"
+          ],
+          "rect": {
+            "bottom": 58,
+            "height": 50,
+            "left": 30,
+            "right": 345,
+            "top": 8,
+            "width": 315,
+            "x": 30,
+            "y": 8
+          },
+          "slots": 8
+        },
+        "pieceChoice": null,
+        "rangeChoice": "all",
+        "resultPerformance": null,
+        "selected": [
+          "m2028-n1-cafe",
+          "m2028-n2-cafe",
+          "m2028-n3-cafe",
+          "m2028-n4-cafe",
+          "m2028-n5-cafe"
+        ],
+        "waiting": false
+      },
+      "errors": [],
+      "focus": "enslisten",
+      "playback": null,
+      "playing": false,
+      "records": 0.11899834335781634,
+      "rect": {
+        "bottom": 58,
+        "height": 50,
+        "left": 30,
+        "right": 345,
+        "top": 8,
+        "width": 315,
+        "x": 30,
+        "y": 8
+      },
+      "scrollWidth": 375,
+      "submit": {
+        "disabled": false,
+        "text": "この5人で出る"
+      },
+      "theme": "light",
+      "waiting": false,
+      "width": 375
+    }
+  },
+  {
+    "case": "bottom-dark",
+    "data": {
+      "actions": {
+        "bottom": 607,
+        "height": 66,
+        "left": 16,
+        "right": 359,
+        "top": 541,
+        "width": 343,
+        "x": 16,
+        "y": 541
+      },
+      "audible": [],
+      "ensemble": {
+        "active": false,
+        "button": {
+          "animation": "none",
+          "disabled": false,
+          "label": "選んだ5人で聴く",
+          "motion": "off",
+          "pressed": "false",
+          "rect": {
+            "bottom": 599,
+            "height": 46,
+            "left": 16,
+            "right": 62,
+            "top": 553,
+            "width": 46,
+            "x": 16,
+            "y": 553
+          },
+          "waiting": "false"
+        },
+        "cast": [],
+        "focus": "enslisten",
+        "fullState": 0.012763981241732836,
+        "miniHidden": true,
+        "performance": null,
+        "picked": {
+          "cards": [
+            "m2028-n1-cafe",
+            "m2028-n2-cafe",
+            "m2028-n3-cafe",
+            "m2028-n4-cafe",
+            "m2028-n5-cafe"
+          ],
+          "faces": [
+            "m2028-n1-cafe",
+            "m2028-n2-cafe",
+            "m2028-n3-cafe",
+            "m2028-n4-cafe",
+            "m2028-n5-cafe"
+          ],
+          "label": "選んだ5人：田中 七海、小川 悠斗、松井 颯太、菅原 菜月、岡本 智也",
+          "names": [
+            "田中 七海",
+            "小川 悠斗",
+            "松井 颯太",
+            "菅原 菜月",
+            "岡本 智也"
+          ],
+          "rect": {
+            "bottom": 58,
+            "height": 50,
+            "left": 30,
+            "right": 345,
+            "top": 8,
+            "width": 315,
+            "x": 30,
+            "y": 8
+          },
+          "slots": 8
+        },
+        "pieceChoice": null,
+        "rangeChoice": "all",
+        "resultPerformance": null,
+        "selected": [
+          "m2028-n1-cafe",
+          "m2028-n2-cafe",
+          "m2028-n3-cafe",
+          "m2028-n4-cafe",
+          "m2028-n5-cafe"
+        ],
+        "waiting": false
+      },
+      "errors": [],
+      "focus": "enslisten",
+      "playback": null,
+      "playing": false,
+      "records": 0.11899834335781634,
+      "rect": {
+        "bottom": 58,
+        "height": 50,
+        "left": 30,
+        "right": 345,
+        "top": 8,
+        "width": 315,
+        "x": 30,
+        "y": 8
+      },
+      "scrollWidth": 375,
+      "submit": {
+        "disabled": false,
+        "text": "この5人で出る"
+      },
+      "theme": "dark",
+      "waiting": false,
+      "width": 375
+    }
+  },
+  {
+    "case": "eight",
+    "data": {
+      "actions": {
+        "bottom": 607,
+        "height": 66,
+        "left": 16,
+        "right": 359,
+        "top": 541,
+        "width": 343,
+        "x": 16,
+        "y": 541
+      },
+      "audible": [],
+      "ensemble": {
+        "active": false,
+        "button": {
+          "animation": "none",
+          "disabled": false,
+          "label": "選んだ8人で聴く",
+          "motion": "off",
+          "pressed": "false",
+          "rect": {
+            "bottom": 599,
+            "height": 46,
+            "left": 16,
+            "right": 62,
+            "top": 553,
+            "width": 46,
+            "x": 16,
+            "y": 553
+          },
+          "waiting": "false"
+        },
+        "cast": [],
+        "focus": "m2028-n37-cafe",
+        "fullState": 0.012763981241732836,
+        "miniHidden": true,
+        "performance": null,
+        "picked": {
+          "cards": [
+            "m2028-n1-cafe",
+            "m2028-n2-cafe",
+            "m2028-n3-cafe",
+            "m2028-n4-cafe",
+            "m2028-n5-cafe",
+            "m2028-n37-cafe",
+            "m2028-n38-cafe",
+            "m2028-n39-cafe"
+          ],
+          "faces": [
+            "m2028-n1-cafe",
+            "m2028-n2-cafe",
+            "m2028-n3-cafe",
+            "m2028-n4-cafe",
+            "m2028-n5-cafe",
+            "m2028-n37-cafe",
+            "m2028-n38-cafe",
+            "m2028-n39-cafe"
+          ],
+          "label": "選んだ8人：田中 七海、小川 悠斗、松井 颯太、菅原 菜月、岡本 智也、山田 蓮、原 杏、横山 透",
+          "names": [
+            "田中 七海",
+            "小川 悠斗",
+            "松井 颯太",
+            "菅原 菜月",
+            "岡本 智也",
+            "山田 蓮",
+            "原 杏",
+            "横山 透"
+          ],
+          "rect": {
+            "bottom": 58,
+            "height": 50,
+            "left": 30,
+            "right": 345,
+            "top": 8,
+            "width": 315,
+            "x": 30,
+            "y": 8
+          },
+          "slots": 8
+        },
+        "pieceChoice": null,
+        "rangeChoice": "all",
+        "resultPerformance": null,
+        "selected": [
+          "m2028-n1-cafe",
+          "m2028-n2-cafe",
+          "m2028-n3-cafe",
+          "m2028-n4-cafe",
+          "m2028-n5-cafe",
+          "m2028-n39-cafe",
+          "m2028-n38-cafe",
+          "m2028-n37-cafe"
+        ],
+        "waiting": false
+      },
+      "errors": [],
+      "focus": "m2028-n37-cafe",
+      "playback": null,
+      "playing": false,
+      "records": 0.11899834335781634,
+      "rect": {
+        "bottom": 58,
+        "height": 50,
+        "left": 30,
+        "right": 345,
+        "top": 8,
+        "width": 315,
+        "x": 30,
+        "y": 8
+      },
+      "scrollWidth": 375,
+      "submit": {
+        "disabled": false,
+        "text": "この8人で出る"
+      },
+      "theme": "dark",
+      "waiting": false,
+      "width": 375
+    }
+  },
+  {
+    "case": "remove-one",
+    "data": {
+      "actions": {
+        "bottom": 607,
+        "height": 66,
+        "left": 16,
+        "right": 359,
+        "top": 541,
+        "width": 343,
+        "x": 16,
+        "y": 541
+      },
+      "audible": [],
+      "ensemble": {
+        "active": false,
+        "button": {
+          "animation": "none",
+          "disabled": false,
+          "label": "選んだ7人で聴く",
+          "motion": "off",
+          "pressed": "false",
+          "rect": {
+            "bottom": 599,
+            "height": 46,
+            "left": 16,
+            "right": 62,
+            "top": 553,
+            "width": 46,
+            "x": 16,
+            "y": 553
+          },
+          "waiting": "false"
+        },
+        "cast": [],
+        "focus": "m2028-n39-cafe",
+        "fullState": 0.012763981241732836,
+        "miniHidden": true,
+        "performance": null,
+        "picked": {
+          "cards": [
+            "m2028-n1-cafe",
+            "m2028-n2-cafe",
+            "m2028-n3-cafe",
+            "m2028-n4-cafe",
+            "m2028-n5-cafe",
+            "m2028-n37-cafe",
+            "m2028-n38-cafe"
+          ],
+          "faces": [
+            "m2028-n1-cafe",
+            "m2028-n2-cafe",
+            "m2028-n3-cafe",
+            "m2028-n4-cafe",
+            "m2028-n5-cafe",
+            "m2028-n37-cafe",
+            "m2028-n38-cafe"
+          ],
+          "label": "選んだ7人：田中 七海、小川 悠斗、松井 颯太、菅原 菜月、岡本 智也、山田 蓮、原 杏",
+          "names": [
+            "田中 七海",
+            "小川 悠斗",
+            "松井 颯太",
+            "菅原 菜月",
+            "岡本 智也",
+            "山田 蓮",
+            "原 杏"
+          ],
+          "rect": {
+            "bottom": 58,
+            "height": 50,
+            "left": 30,
+            "right": 345,
+            "top": 8,
+            "width": 315,
+            "x": 30,
+            "y": 8
+          },
+          "slots": 8
+        },
+        "pieceChoice": null,
+        "rangeChoice": "all",
+        "resultPerformance": null,
+        "selected": [
+          "m2028-n1-cafe",
+          "m2028-n2-cafe",
+          "m2028-n3-cafe",
+          "m2028-n4-cafe",
+          "m2028-n5-cafe",
+          "m2028-n38-cafe",
+          "m2028-n37-cafe"
+        ],
+        "waiting": false
+      },
+      "errors": [],
+      "focus": "m2028-n39-cafe",
+      "playback": null,
+      "playing": false,
+      "records": 0.11899834335781634,
+      "rect": {
+        "bottom": 58,
+        "height": 50,
+        "left": 30,
+        "right": 345,
+        "top": 8,
+        "width": 315,
+        "x": 30,
+        "y": 8
+      },
+      "scrollWidth": 375,
+      "submit": {
+        "disabled": false,
+        "text": "この7人で出る"
+      },
+      "theme": "dark",
+      "waiting": false,
+      "width": 375
+    }
+  },
+  {
+    "case": "preview-seven",
+    "data": {
+      "actions": {
+        "bottom": 607,
+        "height": 66,
+        "left": 16,
+        "right": 359,
+        "top": 541,
+        "width": 343,
+        "x": 16,
+        "y": 541
+      },
+      "audible": [
+        "m2028-n1-cafe",
+        "m2028-n2-cafe",
+        "m2028-n3-cafe",
+        "m2028-n4-cafe",
+        "m2028-n5-cafe",
+        "m2028-n37-cafe",
+        "m2028-n38-cafe"
+      ],
+      "ensemble": {
+        "active": true,
+        "button": {
+          "animation": "none",
+          "disabled": false,
+          "label": "7人の試聴を止める",
+          "motion": "off",
+          "pressed": "true",
+          "rect": {
+            "bottom": 599,
+            "height": 46,
+            "left": 16,
+            "right": 62,
+            "top": 553,
+            "width": 46,
+            "x": 16,
+            "y": 553
+          },
+          "waiting": "false"
+        },
+        "cast": [
+          "m2028-n1-cafe",
+          "m2028-n2-cafe",
+          "m2028-n3-cafe",
+          "m2028-n4-cafe",
+          "m2028-n5-cafe",
+          "m2028-n37-cafe",
+          "m2028-n38-cafe"
+        ],
+        "focus": "enslisten",
+        "fullState": 0.012763981241732836,
+        "miniHidden": true,
+        "performance": 0.9281156968791038,
+        "picked": {
+          "cards": [
+            "m2028-n1-cafe",
+            "m2028-n2-cafe",
+            "m2028-n3-cafe",
+            "m2028-n4-cafe",
+            "m2028-n5-cafe",
+            "m2028-n37-cafe",
+            "m2028-n38-cafe"
+          ],
+          "faces": [
+            "m2028-n1-cafe",
+            "m2028-n2-cafe",
+            "m2028-n3-cafe",
+            "m2028-n4-cafe",
+            "m2028-n5-cafe",
+            "m2028-n37-cafe",
+            "m2028-n38-cafe"
+          ],
+          "label": "選んだ7人：田中 七海、小川 悠斗、松井 颯太、菅原 菜月、岡本 智也、山田 蓮、原 杏",
+          "names": [
+            "田中 七海",
+            "小川 悠斗",
+            "松井 颯太",
+            "菅原 菜月",
+            "岡本 智也",
+            "山田 蓮",
+            "原 杏"
+          ],
+          "rect": {
+            "bottom": 58,
+            "height": 50,
+            "left": 30,
+            "right": 345,
+            "top": 8,
+            "width": 315,
+            "x": 30,
+            "y": 8
+          },
+          "slots": 8
+        },
+        "pieceChoice": "galop",
+        "rangeChoice": "all",
+        "resultPerformance": null,
+        "selected": [
+          "m2028-n1-cafe",
+          "m2028-n2-cafe",
+          "m2028-n3-cafe",
+          "m2028-n4-cafe",
+          "m2028-n5-cafe",
+          "m2028-n38-cafe",
+          "m2028-n37-cafe"
+        ],
+        "waiting": false
+      },
+      "errors": [],
+      "focus": "enslisten",
+      "playback": 1,
+      "playing": true,
+      "records": 0.11899834335781634,
+      "rect": {
+        "bottom": 58,
+        "height": 50,
+        "left": 30,
+        "right": 345,
+        "top": 8,
+        "width": 315,
+        "x": 30,
+        "y": 8
+      },
+      "scrollWidth": 375,
+      "submit": {
+        "disabled": false,
+        "text": "この7人で出る"
+      },
+      "theme": "dark",
+      "waiting": false,
+      "width": 375
+    }
+  },
+  {
+    "case": "selection-stops-preview",
+    "data": {
+      "actions": {
+        "bottom": 607,
+        "height": 66,
+        "left": 16,
+        "right": 359,
+        "top": 541,
+        "width": 343,
+        "x": 16,
+        "y": 541
+      },
+      "audible": [],
+      "ensemble": {
+        "active": false,
+        "button": {
+          "animation": "none",
+          "disabled": false,
+          "label": "選んだ6人で聴く",
+          "motion": "off",
+          "pressed": "false",
+          "rect": {
+            "bottom": 599,
+            "height": 46,
+            "left": 16,
+            "right": 62,
+            "top": 553,
+            "width": 46,
+            "x": 16,
+            "y": 553
+          },
+          "waiting": "false"
+        },
+        "cast": [],
+        "focus": "m2028-n38-cafe",
+        "fullState": 0.012763981241732836,
+        "miniHidden": true,
+        "performance": null,
+        "picked": {
+          "cards": [
+            "m2028-n1-cafe",
+            "m2028-n2-cafe",
+            "m2028-n3-cafe",
+            "m2028-n4-cafe",
+            "m2028-n5-cafe",
+            "m2028-n37-cafe"
+          ],
+          "faces": [
+            "m2028-n1-cafe",
+            "m2028-n2-cafe",
+            "m2028-n3-cafe",
+            "m2028-n4-cafe",
+            "m2028-n5-cafe",
+            "m2028-n37-cafe"
+          ],
+          "label": "選んだ6人：田中 七海、小川 悠斗、松井 颯太、菅原 菜月、岡本 智也、山田 蓮",
+          "names": [
+            "田中 七海",
+            "小川 悠斗",
+            "松井 颯太",
+            "菅原 菜月",
+            "岡本 智也",
+            "山田 蓮"
+          ],
+          "rect": {
+            "bottom": 58,
+            "height": 50,
+            "left": 30,
+            "right": 345,
+            "top": 8,
+            "width": 315,
+            "x": 30,
+            "y": 8
+          },
+          "slots": 8
+        },
+        "pieceChoice": null,
+        "rangeChoice": "all",
+        "resultPerformance": null,
+        "selected": [
+          "m2028-n1-cafe",
+          "m2028-n2-cafe",
+          "m2028-n3-cafe",
+          "m2028-n4-cafe",
+          "m2028-n5-cafe",
+          "m2028-n37-cafe"
+        ],
+        "waiting": false
+      },
+      "errors": [],
+      "focus": "m2028-n38-cafe",
+      "playback": null,
+      "playing": false,
+      "records": 0.11899834335781634,
+      "rect": {
+        "bottom": 58,
+        "height": 50,
+        "left": 30,
+        "right": 345,
+        "top": 8,
+        "width": 315,
+        "x": 30,
+        "y": 8
+      },
+      "scrollWidth": 375,
+      "submit": {
+        "disabled": false,
+        "text": "この6人で出る"
+      },
+      "theme": "dark",
+      "waiting": false,
+      "width": 375
+    }
+  },
+  {
+    "case": "empty",
+    "data": {
+      "actions": {
+        "bottom": 607,
+        "height": 66,
+        "left": 16,
+        "right": 359,
+        "top": 541,
+        "width": 343,
+        "x": 16,
+        "y": 541
+      },
+      "audible": [],
+      "ensemble": {
+        "active": false,
+        "button": {
+          "animation": "none",
+          "disabled": true,
+          "label": "選んだ0人で聴く",
+          "motion": "off",
+          "pressed": "false",
+          "rect": {
+            "bottom": 599,
+            "height": 46,
+            "left": 16,
+            "right": 62,
+            "top": 553,
+            "width": 46,
+            "x": 16,
+            "y": 553
+          },
+          "waiting": "false"
+        },
+        "cast": [],
+        "focus": "m2028-n37-cafe",
+        "fullState": 0.012763981241732836,
+        "miniHidden": true,
+        "performance": null,
+        "picked": {
+          "cards": [],
+          "faces": [],
+          "label": "選んだ0人",
+          "names": [],
+          "rect": {
+            "bottom": 58,
+            "height": 50,
+            "left": 30,
+            "right": 345,
+            "top": 8,
+            "width": 315,
+            "x": 30,
+            "y": 8
+          },
+          "slots": 8
+        },
+        "pieceChoice": null,
+        "rangeChoice": "all",
+        "resultPerformance": null,
+        "selected": [],
+        "waiting": false
+      },
+      "errors": [],
+      "focus": "m2028-n37-cafe",
+      "playback": null,
+      "playing": false,
+      "records": 0.11899834335781634,
+      "rect": {
+        "bottom": 58,
+        "height": 50,
+        "left": 30,
+        "right": 345,
+        "top": 8,
+        "width": 315,
+        "x": 30,
+        "y": 8
+      },
+      "scrollWidth": 375,
+      "submit": {
+        "disabled": true,
+        "text": "あと3人を選ぶ"
+      },
+      "theme": "dark",
+      "waiting": false,
+      "width": 375
+    }
+  },
+  {
+    "case": "three",
+    "data": {
+      "actions": {
+        "bottom": 607,
+        "height": 66,
+        "left": 16,
+        "right": 359,
+        "top": 541,
+        "width": 343,
+        "x": 16,
+        "y": 541
+      },
+      "audible": [],
+      "ensemble": {
+        "active": false,
+        "button": {
+          "animation": "none",
+          "disabled": false,
+          "label": "選んだ3人で聴く",
+          "motion": "off",
+          "pressed": "false",
+          "rect": {
+            "bottom": 599,
+            "height": 46,
+            "left": 16,
+            "right": 62,
+            "top": 553,
+            "width": 46,
+            "x": 16,
+            "y": 553
+          },
+          "waiting": "false"
+        },
+        "cast": [],
+        "focus": "m2028-n3-cafe",
+        "fullState": 0.012763981241732836,
+        "miniHidden": true,
+        "performance": null,
+        "picked": {
+          "cards": [
+            "m2028-n1-cafe",
+            "m2028-n2-cafe",
+            "m2028-n3-cafe"
+          ],
+          "faces": [
+            "m2028-n1-cafe",
+            "m2028-n2-cafe",
+            "m2028-n3-cafe"
+          ],
+          "label": "選んだ3人：田中 七海、小川 悠斗、松井 颯太",
+          "names": [
+            "田中 七海",
+            "小川 悠斗",
+            "松井 颯太"
+          ],
+          "rect": {
+            "bottom": 179.1953125,
+            "height": 50,
+            "left": 30,
+            "right": 345,
+            "top": 129.1953125,
+            "width": 315,
+            "x": 30,
+            "y": 129.1953125
+          },
+          "slots": 8
+        },
+        "pieceChoice": null,
+        "rangeChoice": "all",
+        "resultPerformance": null,
+        "selected": [
+          "m2028-n1-cafe",
+          "m2028-n2-cafe",
+          "m2028-n3-cafe"
+        ],
+        "waiting": false
+      },
+      "errors": [],
+      "focus": "m2028-n3-cafe",
+      "playback": null,
+      "playing": false,
+      "records": 0.11899834335781634,
+      "rect": {
+        "bottom": 179.1953125,
+        "height": 50,
+        "left": 30,
+        "right": 345,
+        "top": 129.1953125,
+        "width": 315,
+        "x": 30,
+        "y": 129.1953125
+      },
+      "scrollWidth": 375,
+      "submit": {
+        "disabled": false,
+        "text": "この3人で出る"
+      },
+      "theme": "dark",
+      "waiting": false,
+      "width": 375
+    }
+  },
+  {
+    "case": "preview-three",
+    "data": {
+      "actions": {
+        "bottom": 607,
+        "height": 66,
+        "left": 16,
+        "right": 359,
+        "top": 541,
+        "width": 343,
+        "x": 16,
+        "y": 541
+      },
+      "audible": [
+        "m2028-n1-cafe",
+        "m2028-n2-cafe",
+        "m2028-n3-cafe"
+      ],
+      "ensemble": {
+        "active": true,
+        "button": {
+          "animation": "none",
+          "disabled": false,
+          "label": "3人の試聴を止める",
+          "motion": "off",
+          "pressed": "true",
+          "rect": {
+            "bottom": 599,
+            "height": 46,
+            "left": 16,
+            "right": 62,
+            "top": 553,
+            "width": 46,
+            "x": 16,
+            "y": 553
+          },
+          "waiting": "false"
+        },
+        "cast": [
+          "m2028-n1-cafe",
+          "m2028-n2-cafe",
+          "m2028-n3-cafe"
+        ],
+        "focus": "enslisten",
+        "fullState": 0.012763981241732836,
+        "miniHidden": true,
+        "performance": 0.3828257357235998,
+        "picked": {
+          "cards": [
+            "m2028-n1-cafe",
+            "m2028-n2-cafe",
+            "m2028-n3-cafe"
+          ],
+          "faces": [
+            "m2028-n1-cafe",
+            "m2028-n2-cafe",
+            "m2028-n3-cafe"
+          ],
+          "label": "選んだ3人：田中 七海、小川 悠斗、松井 颯太",
+          "names": [
+            "田中 七海",
+            "小川 悠斗",
+            "松井 颯太"
+          ],
+          "rect": {
+            "bottom": 179.1953125,
+            "height": 50,
+            "left": 30,
+            "right": 345,
+            "top": 129.1953125,
+            "width": 315,
+            "x": 30,
+            "y": 129.1953125
+          },
+          "slots": 8
+        },
+        "pieceChoice": "galop",
+        "rangeChoice": "all",
+        "resultPerformance": null,
+        "selected": [
+          "m2028-n1-cafe",
+          "m2028-n2-cafe",
+          "m2028-n3-cafe"
+        ],
+        "waiting": false
+      },
+      "errors": [],
+      "focus": "enslisten",
+      "playback": 2,
+      "playing": true,
+      "records": 0.11899834335781634,
+      "rect": {
+        "bottom": 179.1953125,
+        "height": 50,
+        "left": 30,
+        "right": 345,
+        "top": 129.1953125,
+        "width": 315,
+        "x": 30,
+        "y": 129.1953125
+      },
+      "scrollWidth": 375,
+      "submit": {
+        "disabled": false,
+        "text": "この3人で出る"
+      },
+      "theme": "dark",
+      "waiting": false,
+      "width": 375
+    }
+  },
+  {
+    "case": "final-light",
+    "data": {
+      "actions": {
+        "bottom": 607,
+        "height": 66,
+        "left": 16,
+        "right": 359,
+        "top": 541,
+        "width": 343,
+        "x": 16,
+        "y": 541
+      },
+      "audible": [],
+      "ensemble": {
+        "active": false,
+        "button": {
+          "animation": "none",
+          "disabled": false,
+          "label": "選んだ5人で聴く",
+          "motion": "off",
+          "pressed": "false",
+          "rect": {
+            "bottom": 599,
+            "height": 46,
+            "left": 16,
+            "right": 62,
+            "top": 553,
+            "width": 46,
+            "x": 16,
+            "y": 553
+          },
+          "waiting": "false"
+        },
+        "cast": [],
+        "focus": "enslisten",
+        "fullState": 0.11961313243955374,
+        "miniHidden": true,
+        "performance": null,
+        "picked": {
+          "cards": [
+            "m2028-n1-cafe",
+            "m2028-n2-cafe",
+            "m2028-n3-cafe",
+            "m2028-n4-cafe",
+            "m2028-n5-cafe"
+          ],
+          "faces": [
+            "m2028-n1-cafe",
+            "m2028-n2-cafe",
+            "m2028-n3-cafe",
+            "m2028-n4-cafe",
+            "m2028-n5-cafe"
+          ],
+          "label": "選んだ5人：あいうえおかきくけこさし、小川 悠斗、松井 颯太、菅原 菜月、岡本 智也",
+          "names": [
+            "あいうえおかきくけこさし",
+            "小川 悠斗",
+            "松井 颯太",
+            "菅原 菜月",
+            "岡本 智也"
+          ],
+          "rect": {
+            "bottom": 58,
+            "height": 50,
+            "left": 30,
+            "right": 345,
+            "top": 8,
+            "width": 315,
+            "x": 30,
+            "y": 8
+          },
+          "slots": 8
+        },
+        "pieceChoice": null,
+        "rangeChoice": "all",
+        "resultPerformance": null,
+        "selected": [
+          "m2028-n1-cafe",
+          "m2028-n2-cafe",
+          "m2028-n3-cafe",
+          "m2028-n4-cafe",
+          "m2028-n5-cafe"
+        ],
+        "waiting": false
+      },
+      "errors": [],
+      "focus": "enslisten",
+      "playback": null,
+      "playing": false,
+      "records": 0.4614244985859841,
+      "rect": {
+        "bottom": 58,
+        "height": 50,
+        "left": 30,
+        "right": 345,
+        "top": 8,
+        "width": 315,
+        "x": 30,
+        "y": 8
+      },
+      "scrollWidth": 375,
+      "submit": {
+        "disabled": false,
+        "text": "この5人で出る"
+      },
+      "theme": "light",
+      "waiting": false,
+      "width": 375
+    }
+  },
+  {
+    "case": "final-dark",
+    "data": {
+      "actions": {
+        "bottom": 607,
+        "height": 66,
+        "left": 16,
+        "right": 359,
+        "top": 541,
+        "width": 343,
+        "x": 16,
+        "y": 541
+      },
+      "audible": [],
+      "ensemble": {
+        "active": false,
+        "button": {
+          "animation": "none",
+          "disabled": false,
+          "label": "選んだ5人で聴く",
+          "motion": "off",
+          "pressed": "false",
+          "rect": {
+            "bottom": 599,
+            "height": 46,
+            "left": 16,
+            "right": 62,
+            "top": 553,
+            "width": 46,
+            "x": 16,
+            "y": 553
+          },
+          "waiting": "false"
+        },
+        "cast": [],
+        "focus": "enslisten",
+        "fullState": 0.11961313243955374,
+        "miniHidden": true,
+        "performance": null,
+        "picked": {
+          "cards": [
+            "m2028-n1-cafe",
+            "m2028-n2-cafe",
+            "m2028-n3-cafe",
+            "m2028-n4-cafe",
+            "m2028-n5-cafe"
+          ],
+          "faces": [
+            "m2028-n1-cafe",
+            "m2028-n2-cafe",
+            "m2028-n3-cafe",
+            "m2028-n4-cafe",
+            "m2028-n5-cafe"
+          ],
+          "label": "選んだ5人：あいうえおかきくけこさし、小川 悠斗、松井 颯太、菅原 菜月、岡本 智也",
+          "names": [
+            "あいうえおかきくけこさし",
+            "小川 悠斗",
+            "松井 颯太",
+            "菅原 菜月",
+            "岡本 智也"
+          ],
+          "rect": {
+            "bottom": 58,
+            "height": 50,
+            "left": 30,
+            "right": 345,
+            "top": 8,
+            "width": 315,
+            "x": 30,
+            "y": 8
+          },
+          "slots": 8
+        },
+        "pieceChoice": null,
+        "rangeChoice": "all",
+        "resultPerformance": null,
+        "selected": [
+          "m2028-n1-cafe",
+          "m2028-n2-cafe",
+          "m2028-n3-cafe",
+          "m2028-n4-cafe",
+          "m2028-n5-cafe"
+        ],
+        "waiting": false
+      },
+      "errors": [],
+      "focus": "enslisten",
+      "playback": null,
+      "playing": false,
+      "records": 0.4614244985859841,
+      "rect": {
+        "bottom": 58,
+        "height": 50,
+        "left": 30,
+        "right": 345,
+        "top": 8,
+        "width": 315,
+        "x": 30,
+        "y": 8
+      },
+      "scrollWidth": 375,
+      "submit": {
+        "disabled": false,
+        "text": "この5人で出る"
+      },
+      "theme": "dark",
+      "waiting": false,
+      "width": 375
+    }
+  },
+  {
+    "case": "final-eight",
+    "data": {
+      "actions": {
+        "bottom": 607,
+        "height": 66,
+        "left": 16,
+        "right": 359,
+        "top": 541,
+        "width": 343,
+        "x": 16,
+        "y": 541
+      },
+      "audible": [],
+      "ensemble": {
+        "active": false,
+        "button": {
+          "animation": "none",
+          "disabled": false,
+          "label": "選んだ8人で聴く",
+          "motion": "off",
+          "pressed": "false",
+          "rect": {
+            "bottom": 599,
+            "height": 46,
+            "left": 16,
+            "right": 62,
+            "top": 553,
+            "width": 46,
+            "x": 16,
+            "y": 553
+          },
+          "waiting": "false"
+        },
+        "cast": [],
+        "focus": "m2028-n37-cafe",
+        "fullState": 0.11961313243955374,
+        "miniHidden": true,
+        "performance": null,
+        "picked": {
+          "cards": [
+            "m2028-n1-cafe",
+            "m2028-n2-cafe",
+            "m2028-n3-cafe",
+            "m2028-n4-cafe",
+            "m2028-n5-cafe",
+            "m2028-n37-cafe",
+            "m2028-n38-cafe",
+            "m2028-n39-cafe"
+          ],
+          "faces": [
+            "m2028-n1-cafe",
+            "m2028-n2-cafe",
+            "m2028-n3-cafe",
+            "m2028-n4-cafe",
+            "m2028-n5-cafe",
+            "m2028-n37-cafe",
+            "m2028-n38-cafe",
+            "m2028-n39-cafe"
+          ],
+          "label": "選んだ8人：あいうえおかきくけこさし、小川 悠斗、松井 颯太、菅原 菜月、岡本 智也、山田 蓮、原 杏、横山 透",
+          "names": [
+            "あいうえおかきくけこさし",
+            "小川 悠斗",
+            "松井 颯太",
+            "菅原 菜月",
+            "岡本 智也",
+            "山田 蓮",
+            "原 杏",
+            "横山 透"
+          ],
+          "rect": {
+            "bottom": 58,
+            "height": 50,
+            "left": 30,
+            "right": 345,
+            "top": 8,
+            "width": 315,
+            "x": 30,
+            "y": 8
+          },
+          "slots": 8
+        },
+        "pieceChoice": null,
+        "rangeChoice": "all",
+        "resultPerformance": null,
+        "selected": [
+          "m2028-n1-cafe",
+          "m2028-n2-cafe",
+          "m2028-n3-cafe",
+          "m2028-n4-cafe",
+          "m2028-n5-cafe",
+          "m2028-n39-cafe",
+          "m2028-n38-cafe",
+          "m2028-n37-cafe"
+        ],
+        "waiting": false
+      },
+      "errors": [],
+      "focus": "m2028-n37-cafe",
+      "playback": null,
+      "playing": false,
+      "records": 0.4614244985859841,
+      "rect": {
+        "bottom": 58,
+        "height": 50,
+        "left": 30,
+        "right": 345,
+        "top": 8,
+        "width": 315,
+        "x": 30,
+        "y": 8
+      },
+      "scrollWidth": 375,
+      "submit": {
+        "disabled": false,
+        "text": "この8人で出る"
+      },
+      "theme": "dark",
+      "waiting": false,
+      "width": 375
+    }
+  }
+]

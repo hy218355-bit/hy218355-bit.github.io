@@ -1305,6 +1305,13 @@ function listenEnsemble(){
   if(!ensembleListening())done();
   renderSelectors();renderEnsembleListening();
 }
+// 選んだ顔は上に残し、長い名簿の下でも編成を見渡せるようにする。
+function renderEnsemblePicked(){
+  const row=$('#ensemblePicked');if(!row)return;
+  const picked=seated(S).filter(m=>U.ensPick?.has(m.id));
+  row.setAttribute('aria-label',`選んだ${picked.length}人${picked.length?'：'+picked.map(m=>m.name).join('、'):''}`);
+  row.innerHTML=picked.map(m=>`<span class="ens-picked-slot">${memberFace(m,28)}</span>`).join('')+Array.from({length:Math.max(0,ENS_MAX-picked.length)},()=>'<span class="ens-picked-slot empty" aria-hidden="true"></span>').join('');
+}
 // 選択で一覧を作り直さず、押した場所とキーボードのフォーカスを保つ。
 function updateEnsembleSelection(){
   cleanEnsembleSelection();
@@ -1317,6 +1324,7 @@ function updateEnsembleSelection(){
   }
   const submit=$('#week [data-act="ensgo"]');
   if(submit){submit.disabled=k<ENS_MIN||k>ENS_MAX;submit.textContent=ensembleSubmitLabel(k);}
+  renderEnsemblePicked();
   renderEnsembleListening();
 }
 function renderWinter(w){
@@ -1343,9 +1351,10 @@ function renderWinter(w){
       const secs = SECTIONS.map(sc => [sc, seated(S).filter(m => secOf(m) === sc.id)]).filter(([, l]) => l.length)
         .map(([sc, l]) => `<div class="ens-section"><h3>${sc.name}</h3><div class="ens-grid">${l.map(chip).join('')}</div></div>`).join('');
       w.innerHTML = `<div class="ens-intro"><span class="small">${ENS_MIN}〜${ENS_MAX}人を選ぶ</span><button class="help-button" type="button" aria-label="アンサンブルコンテスト"${tipAttr('アンサンブルコンテスト','3〜8人の少人数で出る、冬の大会。今年の自由曲を、選んだ人数で吹く。少人数なので、一人ひとりの音程・リズム・音色・表現がそのまま聞こえる。出た部員は、聴き合う耳と度胸が育つ。G〜Sは、力のランク。はじめは、うまい部員のパートを中心に5人を選んである。再生ボタンで、出場を決める前に選んだ部員の音を聴ける。')}>?</button></div>
+        <div class="ens-picked" id="ensemblePicked" role="img"></div>
         <div class="episode ensp">${secs}</div>
         <div class="transport ens-actions"><button class="btn quiet" type="button" data-act="enslisten" aria-pressed="false" aria-label="選んだ${k}人で聴く"${ok ? '' : ' disabled'}>${uiIcon('play')}</button><button class="btn primary" type="button" data-act="ensgo"${ok ? '' : ' disabled'}>${ensembleSubmitLabel(k)}</button><button class="btn quiet" type="button" data-act="ensskip">今年は出ない</button></div>`;
-      renderEnsembleListening();
+      renderEnsemblePicked();renderEnsembleListening();
       return;
     }
     if(e.skipped){

@@ -423,6 +423,9 @@ select{background:var(--sheet);border:1.5px solid var(--rule);border-radius:8px;
 .ensp .chip[data-ens]:focus-visible{outline:2px solid var(--ink);outline-offset:3px}
 .ens-intro{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px}
 .ens-intro .help-button{margin:0;min-width:44px;min-height:44px}
+.ens-picked{position:sticky;top:calc(8px + env(safe-area-inset-top,0px));z-index:3;display:grid;grid-template-columns:repeat(8,minmax(0,1fr));gap:5px;min-height:50px;padding:8px;margin-bottom:14px;border:1px solid var(--rule);border-left:3px solid var(--brass);border-radius:12px;background:var(--sheet);box-shadow:0 3px 10px var(--shadow)}
+.ens-picked::before{content:'';position:absolute;bottom:100%;left:-1px;right:-1px;height:calc(8px + env(safe-area-inset-top,0px));background:var(--sheet);pointer-events:none}
+.ens-picked-slot{display:grid;place-items:center;min-width:0;height:32px}.ens-picked-slot>.member-face{border-radius:50%}.ens-picked-slot.empty::after{content:'';width:24px;height:24px;border:1px dashed var(--rule);border-radius:50%}
 .episode.ensp{padding:0;border:0;background:none;gap:14px}
 .ens-section h3{font:700 12px var(--f-body);color:var(--ink-soft);margin:0 0 6px;letter-spacing:.06em}
 .ens-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
@@ -1835,7 +1838,7 @@ button.wr-person:focus-visible{outline:2px solid var(--brass);outline-offset:2px
 <script src="js/announce.js?v=announce-navigation-1"></script>
 <script src="js/tunegame.js"></script>
 <script src="js/fx.js?v=stage-cast-1"></script>
-<script src="js/ui.js?v=stage-reveal-1"></script>
+<script src="js/ui.js?v=ensemble-picked-1"></script>
 <div class="tip" id="tip" role="tooltip" hidden></div>
 </body>
 </html>
