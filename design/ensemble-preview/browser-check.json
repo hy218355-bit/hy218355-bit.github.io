@@ -1,0 +1,1181 @@
+[
+  {
+    "case": "before-preview",
+    "data": {
+      "ensemble": {
+        "active": false,
+        "button": {
+          "disabled": false,
+          "label": "選んだ5人で聴く",
+          "pressed": "false",
+          "rect": {
+            "bottom": 744,
+            "height": 46,
+            "left": 16,
+            "right": 62,
+            "top": 698,
+            "width": 46,
+            "x": 16,
+            "y": 698
+          }
+        },
+        "cast": [],
+        "focus": "",
+        "fullState": 0.08175747003406286,
+        "miniHidden": true,
+        "performance": null,
+        "pieceChoice": null,
+        "rangeChoice": "all",
+        "resultPerformance": null,
+        "selected": [
+          "m2028-n1-cafe",
+          "m2028-n2-cafe",
+          "m2028-n3-cafe",
+          "m2028-n4-cafe",
+          "m2028-n5-cafe"
+        ],
+        "waiting": false
+      },
+      "members": 0.19241907191462815,
+      "records": 0.9478827537968756
+    }
+  },
+  {
+    "case": "playing-light",
+    "data": {
+      "audible": [
+        "m2028-n1-cafe",
+        "m2028-n2-cafe",
+        "m2028-n3-cafe",
+        "m2028-n4-cafe",
+        "m2028-n5-cafe"
+      ],
+      "ensemble": {
+        "active": true,
+        "button": {
+          "disabled": false,
+          "label": "5人の試聴を止める",
+          "pressed": "true",
+          "rect": {
+            "bottom": 744,
+            "height": 46,
+            "left": 16,
+            "right": 62,
+            "top": 698,
+            "width": 46,
+            "x": 16,
+            "y": 698
+          }
+        },
+        "cast": [
+          "m2028-n1-cafe",
+          "m2028-n2-cafe",
+          "m2028-n3-cafe",
+          "m2028-n4-cafe",
+          "m2028-n5-cafe"
+        ],
+        "focus": "enslisten",
+        "fullState": 0.08175747003406286,
+        "miniHidden": true,
+        "performance": 0.6326754721812904,
+        "pieceChoice": "ode",
+        "rangeChoice": "all",
+        "resultPerformance": null,
+        "selected": [
+          "m2028-n1-cafe",
+          "m2028-n2-cafe",
+          "m2028-n3-cafe",
+          "m2028-n4-cafe",
+          "m2028-n5-cafe"
+        ],
+        "waiting": false
+      },
+      "errors": [],
+      "playing": true,
+      "scrollWidth": 375,
+      "voices": [
+        "SampleVoice"
+      ],
+      "width": 375
+    }
+  },
+  {
+    "case": "selection-stops",
+    "data": {
+      "ensemble": {
+        "active": false,
+        "button": {
+          "disabled": false,
+          "label": "選んだ4人で聴く",
+          "pressed": "false",
+          "rect": {
+            "bottom": 744,
+            "height": 46,
+            "left": 16,
+            "right": 62,
+            "top": 698,
+            "width": 46,
+            "x": 16,
+            "y": 698
+          }
+        },
+        "cast": [],
+        "focus": "m2028-n1-cafe",
+        "fullState": 0.08175747003406286,
+        "miniHidden": true,
+        "performance": null,
+        "pieceChoice": null,
+        "rangeChoice": "all",
+        "resultPerformance": null,
+        "selected": [
+          "m2028-n2-cafe",
+          "m2028-n3-cafe",
+          "m2028-n4-cafe",
+          "m2028-n5-cafe"
+        ],
+        "waiting": false
+      },
+      "playing": false
+    }
+  },
+  {
+    "case": "below-minimum",
+    "data": {
+      "ensemble": {
+        "active": false,
+        "button": {
+          "disabled": true,
+          "label": "選んだ2人で聴く",
+          "pressed": "false",
+          "rect": {
+            "bottom": 744,
+            "height": 46,
+            "left": 16,
+            "right": 62,
+            "top": 698,
+            "width": 46,
+            "x": 16,
+            "y": 698
+          }
+        },
+        "cast": [],
+        "focus": "m2028-n3-cafe",
+        "fullState": 0.08175747003406286,
+        "miniHidden": true,
+        "performance": null,
+        "pieceChoice": null,
+        "rangeChoice": "all",
+        "resultPerformance": null,
+        "selected": [
+          "m2028-n4-cafe",
+          "m2028-n5-cafe"
+        ],
+        "waiting": false
+      },
+      "submit": true
+    }
+  },
+  {
+    "case": "playing-dark",
+    "data": {
+      "ensemble": {
+        "active": true,
+        "button": {
+          "disabled": false,
+          "label": "3人の試聴を止める",
+          "pressed": "true",
+          "rect": {
+            "bottom": 744,
+            "height": 46,
+            "left": 16,
+            "right": 62,
+            "top": 698,
+            "width": 46,
+            "x": 16,
+            "y": 698
+          }
+        },
+        "cast": [
+          "m2028-n3-cafe",
+          "m2028-n4-cafe",
+          "m2028-n5-cafe"
+        ],
+        "focus": "enslisten",
+        "fullState": 0.08175747003406286,
+        "miniHidden": true,
+        "performance": 0.3743131610099226,
+        "pieceChoice": "ode",
+        "rangeChoice": "all",
+        "resultPerformance": null,
+        "selected": [
+          "m2028-n4-cafe",
+          "m2028-n5-cafe",
+          "m2028-n3-cafe"
+        ],
+        "waiting": false
+      },
+      "playing": true,
+      "scrollWidth": 375,
+      "theme": "dark",
+      "width": 375
+    }
+  },
+  {
+    "case": "preview-different-piece",
+    "data": {
+      "audible": [
+        "m2028-n1-cafe",
+        "m2028-n2-cafe",
+        "m2028-n3-cafe",
+        "m2028-n4-cafe",
+        "m2028-n5-cafe",
+        "m2028-n6-cafe",
+        "m2028-n7-cafe"
+      ],
+      "ensemble": {
+        "active": true,
+        "button": {
+          "disabled": false,
+          "label": "7人の試聴を止める",
+          "pressed": "true",
+          "rect": {
+            "bottom": 0,
+            "height": 0,
+            "left": 0,
+            "right": 0,
+            "top": 0,
+            "width": 0,
+            "x": 0,
+            "y": 0
+          }
+        },
+        "cast": [
+          "m2028-n1-cafe",
+          "m2028-n2-cafe",
+          "m2028-n3-cafe",
+          "m2028-n4-cafe",
+          "m2028-n5-cafe",
+          "m2028-n6-cafe",
+          "m2028-n7-cafe"
+        ],
+        "focus": "",
+        "fullState": 0.08175747003406286,
+        "miniHidden": true,
+        "performance": 0.8318358997348696,
+        "pieceChoice": "ode",
+        "rangeChoice": "all",
+        "resultPerformance": null,
+        "selected": [
+          "m2028-n4-cafe",
+          "m2028-n5-cafe",
+          "m2028-n3-cafe",
+          "m2028-n1-cafe",
+          "m2028-n2-cafe",
+          "m2028-n6-cafe",
+          "m2028-n7-cafe"
+        ],
+        "waiting": false
+      },
+      "listening": {
+        "conductDisabled": true,
+        "engineVenue": "civic",
+        "kind": "アンサンブルの試聴",
+        "range": "all",
+        "rangeDisabled": true,
+        "rangeLabel": "全部",
+        "shownPiece": "ode",
+        "summary": "市民会館・全部・全員",
+        "title": "「歓喜の歌」"
+      }
+    }
+  },
+  {
+    "case": "restore-range",
+    "data": {
+      "ensemble": {
+        "active": false,
+        "button": {
+          "disabled": false,
+          "label": "選んだ7人で聴く",
+          "pressed": "false",
+          "rect": {
+            "bottom": 0,
+            "height": 0,
+            "left": 0,
+            "right": 0,
+            "top": 0,
+            "width": 0,
+            "x": 0,
+            "y": 0
+          }
+        },
+        "cast": [],
+        "focus": "",
+        "fullState": 0.08175747003406286,
+        "miniHidden": true,
+        "performance": null,
+        "pieceChoice": null,
+        "rangeChoice": "1",
+        "resultPerformance": null,
+        "selected": [
+          "m2028-n4-cafe",
+          "m2028-n5-cafe",
+          "m2028-n3-cafe",
+          "m2028-n1-cafe",
+          "m2028-n2-cafe",
+          "m2028-n6-cafe",
+          "m2028-n7-cafe"
+        ],
+        "waiting": false
+      },
+      "listening": {
+        "conductDisabled": false,
+        "engineVenue": "civic",
+        "kind": "自由曲",
+        "range": "1",
+        "rangeDisabled": false,
+        "rangeLabel": "中間部（譜読みG）",
+        "shownPiece": "galop",
+        "summary": "市民会館・中間部・全員",
+        "title": "「天国と地獄」"
+      },
+      "playing": false
+    }
+  },
+  {
+    "case": "immediate-eight",
+    "data": {
+      "active": true,
+      "button": {
+        "disabled": false,
+        "label": "8人の試聴を止める",
+        "pressed": "true",
+        "rect": {
+          "bottom": 744,
+          "height": 46,
+          "left": 16,
+          "right": 62,
+          "top": 698,
+          "width": 46,
+          "x": 16,
+          "y": 698
+        }
+      },
+      "cast": [
+        "m2028-n1-cafe",
+        "m2028-n2-cafe",
+        "m2028-n3-cafe",
+        "m2028-n4-cafe",
+        "m2028-n5-cafe",
+        "m2028-n6-cafe",
+        "m2028-n7-cafe",
+        "m2028-n8-cafe"
+      ],
+      "focus": "enslisten",
+      "fullState": 0.08175747003406286,
+      "miniHidden": true,
+      "performance": 0.3571886783465743,
+      "pieceChoice": "ode",
+      "rangeChoice": "all",
+      "resultPerformance": null,
+      "selected": [
+        "m2028-n4-cafe",
+        "m2028-n5-cafe",
+        "m2028-n3-cafe",
+        "m2028-n1-cafe",
+        "m2028-n2-cafe",
+        "m2028-n6-cafe",
+        "m2028-n7-cafe",
+        "m2028-n8-cafe"
+      ],
+      "waiting": false
+    }
+  },
+  {
+    "case": "immediate-limit",
+    "data": {
+      "active": true,
+      "button": {
+        "disabled": false,
+        "label": "8人の試聴を止める",
+        "pressed": "true",
+        "rect": {
+          "bottom": 744,
+          "height": 46,
+          "left": 16,
+          "right": 62,
+          "top": 698,
+          "width": 46,
+          "x": 16,
+          "y": 698
+        }
+      },
+      "cast": [
+        "m2028-n1-cafe",
+        "m2028-n2-cafe",
+        "m2028-n3-cafe",
+        "m2028-n4-cafe",
+        "m2028-n5-cafe",
+        "m2028-n6-cafe",
+        "m2028-n7-cafe",
+        "m2028-n8-cafe"
+      ],
+      "focus": "m2028-n9-cafe",
+      "fullState": 0.08175747003406286,
+      "miniHidden": true,
+      "performance": 0.3571886783465743,
+      "pieceChoice": "ode",
+      "rangeChoice": "all",
+      "resultPerformance": null,
+      "selected": [
+        "m2028-n4-cafe",
+        "m2028-n5-cafe",
+        "m2028-n3-cafe",
+        "m2028-n1-cafe",
+        "m2028-n2-cafe",
+        "m2028-n6-cafe",
+        "m2028-n7-cafe",
+        "m2028-n8-cafe"
+      ],
+      "waiting": false
+    }
+  },
+  {
+    "case": "immediate-change",
+    "data": {
+      "ensemble": {
+        "active": false,
+        "button": {
+          "disabled": false,
+          "label": "選んだ7人で聴く",
+          "pressed": "false",
+          "rect": {
+            "bottom": 744,
+            "height": 46,
+            "left": 16,
+            "right": 62,
+            "top": 698,
+            "width": 46,
+            "x": 16,
+            "y": 698
+          }
+        },
+        "cast": [],
+        "focus": "m2028-n8-cafe",
+        "fullState": 0.08175747003406286,
+        "miniHidden": true,
+        "performance": null,
+        "pieceChoice": null,
+        "rangeChoice": "1",
+        "resultPerformance": null,
+        "selected": [
+          "m2028-n4-cafe",
+          "m2028-n5-cafe",
+          "m2028-n3-cafe",
+          "m2028-n1-cafe",
+          "m2028-n2-cafe",
+          "m2028-n6-cafe",
+          "m2028-n7-cafe"
+        ],
+        "waiting": false
+      },
+      "playing": false
+    }
+  },
+  {
+    "case": "natural-before",
+    "data": {
+      "ensemble": {
+        "active": true,
+        "button": {
+          "disabled": false,
+          "label": "7人の試聴を止める",
+          "pressed": "true",
+          "rect": {
+            "bottom": 0,
+            "height": 0,
+            "left": 0,
+            "right": 0,
+            "top": 0,
+            "width": 0,
+            "x": 0,
+            "y": 0
+          }
+        },
+        "cast": [
+          "m2028-n1-cafe",
+          "m2028-n2-cafe",
+          "m2028-n3-cafe",
+          "m2028-n4-cafe",
+          "m2028-n5-cafe",
+          "m2028-n6-cafe",
+          "m2028-n7-cafe"
+        ],
+        "focus": "",
+        "fullState": 0.08175747003406286,
+        "miniHidden": false,
+        "performance": 0.8318358997348696,
+        "pieceChoice": "ode",
+        "rangeChoice": "all",
+        "resultPerformance": null,
+        "selected": [
+          "m2028-n4-cafe",
+          "m2028-n5-cafe",
+          "m2028-n3-cafe",
+          "m2028-n1-cafe",
+          "m2028-n2-cafe",
+          "m2028-n6-cafe",
+          "m2028-n7-cafe"
+        ],
+        "waiting": false
+      },
+      "playing": true
+    }
+  },
+  {
+    "case": "waiting",
+    "data": {
+      "audioReady": false,
+      "ensemble": {
+        "active": true,
+        "button": {
+          "disabled": false,
+          "label": "5人の試聴を止める",
+          "pressed": "true",
+          "rect": {
+            "bottom": 599,
+            "height": 46,
+            "left": 16,
+            "right": 62,
+            "top": 553,
+            "width": 46,
+            "x": 16,
+            "y": 553
+          }
+        },
+        "cast": [
+          "m2028-n1-cafe",
+          "m2028-n2-cafe",
+          "m2028-n3-cafe",
+          "m2028-n4-cafe",
+          "m2028-n5-cafe"
+        ],
+        "focus": "enslisten",
+        "fullState": 0.9323088200762868,
+        "miniHidden": true,
+        "performance": 0.12320337956771256,
+        "pieceChoice": "galop",
+        "rangeChoice": "all",
+        "resultPerformance": null,
+        "selected": [
+          "m2028-n1-cafe",
+          "m2028-n2-cafe",
+          "m2028-n3-cafe",
+          "m2028-n4-cafe",
+          "m2028-n5-cafe"
+        ],
+        "waiting": true
+      },
+      "playing": false,
+      "scrollWidth": 375,
+      "width": 375
+    }
+  },
+  {
+    "case": "waiting-cancel",
+    "data": {
+      "ensemble": {
+        "active": false,
+        "button": {
+          "disabled": false,
+          "label": "選んだ4人で聴く",
+          "pressed": "false",
+          "rect": {
+            "bottom": 599,
+            "height": 46,
+            "left": 16,
+            "right": 62,
+            "top": 553,
+            "width": 46,
+            "x": 16,
+            "y": 553
+          }
+        },
+        "cast": [],
+        "focus": "m2028-n1-cafe",
+        "fullState": 0.9323088200762868,
+        "miniHidden": true,
+        "performance": null,
+        "pieceChoice": null,
+        "rangeChoice": "all",
+        "resultPerformance": null,
+        "selected": [
+          "m2028-n2-cafe",
+          "m2028-n3-cafe",
+          "m2028-n4-cafe",
+          "m2028-n5-cafe"
+        ],
+        "waiting": false
+      },
+      "playing": false
+    }
+  },
+  {
+    "case": "loading-released",
+    "data": {
+      "audioReady": true,
+      "ensemble": {
+        "active": false,
+        "button": {
+          "disabled": false,
+          "label": "選んだ4人で聴く",
+          "pressed": "false",
+          "rect": {
+            "bottom": 599,
+            "height": 46,
+            "left": 16,
+            "right": 62,
+            "top": 553,
+            "width": 46,
+            "x": 16,
+            "y": 553
+          }
+        },
+        "cast": [],
+        "focus": "m2028-n1-cafe",
+        "fullState": 0.9323088200762868,
+        "miniHidden": true,
+        "performance": null,
+        "pieceChoice": null,
+        "rangeChoice": "all",
+        "resultPerformance": null,
+        "selected": [
+          "m2028-n2-cafe",
+          "m2028-n3-cafe",
+          "m2028-n4-cafe",
+          "m2028-n5-cafe"
+        ],
+        "waiting": false
+      },
+      "errors": [],
+      "playing": false
+    }
+  },
+  {
+    "case": "natural-after",
+    "data": {
+      "ensemble": {
+        "active": false,
+        "button": {
+          "disabled": false,
+          "label": "選んだ7人で聴く",
+          "pressed": "false",
+          "rect": {
+            "bottom": 0,
+            "height": 0,
+            "left": 0,
+            "right": 0,
+            "top": 0,
+            "width": 0,
+            "x": 0,
+            "y": 0
+          }
+        },
+        "cast": [],
+        "focus": "",
+        "fullState": 0.08175747003406286,
+        "miniHidden": true,
+        "performance": null,
+        "pieceChoice": null,
+        "rangeChoice": "1",
+        "resultPerformance": null,
+        "selected": [
+          "m2028-n4-cafe",
+          "m2028-n5-cafe",
+          "m2028-n3-cafe",
+          "m2028-n1-cafe",
+          "m2028-n2-cafe",
+          "m2028-n6-cafe",
+          "m2028-n7-cafe"
+        ],
+        "waiting": false
+      },
+      "errors": [],
+      "playing": false,
+      "records": 0.9478827537968756
+    }
+  },
+  {
+    "case": "edit-stops-preview",
+    "before": {
+      "active": true,
+      "button": {
+        "disabled": false,
+        "label": "4人の試聴を止める",
+        "pressed": "true",
+        "rect": {
+          "bottom": 0,
+          "height": 0,
+          "left": 0,
+          "right": 0,
+          "top": 0,
+          "width": 0,
+          "x": 0,
+          "y": 0
+        }
+      },
+      "cast": [
+        "m2028-n2-cafe",
+        "m2028-n3-cafe",
+        "m2028-n4-cafe",
+        "m2028-n5-cafe"
+      ],
+      "focus": "memberName",
+      "fullState": 0.9323088200762868,
+      "miniHidden": false,
+      "performance": 0.8081007329747081,
+      "pieceChoice": "galop",
+      "rangeChoice": "all",
+      "resultPerformance": null,
+      "selected": [
+        "m2028-n2-cafe",
+        "m2028-n3-cafe",
+        "m2028-n4-cafe",
+        "m2028-n5-cafe"
+      ],
+      "waiting": false
+    },
+    "data": {
+      "ensemble": {
+        "active": false,
+        "button": {
+          "disabled": false,
+          "label": "選んだ4人で聴く",
+          "pressed": "false",
+          "rect": {
+            "bottom": 0,
+            "height": 0,
+            "left": 0,
+            "right": 0,
+            "top": 0,
+            "width": 0,
+            "x": 0,
+            "y": 0
+          }
+        },
+        "cast": [],
+        "focus": "",
+        "fullState": 0.6564691842067987,
+        "miniHidden": true,
+        "performance": null,
+        "pieceChoice": null,
+        "rangeChoice": "all",
+        "resultPerformance": null,
+        "selected": [
+          "m2028-n2-cafe",
+          "m2028-n3-cafe",
+          "m2028-n4-cafe",
+          "m2028-n5-cafe"
+        ],
+        "waiting": false
+      },
+      "playing": false
+    }
+  },
+  {
+    "case": "before-entry",
+    "data": {
+      "active": true,
+      "button": {
+        "disabled": false,
+        "label": "7人の試聴を止める",
+        "pressed": "true",
+        "rect": {
+          "bottom": 744,
+          "height": 46,
+          "left": 16,
+          "right": 62,
+          "top": 698,
+          "width": 46,
+          "x": 16,
+          "y": 698
+        }
+      },
+      "cast": [
+        "m2028-n1-cafe",
+        "m2028-n2-cafe",
+        "m2028-n3-cafe",
+        "m2028-n4-cafe",
+        "m2028-n5-cafe",
+        "m2028-n6-cafe",
+        "m2028-n7-cafe"
+      ],
+      "focus": "enslisten",
+      "fullState": 0.08175747003406286,
+      "miniHidden": true,
+      "performance": 0.8318358997348696,
+      "pieceChoice": "ode",
+      "rangeChoice": "all",
+      "resultPerformance": null,
+      "selected": [
+        "m2028-n4-cafe",
+        "m2028-n5-cafe",
+        "m2028-n3-cafe",
+        "m2028-n1-cafe",
+        "m2028-n2-cafe",
+        "m2028-n6-cafe",
+        "m2028-n7-cafe"
+      ],
+      "waiting": false
+    }
+  },
+  {
+    "case": "entered",
+    "data": {
+      "cast": [
+        "m2028-n1-cafe",
+        "m2028-n2-cafe",
+        "m2028-n3-cafe",
+        "m2028-n4-cafe",
+        "m2028-n5-cafe",
+        "m2028-n6-cafe",
+        "m2028-n7-cafe"
+      ],
+      "conduct": {
+        "count": 0,
+        "events": 0,
+        "from": 0,
+        "judge": null,
+        "level": 1,
+        "meter": 2,
+        "phase": "watch",
+        "taps": 0,
+        "to": 68
+      },
+      "ensemble": {
+        "active": false,
+        "button": null,
+        "cast": [],
+        "focus": "cdClose",
+        "fullState": 0.8904215511865914,
+        "miniHidden": false,
+        "performance": null,
+        "pieceChoice": null,
+        "rangeChoice": "1",
+        "result": {
+          "award": "bronze",
+          "ids": [
+            "m2028-n4-cafe",
+            "m2028-n5-cafe",
+            "m2028-n3-cafe",
+            "m2028-n1-cafe",
+            "m2028-n2-cafe",
+            "m2028-n6-cafe",
+            "m2028-n7-cafe"
+          ],
+          "names": [
+            "菅原 菜月",
+            "岡本 智也",
+            "松井 颯太",
+            "田中 七海",
+            "小川 悠斗",
+            "山口 大翔",
+            "山下 彩花"
+          ],
+          "recId": "r2028-10-1-331468",
+          "rep": false,
+          "score": 43.1
+        },
+        "resultPerformance": 0.8318358997348696,
+        "selected": [
+          "m2028-n4-cafe",
+          "m2028-n5-cafe",
+          "m2028-n3-cafe",
+          "m2028-n1-cafe",
+          "m2028-n2-cafe",
+          "m2028-n6-cafe",
+          "m2028-n7-cafe"
+        ],
+        "waiting": false
+      },
+      "playing": true,
+      "voices": [
+        "SampleVoice"
+      ]
+    }
+  },
+  {
+    "case": "skip-stops",
+    "before": {
+      "ensemble": {
+        "active": true,
+        "button": {
+          "disabled": false,
+          "label": "4人の試聴を止める",
+          "pressed": "true",
+          "rect": {
+            "bottom": 599,
+            "height": 46,
+            "left": 16,
+            "right": 62,
+            "top": 553,
+            "width": 46,
+            "x": 16,
+            "y": 553
+          }
+        },
+        "cast": [
+          "m2028-n2-cafe",
+          "m2028-n3-cafe",
+          "m2028-n4-cafe",
+          "m2028-n5-cafe"
+        ],
+        "focus": "enslisten",
+        "fullState": 0.6564691842067987,
+        "miniHidden": true,
+        "performance": 0.8081007329747081,
+        "pieceChoice": "galop",
+        "rangeChoice": "all",
+        "resultPerformance": null,
+        "selected": [
+          "m2028-n2-cafe",
+          "m2028-n3-cafe",
+          "m2028-n4-cafe",
+          "m2028-n5-cafe"
+        ],
+        "waiting": false
+      },
+      "records": 0.5902400815393776
+    },
+    "data": {
+      "ensemble": {
+        "active": false,
+        "button": null,
+        "cast": [],
+        "focus": "",
+        "fullState": 0.07246599858626723,
+        "miniHidden": true,
+        "performance": null,
+        "pieceChoice": null,
+        "rangeChoice": "all",
+        "result": {
+          "skipped": true
+        },
+        "resultPerformance": null,
+        "selected": [
+          "m2028-n2-cafe",
+          "m2028-n3-cafe",
+          "m2028-n4-cafe",
+          "m2028-n5-cafe"
+        ],
+        "waiting": false
+      },
+      "playing": false,
+      "records": 0.5902400815393776
+    }
+  },
+  {
+    "case": "ensemble-result",
+    "data": {
+      "ensemble": {
+        "active": false,
+        "button": null,
+        "cast": [],
+        "focus": "",
+        "fullState": 0.8904215511865914,
+        "miniHidden": true,
+        "performance": null,
+        "pieceChoice": null,
+        "rangeChoice": "1",
+        "result": {
+          "award": "bronze",
+          "ids": [
+            "m2028-n4-cafe",
+            "m2028-n5-cafe",
+            "m2028-n3-cafe",
+            "m2028-n1-cafe",
+            "m2028-n2-cafe",
+            "m2028-n6-cafe",
+            "m2028-n7-cafe"
+          ],
+          "names": [
+            "菅原 菜月",
+            "岡本 智也",
+            "松井 颯太",
+            "田中 七海",
+            "小川 悠斗",
+            "山口 大翔",
+            "山下 彩花"
+          ],
+          "recId": "r2028-10-1-331468",
+          "rep": false,
+          "score": 43.1
+        },
+        "resultPerformance": 0.8318358997348696,
+        "selected": [
+          "m2028-n4-cafe",
+          "m2028-n5-cafe",
+          "m2028-n3-cafe",
+          "m2028-n1-cafe",
+          "m2028-n2-cafe",
+          "m2028-n6-cafe",
+          "m2028-n7-cafe"
+        ],
+        "waiting": false
+      },
+      "errors": [],
+      "phase": "winter",
+      "watchHidden": true
+    }
+  },
+  {
+    "case": "one-year",
+    "data": {
+      "boot": {
+        "errors": [],
+        "failed": [],
+        "loaded": 33,
+        "scripts": 33
+      },
+      "errors": [],
+      "steps": 50,
+      "year": 2027
+    }
+  },
+  {
+    "case": "loading-indicator-full",
+    "data": {
+      "active": true,
+      "button": {
+        "animation": "ensloading",
+        "disabled": false,
+        "label": "5人の音を読み込み中。押すと中止",
+        "motion": "full",
+        "pressed": "true",
+        "rect": {
+          "bottom": 599,
+          "height": 46,
+          "left": 16,
+          "right": 62,
+          "top": 553,
+          "width": 46,
+          "x": 16,
+          "y": 553
+        },
+        "waiting": "true"
+      },
+      "cast": [
+        "m2028-n1-cafe",
+        "m2028-n2-cafe",
+        "m2028-n3-cafe",
+        "m2028-n4-cafe",
+        "m2028-n5-cafe"
+      ],
+      "focus": "enslisten",
+      "fullState": 0.9866846471559256,
+      "miniHidden": true,
+      "performance": 0.12320337956771256,
+      "pieceChoice": "galop",
+      "rangeChoice": "all",
+      "resultPerformance": null,
+      "selected": [
+        "m2028-n1-cafe",
+        "m2028-n2-cafe",
+        "m2028-n3-cafe",
+        "m2028-n4-cafe",
+        "m2028-n5-cafe"
+      ],
+      "waiting": true
+    }
+  },
+  {
+    "case": "loading-indicator-off",
+    "data": {
+      "active": true,
+      "button": {
+        "animation": "none",
+        "disabled": false,
+        "label": "5人の音を読み込み中。押すと中止",
+        "motion": "off",
+        "pressed": "true",
+        "rect": {
+          "bottom": 599,
+          "height": 46,
+          "left": 16,
+          "right": 62,
+          "top": 553,
+          "width": 46,
+          "x": 16,
+          "y": 553
+        },
+        "waiting": "true"
+      },
+      "cast": [
+        "m2028-n1-cafe",
+        "m2028-n2-cafe",
+        "m2028-n3-cafe",
+        "m2028-n4-cafe",
+        "m2028-n5-cafe"
+      ],
+      "focus": "",
+      "fullState": 0.9866846471559256,
+      "miniHidden": true,
+      "performance": 0.12320337956771256,
+      "pieceChoice": "galop",
+      "rangeChoice": "all",
+      "resultPerformance": null,
+      "selected": [
+        "m2028-n1-cafe",
+        "m2028-n2-cafe",
+        "m2028-n3-cafe",
+        "m2028-n4-cafe",
+        "m2028-n5-cafe"
+      ],
+      "waiting": true
+    }
+  },
+  {
+    "case": "loading-button-cancel",
+    "data": {
+      "ensemble": {
+        "active": false,
+        "button": {
+          "animation": "none",
+          "disabled": false,
+          "label": "選んだ5人で聴く",
+          "motion": "off",
+          "pressed": "false",
+          "rect": {
+            "bottom": 599,
+            "height": 46,
+            "left": 16,
+            "right": 62,
+            "top": 553,
+            "width": 46,
+            "x": 16,
+            "y": 553
+          },
+          "waiting": "false"
+        },
+        "cast": [],
+        "focus": "enslisten",
+        "fullState": 0.9866846471559256,
+        "miniHidden": true,
+        "performance": null,
+        "pieceChoice": null,
+        "rangeChoice": "all",
+        "resultPerformance": null,
+        "selected": [
+          "m2028-n1-cafe",
+          "m2028-n2-cafe",
+          "m2028-n3-cafe",
+          "m2028-n4-cafe",
+          "m2028-n5-cafe"
+        ],
+        "waiting": false
+      },
+      "errors": [],
+      "playing": false
+    }
+  }
+]

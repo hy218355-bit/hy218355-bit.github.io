@@ -9,7 +9,7 @@ const U = {
   shown: null, shownLabel: '', perfNow: null, diag: null, ptr: null, raf: 0, onEnd: null, playing: false, refreshT: 0,
   tab: 'week', tabScroll: {},
   recordMember: null, recordPerf: null, moveUndo: null,
-  lineup: false, draft: null, audListen: null, pred: null, predKey: '', predT: 0, outKey: '', outPick: new Set(),
+  lineup: false, draft: null, audListen: null, ensListen: null, pred: null, predKey: '', predT: 0, outKey: '', outPick: new Set(),
   sfx: true, fxMode: 'full',
 };
 const UI_KEY = 'suibu-ui-v2';  // 前の名前のころからの保存先（SAVE_KEY と同じ理由でこのまま）
@@ -82,6 +82,7 @@ function renderSnd(){
   else st.textContent = '';
 }
 function commit(next){
+  if(ensembleListening())stopPlay();
   // ほかの操作を巻き戻さないよう、保存する操作で席の取り消しを終える。
   U.moveUndo = null;
   $('#memberCard .mc-undo')?.remove();
@@ -122,6 +123,7 @@ function renderPlayButtons(){
   const moveStop = $('#memberCard [data-mact="movestop"]');
   if(moveStop) moveStop.hidden = !on || tabHidden('play');
   renderAuditionListening();
+  renderEnsembleListening();
   renderDiagPractice();
   renderRecordingLibrary();
 }
@@ -146,7 +148,7 @@ function setTab(t, keep){
 // 合奏の画面以外で鳴っているときは、下に小さく「再生中」と止めるボタンを出す
 function updateMini(){
   const mini = $('#mini'); if(!mini) return;
-  mini.hidden = !((U.playing || U.waitPlay) && tabHidden('play'));
+  mini.hidden = !((U.playing || U.waitPlay) && tabHidden('play') && !(U.tab==='week'&&ensembleListening()));
   if(!mini.hidden) $('#miniLabel').textContent = U.waitPlay && !U.playing ? '♪ 楽器の録音を読み込んでいます…（読み込めたら鳴ります）' : `♪ ${U.shownLabel}`;
 }
 
@@ -538,18 +540,18 @@ function renderHeader(){
   $('#weeksLeft').textContent = nx ? (nx[0] === S.week ? `今週は本番：${nx[1].title}` : `次の本番「${nx[1].title}」まで${nx[0] - S.week}週`) : '';
 }
 function renderPiece(){
-  const recorded=recordingPlayback(), pid = recorded?U.shown.pieceId:playPiece(), pc = PIECES[pid];
-  $('#btnConduct').disabled=recorded||busy();
+  const recorded=recordingPlayback(), ensemble=ensembleListening(), pid = recorded?U.shown.pieceId:playPiece(), pc = PIECES[pid];
+  $('#btnConduct').disabled=!!ensemble||recorded||busy();
   // A部門でコンクールまでは、自由曲と課題曲を切りかえて聴ける
   const two = !recorded && setActive(S) && S.phase === 'week';
   $('#pieceSwitch').hidden = !two;
   if(two) $('#pieceSwitch').innerHTML = [[S.pieceId, '自由曲'], [S.setPiece, '課題曲']].map(([id, nm]) => `<button type="button" data-pswitch="${id}" aria-pressed="${pid === id}">${nm}：${esc(PIECES[id].title)}</button>`).join('');
-  $('#pieceEyebrow').textContent = recorded ? '録音' : two && pid === S.setPiece ? '課題曲' : S.phase === 'choose' || S.phase === 'chooseSet' || pid !== S.pieceId ? '試しに聴く曲' : S.finalWeek ? '定期演奏会の曲' : '自由曲';
+  $('#pieceEyebrow').textContent = ensemble ? 'アンサンブルの試聴' : recorded ? '録音' : two && pid === S.setPiece ? '課題曲' : S.phase === 'choose' || S.phase === 'chooseSet' || pid !== S.pieceId ? '試しに聴く曲' : S.finalWeek ? '定期演奏会の曲' : '自由曲';
   $('#pieceDifficulty').innerHTML = difficultyBadge(pid);
   $('#piece').textContent = pc.title;
   $('#piece').setAttribute('data-tip',pc.full);$('#piece').setAttribute('data-tipname','曲名');$('#piece').setAttribute('role','button');$('#piece').tabIndex=0;
   $('#pieceMeta').textContent = `${pc.composer}｜問われる力：${pc.asks}`;
-  $('#rangeSel').disabled=recorded;
+  $('#rangeSel').disabled=!!ensemble||recorded;
   if(recorded) $('#rangeSel').innerHTML=`<option value="recorded">${recordedRangeLabel(U.shown)}</option>`;
   else{
     const rd = (pid === S.pieceId || (two && pid === S.setPiece)) && S.phase !== 'choose' ? spanReadAvg(S, pid) : null;
@@ -1189,8 +1191,57 @@ function closeGradRoll(done){
 }
 /* ===== 冬（11月 新体制 → 1月 アンサンブルコンテスト → 3月 卒業式） ===== */
 const ensembleSubmitLabel=k=>k>=ENS_MIN?`この${k}人で出る`:`あと${ENS_MIN-k}人を選ぶ`;
+const ensembleSelecting=()=>S?.phase==='winter'&&winterStep(S).id==='ens'&&!S.winter.ens;
+const ensembleSelectionKey=()=>[...(U.ensPick||[])].sort().join(',');
+function cleanEnsembleSelection(){
+  const eligible=new Set(seated(S).map(m=>m.id));
+  for(const id of U.ensPick)if(!eligible.has(id))U.ensPick.delete(id);
+}
+// 本番の録音と同じ入力を作る。試聴では録音を追加せず、部員も育てない。
+function ensemblePreviewPerf(s,ids){
+  const pieceId=s.contestPiece||s.pieceId||'largo',venue='civic';
+  const snap=snapshot(s,{pieceId,venue,nerves:3,only:ids});
+  return rememberStageMembers(perform(recCtx({pieceId,venue,snap})),snap.members,false);
+}
+function ensembleListening(){
+  const active=U.waitPlay?.perf||(U.playing?U.shown:null);
+  return U.ensListen?.perf===active?U.ensListen:null;
+}
+function renderEnsembleListening(){
+  const active=ensembleListening(),button=$('#week [data-act="enslisten"]');
+  if(!button)return;
+  const n=seated(S).filter(m=>U.ensPick?.has(m.id)).length;
+  button.disabled=!ensembleSelecting()||n<ENS_MIN||n>ENS_MAX;
+  button.setAttribute('aria-pressed',String(!!active));
+  const waiting=!!active&&!!U.waitPlay;
+  button.dataset.waiting=String(waiting);
+  const label=waiting?`${n}人の音を読み込み中。押すと中止`:active?`${n}人の試聴を止める`:`選んだ${n}人で聴く`;
+  button.setAttribute('aria-label',label);button.title=label;button.innerHTML=uiIcon(active?'stop':'play');
+}
+function listenEnsemble(){
+  if(!ensembleSelecting()||busy()||CD.phase!=='idle')return;
+  if(ensembleListening()){stopPlay();return;}
+  const state=S,ids=seated(S).filter(m=>U.ensPick?.has(m.id)).map(m=>m.id);
+  if(ids.length<ENS_MIN||ids.length>ENS_MAX)return;
+  stopPlay();if(S!==state||!ensembleSelecting())return;
+  const previous={piece:U.piece,range:U.range},perf=ensemblePreviewPerf(S,ids);
+  U.solo='all';E.setSolo({type:'all'});U.piece=perf.pieceId;U.range='all';setVenue('civic');
+  const token=U.ensListen={perf,state:S,key:ensembleSelectionKey(),...previous};
+  const done=()=>{
+    if(U.ensListen!==token)return;
+    U.ensListen=null;
+    if(U.piece===perf.pieceId&&U.range==='all'){U.piece=token.piece;U.range=token.range;}
+    renderPiece();renderEnsembleListening();updateMini();
+  };
+  playPerf(perf,`アンサンブルの試聴（${ids.length}人・市民会館）`,done,{},done);
+  if(!ensembleListening())done();
+  renderSelectors();renderEnsembleListening();
+}
 // 選択で一覧を作り直さず、押した場所とキーボードのフォーカスを保つ。
 function updateEnsembleSelection(){
+  cleanEnsembleSelection();
+  const active=ensembleListening();
+  if(active&&(active.state!==S||active.key!==ensembleSelectionKey()))stopPlay();
   const k=U.ensPick.size;
   for(const b of document.querySelectorAll('#week [data-ens]')){
     const picked=U.ensPick.has(b.dataset.ens);b.setAttribute('aria-pressed',String(picked));
@@ -1198,6 +1249,7 @@ function updateEnsembleSelection(){
   }
   const submit=$('#week [data-act="ensgo"]');
   if(submit){submit.disabled=k<ENS_MIN||k>ENS_MAX;submit.textContent=ensembleSubmitLabel(k);}
+  renderEnsembleListening();
 }
 function renderWinter(w){
   const st = winterStep(S), names = S.retiredNow?.names || [];
@@ -1213,6 +1265,7 @@ function renderWinter(w){
     if(!e){
       const key = `${S.recruitSeed||0}:${S.year}:ens`;
       if(U.ensKey !== key){ U.ensKey = key; U.ensPick = new Set(autoEnsemble(S)); }
+      cleanEnsembleSelection();
       const k = U.ensPick.size, ok = k >= ENS_MIN && k <= ENS_MAX;
       const chip = m => {
         const inst=SEAT[m.seat].inst,picked=U.ensPick.has(m.id);
@@ -1221,9 +1274,10 @@ function renderWinter(w){
       };
       const secs = SECTIONS.map(sc => [sc, seated(S).filter(m => secOf(m) === sc.id)]).filter(([, l]) => l.length)
         .map(([sc, l]) => `<div class="ens-section"><h3>${sc.name}</h3><div class="ens-grid">${l.map(chip).join('')}</div></div>`).join('');
-      w.innerHTML = `<div class="ens-intro"><span class="small">${ENS_MIN}〜${ENS_MAX}人を選ぶ</span><button class="help-button" type="button" aria-label="アンサンブルコンテスト"${tipAttr('アンサンブルコンテスト','3〜8人の少人数で出る、冬の大会。今年の自由曲を、選んだ人数で吹く。少人数なので、一人ひとりの音程・リズム・音色・表現がそのまま聞こえる。出た部員は、聴き合う耳と度胸が育つ。G〜Sは、力のランク。はじめは、うまい部員のパートを中心に5人を選んである。')}>?</button></div>
+      w.innerHTML = `<div class="ens-intro"><span class="small">${ENS_MIN}〜${ENS_MAX}人を選ぶ</span><button class="help-button" type="button" aria-label="アンサンブルコンテスト"${tipAttr('アンサンブルコンテスト','3〜8人の少人数で出る、冬の大会。今年の自由曲を、選んだ人数で吹く。少人数なので、一人ひとりの音程・リズム・音色・表現がそのまま聞こえる。出た部員は、聴き合う耳と度胸が育つ。G〜Sは、力のランク。はじめは、うまい部員のパートを中心に5人を選んである。再生ボタンで、出場を決める前に選んだ部員の音を聴ける。')}>?</button></div>
         <div class="episode ensp">${secs}</div>
-        <div class="transport ens-actions"><button class="btn primary" type="button" data-act="ensgo"${ok ? '' : ' disabled'}>${ensembleSubmitLabel(k)}</button><button class="btn quiet" type="button" data-act="ensskip">今年は出ない</button></div>`;
+        <div class="transport ens-actions"><button class="btn quiet" type="button" data-act="enslisten" aria-pressed="false" aria-label="選んだ${k}人で聴く"${ok ? '' : ' disabled'}>${uiIcon('play')}</button><button class="btn primary" type="button" data-act="ensgo"${ok ? '' : ' disabled'}>${ensembleSubmitLabel(k)}</button><button class="btn quiet" type="button" data-act="ensskip">今年は出ない</button></div>`;
+      renderEnsembleListening();
       return;
     }
     if(e.skipped){
@@ -2632,7 +2686,8 @@ function bind(){
     else if(act === 'newyear'){ stopPlay(); commit(newYear(S)); U.sel = null; U.piece = null; renderAll(); refreshNow(); }
     else if(act === 'gradroll') openGradRoll();
     else if(act === 'winter'){ stopPlay(); commit(startWinter(S)); U.sel = null; renderAll(); refreshNow(); scrollTo(0, 0); }
-    else if(act === 'ensgo'){ haptic('tap'); commit(runEnsemble(S, [...U.ensPick])); U.ensHide = S.year; renderAll(); playEnsemble(); }
+    else if(act === 'enslisten')listenEnsemble();
+    else if(act === 'ensgo'){ stopPlay(); haptic('tap'); commit(runEnsemble(S, [...U.ensPick])); U.ensHide = S.year; renderAll(); playEnsemble(); }
     else if(act === 'ensskip'){ commit(skipEnsemble(S)); renderAll(); }
     else if(act === 'wnext'){ stopPlay(); const ny = winterStep(S).id === 'grad'; commit(winterNext(S)); if(ny){ U.sel = null; U.piece = null; } renderAll(); refreshNow(); scrollTo(0, 0); }
     else if(act === 'enswatch') playEnsemble();

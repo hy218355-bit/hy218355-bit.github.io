@@ -138,6 +138,10 @@ function record(){
  report.shownMatchesPrepared=!!U.shown&&U.shown===U.perfNow;
  report.playing=U.playing;report.waiting=!!U.waitPlay;report.shownLabel=U.shownLabel;report.range=U.range;report.solo=U.solo;report.piece=playPiece();report.venue=U.venue;
  report.engineSolo=E.solo;report.viewPart=U.view;
+ if(q.has('ensembleAudit')){
+  const active=ensembleListening(),button=$('#week [data-act="enslisten"]'),rec=S.winter?.ens?.recId&&S.recs.find(r=>r.id===S.winter.ens.recId);
+  report.ensemble={selected:[...(U.ensPick||[])],active:!!active,waiting:!!U.waitPlay,fullState:hash(JSON.stringify(S)),performance:active?hash(JSON.stringify(active.perf)):null,cast:active?STAGE_PERFORMERS.get(active.perf)?.members.map(m=>m.id):[],button:button?{label:button.getAttribute('aria-label'),pressed:button.getAttribute('aria-pressed'),disabled:button.disabled,waiting:button.dataset.waiting,motion:document.documentElement.dataset.fxMode,animation:getComputedStyle(button,'::after').animationName,rect:button.getBoundingClientRect().toJSON()}:null,focus:document.activeElement.dataset.ens||document.activeElement.dataset.act||document.activeElement.id,miniHidden:$('#mini').hidden,result:S.winter?.ens,resultPerformance:rec?hash(JSON.stringify(perform(recCtx(rec)))):null,pieceChoice:U.piece,rangeChoice:U.range};
+ }
  if(q.has('watchCardAudit')){
   const card=$('#cdMember'),button=card.querySelector('[data-cdm="solo"]'),rect=el=>el?.getBoundingClientRect().toJSON();
   report.watchCard={selected:CD.sel,hidden:card.hidden,name:card.querySelector('#cdMemberName')?.textContent,pressed:button?.getAttribute('aria-pressed'),button:rect(button),close:rect(card.querySelector('[data-cdm="close"]')),card:rect(card),scroll:$('#conduct').scrollTop,active:document.activeElement.id||document.activeElement.dataset.cdm||document.activeElement.tagName,stats:getComputedStyle($('.cd-stats')).display};
@@ -297,6 +301,8 @@ async function show(next){
   if(q.has('outOldResult')){s=resolveOuting(s,seated(s).slice(0,3).map(m=>m.id));U.outResult=null;}
  }
  if(view==='ensemble'){s.members.forEach((m,i)=>m.grade=i%2+1);s.phase='winter';s.winter={step:1,plan:'kiso'};U.ensKey=null;U.ensPick=null;}
+ if(view==='ensemble'&&q.has('ensembleDifferent'))s.contestPiece='ode';
+ if(view==='ensemble'&&q.has('ensLong'))s=renameMember(s,s.members[0].id,'あいうえおかきくけこさし');
  if(view==='practice-late'){s.week=15;s.members[0].sta=20;}
  if(view.startsWith('prep-')){
   s.week=view==='prep-week'?PREF_WEEK-2:view==='prep-concert'?11:PREF_WEEK;s.phase='week';s.consult=null;s.outing=null;s.episode=null;

@@ -1,0 +1,14 @@
+{
+  "build": "succeeded",
+  "install": "succeeded",
+  "launch": "failed_device_disconnected",
+  "launchReason": "導入直後の起動時に端末との接続が切れた",
+  "runningProcessVerified": false,
+  "visualInteractionVerified": false,
+  "mirroringUsed": false,
+  "bundledSourceSHA256": {
+    "index.html": "b65c17757fafbf8a678419b81ebbd2883e32741eba2733cd2db8070380970e7e",
+    "js/ui.js": "ce487a61ebe0e0324a45dcc78825d3b94230510cfda8d2b3ffdf645021bfe4bb"
+  },
+  "followupDeviceCheck": "failed_coredevice_service_initialization_timeout"
+}
