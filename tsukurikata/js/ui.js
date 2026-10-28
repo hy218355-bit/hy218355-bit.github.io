@@ -248,11 +248,17 @@ const seatXY = (s, G) => {
 // 再生する録音そのものの部員情報を、演奏の音やセーブとは別に覚える。
 const STAGE_PERFORMERS = new WeakMap();
 const PERFORMANCE_PLAYERS = new WeakMap();
+const PERFORMANCE_SECTIONS = new WeakMap();
 // 録音の範囲に音符か打楽器の音がある本人を、一度だけ調べる。
 function performanceMemberSounds(perf,id){
   if(!perf||!id)return false;
   if(!PERFORMANCE_PLAYERS.has(perf))PERFORMANCE_PLAYERS.set(perf,new Set([...perf.notes,...perf.hits].map(n=>n.mid)));
   return PERFORMANCE_PLAYERS.get(perf).has(id);
+}
+function performanceSectionSounds(perf,id){
+  if(!perf||!id)return false;
+  if(!PERFORMANCE_SECTIONS.has(perf))PERFORMANCE_SECTIONS.set(perf,new Set([...perf.notes,...perf.hits].map(n=>n.sec)));
+  return PERFORMANCE_SECTIONS.get(perf).has(id);
 }
 function rememberStageMembers(perf, members, recorded=true, record=null){ STAGE_PERFORMERS.set(perf,{members:members || [],recorded,record}); return perf; }
 function recordingPlayback(){ return !!((U.playing || U.waitPlay) && U.shown && STAGE_PERFORMERS.get(U.shown)?.recorded); }
@@ -558,19 +564,20 @@ function renderHeader(){
   $('#weeksLeft').textContent = nx ? (nx[0] === S.week ? `今週は本番：${nx[1].title}` : `次の本番「${nx[1].title}」まで${nx[0] - S.week}週`) : '';
 }
 function renderPiece(){
-  const recorded=recordingPlayback(), ensemble=ensembleListening(), pid = recorded?U.shown.pieceId:playPiece(), pc = PIECES[pid];
-  $('#btnConduct').disabled=!!ensemble||recorded||busy();
+  const comparison=pieceListening(),recorded=recordingPlayback(),model=comparison?.kind==='model',ensemble=ensembleListening(),pid=recorded||model?U.shown.pieceId:playPiece(),pc=PIECES[pid];
+  $('#btnConduct').disabled=!!ensemble||recorded||model||busy();
   // A部門でコンクールまでは、自由曲と課題曲を切りかえて聴ける
-  const two = !recorded && setActive(S) && S.phase === 'week';
+  const two = !recorded && !model && setActive(S) && S.phase === 'week';
   $('#pieceSwitch').hidden = !two;
   if(two) $('#pieceSwitch').innerHTML = [[S.pieceId, '自由曲'], [S.setPiece, '課題曲']].map(([id, nm]) => `<button type="button" data-pswitch="${id}" aria-pressed="${pid === id}">${nm}：${esc(PIECES[id].title)}</button>`).join('');
-  $('#pieceEyebrow').textContent = ensemble ? 'アンサンブルの試聴' : recorded ? '録音' : two && pid === S.setPiece ? '課題曲' : S.phase === 'choose' || S.phase === 'chooseSet' || pid !== S.pieceId ? '試しに聴く曲' : S.finalWeek ? '定期演奏会の曲' : '自由曲';
+  $('#pieceEyebrow').textContent = model ? 'お手本' : ensemble ? 'アンサンブルの試聴' : recorded ? '録音' : comparison?.kind==='preview' ? 'いまの部' : two && pid === S.setPiece ? '課題曲' : S.phase === 'choose' || S.phase === 'chooseSet' || pid !== S.pieceId ? '試しに聴く曲' : S.finalWeek ? '定期演奏会の曲' : '自由曲';
   $('#pieceDifficulty').innerHTML = difficultyBadge(pid);
   $('#piece').textContent = pc.title;
   $('#piece').setAttribute('data-tip',pc.full);$('#piece').setAttribute('data-tipname','曲名');$('#piece').setAttribute('role','button');$('#piece').tabIndex=0;
   $('#pieceMeta').textContent = `${pc.composer}｜問われる力：${pc.asks}`;
-  $('#rangeSel').disabled=!!ensemble||recorded;
+  $('#rangeSel').disabled=!!ensemble||recorded||model;
   if(recorded) $('#rangeSel').innerHTML=`<option value="recorded">${recordedRangeLabel(U.shown)}</option>`;
+  else if(model)$('#rangeSel').innerHTML='<option value="all">全部</option>';
   else{
     const rd = (pid === S.pieceId || (two && pid === S.setPiece)) && S.phase !== 'choose' ? spanReadAvg(S, pid) : null;
     $('#rangeSel').innerHTML = `<option value="all">全部</option>` + pc.spans.map((sp, i) => `<option value="${i}">${sp.name}${rd ? `（譜読み${rankOf(rd[i])}）` : ''}</option>`).join('');
@@ -597,10 +604,11 @@ function renderSelectors(){
   $('#btnRec').disabled = !recs.length;
   $('#btnSave').disabled = !recs.length;
   const active = U.waitPlay?.perf || (U.playing ? U.shown : null), cast = active && STAGE_PERFORMERS.get(active);
+  const model=pieceListening()?.kind==='model';
   const recSolo = cast?.recorded && U.solo.startsWith('member:') ? cast.members.find(m => m.id === U.solo.slice(7)) : null;
   const person = recSolo || U.recordMember || (U.sel && memberById(U.sel));
-  const sel=person&&(!cast?.recorded||performanceMemberSounds(active,person.id))?person:null;
-  const sections=cast?.recorded?SECTIONS.filter(s=>cast.members.some(m=>SEAT[m.seat]?.sec===s.id&&performanceMemberSounds(active,m.id))):SECTIONS;
+  const sel=!model&&person&&(!cast?.recorded||performanceMemberSounds(active,person.id))?person:null;
+  const sections=cast?.recorded||model?SECTIONS.filter(s=>performanceSectionSounds(active,s.id)):SECTIONS;
   $('#soloSel').innerHTML = `<option value="all">全員</option>` + sections.map(s => `<option value="sec:${s.id}">${s.name}だけ</option>`).join('')
     + (sel ? `<option value="member:${sel.id}">${esc(sel.name)}だけ</option>` : '');
   if(![...$('#soloSel').options].some(o => o.value === U.solo)){ U.solo = 'all'; applySolo(); }
@@ -630,7 +638,8 @@ function recordingRangeNote(rec){
 function renderRecordingLibrary(){
   const list=$('#recordingList');if(!list || !S)return;
   const recs=S.recs.slice().reverse(),seed=String(S.recruitSeed||0),active=activeLibraryRecording(),perf=U.waitPlay?.perf || (U.playing?U.shown:null);
-  $('#btnLiveNow').hidden=!active;$('#btnConduct').hidden=!!active;
+  const model=pieceListening()?.kind==='model';
+  $('#btnLiveNow').hidden=!(active||model);$('#btnConduct').hidden=!!active||model;
   if(U.librarySeed!==seed){U.librarySeed=seed;U.libraryKey=null;U.libraryPerf=null;list.scrollTop=0;}
   if(active && perf!==U.libraryPerf && recs.some(r=>r.id===active.id))$('#recSel').value=active.id;
   U.libraryPerf=perf;
@@ -2267,11 +2276,12 @@ function listenPiece(pid,kind){
   const active=pieceListening();if(active?.pid===pid&&active.kind===kind){stopPlay();return;}
   const state=S;stopPlay();if(S!==state||busy()||CD.phase!=='idle')return;
   U.piece=pid;U.range='all';soloAll();
+  if(kind==='model'){clearRecordedMember();U.sel=null;renderMemberCard();renderRoster();}
   if(kind==='model'&&U.venue!=='hall')setVenue('hall');
   clearTimeout(U.refreshT);U.perfNow=currentPerformance();U.diag=analyze(U.perfNow);renderPiece();renderDiag();
   const perf=kind==='model'?modelPerf(pid):U.perfNow,token=U.pieceListen={pid,kind,perf,state:S};
   const done=()=>{if(U.pieceListen===token){U.pieceListen=null;renderPieceListening();}};
-  const label=kind==='model'?`お手本：${PIECES[pid].title}（全員がうまい部・${VENUE.hall.name}）`:`いまの部で：${PIECES[pid].title}${readAvg(S,pid)<5?'（譜読み前）':''}`;
+  const label=kind==='model'?`お手本：${PIECES[pid].title}（全員がうまい部）`:`いまの部で：${PIECES[pid].title}${readAvg(S,pid)<5?'（譜読み前）':''}`;
   playPerf(perf,label,done,{},done);if(!pieceListening())done();renderSelectors();renderPieceListening();
 }
 // 曲のカード（選曲・課題曲・定期演奏会の曲）：短い曲名・作曲者・問われる力と、聴く・決めるボタン。曲の説明は「どんな曲？」で開く
@@ -2338,6 +2348,7 @@ function soloAll(){ const was = U.solo !== 'all'; U.solo = 'all'; applySolo(); i
 // 今の部員の試聴は今の部から鳴らす。昔の録音やお手本の中から探さない。
 function listenCurrentMember(id, section = false){
   if(!memberById(id)?.seat) return;
+  const action=section?'secsolo':'solo',focused=document.activeElement?.dataset.mact===action&&document.activeElement.closest('#memberCard');
   if((U.playing || U.waitPlay) && U.shown !== U.perfNow) stopPlay();
   // 停止時の処理で部が変わることもあるので、今いる本人を取り直す。
   const m = memberById(id); if(!m?.seat) return;
@@ -2345,6 +2356,7 @@ function listenCurrentMember(id, section = false){
   U.solo = section ? `sec:${SEAT[m.seat].sec}` : `member:${m.id}`;
   renderSelectors(); applySolo(); renderMemberCard();
   if(!U.playing) $('#btnNow').click();
+  if(focused&&U.sel===id)$('#memberCard [data-mact="'+action+'"]').focus({preventScroll:true});
 }
 function startStage(){
   stopPlay();
@@ -2463,7 +2475,10 @@ function bind(){
   });
   $('#btnLiveNow').addEventListener('click',()=>{
     if(libraryBlocked())return;
-    stopPlay();soloAll();clearRecordedMember();$('#btnNow').click();
+    const focused=document.activeElement===$('#btnLiveNow'),model=pieceListening();
+    if(model?.kind==='model')listenPiece(model.pid,'preview');
+    else{stopPlay();soloAll();clearRecordedMember();$('#btnNow').click();}
+    if(focused&&(U.playing||U.waitPlay))$('#btnStop').focus({preventScroll:true});
   });
   $('#btnRec').addEventListener('click', () => listenLibraryRecording($('#recSel').value));
   $('#btnStop').addEventListener('click', stopPlay);

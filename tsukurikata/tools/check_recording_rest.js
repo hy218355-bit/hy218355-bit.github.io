@@ -14,6 +14,7 @@ const $=s=>s==='#memberCard [data-mact="recordsolo"]'?(card.innerHTML.includes('
 const uiIcon=s=>'['+s+']',memberFace=m=>'[顔:'+m.id+']',memberCurrentRanks=()=>'';
 const instrumentIcon=s=>'[楽器:'+s+']',seatLabel=id=>PART_LABEL[SEAT[id].part];
 const renderListeningSummary=()=>{},renderRecordingLibrary=()=>{},memberById=id=>S.members.find(m=>m.id===id);
+const pieceListening=()=>null;
 `,ctx);
 vm.runInContext(ui.slice(ui.indexOf('const STAGE_PERFORMERS ='),ui.indexOf('function levelAt(')),ctx);
 vm.runInContext(ui.slice(ui.indexOf('function renderSelectors(){'),ui.indexOf('// 録音の参照は')),ctx);

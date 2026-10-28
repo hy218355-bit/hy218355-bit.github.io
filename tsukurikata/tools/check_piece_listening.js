@@ -13,7 +13,7 @@ const buttons=PIECE_IDS.flatMap(pid=>['model','preview'].map(act=>element({act,p
 const document={querySelectorAll:s=>s==='[data-piece-card]'?cards:buttons};
 const nodes={},$=s=>nodes[s]||=element({});
 const E={pb:null,solo:{type:'all'},venueId:'room',ac:{currentTime:0},ensure:()=>true,unlock(){},setSolo(s){this.solo=s;},setVenue(id){this.venueId=id;},stop(){this.pb=null;},play(perf){if(failed)return null;this.pb={perf};plays.push({perf,solo:{...this.solo},venue:this.venueId});return this.pb;}};
-const cancelAnimationFrame=()=>{},requestAnimationFrame=()=>0,updateMini=()=>{},clearRecordedMember=()=>{},renderPiece=()=>{},renderDiag=()=>{},drawIdle=()=>{},renderSelectors=()=>{},renderMemberCard=()=>{};
+const cancelAnimationFrame=()=>{},requestAnimationFrame=()=>0,updateMini=()=>{},clearRecordedMember=()=>{},renderPiece=()=>{},renderDiag=()=>{},drawIdle=()=>{},renderSelectors=()=>{},renderMemberCard=()=>{},renderRoster=()=>{};
 const ensembleListening=()=>null,busy=()=>!!(S.pending&&!S.pending.revealed),playPiece=()=>U.piece||S.pieceId||'largo';
 const setNowPlaying=()=>renderPieceListening(),renderPlayButtons=()=>renderPieceListening(),refreshNow=()=>{U.perfNow=null;},setVenue=id=>{U.venue=id;E.setVenue(id);refreshNow();};
 save=()=>{};

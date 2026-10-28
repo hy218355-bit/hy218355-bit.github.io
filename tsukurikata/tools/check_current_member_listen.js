@@ -6,10 +6,11 @@ const pieces=[...html.matchAll(/src="js\/(pieces\/[^"?]+)\.js/g)].map(m=>m[1]);
 const ctx=vm.createContext({console,assert,clearTimeout});
 for(const f of ['util','instruments','venues','scores',...pieces,'band','game'])vm.runInContext(fs.readFileSync(path.join(root,'js',f+'.js'),'utf8'),ctx,{filename:f+'.js'});
 vm.runInContext(`
-let S,plays=[],stops=0,afterStop=null;
+let S,plays=[],stops=0,afterStop=null,focusTarget='';
 const U={piece:null,range:'all',venue:'room',playing:true,shown:null,perfNow:null,solo:'all',sel:null};
 const E={solo:{type:'all'},setSolo(s){this.solo=s;}};
-const nodes={};const $=s=>nodes[s]||=({addEventListener(_,fn){this.click=fn;}});
+const nodes={};const $=s=>nodes[s]||=({addEventListener(_,fn){this.click=fn;},focus(){focusTarget=s;}});
+const document={activeElement:null};
 const playPiece=()=>U.piece||S.pieceId||'largo',rememberStageMembers=perf=>perf;
 const renderSelectors=()=>{},renderMemberCard=()=>{},renderDiag=()=>{},memberById=id=>S.members.find(m=>m.id===id);
 const stopPlay=()=>{stops++;U.playing=false;U.waitPlay=null;U.perfNow=null;const cb=afterStop;afterStop=null;cb?.();};
@@ -55,5 +56,8 @@ assert.equal(stops,1);assert.ok(sound(U.shown)===sound(perform(currentCtx())));
 // 停止時の処理で席を外れた場合と、初めから控えの場合は、古い席から鳴らさない。
 fresh();U.shown=perform(recCtx(S.recs[0]));afterStop=()=>{S.members[1].seat=null;};listenCurrentMember(S.members[1].id);assert.equal(plays.length,0);
 fresh();S.members[1].seat=null;listenCurrentMember(S.members[1].id,true);assert.equal(stops,0);assert.equal(plays.length,0);
+// 描き直しても、押した本人・パートのボタンへ操作先を戻す。
+for(const section of [false,true]){fresh();const action=section?'secsolo':'solo';document.activeElement={dataset:{mact:action},closest:()=>true};listenCurrentMember(S.members[1].id,section);assert.equal(focusTarget,'#memberCard [data-mact="'+action+'"]');}
+fresh();document.activeElement={dataset:{mact:'another'}};focusTarget='outside';listenCurrentMember(S.members[1].id);assert.equal(focusTarget,'outside');
 `,ctx);
 console.log('昔の録音・同じidの昔の力から今の本人とパートへ／現在の合奏は止めずに切替／育った後も今の力／停止時の席変更を再確認／部員と録音を変えない：確認済み');
