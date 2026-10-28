@@ -1,0 +1,14 @@
+<!doctype html>
+<html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>会場の切り替えを滑らかに</title>
+<style>
+body{margin:0;background:#12252f;color:#f3f0e4;font:14px/1.7 system-ui,sans-serif}main{max-width:700px;margin:auto;padding:24px}h1{font-size:23px;line-height:1.55}p{font-size:13px}svg{display:block;width:100%;height:auto;border:1px solid #42565b;border-radius:12px;background:#1e343d}.legend{display:flex;gap:20px}.legend span:first-child{color:#e49c9d}.legend span:last-child{color:#a5ceba}.note{color:#b7c5be;font-size:12px}pre{white-space:pre-wrap;overflow-wrap:anywhere;font-size:11px}a{color:inherit}summary{cursor:pointer;padding:12px 0}#status{color:#a5ceba}
+</style></head><body><main>
+<p>B · 音のつながり</p><h1>切り替えた前の音が、<br>戻らないように。</h1>
+<p>会場を続けて切り替えても、前の響きがふくらまず、静かに消えるようにしました。</p>
+<div class="legend"><span>以前の音量</span><span>修正後の音量</span></div>
+<svg id="chart" viewBox="0 0 600 330" role="img" aria-label="切り替え途中の会場の音量の比較"></svg>
+<p id="status" aria-live="polite">確認中</p>
+<p class="note">会場を切り替えて0.12秒後、もう一度切り替えたときの測定。実際の音声書き出し値です。この画面から音は鳴らしません。</p>
+<details><summary>測定結果を開く</summary><pre id="audit">検証中</pre></details>
+<p><a href="README.md">確認の記録</a></p>
+</main><script src="/tsukurikata/js/util.js"></script><script src="/tsukurikata/js/venues.js?v=venue-fade-audit"></script><script src="probe.js"></script></body></html>

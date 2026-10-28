@@ -1,0 +1,21 @@
+{
+  "buildSucceeded": true,
+  "installed": true,
+  "launched": false,
+  "locked": true,
+  "files": [
+    {
+      "file": "index.html",
+      "source": "b6443aa922313be8f2669b7dfc84b6d0054825d15ac2854deebf59df91ed6fd9",
+      "bundle": "b6443aa922313be8f2669b7dfc84b6d0054825d15ac2854deebf59df91ed6fd9",
+      "match": true
+    },
+    {
+      "file": "js/venues.js",
+      "source": "d8011bb413fd6cf378cfef13190674fa9255d31cdf190be231fb91d9e88e711d",
+      "bundle": "d8011bb413fd6cf378cfef13190674fa9255d31cdf190be231fb91d9e88e711d",
+      "match": true
+    }
+  ],
+  "mirroringUsed": false
+}

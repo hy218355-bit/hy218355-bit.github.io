@@ -145,6 +145,19 @@ function venueIR(ac, vid, pos, onReady){
   return null;
 }
 
+// 途中のフェードインを取り消し、切り替えた瞬間の音量から古い響きを消す。
+function fadeVenueOut(param, at, duration){
+  const value = param.value;
+  if(typeof param.cancelAndHoldAtTime === 'function'){
+    param.cancelAndHoldAtTime(at);
+  }else{
+    param.cancelScheduledValues(at);
+  }
+  // フェードが終わった後も開始点を置き、古い環境でも直前の傾斜を途切れさせない。
+  param.linearRampToValueAtTime(value, at);
+  param.linearRampToValueAtTime(0, at + duration);
+}
+
 // 会場の出口。会場や聴く位置を切り替えると、古い響きから新しい響きへなめらかに入れ替える。
 // input は直接音＋響き、wetIn は響きだけに送る入口（ステージの奥の列ほど多く送る）
 class VenueChain {
@@ -204,7 +217,7 @@ class VenueChain {
     const drop = o => { try{ this.input.disconnect(o.head); this.input.disconnect(o.conv); this.wetIn.disconnect(o.conv); o.out.disconnect(); }catch(e){} };
     if(old && fade > 0){
       st.out.gain.setValueAtTime(0, now); st.out.gain.linearRampToValueAtTime(1, now + fade);
-      old.out.gain.setValueAtTime(old.out.gain.value, now); old.out.gain.linearRampToValueAtTime(0, now + fade);
+      fadeVenueOut(old.out.gain, now, fade);
       setTimeout(() => drop(old), (fade + 0.2) * 1000);
     } else if(old) drop(old);
     this.stage = st;

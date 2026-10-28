@@ -1,0 +1,610 @@
+[
+  {
+    "label": "変更前",
+    "theme": "light",
+    "width": 375,
+    "scrollWidth": 375,
+    "playing": true,
+    "waiting": false,
+    "playbackId": 1,
+    "venue": "room",
+    "venueAudio": {
+      "audioState": "running",
+      "chain": "room",
+      "chainPosition": "center",
+      "engine": "room",
+      "gain": 0.9243749976158142,
+      "performance": 0.4994142900686711,
+      "position": "center",
+      "realIR": true,
+      "state": 0.4669240936636925
+    },
+    "listening": {
+      "conductDisabled": false,
+      "engineVenue": "room",
+      "kind": "自由曲",
+      "range": "all",
+      "rangeDisabled": false,
+      "rangeLabel": "全部",
+      "shownPiece": "galop",
+      "summary": "音楽室・全部・全員",
+      "title": "「天国と地獄」"
+    },
+    "boot": {
+      "loaded": 33,
+      "scripts": 33,
+      "errors": [],
+      "failed": []
+    }
+  },
+  {
+    "label": "gym",
+    "theme": "light",
+    "width": 375,
+    "scrollWidth": 375,
+    "playing": true,
+    "waiting": false,
+    "playbackId": 1,
+    "venue": "gym",
+    "venueAudio": {
+      "audioState": "running",
+      "chain": "gym",
+      "chainPosition": "center",
+      "engine": "gym",
+      "gain": 0.03350461274385452,
+      "performance": 0.4994142900686711,
+      "position": "center",
+      "realIR": false,
+      "state": 0.4669240936636925
+    },
+    "listening": {
+      "conductDisabled": false,
+      "engineVenue": "gym",
+      "kind": "自由曲",
+      "range": "all",
+      "rangeDisabled": false,
+      "rangeLabel": "全部",
+      "shownPiece": "galop",
+      "summary": "体育館・全部・全員",
+      "title": "「天国と地獄」"
+    },
+    "boot": {
+      "loaded": 33,
+      "scripts": 33,
+      "errors": [],
+      "failed": []
+    }
+  },
+  {
+    "label": "civic",
+    "theme": "light",
+    "width": 375,
+    "scrollWidth": 375,
+    "playing": true,
+    "waiting": false,
+    "playbackId": 1,
+    "venue": "civic",
+    "venueAudio": {
+      "audioState": "running",
+      "chain": "civic",
+      "chainPosition": "center",
+      "engine": "civic",
+      "gain": 0.05328125134110451,
+      "performance": 0.4994142900686711,
+      "position": "center",
+      "realIR": false,
+      "state": 0.4669240936636925
+    },
+    "listening": {
+      "conductDisabled": false,
+      "engineVenue": "civic",
+      "kind": "自由曲",
+      "range": "all",
+      "rangeDisabled": false,
+      "rangeLabel": "全部",
+      "shownPiece": "galop",
+      "summary": "市民会館・全部・全員",
+      "title": "「天国と地獄」"
+    },
+    "boot": {
+      "loaded": 33,
+      "scripts": 33,
+      "errors": [],
+      "failed": []
+    }
+  },
+  {
+    "label": "hall",
+    "theme": "light",
+    "width": 375,
+    "scrollWidth": 375,
+    "playing": true,
+    "waiting": false,
+    "playbackId": 1,
+    "venue": "hall",
+    "venueAudio": {
+      "audioState": "running",
+      "chain": "hall",
+      "chainPosition": "center",
+      "engine": "hall",
+      "gain": 0.04661458358168602,
+      "performance": 0.4994142900686711,
+      "position": "center",
+      "realIR": false,
+      "state": 0.4669240936636925
+    },
+    "listening": {
+      "conductDisabled": false,
+      "engineVenue": "hall",
+      "kind": "自由曲",
+      "range": "all",
+      "rangeDisabled": false,
+      "rangeLabel": "全部",
+      "shownPiece": "galop",
+      "summary": "県民文化会館・全部・全員",
+      "title": "「天国と地獄」"
+    },
+    "boot": {
+      "loaded": 33,
+      "scripts": 33,
+      "errors": [],
+      "failed": []
+    }
+  },
+  {
+    "label": "room",
+    "theme": "light",
+    "width": 375,
+    "scrollWidth": 375,
+    "playing": true,
+    "waiting": false,
+    "playbackId": 1,
+    "venue": "room",
+    "venueAudio": {
+      "audioState": "running",
+      "chain": "room",
+      "chainPosition": "center",
+      "engine": "room",
+      "gain": 0.03328125178813934,
+      "performance": 0.4994142900686711,
+      "position": "center",
+      "realIR": true,
+      "state": 0.4669240936636925
+    },
+    "listening": {
+      "conductDisabled": false,
+      "engineVenue": "room",
+      "kind": "自由曲",
+      "range": "all",
+      "rangeDisabled": false,
+      "rangeLabel": "全部",
+      "shownPiece": "galop",
+      "summary": "音楽室・全部・全員",
+      "title": "「天国と地獄」"
+    },
+    "boot": {
+      "loaded": 33,
+      "scripts": 33,
+      "errors": [],
+      "failed": []
+    }
+  },
+  {
+    "label": "ライト・県民文化会館",
+    "theme": "light",
+    "width": 375,
+    "scrollWidth": 375,
+    "playing": true,
+    "waiting": false,
+    "playbackId": 1,
+    "venue": "hall",
+    "venueAudio": {
+      "audioState": "running",
+      "chain": "hall",
+      "chainPosition": "center",
+      "engine": "hall",
+      "gain": 0.08719588816165924,
+      "performance": 0.4994142900686711,
+      "position": "center",
+      "realIR": true,
+      "state": 0.4669240936636925
+    },
+    "listening": {
+      "conductDisabled": false,
+      "engineVenue": "hall",
+      "kind": "自由曲",
+      "range": "all",
+      "rangeDisabled": false,
+      "rangeLabel": "全部",
+      "shownPiece": "galop",
+      "summary": "県民文化会館・全部・全員",
+      "title": "「天国と地獄」"
+    },
+    "boot": {
+      "loaded": 33,
+      "scripts": 33,
+      "errors": [],
+      "failed": []
+    }
+  },
+  {
+    "label": "ダーク・grand",
+    "theme": "dark",
+    "width": 375,
+    "scrollWidth": 375,
+    "playing": false,
+    "waiting": false,
+    "playbackId": null,
+    "venue": "grand",
+    "venueAudio": {
+      "audioState": "running",
+      "chain": "grand",
+      "chainPosition": "center",
+      "engine": "grand",
+      "gain": 0.05328125134110451,
+      "performance": 0.4503788407891989,
+      "position": "center",
+      "realIR": false,
+      "state": 0.4669240936636925
+    },
+    "listening": {
+      "conductDisabled": false,
+      "engineVenue": "grand",
+      "kind": "自由曲",
+      "range": "all",
+      "rangeDisabled": false,
+      "rangeLabel": "全部",
+      "shownPiece": "galop",
+      "summary": "大ホール（支部・全国）・全部・全員",
+      "title": "「天国と地獄」"
+    },
+    "boot": {
+      "loaded": 33,
+      "scripts": 33,
+      "errors": [],
+      "failed": []
+    }
+  },
+  {
+    "label": "ダーク・outdoor",
+    "theme": "dark",
+    "width": 375,
+    "scrollWidth": 375,
+    "playing": false,
+    "waiting": false,
+    "playbackId": null,
+    "venue": "outdoor",
+    "venueAudio": {
+      "audioState": "running",
+      "chain": "outdoor",
+      "chainPosition": "center",
+      "engine": "outdoor",
+      "gain": 0.05328125134110451,
+      "performance": 0.20281367120333016,
+      "position": "center",
+      "realIR": false,
+      "state": 0.4669240936636925
+    },
+    "listening": {
+      "conductDisabled": false,
+      "engineVenue": "outdoor",
+      "kind": "自由曲",
+      "range": "all",
+      "rangeDisabled": false,
+      "rangeLabel": "全部",
+      "shownPiece": "galop",
+      "summary": "屋外ステージ・全部・全員",
+      "title": "「天国と地獄」"
+    },
+    "boot": {
+      "loaded": 33,
+      "scripts": 33,
+      "errors": [],
+      "failed": []
+    }
+  },
+  {
+    "label": "ダーク・camp",
+    "theme": "dark",
+    "width": 375,
+    "scrollWidth": 375,
+    "playing": false,
+    "waiting": false,
+    "playbackId": null,
+    "venue": "camp",
+    "venueAudio": {
+      "audioState": "running",
+      "chain": "camp",
+      "chainPosition": "center",
+      "engine": "camp",
+      "gain": 0.05628301203250885,
+      "performance": 0.4061510658357293,
+      "position": "center",
+      "realIR": false,
+      "state": 0.4669240936636925
+    },
+    "listening": {
+      "conductDisabled": false,
+      "engineVenue": "camp",
+      "kind": "自由曲",
+      "range": "all",
+      "rangeDisabled": false,
+      "rangeLabel": "全部",
+      "shownPiece": "galop",
+      "summary": "合宿所ホール・全部・全員",
+      "title": "「天国と地獄」"
+    },
+    "boot": {
+      "loaded": 33,
+      "scripts": 33,
+      "errors": [],
+      "failed": []
+    }
+  },
+  {
+    "label": "ダーク・civic",
+    "theme": "dark",
+    "width": 375,
+    "scrollWidth": 375,
+    "playing": false,
+    "waiting": false,
+    "playbackId": null,
+    "venue": "civic",
+    "venueAudio": {
+      "audioState": "running",
+      "chain": "civic",
+      "chainPosition": "center",
+      "engine": "civic",
+      "gain": 0.05328125134110451,
+      "performance": 0.3919927766546607,
+      "position": "center",
+      "realIR": true,
+      "state": 0.4669240936636925
+    },
+    "listening": {
+      "conductDisabled": false,
+      "engineVenue": "civic",
+      "kind": "自由曲",
+      "range": "all",
+      "rangeDisabled": false,
+      "rangeLabel": "全部",
+      "shownPiece": "galop",
+      "summary": "市民会館・全部・全員",
+      "title": "「天国と地獄」"
+    },
+    "boot": {
+      "loaded": 33,
+      "scripts": 33,
+      "errors": [],
+      "failed": []
+    }
+  },
+  {
+    "label": "ダーク・再生開始",
+    "theme": "dark",
+    "width": 375,
+    "scrollWidth": 375,
+    "playing": true,
+    "waiting": false,
+    "playbackId": 2,
+    "venue": "civic",
+    "venueAudio": {
+      "audioState": "running",
+      "chain": "civic",
+      "chainPosition": "center",
+      "engine": "civic",
+      "gain": 1,
+      "performance": 0.1277666927780956,
+      "position": "center",
+      "realIR": true,
+      "state": 0.4669240936636925
+    },
+    "listening": {
+      "conductDisabled": false,
+      "engineVenue": "civic",
+      "kind": "自由曲",
+      "range": "all",
+      "rangeDisabled": false,
+      "rangeLabel": "全部",
+      "shownPiece": "galop",
+      "summary": "市民会館・全部・全員",
+      "title": "「天国と地獄」"
+    },
+    "boot": {
+      "loaded": 33,
+      "scripts": 33,
+      "errors": [],
+      "failed": []
+    }
+  },
+  {
+    "label": "ダーク・再生中・grand",
+    "theme": "dark",
+    "width": 375,
+    "scrollWidth": 375,
+    "playing": true,
+    "waiting": false,
+    "playbackId": 2,
+    "venue": "grand",
+    "venueAudio": {
+      "audioState": "running",
+      "chain": "grand",
+      "chainPosition": "center",
+      "engine": "grand",
+      "gain": 0.05328125134110451,
+      "performance": 0.1277666927780956,
+      "position": "center",
+      "realIR": true,
+      "state": 0.4669240936636925
+    },
+    "listening": {
+      "conductDisabled": false,
+      "engineVenue": "grand",
+      "kind": "自由曲",
+      "range": "all",
+      "rangeDisabled": false,
+      "rangeLabel": "全部",
+      "shownPiece": "galop",
+      "summary": "大ホール（支部・全国）・全部・全員",
+      "title": "「天国と地獄」"
+    },
+    "boot": {
+      "loaded": 33,
+      "scripts": 33,
+      "errors": [],
+      "failed": []
+    }
+  },
+  {
+    "label": "ダーク・再生中・outdoor",
+    "theme": "dark",
+    "width": 375,
+    "scrollWidth": 375,
+    "playing": true,
+    "waiting": false,
+    "playbackId": 2,
+    "venue": "outdoor",
+    "venueAudio": {
+      "audioState": "running",
+      "chain": "outdoor",
+      "chainPosition": "center",
+      "engine": "outdoor",
+      "gain": 0.05328125134110451,
+      "performance": 0.1277666927780956,
+      "position": "center",
+      "realIR": true,
+      "state": 0.4669240936636925
+    },
+    "listening": {
+      "conductDisabled": false,
+      "engineVenue": "outdoor",
+      "kind": "自由曲",
+      "range": "all",
+      "rangeDisabled": false,
+      "rangeLabel": "全部",
+      "shownPiece": "galop",
+      "summary": "屋外ステージ・全部・全員",
+      "title": "「天国と地獄」"
+    },
+    "boot": {
+      "loaded": 33,
+      "scripts": 33,
+      "errors": [],
+      "failed": []
+    }
+  },
+  {
+    "label": "ダーク・再生中・camp",
+    "theme": "dark",
+    "width": 375,
+    "scrollWidth": 375,
+    "playing": true,
+    "waiting": false,
+    "playbackId": 2,
+    "venue": "camp",
+    "venueAudio": {
+      "audioState": "running",
+      "chain": "camp",
+      "chainPosition": "center",
+      "engine": "camp",
+      "gain": 0.04661458358168602,
+      "performance": 0.1277666927780956,
+      "position": "center",
+      "realIR": true,
+      "state": 0.4669240936636925
+    },
+    "listening": {
+      "conductDisabled": false,
+      "engineVenue": "camp",
+      "kind": "自由曲",
+      "range": "all",
+      "rangeDisabled": false,
+      "rangeLabel": "全部",
+      "shownPiece": "galop",
+      "summary": "合宿所ホール・全部・全員",
+      "title": "「天国と地獄」"
+    },
+    "boot": {
+      "loaded": 33,
+      "scripts": 33,
+      "errors": [],
+      "failed": []
+    }
+  },
+  {
+    "label": "ダーク・再生中・civic",
+    "theme": "dark",
+    "width": 375,
+    "scrollWidth": 375,
+    "playing": true,
+    "waiting": false,
+    "playbackId": 2,
+    "venue": "civic",
+    "venueAudio": {
+      "audioState": "running",
+      "chain": "civic",
+      "chainPosition": "center",
+      "engine": "civic",
+      "gain": 0.05328125134110451,
+      "performance": 0.1277666927780956,
+      "position": "center",
+      "realIR": true,
+      "state": 0.4669240936636925
+    },
+    "listening": {
+      "conductDisabled": false,
+      "engineVenue": "civic",
+      "kind": "自由曲",
+      "range": "all",
+      "rangeDisabled": false,
+      "rangeLabel": "全部",
+      "shownPiece": "galop",
+      "summary": "市民会館・全部・全員",
+      "title": "「天国と地獄」"
+    },
+    "boot": {
+      "loaded": 33,
+      "scripts": 33,
+      "errors": [],
+      "failed": []
+    }
+  },
+  {
+    "label": "ダーク・停止",
+    "theme": "dark",
+    "width": 375,
+    "scrollWidth": 375,
+    "playing": false,
+    "waiting": false,
+    "playbackId": null,
+    "venue": "civic",
+    "venueAudio": {
+      "audioState": "running",
+      "chain": "civic",
+      "chainPosition": "center",
+      "engine": "civic",
+      "gain": 0.4999479055404663,
+      "performance": 0.1277666927780956,
+      "position": "center",
+      "realIR": true,
+      "state": 0.4669240936636925
+    },
+    "listening": {
+      "conductDisabled": false,
+      "engineVenue": "civic",
+      "kind": "自由曲",
+      "range": "all",
+      "rangeDisabled": false,
+      "rangeLabel": "全部",
+      "shownPiece": "galop",
+      "summary": "市民会館・全部・全員",
+      "title": "「天国と地獄」"
+    },
+    "boot": {
+      "loaded": 33,
+      "scripts": 33,
+      "errors": [],
+      "failed": []
+    }
+  }
+]
