@@ -1,0 +1,26 @@
+{
+  "buildSucceeded": true,
+  "installed": false,
+  "launched": false,
+  "installAttempts": 2,
+  "connectionInterrupted": true,
+  "connectionReasons": [
+    "Connection interrupted",
+    "Connection invalid"
+  ],
+  "files": [
+    {
+      "file": "index.html",
+      "source": "92ed4cf3b1fb6671b46668b0ce6f64a79c94344214961e98dda6f0bedf540dcc",
+      "bundle": "92ed4cf3b1fb6671b46668b0ce6f64a79c94344214961e98dda6f0bedf540dcc",
+      "match": true
+    },
+    {
+      "file": "js/engine.js",
+      "source": "9ef0e53e4e79af61fd152b2f38d7f8a36f80332fcde11fc97683eb4f53483845",
+      "bundle": "9ef0e53e4e79af61fd152b2f38d7f8a36f80332fcde11fc97683eb4f53483845",
+      "match": true
+    }
+  ],
+  "mirroringUsed": false
+}

@@ -1,0 +1,12 @@
+{
+  "since": "2026-10-28T19:45:03.325Z",
+  "current": [],
+  "earlier": [
+    {
+      "level": "error",
+      "message": "TypeError: Failed to execute 'setValueAtTime' on 'AudioParam': The provided double value is non-finite.\n    at SampleVoice.play (http://127.0.0.1:8005/tsukurikata/js/samples.js?v=qa-playback-stop-1:247:28)\n    at Playback.pump (http://127.0.0.1:8005/tsukurikata/js/engine.js?v=qa-playback-stop-1:321:29)\n    at new Playback (http://127.0.0.1:8005/tsukurikata/js/engine.js?v=qa-playback-stop-1:268:10)\n    at Engine.play (http://127.0.0.1:8005/tsukurikata/js/engine.js?v=qa-playback-stop-1:90:15)\n    at playPerf (http://127.0.0.1:8005/tsukurikata/js/ui.js?v=qa-playback-stop-1:182:16)\n    at playRecording (http://127.0.0.1:8005/tsukurikata/js/conduct.js?v=qa-playback-stop-1:441:3)\n    at playRec (http://127.0.0.1:8005/tsukurikata/js/ui.js?v=qa-playback-stop-1:2536:3)\n    at listenLibraryRecording (http://127.0.0.1:8005/tsukurikata/js/ui.js?v=qa-playback-stop-1:715:67)\n    at HTMLDivElement.<anonymous> (http://127.0.0.1:8005/tsukurikata/js/ui.js?v=qa-playback-stop-1:2541:29)",
+      "timestamp": "2026-10-28T19:41:17.709Z",
+      "url": "http://127.0.0.1:8005/tsukurikata/js/samples.js?v=qa-playback-stop-1"
+    }
+  ]
+}

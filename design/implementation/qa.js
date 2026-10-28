@@ -22,6 +22,17 @@ window.fetch=(input,init)=>{
 if(document.readyState==='loading')await new Promise(r=>document.addEventListener('DOMContentLoaded',r,{once:true}));
 const q=new URLSearchParams(location.search);let view=q.get('view')||'week';
 const countinHistory=[];
+const playbackStops=[];
+if(q.has('playbackStopAudit')){
+ // 止めた再生の出口を後から読み、次の再生へ切り替えても音量が戻らないか残す。
+ const stop=Playback.prototype.stop;
+ Playback.prototype.stop=function(){
+  if(this.ended)return stop.call(this);
+  const item={at:this.ac.currentTime,clock:!!this.clock,before:[this.bus.gain.value,this.wet.gain.value],samples:[]};playbackStops.push(item);
+  stop.call(this);
+  for(const delay of [0,80,160,240,360])setTimeout(()=>{item.samples.push({elapsed:this.ac.currentTime-item.at,gains:[this.bus.gain.value,this.wet.gain.value],ended:this.ended});record();},delay);
+ };
+}
 if(q.has('countinAudit')){
  const ready=cdCountReady;
  cdCountReady=now=>{
@@ -108,6 +119,7 @@ function advance(s){
  return practiceWeek(s);
 }
 function record(){
+ if(q.has('playbackStopAudit'))report.playbackStops=playbackStops;
  const bootResult=$('#bootResult');if(bootResult)report.boot=JSON.parse(bootResult.textContent);
  if(q.has('performanceAudit')){
   const key=[playPiece(),U.range,U.venue].join(':');
@@ -390,6 +402,7 @@ async function show(next){
    if(q.has('shortRecord'))s.recs.forEach(r=>r.span={from:0,to:.25});
    if(q.has('oneRecord'))s.recs=s.recs.slice(0,1);
    if(q.has('noRecord'))s.recs=[];
+   if(q.has('recordedDynamics'))s.recs.forEach(r=>{r.conduct={ev:[{b:0,t:0,P:60/bpmAt(PIECES[r.pieceId],1,0),jolt:0}],lv:Array.from({length:120},(_,i)=>[i*.5,i%2?.5:1.45]),taps:[]};});
   }
  }
  if(view==='song-set'){s.division='A';s.phase='chooseSet';}

@@ -354,8 +354,14 @@ class Playback {
     this.ended = true;
     clearInterval(this.timer);
     const now = this.ac.currentTime;
-    this.bus.gain.setTargetAtTime(0, now, 0.04);
-    this.wet.gain.setTargetAtTime(0, now, 0.04);
+    // 保存した指揮の強弱を取り消し、止めた音が後の予約で戻らないようにする。
+    for(const node of [this.bus, this.wet]){
+      const gain = node.gain, value = gain.value;
+      if(typeof gain.cancelAndHoldAtTime === 'function') gain.cancelAndHoldAtTime(now);
+      else gain.cancelScheduledValues(now);
+      gain.linearRampToValueAtTime(value, now);
+      gain.setTargetAtTime(0, now, 0.04);
+    }
     for(const v of this.voices) v.stop(now + 0.3);
     for(const s of this.srcs){ try{ s.stop(now + 0.3); }catch(e){} }
     const outputs=[this.bus,this.wet,...this.listenOutputs];

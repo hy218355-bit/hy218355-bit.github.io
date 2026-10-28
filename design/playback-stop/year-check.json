@@ -1,0 +1,3056 @@
+{
+  "assignExpected": [
+    {
+      "hope": "ob",
+      "id": "m2026-n1-401d75a4",
+      "name": "安藤 朔",
+      "seat": "ob1"
+    },
+    {
+      "hope": "hn",
+      "id": "m2026-n2-401d75a4",
+      "name": "原田 茜",
+      "seat": "hn1"
+    },
+    {
+      "hope": "tuba",
+      "id": "m2026-n3-401d75a4",
+      "name": "石井 樹",
+      "seat": "tuba1"
+    },
+    {
+      "hope": "asax",
+      "id": "m2026-n4-401d75a4",
+      "name": "太田 詩",
+      "seat": "asax1"
+    },
+    {
+      "hope": "timp",
+      "id": "m2026-n5-401d75a4",
+      "name": "佐々木 彩花",
+      "seat": "perc1"
+    },
+    {
+      "hope": "cl",
+      "id": "m2026-n6-401d75a4",
+      "name": "山崎 光",
+      "seat": "cl1a"
+    },
+    {
+      "hope": "hn",
+      "id": "m2026-j7-401d75a4",
+      "name": "石井 晴",
+      "seat": "hn3"
+    },
+    {
+      "hope": "ebcl",
+      "id": "m2026-j8-401d75a4",
+      "name": "宮崎 蒼",
+      "seat": "ebcl1"
+    },
+    {
+      "hope": "fg",
+      "id": "m2026-j9-401d75a4",
+      "name": "山本 茜",
+      "seat": "fg1"
+    },
+    {
+      "hope": "cym",
+      "id": "m2026-j10-401d75a4",
+      "name": "小林 花音",
+      "seat": "perc4"
+    }
+  ],
+  "assignOpen": [
+    "perc"
+  ],
+  "assignPicks": {
+    "m2026-j10-401d75a4": "perc4"
+  },
+  "assignSel": "m2026-j10-401d75a4",
+  "audibleMemberIds": [],
+  "audio": {
+    "banks": [
+      "picc",
+      "oboe",
+      "flute",
+      "bassoon",
+      "clar",
+      "horn",
+      "sax",
+      "tsax",
+      "tpt",
+      "flute_st",
+      "tuba",
+      "oboe_st",
+      "tbn",
+      "bassoon_st",
+      "cbass",
+      "clar_st",
+      "horn_st",
+      "tpt_st",
+      "tbn_st",
+      "tuba_st",
+      "tsax_st",
+      "cbass_st",
+      "pizz",
+      "sd",
+      "bd",
+      "cym",
+      "tri",
+      "sus",
+      "timp",
+      "tamb",
+      "tamtam",
+      "xylo",
+      "glock",
+      "mrb",
+      "chime",
+      "vib",
+      "ebclar",
+      "bclar",
+      "bsax_st",
+      "btbn",
+      "bsax"
+    ],
+    "error": null,
+    "flow": {
+      "active": 0,
+      "failed": 0,
+      "finished": 41,
+      "peak": 4,
+      "settledMs": 1290,
+      "started": 116
+    },
+    "preservedBuffers": null,
+    "progress": 1,
+    "ready": true,
+    "requests": {
+      "bassoon.mp3": 1,
+      "bassoon_st.mp3": 1,
+      "bclar.mp3": 1,
+      "bd.mp3": 1,
+      "bsax.mp3": 1,
+      "bsax_st.mp3": 1,
+      "btbn.mp3": 1,
+      "cbass.mp3": 1,
+      "cbass_st.mp3": 1,
+      "chime.mp3": 1,
+      "clar.mp3": 1,
+      "clar_st.mp3": 1,
+      "cym.mp3": 1,
+      "ebclar.mp3": 1,
+      "flute.mp3": 1,
+      "flute_st.mp3": 1,
+      "glock.mp3": 1,
+      "horn.mp3": 1,
+      "horn_st.mp3": 1,
+      "manifest.json": 1,
+      "mrb.mp3": 1,
+      "oboe.mp3": 1,
+      "oboe_st.mp3": 1,
+      "picc.mp3": 1,
+      "pizz.mp3": 1,
+      "sax.mp3": 1,
+      "sd.mp3": 1,
+      "sus.mp3": 1,
+      "tamb.mp3": 1,
+      "tamtam.mp3": 1,
+      "tbn.mp3": 1,
+      "tbn_st.mp3": 1,
+      "timp.mp3": 1,
+      "tpt.mp3": 1,
+      "tpt_st.mp3": 1,
+      "tri.mp3": 1,
+      "tsax.mp3": 1,
+      "tsax_st.mp3": 1,
+      "tuba.mp3": 1,
+      "tuba_st.mp3": 1,
+      "vib.mp3": 1,
+      "xylo.mp3": 1
+    },
+    "voices": []
+  },
+  "auditionComparison": null,
+  "auditionDecided": false,
+  "auditionExpected": [],
+  "auditionListening": null,
+  "auditionMembers": [
+    {
+      "id": "m2026-n1-401d75a4",
+      "name": "安藤 朔",
+      "out": false,
+      "rank": null
+    },
+    {
+      "id": "m2026-n2-401d75a4",
+      "name": "原田 茜",
+      "out": false,
+      "rank": null
+    },
+    {
+      "id": "m2026-n3-401d75a4",
+      "name": "石井 樹",
+      "out": false,
+      "rank": null
+    },
+    {
+      "id": "m2026-n4-401d75a4",
+      "name": "太田 詩",
+      "out": false,
+      "rank": null
+    },
+    {
+      "id": "m2026-n5-401d75a4",
+      "name": "佐々木 彩花",
+      "out": false,
+      "rank": null
+    },
+    {
+      "id": "m2026-n6-401d75a4",
+      "name": "山崎 光",
+      "out": false,
+      "rank": null
+    },
+    {
+      "id": "m2026-j7-401d75a4",
+      "name": "石井 晴",
+      "out": false,
+      "rank": null
+    },
+    {
+      "id": "m2026-j8-401d75a4",
+      "name": "宮崎 蒼",
+      "out": false,
+      "rank": null
+    },
+    {
+      "id": "m2026-j9-401d75a4",
+      "name": "山本 茜",
+      "out": false,
+      "rank": null
+    }
+  ],
+  "auditionOut": [],
+  "auditionPlayButtons": [],
+  "auditionScores": 0.6689221884589642,
+  "auditionSearching": false,
+  "auditionSignals": [],
+  "autoPicks": {
+    "m2026-j10-401d75a4": "perc4"
+  },
+  "boot": {
+    "errors": [],
+    "failed": [],
+    "globals": {
+      "engine": "function",
+      "fx": "object",
+      "game": "function",
+      "pieces": "object",
+      "season": "function"
+    },
+    "loaded": [
+      "/tsukurikata/js/util.js",
+      "/tsukurikata/js/icons.js",
+      "/tsukurikata/js/instrument-icons.js",
+      "/tsukurikata/js/face-cast.js",
+      "/tsukurikata/js/faces.js",
+      "/tsukurikata/js/instruments.js",
+      "/tsukurikata/js/venues.js",
+      "/tsukurikata/js/samples.js",
+      "/tsukurikata/js/scores.js",
+      "/tsukurikata/js/pieces/largo.js",
+      "/tsukurikata/js/pieces/ode.js",
+      "/tsukurikata/js/pieces/galop.js",
+      "/tsukurikata/js/pieces/pomp.js",
+      "/tsukurikata/js/pieces/aida.js",
+      "/tsukurikata/js/pieces/hero.js",
+      "/tsukurikata/js/pieces/holst.js",
+      "/tsukurikata/js/pieces/hungarian.js",
+      "/tsukurikata/js/pieces/flowers.js",
+      "/tsukurikata/js/pieces/tell.js",
+      "/tsukurikata/js/pieces/carmen.js",
+      "/tsukurikata/js/pieces/valkyrie.js",
+      "/tsukurikata/js/pieces/swan.js",
+      "/tsukurikata/js/pieces/spring.js",
+      "/tsukurikata/js/pieces/canon.js",
+      "/tsukurikata/js/band.js",
+      "/tsukurikata/js/game.js",
+      "/tsukurikata/js/engine.js",
+      "/tsukurikata/js/conduct.js",
+      "/tsukurikata/js/announce.js",
+      "/tsukurikata/js/tunegame.js",
+      "/tsukurikata/js/fx.js",
+      "/tsukurikata/js/ui.js",
+      "/design/implementation/qa.js"
+    ],
+    "ready": true,
+    "resources": [
+      {
+        "bytes": 2477,
+        "file": "/tsukurikata/js/util.js",
+        "ms": 36,
+        "status": 200
+      },
+      {
+        "bytes": 4867,
+        "file": "/tsukurikata/js/icons.js",
+        "ms": 35,
+        "status": 200
+      },
+      {
+        "bytes": 2590,
+        "file": "/tsukurikata/js/instrument-icons.js",
+        "ms": 38,
+        "status": 200
+      },
+      {
+        "bytes": 7048,
+        "file": "/tsukurikata/js/face-cast.js",
+        "ms": 39,
+        "status": 200
+      },
+      {
+        "bytes": 4184,
+        "file": "/tsukurikata/js/faces.js",
+        "ms": 39,
+        "status": 200
+      },
+      {
+        "bytes": 12996,
+        "file": "/tsukurikata/js/venues.js",
+        "ms": 41,
+        "status": 200
+      },
+      {
+        "bytes": 27017,
+        "file": "/tsukurikata/js/instruments.js",
+        "ms": 41,
+        "status": 200
+      },
+      {
+        "bytes": 24975,
+        "file": "/tsukurikata/js/samples.js",
+        "ms": 45,
+        "status": 200
+      },
+      {
+        "bytes": 16000,
+        "file": "/tsukurikata/js/pieces/ode.js",
+        "ms": 45,
+        "status": 200
+      },
+      {
+        "bytes": 22132,
+        "file": "/tsukurikata/js/scores.js",
+        "ms": 45,
+        "status": 200
+      },
+      {
+        "bytes": 11341,
+        "file": "/tsukurikata/js/pieces/largo.js",
+        "ms": 46,
+        "status": 200
+      },
+      {
+        "bytes": 20823,
+        "file": "/tsukurikata/js/pieces/aida.js",
+        "ms": 49,
+        "status": 200
+      },
+      {
+        "bytes": 21784,
+        "file": "/tsukurikata/js/pieces/hero.js",
+        "ms": 50,
+        "status": 200
+      },
+      {
+        "bytes": 22631,
+        "file": "/tsukurikata/js/pieces/galop.js",
+        "ms": 50,
+        "status": 200
+      },
+      {
+        "bytes": 19299,
+        "file": "/tsukurikata/js/pieces/pomp.js",
+        "ms": 50,
+        "status": 200
+      },
+      {
+        "bytes": 18482,
+        "file": "/tsukurikata/js/pieces/holst.js",
+        "ms": 50,
+        "status": 200
+      },
+      {
+        "bytes": 29740,
+        "file": "/tsukurikata/js/pieces/hungarian.js",
+        "ms": 51,
+        "status": 200
+      },
+      {
+        "bytes": 25824,
+        "file": "/tsukurikata/js/pieces/flowers.js",
+        "ms": 51,
+        "status": 200
+      },
+      {
+        "bytes": 37082,
+        "file": "/tsukurikata/js/pieces/tell.js",
+        "ms": 51,
+        "status": 200
+      },
+      {
+        "bytes": 19332,
+        "file": "/tsukurikata/js/pieces/swan.js",
+        "ms": 52,
+        "status": 200
+      },
+      {
+        "bytes": 25854,
+        "file": "/tsukurikata/js/pieces/carmen.js",
+        "ms": 52,
+        "status": 200
+      },
+      {
+        "bytes": 20721,
+        "file": "/tsukurikata/js/pieces/valkyrie.js",
+        "ms": 55,
+        "status": 200
+      },
+      {
+        "bytes": 17241,
+        "file": "/tsukurikata/js/pieces/spring.js",
+        "ms": 52,
+        "status": 200
+      },
+      {
+        "bytes": 13464,
+        "file": "/tsukurikata/js/pieces/canon.js",
+        "ms": 56,
+        "status": 200
+      },
+      {
+        "bytes": 24139,
+        "file": "/tsukurikata/js/engine.js",
+        "ms": 56,
+        "status": 200
+      },
+      {
+        "bytes": 29453,
+        "file": "/tsukurikata/js/conduct.js",
+        "ms": 56,
+        "status": 200
+      },
+      {
+        "bytes": 10527,
+        "file": "/tsukurikata/js/announce.js",
+        "ms": 56,
+        "status": 200
+      },
+      {
+        "bytes": 49938,
+        "file": "/tsukurikata/js/band.js",
+        "ms": 56,
+        "status": 200
+      },
+      {
+        "bytes": 11653,
+        "file": "/tsukurikata/js/fx.js",
+        "ms": 58,
+        "status": 200
+      },
+      {
+        "bytes": 9322,
+        "file": "/tsukurikata/js/tunegame.js",
+        "ms": 58,
+        "status": 200
+      },
+      {
+        "bytes": 189121,
+        "file": "/tsukurikata/js/game.js",
+        "ms": 57,
+        "status": 200
+      },
+      {
+        "bytes": 59138,
+        "file": "/design/implementation/qa.js",
+        "ms": 58,
+        "status": 200
+      },
+      {
+        "bytes": 237131,
+        "file": "/tsukurikata/js/ui.js",
+        "ms": 59,
+        "status": 200
+      }
+    ],
+    "scripts": [
+      "/tsukurikata/js/util.js",
+      "/tsukurikata/js/icons.js",
+      "/tsukurikata/js/instrument-icons.js",
+      "/tsukurikata/js/face-cast.js",
+      "/tsukurikata/js/faces.js",
+      "/tsukurikata/js/instruments.js",
+      "/tsukurikata/js/venues.js",
+      "/tsukurikata/js/samples.js",
+      "/tsukurikata/js/scores.js",
+      "/tsukurikata/js/pieces/largo.js",
+      "/tsukurikata/js/pieces/ode.js",
+      "/tsukurikata/js/pieces/galop.js",
+      "/tsukurikata/js/pieces/pomp.js",
+      "/tsukurikata/js/pieces/aida.js",
+      "/tsukurikata/js/pieces/hero.js",
+      "/tsukurikata/js/pieces/holst.js",
+      "/tsukurikata/js/pieces/hungarian.js",
+      "/tsukurikata/js/pieces/flowers.js",
+      "/tsukurikata/js/pieces/tell.js",
+      "/tsukurikata/js/pieces/carmen.js",
+      "/tsukurikata/js/pieces/valkyrie.js",
+      "/tsukurikata/js/pieces/swan.js",
+      "/tsukurikata/js/pieces/spring.js",
+      "/tsukurikata/js/pieces/canon.js",
+      "/tsukurikata/js/band.js",
+      "/tsukurikata/js/game.js",
+      "/tsukurikata/js/engine.js",
+      "/tsukurikata/js/conduct.js",
+      "/tsukurikata/js/announce.js",
+      "/tsukurikata/js/tunegame.js",
+      "/tsukurikata/js/fx.js",
+      "/tsukurikata/js/ui.js",
+      "/design/implementation/qa.js"
+    ],
+    "started": "2026-10-28T19:41:53.949Z"
+  },
+  "conduct": {
+    "count": 0,
+    "events": 0,
+    "judge": null,
+    "level": 1,
+    "phase": "idle",
+    "taps": 0
+  },
+  "diagPractice": {
+    "back": null,
+    "diagnosis": 0.528700239257887,
+    "key": "1778447044:2031:10:galop",
+    "menus": [],
+    "open": false,
+    "pid": "",
+    "rows": [
+      {
+        "face": "m2028-n1-cafe",
+        "id": "m2028-n1-cafe",
+        "label": "田中 花音 譜読み G、今週の練習を見る",
+        "rank": "G"
+      },
+      {
+        "face": "m2028-n2-cafe",
+        "id": "m2028-n2-cafe",
+        "label": "小川 悠斗 譜読み G、今週の練習を見る",
+        "rank": "G"
+      },
+      {
+        "face": "m2028-n3-cafe",
+        "id": "m2028-n3-cafe",
+        "label": "松井 颯太 譜読み G、今週の練習を見る",
+        "rank": "G"
+      }
+    ],
+    "selectedPiece": "largo",
+    "source": [
+      {
+        "id": "m2026-n1-401d75a4",
+        "name": "安藤 朔",
+        "out": false,
+        "reading": 0,
+        "seat": "ob1",
+        "stats": {
+          "expr": 68.9,
+          "pitch": 70.7,
+          "rhythm": 61.7,
+          "tone": 70.3
+        }
+      },
+      {
+        "id": "m2026-n2-401d75a4",
+        "name": "原田 茜",
+        "out": false,
+        "reading": 0,
+        "seat": "hn1",
+        "stats": {
+          "expr": 76.7,
+          "pitch": 80.2,
+          "rhythm": 75.6,
+          "tone": 76.6
+        }
+      },
+      {
+        "id": "m2026-n3-401d75a4",
+        "name": "石井 樹",
+        "out": false,
+        "reading": 0,
+        "seat": "tuba1",
+        "stats": {
+          "expr": 71.6,
+          "pitch": 57.9,
+          "rhythm": 66.1,
+          "tone": 63.8
+        }
+      },
+      {
+        "id": "m2026-n4-401d75a4",
+        "name": "太田 詩",
+        "out": false,
+        "reading": 0,
+        "seat": "asax1",
+        "stats": {
+          "expr": 77.6,
+          "pitch": 73.2,
+          "rhythm": 71.5,
+          "tone": 73.6
+        }
+      },
+      {
+        "id": "m2026-n5-401d75a4",
+        "name": "佐々木 彩花",
+        "out": false,
+        "reading": 0,
+        "seat": "perc1",
+        "stats": {
+          "expr": 63.8,
+          "pitch": 64.6,
+          "rhythm": 55.6,
+          "tone": 60.2
+        }
+      },
+      {
+        "id": "m2026-n6-401d75a4",
+        "name": "山崎 光",
+        "out": false,
+        "reading": 0,
+        "seat": "cl1a",
+        "stats": {
+          "expr": 50.6,
+          "pitch": 64.1,
+          "rhythm": 53.3,
+          "tone": 51.9
+        }
+      },
+      {
+        "id": "m2026-j7-401d75a4",
+        "name": "石井 晴",
+        "out": false,
+        "reading": 0,
+        "seat": "hn3",
+        "stats": {
+          "expr": 37.4,
+          "pitch": 39,
+          "rhythm": 41.2,
+          "tone": 33.2
+        }
+      },
+      {
+        "id": "m2026-j8-401d75a4",
+        "name": "宮崎 蒼",
+        "out": false,
+        "reading": 0,
+        "seat": "ebcl1",
+        "stats": {
+          "expr": 15.2,
+          "pitch": 14.4,
+          "rhythm": 18.4,
+          "tone": 19.2
+        }
+      },
+      {
+        "id": "m2026-j9-401d75a4",
+        "name": "山本 茜",
+        "out": false,
+        "reading": 0,
+        "seat": "fg1",
+        "stats": {
+          "expr": 15.2,
+          "pitch": 17.6,
+          "rhythm": 14.3,
+          "tone": 14.8
+        }
+      }
+    ],
+    "tab": "week",
+    "topic": "fam",
+    "visible": false
+  },
+  "engineSolo": {
+    "type": "all"
+  },
+  "errors": [],
+  "expectedNowLabel": "いまの音（選曲前・音楽室）",
+  "faceCount": 71,
+  "gradAuto": false,
+  "gradIndex": 0,
+  "gradOpen": false,
+  "graduateIds": [],
+  "graduates": [],
+  "hallExp": 0,
+  "library": {
+    "active": null,
+    "blocked": false,
+    "open": false,
+    "rows": [
+      {
+        "active": "false",
+        "disabled": false,
+        "faces": [
+          "m2026-n1-401d75a4",
+          "m2026-n2-401d75a4",
+          "m2026-n3-401d75a4"
+        ],
+        "id": "r2026-26-8-352162",
+        "label": "2026 アンサンブルコンテスト・「天国と地獄」・市民会館を聴く",
+        "pressed": "false",
+        "saveDisabled": false
+      },
+      {
+        "active": "false",
+        "disabled": false,
+        "faces": [
+          "m2026-n1-401d75a4",
+          "m2026-n2-401d75a4",
+          "m2026-n3-401d75a4"
+        ],
+        "id": "r2026-26-7-373665",
+        "label": "2026 定期演奏会・「天国と地獄」・市民会館を聴く",
+        "pressed": "false",
+        "saveDisabled": false
+      },
+      {
+        "active": "false",
+        "disabled": false,
+        "faces": [
+          "m2026-n1-401d75a4",
+          "m2026-n2-401d75a4",
+          "m2026-n3-401d75a4"
+        ],
+        "id": "r2026-22-6-570379",
+        "label": "2026 文化祭ステージ・「天国と地獄」・体育館を聴く",
+        "pressed": "false",
+        "saveDisabled": false
+      },
+      {
+        "active": "false",
+        "disabled": false,
+        "faces": [
+          "m2026-n1-401d75a4",
+          "m2026-n2-401d75a4",
+          "m2026-n3-401d75a4"
+        ],
+        "id": "r2026-16-5-85882",
+        "label": "2026 吹奏楽コンクール 県大会・「天国と地獄」・県民文化会館を聴く",
+        "pressed": "false",
+        "saveDisabled": false
+      },
+      {
+        "active": "false",
+        "disabled": false,
+        "faces": [
+          "m2026-n1-401d75a4",
+          "m2026-n2-401d75a4",
+          "m2026-n3-401d75a4"
+        ],
+        "id": "r2026-11-4-461224",
+        "label": "2026 合同演奏会・「天国と地獄」・市民会館を聴く",
+        "pressed": "false",
+        "saveDisabled": false
+      },
+      {
+        "active": "false",
+        "disabled": false,
+        "faces": [
+          "m2026-n1-401d75a4",
+          "m2026-n2-401d75a4",
+          "m2026-n3-401d75a4"
+        ],
+        "id": "r2026-6-3-764128",
+        "label": "2026 みなと祭りステージ・「天国と地獄」・屋外ステージを聴く",
+        "pressed": "false",
+        "saveDisabled": false
+      },
+      {
+        "active": "false",
+        "disabled": false,
+        "faces": [
+          "m2026-n1-401d75a4",
+          "m2026-n2-401d75a4",
+          "m2026-n3-401d75a4"
+        ],
+        "id": "r2026-3-2-555315",
+        "label": "2026年 新しい部員が入って最初の合奏・「天国と地獄」・音楽室を聴く",
+        "pressed": "false",
+        "saveDisabled": false
+      },
+      {
+        "active": "false",
+        "disabled": false,
+        "faces": [
+          "m2026-n1-401d75a4",
+          "m2026-n2-401d75a4",
+          "m2026-n3-401d75a4"
+        ],
+        "id": "r2026-1-1-248785",
+        "label": "2026 新入生歓迎演奏・「天国と地獄」・体育館を聴く",
+        "pressed": "false",
+        "saveDisabled": false
+      },
+      {
+        "active": "false",
+        "disabled": false,
+        "faces": [
+          "m2026-n1-401d75a4",
+          "m2026-n2-401d75a4",
+          "m2026-n3-401d75a4"
+        ],
+        "id": "r2026-0-0-583709",
+        "label": "2026年4月の録音・「天国と地獄」・音楽室を聴く",
+        "pressed": "false",
+        "saveDisabled": false
+      }
+    ],
+    "saving": null,
+    "selected": "r2026-0-0-583709",
+    "source": [
+      {
+        "count": 5,
+        "faces": [
+          {
+            "face": 94,
+            "id": "m2026-n1-401d75a4",
+            "name": "安藤 朔"
+          },
+          {
+            "face": 60,
+            "id": "m2026-n2-401d75a4",
+            "name": "原田 茜"
+          },
+          {
+            "face": 83,
+            "id": "m2026-n3-401d75a4",
+            "name": "石井 樹"
+          }
+        ],
+        "id": "r2026-0-0-583709",
+        "label": "2026年4月の録音",
+        "piece": "galop",
+        "venue": "room",
+        "year": 2026
+      },
+      {
+        "count": 5,
+        "faces": [
+          {
+            "face": 94,
+            "id": "m2026-n1-401d75a4",
+            "name": "安藤 朔"
+          },
+          {
+            "face": 60,
+            "id": "m2026-n2-401d75a4",
+            "name": "原田 茜"
+          },
+          {
+            "face": 83,
+            "id": "m2026-n3-401d75a4",
+            "name": "石井 樹"
+          }
+        ],
+        "id": "r2026-1-1-248785",
+        "label": "2026 新入生歓迎演奏",
+        "piece": "galop",
+        "venue": "gym",
+        "year": 2026
+      },
+      {
+        "count": 6,
+        "faces": [
+          {
+            "face": 94,
+            "id": "m2026-n1-401d75a4",
+            "name": "安藤 朔"
+          },
+          {
+            "face": 60,
+            "id": "m2026-n2-401d75a4",
+            "name": "原田 茜"
+          },
+          {
+            "face": 83,
+            "id": "m2026-n3-401d75a4",
+            "name": "石井 樹"
+          }
+        ],
+        "id": "r2026-3-2-555315",
+        "label": "2026年 新しい部員が入って最初の合奏",
+        "piece": "galop",
+        "venue": "room",
+        "year": 2026
+      },
+      {
+        "count": 6,
+        "faces": [
+          {
+            "face": 94,
+            "id": "m2026-n1-401d75a4",
+            "name": "安藤 朔"
+          },
+          {
+            "face": 60,
+            "id": "m2026-n2-401d75a4",
+            "name": "原田 茜"
+          },
+          {
+            "face": 83,
+            "id": "m2026-n3-401d75a4",
+            "name": "石井 樹"
+          }
+        ],
+        "id": "r2026-6-3-764128",
+        "label": "2026 みなと祭りステージ",
+        "piece": "galop",
+        "venue": "outdoor",
+        "year": 2026
+      },
+      {
+        "count": 6,
+        "faces": [
+          {
+            "face": 94,
+            "id": "m2026-n1-401d75a4",
+            "name": "安藤 朔"
+          },
+          {
+            "face": 60,
+            "id": "m2026-n2-401d75a4",
+            "name": "原田 茜"
+          },
+          {
+            "face": 83,
+            "id": "m2026-n3-401d75a4",
+            "name": "石井 樹"
+          }
+        ],
+        "id": "r2026-11-4-461224",
+        "label": "2026 合同演奏会",
+        "piece": "galop",
+        "venue": "civic",
+        "year": 2026
+      },
+      {
+        "count": 6,
+        "faces": [
+          {
+            "face": 94,
+            "id": "m2026-n1-401d75a4",
+            "name": "安藤 朔"
+          },
+          {
+            "face": 60,
+            "id": "m2026-n2-401d75a4",
+            "name": "原田 茜"
+          },
+          {
+            "face": 83,
+            "id": "m2026-n3-401d75a4",
+            "name": "石井 樹"
+          }
+        ],
+        "id": "r2026-16-5-85882",
+        "label": "2026 吹奏楽コンクール 県大会",
+        "piece": "galop",
+        "venue": "hall",
+        "year": 2026
+      },
+      {
+        "count": 6,
+        "faces": [
+          {
+            "face": 94,
+            "id": "m2026-n1-401d75a4",
+            "name": "安藤 朔"
+          },
+          {
+            "face": 60,
+            "id": "m2026-n2-401d75a4",
+            "name": "原田 茜"
+          },
+          {
+            "face": 83,
+            "id": "m2026-n3-401d75a4",
+            "name": "石井 樹"
+          }
+        ],
+        "id": "r2026-22-6-570379",
+        "label": "2026 文化祭ステージ",
+        "piece": "galop",
+        "venue": "gym",
+        "year": 2026
+      },
+      {
+        "count": 9,
+        "faces": [
+          {
+            "face": 94,
+            "id": "m2026-n1-401d75a4",
+            "name": "安藤 朔"
+          },
+          {
+            "face": 60,
+            "id": "m2026-n2-401d75a4",
+            "name": "原田 茜"
+          },
+          {
+            "face": 83,
+            "id": "m2026-n3-401d75a4",
+            "name": "石井 樹"
+          }
+        ],
+        "id": "r2026-26-7-373665",
+        "label": "2026 定期演奏会",
+        "piece": "galop",
+        "venue": "civic",
+        "year": 2026
+      },
+      {
+        "count": 5,
+        "faces": [
+          {
+            "face": 94,
+            "id": "m2026-n1-401d75a4",
+            "name": "安藤 朔"
+          },
+          {
+            "face": 60,
+            "id": "m2026-n2-401d75a4",
+            "name": "原田 茜"
+          },
+          {
+            "face": 83,
+            "id": "m2026-n3-401d75a4",
+            "name": "石井 樹"
+          }
+        ],
+        "id": "r2026-26-8-352162",
+        "label": "2026 アンサンブルコンテスト",
+        "piece": "galop",
+        "venue": "civic",
+        "year": 2026
+      }
+    ],
+    "waiting": false,
+    "years": [
+      "2026年度"
+    ]
+  },
+  "listening": {
+    "conductDisabled": false,
+    "engineVenue": "room",
+    "kind": "試しに聴く曲",
+    "range": "all",
+    "rangeDisabled": false,
+    "rangeLabel": "全部",
+    "shownPiece": "largo",
+    "summary": "音楽室・全部・全員",
+    "title": "《新世界より》第2楽章"
+  },
+  "listeningMix": null,
+  "logPreserved": true,
+  "logRenderedCount": 80,
+  "logSourceCount": 80,
+  "memberFingerprint": 0.4106574517209083,
+  "memberLayout": {
+    "audio": null,
+    "audioButtons": [],
+    "current": null,
+    "height": 0,
+    "history": null,
+    "historyOpen": false,
+    "move": null,
+    "ranks": []
+  },
+  "memberSeats": [
+    {
+      "hope": "ob",
+      "id": "m2026-n1-401d75a4",
+      "name": "安藤 朔",
+      "seat": "ob1"
+    },
+    {
+      "hope": "hn",
+      "id": "m2026-n2-401d75a4",
+      "name": "原田 茜",
+      "seat": "hn1"
+    },
+    {
+      "hope": "tuba",
+      "id": "m2026-n3-401d75a4",
+      "name": "石井 樹",
+      "seat": "tuba1"
+    },
+    {
+      "hope": "asax",
+      "id": "m2026-n4-401d75a4",
+      "name": "太田 詩",
+      "seat": "asax1"
+    },
+    {
+      "hope": "timp",
+      "id": "m2026-n5-401d75a4",
+      "name": "佐々木 彩花",
+      "seat": "perc1"
+    },
+    {
+      "hope": "cl",
+      "id": "m2026-n6-401d75a4",
+      "name": "山崎 光",
+      "seat": "cl1a"
+    },
+    {
+      "hope": "hn",
+      "id": "m2026-j7-401d75a4",
+      "name": "石井 晴",
+      "seat": "hn3"
+    },
+    {
+      "hope": "ebcl",
+      "id": "m2026-j8-401d75a4",
+      "name": "宮崎 蒼",
+      "seat": "ebcl1"
+    },
+    {
+      "hope": "fg",
+      "id": "m2026-j9-401d75a4",
+      "name": "山本 茜",
+      "seat": "fg1"
+    }
+  ],
+  "members": 9,
+  "move": {
+    "enabled": false,
+    "expected": null,
+    "people": [
+      {
+        "face": 94,
+        "id": "m2026-n1-401d75a4",
+        "ranks": {
+          "expr": "C",
+          "pitch": "B",
+          "rhythm": "C",
+          "tone": "B"
+        },
+        "seat": "ob1"
+      },
+      {
+        "face": 60,
+        "id": "m2026-n2-401d75a4",
+        "ranks": {
+          "expr": "B",
+          "pitch": "A",
+          "rhythm": "B",
+          "tone": "B"
+        },
+        "seat": "hn1"
+      },
+      {
+        "face": 83,
+        "id": "m2026-n3-401d75a4",
+        "ranks": {
+          "expr": "B",
+          "pitch": "D",
+          "rhythm": "C",
+          "tone": "C"
+        },
+        "seat": "tuba1"
+      },
+      {
+        "face": 29,
+        "id": "m2026-n4-401d75a4",
+        "ranks": {
+          "expr": "B",
+          "pitch": "B",
+          "rhythm": "B",
+          "tone": "B"
+        },
+        "seat": "asax1"
+      },
+      {
+        "face": 67,
+        "id": "m2026-n5-401d75a4",
+        "ranks": {
+          "expr": "C",
+          "pitch": "C",
+          "rhythm": "D",
+          "tone": "C"
+        },
+        "seat": "perc1"
+      },
+      {
+        "face": 21,
+        "id": "m2026-n6-401d75a4",
+        "ranks": {
+          "expr": "D",
+          "pitch": "C",
+          "rhythm": "D",
+          "tone": "D"
+        },
+        "seat": "cl1a"
+      },
+      {
+        "face": 33,
+        "id": "m2026-j7-401d75a4",
+        "ranks": {
+          "expr": "F",
+          "pitch": "F",
+          "rhythm": "E",
+          "tone": "F"
+        },
+        "seat": "hn3"
+      },
+      {
+        "face": 4,
+        "id": "m2026-j8-401d75a4",
+        "ranks": {
+          "expr": "G",
+          "pitch": "G",
+          "rhythm": "G",
+          "tone": "G"
+        },
+        "seat": "ebcl1"
+      },
+      {
+        "face": 76,
+        "id": "m2026-j9-401d75a4",
+        "ranks": {
+          "expr": "G",
+          "pitch": "G",
+          "rhythm": "G",
+          "tone": "G"
+        },
+        "seat": "fg1"
+      }
+    ],
+    "state": 0.15184061927720904
+  },
+  "moveUndo": {
+    "available": false,
+    "before": null,
+    "saved": false,
+    "visible": false
+  },
+  "occupiedSeats": [
+    "ob1",
+    "hn1",
+    "tuba1",
+    "asax1",
+    "perc1",
+    "cl1a",
+    "hn3",
+    "ebcl1",
+    "fg1"
+  ],
+  "outing": null,
+  "outingResult": {
+    "coach": {
+      "xp": 65
+    },
+    "faces": [],
+    "gains": [],
+    "gainsOpen": false,
+    "last": null,
+    "log": 0.056927814381197095
+  },
+  "pending": null,
+  "phase": "choose",
+  "piece": "largo",
+  "planOwn": {},
+  "playbackId": null,
+  "playbackStops": [
+    {
+      "at": 18.218666666666667,
+      "before": [
+        0.8424981236457825,
+        0.8424981236457825
+      ],
+      "clock": true,
+      "samples": [
+        {
+          "elapsed": 0,
+          "ended": true,
+          "gains": [
+            0.8424981236457825,
+            0.8424981236457825
+          ]
+        },
+        {
+          "elapsed": 0.08533333333333104,
+          "ended": true,
+          "gains": [
+            0.09983911365270616,
+            0.09983911365270616
+          ]
+        },
+        {
+          "elapsed": 0.17066666666666563,
+          "ended": true,
+          "gains": [
+            0.01182509958744049,
+            0.01182509958744049
+          ]
+        },
+        {
+          "elapsed": 0.2346666666666657,
+          "ended": true,
+          "gains": [
+            0.0023874465841799974,
+            0.0023874465841799974
+          ]
+        },
+        {
+          "elapsed": 0.4480000000000004,
+          "ended": true,
+          "gains": [
+            0,
+            0
+          ]
+        }
+      ]
+    },
+    {
+      "at": 18.816,
+      "before": [
+        0.8500000238418579,
+        0.8500000238418579
+      ],
+      "clock": true,
+      "samples": [
+        {
+          "elapsed": 0.0853333333333346,
+          "ended": true,
+          "gains": [
+            0.10072818398475648,
+            0.10072818398475648
+          ]
+        },
+        {
+          "elapsed": 0.1706666666666692,
+          "ended": true,
+          "gains": [
+            0.011930394917726517,
+            0.011930394917726517
+          ]
+        },
+        {
+          "elapsed": 0.19200000000000017,
+          "ended": true,
+          "gains": [
+            0.006998921744525433,
+            0.006998921744525433
+          ]
+        },
+        {
+          "elapsed": 0.23466666666666924,
+          "ended": true,
+          "gains": [
+            0.0024087049532681704,
+            0.0024087049532681704
+          ]
+        },
+        {
+          "elapsed": 0.38400000000000034,
+          "ended": true,
+          "gains": [
+            0.00005759937630500645,
+            0.00005759937630500645
+          ]
+        }
+      ]
+    },
+    {
+      "at": 19.434666666666665,
+      "before": [
+        1.2003906965255735,
+        1.2003906965255735
+      ],
+      "clock": true,
+      "samples": [
+        {
+          "elapsed": 0,
+          "ended": true,
+          "gains": [
+            1.2003906965255735,
+            1.2003906965255735
+          ]
+        },
+        {
+          "elapsed": 0.0853333333333346,
+          "ended": true,
+          "gains": [
+            0.14225061237812042,
+            0.14225061237812042
+          ]
+        },
+        {
+          "elapsed": 0.1680000000000028,
+          "ended": true,
+          "gains": [
+            0.018009936437010765,
+            0.018009936437010765
+          ]
+        },
+        {
+          "elapsed": 0.23466666666666924,
+          "ended": true,
+          "gains": [
+            0.0034016361460089684,
+            0.0034016361460089684
+          ]
+        },
+        {
+          "elapsed": 0.36266666666666936,
+          "ended": true,
+          "gains": [
+            0.00013865843357052654,
+            0.00013865843357052654
+          ]
+        }
+      ]
+    }
+  ],
+  "playing": false,
+  "policy": "auto",
+  "practice": {
+    "from": null,
+    "growth": [],
+    "members": [
+      {
+        "id": "m2026-n1-401d75a4",
+        "name": "安藤 朔",
+        "stats": {
+          "expr": 68.9,
+          "pitch": 70.7,
+          "rhythm": 61.7,
+          "tone": 70.3
+        }
+      },
+      {
+        "id": "m2026-n2-401d75a4",
+        "name": "原田 茜",
+        "stats": {
+          "expr": 76.7,
+          "pitch": 80.2,
+          "rhythm": 75.6,
+          "tone": 76.6
+        }
+      },
+      {
+        "id": "m2026-n3-401d75a4",
+        "name": "石井 樹",
+        "stats": {
+          "expr": 71.6,
+          "pitch": 57.9,
+          "rhythm": 66.1,
+          "tone": 63.8
+        }
+      },
+      {
+        "id": "m2026-n4-401d75a4",
+        "name": "太田 詩",
+        "stats": {
+          "expr": 77.6,
+          "pitch": 73.2,
+          "rhythm": 71.5,
+          "tone": 73.6
+        }
+      },
+      {
+        "id": "m2026-n5-401d75a4",
+        "name": "佐々木 彩花",
+        "stats": {
+          "expr": 63.8,
+          "pitch": 64.6,
+          "rhythm": 55.6,
+          "tone": 60.2
+        }
+      },
+      {
+        "id": "m2026-n6-401d75a4",
+        "name": "山崎 光",
+        "stats": {
+          "expr": 50.6,
+          "pitch": 64.1,
+          "rhythm": 53.3,
+          "tone": 51.9
+        }
+      },
+      {
+        "id": "m2026-j7-401d75a4",
+        "name": "石井 晴",
+        "stats": {
+          "expr": 37.4,
+          "pitch": 39,
+          "rhythm": 41.2,
+          "tone": 33.2
+        }
+      },
+      {
+        "id": "m2026-j8-401d75a4",
+        "name": "宮崎 蒼",
+        "stats": {
+          "expr": 15.2,
+          "pitch": 14.4,
+          "rhythm": 18.4,
+          "tone": 19.2
+        }
+      },
+      {
+        "id": "m2026-j9-401d75a4",
+        "name": "山本 茜",
+        "stats": {
+          "expr": 15.2,
+          "pitch": 17.6,
+          "rhythm": 14.3,
+          "tone": 14.8
+        }
+      }
+    ],
+    "open": [],
+    "pick": null,
+    "tired": []
+  },
+  "prepSource": [
+    {
+      "id": "m2026-n1-401d75a4",
+      "name": "安藤 朔",
+      "out": false,
+      "read": null,
+      "seat": "ob1",
+      "setRead": null,
+      "sta": 100
+    },
+    {
+      "id": "m2026-n2-401d75a4",
+      "name": "原田 茜",
+      "out": false,
+      "read": null,
+      "seat": "hn1",
+      "setRead": null,
+      "sta": 100
+    },
+    {
+      "id": "m2026-n3-401d75a4",
+      "name": "石井 樹",
+      "out": false,
+      "read": null,
+      "seat": "tuba1",
+      "setRead": null,
+      "sta": 100
+    },
+    {
+      "id": "m2026-n4-401d75a4",
+      "name": "太田 詩",
+      "out": false,
+      "read": null,
+      "seat": "asax1",
+      "setRead": null,
+      "sta": 100
+    },
+    {
+      "id": "m2026-n5-401d75a4",
+      "name": "佐々木 彩花",
+      "out": false,
+      "read": null,
+      "seat": "perc1",
+      "setRead": null,
+      "sta": 100
+    },
+    {
+      "id": "m2026-n6-401d75a4",
+      "name": "山崎 光",
+      "out": false,
+      "read": null,
+      "seat": "cl1a",
+      "setRead": null,
+      "sta": 100
+    },
+    {
+      "id": "m2026-j7-401d75a4",
+      "name": "石井 晴",
+      "out": false,
+      "read": null,
+      "seat": "hn3",
+      "setRead": null,
+      "sta": 100
+    },
+    {
+      "id": "m2026-j8-401d75a4",
+      "name": "宮崎 蒼",
+      "out": false,
+      "read": null,
+      "seat": "ebcl1",
+      "setRead": null,
+      "sta": 100
+    },
+    {
+      "id": "m2026-j9-401d75a4",
+      "name": "山本 茜",
+      "out": false,
+      "read": null,
+      "seat": "fg1",
+      "setRead": null,
+      "sta": 100
+    }
+  ],
+  "preparation": null,
+  "preparedBounds": {
+    "from": 0,
+    "to": 64
+  },
+  "range": "all",
+  "readings": [
+    {
+      "average": 0,
+      "id": "largo",
+      "level": 1,
+      "load": 0.8
+    },
+    {
+      "average": 0,
+      "id": "ode",
+      "level": 1,
+      "load": 0.8
+    },
+    {
+      "average": 37.50480109739369,
+      "id": "galop",
+      "level": 3,
+      "load": 1
+    },
+    {
+      "average": 0,
+      "id": "pomp",
+      "level": 2,
+      "load": 0.9
+    },
+    {
+      "average": 0,
+      "id": "aida",
+      "level": 2,
+      "load": 0.9
+    },
+    {
+      "average": 0,
+      "id": "hero",
+      "level": 1,
+      "load": 0.8
+    },
+    {
+      "average": 0,
+      "id": "holst",
+      "level": 3,
+      "load": 1
+    },
+    {
+      "average": 0,
+      "id": "hungarian",
+      "level": 5,
+      "load": 1.4
+    },
+    {
+      "average": 0,
+      "id": "flowers",
+      "level": 4,
+      "load": 1.2
+    },
+    {
+      "average": 0,
+      "id": "tell",
+      "level": 5,
+      "load": 1.4
+    },
+    {
+      "average": 0,
+      "id": "carmen",
+      "level": 4,
+      "load": 1.2
+    },
+    {
+      "average": 0,
+      "id": "valkyrie",
+      "level": 4,
+      "load": 1.2
+    },
+    {
+      "average": 0,
+      "id": "swan",
+      "level": 3,
+      "load": 1
+    },
+    {
+      "average": 0,
+      "id": "spring",
+      "level": 4,
+      "load": 1.2
+    },
+    {
+      "average": 0,
+      "id": "canon",
+      "level": 2,
+      "load": 0.9
+    }
+  ],
+  "recordedCard": null,
+  "recordedCast": [
+    {
+      "grade": 3,
+      "id": "m2028-n1-cafe",
+      "name": "田中 七海",
+      "ranks": {
+        "expr": "A",
+        "pitch": "A",
+        "rhythm": "A",
+        "tone": "A"
+      },
+      "seat": "picc1"
+    },
+    {
+      "grade": 3,
+      "id": "m2026-n2-f00d",
+      "name": "小川 悠斗",
+      "ranks": {
+        "expr": "A",
+        "pitch": "A",
+        "rhythm": "A",
+        "tone": "A"
+      },
+      "seat": "fl1a"
+    },
+    {
+      "grade": 3,
+      "id": "m2026-n3-f00d",
+      "name": "松井 颯太",
+      "ranks": {
+        "expr": "A",
+        "pitch": "A",
+        "rhythm": "A",
+        "tone": "A"
+      },
+      "seat": "fl1b"
+    },
+    {
+      "grade": 3,
+      "id": "m2026-n4-f00d",
+      "name": "菅原 菜月",
+      "ranks": {
+        "expr": "A",
+        "pitch": "A",
+        "rhythm": "A",
+        "tone": "A"
+      },
+      "seat": "fl2a"
+    },
+    {
+      "grade": 3,
+      "id": "m2026-n5-f00d",
+      "name": "岡本 智也",
+      "ranks": {
+        "expr": "A",
+        "pitch": "A",
+        "rhythm": "A",
+        "tone": "A"
+      },
+      "seat": "ob1"
+    },
+    {
+      "grade": 3,
+      "id": "m2026-n6-f00d",
+      "name": "山口 大翔",
+      "ranks": {
+        "expr": "A",
+        "pitch": "A",
+        "rhythm": "A",
+        "tone": "A"
+      },
+      "seat": "cl1a"
+    },
+    {
+      "grade": 3,
+      "id": "m2026-n7-f00d",
+      "name": "山下 彩花",
+      "ranks": {
+        "expr": "A",
+        "pitch": "A",
+        "rhythm": "A",
+        "tone": "A"
+      },
+      "seat": "cl1b"
+    },
+    {
+      "grade": 3,
+      "id": "m2026-n8-f00d",
+      "name": "高木 瑛太",
+      "ranks": {
+        "expr": "A",
+        "pitch": "A",
+        "rhythm": "A",
+        "tone": "A"
+      },
+      "seat": "cl1c"
+    },
+    {
+      "grade": 3,
+      "id": "m2026-n9-f00d",
+      "name": "清水 菜月",
+      "ranks": {
+        "expr": "A",
+        "pitch": "A",
+        "rhythm": "A",
+        "tone": "A"
+      },
+      "seat": "asax1"
+    },
+    {
+      "grade": 3,
+      "id": "m2026-n10-f00d",
+      "name": "山本 凛",
+      "ranks": {
+        "expr": "A",
+        "pitch": "A",
+        "rhythm": "A",
+        "tone": "A"
+      },
+      "seat": "asax2"
+    },
+    {
+      "grade": 3,
+      "id": "m2026-n11-f00d",
+      "name": "山田 悠真",
+      "ranks": {
+        "expr": "A",
+        "pitch": "A",
+        "rhythm": "A",
+        "tone": "A"
+      },
+      "seat": "fg1"
+    },
+    {
+      "grade": 3,
+      "id": "m2026-n12-f00d",
+      "name": "西村 樹",
+      "ranks": {
+        "expr": "A",
+        "pitch": "A",
+        "rhythm": "A",
+        "tone": "A"
+      },
+      "seat": "ebcl1"
+    },
+    {
+      "grade": 3,
+      "id": "m2026-n13-f00d",
+      "name": "松井 美咲",
+      "ranks": {
+        "expr": "A",
+        "pitch": "A",
+        "rhythm": "A",
+        "tone": "A"
+      },
+      "seat": "cl2a"
+    },
+    {
+      "grade": 3,
+      "id": "m2026-n14-f00d",
+      "name": "阿部 和奏",
+      "ranks": {
+        "expr": "A",
+        "pitch": "A",
+        "rhythm": "A",
+        "tone": "A"
+      },
+      "seat": "cl2b"
+    },
+    {
+      "grade": 3,
+      "id": "m2026-n15-f00d",
+      "name": "前田 紬",
+      "ranks": {
+        "expr": "A",
+        "pitch": "A",
+        "rhythm": "A",
+        "tone": "A"
+      },
+      "seat": "cl3a"
+    },
+    {
+      "grade": 3,
+      "id": "m2026-n16-f00d",
+      "name": "野口 陽翔",
+      "ranks": {
+        "expr": "A",
+        "pitch": "A",
+        "rhythm": "A",
+        "tone": "A"
+      },
+      "seat": "cl3b"
+    },
+    {
+      "grade": 3,
+      "id": "m2026-n17-f00d",
+      "name": "工藤 美月",
+      "ranks": {
+        "expr": "A",
+        "pitch": "A",
+        "rhythm": "A",
+        "tone": "A"
+      },
+      "seat": "bcl1"
+    },
+    {
+      "grade": 3,
+      "id": "m2026-n18-f00d",
+      "name": "中野 透",
+      "ranks": {
+        "expr": "A",
+        "pitch": "A",
+        "rhythm": "A",
+        "tone": "A"
+      },
+      "seat": "tsax1"
+    },
+    {
+      "grade": 3,
+      "id": "m2026-n19-f00d",
+      "name": "木村 湊",
+      "ranks": {
+        "expr": "A",
+        "pitch": "A",
+        "rhythm": "A",
+        "tone": "A"
+      },
+      "seat": "bsax1"
+    },
+    {
+      "grade": 3,
+      "id": "m2026-n20-f00d",
+      "name": "佐々木 彩花",
+      "ranks": {
+        "expr": "A",
+        "pitch": "A",
+        "rhythm": "A",
+        "tone": "A"
+      },
+      "seat": "hn1"
+    },
+    {
+      "grade": 3,
+      "id": "m2026-n21-f00d",
+      "name": "井上 優",
+      "ranks": {
+        "expr": "A",
+        "pitch": "A",
+        "rhythm": "A",
+        "tone": "A"
+      },
+      "seat": "hn2"
+    },
+    {
+      "grade": 3,
+      "id": "m2026-n22-f00d",
+      "name": "酒井 陸",
+      "ranks": {
+        "expr": "A",
+        "pitch": "A",
+        "rhythm": "A",
+        "tone": "A"
+      },
+      "seat": "hn3"
+    },
+    {
+      "grade": 3,
+      "id": "m2026-n23-f00d",
+      "name": "松田 拓海",
+      "ranks": {
+        "expr": "A",
+        "pitch": "A",
+        "rhythm": "A",
+        "tone": "A"
+      },
+      "seat": "hn4"
+    },
+    {
+      "grade": 3,
+      "id": "m2026-n24-f00d",
+      "name": "中村 絢",
+      "ranks": {
+        "expr": "A",
+        "pitch": "A",
+        "rhythm": "A",
+        "tone": "A"
+      },
+      "seat": "tp1a"
+    },
+    {
+      "grade": 3,
+      "id": "m2026-n25-f00d",
+      "name": "林 亮",
+      "ranks": {
+        "expr": "A",
+        "pitch": "A",
+        "rhythm": "A",
+        "tone": "A"
+      },
+      "seat": "tp1b"
+    },
+    {
+      "grade": 3,
+      "id": "m2026-n26-f00d",
+      "name": "岩崎 結衣",
+      "ranks": {
+        "expr": "A",
+        "pitch": "A",
+        "rhythm": "A",
+        "tone": "A"
+      },
+      "seat": "tp2a"
+    },
+    {
+      "grade": 3,
+      "id": "m2026-n27-f00d",
+      "name": "千葉 陸",
+      "ranks": {
+        "expr": "A",
+        "pitch": "A",
+        "rhythm": "A",
+        "tone": "A"
+      },
+      "seat": "tp3a"
+    },
+    {
+      "grade": 3,
+      "id": "m2026-n28-f00d",
+      "name": "竹内 花音",
+      "ranks": {
+        "expr": "A",
+        "pitch": "A",
+        "rhythm": "A",
+        "tone": "A"
+      },
+      "seat": "tb1"
+    },
+    {
+      "grade": 3,
+      "id": "m2026-n29-f00d",
+      "name": "井上 雫",
+      "ranks": {
+        "expr": "A",
+        "pitch": "A",
+        "rhythm": "A",
+        "tone": "A"
+      },
+      "seat": "tb2"
+    },
+    {
+      "grade": 3,
+      "id": "m2026-n30-f00d",
+      "name": "石井 透",
+      "ranks": {
+        "expr": "A",
+        "pitch": "A",
+        "rhythm": "A",
+        "tone": "A"
+      },
+      "seat": "btb1"
+    },
+    {
+      "grade": 3,
+      "id": "m2026-n31-f00d",
+      "name": "山下 茜",
+      "ranks": {
+        "expr": "A",
+        "pitch": "A",
+        "rhythm": "A",
+        "tone": "A"
+      },
+      "seat": "euph1"
+    },
+    {
+      "grade": 3,
+      "id": "m2026-n32-f00d",
+      "name": "渡辺 渚",
+      "ranks": {
+        "expr": "A",
+        "pitch": "A",
+        "rhythm": "A",
+        "tone": "A"
+      },
+      "seat": "euph2"
+    },
+    {
+      "grade": 3,
+      "id": "m2026-n33-f00d",
+      "name": "坂本 雫",
+      "ranks": {
+        "expr": "A",
+        "pitch": "A",
+        "rhythm": "A",
+        "tone": "A"
+      },
+      "seat": "tuba1"
+    },
+    {
+      "grade": 3,
+      "id": "m2026-n34-f00d",
+      "name": "菅原 智也",
+      "ranks": {
+        "expr": "A",
+        "pitch": "A",
+        "rhythm": "A",
+        "tone": "A"
+      },
+      "seat": "tuba2"
+    },
+    {
+      "grade": 3,
+      "id": "m2026-n35-f00d",
+      "name": "高木 明里",
+      "ranks": {
+        "expr": "A",
+        "pitch": "A",
+        "rhythm": "A",
+        "tone": "A"
+      },
+      "seat": "cb1"
+    },
+    {
+      "grade": 3,
+      "id": "m2026-n36-f00d",
+      "name": "佐藤 誠",
+      "ranks": {
+        "expr": "A",
+        "pitch": "A",
+        "rhythm": "A",
+        "tone": "A"
+      },
+      "seat": "perc1"
+    },
+    {
+      "grade": 3,
+      "id": "m2026-n37-f00d",
+      "name": "山田 蓮",
+      "ranks": {
+        "expr": "A",
+        "pitch": "A",
+        "rhythm": "A",
+        "tone": "A"
+      },
+      "seat": "perc2"
+    },
+    {
+      "grade": 3,
+      "id": "m2026-n38-f00d",
+      "name": "原 杏",
+      "ranks": {
+        "expr": "A",
+        "pitch": "A",
+        "rhythm": "A",
+        "tone": "A"
+      },
+      "seat": "perc3"
+    },
+    {
+      "grade": 3,
+      "id": "m2026-n39-f00d",
+      "name": "横山 透",
+      "ranks": {
+        "expr": "A",
+        "pitch": "A",
+        "rhythm": "A",
+        "tone": "A"
+      },
+      "seat": "perc4"
+    }
+  ],
+  "recordings": [
+    {
+      "id": "r2026-0-0-583709",
+      "label": "2026年4月の録音"
+    },
+    {
+      "id": "r2026-1-1-248785",
+      "label": "2026 新入生歓迎演奏"
+    },
+    {
+      "id": "r2026-3-2-555315",
+      "label": "2026年 新しい部員が入って最初の合奏"
+    },
+    {
+      "id": "r2026-6-3-764128",
+      "label": "2026 みなと祭りステージ"
+    },
+    {
+      "id": "r2026-11-4-461224",
+      "label": "2026 合同演奏会"
+    },
+    {
+      "id": "r2026-16-5-85882",
+      "label": "2026 吹奏楽コンクール 県大会"
+    },
+    {
+      "id": "r2026-22-6-570379",
+      "label": "2026 文化祭ステージ"
+    },
+    {
+      "id": "r2026-26-7-373665",
+      "label": "2026 定期演奏会"
+    },
+    {
+      "id": "r2026-26-8-352162",
+      "label": "2026 アンサンブルコンテスト"
+    }
+  ],
+  "recordsFingerprint": 0.8342411136254668,
+  "recruits": [
+    {
+      "exp": false,
+      "hope": "cym",
+      "id": "m2026-j10-401d75a4",
+      "name": "小林 花音",
+      "talent": false
+    }
+  ],
+  "reducedMotion": false,
+  "roster": {
+    "count": "9／9人",
+    "filter": {
+      "grade": "all",
+      "name": "",
+      "sec": "all"
+    },
+    "members": [
+      {
+        "face": 94,
+        "grade": 2,
+        "id": "m2026-n1-401d75a4",
+        "name": "安藤 朔",
+        "sec": "dr"
+      },
+      {
+        "face": 60,
+        "grade": 2,
+        "id": "m2026-n2-401d75a4",
+        "name": "原田 茜",
+        "sec": "hn"
+      },
+      {
+        "face": 83,
+        "grade": 2,
+        "id": "m2026-n3-401d75a4",
+        "name": "石井 樹",
+        "sec": "low"
+      },
+      {
+        "face": 29,
+        "grade": 2,
+        "id": "m2026-n4-401d75a4",
+        "name": "太田 詩",
+        "sec": "sax"
+      },
+      {
+        "face": 67,
+        "grade": 2,
+        "id": "m2026-n5-401d75a4",
+        "name": "佐々木 彩花",
+        "sec": "perc"
+      },
+      {
+        "face": 21,
+        "grade": 2,
+        "id": "m2026-n6-401d75a4",
+        "name": "山崎 光",
+        "sec": "cl"
+      },
+      {
+        "face": 33,
+        "grade": 2,
+        "id": "m2026-j7-401d75a4",
+        "name": "石井 晴",
+        "sec": "hn"
+      },
+      {
+        "face": 4,
+        "grade": 2,
+        "id": "m2026-j8-401d75a4",
+        "name": "宮崎 蒼",
+        "sec": "cl"
+      },
+      {
+        "face": 76,
+        "grade": 2,
+        "id": "m2026-j9-401d75a4",
+        "name": "山本 茜",
+        "sec": "dr"
+      }
+    ],
+    "partsOpen": false,
+    "picker": false,
+    "rows": [
+      {
+        "id": "m2026-n1-401d75a4",
+        "name": "安藤 朔"
+      },
+      {
+        "id": "m2026-j9-401d75a4",
+        "name": "山本 茜"
+      },
+      {
+        "id": "m2026-n6-401d75a4",
+        "name": "山崎 光"
+      },
+      {
+        "id": "m2026-j8-401d75a4",
+        "name": "宮崎 蒼"
+      },
+      {
+        "id": "m2026-n4-401d75a4",
+        "name": "太田 詩"
+      },
+      {
+        "id": "m2026-n2-401d75a4",
+        "name": "原田 茜"
+      },
+      {
+        "id": "m2026-j7-401d75a4",
+        "name": "石井 晴"
+      },
+      {
+        "id": "m2026-n3-401d75a4",
+        "name": "石井 樹"
+      },
+      {
+        "id": "m2026-n5-401d75a4",
+        "name": "佐々木 彩花"
+      }
+    ]
+  },
+  "saveVersion": 2,
+  "scrollWidth": 375,
+  "selectedMember": null,
+  "seniorOpen": [],
+  "shownBounds": {
+    "from": 0,
+    "to": 64
+  },
+  "shownLabel": "いまの音（選曲前・音楽室）",
+  "shownMatchesPrepared": true,
+  "shownPlayers": [
+    {
+      "id": "m2026-n1-401d75a4",
+      "seat": "ob1"
+    },
+    {
+      "id": "m2026-n2-401d75a4",
+      "seat": "hn1"
+    },
+    {
+      "id": "m2026-n3-401d75a4",
+      "seat": "tuba1"
+    },
+    {
+      "id": "m2026-n4-401d75a4",
+      "seat": "asax1"
+    },
+    {
+      "id": "m2026-n6-401d75a4",
+      "seat": "cl1a"
+    },
+    {
+      "id": "m2026-j7-401d75a4",
+      "seat": "hn3"
+    },
+    {
+      "id": "m2026-j8-401d75a4",
+      "seat": "ebcl1"
+    },
+    {
+      "id": "m2026-j9-401d75a4",
+      "seat": "fg1"
+    },
+    {
+      "id": "m2026-n5-401d75a4",
+      "seat": "perc1"
+    }
+  ],
+  "solo": "all",
+  "stageCache": {
+    "images": 10,
+    "stamps": 63
+  },
+  "stageCasts": [],
+  "stagePortraits": 9,
+  "stageSeats": [
+    {
+      "id": "picc1",
+      "point": [
+        76.28571428571428,
+        218.57142857142856
+      ]
+    },
+    {
+      "id": "fl1a",
+      "point": [
+        105.42857142857142,
+        216.8571428571429
+      ]
+    },
+    {
+      "id": "fl1b",
+      "point": [
+        47.14285714285714,
+        174.78571428571428
+      ]
+    },
+    {
+      "id": "fl2a",
+      "point": [
+        76.28571428571428,
+        173.07142857142858
+      ]
+    },
+    {
+      "id": "ob1",
+      "member": "m2026-n1-401d75a4",
+      "point": [
+        105.42857142857142,
+        171.35714285714286
+      ]
+    },
+    {
+      "id": "cl1a",
+      "member": "m2026-n6-401d75a4",
+      "point": [
+        134.57142857142856,
+        171.35714285714286
+      ]
+    },
+    {
+      "id": "cl1b",
+      "point": [
+        163.71428571428572,
+        173.07142857142858
+      ]
+    },
+    {
+      "id": "cl1c",
+      "point": [
+        192.85714285714283,
+        174.78571428571428
+      ]
+    },
+    {
+      "id": "asax1",
+      "member": "m2026-n4-401d75a4",
+      "point": [
+        134.57142857142856,
+        216.8571428571429
+      ]
+    },
+    {
+      "id": "asax2",
+      "point": [
+        163.71428571428572,
+        218.57142857142856
+      ]
+    },
+    {
+      "id": "fg1",
+      "member": "m2026-j9-401d75a4",
+      "point": [
+        47.14285714285714,
+        220.28571428571428
+      ]
+    },
+    {
+      "id": "ebcl1",
+      "member": "m2026-j8-401d75a4",
+      "point": [
+        18,
+        176.5
+      ]
+    },
+    {
+      "id": "cl2a",
+      "point": [
+        47.14285714285714,
+        129.28571428571428
+      ]
+    },
+    {
+      "id": "cl2b",
+      "point": [
+        76.28571428571428,
+        127.57142857142856
+      ]
+    },
+    {
+      "id": "cl3a",
+      "point": [
+        105.42857142857142,
+        125.85714285714286
+      ]
+    },
+    {
+      "id": "cl3b",
+      "point": [
+        105.42857142857142,
+        80.35714285714286
+      ]
+    },
+    {
+      "id": "bcl1",
+      "point": [
+        134.57142857142856,
+        80.35714285714286
+      ]
+    },
+    {
+      "id": "tsax1",
+      "point": [
+        163.71428571428572,
+        82.07142857142857
+      ]
+    },
+    {
+      "id": "bsax1",
+      "point": [
+        134.57142857142856,
+        125.85714285714286
+      ]
+    },
+    {
+      "id": "hn1",
+      "member": "m2026-n2-401d75a4",
+      "point": [
+        163.71428571428572,
+        127.57142857142856
+      ]
+    },
+    {
+      "id": "hn2",
+      "point": [
+        192.85714285714283,
+        129.28571428571428
+      ]
+    },
+    {
+      "id": "hn3",
+      "member": "m2026-j7-401d75a4",
+      "point": [
+        222,
+        176.5
+      ]
+    },
+    {
+      "id": "hn4",
+      "point": [
+        192.85714285714283,
+        220.28571428571428
+      ]
+    },
+    {
+      "id": "tp1a",
+      "point": [
+        18,
+        222
+      ]
+    },
+    {
+      "id": "tp1b",
+      "point": [
+        18,
+        131
+      ]
+    },
+    {
+      "id": "tp2a",
+      "point": [
+        18,
+        85.5
+      ]
+    },
+    {
+      "id": "tp3a",
+      "point": [
+        47.14285714285714,
+        83.78571428571429
+      ]
+    },
+    {
+      "id": "tb1",
+      "point": [
+        76.28571428571428,
+        82.07142857142857
+      ]
+    },
+    {
+      "id": "tb2",
+      "point": [
+        86,
+        36
+      ]
+    },
+    {
+      "id": "btb1",
+      "point": [
+        120,
+        34
+      ]
+    },
+    {
+      "id": "euph1",
+      "point": [
+        188,
+        38
+      ]
+    },
+    {
+      "id": "euph2",
+      "point": [
+        192.85714285714283,
+        83.78571428571428
+      ]
+    },
+    {
+      "id": "tuba1",
+      "member": "m2026-n3-401d75a4",
+      "point": [
+        222,
+        85.5
+      ]
+    },
+    {
+      "id": "tuba2",
+      "point": [
+        222,
+        131
+      ]
+    },
+    {
+      "id": "cb1",
+      "point": [
+        222,
+        222
+      ]
+    },
+    {
+      "id": "perc1",
+      "member": "m2026-n5-401d75a4",
+      "point": [
+        18,
+        40
+      ]
+    },
+    {
+      "id": "perc2",
+      "point": [
+        51.999999999999986,
+        38
+      ]
+    },
+    {
+      "id": "perc3",
+      "point": [
+        154,
+        36
+      ]
+    },
+    {
+      "id": "perc4",
+      "point": [
+        222,
+        40
+      ]
+    }
+  ],
+  "stageSelected": null,
+  "statsFingerprint": 0.5787295855116099,
+  "steps": 49,
+  "stopUi": {
+    "focus": "play",
+    "mainHidden": true,
+    "miniHidden": true,
+    "miniStop": {
+      "bottom": 0,
+      "height": 0,
+      "left": 0,
+      "right": 0,
+      "top": 0,
+      "width": 0,
+      "x": 0,
+      "y": 0
+    },
+    "now": {
+      "bottom": 0,
+      "height": 0,
+      "left": 0,
+      "right": 0,
+      "top": 0,
+      "width": 0,
+      "x": 0,
+      "y": 0
+    },
+    "nowHidden": false,
+    "scroll": 0,
+    "seconds": null,
+    "state": 0.15184061927720904,
+    "tab": "week",
+    "tabButton": {
+      "bottom": 805,
+      "height": 46,
+      "left": 12,
+      "right": 96.75,
+      "top": 759,
+      "width": 84.75,
+      "x": 12,
+      "y": 759
+    }
+  },
+  "theme": "dark",
+  "venue": "room",
+  "view": "year",
+  "viewPart": "mel",
+  "waiting": false,
+  "watchPortraits": 0,
+  "watchSeats": [
+    {
+      "id": "picc1",
+      "member": null,
+      "point": [
+        76.28571428571428,
+        218.57142857142856
+      ]
+    },
+    {
+      "id": "fl1a",
+      "member": null,
+      "point": [
+        105.42857142857142,
+        216.8571428571429
+      ]
+    },
+    {
+      "id": "fl1b",
+      "member": null,
+      "point": [
+        47.14285714285714,
+        174.78571428571428
+      ]
+    },
+    {
+      "id": "fl2a",
+      "member": null,
+      "point": [
+        76.28571428571428,
+        173.07142857142858
+      ]
+    },
+    {
+      "id": "ob1",
+      "member": null,
+      "point": [
+        105.42857142857142,
+        171.35714285714286
+      ]
+    },
+    {
+      "id": "cl1a",
+      "member": null,
+      "point": [
+        134.57142857142856,
+        171.35714285714286
+      ]
+    },
+    {
+      "id": "cl1b",
+      "member": null,
+      "point": [
+        163.71428571428572,
+        173.07142857142858
+      ]
+    },
+    {
+      "id": "cl1c",
+      "member": null,
+      "point": [
+        192.85714285714283,
+        174.78571428571428
+      ]
+    },
+    {
+      "id": "asax1",
+      "member": null,
+      "point": [
+        134.57142857142856,
+        216.8571428571429
+      ]
+    },
+    {
+      "id": "asax2",
+      "member": null,
+      "point": [
+        163.71428571428572,
+        218.57142857142856
+      ]
+    },
+    {
+      "id": "fg1",
+      "member": null,
+      "point": [
+        47.14285714285714,
+        220.28571428571428
+      ]
+    },
+    {
+      "id": "ebcl1",
+      "member": null,
+      "point": [
+        18,
+        176.5
+      ]
+    },
+    {
+      "id": "cl2a",
+      "member": null,
+      "point": [
+        47.14285714285714,
+        129.28571428571428
+      ]
+    },
+    {
+      "id": "cl2b",
+      "member": null,
+      "point": [
+        76.28571428571428,
+        127.57142857142856
+      ]
+    },
+    {
+      "id": "cl3a",
+      "member": null,
+      "point": [
+        105.42857142857142,
+        125.85714285714286
+      ]
+    },
+    {
+      "id": "cl3b",
+      "member": null,
+      "point": [
+        105.42857142857142,
+        80.35714285714286
+      ]
+    },
+    {
+      "id": "bcl1",
+      "member": null,
+      "point": [
+        134.57142857142856,
+        80.35714285714286
+      ]
+    },
+    {
+      "id": "tsax1",
+      "member": null,
+      "point": [
+        163.71428571428572,
+        82.07142857142857
+      ]
+    },
+    {
+      "id": "bsax1",
+      "member": null,
+      "point": [
+        134.57142857142856,
+        125.85714285714286
+      ]
+    },
+    {
+      "id": "hn1",
+      "member": null,
+      "point": [
+        163.71428571428572,
+        127.57142857142856
+      ]
+    },
+    {
+      "id": "hn2",
+      "member": null,
+      "point": [
+        192.85714285714283,
+        129.28571428571428
+      ]
+    },
+    {
+      "id": "hn3",
+      "member": null,
+      "point": [
+        222,
+        176.5
+      ]
+    },
+    {
+      "id": "hn4",
+      "member": null,
+      "point": [
+        192.85714285714283,
+        220.28571428571428
+      ]
+    },
+    {
+      "id": "tp1a",
+      "member": null,
+      "point": [
+        18,
+        222
+      ]
+    },
+    {
+      "id": "tp1b",
+      "member": null,
+      "point": [
+        18,
+        131
+      ]
+    },
+    {
+      "id": "tp2a",
+      "member": null,
+      "point": [
+        18,
+        85.5
+      ]
+    },
+    {
+      "id": "tp3a",
+      "member": null,
+      "point": [
+        47.14285714285714,
+        83.78571428571429
+      ]
+    },
+    {
+      "id": "tb1",
+      "member": null,
+      "point": [
+        76.28571428571428,
+        82.07142857142857
+      ]
+    },
+    {
+      "id": "tb2",
+      "member": null,
+      "point": [
+        86,
+        36
+      ]
+    },
+    {
+      "id": "btb1",
+      "member": null,
+      "point": [
+        120,
+        34
+      ]
+    },
+    {
+      "id": "euph1",
+      "member": null,
+      "point": [
+        188,
+        38
+      ]
+    },
+    {
+      "id": "euph2",
+      "member": null,
+      "point": [
+        192.85714285714283,
+        83.78571428571428
+      ]
+    },
+    {
+      "id": "tuba1",
+      "member": null,
+      "point": [
+        222,
+        85.5
+      ]
+    },
+    {
+      "id": "tuba2",
+      "member": null,
+      "point": [
+        222,
+        131
+      ]
+    },
+    {
+      "id": "cb1",
+      "member": null,
+      "point": [
+        222,
+        222
+      ]
+    },
+    {
+      "id": "perc1",
+      "member": null,
+      "point": [
+        18,
+        40
+      ]
+    },
+    {
+      "id": "perc2",
+      "member": null,
+      "point": [
+        51.999999999999986,
+        38
+      ]
+    },
+    {
+      "id": "perc3",
+      "member": null,
+      "point": [
+        154,
+        36
+      ]
+    },
+    {
+      "id": "perc4",
+      "member": null,
+      "point": [
+        222,
+        40
+      ]
+    }
+  ],
+  "watchSelected": null,
+  "week": 0,
+  "width": 375,
+  "wings": {
+    "actions": 0,
+    "calm": [],
+    "huddle": false,
+    "tense": []
+  },
+  "year": 2027,
+  "yearGrowth": [],
+  "yearNext": null
+}
