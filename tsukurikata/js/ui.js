@@ -2084,14 +2084,40 @@ function memberCurrentRanks(m){
   return `<div class="mc-current"><div class="mc-current-grid">${STAT_KEYS.map(k=>`<span aria-label="${STAT_LABEL[k]} ${rankOf(m.stats[k])}"><small>${STAT_LABEL[k]}</small>${rankBadge(m.stats[k])}</span>`).join('')}</div>${m.mental!=null?`<div class="mc-mental"><span>本番の強さ</span>${rankBadge(m.mental)}</div>`:''}</div>`;
 }
 // 録音時の部員は見る・聴くだけにし、いまの部員の名前や席を変える操作を出さない。
+function releaseRecordedMemberSolo(nextId=null){
+  if(U.recordMember&&U.recordMember.id!==nextId&&U.solo===`member:${U.recordMember.id}`){U.solo='all';applySolo();}
+}
 function clearRecordedMember(){
   if(!U.recordMember) return;
+  const returnFocus=$('#memberCard').contains(document.activeElement);
+  releaseRecordedMemberSolo();
   U.recordMember=null;U.recordPerf=null;U.sel=null;
   renderSelectors();renderMemberCard();renderRoster();
+  if(returnFocus)$('#stage').focus({preventScroll:true});
+}
+// 同じボタンで本人と全員を切り替え、操作先と再生位置を保つ。
+function toggleRecordedMemberSolo(){
+  if(!U.recordMember||U.recordPerf!==(U.waitPlay?.perf||(U.playing?U.shown:null)))return;
+  U.solo=U.solo===`member:${U.recordMember.id}`?'all':`member:${U.recordMember.id}`;
+  applySolo();renderSelectors();renderRecordedMemberSolo();
+}
+function renderRecordedMemberSolo(){
+  const b=$('#memberCard [data-mact="recordsolo"]');if(!b||!U.recordMember)return;
+  const on=U.solo===`member:${U.recordMember.id}`;
+  b.setAttribute('aria-pressed',String(on));b.innerHTML=uiIcon(on?'members':'play')+(on?'全員の音にもどす':'この人だけ聴く');
+}
+function closeMemberCard(){
+  const fromStage=$('#memberCard').dataset.origin==='stage',back=$('#memberCard').dataset.origin==='roster'&&U.cardReturn;
+  releaseRecordedMemberSolo();
+  U.recordMember=null;U.recordPerf=null;U.sel=null;renderSelectors();renderMemberCard();renderRoster();drawIdle();
+  if(back){const row=document.querySelector(`[data-mid="${back.id}"] .roster-open`);if(row){row.focus({preventScroll:true});window.scrollTo(0,back.top);}else{$('#rosterSearch').focus({preventScroll:true});$('#rosterFind').scrollIntoView({block:'nearest'});}}
+  else if(fromStage){$('#stage').focus({preventScroll:true});if(narrow.matches)$('#stage').scrollIntoView({block:'start'});}
+  U.cardReturn=null;
 }
 function renderRecordedMemberCard(card, m){
-  card.innerHTML=`<button class="help-button mc-close" type="button" data-mact="close" aria-label="閉じる">${uiIcon('close')}</button><div class="mc-portrait">${memberFace(m,112)}<div class="mc-head"><h3>${esc(m.name)}</h3><span class="sub">${instrumentIcon(SEAT[m.seat].inst)}${m.grade ? `${m.grade}年・` : ''}${esc(seatLabel(m.seat))}</span><span class="small">録音時</span></div></div><div class="mc-actions"><button class="btn small" type="button" data-mact="recordsolo" aria-pressed="${U.solo===`member:${m.id}`}">${uiIcon('play')}この人だけ聴く</button>${U.solo!=='all'?'<button class="btn small quiet" type="button" data-mact="recordall">全員の音にもどす</button>':''}</div>${memberCurrentRanks(m)}`;
+  card.innerHTML=`<button class="help-button mc-close" type="button" data-mact="close" aria-label="閉じる">${uiIcon('close')}</button><div class="mc-portrait">${memberFace(m,112)}<div class="mc-head"><h3>${esc(m.name)}</h3><span class="sub">${instrumentIcon(SEAT[m.seat].inst)}${m.grade ? `${m.grade}年・` : ''}${esc(seatLabel(m.seat))}</span><span class="small">録音時</span></div></div><div class="mc-actions"><button class="btn small" type="button" data-mact="recordsolo" aria-pressed="false">${uiIcon('play')}この人だけ聴く</button></div>${memberCurrentRanks(m)}`;
   card.dataset.recorded=m.id;
+  renderRecordedMemberSolo();
 }
 function renderMemberCard(){
   const card = $('#memberCard');
@@ -2497,11 +2523,13 @@ function bind(){
     // 録音は当時の部員を開き、同じ席の現部員と取り違えない。
     const recorded = recordingPlayback();
     const m = recorded ? U.stageMembers.get(s.id) : (U.playing || U.waitPlay) && U.stageMembers ? S.members.find(x => x.id === U.stageMembers.get(s.id)?.id) : S.members.find(x => x.seat === s.id);
+    releaseRecordedMemberSolo(m?.id);
     U.recordMember=recorded&&m?m:null;U.recordPerf=U.recordMember?U.shown:null;
     U.sel = m ? m.id : null;
     // 部員を開いても、舞台と音の動きの表示範囲は保つ。
     placeCard('stage');
     renderSelectors(); renderMemberCard(); renderRoster(); drawIdle();
+    if(m&&recorded)$('#memberCard [data-mact="close"]').focus({preventScroll:true});
     if(m) $('#memberCard').scrollIntoView({block:narrow.matches?'start':'nearest',behavior:!fxCalm()&&U.fxMode==='full'?'smooth':'auto'});
   });
   $('#secGrid').addEventListener('click', e => {
@@ -2550,17 +2578,10 @@ function bind(){
     const b = e.target.closest('[data-mact]'); if(!b) return;
     const act = b.dataset.mact;
     if(act === 'close'){
-      const fromStage = $('#memberCard').dataset.origin === 'stage';
-      const back=$('#memberCard').dataset.origin==='roster'&&U.cardReturn;
-      U.recordMember=null;U.recordPerf=null;U.sel=null;renderSelectors();renderMemberCard();renderRoster();drawIdle();
-      if(back){const row=document.querySelector(`[data-mid="${back.id}"] .roster-open`);if(row){row.focus({preventScroll:true});window.scrollTo(0,back.top);}else{$('#rosterSearch').focus({preventScroll:true});$('#rosterFind').scrollIntoView({block:'nearest'});}}
-      else if(fromStage && narrow.matches) $('#stage').scrollIntoView({block:'start'});
-      U.cardReturn=null;return;
+      closeMemberCard();return;
     }
     if(U.recordMember){
-      if(act==='recordsolo'||act==='recordall'){
-        U.solo=act==='recordsolo'?`member:${U.recordMember.id}`:'all';applySolo();renderSelectors();renderMemberCard();
-      }
+      if(act==='recordsolo')toggleRecordedMemberSolo();
       return;
     }
     const m = memberById(U.sel); if(!m) return;
@@ -2629,8 +2650,11 @@ function bind(){
     const form = e.target.closest('#memberNameForm'); if(form) form.dataset.composing = String(type === 'compositionstart');
   });
   $('#memberCard').addEventListener('keydown', e => {
-    if(e.key === 'Escape' && !e.isComposing && !$('#memberNameForm')?.hidden){ e.preventDefault(); closeMemberNameForm(); }
-    else if(e.key === 'Escape' && !e.isComposing && $('#memberCard .mc-move')?.open){ e.preventDefault(); $('#memberCard [data-mact="movecancel"]').click(); }
+    if(e.key!=='Escape'||e.isComposing||e.repeat||!$('#tip').hidden)return;
+    const form=$('#memberNameForm');
+    if(form&&!form.hidden){e.preventDefault();closeMemberNameForm();}
+    else if($('#memberCard .mc-move')?.open){e.preventDefault();$('#memberCard [data-mact="movecancel"]').click();}
+    else{e.preventDefault();closeMemberCard();}
   });
   $('#week').addEventListener('keydown',e=>{if(e.key==='Escape'&&U.pick){e.preventDefault();closePracticePicker();}else if(e.key==='Escape'&&U.outPick?.size&&e.target.closest('.outing')&&$('#tip').hidden){e.preventDefault();cancelOutingSelection();}else if(e.key==='Escape'&&U.prepPanel&&e.target.closest('.preparation')){e.preventDefault();togglePreparation(U.prepPanel);}});
   $('#week').addEventListener('click', e => {

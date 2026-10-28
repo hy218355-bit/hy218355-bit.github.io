@@ -173,6 +173,10 @@ function record(){
  report.shownPlayers=U.shown?Object.entries(buildPtr(U.shown)).map(([seat,p])=>({seat,id:p.mid})):[];
  report.recordsFingerprint=hash(JSON.stringify(S.recs));
  report.recordedCard=U.recordMember?{id:U.recordMember.id,name:U.recordMember.name,grade:U.recordMember.grade,seat:U.recordMember.seat,ranks:Object.fromEntries(STAT_KEYS.map(k=>[k,rankOf(U.recordMember.stats[k])]))}:null;
+ if(q.has('recordCardAudit')){
+  const card=$('#memberCard'),b=card.querySelector('[data-mact="recordsolo"]');
+  report.recordCardUi={state:hash(JSON.stringify(S)),hidden:card.hidden,origin:card.dataset.origin,focus:document.activeElement.id||document.activeElement.dataset.mact||document.activeElement.tagName,button:b?{pressed:b.getAttribute('aria-pressed'),text:b.textContent,rect:b.getBoundingClientRect().toJSON()}:null,card:card.getBoundingClientRect().toJSON(),solo:U.solo,seconds:U.playing?E.now():null,current:U.sel&&memberById(U.sel)?{name:memberById(U.sel).name,seat:memberById(U.sel).seat}:null,canRename:!!card.querySelector('[data-mact="rename"]'),canMove:!!card.querySelector('.mc-move'),nameFormOpen:!!$('#memberNameForm')&&!$('#memberNameForm').hidden,moveOpen:!!card.querySelector('.mc-move')?.open};
+ }
  report.recordedCast=U.stageMembers?Array.from(U.stageMembers,([seat,m])=>({seat,id:m.id,name:m.name,grade:m.grade,ranks:Object.fromEntries(STAT_KEYS.map(k=>[k,rankOf(m.stats[k])]))})):[];
  report.recordings=S.recs.map(r=>({id:r.id,label:r.label}));
  const libraryActive=activeLibraryRecording(),libraryPerf=U.waitPlay?.perf || (U.playing?U.shown:null);
@@ -442,7 +446,7 @@ $('#week').addEventListener('toggle',()=>setTimeout(record,0),true);
 new MutationObserver(()=>setTimeout(record,0)).observe($('#week'),{childList:true,subtree:true});
 new MutationObserver(()=>setTimeout(record,0)).observe($('#grCard'),{childList:true,subtree:true});
 new MutationObserver(()=>setTimeout(record,0)).observe($('#nowPlaying'),{childList:true,subtree:true});
-for(const event of ['click','submit','change'])$('#memberCard').addEventListener(event,()=>setTimeout(record,0));
+for(const event of ['click','submit','change','keydown'])$('#memberCard').addEventListener(event,()=>setTimeout(record,0));
 $('#rosterTable').addEventListener('click',()=>setTimeout(record,0));
 for(const event of ['click','keydown','toggle'])$('#diagPractice').addEventListener(event,()=>setTimeout(record,0));
 for(const event of ['click','keydown'])$('#recordingList').addEventListener(event,()=>setTimeout(record,0));

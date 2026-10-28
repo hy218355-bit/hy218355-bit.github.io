@@ -1,0 +1,22 @@
+[
+  {
+    "scrollWidth": 375,
+    "selected": "week",
+    "width": 375
+  },
+  {
+    "scrollWidth": 375,
+    "selected": "play",
+    "width": 375
+  },
+  {
+    "scrollWidth": 375,
+    "selected": "members",
+    "width": 375
+  },
+  {
+    "scrollWidth": 375,
+    "selected": "log",
+    "width": 375
+  }
+]

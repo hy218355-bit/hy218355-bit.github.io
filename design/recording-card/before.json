@@ -1,0 +1,37 @@
+{
+  "solo": {
+    "audible": [
+      "m2028-n1-cafe"
+    ],
+    "button": "<button class=\"btn small\" type=\"button\" data-mact=\"recordsolo\" aria-pressed=\"true\"><svg class=\"ui-icon \" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.6\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\" focusable=\"false\"><path d=\"m8 4 12 8-12 8Z\"></path></svg>この人だけ聴く</button>",
+    "card": {
+      "grade": 3,
+      "id": "m2028-n1-cafe",
+      "name": "田中 七海",
+      "ranks": {
+        "expr": "A",
+        "pitch": "A",
+        "rhythm": "A",
+        "tone": "A"
+      },
+      "seat": "picc1"
+    },
+    "playing": true,
+    "solo": {
+      "id": "m2028-n1-cafe",
+      "type": "member"
+    }
+  },
+  "closed": {
+    "audible": [
+      "m2028-n1-cafe"
+    ],
+    "card": null,
+    "hidden": true,
+    "playing": true,
+    "solo": {
+      "id": "m2028-n1-cafe",
+      "type": "member"
+    }
+  }
+}
