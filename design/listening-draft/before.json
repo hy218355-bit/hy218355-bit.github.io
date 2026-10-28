@@ -1,0 +1,144 @@
+{
+  "before": {
+    "buttons": [
+      {
+        "act": "solo",
+        "checked": false,
+        "hidden": false,
+        "id": 1,
+        "label": "田中 七海だけ聴く",
+        "pressed": "false",
+        "rect": {
+          "bottom": -524.4140625,
+          "height": 44,
+          "left": 52,
+          "right": 183.5,
+          "top": -568.4140625,
+          "width": 131.5,
+          "x": 52,
+          "y": -568.4140625
+        }
+      },
+      {
+        "act": "secsolo",
+        "checked": false,
+        "hidden": false,
+        "id": 2,
+        "label": "フルートだけ聴く",
+        "pressed": "false",
+        "rect": {
+          "bottom": -524.4140625,
+          "height": 44,
+          "left": 191.5,
+          "right": 323,
+          "top": -568.4140625,
+          "width": 131.5,
+          "x": 191.5,
+          "y": -568.4140625
+        }
+      },
+      {
+        "act": "all",
+        "checked": false,
+        "hidden": true,
+        "id": 3,
+        "label": null,
+        "pressed": null,
+        "rect": {
+          "bottom": 0,
+          "height": 0,
+          "left": 0,
+          "right": 0,
+          "top": 0,
+          "width": 0,
+          "x": 0,
+          "y": 0
+        }
+      }
+    ],
+    "cacheCurrent": true,
+    "details": [
+      "mc-growth-history",
+      "mc-story"
+    ],
+    "draft": "未保存のなまえ",
+    "expected": [],
+    "focus": "SUMMARY",
+    "hidden": false,
+    "section": "fl",
+    "selected": "m2028-n1-cafe",
+    "sourceCurrent": false,
+    "state": 0.4408087986521423
+  },
+  "after": {
+    "buttons": [
+      {
+        "act": "solo",
+        "checked": false,
+        "hidden": false,
+        "id": 4,
+        "label": "田中 七海だけ聴く",
+        "pressed": "false",
+        "rect": {
+          "bottom": -706.5078125,
+          "height": 44,
+          "left": 52,
+          "right": 183.5,
+          "top": -750.5078125,
+          "width": 131.5,
+          "x": 52,
+          "y": -750.5078125
+        }
+      },
+      {
+        "act": "secsolo",
+        "checked": false,
+        "hidden": false,
+        "id": 5,
+        "label": "フルートだけ聴く",
+        "pressed": "false",
+        "rect": {
+          "bottom": -706.5078125,
+          "height": 44,
+          "left": 191.5,
+          "right": 323,
+          "top": -750.5078125,
+          "width": 131.5,
+          "x": 191.5,
+          "y": -750.5078125
+        }
+      },
+      {
+        "act": "all",
+        "checked": false,
+        "hidden": false,
+        "id": 6,
+        "label": null,
+        "pressed": null,
+        "rect": {
+          "bottom": -654.5078125,
+          "height": 44,
+          "left": 52,
+          "right": 323,
+          "top": -698.5078125,
+          "width": 271,
+          "x": 52,
+          "y": -698.5078125
+        }
+      }
+    ],
+    "cacheCurrent": true,
+    "details": [
+      "mc-growth-history",
+      "mc-story"
+    ],
+    "draft": null,
+    "expected": [],
+    "focus": "SUMMARY",
+    "hidden": false,
+    "section": "fl",
+    "selected": "m2028-n1-cafe",
+    "sourceCurrent": false,
+    "state": 0.4408087986521423
+  }
+}

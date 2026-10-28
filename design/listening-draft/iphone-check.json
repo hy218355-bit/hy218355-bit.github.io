@@ -1,0 +1,11 @@
+{
+  "build": "succeeded",
+  "install": "succeeded",
+  "launch": "succeeded",
+  "visualInteractionVerified": false,
+  "mirroringUsed": false,
+  "bundledSourceSHA256": {
+    "index.html": "eee117aaa0f4c2db120ab534cfb5e9f5cd5267dc3a0ea3a47f947d2b788cc465",
+    "js/ui.js": "338023473009ab9fc5701b873c6bd10df723c9277d236242e020e479d9e32a3b"
+  }
+}

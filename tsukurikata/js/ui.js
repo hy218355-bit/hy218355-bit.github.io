@@ -2598,7 +2598,7 @@ function bind(){
     if(recordingPlayback()) return;
     stopPlay();U.range=value;U.perfNow=null;renderPiece();refreshNow();
   });
-  $('#soloSel').addEventListener('change', e => { U.solo = e.target.value; applySolo(); renderMemberCard(); renderListeningSummary(); });
+  $('#soloSel').addEventListener('change', e => { U.solo = e.target.value; applySolo(); renderCurrentMemberListening(); renderRecordedMemberSolo(); renderListeningSummary(); });
   $('#viewSel').addEventListener('change', e => { U.view = e.target.value; renderSelectors(); renderRoster(); drawIdle(); if(U.playing) drawRoll(U.shown, E.now()); });
   // 本番を見ているあいだ：舞台の部員をタップすると、その子の様子
   $('#cdStage').addEventListener('click', e => {
