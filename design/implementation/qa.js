@@ -21,6 +21,11 @@ window.fetch=(input,init)=>{
 };
 if(document.readyState==='loading')await new Promise(r=>document.addEventListener('DOMContentLoaded',r,{once:true}));
 const q=new URLSearchParams(location.search);let view=q.get('view')||'week';
+const focusKeys=[];
+if(q.has('focusAudit'))window.addEventListener('keydown',e=>{
+ if(['Escape','Tab',' ','Enter'].includes(e.key))focusKeys.push({key:e.key,repeat:e.repeat,tipOpen:!$('#tip').hidden,target:e.target.id||e.target.tagName});
+ setTimeout(record,0);
+},{capture:true});
 const timingAudit={frames:0,textChanges:0,inputs:[]};
 if(q.has('timingAudit')){
  // 確認専用。実際の入力を処理する直前に負荷を掛け、判定時刻との違いを記録する。
@@ -90,6 +95,11 @@ function record(){
  report.listeningMix=E.pb?{nodes:E.pb.listenOutputs.length,live:E.pb.listenLive,gain:E.pb.listenOutputs.map(n=>n.gain.value)}:null;
  report.hallExp=S.hallExp;
  report.conduct={period:CD.clock?.P,level:CD.level,beat:$('#cdPattern').dataset.nextBeat,phase:CD.phase,count:CD.count.length,taps:CD.clock?.taps.length||0,judge:CD.judge?{...CD.judge}:null,combo:CD.combo,events:CD.clock?.ev.length||0,meter:CD.perf?.meter,from:CD.perf?.from,to:CD.perf?.to};
+ if(q.has('focusAudit')){
+  const active=document.activeElement;
+  report.conductKeys=focusKeys.slice(-32);
+  report.conductFocus={active:active?.id||active?.getAttribute('data-cd')||active?.getAttribute('data-act')||active?.tagName,text:active?.textContent?.trim().slice(0,60),inside:$('#conduct').contains(active),role:$('#conduct').getAttribute('role'),modal:$('#conduct').getAttribute('aria-modal'),background:[...document.querySelectorAll('.app,#tabbar,#mini,#toast')].map(el=>({id:el.id||'app',inert:el.inert})),tipOpen:!$('#tip').hidden,tipOwner:document.querySelector('[aria-describedby~="tip"]')?.id||null};
+ }
  if(q.has('judgeAudit'))report.conductFeedback=feedbackAudit.slice(-24);
  if(q.has('timingAudit'))report.conductTiming={...timingAudit,inputs:timingAudit.inputs.map(x=>({...x}))};
  const yearNext=$('#week .year-actions .btn')?.getBoundingClientRect();report.yearNext=yearNext?{top:yearNext.top,bottom:yearNext.bottom,height:yearNext.height}:null;
@@ -178,6 +188,7 @@ async function show(next){
  clearTimeout(GR.timer);clearTimeout(AN.timer);cancelAnimationFrame(CD.raf);CD.phase='idle';
  for(const id of ['conduct','gradRoll','announce','fx'])$('#'+id).hidden=true;
  document.documentElement.classList.remove('conducting');
+ cdDialogRelease();CD.focusToken={};
  let s;
  if(view==='balanced-result'||view==='first-year'||view==='first-summary'){
   const random=Math.random;let seed=20261027;
@@ -360,6 +371,7 @@ async function show(next){
 }
 await show(view);
 document.addEventListener('bootchecked',record);
+if(q.has('focusAudit'))document.addEventListener('focusin',()=>setTimeout(record,0));
 window.addEventListener('resize',()=>setTimeout(record,0));
 document.addEventListener('facesready',()=>setTimeout(record,0));
 for(const event of ['pointerdown','toggle','click','keydown','scroll'])$('#grCard').addEventListener(event,()=>setTimeout(record,0),{capture:true});

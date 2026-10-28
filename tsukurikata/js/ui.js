@@ -2141,23 +2141,36 @@ function pieceCard(id, {tag = '', note = '', act, label}){
 const listenBtns = id => `<button class="btn small" type="button" data-act="model" data-pid="${id}">▶ お手本を聴く</button><button class="btn small" type="button" data-act="preview" data-pid="${id}">▶ いまの部で聴く</button>`;
 
 /* ===== 数字の説明の吹き出し ===== */
+let tipOwner=null;
 function showTip(el){
   const tip = $('#tip');
   if(tip.dataset.for === el.dataset.tipname && !tip.hidden){ hideTip(); return; }
+  hideTip();
+  const stage=el.closest('.conduct');
+  (stage||document.body).appendChild(tip);
+  tipOwner=el;
+  el.setAttribute('aria-describedby',[...(el.getAttribute('aria-describedby')||'').split(/\s+/).filter(Boolean),'tip'].join(' '));
   tip.innerHTML = `<b>${esc(el.dataset.tipname)}</b>${esc(el.dataset.tip)}`;
   tip.dataset.for = el.dataset.tipname;
-  tip.classList.toggle('over-stage',Boolean(el.closest('.conduct')));
+  tip.classList.toggle('over-stage',Boolean(stage));
   tip.hidden = false; tip.classList.remove('on');
   const r = el.getBoundingClientRect(), w = tip.offsetWidth, h = tip.offsetHeight;
   const left = clamp(r.left, 16, innerWidth - 16 - w);
   const below = r.bottom + 8 + h < innerHeight - 70;   // 下のタブにかからないように
-  tip.style.left = `${left + scrollX}px`;
-  tip.style.top = `${(below ? r.bottom + 6 : r.top - 6 - h) + scrollY}px`;
+  tip.style.left = `${left + (stage?0:scrollX)}px`;
+  tip.style.top = `${(below ? r.bottom + 6 : r.top - 6 - h) + (stage?0:scrollY)}px`;
   tip.classList.toggle('up', !below);
   requestAnimationFrame(() => tip.classList.add('on'));
   haptic('tap');
 }
-function hideTip(){ const tip = $('#tip'); if(tip){ tip.hidden = true; tip.classList.remove('on'); delete tip.dataset.for; } }
+function hideTip(){
+  if(tipOwner){
+    const ids=(tipOwner.getAttribute('aria-describedby')||'').split(/\s+/).filter(id=>id&&id!=='tip');
+    if(ids.length)tipOwner.setAttribute('aria-describedby',ids.join(' '));else tipOwner.removeAttribute('aria-describedby');
+    tipOwner=null;
+  }
+  const tip=$('#tip');if(tip){tip.hidden=true;tip.classList.remove('on');delete tip.dataset.for;}
+}
 
 /* ===== まとめて描く ===== */
 function renderAll(){

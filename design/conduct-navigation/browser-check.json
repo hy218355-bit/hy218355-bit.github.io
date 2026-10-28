@@ -1,0 +1,2939 @@
+{
+  "watchOpened": {
+    "audio": {
+      "banks": 41,
+      "ready": true,
+      "voices": []
+    },
+    "boot": {
+      "errors": [],
+      "failed": [],
+      "loaded": 33,
+      "scripts": 33
+    },
+    "conduct": {
+      "count": 0,
+      "events": 0,
+      "from": 0,
+      "judge": null,
+      "level": 1,
+      "meter": 2,
+      "phase": "watch",
+      "taps": 0,
+      "to": 81
+    },
+    "errors": [],
+    "focus": {
+      "active": "cdClose",
+      "background": [
+        {
+          "id": "app",
+          "inert": true
+        },
+        {
+          "id": "toast",
+          "inert": false
+        },
+        {
+          "id": "mini",
+          "inert": true
+        },
+        {
+          "id": "tabbar",
+          "inert": true
+        }
+      ],
+      "inside": true,
+      "modal": "true",
+      "role": "dialog",
+      "text": "とばす",
+      "tipOpen": false,
+      "tipOwner": null
+    },
+    "hidden": false,
+    "members": 0.6864548486191779,
+    "pending": null,
+    "playing": false,
+    "records": 0.9236286622472109,
+    "scrollWidth": 375,
+    "tipParent": "",
+    "tipRect": {
+      "bottom": 0,
+      "height": 0,
+      "left": 0,
+      "right": 0,
+      "top": 0,
+      "width": 0,
+      "x": 0,
+      "y": 0
+    },
+    "toastParent": "conduct",
+    "width": 375
+  },
+  "tipOpen": {
+    "audio": {
+      "banks": 41,
+      "ready": true,
+      "voices": []
+    },
+    "boot": {
+      "errors": [],
+      "failed": [],
+      "loaded": 33,
+      "scripts": 33
+    },
+    "conduct": {
+      "count": 0,
+      "events": 0,
+      "from": 0,
+      "judge": null,
+      "level": 1,
+      "meter": 2,
+      "phase": "watch",
+      "taps": 0,
+      "to": 81
+    },
+    "errors": [],
+    "focus": {
+      "active": "BUTTON",
+      "background": [
+        {
+          "id": "app",
+          "inert": true
+        },
+        {
+          "id": "toast",
+          "inert": false
+        },
+        {
+          "id": "mini",
+          "inert": true
+        },
+        {
+          "id": "tabbar",
+          "inert": true
+        }
+      ],
+      "inside": true,
+      "modal": "true",
+      "role": "dialog",
+      "text": "?",
+      "tipOpen": true,
+      "tipOwner": null
+    },
+    "hidden": false,
+    "members": 0.6864548486191779,
+    "pending": null,
+    "playing": false,
+    "records": 0.665518045425415,
+    "scrollWidth": 375,
+    "tipParent": "conduct",
+    "tipRect": {
+      "bottom": 744.3828125,
+      "height": 126.3828125,
+      "left": 59,
+      "right": 359,
+      "top": 618,
+      "width": 300,
+      "x": 59,
+      "y": 618
+    },
+    "toastParent": "conduct",
+    "width": 375
+  },
+  "tipEscape": {
+    "audio": {
+      "banks": 41,
+      "ready": true,
+      "voices": []
+    },
+    "boot": {
+      "errors": [],
+      "failed": [],
+      "loaded": 33,
+      "scripts": 33
+    },
+    "conduct": {
+      "count": 0,
+      "events": 0,
+      "from": 0,
+      "judge": null,
+      "level": 1,
+      "meter": 2,
+      "phase": "watch",
+      "taps": 0,
+      "to": 81
+    },
+    "errors": [],
+    "focus": {
+      "active": "BUTTON",
+      "background": [
+        {
+          "id": "app",
+          "inert": true
+        },
+        {
+          "id": "toast",
+          "inert": false
+        },
+        {
+          "id": "mini",
+          "inert": true
+        },
+        {
+          "id": "tabbar",
+          "inert": true
+        }
+      ],
+      "inside": true,
+      "modal": "true",
+      "role": "dialog",
+      "text": "?",
+      "tipOpen": false,
+      "tipOwner": null
+    },
+    "hidden": false,
+    "members": 0.6864548486191779,
+    "pending": null,
+    "playing": false,
+    "records": 0.665518045425415,
+    "scrollWidth": 375,
+    "tipParent": "conduct",
+    "tipRect": {
+      "bottom": 0,
+      "height": 0,
+      "left": 0,
+      "right": 0,
+      "top": 0,
+      "width": 0,
+      "x": 0,
+      "y": 0
+    },
+    "toastParent": "conduct",
+    "width": 375
+  },
+  "watchTab": {
+    "audio": {
+      "banks": 41,
+      "ready": true,
+      "voices": []
+    },
+    "boot": {
+      "errors": [],
+      "failed": [],
+      "loaded": 33,
+      "scripts": 33
+    },
+    "conduct": {
+      "count": 0,
+      "events": 0,
+      "from": 0,
+      "judge": null,
+      "level": 1,
+      "meter": 2,
+      "phase": "watch",
+      "taps": 0,
+      "to": 81
+    },
+    "errors": [],
+    "focus": {
+      "active": "cdClose",
+      "background": [
+        {
+          "id": "app",
+          "inert": true
+        },
+        {
+          "id": "toast",
+          "inert": false
+        },
+        {
+          "id": "mini",
+          "inert": true
+        },
+        {
+          "id": "tabbar",
+          "inert": true
+        }
+      ],
+      "inside": true,
+      "modal": "true",
+      "role": "dialog",
+      "text": "とばす",
+      "tipOpen": false,
+      "tipOwner": null
+    },
+    "hidden": false,
+    "members": 0.6864548486191779,
+    "pending": null,
+    "playing": false,
+    "records": 0.665518045425415,
+    "scrollWidth": 375,
+    "tipParent": "conduct",
+    "tipRect": {
+      "bottom": 0,
+      "height": 0,
+      "left": 0,
+      "right": 0,
+      "top": 0,
+      "width": 0,
+      "x": 0,
+      "y": 0
+    },
+    "toastParent": "conduct",
+    "width": 375
+  },
+  "watchBackTab": {
+    "audio": {
+      "banks": 41,
+      "ready": true,
+      "voices": []
+    },
+    "boot": {
+      "errors": [],
+      "failed": [],
+      "loaded": 33,
+      "scripts": 33
+    },
+    "conduct": {
+      "count": 0,
+      "events": 0,
+      "from": 0,
+      "judge": null,
+      "level": 1,
+      "meter": 2,
+      "phase": "watch",
+      "taps": 0,
+      "to": 81
+    },
+    "errors": [],
+    "focus": {
+      "active": "BUTTON",
+      "background": [
+        {
+          "id": "app",
+          "inert": true
+        },
+        {
+          "id": "toast",
+          "inert": false
+        },
+        {
+          "id": "mini",
+          "inert": true
+        },
+        {
+          "id": "tabbar",
+          "inert": true
+        }
+      ],
+      "inside": true,
+      "modal": "true",
+      "role": "dialog",
+      "text": "?",
+      "tipOpen": false,
+      "tipOwner": null
+    },
+    "hidden": false,
+    "members": 0.6864548486191779,
+    "pending": null,
+    "playing": false,
+    "records": 0.665518045425415,
+    "scrollWidth": 375,
+    "tipParent": "conduct",
+    "tipRect": {
+      "bottom": 0,
+      "height": 0,
+      "left": 0,
+      "right": 0,
+      "top": 0,
+      "width": 0,
+      "x": 0,
+      "y": 0
+    },
+    "toastParent": "conduct",
+    "width": 375
+  },
+  "watchClosed": {
+    "audio": {
+      "banks": 41,
+      "ready": true,
+      "voices": []
+    },
+    "boot": {
+      "errors": [],
+      "failed": [],
+      "loaded": 33,
+      "scripts": 33
+    },
+    "conduct": {
+      "count": 0,
+      "events": 0,
+      "from": 0,
+      "judge": null,
+      "level": 1,
+      "meter": 2,
+      "phase": "idle",
+      "taps": 0,
+      "to": 81
+    },
+    "errors": [],
+    "focus": {
+      "active": "btnConduct",
+      "background": [
+        {
+          "id": "app",
+          "inert": false
+        },
+        {
+          "id": "mini",
+          "inert": false
+        },
+        {
+          "id": "tabbar",
+          "inert": false
+        },
+        {
+          "id": "toast",
+          "inert": false
+        }
+      ],
+      "inside": false,
+      "modal": "true",
+      "role": "dialog",
+      "text": "指揮する",
+      "tipOpen": false,
+      "tipOwner": null
+    },
+    "hidden": true,
+    "members": 0.6864548486191779,
+    "pending": null,
+    "playing": false,
+    "records": 0.665518045425415,
+    "scrollWidth": 0,
+    "tipParent": "conduct",
+    "tipRect": {
+      "bottom": 0,
+      "height": 0,
+      "left": 0,
+      "right": 0,
+      "top": 0,
+      "width": 0,
+      "x": 0,
+      "y": 0
+    },
+    "toastParent": "",
+    "width": 375
+  },
+  "opened": {
+    "audio": {
+      "banks": 41,
+      "ready": true,
+      "voices": []
+    },
+    "boot": {
+      "errors": [],
+      "failed": [],
+      "loaded": 33,
+      "scripts": 33
+    },
+    "conduct": {
+      "beat": "1",
+      "combo": 0,
+      "count": 0,
+      "events": 0,
+      "from": 0,
+      "judge": {
+        "e": 0,
+        "g": 0,
+        "l": 0,
+        "p": 0
+      },
+      "level": 1,
+      "meter": 4,
+      "phase": "count",
+      "taps": 0,
+      "to": 64
+    },
+    "described": false,
+    "errors": [],
+    "focus": {
+      "active": "cdPad",
+      "background": [
+        {
+          "id": "app",
+          "inert": true
+        },
+        {
+          "id": "toast",
+          "inert": false
+        },
+        {
+          "id": "mini",
+          "inert": true
+        },
+        {
+          "id": "tabbar",
+          "inert": true
+        }
+      ],
+      "inside": true,
+      "modal": "true",
+      "role": "dialog",
+      "text": "タップ大きく小さく",
+      "tipOpen": false,
+      "tipOwner": null
+    },
+    "focusedVisible": true,
+    "height": 812,
+    "hidden": false,
+    "keys": [],
+    "members": 0.6864548486191779,
+    "pending": null,
+    "playing": false,
+    "recordings": [],
+    "records": 0.7712433410342783,
+    "scrollWidth": 375,
+    "tipParent": "",
+    "tipRect": {
+      "bottom": 0,
+      "height": 0,
+      "left": 0,
+      "right": 0,
+      "top": 0,
+      "width": 0,
+      "x": 0,
+      "y": 0
+    },
+    "toastParent": "conduct",
+    "width": 375
+  },
+  "tabLoop": [
+    {
+      "active": "cdClose",
+      "background": [
+        {
+          "id": "app",
+          "inert": true
+        },
+        {
+          "id": "toast",
+          "inert": false
+        },
+        {
+          "id": "mini",
+          "inert": true
+        },
+        {
+          "id": "tabbar",
+          "inert": true
+        }
+      ],
+      "inside": true,
+      "modal": "true",
+      "role": "dialog",
+      "text": "やめる",
+      "tipOpen": false,
+      "tipOwner": null
+    },
+    {
+      "active": "cdPad",
+      "background": [
+        {
+          "id": "app",
+          "inert": true
+        },
+        {
+          "id": "toast",
+          "inert": false
+        },
+        {
+          "id": "mini",
+          "inert": true
+        },
+        {
+          "id": "tabbar",
+          "inert": true
+        }
+      ],
+      "inside": true,
+      "modal": "true",
+      "role": "dialog",
+      "text": "タップ大きく小さく",
+      "tipOpen": false,
+      "tipOwner": null
+    },
+    {
+      "active": "cdClose",
+      "background": [
+        {
+          "id": "app",
+          "inert": true
+        },
+        {
+          "id": "toast",
+          "inert": false
+        },
+        {
+          "id": "mini",
+          "inert": true
+        },
+        {
+          "id": "tabbar",
+          "inert": true
+        }
+      ],
+      "inside": true,
+      "modal": "true",
+      "role": "dialog",
+      "text": "やめる",
+      "tipOpen": false,
+      "tipOwner": null
+    },
+    {
+      "active": "cdPad",
+      "background": [
+        {
+          "id": "app",
+          "inert": true
+        },
+        {
+          "id": "toast",
+          "inert": false
+        },
+        {
+          "id": "mini",
+          "inert": true
+        },
+        {
+          "id": "tabbar",
+          "inert": true
+        }
+      ],
+      "inside": true,
+      "modal": "true",
+      "role": "dialog",
+      "text": "タップ大きく小さく",
+      "tipOpen": false,
+      "tipOwner": null
+    }
+  ],
+  "closed": {
+    "audio": {
+      "banks": 41,
+      "ready": true,
+      "voices": []
+    },
+    "boot": {
+      "errors": [],
+      "failed": [],
+      "loaded": 33,
+      "scripts": 33
+    },
+    "conduct": {
+      "beat": "2",
+      "combo": 0,
+      "count": 0,
+      "events": 0,
+      "from": 0,
+      "judge": {
+        "e": 0,
+        "g": 0,
+        "l": 0,
+        "p": 0
+      },
+      "level": 1,
+      "meter": 4,
+      "phase": "idle",
+      "taps": 0,
+      "to": 64
+    },
+    "described": false,
+    "errors": [],
+    "focus": {
+      "active": "btnConduct",
+      "background": [
+        {
+          "id": "app",
+          "inert": false
+        },
+        {
+          "id": "mini",
+          "inert": false
+        },
+        {
+          "id": "tabbar",
+          "inert": false
+        },
+        {
+          "id": "toast",
+          "inert": false
+        }
+      ],
+      "inside": false,
+      "modal": "true",
+      "role": "dialog",
+      "text": "指揮する",
+      "tipOpen": false,
+      "tipOwner": null
+    },
+    "focusedVisible": true,
+    "height": 812,
+    "hidden": true,
+    "keys": [
+      {
+        "key": "Tab",
+        "repeat": false,
+        "target": "cdPad",
+        "tipOpen": false
+      },
+      {
+        "key": "Tab",
+        "repeat": false,
+        "target": "cdClose",
+        "tipOpen": false
+      },
+      {
+        "key": "Tab",
+        "repeat": false,
+        "target": "cdPad",
+        "tipOpen": false
+      },
+      {
+        "key": "Tab",
+        "repeat": false,
+        "target": "cdClose",
+        "tipOpen": false
+      },
+      {
+        "key": "Escape",
+        "repeat": false,
+        "target": "cdPad",
+        "tipOpen": false
+      }
+    ],
+    "members": 0.6864548486191779,
+    "pending": null,
+    "playing": false,
+    "recordings": [],
+    "records": 0.7712433410342783,
+    "scrollWidth": 0,
+    "tipParent": "",
+    "tipRect": {
+      "bottom": 0,
+      "height": 0,
+      "left": 0,
+      "right": 0,
+      "top": 0,
+      "width": 0,
+      "x": 0,
+      "y": 0
+    },
+    "toastParent": "",
+    "width": 375
+  },
+  "playing": {
+    "audio": {
+      "banks": 41,
+      "ready": true,
+      "voices": [
+        "SampleVoice"
+      ]
+    },
+    "boot": {
+      "errors": [],
+      "failed": [],
+      "loaded": 33,
+      "scripts": 33
+    },
+    "conduct": {
+      "beat": "4",
+      "combo": 4,
+      "count": 4,
+      "events": 7,
+      "from": 0,
+      "judge": {
+        "e": 0,
+        "g": 0,
+        "l": 0,
+        "p": 4
+      },
+      "level": 0.975,
+      "meter": 4,
+      "period": 0.41815389290388777,
+      "phase": "play",
+      "taps": 4,
+      "to": 64
+    },
+    "described": false,
+    "errors": [],
+    "focus": {
+      "active": "cdPad",
+      "background": [
+        {
+          "id": "app",
+          "inert": true
+        },
+        {
+          "id": "toast",
+          "inert": false
+        },
+        {
+          "id": "mini",
+          "inert": true
+        },
+        {
+          "id": "tabbar",
+          "inert": true
+        }
+      ],
+      "inside": true,
+      "modal": "true",
+      "role": "dialog",
+      "text": "タップ大きく小さく",
+      "tipOpen": false,
+      "tipOwner": null
+    },
+    "focusedVisible": true,
+    "height": 812,
+    "hidden": false,
+    "keys": [
+      {
+        "key": "Tab",
+        "repeat": false,
+        "target": "cdPad",
+        "tipOpen": false
+      },
+      {
+        "key": "Tab",
+        "repeat": false,
+        "target": "cdClose",
+        "tipOpen": false
+      },
+      {
+        "key": "Tab",
+        "repeat": false,
+        "target": "cdPad",
+        "tipOpen": false
+      },
+      {
+        "key": "Tab",
+        "repeat": false,
+        "target": "cdClose",
+        "tipOpen": false
+      },
+      {
+        "key": "Escape",
+        "repeat": false,
+        "target": "cdPad",
+        "tipOpen": false
+      },
+      {
+        "key": " ",
+        "repeat": false,
+        "target": "cdPad",
+        "tipOpen": false
+      },
+      {
+        "key": " ",
+        "repeat": false,
+        "target": "cdPad",
+        "tipOpen": false
+      },
+      {
+        "key": " ",
+        "repeat": false,
+        "target": "cdPad",
+        "tipOpen": false
+      },
+      {
+        "key": " ",
+        "repeat": false,
+        "target": "cdPad",
+        "tipOpen": false
+      },
+      {
+        "key": " ",
+        "repeat": false,
+        "target": "cdPad",
+        "tipOpen": false
+      },
+      {
+        "key": " ",
+        "repeat": false,
+        "target": "cdPad",
+        "tipOpen": false
+      },
+      {
+        "key": " ",
+        "repeat": false,
+        "target": "cdPad",
+        "tipOpen": false
+      },
+      {
+        "key": " ",
+        "repeat": false,
+        "target": "cdPad",
+        "tipOpen": false
+      }
+    ],
+    "members": 0.6864548486191779,
+    "pending": null,
+    "playing": true,
+    "recordings": [],
+    "records": 0.7712433410342783,
+    "scrollWidth": 375,
+    "tipParent": "",
+    "tipRect": {
+      "bottom": 0,
+      "height": 0,
+      "left": 0,
+      "right": 0,
+      "top": 0,
+      "width": 0,
+      "x": 0,
+      "y": 0
+    },
+    "toastParent": "conduct",
+    "width": 375
+  },
+  "result": {
+    "audio": {
+      "banks": 41,
+      "ready": true,
+      "voices": []
+    },
+    "boot": {
+      "errors": [],
+      "failed": [],
+      "loaded": 33,
+      "scripts": 33
+    },
+    "conduct": {
+      "beat": "4",
+      "combo": 4,
+      "count": 4,
+      "events": 7,
+      "from": 0,
+      "judge": {
+        "e": 0,
+        "g": 0,
+        "l": 0,
+        "p": 4
+      },
+      "level": 0.975,
+      "meter": 4,
+      "period": 0.41815389290388777,
+      "phase": "done",
+      "taps": 4,
+      "to": 64
+    },
+    "described": false,
+    "errors": [],
+    "focus": {
+      "active": "H3",
+      "background": [
+        {
+          "id": "app",
+          "inert": true
+        },
+        {
+          "id": "toast",
+          "inert": false
+        },
+        {
+          "id": "mini",
+          "inert": true
+        },
+        {
+          "id": "tabbar",
+          "inert": true
+        }
+      ],
+      "inside": true,
+      "modal": "true",
+      "role": "dialog",
+      "text": "演奏おわり",
+      "tipOpen": false,
+      "tipOwner": null
+    },
+    "focusedVisible": true,
+    "height": 812,
+    "hidden": false,
+    "keys": [
+      {
+        "key": "Tab",
+        "repeat": false,
+        "target": "cdPad",
+        "tipOpen": false
+      },
+      {
+        "key": "Tab",
+        "repeat": false,
+        "target": "cdClose",
+        "tipOpen": false
+      },
+      {
+        "key": "Tab",
+        "repeat": false,
+        "target": "cdPad",
+        "tipOpen": false
+      },
+      {
+        "key": "Tab",
+        "repeat": false,
+        "target": "cdClose",
+        "tipOpen": false
+      },
+      {
+        "key": "Escape",
+        "repeat": false,
+        "target": "cdPad",
+        "tipOpen": false
+      },
+      {
+        "key": " ",
+        "repeat": false,
+        "target": "cdPad",
+        "tipOpen": false
+      },
+      {
+        "key": " ",
+        "repeat": false,
+        "target": "cdPad",
+        "tipOpen": false
+      },
+      {
+        "key": " ",
+        "repeat": false,
+        "target": "cdPad",
+        "tipOpen": false
+      },
+      {
+        "key": " ",
+        "repeat": false,
+        "target": "cdPad",
+        "tipOpen": false
+      },
+      {
+        "key": " ",
+        "repeat": false,
+        "target": "cdPad",
+        "tipOpen": false
+      },
+      {
+        "key": " ",
+        "repeat": false,
+        "target": "cdPad",
+        "tipOpen": false
+      },
+      {
+        "key": " ",
+        "repeat": false,
+        "target": "cdPad",
+        "tipOpen": false
+      },
+      {
+        "key": " ",
+        "repeat": false,
+        "target": "cdPad",
+        "tipOpen": false
+      }
+    ],
+    "members": 0.6864548486191779,
+    "pending": null,
+    "playing": false,
+    "recordings": [
+      {
+        "id": "r2028-10-0-395491",
+        "label": "あなたの指揮：《新世界より》第2楽章（6月 第3週）"
+      }
+    ],
+    "records": 0.6537782605737448,
+    "scrollWidth": 375,
+    "tipParent": "",
+    "tipRect": {
+      "bottom": 0,
+      "height": 0,
+      "left": 0,
+      "right": 0,
+      "top": 0,
+      "width": 0,
+      "x": 0,
+      "y": 0
+    },
+    "toastParent": "conduct",
+    "width": 375
+  },
+  "resultTab": {
+    "audio": {
+      "banks": 41,
+      "ready": true,
+      "voices": []
+    },
+    "boot": {
+      "errors": [],
+      "failed": [],
+      "loaded": 33,
+      "scripts": 33
+    },
+    "conduct": {
+      "beat": "4",
+      "combo": 4,
+      "count": 4,
+      "events": 7,
+      "from": 0,
+      "judge": {
+        "e": 0,
+        "g": 0,
+        "l": 0,
+        "p": 4
+      },
+      "level": 0.975,
+      "meter": 4,
+      "period": 0.41815389290388777,
+      "phase": "done",
+      "taps": 4,
+      "to": 64
+    },
+    "described": false,
+    "errors": [],
+    "focus": {
+      "active": "again",
+      "background": [
+        {
+          "id": "app",
+          "inert": true
+        },
+        {
+          "id": "toast",
+          "inert": false
+        },
+        {
+          "id": "mini",
+          "inert": true
+        },
+        {
+          "id": "tabbar",
+          "inert": true
+        }
+      ],
+      "inside": true,
+      "modal": "true",
+      "role": "dialog",
+      "text": "もう一度聴く",
+      "tipOpen": false,
+      "tipOwner": null
+    },
+    "focusedVisible": true,
+    "height": 812,
+    "hidden": false,
+    "keys": [
+      {
+        "key": "Tab",
+        "repeat": false,
+        "target": "cdPad",
+        "tipOpen": false
+      },
+      {
+        "key": "Tab",
+        "repeat": false,
+        "target": "cdClose",
+        "tipOpen": false
+      },
+      {
+        "key": "Tab",
+        "repeat": false,
+        "target": "cdPad",
+        "tipOpen": false
+      },
+      {
+        "key": "Tab",
+        "repeat": false,
+        "target": "cdClose",
+        "tipOpen": false
+      },
+      {
+        "key": "Escape",
+        "repeat": false,
+        "target": "cdPad",
+        "tipOpen": false
+      },
+      {
+        "key": " ",
+        "repeat": false,
+        "target": "cdPad",
+        "tipOpen": false
+      },
+      {
+        "key": " ",
+        "repeat": false,
+        "target": "cdPad",
+        "tipOpen": false
+      },
+      {
+        "key": " ",
+        "repeat": false,
+        "target": "cdPad",
+        "tipOpen": false
+      },
+      {
+        "key": " ",
+        "repeat": false,
+        "target": "cdPad",
+        "tipOpen": false
+      },
+      {
+        "key": " ",
+        "repeat": false,
+        "target": "cdPad",
+        "tipOpen": false
+      },
+      {
+        "key": " ",
+        "repeat": false,
+        "target": "cdPad",
+        "tipOpen": false
+      },
+      {
+        "key": " ",
+        "repeat": false,
+        "target": "cdPad",
+        "tipOpen": false
+      },
+      {
+        "key": " ",
+        "repeat": false,
+        "target": "cdPad",
+        "tipOpen": false
+      },
+      {
+        "key": "Tab",
+        "repeat": false,
+        "target": "H3",
+        "tipOpen": false
+      }
+    ],
+    "members": 0.6864548486191779,
+    "pending": null,
+    "playing": false,
+    "recordings": [
+      {
+        "id": "r2028-10-0-395491",
+        "label": "あなたの指揮：《新世界より》第2楽章（6月 第3週）"
+      }
+    ],
+    "records": 0.6537782605737448,
+    "scrollWidth": 375,
+    "tipParent": "",
+    "tipRect": {
+      "bottom": 0,
+      "height": 0,
+      "left": 0,
+      "right": 0,
+      "top": 0,
+      "width": 0,
+      "x": 0,
+      "y": 0
+    },
+    "toastParent": "conduct",
+    "width": 375
+  },
+  "export": {
+    "audio": {
+      "banks": 41,
+      "ready": true,
+      "voices": []
+    },
+    "boot": {
+      "errors": [],
+      "failed": [],
+      "loaded": 33,
+      "scripts": 33
+    },
+    "conduct": {
+      "beat": "4",
+      "combo": 4,
+      "count": 4,
+      "events": 7,
+      "from": 0,
+      "judge": {
+        "e": 0,
+        "g": 0,
+        "l": 0,
+        "p": 4
+      },
+      "level": 0.975,
+      "meter": 4,
+      "period": 0.41815389290388777,
+      "phase": "done",
+      "taps": 4,
+      "to": 64
+    },
+    "described": false,
+    "errors": [],
+    "focus": {
+      "active": "BUTTON",
+      "background": [
+        {
+          "id": "app",
+          "inert": true
+        },
+        {
+          "id": "toast",
+          "inert": false
+        },
+        {
+          "id": "mini",
+          "inert": true
+        },
+        {
+          "id": "tabbar",
+          "inert": true
+        }
+      ],
+      "inside": true,
+      "modal": "true",
+      "role": "dialog",
+      "text": "保存する",
+      "tipOpen": false,
+      "tipOwner": null
+    },
+    "focusedVisible": true,
+    "height": 812,
+    "hidden": false,
+    "keys": [
+      {
+        "key": "Tab",
+        "repeat": false,
+        "target": "cdPad",
+        "tipOpen": false
+      },
+      {
+        "key": "Tab",
+        "repeat": false,
+        "target": "cdClose",
+        "tipOpen": false
+      },
+      {
+        "key": "Tab",
+        "repeat": false,
+        "target": "cdPad",
+        "tipOpen": false
+      },
+      {
+        "key": "Tab",
+        "repeat": false,
+        "target": "cdClose",
+        "tipOpen": false
+      },
+      {
+        "key": "Escape",
+        "repeat": false,
+        "target": "cdPad",
+        "tipOpen": false
+      },
+      {
+        "key": " ",
+        "repeat": false,
+        "target": "cdPad",
+        "tipOpen": false
+      },
+      {
+        "key": " ",
+        "repeat": false,
+        "target": "cdPad",
+        "tipOpen": false
+      },
+      {
+        "key": " ",
+        "repeat": false,
+        "target": "cdPad",
+        "tipOpen": false
+      },
+      {
+        "key": " ",
+        "repeat": false,
+        "target": "cdPad",
+        "tipOpen": false
+      },
+      {
+        "key": " ",
+        "repeat": false,
+        "target": "cdPad",
+        "tipOpen": false
+      },
+      {
+        "key": " ",
+        "repeat": false,
+        "target": "cdPad",
+        "tipOpen": false
+      },
+      {
+        "key": " ",
+        "repeat": false,
+        "target": "cdPad",
+        "tipOpen": false
+      },
+      {
+        "key": " ",
+        "repeat": false,
+        "target": "cdPad",
+        "tipOpen": false
+      },
+      {
+        "key": "Tab",
+        "repeat": false,
+        "target": "H3",
+        "tipOpen": false
+      },
+      {
+        "key": "Tab",
+        "repeat": false,
+        "target": "BUTTON",
+        "tipOpen": false
+      }
+    ],
+    "members": 0.6864548486191779,
+    "pending": null,
+    "playing": false,
+    "recordings": [
+      {
+        "id": "r2028-10-0-395491",
+        "label": "あなたの指揮：《新世界より》第2楽章（6月 第3週）"
+      }
+    ],
+    "records": 0.6537782605737448,
+    "scrollWidth": 375,
+    "tipParent": "",
+    "tipRect": {
+      "bottom": 0,
+      "height": 0,
+      "left": 0,
+      "right": 0,
+      "top": 0,
+      "width": 0,
+      "x": 0,
+      "y": 0
+    },
+    "toastParent": "conduct",
+    "width": 375
+  },
+  "afterExportClose": {
+    "audio": {
+      "banks": 41,
+      "ready": true,
+      "voices": []
+    },
+    "boot": {
+      "errors": [],
+      "failed": [],
+      "loaded": 33,
+      "scripts": 33
+    },
+    "conduct": {
+      "beat": "4",
+      "combo": 4,
+      "count": 4,
+      "events": 7,
+      "from": 0,
+      "judge": {
+        "e": 0,
+        "g": 0,
+        "l": 0,
+        "p": 4
+      },
+      "level": 0.975,
+      "meter": 4,
+      "period": 0.41815389290388777,
+      "phase": "idle",
+      "taps": 4,
+      "to": 64
+    },
+    "described": false,
+    "errors": [],
+    "focus": {
+      "active": "btnConduct",
+      "background": [
+        {
+          "id": "app",
+          "inert": false
+        },
+        {
+          "id": "mini",
+          "inert": false
+        },
+        {
+          "id": "tabbar",
+          "inert": false
+        },
+        {
+          "id": "toast",
+          "inert": false
+        }
+      ],
+      "inside": false,
+      "modal": "true",
+      "role": "dialog",
+      "text": "指揮する",
+      "tipOpen": false,
+      "tipOwner": null
+    },
+    "focusedVisible": true,
+    "height": 812,
+    "hidden": true,
+    "keys": [
+      {
+        "key": "Tab",
+        "repeat": false,
+        "target": "cdPad",
+        "tipOpen": false
+      },
+      {
+        "key": "Tab",
+        "repeat": false,
+        "target": "cdClose",
+        "tipOpen": false
+      },
+      {
+        "key": "Tab",
+        "repeat": false,
+        "target": "cdPad",
+        "tipOpen": false
+      },
+      {
+        "key": "Tab",
+        "repeat": false,
+        "target": "cdClose",
+        "tipOpen": false
+      },
+      {
+        "key": "Escape",
+        "repeat": false,
+        "target": "cdPad",
+        "tipOpen": false
+      },
+      {
+        "key": " ",
+        "repeat": false,
+        "target": "cdPad",
+        "tipOpen": false
+      },
+      {
+        "key": " ",
+        "repeat": false,
+        "target": "cdPad",
+        "tipOpen": false
+      },
+      {
+        "key": " ",
+        "repeat": false,
+        "target": "cdPad",
+        "tipOpen": false
+      },
+      {
+        "key": " ",
+        "repeat": false,
+        "target": "cdPad",
+        "tipOpen": false
+      },
+      {
+        "key": " ",
+        "repeat": false,
+        "target": "cdPad",
+        "tipOpen": false
+      },
+      {
+        "key": " ",
+        "repeat": false,
+        "target": "cdPad",
+        "tipOpen": false
+      },
+      {
+        "key": " ",
+        "repeat": false,
+        "target": "cdPad",
+        "tipOpen": false
+      },
+      {
+        "key": " ",
+        "repeat": false,
+        "target": "cdPad",
+        "tipOpen": false
+      },
+      {
+        "key": "Tab",
+        "repeat": false,
+        "target": "H3",
+        "tipOpen": false
+      },
+      {
+        "key": "Tab",
+        "repeat": false,
+        "target": "BUTTON",
+        "tipOpen": false
+      },
+      {
+        "key": "Escape",
+        "repeat": false,
+        "target": "BUTTON",
+        "tipOpen": false
+      }
+    ],
+    "members": 0.6864548486191779,
+    "pending": null,
+    "playing": false,
+    "recordings": [
+      {
+        "id": "r2028-10-0-395491",
+        "label": "あなたの指揮：《新世界より》第2楽章（6月 第3週）"
+      }
+    ],
+    "records": 0.6537782605737448,
+    "scrollWidth": 0,
+    "tipParent": "",
+    "tipRect": {
+      "bottom": 0,
+      "height": 0,
+      "left": 0,
+      "right": 0,
+      "top": 0,
+      "width": 0,
+      "x": 0,
+      "y": 0
+    },
+    "toastParent": "",
+    "width": 375
+  },
+  "stageWatch": {
+    "audio": {
+      "banks": 41,
+      "ready": true,
+      "voices": [
+        "SampleVoice"
+      ]
+    },
+    "boot": {
+      "errors": [],
+      "failed": [],
+      "loaded": 33,
+      "scripts": 33
+    },
+    "conduct": {
+      "count": 0,
+      "events": 0,
+      "from": 0,
+      "judge": null,
+      "level": 1,
+      "meter": 2,
+      "phase": "watch",
+      "taps": 0,
+      "to": 68
+    },
+    "described": false,
+    "errors": [],
+    "focus": {
+      "active": "cdClose",
+      "background": [
+        {
+          "id": "app",
+          "inert": true
+        },
+        {
+          "id": "toast",
+          "inert": false
+        },
+        {
+          "id": "mini",
+          "inert": true
+        },
+        {
+          "id": "tabbar",
+          "inert": true
+        }
+      ],
+      "inside": true,
+      "modal": "true",
+      "role": "dialog",
+      "text": "とばす",
+      "tipOpen": false,
+      "tipOwner": null
+    },
+    "focusedVisible": true,
+    "height": 812,
+    "hidden": false,
+    "keys": [],
+    "members": 0.8418836034834385,
+    "pending": {
+      "kind": "contest",
+      "revealed": false
+    },
+    "playing": true,
+    "recordings": [
+      {
+        "id": "r2026-0-0-583709",
+        "label": "2026年4月の録音"
+      },
+      {
+        "id": "r2028-16-1-725076",
+        "label": "2028 吹奏楽コンクール 県大会（課題曲）"
+      },
+      {
+        "id": "r2028-16-2-358326",
+        "label": "2028 吹奏楽コンクール 県大会（自由曲）"
+      }
+    ],
+    "records": 0.18737407843582332,
+    "scrollWidth": 375,
+    "tipParent": "",
+    "tipRect": {
+      "bottom": 0,
+      "height": 0,
+      "left": 0,
+      "right": 0,
+      "top": 0,
+      "width": 0,
+      "x": 0,
+      "y": 0
+    },
+    "toastParent": "conduct",
+    "width": 375
+  },
+  "stageTip": {
+    "audio": {
+      "banks": 41,
+      "ready": true,
+      "voices": [
+        "SampleVoice"
+      ]
+    },
+    "boot": {
+      "errors": [],
+      "failed": [],
+      "loaded": 33,
+      "scripts": 33
+    },
+    "conduct": {
+      "count": 0,
+      "events": 0,
+      "from": 0,
+      "judge": null,
+      "level": 1,
+      "meter": 2,
+      "phase": "watch",
+      "taps": 0,
+      "to": 68
+    },
+    "described": true,
+    "errors": [],
+    "focus": {
+      "active": "BUTTON",
+      "background": [
+        {
+          "id": "app",
+          "inert": true
+        },
+        {
+          "id": "toast",
+          "inert": false
+        },
+        {
+          "id": "mini",
+          "inert": true
+        },
+        {
+          "id": "tabbar",
+          "inert": true
+        }
+      ],
+      "inside": true,
+      "modal": "true",
+      "role": "dialog",
+      "text": "?",
+      "tipOpen": true,
+      "tipOwner": null
+    },
+    "focusedVisible": true,
+    "height": 812,
+    "hidden": false,
+    "keys": [],
+    "members": 0.8418836034834385,
+    "pending": {
+      "kind": "contest",
+      "revealed": false
+    },
+    "playing": true,
+    "recordings": [
+      {
+        "id": "r2026-0-0-583709",
+        "label": "2026年4月の録音"
+      },
+      {
+        "id": "r2028-16-1-725076",
+        "label": "2028 吹奏楽コンクール 県大会（課題曲）"
+      },
+      {
+        "id": "r2028-16-2-358326",
+        "label": "2028 吹奏楽コンクール 県大会（自由曲）"
+      }
+    ],
+    "records": 0.18737407843582332,
+    "scrollWidth": 375,
+    "tipParent": "conduct",
+    "tipRect": {
+      "bottom": 744.3828125,
+      "height": 126.3828125,
+      "left": 59,
+      "right": 359,
+      "top": 618,
+      "width": 300,
+      "x": 59,
+      "y": 618
+    },
+    "toastParent": "conduct",
+    "width": 375
+  },
+  "stageTipEscape": {
+    "audio": {
+      "banks": 41,
+      "ready": true,
+      "voices": [
+        "SampleVoice"
+      ]
+    },
+    "boot": {
+      "errors": [],
+      "failed": [],
+      "loaded": 33,
+      "scripts": 33
+    },
+    "conduct": {
+      "count": 0,
+      "events": 0,
+      "from": 0,
+      "judge": null,
+      "level": 1,
+      "meter": 2,
+      "phase": "watch",
+      "taps": 0,
+      "to": 68
+    },
+    "described": false,
+    "errors": [],
+    "focus": {
+      "active": "BUTTON",
+      "background": [
+        {
+          "id": "app",
+          "inert": true
+        },
+        {
+          "id": "toast",
+          "inert": false
+        },
+        {
+          "id": "mini",
+          "inert": true
+        },
+        {
+          "id": "tabbar",
+          "inert": true
+        }
+      ],
+      "inside": true,
+      "modal": "true",
+      "role": "dialog",
+      "text": "?",
+      "tipOpen": false,
+      "tipOwner": null
+    },
+    "focusedVisible": true,
+    "height": 812,
+    "hidden": false,
+    "keys": [
+      {
+        "key": "Escape",
+        "repeat": false,
+        "target": "BUTTON",
+        "tipOpen": true
+      }
+    ],
+    "members": 0.8418836034834385,
+    "pending": {
+      "kind": "contest",
+      "revealed": false
+    },
+    "playing": true,
+    "recordings": [
+      {
+        "id": "r2026-0-0-583709",
+        "label": "2026年4月の録音"
+      },
+      {
+        "id": "r2028-16-1-725076",
+        "label": "2028 吹奏楽コンクール 県大会（課題曲）"
+      },
+      {
+        "id": "r2028-16-2-358326",
+        "label": "2028 吹奏楽コンクール 県大会（自由曲）"
+      }
+    ],
+    "records": 0.18737407843582332,
+    "scrollWidth": 375,
+    "tipParent": "conduct",
+    "tipRect": {
+      "bottom": 0,
+      "height": 0,
+      "left": 0,
+      "right": 0,
+      "top": 0,
+      "width": 0,
+      "x": 0,
+      "y": 0
+    },
+    "toastParent": "conduct",
+    "width": 375
+  },
+  "stageConduct": {
+    "audio": {
+      "banks": 41,
+      "ready": true,
+      "voices": []
+    },
+    "boot": {
+      "errors": [],
+      "failed": [],
+      "loaded": 33,
+      "scripts": 33
+    },
+    "conduct": {
+      "beat": "1",
+      "combo": 0,
+      "count": 0,
+      "events": 0,
+      "from": 0,
+      "judge": {
+        "e": 0,
+        "g": 0,
+        "l": 0,
+        "p": 0
+      },
+      "level": 1,
+      "meter": 2,
+      "phase": "count",
+      "taps": 0,
+      "to": 81
+    },
+    "described": false,
+    "errors": [],
+    "focus": {
+      "active": "cdPad",
+      "background": [
+        {
+          "id": "app",
+          "inert": true
+        },
+        {
+          "id": "toast",
+          "inert": false
+        },
+        {
+          "id": "mini",
+          "inert": true
+        },
+        {
+          "id": "tabbar",
+          "inert": true
+        }
+      ],
+      "inside": true,
+      "modal": "true",
+      "role": "dialog",
+      "text": "タップ大きく小さく",
+      "tipOpen": false,
+      "tipOwner": null
+    },
+    "focusedVisible": true,
+    "height": 812,
+    "hidden": false,
+    "keys": [
+      {
+        "key": "Escape",
+        "repeat": false,
+        "target": "BUTTON",
+        "tipOpen": true
+      }
+    ],
+    "members": 0.8418836034834385,
+    "pending": {
+      "kind": "contest",
+      "revealed": false
+    },
+    "playing": false,
+    "recordings": [
+      {
+        "id": "r2026-0-0-583709",
+        "label": "2026年4月の録音"
+      },
+      {
+        "id": "r2028-16-1-725076",
+        "label": "2028 吹奏楽コンクール 県大会（課題曲）"
+      },
+      {
+        "id": "r2028-16-2-358326",
+        "label": "2028 吹奏楽コンクール 県大会（自由曲）"
+      }
+    ],
+    "records": 0.18737407843582332,
+    "scrollWidth": 375,
+    "tipParent": "conduct",
+    "tipRect": {
+      "bottom": 0,
+      "height": 0,
+      "left": 0,
+      "right": 0,
+      "top": 0,
+      "width": 0,
+      "x": 0,
+      "y": 0
+    },
+    "toastParent": "conduct",
+    "width": 375
+  },
+  "stageTab": {
+    "audio": {
+      "banks": 41,
+      "ready": true,
+      "voices": []
+    },
+    "boot": {
+      "errors": [],
+      "failed": [],
+      "loaded": 33,
+      "scripts": 33
+    },
+    "conduct": {
+      "beat": "2",
+      "combo": 0,
+      "count": 0,
+      "events": 0,
+      "from": 0,
+      "judge": {
+        "e": 0,
+        "g": 0,
+        "l": 0,
+        "p": 0
+      },
+      "level": 1,
+      "meter": 2,
+      "phase": "count",
+      "taps": 0,
+      "to": 81
+    },
+    "described": false,
+    "errors": [],
+    "focus": {
+      "active": "cdClose",
+      "background": [
+        {
+          "id": "app",
+          "inert": true
+        },
+        {
+          "id": "toast",
+          "inert": false
+        },
+        {
+          "id": "mini",
+          "inert": true
+        },
+        {
+          "id": "tabbar",
+          "inert": true
+        }
+      ],
+      "inside": true,
+      "modal": "true",
+      "role": "dialog",
+      "text": "やめる",
+      "tipOpen": false,
+      "tipOwner": null
+    },
+    "focusedVisible": true,
+    "height": 812,
+    "hidden": false,
+    "keys": [
+      {
+        "key": "Escape",
+        "repeat": false,
+        "target": "BUTTON",
+        "tipOpen": true
+      },
+      {
+        "key": "Tab",
+        "repeat": false,
+        "target": "cdPad",
+        "tipOpen": false
+      }
+    ],
+    "members": 0.8418836034834385,
+    "pending": {
+      "kind": "contest",
+      "revealed": false
+    },
+    "playing": false,
+    "recordings": [
+      {
+        "id": "r2026-0-0-583709",
+        "label": "2026年4月の録音"
+      },
+      {
+        "id": "r2028-16-1-725076",
+        "label": "2028 吹奏楽コンクール 県大会（課題曲）"
+      },
+      {
+        "id": "r2028-16-2-358326",
+        "label": "2028 吹奏楽コンクール 県大会（自由曲）"
+      }
+    ],
+    "records": 0.18737407843582332,
+    "scrollWidth": 375,
+    "tipParent": "conduct",
+    "tipRect": {
+      "bottom": 0,
+      "height": 0,
+      "left": 0,
+      "right": 0,
+      "top": 0,
+      "width": 0,
+      "x": 0,
+      "y": 0
+    },
+    "toastParent": "conduct",
+    "width": 375
+  },
+  "stageClosed": {
+    "audio": {
+      "banks": 41,
+      "ready": true,
+      "voices": []
+    },
+    "boot": {
+      "errors": [],
+      "failed": [],
+      "loaded": 33,
+      "scripts": 33
+    },
+    "conduct": {
+      "beat": "2",
+      "combo": 0,
+      "count": 0,
+      "events": 0,
+      "from": 0,
+      "judge": {
+        "e": 0,
+        "g": 0,
+        "l": 0,
+        "p": 0
+      },
+      "level": 1,
+      "meter": 2,
+      "phase": "idle",
+      "taps": 0,
+      "to": 81
+    },
+    "described": false,
+    "errors": [],
+    "focus": {
+      "active": "reveal",
+      "background": [
+        {
+          "id": "app",
+          "inert": false
+        },
+        {
+          "id": "mini",
+          "inert": false
+        },
+        {
+          "id": "tabbar",
+          "inert": false
+        },
+        {
+          "id": "toast",
+          "inert": false
+        }
+      ],
+      "inside": false,
+      "modal": "true",
+      "role": "dialog",
+      "text": "結果を見る",
+      "tipOpen": false,
+      "tipOwner": null
+    },
+    "focusedVisible": true,
+    "height": 812,
+    "hidden": true,
+    "keys": [
+      {
+        "key": "Escape",
+        "repeat": false,
+        "target": "BUTTON",
+        "tipOpen": true
+      },
+      {
+        "key": "Tab",
+        "repeat": false,
+        "target": "cdPad",
+        "tipOpen": false
+      },
+      {
+        "key": "Escape",
+        "repeat": false,
+        "target": "cdClose",
+        "tipOpen": false
+      }
+    ],
+    "members": 0.8418836034834385,
+    "pending": {
+      "kind": "contest",
+      "revealed": false
+    },
+    "playing": false,
+    "recordings": [
+      {
+        "id": "r2026-0-0-583709",
+        "label": "2026年4月の録音"
+      },
+      {
+        "id": "r2028-16-1-725076",
+        "label": "2028 吹奏楽コンクール 県大会（課題曲）"
+      },
+      {
+        "id": "r2028-16-2-358326",
+        "label": "2028 吹奏楽コンクール 県大会（自由曲）"
+      }
+    ],
+    "records": 0.18737407843582332,
+    "scrollWidth": 0,
+    "tipParent": "conduct",
+    "tipRect": {
+      "bottom": 0,
+      "height": 0,
+      "left": 0,
+      "right": 0,
+      "top": 0,
+      "width": 0,
+      "x": 0,
+      "y": 0
+    },
+    "toastParent": "",
+    "width": 375
+  },
+  "waiting": {
+    "audio": {
+      "banks": 41,
+      "ready": false,
+      "voices": []
+    },
+    "boot": {
+      "errors": [],
+      "failed": [],
+      "loaded": 33,
+      "scripts": 33
+    },
+    "conduct": {
+      "combo": 0,
+      "count": 0,
+      "events": 0,
+      "from": 0,
+      "judge": {
+        "e": 0,
+        "g": 0,
+        "l": 0,
+        "p": 0
+      },
+      "level": 1,
+      "meter": 2,
+      "phase": "wait",
+      "taps": 0,
+      "to": 81
+    },
+    "described": false,
+    "errors": [],
+    "focus": {
+      "active": "cdPad",
+      "background": [
+        {
+          "id": "app",
+          "inert": true
+        },
+        {
+          "id": "toast",
+          "inert": false
+        },
+        {
+          "id": "mini",
+          "inert": true
+        },
+        {
+          "id": "tabbar",
+          "inert": true
+        }
+      ],
+      "inside": true,
+      "modal": "true",
+      "role": "dialog",
+      "text": "タップ大きく小さく",
+      "tipOpen": false,
+      "tipOwner": null
+    },
+    "focusedVisible": true,
+    "height": 812,
+    "hidden": false,
+    "keys": [],
+    "members": 0.6864548486191779,
+    "pending": null,
+    "playing": false,
+    "recordings": [],
+    "records": 0.7712433410342783,
+    "scrollWidth": 375,
+    "tipParent": "",
+    "tipRect": {
+      "bottom": 0,
+      "height": 0,
+      "left": 0,
+      "right": 0,
+      "top": 0,
+      "width": 0,
+      "x": 0,
+      "y": 0
+    },
+    "toastParent": "conduct",
+    "width": 375
+  },
+  "waitTab": {
+    "audio": {
+      "banks": 41,
+      "ready": false,
+      "voices": []
+    },
+    "boot": {
+      "errors": [],
+      "failed": [],
+      "loaded": 33,
+      "scripts": 33
+    },
+    "conduct": {
+      "combo": 0,
+      "count": 0,
+      "events": 0,
+      "from": 0,
+      "judge": {
+        "e": 0,
+        "g": 0,
+        "l": 0,
+        "p": 0
+      },
+      "level": 1,
+      "meter": 2,
+      "phase": "wait",
+      "taps": 0,
+      "to": 81
+    },
+    "described": false,
+    "errors": [],
+    "focus": {
+      "active": "cdClose",
+      "background": [
+        {
+          "id": "app",
+          "inert": true
+        },
+        {
+          "id": "toast",
+          "inert": false
+        },
+        {
+          "id": "mini",
+          "inert": true
+        },
+        {
+          "id": "tabbar",
+          "inert": true
+        }
+      ],
+      "inside": true,
+      "modal": "true",
+      "role": "dialog",
+      "text": "やめる",
+      "tipOpen": false,
+      "tipOwner": null
+    },
+    "focusedVisible": true,
+    "height": 812,
+    "hidden": false,
+    "keys": [
+      {
+        "key": "Tab",
+        "repeat": false,
+        "target": "cdPad",
+        "tipOpen": false
+      }
+    ],
+    "members": 0.6864548486191779,
+    "pending": null,
+    "playing": false,
+    "recordings": [],
+    "records": 0.7712433410342783,
+    "scrollWidth": 375,
+    "tipParent": "",
+    "tipRect": {
+      "bottom": 0,
+      "height": 0,
+      "left": 0,
+      "right": 0,
+      "top": 0,
+      "width": 0,
+      "x": 0,
+      "y": 0
+    },
+    "toastParent": "conduct",
+    "width": 375
+  },
+  "waitClosed": {
+    "audio": {
+      "banks": 41,
+      "ready": false,
+      "voices": []
+    },
+    "boot": {
+      "errors": [],
+      "failed": [],
+      "loaded": 33,
+      "scripts": 33
+    },
+    "conduct": {
+      "combo": 0,
+      "count": 0,
+      "events": 0,
+      "from": 0,
+      "judge": {
+        "e": 0,
+        "g": 0,
+        "l": 0,
+        "p": 0
+      },
+      "level": 1,
+      "meter": 2,
+      "phase": "idle",
+      "taps": 0,
+      "to": 81
+    },
+    "described": false,
+    "errors": [],
+    "focus": {
+      "active": "btnConduct",
+      "background": [
+        {
+          "id": "app",
+          "inert": false
+        },
+        {
+          "id": "mini",
+          "inert": false
+        },
+        {
+          "id": "tabbar",
+          "inert": false
+        },
+        {
+          "id": "toast",
+          "inert": false
+        }
+      ],
+      "inside": false,
+      "modal": "true",
+      "role": "dialog",
+      "text": "指揮する",
+      "tipOpen": false,
+      "tipOwner": null
+    },
+    "focusedVisible": true,
+    "height": 812,
+    "hidden": true,
+    "keys": [
+      {
+        "key": "Tab",
+        "repeat": false,
+        "target": "cdPad",
+        "tipOpen": false
+      },
+      {
+        "key": "Escape",
+        "repeat": false,
+        "target": "cdClose",
+        "tipOpen": false
+      }
+    ],
+    "members": 0.6864548486191779,
+    "pending": null,
+    "playing": false,
+    "recordings": [],
+    "records": 0.7712433410342783,
+    "scrollWidth": 0,
+    "tipParent": "",
+    "tipRect": {
+      "bottom": 0,
+      "height": 0,
+      "left": 0,
+      "right": 0,
+      "top": 0,
+      "width": 0,
+      "x": 0,
+      "y": 0
+    },
+    "toastParent": "",
+    "width": 375
+  },
+  "loadReleased": {
+    "audio": {
+      "banks": 41,
+      "ready": true,
+      "voices": []
+    },
+    "boot": {
+      "errors": [],
+      "failed": [],
+      "loaded": 33,
+      "scripts": 33
+    },
+    "conduct": {
+      "combo": 0,
+      "count": 0,
+      "events": 0,
+      "from": 0,
+      "judge": {
+        "e": 0,
+        "g": 0,
+        "l": 0,
+        "p": 0
+      },
+      "level": 1,
+      "meter": 2,
+      "phase": "idle",
+      "taps": 0,
+      "to": 81
+    },
+    "described": false,
+    "errors": [],
+    "focus": {
+      "active": "btnConduct",
+      "background": [
+        {
+          "id": "app",
+          "inert": false
+        },
+        {
+          "id": "mini",
+          "inert": false
+        },
+        {
+          "id": "tabbar",
+          "inert": false
+        },
+        {
+          "id": "toast",
+          "inert": false
+        }
+      ],
+      "inside": false,
+      "modal": "true",
+      "role": "dialog",
+      "text": "指揮する",
+      "tipOpen": false,
+      "tipOwner": null
+    },
+    "focusedVisible": true,
+    "height": 812,
+    "hidden": true,
+    "keys": [
+      {
+        "key": "Tab",
+        "repeat": false,
+        "target": "cdPad",
+        "tipOpen": false
+      },
+      {
+        "key": "Escape",
+        "repeat": false,
+        "target": "cdClose",
+        "tipOpen": false
+      }
+    ],
+    "members": 0.6864548486191779,
+    "pending": null,
+    "playing": false,
+    "recordings": [],
+    "records": 0.7712433410342783,
+    "scrollWidth": 0,
+    "tipParent": "",
+    "tipRect": {
+      "bottom": 0,
+      "height": 0,
+      "left": 0,
+      "right": 0,
+      "top": 0,
+      "width": 0,
+      "x": 0,
+      "y": 0
+    },
+    "toastParent": "",
+    "width": 375
+  },
+  "afterLoadOpen": {
+    "audio": {
+      "banks": 41,
+      "ready": true,
+      "voices": []
+    },
+    "boot": {
+      "errors": [],
+      "failed": [],
+      "loaded": 33,
+      "scripts": 33
+    },
+    "conduct": {
+      "beat": "1",
+      "combo": 0,
+      "count": 0,
+      "events": 0,
+      "from": 0,
+      "judge": {
+        "e": 0,
+        "g": 0,
+        "l": 0,
+        "p": 0
+      },
+      "level": 1,
+      "meter": 2,
+      "phase": "count",
+      "taps": 0,
+      "to": 81
+    },
+    "described": false,
+    "errors": [],
+    "focus": {
+      "active": "cdPad",
+      "background": [
+        {
+          "id": "app",
+          "inert": true
+        },
+        {
+          "id": "toast",
+          "inert": false
+        },
+        {
+          "id": "mini",
+          "inert": true
+        },
+        {
+          "id": "tabbar",
+          "inert": true
+        }
+      ],
+      "inside": true,
+      "modal": "true",
+      "role": "dialog",
+      "text": "タップ大きく小さく",
+      "tipOpen": false,
+      "tipOwner": null
+    },
+    "focusedVisible": true,
+    "height": 812,
+    "hidden": false,
+    "keys": [
+      {
+        "key": "Tab",
+        "repeat": false,
+        "target": "cdPad",
+        "tipOpen": false
+      },
+      {
+        "key": "Escape",
+        "repeat": false,
+        "target": "cdClose",
+        "tipOpen": false
+      }
+    ],
+    "members": 0.6864548486191779,
+    "pending": null,
+    "playing": false,
+    "recordings": [],
+    "records": 0.7712433410342783,
+    "scrollWidth": 375,
+    "tipParent": "",
+    "tipRect": {
+      "bottom": 0,
+      "height": 0,
+      "left": 0,
+      "right": 0,
+      "top": 0,
+      "width": 0,
+      "x": 0,
+      "y": 0
+    },
+    "toastParent": "conduct",
+    "width": 375
+  },
+  "normalTip": {
+    "audio": {
+      "banks": 41,
+      "ready": true,
+      "voices": []
+    },
+    "boot": {
+      "errors": [],
+      "failed": [],
+      "loaded": 33,
+      "scripts": 33
+    },
+    "conduct": {
+      "beat": "1",
+      "combo": 0,
+      "count": 0,
+      "events": 0,
+      "from": 0,
+      "judge": {
+        "e": 0,
+        "g": 0,
+        "l": 0,
+        "p": 0
+      },
+      "level": 1,
+      "meter": 2,
+      "phase": "idle",
+      "taps": 0,
+      "to": 81
+    },
+    "described": false,
+    "errors": [],
+    "focus": {
+      "active": "BUTTON",
+      "background": [
+        {
+          "id": "app",
+          "inert": false
+        },
+        {
+          "id": "mini",
+          "inert": false
+        },
+        {
+          "id": "tabbar",
+          "inert": false
+        },
+        {
+          "id": "toast",
+          "inert": false
+        }
+      ],
+      "inside": false,
+      "modal": "true",
+      "role": "dialog",
+      "text": "難しさ",
+      "tipOpen": true,
+      "tipOwner": null
+    },
+    "focusedVisible": true,
+    "height": 812,
+    "hidden": true,
+    "keys": [
+      {
+        "key": "Tab",
+        "repeat": false,
+        "target": "cdPad",
+        "tipOpen": false
+      },
+      {
+        "key": "Escape",
+        "repeat": false,
+        "target": "cdClose",
+        "tipOpen": false
+      },
+      {
+        "key": "Escape",
+        "repeat": false,
+        "target": "cdPad",
+        "tipOpen": false
+      }
+    ],
+    "members": 0.6864548486191779,
+    "pending": null,
+    "playing": false,
+    "recordings": [],
+    "records": 0.7712433410342783,
+    "scrollWidth": 0,
+    "tipParent": "",
+    "tipRect": {
+      "bottom": 230.1796875,
+      "height": 147.1796875,
+      "left": 59,
+      "right": 359,
+      "top": 83,
+      "width": 300,
+      "x": 59,
+      "y": 83
+    },
+    "toastParent": "",
+    "width": 375
+  },
+  "normalTipClose": {
+    "audio": {
+      "banks": 41,
+      "ready": true,
+      "voices": []
+    },
+    "boot": {
+      "errors": [],
+      "failed": [],
+      "loaded": 33,
+      "scripts": 33
+    },
+    "conduct": {
+      "beat": "1",
+      "combo": 0,
+      "count": 0,
+      "events": 0,
+      "from": 0,
+      "judge": {
+        "e": 0,
+        "g": 0,
+        "l": 0,
+        "p": 0
+      },
+      "level": 1,
+      "meter": 2,
+      "phase": "idle",
+      "taps": 0,
+      "to": 81
+    },
+    "described": false,
+    "errors": [],
+    "focus": {
+      "active": "BUTTON",
+      "background": [
+        {
+          "id": "app",
+          "inert": false
+        },
+        {
+          "id": "mini",
+          "inert": false
+        },
+        {
+          "id": "tabbar",
+          "inert": false
+        },
+        {
+          "id": "toast",
+          "inert": false
+        }
+      ],
+      "inside": false,
+      "modal": "true",
+      "role": "dialog",
+      "text": "難しさ",
+      "tipOpen": false,
+      "tipOwner": null
+    },
+    "focusedVisible": true,
+    "height": 812,
+    "hidden": true,
+    "keys": [
+      {
+        "key": "Tab",
+        "repeat": false,
+        "target": "cdPad",
+        "tipOpen": false
+      },
+      {
+        "key": "Escape",
+        "repeat": false,
+        "target": "cdClose",
+        "tipOpen": false
+      },
+      {
+        "key": "Escape",
+        "repeat": false,
+        "target": "cdPad",
+        "tipOpen": false
+      },
+      {
+        "key": "Escape",
+        "repeat": false,
+        "target": "BUTTON",
+        "tipOpen": true
+      }
+    ],
+    "members": 0.6864548486191779,
+    "pending": null,
+    "playing": false,
+    "recordings": [],
+    "records": 0.7712433410342783,
+    "scrollWidth": 0,
+    "tipParent": "",
+    "tipRect": {
+      "bottom": 0,
+      "height": 0,
+      "left": 0,
+      "right": 0,
+      "top": 0,
+      "width": 0,
+      "x": 0,
+      "y": 0
+    },
+    "toastParent": "",
+    "width": 375
+  },
+  "year": {
+    "boot": {
+      "loaded": 33,
+      "scripts": 33
+    },
+    "errors": [],
+    "focus": {
+      "active": "BODY",
+      "background": [
+        {
+          "id": "app",
+          "inert": false
+        },
+        {
+          "id": "mini",
+          "inert": false
+        },
+        {
+          "id": "tabbar",
+          "inert": false
+        },
+        {
+          "id": "toast",
+          "inert": false
+        }
+      ],
+      "inside": false,
+      "modal": "true",
+      "role": "dialog",
+      "text": "吹奏楽部のつくりかた\n    \n      県立みなと高校 吹奏楽部　2027年度\n      あなたは吹奏楽部の顧問。",
+      "tipOpen": false,
+      "tipOwner": null
+    },
+    "scrollWidth": 375,
+    "steps": 49,
+    "width": 375,
+    "year": 2027
+  },
+  "console": []
+}

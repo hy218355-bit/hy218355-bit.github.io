@@ -1,0 +1,118 @@
+{
+  "tab": {
+    "active": "BUTTON",
+    "background": [
+      {
+        "id": "app",
+        "inert": false
+      },
+      {
+        "id": "toast",
+        "inert": false
+      },
+      {
+        "id": "mini",
+        "inert": false
+      },
+      {
+        "id": "tabbar",
+        "inert": false
+      }
+    ],
+    "inside": false,
+    "modal": null,
+    "role": null,
+    "text": "今週",
+    "tipOpen": false,
+    "tipOwner": null
+  },
+  "closed": {
+    "active": "cdClose",
+    "background": [
+      {
+        "id": "app",
+        "inert": false
+      },
+      {
+        "id": "toast",
+        "inert": false
+      },
+      {
+        "id": "mini",
+        "inert": false
+      },
+      {
+        "id": "tabbar",
+        "inert": false
+      }
+    ],
+    "inside": true,
+    "modal": null,
+    "role": null,
+    "text": "やめる",
+    "tipOpen": false,
+    "tipOwner": null
+  },
+  "tip": {
+    "focus": {
+      "active": "BUTTON",
+      "background": [
+        {
+          "id": "app",
+          "inert": false
+        },
+        {
+          "id": "toast",
+          "inert": false
+        },
+        {
+          "id": "mini",
+          "inert": false
+        },
+        {
+          "id": "tabbar",
+          "inert": false
+        }
+      ],
+      "inside": true,
+      "modal": null,
+      "role": null,
+      "text": "?",
+      "tipOpen": true,
+      "tipOwner": null
+    },
+    "hidden": false,
+    "phase": "watch"
+  },
+  "tipEscape": {
+    "focus": {
+      "active": "BUTTON",
+      "background": [
+        {
+          "id": "app",
+          "inert": false
+        },
+        {
+          "id": "toast",
+          "inert": false
+        },
+        {
+          "id": "mini",
+          "inert": false
+        },
+        {
+          "id": "tabbar",
+          "inert": false
+        }
+      ],
+      "inside": true,
+      "modal": null,
+      "role": null,
+      "text": "?",
+      "tipOpen": false,
+      "tipOwner": null
+    },
+    "hidden": true,
+    "phase": "idle"
+  }
+}

@@ -11,6 +11,60 @@ const cdCountN = () => CD.perf.meter <= 2 ? CD.perf.meter * 2 : CD.perf.meter;
 const cdCueCalm = () => fxCalm() || U.fxMode !== 'full';
 const cdCueHint = () => cdCueCalm() ? 'ラインが光ったらタップ' : '光がラインに届いたらタップ';
 
+// 指揮を開いている間は、裏の画面を押したり、Tabで移ったりしない。
+const cdVisible = el => !!(el?.isConnected && !el.closest('[hidden],[inert]') && !el.matches(':disabled') && el.getClientRects().length && getComputedStyle(el).visibility !== 'hidden');
+function cdDialogFocus(target){
+  CD.focusToken={};
+  if(!CD.focusBlocks){
+    CD.returnTo=document.activeElement;
+    CD.returnId=CD.returnTo?.id;
+    CD.focusBlocks=new Map(Array.from(document.querySelectorAll('.app,#tabbar,#mini'),el=>[el,el.inert]));
+  }
+  for(const el of CD.focusBlocks.keys())el.inert=true;
+  $('#conduct').appendChild($('#toast'));
+  (target||$('#cdClose')).focus({preventScroll:true});
+}
+function cdDialogRelease(){
+  if(!CD.focusBlocks)return;
+  for(const [el,was] of CD.focusBlocks)el.inert=was;
+  CD.focusBlocks=null;
+  hideTip();
+  document.body.appendChild($('#toast'));
+  const old=CD.returnTo,id=CD.returnId,token=CD.focusToken={};
+  CD.returnTo=null;CD.returnId=null;
+  // 課題曲から自由曲や結果へ進むときは、その画面への移動をじゃましない。
+  requestAnimationFrame(()=>{
+    if(CD.focusToken!==token||!$('#conduct').hidden||['announce','gradRoll','tuneGame'].some(id=>!$('#'+id).hidden))return;
+    const choices=[old,id&&document.getElementById(id),...document.querySelectorAll('#week [data-act="reveal"],#week [data-act="next"],#btnConduct,#tabbar [aria-current="page"]')];
+    choices.find(el=>el!==document.body&&el!==document.documentElement&&cdVisible(el))?.focus({preventScroll:true});
+  });
+}
+function cdResultFocus(){
+  requestAnimationFrame(()=>{
+    if(CD.phase!=='done'||$('#conduct').hidden)return;
+    const active=document.activeElement;
+    if($('#conduct').contains(active)&&cdVisible(active))return;
+    const title=$('#cdResult h3');
+    if(title){title.tabIndex=-1;title.focus({preventScroll:true});}
+  });
+}
+function cdDialogKey(e){
+  const dialog=$('#conduct');
+  if(dialog.hidden)return;
+  if(e.key==='Escape'){
+    e.preventDefault();e.stopImmediatePropagation();
+    if(e.isComposing||e.repeat)return;
+    if(!$('#tip').hidden){hideTip();return;}
+    closeConduct();
+  }else if(e.key==='Tab'){
+    const items=Array.from(dialog.querySelectorAll('button,[href],input,select,textarea,summary,[tabindex]:not([tabindex="-1"])')).filter(cdVisible),first=items[0],last=items.at(-1),active=document.activeElement;
+    if(!items.length){e.preventDefault();dialog.focus({preventScroll:true});}
+    else if(!dialog.contains(active)||(e.shiftKey?active===first:active===last)){
+      e.preventDefault();(e.shiftKey?last:first).focus({preventScroll:true});
+    }
+  }
+}
+
 // stage を渡すと本番の指揮（{rec, ev}）。終わると、その指揮で演奏した結果が採点される
 function openConduct(stage = null){
   if(!stage && busy()) return;
@@ -55,7 +109,7 @@ function openConduct(stage = null){
   document.documentElement.classList.add('conducting');
   renderRecordingLibrary();
   drawStage(-1, $('#cdStage'), CD.who); $('#cdProg').style.width = '0';
-  $('#cdPad').focus({preventScroll: true});
+  cdDialogFocus($('#cdPad'));
   cancelAnimationFrame(CD.raf);
   CD.raf = requestAnimationFrame(cdFrame);
 }
@@ -75,6 +129,7 @@ function openWatch(perf, title){
   document.documentElement.classList.add('conducting');
   drawStage(-1, $('#cdStage'), CD.who); $('#cdProg').style.width = '0';
   renderRecordingLibrary();
+  cdDialogFocus();
 }
 function closeWatch(){
   if(CD.phase !== 'watch') return;
@@ -86,6 +141,7 @@ function closeWatch(){
   $('#conduct').hidden = true; $('#conduct').classList.remove('watch'); $('#cdClose').textContent = 'やめる'; $('#cdEyebrow').textContent = '指揮';
   document.documentElement.classList.remove('conducting');
   renderRecordingLibrary();
+  cdDialogRelease();
 }
 function closeConduct(){
   // 見ているだけの本番は、止めて結果へ（入場の途中や、課題曲と自由曲のあいだなら、鳴っていないので、そのまま結果へ）
@@ -99,6 +155,7 @@ function closeConduct(){
   $('#conduct').hidden = true;
   document.documentElement.classList.remove('conducting');
   renderRecordingLibrary();
+  cdDialogRelease();
 }
 const cdMsg = s => { $('#cdMsg').textContent = s; };
 
@@ -264,6 +321,7 @@ function cdFinish(natural){
   if(CD.phase !== 'play') return;
   CD.phase = 'done';
   cdClearJudge();
+  cdResultFocus();
   if(!natural){
     $('#cdPad').hidden = true; cdMsg('');
     $('#cdResult').hidden = false;
@@ -403,6 +461,8 @@ window.onNativeFileDone = ok => toast(ok ? '' : '保存できませんでした�
 // 画面下の小さな知らせ（ボタンつきもある）。空文字で消す
 function toast(text, ms = 0, action = null, onAction = null){
   const el = $('#toast');
+  // 指揮の結果から書き出すときも、保存のボタンをその画面の中で押せるようにする。
+  ($('#conduct').hidden?document.body:$('#conduct')).appendChild(el);
   clearTimeout(U.toastT);
   if(!text){ el.hidden = true; return; }
   el.hidden = false;
@@ -417,7 +477,7 @@ function bindConduct(){
   $('#cdClose').addEventListener('click', closeConduct);
   const pad = $('#cdPad');
   pad.addEventListener('pointerdown', cdTap);
-  pad.addEventListener('keydown', e => { if(e.key === ' ' || e.key === 'Enter'){ if(!e.repeat) cdTap(e); } });
+  pad.addEventListener('keydown', e => { if((e.key === ' ' || e.key === 'Enter')&&!e.isComposing&&!e.altKey&&!e.ctrlKey&&!e.metaKey){ e.preventDefault();if(!e.repeat) cdTap(e); } });
   $('#cdResult').addEventListener('click', e => {
     const b = e.target.closest('[data-cd]'); if(!b) return;
     const act = b.dataset.cd;
@@ -427,5 +487,5 @@ function bindConduct(){
     else if(act === 'close'){ stopPlay(); closeConduct(); }
     else if(act === 'reveal'){ closeConduct(); setTab('week'); reveal(); }
   });
-  document.addEventListener('keydown', e => { if(e.key === 'Escape' && !$('#conduct').hidden) closeConduct(); });
+  document.addEventListener('keydown', cdDialogKey, {capture:true});
 }
