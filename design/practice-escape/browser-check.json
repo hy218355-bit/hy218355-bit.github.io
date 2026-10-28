@@ -1,0 +1,776 @@
+[
+  {
+    "case": "tip-open",
+    "data": {
+      "errors": [],
+      "scrollWidth": 375,
+      "theme": "light",
+      "ui": {
+        "focus": "rkhead",
+        "from": null,
+        "menu": [
+          {
+            "pressed": "true",
+            "rect": {
+              "bottom": 697.5625,
+              "height": 64,
+              "left": 43,
+              "right": 183.5,
+              "top": 633.5625,
+              "width": 140.5,
+              "x": 43,
+              "y": 633.5625
+            },
+            "value": ""
+          },
+          {
+            "pressed": "false",
+            "rect": {
+              "bottom": 697.5625,
+              "height": 64,
+              "left": 191.5,
+              "right": 332,
+              "top": 633.5625,
+              "width": 140.5,
+              "x": 191.5,
+              "y": 633.5625
+            },
+            "value": "long"
+          },
+          {
+            "pressed": "false",
+            "rect": {
+              "bottom": 769.5625,
+              "height": 64,
+              "left": 43,
+              "right": 183.5,
+              "top": 705.5625,
+              "width": 140.5,
+              "x": 43,
+              "y": 705.5625
+            },
+            "value": "tune"
+          },
+          {
+            "pressed": "false",
+            "rect": {
+              "bottom": 769.5625,
+              "height": 64,
+              "left": 191.5,
+              "right": 332,
+              "top": 705.5625,
+              "width": 140.5,
+              "x": 191.5,
+              "y": 705.5625
+            },
+            "value": "metro"
+          },
+          {
+            "pressed": "false",
+            "rect": {
+              "bottom": 841.5625,
+              "height": 64,
+              "left": 43,
+              "right": 183.5,
+              "top": 777.5625,
+              "width": 140.5,
+              "x": 43,
+              "y": 777.5625
+            },
+            "value": "phrase"
+          },
+          {
+            "pressed": "false",
+            "rect": {
+              "bottom": 841.5625,
+              "height": 64,
+              "left": 191.5,
+              "right": 332,
+              "top": 777.5625,
+              "width": 140.5,
+              "x": 191.5,
+              "y": 777.5625
+            },
+            "value": "piece"
+          },
+          {
+            "pressed": "false",
+            "rect": {
+              "bottom": 913.5625,
+              "height": 64,
+              "left": 43,
+              "right": 183.5,
+              "top": 849.5625,
+              "width": 140.5,
+              "x": 43,
+              "y": 849.5625
+            },
+            "value": "tutti"
+          },
+          {
+            "pressed": "false",
+            "rect": {
+              "bottom": 913.5625,
+              "height": 64,
+              "left": 191.5,
+              "right": 332,
+              "top": 849.5625,
+              "width": 140.5,
+              "x": 191.5,
+              "y": 849.5625
+            },
+            "value": "rest"
+          }
+        ],
+        "outing": [],
+        "pick": "m2028-n1-cafe",
+        "prep": "",
+        "state": 0.6227434049360454,
+        "tip": true
+      },
+      "width": 375
+    }
+  },
+  {
+    "case": "tip-only-closed",
+    "data": {
+      "errors": [],
+      "scrollWidth": 375,
+      "theme": "light",
+      "ui": {
+        "focus": "rkhead",
+        "from": null,
+        "menu": [
+          {
+            "pressed": "true",
+            "rect": {
+              "bottom": 697.5625,
+              "height": 64,
+              "left": 43,
+              "right": 183.5,
+              "top": 633.5625,
+              "width": 140.5,
+              "x": 43,
+              "y": 633.5625
+            },
+            "value": ""
+          },
+          {
+            "pressed": "false",
+            "rect": {
+              "bottom": 697.5625,
+              "height": 64,
+              "left": 191.5,
+              "right": 332,
+              "top": 633.5625,
+              "width": 140.5,
+              "x": 191.5,
+              "y": 633.5625
+            },
+            "value": "long"
+          },
+          {
+            "pressed": "false",
+            "rect": {
+              "bottom": 769.5625,
+              "height": 64,
+              "left": 43,
+              "right": 183.5,
+              "top": 705.5625,
+              "width": 140.5,
+              "x": 43,
+              "y": 705.5625
+            },
+            "value": "tune"
+          },
+          {
+            "pressed": "false",
+            "rect": {
+              "bottom": 769.5625,
+              "height": 64,
+              "left": 191.5,
+              "right": 332,
+              "top": 705.5625,
+              "width": 140.5,
+              "x": 191.5,
+              "y": 705.5625
+            },
+            "value": "metro"
+          },
+          {
+            "pressed": "false",
+            "rect": {
+              "bottom": 841.5625,
+              "height": 64,
+              "left": 43,
+              "right": 183.5,
+              "top": 777.5625,
+              "width": 140.5,
+              "x": 43,
+              "y": 777.5625
+            },
+            "value": "phrase"
+          },
+          {
+            "pressed": "false",
+            "rect": {
+              "bottom": 841.5625,
+              "height": 64,
+              "left": 191.5,
+              "right": 332,
+              "top": 777.5625,
+              "width": 140.5,
+              "x": 191.5,
+              "y": 777.5625
+            },
+            "value": "piece"
+          },
+          {
+            "pressed": "false",
+            "rect": {
+              "bottom": 913.5625,
+              "height": 64,
+              "left": 43,
+              "right": 183.5,
+              "top": 849.5625,
+              "width": 140.5,
+              "x": 43,
+              "y": 849.5625
+            },
+            "value": "tutti"
+          },
+          {
+            "pressed": "false",
+            "rect": {
+              "bottom": 913.5625,
+              "height": 64,
+              "left": 191.5,
+              "right": 332,
+              "top": 849.5625,
+              "width": 140.5,
+              "x": 191.5,
+              "y": 849.5625
+            },
+            "value": "rest"
+          }
+        ],
+        "outing": [],
+        "pick": "m2028-n1-cafe",
+        "prep": "",
+        "state": 0.6227434049360454,
+        "tip": false
+      },
+      "width": 375
+    }
+  },
+  {
+    "case": "tip-only-closed-dark",
+    "data": {
+      "errors": [],
+      "scrollWidth": 375,
+      "theme": "dark",
+      "ui": {
+        "focus": "pchip",
+        "from": null,
+        "menu": [
+          {
+            "pressed": "true",
+            "rect": {
+              "bottom": 438.0625,
+              "height": 64,
+              "left": 43,
+              "right": 183.5,
+              "top": 374.0625,
+              "width": 140.5,
+              "x": 43,
+              "y": 374.0625
+            },
+            "value": ""
+          },
+          {
+            "pressed": "false",
+            "rect": {
+              "bottom": 438.0625,
+              "height": 64,
+              "left": 191.5,
+              "right": 332,
+              "top": 374.0625,
+              "width": 140.5,
+              "x": 191.5,
+              "y": 374.0625
+            },
+            "value": "long"
+          },
+          {
+            "pressed": "false",
+            "rect": {
+              "bottom": 510.0625,
+              "height": 64,
+              "left": 43,
+              "right": 183.5,
+              "top": 446.0625,
+              "width": 140.5,
+              "x": 43,
+              "y": 446.0625
+            },
+            "value": "tune"
+          },
+          {
+            "pressed": "false",
+            "rect": {
+              "bottom": 510.0625,
+              "height": 64,
+              "left": 191.5,
+              "right": 332,
+              "top": 446.0625,
+              "width": 140.5,
+              "x": 191.5,
+              "y": 446.0625
+            },
+            "value": "metro"
+          },
+          {
+            "pressed": "false",
+            "rect": {
+              "bottom": 582.0625,
+              "height": 64,
+              "left": 43,
+              "right": 183.5,
+              "top": 518.0625,
+              "width": 140.5,
+              "x": 43,
+              "y": 518.0625
+            },
+            "value": "phrase"
+          },
+          {
+            "pressed": "false",
+            "rect": {
+              "bottom": 582.0625,
+              "height": 64,
+              "left": 191.5,
+              "right": 332,
+              "top": 518.0625,
+              "width": 140.5,
+              "x": 191.5,
+              "y": 518.0625
+            },
+            "value": "piece"
+          },
+          {
+            "pressed": "false",
+            "rect": {
+              "bottom": 654.0625,
+              "height": 64,
+              "left": 43,
+              "right": 183.5,
+              "top": 590.0625,
+              "width": 140.5,
+              "x": 43,
+              "y": 590.0625
+            },
+            "value": "tutti"
+          },
+          {
+            "pressed": "false",
+            "rect": {
+              "bottom": 654.0625,
+              "height": 64,
+              "left": 191.5,
+              "right": 332,
+              "top": 590.0625,
+              "width": 140.5,
+              "x": 191.5,
+              "y": 590.0625
+            },
+            "value": "rest"
+          }
+        ],
+        "outing": [],
+        "pick": "m2028-n1-cafe",
+        "prep": "",
+        "state": 0.6227434049360454,
+        "tip": false
+      },
+      "width": 375
+    }
+  },
+  {
+    "case": "picker-closed",
+    "data": {
+      "errors": [],
+      "scrollWidth": 375,
+      "theme": "dark",
+      "ui": {
+        "focus": "m2028-n1-cafe",
+        "from": null,
+        "menu": [],
+        "outing": [],
+        "pick": null,
+        "prep": "",
+        "state": 0.6227434049360454,
+        "tip": false
+      },
+      "width": 375
+    }
+  },
+  {
+    "case": "group-remains",
+    "data": {
+      "errors": [],
+      "scrollWidth": 375,
+      "theme": "dark",
+      "ui": {
+        "focus": "rkhead",
+        "from": null,
+        "menu": [
+          {
+            "pressed": "true",
+            "rect": {
+              "bottom": 599.5625,
+              "height": 64,
+              "left": 43,
+              "right": 183.5,
+              "top": 535.5625,
+              "width": 140.5,
+              "x": 43,
+              "y": 535.5625
+            },
+            "value": ""
+          },
+          {
+            "pressed": "false",
+            "rect": {
+              "bottom": 599.5625,
+              "height": 64,
+              "left": 191.5,
+              "right": 332,
+              "top": 535.5625,
+              "width": 140.5,
+              "x": 191.5,
+              "y": 535.5625
+            },
+            "value": "long"
+          },
+          {
+            "pressed": "false",
+            "rect": {
+              "bottom": 671.5625,
+              "height": 64,
+              "left": 43,
+              "right": 183.5,
+              "top": 607.5625,
+              "width": 140.5,
+              "x": 43,
+              "y": 607.5625
+            },
+            "value": "tune"
+          },
+          {
+            "pressed": "false",
+            "rect": {
+              "bottom": 671.5625,
+              "height": 64,
+              "left": 191.5,
+              "right": 332,
+              "top": 607.5625,
+              "width": 140.5,
+              "x": 191.5,
+              "y": 607.5625
+            },
+            "value": "metro"
+          },
+          {
+            "pressed": "false",
+            "rect": {
+              "bottom": 743.5625,
+              "height": 64,
+              "left": 43,
+              "right": 183.5,
+              "top": 679.5625,
+              "width": 140.5,
+              "x": 43,
+              "y": 679.5625
+            },
+            "value": "phrase"
+          },
+          {
+            "pressed": "false",
+            "rect": {
+              "bottom": 743.5625,
+              "height": 64,
+              "left": 191.5,
+              "right": 332,
+              "top": 679.5625,
+              "width": 140.5,
+              "x": 191.5,
+              "y": 679.5625
+            },
+            "value": "piece"
+          },
+          {
+            "pressed": "false",
+            "rect": {
+              "bottom": 815.5625,
+              "height": 64,
+              "left": 43,
+              "right": 183.5,
+              "top": 751.5625,
+              "width": 140.5,
+              "x": 43,
+              "y": 751.5625
+            },
+            "value": "tutti"
+          },
+          {
+            "pressed": "false",
+            "rect": {
+              "bottom": 815.5625,
+              "height": 64,
+              "left": 191.5,
+              "right": 332,
+              "top": 751.5625,
+              "width": 140.5,
+              "x": 191.5,
+              "y": 751.5625
+            },
+            "value": "rest"
+          }
+        ],
+        "outing": [],
+        "pick": "sec:fl",
+        "prep": "",
+        "state": 0.6227434049360454,
+        "tip": false
+      },
+      "width": 375
+    }
+  },
+  {
+    "case": "group-closed",
+    "data": {
+      "errors": [],
+      "scrollWidth": 375,
+      "theme": "dark",
+      "ui": {
+        "focus": "sec:fl",
+        "from": null,
+        "menu": [],
+        "outing": [],
+        "pick": null,
+        "prep": "",
+        "state": 0.6227434049360454,
+        "tip": false
+      },
+      "width": 375
+    }
+  },
+  {
+    "case": "care-remains",
+    "data": {
+      "errors": [],
+      "scrollWidth": 375,
+      "theme": "light",
+      "ui": {
+        "focus": "rkhead",
+        "from": "care",
+        "menu": [
+          {
+            "pressed": "false",
+            "rect": {
+              "bottom": 697.765625,
+              "height": 64,
+              "left": 43,
+              "right": 183.5,
+              "top": 633.765625,
+              "width": 140.5,
+              "x": 43,
+              "y": 633.765625
+            },
+            "value": ""
+          },
+          {
+            "pressed": "false",
+            "rect": {
+              "bottom": 697.765625,
+              "height": 64,
+              "left": 191.5,
+              "right": 332,
+              "top": 633.765625,
+              "width": 140.5,
+              "x": 191.5,
+              "y": 633.765625
+            },
+            "value": "rest"
+          },
+          {
+            "pressed": "false",
+            "rect": {
+              "bottom": 769.765625,
+              "height": 64,
+              "left": 43,
+              "right": 183.5,
+              "top": 705.765625,
+              "width": 140.5,
+              "x": 43,
+              "y": 705.765625
+            },
+            "value": "long"
+          },
+          {
+            "pressed": "true",
+            "rect": {
+              "bottom": 769.765625,
+              "height": 64,
+              "left": 191.5,
+              "right": 332,
+              "top": 705.765625,
+              "width": 140.5,
+              "x": 191.5,
+              "y": 705.765625
+            },
+            "value": "tune"
+          },
+          {
+            "pressed": "false",
+            "rect": {
+              "bottom": 841.765625,
+              "height": 64,
+              "left": 43,
+              "right": 183.5,
+              "top": 777.765625,
+              "width": 140.5,
+              "x": 43,
+              "y": 777.765625
+            },
+            "value": "metro"
+          },
+          {
+            "pressed": "false",
+            "rect": {
+              "bottom": 841.765625,
+              "height": 64,
+              "left": 191.5,
+              "right": 332,
+              "top": 777.765625,
+              "width": 140.5,
+              "x": 191.5,
+              "y": 777.765625
+            },
+            "value": "phrase"
+          },
+          {
+            "pressed": "false",
+            "rect": {
+              "bottom": 913.765625,
+              "height": 64,
+              "left": 43,
+              "right": 183.5,
+              "top": 849.765625,
+              "width": 140.5,
+              "x": 43,
+              "y": 849.765625
+            },
+            "value": "piece"
+          },
+          {
+            "pressed": "false",
+            "rect": {
+              "bottom": 913.765625,
+              "height": 64,
+              "left": 191.5,
+              "right": 332,
+              "top": 849.765625,
+              "width": 140.5,
+              "x": 191.5,
+              "y": 849.765625
+            },
+            "value": "tutti"
+          }
+        ],
+        "outing": [],
+        "pick": "m2028-n1-cafe",
+        "prep": "",
+        "state": 0.8077202723361552,
+        "tip": false
+      },
+      "width": 375
+    }
+  },
+  {
+    "case": "care-returns",
+    "data": {
+      "errors": [],
+      "scrollWidth": 375,
+      "theme": "light",
+      "ui": {
+        "focus": "m2028-n1-cafe",
+        "from": null,
+        "menu": [],
+        "outing": [],
+        "pick": null,
+        "prep": "",
+        "state": 0.8077202723361552,
+        "tip": false
+      },
+      "width": 375
+    }
+  },
+  {
+    "case": "prep-tip-open",
+    "data": {
+      "errors": [],
+      "scrollWidth": 375,
+      "theme": "light",
+      "ui": {
+        "focus": "help-button",
+        "from": null,
+        "menu": [],
+        "outing": [],
+        "pick": null,
+        "prep": "reading",
+        "state": 0.711104953661561,
+        "tip": true
+      },
+      "width": 375
+    }
+  },
+  {
+    "case": "prep-remains",
+    "data": {
+      "errors": [],
+      "scrollWidth": 375,
+      "theme": "light",
+      "ui": {
+        "focus": "help-button",
+        "from": null,
+        "menu": [],
+        "outing": [],
+        "pick": null,
+        "prep": "reading",
+        "state": 0.711104953661561,
+        "tip": false
+      },
+      "width": 375
+    }
+  },
+  {
+    "case": "prep-closed",
+    "data": {
+      "errors": [],
+      "scrollWidth": 375,
+      "theme": "light",
+      "ui": {
+        "focus": "prep-tab",
+        "from": null,
+        "menu": [],
+        "outing": [],
+        "pick": null,
+        "prep": "",
+        "state": 0.711104953661561,
+        "tip": false
+      },
+      "width": 375
+    }
+  }
+]

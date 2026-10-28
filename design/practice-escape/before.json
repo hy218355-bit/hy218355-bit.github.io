@@ -1,0 +1,10 @@
+{
+  "before": {
+    "tip": true,
+    "picker": true
+  },
+  "afterEscape": {
+    "tip": false,
+    "picker": false
+  }
+}

@@ -2750,7 +2750,13 @@ function bind(){
     else if($('#memberCard .mc-move')?.open){e.preventDefault();$('#memberCard [data-mact="movecancel"]').click();}
     else{e.preventDefault();closeMemberCard();}
   });
-  $('#week').addEventListener('keydown',e=>{if(e.key==='Escape'&&U.pick){e.preventDefault();closePracticePicker();}else if(e.key==='Escape'&&U.outPick?.size&&e.target.closest('.outing')&&$('#tip').hidden){e.preventDefault();cancelOutingSelection();}else if(e.key==='Escape'&&U.prepPanel&&e.target.closest('.preparation')){e.preventDefault();togglePreparation(U.prepPanel);}});
+  $('#week').addEventListener('keydown',e=>{
+    // 説明を先に閉じ、長押しや文字の変換で練習や人選まで閉じない。
+    if(e.key!=='Escape'||e.isComposing||e.repeat||!$('#tip').hidden)return;
+    if(U.pick){e.preventDefault();closePracticePicker();}
+    else if(U.outPick?.size&&e.target.closest('.outing')){e.preventDefault();cancelOutingSelection();}
+    else if(U.prepPanel&&e.target.closest('.preparation')){e.preventDefault();togglePreparation(U.prepPanel);}
+  });
   $('#week').addEventListener('click', e => {
     const b = e.target.closest('button'); if(!b || b.disabled) return;
     if(b.dataset.gradMember){ openGradRoll(b.dataset.gradMember); return; }
