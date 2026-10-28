@@ -1,0 +1,4065 @@
+[
+  {
+    "case": "conduct-playing",
+    "data": {
+      "audio": [],
+      "buttons": [],
+      "count": 1,
+      "errors": [],
+      "focus": {
+        "active": "cdPad",
+        "background": [
+          {
+            "id": "app",
+            "inert": true
+          },
+          {
+            "id": "toast",
+            "inert": false
+          },
+          {
+            "id": "mini",
+            "inert": true
+          },
+          {
+            "id": "tabbar",
+            "inert": true
+          }
+        ],
+        "inside": true,
+        "modal": "true",
+        "role": "dialog",
+        "text": "タップ大きく小さく",
+        "tipOpen": false,
+        "tipOwner": null
+      },
+      "phase": "play",
+      "playing": true,
+      "recording": {
+        "active": null,
+        "button": null,
+        "clock": [
+          {
+            "P": 0.4485,
+            "b": 0,
+            "jolt": 0,
+            "t": 0
+          }
+        ],
+        "expected": null,
+        "hidden": false,
+        "performance": 0.36987378587946296,
+        "record": null,
+        "state": 0.06773336720652878
+      },
+      "records": 0.48450611950829625,
+      "scrollWidth": 375,
+      "waiting": false,
+      "width": 375
+    }
+  },
+  {
+    "case": "finished",
+    "data": {
+      "audio": [],
+      "buttons": [
+        {
+          "act": "again",
+          "rect": {
+            "bottom": 525.9609375,
+            "height": 46,
+            "left": 24,
+            "right": 183.5,
+            "top": 479.9609375,
+            "width": 159.5,
+            "x": 24,
+            "y": 479.9609375
+          },
+          "text": "もう一度聴く"
+        },
+        {
+          "act": "save",
+          "rect": {
+            "bottom": 525.9609375,
+            "height": 46,
+            "left": 191.5,
+            "right": 351,
+            "top": 479.9609375,
+            "width": 159.5,
+            "x": 191.5,
+            "y": 479.9609375
+          },
+          "text": "保存する"
+        },
+        {
+          "act": "retry",
+          "rect": {
+            "bottom": 579.9609375,
+            "height": 46,
+            "left": 24,
+            "right": 183.5,
+            "top": 533.9609375,
+            "width": 159.5,
+            "x": 24,
+            "y": 533.9609375
+          },
+          "text": "もう一度指揮する"
+        },
+        {
+          "act": "close",
+          "rect": {
+            "bottom": 579.9609375,
+            "height": 46,
+            "left": 191.5,
+            "right": 351,
+            "top": 533.9609375,
+            "width": 159.5,
+            "x": 191.5,
+            "y": 533.9609375
+          },
+          "text": "閉じる"
+        }
+      ],
+      "count": 2,
+      "errors": [],
+      "focus": {
+        "active": "H3",
+        "background": [
+          {
+            "id": "app",
+            "inert": true
+          },
+          {
+            "id": "toast",
+            "inert": false
+          },
+          {
+            "id": "mini",
+            "inert": true
+          },
+          {
+            "id": "tabbar",
+            "inert": true
+          }
+        ],
+        "inside": true,
+        "modal": "true",
+        "role": "dialog",
+        "text": "演奏おわり",
+        "tipOpen": false,
+        "tipOwner": null
+      },
+      "phase": "done",
+      "playing": false,
+      "recording": {
+        "active": null,
+        "button": {
+          "pressed": "false",
+          "rect": {
+            "bottom": 525.9609375,
+            "height": 46,
+            "left": 24,
+            "right": 183.5,
+            "top": 479.9609375,
+            "width": 159.5,
+            "x": 24,
+            "y": 479.9609375
+          },
+          "text": "もう一度聴く",
+          "waiting": "false"
+        },
+        "expected": 0.36987378587946296,
+        "hidden": false,
+        "performance": null,
+        "record": {
+          "conduct": {
+            "bpm": 134,
+            "ev": [
+              {
+                "P": 0.4485,
+                "b": 0,
+                "jolt": 0,
+                "t": 0
+              }
+            ],
+            "judge": {
+              "best": 0,
+              "e": 0,
+              "g": 0,
+              "l": 0,
+              "p": 0
+            },
+            "lv": [
+              [
+                0,
+                0.97
+              ]
+            ],
+            "stab": 100,
+            "taps": []
+          },
+          "id": "r2028-10-1-395491",
+          "snapshot": 0.22666935436427593,
+          "span": {
+            "from": 0,
+            "to": 32
+          }
+        },
+        "state": 0.5676822771783918
+      },
+      "records": 0.5311925124842674,
+      "scrollWidth": 375,
+      "waiting": false,
+      "width": 375
+    }
+  },
+  {
+    "case": "replay-light",
+    "data": {
+      "audio": [],
+      "buttons": [
+        {
+          "act": "again",
+          "rect": {
+            "bottom": 525.9609375,
+            "height": 46,
+            "left": 24,
+            "right": 183.5,
+            "top": 479.9609375,
+            "width": 159.5,
+            "x": 24,
+            "y": 479.9609375
+          },
+          "text": "止める"
+        },
+        {
+          "act": "save",
+          "rect": {
+            "bottom": 525.9609375,
+            "height": 46,
+            "left": 191.5,
+            "right": 351,
+            "top": 479.9609375,
+            "width": 159.5,
+            "x": 191.5,
+            "y": 479.9609375
+          },
+          "text": "保存する"
+        },
+        {
+          "act": "retry",
+          "rect": {
+            "bottom": 579.9609375,
+            "height": 46,
+            "left": 24,
+            "right": 183.5,
+            "top": 533.9609375,
+            "width": 159.5,
+            "x": 24,
+            "y": 533.9609375
+          },
+          "text": "もう一度指揮する"
+        },
+        {
+          "act": "close",
+          "rect": {
+            "bottom": 579.9609375,
+            "height": 46,
+            "left": 191.5,
+            "right": 351,
+            "top": 533.9609375,
+            "width": 159.5,
+            "x": 191.5,
+            "y": 533.9609375
+          },
+          "text": "閉じる"
+        }
+      ],
+      "count": 2,
+      "errors": [],
+      "focus": {
+        "active": "again",
+        "background": [
+          {
+            "id": "app",
+            "inert": true
+          },
+          {
+            "id": "toast",
+            "inert": false
+          },
+          {
+            "id": "mini",
+            "inert": true
+          },
+          {
+            "id": "tabbar",
+            "inert": true
+          }
+        ],
+        "inside": true,
+        "modal": "true",
+        "role": "dialog",
+        "text": "止める",
+        "tipOpen": false,
+        "tipOwner": null
+      },
+      "phase": "done",
+      "playing": true,
+      "recording": {
+        "active": "r2028-10-1-395491",
+        "button": {
+          "pressed": "true",
+          "rect": {
+            "bottom": 525.9609375,
+            "height": 46,
+            "left": 24,
+            "right": 183.5,
+            "top": 479.9609375,
+            "width": 159.5,
+            "x": 24,
+            "y": 479.9609375
+          },
+          "text": "止める",
+          "waiting": "false"
+        },
+        "clock": [
+          {
+            "P": 0.4485,
+            "b": 0,
+            "jolt": 0,
+            "t": 0
+          }
+        ],
+        "expected": 0.36987378587946296,
+        "hidden": false,
+        "performance": 0.36987378587946296,
+        "record": {
+          "conduct": {
+            "bpm": 134,
+            "ev": [
+              {
+                "P": 0.4485,
+                "b": 0,
+                "jolt": 0,
+                "t": 0
+              }
+            ],
+            "judge": {
+              "best": 0,
+              "e": 0,
+              "g": 0,
+              "l": 0,
+              "p": 0
+            },
+            "lv": [
+              [
+                0,
+                0.97
+              ]
+            ],
+            "stab": 100,
+            "taps": []
+          },
+          "id": "r2028-10-1-395491",
+          "snapshot": 0.22666935436427593,
+          "span": {
+            "from": 0,
+            "to": 32
+          }
+        },
+        "state": 0.5676822771783918
+      },
+      "records": 0.5311925124842674,
+      "scrollWidth": 375,
+      "waiting": false,
+      "width": 375
+    }
+  },
+  {
+    "case": "save-same-record",
+    "data": {
+      "audio": [
+        "SampleVoice"
+      ],
+      "buttons": [
+        {
+          "act": "again",
+          "rect": {
+            "bottom": 525.9609375,
+            "height": 46,
+            "left": 24,
+            "right": 183.5,
+            "top": 479.9609375,
+            "width": 159.5,
+            "x": 24,
+            "y": 479.9609375
+          },
+          "text": "止める"
+        },
+        {
+          "act": "save",
+          "rect": {
+            "bottom": 525.9609375,
+            "height": 46,
+            "left": 191.5,
+            "right": 351,
+            "top": 479.9609375,
+            "width": 159.5,
+            "x": 191.5,
+            "y": 479.9609375
+          },
+          "text": "保存する"
+        },
+        {
+          "act": "retry",
+          "rect": {
+            "bottom": 579.9609375,
+            "height": 46,
+            "left": 24,
+            "right": 183.5,
+            "top": 533.9609375,
+            "width": 159.5,
+            "x": 24,
+            "y": 533.9609375
+          },
+          "text": "もう一度指揮する"
+        },
+        {
+          "act": "close",
+          "rect": {
+            "bottom": 579.9609375,
+            "height": 46,
+            "left": 191.5,
+            "right": 351,
+            "top": 533.9609375,
+            "width": 159.5,
+            "x": 191.5,
+            "y": 533.9609375
+          },
+          "text": "閉じる"
+        }
+      ],
+      "count": 2,
+      "errors": [],
+      "focus": {
+        "active": "save",
+        "background": [
+          {
+            "id": "app",
+            "inert": true
+          },
+          {
+            "id": "toast",
+            "inert": false
+          },
+          {
+            "id": "mini",
+            "inert": true
+          },
+          {
+            "id": "tabbar",
+            "inert": true
+          }
+        ],
+        "inside": true,
+        "modal": "true",
+        "role": "dialog",
+        "text": "保存する",
+        "tipOpen": false,
+        "tipOwner": null
+      },
+      "phase": "done",
+      "playing": true,
+      "recording": {
+        "active": "r2028-10-1-395491",
+        "button": {
+          "pressed": "true",
+          "rect": {
+            "bottom": 525.9609375,
+            "height": 46,
+            "left": 24,
+            "right": 183.5,
+            "top": 479.9609375,
+            "width": 159.5,
+            "x": 24,
+            "y": 479.9609375
+          },
+          "text": "止める",
+          "waiting": "false"
+        },
+        "clock": [
+          {
+            "P": 0.4485,
+            "b": 0,
+            "jolt": 0,
+            "t": 0
+          }
+        ],
+        "expected": 0.36987378587946296,
+        "export": {
+          "id": "r2028-10-1-395491",
+          "label": "あなたの指揮：《新世界より》第2楽章（6月 第3週）",
+          "snapshot": 0.22666935436427593
+        },
+        "hidden": false,
+        "performance": 0.36987378587946296,
+        "record": {
+          "conduct": {
+            "bpm": 134,
+            "ev": [
+              {
+                "P": 0.4485,
+                "b": 0,
+                "jolt": 0,
+                "t": 0
+              }
+            ],
+            "judge": {
+              "best": 0,
+              "e": 0,
+              "g": 0,
+              "l": 0,
+              "p": 0
+            },
+            "lv": [
+              [
+                0,
+                0.97
+              ]
+            ],
+            "stab": 100,
+            "taps": []
+          },
+          "id": "r2028-10-1-395491",
+          "snapshot": 0.22666935436427593,
+          "span": {
+            "from": 0,
+            "to": 32
+          }
+        },
+        "state": 0.5676822771783918
+      },
+      "records": 0.5311925124842674,
+      "scrollWidth": 375,
+      "waiting": false,
+      "width": 375
+    }
+  },
+  {
+    "case": "replay-dark",
+    "data": {
+      "audio": [
+        "SampleVoice"
+      ],
+      "buttons": [
+        {
+          "act": "again",
+          "rect": {
+            "bottom": 525.9609375,
+            "height": 46,
+            "left": 24,
+            "right": 183.5,
+            "top": 479.9609375,
+            "width": 159.5,
+            "x": 24,
+            "y": 479.9609375
+          },
+          "text": "止める"
+        },
+        {
+          "act": "save",
+          "rect": {
+            "bottom": 525.9609375,
+            "height": 46,
+            "left": 191.5,
+            "right": 351,
+            "top": 479.9609375,
+            "width": 159.5,
+            "x": 191.5,
+            "y": 479.9609375
+          },
+          "text": "保存する"
+        },
+        {
+          "act": "retry",
+          "rect": {
+            "bottom": 579.9609375,
+            "height": 46,
+            "left": 24,
+            "right": 183.5,
+            "top": 533.9609375,
+            "width": 159.5,
+            "x": 24,
+            "y": 533.9609375
+          },
+          "text": "もう一度指揮する"
+        },
+        {
+          "act": "close",
+          "rect": {
+            "bottom": 579.9609375,
+            "height": 46,
+            "left": 191.5,
+            "right": 351,
+            "top": 533.9609375,
+            "width": 159.5,
+            "x": 191.5,
+            "y": 533.9609375
+          },
+          "text": "閉じる"
+        }
+      ],
+      "count": 2,
+      "errors": [],
+      "focus": {
+        "active": "save",
+        "background": [
+          {
+            "id": "app",
+            "inert": true
+          },
+          {
+            "id": "toast",
+            "inert": false
+          },
+          {
+            "id": "mini",
+            "inert": true
+          },
+          {
+            "id": "tabbar",
+            "inert": true
+          }
+        ],
+        "inside": true,
+        "modal": "true",
+        "role": "dialog",
+        "text": "保存する",
+        "tipOpen": false,
+        "tipOwner": null
+      },
+      "phase": "done",
+      "playing": true,
+      "recording": {
+        "active": "r2028-10-1-395491",
+        "button": {
+          "pressed": "true",
+          "rect": {
+            "bottom": 525.9609375,
+            "height": 46,
+            "left": 24,
+            "right": 183.5,
+            "top": 479.9609375,
+            "width": 159.5,
+            "x": 24,
+            "y": 479.9609375
+          },
+          "text": "止める",
+          "waiting": "false"
+        },
+        "clock": [
+          {
+            "P": 0.4485,
+            "b": 0,
+            "jolt": 0,
+            "t": 0
+          }
+        ],
+        "expected": 0.36987378587946296,
+        "export": {
+          "id": "r2028-10-1-395491",
+          "label": "あなたの指揮：《新世界より》第2楽章（6月 第3週）",
+          "snapshot": 0.22666935436427593
+        },
+        "hidden": false,
+        "performance": 0.36987378587946296,
+        "record": {
+          "conduct": {
+            "bpm": 134,
+            "ev": [
+              {
+                "P": 0.4485,
+                "b": 0,
+                "jolt": 0,
+                "t": 0
+              }
+            ],
+            "judge": {
+              "best": 0,
+              "e": 0,
+              "g": 0,
+              "l": 0,
+              "p": 0
+            },
+            "lv": [
+              [
+                0,
+                0.97
+              ]
+            ],
+            "stab": 100,
+            "taps": []
+          },
+          "id": "r2028-10-1-395491",
+          "snapshot": 0.22666935436427593,
+          "span": {
+            "from": 0,
+            "to": 32
+          }
+        },
+        "state": 0.5676822771783918
+      },
+      "records": 0.5311925124842674,
+      "scrollWidth": 375,
+      "waiting": false,
+      "width": 375
+    }
+  },
+  {
+    "case": "toggle-stop",
+    "data": {
+      "audio": [],
+      "buttons": [
+        {
+          "act": "again",
+          "rect": {
+            "bottom": 525.9609375,
+            "height": 46,
+            "left": 24,
+            "right": 183.5,
+            "top": 479.9609375,
+            "width": 159.5,
+            "x": 24,
+            "y": 479.9609375
+          },
+          "text": "もう一度聴く"
+        },
+        {
+          "act": "save",
+          "rect": {
+            "bottom": 525.9609375,
+            "height": 46,
+            "left": 191.5,
+            "right": 351,
+            "top": 479.9609375,
+            "width": 159.5,
+            "x": 191.5,
+            "y": 479.9609375
+          },
+          "text": "保存する"
+        },
+        {
+          "act": "retry",
+          "rect": {
+            "bottom": 579.9609375,
+            "height": 46,
+            "left": 24,
+            "right": 183.5,
+            "top": 533.9609375,
+            "width": 159.5,
+            "x": 24,
+            "y": 533.9609375
+          },
+          "text": "もう一度指揮する"
+        },
+        {
+          "act": "close",
+          "rect": {
+            "bottom": 579.9609375,
+            "height": 46,
+            "left": 191.5,
+            "right": 351,
+            "top": 533.9609375,
+            "width": 159.5,
+            "x": 191.5,
+            "y": 533.9609375
+          },
+          "text": "閉じる"
+        }
+      ],
+      "count": 2,
+      "errors": [],
+      "focus": {
+        "active": "again",
+        "background": [
+          {
+            "id": "app",
+            "inert": true
+          },
+          {
+            "id": "toast",
+            "inert": false
+          },
+          {
+            "id": "mini",
+            "inert": true
+          },
+          {
+            "id": "tabbar",
+            "inert": true
+          }
+        ],
+        "inside": true,
+        "modal": "true",
+        "role": "dialog",
+        "text": "もう一度聴く",
+        "tipOpen": false,
+        "tipOwner": null
+      },
+      "phase": "done",
+      "playing": false,
+      "recording": {
+        "active": null,
+        "button": {
+          "pressed": "false",
+          "rect": {
+            "bottom": 525.9609375,
+            "height": 46,
+            "left": 24,
+            "right": 183.5,
+            "top": 479.9609375,
+            "width": 159.5,
+            "x": 24,
+            "y": 479.9609375
+          },
+          "text": "もう一度聴く",
+          "waiting": "false"
+        },
+        "expected": 0.36987378587946296,
+        "export": {
+          "id": "r2028-10-1-395491",
+          "label": "あなたの指揮：《新世界より》第2楽章（6月 第3週）",
+          "snapshot": 0.22666935436427593
+        },
+        "hidden": false,
+        "performance": null,
+        "record": {
+          "conduct": {
+            "bpm": 134,
+            "ev": [
+              {
+                "P": 0.4485,
+                "b": 0,
+                "jolt": 0,
+                "t": 0
+              }
+            ],
+            "judge": {
+              "best": 0,
+              "e": 0,
+              "g": 0,
+              "l": 0,
+              "p": 0
+            },
+            "lv": [
+              [
+                0,
+                0.97
+              ]
+            ],
+            "stab": 100,
+            "taps": []
+          },
+          "id": "r2028-10-1-395491",
+          "snapshot": 0.22666935436427593,
+          "span": {
+            "from": 0,
+            "to": 32
+          }
+        },
+        "state": 0.5676822771783918
+      },
+      "records": 0.5311925124842674,
+      "scrollWidth": 375,
+      "waiting": false,
+      "width": 375
+    }
+  },
+  {
+    "case": "waiting",
+    "data": {
+      "audio": [],
+      "buttons": [
+        {
+          "act": "again",
+          "rect": {
+            "bottom": 525.9609375,
+            "height": 46,
+            "left": 24,
+            "right": 183.5,
+            "top": 479.9609375,
+            "width": 159.5,
+            "x": 24,
+            "y": 479.9609375
+          },
+          "text": "読み込みをやめる"
+        },
+        {
+          "act": "save",
+          "rect": {
+            "bottom": 525.9609375,
+            "height": 46,
+            "left": 191.5,
+            "right": 351,
+            "top": 479.9609375,
+            "width": 159.5,
+            "x": 191.5,
+            "y": 479.9609375
+          },
+          "text": "保存する"
+        },
+        {
+          "act": "retry",
+          "rect": {
+            "bottom": 579.9609375,
+            "height": 46,
+            "left": 24,
+            "right": 183.5,
+            "top": 533.9609375,
+            "width": 159.5,
+            "x": 24,
+            "y": 533.9609375
+          },
+          "text": "もう一度指揮する"
+        },
+        {
+          "act": "close",
+          "rect": {
+            "bottom": 579.9609375,
+            "height": 46,
+            "left": 191.5,
+            "right": 351,
+            "top": 533.9609375,
+            "width": 159.5,
+            "x": 191.5,
+            "y": 533.9609375
+          },
+          "text": "閉じる"
+        }
+      ],
+      "count": 2,
+      "errors": [],
+      "focus": {
+        "active": "again",
+        "background": [
+          {
+            "id": "app",
+            "inert": true
+          },
+          {
+            "id": "toast",
+            "inert": false
+          },
+          {
+            "id": "mini",
+            "inert": true
+          },
+          {
+            "id": "tabbar",
+            "inert": true
+          }
+        ],
+        "inside": true,
+        "modal": "true",
+        "role": "dialog",
+        "text": "読み込みをやめる",
+        "tipOpen": false,
+        "tipOwner": null
+      },
+      "phase": "done",
+      "playing": false,
+      "recording": {
+        "active": "r2028-10-1-395491",
+        "button": {
+          "pressed": "true",
+          "rect": {
+            "bottom": 525.9609375,
+            "height": 46,
+            "left": 24,
+            "right": 183.5,
+            "top": 479.9609375,
+            "width": 159.5,
+            "x": 24,
+            "y": 479.9609375
+          },
+          "text": "読み込みをやめる",
+          "waiting": "true"
+        },
+        "expected": 0.36987378587946296,
+        "export": {
+          "id": "r2028-10-1-395491",
+          "label": "あなたの指揮：《新世界より》第2楽章（6月 第3週）",
+          "snapshot": 0.22666935436427593
+        },
+        "hidden": false,
+        "performance": 0.36987378587946296,
+        "record": {
+          "conduct": {
+            "bpm": 134,
+            "ev": [
+              {
+                "P": 0.4485,
+                "b": 0,
+                "jolt": 0,
+                "t": 0
+              }
+            ],
+            "judge": {
+              "best": 0,
+              "e": 0,
+              "g": 0,
+              "l": 0,
+              "p": 0
+            },
+            "lv": [
+              [
+                0,
+                0.97
+              ]
+            ],
+            "stab": 100,
+            "taps": []
+          },
+          "id": "r2028-10-1-395491",
+          "snapshot": 0.22666935436427593,
+          "span": {
+            "from": 0,
+            "to": 32
+          }
+        },
+        "state": 0.5676822771783918
+      },
+      "records": 0.5311925124842674,
+      "scrollWidth": 375,
+      "waiting": true,
+      "width": 375
+    }
+  },
+  {
+    "case": "waiting-cancel",
+    "data": {
+      "audio": [],
+      "buttons": [
+        {
+          "act": "again",
+          "rect": {
+            "bottom": 525.9609375,
+            "height": 46,
+            "left": 24,
+            "right": 183.5,
+            "top": 479.9609375,
+            "width": 159.5,
+            "x": 24,
+            "y": 479.9609375
+          },
+          "text": "もう一度聴く"
+        },
+        {
+          "act": "save",
+          "rect": {
+            "bottom": 525.9609375,
+            "height": 46,
+            "left": 191.5,
+            "right": 351,
+            "top": 479.9609375,
+            "width": 159.5,
+            "x": 191.5,
+            "y": 479.9609375
+          },
+          "text": "保存する"
+        },
+        {
+          "act": "retry",
+          "rect": {
+            "bottom": 579.9609375,
+            "height": 46,
+            "left": 24,
+            "right": 183.5,
+            "top": 533.9609375,
+            "width": 159.5,
+            "x": 24,
+            "y": 533.9609375
+          },
+          "text": "もう一度指揮する"
+        },
+        {
+          "act": "close",
+          "rect": {
+            "bottom": 579.9609375,
+            "height": 46,
+            "left": 191.5,
+            "right": 351,
+            "top": 533.9609375,
+            "width": 159.5,
+            "x": 191.5,
+            "y": 533.9609375
+          },
+          "text": "閉じる"
+        }
+      ],
+      "count": 2,
+      "errors": [],
+      "focus": {
+        "active": "again",
+        "background": [
+          {
+            "id": "app",
+            "inert": true
+          },
+          {
+            "id": "toast",
+            "inert": false
+          },
+          {
+            "id": "mini",
+            "inert": true
+          },
+          {
+            "id": "tabbar",
+            "inert": true
+          }
+        ],
+        "inside": true,
+        "modal": "true",
+        "role": "dialog",
+        "text": "もう一度聴く",
+        "tipOpen": false,
+        "tipOwner": null
+      },
+      "phase": "done",
+      "playing": false,
+      "recording": {
+        "active": null,
+        "button": {
+          "pressed": "false",
+          "rect": {
+            "bottom": 525.9609375,
+            "height": 46,
+            "left": 24,
+            "right": 183.5,
+            "top": 479.9609375,
+            "width": 159.5,
+            "x": 24,
+            "y": 479.9609375
+          },
+          "text": "もう一度聴く",
+          "waiting": "false"
+        },
+        "expected": 0.36987378587946296,
+        "export": {
+          "id": "r2028-10-1-395491",
+          "label": "あなたの指揮：《新世界より》第2楽章（6月 第3週）",
+          "snapshot": 0.22666935436427593
+        },
+        "hidden": false,
+        "performance": null,
+        "record": {
+          "conduct": {
+            "bpm": 134,
+            "ev": [
+              {
+                "P": 0.4485,
+                "b": 0,
+                "jolt": 0,
+                "t": 0
+              }
+            ],
+            "judge": {
+              "best": 0,
+              "e": 0,
+              "g": 0,
+              "l": 0,
+              "p": 0
+            },
+            "lv": [
+              [
+                0,
+                0.97
+              ]
+            ],
+            "stab": 100,
+            "taps": []
+          },
+          "id": "r2028-10-1-395491",
+          "snapshot": 0.22666935436427593,
+          "span": {
+            "from": 0,
+            "to": 32
+          }
+        },
+        "state": 0.5676822771783918
+      },
+      "records": 0.5311925124842674,
+      "scrollWidth": 375,
+      "waiting": false,
+      "width": 375
+    }
+  },
+  {
+    "case": "waiting-release",
+    "data": {
+      "audio": [],
+      "buttons": [
+        {
+          "act": "again",
+          "rect": {
+            "bottom": 525.9609375,
+            "height": 46,
+            "left": 24,
+            "right": 183.5,
+            "top": 479.9609375,
+            "width": 159.5,
+            "x": 24,
+            "y": 479.9609375
+          },
+          "text": "もう一度聴く"
+        },
+        {
+          "act": "save",
+          "rect": {
+            "bottom": 525.9609375,
+            "height": 46,
+            "left": 191.5,
+            "right": 351,
+            "top": 479.9609375,
+            "width": 159.5,
+            "x": 191.5,
+            "y": 479.9609375
+          },
+          "text": "保存する"
+        },
+        {
+          "act": "retry",
+          "rect": {
+            "bottom": 579.9609375,
+            "height": 46,
+            "left": 24,
+            "right": 183.5,
+            "top": 533.9609375,
+            "width": 159.5,
+            "x": 24,
+            "y": 533.9609375
+          },
+          "text": "もう一度指揮する"
+        },
+        {
+          "act": "close",
+          "rect": {
+            "bottom": 579.9609375,
+            "height": 46,
+            "left": 191.5,
+            "right": 351,
+            "top": 533.9609375,
+            "width": 159.5,
+            "x": 191.5,
+            "y": 533.9609375
+          },
+          "text": "閉じる"
+        }
+      ],
+      "count": 2,
+      "errors": [],
+      "focus": {
+        "active": "again",
+        "background": [
+          {
+            "id": "app",
+            "inert": true
+          },
+          {
+            "id": "toast",
+            "inert": false
+          },
+          {
+            "id": "mini",
+            "inert": true
+          },
+          {
+            "id": "tabbar",
+            "inert": true
+          }
+        ],
+        "inside": true,
+        "modal": "true",
+        "role": "dialog",
+        "text": "もう一度聴く",
+        "tipOpen": false,
+        "tipOwner": null
+      },
+      "phase": "done",
+      "playing": false,
+      "recording": {
+        "active": null,
+        "button": {
+          "pressed": "false",
+          "rect": {
+            "bottom": 525.9609375,
+            "height": 46,
+            "left": 24,
+            "right": 183.5,
+            "top": 479.9609375,
+            "width": 159.5,
+            "x": 24,
+            "y": 479.9609375
+          },
+          "text": "もう一度聴く",
+          "waiting": "false"
+        },
+        "expected": 0.36987378587946296,
+        "export": {
+          "id": "r2028-10-1-395491",
+          "label": "あなたの指揮：《新世界より》第2楽章（6月 第3週）",
+          "snapshot": 0.22666935436427593
+        },
+        "hidden": false,
+        "performance": null,
+        "record": {
+          "conduct": {
+            "bpm": 134,
+            "ev": [
+              {
+                "P": 0.4485,
+                "b": 0,
+                "jolt": 0,
+                "t": 0
+              }
+            ],
+            "judge": {
+              "best": 0,
+              "e": 0,
+              "g": 0,
+              "l": 0,
+              "p": 0
+            },
+            "lv": [
+              [
+                0,
+                0.97
+              ]
+            ],
+            "stab": 100,
+            "taps": []
+          },
+          "id": "r2028-10-1-395491",
+          "snapshot": 0.22666935436427593,
+          "span": {
+            "from": 0,
+            "to": 32
+          }
+        },
+        "state": 0.5676822771783918
+      },
+      "records": 0.5311925124842674,
+      "scrollWidth": 375,
+      "waiting": false,
+      "width": 375
+    }
+  },
+  {
+    "case": "natural-before",
+    "data": {
+      "audio": [],
+      "buttons": [
+        {
+          "act": "again",
+          "rect": {
+            "bottom": 525.9609375,
+            "height": 46,
+            "left": 24,
+            "right": 183.5,
+            "top": 479.9609375,
+            "width": 159.5,
+            "x": 24,
+            "y": 479.9609375
+          },
+          "text": "止める"
+        },
+        {
+          "act": "save",
+          "rect": {
+            "bottom": 525.9609375,
+            "height": 46,
+            "left": 191.5,
+            "right": 351,
+            "top": 479.9609375,
+            "width": 159.5,
+            "x": 191.5,
+            "y": 479.9609375
+          },
+          "text": "保存する"
+        },
+        {
+          "act": "retry",
+          "rect": {
+            "bottom": 579.9609375,
+            "height": 46,
+            "left": 24,
+            "right": 183.5,
+            "top": 533.9609375,
+            "width": 159.5,
+            "x": 24,
+            "y": 533.9609375
+          },
+          "text": "もう一度指揮する"
+        },
+        {
+          "act": "close",
+          "rect": {
+            "bottom": 579.9609375,
+            "height": 46,
+            "left": 191.5,
+            "right": 351,
+            "top": 533.9609375,
+            "width": 159.5,
+            "x": 191.5,
+            "y": 533.9609375
+          },
+          "text": "閉じる"
+        }
+      ],
+      "count": 2,
+      "errors": [],
+      "focus": {
+        "active": "again",
+        "background": [
+          {
+            "id": "app",
+            "inert": true
+          },
+          {
+            "id": "toast",
+            "inert": false
+          },
+          {
+            "id": "mini",
+            "inert": true
+          },
+          {
+            "id": "tabbar",
+            "inert": true
+          }
+        ],
+        "inside": true,
+        "modal": "true",
+        "role": "dialog",
+        "text": "止める",
+        "tipOpen": false,
+        "tipOwner": null
+      },
+      "phase": "done",
+      "playing": true,
+      "recording": {
+        "active": "r2028-10-1-395491",
+        "button": {
+          "pressed": "true",
+          "rect": {
+            "bottom": 525.9609375,
+            "height": 46,
+            "left": 24,
+            "right": 183.5,
+            "top": 479.9609375,
+            "width": 159.5,
+            "x": 24,
+            "y": 479.9609375
+          },
+          "text": "止める",
+          "waiting": "false"
+        },
+        "clock": [
+          {
+            "P": 0.4485,
+            "b": 0,
+            "jolt": 0,
+            "t": 0
+          }
+        ],
+        "expected": 0.36987378587946296,
+        "export": {
+          "id": "r2028-10-1-395491",
+          "label": "あなたの指揮：《新世界より》第2楽章（6月 第3週）",
+          "snapshot": 0.22666935436427593
+        },
+        "hidden": false,
+        "performance": 0.36987378587946296,
+        "record": {
+          "conduct": {
+            "bpm": 134,
+            "ev": [
+              {
+                "P": 0.4485,
+                "b": 0,
+                "jolt": 0,
+                "t": 0
+              }
+            ],
+            "judge": {
+              "best": 0,
+              "e": 0,
+              "g": 0,
+              "l": 0,
+              "p": 0
+            },
+            "lv": [
+              [
+                0,
+                0.97
+              ]
+            ],
+            "stab": 100,
+            "taps": []
+          },
+          "id": "r2028-10-1-395491",
+          "snapshot": 0.22666935436427593,
+          "span": {
+            "from": 0,
+            "to": 32
+          }
+        },
+        "state": 0.5676822771783918
+      },
+      "records": 0.5311925124842674,
+      "scrollWidth": 375,
+      "waiting": false,
+      "width": 375
+    }
+  },
+  {
+    "case": "natural-after",
+    "data": {
+      "audio": [],
+      "buttons": [
+        {
+          "act": "again",
+          "rect": {
+            "bottom": 525.9609375,
+            "height": 46,
+            "left": 24,
+            "right": 183.5,
+            "top": 479.9609375,
+            "width": 159.5,
+            "x": 24,
+            "y": 479.9609375
+          },
+          "text": "もう一度聴く"
+        },
+        {
+          "act": "save",
+          "rect": {
+            "bottom": 525.9609375,
+            "height": 46,
+            "left": 191.5,
+            "right": 351,
+            "top": 479.9609375,
+            "width": 159.5,
+            "x": 191.5,
+            "y": 479.9609375
+          },
+          "text": "保存する"
+        },
+        {
+          "act": "retry",
+          "rect": {
+            "bottom": 579.9609375,
+            "height": 46,
+            "left": 24,
+            "right": 183.5,
+            "top": 533.9609375,
+            "width": 159.5,
+            "x": 24,
+            "y": 533.9609375
+          },
+          "text": "もう一度指揮する"
+        },
+        {
+          "act": "close",
+          "rect": {
+            "bottom": 579.9609375,
+            "height": 46,
+            "left": 191.5,
+            "right": 351,
+            "top": 533.9609375,
+            "width": 159.5,
+            "x": 191.5,
+            "y": 533.9609375
+          },
+          "text": "閉じる"
+        }
+      ],
+      "count": 2,
+      "errors": [],
+      "focus": {
+        "active": "again",
+        "background": [
+          {
+            "id": "app",
+            "inert": true
+          },
+          {
+            "id": "toast",
+            "inert": false
+          },
+          {
+            "id": "mini",
+            "inert": true
+          },
+          {
+            "id": "tabbar",
+            "inert": true
+          }
+        ],
+        "inside": true,
+        "modal": "true",
+        "role": "dialog",
+        "text": "もう一度聴く",
+        "tipOpen": false,
+        "tipOwner": null
+      },
+      "phase": "done",
+      "playing": false,
+      "recording": {
+        "active": null,
+        "button": {
+          "pressed": "false",
+          "rect": {
+            "bottom": 525.9609375,
+            "height": 46,
+            "left": 24,
+            "right": 183.5,
+            "top": 479.9609375,
+            "width": 159.5,
+            "x": 24,
+            "y": 479.9609375
+          },
+          "text": "もう一度聴く",
+          "waiting": "false"
+        },
+        "expected": 0.36987378587946296,
+        "export": {
+          "id": "r2028-10-1-395491",
+          "label": "あなたの指揮：《新世界より》第2楽章（6月 第3週）",
+          "snapshot": 0.22666935436427593
+        },
+        "hidden": false,
+        "performance": null,
+        "record": {
+          "conduct": {
+            "bpm": 134,
+            "ev": [
+              {
+                "P": 0.4485,
+                "b": 0,
+                "jolt": 0,
+                "t": 0
+              }
+            ],
+            "judge": {
+              "best": 0,
+              "e": 0,
+              "g": 0,
+              "l": 0,
+              "p": 0
+            },
+            "lv": [
+              [
+                0,
+                0.97
+              ]
+            ],
+            "stab": 100,
+            "taps": []
+          },
+          "id": "r2028-10-1-395491",
+          "snapshot": 0.22666935436427593,
+          "span": {
+            "from": 0,
+            "to": 32
+          }
+        },
+        "state": 0.5676822771783918
+      },
+      "records": 0.5311925124842674,
+      "scrollWidth": 375,
+      "waiting": false,
+      "width": 375
+    }
+  },
+  {
+    "case": "retry-waiting",
+    "data": {
+      "audio": [],
+      "buttons": [
+        {
+          "act": "again",
+          "rect": {
+            "bottom": 525.9609375,
+            "height": 46,
+            "left": 24,
+            "right": 183.5,
+            "top": 479.9609375,
+            "width": 159.5,
+            "x": 24,
+            "y": 479.9609375
+          },
+          "text": "読み込みをやめる"
+        },
+        {
+          "act": "save",
+          "rect": {
+            "bottom": 525.9609375,
+            "height": 46,
+            "left": 191.5,
+            "right": 351,
+            "top": 479.9609375,
+            "width": 159.5,
+            "x": 191.5,
+            "y": 479.9609375
+          },
+          "text": "保存する"
+        },
+        {
+          "act": "retry",
+          "rect": {
+            "bottom": 579.9609375,
+            "height": 46,
+            "left": 24,
+            "right": 183.5,
+            "top": 533.9609375,
+            "width": 159.5,
+            "x": 24,
+            "y": 533.9609375
+          },
+          "text": "もう一度指揮する"
+        },
+        {
+          "act": "close",
+          "rect": {
+            "bottom": 579.9609375,
+            "height": 46,
+            "left": 191.5,
+            "right": 351,
+            "top": 533.9609375,
+            "width": 159.5,
+            "x": 191.5,
+            "y": 533.9609375
+          },
+          "text": "閉じる"
+        }
+      ],
+      "count": 2,
+      "errors": [],
+      "focus": {
+        "active": "again",
+        "background": [
+          {
+            "id": "app",
+            "inert": true
+          },
+          {
+            "id": "toast",
+            "inert": false
+          },
+          {
+            "id": "mini",
+            "inert": true
+          },
+          {
+            "id": "tabbar",
+            "inert": true
+          }
+        ],
+        "inside": true,
+        "modal": "true",
+        "role": "dialog",
+        "text": "読み込みをやめる",
+        "tipOpen": false,
+        "tipOwner": null
+      },
+      "phase": "done",
+      "playing": false,
+      "recording": {
+        "active": "r2028-10-1-395491",
+        "button": {
+          "pressed": "true",
+          "rect": {
+            "bottom": 525.9609375,
+            "height": 46,
+            "left": 24,
+            "right": 183.5,
+            "top": 479.9609375,
+            "width": 159.5,
+            "x": 24,
+            "y": 479.9609375
+          },
+          "text": "読み込みをやめる",
+          "waiting": "true"
+        },
+        "expected": 0.36987378587946296,
+        "export": {
+          "id": "r2028-10-1-395491",
+          "label": "あなたの指揮：《新世界より》第2楽章（6月 第3週）",
+          "snapshot": 0.22666935436427593
+        },
+        "hidden": false,
+        "performance": 0.36987378587946296,
+        "record": {
+          "conduct": {
+            "bpm": 134,
+            "ev": [
+              {
+                "P": 0.4485,
+                "b": 0,
+                "jolt": 0,
+                "t": 0
+              }
+            ],
+            "judge": {
+              "best": 0,
+              "e": 0,
+              "g": 0,
+              "l": 0,
+              "p": 0
+            },
+            "lv": [
+              [
+                0,
+                0.97
+              ]
+            ],
+            "stab": 100,
+            "taps": []
+          },
+          "id": "r2028-10-1-395491",
+          "snapshot": 0.22666935436427593,
+          "span": {
+            "from": 0,
+            "to": 32
+          }
+        },
+        "state": 0.5676822771783918
+      },
+      "records": 0.5311925124842674,
+      "scrollWidth": 375,
+      "waiting": true,
+      "width": 375
+    }
+  },
+  {
+    "case": "retry-count",
+    "data": {
+      "audio": [],
+      "buttons": [
+        {
+          "act": "again",
+          "rect": {
+            "bottom": 0,
+            "height": 0,
+            "left": 0,
+            "right": 0,
+            "top": 0,
+            "width": 0,
+            "x": 0,
+            "y": 0
+          },
+          "text": "もう一度聴く"
+        },
+        {
+          "act": "save",
+          "rect": {
+            "bottom": 0,
+            "height": 0,
+            "left": 0,
+            "right": 0,
+            "top": 0,
+            "width": 0,
+            "x": 0,
+            "y": 0
+          },
+          "text": "保存する"
+        },
+        {
+          "act": "retry",
+          "rect": {
+            "bottom": 0,
+            "height": 0,
+            "left": 0,
+            "right": 0,
+            "top": 0,
+            "width": 0,
+            "x": 0,
+            "y": 0
+          },
+          "text": "もう一度指揮する"
+        },
+        {
+          "act": "close",
+          "rect": {
+            "bottom": 0,
+            "height": 0,
+            "left": 0,
+            "right": 0,
+            "top": 0,
+            "width": 0,
+            "x": 0,
+            "y": 0
+          },
+          "text": "閉じる"
+        }
+      ],
+      "count": 2,
+      "errors": [],
+      "focus": {
+        "active": "cdPad",
+        "background": [
+          {
+            "id": "app",
+            "inert": true
+          },
+          {
+            "id": "toast",
+            "inert": false
+          },
+          {
+            "id": "mini",
+            "inert": true
+          },
+          {
+            "id": "tabbar",
+            "inert": true
+          }
+        ],
+        "inside": true,
+        "modal": "true",
+        "role": "dialog",
+        "text": "タップ大きく小さく",
+        "tipOpen": false,
+        "tipOwner": null
+      },
+      "phase": "wait",
+      "playing": false,
+      "recording": {
+        "active": null,
+        "button": {
+          "pressed": "false",
+          "rect": {
+            "bottom": 0,
+            "height": 0,
+            "left": 0,
+            "right": 0,
+            "top": 0,
+            "width": 0,
+            "x": 0,
+            "y": 0
+          },
+          "text": "もう一度聴く",
+          "waiting": "false"
+        },
+        "expected": null,
+        "export": {
+          "id": "r2028-10-1-395491",
+          "label": "あなたの指揮：《新世界より》第2楽章（6月 第3週）",
+          "snapshot": 0.22666935436427593
+        },
+        "hidden": false,
+        "performance": null,
+        "record": null,
+        "state": 0.5676822771783918
+      },
+      "records": 0.5311925124842674,
+      "scrollWidth": 375,
+      "waiting": false,
+      "width": 375
+    }
+  },
+  {
+    "case": "retry-released",
+    "data": {
+      "audio": [],
+      "buttons": [
+        {
+          "act": "again",
+          "rect": {
+            "bottom": 0,
+            "height": 0,
+            "left": 0,
+            "right": 0,
+            "top": 0,
+            "width": 0,
+            "x": 0,
+            "y": 0
+          },
+          "text": "もう一度聴く"
+        },
+        {
+          "act": "save",
+          "rect": {
+            "bottom": 0,
+            "height": 0,
+            "left": 0,
+            "right": 0,
+            "top": 0,
+            "width": 0,
+            "x": 0,
+            "y": 0
+          },
+          "text": "保存する"
+        },
+        {
+          "act": "retry",
+          "rect": {
+            "bottom": 0,
+            "height": 0,
+            "left": 0,
+            "right": 0,
+            "top": 0,
+            "width": 0,
+            "x": 0,
+            "y": 0
+          },
+          "text": "もう一度指揮する"
+        },
+        {
+          "act": "close",
+          "rect": {
+            "bottom": 0,
+            "height": 0,
+            "left": 0,
+            "right": 0,
+            "top": 0,
+            "width": 0,
+            "x": 0,
+            "y": 0
+          },
+          "text": "閉じる"
+        }
+      ],
+      "count": 2,
+      "errors": [],
+      "focus": {
+        "active": "cdPad",
+        "background": [
+          {
+            "id": "app",
+            "inert": true
+          },
+          {
+            "id": "toast",
+            "inert": false
+          },
+          {
+            "id": "mini",
+            "inert": true
+          },
+          {
+            "id": "tabbar",
+            "inert": true
+          }
+        ],
+        "inside": true,
+        "modal": "true",
+        "role": "dialog",
+        "text": "タップ大きく小さく",
+        "tipOpen": false,
+        "tipOwner": null
+      },
+      "phase": "count",
+      "playing": false,
+      "recording": {
+        "active": null,
+        "button": {
+          "pressed": "false",
+          "rect": {
+            "bottom": 0,
+            "height": 0,
+            "left": 0,
+            "right": 0,
+            "top": 0,
+            "width": 0,
+            "x": 0,
+            "y": 0
+          },
+          "text": "もう一度聴く",
+          "waiting": "false"
+        },
+        "expected": null,
+        "export": {
+          "id": "r2028-10-1-395491",
+          "label": "あなたの指揮：《新世界より》第2楽章（6月 第3週）",
+          "snapshot": 0.22666935436427593
+        },
+        "hidden": false,
+        "performance": null,
+        "record": null,
+        "state": 0.5676822771783918
+      },
+      "records": 0.5311925124842674,
+      "scrollWidth": 375,
+      "waiting": false,
+      "width": 375
+    }
+  },
+  {
+    "case": "retry-playing",
+    "data": {
+      "audio": [],
+      "buttons": [
+        {
+          "act": "again",
+          "rect": {
+            "bottom": 0,
+            "height": 0,
+            "left": 0,
+            "right": 0,
+            "top": 0,
+            "width": 0,
+            "x": 0,
+            "y": 0
+          },
+          "text": "もう一度聴く"
+        },
+        {
+          "act": "save",
+          "rect": {
+            "bottom": 0,
+            "height": 0,
+            "left": 0,
+            "right": 0,
+            "top": 0,
+            "width": 0,
+            "x": 0,
+            "y": 0
+          },
+          "text": "保存する"
+        },
+        {
+          "act": "retry",
+          "rect": {
+            "bottom": 0,
+            "height": 0,
+            "left": 0,
+            "right": 0,
+            "top": 0,
+            "width": 0,
+            "x": 0,
+            "y": 0
+          },
+          "text": "もう一度指揮する"
+        },
+        {
+          "act": "close",
+          "rect": {
+            "bottom": 0,
+            "height": 0,
+            "left": 0,
+            "right": 0,
+            "top": 0,
+            "width": 0,
+            "x": 0,
+            "y": 0
+          },
+          "text": "閉じる"
+        }
+      ],
+      "count": 2,
+      "errors": [],
+      "focus": {
+        "active": "cdPad",
+        "background": [
+          {
+            "id": "app",
+            "inert": true
+          },
+          {
+            "id": "toast",
+            "inert": false
+          },
+          {
+            "id": "mini",
+            "inert": true
+          },
+          {
+            "id": "tabbar",
+            "inert": true
+          }
+        ],
+        "inside": true,
+        "modal": "true",
+        "role": "dialog",
+        "text": "タップ大きく小さく",
+        "tipOpen": false,
+        "tipOwner": null
+      },
+      "phase": "play",
+      "playing": true,
+      "recording": {
+        "active": null,
+        "button": {
+          "pressed": "false",
+          "rect": {
+            "bottom": 0,
+            "height": 0,
+            "left": 0,
+            "right": 0,
+            "top": 0,
+            "width": 0,
+            "x": 0,
+            "y": 0
+          },
+          "text": "もう一度聴く",
+          "waiting": "false"
+        },
+        "clock": [
+          {
+            "P": 0.4695,
+            "b": 0,
+            "jolt": 0,
+            "t": 0
+          }
+        ],
+        "expected": null,
+        "export": {
+          "id": "r2028-10-1-395491",
+          "label": "あなたの指揮：《新世界より》第2楽章（6月 第3週）",
+          "snapshot": 0.22666935436427593
+        },
+        "hidden": false,
+        "performance": 0.36987378587946296,
+        "record": null,
+        "state": 0.5676822771783918
+      },
+      "records": 0.5311925124842674,
+      "scrollWidth": 375,
+      "waiting": false,
+      "width": 375
+    }
+  },
+  {
+    "case": "retry-finished",
+    "data": {
+      "audio": [],
+      "buttons": [
+        {
+          "act": "again",
+          "rect": {
+            "bottom": 525.9609375,
+            "height": 46,
+            "left": 24,
+            "right": 183.5,
+            "top": 479.9609375,
+            "width": 159.5,
+            "x": 24,
+            "y": 479.9609375
+          },
+          "text": "もう一度聴く"
+        },
+        {
+          "act": "save",
+          "rect": {
+            "bottom": 525.9609375,
+            "height": 46,
+            "left": 191.5,
+            "right": 351,
+            "top": 479.9609375,
+            "width": 159.5,
+            "x": 191.5,
+            "y": 479.9609375
+          },
+          "text": "保存する"
+        },
+        {
+          "act": "retry",
+          "rect": {
+            "bottom": 579.9609375,
+            "height": 46,
+            "left": 24,
+            "right": 183.5,
+            "top": 533.9609375,
+            "width": 159.5,
+            "x": 24,
+            "y": 533.9609375
+          },
+          "text": "もう一度指揮する"
+        },
+        {
+          "act": "close",
+          "rect": {
+            "bottom": 579.9609375,
+            "height": 46,
+            "left": 191.5,
+            "right": 351,
+            "top": 533.9609375,
+            "width": 159.5,
+            "x": 191.5,
+            "y": 533.9609375
+          },
+          "text": "閉じる"
+        }
+      ],
+      "count": 3,
+      "errors": [],
+      "focus": {
+        "active": "H3",
+        "background": [
+          {
+            "id": "app",
+            "inert": true
+          },
+          {
+            "id": "toast",
+            "inert": false
+          },
+          {
+            "id": "mini",
+            "inert": true
+          },
+          {
+            "id": "tabbar",
+            "inert": true
+          }
+        ],
+        "inside": true,
+        "modal": "true",
+        "role": "dialog",
+        "text": "演奏おわり",
+        "tipOpen": false,
+        "tipOwner": null
+      },
+      "phase": "done",
+      "playing": false,
+      "recording": {
+        "active": null,
+        "button": {
+          "pressed": "false",
+          "rect": {
+            "bottom": 525.9609375,
+            "height": 46,
+            "left": 24,
+            "right": 183.5,
+            "top": 479.9609375,
+            "width": 159.5,
+            "x": 24,
+            "y": 479.9609375
+          },
+          "text": "もう一度聴く",
+          "waiting": "false"
+        },
+        "expected": 0.36987378587946296,
+        "export": {
+          "id": "r2028-10-1-395491",
+          "label": "あなたの指揮：《新世界より》第2楽章（6月 第3週）",
+          "snapshot": 0.22666935436427593
+        },
+        "hidden": false,
+        "performance": null,
+        "record": {
+          "conduct": {
+            "bpm": 128,
+            "ev": [
+              {
+                "P": 0.4695,
+                "b": 0,
+                "jolt": 0,
+                "t": 0
+              }
+            ],
+            "judge": {
+              "best": 0,
+              "e": 0,
+              "g": 0,
+              "l": 0,
+              "p": 0
+            },
+            "lv": [
+              [
+                0,
+                0.97
+              ]
+            ],
+            "stab": 100,
+            "taps": []
+          },
+          "id": "r2028-10-2-395491",
+          "snapshot": 0.22666935436427593,
+          "span": {
+            "from": 0,
+            "to": 32
+          }
+        },
+        "state": 0.01168573391623795
+      },
+      "records": 0.5704102092422545,
+      "scrollWidth": 375,
+      "waiting": false,
+      "width": 375
+    }
+  },
+  {
+    "case": "small-dark-wait",
+    "data": {
+      "audio": [],
+      "buttons": [
+        {
+          "act": "again",
+          "rect": {
+            "bottom": 507.15625,
+            "height": 46,
+            "left": 24,
+            "right": 183.5,
+            "top": 461.15625,
+            "width": 159.5,
+            "x": 24,
+            "y": 461.15625
+          },
+          "text": "読み込みをやめる"
+        },
+        {
+          "act": "save",
+          "rect": {
+            "bottom": 507.15625,
+            "height": 46,
+            "left": 191.5,
+            "right": 351,
+            "top": 461.15625,
+            "width": 159.5,
+            "x": 191.5,
+            "y": 461.15625
+          },
+          "text": "保存する"
+        },
+        {
+          "act": "retry",
+          "rect": {
+            "bottom": 561.15625,
+            "height": 46,
+            "left": 24,
+            "right": 183.5,
+            "top": 515.15625,
+            "width": 159.5,
+            "x": 24,
+            "y": 515.15625
+          },
+          "text": "もう一度指揮する"
+        },
+        {
+          "act": "close",
+          "rect": {
+            "bottom": 561.15625,
+            "height": 46,
+            "left": 191.5,
+            "right": 351,
+            "top": 515.15625,
+            "width": 159.5,
+            "x": 191.5,
+            "y": 515.15625
+          },
+          "text": "閉じる"
+        }
+      ],
+      "count": 3,
+      "errors": [],
+      "focus": {
+        "active": "again",
+        "background": [
+          {
+            "id": "app",
+            "inert": true
+          },
+          {
+            "id": "toast",
+            "inert": false
+          },
+          {
+            "id": "mini",
+            "inert": true
+          },
+          {
+            "id": "tabbar",
+            "inert": true
+          }
+        ],
+        "inside": true,
+        "modal": "true",
+        "role": "dialog",
+        "text": "読み込みをやめる",
+        "tipOpen": false,
+        "tipOwner": null
+      },
+      "phase": "done",
+      "playing": false,
+      "recording": {
+        "active": "r2028-10-2-395491",
+        "button": {
+          "pressed": "true",
+          "rect": {
+            "bottom": 507.15625,
+            "height": 46,
+            "left": 24,
+            "right": 183.5,
+            "top": 461.15625,
+            "width": 159.5,
+            "x": 24,
+            "y": 461.15625
+          },
+          "text": "読み込みをやめる",
+          "waiting": "true"
+        },
+        "expected": 0.36987378587946296,
+        "export": {
+          "id": "r2028-10-1-395491",
+          "label": "あなたの指揮：《新世界より》第2楽章（6月 第3週）",
+          "snapshot": 0.22666935436427593
+        },
+        "hidden": false,
+        "performance": 0.36987378587946296,
+        "record": {
+          "conduct": {
+            "bpm": 128,
+            "ev": [
+              {
+                "P": 0.4695,
+                "b": 0,
+                "jolt": 0,
+                "t": 0
+              }
+            ],
+            "judge": {
+              "best": 0,
+              "e": 0,
+              "g": 0,
+              "l": 0,
+              "p": 0
+            },
+            "lv": [
+              [
+                0,
+                0.97
+              ]
+            ],
+            "stab": 100,
+            "taps": []
+          },
+          "id": "r2028-10-2-395491",
+          "snapshot": 0.22666935436427593,
+          "span": {
+            "from": 0,
+            "to": 32
+          }
+        },
+        "state": 0.01168573391623795
+      },
+      "records": 0.5704102092422545,
+      "scrollWidth": 375,
+      "waiting": true,
+      "width": 375
+    }
+  },
+  {
+    "case": "small-light-wait",
+    "data": {
+      "audio": [],
+      "buttons": [
+        {
+          "act": "again",
+          "rect": {
+            "bottom": 507.15625,
+            "height": 46,
+            "left": 24,
+            "right": 183.5,
+            "top": 461.15625,
+            "width": 159.5,
+            "x": 24,
+            "y": 461.15625
+          },
+          "text": "読み込みをやめる"
+        },
+        {
+          "act": "save",
+          "rect": {
+            "bottom": 507.15625,
+            "height": 46,
+            "left": 191.5,
+            "right": 351,
+            "top": 461.15625,
+            "width": 159.5,
+            "x": 191.5,
+            "y": 461.15625
+          },
+          "text": "保存する"
+        },
+        {
+          "act": "retry",
+          "rect": {
+            "bottom": 561.15625,
+            "height": 46,
+            "left": 24,
+            "right": 183.5,
+            "top": 515.15625,
+            "width": 159.5,
+            "x": 24,
+            "y": 515.15625
+          },
+          "text": "もう一度指揮する"
+        },
+        {
+          "act": "close",
+          "rect": {
+            "bottom": 561.15625,
+            "height": 46,
+            "left": 191.5,
+            "right": 351,
+            "top": 515.15625,
+            "width": 159.5,
+            "x": 191.5,
+            "y": 515.15625
+          },
+          "text": "閉じる"
+        }
+      ],
+      "count": 3,
+      "errors": [],
+      "focus": {
+        "active": "again",
+        "background": [
+          {
+            "id": "app",
+            "inert": true
+          },
+          {
+            "id": "toast",
+            "inert": false
+          },
+          {
+            "id": "mini",
+            "inert": true
+          },
+          {
+            "id": "tabbar",
+            "inert": true
+          }
+        ],
+        "inside": true,
+        "modal": "true",
+        "role": "dialog",
+        "text": "読み込みをやめる",
+        "tipOpen": false,
+        "tipOwner": null
+      },
+      "phase": "done",
+      "playing": false,
+      "recording": {
+        "active": "r2028-10-2-395491",
+        "button": {
+          "pressed": "true",
+          "rect": {
+            "bottom": 507.15625,
+            "height": 46,
+            "left": 24,
+            "right": 183.5,
+            "top": 461.15625,
+            "width": 159.5,
+            "x": 24,
+            "y": 461.15625
+          },
+          "text": "読み込みをやめる",
+          "waiting": "true"
+        },
+        "expected": 0.36987378587946296,
+        "export": {
+          "id": "r2028-10-1-395491",
+          "label": "あなたの指揮：《新世界より》第2楽章（6月 第3週）",
+          "snapshot": 0.22666935436427593
+        },
+        "hidden": false,
+        "performance": 0.36987378587946296,
+        "record": {
+          "conduct": {
+            "bpm": 128,
+            "ev": [
+              {
+                "P": 0.4695,
+                "b": 0,
+                "jolt": 0,
+                "t": 0
+              }
+            ],
+            "judge": {
+              "best": 0,
+              "e": 0,
+              "g": 0,
+              "l": 0,
+              "p": 0
+            },
+            "lv": [
+              [
+                0,
+                0.97
+              ]
+            ],
+            "stab": 100,
+            "taps": []
+          },
+          "id": "r2028-10-2-395491",
+          "snapshot": 0.22666935436427593,
+          "span": {
+            "from": 0,
+            "to": 32
+          }
+        },
+        "state": 0.01168573391623795
+      },
+      "records": 0.5704102092422545,
+      "scrollWidth": 375,
+      "waiting": true,
+      "width": 375
+    }
+  },
+  {
+    "case": "escape-before",
+    "data": {
+      "audio": [],
+      "buttons": [
+        {
+          "act": "again",
+          "rect": {
+            "bottom": 507.15625,
+            "height": 46,
+            "left": 24,
+            "right": 183.5,
+            "top": 461.15625,
+            "width": 159.5,
+            "x": 24,
+            "y": 461.15625
+          },
+          "text": "止める"
+        },
+        {
+          "act": "save",
+          "rect": {
+            "bottom": 507.15625,
+            "height": 46,
+            "left": 191.5,
+            "right": 351,
+            "top": 461.15625,
+            "width": 159.5,
+            "x": 191.5,
+            "y": 461.15625
+          },
+          "text": "保存する"
+        },
+        {
+          "act": "retry",
+          "rect": {
+            "bottom": 561.15625,
+            "height": 46,
+            "left": 24,
+            "right": 183.5,
+            "top": 515.15625,
+            "width": 159.5,
+            "x": 24,
+            "y": 515.15625
+          },
+          "text": "もう一度指揮する"
+        },
+        {
+          "act": "close",
+          "rect": {
+            "bottom": 561.15625,
+            "height": 46,
+            "left": 191.5,
+            "right": 351,
+            "top": 515.15625,
+            "width": 159.5,
+            "x": 191.5,
+            "y": 515.15625
+          },
+          "text": "閉じる"
+        }
+      ],
+      "count": 3,
+      "errors": [],
+      "focus": {
+        "active": "again",
+        "background": [
+          {
+            "id": "app",
+            "inert": true
+          },
+          {
+            "id": "toast",
+            "inert": false
+          },
+          {
+            "id": "mini",
+            "inert": true
+          },
+          {
+            "id": "tabbar",
+            "inert": true
+          }
+        ],
+        "inside": true,
+        "modal": "true",
+        "role": "dialog",
+        "text": "止める",
+        "tipOpen": false,
+        "tipOwner": null
+      },
+      "phase": "done",
+      "playing": true,
+      "recording": {
+        "active": "r2028-10-2-395491",
+        "button": {
+          "pressed": "true",
+          "rect": {
+            "bottom": 507.15625,
+            "height": 46,
+            "left": 24,
+            "right": 183.5,
+            "top": 461.15625,
+            "width": 159.5,
+            "x": 24,
+            "y": 461.15625
+          },
+          "text": "止める",
+          "waiting": "false"
+        },
+        "clock": [
+          {
+            "P": 0.4695,
+            "b": 0,
+            "jolt": 0,
+            "t": 0
+          }
+        ],
+        "expected": 0.36987378587946296,
+        "export": {
+          "id": "r2028-10-1-395491",
+          "label": "あなたの指揮：《新世界より》第2楽章（6月 第3週）",
+          "snapshot": 0.22666935436427593
+        },
+        "hidden": false,
+        "performance": 0.36987378587946296,
+        "record": {
+          "conduct": {
+            "bpm": 128,
+            "ev": [
+              {
+                "P": 0.4695,
+                "b": 0,
+                "jolt": 0,
+                "t": 0
+              }
+            ],
+            "judge": {
+              "best": 0,
+              "e": 0,
+              "g": 0,
+              "l": 0,
+              "p": 0
+            },
+            "lv": [
+              [
+                0,
+                0.97
+              ]
+            ],
+            "stab": 100,
+            "taps": []
+          },
+          "id": "r2028-10-2-395491",
+          "snapshot": 0.22666935436427593,
+          "span": {
+            "from": 0,
+            "to": 32
+          }
+        },
+        "state": 0.01168573391623795
+      },
+      "records": 0.5704102092422545,
+      "scrollWidth": 375,
+      "waiting": false,
+      "width": 375
+    }
+  },
+  {
+    "case": "escape-stops",
+    "data": {
+      "audio": [],
+      "buttons": [
+        {
+          "act": "again",
+          "rect": {
+            "bottom": 0,
+            "height": 0,
+            "left": 0,
+            "right": 0,
+            "top": 0,
+            "width": 0,
+            "x": 0,
+            "y": 0
+          },
+          "text": "もう一度聴く"
+        },
+        {
+          "act": "save",
+          "rect": {
+            "bottom": 0,
+            "height": 0,
+            "left": 0,
+            "right": 0,
+            "top": 0,
+            "width": 0,
+            "x": 0,
+            "y": 0
+          },
+          "text": "保存する"
+        },
+        {
+          "act": "retry",
+          "rect": {
+            "bottom": 0,
+            "height": 0,
+            "left": 0,
+            "right": 0,
+            "top": 0,
+            "width": 0,
+            "x": 0,
+            "y": 0
+          },
+          "text": "もう一度指揮する"
+        },
+        {
+          "act": "close",
+          "rect": {
+            "bottom": 0,
+            "height": 0,
+            "left": 0,
+            "right": 0,
+            "top": 0,
+            "width": 0,
+            "x": 0,
+            "y": 0
+          },
+          "text": "閉じる"
+        }
+      ],
+      "count": 3,
+      "errors": [],
+      "focus": {
+        "active": "btnConduct",
+        "background": [
+          {
+            "id": "app",
+            "inert": false
+          },
+          {
+            "id": "mini",
+            "inert": false
+          },
+          {
+            "id": "tabbar",
+            "inert": false
+          },
+          {
+            "id": "toast",
+            "inert": false
+          }
+        ],
+        "inside": false,
+        "modal": "true",
+        "role": "dialog",
+        "text": "指揮する",
+        "tipOpen": false,
+        "tipOwner": null
+      },
+      "phase": "idle",
+      "playing": false,
+      "recording": {
+        "active": null,
+        "button": {
+          "pressed": "false",
+          "rect": {
+            "bottom": 0,
+            "height": 0,
+            "left": 0,
+            "right": 0,
+            "top": 0,
+            "width": 0,
+            "x": 0,
+            "y": 0
+          },
+          "text": "もう一度聴く",
+          "waiting": "false"
+        },
+        "expected": 0.36987378587946296,
+        "export": {
+          "id": "r2028-10-1-395491",
+          "label": "あなたの指揮：《新世界より》第2楽章（6月 第3週）",
+          "snapshot": 0.22666935436427593
+        },
+        "hidden": true,
+        "performance": null,
+        "record": {
+          "conduct": {
+            "bpm": 128,
+            "ev": [
+              {
+                "P": 0.4695,
+                "b": 0,
+                "jolt": 0,
+                "t": 0
+              }
+            ],
+            "judge": {
+              "best": 0,
+              "e": 0,
+              "g": 0,
+              "l": 0,
+              "p": 0
+            },
+            "lv": [
+              [
+                0,
+                0.97
+              ]
+            ],
+            "stab": 100,
+            "taps": []
+          },
+          "id": "r2028-10-2-395491",
+          "snapshot": 0.22666935436427593,
+          "span": {
+            "from": 0,
+            "to": 32
+          }
+        },
+        "state": 0.01168573391623795
+      },
+      "records": 0.5704102092422545,
+      "scrollWidth": 375,
+      "waiting": false,
+      "width": 375
+    }
+  },
+  {
+    "case": "one-year",
+    "data": {
+      "boot": {
+        "errors": [],
+        "failed": [],
+        "loaded": 33,
+        "scripts": 33
+      },
+      "errors": [],
+      "steps": 49,
+      "year": 2027
+    }
+  },
+  {
+    "case": "recapture-playing",
+    "data": {
+      "audio": [],
+      "buttons": [],
+      "count": 1,
+      "errors": [],
+      "focus": {
+        "active": "cdPad",
+        "background": [
+          {
+            "id": "app",
+            "inert": true
+          },
+          {
+            "id": "toast",
+            "inert": false
+          },
+          {
+            "id": "mini",
+            "inert": true
+          },
+          {
+            "id": "tabbar",
+            "inert": true
+          }
+        ],
+        "inside": true,
+        "modal": "true",
+        "role": "dialog",
+        "text": "タップ大きく小さく",
+        "tipOpen": false,
+        "tipOwner": null
+      },
+      "phase": "play",
+      "playing": true,
+      "recording": {
+        "active": null,
+        "button": null,
+        "clock": [
+          {
+            "P": 0.4689,
+            "b": 0,
+            "jolt": 0,
+            "t": 0
+          }
+        ],
+        "expected": null,
+        "hidden": false,
+        "performance": 0.36987378587946296,
+        "record": null,
+        "state": 0.4049305496737361
+      },
+      "records": 0.3808081126771867,
+      "scrollWidth": 375,
+      "waiting": false,
+      "width": 375
+    }
+  },
+  {
+    "case": "recapture-dark",
+    "data": {
+      "audio": [],
+      "buttons": [
+        {
+          "act": "again",
+          "rect": {
+            "bottom": 525.9609375,
+            "height": 46,
+            "left": 24,
+            "right": 183.5,
+            "top": 479.9609375,
+            "width": 159.5,
+            "x": 24,
+            "y": 479.9609375
+          },
+          "text": "止める"
+        },
+        {
+          "act": "save",
+          "rect": {
+            "bottom": 525.9609375,
+            "height": 46,
+            "left": 191.5,
+            "right": 351,
+            "top": 479.9609375,
+            "width": 159.5,
+            "x": 191.5,
+            "y": 479.9609375
+          },
+          "text": "保存する"
+        },
+        {
+          "act": "retry",
+          "rect": {
+            "bottom": 579.9609375,
+            "height": 46,
+            "left": 24,
+            "right": 183.5,
+            "top": 533.9609375,
+            "width": 159.5,
+            "x": 24,
+            "y": 533.9609375
+          },
+          "text": "もう一度指揮する"
+        },
+        {
+          "act": "close",
+          "rect": {
+            "bottom": 579.9609375,
+            "height": 46,
+            "left": 191.5,
+            "right": 351,
+            "top": 533.9609375,
+            "width": 159.5,
+            "x": 191.5,
+            "y": 533.9609375
+          },
+          "text": "閉じる"
+        }
+      ],
+      "count": 2,
+      "errors": [],
+      "focus": {
+        "active": "again",
+        "background": [
+          {
+            "id": "app",
+            "inert": true
+          },
+          {
+            "id": "toast",
+            "inert": false
+          },
+          {
+            "id": "mini",
+            "inert": true
+          },
+          {
+            "id": "tabbar",
+            "inert": true
+          }
+        ],
+        "inside": true,
+        "modal": "true",
+        "role": "dialog",
+        "text": "止める",
+        "tipOpen": false,
+        "tipOwner": null
+      },
+      "phase": "done",
+      "playing": true,
+      "recording": {
+        "active": "r2028-10-1-395491",
+        "button": {
+          "pressed": "true",
+          "rect": {
+            "bottom": 525.9609375,
+            "height": 46,
+            "left": 24,
+            "right": 183.5,
+            "top": 479.9609375,
+            "width": 159.5,
+            "x": 24,
+            "y": 479.9609375
+          },
+          "text": "止める",
+          "waiting": "false"
+        },
+        "clock": [
+          {
+            "P": 0.4689,
+            "b": 0,
+            "jolt": 0,
+            "t": 0
+          }
+        ],
+        "expected": 0.36987378587946296,
+        "hidden": false,
+        "performance": 0.36987378587946296,
+        "record": {
+          "conduct": {
+            "bpm": 128,
+            "ev": [
+              {
+                "P": 0.4689,
+                "b": 0,
+                "jolt": 0,
+                "t": 0
+              }
+            ],
+            "judge": {
+              "best": 0,
+              "e": 0,
+              "g": 0,
+              "l": 0,
+              "p": 0
+            },
+            "lv": [
+              [
+                0,
+                0.97
+              ]
+            ],
+            "stab": 100,
+            "taps": []
+          },
+          "id": "r2028-10-1-395491",
+          "snapshot": 0.22666935436427593,
+          "span": {
+            "from": 0,
+            "to": 32
+          }
+        },
+        "state": 0.37517200293950737
+      },
+      "records": 0.130202429369092,
+      "scrollWidth": 375,
+      "waiting": false,
+      "width": 375
+    }
+  },
+  {
+    "case": "recapture-light",
+    "data": {
+      "audio": [
+        "SampleVoice"
+      ],
+      "buttons": [
+        {
+          "act": "again",
+          "rect": {
+            "bottom": 525.9609375,
+            "height": 46,
+            "left": 24,
+            "right": 183.5,
+            "top": 479.9609375,
+            "width": 159.5,
+            "x": 24,
+            "y": 479.9609375
+          },
+          "text": "止める"
+        },
+        {
+          "act": "save",
+          "rect": {
+            "bottom": 525.9609375,
+            "height": 46,
+            "left": 191.5,
+            "right": 351,
+            "top": 479.9609375,
+            "width": 159.5,
+            "x": 191.5,
+            "y": 479.9609375
+          },
+          "text": "保存する"
+        },
+        {
+          "act": "retry",
+          "rect": {
+            "bottom": 579.9609375,
+            "height": 46,
+            "left": 24,
+            "right": 183.5,
+            "top": 533.9609375,
+            "width": 159.5,
+            "x": 24,
+            "y": 533.9609375
+          },
+          "text": "もう一度指揮する"
+        },
+        {
+          "act": "close",
+          "rect": {
+            "bottom": 579.9609375,
+            "height": 46,
+            "left": 191.5,
+            "right": 351,
+            "top": 533.9609375,
+            "width": 159.5,
+            "x": 191.5,
+            "y": 533.9609375
+          },
+          "text": "閉じる"
+        }
+      ],
+      "count": 2,
+      "errors": [],
+      "focus": {
+        "active": "again",
+        "background": [
+          {
+            "id": "app",
+            "inert": true
+          },
+          {
+            "id": "toast",
+            "inert": false
+          },
+          {
+            "id": "mini",
+            "inert": true
+          },
+          {
+            "id": "tabbar",
+            "inert": true
+          }
+        ],
+        "inside": true,
+        "modal": "true",
+        "role": "dialog",
+        "text": "止める",
+        "tipOpen": false,
+        "tipOwner": null
+      },
+      "phase": "done",
+      "playing": true,
+      "recording": {
+        "active": "r2028-10-1-395491",
+        "button": {
+          "pressed": "true",
+          "rect": {
+            "bottom": 525.9609375,
+            "height": 46,
+            "left": 24,
+            "right": 183.5,
+            "top": 479.9609375,
+            "width": 159.5,
+            "x": 24,
+            "y": 479.9609375
+          },
+          "text": "止める",
+          "waiting": "false"
+        },
+        "clock": [
+          {
+            "P": 0.4689,
+            "b": 0,
+            "jolt": 0,
+            "t": 0
+          }
+        ],
+        "expected": 0.36987378587946296,
+        "hidden": false,
+        "performance": 0.36987378587946296,
+        "record": {
+          "conduct": {
+            "bpm": 128,
+            "ev": [
+              {
+                "P": 0.4689,
+                "b": 0,
+                "jolt": 0,
+                "t": 0
+              }
+            ],
+            "judge": {
+              "best": 0,
+              "e": 0,
+              "g": 0,
+              "l": 0,
+              "p": 0
+            },
+            "lv": [
+              [
+                0,
+                0.97
+              ]
+            ],
+            "stab": 100,
+            "taps": []
+          },
+          "id": "r2028-10-1-395491",
+          "snapshot": 0.22666935436427593,
+          "span": {
+            "from": 0,
+            "to": 32
+          }
+        },
+        "state": 0.37517200293950737
+      },
+      "records": 0.130202429369092,
+      "scrollWidth": 375,
+      "waiting": false,
+      "width": 375
+    }
+  },
+  {
+    "case": "recapture-small-light",
+    "data": {
+      "audio": [],
+      "buttons": [
+        {
+          "act": "again",
+          "rect": {
+            "bottom": 507.15625,
+            "height": 46,
+            "left": 24,
+            "right": 183.5,
+            "top": 461.15625,
+            "width": 159.5,
+            "x": 24,
+            "y": 461.15625
+          },
+          "text": "読み込みをやめる"
+        },
+        {
+          "act": "save",
+          "rect": {
+            "bottom": 507.15625,
+            "height": 46,
+            "left": 191.5,
+            "right": 351,
+            "top": 461.15625,
+            "width": 159.5,
+            "x": 191.5,
+            "y": 461.15625
+          },
+          "text": "保存する"
+        },
+        {
+          "act": "retry",
+          "rect": {
+            "bottom": 561.15625,
+            "height": 46,
+            "left": 24,
+            "right": 183.5,
+            "top": 515.15625,
+            "width": 159.5,
+            "x": 24,
+            "y": 515.15625
+          },
+          "text": "もう一度指揮する"
+        },
+        {
+          "act": "close",
+          "rect": {
+            "bottom": 561.15625,
+            "height": 46,
+            "left": 191.5,
+            "right": 351,
+            "top": 515.15625,
+            "width": 159.5,
+            "x": 191.5,
+            "y": 515.15625
+          },
+          "text": "閉じる"
+        }
+      ],
+      "count": 2,
+      "errors": [],
+      "focus": {
+        "active": "again",
+        "background": [
+          {
+            "id": "app",
+            "inert": true
+          },
+          {
+            "id": "toast",
+            "inert": false
+          },
+          {
+            "id": "mini",
+            "inert": true
+          },
+          {
+            "id": "tabbar",
+            "inert": true
+          }
+        ],
+        "inside": true,
+        "modal": "true",
+        "role": "dialog",
+        "text": "読み込みをやめる",
+        "tipOpen": false,
+        "tipOwner": null
+      },
+      "phase": "done",
+      "playing": false,
+      "recording": {
+        "active": "r2028-10-1-395491",
+        "button": {
+          "pressed": "true",
+          "rect": {
+            "bottom": 507.15625,
+            "height": 46,
+            "left": 24,
+            "right": 183.5,
+            "top": 461.15625,
+            "width": 159.5,
+            "x": 24,
+            "y": 461.15625
+          },
+          "text": "読み込みをやめる",
+          "waiting": "true"
+        },
+        "expected": 0.36987378587946296,
+        "hidden": false,
+        "performance": 0.36987378587946296,
+        "record": {
+          "conduct": {
+            "bpm": 128,
+            "ev": [
+              {
+                "P": 0.4689,
+                "b": 0,
+                "jolt": 0,
+                "t": 0
+              }
+            ],
+            "judge": {
+              "best": 0,
+              "e": 0,
+              "g": 0,
+              "l": 0,
+              "p": 0
+            },
+            "lv": [
+              [
+                0,
+                0.97
+              ]
+            ],
+            "stab": 100,
+            "taps": []
+          },
+          "id": "r2028-10-1-395491",
+          "snapshot": 0.22666935436427593,
+          "span": {
+            "from": 0,
+            "to": 32
+          }
+        },
+        "state": 0.37517200293950737
+      },
+      "records": 0.130202429369092,
+      "scrollWidth": 375,
+      "waiting": true,
+      "width": 375
+    }
+  },
+  {
+    "case": "recapture-small-dark",
+    "data": {
+      "audio": [],
+      "buttons": [
+        {
+          "act": "again",
+          "rect": {
+            "bottom": 507.15625,
+            "height": 46,
+            "left": 24,
+            "right": 183.5,
+            "top": 461.15625,
+            "width": 159.5,
+            "x": 24,
+            "y": 461.15625
+          },
+          "text": "読み込みをやめる"
+        },
+        {
+          "act": "save",
+          "rect": {
+            "bottom": 507.15625,
+            "height": 46,
+            "left": 191.5,
+            "right": 351,
+            "top": 461.15625,
+            "width": 159.5,
+            "x": 191.5,
+            "y": 461.15625
+          },
+          "text": "保存する"
+        },
+        {
+          "act": "retry",
+          "rect": {
+            "bottom": 561.15625,
+            "height": 46,
+            "left": 24,
+            "right": 183.5,
+            "top": 515.15625,
+            "width": 159.5,
+            "x": 24,
+            "y": 515.15625
+          },
+          "text": "もう一度指揮する"
+        },
+        {
+          "act": "close",
+          "rect": {
+            "bottom": 561.15625,
+            "height": 46,
+            "left": 191.5,
+            "right": 351,
+            "top": 515.15625,
+            "width": 159.5,
+            "x": 191.5,
+            "y": 515.15625
+          },
+          "text": "閉じる"
+        }
+      ],
+      "count": 2,
+      "errors": [],
+      "focus": {
+        "active": "again",
+        "background": [
+          {
+            "id": "app",
+            "inert": true
+          },
+          {
+            "id": "toast",
+            "inert": false
+          },
+          {
+            "id": "mini",
+            "inert": true
+          },
+          {
+            "id": "tabbar",
+            "inert": true
+          }
+        ],
+        "inside": true,
+        "modal": "true",
+        "role": "dialog",
+        "text": "読み込みをやめる",
+        "tipOpen": false,
+        "tipOwner": null
+      },
+      "phase": "done",
+      "playing": false,
+      "recording": {
+        "active": "r2028-10-1-395491",
+        "button": {
+          "pressed": "true",
+          "rect": {
+            "bottom": 507.15625,
+            "height": 46,
+            "left": 24,
+            "right": 183.5,
+            "top": 461.15625,
+            "width": 159.5,
+            "x": 24,
+            "y": 461.15625
+          },
+          "text": "読み込みをやめる",
+          "waiting": "true"
+        },
+        "expected": 0.36987378587946296,
+        "hidden": false,
+        "performance": 0.36987378587946296,
+        "record": {
+          "conduct": {
+            "bpm": 128,
+            "ev": [
+              {
+                "P": 0.4689,
+                "b": 0,
+                "jolt": 0,
+                "t": 0
+              }
+            ],
+            "judge": {
+              "best": 0,
+              "e": 0,
+              "g": 0,
+              "l": 0,
+              "p": 0
+            },
+            "lv": [
+              [
+                0,
+                0.97
+              ]
+            ],
+            "stab": 100,
+            "taps": []
+          },
+          "id": "r2028-10-1-395491",
+          "snapshot": 0.22666935436427593,
+          "span": {
+            "from": 0,
+            "to": 32
+          }
+        },
+        "state": 0.37517200293950737
+      },
+      "records": 0.130202429369092,
+      "scrollWidth": 375,
+      "waiting": true,
+      "width": 375
+    }
+  },
+  {
+    "case": "header-stops-waiting",
+    "data": {
+      "audio": [],
+      "buttons": [
+        {
+          "act": "again",
+          "rect": {
+            "bottom": 0,
+            "height": 0,
+            "left": 0,
+            "right": 0,
+            "top": 0,
+            "width": 0,
+            "x": 0,
+            "y": 0
+          },
+          "text": "もう一度聴く"
+        },
+        {
+          "act": "save",
+          "rect": {
+            "bottom": 0,
+            "height": 0,
+            "left": 0,
+            "right": 0,
+            "top": 0,
+            "width": 0,
+            "x": 0,
+            "y": 0
+          },
+          "text": "保存する"
+        },
+        {
+          "act": "retry",
+          "rect": {
+            "bottom": 0,
+            "height": 0,
+            "left": 0,
+            "right": 0,
+            "top": 0,
+            "width": 0,
+            "x": 0,
+            "y": 0
+          },
+          "text": "もう一度指揮する"
+        },
+        {
+          "act": "close",
+          "rect": {
+            "bottom": 0,
+            "height": 0,
+            "left": 0,
+            "right": 0,
+            "top": 0,
+            "width": 0,
+            "x": 0,
+            "y": 0
+          },
+          "text": "閉じる"
+        }
+      ],
+      "count": 2,
+      "errors": [],
+      "focus": {
+        "active": "btnConduct",
+        "background": [
+          {
+            "id": "app",
+            "inert": false
+          },
+          {
+            "id": "mini",
+            "inert": false
+          },
+          {
+            "id": "tabbar",
+            "inert": false
+          },
+          {
+            "id": "toast",
+            "inert": false
+          }
+        ],
+        "inside": false,
+        "modal": "true",
+        "role": "dialog",
+        "text": "指揮する",
+        "tipOpen": false,
+        "tipOwner": null
+      },
+      "phase": "idle",
+      "playing": false,
+      "recording": {
+        "active": null,
+        "button": {
+          "pressed": "false",
+          "rect": {
+            "bottom": 0,
+            "height": 0,
+            "left": 0,
+            "right": 0,
+            "top": 0,
+            "width": 0,
+            "x": 0,
+            "y": 0
+          },
+          "text": "もう一度聴く",
+          "waiting": "false"
+        },
+        "expected": 0.36987378587946296,
+        "hidden": true,
+        "performance": null,
+        "record": {
+          "conduct": {
+            "bpm": 128,
+            "ev": [
+              {
+                "P": 0.4689,
+                "b": 0,
+                "jolt": 0,
+                "t": 0
+              }
+            ],
+            "judge": {
+              "best": 0,
+              "e": 0,
+              "g": 0,
+              "l": 0,
+              "p": 0
+            },
+            "lv": [
+              [
+                0,
+                0.97
+              ]
+            ],
+            "stab": 100,
+            "taps": []
+          },
+          "id": "r2028-10-1-395491",
+          "snapshot": 0.22666935436427593,
+          "span": {
+            "from": 0,
+            "to": 32
+          }
+        },
+        "state": 0.37517200293950737
+      },
+      "records": 0.130202429369092,
+      "scrollWidth": 375,
+      "waiting": false,
+      "width": 375
+    }
+  },
+  {
+    "case": "header-released",
+    "data": {
+      "audio": [],
+      "buttons": [
+        {
+          "act": "again",
+          "rect": {
+            "bottom": 0,
+            "height": 0,
+            "left": 0,
+            "right": 0,
+            "top": 0,
+            "width": 0,
+            "x": 0,
+            "y": 0
+          },
+          "text": "もう一度聴く"
+        },
+        {
+          "act": "save",
+          "rect": {
+            "bottom": 0,
+            "height": 0,
+            "left": 0,
+            "right": 0,
+            "top": 0,
+            "width": 0,
+            "x": 0,
+            "y": 0
+          },
+          "text": "保存する"
+        },
+        {
+          "act": "retry",
+          "rect": {
+            "bottom": 0,
+            "height": 0,
+            "left": 0,
+            "right": 0,
+            "top": 0,
+            "width": 0,
+            "x": 0,
+            "y": 0
+          },
+          "text": "もう一度指揮する"
+        },
+        {
+          "act": "close",
+          "rect": {
+            "bottom": 0,
+            "height": 0,
+            "left": 0,
+            "right": 0,
+            "top": 0,
+            "width": 0,
+            "x": 0,
+            "y": 0
+          },
+          "text": "閉じる"
+        }
+      ],
+      "count": 2,
+      "errors": [],
+      "focus": {
+        "active": "btnConduct",
+        "background": [
+          {
+            "id": "app",
+            "inert": false
+          },
+          {
+            "id": "mini",
+            "inert": false
+          },
+          {
+            "id": "tabbar",
+            "inert": false
+          },
+          {
+            "id": "toast",
+            "inert": false
+          }
+        ],
+        "inside": false,
+        "modal": "true",
+        "role": "dialog",
+        "text": "指揮する",
+        "tipOpen": false,
+        "tipOwner": null
+      },
+      "phase": "idle",
+      "playing": false,
+      "recording": {
+        "active": null,
+        "button": {
+          "pressed": "false",
+          "rect": {
+            "bottom": 0,
+            "height": 0,
+            "left": 0,
+            "right": 0,
+            "top": 0,
+            "width": 0,
+            "x": 0,
+            "y": 0
+          },
+          "text": "もう一度聴く",
+          "waiting": "false"
+        },
+        "expected": 0.36987378587946296,
+        "hidden": true,
+        "performance": null,
+        "record": {
+          "conduct": {
+            "bpm": 128,
+            "ev": [
+              {
+                "P": 0.4689,
+                "b": 0,
+                "jolt": 0,
+                "t": 0
+              }
+            ],
+            "judge": {
+              "best": 0,
+              "e": 0,
+              "g": 0,
+              "l": 0,
+              "p": 0
+            },
+            "lv": [
+              [
+                0,
+                0.97
+              ]
+            ],
+            "stab": 100,
+            "taps": []
+          },
+          "id": "r2028-10-1-395491",
+          "snapshot": 0.22666935436427593,
+          "span": {
+            "from": 0,
+            "to": 32
+          }
+        },
+        "state": 0.37517200293950737
+      },
+      "records": 0.130202429369092,
+      "scrollWidth": 375,
+      "waiting": false,
+      "width": 375
+    }
+  }
+]

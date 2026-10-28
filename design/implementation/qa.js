@@ -117,6 +117,11 @@ function record(){
  report.audio={ready:SAMPLES.ready,progress:SAMPLES.progress,error:SAMPLES.error?{name:SAMPLES.error.name,message:SAMPLES.error.message}:null,banks:Object.keys(SAMPLES.banks),requests:{...audioRequests},flow:{...audioFlow},preservedCount:audioBeforeRetry?.length,preservedBuffers:audioBeforeRetry?audioBeforeRetry.every(([name,bank])=>SAMPLES.banks[name]===bank):null,voices:[...new Set((E.pb?.voices||[]).map(v=>v.constructor.name))]};
  report.listeningMix=E.pb?{nodes:E.pb.listenOutputs.length,live:E.pb.listenLive,gain:E.pb.listenOutputs.map(n=>n.gain.value)}:null;
  report.hallExp=S.hallExp;
+ if(q.has('conductResultAudit')){
+  const rec=CD.rec,b=$('#cdResult [data-cd="again"]'),active=U.waitPlay?.perf||(U.playing?U.shown:null);
+  if(rec&&!libraryExpected.has(rec))libraryExpected.set(rec,hash(JSON.stringify(recPerf(rec))));
+  report.resultRecording={state:hash(JSON.stringify(S)),record:rec?{id:rec.id,snapshot:hash(JSON.stringify(rec.snap)),span:rec.span,conduct:rec.conduct}:null,active:activeLibraryRecording()?.id||null,expected:rec?libraryExpected.get(rec):null,performance:active?hash(JSON.stringify(active)):null,clock:E.pb?.clock?.saved(),hidden:$('#conduct').hidden,button:b?{text:b.textContent,pressed:b.getAttribute('aria-pressed'),waiting:b.dataset.waiting||'false',rect:b.getBoundingClientRect().toJSON()}:null,export:report.libraryExport};
+ }
  report.conduct={period:CD.clock?.P,level:CD.level,beat:$('#cdPattern').dataset.nextBeat,phase:CD.phase,count:CD.count.length,taps:CD.clock?.taps.length||0,judge:CD.judge?{...CD.judge}:null,combo:CD.combo,events:CD.clock?.ev.length||0,meter:CD.perf?.meter,from:CD.perf?.from,to:CD.perf?.to};
  if(q.has('countinAudit'))report.countin={history:countinHistory.slice(),times:CD.count.slice(),cueStart:CD.cueStart,lastTap:CD.lastTap,message:$('#cdMsg').textContent,shown:$('#cdPattern').dataset.nextBeat};
  if(q.has('focusAudit')){
@@ -444,6 +449,14 @@ let audioReportT;new MutationObserver(()=>{clearTimeout(audioReportT);audioRepor
 if(q.has('keys'))document.addEventListener('keydown',async e=>{
  if(e.target.matches('input,select,textarea'))return;
  const key=e.key.toLowerCase();
+ if(q.has('conductResultAudit')&&key==='h'){
+  e.preventDefault();
+  if(CD.phase==='done'&&!U.playing&&!U.waitPlay&&!releaseSamples){
+   const original={ready:SAMPLES.ready,error:SAMPLES.error,loading:SAMPLES.loading};SAMPLES.ready=false;SAMPLES.error=null;
+   SAMPLES.loading=new Promise(resolve=>{releaseSamples=()=>{Object.assign(SAMPLES,original);resolve();};});
+  }
+  record();return;
+ }
  if(releaseLibraryExport&&key==='j'){e.preventDefault();const done=releaseLibraryExport;releaseLibraryExport=null;done();setTimeout(record,0);return;}
  if(releaseSamples&&key==='j'){e.preventDefault();releaseSamples();releaseSamples=null;report.loadingReleased=true;setTimeout(record,30);return;}
  if(key==='3'){e.preventDefault();await show('audition-decided');return;}

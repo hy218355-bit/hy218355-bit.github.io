@@ -124,6 +124,7 @@ function renderPlayButtons(){
   if(moveStop) moveStop.hidden = !on || tabHidden('play');
   renderAuditionListening();
   renderEnsembleListening();
+  renderConductResultPlayback();
   renderDiagPractice();
   renderRecordingLibrary();
 }

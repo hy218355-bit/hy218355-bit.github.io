@@ -1580,6 +1580,10 @@ button.wr-person:focus-visible{outline:2px solid var(--brass);outline-offset:2px
 #conduct .cd-result .cd-num{flex-wrap:wrap;gap:12px 24px}
 #conduct .cd-result .cd-num span{color:var(--cd-soft)}
 #conduct .cd-result .cd-num b{color:var(--cd-ink)}
+#conduct .cd-result>.transport{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
+#conduct .cd-result>.transport>.btn{min-width:0;min-height:46px;padding:10px 6px;gap:6px;font-size:12px}
+#conduct .cd-result>.transport>.btn:only-child{grid-column:1/-1}
+#conduct .cd-result [data-cd="again"][aria-pressed="true"]{background:var(--brass);border-color:var(--brass);color:var(--on-brass)}
 #conduct .cd-legend,#conduct .cd-member{order:2}
 #conduct .cd-member .btn{min-height:44px}
 #conduct.watch .cd-stage-meta,#conduct.watch .cd-controls,#conduct.watch .cd-stats,#conduct:has(.cd-result:not([hidden])) .cd-controls,#conduct:has(.cd-result:not([hidden])) .cd-stats{display:none}
@@ -1819,11 +1823,11 @@ button.wr-person:focus-visible{outline:2px solid var(--brass);outline-offset:2px
 <script src="js/band.js?v=flute-cast-1"></script>
 <script src="js/game.js?v=flute-cast-1"></script>
 <script src="js/engine.js?v=quiet-intro-1"></script>
-<script src="js/conduct.js?v=stage-cast-1"></script>
+<script src="js/conduct.js?v=conduct-recording-1"></script>
 <script src="js/announce.js?v=announce-navigation-1"></script>
 <script src="js/tunegame.js"></script>
 <script src="js/fx.js?v=stage-cast-1"></script>
-<script src="js/ui.js?v=stage-cast-1"></script>
+<script src="js/ui.js?v=conduct-recording-1"></script>
 <div class="tip" id="tip" role="tooltip" hidden></div>
 </body>
 </html>

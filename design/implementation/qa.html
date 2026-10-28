@@ -1609,6 +1609,10 @@ button.wr-person:focus-visible{outline:2px solid var(--brass);outline-offset:2px
 #conduct .cd-result .cd-num{flex-wrap:wrap;gap:12px 24px}
 #conduct .cd-result .cd-num span{color:var(--cd-soft)}
 #conduct .cd-result .cd-num b{color:var(--cd-ink)}
+#conduct .cd-result>.transport{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
+#conduct .cd-result>.transport>.btn{min-width:0;min-height:46px;padding:10px 6px;gap:6px;font-size:12px}
+#conduct .cd-result>.transport>.btn:only-child{grid-column:1/-1}
+#conduct .cd-result [data-cd="again"][aria-pressed="true"]{background:var(--brass);border-color:var(--brass);color:var(--on-brass)}
 #conduct .cd-legend,#conduct .cd-member{order:2}
 #conduct .cd-member .btn{min-height:44px}
 #conduct.watch .cd-stage-meta,#conduct.watch .cd-controls,#conduct.watch .cd-stats,#conduct:has(.cd-result:not([hidden])) .cd-controls,#conduct:has(.cd-result:not([hidden])) .cd-stats{display:none}
@@ -1821,39 +1825,39 @@ button.wr-person:focus-visible{outline:2px solid var(--brass);outline-offset:2px
   <button type="button" data-tabgo="log"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 5.5C4 4.7 4.7 4 5.5 4H11v16H5.5c-.8 0-1.5-.7-1.5-1.5z"/><path d="M20 5.5c0-.8-.7-1.5-1.5-1.5H13v16h5.5c.8 0 1.5-.7 1.5-1.5z"/></svg><span>日誌</span></button>
 </nav>
 
-<script src="js/util.js?v=qa-stage-cast-1"></script>
-<script src="js/icons.js?v=qa-stage-cast-1"></script>
-<script src="js/instrument-icons.js?v=qa-stage-cast-1"></script>
-<script src="js/face-cast.js?v=qa-stage-cast-1"></script>
-<script src="js/faces.js?v=qa-stage-cast-1"></script>
-<script src="js/instruments.js?v=qa-stage-cast-1"></script>
-<script src="js/venues.js?v=qa-stage-cast-1"></script>
-<script src="js/samples.js?v=qa-stage-cast-1"></script>
-<script src="js/scores.js?v=qa-stage-cast-1"></script>
-<script src="js/pieces/largo.js?v=qa-stage-cast-1"></script>
-<script src="js/pieces/ode.js?v=qa-stage-cast-1"></script>
-<script src="js/pieces/galop.js?v=qa-stage-cast-1"></script>
-<script src="js/pieces/pomp.js?v=qa-stage-cast-1"></script>
-<script src="js/pieces/aida.js?v=qa-stage-cast-1"></script>
-<script src="js/pieces/hero.js?v=qa-stage-cast-1"></script>
-<script src="js/pieces/holst.js?v=qa-stage-cast-1"></script>
-<script src="js/pieces/hungarian.js?v=qa-stage-cast-1"></script>
-<script src="js/pieces/flowers.js?v=qa-stage-cast-1"></script>
-<script src="js/pieces/tell.js?v=qa-stage-cast-1"></script>
-<script src="js/pieces/carmen.js?v=qa-stage-cast-1"></script>
-<script src="js/pieces/valkyrie.js?v=qa-stage-cast-1"></script>
-<script src="js/pieces/swan.js?v=qa-stage-cast-1"></script>
-<script src="js/pieces/spring.js?v=qa-stage-cast-1"></script>
-<script src="js/pieces/canon.js?v=qa-stage-cast-1"></script>
-<script src="js/band.js?v=qa-stage-cast-1"></script>
-<script src="js/game.js?v=qa-stage-cast-1"></script>
-<script src="js/engine.js?v=qa-stage-cast-1"></script>
-<script src="js/conduct.js?v=qa-stage-cast-1"></script>
-<script src="js/announce.js?v=qa-stage-cast-1"></script>
-<script src="js/tunegame.js?v=qa-stage-cast-1"></script>
-<script src="js/fx.js?v=qa-stage-cast-1"></script>
-<script src="js/ui.js?v=qa-stage-cast-1"></script>
+<script src="js/util.js?v=qa-conduct-recording-1"></script>
+<script src="js/icons.js?v=qa-conduct-recording-1"></script>
+<script src="js/instrument-icons.js?v=qa-conduct-recording-1"></script>
+<script src="js/face-cast.js?v=qa-conduct-recording-1"></script>
+<script src="js/faces.js?v=qa-conduct-recording-1"></script>
+<script src="js/instruments.js?v=qa-conduct-recording-1"></script>
+<script src="js/venues.js?v=qa-conduct-recording-1"></script>
+<script src="js/samples.js?v=qa-conduct-recording-1"></script>
+<script src="js/scores.js?v=qa-conduct-recording-1"></script>
+<script src="js/pieces/largo.js?v=qa-conduct-recording-1"></script>
+<script src="js/pieces/ode.js?v=qa-conduct-recording-1"></script>
+<script src="js/pieces/galop.js?v=qa-conduct-recording-1"></script>
+<script src="js/pieces/pomp.js?v=qa-conduct-recording-1"></script>
+<script src="js/pieces/aida.js?v=qa-conduct-recording-1"></script>
+<script src="js/pieces/hero.js?v=qa-conduct-recording-1"></script>
+<script src="js/pieces/holst.js?v=qa-conduct-recording-1"></script>
+<script src="js/pieces/hungarian.js?v=qa-conduct-recording-1"></script>
+<script src="js/pieces/flowers.js?v=qa-conduct-recording-1"></script>
+<script src="js/pieces/tell.js?v=qa-conduct-recording-1"></script>
+<script src="js/pieces/carmen.js?v=qa-conduct-recording-1"></script>
+<script src="js/pieces/valkyrie.js?v=qa-conduct-recording-1"></script>
+<script src="js/pieces/swan.js?v=qa-conduct-recording-1"></script>
+<script src="js/pieces/spring.js?v=qa-conduct-recording-1"></script>
+<script src="js/pieces/canon.js?v=qa-conduct-recording-1"></script>
+<script src="js/band.js?v=qa-conduct-recording-1"></script>
+<script src="js/game.js?v=qa-conduct-recording-1"></script>
+<script src="js/engine.js?v=qa-conduct-recording-1"></script>
+<script src="js/conduct.js?v=qa-conduct-recording-1"></script>
+<script src="js/announce.js?v=qa-conduct-recording-1"></script>
+<script src="js/tunegame.js?v=qa-conduct-recording-1"></script>
+<script src="js/fx.js?v=qa-conduct-recording-1"></script>
+<script src="js/ui.js?v=qa-conduct-recording-1"></script>
 <div class="tip" id="tip" role="tooltip" hidden></div>
-<script src="/design/implementation/qa.js?v=qa-stage-cast-1"></script>
+<script src="/design/implementation/qa.js?v=qa-conduct-recording-1"></script>
 </body>
 </html>

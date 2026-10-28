@@ -1,0 +1,4 @@
+zen-kaku-gothic-new-400.woff2 6 ▶♩♮⤓常𝄪
+zen-kaku-gothic-new-500.woff2 6 ▶♩♮⤓常𝄪
+zen-kaku-gothic-new-700.woff2 6 ▶♩♮⤓常𝄪
+結果の操作ボタンの表示は、本文の全3ウェイトに全字収録済み。「常」は既存のコードコメントのみ。

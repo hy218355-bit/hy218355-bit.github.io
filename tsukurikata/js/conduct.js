@@ -171,7 +171,7 @@ function closeConduct(){
   if(CD.phase === 'watch'){ const idle = !!CD.intro || !U.playing; stopPlay(); closeWatch(); if(idle) reveal(); return; }
   cancelAnimationFrame(CD.raf);
   cdClearJudge();
-  const playing = CD.phase === 'play';
+  const playing = CD.phase === 'play' || CD.phase === 'done';
   CD.phase = 'idle';
   if(playing) stopPlay();
   if(CD.stage && S.pending && !S.pending.revealed){ CD.stage = null; renderAll(); }
@@ -347,6 +347,7 @@ function cdFrame(){
 function cdFinish(natural){
   if(CD.phase !== 'play') return;
   CD.phase = 'done';
+  $('#cdClose').textContent='閉じる';
   cdClearJudge();
   cdResultFocus();
   if(!natural){
@@ -410,8 +411,22 @@ function cdFinish(natural){
     ${judgeRow}
     <p>${speed}。${comment}</p>
     <p class="small">この演奏は「録音」に残った。会場の響きつきで保存して、何度でも聴き返せる。</p>
-    <div class="transport"><button class="btn primary" type="button" data-cd="again">▶ もう一度聴く</button><button class="btn" type="button" data-cd="save">⤓ 保存する</button><button class="btn" type="button" data-cd="retry">もう一度指揮する</button><button class="btn quiet" type="button" data-cd="close">閉じる</button></div>`;
+    <div class="transport"><button class="btn primary" type="button" data-cd="again" aria-pressed="false">${uiIcon('play')}もう一度聴く</button><button class="btn" type="button" data-cd="save">${uiIcon('download')}保存する</button><button class="btn" type="button" data-cd="retry">${uiIcon('conduct')}もう一度指揮する</button><button class="btn quiet" type="button" data-cd="close">閉じる</button></div>`;
   haptic(stab >= 85 ? 'success' : 'tap');
+}
+
+// 結果の同じボタンで聴く・止める。別の録音の再生や待機を取り違えない。
+function renderConductResultPlayback(){
+  const button=$('#cdResult [data-cd="again"]');if(!button)return;
+  const on=CD.phase==='done'&&!!CD.rec&&activeLibraryRecording()?.id===CD.rec.id;
+  const waiting=on&&!!U.waitPlay,label=waiting?'読み込みをやめる':on?'止める':'もう一度聴く';
+  button.setAttribute('aria-pressed',String(on));button.dataset.waiting=String(waiting);
+  button.innerHTML=uiIcon(on?'stop':'play')+label;
+}
+function listenConductResult(){
+  if(CD.phase!=='done'||!CD.rec)return;
+  if(activeLibraryRecording()?.id===CD.rec.id)stopPlay();
+  else playRecording(CD.rec,CD.rec.label);
 }
 
 /* ===== 録音の再生（指揮した録音は、そのときの拍の進み方で）と保存 ===== */
@@ -508,7 +523,7 @@ function bindConduct(){
   $('#cdResult').addEventListener('click', e => {
     const b = e.target.closest('[data-cd]'); if(!b) return;
     const act = b.dataset.cd;
-    if(act === 'again' && CD.rec) playRecording(CD.rec, CD.rec.label);
+    if(act === 'again') listenConductResult();
     else if(act === 'save' && CD.rec) saveRecording(CD.rec);
     else if(act === 'retry'){ stopPlay(); openConduct(); }
     else if(act === 'close'){ stopPlay(); closeConduct(); }
