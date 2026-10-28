@@ -9,7 +9,7 @@ const U = {
   shown: null, shownLabel: '', perfNow: null, diag: null, ptr: null, raf: 0, onEnd: null, playing: false, refreshT: 0,
   tab: 'week', tabScroll: {},
   recordMember: null, recordPerf: null, moveUndo: null,
-  lineup: false, draft: null, audListen: null, ensListen: null, pred: null, predKey: '', predT: 0, outKey: '', outPick: new Set(),
+  lineup: false, draft: null, audListen: null, ensListen: null, pieceListen: null, pred: null, predKey: '', predT: 0, outKey: '', outPick: new Set(),
   sfx: true, fxMode: 'full',
 };
 const UI_KEY = 'suibu-ui-v2';  // 前の名前のころからの保存先（SAVE_KEY と同じ理由でこのまま）
@@ -82,7 +82,7 @@ function renderSnd(){
   else st.textContent = '';
 }
 function commit(next){
-  if(ensembleListening())stopPlay();
+  if(ensembleListening()||pieceListening())stopPlay();
   // ほかの操作を巻き戻さないよう、保存する操作で席の取り消しを終える。
   U.moveUndo = null;
   $('#memberCard .mc-undo')?.remove();
@@ -125,6 +125,7 @@ function renderPlayButtons(){
   renderAuditionListening();
   renderEnsembleListening();
   renderConductResultPlayback();
+  renderPieceListening();
   renderDiagPractice();
   renderRecordingLibrary();
 }
@@ -2206,6 +2207,36 @@ function pieceFit(){
 function modelPerf(pid){
   return perform({members: fullBand({pitch: 100, rhythm: 100, tone: 100, expr: 100}), pieceId: pid, cohesion: 100, fam: 100, interp: {tempo: 1, dyn: 1, rub: 1}, venue: 'hall', seed: 'band', lead: () => 1});
 }
+// 選曲の試聴は、前の本人だけの音や終了処理を終えてから切り替える。
+function pieceListening(){
+  const active=U.waitPlay?.perf||(U.playing?U.shown:null);
+  return U.pieceListen?.perf===active?U.pieceListen:null;
+}
+function renderPieceListening(){
+  const active=pieceListening();
+  for(const b of document.querySelectorAll('[data-act="model"][data-pid],[data-act="preview"][data-pid]')){
+    const pid=b.dataset.pid,kind=b.dataset.act;if(!PIECES[pid])continue;
+    const on=active?.pid===pid&&active.kind===kind,waiting=on&&!!U.waitPlay;
+    if(b.getAttribute('aria-pressed')!==String(on)||b.dataset.waiting!==String(waiting)){
+      const label=waiting?'読み込み中':on?'止める':kind==='model'?'お手本':'いまの部で';
+      b.setAttribute('aria-pressed',String(on));b.dataset.waiting=String(waiting);b.innerHTML=uiIcon(on?'stop':'play')+label;
+      b.setAttribute('aria-label',`${PIECES[pid].title}を${kind==='model'?'お手本で':'いまの部で'}${waiting?'読み込み中。押すと中止':on?'再生中。押すと止める':'聴く'}`);
+    }
+  }
+  for(const card of document.querySelectorAll('[data-piece-card]'))card.dataset.listening=String(active?.pid===card.dataset.pieceCard);
+}
+function listenPiece(pid,kind){
+  if(!PIECES[pid]||!['model','preview'].includes(kind)||busy()||CD.phase!=='idle')return;
+  const active=pieceListening();if(active?.pid===pid&&active.kind===kind){stopPlay();return;}
+  const state=S;stopPlay();if(S!==state||busy()||CD.phase!=='idle')return;
+  U.piece=pid;U.range='all';soloAll();
+  if(kind==='model'&&U.venue!=='hall')setVenue('hall');
+  clearTimeout(U.refreshT);U.perfNow=currentPerformance();U.diag=analyze(U.perfNow);renderPiece();renderDiag();
+  const perf=kind==='model'?modelPerf(pid):U.perfNow,token=U.pieceListen={pid,kind,perf,state:S};
+  const done=()=>{if(U.pieceListen===token){U.pieceListen=null;renderPieceListening();}};
+  const label=kind==='model'?`お手本：${PIECES[pid].title}（全員がうまい部・${VENUE.hall.name}）`:`いまの部で：${PIECES[pid].title}${readAvg(S,pid)<5?'（譜読み前）':''}`;
+  playPerf(perf,label,done,{},done);if(!pieceListening())done();renderSelectors();renderPieceListening();
+}
 // 曲のカード（選曲・課題曲・定期演奏会の曲）：短い曲名・作曲者・問われる力と、聴く・決めるボタン。曲の説明は「どんな曲？」で開く
 function difficultyBadge(pid){
   const n = pieceDifficulty(pid);
@@ -2214,10 +2245,10 @@ function difficultyBadge(pid){
 function pieceCard(id, {tag = '', note = '', act, label}){
   const pc = PIECES[id];
   // 作曲者と曲の説明は「どんな曲？」の中に置く。
-  return `<div class="pcard">${tag ? `<span class="tag fit">${tag}</span>` : ''}<div class="piece-heading"><h3>${pc.title}</h3>${difficultyBadge(id)}</div>${note ? `<p>${note}</p>` : ''}
+  return `<div class="pcard" data-piece-card="${id}">${tag ? `<span class="tag fit">${tag}</span>` : ''}<div class="piece-heading"><h3>${pc.title}</h3>${difficultyBadge(id)}</div>${note ? `<p>${note}</p>` : ''}
     <p class="asks">問われる力：<b>${pc.asks}</b></p>
     <details class="pdesc"><summary>どんな曲？</summary><p>${pc.composer}。${pc.full}。${pc.desc}</p></details>
-    <div class="row"><button class="btn small" type="button" data-act="model" data-pid="${id}">${uiIcon('play')}お手本</button><button class="btn small" type="button" data-act="preview" data-pid="${id}">${uiIcon('play')}いまの部で</button><button class="btn small primary" type="button" data-act="${act}" data-pid="${id}">${label}</button></div></div>`;
+    <div class="row"><button class="btn small" type="button" data-act="model" data-pid="${id}" aria-pressed="false">${uiIcon('play')}お手本</button><button class="btn small" type="button" data-act="preview" data-pid="${id}" aria-pressed="false">${uiIcon('play')}いまの部で</button><button class="btn small primary" type="button" data-act="${act}" data-pid="${id}">${label}</button></div></div>`;
 }
 const listenBtns = id => `<button class="btn small" type="button" data-act="model" data-pid="${id}">▶ お手本を聴く</button><button class="btn small" type="button" data-act="preview" data-pid="${id}">▶ いまの部で聴く</button>`;
 
@@ -2260,6 +2291,7 @@ function renderAll(){
   renderHeader(); renderPiece(); renderVenues(); renderSelectors();
   renderStats(); renderWeek(); renderLog();
   renderMemberCard(); renderRoster(); renderHistory();
+  renderPieceListening();
   $('#btnNow').disabled = busy();
 }
 
@@ -2656,10 +2688,7 @@ function bind(){
     }
     const act = b.dataset.act;
     if(act === 'preview' || act === 'model'){
-      const pid = b.dataset.pid;
-      U.piece = pid; U.range = 'all'; renderPiece(); U.perfNow = currentPerformance(); U.diag = analyze(U.perfNow); renderDiag();
-      if(act === 'model') playPerf(modelPerf(pid), `お手本：${PIECES[pid].title}（全員がうまい部・${VENUE.hall.name}）`);
-      else playPerf(U.perfNow, `いまの部で：${PIECES[pid].title}${readAvg(S, pid) < 5 ? '（譜読み前）' : ''}`);
+      listenPiece(b.dataset.pid,act);
     }
     else if(act === 'choose'){ stopPlay(); commit(choosePiece(S, b.dataset.pid)); U.piece = null; renderAll(); refreshNow(); scrollTo(0, 0); }
     else if(act === 'chooseset'){ stopPlay(); commit(chooseSetPiece(S, b.dataset.pid)); U.piece = null; renderAll(); refreshNow(); scrollTo(0, 0); }

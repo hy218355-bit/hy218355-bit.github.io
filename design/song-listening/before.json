@@ -1,0 +1,20 @@
+{
+  "first": {
+    "audible": [],
+    "button": "お手本",
+    "engineVenue": "room",
+    "label": "お手本：《新世界より》第2楽章（全員がうまい部・県民文化会館）",
+    "playback": 2,
+    "playing": true,
+    "pressed": null,
+    "solo": {
+      "id": "m2026-n4-a3a8b987",
+      "type": "member"
+    }
+  },
+  "second": {
+    "audible": [],
+    "playback": 3,
+    "playing": true
+  }
+}

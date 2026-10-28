@@ -86,6 +86,7 @@ document.documentElement.dataset.theme=q.get('theme')==='dark'?'dark':'light';
 U.sfx=false;U.fxMode='off';FX.q=[];clearTimeout(FX.timer);FX.on=false;$('#fx').hidden=true;
 let report,releaseSamples,performanceMemo,releaseLibraryExport;
 const libraryExpected=new WeakMap();
+const pieceExpected=new WeakMap();
 if(q.has('exportAudit'))saveRecording=rec=>{report.libraryExport={id:rec.id,label:rec.label,snapshot:hash(JSON.stringify(rec.snap))};return q.has('holdExport')?new Promise(resolve=>{releaseLibraryExport=resolve;}):Promise.resolve();};
 const playbackIds=new WeakMap();let playbackCount=0;
 window.addEventListener('error',e=>{if(report)report.errors.push(e.message);});
@@ -117,6 +118,10 @@ function record(){
  report.audio={ready:SAMPLES.ready,progress:SAMPLES.progress,error:SAMPLES.error?{name:SAMPLES.error.name,message:SAMPLES.error.message}:null,banks:Object.keys(SAMPLES.banks),requests:{...audioRequests},flow:{...audioFlow},preservedCount:audioBeforeRetry?.length,preservedBuffers:audioBeforeRetry?audioBeforeRetry.every(([name,bank])=>SAMPLES.banks[name]===bank):null,voices:[...new Set((E.pb?.voices||[]).map(v=>v.constructor.name))]};
  report.listeningMix=E.pb?{nodes:E.pb.listenOutputs.length,live:E.pb.listenLive,gain:E.pb.listenOutputs.map(n=>n.gain.value)}:null;
  report.hallExp=S.hallExp;
+ if(q.has('pieceAudit')){
+  const active=pieceListening();if(active&&!pieceExpected.has(active))pieceExpected.set(active,hash(JSON.stringify(active.kind==='model'?modelPerf(active.pid):perform(currentCtx()))));
+  report.pieceListening={active:!!active,duration:active?.perf.total,kind:active?.kind,pid:active?.pid,state:hash(JSON.stringify(S)),performance:active?hash(JSON.stringify(active.perf)):null,expected:active?pieceExpected.get(active):null,performers:active?[...new Set([...active.perf.notes,...active.perf.hits].map(n=>n.mid))]:[],buttons:[...document.querySelectorAll('[data-act="model"][data-pid],[data-act="preview"][data-pid]')].map(b=>({pid:b.dataset.pid,kind:b.dataset.act,pressed:b.getAttribute('aria-pressed'),waiting:b.dataset.waiting,text:b.textContent,rect:b.getAttribute('aria-pressed')==='true'?b.getBoundingClientRect().toJSON():null})),cards:[...document.querySelectorAll('[data-piece-card][data-listening="true"]')].map(c=>c.dataset.pieceCard),focus:{id:document.activeElement.id,pid:document.activeElement.dataset.pid,kind:document.activeElement.dataset.act},expectedChoice:report.expectedChoice};
+ }
  if(q.has('conductResultAudit')){
   const rec=CD.rec,b=$('#cdResult [data-cd="again"]'),active=U.waitPlay?.perf||(U.playing?U.shown:null);
   if(rec&&!libraryExpected.has(rec))libraryExpected.set(rec,hash(JSON.stringify(recPerf(rec))));
@@ -424,6 +429,10 @@ async function show(next){
 await show(view);
 document.addEventListener('bootchecked',record);
 if(q.has('focusAudit')||q.has('watchCardAudit'))document.addEventListener('focusin',()=>setTimeout(record,0));
+if(q.has('pieceAudit'))$('#week').addEventListener('click',e=>{
+ const b=e.target.closest('[data-act][data-pid]'),fn=b&&({choose:choosePiece,chooseset:chooseSetPiece,choosefinal:chooseFinalPiece})[b.dataset.act];
+ if(fn)report.expectedChoice={pid:b.dataset.pid,act:b.dataset.act,state:hash(JSON.stringify(fn(S,b.dataset.pid)))};
+},true);
 window.addEventListener('resize',()=>setTimeout(record,0));
 document.addEventListener('facesready',()=>setTimeout(record,0));
 for(const event of ['pointerdown','toggle','click','keydown','scroll'])$('#grCard').addEventListener(event,()=>setTimeout(record,0),{capture:true});

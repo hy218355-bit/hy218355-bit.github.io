@@ -7,6 +7,7 @@ const ctx=vm.createContext({console,assert});
 for(const f of ['util','instruments','venues','scores',...pieces,'band','game'])vm.runInContext(fs.readFileSync(path.join(root,'js',f+'.js'),'utf8'),ctx,{filename:f+'.js'});
 vm.runInContext(`
 let S,played,saved,refreshes=0,nextTimer=0;
+const ensembleListening=()=>null,pieceListening=()=>null;
 const timers=new Map(),setTimeout=run=>{timers.set(++nextTimer,run);return nextTimer;},clearTimeout=id=>timers.delete(id);
 const U={piece:null,range:'all',venue:'room',playing:false,moveUndo:null,perfNow:null,shown:null};
 const nodes={};const $=s=>nodes[s]||=( {remove(){},addEventListener(_,fn){this.click=fn;}} );

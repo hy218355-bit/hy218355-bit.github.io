@@ -8,6 +8,7 @@ const pieces=[...html.matchAll(/src="js\/(pieces\/[^"?]+)\.js/g)].map(m=>m[1]);
 for(const f of ['util','instruments','venues','scores',...pieces,'band','game'])vm.runInContext(fs.readFileSync(path.join(root,'js',f+'.js'),'utf8'),ctx,{filename:f+'.js'});
 vm.runInContext(`
 let S=null,stopAction=null,saves=0;
+const ensembleListening=()=>null,pieceListening=()=>null;
 const U={moveUndo:null,solo:'all',view:'mel'},narrow={matches:false};
 const $=()=>({remove(){},focus(){},scrollIntoView(){}});
 const busy=()=>!!(S.pending&&!S.pending.revealed);

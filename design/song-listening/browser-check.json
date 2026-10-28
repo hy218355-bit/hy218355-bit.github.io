@@ -1,0 +1,5990 @@
+[
+  {
+    "case": "initial",
+    "data": {
+      "audible": [],
+      "errors": [],
+      "label": "いまの音（選曲前・音楽室）",
+      "phase": "choose",
+      "piece": {
+        "active": false,
+        "buttons": [
+          {
+            "kind": "model",
+            "pid": "largo",
+            "pressed": "false",
+            "rect": null,
+            "text": "お手本",
+            "waiting": "false"
+          },
+          {
+            "kind": "preview",
+            "pid": "largo",
+            "pressed": "false",
+            "rect": null,
+            "text": "いまの部で",
+            "waiting": "false"
+          },
+          {
+            "kind": "model",
+            "pid": "ode",
+            "pressed": "false",
+            "rect": null,
+            "text": "お手本",
+            "waiting": "false"
+          },
+          {
+            "kind": "preview",
+            "pid": "ode",
+            "pressed": "false",
+            "rect": null,
+            "text": "いまの部で",
+            "waiting": "false"
+          },
+          {
+            "kind": "model",
+            "pid": "galop",
+            "pressed": "false",
+            "rect": null,
+            "text": "お手本",
+            "waiting": "false"
+          },
+          {
+            "kind": "preview",
+            "pid": "galop",
+            "pressed": "false",
+            "rect": null,
+            "text": "いまの部で",
+            "waiting": "false"
+          },
+          {
+            "kind": "model",
+            "pid": "pomp",
+            "pressed": "false",
+            "rect": null,
+            "text": "お手本",
+            "waiting": "false"
+          },
+          {
+            "kind": "preview",
+            "pid": "pomp",
+            "pressed": "false",
+            "rect": null,
+            "text": "いまの部で",
+            "waiting": "false"
+          },
+          {
+            "kind": "model",
+            "pid": "aida",
+            "pressed": "false",
+            "rect": null,
+            "text": "お手本",
+            "waiting": "false"
+          },
+          {
+            "kind": "preview",
+            "pid": "aida",
+            "pressed": "false",
+            "rect": null,
+            "text": "いまの部で",
+            "waiting": "false"
+          },
+          {
+            "kind": "model",
+            "pid": "hero",
+            "pressed": "false",
+            "rect": null,
+            "text": "お手本",
+            "waiting": "false"
+          },
+          {
+            "kind": "preview",
+            "pid": "hero",
+            "pressed": "false",
+            "rect": null,
+            "text": "いまの部で",
+            "waiting": "false"
+          },
+          {
+            "kind": "model",
+            "pid": "holst",
+            "pressed": "false",
+            "rect": null,
+            "text": "お手本",
+            "waiting": "false"
+          },
+          {
+            "kind": "preview",
+            "pid": "holst",
+            "pressed": "false",
+            "rect": null,
+            "text": "いまの部で",
+            "waiting": "false"
+          },
+          {
+            "kind": "model",
+            "pid": "hungarian",
+            "pressed": "false",
+            "rect": null,
+            "text": "お手本",
+            "waiting": "false"
+          },
+          {
+            "kind": "preview",
+            "pid": "hungarian",
+            "pressed": "false",
+            "rect": null,
+            "text": "いまの部で",
+            "waiting": "false"
+          },
+          {
+            "kind": "model",
+            "pid": "flowers",
+            "pressed": "false",
+            "rect": null,
+            "text": "お手本",
+            "waiting": "false"
+          },
+          {
+            "kind": "preview",
+            "pid": "flowers",
+            "pressed": "false",
+            "rect": null,
+            "text": "いまの部で",
+            "waiting": "false"
+          },
+          {
+            "kind": "model",
+            "pid": "tell",
+            "pressed": "false",
+            "rect": null,
+            "text": "お手本",
+            "waiting": "false"
+          },
+          {
+            "kind": "preview",
+            "pid": "tell",
+            "pressed": "false",
+            "rect": null,
+            "text": "いまの部で",
+            "waiting": "false"
+          },
+          {
+            "kind": "model",
+            "pid": "carmen",
+            "pressed": "false",
+            "rect": null,
+            "text": "お手本",
+            "waiting": "false"
+          },
+          {
+            "kind": "preview",
+            "pid": "carmen",
+            "pressed": "false",
+            "rect": null,
+            "text": "いまの部で",
+            "waiting": "false"
+          },
+          {
+            "kind": "model",
+            "pid": "valkyrie",
+            "pressed": "false",
+            "rect": null,
+            "text": "お手本",
+            "waiting": "false"
+          },
+          {
+            "kind": "preview",
+            "pid": "valkyrie",
+            "pressed": "false",
+            "rect": null,
+            "text": "いまの部で",
+            "waiting": "false"
+          },
+          {
+            "kind": "model",
+            "pid": "swan",
+            "pressed": "false",
+            "rect": null,
+            "text": "お手本",
+            "waiting": "false"
+          },
+          {
+            "kind": "preview",
+            "pid": "swan",
+            "pressed": "false",
+            "rect": null,
+            "text": "いまの部で",
+            "waiting": "false"
+          },
+          {
+            "kind": "model",
+            "pid": "spring",
+            "pressed": "false",
+            "rect": null,
+            "text": "お手本",
+            "waiting": "false"
+          },
+          {
+            "kind": "preview",
+            "pid": "spring",
+            "pressed": "false",
+            "rect": null,
+            "text": "いまの部で",
+            "waiting": "false"
+          },
+          {
+            "kind": "model",
+            "pid": "canon",
+            "pressed": "false",
+            "rect": null,
+            "text": "お手本",
+            "waiting": "false"
+          },
+          {
+            "kind": "preview",
+            "pid": "canon",
+            "pressed": "false",
+            "rect": null,
+            "text": "いまの部で",
+            "waiting": "false"
+          }
+        ],
+        "cards": [],
+        "expected": null,
+        "focus": {
+          "id": ""
+        },
+        "performance": null,
+        "performers": [],
+        "state": 0.15487505751661956
+      },
+      "pieceChoice": "largo",
+      "playing": false,
+      "records": 0.7712433410342783,
+      "scrollWidth": 375,
+      "solo": {
+        "type": "all"
+      },
+      "venue": "room",
+      "voices": [],
+      "waiting": false,
+      "width": 375
+    }
+  },
+  {
+    "case": "model-after-solo",
+    "data": {
+      "audible": [
+        "lab-0",
+        "lab-1",
+        "lab-2",
+        "lab-3",
+        "lab-4",
+        "lab-5",
+        "lab-6",
+        "lab-7",
+        "lab-8",
+        "lab-9",
+        "lab-10",
+        "lab-11",
+        "lab-12",
+        "lab-13",
+        "lab-14",
+        "lab-15",
+        "lab-16",
+        "lab-17",
+        "lab-18",
+        "lab-19",
+        "lab-20",
+        "lab-21",
+        "lab-22",
+        "lab-23",
+        "lab-24",
+        "lab-25",
+        "lab-26",
+        "lab-27",
+        "lab-28",
+        "lab-29",
+        "lab-30",
+        "lab-31",
+        "lab-32",
+        "lab-33",
+        "lab-34",
+        "lab-35",
+        "lab-36"
+      ],
+      "errors": [],
+      "label": "お手本：《新世界より》第2楽章（全員がうまい部・県民文化会館）",
+      "phase": "choose",
+      "piece": {
+        "active": true,
+        "buttons": [
+          {
+            "kind": "model",
+            "pid": "largo",
+            "pressed": "true",
+            "rect": {
+              "bottom": 427.8515625,
+              "height": 44,
+              "left": 45.5,
+              "right": 136.1640625,
+              "top": 383.8515625,
+              "width": 90.6640625,
+              "x": 45.5,
+              "y": 383.8515625
+            },
+            "text": "止める",
+            "waiting": "false"
+          },
+          {
+            "kind": "preview",
+            "pid": "largo",
+            "pressed": "false",
+            "rect": null,
+            "text": "いまの部で",
+            "waiting": "false"
+          },
+          {
+            "kind": "model",
+            "pid": "ode",
+            "pressed": "false",
+            "rect": null,
+            "text": "お手本",
+            "waiting": "false"
+          },
+          {
+            "kind": "preview",
+            "pid": "ode",
+            "pressed": "false",
+            "rect": null,
+            "text": "いまの部で",
+            "waiting": "false"
+          },
+          {
+            "kind": "model",
+            "pid": "galop",
+            "pressed": "false",
+            "rect": null,
+            "text": "お手本",
+            "waiting": "false"
+          },
+          {
+            "kind": "preview",
+            "pid": "galop",
+            "pressed": "false",
+            "rect": null,
+            "text": "いまの部で",
+            "waiting": "false"
+          },
+          {
+            "kind": "model",
+            "pid": "pomp",
+            "pressed": "false",
+            "rect": null,
+            "text": "お手本",
+            "waiting": "false"
+          },
+          {
+            "kind": "preview",
+            "pid": "pomp",
+            "pressed": "false",
+            "rect": null,
+            "text": "いまの部で",
+            "waiting": "false"
+          },
+          {
+            "kind": "model",
+            "pid": "aida",
+            "pressed": "false",
+            "rect": null,
+            "text": "お手本",
+            "waiting": "false"
+          },
+          {
+            "kind": "preview",
+            "pid": "aida",
+            "pressed": "false",
+            "rect": null,
+            "text": "いまの部で",
+            "waiting": "false"
+          },
+          {
+            "kind": "model",
+            "pid": "hero",
+            "pressed": "false",
+            "rect": null,
+            "text": "お手本",
+            "waiting": "false"
+          },
+          {
+            "kind": "preview",
+            "pid": "hero",
+            "pressed": "false",
+            "rect": null,
+            "text": "いまの部で",
+            "waiting": "false"
+          },
+          {
+            "kind": "model",
+            "pid": "holst",
+            "pressed": "false",
+            "rect": null,
+            "text": "お手本",
+            "waiting": "false"
+          },
+          {
+            "kind": "preview",
+            "pid": "holst",
+            "pressed": "false",
+            "rect": null,
+            "text": "いまの部で",
+            "waiting": "false"
+          },
+          {
+            "kind": "model",
+            "pid": "hungarian",
+            "pressed": "false",
+            "rect": null,
+            "text": "お手本",
+            "waiting": "false"
+          },
+          {
+            "kind": "preview",
+            "pid": "hungarian",
+            "pressed": "false",
+            "rect": null,
+            "text": "いまの部で",
+            "waiting": "false"
+          },
+          {
+            "kind": "model",
+            "pid": "flowers",
+            "pressed": "false",
+            "rect": null,
+            "text": "お手本",
+            "waiting": "false"
+          },
+          {
+            "kind": "preview",
+            "pid": "flowers",
+            "pressed": "false",
+            "rect": null,
+            "text": "いまの部で",
+            "waiting": "false"
+          },
+          {
+            "kind": "model",
+            "pid": "tell",
+            "pressed": "false",
+            "rect": null,
+            "text": "お手本",
+            "waiting": "false"
+          },
+          {
+            "kind": "preview",
+            "pid": "tell",
+            "pressed": "false",
+            "rect": null,
+            "text": "いまの部で",
+            "waiting": "false"
+          },
+          {
+            "kind": "model",
+            "pid": "carmen",
+            "pressed": "false",
+            "rect": null,
+            "text": "お手本",
+            "waiting": "false"
+          },
+          {
+            "kind": "preview",
+            "pid": "carmen",
+            "pressed": "false",
+            "rect": null,
+            "text": "いまの部で",
+            "waiting": "false"
+          },
+          {
+            "kind": "model",
+            "pid": "valkyrie",
+            "pressed": "false",
+            "rect": null,
+            "text": "お手本",
+            "waiting": "false"
+          },
+          {
+            "kind": "preview",
+            "pid": "valkyrie",
+            "pressed": "false",
+            "rect": null,
+            "text": "いまの部で",
+            "waiting": "false"
+          },
+          {
+            "kind": "model",
+            "pid": "swan",
+            "pressed": "false",
+            "rect": null,
+            "text": "お手本",
+            "waiting": "false"
+          },
+          {
+            "kind": "preview",
+            "pid": "swan",
+            "pressed": "false",
+            "rect": null,
+            "text": "いまの部で",
+            "waiting": "false"
+          },
+          {
+            "kind": "model",
+            "pid": "spring",
+            "pressed": "false",
+            "rect": null,
+            "text": "お手本",
+            "waiting": "false"
+          },
+          {
+            "kind": "preview",
+            "pid": "spring",
+            "pressed": "false",
+            "rect": null,
+            "text": "いまの部で",
+            "waiting": "false"
+          },
+          {
+            "kind": "model",
+            "pid": "canon",
+            "pressed": "false",
+            "rect": null,
+            "text": "お手本",
+            "waiting": "false"
+          },
+          {
+            "kind": "preview",
+            "pid": "canon",
+            "pressed": "false",
+            "rect": null,
+            "text": "いまの部で",
+            "waiting": "false"
+          }
+        ],
+        "cards": [
+          "largo"
+        ],
+        "expected": 0.4519849091302603,
+        "focus": {
+          "id": "",
+          "kind": "model",
+          "pid": "largo"
+        },
+        "kind": "model",
+        "performance": 0.4519849091302603,
+        "performers": [
+          "lab-0",
+          "lab-1",
+          "lab-2",
+          "lab-3",
+          "lab-4",
+          "lab-5",
+          "lab-6",
+          "lab-7",
+          "lab-8",
+          "lab-9",
+          "lab-10",
+          "lab-11",
+          "lab-12",
+          "lab-13",
+          "lab-14",
+          "lab-15",
+          "lab-16",
+          "lab-17",
+          "lab-18",
+          "lab-19",
+          "lab-20",
+          "lab-21",
+          "lab-22",
+          "lab-23",
+          "lab-24",
+          "lab-25",
+          "lab-26",
+          "lab-27",
+          "lab-28",
+          "lab-29",
+          "lab-30",
+          "lab-31",
+          "lab-32",
+          "lab-33",
+          "lab-34",
+          "lab-35",
+          "lab-36"
+        ],
+        "pid": "largo",
+        "state": 0.15487505751661956
+      },
+      "pieceChoice": "largo",
+      "playing": true,
+      "records": 0.7712433410342783,
+      "scrollWidth": 375,
+      "solo": {
+        "type": "all"
+      },
+      "venue": "hall",
+      "voices": [
+        "SampleVoice"
+      ],
+      "waiting": false,
+      "width": 375
+    }
+  },
+  {
+    "case": "model-restart",
+    "data": {
+      "audible": [
+        "lab-0",
+        "lab-1",
+        "lab-2",
+        "lab-3",
+        "lab-4",
+        "lab-5",
+        "lab-6",
+        "lab-7",
+        "lab-8",
+        "lab-9",
+        "lab-10",
+        "lab-11",
+        "lab-12",
+        "lab-13",
+        "lab-14",
+        "lab-15",
+        "lab-16",
+        "lab-17",
+        "lab-18",
+        "lab-19",
+        "lab-20",
+        "lab-21",
+        "lab-22",
+        "lab-23",
+        "lab-24",
+        "lab-25",
+        "lab-26",
+        "lab-27",
+        "lab-28",
+        "lab-29",
+        "lab-30",
+        "lab-31",
+        "lab-32",
+        "lab-33",
+        "lab-34",
+        "lab-35",
+        "lab-36"
+      ],
+      "errors": [],
+      "label": "お手本：《新世界より》第2楽章（全員がうまい部・県民文化会館）",
+      "phase": "choose",
+      "piece": {
+        "active": true,
+        "buttons": [
+          {
+            "kind": "model",
+            "pid": "largo",
+            "pressed": "true",
+            "rect": {
+              "bottom": 427.8515625,
+              "height": 44,
+              "left": 45.5,
+              "right": 136.1640625,
+              "top": 383.8515625,
+              "width": 90.6640625,
+              "x": 45.5,
+              "y": 383.8515625
+            },
+            "text": "止める",
+            "waiting": "false"
+          },
+          {
+            "kind": "preview",
+            "pid": "largo",
+            "pressed": "false",
+            "rect": null,
+            "text": "いまの部で",
+            "waiting": "false"
+          },
+          {
+            "kind": "model",
+            "pid": "ode",
+            "pressed": "false",
+            "rect": null,
+            "text": "お手本",
+            "waiting": "false"
+          },
+          {
+            "kind": "preview",
+            "pid": "ode",
+            "pressed": "false",
+            "rect": null,
+            "text": "いまの部で",
+            "waiting": "false"
+          },
+          {
+            "kind": "model",
+            "pid": "galop",
+            "pressed": "false",
+            "rect": null,
+            "text": "お手本",
+            "waiting": "false"
+          },
+          {
+            "kind": "preview",
+            "pid": "galop",
+            "pressed": "false",
+            "rect": null,
+            "text": "いまの部で",
+            "waiting": "false"
+          },
+          {
+            "kind": "model",
+            "pid": "pomp",
+            "pressed": "false",
+            "rect": null,
+            "text": "お手本",
+            "waiting": "false"
+          },
+          {
+            "kind": "preview",
+            "pid": "pomp",
+            "pressed": "false",
+            "rect": null,
+            "text": "いまの部で",
+            "waiting": "false"
+          },
+          {
+            "kind": "model",
+            "pid": "aida",
+            "pressed": "false",
+            "rect": null,
+            "text": "お手本",
+            "waiting": "false"
+          },
+          {
+            "kind": "preview",
+            "pid": "aida",
+            "pressed": "false",
+            "rect": null,
+            "text": "いまの部で",
+            "waiting": "false"
+          },
+          {
+            "kind": "model",
+            "pid": "hero",
+            "pressed": "false",
+            "rect": null,
+            "text": "お手本",
+            "waiting": "false"
+          },
+          {
+            "kind": "preview",
+            "pid": "hero",
+            "pressed": "false",
+            "rect": null,
+            "text": "いまの部で",
+            "waiting": "false"
+          },
+          {
+            "kind": "model",
+            "pid": "holst",
+            "pressed": "false",
+            "rect": null,
+            "text": "お手本",
+            "waiting": "false"
+          },
+          {
+            "kind": "preview",
+            "pid": "holst",
+            "pressed": "false",
+            "rect": null,
+            "text": "いまの部で",
+            "waiting": "false"
+          },
+          {
+            "kind": "model",
+            "pid": "hungarian",
+            "pressed": "false",
+            "rect": null,
+            "text": "お手本",
+            "waiting": "false"
+          },
+          {
+            "kind": "preview",
+            "pid": "hungarian",
+            "pressed": "false",
+            "rect": null,
+            "text": "いまの部で",
+            "waiting": "false"
+          },
+          {
+            "kind": "model",
+            "pid": "flowers",
+            "pressed": "false",
+            "rect": null,
+            "text": "お手本",
+            "waiting": "false"
+          },
+          {
+            "kind": "preview",
+            "pid": "flowers",
+            "pressed": "false",
+            "rect": null,
+            "text": "いまの部で",
+            "waiting": "false"
+          },
+          {
+            "kind": "model",
+            "pid": "tell",
+            "pressed": "false",
+            "rect": null,
+            "text": "お手本",
+            "waiting": "false"
+          },
+          {
+            "kind": "preview",
+            "pid": "tell",
+            "pressed": "false",
+            "rect": null,
+            "text": "いまの部で",
+            "waiting": "false"
+          },
+          {
+            "kind": "model",
+            "pid": "carmen",
+            "pressed": "false",
+            "rect": null,
+            "text": "お手本",
+            "waiting": "false"
+          },
+          {
+            "kind": "preview",
+            "pid": "carmen",
+            "pressed": "false",
+            "rect": null,
+            "text": "いまの部で",
+            "waiting": "false"
+          },
+          {
+            "kind": "model",
+            "pid": "valkyrie",
+            "pressed": "false",
+            "rect": null,
+            "text": "お手本",
+            "waiting": "false"
+          },
+          {
+            "kind": "preview",
+            "pid": "valkyrie",
+            "pressed": "false",
+            "rect": null,
+            "text": "いまの部で",
+            "waiting": "false"
+          },
+          {
+            "kind": "model",
+            "pid": "swan",
+            "pressed": "false",
+            "rect": null,
+            "text": "お手本",
+            "waiting": "false"
+          },
+          {
+            "kind": "preview",
+            "pid": "swan",
+            "pressed": "false",
+            "rect": null,
+            "text": "いまの部で",
+            "waiting": "false"
+          },
+          {
+            "kind": "model",
+            "pid": "spring",
+            "pressed": "false",
+            "rect": null,
+            "text": "お手本",
+            "waiting": "false"
+          },
+          {
+            "kind": "preview",
+            "pid": "spring",
+            "pressed": "false",
+            "rect": null,
+            "text": "いまの部で",
+            "waiting": "false"
+          },
+          {
+            "kind": "model",
+            "pid": "canon",
+            "pressed": "false",
+            "rect": null,
+            "text": "お手本",
+            "waiting": "false"
+          },
+          {
+            "kind": "preview",
+            "pid": "canon",
+            "pressed": "false",
+            "rect": null,
+            "text": "いまの部で",
+            "waiting": "false"
+          }
+        ],
+        "cards": [
+          "largo"
+        ],
+        "expected": 0.4519849091302603,
+        "focus": {
+          "id": "",
+          "kind": "model",
+          "pid": "largo"
+        },
+        "kind": "model",
+        "performance": 0.4519849091302603,
+        "performers": [
+          "lab-0",
+          "lab-1",
+          "lab-2",
+          "lab-3",
+          "lab-4",
+          "lab-5",
+          "lab-6",
+          "lab-7",
+          "lab-8",
+          "lab-9",
+          "lab-10",
+          "lab-11",
+          "lab-12",
+          "lab-13",
+          "lab-14",
+          "lab-15",
+          "lab-16",
+          "lab-17",
+          "lab-18",
+          "lab-19",
+          "lab-20",
+          "lab-21",
+          "lab-22",
+          "lab-23",
+          "lab-24",
+          "lab-25",
+          "lab-26",
+          "lab-27",
+          "lab-28",
+          "lab-29",
+          "lab-30",
+          "lab-31",
+          "lab-32",
+          "lab-33",
+          "lab-34",
+          "lab-35",
+          "lab-36"
+        ],
+        "pid": "largo",
+        "state": 0.15487505751661956
+      },
+      "pieceChoice": "largo",
+      "playing": true,
+      "records": 0.7712433410342783,
+      "scrollWidth": 375,
+      "solo": {
+        "type": "all"
+      },
+      "venue": "hall",
+      "voices": [
+        "SampleVoice"
+      ],
+      "waiting": false,
+      "width": 375
+    }
+  },
+  {
+    "case": "own-light",
+    "data": {
+      "audible": [
+        "m2026-n1-3f427a37",
+        "m2026-n2-3f427a37",
+        "m2026-n3-3f427a37",
+        "m2026-n4-3f427a37",
+        "m2026-n5-3f427a37"
+      ],
+      "errors": [],
+      "label": "いまの部で：《新世界より》第2楽章（譜読み前）",
+      "phase": "choose",
+      "piece": {
+        "active": true,
+        "buttons": [
+          {
+            "kind": "model",
+            "pid": "largo",
+            "pressed": "false",
+            "rect": null,
+            "text": "お手本",
+            "waiting": "false"
+          },
+          {
+            "kind": "preview",
+            "pid": "largo",
+            "pressed": "true",
+            "rect": {
+              "bottom": 427.8515625,
+              "height": 44,
+              "left": 142.1640625,
+              "right": 232.8359375,
+              "top": 383.8515625,
+              "width": 90.671875,
+              "x": 142.1640625,
+              "y": 383.8515625
+            },
+            "text": "止める",
+            "waiting": "false"
+          },
+          {
+            "kind": "model",
+            "pid": "ode",
+            "pressed": "false",
+            "rect": null,
+            "text": "お手本",
+            "waiting": "false"
+          },
+          {
+            "kind": "preview",
+            "pid": "ode",
+            "pressed": "false",
+            "rect": null,
+            "text": "いまの部で",
+            "waiting": "false"
+          },
+          {
+            "kind": "model",
+            "pid": "galop",
+            "pressed": "false",
+            "rect": null,
+            "text": "お手本",
+            "waiting": "false"
+          },
+          {
+            "kind": "preview",
+            "pid": "galop",
+            "pressed": "false",
+            "rect": null,
+            "text": "いまの部で",
+            "waiting": "false"
+          },
+          {
+            "kind": "model",
+            "pid": "pomp",
+            "pressed": "false",
+            "rect": null,
+            "text": "お手本",
+            "waiting": "false"
+          },
+          {
+            "kind": "preview",
+            "pid": "pomp",
+            "pressed": "false",
+            "rect": null,
+            "text": "いまの部で",
+            "waiting": "false"
+          },
+          {
+            "kind": "model",
+            "pid": "aida",
+            "pressed": "false",
+            "rect": null,
+            "text": "お手本",
+            "waiting": "false"
+          },
+          {
+            "kind": "preview",
+            "pid": "aida",
+            "pressed": "false",
+            "rect": null,
+            "text": "いまの部で",
+            "waiting": "false"
+          },
+          {
+            "kind": "model",
+            "pid": "hero",
+            "pressed": "false",
+            "rect": null,
+            "text": "お手本",
+            "waiting": "false"
+          },
+          {
+            "kind": "preview",
+            "pid": "hero",
+            "pressed": "false",
+            "rect": null,
+            "text": "いまの部で",
+            "waiting": "false"
+          },
+          {
+            "kind": "model",
+            "pid": "holst",
+            "pressed": "false",
+            "rect": null,
+            "text": "お手本",
+            "waiting": "false"
+          },
+          {
+            "kind": "preview",
+            "pid": "holst",
+            "pressed": "false",
+            "rect": null,
+            "text": "いまの部で",
+            "waiting": "false"
+          },
+          {
+            "kind": "model",
+            "pid": "hungarian",
+            "pressed": "false",
+            "rect": null,
+            "text": "お手本",
+            "waiting": "false"
+          },
+          {
+            "kind": "preview",
+            "pid": "hungarian",
+            "pressed": "false",
+            "rect": null,
+            "text": "いまの部で",
+            "waiting": "false"
+          },
+          {
+            "kind": "model",
+            "pid": "flowers",
+            "pressed": "false",
+            "rect": null,
+            "text": "お手本",
+            "waiting": "false"
+          },
+          {
+            "kind": "preview",
+            "pid": "flowers",
+            "pressed": "false",
+            "rect": null,
+            "text": "いまの部で",
+            "waiting": "false"
+          },
+          {
+            "kind": "model",
+            "pid": "tell",
+            "pressed": "false",
+            "rect": null,
+            "text": "お手本",
+            "waiting": "false"
+          },
+          {
+            "kind": "preview",
+            "pid": "tell",
+            "pressed": "false",
+            "rect": null,
+            "text": "いまの部で",
+            "waiting": "false"
+          },
+          {
+            "kind": "model",
+            "pid": "carmen",
+            "pressed": "false",
+            "rect": null,
+            "text": "お手本",
+            "waiting": "false"
+          },
+          {
+            "kind": "preview",
+            "pid": "carmen",
+            "pressed": "false",
+            "rect": null,
+            "text": "いまの部で",
+            "waiting": "false"
+          },
+          {
+            "kind": "model",
+            "pid": "valkyrie",
+            "pressed": "false",
+            "rect": null,
+            "text": "お手本",
+            "waiting": "false"
+          },
+          {
+            "kind": "preview",
+            "pid": "valkyrie",
+            "pressed": "false",
+            "rect": null,
+            "text": "いまの部で",
+            "waiting": "false"
+          },
+          {
+            "kind": "model",
+            "pid": "swan",
+            "pressed": "false",
+            "rect": null,
+            "text": "お手本",
+            "waiting": "false"
+          },
+          {
+            "kind": "preview",
+            "pid": "swan",
+            "pressed": "false",
+            "rect": null,
+            "text": "いまの部で",
+            "waiting": "false"
+          },
+          {
+            "kind": "model",
+            "pid": "spring",
+            "pressed": "false",
+            "rect": null,
+            "text": "お手本",
+            "waiting": "false"
+          },
+          {
+            "kind": "preview",
+            "pid": "spring",
+            "pressed": "false",
+            "rect": null,
+            "text": "いまの部で",
+            "waiting": "false"
+          },
+          {
+            "kind": "model",
+            "pid": "canon",
+            "pressed": "false",
+            "rect": null,
+            "text": "お手本",
+            "waiting": "false"
+          },
+          {
+            "kind": "preview",
+            "pid": "canon",
+            "pressed": "false",
+            "rect": null,
+            "text": "いまの部で",
+            "waiting": "false"
+          }
+        ],
+        "cards": [
+          "largo"
+        ],
+        "expected": 0.36751327477395535,
+        "focus": {
+          "id": "",
+          "kind": "preview",
+          "pid": "largo"
+        },
+        "kind": "preview",
+        "performance": 0.36751327477395535,
+        "performers": [
+          "m2026-n1-3f427a37",
+          "m2026-n2-3f427a37",
+          "m2026-n3-3f427a37",
+          "m2026-n4-3f427a37",
+          "m2026-n5-3f427a37"
+        ],
+        "pid": "largo",
+        "state": 0.15487505751661956
+      },
+      "pieceChoice": "largo",
+      "playing": true,
+      "records": 0.7712433410342783,
+      "scrollWidth": 375,
+      "solo": {
+        "type": "all"
+      },
+      "venue": "hall",
+      "voices": [
+        "SampleVoice"
+      ],
+      "waiting": false,
+      "width": 375
+    }
+  },
+  {
+    "case": "own-dark",
+    "data": {
+      "audible": [
+        "m2026-n1-3f427a37",
+        "m2026-n2-3f427a37",
+        "m2026-n3-3f427a37",
+        "m2026-n4-3f427a37",
+        "m2026-n5-3f427a37"
+      ],
+      "errors": [],
+      "label": "いまの部で：《新世界より》第2楽章（譜読み前）",
+      "phase": "choose",
+      "piece": {
+        "active": true,
+        "buttons": [
+          {
+            "kind": "model",
+            "pid": "largo",
+            "pressed": "false",
+            "rect": null,
+            "text": "お手本",
+            "waiting": "false"
+          },
+          {
+            "kind": "preview",
+            "pid": "largo",
+            "pressed": "true",
+            "rect": {
+              "bottom": 427.8515625,
+              "height": 44,
+              "left": 142.1640625,
+              "right": 232.8359375,
+              "top": 383.8515625,
+              "width": 90.671875,
+              "x": 142.1640625,
+              "y": 383.8515625
+            },
+            "text": "止める",
+            "waiting": "false"
+          },
+          {
+            "kind": "model",
+            "pid": "ode",
+            "pressed": "false",
+            "rect": null,
+            "text": "お手本",
+            "waiting": "false"
+          },
+          {
+            "kind": "preview",
+            "pid": "ode",
+            "pressed": "false",
+            "rect": null,
+            "text": "いまの部で",
+            "waiting": "false"
+          },
+          {
+            "kind": "model",
+            "pid": "galop",
+            "pressed": "false",
+            "rect": null,
+            "text": "お手本",
+            "waiting": "false"
+          },
+          {
+            "kind": "preview",
+            "pid": "galop",
+            "pressed": "false",
+            "rect": null,
+            "text": "いまの部で",
+            "waiting": "false"
+          },
+          {
+            "kind": "model",
+            "pid": "pomp",
+            "pressed": "false",
+            "rect": null,
+            "text": "お手本",
+            "waiting": "false"
+          },
+          {
+            "kind": "preview",
+            "pid": "pomp",
+            "pressed": "false",
+            "rect": null,
+            "text": "いまの部で",
+            "waiting": "false"
+          },
+          {
+            "kind": "model",
+            "pid": "aida",
+            "pressed": "false",
+            "rect": null,
+            "text": "お手本",
+            "waiting": "false"
+          },
+          {
+            "kind": "preview",
+            "pid": "aida",
+            "pressed": "false",
+            "rect": null,
+            "text": "いまの部で",
+            "waiting": "false"
+          },
+          {
+            "kind": "model",
+            "pid": "hero",
+            "pressed": "false",
+            "rect": null,
+            "text": "お手本",
+            "waiting": "false"
+          },
+          {
+            "kind": "preview",
+            "pid": "hero",
+            "pressed": "false",
+            "rect": null,
+            "text": "いまの部で",
+            "waiting": "false"
+          },
+          {
+            "kind": "model",
+            "pid": "holst",
+            "pressed": "false",
+            "rect": null,
+            "text": "お手本",
+            "waiting": "false"
+          },
+          {
+            "kind": "preview",
+            "pid": "holst",
+            "pressed": "false",
+            "rect": null,
+            "text": "いまの部で",
+            "waiting": "false"
+          },
+          {
+            "kind": "model",
+            "pid": "hungarian",
+            "pressed": "false",
+            "rect": null,
+            "text": "お手本",
+            "waiting": "false"
+          },
+          {
+            "kind": "preview",
+            "pid": "hungarian",
+            "pressed": "false",
+            "rect": null,
+            "text": "いまの部で",
+            "waiting": "false"
+          },
+          {
+            "kind": "model",
+            "pid": "flowers",
+            "pressed": "false",
+            "rect": null,
+            "text": "お手本",
+            "waiting": "false"
+          },
+          {
+            "kind": "preview",
+            "pid": "flowers",
+            "pressed": "false",
+            "rect": null,
+            "text": "いまの部で",
+            "waiting": "false"
+          },
+          {
+            "kind": "model",
+            "pid": "tell",
+            "pressed": "false",
+            "rect": null,
+            "text": "お手本",
+            "waiting": "false"
+          },
+          {
+            "kind": "preview",
+            "pid": "tell",
+            "pressed": "false",
+            "rect": null,
+            "text": "いまの部で",
+            "waiting": "false"
+          },
+          {
+            "kind": "model",
+            "pid": "carmen",
+            "pressed": "false",
+            "rect": null,
+            "text": "お手本",
+            "waiting": "false"
+          },
+          {
+            "kind": "preview",
+            "pid": "carmen",
+            "pressed": "false",
+            "rect": null,
+            "text": "いまの部で",
+            "waiting": "false"
+          },
+          {
+            "kind": "model",
+            "pid": "valkyrie",
+            "pressed": "false",
+            "rect": null,
+            "text": "お手本",
+            "waiting": "false"
+          },
+          {
+            "kind": "preview",
+            "pid": "valkyrie",
+            "pressed": "false",
+            "rect": null,
+            "text": "いまの部で",
+            "waiting": "false"
+          },
+          {
+            "kind": "model",
+            "pid": "swan",
+            "pressed": "false",
+            "rect": null,
+            "text": "お手本",
+            "waiting": "false"
+          },
+          {
+            "kind": "preview",
+            "pid": "swan",
+            "pressed": "false",
+            "rect": null,
+            "text": "いまの部で",
+            "waiting": "false"
+          },
+          {
+            "kind": "model",
+            "pid": "spring",
+            "pressed": "false",
+            "rect": null,
+            "text": "お手本",
+            "waiting": "false"
+          },
+          {
+            "kind": "preview",
+            "pid": "spring",
+            "pressed": "false",
+            "rect": null,
+            "text": "いまの部で",
+            "waiting": "false"
+          },
+          {
+            "kind": "model",
+            "pid": "canon",
+            "pressed": "false",
+            "rect": null,
+            "text": "お手本",
+            "waiting": "false"
+          },
+          {
+            "kind": "preview",
+            "pid": "canon",
+            "pressed": "false",
+            "rect": null,
+            "text": "いまの部で",
+            "waiting": "false"
+          }
+        ],
+        "cards": [
+          "largo"
+        ],
+        "expected": 0.36751327477395535,
+        "focus": {
+          "id": "",
+          "kind": "preview",
+          "pid": "largo"
+        },
+        "kind": "preview",
+        "performance": 0.36751327477395535,
+        "performers": [
+          "m2026-n1-3f427a37",
+          "m2026-n2-3f427a37",
+          "m2026-n3-3f427a37",
+          "m2026-n4-3f427a37",
+          "m2026-n5-3f427a37"
+        ],
+        "pid": "largo",
+        "state": 0.15487505751661956
+      },
+      "pieceChoice": "largo",
+      "playing": true,
+      "records": 0.7712433410342783,
+      "scrollWidth": 375,
+      "solo": {
+        "type": "all"
+      },
+      "venue": "hall",
+      "voices": [
+        "SampleVoice"
+      ],
+      "waiting": false,
+      "width": 375
+    }
+  },
+  {
+    "case": "own-restart",
+    "data": {
+      "audible": [
+        "m2026-n1-3f427a37",
+        "m2026-n2-3f427a37",
+        "m2026-n3-3f427a37",
+        "m2026-n4-3f427a37",
+        "m2026-n5-3f427a37"
+      ],
+      "errors": [],
+      "label": "いまの部で：《新世界より》第2楽章（譜読み前）",
+      "phase": "choose",
+      "piece": {
+        "active": true,
+        "buttons": [
+          {
+            "kind": "model",
+            "pid": "largo",
+            "pressed": "false",
+            "rect": null,
+            "text": "お手本",
+            "waiting": "false"
+          },
+          {
+            "kind": "preview",
+            "pid": "largo",
+            "pressed": "true",
+            "rect": {
+              "bottom": 427.8515625,
+              "height": 44,
+              "left": 142.1640625,
+              "right": 232.8359375,
+              "top": 383.8515625,
+              "width": 90.671875,
+              "x": 142.1640625,
+              "y": 383.8515625
+            },
+            "text": "止める",
+            "waiting": "false"
+          },
+          {
+            "kind": "model",
+            "pid": "ode",
+            "pressed": "false",
+            "rect": null,
+            "text": "お手本",
+            "waiting": "false"
+          },
+          {
+            "kind": "preview",
+            "pid": "ode",
+            "pressed": "false",
+            "rect": null,
+            "text": "いまの部で",
+            "waiting": "false"
+          },
+          {
+            "kind": "model",
+            "pid": "galop",
+            "pressed": "false",
+            "rect": null,
+            "text": "お手本",
+            "waiting": "false"
+          },
+          {
+            "kind": "preview",
+            "pid": "galop",
+            "pressed": "false",
+            "rect": null,
+            "text": "いまの部で",
+            "waiting": "false"
+          },
+          {
+            "kind": "model",
+            "pid": "pomp",
+            "pressed": "false",
+            "rect": null,
+            "text": "お手本",
+            "waiting": "false"
+          },
+          {
+            "kind": "preview",
+            "pid": "pomp",
+            "pressed": "false",
+            "rect": null,
+            "text": "いまの部で",
+            "waiting": "false"
+          },
+          {
+            "kind": "model",
+            "pid": "aida",
+            "pressed": "false",
+            "rect": null,
+            "text": "お手本",
+            "waiting": "false"
+          },
+          {
+            "kind": "preview",
+            "pid": "aida",
+            "pressed": "false",
+            "rect": null,
+            "text": "いまの部で",
+            "waiting": "false"
+          },
+          {
+            "kind": "model",
+            "pid": "hero",
+            "pressed": "false",
+            "rect": null,
+            "text": "お手本",
+            "waiting": "false"
+          },
+          {
+            "kind": "preview",
+            "pid": "hero",
+            "pressed": "false",
+            "rect": null,
+            "text": "いまの部で",
+            "waiting": "false"
+          },
+          {
+            "kind": "model",
+            "pid": "holst",
+            "pressed": "false",
+            "rect": null,
+            "text": "お手本",
+            "waiting": "false"
+          },
+          {
+            "kind": "preview",
+            "pid": "holst",
+            "pressed": "false",
+            "rect": null,
+            "text": "いまの部で",
+            "waiting": "false"
+          },
+          {
+            "kind": "model",
+            "pid": "hungarian",
+            "pressed": "false",
+            "rect": null,
+            "text": "お手本",
+            "waiting": "false"
+          },
+          {
+            "kind": "preview",
+            "pid": "hungarian",
+            "pressed": "false",
+            "rect": null,
+            "text": "いまの部で",
+            "waiting": "false"
+          },
+          {
+            "kind": "model",
+            "pid": "flowers",
+            "pressed": "false",
+            "rect": null,
+            "text": "お手本",
+            "waiting": "false"
+          },
+          {
+            "kind": "preview",
+            "pid": "flowers",
+            "pressed": "false",
+            "rect": null,
+            "text": "いまの部で",
+            "waiting": "false"
+          },
+          {
+            "kind": "model",
+            "pid": "tell",
+            "pressed": "false",
+            "rect": null,
+            "text": "お手本",
+            "waiting": "false"
+          },
+          {
+            "kind": "preview",
+            "pid": "tell",
+            "pressed": "false",
+            "rect": null,
+            "text": "いまの部で",
+            "waiting": "false"
+          },
+          {
+            "kind": "model",
+            "pid": "carmen",
+            "pressed": "false",
+            "rect": null,
+            "text": "お手本",
+            "waiting": "false"
+          },
+          {
+            "kind": "preview",
+            "pid": "carmen",
+            "pressed": "false",
+            "rect": null,
+            "text": "いまの部で",
+            "waiting": "false"
+          },
+          {
+            "kind": "model",
+            "pid": "valkyrie",
+            "pressed": "false",
+            "rect": null,
+            "text": "お手本",
+            "waiting": "false"
+          },
+          {
+            "kind": "preview",
+            "pid": "valkyrie",
+            "pressed": "false",
+            "rect": null,
+            "text": "いまの部で",
+            "waiting": "false"
+          },
+          {
+            "kind": "model",
+            "pid": "swan",
+            "pressed": "false",
+            "rect": null,
+            "text": "お手本",
+            "waiting": "false"
+          },
+          {
+            "kind": "preview",
+            "pid": "swan",
+            "pressed": "false",
+            "rect": null,
+            "text": "いまの部で",
+            "waiting": "false"
+          },
+          {
+            "kind": "model",
+            "pid": "spring",
+            "pressed": "false",
+            "rect": null,
+            "text": "お手本",
+            "waiting": "false"
+          },
+          {
+            "kind": "preview",
+            "pid": "spring",
+            "pressed": "false",
+            "rect": null,
+            "text": "いまの部で",
+            "waiting": "false"
+          },
+          {
+            "kind": "model",
+            "pid": "canon",
+            "pressed": "false",
+            "rect": null,
+            "text": "お手本",
+            "waiting": "false"
+          },
+          {
+            "kind": "preview",
+            "pid": "canon",
+            "pressed": "false",
+            "rect": null,
+            "text": "いまの部で",
+            "waiting": "false"
+          }
+        ],
+        "cards": [
+          "largo"
+        ],
+        "expected": 0.36751327477395535,
+        "focus": {
+          "id": "",
+          "kind": "preview",
+          "pid": "largo"
+        },
+        "kind": "preview",
+        "performance": 0.36751327477395535,
+        "performers": [
+          "m2026-n1-3f427a37",
+          "m2026-n2-3f427a37",
+          "m2026-n3-3f427a37",
+          "m2026-n4-3f427a37",
+          "m2026-n5-3f427a37"
+        ],
+        "pid": "largo",
+        "state": 0.15487505751661956
+      },
+      "pieceChoice": "largo",
+      "playing": true,
+      "records": 0.7712433410342783,
+      "scrollWidth": 375,
+      "solo": {
+        "type": "all"
+      },
+      "venue": "hall",
+      "voices": [
+        "SampleVoice"
+      ],
+      "waiting": false,
+      "width": 375
+    }
+  },
+  {
+    "case": "confirmed-toggle-stop",
+    "data": {
+      "audible": [],
+      "errors": [],
+      "label": "いまの音（選曲前・県民文化会館）",
+      "phase": "choose",
+      "piece": {
+        "active": false,
+        "buttons": [
+          {
+            "kind": "model",
+            "pid": "largo",
+            "pressed": "false",
+            "rect": null,
+            "text": "お手本",
+            "waiting": "false"
+          },
+          {
+            "kind": "preview",
+            "pid": "largo",
+            "pressed": "false",
+            "rect": null,
+            "text": "いまの部で",
+            "waiting": "false"
+          },
+          {
+            "kind": "model",
+            "pid": "ode",
+            "pressed": "false",
+            "rect": null,
+            "text": "お手本",
+            "waiting": "false"
+          },
+          {
+            "kind": "preview",
+            "pid": "ode",
+            "pressed": "false",
+            "rect": null,
+            "text": "いまの部で",
+            "waiting": "false"
+          },
+          {
+            "kind": "model",
+            "pid": "galop",
+            "pressed": "false",
+            "rect": null,
+            "text": "お手本",
+            "waiting": "false"
+          },
+          {
+            "kind": "preview",
+            "pid": "galop",
+            "pressed": "false",
+            "rect": null,
+            "text": "いまの部で",
+            "waiting": "false"
+          },
+          {
+            "kind": "model",
+            "pid": "pomp",
+            "pressed": "false",
+            "rect": null,
+            "text": "お手本",
+            "waiting": "false"
+          },
+          {
+            "kind": "preview",
+            "pid": "pomp",
+            "pressed": "false",
+            "rect": null,
+            "text": "いまの部で",
+            "waiting": "false"
+          },
+          {
+            "kind": "model",
+            "pid": "aida",
+            "pressed": "false",
+            "rect": null,
+            "text": "お手本",
+            "waiting": "false"
+          },
+          {
+            "kind": "preview",
+            "pid": "aida",
+            "pressed": "false",
+            "rect": null,
+            "text": "いまの部で",
+            "waiting": "false"
+          },
+          {
+            "kind": "model",
+            "pid": "hero",
+            "pressed": "false",
+            "rect": null,
+            "text": "お手本",
+            "waiting": "false"
+          },
+          {
+            "kind": "preview",
+            "pid": "hero",
+            "pressed": "false",
+            "rect": null,
+            "text": "いまの部で",
+            "waiting": "false"
+          },
+          {
+            "kind": "model",
+            "pid": "holst",
+            "pressed": "false",
+            "rect": null,
+            "text": "お手本",
+            "waiting": "false"
+          },
+          {
+            "kind": "preview",
+            "pid": "holst",
+            "pressed": "false",
+            "rect": null,
+            "text": "いまの部で",
+            "waiting": "false"
+          },
+          {
+            "kind": "model",
+            "pid": "hungarian",
+            "pressed": "false",
+            "rect": null,
+            "text": "お手本",
+            "waiting": "false"
+          },
+          {
+            "kind": "preview",
+            "pid": "hungarian",
+            "pressed": "false",
+            "rect": null,
+            "text": "いまの部で",
+            "waiting": "false"
+          },
+          {
+            "kind": "model",
+            "pid": "flowers",
+            "pressed": "false",
+            "rect": null,
+            "text": "お手本",
+            "waiting": "false"
+          },
+          {
+            "kind": "preview",
+            "pid": "flowers",
+            "pressed": "false",
+            "rect": null,
+            "text": "いまの部で",
+            "waiting": "false"
+          },
+          {
+            "kind": "model",
+            "pid": "tell",
+            "pressed": "false",
+            "rect": null,
+            "text": "お手本",
+            "waiting": "false"
+          },
+          {
+            "kind": "preview",
+            "pid": "tell",
+            "pressed": "false",
+            "rect": null,
+            "text": "いまの部で",
+            "waiting": "false"
+          },
+          {
+            "kind": "model",
+            "pid": "carmen",
+            "pressed": "false",
+            "rect": null,
+            "text": "お手本",
+            "waiting": "false"
+          },
+          {
+            "kind": "preview",
+            "pid": "carmen",
+            "pressed": "false",
+            "rect": null,
+            "text": "いまの部で",
+            "waiting": "false"
+          },
+          {
+            "kind": "model",
+            "pid": "valkyrie",
+            "pressed": "false",
+            "rect": null,
+            "text": "お手本",
+            "waiting": "false"
+          },
+          {
+            "kind": "preview",
+            "pid": "valkyrie",
+            "pressed": "false",
+            "rect": null,
+            "text": "いまの部で",
+            "waiting": "false"
+          },
+          {
+            "kind": "model",
+            "pid": "swan",
+            "pressed": "false",
+            "rect": null,
+            "text": "お手本",
+            "waiting": "false"
+          },
+          {
+            "kind": "preview",
+            "pid": "swan",
+            "pressed": "false",
+            "rect": null,
+            "text": "いまの部で",
+            "waiting": "false"
+          },
+          {
+            "kind": "model",
+            "pid": "spring",
+            "pressed": "false",
+            "rect": null,
+            "text": "お手本",
+            "waiting": "false"
+          },
+          {
+            "kind": "preview",
+            "pid": "spring",
+            "pressed": "false",
+            "rect": null,
+            "text": "いまの部で",
+            "waiting": "false"
+          },
+          {
+            "kind": "model",
+            "pid": "canon",
+            "pressed": "false",
+            "rect": null,
+            "text": "お手本",
+            "waiting": "false"
+          },
+          {
+            "kind": "preview",
+            "pid": "canon",
+            "pressed": "false",
+            "rect": null,
+            "text": "いまの部で",
+            "waiting": "false"
+          }
+        ],
+        "cards": [],
+        "expected": null,
+        "focus": {
+          "id": "",
+          "kind": "preview",
+          "pid": "largo"
+        },
+        "performance": null,
+        "performers": [],
+        "state": 0.15487505751661956
+      },
+      "pieceChoice": "largo",
+      "playing": false,
+      "records": 0.7712433410342783,
+      "scrollWidth": 375,
+      "solo": {
+        "type": "all"
+      },
+      "venue": "hall",
+      "voices": [],
+      "waiting": false,
+      "width": 375
+    }
+  },
+  {
+    "case": "different-piece",
+    "data": {
+      "audible": [
+        "lab-0",
+        "lab-1",
+        "lab-2",
+        "lab-3",
+        "lab-4",
+        "lab-5",
+        "lab-6",
+        "lab-7",
+        "lab-8",
+        "lab-9",
+        "lab-10",
+        "lab-11",
+        "lab-12",
+        "lab-13",
+        "lab-14",
+        "lab-15",
+        "lab-16",
+        "lab-17",
+        "lab-18",
+        "lab-19",
+        "lab-20",
+        "lab-21",
+        "lab-22",
+        "lab-23",
+        "lab-24",
+        "lab-25",
+        "lab-26",
+        "lab-27",
+        "lab-28",
+        "lab-29",
+        "lab-30",
+        "lab-31",
+        "lab-32",
+        "lab-33",
+        "lab-34",
+        "lab-35",
+        "lab-36",
+        "lab-37",
+        "lab-38"
+      ],
+      "errors": [],
+      "label": "お手本：「天国と地獄」（全員がうまい部・県民文化会館）",
+      "phase": "choose",
+      "piece": {
+        "active": true,
+        "buttons": [
+          {
+            "kind": "model",
+            "pid": "largo",
+            "pressed": "false",
+            "rect": null,
+            "text": "お手本",
+            "waiting": "false"
+          },
+          {
+            "kind": "preview",
+            "pid": "largo",
+            "pressed": "false",
+            "rect": null,
+            "text": "いまの部で",
+            "waiting": "false"
+          },
+          {
+            "kind": "model",
+            "pid": "ode",
+            "pressed": "false",
+            "rect": null,
+            "text": "お手本",
+            "waiting": "false"
+          },
+          {
+            "kind": "preview",
+            "pid": "ode",
+            "pressed": "false",
+            "rect": null,
+            "text": "いまの部で",
+            "waiting": "false"
+          },
+          {
+            "kind": "model",
+            "pid": "galop",
+            "pressed": "true",
+            "rect": {
+              "bottom": 427.9375,
+              "height": 44,
+              "left": 45.5,
+              "right": 136.1640625,
+              "top": 383.9375,
+              "width": 90.6640625,
+              "x": 45.5,
+              "y": 383.9375
+            },
+            "text": "止める",
+            "waiting": "false"
+          },
+          {
+            "kind": "preview",
+            "pid": "galop",
+            "pressed": "false",
+            "rect": null,
+            "text": "いまの部で",
+            "waiting": "false"
+          },
+          {
+            "kind": "model",
+            "pid": "pomp",
+            "pressed": "false",
+            "rect": null,
+            "text": "お手本",
+            "waiting": "false"
+          },
+          {
+            "kind": "preview",
+            "pid": "pomp",
+            "pressed": "false",
+            "rect": null,
+            "text": "いまの部で",
+            "waiting": "false"
+          },
+          {
+            "kind": "model",
+            "pid": "aida",
+            "pressed": "false",
+            "rect": null,
+            "text": "お手本",
+            "waiting": "false"
+          },
+          {
+            "kind": "preview",
+            "pid": "aida",
+            "pressed": "false",
+            "rect": null,
+            "text": "いまの部で",
+            "waiting": "false"
+          },
+          {
+            "kind": "model",
+            "pid": "hero",
+            "pressed": "false",
+            "rect": null,
+            "text": "お手本",
+            "waiting": "false"
+          },
+          {
+            "kind": "preview",
+            "pid": "hero",
+            "pressed": "false",
+            "rect": null,
+            "text": "いまの部で",
+            "waiting": "false"
+          },
+          {
+            "kind": "model",
+            "pid": "holst",
+            "pressed": "false",
+            "rect": null,
+            "text": "お手本",
+            "waiting": "false"
+          },
+          {
+            "kind": "preview",
+            "pid": "holst",
+            "pressed": "false",
+            "rect": null,
+            "text": "いまの部で",
+            "waiting": "false"
+          },
+          {
+            "kind": "model",
+            "pid": "hungarian",
+            "pressed": "false",
+            "rect": null,
+            "text": "お手本",
+            "waiting": "false"
+          },
+          {
+            "kind": "preview",
+            "pid": "hungarian",
+            "pressed": "false",
+            "rect": null,
+            "text": "いまの部で",
+            "waiting": "false"
+          },
+          {
+            "kind": "model",
+            "pid": "flowers",
+            "pressed": "false",
+            "rect": null,
+            "text": "お手本",
+            "waiting": "false"
+          },
+          {
+            "kind": "preview",
+            "pid": "flowers",
+            "pressed": "false",
+            "rect": null,
+            "text": "いまの部で",
+            "waiting": "false"
+          },
+          {
+            "kind": "model",
+            "pid": "tell",
+            "pressed": "false",
+            "rect": null,
+            "text": "お手本",
+            "waiting": "false"
+          },
+          {
+            "kind": "preview",
+            "pid": "tell",
+            "pressed": "false",
+            "rect": null,
+            "text": "いまの部で",
+            "waiting": "false"
+          },
+          {
+            "kind": "model",
+            "pid": "carmen",
+            "pressed": "false",
+            "rect": null,
+            "text": "お手本",
+            "waiting": "false"
+          },
+          {
+            "kind": "preview",
+            "pid": "carmen",
+            "pressed": "false",
+            "rect": null,
+            "text": "いまの部で",
+            "waiting": "false"
+          },
+          {
+            "kind": "model",
+            "pid": "valkyrie",
+            "pressed": "false",
+            "rect": null,
+            "text": "お手本",
+            "waiting": "false"
+          },
+          {
+            "kind": "preview",
+            "pid": "valkyrie",
+            "pressed": "false",
+            "rect": null,
+            "text": "いまの部で",
+            "waiting": "false"
+          },
+          {
+            "kind": "model",
+            "pid": "swan",
+            "pressed": "false",
+            "rect": null,
+            "text": "お手本",
+            "waiting": "false"
+          },
+          {
+            "kind": "preview",
+            "pid": "swan",
+            "pressed": "false",
+            "rect": null,
+            "text": "いまの部で",
+            "waiting": "false"
+          },
+          {
+            "kind": "model",
+            "pid": "spring",
+            "pressed": "false",
+            "rect": null,
+            "text": "お手本",
+            "waiting": "false"
+          },
+          {
+            "kind": "preview",
+            "pid": "spring",
+            "pressed": "false",
+            "rect": null,
+            "text": "いまの部で",
+            "waiting": "false"
+          },
+          {
+            "kind": "model",
+            "pid": "canon",
+            "pressed": "false",
+            "rect": null,
+            "text": "お手本",
+            "waiting": "false"
+          },
+          {
+            "kind": "preview",
+            "pid": "canon",
+            "pressed": "false",
+            "rect": null,
+            "text": "いまの部で",
+            "waiting": "false"
+          }
+        ],
+        "cards": [
+          "galop"
+        ],
+        "expected": 0.25665230257436633,
+        "focus": {
+          "id": "",
+          "kind": "model",
+          "pid": "galop"
+        },
+        "kind": "model",
+        "performance": 0.25665230257436633,
+        "performers": [
+          "lab-0",
+          "lab-1",
+          "lab-2",
+          "lab-3",
+          "lab-4",
+          "lab-5",
+          "lab-6",
+          "lab-7",
+          "lab-8",
+          "lab-9",
+          "lab-10",
+          "lab-11",
+          "lab-12",
+          "lab-13",
+          "lab-14",
+          "lab-15",
+          "lab-16",
+          "lab-17",
+          "lab-18",
+          "lab-19",
+          "lab-20",
+          "lab-21",
+          "lab-22",
+          "lab-23",
+          "lab-24",
+          "lab-25",
+          "lab-26",
+          "lab-27",
+          "lab-28",
+          "lab-29",
+          "lab-30",
+          "lab-31",
+          "lab-32",
+          "lab-33",
+          "lab-34",
+          "lab-35",
+          "lab-36",
+          "lab-37",
+          "lab-38"
+        ],
+        "pid": "galop",
+        "state": 0.15487505751661956
+      },
+      "pieceChoice": "galop",
+      "playing": true,
+      "records": 0.7712433410342783,
+      "scrollWidth": 375,
+      "solo": {
+        "type": "all"
+      },
+      "venue": "hall",
+      "voices": [
+        "SampleVoice"
+      ],
+      "waiting": false,
+      "width": 375
+    }
+  },
+  {
+    "case": "choose-free",
+    "data": {
+      "audible": [],
+      "errors": [],
+      "label": "いまの音（4月 第1週・県民文化会館）",
+      "phase": "week",
+      "piece": {
+        "active": false,
+        "buttons": [],
+        "cards": [],
+        "expected": null,
+        "expectedChoice": {
+          "act": "choose",
+          "pid": "galop",
+          "state": 0.02176462090574205
+        },
+        "focus": {
+          "id": ""
+        },
+        "performance": null,
+        "performers": [],
+        "state": 0.02176462090574205
+      },
+      "pieceChoice": "galop",
+      "playing": false,
+      "records": 0.6130959002766758,
+      "scrollWidth": 375,
+      "solo": {
+        "type": "all"
+      },
+      "venue": "hall",
+      "voices": [],
+      "waiting": false,
+      "width": 375
+    }
+  },
+  {
+    "case": "set-initial",
+    "data": {
+      "audible": [],
+      "errors": [],
+      "label": "いまの音（選曲前・音楽室）",
+      "phase": "chooseSet",
+      "piece": {
+        "active": false,
+        "buttons": [
+          {
+            "kind": "model",
+            "pid": "aida",
+            "pressed": "false",
+            "rect": null,
+            "text": "お手本",
+            "waiting": "false"
+          },
+          {
+            "kind": "preview",
+            "pid": "aida",
+            "pressed": "false",
+            "rect": null,
+            "text": "いまの部で",
+            "waiting": "false"
+          },
+          {
+            "kind": "model",
+            "pid": "pomp",
+            "pressed": "false",
+            "rect": null,
+            "text": "お手本",
+            "waiting": "false"
+          },
+          {
+            "kind": "preview",
+            "pid": "pomp",
+            "pressed": "false",
+            "rect": null,
+            "text": "いまの部で",
+            "waiting": "false"
+          },
+          {
+            "kind": "model",
+            "pid": "ode",
+            "pressed": "false",
+            "rect": null,
+            "text": "お手本",
+            "waiting": "false"
+          },
+          {
+            "kind": "preview",
+            "pid": "ode",
+            "pressed": "false",
+            "rect": null,
+            "text": "いまの部で",
+            "waiting": "false"
+          }
+        ],
+        "cards": [],
+        "expected": null,
+        "focus": {
+          "id": ""
+        },
+        "performance": null,
+        "performers": [],
+        "state": 0.9628621663432568
+      },
+      "pieceChoice": "galop",
+      "playing": false,
+      "records": 0.41059355391189456,
+      "scrollWidth": 375,
+      "solo": {
+        "type": "all"
+      },
+      "venue": "room",
+      "voices": [],
+      "waiting": false,
+      "width": 375
+    }
+  },
+  {
+    "case": "set-wait-model",
+    "data": {
+      "audible": [],
+      "errors": [],
+      "label": "お手本：「凱旋行進曲」（全員がうまい部・県民文化会館）",
+      "phase": "chooseSet",
+      "piece": {
+        "active": true,
+        "buttons": [
+          {
+            "kind": "model",
+            "pid": "aida",
+            "pressed": "true",
+            "rect": {
+              "bottom": 427.8359375,
+              "height": 44,
+              "left": 45.5,
+              "right": 136.1640625,
+              "top": 383.8359375,
+              "width": 90.6640625,
+              "x": 45.5,
+              "y": 383.8359375
+            },
+            "text": "読み込み中",
+            "waiting": "true"
+          },
+          {
+            "kind": "preview",
+            "pid": "aida",
+            "pressed": "false",
+            "rect": null,
+            "text": "いまの部で",
+            "waiting": "false"
+          },
+          {
+            "kind": "model",
+            "pid": "pomp",
+            "pressed": "false",
+            "rect": null,
+            "text": "お手本",
+            "waiting": "false"
+          },
+          {
+            "kind": "preview",
+            "pid": "pomp",
+            "pressed": "false",
+            "rect": null,
+            "text": "いまの部で",
+            "waiting": "false"
+          },
+          {
+            "kind": "model",
+            "pid": "ode",
+            "pressed": "false",
+            "rect": null,
+            "text": "お手本",
+            "waiting": "false"
+          },
+          {
+            "kind": "preview",
+            "pid": "ode",
+            "pressed": "false",
+            "rect": null,
+            "text": "いまの部で",
+            "waiting": "false"
+          }
+        ],
+        "cards": [
+          "aida"
+        ],
+        "expected": 0.8822829159907997,
+        "focus": {
+          "id": "",
+          "kind": "model",
+          "pid": "aida"
+        },
+        "kind": "model",
+        "performance": 0.8822829159907997,
+        "performers": [
+          "lab-0",
+          "lab-1",
+          "lab-2",
+          "lab-3",
+          "lab-4",
+          "lab-5",
+          "lab-6",
+          "lab-7",
+          "lab-8",
+          "lab-9",
+          "lab-10",
+          "lab-11",
+          "lab-12",
+          "lab-13",
+          "lab-14",
+          "lab-15",
+          "lab-16",
+          "lab-17",
+          "lab-18",
+          "lab-19",
+          "lab-20",
+          "lab-21",
+          "lab-22",
+          "lab-23",
+          "lab-24",
+          "lab-25",
+          "lab-26",
+          "lab-27",
+          "lab-28",
+          "lab-29",
+          "lab-30",
+          "lab-31",
+          "lab-32",
+          "lab-33",
+          "lab-34",
+          "lab-35",
+          "lab-37",
+          "lab-36",
+          "lab-38"
+        ],
+        "pid": "aida",
+        "state": 0.9628621663432568
+      },
+      "pieceChoice": "aida",
+      "playing": false,
+      "records": 0.41059355391189456,
+      "scrollWidth": 375,
+      "solo": {
+        "type": "all"
+      },
+      "venue": "hall",
+      "voices": [],
+      "waiting": true,
+      "width": 375
+    }
+  },
+  {
+    "case": "set-wait-own",
+    "data": {
+      "audible": [],
+      "errors": [],
+      "label": "いまの部で：「威風堂々」（譜読み前）",
+      "phase": "chooseSet",
+      "piece": {
+        "active": true,
+        "buttons": [
+          {
+            "kind": "model",
+            "pid": "aida",
+            "pressed": "false",
+            "rect": null,
+            "text": "お手本",
+            "waiting": "false"
+          },
+          {
+            "kind": "preview",
+            "pid": "aida",
+            "pressed": "false",
+            "rect": null,
+            "text": "いまの部で",
+            "waiting": "false"
+          },
+          {
+            "kind": "model",
+            "pid": "pomp",
+            "pressed": "false",
+            "rect": null,
+            "text": "お手本",
+            "waiting": "false"
+          },
+          {
+            "kind": "preview",
+            "pid": "pomp",
+            "pressed": "true",
+            "rect": {
+              "bottom": 428.1796875,
+              "height": 44,
+              "left": 142.1640625,
+              "right": 232.8359375,
+              "top": 384.1796875,
+              "width": 90.671875,
+              "x": 142.1640625,
+              "y": 384.1796875
+            },
+            "text": "読み込み中",
+            "waiting": "true"
+          },
+          {
+            "kind": "model",
+            "pid": "ode",
+            "pressed": "false",
+            "rect": null,
+            "text": "お手本",
+            "waiting": "false"
+          },
+          {
+            "kind": "preview",
+            "pid": "ode",
+            "pressed": "false",
+            "rect": null,
+            "text": "いまの部で",
+            "waiting": "false"
+          }
+        ],
+        "cards": [
+          "pomp"
+        ],
+        "expected": 0.5866571208462119,
+        "focus": {
+          "id": "",
+          "kind": "preview",
+          "pid": "pomp"
+        },
+        "kind": "preview",
+        "performance": 0.5866571208462119,
+        "performers": [
+          "m2028-n1-cafe",
+          "m2028-n2-cafe",
+          "m2028-n3-cafe",
+          "m2028-n4-cafe",
+          "m2028-n5-cafe",
+          "m2028-n6-cafe",
+          "m2028-n7-cafe",
+          "m2028-n8-cafe",
+          "m2028-n9-cafe",
+          "m2028-n10-cafe",
+          "m2028-n11-cafe",
+          "m2028-n12-cafe",
+          "m2028-n13-cafe",
+          "m2028-n14-cafe",
+          "m2028-n15-cafe",
+          "m2028-n16-cafe",
+          "m2028-n17-cafe",
+          "m2028-n18-cafe",
+          "m2028-n19-cafe",
+          "m2028-n20-cafe",
+          "m2028-n21-cafe",
+          "m2028-n22-cafe",
+          "m2028-n23-cafe",
+          "m2028-n24-cafe",
+          "m2028-n25-cafe",
+          "m2028-n26-cafe",
+          "m2028-n27-cafe",
+          "m2028-n28-cafe",
+          "m2028-n29-cafe",
+          "m2028-n30-cafe",
+          "m2028-n31-cafe",
+          "m2028-n32-cafe",
+          "m2028-n33-cafe",
+          "m2028-n34-cafe",
+          "m2028-n35-cafe",
+          "m2028-n36-cafe",
+          "m2028-n37-cafe",
+          "m2028-n39-cafe",
+          "m2028-n38-cafe"
+        ],
+        "pid": "pomp",
+        "state": 0.9628621663432568
+      },
+      "pieceChoice": "pomp",
+      "playing": false,
+      "records": 0.41059355391189456,
+      "scrollWidth": 375,
+      "solo": {
+        "type": "all"
+      },
+      "venue": "hall",
+      "voices": [],
+      "waiting": true,
+      "width": 375
+    }
+  },
+  {
+    "case": "set-release",
+    "data": {
+      "audible": [
+        "m2028-n1-cafe",
+        "m2028-n2-cafe",
+        "m2028-n3-cafe",
+        "m2028-n4-cafe",
+        "m2028-n5-cafe",
+        "m2028-n6-cafe",
+        "m2028-n7-cafe",
+        "m2028-n8-cafe",
+        "m2028-n9-cafe",
+        "m2028-n10-cafe",
+        "m2028-n11-cafe",
+        "m2028-n12-cafe",
+        "m2028-n13-cafe",
+        "m2028-n14-cafe",
+        "m2028-n15-cafe",
+        "m2028-n16-cafe",
+        "m2028-n17-cafe",
+        "m2028-n18-cafe",
+        "m2028-n19-cafe",
+        "m2028-n20-cafe",
+        "m2028-n21-cafe",
+        "m2028-n22-cafe",
+        "m2028-n23-cafe",
+        "m2028-n24-cafe",
+        "m2028-n25-cafe",
+        "m2028-n26-cafe",
+        "m2028-n27-cafe",
+        "m2028-n28-cafe",
+        "m2028-n29-cafe",
+        "m2028-n30-cafe",
+        "m2028-n31-cafe",
+        "m2028-n32-cafe",
+        "m2028-n33-cafe",
+        "m2028-n34-cafe",
+        "m2028-n35-cafe",
+        "m2028-n36-cafe",
+        "m2028-n37-cafe",
+        "m2028-n39-cafe",
+        "m2028-n38-cafe"
+      ],
+      "errors": [],
+      "label": "いまの部で：「威風堂々」（譜読み前）",
+      "phase": "chooseSet",
+      "piece": {
+        "active": true,
+        "buttons": [
+          {
+            "kind": "model",
+            "pid": "aida",
+            "pressed": "false",
+            "rect": null,
+            "text": "お手本",
+            "waiting": "false"
+          },
+          {
+            "kind": "preview",
+            "pid": "aida",
+            "pressed": "false",
+            "rect": null,
+            "text": "いまの部で",
+            "waiting": "false"
+          },
+          {
+            "kind": "model",
+            "pid": "pomp",
+            "pressed": "false",
+            "rect": null,
+            "text": "お手本",
+            "waiting": "false"
+          },
+          {
+            "kind": "preview",
+            "pid": "pomp",
+            "pressed": "true",
+            "rect": {
+              "bottom": 428.1796875,
+              "height": 44,
+              "left": 142.1640625,
+              "right": 232.8359375,
+              "top": 384.1796875,
+              "width": 90.671875,
+              "x": 142.1640625,
+              "y": 384.1796875
+            },
+            "text": "止める",
+            "waiting": "false"
+          },
+          {
+            "kind": "model",
+            "pid": "ode",
+            "pressed": "false",
+            "rect": null,
+            "text": "お手本",
+            "waiting": "false"
+          },
+          {
+            "kind": "preview",
+            "pid": "ode",
+            "pressed": "false",
+            "rect": null,
+            "text": "いまの部で",
+            "waiting": "false"
+          }
+        ],
+        "cards": [
+          "pomp"
+        ],
+        "expected": 0.5866571208462119,
+        "focus": {
+          "id": "",
+          "kind": "preview",
+          "pid": "pomp"
+        },
+        "kind": "preview",
+        "performance": 0.5866571208462119,
+        "performers": [
+          "m2028-n1-cafe",
+          "m2028-n2-cafe",
+          "m2028-n3-cafe",
+          "m2028-n4-cafe",
+          "m2028-n5-cafe",
+          "m2028-n6-cafe",
+          "m2028-n7-cafe",
+          "m2028-n8-cafe",
+          "m2028-n9-cafe",
+          "m2028-n10-cafe",
+          "m2028-n11-cafe",
+          "m2028-n12-cafe",
+          "m2028-n13-cafe",
+          "m2028-n14-cafe",
+          "m2028-n15-cafe",
+          "m2028-n16-cafe",
+          "m2028-n17-cafe",
+          "m2028-n18-cafe",
+          "m2028-n19-cafe",
+          "m2028-n20-cafe",
+          "m2028-n21-cafe",
+          "m2028-n22-cafe",
+          "m2028-n23-cafe",
+          "m2028-n24-cafe",
+          "m2028-n25-cafe",
+          "m2028-n26-cafe",
+          "m2028-n27-cafe",
+          "m2028-n28-cafe",
+          "m2028-n29-cafe",
+          "m2028-n30-cafe",
+          "m2028-n31-cafe",
+          "m2028-n32-cafe",
+          "m2028-n33-cafe",
+          "m2028-n34-cafe",
+          "m2028-n35-cafe",
+          "m2028-n36-cafe",
+          "m2028-n37-cafe",
+          "m2028-n39-cafe",
+          "m2028-n38-cafe"
+        ],
+        "pid": "pomp",
+        "state": 0.9628621663432568
+      },
+      "pieceChoice": "pomp",
+      "playing": true,
+      "records": 0.41059355391189456,
+      "scrollWidth": 375,
+      "solo": {
+        "type": "all"
+      },
+      "venue": "hall",
+      "voices": [
+        "SampleVoice"
+      ],
+      "waiting": false,
+      "width": 375
+    }
+  },
+  {
+    "case": "set-toggle-stop",
+    "data": {
+      "audible": [],
+      "errors": [],
+      "label": "いまの音（選曲前・県民文化会館）",
+      "phase": "chooseSet",
+      "piece": {
+        "active": false,
+        "buttons": [
+          {
+            "kind": "model",
+            "pid": "aida",
+            "pressed": "false",
+            "rect": null,
+            "text": "お手本",
+            "waiting": "false"
+          },
+          {
+            "kind": "preview",
+            "pid": "aida",
+            "pressed": "false",
+            "rect": null,
+            "text": "いまの部で",
+            "waiting": "false"
+          },
+          {
+            "kind": "model",
+            "pid": "pomp",
+            "pressed": "false",
+            "rect": null,
+            "text": "お手本",
+            "waiting": "false"
+          },
+          {
+            "kind": "preview",
+            "pid": "pomp",
+            "pressed": "false",
+            "rect": null,
+            "text": "いまの部で",
+            "waiting": "false"
+          },
+          {
+            "kind": "model",
+            "pid": "ode",
+            "pressed": "false",
+            "rect": null,
+            "text": "お手本",
+            "waiting": "false"
+          },
+          {
+            "kind": "preview",
+            "pid": "ode",
+            "pressed": "false",
+            "rect": null,
+            "text": "いまの部で",
+            "waiting": "false"
+          }
+        ],
+        "cards": [],
+        "expected": null,
+        "focus": {
+          "id": "",
+          "kind": "preview",
+          "pid": "pomp"
+        },
+        "performance": null,
+        "performers": [],
+        "state": 0.9628621663432568
+      },
+      "pieceChoice": "pomp",
+      "playing": false,
+      "records": 0.41059355391189456,
+      "scrollWidth": 375,
+      "solo": {
+        "type": "all"
+      },
+      "venue": "hall",
+      "voices": [],
+      "waiting": false,
+      "width": 375
+    }
+  },
+  {
+    "case": "choose-set",
+    "data": {
+      "audible": [],
+      "errors": [],
+      "label": "いまの音（6月 第3週・県民文化会館）",
+      "phase": "week",
+      "piece": {
+        "active": false,
+        "buttons": [],
+        "cards": [],
+        "expected": null,
+        "expectedChoice": {
+          "act": "chooseset",
+          "pid": "pomp",
+          "state": 0.14414472342468798
+        },
+        "focus": {
+          "id": ""
+        },
+        "performance": null,
+        "performers": [],
+        "state": 0.14414472342468798
+      },
+      "pieceChoice": "galop",
+      "playing": false,
+      "records": 0.41059355391189456,
+      "scrollWidth": 375,
+      "solo": {
+        "type": "all"
+      },
+      "venue": "hall",
+      "voices": [],
+      "waiting": false,
+      "width": 375
+    }
+  },
+  {
+    "case": "final-initial",
+    "data": {
+      "audible": [],
+      "errors": [],
+      "label": "いまの音（9月 第1週・音楽室）",
+      "phase": "week",
+      "piece": {
+        "active": false,
+        "buttons": [
+          {
+            "kind": "model",
+            "pid": "largo",
+            "pressed": "false",
+            "rect": null,
+            "text": "お手本",
+            "waiting": "false"
+          },
+          {
+            "kind": "preview",
+            "pid": "largo",
+            "pressed": "false",
+            "rect": null,
+            "text": "いまの部で",
+            "waiting": "false"
+          },
+          {
+            "kind": "model",
+            "pid": "ode",
+            "pressed": "false",
+            "rect": null,
+            "text": "お手本",
+            "waiting": "false"
+          },
+          {
+            "kind": "preview",
+            "pid": "ode",
+            "pressed": "false",
+            "rect": null,
+            "text": "いまの部で",
+            "waiting": "false"
+          },
+          {
+            "kind": "model",
+            "pid": "galop",
+            "pressed": "false",
+            "rect": null,
+            "text": "お手本",
+            "waiting": "false"
+          },
+          {
+            "kind": "preview",
+            "pid": "galop",
+            "pressed": "false",
+            "rect": null,
+            "text": "いまの部で",
+            "waiting": "false"
+          },
+          {
+            "kind": "model",
+            "pid": "pomp",
+            "pressed": "false",
+            "rect": null,
+            "text": "お手本",
+            "waiting": "false"
+          },
+          {
+            "kind": "preview",
+            "pid": "pomp",
+            "pressed": "false",
+            "rect": null,
+            "text": "いまの部で",
+            "waiting": "false"
+          },
+          {
+            "kind": "model",
+            "pid": "aida",
+            "pressed": "false",
+            "rect": null,
+            "text": "お手本",
+            "waiting": "false"
+          },
+          {
+            "kind": "preview",
+            "pid": "aida",
+            "pressed": "false",
+            "rect": null,
+            "text": "いまの部で",
+            "waiting": "false"
+          },
+          {
+            "kind": "model",
+            "pid": "hero",
+            "pressed": "false",
+            "rect": null,
+            "text": "お手本",
+            "waiting": "false"
+          },
+          {
+            "kind": "preview",
+            "pid": "hero",
+            "pressed": "false",
+            "rect": null,
+            "text": "いまの部で",
+            "waiting": "false"
+          },
+          {
+            "kind": "model",
+            "pid": "holst",
+            "pressed": "false",
+            "rect": null,
+            "text": "お手本",
+            "waiting": "false"
+          },
+          {
+            "kind": "preview",
+            "pid": "holst",
+            "pressed": "false",
+            "rect": null,
+            "text": "いまの部で",
+            "waiting": "false"
+          },
+          {
+            "kind": "model",
+            "pid": "hungarian",
+            "pressed": "false",
+            "rect": null,
+            "text": "お手本",
+            "waiting": "false"
+          },
+          {
+            "kind": "preview",
+            "pid": "hungarian",
+            "pressed": "false",
+            "rect": null,
+            "text": "いまの部で",
+            "waiting": "false"
+          },
+          {
+            "kind": "model",
+            "pid": "flowers",
+            "pressed": "false",
+            "rect": null,
+            "text": "お手本",
+            "waiting": "false"
+          },
+          {
+            "kind": "preview",
+            "pid": "flowers",
+            "pressed": "false",
+            "rect": null,
+            "text": "いまの部で",
+            "waiting": "false"
+          },
+          {
+            "kind": "model",
+            "pid": "tell",
+            "pressed": "false",
+            "rect": null,
+            "text": "お手本",
+            "waiting": "false"
+          },
+          {
+            "kind": "preview",
+            "pid": "tell",
+            "pressed": "false",
+            "rect": null,
+            "text": "いまの部で",
+            "waiting": "false"
+          },
+          {
+            "kind": "model",
+            "pid": "carmen",
+            "pressed": "false",
+            "rect": null,
+            "text": "お手本",
+            "waiting": "false"
+          },
+          {
+            "kind": "preview",
+            "pid": "carmen",
+            "pressed": "false",
+            "rect": null,
+            "text": "いまの部で",
+            "waiting": "false"
+          },
+          {
+            "kind": "model",
+            "pid": "valkyrie",
+            "pressed": "false",
+            "rect": null,
+            "text": "お手本",
+            "waiting": "false"
+          },
+          {
+            "kind": "preview",
+            "pid": "valkyrie",
+            "pressed": "false",
+            "rect": null,
+            "text": "いまの部で",
+            "waiting": "false"
+          },
+          {
+            "kind": "model",
+            "pid": "swan",
+            "pressed": "false",
+            "rect": null,
+            "text": "お手本",
+            "waiting": "false"
+          },
+          {
+            "kind": "preview",
+            "pid": "swan",
+            "pressed": "false",
+            "rect": null,
+            "text": "いまの部で",
+            "waiting": "false"
+          },
+          {
+            "kind": "model",
+            "pid": "spring",
+            "pressed": "false",
+            "rect": null,
+            "text": "お手本",
+            "waiting": "false"
+          },
+          {
+            "kind": "preview",
+            "pid": "spring",
+            "pressed": "false",
+            "rect": null,
+            "text": "いまの部で",
+            "waiting": "false"
+          },
+          {
+            "kind": "model",
+            "pid": "canon",
+            "pressed": "false",
+            "rect": null,
+            "text": "お手本",
+            "waiting": "false"
+          },
+          {
+            "kind": "preview",
+            "pid": "canon",
+            "pressed": "false",
+            "rect": null,
+            "text": "いまの部で",
+            "waiting": "false"
+          }
+        ],
+        "cards": [],
+        "expected": null,
+        "focus": {
+          "id": ""
+        },
+        "performance": null,
+        "performers": [],
+        "state": 0.21699753403663635
+      },
+      "pieceChoice": "galop",
+      "playing": false,
+      "records": 0.4122987308073789,
+      "scrollWidth": 375,
+      "solo": {
+        "type": "all"
+      },
+      "venue": "room",
+      "voices": [],
+      "waiting": false,
+      "width": 375
+    }
+  },
+  {
+    "case": "final-wait-light",
+    "data": {
+      "audible": [],
+      "errors": [],
+      "label": "お手本：《新世界より》第2楽章（全員がうまい部・県民文化会館）",
+      "phase": "week",
+      "piece": {
+        "active": true,
+        "buttons": [
+          {
+            "kind": "model",
+            "pid": "largo",
+            "pressed": "true",
+            "rect": {
+              "bottom": 355.421875,
+              "height": 44,
+              "left": 45.5,
+              "right": 136.1640625,
+              "top": 311.421875,
+              "width": 90.6640625,
+              "x": 45.5,
+              "y": 311.421875
+            },
+            "text": "読み込み中",
+            "waiting": "true"
+          },
+          {
+            "kind": "preview",
+            "pid": "largo",
+            "pressed": "false",
+            "rect": null,
+            "text": "いまの部で",
+            "waiting": "false"
+          },
+          {
+            "kind": "model",
+            "pid": "ode",
+            "pressed": "false",
+            "rect": null,
+            "text": "お手本",
+            "waiting": "false"
+          },
+          {
+            "kind": "preview",
+            "pid": "ode",
+            "pressed": "false",
+            "rect": null,
+            "text": "いまの部で",
+            "waiting": "false"
+          },
+          {
+            "kind": "model",
+            "pid": "galop",
+            "pressed": "false",
+            "rect": null,
+            "text": "お手本",
+            "waiting": "false"
+          },
+          {
+            "kind": "preview",
+            "pid": "galop",
+            "pressed": "false",
+            "rect": null,
+            "text": "いまの部で",
+            "waiting": "false"
+          },
+          {
+            "kind": "model",
+            "pid": "pomp",
+            "pressed": "false",
+            "rect": null,
+            "text": "お手本",
+            "waiting": "false"
+          },
+          {
+            "kind": "preview",
+            "pid": "pomp",
+            "pressed": "false",
+            "rect": null,
+            "text": "いまの部で",
+            "waiting": "false"
+          },
+          {
+            "kind": "model",
+            "pid": "aida",
+            "pressed": "false",
+            "rect": null,
+            "text": "お手本",
+            "waiting": "false"
+          },
+          {
+            "kind": "preview",
+            "pid": "aida",
+            "pressed": "false",
+            "rect": null,
+            "text": "いまの部で",
+            "waiting": "false"
+          },
+          {
+            "kind": "model",
+            "pid": "hero",
+            "pressed": "false",
+            "rect": null,
+            "text": "お手本",
+            "waiting": "false"
+          },
+          {
+            "kind": "preview",
+            "pid": "hero",
+            "pressed": "false",
+            "rect": null,
+            "text": "いまの部で",
+            "waiting": "false"
+          },
+          {
+            "kind": "model",
+            "pid": "holst",
+            "pressed": "false",
+            "rect": null,
+            "text": "お手本",
+            "waiting": "false"
+          },
+          {
+            "kind": "preview",
+            "pid": "holst",
+            "pressed": "false",
+            "rect": null,
+            "text": "いまの部で",
+            "waiting": "false"
+          },
+          {
+            "kind": "model",
+            "pid": "hungarian",
+            "pressed": "false",
+            "rect": null,
+            "text": "お手本",
+            "waiting": "false"
+          },
+          {
+            "kind": "preview",
+            "pid": "hungarian",
+            "pressed": "false",
+            "rect": null,
+            "text": "いまの部で",
+            "waiting": "false"
+          },
+          {
+            "kind": "model",
+            "pid": "flowers",
+            "pressed": "false",
+            "rect": null,
+            "text": "お手本",
+            "waiting": "false"
+          },
+          {
+            "kind": "preview",
+            "pid": "flowers",
+            "pressed": "false",
+            "rect": null,
+            "text": "いまの部で",
+            "waiting": "false"
+          },
+          {
+            "kind": "model",
+            "pid": "tell",
+            "pressed": "false",
+            "rect": null,
+            "text": "お手本",
+            "waiting": "false"
+          },
+          {
+            "kind": "preview",
+            "pid": "tell",
+            "pressed": "false",
+            "rect": null,
+            "text": "いまの部で",
+            "waiting": "false"
+          },
+          {
+            "kind": "model",
+            "pid": "carmen",
+            "pressed": "false",
+            "rect": null,
+            "text": "お手本",
+            "waiting": "false"
+          },
+          {
+            "kind": "preview",
+            "pid": "carmen",
+            "pressed": "false",
+            "rect": null,
+            "text": "いまの部で",
+            "waiting": "false"
+          },
+          {
+            "kind": "model",
+            "pid": "valkyrie",
+            "pressed": "false",
+            "rect": null,
+            "text": "お手本",
+            "waiting": "false"
+          },
+          {
+            "kind": "preview",
+            "pid": "valkyrie",
+            "pressed": "false",
+            "rect": null,
+            "text": "いまの部で",
+            "waiting": "false"
+          },
+          {
+            "kind": "model",
+            "pid": "swan",
+            "pressed": "false",
+            "rect": null,
+            "text": "お手本",
+            "waiting": "false"
+          },
+          {
+            "kind": "preview",
+            "pid": "swan",
+            "pressed": "false",
+            "rect": null,
+            "text": "いまの部で",
+            "waiting": "false"
+          },
+          {
+            "kind": "model",
+            "pid": "spring",
+            "pressed": "false",
+            "rect": null,
+            "text": "お手本",
+            "waiting": "false"
+          },
+          {
+            "kind": "preview",
+            "pid": "spring",
+            "pressed": "false",
+            "rect": null,
+            "text": "いまの部で",
+            "waiting": "false"
+          },
+          {
+            "kind": "model",
+            "pid": "canon",
+            "pressed": "false",
+            "rect": null,
+            "text": "お手本",
+            "waiting": "false"
+          },
+          {
+            "kind": "preview",
+            "pid": "canon",
+            "pressed": "false",
+            "rect": null,
+            "text": "いまの部で",
+            "waiting": "false"
+          }
+        ],
+        "cards": [
+          "largo"
+        ],
+        "duration": 39.606510416666616,
+        "expected": 0.4519849091302603,
+        "focus": {
+          "id": "",
+          "kind": "model",
+          "pid": "largo"
+        },
+        "kind": "model",
+        "performance": 0.4519849091302603,
+        "performers": [
+          "lab-0",
+          "lab-1",
+          "lab-2",
+          "lab-3",
+          "lab-4",
+          "lab-5",
+          "lab-6",
+          "lab-7",
+          "lab-8",
+          "lab-9",
+          "lab-10",
+          "lab-11",
+          "lab-12",
+          "lab-13",
+          "lab-14",
+          "lab-15",
+          "lab-16",
+          "lab-17",
+          "lab-18",
+          "lab-19",
+          "lab-20",
+          "lab-21",
+          "lab-22",
+          "lab-23",
+          "lab-24",
+          "lab-25",
+          "lab-26",
+          "lab-27",
+          "lab-28",
+          "lab-29",
+          "lab-30",
+          "lab-31",
+          "lab-32",
+          "lab-33",
+          "lab-34",
+          "lab-35",
+          "lab-36"
+        ],
+        "pid": "largo",
+        "state": 0.21699753403663635
+      },
+      "pieceChoice": "largo",
+      "playing": false,
+      "records": 0.4122987308073789,
+      "scrollWidth": 375,
+      "solo": {
+        "type": "all"
+      },
+      "venue": "hall",
+      "voices": [],
+      "waiting": true,
+      "width": 375
+    }
+  },
+  {
+    "case": "final-wait-dark",
+    "data": {
+      "audible": [],
+      "errors": [],
+      "label": "お手本：《新世界より》第2楽章（全員がうまい部・県民文化会館）",
+      "phase": "week",
+      "piece": {
+        "active": true,
+        "buttons": [
+          {
+            "kind": "model",
+            "pid": "largo",
+            "pressed": "true",
+            "rect": {
+              "bottom": 355.421875,
+              "height": 44,
+              "left": 45.5,
+              "right": 136.1640625,
+              "top": 311.421875,
+              "width": 90.6640625,
+              "x": 45.5,
+              "y": 311.421875
+            },
+            "text": "読み込み中",
+            "waiting": "true"
+          },
+          {
+            "kind": "preview",
+            "pid": "largo",
+            "pressed": "false",
+            "rect": null,
+            "text": "いまの部で",
+            "waiting": "false"
+          },
+          {
+            "kind": "model",
+            "pid": "ode",
+            "pressed": "false",
+            "rect": null,
+            "text": "お手本",
+            "waiting": "false"
+          },
+          {
+            "kind": "preview",
+            "pid": "ode",
+            "pressed": "false",
+            "rect": null,
+            "text": "いまの部で",
+            "waiting": "false"
+          },
+          {
+            "kind": "model",
+            "pid": "galop",
+            "pressed": "false",
+            "rect": null,
+            "text": "お手本",
+            "waiting": "false"
+          },
+          {
+            "kind": "preview",
+            "pid": "galop",
+            "pressed": "false",
+            "rect": null,
+            "text": "いまの部で",
+            "waiting": "false"
+          },
+          {
+            "kind": "model",
+            "pid": "pomp",
+            "pressed": "false",
+            "rect": null,
+            "text": "お手本",
+            "waiting": "false"
+          },
+          {
+            "kind": "preview",
+            "pid": "pomp",
+            "pressed": "false",
+            "rect": null,
+            "text": "いまの部で",
+            "waiting": "false"
+          },
+          {
+            "kind": "model",
+            "pid": "aida",
+            "pressed": "false",
+            "rect": null,
+            "text": "お手本",
+            "waiting": "false"
+          },
+          {
+            "kind": "preview",
+            "pid": "aida",
+            "pressed": "false",
+            "rect": null,
+            "text": "いまの部で",
+            "waiting": "false"
+          },
+          {
+            "kind": "model",
+            "pid": "hero",
+            "pressed": "false",
+            "rect": null,
+            "text": "お手本",
+            "waiting": "false"
+          },
+          {
+            "kind": "preview",
+            "pid": "hero",
+            "pressed": "false",
+            "rect": null,
+            "text": "いまの部で",
+            "waiting": "false"
+          },
+          {
+            "kind": "model",
+            "pid": "holst",
+            "pressed": "false",
+            "rect": null,
+            "text": "お手本",
+            "waiting": "false"
+          },
+          {
+            "kind": "preview",
+            "pid": "holst",
+            "pressed": "false",
+            "rect": null,
+            "text": "いまの部で",
+            "waiting": "false"
+          },
+          {
+            "kind": "model",
+            "pid": "hungarian",
+            "pressed": "false",
+            "rect": null,
+            "text": "お手本",
+            "waiting": "false"
+          },
+          {
+            "kind": "preview",
+            "pid": "hungarian",
+            "pressed": "false",
+            "rect": null,
+            "text": "いまの部で",
+            "waiting": "false"
+          },
+          {
+            "kind": "model",
+            "pid": "flowers",
+            "pressed": "false",
+            "rect": null,
+            "text": "お手本",
+            "waiting": "false"
+          },
+          {
+            "kind": "preview",
+            "pid": "flowers",
+            "pressed": "false",
+            "rect": null,
+            "text": "いまの部で",
+            "waiting": "false"
+          },
+          {
+            "kind": "model",
+            "pid": "tell",
+            "pressed": "false",
+            "rect": null,
+            "text": "お手本",
+            "waiting": "false"
+          },
+          {
+            "kind": "preview",
+            "pid": "tell",
+            "pressed": "false",
+            "rect": null,
+            "text": "いまの部で",
+            "waiting": "false"
+          },
+          {
+            "kind": "model",
+            "pid": "carmen",
+            "pressed": "false",
+            "rect": null,
+            "text": "お手本",
+            "waiting": "false"
+          },
+          {
+            "kind": "preview",
+            "pid": "carmen",
+            "pressed": "false",
+            "rect": null,
+            "text": "いまの部で",
+            "waiting": "false"
+          },
+          {
+            "kind": "model",
+            "pid": "valkyrie",
+            "pressed": "false",
+            "rect": null,
+            "text": "お手本",
+            "waiting": "false"
+          },
+          {
+            "kind": "preview",
+            "pid": "valkyrie",
+            "pressed": "false",
+            "rect": null,
+            "text": "いまの部で",
+            "waiting": "false"
+          },
+          {
+            "kind": "model",
+            "pid": "swan",
+            "pressed": "false",
+            "rect": null,
+            "text": "お手本",
+            "waiting": "false"
+          },
+          {
+            "kind": "preview",
+            "pid": "swan",
+            "pressed": "false",
+            "rect": null,
+            "text": "いまの部で",
+            "waiting": "false"
+          },
+          {
+            "kind": "model",
+            "pid": "spring",
+            "pressed": "false",
+            "rect": null,
+            "text": "お手本",
+            "waiting": "false"
+          },
+          {
+            "kind": "preview",
+            "pid": "spring",
+            "pressed": "false",
+            "rect": null,
+            "text": "いまの部で",
+            "waiting": "false"
+          },
+          {
+            "kind": "model",
+            "pid": "canon",
+            "pressed": "false",
+            "rect": null,
+            "text": "お手本",
+            "waiting": "false"
+          },
+          {
+            "kind": "preview",
+            "pid": "canon",
+            "pressed": "false",
+            "rect": null,
+            "text": "いまの部で",
+            "waiting": "false"
+          }
+        ],
+        "cards": [
+          "largo"
+        ],
+        "duration": 39.606510416666616,
+        "expected": 0.4519849091302603,
+        "focus": {
+          "id": "",
+          "kind": "model",
+          "pid": "largo"
+        },
+        "kind": "model",
+        "performance": 0.4519849091302603,
+        "performers": [
+          "lab-0",
+          "lab-1",
+          "lab-2",
+          "lab-3",
+          "lab-4",
+          "lab-5",
+          "lab-6",
+          "lab-7",
+          "lab-8",
+          "lab-9",
+          "lab-10",
+          "lab-11",
+          "lab-12",
+          "lab-13",
+          "lab-14",
+          "lab-15",
+          "lab-16",
+          "lab-17",
+          "lab-18",
+          "lab-19",
+          "lab-20",
+          "lab-21",
+          "lab-22",
+          "lab-23",
+          "lab-24",
+          "lab-25",
+          "lab-26",
+          "lab-27",
+          "lab-28",
+          "lab-29",
+          "lab-30",
+          "lab-31",
+          "lab-32",
+          "lab-33",
+          "lab-34",
+          "lab-35",
+          "lab-36"
+        ],
+        "pid": "largo",
+        "state": 0.21699753403663635
+      },
+      "pieceChoice": "largo",
+      "playing": false,
+      "records": 0.4122987308073789,
+      "scrollWidth": 375,
+      "solo": {
+        "type": "all"
+      },
+      "venue": "hall",
+      "voices": [],
+      "waiting": true,
+      "width": 375
+    }
+  },
+  {
+    "case": "choose-final",
+    "data": {
+      "audible": [],
+      "errors": [],
+      "label": "いまの音（9月 第1週・県民文化会館）",
+      "phase": "week",
+      "piece": {
+        "active": false,
+        "buttons": [],
+        "cards": [],
+        "expected": null,
+        "expectedChoice": {
+          "act": "choosefinal",
+          "pid": "largo",
+          "state": 0.8254530222620815
+        },
+        "focus": {
+          "id": ""
+        },
+        "performance": null,
+        "performers": [],
+        "state": 0.8254530222620815
+      },
+      "pieceChoice": "largo",
+      "playing": false,
+      "records": 0.4122987308073789,
+      "scrollWidth": 375,
+      "solo": {
+        "type": "all"
+      },
+      "venue": "hall",
+      "voices": [],
+      "waiting": false,
+      "width": 375
+    }
+  },
+  {
+    "case": "final-release",
+    "data": {
+      "audible": [],
+      "errors": [],
+      "label": "いまの音（9月 第1週・県民文化会館）",
+      "phase": "week",
+      "piece": {
+        "active": false,
+        "buttons": [],
+        "cards": [],
+        "expected": null,
+        "expectedChoice": {
+          "act": "choosefinal",
+          "pid": "largo",
+          "state": 0.8254530222620815
+        },
+        "focus": {
+          "id": ""
+        },
+        "performance": null,
+        "performers": [],
+        "state": 0.8254530222620815
+      },
+      "pieceChoice": "largo",
+      "playing": false,
+      "records": 0.4122987308073789,
+      "scrollWidth": 375,
+      "solo": {
+        "type": "all"
+      },
+      "venue": "hall",
+      "voices": [],
+      "waiting": false,
+      "width": 375
+    }
+  },
+  {
+    "case": "natural-before",
+    "data": {
+      "audible": [
+        "lab-0",
+        "lab-1",
+        "lab-2",
+        "lab-3",
+        "lab-4",
+        "lab-5",
+        "lab-6",
+        "lab-7",
+        "lab-8",
+        "lab-9",
+        "lab-10",
+        "lab-11",
+        "lab-12",
+        "lab-13",
+        "lab-14",
+        "lab-15",
+        "lab-16",
+        "lab-17",
+        "lab-18",
+        "lab-19",
+        "lab-20",
+        "lab-21",
+        "lab-22",
+        "lab-23",
+        "lab-24",
+        "lab-25",
+        "lab-26",
+        "lab-27",
+        "lab-28",
+        "lab-29",
+        "lab-30",
+        "lab-31",
+        "lab-32",
+        "lab-33",
+        "lab-34",
+        "lab-35",
+        "lab-36"
+      ],
+      "errors": [],
+      "label": "お手本：《新世界より》第2楽章（全員がうまい部・県民文化会館）",
+      "phase": "week",
+      "piece": {
+        "active": true,
+        "buttons": [
+          {
+            "kind": "model",
+            "pid": "largo",
+            "pressed": "true",
+            "rect": {
+              "bottom": 355.421875,
+              "height": 44,
+              "left": 45.5,
+              "right": 136.1640625,
+              "top": 311.421875,
+              "width": 90.6640625,
+              "x": 45.5,
+              "y": 311.421875
+            },
+            "text": "止める",
+            "waiting": "false"
+          },
+          {
+            "kind": "preview",
+            "pid": "largo",
+            "pressed": "false",
+            "rect": null,
+            "text": "いまの部で",
+            "waiting": "false"
+          },
+          {
+            "kind": "model",
+            "pid": "ode",
+            "pressed": "false",
+            "rect": null,
+            "text": "お手本",
+            "waiting": "false"
+          },
+          {
+            "kind": "preview",
+            "pid": "ode",
+            "pressed": "false",
+            "rect": null,
+            "text": "いまの部で",
+            "waiting": "false"
+          },
+          {
+            "kind": "model",
+            "pid": "galop",
+            "pressed": "false",
+            "rect": null,
+            "text": "お手本",
+            "waiting": "false"
+          },
+          {
+            "kind": "preview",
+            "pid": "galop",
+            "pressed": "false",
+            "rect": null,
+            "text": "いまの部で",
+            "waiting": "false"
+          },
+          {
+            "kind": "model",
+            "pid": "pomp",
+            "pressed": "false",
+            "rect": null,
+            "text": "お手本",
+            "waiting": "false"
+          },
+          {
+            "kind": "preview",
+            "pid": "pomp",
+            "pressed": "false",
+            "rect": null,
+            "text": "いまの部で",
+            "waiting": "false"
+          },
+          {
+            "kind": "model",
+            "pid": "aida",
+            "pressed": "false",
+            "rect": null,
+            "text": "お手本",
+            "waiting": "false"
+          },
+          {
+            "kind": "preview",
+            "pid": "aida",
+            "pressed": "false",
+            "rect": null,
+            "text": "いまの部で",
+            "waiting": "false"
+          },
+          {
+            "kind": "model",
+            "pid": "hero",
+            "pressed": "false",
+            "rect": null,
+            "text": "お手本",
+            "waiting": "false"
+          },
+          {
+            "kind": "preview",
+            "pid": "hero",
+            "pressed": "false",
+            "rect": null,
+            "text": "いまの部で",
+            "waiting": "false"
+          },
+          {
+            "kind": "model",
+            "pid": "holst",
+            "pressed": "false",
+            "rect": null,
+            "text": "お手本",
+            "waiting": "false"
+          },
+          {
+            "kind": "preview",
+            "pid": "holst",
+            "pressed": "false",
+            "rect": null,
+            "text": "いまの部で",
+            "waiting": "false"
+          },
+          {
+            "kind": "model",
+            "pid": "hungarian",
+            "pressed": "false",
+            "rect": null,
+            "text": "お手本",
+            "waiting": "false"
+          },
+          {
+            "kind": "preview",
+            "pid": "hungarian",
+            "pressed": "false",
+            "rect": null,
+            "text": "いまの部で",
+            "waiting": "false"
+          },
+          {
+            "kind": "model",
+            "pid": "flowers",
+            "pressed": "false",
+            "rect": null,
+            "text": "お手本",
+            "waiting": "false"
+          },
+          {
+            "kind": "preview",
+            "pid": "flowers",
+            "pressed": "false",
+            "rect": null,
+            "text": "いまの部で",
+            "waiting": "false"
+          },
+          {
+            "kind": "model",
+            "pid": "tell",
+            "pressed": "false",
+            "rect": null,
+            "text": "お手本",
+            "waiting": "false"
+          },
+          {
+            "kind": "preview",
+            "pid": "tell",
+            "pressed": "false",
+            "rect": null,
+            "text": "いまの部で",
+            "waiting": "false"
+          },
+          {
+            "kind": "model",
+            "pid": "carmen",
+            "pressed": "false",
+            "rect": null,
+            "text": "お手本",
+            "waiting": "false"
+          },
+          {
+            "kind": "preview",
+            "pid": "carmen",
+            "pressed": "false",
+            "rect": null,
+            "text": "いまの部で",
+            "waiting": "false"
+          },
+          {
+            "kind": "model",
+            "pid": "valkyrie",
+            "pressed": "false",
+            "rect": null,
+            "text": "お手本",
+            "waiting": "false"
+          },
+          {
+            "kind": "preview",
+            "pid": "valkyrie",
+            "pressed": "false",
+            "rect": null,
+            "text": "いまの部で",
+            "waiting": "false"
+          },
+          {
+            "kind": "model",
+            "pid": "swan",
+            "pressed": "false",
+            "rect": null,
+            "text": "お手本",
+            "waiting": "false"
+          },
+          {
+            "kind": "preview",
+            "pid": "swan",
+            "pressed": "false",
+            "rect": null,
+            "text": "いまの部で",
+            "waiting": "false"
+          },
+          {
+            "kind": "model",
+            "pid": "spring",
+            "pressed": "false",
+            "rect": null,
+            "text": "お手本",
+            "waiting": "false"
+          },
+          {
+            "kind": "preview",
+            "pid": "spring",
+            "pressed": "false",
+            "rect": null,
+            "text": "いまの部で",
+            "waiting": "false"
+          },
+          {
+            "kind": "model",
+            "pid": "canon",
+            "pressed": "false",
+            "rect": null,
+            "text": "お手本",
+            "waiting": "false"
+          },
+          {
+            "kind": "preview",
+            "pid": "canon",
+            "pressed": "false",
+            "rect": null,
+            "text": "いまの部で",
+            "waiting": "false"
+          }
+        ],
+        "cards": [
+          "largo"
+        ],
+        "duration": 39.606510416666616,
+        "expected": 0.4519849091302603,
+        "focus": {
+          "id": "",
+          "kind": "model",
+          "pid": "largo"
+        },
+        "kind": "model",
+        "performance": 0.4519849091302603,
+        "performers": [
+          "lab-0",
+          "lab-1",
+          "lab-2",
+          "lab-3",
+          "lab-4",
+          "lab-5",
+          "lab-6",
+          "lab-7",
+          "lab-8",
+          "lab-9",
+          "lab-10",
+          "lab-11",
+          "lab-12",
+          "lab-13",
+          "lab-14",
+          "lab-15",
+          "lab-16",
+          "lab-17",
+          "lab-18",
+          "lab-19",
+          "lab-20",
+          "lab-21",
+          "lab-22",
+          "lab-23",
+          "lab-24",
+          "lab-25",
+          "lab-26",
+          "lab-27",
+          "lab-28",
+          "lab-29",
+          "lab-30",
+          "lab-31",
+          "lab-32",
+          "lab-33",
+          "lab-34",
+          "lab-35",
+          "lab-36"
+        ],
+        "pid": "largo",
+        "state": 0.7794896697159857
+      },
+      "pieceChoice": "largo",
+      "playing": true,
+      "records": 0.969162535155192,
+      "scrollWidth": 375,
+      "solo": {
+        "type": "all"
+      },
+      "venue": "hall",
+      "voices": [
+        "SampleVoice"
+      ],
+      "waiting": false,
+      "width": 375
+    }
+  },
+  {
+    "case": "natural-recheck-before",
+    "data": {
+      "audible": [
+        "lab-0",
+        "lab-1",
+        "lab-2",
+        "lab-3",
+        "lab-4",
+        "lab-5",
+        "lab-6",
+        "lab-7",
+        "lab-8",
+        "lab-9",
+        "lab-10",
+        "lab-11",
+        "lab-12",
+        "lab-13",
+        "lab-14",
+        "lab-15",
+        "lab-16",
+        "lab-17",
+        "lab-18",
+        "lab-19",
+        "lab-20",
+        "lab-21",
+        "lab-22",
+        "lab-23",
+        "lab-24",
+        "lab-25",
+        "lab-26",
+        "lab-27",
+        "lab-28",
+        "lab-29",
+        "lab-30",
+        "lab-31",
+        "lab-32",
+        "lab-33",
+        "lab-34",
+        "lab-35",
+        "lab-36"
+      ],
+      "errors": [],
+      "label": "お手本：《新世界より》第2楽章（全員がうまい部・県民文化会館）",
+      "phase": "week",
+      "piece": {
+        "active": true,
+        "buttons": [
+          {
+            "kind": "model",
+            "pid": "largo",
+            "pressed": "true",
+            "rect": {
+              "bottom": 435.53125,
+              "height": 44,
+              "left": 931.9296875,
+              "right": 1043.1171875,
+              "top": 391.53125,
+              "width": 111.1875,
+              "x": 931.9296875,
+              "y": 391.53125
+            },
+            "text": "止める",
+            "waiting": "false"
+          },
+          {
+            "kind": "preview",
+            "pid": "largo",
+            "pressed": "false",
+            "rect": null,
+            "text": "いまの部で",
+            "waiting": "false"
+          },
+          {
+            "kind": "model",
+            "pid": "ode",
+            "pressed": "false",
+            "rect": null,
+            "text": "お手本",
+            "waiting": "false"
+          },
+          {
+            "kind": "preview",
+            "pid": "ode",
+            "pressed": "false",
+            "rect": null,
+            "text": "いまの部で",
+            "waiting": "false"
+          },
+          {
+            "kind": "model",
+            "pid": "galop",
+            "pressed": "false",
+            "rect": null,
+            "text": "お手本",
+            "waiting": "false"
+          },
+          {
+            "kind": "preview",
+            "pid": "galop",
+            "pressed": "false",
+            "rect": null,
+            "text": "いまの部で",
+            "waiting": "false"
+          },
+          {
+            "kind": "model",
+            "pid": "pomp",
+            "pressed": "false",
+            "rect": null,
+            "text": "お手本",
+            "waiting": "false"
+          },
+          {
+            "kind": "preview",
+            "pid": "pomp",
+            "pressed": "false",
+            "rect": null,
+            "text": "いまの部で",
+            "waiting": "false"
+          },
+          {
+            "kind": "model",
+            "pid": "aida",
+            "pressed": "false",
+            "rect": null,
+            "text": "お手本",
+            "waiting": "false"
+          },
+          {
+            "kind": "preview",
+            "pid": "aida",
+            "pressed": "false",
+            "rect": null,
+            "text": "いまの部で",
+            "waiting": "false"
+          },
+          {
+            "kind": "model",
+            "pid": "hero",
+            "pressed": "false",
+            "rect": null,
+            "text": "お手本",
+            "waiting": "false"
+          },
+          {
+            "kind": "preview",
+            "pid": "hero",
+            "pressed": "false",
+            "rect": null,
+            "text": "いまの部で",
+            "waiting": "false"
+          },
+          {
+            "kind": "model",
+            "pid": "holst",
+            "pressed": "false",
+            "rect": null,
+            "text": "お手本",
+            "waiting": "false"
+          },
+          {
+            "kind": "preview",
+            "pid": "holst",
+            "pressed": "false",
+            "rect": null,
+            "text": "いまの部で",
+            "waiting": "false"
+          },
+          {
+            "kind": "model",
+            "pid": "hungarian",
+            "pressed": "false",
+            "rect": null,
+            "text": "お手本",
+            "waiting": "false"
+          },
+          {
+            "kind": "preview",
+            "pid": "hungarian",
+            "pressed": "false",
+            "rect": null,
+            "text": "いまの部で",
+            "waiting": "false"
+          },
+          {
+            "kind": "model",
+            "pid": "flowers",
+            "pressed": "false",
+            "rect": null,
+            "text": "お手本",
+            "waiting": "false"
+          },
+          {
+            "kind": "preview",
+            "pid": "flowers",
+            "pressed": "false",
+            "rect": null,
+            "text": "いまの部で",
+            "waiting": "false"
+          },
+          {
+            "kind": "model",
+            "pid": "tell",
+            "pressed": "false",
+            "rect": null,
+            "text": "お手本",
+            "waiting": "false"
+          },
+          {
+            "kind": "preview",
+            "pid": "tell",
+            "pressed": "false",
+            "rect": null,
+            "text": "いまの部で",
+            "waiting": "false"
+          },
+          {
+            "kind": "model",
+            "pid": "carmen",
+            "pressed": "false",
+            "rect": null,
+            "text": "お手本",
+            "waiting": "false"
+          },
+          {
+            "kind": "preview",
+            "pid": "carmen",
+            "pressed": "false",
+            "rect": null,
+            "text": "いまの部で",
+            "waiting": "false"
+          },
+          {
+            "kind": "model",
+            "pid": "valkyrie",
+            "pressed": "false",
+            "rect": null,
+            "text": "お手本",
+            "waiting": "false"
+          },
+          {
+            "kind": "preview",
+            "pid": "valkyrie",
+            "pressed": "false",
+            "rect": null,
+            "text": "いまの部で",
+            "waiting": "false"
+          },
+          {
+            "kind": "model",
+            "pid": "swan",
+            "pressed": "false",
+            "rect": null,
+            "text": "お手本",
+            "waiting": "false"
+          },
+          {
+            "kind": "preview",
+            "pid": "swan",
+            "pressed": "false",
+            "rect": null,
+            "text": "いまの部で",
+            "waiting": "false"
+          },
+          {
+            "kind": "model",
+            "pid": "spring",
+            "pressed": "false",
+            "rect": null,
+            "text": "お手本",
+            "waiting": "false"
+          },
+          {
+            "kind": "preview",
+            "pid": "spring",
+            "pressed": "false",
+            "rect": null,
+            "text": "いまの部で",
+            "waiting": "false"
+          },
+          {
+            "kind": "model",
+            "pid": "canon",
+            "pressed": "false",
+            "rect": null,
+            "text": "お手本",
+            "waiting": "false"
+          },
+          {
+            "kind": "preview",
+            "pid": "canon",
+            "pressed": "false",
+            "rect": null,
+            "text": "いまの部で",
+            "waiting": "false"
+          }
+        ],
+        "cards": [
+          "largo"
+        ],
+        "duration": 39.606510416666616,
+        "expected": 0.4519849091302603,
+        "focus": {
+          "id": "",
+          "kind": "model",
+          "pid": "largo"
+        },
+        "kind": "model",
+        "performance": 0.4519849091302603,
+        "performers": [
+          "lab-0",
+          "lab-1",
+          "lab-2",
+          "lab-3",
+          "lab-4",
+          "lab-5",
+          "lab-6",
+          "lab-7",
+          "lab-8",
+          "lab-9",
+          "lab-10",
+          "lab-11",
+          "lab-12",
+          "lab-13",
+          "lab-14",
+          "lab-15",
+          "lab-16",
+          "lab-17",
+          "lab-18",
+          "lab-19",
+          "lab-20",
+          "lab-21",
+          "lab-22",
+          "lab-23",
+          "lab-24",
+          "lab-25",
+          "lab-26",
+          "lab-27",
+          "lab-28",
+          "lab-29",
+          "lab-30",
+          "lab-31",
+          "lab-32",
+          "lab-33",
+          "lab-34",
+          "lab-35",
+          "lab-36"
+        ],
+        "pid": "largo",
+        "state": 0.17047634744085371
+      },
+      "pieceChoice": "largo",
+      "playing": true,
+      "records": 0.281565218931064,
+      "scrollWidth": 1512,
+      "solo": {
+        "type": "all"
+      },
+      "venue": "hall",
+      "voices": [
+        "SampleVoice"
+      ],
+      "waiting": false,
+      "width": 1512
+    }
+  },
+  {
+    "case": "natural-recheck-still-playing",
+    "data": {
+      "audible": [
+        "lab-0",
+        "lab-1",
+        "lab-2",
+        "lab-3",
+        "lab-4",
+        "lab-5",
+        "lab-6",
+        "lab-7",
+        "lab-8",
+        "lab-9",
+        "lab-10",
+        "lab-11",
+        "lab-12",
+        "lab-13",
+        "lab-14",
+        "lab-15",
+        "lab-16",
+        "lab-17",
+        "lab-18",
+        "lab-19",
+        "lab-20",
+        "lab-21",
+        "lab-22",
+        "lab-23",
+        "lab-24",
+        "lab-25",
+        "lab-26",
+        "lab-27",
+        "lab-28",
+        "lab-29",
+        "lab-30",
+        "lab-31",
+        "lab-32",
+        "lab-33",
+        "lab-34",
+        "lab-35",
+        "lab-36"
+      ],
+      "errors": [],
+      "label": "お手本：《新世界より》第2楽章（全員がうまい部・県民文化会館）",
+      "phase": "week",
+      "piece": {
+        "active": true,
+        "buttons": [
+          {
+            "kind": "model",
+            "pid": "largo",
+            "pressed": "true",
+            "rect": {
+              "bottom": 435.53125,
+              "height": 44,
+              "left": 931.9296875,
+              "right": 1043.1171875,
+              "top": 391.53125,
+              "width": 111.1875,
+              "x": 931.9296875,
+              "y": 391.53125
+            },
+            "text": "止める",
+            "waiting": "false"
+          },
+          {
+            "kind": "preview",
+            "pid": "largo",
+            "pressed": "false",
+            "rect": null,
+            "text": "いまの部で",
+            "waiting": "false"
+          },
+          {
+            "kind": "model",
+            "pid": "ode",
+            "pressed": "false",
+            "rect": null,
+            "text": "お手本",
+            "waiting": "false"
+          },
+          {
+            "kind": "preview",
+            "pid": "ode",
+            "pressed": "false",
+            "rect": null,
+            "text": "いまの部で",
+            "waiting": "false"
+          },
+          {
+            "kind": "model",
+            "pid": "galop",
+            "pressed": "false",
+            "rect": null,
+            "text": "お手本",
+            "waiting": "false"
+          },
+          {
+            "kind": "preview",
+            "pid": "galop",
+            "pressed": "false",
+            "rect": null,
+            "text": "いまの部で",
+            "waiting": "false"
+          },
+          {
+            "kind": "model",
+            "pid": "pomp",
+            "pressed": "false",
+            "rect": null,
+            "text": "お手本",
+            "waiting": "false"
+          },
+          {
+            "kind": "preview",
+            "pid": "pomp",
+            "pressed": "false",
+            "rect": null,
+            "text": "いまの部で",
+            "waiting": "false"
+          },
+          {
+            "kind": "model",
+            "pid": "aida",
+            "pressed": "false",
+            "rect": null,
+            "text": "お手本",
+            "waiting": "false"
+          },
+          {
+            "kind": "preview",
+            "pid": "aida",
+            "pressed": "false",
+            "rect": null,
+            "text": "いまの部で",
+            "waiting": "false"
+          },
+          {
+            "kind": "model",
+            "pid": "hero",
+            "pressed": "false",
+            "rect": null,
+            "text": "お手本",
+            "waiting": "false"
+          },
+          {
+            "kind": "preview",
+            "pid": "hero",
+            "pressed": "false",
+            "rect": null,
+            "text": "いまの部で",
+            "waiting": "false"
+          },
+          {
+            "kind": "model",
+            "pid": "holst",
+            "pressed": "false",
+            "rect": null,
+            "text": "お手本",
+            "waiting": "false"
+          },
+          {
+            "kind": "preview",
+            "pid": "holst",
+            "pressed": "false",
+            "rect": null,
+            "text": "いまの部で",
+            "waiting": "false"
+          },
+          {
+            "kind": "model",
+            "pid": "hungarian",
+            "pressed": "false",
+            "rect": null,
+            "text": "お手本",
+            "waiting": "false"
+          },
+          {
+            "kind": "preview",
+            "pid": "hungarian",
+            "pressed": "false",
+            "rect": null,
+            "text": "いまの部で",
+            "waiting": "false"
+          },
+          {
+            "kind": "model",
+            "pid": "flowers",
+            "pressed": "false",
+            "rect": null,
+            "text": "お手本",
+            "waiting": "false"
+          },
+          {
+            "kind": "preview",
+            "pid": "flowers",
+            "pressed": "false",
+            "rect": null,
+            "text": "いまの部で",
+            "waiting": "false"
+          },
+          {
+            "kind": "model",
+            "pid": "tell",
+            "pressed": "false",
+            "rect": null,
+            "text": "お手本",
+            "waiting": "false"
+          },
+          {
+            "kind": "preview",
+            "pid": "tell",
+            "pressed": "false",
+            "rect": null,
+            "text": "いまの部で",
+            "waiting": "false"
+          },
+          {
+            "kind": "model",
+            "pid": "carmen",
+            "pressed": "false",
+            "rect": null,
+            "text": "お手本",
+            "waiting": "false"
+          },
+          {
+            "kind": "preview",
+            "pid": "carmen",
+            "pressed": "false",
+            "rect": null,
+            "text": "いまの部で",
+            "waiting": "false"
+          },
+          {
+            "kind": "model",
+            "pid": "valkyrie",
+            "pressed": "false",
+            "rect": null,
+            "text": "お手本",
+            "waiting": "false"
+          },
+          {
+            "kind": "preview",
+            "pid": "valkyrie",
+            "pressed": "false",
+            "rect": null,
+            "text": "いまの部で",
+            "waiting": "false"
+          },
+          {
+            "kind": "model",
+            "pid": "swan",
+            "pressed": "false",
+            "rect": null,
+            "text": "お手本",
+            "waiting": "false"
+          },
+          {
+            "kind": "preview",
+            "pid": "swan",
+            "pressed": "false",
+            "rect": null,
+            "text": "いまの部で",
+            "waiting": "false"
+          },
+          {
+            "kind": "model",
+            "pid": "spring",
+            "pressed": "false",
+            "rect": null,
+            "text": "お手本",
+            "waiting": "false"
+          },
+          {
+            "kind": "preview",
+            "pid": "spring",
+            "pressed": "false",
+            "rect": null,
+            "text": "いまの部で",
+            "waiting": "false"
+          },
+          {
+            "kind": "model",
+            "pid": "canon",
+            "pressed": "false",
+            "rect": null,
+            "text": "お手本",
+            "waiting": "false"
+          },
+          {
+            "kind": "preview",
+            "pid": "canon",
+            "pressed": "false",
+            "rect": null,
+            "text": "いまの部で",
+            "waiting": "false"
+          }
+        ],
+        "cards": [
+          "largo"
+        ],
+        "duration": 39.606510416666616,
+        "expected": 0.4519849091302603,
+        "focus": {
+          "id": "",
+          "kind": "model",
+          "pid": "largo"
+        },
+        "kind": "model",
+        "performance": 0.4519849091302603,
+        "performers": [
+          "lab-0",
+          "lab-1",
+          "lab-2",
+          "lab-3",
+          "lab-4",
+          "lab-5",
+          "lab-6",
+          "lab-7",
+          "lab-8",
+          "lab-9",
+          "lab-10",
+          "lab-11",
+          "lab-12",
+          "lab-13",
+          "lab-14",
+          "lab-15",
+          "lab-16",
+          "lab-17",
+          "lab-18",
+          "lab-19",
+          "lab-20",
+          "lab-21",
+          "lab-22",
+          "lab-23",
+          "lab-24",
+          "lab-25",
+          "lab-26",
+          "lab-27",
+          "lab-28",
+          "lab-29",
+          "lab-30",
+          "lab-31",
+          "lab-32",
+          "lab-33",
+          "lab-34",
+          "lab-35",
+          "lab-36"
+        ],
+        "pid": "largo",
+        "state": 0.17047634744085371
+      },
+      "pieceChoice": "largo",
+      "playing": true,
+      "records": 0.281565218931064,
+      "scrollWidth": 1512,
+      "solo": {
+        "type": "all"
+      },
+      "venue": "hall",
+      "voices": [
+        "SampleVoice"
+      ],
+      "waiting": false,
+      "width": 1512
+    }
+  },
+  {
+    "case": "natural-final-before",
+    "data": {
+      "audible": [
+        "lab-0",
+        "lab-1",
+        "lab-2",
+        "lab-3",
+        "lab-4",
+        "lab-5",
+        "lab-6",
+        "lab-7",
+        "lab-8",
+        "lab-9",
+        "lab-10",
+        "lab-11",
+        "lab-12",
+        "lab-13",
+        "lab-14",
+        "lab-15",
+        "lab-16",
+        "lab-17",
+        "lab-18",
+        "lab-19",
+        "lab-20",
+        "lab-21",
+        "lab-22",
+        "lab-23",
+        "lab-24",
+        "lab-25",
+        "lab-26",
+        "lab-27",
+        "lab-28",
+        "lab-29",
+        "lab-30",
+        "lab-31",
+        "lab-32",
+        "lab-33",
+        "lab-34",
+        "lab-35",
+        "lab-36"
+      ],
+      "errors": [],
+      "label": "お手本：《新世界より》第2楽章（全員がうまい部・県民文化会館）",
+      "phase": "week",
+      "piece": {
+        "active": true,
+        "buttons": [
+          {
+            "kind": "model",
+            "pid": "largo",
+            "pressed": "true",
+            "rect": {
+              "bottom": 435.53125,
+              "height": 44,
+              "left": 931.9296875,
+              "right": 1043.1171875,
+              "top": 391.53125,
+              "width": 111.1875,
+              "x": 931.9296875,
+              "y": 391.53125
+            },
+            "text": "止める",
+            "waiting": "false"
+          },
+          {
+            "kind": "preview",
+            "pid": "largo",
+            "pressed": "false",
+            "rect": null,
+            "text": "いまの部で",
+            "waiting": "false"
+          },
+          {
+            "kind": "model",
+            "pid": "ode",
+            "pressed": "false",
+            "rect": null,
+            "text": "お手本",
+            "waiting": "false"
+          },
+          {
+            "kind": "preview",
+            "pid": "ode",
+            "pressed": "false",
+            "rect": null,
+            "text": "いまの部で",
+            "waiting": "false"
+          },
+          {
+            "kind": "model",
+            "pid": "galop",
+            "pressed": "false",
+            "rect": null,
+            "text": "お手本",
+            "waiting": "false"
+          },
+          {
+            "kind": "preview",
+            "pid": "galop",
+            "pressed": "false",
+            "rect": null,
+            "text": "いまの部で",
+            "waiting": "false"
+          },
+          {
+            "kind": "model",
+            "pid": "pomp",
+            "pressed": "false",
+            "rect": null,
+            "text": "お手本",
+            "waiting": "false"
+          },
+          {
+            "kind": "preview",
+            "pid": "pomp",
+            "pressed": "false",
+            "rect": null,
+            "text": "いまの部で",
+            "waiting": "false"
+          },
+          {
+            "kind": "model",
+            "pid": "aida",
+            "pressed": "false",
+            "rect": null,
+            "text": "お手本",
+            "waiting": "false"
+          },
+          {
+            "kind": "preview",
+            "pid": "aida",
+            "pressed": "false",
+            "rect": null,
+            "text": "いまの部で",
+            "waiting": "false"
+          },
+          {
+            "kind": "model",
+            "pid": "hero",
+            "pressed": "false",
+            "rect": null,
+            "text": "お手本",
+            "waiting": "false"
+          },
+          {
+            "kind": "preview",
+            "pid": "hero",
+            "pressed": "false",
+            "rect": null,
+            "text": "いまの部で",
+            "waiting": "false"
+          },
+          {
+            "kind": "model",
+            "pid": "holst",
+            "pressed": "false",
+            "rect": null,
+            "text": "お手本",
+            "waiting": "false"
+          },
+          {
+            "kind": "preview",
+            "pid": "holst",
+            "pressed": "false",
+            "rect": null,
+            "text": "いまの部で",
+            "waiting": "false"
+          },
+          {
+            "kind": "model",
+            "pid": "hungarian",
+            "pressed": "false",
+            "rect": null,
+            "text": "お手本",
+            "waiting": "false"
+          },
+          {
+            "kind": "preview",
+            "pid": "hungarian",
+            "pressed": "false",
+            "rect": null,
+            "text": "いまの部で",
+            "waiting": "false"
+          },
+          {
+            "kind": "model",
+            "pid": "flowers",
+            "pressed": "false",
+            "rect": null,
+            "text": "お手本",
+            "waiting": "false"
+          },
+          {
+            "kind": "preview",
+            "pid": "flowers",
+            "pressed": "false",
+            "rect": null,
+            "text": "いまの部で",
+            "waiting": "false"
+          },
+          {
+            "kind": "model",
+            "pid": "tell",
+            "pressed": "false",
+            "rect": null,
+            "text": "お手本",
+            "waiting": "false"
+          },
+          {
+            "kind": "preview",
+            "pid": "tell",
+            "pressed": "false",
+            "rect": null,
+            "text": "いまの部で",
+            "waiting": "false"
+          },
+          {
+            "kind": "model",
+            "pid": "carmen",
+            "pressed": "false",
+            "rect": null,
+            "text": "お手本",
+            "waiting": "false"
+          },
+          {
+            "kind": "preview",
+            "pid": "carmen",
+            "pressed": "false",
+            "rect": null,
+            "text": "いまの部で",
+            "waiting": "false"
+          },
+          {
+            "kind": "model",
+            "pid": "valkyrie",
+            "pressed": "false",
+            "rect": null,
+            "text": "お手本",
+            "waiting": "false"
+          },
+          {
+            "kind": "preview",
+            "pid": "valkyrie",
+            "pressed": "false",
+            "rect": null,
+            "text": "いまの部で",
+            "waiting": "false"
+          },
+          {
+            "kind": "model",
+            "pid": "swan",
+            "pressed": "false",
+            "rect": null,
+            "text": "お手本",
+            "waiting": "false"
+          },
+          {
+            "kind": "preview",
+            "pid": "swan",
+            "pressed": "false",
+            "rect": null,
+            "text": "いまの部で",
+            "waiting": "false"
+          },
+          {
+            "kind": "model",
+            "pid": "spring",
+            "pressed": "false",
+            "rect": null,
+            "text": "お手本",
+            "waiting": "false"
+          },
+          {
+            "kind": "preview",
+            "pid": "spring",
+            "pressed": "false",
+            "rect": null,
+            "text": "いまの部で",
+            "waiting": "false"
+          },
+          {
+            "kind": "model",
+            "pid": "canon",
+            "pressed": "false",
+            "rect": null,
+            "text": "お手本",
+            "waiting": "false"
+          },
+          {
+            "kind": "preview",
+            "pid": "canon",
+            "pressed": "false",
+            "rect": null,
+            "text": "いまの部で",
+            "waiting": "false"
+          }
+        ],
+        "cards": [
+          "largo"
+        ],
+        "duration": 39.606510416666616,
+        "expected": 0.4519849091302603,
+        "focus": {
+          "id": "",
+          "kind": "model",
+          "pid": "largo"
+        },
+        "kind": "model",
+        "performance": 0.4519849091302603,
+        "performers": [
+          "lab-0",
+          "lab-1",
+          "lab-2",
+          "lab-3",
+          "lab-4",
+          "lab-5",
+          "lab-6",
+          "lab-7",
+          "lab-8",
+          "lab-9",
+          "lab-10",
+          "lab-11",
+          "lab-12",
+          "lab-13",
+          "lab-14",
+          "lab-15",
+          "lab-16",
+          "lab-17",
+          "lab-18",
+          "lab-19",
+          "lab-20",
+          "lab-21",
+          "lab-22",
+          "lab-23",
+          "lab-24",
+          "lab-25",
+          "lab-26",
+          "lab-27",
+          "lab-28",
+          "lab-29",
+          "lab-30",
+          "lab-31",
+          "lab-32",
+          "lab-33",
+          "lab-34",
+          "lab-35",
+          "lab-36"
+        ],
+        "pid": "largo",
+        "state": 0.6174420572351664
+      },
+      "pieceChoice": "largo",
+      "playing": true,
+      "records": 0.002820514142513275,
+      "scrollWidth": 1512,
+      "solo": {
+        "type": "all"
+      },
+      "venue": "hall",
+      "voices": [
+        "SampleVoice"
+      ],
+      "waiting": false,
+      "width": 1512
+    }
+  },
+  {
+    "case": "natural-final-after",
+    "data": {
+      "audible": [],
+      "errors": [],
+      "label": "いまの音（9月 第1週・県民文化会館）",
+      "phase": "week",
+      "piece": {
+        "active": false,
+        "buttons": [
+          {
+            "kind": "model",
+            "pid": "largo",
+            "pressed": "false",
+            "rect": null,
+            "text": "お手本",
+            "waiting": "false"
+          },
+          {
+            "kind": "preview",
+            "pid": "largo",
+            "pressed": "false",
+            "rect": null,
+            "text": "いまの部で",
+            "waiting": "false"
+          },
+          {
+            "kind": "model",
+            "pid": "ode",
+            "pressed": "false",
+            "rect": null,
+            "text": "お手本",
+            "waiting": "false"
+          },
+          {
+            "kind": "preview",
+            "pid": "ode",
+            "pressed": "false",
+            "rect": null,
+            "text": "いまの部で",
+            "waiting": "false"
+          },
+          {
+            "kind": "model",
+            "pid": "galop",
+            "pressed": "false",
+            "rect": null,
+            "text": "お手本",
+            "waiting": "false"
+          },
+          {
+            "kind": "preview",
+            "pid": "galop",
+            "pressed": "false",
+            "rect": null,
+            "text": "いまの部で",
+            "waiting": "false"
+          },
+          {
+            "kind": "model",
+            "pid": "pomp",
+            "pressed": "false",
+            "rect": null,
+            "text": "お手本",
+            "waiting": "false"
+          },
+          {
+            "kind": "preview",
+            "pid": "pomp",
+            "pressed": "false",
+            "rect": null,
+            "text": "いまの部で",
+            "waiting": "false"
+          },
+          {
+            "kind": "model",
+            "pid": "aida",
+            "pressed": "false",
+            "rect": null,
+            "text": "お手本",
+            "waiting": "false"
+          },
+          {
+            "kind": "preview",
+            "pid": "aida",
+            "pressed": "false",
+            "rect": null,
+            "text": "いまの部で",
+            "waiting": "false"
+          },
+          {
+            "kind": "model",
+            "pid": "hero",
+            "pressed": "false",
+            "rect": null,
+            "text": "お手本",
+            "waiting": "false"
+          },
+          {
+            "kind": "preview",
+            "pid": "hero",
+            "pressed": "false",
+            "rect": null,
+            "text": "いまの部で",
+            "waiting": "false"
+          },
+          {
+            "kind": "model",
+            "pid": "holst",
+            "pressed": "false",
+            "rect": null,
+            "text": "お手本",
+            "waiting": "false"
+          },
+          {
+            "kind": "preview",
+            "pid": "holst",
+            "pressed": "false",
+            "rect": null,
+            "text": "いまの部で",
+            "waiting": "false"
+          },
+          {
+            "kind": "model",
+            "pid": "hungarian",
+            "pressed": "false",
+            "rect": null,
+            "text": "お手本",
+            "waiting": "false"
+          },
+          {
+            "kind": "preview",
+            "pid": "hungarian",
+            "pressed": "false",
+            "rect": null,
+            "text": "いまの部で",
+            "waiting": "false"
+          },
+          {
+            "kind": "model",
+            "pid": "flowers",
+            "pressed": "false",
+            "rect": null,
+            "text": "お手本",
+            "waiting": "false"
+          },
+          {
+            "kind": "preview",
+            "pid": "flowers",
+            "pressed": "false",
+            "rect": null,
+            "text": "いまの部で",
+            "waiting": "false"
+          },
+          {
+            "kind": "model",
+            "pid": "tell",
+            "pressed": "false",
+            "rect": null,
+            "text": "お手本",
+            "waiting": "false"
+          },
+          {
+            "kind": "preview",
+            "pid": "tell",
+            "pressed": "false",
+            "rect": null,
+            "text": "いまの部で",
+            "waiting": "false"
+          },
+          {
+            "kind": "model",
+            "pid": "carmen",
+            "pressed": "false",
+            "rect": null,
+            "text": "お手本",
+            "waiting": "false"
+          },
+          {
+            "kind": "preview",
+            "pid": "carmen",
+            "pressed": "false",
+            "rect": null,
+            "text": "いまの部で",
+            "waiting": "false"
+          },
+          {
+            "kind": "model",
+            "pid": "valkyrie",
+            "pressed": "false",
+            "rect": null,
+            "text": "お手本",
+            "waiting": "false"
+          },
+          {
+            "kind": "preview",
+            "pid": "valkyrie",
+            "pressed": "false",
+            "rect": null,
+            "text": "いまの部で",
+            "waiting": "false"
+          },
+          {
+            "kind": "model",
+            "pid": "swan",
+            "pressed": "false",
+            "rect": null,
+            "text": "お手本",
+            "waiting": "false"
+          },
+          {
+            "kind": "preview",
+            "pid": "swan",
+            "pressed": "false",
+            "rect": null,
+            "text": "いまの部で",
+            "waiting": "false"
+          },
+          {
+            "kind": "model",
+            "pid": "spring",
+            "pressed": "false",
+            "rect": null,
+            "text": "お手本",
+            "waiting": "false"
+          },
+          {
+            "kind": "preview",
+            "pid": "spring",
+            "pressed": "false",
+            "rect": null,
+            "text": "いまの部で",
+            "waiting": "false"
+          },
+          {
+            "kind": "model",
+            "pid": "canon",
+            "pressed": "false",
+            "rect": null,
+            "text": "お手本",
+            "waiting": "false"
+          },
+          {
+            "kind": "preview",
+            "pid": "canon",
+            "pressed": "false",
+            "rect": null,
+            "text": "いまの部で",
+            "waiting": "false"
+          }
+        ],
+        "cards": [],
+        "expected": null,
+        "focus": {
+          "id": "",
+          "kind": "model",
+          "pid": "largo"
+        },
+        "performance": null,
+        "performers": [],
+        "state": 0.6174420572351664
+      },
+      "pieceChoice": "largo",
+      "playing": false,
+      "records": 0.002820514142513275,
+      "scrollWidth": 1512,
+      "solo": {
+        "type": "all"
+      },
+      "venue": "hall",
+      "voices": [],
+      "waiting": false,
+      "width": 1512
+    }
+  }
+]
