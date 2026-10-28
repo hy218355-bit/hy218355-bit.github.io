@@ -8,7 +8,7 @@ const U = {
   venue: 'room', pos: 'center', range: 'all', view: 'mel', sel: null, piece: null, solo: 'all',
   shown: null, shownLabel: '', perfNow: null, diag: null, ptr: null, raf: 0, onEnd: null, playing: false, refreshT: 0,
   tab: 'week', tabScroll: {},
-  recordMember: null, recordPerf: null, moveUndo: null,
+  recordMember: null, recordPerf: null, memberCardMember: null, moveUndo: null,
   lineup: false, draft: null, audListen: null, ensListen: null, pieceListen: null, pred: null, predKey: '', predT: 0, outKey: '', outPick: new Set(),
   sfx: true, fxMode: 'full',
 };
@@ -126,6 +126,7 @@ function renderPlayButtons(){
   renderEnsembleListening();
   renderConductResultPlayback();
   renderPieceListening();
+  renderCurrentMemberListening();
   renderDiagPractice();
   renderRecordingLibrary();
 }
@@ -2114,6 +2115,29 @@ function renderMemberMove(){
   }).join('');
 }
 // いまの力は小さなランクを横に並べ、入部時からの変化は別に開く。
+// 本人とパートの印は、今の部の再生・待機に対応しているときだけ付ける。
+function currentMemberListening(m,section=false){
+  const active=U.waitPlay?.perf||(U.playing?U.shown:null);
+  return !!(m?.seat&&!U.recordMember&&active&&active===U.perfNow&&U.solo===(section?`sec:${SEAT[m.seat].sec}`:`member:${m.id}`));
+}
+function renderCurrentMemberListening(){
+  if(U.recordMember)return;
+  const m=U.sel&&memberById(U.sel),card=$('#memberCard');
+  if(!m||card.hidden||card.dataset.member!==m.id)return;
+  for(const [act,section,label] of [['solo',false,'この人だけ聴く'],['secsolo',true,'パートだけ聴く']]){
+    const b=card.querySelector(`[data-mact="${act}"]`);if(!b)continue;
+    const on=currentMemberListening(m,section),who=section?(SECTIONS.find(s=>s.id===SEAT[m.seat]?.sec)?.name||'パート'):m.name;
+    if(b.getAttribute('aria-pressed')!==String(on)){b.setAttribute('aria-pressed',String(on));b.innerHTML=uiIcon(on?'check':'play')+label;}
+    const name=on?`${who}の音${U.waitPlay?'を読み込み中':'を再生中'}。押すと全員の音にもどす`:`${who}だけ聴く`;
+    if(b.getAttribute('aria-label')!==name)b.setAttribute('aria-label',name);
+  }
+  const all=card.querySelector('[data-mact="all"]');if(all)all.hidden=U.solo==='all';
+}
+function clearCurrentMemberListening(){
+  const all=$('#memberCard [data-mact="all"]'),focused=document.activeElement===all;
+  U.solo='all';applySolo();renderSelectors();renderCurrentMemberListening();
+  if(focused){const target=$('#memberCard [data-mact="solo"]')||$('#memberCard [data-mact="close"]');if(cdVisible(target))target.focus({preventScroll:true});}
+}
 function memberCurrentRanks(m){
   return `<div class="mc-current"><div class="mc-current-grid">${STAT_KEYS.map(k=>`<span aria-label="${STAT_LABEL[k]} ${rankOf(m.stats[k])}"><small>${STAT_LABEL[k]}</small>${rankBadge(m.stats[k])}</span>`).join('')}</div>${m.mental!=null?`<div class="mc-mental"><span>本番の強さ</span>${rankBadge(m.mental)}</div>`:''}</div>`;
 }
@@ -2157,11 +2181,13 @@ function renderRecordedMemberCard(card, m){
 }
 function renderMemberCard(){
   const card = $('#memberCard');
+  U.memberCardMember=null;
   delete card.dataset.recorded;
   if(U.recordMember){card.hidden=false;renderRecordedMemberCard(card,U.recordMember);return;}
   const m = U.sel && memberById(U.sel);
   if(!m){ card.hidden = true; return; }
   card.hidden = false;
+  U.memberCardMember=m;
   // 同じ子の音を聴き直しても、開いている成長や思い出を閉じない。
   const openDetails = card.dataset.member === m.id ? [...card.querySelectorAll(':scope > details[open]:not(.mc-move)')].map(d=>d.className) : [];
   card.dataset.member = m.id;
@@ -2170,7 +2196,7 @@ function renderMemberCard(){
   card.innerHTML = `<button class="help-button mc-close" type="button" data-mact="close" aria-label="閉じる">${uiIcon('close')}</button><div class="mc-portrait">${memberFace(m,112)}<div class="mc-head"><h3>${esc(m.name)}</h3>${m.title ? `<span class="tag">${m.title}</span>` : ''}<span class="sub">${seat?instrumentIcon(seat.inst):''}${m.grade}年・${seat ? PART_LABEL[seat.part] : '控え（席なし）'}</span><button class="mc-name-edit" type="button" data-mact="rename" aria-expanded="false" aria-controls="memberNameForm">名前を変える</button></div></div>
     <form class="mc-name-form" id="memberNameForm" data-mid="${m.id}" hidden novalidate><label for="memberName">名前<small>${MEMBER_NAME_MAX}文字まで</small></label><input id="memberName" name="memberName" type="text" value="${esc(m.name)}" maxlength="24" autocomplete="off" autocapitalize="off" spellcheck="false" enterkeyhint="done" aria-describedby="memberNameError"><p id="memberNameError" class="mc-name-error" role="alert" hidden></p><div><button class="btn quiet" type="button" data-mact="renamecancel">やめる</button><button class="btn primary" type="submit">保存する</button></div></form>
     ${canUndoMemberMove() && U.moveUndo.ids.includes(m.id) ? '<div class="mc-undo"><span>席を移した</span><button class="btn small" type="button" data-mact="moveundo">元に戻す</button></div>' : ''}
-    ${seat || U.solo !== 'all' ? `<div class="mc-actions">${seat ? `<button class="btn small" type="button" data-mact="solo" aria-pressed="${U.solo===`member:${m.id}`}">${uiIcon('play')}この人だけ聴く</button><button class="btn small" type="button" data-mact="secsolo" aria-pressed="${U.solo===`sec:${seat.sec}`}">${uiIcon('play')}パートだけ聴く</button>` : ''}${U.solo !== 'all' ? '<button class="btn small quiet" type="button" data-mact="all">全員の音にもどす</button>' : ''}</div>` : ''}
+    ${seat || U.solo !== 'all' ? `<div class="mc-actions">${seat ? `<button class="btn small" type="button" data-mact="solo" aria-pressed="false">${uiIcon('play')}この人だけ聴く</button><button class="btn small" type="button" data-mact="secsolo" aria-pressed="false">${uiIcon('play')}パートだけ聴く</button>` : ''}<button class="btn small quiet" type="button" data-mact="all"${U.solo==='all'?' hidden':''}>全員の音にもどす</button></div>` : ''}
     <details class="mc-move" data-move-to=""><summary>席を移す</summary>${movePicker(m)}<div class="move-preview" id="movePreview" aria-live="polite" hidden></div><div class="mc-actions move-actions"><button class="btn quiet" type="button" data-mact="movecancel">やめる</button><button class="btn brass" type="button" data-mact="move" disabled>移す</button><button class="btn quiet move-stop" type="button" data-mact="movestop" aria-label="止める"${(U.playing || U.waitPlay) && !tabHidden('play') ? '' : ' hidden'}>${uiIcon('stop')}</button></div>
     <p class="small">楽器が変わると、その楽器での音程と音色は基礎からやり直しになる。</p></details>
     ${memberCurrentRanks(m)}
@@ -2181,6 +2207,7 @@ function renderMemberCard(){
     <details class="mc-personality"><summary>スキル・癖</summary>${skillList(m)}${tr?`<p class="mc-trait">癖：${tr.name}。${tr.desc}</p>`:'<p class="mc-trait">目立った癖はない。</p>'}</details>
     ${memberStory(m)}`;
   for(const name of openDetails){ const detail=card.querySelector('details.'+name);if(detail)detail.open=true; }
+  renderCurrentMemberListening();
   // 開いたら移動先をすぐ選べる位置へ。本人の顔は少し上へ戻れば見られる。
   card.querySelector('.mc-move').addEventListener('toggle',e=>{
     if(e.target.isConnected && e.target.open)scrollMemberMoveChoices();
@@ -2370,9 +2397,14 @@ function listenCurrentMember(id, section = false){
   const m = memberById(id); if(!m?.seat) return;
   U.sel = m.id;
   U.solo = section ? `sec:${SEAT[m.seat].sec}` : `member:${m.id}`;
-  renderSelectors(); applySolo(); renderMemberCard();
+  renderSelectors(); applySolo();
+  if(!U.recordMember&&U.memberCardMember===m&&!$('#memberCard').hidden)renderCurrentMemberListening();else renderMemberCard();
   if(!U.playing) $('#btnNow').click();
   if(focused&&U.sel===id)$('#memberCard [data-mact="'+action+'"]').focus({preventScroll:true});
+}
+function toggleCurrentMemberListening(id,section=false){
+  const m=memberById(id);if(!m?.seat)return;
+  if(currentMemberListening(m,section))clearCurrentMemberListening();else listenCurrentMember(id,section);
 }
 function startStage(){
   stopPlay();
@@ -2658,9 +2690,9 @@ function bind(){
       if(narrow.matches) $('#memberCard').scrollIntoView({block: 'start'}); return;
     }
     if(act === 'renamecancel'){ closeMemberNameForm(); return; }
-    if(act === 'solo') listenCurrentMember(m.id);
-    else if(act === 'secsolo') listenCurrentMember(m.id, true);
-    else if(act === 'all'){ U.solo = 'all'; renderSelectors(); applySolo(); renderMemberCard(); }
+    if(act === 'solo') toggleCurrentMemberListening(m.id);
+    else if(act === 'secsolo') toggleCurrentMemberListening(m.id, true);
+    else if(act === 'all')clearCurrentMemberListening();
     else if(act === 'move'){
       if(busy() || !selectedMemberMove()) return;
       // 移動前の音と読み込み待ちを止め、止めたあとに最新の部から移動を決める。

@@ -87,6 +87,7 @@ U.sfx=false;U.fxMode='off';FX.q=[];clearTimeout(FX.timer);FX.on=false;$('#fx').h
 let report,releaseSamples,performanceMemo,releaseLibraryExport;
 const libraryExpected=new WeakMap();
 const pieceExpected=new WeakMap();
+const memberButtonIds=new WeakMap();let memberButtonId=0;
 if(q.has('exportAudit'))saveRecording=rec=>{report.libraryExport={id:rec.id,label:rec.label,snapshot:hash(JSON.stringify(rec.snap))};return q.has('holdExport')?new Promise(resolve=>{releaseLibraryExport=resolve;}):Promise.resolve();};
 const playbackIds=new WeakMap();let playbackCount=0;
 window.addEventListener('error',e=>{if(report)report.errors.push(e.message);});
@@ -118,6 +119,11 @@ function record(){
  report.audio={ready:SAMPLES.ready,progress:SAMPLES.progress,error:SAMPLES.error?{name:SAMPLES.error.name,message:SAMPLES.error.message}:null,banks:Object.keys(SAMPLES.banks),requests:{...audioRequests},flow:{...audioFlow},preservedCount:audioBeforeRetry?.length,preservedBuffers:audioBeforeRetry?audioBeforeRetry.every(([name,bank])=>SAMPLES.banks[name]===bank):null,voices:[...new Set((E.pb?.voices||[]).map(v=>v.constructor.name))]};
  report.listeningMix=E.pb?{nodes:E.pb.listenOutputs.length,live:E.pb.listenLive,gain:E.pb.listenOutputs.map(n=>n.gain.value)}:null;
  report.hallExp=S.hallExp;
+ if(q.has('memberListenAudit')){
+  const card=$('#memberCard'),active=U.waitPlay?.perf||(U.playing?U.shown:null),m=U.sel&&memberById(U.sel),[type,id]=U.solo.split(':');
+  const buttonId=b=>{if(!memberButtonIds.has(b))memberButtonIds.set(b,++memberButtonId);return memberButtonIds.get(b);};
+  report.memberListening={state:hash(JSON.stringify(S)),selected:U.sel,section:m?.seat&&SEAT[m.seat].sec,sourceCurrent:!!active&&active===U.perfNow,cacheCurrent:!!m&&U.memberCardMember===m,hidden:card.hidden,focus:document.activeElement.id||document.activeElement.dataset.mact||document.activeElement.tagName,buttons:[...card.querySelectorAll(':scope>.mc-actions [data-mact]')].map(b=>({id:buttonId(b),act:b.dataset.mact,pressed:b.getAttribute('aria-pressed'),label:b.getAttribute('aria-label'),hidden:b.hidden,checked:!!b.querySelector('path[d="m5 12 4 4L19 6"]'),rect:b.getBoundingClientRect().toJSON()})),details:[...card.querySelectorAll(':scope>details[open]')].map(d=>d.className),draft:$('#memberNameForm')&&!$('#memberNameForm').hidden?$('#memberName').value:null,expected:active?[...new Set([...active.notes,...active.hits].filter(n=>type==='all'||type==='member'&&n.mid===id||type==='sec'&&n.sec===id).map(n=>n.mid))]:[]};
+ }
  if(q.has('stopAudit')){
   const current=document.activeElement,rect=el=>el.getBoundingClientRect().toJSON();
   report.stopUi={state:hash(JSON.stringify(S)),focus:current.id||current.dataset.tabgo||current.tagName,tab:U.tab,scroll:scrollY,mainHidden:$('#btnStop').hidden,nowHidden:$('#btnNow').hidden,miniHidden:$('#mini').hidden,now:rect($('#btnNow')),miniStop:rect($('#miniStop')),tabButton:rect($('#tabbar [aria-current="page"]')),seconds:U.playing?E.now():null};
@@ -452,7 +458,7 @@ $('#week').addEventListener('toggle',()=>setTimeout(record,0),true);
 new MutationObserver(()=>setTimeout(record,0)).observe($('#week'),{childList:true,subtree:true});
 new MutationObserver(()=>setTimeout(record,0)).observe($('#grCard'),{childList:true,subtree:true});
 new MutationObserver(()=>setTimeout(record,0)).observe($('#nowPlaying'),{childList:true,subtree:true});
-for(const event of ['click','submit','change','keydown'])$('#memberCard').addEventListener(event,()=>setTimeout(record,0));
+for(const event of ['click','submit','change','keydown','input'])$('#memberCard').addEventListener(event,()=>setTimeout(record,0));
 $('#rosterTable').addEventListener('click',()=>setTimeout(record,0));
 for(const event of ['click','keydown','toggle'])$('#diagPractice').addEventListener(event,()=>setTimeout(record,0));
 for(const event of ['click','keydown'])$('#recordingList').addEventListener(event,()=>setTimeout(record,0));

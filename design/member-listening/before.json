@@ -1,0 +1,84 @@
+{
+  "solo": {
+    "audible": [
+      "m2028-n1-cafe"
+    ],
+    "buttons": [
+      {
+        "act": "solo",
+        "pressed": "true",
+        "text": "この人だけ聴く"
+      },
+      {
+        "act": "secsolo",
+        "pressed": "false",
+        "text": "パートだけ聴く"
+      },
+      {
+        "act": "all",
+        "pressed": null,
+        "text": "全員の音にもどす"
+      }
+    ],
+    "playing": true,
+    "solo": {
+      "id": "m2028-n1-cafe",
+      "type": "member"
+    },
+    "waiting": false
+  },
+  "repeat": {
+    "audible": [
+      "m2028-n1-cafe"
+    ],
+    "buttons": [
+      {
+        "act": "solo",
+        "pressed": "true",
+        "text": "この人だけ聴く"
+      },
+      {
+        "act": "secsolo",
+        "pressed": "false",
+        "text": "パートだけ聴く"
+      },
+      {
+        "act": "all",
+        "pressed": null,
+        "text": "全員の音にもどす"
+      }
+    ],
+    "playing": true,
+    "solo": {
+      "id": "m2028-n1-cafe",
+      "type": "member"
+    },
+    "waiting": false
+  },
+  "stopped": {
+    "audible": [],
+    "buttons": [
+      {
+        "act": "solo",
+        "pressed": "true",
+        "text": "この人だけ聴く"
+      },
+      {
+        "act": "secsolo",
+        "pressed": "false",
+        "text": "パートだけ聴く"
+      },
+      {
+        "act": "all",
+        "pressed": null,
+        "text": "全員の音にもどす"
+      }
+    ],
+    "playing": false,
+    "solo": {
+      "id": "m2028-n1-cafe",
+      "type": "member"
+    },
+    "waiting": false
+  }
+}

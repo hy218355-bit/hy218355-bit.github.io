@@ -1,0 +1,2831 @@
+[
+  {
+    "case": "initial",
+    "data": {
+      "audible": [],
+      "current": {
+        "expected": 0.4994142900686711,
+        "expectedCohesion": 0.2,
+        "prepared": 0.4994142900686711,
+        "preparedCohesion": 0.2,
+        "shown": 0.4994142900686711,
+        "shownCohesion": 0.2
+      },
+      "errors": [],
+      "playback": null,
+      "playing": false,
+      "records": 0.7924397739116102,
+      "scrollWidth": 375,
+      "solo": {
+        "type": "all"
+      },
+      "ui": {
+        "buttons": [
+          {
+            "act": "solo",
+            "checked": false,
+            "hidden": false,
+            "id": 1,
+            "label": "田中 七海だけ聴く",
+            "pressed": "false",
+            "rect": {
+              "bottom": 205.9921875,
+              "height": 44,
+              "left": 52,
+              "right": 183.5,
+              "top": 161.9921875,
+              "width": 131.5,
+              "x": 52,
+              "y": 161.9921875
+            }
+          },
+          {
+            "act": "secsolo",
+            "checked": false,
+            "hidden": false,
+            "id": 2,
+            "label": "フルートだけ聴く",
+            "pressed": "false",
+            "rect": {
+              "bottom": 205.9921875,
+              "height": 44,
+              "left": 191.5,
+              "right": 323,
+              "top": 161.9921875,
+              "width": 131.5,
+              "x": 191.5,
+              "y": 161.9921875
+            }
+          },
+          {
+            "act": "all",
+            "checked": false,
+            "hidden": true,
+            "id": 3,
+            "label": null,
+            "pressed": null,
+            "rect": {
+              "bottom": 0,
+              "height": 0,
+              "left": 0,
+              "right": 0,
+              "top": 0,
+              "width": 0,
+              "x": 0,
+              "y": 0
+            }
+          }
+        ],
+        "cacheCurrent": true,
+        "details": [],
+        "draft": null,
+        "expected": [],
+        "focus": "BODY",
+        "hidden": false,
+        "section": "fl",
+        "selected": "m2028-n1-cafe",
+        "sourceCurrent": false,
+        "state": 0.6467266883701086
+      },
+      "waiting": false,
+      "width": 375
+    }
+  },
+  {
+    "case": "solo-light",
+    "data": {
+      "audible": [
+        "m2028-n1-cafe"
+      ],
+      "current": {
+        "expected": 0.4994142900686711,
+        "expectedCohesion": 0.2,
+        "prepared": 0.4994142900686711,
+        "preparedCohesion": 0.2,
+        "shown": 0.4994142900686711,
+        "shownCohesion": 0.2
+      },
+      "errors": [],
+      "playback": 1,
+      "playing": true,
+      "records": 0.7924397739116102,
+      "scrollWidth": 375,
+      "solo": {
+        "id": "m2028-n1-cafe",
+        "type": "member"
+      },
+      "ui": {
+        "buttons": [
+          {
+            "act": "solo",
+            "checked": true,
+            "hidden": false,
+            "id": 1,
+            "label": "田中 七海の音を再生中。押すと全員の音にもどす",
+            "pressed": "true",
+            "rect": {
+              "bottom": 427.9921875,
+              "height": 44,
+              "left": 52,
+              "right": 183.5,
+              "top": 383.9921875,
+              "width": 131.5,
+              "x": 52,
+              "y": 383.9921875
+            }
+          },
+          {
+            "act": "secsolo",
+            "checked": false,
+            "hidden": false,
+            "id": 2,
+            "label": "フルートだけ聴く",
+            "pressed": "false",
+            "rect": {
+              "bottom": 427.9921875,
+              "height": 44,
+              "left": 191.5,
+              "right": 323,
+              "top": 383.9921875,
+              "width": 131.5,
+              "x": 191.5,
+              "y": 383.9921875
+            }
+          },
+          {
+            "act": "all",
+            "checked": false,
+            "hidden": false,
+            "id": 3,
+            "label": null,
+            "pressed": null,
+            "rect": {
+              "bottom": 479.9921875,
+              "height": 44,
+              "left": 52,
+              "right": 323,
+              "top": 435.9921875,
+              "width": 271,
+              "x": 52,
+              "y": 435.9921875
+            }
+          }
+        ],
+        "cacheCurrent": true,
+        "details": [],
+        "draft": null,
+        "expected": [
+          "m2028-n1-cafe"
+        ],
+        "focus": "solo",
+        "hidden": false,
+        "section": "fl",
+        "selected": "m2028-n1-cafe",
+        "sourceCurrent": true,
+        "state": 0.6467266883701086
+      },
+      "waiting": false,
+      "width": 375
+    }
+  },
+  {
+    "case": "solo-dark",
+    "data": {
+      "audible": [
+        "m2028-n1-cafe"
+      ],
+      "current": {
+        "expected": 0.4994142900686711,
+        "expectedCohesion": 0.2,
+        "prepared": 0.4994142900686711,
+        "preparedCohesion": 0.2,
+        "shown": 0.4994142900686711,
+        "shownCohesion": 0.2
+      },
+      "errors": [],
+      "playback": 1,
+      "playing": true,
+      "records": 0.7924397739116102,
+      "scrollWidth": 375,
+      "solo": {
+        "id": "m2028-n1-cafe",
+        "type": "member"
+      },
+      "ui": {
+        "buttons": [
+          {
+            "act": "solo",
+            "checked": true,
+            "hidden": false,
+            "id": 1,
+            "label": "田中 七海の音を再生中。押すと全員の音にもどす",
+            "pressed": "true",
+            "rect": {
+              "bottom": 427.9921875,
+              "height": 44,
+              "left": 52,
+              "right": 183.5,
+              "top": 383.9921875,
+              "width": 131.5,
+              "x": 52,
+              "y": 383.9921875
+            }
+          },
+          {
+            "act": "secsolo",
+            "checked": false,
+            "hidden": false,
+            "id": 2,
+            "label": "フルートだけ聴く",
+            "pressed": "false",
+            "rect": {
+              "bottom": 427.9921875,
+              "height": 44,
+              "left": 191.5,
+              "right": 323,
+              "top": 383.9921875,
+              "width": 131.5,
+              "x": 191.5,
+              "y": 383.9921875
+            }
+          },
+          {
+            "act": "all",
+            "checked": false,
+            "hidden": false,
+            "id": 3,
+            "label": null,
+            "pressed": null,
+            "rect": {
+              "bottom": 479.9921875,
+              "height": 44,
+              "left": 52,
+              "right": 323,
+              "top": 435.9921875,
+              "width": 271,
+              "x": 52,
+              "y": 435.9921875
+            }
+          }
+        ],
+        "cacheCurrent": true,
+        "details": [],
+        "draft": null,
+        "expected": [
+          "m2028-n1-cafe"
+        ],
+        "focus": "solo",
+        "hidden": false,
+        "section": "fl",
+        "selected": "m2028-n1-cafe",
+        "sourceCurrent": true,
+        "state": 0.6467266883701086
+      },
+      "waiting": false,
+      "width": 375
+    }
+  },
+  {
+    "case": "same-button-all",
+    "data": {
+      "audible": [
+        "m2028-n1-cafe",
+        "m2028-n2-cafe",
+        "m2028-n3-cafe",
+        "m2028-n4-cafe",
+        "m2028-n5-cafe",
+        "m2028-n6-cafe",
+        "m2028-n7-cafe",
+        "m2028-n8-cafe",
+        "m2028-n9-cafe",
+        "m2028-n10-cafe",
+        "m2028-n11-cafe",
+        "m2028-n12-cafe",
+        "m2028-n13-cafe",
+        "m2028-n14-cafe",
+        "m2028-n15-cafe",
+        "m2028-n16-cafe",
+        "m2028-n17-cafe",
+        "m2028-n18-cafe",
+        "m2028-n19-cafe",
+        "m2028-n20-cafe",
+        "m2028-n21-cafe",
+        "m2028-n22-cafe",
+        "m2028-n23-cafe",
+        "m2028-n24-cafe",
+        "m2028-n25-cafe",
+        "m2028-n26-cafe",
+        "m2028-n27-cafe",
+        "m2028-n28-cafe",
+        "m2028-n29-cafe",
+        "m2028-n30-cafe",
+        "m2028-n31-cafe",
+        "m2028-n32-cafe",
+        "m2028-n33-cafe",
+        "m2028-n34-cafe",
+        "m2028-n35-cafe",
+        "m2028-n36-cafe",
+        "m2028-n37-cafe",
+        "m2028-n39-cafe",
+        "m2028-n38-cafe"
+      ],
+      "current": {
+        "expected": 0.4994142900686711,
+        "expectedCohesion": 0.2,
+        "prepared": 0.4994142900686711,
+        "preparedCohesion": 0.2,
+        "shown": 0.4994142900686711,
+        "shownCohesion": 0.2
+      },
+      "errors": [],
+      "playback": 1,
+      "playing": true,
+      "records": 0.7924397739116102,
+      "scrollWidth": 375,
+      "solo": {
+        "type": "all"
+      },
+      "ui": {
+        "buttons": [
+          {
+            "act": "solo",
+            "checked": false,
+            "hidden": false,
+            "id": 1,
+            "label": "田中 七海だけ聴く",
+            "pressed": "false",
+            "rect": {
+              "bottom": 427.9921875,
+              "height": 44,
+              "left": 52,
+              "right": 183.5,
+              "top": 383.9921875,
+              "width": 131.5,
+              "x": 52,
+              "y": 383.9921875
+            }
+          },
+          {
+            "act": "secsolo",
+            "checked": false,
+            "hidden": false,
+            "id": 2,
+            "label": "フルートだけ聴く",
+            "pressed": "false",
+            "rect": {
+              "bottom": 427.9921875,
+              "height": 44,
+              "left": 191.5,
+              "right": 323,
+              "top": 383.9921875,
+              "width": 131.5,
+              "x": 191.5,
+              "y": 383.9921875
+            }
+          },
+          {
+            "act": "all",
+            "checked": false,
+            "hidden": true,
+            "id": 3,
+            "label": null,
+            "pressed": null,
+            "rect": {
+              "bottom": 0,
+              "height": 0,
+              "left": 0,
+              "right": 0,
+              "top": 0,
+              "width": 0,
+              "x": 0,
+              "y": 0
+            }
+          }
+        ],
+        "cacheCurrent": true,
+        "details": [],
+        "draft": null,
+        "expected": [
+          "m2028-n1-cafe",
+          "m2028-n2-cafe",
+          "m2028-n3-cafe",
+          "m2028-n4-cafe",
+          "m2028-n5-cafe",
+          "m2028-n6-cafe",
+          "m2028-n7-cafe",
+          "m2028-n8-cafe",
+          "m2028-n9-cafe",
+          "m2028-n10-cafe",
+          "m2028-n11-cafe",
+          "m2028-n12-cafe",
+          "m2028-n13-cafe",
+          "m2028-n14-cafe",
+          "m2028-n15-cafe",
+          "m2028-n16-cafe",
+          "m2028-n17-cafe",
+          "m2028-n18-cafe",
+          "m2028-n19-cafe",
+          "m2028-n20-cafe",
+          "m2028-n21-cafe",
+          "m2028-n22-cafe",
+          "m2028-n23-cafe",
+          "m2028-n24-cafe",
+          "m2028-n25-cafe",
+          "m2028-n26-cafe",
+          "m2028-n27-cafe",
+          "m2028-n28-cafe",
+          "m2028-n29-cafe",
+          "m2028-n30-cafe",
+          "m2028-n31-cafe",
+          "m2028-n32-cafe",
+          "m2028-n33-cafe",
+          "m2028-n34-cafe",
+          "m2028-n35-cafe",
+          "m2028-n36-cafe",
+          "m2028-n37-cafe",
+          "m2028-n39-cafe",
+          "m2028-n38-cafe"
+        ],
+        "focus": "solo",
+        "hidden": false,
+        "section": "fl",
+        "selected": "m2028-n1-cafe",
+        "sourceCurrent": true,
+        "state": 0.6467266883701086
+      },
+      "waiting": false,
+      "width": 375
+    }
+  },
+  {
+    "case": "section",
+    "data": {
+      "audible": [
+        "m2028-n1-cafe",
+        "m2028-n2-cafe",
+        "m2028-n3-cafe",
+        "m2028-n4-cafe"
+      ],
+      "current": {
+        "expected": 0.4994142900686711,
+        "expectedCohesion": 0.2,
+        "prepared": 0.4994142900686711,
+        "preparedCohesion": 0.2,
+        "shown": 0.4994142900686711,
+        "shownCohesion": 0.2
+      },
+      "errors": [],
+      "playback": 1,
+      "playing": true,
+      "records": 0.7924397739116102,
+      "scrollWidth": 375,
+      "solo": {
+        "id": "fl",
+        "type": "sec"
+      },
+      "ui": {
+        "buttons": [
+          {
+            "act": "solo",
+            "checked": false,
+            "hidden": false,
+            "id": 1,
+            "label": "田中 七海だけ聴く",
+            "pressed": "false",
+            "rect": {
+              "bottom": 427.9921875,
+              "height": 44,
+              "left": 52,
+              "right": 183.5,
+              "top": 383.9921875,
+              "width": 131.5,
+              "x": 52,
+              "y": 383.9921875
+            }
+          },
+          {
+            "act": "secsolo",
+            "checked": true,
+            "hidden": false,
+            "id": 2,
+            "label": "フルートの音を再生中。押すと全員の音にもどす",
+            "pressed": "true",
+            "rect": {
+              "bottom": 427.9921875,
+              "height": 44,
+              "left": 191.5,
+              "right": 323,
+              "top": 383.9921875,
+              "width": 131.5,
+              "x": 191.5,
+              "y": 383.9921875
+            }
+          },
+          {
+            "act": "all",
+            "checked": false,
+            "hidden": false,
+            "id": 3,
+            "label": null,
+            "pressed": null,
+            "rect": {
+              "bottom": 479.9921875,
+              "height": 44,
+              "left": 52,
+              "right": 323,
+              "top": 435.9921875,
+              "width": 271,
+              "x": 52,
+              "y": 435.9921875
+            }
+          }
+        ],
+        "cacheCurrent": true,
+        "details": [],
+        "draft": null,
+        "expected": [
+          "m2028-n1-cafe",
+          "m2028-n2-cafe",
+          "m2028-n3-cafe",
+          "m2028-n4-cafe"
+        ],
+        "focus": "secsolo",
+        "hidden": false,
+        "section": "fl",
+        "selected": "m2028-n1-cafe",
+        "sourceCurrent": true,
+        "state": 0.6467266883701086
+      },
+      "waiting": false,
+      "width": 375
+    }
+  },
+  {
+    "case": "same-section-all",
+    "data": {
+      "audible": [
+        "m2028-n1-cafe",
+        "m2028-n2-cafe",
+        "m2028-n3-cafe",
+        "m2028-n4-cafe",
+        "m2028-n5-cafe",
+        "m2028-n6-cafe",
+        "m2028-n7-cafe",
+        "m2028-n8-cafe",
+        "m2028-n9-cafe",
+        "m2028-n10-cafe",
+        "m2028-n11-cafe",
+        "m2028-n12-cafe",
+        "m2028-n13-cafe",
+        "m2028-n14-cafe",
+        "m2028-n15-cafe",
+        "m2028-n16-cafe",
+        "m2028-n17-cafe",
+        "m2028-n18-cafe",
+        "m2028-n19-cafe",
+        "m2028-n20-cafe",
+        "m2028-n21-cafe",
+        "m2028-n22-cafe",
+        "m2028-n23-cafe",
+        "m2028-n24-cafe",
+        "m2028-n25-cafe",
+        "m2028-n26-cafe",
+        "m2028-n27-cafe",
+        "m2028-n28-cafe",
+        "m2028-n29-cafe",
+        "m2028-n30-cafe",
+        "m2028-n31-cafe",
+        "m2028-n32-cafe",
+        "m2028-n33-cafe",
+        "m2028-n34-cafe",
+        "m2028-n35-cafe",
+        "m2028-n36-cafe",
+        "m2028-n37-cafe",
+        "m2028-n39-cafe",
+        "m2028-n38-cafe"
+      ],
+      "current": {
+        "expected": 0.4994142900686711,
+        "expectedCohesion": 0.2,
+        "prepared": 0.4994142900686711,
+        "preparedCohesion": 0.2,
+        "shown": 0.4994142900686711,
+        "shownCohesion": 0.2
+      },
+      "errors": [],
+      "playback": 1,
+      "playing": true,
+      "records": 0.7924397739116102,
+      "scrollWidth": 375,
+      "solo": {
+        "type": "all"
+      },
+      "ui": {
+        "buttons": [
+          {
+            "act": "solo",
+            "checked": false,
+            "hidden": false,
+            "id": 1,
+            "label": "田中 七海だけ聴く",
+            "pressed": "false",
+            "rect": {
+              "bottom": 427.9921875,
+              "height": 44,
+              "left": 52,
+              "right": 183.5,
+              "top": 383.9921875,
+              "width": 131.5,
+              "x": 52,
+              "y": 383.9921875
+            }
+          },
+          {
+            "act": "secsolo",
+            "checked": false,
+            "hidden": false,
+            "id": 2,
+            "label": "フルートだけ聴く",
+            "pressed": "false",
+            "rect": {
+              "bottom": 427.9921875,
+              "height": 44,
+              "left": 191.5,
+              "right": 323,
+              "top": 383.9921875,
+              "width": 131.5,
+              "x": 191.5,
+              "y": 383.9921875
+            }
+          },
+          {
+            "act": "all",
+            "checked": false,
+            "hidden": true,
+            "id": 3,
+            "label": null,
+            "pressed": null,
+            "rect": {
+              "bottom": 0,
+              "height": 0,
+              "left": 0,
+              "right": 0,
+              "top": 0,
+              "width": 0,
+              "x": 0,
+              "y": 0
+            }
+          }
+        ],
+        "cacheCurrent": true,
+        "details": [],
+        "draft": null,
+        "expected": [
+          "m2028-n1-cafe",
+          "m2028-n2-cafe",
+          "m2028-n3-cafe",
+          "m2028-n4-cafe",
+          "m2028-n5-cafe",
+          "m2028-n6-cafe",
+          "m2028-n7-cafe",
+          "m2028-n8-cafe",
+          "m2028-n9-cafe",
+          "m2028-n10-cafe",
+          "m2028-n11-cafe",
+          "m2028-n12-cafe",
+          "m2028-n13-cafe",
+          "m2028-n14-cafe",
+          "m2028-n15-cafe",
+          "m2028-n16-cafe",
+          "m2028-n17-cafe",
+          "m2028-n18-cafe",
+          "m2028-n19-cafe",
+          "m2028-n20-cafe",
+          "m2028-n21-cafe",
+          "m2028-n22-cafe",
+          "m2028-n23-cafe",
+          "m2028-n24-cafe",
+          "m2028-n25-cafe",
+          "m2028-n26-cafe",
+          "m2028-n27-cafe",
+          "m2028-n28-cafe",
+          "m2028-n29-cafe",
+          "m2028-n30-cafe",
+          "m2028-n31-cafe",
+          "m2028-n32-cafe",
+          "m2028-n33-cafe",
+          "m2028-n34-cafe",
+          "m2028-n35-cafe",
+          "m2028-n36-cafe",
+          "m2028-n37-cafe",
+          "m2028-n39-cafe",
+          "m2028-n38-cafe"
+        ],
+        "focus": "secsolo",
+        "hidden": false,
+        "section": "fl",
+        "selected": "m2028-n1-cafe",
+        "sourceCurrent": true,
+        "state": 0.6467266883701086
+      },
+      "waiting": false,
+      "width": 375
+    }
+  },
+  {
+    "case": "stopped",
+    "data": {
+      "audible": [],
+      "current": {
+        "expected": 0.4994142900686711,
+        "expectedCohesion": 0.2,
+        "prepared": 0.4994142900686711,
+        "preparedCohesion": 0.2,
+        "shown": 0.4994142900686711,
+        "shownCohesion": 0.2
+      },
+      "errors": [],
+      "playback": null,
+      "playing": false,
+      "records": 0.7924397739116102,
+      "scrollWidth": 375,
+      "solo": {
+        "id": "m2028-n1-cafe",
+        "type": "member"
+      },
+      "ui": {
+        "buttons": [
+          {
+            "act": "solo",
+            "checked": false,
+            "hidden": false,
+            "id": 1,
+            "label": "田中 七海だけ聴く",
+            "pressed": "false",
+            "rect": {
+              "bottom": 427.9921875,
+              "height": 44,
+              "left": 52,
+              "right": 183.5,
+              "top": 383.9921875,
+              "width": 131.5,
+              "x": 52,
+              "y": 383.9921875
+            }
+          },
+          {
+            "act": "secsolo",
+            "checked": false,
+            "hidden": false,
+            "id": 2,
+            "label": "フルートだけ聴く",
+            "pressed": "false",
+            "rect": {
+              "bottom": 427.9921875,
+              "height": 44,
+              "left": 191.5,
+              "right": 323,
+              "top": 383.9921875,
+              "width": 131.5,
+              "x": 191.5,
+              "y": 383.9921875
+            }
+          },
+          {
+            "act": "all",
+            "checked": false,
+            "hidden": false,
+            "id": 3,
+            "label": null,
+            "pressed": null,
+            "rect": {
+              "bottom": 479.9921875,
+              "height": 44,
+              "left": 52,
+              "right": 323,
+              "top": 435.9921875,
+              "width": 271,
+              "x": 52,
+              "y": 435.9921875
+            }
+          }
+        ],
+        "cacheCurrent": true,
+        "details": [],
+        "draft": null,
+        "expected": [],
+        "focus": "btnNow",
+        "hidden": false,
+        "section": "fl",
+        "selected": "m2028-n1-cafe",
+        "sourceCurrent": false,
+        "state": 0.6467266883701086
+      },
+      "waiting": false,
+      "width": 375
+    }
+  },
+  {
+    "case": "resumed",
+    "data": {
+      "audible": [
+        "m2028-n1-cafe"
+      ],
+      "current": {
+        "expected": 0.4994142900686711,
+        "expectedCohesion": 0.2,
+        "prepared": 0.4994142900686711,
+        "preparedCohesion": 0.2,
+        "shown": 0.4994142900686711,
+        "shownCohesion": 0.2
+      },
+      "errors": [],
+      "playback": 2,
+      "playing": true,
+      "records": 0.7924397739116102,
+      "scrollWidth": 375,
+      "solo": {
+        "id": "m2028-n1-cafe",
+        "type": "member"
+      },
+      "ui": {
+        "buttons": [
+          {
+            "act": "solo",
+            "checked": true,
+            "hidden": false,
+            "id": 1,
+            "label": "田中 七海の音を再生中。押すと全員の音にもどす",
+            "pressed": "true",
+            "rect": {
+              "bottom": 427.9921875,
+              "height": 44,
+              "left": 52,
+              "right": 183.5,
+              "top": 383.9921875,
+              "width": 131.5,
+              "x": 52,
+              "y": 383.9921875
+            }
+          },
+          {
+            "act": "secsolo",
+            "checked": false,
+            "hidden": false,
+            "id": 2,
+            "label": "フルートだけ聴く",
+            "pressed": "false",
+            "rect": {
+              "bottom": 427.9921875,
+              "height": 44,
+              "left": 191.5,
+              "right": 323,
+              "top": 383.9921875,
+              "width": 131.5,
+              "x": 191.5,
+              "y": 383.9921875
+            }
+          },
+          {
+            "act": "all",
+            "checked": false,
+            "hidden": false,
+            "id": 3,
+            "label": null,
+            "pressed": null,
+            "rect": {
+              "bottom": 479.9921875,
+              "height": 44,
+              "left": 52,
+              "right": 323,
+              "top": 435.9921875,
+              "width": 271,
+              "x": 52,
+              "y": 435.9921875
+            }
+          }
+        ],
+        "cacheCurrent": true,
+        "details": [],
+        "draft": null,
+        "expected": [
+          "m2028-n1-cafe"
+        ],
+        "focus": "solo",
+        "hidden": false,
+        "section": "fl",
+        "selected": "m2028-n1-cafe",
+        "sourceCurrent": true,
+        "state": 0.6467266883701086
+      },
+      "waiting": false,
+      "width": 375
+    }
+  },
+  {
+    "case": "all-button",
+    "data": {
+      "audible": [
+        "m2028-n1-cafe",
+        "m2028-n2-cafe",
+        "m2028-n3-cafe",
+        "m2028-n4-cafe",
+        "m2028-n5-cafe",
+        "m2028-n6-cafe",
+        "m2028-n7-cafe",
+        "m2028-n8-cafe",
+        "m2028-n9-cafe",
+        "m2028-n10-cafe",
+        "m2028-n11-cafe",
+        "m2028-n12-cafe",
+        "m2028-n13-cafe",
+        "m2028-n14-cafe",
+        "m2028-n15-cafe",
+        "m2028-n16-cafe",
+        "m2028-n17-cafe",
+        "m2028-n18-cafe",
+        "m2028-n19-cafe",
+        "m2028-n20-cafe",
+        "m2028-n21-cafe",
+        "m2028-n22-cafe",
+        "m2028-n23-cafe",
+        "m2028-n24-cafe",
+        "m2028-n25-cafe",
+        "m2028-n26-cafe",
+        "m2028-n27-cafe",
+        "m2028-n28-cafe",
+        "m2028-n29-cafe",
+        "m2028-n30-cafe",
+        "m2028-n31-cafe",
+        "m2028-n32-cafe",
+        "m2028-n33-cafe",
+        "m2028-n34-cafe",
+        "m2028-n35-cafe",
+        "m2028-n36-cafe",
+        "m2028-n37-cafe",
+        "m2028-n39-cafe",
+        "m2028-n38-cafe"
+      ],
+      "current": {
+        "expected": 0.4994142900686711,
+        "expectedCohesion": 0.2,
+        "prepared": 0.4994142900686711,
+        "preparedCohesion": 0.2,
+        "shown": 0.4994142900686711,
+        "shownCohesion": 0.2
+      },
+      "errors": [],
+      "playback": 2,
+      "playing": true,
+      "records": 0.7924397739116102,
+      "scrollWidth": 375,
+      "solo": {
+        "type": "all"
+      },
+      "ui": {
+        "buttons": [
+          {
+            "act": "solo",
+            "checked": false,
+            "hidden": false,
+            "id": 1,
+            "label": "田中 七海だけ聴く",
+            "pressed": "false",
+            "rect": {
+              "bottom": 375.9921875,
+              "height": 44,
+              "left": 52,
+              "right": 183.5,
+              "top": 331.9921875,
+              "width": 131.5,
+              "x": 52,
+              "y": 331.9921875
+            }
+          },
+          {
+            "act": "secsolo",
+            "checked": false,
+            "hidden": false,
+            "id": 2,
+            "label": "フルートだけ聴く",
+            "pressed": "false",
+            "rect": {
+              "bottom": 375.9921875,
+              "height": 44,
+              "left": 191.5,
+              "right": 323,
+              "top": 331.9921875,
+              "width": 131.5,
+              "x": 191.5,
+              "y": 331.9921875
+            }
+          },
+          {
+            "act": "all",
+            "checked": false,
+            "hidden": true,
+            "id": 3,
+            "label": null,
+            "pressed": null,
+            "rect": {
+              "bottom": 0,
+              "height": 0,
+              "left": 0,
+              "right": 0,
+              "top": 0,
+              "width": 0,
+              "x": 0,
+              "y": 0
+            }
+          }
+        ],
+        "cacheCurrent": true,
+        "details": [],
+        "draft": null,
+        "expected": [
+          "m2028-n1-cafe",
+          "m2028-n2-cafe",
+          "m2028-n3-cafe",
+          "m2028-n4-cafe",
+          "m2028-n5-cafe",
+          "m2028-n6-cafe",
+          "m2028-n7-cafe",
+          "m2028-n8-cafe",
+          "m2028-n9-cafe",
+          "m2028-n10-cafe",
+          "m2028-n11-cafe",
+          "m2028-n12-cafe",
+          "m2028-n13-cafe",
+          "m2028-n14-cafe",
+          "m2028-n15-cafe",
+          "m2028-n16-cafe",
+          "m2028-n17-cafe",
+          "m2028-n18-cafe",
+          "m2028-n19-cafe",
+          "m2028-n20-cafe",
+          "m2028-n21-cafe",
+          "m2028-n22-cafe",
+          "m2028-n23-cafe",
+          "m2028-n24-cafe",
+          "m2028-n25-cafe",
+          "m2028-n26-cafe",
+          "m2028-n27-cafe",
+          "m2028-n28-cafe",
+          "m2028-n29-cafe",
+          "m2028-n30-cafe",
+          "m2028-n31-cafe",
+          "m2028-n32-cafe",
+          "m2028-n33-cafe",
+          "m2028-n34-cafe",
+          "m2028-n35-cafe",
+          "m2028-n36-cafe",
+          "m2028-n37-cafe",
+          "m2028-n39-cafe",
+          "m2028-n38-cafe"
+        ],
+        "focus": "solo",
+        "hidden": false,
+        "section": "fl",
+        "selected": "m2028-n1-cafe",
+        "sourceCurrent": true,
+        "state": 0.6467266883701086
+      },
+      "waiting": false,
+      "width": 375
+    }
+  },
+  {
+    "case": "details-initial",
+    "data": {
+      "audible": [],
+      "current": {
+        "expected": 0.4994142900686711,
+        "expectedCohesion": 0.2,
+        "prepared": 0.4994142900686711,
+        "preparedCohesion": 0.2,
+        "shown": 0.4994142900686711,
+        "shownCohesion": 0.2
+      },
+      "errors": [],
+      "playback": null,
+      "playing": false,
+      "records": 0.15144494269043207,
+      "scrollWidth": 375,
+      "solo": {
+        "type": "all"
+      },
+      "ui": {
+        "buttons": [
+          {
+            "act": "solo",
+            "checked": false,
+            "hidden": false,
+            "id": 1,
+            "label": "田中 七海だけ聴く",
+            "pressed": "false",
+            "rect": {
+              "bottom": 205.9921875,
+              "height": 44,
+              "left": 52,
+              "right": 183.5,
+              "top": 161.9921875,
+              "width": 131.5,
+              "x": 52,
+              "y": 161.9921875
+            }
+          },
+          {
+            "act": "secsolo",
+            "checked": false,
+            "hidden": false,
+            "id": 2,
+            "label": "フルートだけ聴く",
+            "pressed": "false",
+            "rect": {
+              "bottom": 205.9921875,
+              "height": 44,
+              "left": 191.5,
+              "right": 323,
+              "top": 161.9921875,
+              "width": 131.5,
+              "x": 191.5,
+              "y": 161.9921875
+            }
+          },
+          {
+            "act": "all",
+            "checked": false,
+            "hidden": true,
+            "id": 3,
+            "label": null,
+            "pressed": null,
+            "rect": {
+              "bottom": 0,
+              "height": 0,
+              "left": 0,
+              "right": 0,
+              "top": 0,
+              "width": 0,
+              "x": 0,
+              "y": 0
+            }
+          }
+        ],
+        "cacheCurrent": true,
+        "details": [],
+        "draft": null,
+        "expected": [],
+        "focus": "BODY",
+        "hidden": false,
+        "section": "fl",
+        "selected": "m2028-n1-cafe",
+        "sourceCurrent": false,
+        "state": 0.4283864381723106
+      },
+      "waiting": false,
+      "width": 375
+    }
+  },
+  {
+    "case": "draft-before",
+    "data": {
+      "audible": [],
+      "current": {
+        "expected": 0.4994142900686711,
+        "expectedCohesion": 0.2,
+        "prepared": 0.4994142900686711,
+        "preparedCohesion": 0.2,
+        "shown": 0.4994142900686711,
+        "shownCohesion": 0.2
+      },
+      "errors": [],
+      "playback": null,
+      "playing": false,
+      "records": 0.15144494269043207,
+      "scrollWidth": 375,
+      "solo": {
+        "type": "all"
+      },
+      "ui": {
+        "buttons": [
+          {
+            "act": "solo",
+            "checked": false,
+            "hidden": false,
+            "id": 1,
+            "label": "田中 七海だけ聴く",
+            "pressed": "false",
+            "rect": {
+              "bottom": 559.0859375,
+              "height": 44,
+              "left": 52,
+              "right": 183.5,
+              "top": 515.0859375,
+              "width": 131.5,
+              "x": 52,
+              "y": 515.0859375
+            }
+          },
+          {
+            "act": "secsolo",
+            "checked": false,
+            "hidden": false,
+            "id": 2,
+            "label": "フルートだけ聴く",
+            "pressed": "false",
+            "rect": {
+              "bottom": 559.0859375,
+              "height": 44,
+              "left": 191.5,
+              "right": 323,
+              "top": 515.0859375,
+              "width": 131.5,
+              "x": 191.5,
+              "y": 515.0859375
+            }
+          },
+          {
+            "act": "all",
+            "checked": false,
+            "hidden": true,
+            "id": 3,
+            "label": null,
+            "pressed": null,
+            "rect": {
+              "bottom": 0,
+              "height": 0,
+              "left": 0,
+              "right": 0,
+              "top": 0,
+              "width": 0,
+              "x": 0,
+              "y": 0
+            }
+          }
+        ],
+        "cacheCurrent": true,
+        "details": [
+          "mc-growth-history",
+          "mc-story"
+        ],
+        "draft": "名前の入力中",
+        "expected": [],
+        "focus": "memberName",
+        "hidden": false,
+        "section": "fl",
+        "selected": "m2028-n1-cafe",
+        "sourceCurrent": false,
+        "state": 0.4283864381723106
+      },
+      "waiting": false,
+      "width": 375
+    }
+  },
+  {
+    "case": "draft-solo",
+    "data": {
+      "audible": [
+        "m2028-n1-cafe"
+      ],
+      "current": {
+        "expected": 0.4994142900686711,
+        "expectedCohesion": 0.2,
+        "prepared": 0.4994142900686711,
+        "preparedCohesion": 0.2,
+        "shown": 0.4994142900686711,
+        "shownCohesion": 0.2
+      },
+      "errors": [],
+      "playback": 1,
+      "playing": true,
+      "records": 0.15144494269043207,
+      "scrollWidth": 375,
+      "solo": {
+        "id": "m2028-n1-cafe",
+        "type": "member"
+      },
+      "ui": {
+        "buttons": [
+          {
+            "act": "solo",
+            "checked": true,
+            "hidden": false,
+            "id": 1,
+            "label": "田中 七海の音を再生中。押すと全員の音にもどす",
+            "pressed": "true",
+            "rect": {
+              "bottom": 428.0859375,
+              "height": 44,
+              "left": 52,
+              "right": 183.5,
+              "top": 384.0859375,
+              "width": 131.5,
+              "x": 52,
+              "y": 384.0859375
+            }
+          },
+          {
+            "act": "secsolo",
+            "checked": false,
+            "hidden": false,
+            "id": 2,
+            "label": "フルートだけ聴く",
+            "pressed": "false",
+            "rect": {
+              "bottom": 428.0859375,
+              "height": 44,
+              "left": 191.5,
+              "right": 323,
+              "top": 384.0859375,
+              "width": 131.5,
+              "x": 191.5,
+              "y": 384.0859375
+            }
+          },
+          {
+            "act": "all",
+            "checked": false,
+            "hidden": false,
+            "id": 3,
+            "label": null,
+            "pressed": null,
+            "rect": {
+              "bottom": 480.0859375,
+              "height": 44,
+              "left": 52,
+              "right": 323,
+              "top": 436.0859375,
+              "width": 271,
+              "x": 52,
+              "y": 436.0859375
+            }
+          }
+        ],
+        "cacheCurrent": true,
+        "details": [
+          "mc-growth-history",
+          "mc-story"
+        ],
+        "draft": "名前の入力中",
+        "expected": [
+          "m2028-n1-cafe"
+        ],
+        "focus": "solo",
+        "hidden": false,
+        "section": "fl",
+        "selected": "m2028-n1-cafe",
+        "sourceCurrent": true,
+        "state": 0.4283864381723106
+      },
+      "waiting": false,
+      "width": 375
+    }
+  },
+  {
+    "case": "draft-section",
+    "data": {
+      "audible": [
+        "m2028-n1-cafe",
+        "m2028-n2-cafe",
+        "m2028-n3-cafe",
+        "m2028-n4-cafe"
+      ],
+      "current": {
+        "expected": 0.4994142900686711,
+        "expectedCohesion": 0.2,
+        "prepared": 0.4994142900686711,
+        "preparedCohesion": 0.2,
+        "shown": 0.4994142900686711,
+        "shownCohesion": 0.2
+      },
+      "errors": [],
+      "playback": 1,
+      "playing": true,
+      "records": 0.15144494269043207,
+      "scrollWidth": 375,
+      "solo": {
+        "id": "fl",
+        "type": "sec"
+      },
+      "ui": {
+        "buttons": [
+          {
+            "act": "solo",
+            "checked": false,
+            "hidden": false,
+            "id": 1,
+            "label": "田中 七海だけ聴く",
+            "pressed": "false",
+            "rect": {
+              "bottom": 428.0859375,
+              "height": 44,
+              "left": 52,
+              "right": 183.5,
+              "top": 384.0859375,
+              "width": 131.5,
+              "x": 52,
+              "y": 384.0859375
+            }
+          },
+          {
+            "act": "secsolo",
+            "checked": true,
+            "hidden": false,
+            "id": 2,
+            "label": "フルートの音を再生中。押すと全員の音にもどす",
+            "pressed": "true",
+            "rect": {
+              "bottom": 428.0859375,
+              "height": 44,
+              "left": 191.5,
+              "right": 323,
+              "top": 384.0859375,
+              "width": 131.5,
+              "x": 191.5,
+              "y": 384.0859375
+            }
+          },
+          {
+            "act": "all",
+            "checked": false,
+            "hidden": false,
+            "id": 3,
+            "label": null,
+            "pressed": null,
+            "rect": {
+              "bottom": 480.0859375,
+              "height": 44,
+              "left": 52,
+              "right": 323,
+              "top": 436.0859375,
+              "width": 271,
+              "x": 52,
+              "y": 436.0859375
+            }
+          }
+        ],
+        "cacheCurrent": true,
+        "details": [
+          "mc-growth-history",
+          "mc-story"
+        ],
+        "draft": "名前の入力中",
+        "expected": [
+          "m2028-n1-cafe",
+          "m2028-n2-cafe",
+          "m2028-n3-cafe",
+          "m2028-n4-cafe"
+        ],
+        "focus": "secsolo",
+        "hidden": false,
+        "section": "fl",
+        "selected": "m2028-n1-cafe",
+        "sourceCurrent": true,
+        "state": 0.4283864381723106
+      },
+      "waiting": false,
+      "width": 375
+    }
+  },
+  {
+    "case": "draft-all",
+    "data": {
+      "audible": [
+        "m2028-n1-cafe",
+        "m2028-n2-cafe",
+        "m2028-n3-cafe",
+        "m2028-n4-cafe",
+        "m2028-n5-cafe",
+        "m2028-n6-cafe",
+        "m2028-n7-cafe",
+        "m2028-n8-cafe",
+        "m2028-n9-cafe",
+        "m2028-n10-cafe",
+        "m2028-n11-cafe",
+        "m2028-n12-cafe",
+        "m2028-n13-cafe",
+        "m2028-n14-cafe",
+        "m2028-n15-cafe",
+        "m2028-n16-cafe",
+        "m2028-n17-cafe",
+        "m2028-n18-cafe",
+        "m2028-n19-cafe",
+        "m2028-n20-cafe",
+        "m2028-n21-cafe",
+        "m2028-n22-cafe",
+        "m2028-n23-cafe",
+        "m2028-n24-cafe",
+        "m2028-n25-cafe",
+        "m2028-n26-cafe",
+        "m2028-n27-cafe",
+        "m2028-n28-cafe",
+        "m2028-n29-cafe",
+        "m2028-n30-cafe",
+        "m2028-n31-cafe",
+        "m2028-n32-cafe",
+        "m2028-n33-cafe",
+        "m2028-n34-cafe",
+        "m2028-n35-cafe",
+        "m2028-n36-cafe",
+        "m2028-n37-cafe",
+        "m2028-n39-cafe",
+        "m2028-n38-cafe"
+      ],
+      "current": {
+        "expected": 0.4994142900686711,
+        "expectedCohesion": 0.2,
+        "prepared": 0.4994142900686711,
+        "preparedCohesion": 0.2,
+        "shown": 0.4994142900686711,
+        "shownCohesion": 0.2
+      },
+      "errors": [],
+      "playback": 1,
+      "playing": true,
+      "records": 0.15144494269043207,
+      "scrollWidth": 375,
+      "solo": {
+        "type": "all"
+      },
+      "ui": {
+        "buttons": [
+          {
+            "act": "solo",
+            "checked": false,
+            "hidden": false,
+            "id": 1,
+            "label": "田中 七海だけ聴く",
+            "pressed": "false",
+            "rect": {
+              "bottom": 376.0859375,
+              "height": 44,
+              "left": 52,
+              "right": 183.5,
+              "top": 332.0859375,
+              "width": 131.5,
+              "x": 52,
+              "y": 332.0859375
+            }
+          },
+          {
+            "act": "secsolo",
+            "checked": false,
+            "hidden": false,
+            "id": 2,
+            "label": "フルートだけ聴く",
+            "pressed": "false",
+            "rect": {
+              "bottom": 376.0859375,
+              "height": 44,
+              "left": 191.5,
+              "right": 323,
+              "top": 332.0859375,
+              "width": 131.5,
+              "x": 191.5,
+              "y": 332.0859375
+            }
+          },
+          {
+            "act": "all",
+            "checked": false,
+            "hidden": true,
+            "id": 3,
+            "label": null,
+            "pressed": null,
+            "rect": {
+              "bottom": 0,
+              "height": 0,
+              "left": 0,
+              "right": 0,
+              "top": 0,
+              "width": 0,
+              "x": 0,
+              "y": 0
+            }
+          }
+        ],
+        "cacheCurrent": true,
+        "details": [
+          "mc-growth-history",
+          "mc-story"
+        ],
+        "draft": "名前の入力中",
+        "expected": [
+          "m2028-n1-cafe",
+          "m2028-n2-cafe",
+          "m2028-n3-cafe",
+          "m2028-n4-cafe",
+          "m2028-n5-cafe",
+          "m2028-n6-cafe",
+          "m2028-n7-cafe",
+          "m2028-n8-cafe",
+          "m2028-n9-cafe",
+          "m2028-n10-cafe",
+          "m2028-n11-cafe",
+          "m2028-n12-cafe",
+          "m2028-n13-cafe",
+          "m2028-n14-cafe",
+          "m2028-n15-cafe",
+          "m2028-n16-cafe",
+          "m2028-n17-cafe",
+          "m2028-n18-cafe",
+          "m2028-n19-cafe",
+          "m2028-n20-cafe",
+          "m2028-n21-cafe",
+          "m2028-n22-cafe",
+          "m2028-n23-cafe",
+          "m2028-n24-cafe",
+          "m2028-n25-cafe",
+          "m2028-n26-cafe",
+          "m2028-n27-cafe",
+          "m2028-n28-cafe",
+          "m2028-n29-cafe",
+          "m2028-n30-cafe",
+          "m2028-n31-cafe",
+          "m2028-n32-cafe",
+          "m2028-n33-cafe",
+          "m2028-n34-cafe",
+          "m2028-n35-cafe",
+          "m2028-n36-cafe",
+          "m2028-n37-cafe",
+          "m2028-n39-cafe",
+          "m2028-n38-cafe"
+        ],
+        "focus": "solo",
+        "hidden": false,
+        "section": "fl",
+        "selected": "m2028-n1-cafe",
+        "sourceCurrent": true,
+        "state": 0.4283864381723106
+      },
+      "waiting": false,
+      "width": 375
+    }
+  },
+  {
+    "case": "natural-before",
+    "data": {
+      "audible": [
+        "m2028-n1-cafe"
+      ],
+      "current": {
+        "expected": 0.4994142900686711,
+        "expectedCohesion": 0.2,
+        "prepared": 0.4994142900686711,
+        "preparedCohesion": 0.2,
+        "shown": 0.4994142900686711,
+        "shownCohesion": 0.2
+      },
+      "errors": [],
+      "playback": 1,
+      "playing": true,
+      "records": 0.15144494269043207,
+      "scrollWidth": 375,
+      "solo": {
+        "id": "m2028-n1-cafe",
+        "type": "member"
+      },
+      "ui": {
+        "buttons": [
+          {
+            "act": "solo",
+            "checked": true,
+            "hidden": false,
+            "id": 1,
+            "label": "田中 七海の音を再生中。押すと全員の音にもどす",
+            "pressed": "true",
+            "rect": {
+              "bottom": 427.9921875,
+              "height": 44,
+              "left": 52,
+              "right": 183.5,
+              "top": 383.9921875,
+              "width": 131.5,
+              "x": 52,
+              "y": 383.9921875
+            }
+          },
+          {
+            "act": "secsolo",
+            "checked": false,
+            "hidden": false,
+            "id": 2,
+            "label": "フルートだけ聴く",
+            "pressed": "false",
+            "rect": {
+              "bottom": 427.9921875,
+              "height": 44,
+              "left": 191.5,
+              "right": 323,
+              "top": 383.9921875,
+              "width": 131.5,
+              "x": 191.5,
+              "y": 383.9921875
+            }
+          },
+          {
+            "act": "all",
+            "checked": false,
+            "hidden": false,
+            "id": 3,
+            "label": null,
+            "pressed": null,
+            "rect": {
+              "bottom": 479.9921875,
+              "height": 44,
+              "left": 52,
+              "right": 323,
+              "top": 435.9921875,
+              "width": 271,
+              "x": 52,
+              "y": 435.9921875
+            }
+          }
+        ],
+        "cacheCurrent": true,
+        "details": [
+          "mc-growth-history",
+          "mc-story"
+        ],
+        "draft": null,
+        "expected": [
+          "m2028-n1-cafe"
+        ],
+        "focus": "solo",
+        "hidden": false,
+        "section": "fl",
+        "selected": "m2028-n1-cafe",
+        "sourceCurrent": true,
+        "state": 0.4283864381723106
+      },
+      "waiting": false,
+      "width": 375
+    }
+  },
+  {
+    "case": "natural-after",
+    "data": {
+      "audible": [],
+      "current": {
+        "expected": 0.4994142900686711,
+        "expectedCohesion": 0.2,
+        "prepared": 0.4994142900686711,
+        "preparedCohesion": 0.2,
+        "shown": 0.4994142900686711,
+        "shownCohesion": 0.2
+      },
+      "errors": [],
+      "playback": null,
+      "playing": false,
+      "records": 0.15144494269043207,
+      "scrollWidth": 375,
+      "solo": {
+        "id": "m2028-n1-cafe",
+        "type": "member"
+      },
+      "ui": {
+        "buttons": [
+          {
+            "act": "solo",
+            "checked": false,
+            "hidden": false,
+            "id": 1,
+            "label": "田中 七海だけ聴く",
+            "pressed": "false",
+            "rect": {
+              "bottom": 427.9921875,
+              "height": 44,
+              "left": 52,
+              "right": 183.5,
+              "top": 383.9921875,
+              "width": 131.5,
+              "x": 52,
+              "y": 383.9921875
+            }
+          },
+          {
+            "act": "secsolo",
+            "checked": false,
+            "hidden": false,
+            "id": 2,
+            "label": "フルートだけ聴く",
+            "pressed": "false",
+            "rect": {
+              "bottom": 427.9921875,
+              "height": 44,
+              "left": 191.5,
+              "right": 323,
+              "top": 383.9921875,
+              "width": 131.5,
+              "x": 191.5,
+              "y": 383.9921875
+            }
+          },
+          {
+            "act": "all",
+            "checked": false,
+            "hidden": false,
+            "id": 3,
+            "label": null,
+            "pressed": null,
+            "rect": {
+              "bottom": 479.9921875,
+              "height": 44,
+              "left": 52,
+              "right": 323,
+              "top": 435.9921875,
+              "width": 271,
+              "x": 52,
+              "y": 435.9921875
+            }
+          }
+        ],
+        "cacheCurrent": true,
+        "details": [
+          "mc-growth-history",
+          "mc-story"
+        ],
+        "draft": null,
+        "expected": [],
+        "focus": "solo",
+        "hidden": false,
+        "section": "fl",
+        "selected": "m2028-n1-cafe",
+        "sourceCurrent": false,
+        "state": 0.4283864381723106
+      },
+      "waiting": false,
+      "width": 375
+    }
+  },
+  {
+    "case": "wait-initial",
+    "data": {
+      "audible": [],
+      "current": {
+        "expected": 0.4994142900686711,
+        "expectedCohesion": 0.2,
+        "prepared": 0.4994142900686711,
+        "preparedCohesion": 0.2,
+        "shown": 0.4994142900686711,
+        "shownCohesion": 0.2
+      },
+      "errors": [],
+      "playback": null,
+      "playing": false,
+      "records": 0.8484907292295247,
+      "scrollWidth": 375,
+      "solo": {
+        "type": "all"
+      },
+      "ui": {
+        "buttons": [
+          {
+            "act": "solo",
+            "checked": false,
+            "hidden": false,
+            "id": 1,
+            "label": "田中 七海だけ聴く",
+            "pressed": "false",
+            "rect": {
+              "bottom": 205.9921875,
+              "height": 44,
+              "left": 52,
+              "right": 183.5,
+              "top": 161.9921875,
+              "width": 131.5,
+              "x": 52,
+              "y": 161.9921875
+            }
+          },
+          {
+            "act": "secsolo",
+            "checked": false,
+            "hidden": false,
+            "id": 2,
+            "label": "フルートだけ聴く",
+            "pressed": "false",
+            "rect": {
+              "bottom": 205.9921875,
+              "height": 44,
+              "left": 191.5,
+              "right": 323,
+              "top": 161.9921875,
+              "width": 131.5,
+              "x": 191.5,
+              "y": 161.9921875
+            }
+          },
+          {
+            "act": "all",
+            "checked": false,
+            "hidden": true,
+            "id": 3,
+            "label": null,
+            "pressed": null,
+            "rect": {
+              "bottom": 0,
+              "height": 0,
+              "left": 0,
+              "right": 0,
+              "top": 0,
+              "width": 0,
+              "x": 0,
+              "y": 0
+            }
+          }
+        ],
+        "cacheCurrent": true,
+        "details": [],
+        "draft": null,
+        "expected": [],
+        "focus": "BODY",
+        "hidden": false,
+        "section": "fl",
+        "selected": "m2028-n1-cafe",
+        "sourceCurrent": false,
+        "state": 0.7146106366999447
+      },
+      "waiting": false,
+      "width": 375
+    }
+  },
+  {
+    "case": "wait-section-light",
+    "data": {
+      "audible": [],
+      "current": {
+        "expected": 0.4994142900686711,
+        "expectedCohesion": 0.2,
+        "prepared": 0.4994142900686711,
+        "preparedCohesion": 0.2,
+        "shown": 0.4994142900686711,
+        "shownCohesion": 0.2
+      },
+      "errors": [],
+      "playback": null,
+      "playing": false,
+      "records": 0.8484907292295247,
+      "scrollWidth": 375,
+      "solo": {
+        "id": "fl",
+        "type": "sec"
+      },
+      "ui": {
+        "buttons": [
+          {
+            "act": "solo",
+            "checked": false,
+            "hidden": false,
+            "id": 1,
+            "label": "田中 七海だけ聴く",
+            "pressed": "false",
+            "rect": {
+              "bottom": 355.4921875,
+              "height": 44,
+              "left": 52,
+              "right": 183.5,
+              "top": 311.4921875,
+              "width": 131.5,
+              "x": 52,
+              "y": 311.4921875
+            }
+          },
+          {
+            "act": "secsolo",
+            "checked": true,
+            "hidden": false,
+            "id": 2,
+            "label": "フルートの音を読み込み中。押すと全員の音にもどす",
+            "pressed": "true",
+            "rect": {
+              "bottom": 355.4921875,
+              "height": 44,
+              "left": 191.5,
+              "right": 323,
+              "top": 311.4921875,
+              "width": 131.5,
+              "x": 191.5,
+              "y": 311.4921875
+            }
+          },
+          {
+            "act": "all",
+            "checked": false,
+            "hidden": false,
+            "id": 3,
+            "label": null,
+            "pressed": null,
+            "rect": {
+              "bottom": 407.4921875,
+              "height": 44,
+              "left": 52,
+              "right": 323,
+              "top": 363.4921875,
+              "width": 271,
+              "x": 52,
+              "y": 363.4921875
+            }
+          }
+        ],
+        "cacheCurrent": true,
+        "details": [],
+        "draft": null,
+        "expected": [
+          "m2028-n1-cafe",
+          "m2028-n2-cafe",
+          "m2028-n3-cafe",
+          "m2028-n4-cafe"
+        ],
+        "focus": "secsolo",
+        "hidden": false,
+        "section": "fl",
+        "selected": "m2028-n1-cafe",
+        "sourceCurrent": true,
+        "state": 0.7146106366999447
+      },
+      "waiting": true,
+      "width": 375
+    }
+  },
+  {
+    "case": "wait-section-dark",
+    "data": {
+      "audible": [],
+      "current": {
+        "expected": 0.4994142900686711,
+        "expectedCohesion": 0.2,
+        "prepared": 0.4994142900686711,
+        "preparedCohesion": 0.2,
+        "shown": 0.4994142900686711,
+        "shownCohesion": 0.2
+      },
+      "errors": [],
+      "playback": null,
+      "playing": false,
+      "records": 0.8484907292295247,
+      "scrollWidth": 375,
+      "solo": {
+        "id": "fl",
+        "type": "sec"
+      },
+      "ui": {
+        "buttons": [
+          {
+            "act": "solo",
+            "checked": false,
+            "hidden": false,
+            "id": 1,
+            "label": "田中 七海だけ聴く",
+            "pressed": "false",
+            "rect": {
+              "bottom": 355.4921875,
+              "height": 44,
+              "left": 52,
+              "right": 183.5,
+              "top": 311.4921875,
+              "width": 131.5,
+              "x": 52,
+              "y": 311.4921875
+            }
+          },
+          {
+            "act": "secsolo",
+            "checked": true,
+            "hidden": false,
+            "id": 2,
+            "label": "フルートの音を読み込み中。押すと全員の音にもどす",
+            "pressed": "true",
+            "rect": {
+              "bottom": 355.4921875,
+              "height": 44,
+              "left": 191.5,
+              "right": 323,
+              "top": 311.4921875,
+              "width": 131.5,
+              "x": 191.5,
+              "y": 311.4921875
+            }
+          },
+          {
+            "act": "all",
+            "checked": false,
+            "hidden": false,
+            "id": 3,
+            "label": null,
+            "pressed": null,
+            "rect": {
+              "bottom": 407.4921875,
+              "height": 44,
+              "left": 52,
+              "right": 323,
+              "top": 363.4921875,
+              "width": 271,
+              "x": 52,
+              "y": 363.4921875
+            }
+          }
+        ],
+        "cacheCurrent": true,
+        "details": [],
+        "draft": null,
+        "expected": [
+          "m2028-n1-cafe",
+          "m2028-n2-cafe",
+          "m2028-n3-cafe",
+          "m2028-n4-cafe"
+        ],
+        "focus": "secsolo",
+        "hidden": false,
+        "section": "fl",
+        "selected": "m2028-n1-cafe",
+        "sourceCurrent": true,
+        "state": 0.7146106366999447
+      },
+      "waiting": true,
+      "width": 375
+    }
+  },
+  {
+    "case": "wait-section-all",
+    "data": {
+      "audible": [],
+      "current": {
+        "expected": 0.4994142900686711,
+        "expectedCohesion": 0.2,
+        "prepared": 0.4994142900686711,
+        "preparedCohesion": 0.2,
+        "shown": 0.4994142900686711,
+        "shownCohesion": 0.2
+      },
+      "errors": [],
+      "playback": null,
+      "playing": false,
+      "records": 0.8484907292295247,
+      "scrollWidth": 375,
+      "solo": {
+        "type": "all"
+      },
+      "ui": {
+        "buttons": [
+          {
+            "act": "solo",
+            "checked": false,
+            "hidden": false,
+            "id": 1,
+            "label": "田中 七海だけ聴く",
+            "pressed": "false",
+            "rect": {
+              "bottom": 355.4921875,
+              "height": 44,
+              "left": 52,
+              "right": 183.5,
+              "top": 311.4921875,
+              "width": 131.5,
+              "x": 52,
+              "y": 311.4921875
+            }
+          },
+          {
+            "act": "secsolo",
+            "checked": false,
+            "hidden": false,
+            "id": 2,
+            "label": "フルートだけ聴く",
+            "pressed": "false",
+            "rect": {
+              "bottom": 355.4921875,
+              "height": 44,
+              "left": 191.5,
+              "right": 323,
+              "top": 311.4921875,
+              "width": 131.5,
+              "x": 191.5,
+              "y": 311.4921875
+            }
+          },
+          {
+            "act": "all",
+            "checked": false,
+            "hidden": true,
+            "id": 3,
+            "label": null,
+            "pressed": null,
+            "rect": {
+              "bottom": 0,
+              "height": 0,
+              "left": 0,
+              "right": 0,
+              "top": 0,
+              "width": 0,
+              "x": 0,
+              "y": 0
+            }
+          }
+        ],
+        "cacheCurrent": true,
+        "details": [],
+        "draft": null,
+        "expected": [
+          "m2028-n1-cafe",
+          "m2028-n2-cafe",
+          "m2028-n3-cafe",
+          "m2028-n4-cafe",
+          "m2028-n5-cafe",
+          "m2028-n6-cafe",
+          "m2028-n7-cafe",
+          "m2028-n8-cafe",
+          "m2028-n9-cafe",
+          "m2028-n10-cafe",
+          "m2028-n11-cafe",
+          "m2028-n12-cafe",
+          "m2028-n13-cafe",
+          "m2028-n14-cafe",
+          "m2028-n15-cafe",
+          "m2028-n16-cafe",
+          "m2028-n17-cafe",
+          "m2028-n18-cafe",
+          "m2028-n19-cafe",
+          "m2028-n20-cafe",
+          "m2028-n21-cafe",
+          "m2028-n22-cafe",
+          "m2028-n23-cafe",
+          "m2028-n24-cafe",
+          "m2028-n25-cafe",
+          "m2028-n26-cafe",
+          "m2028-n27-cafe",
+          "m2028-n28-cafe",
+          "m2028-n29-cafe",
+          "m2028-n30-cafe",
+          "m2028-n31-cafe",
+          "m2028-n32-cafe",
+          "m2028-n33-cafe",
+          "m2028-n34-cafe",
+          "m2028-n35-cafe",
+          "m2028-n36-cafe",
+          "m2028-n37-cafe",
+          "m2028-n39-cafe",
+          "m2028-n38-cafe"
+        ],
+        "focus": "secsolo",
+        "hidden": false,
+        "section": "fl",
+        "selected": "m2028-n1-cafe",
+        "sourceCurrent": true,
+        "state": 0.7146106366999447
+      },
+      "waiting": true,
+      "width": 375
+    }
+  },
+  {
+    "case": "wait-solo",
+    "data": {
+      "audible": [],
+      "current": {
+        "expected": 0.4994142900686711,
+        "expectedCohesion": 0.2,
+        "prepared": 0.4994142900686711,
+        "preparedCohesion": 0.2,
+        "shown": 0.4994142900686711,
+        "shownCohesion": 0.2
+      },
+      "errors": [],
+      "playback": null,
+      "playing": false,
+      "records": 0.8484907292295247,
+      "scrollWidth": 375,
+      "solo": {
+        "id": "m2028-n1-cafe",
+        "type": "member"
+      },
+      "ui": {
+        "buttons": [
+          {
+            "act": "solo",
+            "checked": true,
+            "hidden": false,
+            "id": 1,
+            "label": "田中 七海の音を読み込み中。押すと全員の音にもどす",
+            "pressed": "true",
+            "rect": {
+              "bottom": 355.4921875,
+              "height": 44,
+              "left": 52,
+              "right": 183.5,
+              "top": 311.4921875,
+              "width": 131.5,
+              "x": 52,
+              "y": 311.4921875
+            }
+          },
+          {
+            "act": "secsolo",
+            "checked": false,
+            "hidden": false,
+            "id": 2,
+            "label": "フルートだけ聴く",
+            "pressed": "false",
+            "rect": {
+              "bottom": 355.4921875,
+              "height": 44,
+              "left": 191.5,
+              "right": 323,
+              "top": 311.4921875,
+              "width": 131.5,
+              "x": 191.5,
+              "y": 311.4921875
+            }
+          },
+          {
+            "act": "all",
+            "checked": false,
+            "hidden": false,
+            "id": 3,
+            "label": null,
+            "pressed": null,
+            "rect": {
+              "bottom": 407.4921875,
+              "height": 44,
+              "left": 52,
+              "right": 323,
+              "top": 363.4921875,
+              "width": 271,
+              "x": 52,
+              "y": 363.4921875
+            }
+          }
+        ],
+        "cacheCurrent": true,
+        "details": [],
+        "draft": null,
+        "expected": [
+          "m2028-n1-cafe"
+        ],
+        "focus": "solo",
+        "hidden": false,
+        "section": "fl",
+        "selected": "m2028-n1-cafe",
+        "sourceCurrent": true,
+        "state": 0.7146106366999447
+      },
+      "waiting": true,
+      "width": 375
+    }
+  },
+  {
+    "case": "wait-cancel",
+    "data": {
+      "audible": [],
+      "current": {
+        "expected": 0.4994142900686711,
+        "expectedCohesion": 0.2,
+        "prepared": 0.4994142900686711,
+        "preparedCohesion": 0.2,
+        "shown": 0.4994142900686711,
+        "shownCohesion": 0.2
+      },
+      "errors": [],
+      "playback": null,
+      "playing": false,
+      "records": 0.8484907292295247,
+      "scrollWidth": 375,
+      "solo": {
+        "id": "m2028-n1-cafe",
+        "type": "member"
+      },
+      "ui": {
+        "buttons": [
+          {
+            "act": "solo",
+            "checked": false,
+            "hidden": false,
+            "id": 1,
+            "label": "田中 七海だけ聴く",
+            "pressed": "false",
+            "rect": {
+              "bottom": 355.4921875,
+              "height": 44,
+              "left": 52,
+              "right": 183.5,
+              "top": 311.4921875,
+              "width": 131.5,
+              "x": 52,
+              "y": 311.4921875
+            }
+          },
+          {
+            "act": "secsolo",
+            "checked": false,
+            "hidden": false,
+            "id": 2,
+            "label": "フルートだけ聴く",
+            "pressed": "false",
+            "rect": {
+              "bottom": 355.4921875,
+              "height": 44,
+              "left": 191.5,
+              "right": 323,
+              "top": 311.4921875,
+              "width": 131.5,
+              "x": 191.5,
+              "y": 311.4921875
+            }
+          },
+          {
+            "act": "all",
+            "checked": false,
+            "hidden": false,
+            "id": 3,
+            "label": null,
+            "pressed": null,
+            "rect": {
+              "bottom": 407.4921875,
+              "height": 44,
+              "left": 52,
+              "right": 323,
+              "top": 363.4921875,
+              "width": 271,
+              "x": 52,
+              "y": 363.4921875
+            }
+          }
+        ],
+        "cacheCurrent": true,
+        "details": [],
+        "draft": null,
+        "expected": [],
+        "focus": "btnNow",
+        "hidden": false,
+        "section": "fl",
+        "selected": "m2028-n1-cafe",
+        "sourceCurrent": false,
+        "state": 0.7146106366999447
+      },
+      "waiting": false,
+      "width": 375
+    }
+  },
+  {
+    "case": "wait-release",
+    "data": {
+      "audible": [],
+      "current": {
+        "expected": 0.4994142900686711,
+        "expectedCohesion": 0.2,
+        "prepared": 0.4994142900686711,
+        "preparedCohesion": 0.2,
+        "shown": 0.4994142900686711,
+        "shownCohesion": 0.2
+      },
+      "errors": [],
+      "playback": null,
+      "playing": false,
+      "records": 0.8484907292295247,
+      "scrollWidth": 375,
+      "solo": {
+        "id": "m2028-n1-cafe",
+        "type": "member"
+      },
+      "ui": {
+        "buttons": [
+          {
+            "act": "solo",
+            "checked": false,
+            "hidden": false,
+            "id": 1,
+            "label": "田中 七海だけ聴く",
+            "pressed": "false",
+            "rect": {
+              "bottom": 355.4921875,
+              "height": 44,
+              "left": 52,
+              "right": 183.5,
+              "top": 311.4921875,
+              "width": 131.5,
+              "x": 52,
+              "y": 311.4921875
+            }
+          },
+          {
+            "act": "secsolo",
+            "checked": false,
+            "hidden": false,
+            "id": 2,
+            "label": "フルートだけ聴く",
+            "pressed": "false",
+            "rect": {
+              "bottom": 355.4921875,
+              "height": 44,
+              "left": 191.5,
+              "right": 323,
+              "top": 311.4921875,
+              "width": 131.5,
+              "x": 191.5,
+              "y": 311.4921875
+            }
+          },
+          {
+            "act": "all",
+            "checked": false,
+            "hidden": false,
+            "id": 3,
+            "label": null,
+            "pressed": null,
+            "rect": {
+              "bottom": 407.4921875,
+              "height": 44,
+              "left": 52,
+              "right": 323,
+              "top": 363.4921875,
+              "width": 271,
+              "x": 52,
+              "y": 363.4921875
+            }
+          }
+        ],
+        "cacheCurrent": true,
+        "details": [],
+        "draft": null,
+        "expected": [],
+        "focus": "btnNow",
+        "hidden": false,
+        "section": "fl",
+        "selected": "m2028-n1-cafe",
+        "sourceCurrent": false,
+        "state": 0.7146106366999447
+      },
+      "waiting": false,
+      "width": 375
+    }
+  },
+  {
+    "case": "wait-resumed",
+    "data": {
+      "audible": [
+        "m2028-n1-cafe"
+      ],
+      "current": {
+        "expected": 0.4994142900686711,
+        "expectedCohesion": 0.2,
+        "prepared": 0.4994142900686711,
+        "preparedCohesion": 0.2,
+        "shown": 0.4994142900686711,
+        "shownCohesion": 0.2
+      },
+      "errors": [],
+      "playback": 1,
+      "playing": true,
+      "records": 0.8484907292295247,
+      "scrollWidth": 375,
+      "solo": {
+        "id": "m2028-n1-cafe",
+        "type": "member"
+      },
+      "ui": {
+        "buttons": [
+          {
+            "act": "solo",
+            "checked": true,
+            "hidden": false,
+            "id": 1,
+            "label": "田中 七海の音を再生中。押すと全員の音にもどす",
+            "pressed": "true",
+            "rect": {
+              "bottom": 355.4921875,
+              "height": 44,
+              "left": 52,
+              "right": 183.5,
+              "top": 311.4921875,
+              "width": 131.5,
+              "x": 52,
+              "y": 311.4921875
+            }
+          },
+          {
+            "act": "secsolo",
+            "checked": false,
+            "hidden": false,
+            "id": 2,
+            "label": "フルートだけ聴く",
+            "pressed": "false",
+            "rect": {
+              "bottom": 355.4921875,
+              "height": 44,
+              "left": 191.5,
+              "right": 323,
+              "top": 311.4921875,
+              "width": 131.5,
+              "x": 191.5,
+              "y": 311.4921875
+            }
+          },
+          {
+            "act": "all",
+            "checked": false,
+            "hidden": false,
+            "id": 3,
+            "label": null,
+            "pressed": null,
+            "rect": {
+              "bottom": 407.4921875,
+              "height": 44,
+              "left": 52,
+              "right": 323,
+              "top": 363.4921875,
+              "width": 271,
+              "x": 52,
+              "y": 363.4921875
+            }
+          }
+        ],
+        "cacheCurrent": true,
+        "details": [],
+        "draft": null,
+        "expected": [
+          "m2028-n1-cafe"
+        ],
+        "focus": "solo",
+        "hidden": false,
+        "section": "fl",
+        "selected": "m2028-n1-cafe",
+        "sourceCurrent": true,
+        "state": 0.7146106366999447
+      },
+      "waiting": false,
+      "width": 375
+    }
+  },
+  {
+    "case": "wait-resumed-all",
+    "data": {
+      "audible": [
+        "m2028-n1-cafe",
+        "m2028-n2-cafe",
+        "m2028-n3-cafe",
+        "m2028-n4-cafe",
+        "m2028-n5-cafe",
+        "m2028-n6-cafe",
+        "m2028-n7-cafe",
+        "m2028-n8-cafe",
+        "m2028-n9-cafe",
+        "m2028-n10-cafe",
+        "m2028-n11-cafe",
+        "m2028-n12-cafe",
+        "m2028-n13-cafe",
+        "m2028-n14-cafe",
+        "m2028-n15-cafe",
+        "m2028-n16-cafe",
+        "m2028-n17-cafe",
+        "m2028-n18-cafe",
+        "m2028-n19-cafe",
+        "m2028-n20-cafe",
+        "m2028-n21-cafe",
+        "m2028-n22-cafe",
+        "m2028-n23-cafe",
+        "m2028-n24-cafe",
+        "m2028-n25-cafe",
+        "m2028-n26-cafe",
+        "m2028-n27-cafe",
+        "m2028-n28-cafe",
+        "m2028-n29-cafe",
+        "m2028-n30-cafe",
+        "m2028-n31-cafe",
+        "m2028-n32-cafe",
+        "m2028-n33-cafe",
+        "m2028-n34-cafe",
+        "m2028-n35-cafe",
+        "m2028-n36-cafe",
+        "m2028-n37-cafe",
+        "m2028-n39-cafe",
+        "m2028-n38-cafe"
+      ],
+      "current": {
+        "expected": 0.4994142900686711,
+        "expectedCohesion": 0.2,
+        "prepared": 0.4994142900686711,
+        "preparedCohesion": 0.2,
+        "shown": 0.4994142900686711,
+        "shownCohesion": 0.2
+      },
+      "errors": [],
+      "playback": 1,
+      "playing": true,
+      "records": 0.8484907292295247,
+      "scrollWidth": 375,
+      "solo": {
+        "type": "all"
+      },
+      "ui": {
+        "buttons": [
+          {
+            "act": "solo",
+            "checked": false,
+            "hidden": false,
+            "id": 1,
+            "label": "田中 七海だけ聴く",
+            "pressed": "false",
+            "rect": {
+              "bottom": 355.4921875,
+              "height": 44,
+              "left": 52,
+              "right": 183.5,
+              "top": 311.4921875,
+              "width": 131.5,
+              "x": 52,
+              "y": 311.4921875
+            }
+          },
+          {
+            "act": "secsolo",
+            "checked": false,
+            "hidden": false,
+            "id": 2,
+            "label": "フルートだけ聴く",
+            "pressed": "false",
+            "rect": {
+              "bottom": 355.4921875,
+              "height": 44,
+              "left": 191.5,
+              "right": 323,
+              "top": 311.4921875,
+              "width": 131.5,
+              "x": 191.5,
+              "y": 311.4921875
+            }
+          },
+          {
+            "act": "all",
+            "checked": false,
+            "hidden": true,
+            "id": 3,
+            "label": null,
+            "pressed": null,
+            "rect": {
+              "bottom": 0,
+              "height": 0,
+              "left": 0,
+              "right": 0,
+              "top": 0,
+              "width": 0,
+              "x": 0,
+              "y": 0
+            }
+          }
+        ],
+        "cacheCurrent": true,
+        "details": [],
+        "draft": null,
+        "expected": [
+          "m2028-n1-cafe",
+          "m2028-n2-cafe",
+          "m2028-n3-cafe",
+          "m2028-n4-cafe",
+          "m2028-n5-cafe",
+          "m2028-n6-cafe",
+          "m2028-n7-cafe",
+          "m2028-n8-cafe",
+          "m2028-n9-cafe",
+          "m2028-n10-cafe",
+          "m2028-n11-cafe",
+          "m2028-n12-cafe",
+          "m2028-n13-cafe",
+          "m2028-n14-cafe",
+          "m2028-n15-cafe",
+          "m2028-n16-cafe",
+          "m2028-n17-cafe",
+          "m2028-n18-cafe",
+          "m2028-n19-cafe",
+          "m2028-n20-cafe",
+          "m2028-n21-cafe",
+          "m2028-n22-cafe",
+          "m2028-n23-cafe",
+          "m2028-n24-cafe",
+          "m2028-n25-cafe",
+          "m2028-n26-cafe",
+          "m2028-n27-cafe",
+          "m2028-n28-cafe",
+          "m2028-n29-cafe",
+          "m2028-n30-cafe",
+          "m2028-n31-cafe",
+          "m2028-n32-cafe",
+          "m2028-n33-cafe",
+          "m2028-n34-cafe",
+          "m2028-n35-cafe",
+          "m2028-n36-cafe",
+          "m2028-n37-cafe",
+          "m2028-n39-cafe",
+          "m2028-n38-cafe"
+        ],
+        "focus": "solo",
+        "hidden": false,
+        "section": "fl",
+        "selected": "m2028-n1-cafe",
+        "sourceCurrent": true,
+        "state": 0.7146106366999447
+      },
+      "waiting": false,
+      "width": 375
+    }
+  }
+]
