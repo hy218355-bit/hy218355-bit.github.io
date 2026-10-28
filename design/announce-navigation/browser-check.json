@@ -1,0 +1,1591 @@
+[
+  {
+    "case": "off-ready",
+    "data": {
+      "ann": {
+        "active": "anDone",
+        "background": [
+          {
+            "id": "app",
+            "inert": true
+          },
+          {
+            "id": "toast",
+            "inert": true
+          },
+          {
+            "id": "mini",
+            "inert": true
+          },
+          {
+            "id": "tabbar",
+            "inert": true
+          }
+        ],
+        "body": {
+          "height": 651,
+          "rect": {
+            "bottom": 740,
+            "height": 650.953125,
+            "left": 16,
+            "right": 359,
+            "top": 89.046875,
+            "width": 343,
+            "x": 16,
+            "y": 89.046875
+          },
+          "scroll": 867,
+          "top": 0
+        },
+        "closed": 0,
+        "done": {
+          "bottom": 798,
+          "height": 46,
+          "left": 16,
+          "right": 359,
+          "top": 752,
+          "width": 343,
+          "x": 16,
+          "y": 752
+        },
+        "doneHidden": false,
+        "faces": [
+          "m2028-n1-cafe",
+          "m2028-n2-cafe",
+          "m2028-n3-cafe",
+          "m2028-n4-cafe",
+          "m2028-n5-cafe",
+          "m2028-n6-cafe",
+          "m2028-n7-cafe",
+          "m2028-n8-cafe"
+        ],
+        "hidden": false,
+        "inside": true,
+        "modal": "true",
+        "motion": "off",
+        "pending": 0.6582213917281479,
+        "representatives": [
+          "市立萩見高等学校",
+          "県立風川高等学校",
+          "県立みなと高等学校"
+        ],
+        "role": "dialog",
+        "rows": [
+          {
+            "award": "ゴールド金賞",
+            "name": "市立萩見高等学校",
+            "ours": false
+          },
+          {
+            "award": "ゴールド金賞",
+            "name": "県立風川高等学校",
+            "ours": false
+          },
+          {
+            "award": "ゴールド金賞",
+            "name": "県立月見台高等学校ライバル",
+            "ours": false
+          },
+          {
+            "award": "銀賞",
+            "name": "私立緑里高等学校",
+            "ours": false
+          },
+          {
+            "award": "ゴールド金賞",
+            "name": "県立みなと高等学校",
+            "ours": true
+          },
+          {
+            "award": "銀賞",
+            "name": "県立若沢高等学校",
+            "ours": false
+          },
+          {
+            "award": "銀賞",
+            "name": "県立風崎高等学校",
+            "ours": false
+          },
+          {
+            "award": "銅賞",
+            "name": "県立椿浜高等学校",
+            "ours": false
+          },
+          {
+            "award": "銀賞",
+            "name": "県立椿見高等学校",
+            "ours": false
+          },
+          {
+            "award": "銀賞",
+            "name": "県立若浜高等学校",
+            "ours": false
+          },
+          {
+            "award": "銀賞",
+            "name": "県立葵森高等学校",
+            "ours": false
+          },
+          {
+            "award": "銅賞",
+            "name": "市立椿崎高等学校",
+            "ours": false
+          }
+        ],
+        "skipHidden": true
+      },
+      "errors": [],
+      "members": 0.6864548486191779,
+      "records": 0.9131547128781676,
+      "scrollWidth": 375,
+      "width": 375
+    }
+  },
+  {
+    "case": "keyboard-list",
+    "before": {
+      "active": "an-body",
+      "top": 0
+    },
+    "data": {
+      "active": "an-body",
+      "background": [
+        {
+          "id": "app",
+          "inert": true
+        },
+        {
+          "id": "toast",
+          "inert": true
+        },
+        {
+          "id": "mini",
+          "inert": true
+        },
+        {
+          "id": "tabbar",
+          "inert": true
+        }
+      ],
+      "body": {
+        "height": 651,
+        "rect": {
+          "bottom": 740,
+          "height": 650.953125,
+          "left": 16,
+          "right": 359,
+          "top": 89.046875,
+          "width": 343,
+          "x": 16,
+          "y": 89.046875
+        },
+        "scroll": 867,
+        "top": 0
+      },
+      "closed": 0,
+      "done": {
+        "bottom": 798,
+        "height": 46,
+        "left": 16,
+        "right": 359,
+        "top": 752,
+        "width": 343,
+        "x": 16,
+        "y": 752
+      },
+      "doneHidden": false,
+      "faces": [
+        "m2028-n1-cafe",
+        "m2028-n2-cafe",
+        "m2028-n3-cafe",
+        "m2028-n4-cafe",
+        "m2028-n5-cafe",
+        "m2028-n6-cafe",
+        "m2028-n7-cafe",
+        "m2028-n8-cafe"
+      ],
+      "hidden": false,
+      "inside": true,
+      "modal": "true",
+      "motion": "off",
+      "pending": 0.6582213917281479,
+      "representatives": [
+        "市立萩見高等学校",
+        "県立風川高等学校",
+        "県立みなと高等学校"
+      ],
+      "role": "dialog",
+      "rows": [
+        {
+          "award": "ゴールド金賞",
+          "name": "市立萩見高等学校",
+          "ours": false
+        },
+        {
+          "award": "ゴールド金賞",
+          "name": "県立風川高等学校",
+          "ours": false
+        },
+        {
+          "award": "ゴールド金賞",
+          "name": "県立月見台高等学校ライバル",
+          "ours": false
+        },
+        {
+          "award": "銀賞",
+          "name": "私立緑里高等学校",
+          "ours": false
+        },
+        {
+          "award": "ゴールド金賞",
+          "name": "県立みなと高等学校",
+          "ours": true
+        },
+        {
+          "award": "銀賞",
+          "name": "県立若沢高等学校",
+          "ours": false
+        },
+        {
+          "award": "銀賞",
+          "name": "県立風崎高等学校",
+          "ours": false
+        },
+        {
+          "award": "銅賞",
+          "name": "県立椿浜高等学校",
+          "ours": false
+        },
+        {
+          "award": "銀賞",
+          "name": "県立椿見高等学校",
+          "ours": false
+        },
+        {
+          "award": "銀賞",
+          "name": "県立若浜高等学校",
+          "ours": false
+        },
+        {
+          "award": "銀賞",
+          "name": "県立葵森高等学校",
+          "ours": false
+        },
+        {
+          "award": "銅賞",
+          "name": "市立椿崎高等学校",
+          "ours": false
+        }
+      ],
+      "skipHidden": true
+    },
+    "live": {
+      "active": "an-body",
+      "top": 216
+    }
+  },
+  {
+    "case": "tab-wrap",
+    "data": {
+      "active": "anDone",
+      "background": [
+        {
+          "id": "app",
+          "inert": true
+        },
+        {
+          "id": "toast",
+          "inert": true
+        },
+        {
+          "id": "mini",
+          "inert": true
+        },
+        {
+          "id": "tabbar",
+          "inert": true
+        }
+      ],
+      "body": {
+        "height": 651,
+        "rect": {
+          "bottom": 740,
+          "height": 650.953125,
+          "left": 16,
+          "right": 359,
+          "top": 89.046875,
+          "width": 343,
+          "x": 16,
+          "y": 89.046875
+        },
+        "scroll": 867,
+        "top": 214
+      },
+      "closed": 0,
+      "done": {
+        "bottom": 798,
+        "height": 46,
+        "left": 16,
+        "right": 359,
+        "top": 752,
+        "width": 343,
+        "x": 16,
+        "y": 752
+      },
+      "doneHidden": false,
+      "faces": [
+        "m2028-n1-cafe",
+        "m2028-n2-cafe",
+        "m2028-n3-cafe",
+        "m2028-n4-cafe",
+        "m2028-n5-cafe",
+        "m2028-n6-cafe",
+        "m2028-n7-cafe",
+        "m2028-n8-cafe"
+      ],
+      "hidden": false,
+      "inside": true,
+      "modal": "true",
+      "motion": "off",
+      "pending": 0.6582213917281479,
+      "representatives": [
+        "市立萩見高等学校",
+        "県立風川高等学校",
+        "県立みなと高等学校"
+      ],
+      "role": "dialog",
+      "rows": [
+        {
+          "award": "ゴールド金賞",
+          "name": "市立萩見高等学校",
+          "ours": false
+        },
+        {
+          "award": "ゴールド金賞",
+          "name": "県立風川高等学校",
+          "ours": false
+        },
+        {
+          "award": "ゴールド金賞",
+          "name": "県立月見台高等学校ライバル",
+          "ours": false
+        },
+        {
+          "award": "銀賞",
+          "name": "私立緑里高等学校",
+          "ours": false
+        },
+        {
+          "award": "ゴールド金賞",
+          "name": "県立みなと高等学校",
+          "ours": true
+        },
+        {
+          "award": "銀賞",
+          "name": "県立若沢高等学校",
+          "ours": false
+        },
+        {
+          "award": "銀賞",
+          "name": "県立風崎高等学校",
+          "ours": false
+        },
+        {
+          "award": "銅賞",
+          "name": "県立椿浜高等学校",
+          "ours": false
+        },
+        {
+          "award": "銀賞",
+          "name": "県立椿見高等学校",
+          "ours": false
+        },
+        {
+          "award": "銀賞",
+          "name": "県立若浜高等学校",
+          "ours": false
+        },
+        {
+          "award": "銀賞",
+          "name": "県立葵森高等学校",
+          "ours": false
+        },
+        {
+          "award": "銅賞",
+          "name": "市立椿崎高等学校",
+          "ours": false
+        }
+      ],
+      "skipHidden": true
+    }
+  },
+  {
+    "case": "close-off",
+    "data": {
+      "ann": {
+        "active": "BUTTON",
+        "background": [
+          {
+            "id": "app",
+            "inert": false
+          },
+          {
+            "id": "toast",
+            "inert": false
+          },
+          {
+            "id": "mini",
+            "inert": false
+          },
+          {
+            "id": "tabbar",
+            "inert": false
+          }
+        ],
+        "body": {
+          "height": 0,
+          "rect": {
+            "bottom": 0,
+            "height": 0,
+            "left": 0,
+            "right": 0,
+            "top": 0,
+            "width": 0,
+            "x": 0,
+            "y": 0
+          },
+          "scroll": 0,
+          "top": 0
+        },
+        "closed": 1,
+        "done": {
+          "bottom": 0,
+          "height": 0,
+          "left": 0,
+          "right": 0,
+          "top": 0,
+          "width": 0,
+          "x": 0,
+          "y": 0
+        },
+        "doneHidden": false,
+        "faces": [
+          "m2028-n1-cafe",
+          "m2028-n2-cafe",
+          "m2028-n3-cafe",
+          "m2028-n4-cafe",
+          "m2028-n5-cafe",
+          "m2028-n6-cafe",
+          "m2028-n7-cafe",
+          "m2028-n8-cafe"
+        ],
+        "hidden": true,
+        "inside": false,
+        "modal": "true",
+        "motion": "off",
+        "pending": 0.6582213917281479,
+        "representatives": [
+          "市立萩見高等学校",
+          "県立風川高等学校",
+          "県立みなと高等学校"
+        ],
+        "role": "dialog",
+        "rows": [
+          {
+            "award": "ゴールド金賞",
+            "name": "市立萩見高等学校",
+            "ours": false
+          },
+          {
+            "award": "ゴールド金賞",
+            "name": "県立風川高等学校",
+            "ours": false
+          },
+          {
+            "award": "ゴールド金賞",
+            "name": "県立月見台高等学校ライバル",
+            "ours": false
+          },
+          {
+            "award": "銀賞",
+            "name": "私立緑里高等学校",
+            "ours": false
+          },
+          {
+            "award": "ゴールド金賞",
+            "name": "県立みなと高等学校",
+            "ours": true
+          },
+          {
+            "award": "銀賞",
+            "name": "県立若沢高等学校",
+            "ours": false
+          },
+          {
+            "award": "銀賞",
+            "name": "県立風崎高等学校",
+            "ours": false
+          },
+          {
+            "award": "銅賞",
+            "name": "県立椿浜高等学校",
+            "ours": false
+          },
+          {
+            "award": "銀賞",
+            "name": "県立椿見高等学校",
+            "ours": false
+          },
+          {
+            "award": "銀賞",
+            "name": "県立若浜高等学校",
+            "ours": false
+          },
+          {
+            "award": "銀賞",
+            "name": "県立葵森高等学校",
+            "ours": false
+          },
+          {
+            "award": "銅賞",
+            "name": "市立椿崎高等学校",
+            "ours": false
+          }
+        ],
+        "skipHidden": true
+      },
+      "members": 0.6864548486191779,
+      "records": 0.9131547128781676
+    }
+  },
+  {
+    "case": "animated-start",
+    "data": {
+      "active": "anSkip",
+      "background": [
+        {
+          "id": "app",
+          "inert": true
+        },
+        {
+          "id": "toast",
+          "inert": true
+        },
+        {
+          "id": "mini",
+          "inert": true
+        },
+        {
+          "id": "tabbar",
+          "inert": true
+        }
+      ],
+      "body": {
+        "height": 651,
+        "rect": {
+          "bottom": 740,
+          "height": 650.953125,
+          "left": 16,
+          "right": 359,
+          "top": 89.046875,
+          "width": 343,
+          "x": 16,
+          "y": 89.046875
+        },
+        "scroll": 651,
+        "top": 0
+      },
+      "closed": 0,
+      "done": {
+        "bottom": 0,
+        "height": 0,
+        "left": 0,
+        "right": 0,
+        "top": 0,
+        "width": 0,
+        "x": 0,
+        "y": 0
+      },
+      "doneHidden": true,
+      "faces": [],
+      "hidden": false,
+      "inside": true,
+      "modal": "true",
+      "motion": "full",
+      "pending": 0.6582213917281479,
+      "representatives": [],
+      "role": "dialog",
+      "rows": [],
+      "skipHidden": false
+    }
+  },
+  {
+    "case": "held-escape",
+    "data": {
+      "ann": {
+        "active": "anDone",
+        "background": [
+          {
+            "id": "app",
+            "inert": true
+          },
+          {
+            "id": "toast",
+            "inert": true
+          },
+          {
+            "id": "mini",
+            "inert": true
+          },
+          {
+            "id": "tabbar",
+            "inert": true
+          }
+        ],
+        "body": {
+          "height": 651,
+          "rect": {
+            "bottom": 740,
+            "height": 650.953125,
+            "left": 16,
+            "right": 359,
+            "top": 89.046875,
+            "width": 343,
+            "x": 16,
+            "y": 89.046875
+          },
+          "scroll": 869,
+          "top": 0
+        },
+        "closed": 0,
+        "done": {
+          "bottom": 798,
+          "height": 46,
+          "left": 16,
+          "right": 359,
+          "top": 752,
+          "width": 343,
+          "x": 16,
+          "y": 752
+        },
+        "doneHidden": false,
+        "faces": [
+          "m2028-n1-cafe",
+          "m2028-n2-cafe",
+          "m2028-n3-cafe",
+          "m2028-n4-cafe",
+          "m2028-n5-cafe",
+          "m2028-n6-cafe",
+          "m2028-n7-cafe",
+          "m2028-n8-cafe"
+        ],
+        "hidden": false,
+        "inside": true,
+        "modal": "true",
+        "motion": "full",
+        "pending": 0.6582213917281479,
+        "representatives": [
+          "市立萩見高等学校",
+          "県立風川高等学校",
+          "私立緑里高等学校"
+        ],
+        "role": "dialog",
+        "rows": [
+          {
+            "award": "ゴールド金賞",
+            "name": "市立萩見高等学校",
+            "ours": false
+          },
+          {
+            "award": "ゴールド金賞",
+            "name": "県立風川高等学校",
+            "ours": false
+          },
+          {
+            "award": "ゴールド金賞",
+            "name": "県立月見台高等学校ライバル",
+            "ours": false
+          },
+          {
+            "award": "ゴールド金賞",
+            "name": "私立緑里高等学校",
+            "ours": false
+          },
+          {
+            "award": "銀賞",
+            "name": "県立みなと高等学校",
+            "ours": true
+          },
+          {
+            "award": "銀賞",
+            "name": "県立若沢高等学校",
+            "ours": false
+          },
+          {
+            "award": "銀賞",
+            "name": "県立風崎高等学校",
+            "ours": false
+          },
+          {
+            "award": "銅賞",
+            "name": "県立椿浜高等学校",
+            "ours": false
+          },
+          {
+            "award": "銀賞",
+            "name": "県立椿見高等学校",
+            "ours": false
+          },
+          {
+            "award": "銀賞",
+            "name": "県立若浜高等学校",
+            "ours": false
+          },
+          {
+            "award": "銀賞",
+            "name": "県立葵森高等学校",
+            "ours": false
+          },
+          {
+            "award": "銅賞",
+            "name": "市立椿崎高等学校",
+            "ours": false
+          }
+        ],
+        "skipHidden": true
+      },
+      "keys": [
+        {
+          "key": "Escape",
+          "repeat": false,
+          "target": "anSkip",
+          "tipOpen": false
+        }
+      ]
+    }
+  },
+  {
+    "case": "second-escape-close",
+    "data": {
+      "active": "BUTTON",
+      "background": [
+        {
+          "id": "app",
+          "inert": false
+        },
+        {
+          "id": "toast",
+          "inert": false
+        },
+        {
+          "id": "mini",
+          "inert": false
+        },
+        {
+          "id": "tabbar",
+          "inert": false
+        }
+      ],
+      "body": {
+        "height": 0,
+        "rect": {
+          "bottom": 0,
+          "height": 0,
+          "left": 0,
+          "right": 0,
+          "top": 0,
+          "width": 0,
+          "x": 0,
+          "y": 0
+        },
+        "scroll": 0,
+        "top": 0
+      },
+      "closed": 1,
+      "done": {
+        "bottom": 0,
+        "height": 0,
+        "left": 0,
+        "right": 0,
+        "top": 0,
+        "width": 0,
+        "x": 0,
+        "y": 0
+      },
+      "doneHidden": false,
+      "faces": [
+        "m2028-n1-cafe",
+        "m2028-n2-cafe",
+        "m2028-n3-cafe",
+        "m2028-n4-cafe",
+        "m2028-n5-cafe",
+        "m2028-n6-cafe",
+        "m2028-n7-cafe",
+        "m2028-n8-cafe"
+      ],
+      "hidden": true,
+      "inside": false,
+      "modal": "true",
+      "motion": "full",
+      "pending": 0.6582213917281479,
+      "representatives": [
+        "市立萩見高等学校",
+        "県立風川高等学校",
+        "私立緑里高等学校"
+      ],
+      "role": "dialog",
+      "rows": [
+        {
+          "award": "ゴールド金賞",
+          "name": "市立萩見高等学校",
+          "ours": false
+        },
+        {
+          "award": "ゴールド金賞",
+          "name": "県立風川高等学校",
+          "ours": false
+        },
+        {
+          "award": "ゴールド金賞",
+          "name": "県立月見台高等学校ライバル",
+          "ours": false
+        },
+        {
+          "award": "ゴールド金賞",
+          "name": "私立緑里高等学校",
+          "ours": false
+        },
+        {
+          "award": "銀賞",
+          "name": "県立みなと高等学校",
+          "ours": true
+        },
+        {
+          "award": "銀賞",
+          "name": "県立若沢高等学校",
+          "ours": false
+        },
+        {
+          "award": "銀賞",
+          "name": "県立風崎高等学校",
+          "ours": false
+        },
+        {
+          "award": "銅賞",
+          "name": "県立椿浜高等学校",
+          "ours": false
+        },
+        {
+          "award": "銀賞",
+          "name": "県立椿見高等学校",
+          "ours": false
+        },
+        {
+          "award": "銀賞",
+          "name": "県立若浜高等学校",
+          "ours": false
+        },
+        {
+          "award": "銀賞",
+          "name": "県立葵森高等学校",
+          "ours": false
+        },
+        {
+          "award": "銅賞",
+          "name": "市立椿崎高等学校",
+          "ours": false
+        }
+      ],
+      "skipHidden": true
+    }
+  },
+  {
+    "case": "short-natural-b",
+    "data": {
+      "ann": {
+        "active": "anDone",
+        "background": [
+          {
+            "id": "app",
+            "inert": true
+          },
+          {
+            "id": "toast",
+            "inert": true
+          },
+          {
+            "id": "mini",
+            "inert": true
+          },
+          {
+            "id": "tabbar",
+            "inert": true
+          }
+        ],
+        "body": {
+          "height": 506,
+          "rect": {
+            "bottom": 595,
+            "height": 505.953125,
+            "left": 16,
+            "right": 359,
+            "top": 89.046875,
+            "width": 343,
+            "x": 16,
+            "y": 89.046875
+          },
+          "scroll": 689,
+          "top": 175.5
+        },
+        "closed": 0,
+        "done": {
+          "bottom": 653,
+          "height": 46,
+          "left": 16,
+          "right": 359,
+          "top": 607,
+          "width": 343,
+          "x": 16,
+          "y": 607
+        },
+        "doneHidden": false,
+        "faces": [
+          "m2028-n1-cafe",
+          "m2028-n2-cafe",
+          "m2028-n3-cafe",
+          "m2028-n4-cafe",
+          "m2028-n5-cafe",
+          "m2028-n6-cafe",
+          "m2028-n7-cafe",
+          "m2028-n8-cafe"
+        ],
+        "hidden": false,
+        "inside": true,
+        "modal": "true",
+        "motion": "short",
+        "pending": 0.6582213917281479,
+        "representatives": [],
+        "role": "dialog",
+        "rows": [
+          {
+            "award": "銀賞",
+            "name": "市立夕台高等学校",
+            "ours": false
+          },
+          {
+            "award": "銀賞",
+            "name": "県立青見高等学校",
+            "ours": false
+          },
+          {
+            "award": "銀賞",
+            "name": "市立松里高等学校",
+            "ours": false
+          },
+          {
+            "award": "銀賞",
+            "name": "県立鈴ヶ丘高等学校",
+            "ours": false
+          },
+          {
+            "award": "銅賞",
+            "name": "県立みなと高等学校",
+            "ours": true
+          },
+          {
+            "award": "銀賞",
+            "name": "市立緑森高等学校",
+            "ours": false
+          },
+          {
+            "award": "銀賞",
+            "name": "私立汐坂高等学校",
+            "ours": false
+          },
+          {
+            "award": "銅賞",
+            "name": "県立風坂高等学校",
+            "ours": false
+          },
+          {
+            "award": "ゴールド金賞",
+            "name": "市立藤ヶ丘高等学校",
+            "ours": false
+          },
+          {
+            "award": "銅賞",
+            "name": "県立椿が原高等学校",
+            "ours": false
+          },
+          {
+            "award": "ゴールド金賞",
+            "name": "市立霞崎高等学校",
+            "ours": false
+          },
+          {
+            "award": "銀賞",
+            "name": "私立汐台高等学校",
+            "ours": false
+          }
+        ],
+        "skipHidden": true
+      },
+      "errors": [],
+      "scrollWidth": 375,
+      "width": 375
+    }
+  },
+  {
+    "case": "actual-result",
+    "data": {
+      "ann": {
+        "active": "anDone",
+        "background": [
+          {
+            "id": "app",
+            "inert": true
+          },
+          {
+            "id": "toast",
+            "inert": true
+          },
+          {
+            "id": "mini",
+            "inert": true
+          },
+          {
+            "id": "tabbar",
+            "inert": true
+          }
+        ],
+        "body": {
+          "height": 651,
+          "rect": {
+            "bottom": 740,
+            "height": 650.953125,
+            "left": 16,
+            "right": 359,
+            "top": 89.046875,
+            "width": 343,
+            "x": 16,
+            "y": 89.046875
+          },
+          "scroll": 863,
+          "top": 0
+        },
+        "closed": 0,
+        "done": {
+          "bottom": 798,
+          "height": 46,
+          "left": 16,
+          "right": 359,
+          "top": 752,
+          "width": 343,
+          "x": 16,
+          "y": 752
+        },
+        "doneHidden": false,
+        "faces": [
+          "m2026-n1-723df5a6",
+          "m2026-n2-723df5a6",
+          "m2026-n3-723df5a6",
+          "m2026-n4-723df5a6",
+          "m2026-n5-723df5a6",
+          "m2026-n6-723df5a6",
+          "m2026-j7-723df5a6",
+          "m2026-j8-723df5a6"
+        ],
+        "hidden": false,
+        "inside": true,
+        "modal": "true",
+        "motion": "off",
+        "pending": 0.4707749132066965,
+        "representatives": [
+          "市立萩見高等学校",
+          "県立風川高等学校",
+          "私立緑里高等学校"
+        ],
+        "role": "dialog",
+        "rows": [
+          {
+            "award": "ゴールド金賞",
+            "name": "市立萩見高等学校",
+            "ours": false
+          },
+          {
+            "award": "ゴールド金賞",
+            "name": "県立風川高等学校",
+            "ours": false
+          },
+          {
+            "award": "ゴールド金賞",
+            "name": "県立月見台高等学校ライバル",
+            "ours": false
+          },
+          {
+            "award": "ゴールド金賞",
+            "name": "私立緑里高等学校",
+            "ours": false
+          },
+          {
+            "award": "銀賞",
+            "name": "県立みなと高等学校",
+            "ours": true
+          },
+          {
+            "award": "銀賞",
+            "name": "県立若沢高等学校",
+            "ours": false
+          },
+          {
+            "award": "銀賞",
+            "name": "県立風崎高等学校",
+            "ours": false
+          },
+          {
+            "award": "銅賞",
+            "name": "県立椿浜高等学校",
+            "ours": false
+          },
+          {
+            "award": "銀賞",
+            "name": "県立椿見高等学校",
+            "ours": false
+          },
+          {
+            "award": "銀賞",
+            "name": "県立若浜高等学校",
+            "ours": false
+          },
+          {
+            "award": "銀賞",
+            "name": "県立葵森高等学校",
+            "ours": false
+          },
+          {
+            "award": "銅賞",
+            "name": "市立椿崎高等学校",
+            "ours": false
+          }
+        ],
+        "skipHidden": true
+      },
+      "judge": {
+        "avg": 68.66666666666667,
+        "award": "silver",
+        "judges": [
+          {
+            "comment": "サックスを中心に音程がよく合い、和音が豊かに響いていました。トランペットがいないため、その受け持ちをほかの楽器で補っていました。この曲本来の響きには、まだ届いていません。",
+            "grade": "B",
+            "name": "審査員A（指揮者）",
+            "score": 69
+          },
+          {
+            "comment": "課題曲は、ホルンの柔らかく芯のある音色が印象的です。サックスが大きく、旋律が埋もれてしまう場面がありました。自由曲は、ホルンの柔らかく芯のある音色が印象的です。フルートが大きく、旋律が埋もれてしまう場面がありました。",
+            "grade": "B",
+            "name": "審査員B（作曲家）",
+            "score": 67
+          },
+          {
+            "comment": "縦の線がよくそろい、テンポも安定していました。",
+            "grade": "B",
+            "name": "審査員C（演奏家）",
+            "score": 70
+          }
+        ],
+        "level": "pref",
+        "rep": false
+      },
+      "members": 0.07939859945327044,
+      "pending": {
+        "kind": "contest",
+        "revealed": true
+      },
+      "records": 0.8473025471903384
+    }
+  },
+  {
+    "case": "actual-return",
+    "data": {
+      "active": "next",
+      "ann": {
+        "active": "btn primary",
+        "background": [
+          {
+            "id": "app",
+            "inert": false
+          },
+          {
+            "id": "toast",
+            "inert": false
+          },
+          {
+            "id": "mini",
+            "inert": false
+          },
+          {
+            "id": "tabbar",
+            "inert": false
+          }
+        ],
+        "body": {
+          "height": 0,
+          "rect": {
+            "bottom": 0,
+            "height": 0,
+            "left": 0,
+            "right": 0,
+            "top": 0,
+            "width": 0,
+            "x": 0,
+            "y": 0
+          },
+          "scroll": 0,
+          "top": 0
+        },
+        "closed": 0,
+        "done": {
+          "bottom": 0,
+          "height": 0,
+          "left": 0,
+          "right": 0,
+          "top": 0,
+          "width": 0,
+          "x": 0,
+          "y": 0
+        },
+        "doneHidden": false,
+        "faces": [
+          "m2026-n1-723df5a6",
+          "m2026-n2-723df5a6",
+          "m2026-n3-723df5a6",
+          "m2026-n4-723df5a6",
+          "m2026-n5-723df5a6",
+          "m2026-n6-723df5a6",
+          "m2026-j7-723df5a6",
+          "m2026-j8-723df5a6"
+        ],
+        "hidden": true,
+        "inside": false,
+        "modal": "true",
+        "motion": "off",
+        "pending": 0.4707749132066965,
+        "representatives": [
+          "市立萩見高等学校",
+          "県立風川高等学校",
+          "私立緑里高等学校"
+        ],
+        "role": "dialog",
+        "rows": [
+          {
+            "award": "ゴールド金賞",
+            "name": "市立萩見高等学校",
+            "ours": false
+          },
+          {
+            "award": "ゴールド金賞",
+            "name": "県立風川高等学校",
+            "ours": false
+          },
+          {
+            "award": "ゴールド金賞",
+            "name": "県立月見台高等学校ライバル",
+            "ours": false
+          },
+          {
+            "award": "ゴールド金賞",
+            "name": "私立緑里高等学校",
+            "ours": false
+          },
+          {
+            "award": "銀賞",
+            "name": "県立みなと高等学校",
+            "ours": true
+          },
+          {
+            "award": "銀賞",
+            "name": "県立若沢高等学校",
+            "ours": false
+          },
+          {
+            "award": "銀賞",
+            "name": "県立風崎高等学校",
+            "ours": false
+          },
+          {
+            "award": "銅賞",
+            "name": "県立椿浜高等学校",
+            "ours": false
+          },
+          {
+            "award": "銀賞",
+            "name": "県立椿見高等学校",
+            "ours": false
+          },
+          {
+            "award": "銀賞",
+            "name": "県立若浜高等学校",
+            "ours": false
+          },
+          {
+            "award": "銀賞",
+            "name": "県立葵森高等学校",
+            "ours": false
+          },
+          {
+            "award": "銅賞",
+            "name": "市立椿崎高等学校",
+            "ours": false
+          }
+        ],
+        "skipHidden": true
+      },
+      "members": 0.07939859945327044,
+      "pending": {
+        "kind": "contest",
+        "revealed": true
+      },
+      "records": 0.8473025471903384,
+      "text": "シーズンを終える"
+    }
+  },
+  {
+    "case": "tab-light-合奏",
+    "data": {
+      "errors": [],
+      "members": 0.07939859945327044,
+      "records": 0.8473025471903384,
+      "scrollWidth": 375,
+      "theme": "light",
+      "width": 375
+    }
+  },
+  {
+    "case": "tab-light-部員",
+    "data": {
+      "errors": [],
+      "members": 0.07939859945327044,
+      "records": 0.8473025471903384,
+      "scrollWidth": 375,
+      "theme": "light",
+      "width": 375
+    }
+  },
+  {
+    "case": "tab-light-日誌",
+    "data": {
+      "errors": [],
+      "members": 0.07939859945327044,
+      "records": 0.8473025471903384,
+      "scrollWidth": 375,
+      "theme": "light",
+      "width": 375
+    }
+  },
+  {
+    "case": "tab-light-今週",
+    "data": {
+      "errors": [],
+      "members": 0.07939859945327044,
+      "records": 0.8473025471903384,
+      "scrollWidth": 375,
+      "theme": "light",
+      "width": 375
+    }
+  },
+  {
+    "case": "tab-dark-合奏",
+    "data": {
+      "errors": [],
+      "members": 0.07939859945327044,
+      "records": 0.8473025471903384,
+      "scrollWidth": 375,
+      "theme": "dark",
+      "width": 375
+    }
+  },
+  {
+    "case": "tab-dark-部員",
+    "data": {
+      "errors": [],
+      "members": 0.07939859945327044,
+      "records": 0.8473025471903384,
+      "scrollWidth": 375,
+      "theme": "dark",
+      "width": 375
+    }
+  },
+  {
+    "case": "tab-dark-日誌",
+    "data": {
+      "errors": [],
+      "members": 0.07939859945327044,
+      "records": 0.8473025471903384,
+      "scrollWidth": 375,
+      "theme": "dark",
+      "width": 375
+    }
+  },
+  {
+    "case": "tab-dark-今週",
+    "data": {
+      "errors": [],
+      "members": 0.07939859945327044,
+      "records": 0.8473025471903384,
+      "scrollWidth": 375,
+      "theme": "dark",
+      "width": 375
+    }
+  },
+  {
+    "case": "year-after-announcement",
+    "data": {
+      "announcement": {
+        "active": "BODY",
+        "background": [
+          {
+            "id": "app",
+            "inert": false
+          },
+          {
+            "id": "mini",
+            "inert": false
+          },
+          {
+            "id": "tabbar",
+            "inert": false
+          },
+          {
+            "id": "toast",
+            "inert": false
+          }
+        ],
+        "body": {
+          "height": 0,
+          "rect": {
+            "bottom": 0,
+            "height": 0,
+            "left": 0,
+            "right": 0,
+            "top": 0,
+            "width": 0,
+            "x": 0,
+            "y": 0
+          },
+          "scroll": 0,
+          "top": 0
+        },
+        "closed": 0,
+        "done": {
+          "bottom": 0,
+          "height": 0,
+          "left": 0,
+          "right": 0,
+          "top": 0,
+          "width": 0,
+          "x": 0,
+          "y": 0
+        },
+        "doneHidden": false,
+        "faces": [
+          "m2028-n1-cafe",
+          "m2028-n2-cafe",
+          "m2028-n3-cafe",
+          "m2028-n4-cafe",
+          "m2028-n5-cafe",
+          "m2028-n6-cafe",
+          "m2028-n7-cafe",
+          "m2028-n8-cafe"
+        ],
+        "hidden": true,
+        "inside": false,
+        "modal": "true",
+        "motion": "off",
+        "pending": 0.6582213917281479,
+        "representatives": [
+          "市立萩見高等学校",
+          "県立風川高等学校",
+          "県立みなと高等学校"
+        ],
+        "role": "dialog",
+        "rows": [
+          {
+            "award": "ゴールド金賞",
+            "name": "市立萩見高等学校",
+            "ours": false
+          },
+          {
+            "award": "ゴールド金賞",
+            "name": "県立風川高等学校",
+            "ours": false
+          },
+          {
+            "award": "ゴールド金賞",
+            "name": "県立月見台高等学校ライバル",
+            "ours": false
+          },
+          {
+            "award": "銀賞",
+            "name": "私立緑里高等学校",
+            "ours": false
+          },
+          {
+            "award": "ゴールド金賞",
+            "name": "県立みなと高等学校",
+            "ours": true
+          },
+          {
+            "award": "銀賞",
+            "name": "県立若沢高等学校",
+            "ours": false
+          },
+          {
+            "award": "銀賞",
+            "name": "県立風崎高等学校",
+            "ours": false
+          },
+          {
+            "award": "銅賞",
+            "name": "県立椿浜高等学校",
+            "ours": false
+          },
+          {
+            "award": "銀賞",
+            "name": "県立椿見高等学校",
+            "ours": false
+          },
+          {
+            "award": "銀賞",
+            "name": "県立若浜高等学校",
+            "ours": false
+          },
+          {
+            "award": "銀賞",
+            "name": "県立葵森高等学校",
+            "ours": false
+          },
+          {
+            "award": "銅賞",
+            "name": "市立椿崎高等学校",
+            "ours": false
+          }
+        ],
+        "skipHidden": true
+      },
+      "background": [
+        false,
+        false,
+        false
+      ],
+      "boot": {
+        "errors": [],
+        "failed": [],
+        "loaded": 33,
+        "scripts": 33
+      },
+      "errors": [],
+      "steps": 50,
+      "year": 2027
+    }
+  }
+]

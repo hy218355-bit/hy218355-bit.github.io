@@ -1258,6 +1258,8 @@ button.wr-person:focus-visible{outline:2px solid var(--brass);outline-offset:2px
 .an-crew{grid-column:2;display:flex;flex-wrap:wrap;gap:4px;padding-top:2px;min-width:0}
 .an-crew .member-face{border-radius:50%;box-shadow:0 0 0 1px var(--scene-rule)}
 .an-foot .btn{min-height:46px;width:100%;font-size:14px}
+.announce :focus-visible{outline:2px solid var(--scene-brass);outline-offset:4px}
+.announce .an-body:focus-visible{outline-offset:-2px;border-radius:4px}
 .announce[data-motion="off"] *{animation:none!important;transition:none!important}
 .announce[data-motion="short"] .aw.stamp-in{animation-duration:.2s}
 #log{gap:12px;font-size:14px;line-height:1.85}
@@ -1763,9 +1765,9 @@ button.wr-person:focus-visible{outline:2px solid var(--brass);outline-offset:2px
     <div class="transport"><button class="btn" type="button" id="tgPlay" data-tg="play">■ 止める</button><button class="btn primary" type="button" id="tgOk" data-tg="ok">合った！</button><button class="btn primary" type="button" id="tgNext" data-tg="next" hidden>次の部員へ</button></div>
   </div>
 </section>
-<section class="announce" id="announce" hidden aria-labelledby="anTitle">
+<section class="announce" id="announce" hidden role="dialog" aria-modal="true" aria-labelledby="anTitle" tabindex="-1">
   <div class="an-head"><p class="eyebrow">ホールの照明が落ちた</p><h2 id="anTitle"></h2></div>
-  <div class="an-body">
+  <div class="an-body" tabindex="0" role="region" aria-label="審査結果の一覧">
     <ol class="an-list" id="anList" aria-live="polite"></ol>
     <div class="an-rep" id="anRep" aria-live="polite"></div>
   </div>
@@ -1810,7 +1812,7 @@ button.wr-person:focus-visible{outline:2px solid var(--brass);outline-offset:2px
 <script src="js/game.js?v=flute-cast-1"></script>
 <script src="js/engine.js?v=quiet-intro-1"></script>
 <script src="js/conduct.js?v=watch-member-1"></script>
-<script src="js/announce.js?v=result-journal-1"></script>
+<script src="js/announce.js?v=announce-navigation-1"></script>
 <script src="js/tunegame.js"></script>
 <script src="js/fx.js"></script>
 <script src="js/ui.js?v=watch-member-1"></script>

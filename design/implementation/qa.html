@@ -1287,6 +1287,8 @@ button.wr-person:focus-visible{outline:2px solid var(--brass);outline-offset:2px
 .an-crew{grid-column:2;display:flex;flex-wrap:wrap;gap:4px;padding-top:2px;min-width:0}
 .an-crew .member-face{border-radius:50%;box-shadow:0 0 0 1px var(--scene-rule)}
 .an-foot .btn{min-height:46px;width:100%;font-size:14px}
+.announce :focus-visible{outline:2px solid var(--scene-brass);outline-offset:4px}
+.announce .an-body:focus-visible{outline-offset:-2px;border-radius:4px}
 .announce[data-motion="off"] *{animation:none!important;transition:none!important}
 .announce[data-motion="short"] .aw.stamp-in{animation-duration:.2s}
 #log{gap:12px;font-size:14px;line-height:1.85}
@@ -1792,9 +1794,9 @@ button.wr-person:focus-visible{outline:2px solid var(--brass);outline-offset:2px
     <div class="transport"><button class="btn" type="button" id="tgPlay" data-tg="play">■ 止める</button><button class="btn primary" type="button" id="tgOk" data-tg="ok">合った！</button><button class="btn primary" type="button" id="tgNext" data-tg="next" hidden>次の部員へ</button></div>
   </div>
 </section>
-<section class="announce" id="announce" hidden aria-labelledby="anTitle">
+<section class="announce" id="announce" hidden role="dialog" aria-modal="true" aria-labelledby="anTitle" tabindex="-1">
   <div class="an-head"><p class="eyebrow">ホールの照明が落ちた</p><h2 id="anTitle"></h2></div>
-  <div class="an-body">
+  <div class="an-body" tabindex="0" role="region" aria-label="審査結果の一覧">
     <ol class="an-list" id="anList" aria-live="polite"></ol>
     <div class="an-rep" id="anRep" aria-live="polite"></div>
   </div>
@@ -1811,39 +1813,39 @@ button.wr-person:focus-visible{outline:2px solid var(--brass);outline-offset:2px
   <button type="button" data-tabgo="log"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 5.5C4 4.7 4.7 4 5.5 4H11v16H5.5c-.8 0-1.5-.7-1.5-1.5z"/><path d="M20 5.5c0-.8-.7-1.5-1.5-1.5H13v16h5.5c.8 0 1.5-.7 1.5-1.5z"/></svg><span>日誌</span></button>
 </nav>
 
-<script src="js/util.js?v=qa-watch-member-1"></script>
-<script src="js/icons.js?v=qa-watch-member-1"></script>
-<script src="js/instrument-icons.js?v=qa-watch-member-1"></script>
-<script src="js/face-cast.js?v=qa-watch-member-1"></script>
-<script src="js/faces.js?v=qa-watch-member-1"></script>
-<script src="js/instruments.js?v=qa-watch-member-1"></script>
-<script src="js/venues.js?v=qa-watch-member-1"></script>
-<script src="js/samples.js?v=qa-watch-member-1"></script>
-<script src="js/scores.js?v=qa-watch-member-1"></script>
-<script src="js/pieces/largo.js?v=qa-watch-member-1"></script>
-<script src="js/pieces/ode.js?v=qa-watch-member-1"></script>
-<script src="js/pieces/galop.js?v=qa-watch-member-1"></script>
-<script src="js/pieces/pomp.js?v=qa-watch-member-1"></script>
-<script src="js/pieces/aida.js?v=qa-watch-member-1"></script>
-<script src="js/pieces/hero.js?v=qa-watch-member-1"></script>
-<script src="js/pieces/holst.js?v=qa-watch-member-1"></script>
-<script src="js/pieces/hungarian.js?v=qa-watch-member-1"></script>
-<script src="js/pieces/flowers.js?v=qa-watch-member-1"></script>
-<script src="js/pieces/tell.js?v=qa-watch-member-1"></script>
-<script src="js/pieces/carmen.js?v=qa-watch-member-1"></script>
-<script src="js/pieces/valkyrie.js?v=qa-watch-member-1"></script>
-<script src="js/pieces/swan.js?v=qa-watch-member-1"></script>
-<script src="js/pieces/spring.js?v=qa-watch-member-1"></script>
-<script src="js/pieces/canon.js?v=qa-watch-member-1"></script>
-<script src="js/band.js?v=qa-watch-member-1"></script>
-<script src="js/game.js?v=qa-watch-member-1"></script>
-<script src="js/engine.js?v=qa-watch-member-1"></script>
-<script src="js/conduct.js?v=qa-watch-member-1"></script>
-<script src="js/announce.js?v=qa-watch-member-1"></script>
-<script src="js/tunegame.js?v=qa-watch-member-1"></script>
-<script src="js/fx.js?v=qa-watch-member-1"></script>
-<script src="js/ui.js?v=qa-watch-member-1"></script>
+<script src="js/util.js?v=qa-announce-navigation-1"></script>
+<script src="js/icons.js?v=qa-announce-navigation-1"></script>
+<script src="js/instrument-icons.js?v=qa-announce-navigation-1"></script>
+<script src="js/face-cast.js?v=qa-announce-navigation-1"></script>
+<script src="js/faces.js?v=qa-announce-navigation-1"></script>
+<script src="js/instruments.js?v=qa-announce-navigation-1"></script>
+<script src="js/venues.js?v=qa-announce-navigation-1"></script>
+<script src="js/samples.js?v=qa-announce-navigation-1"></script>
+<script src="js/scores.js?v=qa-announce-navigation-1"></script>
+<script src="js/pieces/largo.js?v=qa-announce-navigation-1"></script>
+<script src="js/pieces/ode.js?v=qa-announce-navigation-1"></script>
+<script src="js/pieces/galop.js?v=qa-announce-navigation-1"></script>
+<script src="js/pieces/pomp.js?v=qa-announce-navigation-1"></script>
+<script src="js/pieces/aida.js?v=qa-announce-navigation-1"></script>
+<script src="js/pieces/hero.js?v=qa-announce-navigation-1"></script>
+<script src="js/pieces/holst.js?v=qa-announce-navigation-1"></script>
+<script src="js/pieces/hungarian.js?v=qa-announce-navigation-1"></script>
+<script src="js/pieces/flowers.js?v=qa-announce-navigation-1"></script>
+<script src="js/pieces/tell.js?v=qa-announce-navigation-1"></script>
+<script src="js/pieces/carmen.js?v=qa-announce-navigation-1"></script>
+<script src="js/pieces/valkyrie.js?v=qa-announce-navigation-1"></script>
+<script src="js/pieces/swan.js?v=qa-announce-navigation-1"></script>
+<script src="js/pieces/spring.js?v=qa-announce-navigation-1"></script>
+<script src="js/pieces/canon.js?v=qa-announce-navigation-1"></script>
+<script src="js/band.js?v=qa-announce-navigation-1"></script>
+<script src="js/game.js?v=qa-announce-navigation-1"></script>
+<script src="js/engine.js?v=qa-announce-navigation-1"></script>
+<script src="js/conduct.js?v=qa-announce-navigation-1"></script>
+<script src="js/announce.js?v=qa-announce-navigation-1"></script>
+<script src="js/tunegame.js?v=qa-announce-navigation-1"></script>
+<script src="js/fx.js?v=qa-announce-navigation-1"></script>
+<script src="js/ui.js?v=qa-announce-navigation-1"></script>
 <div class="tip" id="tip" role="tooltip" hidden></div>
-<script src="/design/implementation/qa.js?v=qa-watch-member-1"></script>
+<script src="/design/implementation/qa.js?v=qa-announce-navigation-1"></script>
 </body>
 </html>

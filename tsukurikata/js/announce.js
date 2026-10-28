@@ -10,6 +10,53 @@ const RIVAL_B = ['ヶ丘', '台', '浜', '野', 'が原', '坂', '川', '崎', '
 const RIVAL_HEAD = ['県立', '県立', '県立', '市立', '市立', '私立'];
 const AN = {timer: 0, token: null, onDone: null};
 
+const anVisible = el => !!(el?.isConnected&&!el.closest('[hidden],[inert]')&&!el.matches(':disabled')&&el.getClientRects().length&&getComputedStyle(el).visibility!=='hidden');
+function anDialogFocus(){
+  AN.focusToken={};
+  if(!AN.focusBlocks){
+    AN.returnTo=document.activeElement;AN.returnId=AN.returnTo?.id;
+    AN.focusBlocks=new Map(Array.from(document.querySelectorAll('.app,#tabbar,#mini,#toast,#conduct,#gradRoll,#tuneGame,#fx'),el=>[el,el.inert]));
+  }
+  for(const el of AN.focusBlocks.keys())el.inert=true;
+  hideTip();$('#anSkip').focus({preventScroll:true});
+}
+function anDialogRelease(){
+  if(!AN.focusBlocks)return;
+  for(const [el,was] of AN.focusBlocks)el.inert=was;
+  AN.focusBlocks=null;
+  const old=AN.returnTo,id=AN.returnId,token=AN.focusToken={};
+  AN.returnTo=null;AN.returnId=null;
+  requestAnimationFrame(()=>{
+    if(AN.focusToken!==token||!$('#announce').hidden||['conduct','gradRoll','tuneGame'].some(id=>!$('#'+id).hidden))return;
+    const active=document.activeElement;
+    // 結果を閉じる処理が自分で操作先を決めた場合は、その移動を保つ。
+    if(active!==document.body&&active!==document.documentElement&&anVisible(active))return;
+    [old,id&&document.getElementById(id),...document.querySelectorAll('#week [data-act="next"],#week [data-act="reveal"],#tabbar [aria-current="page"]')].find(el=>el!==document.body&&el!==document.documentElement&&anVisible(el))?.focus({preventScroll:true});
+  });
+}
+function anReady(){
+  $('#anSkip').hidden=true;$('#anDone').hidden=false;
+  $('#anDone').focus({preventScroll:true});
+}
+function anDialogKey(e){
+  const dialog=$('#announce');
+  if(dialog.hidden)return;
+  if(e.key==='Escape'){
+    e.preventDefault();e.stopImmediatePropagation();
+    if(e.repeat||e.isComposing)return;
+    if(!$('#anSkip').hidden)AN.skip?.();else closeAnnounce();
+  }else if((e.key==='Enter'||e.key===' ')&&(e.repeat||e.isComposing)&&e.target?.closest?.('button')){
+    // 長押しした「とばす」で、表示した結果まで続けて閉じない。
+    e.preventDefault();e.stopImmediatePropagation();
+  }else if(e.key==='Tab'){
+    const items=Array.from(dialog.querySelectorAll('button,[href],[tabindex]:not([tabindex="-1"])')).filter(anVisible),first=items[0],last=items.at(-1),active=document.activeElement;
+    if(!items.length){e.preventDefault();dialog.focus({preventScroll:true});}
+    else if(!dialog.contains(active)||(e.shiftKey?active===first:active===last)){
+      e.preventDefault();(e.shiftKey?last:first).focus({preventScroll:true});
+    }
+  }
+}
+
 function rivalSchools(year, level, n){
   const used = new Set(), out = [];
   for(let k = 0; out.length < n && k < 400; k++){
@@ -45,6 +92,7 @@ function contestBoard(year, levelId, j, div = null){
 }
 
 function showAnnounce(j, levelId, onDone, div = null){
+  clearTimeout(AN.timer);
   const {L, list, nRep} = contestBoard(S.year, levelId, j, div);
   const ours = list.find(r => r.ours);
   const rec=S.recs.find(r=>r.id===S.pending?.recId);
@@ -59,6 +107,7 @@ function showAnnounce(j, levelId, onDone, div = null){
   $('#announce').hidden = false;
   $('#announce').dataset.motion=fxCalm()||U.fxMode==='off'?'off':U.fxMode;
   document.documentElement.classList.add('announcing');
+  anDialogFocus();
   const steps = [];
   const row = r => {
     const li = document.createElement('li');
@@ -98,7 +147,7 @@ function showAnnounce(j, levelId, onDone, div = null){
     }
     if(!ours.rep) steps.push([900, () => { const p = document.createElement('p'); p.className = 'lead'; p.textContent = j.award === 'gold' ? '金賞。でも、代表には届かなかった。' : '代表には届かなかった。'; $('#anRep').appendChild(p); }]);
   }
-  steps.push([700, () => { $('#anSkip').hidden = true; $('#anDone').hidden = false; $('#anDone').focus({preventScroll: true}); }]);
+  steps.push([700, anReady]);
   let i = 0;
   const next = () => {
     if(AN.token !== token || i >= steps.length) return;
@@ -112,20 +161,24 @@ function showAnnounce(j, levelId, onDone, div = null){
     $('#anList').innerHTML = '';
     for(const r of list){ const li = row(r); say(li.querySelector('.aw'), AWARD_CALL[r.award]); $('#anList').appendChild(li); }
     if(nRep) $('#anRep').innerHTML = `<p class="lead">${L.rep}への代表校</p><ol>${list.filter(x => x.rep).map(r => `<li class="${r.ours ? 'ours' : ''}"><span class="no">プログラム${r.no}番</span><span class="nm">${esc(r.name)}</span>${r.ours ? '<span class="aw rep on">代表</span>' : ''}</li>`).join('')}</ol>`;
-    $('#anSkip').hidden = true; $('#anDone').hidden = false;
+    anReady();
     $('#announce .an-body').querySelector('.ours')?.scrollIntoView({block: 'center'});
   };
   if(fxCalm() || U.fxMode === 'off') AN.skip(); else next();
 }
 function closeAnnounce(){
+  if($('#announce').hidden)return;
   clearTimeout(AN.timer);
   AN.token = null;
   $('#announce').hidden = true;
   document.documentElement.classList.remove('announcing');
+  AN.skip=null;
+  anDialogRelease();
   const cb = AN.onDone; AN.onDone = null;
   if(cb) cb();
 }
 function bindAnnounce(){
   $('#anSkip').addEventListener('click', () => AN.skip && AN.skip());
   $('#anDone').addEventListener('click', closeAnnounce);
+  document.addEventListener('keydown',anDialogKey,{capture:true});
 }

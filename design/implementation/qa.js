@@ -142,6 +142,10 @@ function record(){
   const card=$('#cdMember'),button=card.querySelector('[data-cdm="solo"]'),rect=el=>el?.getBoundingClientRect().toJSON();
   report.watchCard={selected:CD.sel,hidden:card.hidden,name:card.querySelector('#cdMemberName')?.textContent,pressed:button?.getAttribute('aria-pressed'),button:rect(button),close:rect(card.querySelector('[data-cdm="close"]')),card:rect(card),scroll:$('#conduct').scrollTop,active:document.activeElement.id||document.activeElement.dataset.cdm||document.activeElement.tagName,stats:getComputedStyle($('.cd-stats')).display};
  }
+ if(q.has('announceAudit')){
+  const dialog=$('#announce'),body=dialog.querySelector('.an-body');
+  report.announcement={hidden:dialog.hidden,active:document.activeElement.id||document.activeElement.className||document.activeElement.tagName,inside:dialog.contains(document.activeElement),role:dialog.getAttribute('role'),modal:dialog.getAttribute('aria-modal'),motion:dialog.dataset.motion,skipHidden:$('#anSkip').hidden,doneHidden:$('#anDone').hidden,body:{top:body.scrollTop,height:body.clientHeight,scroll:body.scrollHeight,rect:body.getBoundingClientRect().toJSON()},done:$('#anDone').getBoundingClientRect().toJSON(),background:[...document.querySelectorAll('.app,#tabbar,#mini,#toast')].map(el=>({id:el.id||'app',inert:el.inert})),rows:[...$('#anList').children].map(el=>({name:el.querySelector('.nm').textContent,award:el.querySelector('.aw').textContent,ours:el.classList.contains('ours')})),representatives:[...document.querySelectorAll('#anRep li .nm')].map(el=>el.textContent),faces:[...document.querySelectorAll('#anList .an-crew [data-face]')].map(el=>el.dataset.face),closed:report.announceClosed||0,pending:hash(JSON.stringify(S.pending))};
+ }
  if(E.pb&&!playbackIds.has(E.pb))playbackIds.set(E.pb,++playbackCount);
  report.playbackId=E.pb?playbackIds.get(E.pb):null;
  report.audibleMemberIds=E.pb?Object.keys(E.pb.mem).filter(mid=>E.pb.audible(mid,E.solo)):[];
@@ -217,7 +221,7 @@ async function show(next){
  clearTimeout(GR.timer);clearTimeout(AN.timer);cancelAnimationFrame(CD.raf);CD.phase='idle';
  for(const id of ['conduct','gradRoll','announce','fx'])$('#'+id).hidden=true;
  document.documentElement.classList.remove('conducting');
- cdDialogRelease();CD.focusToken={};
+ cdDialogRelease();CD.focusToken={};anDialogRelease();AN.focusToken={};
  let s;
  if(view==='balanced-result'||view==='first-year'||view==='first-summary'){
   const random=Math.random;let seed=20261027;
@@ -383,7 +387,7 @@ async function show(next){
  if(view==='announce'||view.startsWith('announce-')){
   if(view==='announce-cast'){const rec=addRec(S,'確認用の本番',{only:S.members.slice(12,15).map(m=>m.id)});S.pending={recId:rec.id};report.castIds=rec.snap.members.map(m=>m.id);}
   const award=view==='announce-silver'?'silver':view==='announce-bronze'?'bronze':'gold';
-  showAnnounce({award,rep:award==='gold',avg:85},'pref',()=>{},view==='announce-bronze'?'B':'A');AN.skip();
+  showAnnounce({award,rep:award==='gold',avg:85},'pref',()=>{report.announceClosed=(report.announceClosed||0)+1;record();},view==='announce-bronze'?'B':'A');if(!q.has('animateAnnounce'))AN.skip();
  }
  if(view==='balanced-result'){reveal();AN.skip();}
  if(view==='fx'){U.fxMode=q.get('fx')||'short';fxShow({kind:'cut',html:fxCutHtml('実績を達成','はじめての金賞','',''),ms:60000});clearTimeout(FX.timer);}

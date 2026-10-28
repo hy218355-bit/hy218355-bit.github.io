@@ -1,0 +1,28 @@
+{
+  "active": "BODY",
+  "background": [
+    {
+      "id": "app",
+      "inert": false
+    },
+    {
+      "id": "mini",
+      "inert": false
+    },
+    {
+      "id": "tabbar",
+      "inert": false
+    }
+  ],
+  "doneHidden": false,
+  "modal": null,
+  "role": null,
+  "afterTab": {
+    "active": "BUTTON",
+    "inside": false
+  },
+  "afterSecondTab": {
+    "active": "BUTTON",
+    "inside": false
+  }
+}
