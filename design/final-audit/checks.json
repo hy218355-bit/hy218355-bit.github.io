@@ -1,0 +1,280 @@
+[
+  {
+    "file": "tsukurikata/tools/check_announce_navigation.js",
+    "exit": 0,
+    "seconds": 0.06,
+    "stdout": "発表内のTab循環／長押しと変換中の入力／閉じる処理の一回実行／元の操作とinertの復元／開き直しと次の画面の操作先：確認済み\n",
+    "stderr": ""
+  },
+  {
+    "file": "tsukurikata/tools/check_audition_listen.js",
+    "exit": 0,
+    "seconds": 1.9,
+    "stdout": "前の本人指定を解消／選択と全員と本人の実際の音／チェックと保存を保つ／選び直しと待機中止／古い予約の無効化／自然終了と別の音への切替／0人と本番中の制限：確認済み\n",
+    "stderr": ""
+  },
+  {
+    "file": "tsukurikata/tools/check_audition_sound.js",
+    "exit": 0,
+    "seconds": 10.96,
+    "stdout": "全15曲：人選と理由の一致・同じ本番の採点・課題曲4割と自由曲6割・保存内容の保持を確認。\n[{\"id\":\"largo\",\"all\":38,\"selected\":76.66666666666667,\"disruptionAll\":20,\"disruptionSelected\":0},{\"id\":\"ode\",\"all\":53,\"selected\":74.33333333333333,\"disruptionAll\":19.781443830758324,\"disruptionSelected\":0},{\"id\":\"galop\",\"all\":50,\"selected\":77.33333333333333,\"disruptionAll\":19.80013240357476,\"disruptionSelected\":0},{\"id\":\"pomp\",\"all\":55,\"selected\":79.33333333333333,\"disruptionAll\":19.83096113055823,\"disruptionSelected\":0},{\"id\":\"aida\",\"all\":56.333333333333336,\"selected\":78.66666666666667,\"disruptionAll\":19.648893722680942,\"disruptionSelected\":0},{\"id\":\"hero\",\"all\":53,\"selected\":75.66666666666667,\"disruptionAll\":19.27040456525032,\"disruptionSelected\":0},{\"id\":\"holst\",\"all\":53.666666666666664,\"selected\":77.66666666666667,\"disruptionAll\":19.654656912771014,\"disruptionSelected\":0},{\"id\":\"hungarian\",\"all\":52.333333333333336,\"selected\":76.66666666666667,\"disruptionAll\":19.537865436261548,\"disruptionSelected\":0},{\"id\":\"flowers\",\"all\":54,\"selected\":74.66666666666667,\"disruptionAll\":19.00008613946615,\"disruptionSelected\":0},{\"id\":\"tell\",\"all\":53.666666666666664,\"selected\":76.66666666666667,\"disruptionAll\":19.931629179630875,\"disruptionSelected\":0},{\"id\":\"carmen\",\"all\":51.333333333333336,\"selected\":75.66666666666667,\"disruptionAll\":19.89724695605404,\"disruptionSelected\":0},{\"id\":\"valkyrie\",\"all\":50,\"selected\":78.33333333333333,\"disruptionAll\":19.652806561171975,\"disruptionSelected\":0},{\"id\":\"swan\",\"all\":55,\"selected\":74.66666666666667,\"disruptionAll\":15.652140398314929,\"disruptionSelected\":0},{\"id\":\"spring\",\"all\":39.666666666666664,\"selected\":76.66666666666667,\"disruptionAll\":19.605063058003708,\"disruptionSelected\":0},{\"id\":\"canon\",\"all\":46.666666666666664,\"selected\":76.33333333333333,\"disruptionAll\":19.787177759104843,\"disruptionSelected\":0}]\n",
+    "stderr": ""
+  },
+  {
+    "file": "tsukurikata/tools/check_conduct_cue.js",
+    "exit": 0,
+    "seconds": 0.05,
+    "stdout": "2・3・4・8拍の予告と入り／実際のタップから演奏開始・ぴったり判定／全15曲の区間・テンポ変更／途中の拍と小節の先頭・数え始めの音／テンポ出しの中断と数え直し／演奏と時計の不変／終端・待機・終了／演出なし・短く・動きを減らす設定：確認済み\n",
+    "stderr": ""
+  },
+  {
+    "file": "tsukurikata/tools/check_conduct_result.js",
+    "exit": 0,
+    "seconds": 1.1,
+    "stdout": "同じボタンで再生・停止／自然終了で印を戻す／読み込み中止後の遅延再生なし／結果を閉じて再生と待機を停止／別の録音の印を区別／部と録音を増減しない：確認済み\n",
+    "stderr": ""
+  },
+  {
+    "file": "tsukurikata/tools/check_conduct_timing.js",
+    "exit": 0,
+    "seconds": 0.04,
+    "stdout": "{\"scenario\":\"半秒ごとの5タップ・処理待ち50〜160ms\",\"judge\":{\"p\":5,\"g\":0,\"e\":0,\"l\":0},\"period\":0.5,\"taps\":[{\"time\":20,\"offset\":0},{\"time\":20.5,\"offset\":0},{\"time\":21,\"offset\":0},{\"time\":21.5,\"offset\":0},{\"time\":22,\"offset\":0}]}\n処理待ちの補正／テンポ出しと開始時刻／本当の遅れと二度押し／時刻の起点と無効な値／滞留・複数指・右クリック／保存した指揮の再生：確認済み\n",
+    "stderr": ""
+  },
+  {
+    "file": "tsukurikata/tools/check_current_member_listen.js",
+    "exit": 0,
+    "seconds": 3.71,
+    "stdout": "昔の録音・同じidの昔の力から今の本人とパートへ／現在の合奏は止めずに切替／育った後も今の力／停止時の席変更を再確認／部員と録音を変えない：確認済み\n",
+    "stderr": ""
+  },
+  {
+    "file": "tsukurikata/tools/check_current_rest.js",
+    "exit": 0,
+    "seconds": 3.23,
+    "stdout": "全15曲・全57範囲／休みの延べ301人・音のある延べ1922人・パートの休み41件／休みは試聴しない／本人は休みでもパートを聴ける／範囲変更で古い無音指定を解消／未準備時の判定と操作先／顔と席・部・録音・演奏を保持／演奏ごとの使い回し：確認済み\n",
+    "stderr": ""
+  },
+  {
+    "file": "tsukurikata/tools/check_ensemble_picked.js",
+    "exit": 0,
+    "seconds": 0.05,
+    "stdout": "0〜8人／選択した本人と候補の順序／外した顔を消す／8枠を保持／読み上げの人数と名前／控えと不在を除外／部と選択を変えない／一覧がない画面：確認済み\n",
+    "stderr": ""
+  },
+  {
+    "file": "tsukurikata/tools/check_ensemble_preview.js",
+    "exit": 0,
+    "seconds": 2.89,
+    "stdout": "全15曲×3・5・8人の45編成／本番の録音との音符・時刻・音程・音量の一致／本番前の能力・譜読み・会場／選んだ本人の顔／部員・評判・録音・日誌の不変：確認済み\n席がなくなった人と存在しない人だけを選択から外し、部員のデータは保つ：確認済み\n",
+    "stderr": ""
+  },
+  {
+    "file": "tsukurikata/tools/check_faces.js",
+    "exit": 0,
+    "seconds": 0.03,
+    "stdout": "100人の原画／元の39人の内訳維持／名前生成／名前と顔の対応／旧セーブ不変／キャッシュ／解像度と容量：確認済み\nランクの境界：確認済み\n",
+    "stderr": ""
+  },
+  {
+    "file": "tsukurikata/tools/check_flute_cast.js",
+    "exit": 0,
+    "seconds": 0.54,
+    "stdout": "100種類の39人編成／フルート・ピッコロの女子配役／名前と顔の一致／重複なし／再現性／席・能力・やる気の維持／今いる部員と入部待ちの保持：確認済み\n",
+    "stderr": ""
+  },
+  {
+    "file": "tsukurikata/tools/check_graduation_album.js",
+    "exit": 0,
+    "seconds": 0.05,
+    "stdout": "本人への移動と前後・集合写真から戻る／決定前の保存なし／録音の再開なし／引退後の39人の録音／最後の確定だけ保存／演出3設定と動きの少ない設定／空の名簿と名前の安全な表示：確認済み\n",
+    "stderr": ""
+  },
+  {
+    "file": "tsukurikata/tools/check_hall_carry.js",
+    "exit": 0,
+    "seconds": 0.05,
+    "stdout": "年度替わりの会場慣れ／卒業と新年度／録音と入力の保持／保存・再開／週ごとの減少／前の記録：確認済み\n",
+    "stderr": ""
+  },
+  {
+    "file": "tsukurikata/tools/check_lineup_scoring.js",
+    "exit": 0,
+    "seconds": 6.55,
+    "stdout": "{\n  \"曲別\": [\n    {\n      \"曲\": \"largo\",\n      \"安定20人\": 75.3,\n      \"苦手1人追加\": 64.7,\n      \"苦手5人追加\": 37.7,\n      \"安定39人\": 82.3,\n      \"厚み加点\": 3.54\n    },\n    {\n      \"曲\": \"ode\",\n      \"安定20人\": 76.7,\n      \"苦手1人追加\": 67.7,\n      \"苦手5人追加\": 40.7,\n      \"安定39人\": 81.7,\n      \"厚み加点\": 3.78\n    },\n    {\n      \"曲\": \"galop\",\n      \"安定20人\": 78.7,\n      \"苦手1人追加\": 65.7,\n      \"苦手5人追加\": 45.7,\n      \"安定39人\": 85.7,\n      \"厚み加点\": 3.83\n    },\n    {\n      \"曲\": \"pomp\",\n      \"安定20人\": 79.7,\n      \"苦手1人追加\": 66.7,\n      \"苦手5人追加\": 45.3,\n      \"安定39人\": 86.3,\n      \"厚み加点\": 3.81\n    },\n    {\n      \"曲\": \"aida\",\n      \"安定20人\": 75.7,\n      \"苦手1人追加\": 66.3,\n      \"苦手5人追加\": 47.7,\n      \"安定39人\": 83.7,\n      \"厚み加点\": 3.81\n    },\n    {\n      \"曲\": \"hero\",\n      \"安定20人\": 79,\n      \"苦手1人追加\": 64.3,\n      \"苦手5人追加\": 43.7,\n      \"安定39人\": 85.7,\n      \"厚み加点\": 3.61\n    },\n    {\n      \"曲\": \"holst\",\n      \"安定20人\": 78.7,\n      \"苦手1人追加\": 65,\n      \"苦手5人追加\": 43.7,\n      \"安定39人\": 85.3,\n      \"厚み加点\": 3.83\n    },\n    {\n      \"曲\": \"hungarian\",\n      \"安定20人\": 76.7,\n      \"苦手1人追加\": 67,\n      \"苦手5人追加\": 41.3,\n      \"安定39人\": 85,\n      \"厚み加点\": 3.54\n    },\n    {\n      \"曲\": \"flowers\",\n      \"安定20人\": 71,\n      \"苦手1人追加\": 60.3,\n      \"苦手5人追加\": 36.7,\n      \"安定39人\": 83.3,\n      \"厚み加点\": 3.61\n    },\n    {\n      \"曲\": \"tell\",\n      \"安定20人\": 78.3,\n      \"苦手1人追加\": 67,\n      \"苦手5人追加\": 44.7,\n      \"安定39人\": 82.7,\n      \"厚み加点\": 3.8\n    },\n    {\n      \"曲\": \"carmen\",\n      \"安定20人\": 78.7,\n      \"苦手1人追加\": 64.7,\n      \"苦手5人追加\": 43.7,\n      \"安定39人\": 86,\n      \"厚み加点\": 3.81\n    },\n    {\n      \"曲\": \"valkyrie\",\n      \"安定20人\": 73.7,\n      \"苦手1人追加\": 62.7,\n      \"苦手5人追加\": 38.7,\n      \"安定39人\": 81,\n      \"厚み加点\": 3.84\n    },\n    {\n      \"曲\": \"swan\",\n      \"安定20人\": 76,\n      \"苦手1人追加\": 69,\n      \"苦手5人追加\": 38.7,\n      \"安定39人\": 80.7,\n      \"厚み加点\": 3.17\n    },\n    {\n      \"曲\": \"spring\",\n      \"安定20人\": 75.3,\n      \"苦手1人追加\": 66.3,\n      \"苦手5人追加\": 34.7,\n      \"安定39人\": 79.7,\n      \"厚み加点\": 3.44\n    },\n    {\n      \"曲\": \"canon\",\n      \"安定20人\": 78,\n      \"苦手1人追加\": 65,\n      \"苦手5人追加\": 41.7,\n      \"安定39人\": 82,\n      \"厚み加点\": 3.46\n    }\n  ],\n  \"人選\": {\n    \"全員\": 50.666666666666664,\n    \"おすすめ\": 79,\n    \"控え\": 8\n  },\n  \"確認\": \"全15曲・弱い奏者の追加・安定した厚み・楽器の欠員・空編成・以前の録音・セーブ不変・A部門の採点一致\"\n}\n",
+    "stderr": ""
+  },
+  {
+    "file": "tsukurikata/tools/check_listening_mix.js",
+    "exit": 0,
+    "seconds": 0.05,
+    "stdout": "静かな区間だけの補正／残響との一致／通常と保存済みと演奏中の指揮／区間と他曲の維持／停止と自然終了の片づけ／音色のなめらかなつなぎ／演奏記録の不変：確認済み\n",
+    "stderr": ""
+  },
+  {
+    "file": "tsukurikata/tools/check_live_performance.js",
+    "exit": 0,
+    "seconds": 3.0,
+    "stdout": "相談・冬の練習・行事・新体制後の初回再生／範囲と会場の変更直後／連続更新／再生中の録音を保つ／再生でセーブを書き換えない：確認済み\n",
+    "stderr": "",
+    "earlierFailure": {
+      "reason": "検査用の画面関数が不足していたため補った。製品は変更していない。",
+      "exit": 1,
+      "stderr": "evalmachine.<anonymous>:27\n    renderSelectors();renderCurrentMemberListening();\n    ^\n\nReferenceError: renderSelectors is not defined\n    at evalmachine.<anonymous>:27:5\n    at flush (evalmachine.<anonymous>:11:71)\n    at evalmachine.<anonymous>:12:109\n    at Script.runInContext (node:vm:149:12)\n    at Object.runInContext (node:vm:301:6)\n    at Object.<anonymous> (/Users/yh/Documents/Codex/2026-10-26/tsukurikata-2-1-ok-agents-md/worktree/tsukurikata/tools/check_live_performance.js:38:4)\n    at Module._compile (node:internal/modules/cjs/loader:1812:14)\n    at Object..js (node:internal/modules/cjs/loader:1943:10)\n    at Module.load (node:internal/modules/cjs/loader:1533:32)\n    at Module._load (node:internal/modules/cjs/loader:1335:12)\n\nNode.js v24.14.0\n"
+    }
+  },
+  {
+    "file": "tsukurikata/tools/check_member_listening.js",
+    "exit": 0,
+    "seconds": 4.51,
+    "stdout": "全15曲×本人・パートの30通り／同じボタンで全員へ／切替で再生・音・部を保持／ボタンと入力・開いた内容を使い回す／停止後に印を解除し再開／待機を保って全員へ／違う音・成長後は最新へ／録音と控えを区別：確認済み\n",
+    "stderr": ""
+  },
+  {
+    "file": "tsukurikata/tools/check_member_move_undo.js",
+    "exit": 0,
+    "seconds": 0.07,
+    "stdout": "交代する二人の能力・席・160件の日誌・録音・セーブの復元／控えと空席／直前の1回だけ／改名・練習・本番・停止時の保存を消さない：確認済み\n",
+    "stderr": ""
+  },
+  {
+    "file": "tsukurikata/tools/check_member_names.js",
+    "exit": 0,
+    "seconds": 0.05,
+    "stdout": "名前の保存と再読み込み／旧セーブ／何度変えても同じ顔／能力と本人のid／録音の保持／空欄・長さ・同名・記号の検証：確認済み\n",
+    "stderr": ""
+  },
+  {
+    "file": "tsukurikata/tools/check_member_record_stop.js",
+    "exit": 0,
+    "seconds": 1.91,
+    "stdout": "個人録音の待機中止・実際の停止・全員や別の本人への切替／古い待機が鳴らない／本番の終了処理を呼ばない／次の音を止めない／部と録音を変えない：確認済み\n",
+    "stderr": ""
+  },
+  {
+    "file": "tsukurikata/tools/check_mini_subject.js",
+    "exit": 0,
+    "seconds": 1.58,
+    "stdout": "全15曲／本人の顔と当時の楽器・パート・全員／待機と停止・合奏タブ・人選中の表示／同じ表示を使い回す／名前の安全な表示／部と演奏を保持：確認済み\n",
+    "stderr": ""
+  },
+  {
+    "file": "tsukurikata/tools/check_model_context.js",
+    "exit": 0,
+    "seconds": 1.92,
+    "stdout": "全15曲×再生・待機の30通り／お手本の見出しと曲／全曲の範囲／自分の部員と指揮を混ぜない／音のあるパートのみ／使い回し／停止・今の部で元へ／部・演奏の不変：確認済み\n",
+    "stderr": ""
+  },
+  {
+    "file": "tsukurikata/tools/check_native_file.js",
+    "exit": 0,
+    "seconds": 0.04,
+    "stdout": "完了まで待機／8分割の順序・同じID／二重保存を拒否／古い通知を無視／成功・失敗・橋の例外から復帰／録音の作成1回と保存中表示／本人の書き出し／途中の失敗で送信終了／録音の不変：確認済み\n",
+    "stderr": ""
+  },
+  {
+    "file": "tsukurikata/tools/check_piece_listening.js",
+    "exit": 0,
+    "seconds": 3.96,
+    "stdout": "全15曲×お手本・いまの部の30通りの実際の音／本人指定を解消／表示どおりの会場／同じボタンで停止／切替・自然終了・待機中止／古い予約を鳴らさない／最新の部・通常の再生を保持／失敗時の印を解除：確認済み\n",
+    "stderr": ""
+  },
+  {
+    "file": "tsukurikata/tools/check_prediction_state.js",
+    "exit": 0,
+    "seconds": 1.74,
+    "stdout": "{\"before\":81,\"afterWithCache\":81,\"afterFresh\":81,\"nWithCache\":38,\"nFresh\":38}\n同じ週の席・楽器・曲・やる気の変更を予想に反映／前の部の保持：確認済み\n",
+    "stderr": ""
+  },
+  {
+    "file": "tsukurikata/tools/check_reading_difficulty.js",
+    "exit": 0,
+    "seconds": 0.48,
+    "stdout": "15曲の設定／週の進み方／実力と譜読みスキル／個人練習と合奏／課題曲の配分／旧セーブ／覚えた値／採点の保持：確認済み\n{\"firstWeek\":[34.712725546058884,33.46938904716682,31.61551123773346,26.725641025641025,22.909971509971506],\"weeksTo90\":[5,6,8],\"pieces\":[{\"id\":\"largo\",\"title\":\"《新世界より》第2楽章\",\"difficulty\":1,\"load\":0.8},{\"id\":\"ode\",\"title\":\"「歓喜の歌」\",\"difficulty\":1,\"load\":0.8},{\"id\":\"galop\",\"title\":\"「天国と地獄」\",\"difficulty\":3,\"load\":1},{\"id\":\"pomp\",\"title\":\"「威風堂々」\",\"difficulty\":2,\"load\":0.9},{\"id\":\"aida\",\"title\":\"「凱旋行進曲」\",\"difficulty\":2,\"load\":0.9},{\"id\":\"hero\",\"title\":\"「見よ、勇者は帰る」\",\"difficulty\":1,\"load\":0.8},{\"id\":\"holst\",\"title\":\"「木星」\",\"difficulty\":3,\"load\":1},{\"id\":\"hungarian\",\"title\":\"「ハンガリー舞曲第5番」\",\"difficulty\":5,\"load\":1.4},{\"id\":\"flowers\",\"title\":\"「花のワルツ」\",\"difficulty\":4,\"load\":1.2},{\"id\":\"tell\",\"title\":\"「ウィリアム・テル」序曲\",\"difficulty\":5,\"load\":1.4},{\"id\":\"carmen\",\"title\":\"「カルメン」前奏曲\",\"difficulty\":4,\"load\":1.2},{\"id\":\"valkyrie\",\"title\":\"「ワルキューレの騎行」\",\"difficulty\":4,\"load\":1.2},{\"id\":\"swan\",\"title\":\"「情景」\",\"difficulty\":3,\"load\":1},{\"id\":\"spring\",\"title\":\"《四季》より「春」\",\"difficulty\":4,\"load\":1.2},{\"id\":\"canon\",\"title\":\"「カノン」\",\"difficulty\":2,\"load\":0.9}]}\n",
+    "stderr": ""
+  },
+  {
+    "file": "tsukurikata/tools/check_recording_card.js",
+    "exit": 0,
+    "seconds": 3.3,
+    "stdout": "全15曲の本人・全員の切替／再生と音・部・録音を保持／別の本人・閉じる・待機で指定を解除／パート指定の保持／Escapeの説明・編集・席選び・長押し・変換／舞台・名簿の操作先：確認済み\n",
+    "stderr": ""
+  },
+  {
+    "file": "tsukurikata/tools/check_recording_rest.js",
+    "exit": 0,
+    "seconds": 3.09,
+    "stdout": "全15曲・全57範囲／休みの延べ301人と音のある延べ1922人／音符・打楽器による区別／本人とパートの一覧／無音の指定を解消／演奏ごとの使い回し／部・録音・演奏の不変／現在の部の設定を保持：確認済み\n",
+    "stderr": ""
+  },
+  {
+    "file": "tsukurikata/tools/check_recruits.js",
+    "exit": 0,
+    "seconds": 0.38,
+    "stdout": "{\n  \"分布\": [\n    {\n      \"評判\": 5,\n      \"優秀\": 0,\n      \"試行\": 5000\n    },\n    {\n      \"評判\": 35,\n      \"優秀\": 0,\n      \"試行\": 5000\n    },\n    {\n      \"評判\": 60,\n      \"優秀\": 258,\n      \"試行\": 5000\n    },\n    {\n      \"評判\": 100,\n      \"優秀\": 709,\n      \"試行\": 5000\n    }\n  ],\n  \"初期能力比較\": {\n    \"通常\": 25.75,\n    \"優秀\": 49,\n    \"違う楽器\": 25.75\n  },\n  \"顔\": {\n    \"候補\": 100,\n    \"三十九人の異なる顔\": 39\n  },\n  \"確認\": \"出会いの変化・再読み込みで固定・旧セーブ互換・以前の顔固定・名前対応・評判の効果・得意楽器の初期能力\"\n}\n",
+    "stderr": ""
+  },
+  {
+    "file": "tsukurikata/tools/check_sample_queue.js",
+    "exit": 0,
+    "seconds": 0.03,
+    "stdout": "41個を4個までの負荷で読む／展開後に次を開始／失敗しても最後まで読む／再試行は残りだけ／録音と調律情報を保持／進み具合と二重実行：確認済み\n",
+    "stderr": ""
+  },
+  {
+    "file": "tsukurikata/tools/check_sample_retry.js",
+    "exit": 0,
+    "seconds": 0.03,
+    "stdout": "HTTP・音の展開・目録のエラーから再試行／読めた録音と調律情報の保持／残りの読み込みとの競合なし／二重実行なし／再び読めない場合も再試行可：確認済み\n",
+    "stderr": ""
+  },
+  {
+    "file": "tsukurikata/tools/check_score_balance.js",
+    "exit": 0,
+    "seconds": 9.11,
+    "stdout": "全15曲：演奏の音・分析・演奏会・練習・譜読みを保持。大会の採点係数・旧セーブの結果保持を確認。\n[{\"id\":\"largo\",\"before\":1,\"after\":0.948},{\"id\":\"ode\",\"before\":0.96,\"after\":0.95},{\"id\":\"galop\",\"before\":0.99,\"after\":0.965},{\"id\":\"pomp\",\"before\":0.98,\"after\":0.97},{\"id\":\"aida\",\"before\":0.96,\"after\":0.945},{\"id\":\"hero\",\"before\":1,\"after\":0.97},{\"id\":\"holst\",\"before\":0.97,\"after\":0.955},{\"id\":\"hungarian\",\"before\":0.96,\"after\":0.96},{\"id\":\"flowers\",\"before\":0.96,\"after\":0.95},{\"id\":\"tell\",\"before\":0.96,\"after\":0.96},{\"id\":\"carmen\",\"before\":0.96,\"after\":0.96},{\"id\":\"valkyrie\",\"before\":0.96,\"after\":0.935},{\"id\":\"swan\",\"before\":0.97,\"after\":0.945},{\"id\":\"spring\",\"before\":0.97,\"after\":0.925},{\"id\":\"canon\",\"before\":0.98,\"after\":0.955}]\n",
+    "stderr": ""
+  },
+  {
+    "file": "tsukurikata/tools/check_stage_cast.js",
+    "exit": 0,
+    "seconds": 3.37,
+    "stdout": "全15曲の音と記録の不変／音符のない延べ19人を含む全出場者／少人数の人選／改名・席替え・卒業後も当時の本人／アンサンブルで育つ前の力／当日の曲と譜読みのひとこと：確認済み\nA部門の課題曲→自由曲と拍手／課題曲→自由曲の指揮／アンサンブルの実際の開始／出場人数・当日の力・音と結果の保持：確認済み\n当日の記録から空の舞台→入場途中→全39人／今の名簿にいなくても本人を保つ／入場後に一度だけ演奏開始：確認済み\n",
+    "stderr": ""
+  },
+  {
+    "file": "tsukurikata/tools/check_stage_faces.js",
+    "exit": 0,
+    "seconds": 0.04,
+    "stdout": "240〜720pxの顔の間隔・はみ出し・タップ／楽器決めの位置維持／録音の本人の顔／4枚の読み込みと39個の絵の再利用：確認済み\n100人へ拡張しても原画10枚・丸い画像100個を再利用：確認済み\n",
+    "stderr": ""
+  },
+  {
+    "file": "tsukurikata/tools/check_stage_reveal.js",
+    "exit": 0,
+    "seconds": 0.02,
+    "stdout": "合奏開始の10通り／舞台が隠れるときだけ表示／停止へ操作先を渡す／部員カードなどの試聴は移動しない／待機・失敗・広い画面・別タブを区別／同じ音を一度だけ再生／部と音を保持：確認済み\n",
+    "stderr": ""
+  },
+  {
+    "file": "tsukurikata/tools/check_stop_current.js",
+    "exit": 0,
+    "seconds": 0.19,
+    "stdout": "週を進めたあとの停止で今の音と譜面へ戻る／元の部を変えない／終了の通知は1回／次の本番を上書きしない／終了処理後の最新状態を使う：確認済み\n",
+    "stderr": ""
+  },
+  {
+    "file": "tsukurikata/tools/check_stop_navigation.js",
+    "exit": 0,
+    "seconds": 0.04,
+    "stdout": "合奏・小さな再生バーの停止と自然終了／待機の中止／元の部と演奏を保持／終了の通知は1回／次の音と待機・結果・別の操作を保つ／隠れた操作とモーダルの裏へ戻さない／スクロールを動かさない：確認済み\n",
+    "stderr": ""
+  },
+  {
+    "file": "tsukurikata/tools/check_week_escape.js",
+    "exit": 0,
+    "seconds": 0.03,
+    "stdout": "練習・行事・本番準備の18通り／説明を先に閉じる／長押し・文字の変換・他のキーは保持／対象外の場所を保持／一度の入力で一つだけ閉じる：確認済み\n",
+    "stderr": ""
+  }
+]

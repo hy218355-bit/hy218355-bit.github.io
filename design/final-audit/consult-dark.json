@@ -1,0 +1,247 @@
+{
+  "announcement": {
+    "active": "BUTTON",
+    "background": [
+      {
+        "id": "app",
+        "inert": false
+      },
+      {
+        "id": "mini",
+        "inert": false
+      },
+      {
+        "id": "tabbar",
+        "inert": false
+      },
+      {
+        "id": "toast",
+        "inert": false
+      }
+    ],
+    "body": {
+      "height": 0,
+      "rect": {
+        "bottom": 0,
+        "height": 0,
+        "left": 0,
+        "right": 0,
+        "top": 0,
+        "width": 0,
+        "x": 0,
+        "y": 0
+      },
+      "scroll": 0,
+      "top": 0
+    },
+    "closed": 0,
+    "done": {
+      "bottom": 0,
+      "height": 0,
+      "left": 0,
+      "right": 0,
+      "top": 0,
+      "width": 0,
+      "x": 0,
+      "y": 0
+    },
+    "doneHidden": false,
+    "faces": [
+      "m2028-n1-cafe",
+      "m2028-n2-cafe",
+      "m2028-n3-cafe",
+      "m2028-n4-cafe",
+      "m2028-n5-cafe",
+      "m2028-n6-cafe",
+      "m2028-n7-cafe",
+      "m2028-n8-cafe"
+    ],
+    "hidden": true,
+    "inside": false,
+    "modal": "true",
+    "motion": "off",
+    "pending": 0.6582213917281479,
+    "representatives": [
+      "市立萩見高等学校",
+      "県立風川高等学校",
+      "県立みなと高等学校"
+    ],
+    "role": "dialog",
+    "rows": [
+      {
+        "award": "ゴールド金賞",
+        "name": "市立萩見高等学校",
+        "ours": false
+      },
+      {
+        "award": "ゴールド金賞",
+        "name": "県立風川高等学校",
+        "ours": false
+      },
+      {
+        "award": "ゴールド金賞",
+        "name": "県立月見台高等学校ライバル",
+        "ours": false
+      },
+      {
+        "award": "銀賞",
+        "name": "私立緑里高等学校",
+        "ours": false
+      },
+      {
+        "award": "ゴールド金賞",
+        "name": "県立みなと高等学校",
+        "ours": true
+      },
+      {
+        "award": "銀賞",
+        "name": "県立若沢高等学校",
+        "ours": false
+      },
+      {
+        "award": "銀賞",
+        "name": "県立風崎高等学校",
+        "ours": false
+      },
+      {
+        "award": "銅賞",
+        "name": "県立椿浜高等学校",
+        "ours": false
+      },
+      {
+        "award": "銀賞",
+        "name": "県立椿見高等学校",
+        "ours": false
+      },
+      {
+        "award": "銀賞",
+        "name": "県立若浜高等学校",
+        "ours": false
+      },
+      {
+        "award": "銀賞",
+        "name": "県立葵森高等学校",
+        "ours": false
+      },
+      {
+        "award": "銅賞",
+        "name": "市立椿崎高等学校",
+        "ours": false
+      }
+    ],
+    "skipHidden": true
+  },
+  "boot": {
+    "errors": [],
+    "failed": [],
+    "loaded": 33,
+    "scripts": 33
+  },
+  "cache": {
+    "images": 10,
+    "stamps": 58
+  },
+  "conduct": {
+    "count": 0,
+    "events": 0,
+    "from": 0,
+    "judge": null,
+    "level": 1,
+    "meter": 2,
+    "phase": "idle",
+    "taps": 0,
+    "to": 81
+  },
+  "faces": 56,
+  "focus": {
+    "active": "BUTTON",
+    "background": [
+      {
+        "id": "app",
+        "inert": false
+      },
+      {
+        "id": "mini",
+        "inert": false
+      },
+      {
+        "id": "tabbar",
+        "inert": false
+      },
+      {
+        "id": "toast",
+        "inert": false
+      }
+    ],
+    "inside": false,
+    "modal": "true",
+    "role": "dialog",
+    "text": "合奏",
+    "tipOpen": false,
+    "tipOwner": null
+  },
+  "gradOpen": false,
+  "h": 812,
+  "imageSources": [
+    "url(\"http://127.0.0.1:8005/tsukurikata/img/faces/classmates-04.webp?v=cast100-20261026-1\")",
+    "url(\"http://127.0.0.1:8005/tsukurikata/img/faces/classmates-08.webp?v=cast100-20261026-1\")",
+    "url(\"http://127.0.0.1:8005/tsukurikata/img/faces/plain-03.webp?v=cast100-20261026-1\")",
+    "url(\"http://127.0.0.1:8005/tsukurikata/img/faces/plain-02.webp?v=cast100-20261026-1\")",
+    "url(\"http://127.0.0.1:8005/tsukurikata/img/faces/classmates-05.webp?v=cast100-20261026-1\")",
+    "url(\"http://127.0.0.1:8005/tsukurikata/img/faces/classmates-09.webp?v=cast100-20261026-1\")",
+    "url(\"http://127.0.0.1:8005/tsukurikata/img/faces/plain-01.webp?v=cast100-20261026-1\")"
+  ],
+  "rankText": [
+    "G",
+    "F",
+    "E",
+    "D",
+    "C",
+    "B",
+    "A",
+    "S"
+  ],
+  "scriptSources": [
+    "http://127.0.0.1:8005/tsukurikata/js/util.js?v=qa-final-audit-1",
+    "http://127.0.0.1:8005/tsukurikata/js/icons.js?v=qa-final-audit-1",
+    "http://127.0.0.1:8005/tsukurikata/js/instrument-icons.js?v=qa-final-audit-1",
+    "http://127.0.0.1:8005/tsukurikata/js/face-cast.js?v=qa-final-audit-1",
+    "http://127.0.0.1:8005/tsukurikata/js/faces.js?v=qa-final-audit-1",
+    "http://127.0.0.1:8005/tsukurikata/js/instruments.js?v=qa-final-audit-1",
+    "http://127.0.0.1:8005/tsukurikata/js/venues.js?v=qa-final-audit-1",
+    "http://127.0.0.1:8005/tsukurikata/js/samples.js?v=qa-final-audit-1",
+    "http://127.0.0.1:8005/tsukurikata/js/scores.js?v=qa-final-audit-1",
+    "http://127.0.0.1:8005/tsukurikata/js/pieces/largo.js?v=qa-final-audit-1",
+    "http://127.0.0.1:8005/tsukurikata/js/pieces/ode.js?v=qa-final-audit-1",
+    "http://127.0.0.1:8005/tsukurikata/js/pieces/galop.js?v=qa-final-audit-1",
+    "http://127.0.0.1:8005/tsukurikata/js/pieces/pomp.js?v=qa-final-audit-1",
+    "http://127.0.0.1:8005/tsukurikata/js/pieces/aida.js?v=qa-final-audit-1",
+    "http://127.0.0.1:8005/tsukurikata/js/pieces/hero.js?v=qa-final-audit-1",
+    "http://127.0.0.1:8005/tsukurikata/js/pieces/holst.js?v=qa-final-audit-1",
+    "http://127.0.0.1:8005/tsukurikata/js/pieces/hungarian.js?v=qa-final-audit-1",
+    "http://127.0.0.1:8005/tsukurikata/js/pieces/flowers.js?v=qa-final-audit-1",
+    "http://127.0.0.1:8005/tsukurikata/js/pieces/tell.js?v=qa-final-audit-1",
+    "http://127.0.0.1:8005/tsukurikata/js/pieces/carmen.js?v=qa-final-audit-1",
+    "http://127.0.0.1:8005/tsukurikata/js/pieces/valkyrie.js?v=qa-final-audit-1",
+    "http://127.0.0.1:8005/tsukurikata/js/pieces/swan.js?v=qa-final-audit-1",
+    "http://127.0.0.1:8005/tsukurikata/js/pieces/spring.js?v=qa-final-audit-1",
+    "http://127.0.0.1:8005/tsukurikata/js/pieces/canon.js?v=qa-final-audit-1",
+    "http://127.0.0.1:8005/tsukurikata/js/band.js?v=qa-final-audit-1",
+    "http://127.0.0.1:8005/tsukurikata/js/game.js?v=qa-final-audit-1",
+    "http://127.0.0.1:8005/tsukurikata/js/engine.js?v=qa-final-audit-1",
+    "http://127.0.0.1:8005/tsukurikata/js/conduct.js?v=qa-final-audit-1",
+    "http://127.0.0.1:8005/tsukurikata/js/announce.js?v=qa-final-audit-1",
+    "http://127.0.0.1:8005/tsukurikata/js/tunegame.js?v=qa-final-audit-1",
+    "http://127.0.0.1:8005/tsukurikata/js/fx.js?v=qa-final-audit-1",
+    "http://127.0.0.1:8005/tsukurikata/js/ui.js?v=qa-final-audit-1",
+    "http://127.0.0.1:8005/design/implementation/qa.js?v=qa-final-audit-1"
+  ],
+  "scrollWidth": 375,
+  "selectedGraduate": "m2028-n3-cafe",
+  "stagePortraits": 6,
+  "theme": "dark",
+  "view": "consult",
+  "watchPortraits": 39,
+  "width": 375,
+  "y": 81.5
+}

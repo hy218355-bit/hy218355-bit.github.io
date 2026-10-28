@@ -1,0 +1,142 @@
+[
+  {
+    "requirement": "承認済みB案で主要画面の見た目を統一",
+    "status": "verified",
+    "evidence": [
+      "screenshots/",
+      "summary.json"
+    ]
+  },
+  {
+    "requirement": "375px・ライトとダークで4タブ、部員カード、相談、本番、結果、卒業式、指揮を確認",
+    "status": "verified",
+    "evidence": [
+      "summary.json",
+      "practice-lines.json",
+      "console-check.json"
+    ]
+  },
+  {
+    "requirement": "本人の顔・名前・楽器を各画面でそろえ、過去の録音は当時の部員を表示",
+    "status": "verified",
+    "evidence": [
+      "checks.json:check_faces.js",
+      "checks.json:check_stage_cast.js",
+      "checks.json:check_recording_card.js",
+      "checks.json:check_graduation_album.js"
+    ]
+  },
+  {
+    "requirement": "高1寄りの顔100候補、元の39人の特別な顔は女子8人・男子1人、既存の配役を保つ",
+    "status": "verified",
+    "evidence": [
+      "checks.json:check_faces.js",
+      "checks.json:check_recruits.js",
+      "assets.json"
+    ]
+  },
+  {
+    "requirement": "新しいフルート・ピッコロの配役、改名、席替えと取り消し",
+    "status": "verified",
+    "evidence": [
+      "checks.json:check_flute_cast.js",
+      "checks.json:check_member_names.js",
+      "checks.json:check_member_move_undo.js"
+    ]
+  },
+  {
+    "requirement": "G〜Sのランク、Sは金、本人の能力は数値で表示しない",
+    "status": "verified",
+    "evidence": [
+      "*-light.json:rankText",
+      "*-dark.json:rankText",
+      "checks.json:check_faces.js",
+      "screenshots/member-dark.png",
+      "screenshots/practice-light.png"
+    ]
+  },
+  {
+    "requirement": "指揮の拍を前もって予告し、処理待ちを判定へ混ぜず、演出設定に合わせる",
+    "status": "verified",
+    "evidence": [
+      "checks.json:check_conduct_cue.js",
+      "checks.json:check_conduct_timing.js",
+      "screenshots/conduct-light.png",
+      "screenshots/conduct-dark.png"
+    ]
+  },
+  {
+    "requirement": "人選による安定感と厚み、曲ごとの譜読み時間、評判による入部、会場慣れの持ち越し",
+    "status": "verified",
+    "evidence": [
+      "checks.json:check_lineup_scoring.js",
+      "checks.json:check_score_balance.js",
+      "checks.json:check_reading_difficulty.js",
+      "checks.json:check_recruits.js",
+      "checks.json:check_hall_carry.js"
+    ]
+  },
+  {
+    "requirement": "通常・お手本・録音・人選・本人の試聴を混同せず、停止と自然終了をそろえる",
+    "status": "verified",
+    "evidence": [
+      "checks.json",
+      "../playback-stop/pcm-check.json",
+      "../venue-fade/pcm-check.json"
+    ]
+  },
+  {
+    "requirement": "保存を重ねず、端末の完了通知まで待ち、失敗後は再試行できる",
+    "status": "verified_in_code_and_test_bridge",
+    "evidence": [
+      "checks.json:check_native_file.js",
+      "../native-export/README.md",
+      "../native-export/check-results.txt"
+    ]
+  },
+  {
+    "requirement": "1年分の進行とコンソールの確認",
+    "status": "verified",
+    "evidence": [
+      "../native-export/year-check.json",
+      "console-check.json",
+      "checks.json"
+    ]
+  },
+  {
+    "requirement": "画像の容量・出典・同梱フォント・オフライン・顔キャッシュ・アイコン3寸法",
+    "status": "verified",
+    "evidence": [
+      "assets.json",
+      "../native-export/font-check.txt",
+      "../../tsukurikata/img/CREDITS.md",
+      "checks.json:check_faces.js"
+    ]
+  },
+  {
+    "requirement": "ミラーリングを使わない、別worktreeとcodex/design、日本語のコミット、pushしない",
+    "status": "verified",
+    "evidence": [
+      "../../AGENTS.md",
+      "../native-export/native-check.json",
+      "device-status.json",
+      "git履歴とworktree"
+    ]
+  },
+  {
+    "requirement": "最終ソースのiOSビルドと同梱ファイルの照合",
+    "status": "verified",
+    "evidence": [
+      "../native-export/native-check.json"
+    ]
+  },
+  {
+    "requirement": "最終ビルドをiPhoneへ導入し、起動を確認",
+    "status": "pending_external_connection",
+    "evidence": [
+      "device-status.json",
+      "../native-export/native-check.json"
+    ],
+    "reason": "ペアリング済みのiPhoneはあるが、接続先がunavailableで導入できない。"
+  }
+]

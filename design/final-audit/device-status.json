@@ -1,0 +1,12 @@
+{
+  "physicalIOS": [
+    {
+      "paired": true,
+      "transport": null,
+      "tunnel": "unavailable",
+      "installable": false
+    }
+  ],
+  "installableCount": 0,
+  "mirroringUsed": false
+}

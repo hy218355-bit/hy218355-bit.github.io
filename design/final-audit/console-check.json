@@ -1,0 +1,18 @@
+{
+  "since": "2026-10-28T23:28:34.406Z",
+  "current": [],
+  "earlier": [
+    {
+      "level": "error",
+      "message": "TypeError: Cannot read properties of null (reading 'scrollIntoView')\n    at show (http://127.0.0.1:8005/design/implementation/qa.js?v=qa-native-export-4:480:48)\n    at async HTMLDocument.<anonymous> (http://127.0.0.1:8005/design/implementation/qa.js?v=qa-native-export-4:541:357)",
+      "timestamp": "2026-10-28T23:23:50.613Z",
+      "url": "http://127.0.0.1:8005/design/implementation/qa.js?v=qa-native-export-4"
+    },
+    {
+      "level": "error",
+      "message": "TypeError: Cannot read properties of null (reading 'scrollIntoView')\n    at show (http://127.0.0.1:8005/design/implementation/qa.js?v=qa-native-export-4:480:48)\n    at async HTMLDocument.<anonymous> (http://127.0.0.1:8005/design/implementation/qa.js?v=qa-native-export-4:541:357)",
+      "timestamp": "2026-10-28T23:24:13.788Z",
+      "url": "http://127.0.0.1:8005/design/implementation/qa.js?v=qa-native-export-4"
+    }
+  ]
+}

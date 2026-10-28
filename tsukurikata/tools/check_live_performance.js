@@ -13,6 +13,7 @@ const U={piece:null,range:'all',venue:'room',playing:false,moveUndo:null,perfNow
 const nodes={};const $=s=>nodes[s]||=( {remove(){},addEventListener(_,fn){this.click=fn;}} );
 save=s=>{saved=JSON.stringify(s);};
 const rememberStageMembers=perf=>perf,setNowPlaying=()=>{},renderDiag=()=>{},drawIdle=()=>{};
+const renderSelectors=()=>{},renderCurrentMemberListening=()=>{};
 const playPiece=()=>U.piece||S.pieceId||'largo';
 const playPerf=(perf,label)=>{played={perf,label};U.shown=perf;U.shownLabel=label;U.playing=true;};
 const flush=()=>{for(const [id,run] of [...timers]){timers.delete(id);run();refreshes++;}};

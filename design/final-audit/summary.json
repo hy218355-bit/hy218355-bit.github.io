@@ -1,0 +1,127 @@
+{
+  "checks": {
+    "total": 39,
+    "passed": 39
+  },
+  "viewport": 375,
+  "screenshots": 24,
+  "views": [
+    {
+      "key": "week",
+      "label": "今週",
+      "screenshots": [
+        "week-light",
+        "week-dark"
+      ],
+      "checked": true
+    },
+    {
+      "key": "practice",
+      "label": "練習の指示",
+      "screenshots": [
+        "practice-light",
+        "practice-dark"
+      ],
+      "checked": true
+    },
+    {
+      "key": "stage",
+      "label": "合奏",
+      "screenshots": [
+        "stage-light",
+        "stage-dark"
+      ],
+      "checked": true
+    },
+    {
+      "key": "members",
+      "label": "部員一覧",
+      "screenshots": [
+        "members-light",
+        "members-dark"
+      ],
+      "checked": true
+    },
+    {
+      "key": "journal",
+      "label": "日誌",
+      "screenshots": [
+        "journal-light",
+        "journal-dark"
+      ],
+      "checked": true
+    },
+    {
+      "key": "member",
+      "label": "部員カード",
+      "screenshots": [
+        "member-light",
+        "member-dark"
+      ],
+      "checked": true
+    },
+    {
+      "key": "consult",
+      "label": "相談",
+      "screenshots": [
+        "consult-light",
+        "consult-dark"
+      ],
+      "checked": true
+    },
+    {
+      "key": "ensemble",
+      "label": "アンサンブル人選",
+      "screenshots": [
+        "ensemble-light",
+        "ensemble-dark"
+      ],
+      "checked": true
+    },
+    {
+      "key": "watch",
+      "label": "本番の舞台",
+      "screenshots": [
+        "watch-light",
+        "watch-dark"
+      ],
+      "checked": true
+    },
+    {
+      "key": "announce",
+      "label": "結果発表",
+      "screenshots": [
+        "announce-light",
+        "announce-dark"
+      ],
+      "checked": true
+    },
+    {
+      "key": "grad",
+      "label": "卒業式",
+      "screenshots": [
+        "grad-light",
+        "grad-dark"
+      ],
+      "checked": true
+    },
+    {
+      "key": "conduct",
+      "label": "指揮の予告",
+      "screenshots": [
+        "conduct-light",
+        "conduct-dark"
+      ],
+      "checked": true
+    }
+  ],
+  "consoleErrors": 0,
+  "iphoneInstall": "端末が見つからないため未完了",
+  "mirroringUsed": false,
+  "completion": "実装とブラウザ確認は完了。実機への導入と起動は未完了。",
+  "remaining": [
+    "接続できるiPhoneへ最終ビルドを導入する",
+    "導入した最終ビルドの起動を確認する"
+  ],
+  "physicalScreenAndSound": "オーナー側の確認。ミラーリングは使わない。"
+}

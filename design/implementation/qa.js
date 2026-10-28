@@ -282,7 +282,12 @@ function record(){
  }
  let out=$('#qaResult');if(!out){out=document.createElement('output');out.id='qaResult';out.hidden=true;document.body.append(out);}out.dataset.audioSettled=String(!!(SAMPLES.ready||SAMPLES.error));out.dataset.audioReady=String(SAMPLES.ready);out.textContent=JSON.stringify(report);
 }
+let showing=false;
 async function show(next){
+ if(showing)return;
+ showing=true;
+ if($('#qaResult'))$('#qaResult').dataset.viewReady='false';
+ try{
  view=next;report={view,errors:[],steps:0};
  U.asg=null;U.weekRes=null;U.pick=null;U.pickReturn=null;U.rosterAt=null;U.prepKey=null;U.outKey='';U.outResult=null;$('#rosterParts').open=false;
  stopPlay();if(releaseSamples){releaseSamples();releaseSamples=null;}U.range='all';U.solo='all';U.view='mel';U.piece=null;U.venue='room';E.setSolo({type:'all'});E.setVenue('room');
@@ -480,7 +485,8 @@ async function show(next){
  else if(view==='consult')$('.episode.consult').scrollIntoView({block:'center'});
  else if(view.startsWith('song-'))$('.pcard')?.scrollIntoView({block:'start'});
  else window.scrollTo(0,0);
- record();console.log('画面確認',report);
+ record();$('#qaResult').dataset.viewReady='true';console.log('画面確認',report);
+ }finally{showing=false;}
 }
 await show(view);
 document.addEventListener('bootchecked',record);
