@@ -10,6 +10,9 @@ const CD = {phase: 'idle', perf: null, clock: null, count: [], lv: [], level: 1,
 const cdCountN = () => CD.perf.meter <= 2 ? CD.perf.meter * 2 : CD.perf.meter;
 const cdCueCalm = () => fxCalm() || U.fxMode !== 'full';
 const cdCueHint = () => cdCueCalm() ? 'ラインが光ったらタップ' : '光がラインに届いたらタップ';
+const cdBeatLabel = pc => pc.beatUnit===2?'2分音符':pc.beatUnit===1.5?'付点4分音符':pc.beatUnit===.5?'8分音符':'4分音符';
+const cdBeatMark = pc => `<span class="cd-beat" role="img" aria-label="${cdBeatLabel(pc)}">${uiBeatIcon(pc.beatUnit)}</span>`;
+const cdAverageTempo = (pc,bpm) => `<b class="cd-average">${cdBeatMark(pc)}<span aria-hidden="true">=</span>${bpm}</b>`;
 
 // 指揮を開いている間は、裏の画面を押したり、Tabで移ったりしない。
 const cdVisible = el => !!(el?.isConnected && !el.closest('[hidden],[inert]') && !el.matches(':disabled') && el.getClientRects().length && getComputedStyle(el).visibility !== 'hidden');
@@ -88,7 +91,9 @@ function openConduct(stage = null){
   $('#cdVenue').textContent = VENUE[CD.perf.venue || U.venue].name;
   $('#cdPlayers').textContent = `${CD.stageMembers.size}人`;
   $('#cdRef').textContent = bpmAt(pc, CD.perf.interp.tempo ?? 1, CD.perf.from);
-  for(const el of document.querySelectorAll('#conduct .cd-beat')) el.textContent = beatName(pc);
+  for(const el of document.querySelectorAll('#conduct .cd-stats .cd-beat')){
+    el.innerHTML=uiBeatIcon(pc.beatUnit);el.setAttribute('aria-label',cdBeatLabel(pc));
+  }
   $('#cdTempo').textContent = '--';
   $('#cdResult').hidden = true; $('#cdPad').hidden = false;
   const n = cdCountN();
@@ -361,7 +366,7 @@ function cdFinish(natural){
     $('#cdPad').hidden = true; cdMsg('');
     $('#cdResult').hidden = false;
     $('#cdResult').innerHTML = `<h3>演奏おわり</h3>
-      <p class="cd-num"><span>平均テンポ<b>${beatName(pc)}=${bpm}</b></span><span>安定度<b>${followed ? stab + '%' : '—'}</b></span></p>
+      <p class="cd-num"><span>平均テンポ${cdAverageTempo(pc,bpm)}</span><span>安定度<b>${followed ? stab + '%' : '—'}</b></span></p>
       ${judgeRow}
       <p>${speed}。${comment}</p>
       ${g != null ? `<p class="cd-gain">${g >= 0.05 ? `あなたの指揮で、おまかせより <b>+${g.toFixed(1)}点</b>` : g <= -0.05 ? `おまかせより <b>−${Math.abs(g).toFixed(1)}点</b>。タップを拍にぴったり合わせると、部員の出だしがそろう` : 'おまかせとほぼ同じ出来'}</p>` : ''}
@@ -379,7 +384,7 @@ function cdFinish(natural){
   cdMsg('');
   $('#cdResult').hidden = false;
   $('#cdResult').innerHTML = `<h3>演奏おわり</h3>
-    <p class="cd-num"><span>平均テンポ<b>${beatName(pc)}=${bpm}</b></span><span>安定度<b>${followed ? stab + '%' : '—'}</b></span></p>
+    <p class="cd-num"><span>平均テンポ${cdAverageTempo(pc,bpm)}</span><span>安定度<b>${followed ? stab + '%' : '—'}</b></span></p>
     ${judgeRow}
     <p>${speed}。${comment}</p>
     <p class="small">この演奏は「録音」に残った。会場の響きつきで保存して、何度でも聴き返せる。</p>

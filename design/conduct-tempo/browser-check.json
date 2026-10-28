@@ -1,0 +1,1972 @@
+{
+  "ready": {
+    "audio": {
+      "banks": 41,
+      "ready": true,
+      "voices": []
+    },
+    "boot": {
+      "errors": [],
+      "failed": [],
+      "loaded": 33,
+      "scripts": 33
+    },
+    "conduct": {
+      "beat": "1",
+      "combo": 0,
+      "count": 0,
+      "events": 0,
+      "from": 0,
+      "judge": {
+        "e": 0,
+        "g": 0,
+        "l": 0,
+        "p": 0
+      },
+      "level": 1,
+      "meter": 3,
+      "phase": "count",
+      "taps": 0,
+      "to": 94
+    },
+    "errors": [],
+    "focus": {
+      "id": "cdPad",
+      "inside": true,
+      "text": "\n      \n      タップ大きく小さく\n    "
+    },
+    "footer": {
+      "bottom": 794,
+      "height": 62,
+      "left": 24,
+      "right": 351,
+      "top": 732,
+      "width": 327,
+      "x": 24,
+      "y": 732
+    },
+    "height": 812,
+    "items": [
+      {
+        "rect": {
+          "bottom": 794,
+          "height": 44,
+          "left": 24,
+          "right": 80.640625,
+          "top": 750,
+          "width": 56.640625,
+          "x": 24,
+          "y": 750
+        },
+        "text": "いまのテンポ=--"
+      },
+      {
+        "rect": {
+          "bottom": 794,
+          "height": 44,
+          "left": 92.640625,
+          "right": 161.8671875,
+          "top": 750,
+          "width": 69.2265625,
+          "x": 92.640625,
+          "y": 750
+        },
+        "text": "指定=72"
+      },
+      {
+        "rect": {
+          "bottom": 772,
+          "height": 0,
+          "left": 351,
+          "right": 351,
+          "top": 772,
+          "width": 0,
+          "x": 351,
+          "y": 772
+        },
+        "text": ""
+      }
+    ],
+    "members": 0.6864548486191779,
+    "notes": [
+      {
+        "dots": 1,
+        "fill": "currentColor",
+        "flags": 0,
+        "label": "付点4分音符",
+        "rect": {
+          "bottom": 785,
+          "height": 26,
+          "left": 24,
+          "right": 44,
+          "top": 759,
+          "width": 20,
+          "x": 24,
+          "y": 759
+        },
+        "unit": "1.5"
+      },
+      {
+        "dots": 1,
+        "fill": "currentColor",
+        "flags": 0,
+        "label": "付点4分音符",
+        "rect": {
+          "bottom": 783,
+          "height": 22,
+          "left": 116.640625,
+          "right": 132.640625,
+          "top": 761,
+          "width": 16,
+          "x": 116.640625,
+          "y": 761
+        },
+        "unit": "1.5"
+      }
+    ],
+    "piece": "valkyrie",
+    "recordings": [],
+    "records": 0.7712433410342783,
+    "scrollHeight": 812,
+    "scrollWidth": 375,
+    "theme": "light",
+    "tips": {
+      "open": false,
+      "parent": "",
+      "text": ""
+    },
+    "width": 375
+  },
+  "tip": {
+    "audio": {
+      "banks": 41,
+      "ready": true,
+      "voices": []
+    },
+    "boot": {
+      "errors": [],
+      "failed": [],
+      "loaded": 33,
+      "scripts": 33
+    },
+    "conduct": {
+      "beat": "1",
+      "combo": 0,
+      "count": 0,
+      "events": 0,
+      "from": 0,
+      "judge": {
+        "e": 0,
+        "g": 0,
+        "l": 0,
+        "p": 0
+      },
+      "level": 1,
+      "meter": 3,
+      "phase": "count",
+      "taps": 0,
+      "to": 94
+    },
+    "errors": [],
+    "focus": {
+      "id": "",
+      "inside": true,
+      "text": "いまのテンポ=--"
+    },
+    "footer": {
+      "bottom": 794,
+      "height": 62,
+      "left": 24,
+      "right": 351,
+      "top": 732,
+      "width": 327,
+      "x": 24,
+      "y": 732
+    },
+    "height": 812,
+    "items": [
+      {
+        "rect": {
+          "bottom": 794,
+          "height": 44,
+          "left": 24,
+          "right": 80.640625,
+          "top": 750,
+          "width": 56.640625,
+          "x": 24,
+          "y": 750
+        },
+        "text": "いまのテンポ=--"
+      },
+      {
+        "rect": {
+          "bottom": 794,
+          "height": 44,
+          "left": 92.640625,
+          "right": 161.8671875,
+          "top": 750,
+          "width": 69.2265625,
+          "x": 92.640625,
+          "y": 750
+        },
+        "text": "指定=72"
+      },
+      {
+        "rect": {
+          "bottom": 772,
+          "height": 0,
+          "left": 351,
+          "right": 351,
+          "top": 772,
+          "width": 0,
+          "x": 351,
+          "y": 772
+        },
+        "text": ""
+      }
+    ],
+    "members": 0.6864548486191779,
+    "notes": [
+      {
+        "dots": 1,
+        "fill": "currentColor",
+        "flags": 0,
+        "label": "付点4分音符",
+        "rect": {
+          "bottom": 785,
+          "height": 26,
+          "left": 24,
+          "right": 44,
+          "top": 759,
+          "width": 20,
+          "x": 24,
+          "y": 759
+        },
+        "unit": "1.5"
+      },
+      {
+        "dots": 1,
+        "fill": "currentColor",
+        "flags": 0,
+        "label": "付点4分音符",
+        "rect": {
+          "bottom": 783,
+          "height": 22,
+          "left": 116.640625,
+          "right": 132.640625,
+          "top": 761,
+          "width": 16,
+          "x": 116.640625,
+          "y": 761
+        },
+        "unit": "1.5"
+      }
+    ],
+    "piece": "valkyrie",
+    "recordings": [],
+    "records": 0.7712433410342783,
+    "scrollHeight": 812,
+    "scrollWidth": 375,
+    "theme": "light",
+    "tips": {
+      "open": true,
+      "parent": "conduct",
+      "text": "拍とテンポ音符ひとつが1拍。数字は1分間の拍の数。「指定」を目安に、光に合わせてタップする。拍の数え方は曲に合わせている。"
+    },
+    "width": 375
+  },
+  "tipClosed": {
+    "audio": {
+      "banks": 41,
+      "ready": true,
+      "voices": []
+    },
+    "boot": {
+      "errors": [],
+      "failed": [],
+      "loaded": 33,
+      "scripts": 33
+    },
+    "conduct": {
+      "beat": "1",
+      "combo": 0,
+      "count": 0,
+      "events": 0,
+      "from": 0,
+      "judge": {
+        "e": 0,
+        "g": 0,
+        "l": 0,
+        "p": 0
+      },
+      "level": 1,
+      "meter": 3,
+      "phase": "count",
+      "taps": 0,
+      "to": 94
+    },
+    "errors": [],
+    "focus": {
+      "id": "",
+      "inside": true,
+      "text": "いまのテンポ=--"
+    },
+    "footer": {
+      "bottom": 794,
+      "height": 62,
+      "left": 24,
+      "right": 351,
+      "top": 732,
+      "width": 327,
+      "x": 24,
+      "y": 732
+    },
+    "height": 812,
+    "items": [
+      {
+        "rect": {
+          "bottom": 794,
+          "height": 44,
+          "left": 24,
+          "right": 80.640625,
+          "top": 750,
+          "width": 56.640625,
+          "x": 24,
+          "y": 750
+        },
+        "text": "いまのテンポ=--"
+      },
+      {
+        "rect": {
+          "bottom": 794,
+          "height": 44,
+          "left": 92.640625,
+          "right": 161.8671875,
+          "top": 750,
+          "width": 69.2265625,
+          "x": 92.640625,
+          "y": 750
+        },
+        "text": "指定=72"
+      },
+      {
+        "rect": {
+          "bottom": 772,
+          "height": 0,
+          "left": 351,
+          "right": 351,
+          "top": 772,
+          "width": 0,
+          "x": 351,
+          "y": 772
+        },
+        "text": ""
+      }
+    ],
+    "members": 0.6864548486191779,
+    "notes": [
+      {
+        "dots": 1,
+        "fill": "currentColor",
+        "flags": 0,
+        "label": "付点4分音符",
+        "rect": {
+          "bottom": 785,
+          "height": 26,
+          "left": 24,
+          "right": 44,
+          "top": 759,
+          "width": 20,
+          "x": 24,
+          "y": 759
+        },
+        "unit": "1.5"
+      },
+      {
+        "dots": 1,
+        "fill": "currentColor",
+        "flags": 0,
+        "label": "付点4分音符",
+        "rect": {
+          "bottom": 783,
+          "height": 22,
+          "left": 116.640625,
+          "right": 132.640625,
+          "top": 761,
+          "width": 16,
+          "x": 116.640625,
+          "y": 761
+        },
+        "unit": "1.5"
+      }
+    ],
+    "piece": "valkyrie",
+    "recordings": [],
+    "records": 0.7712433410342783,
+    "scrollHeight": 812,
+    "scrollWidth": 375,
+    "theme": "light",
+    "tips": {
+      "open": false,
+      "parent": "conduct",
+      "text": "拍とテンポ音符ひとつが1拍。数字は1分間の拍の数。「指定」を目安に、光に合わせてタップする。拍の数え方は曲に合わせている。"
+    },
+    "width": 375
+  },
+  "dottedLight": {
+    "audio": {
+      "banks": 41,
+      "ready": true,
+      "voices": [
+        "SampleVoice"
+      ]
+    },
+    "boot": {
+      "errors": [],
+      "failed": [],
+      "loaded": 33,
+      "scripts": 33
+    },
+    "conduct": {
+      "beat": "1",
+      "combo": 4,
+      "count": 3,
+      "events": 7,
+      "from": 0,
+      "judge": {
+        "e": 0,
+        "g": 0,
+        "l": 0,
+        "p": 4
+      },
+      "level": 0.975,
+      "meter": 3,
+      "period": 0.41807685670947264,
+      "phase": "play",
+      "taps": 4,
+      "to": 94
+    },
+    "errors": [],
+    "focus": {
+      "id": "cdPad",
+      "inside": true,
+      "text": "\n      \n      タップ大きく小さく\n    "
+    },
+    "footer": {
+      "bottom": 794,
+      "height": 62,
+      "left": 24,
+      "right": 351,
+      "top": 732,
+      "width": 327,
+      "x": 24,
+      "y": 732
+    },
+    "height": 812,
+    "items": [
+      {
+        "rect": {
+          "bottom": 794,
+          "height": 44,
+          "left": 24,
+          "right": 92.71875,
+          "top": 750,
+          "width": 68.71875,
+          "x": 24,
+          "y": 750
+        },
+        "text": "いまのテンポ=144"
+      },
+      {
+        "rect": {
+          "bottom": 794,
+          "height": 44,
+          "left": 104.71875,
+          "right": 173.9453125,
+          "top": 750,
+          "width": 69.2265625,
+          "x": 104.71875,
+          "y": 750
+        },
+        "text": "指定=72"
+      },
+      {
+        "rect": {
+          "bottom": 782.1953125,
+          "height": 20.3984375,
+          "left": 321.0703125,
+          "right": 351,
+          "top": 761.796875,
+          "width": 29.9296875,
+          "x": 321.0703125,
+          "y": 761.796875
+        },
+        "text": "4連続"
+      }
+    ],
+    "members": 0.6864548486191779,
+    "notes": [
+      {
+        "dots": 1,
+        "fill": "currentColor",
+        "flags": 0,
+        "label": "付点4分音符",
+        "rect": {
+          "bottom": 785,
+          "height": 26,
+          "left": 24,
+          "right": 44,
+          "top": 759,
+          "width": 20,
+          "x": 24,
+          "y": 759
+        },
+        "unit": "1.5"
+      },
+      {
+        "dots": 1,
+        "fill": "currentColor",
+        "flags": 0,
+        "label": "付点4分音符",
+        "rect": {
+          "bottom": 783,
+          "height": 22,
+          "left": 128.71875,
+          "right": 144.71875,
+          "top": 761,
+          "width": 16,
+          "x": 128.71875,
+          "y": 761
+        },
+        "unit": "1.5"
+      }
+    ],
+    "piece": "valkyrie",
+    "recordings": [],
+    "records": 0.7712433410342783,
+    "scrollHeight": 812,
+    "scrollWidth": 375,
+    "theme": "light",
+    "tips": {
+      "open": false,
+      "parent": "conduct",
+      "text": "拍とテンポ音符ひとつが1拍。数字は1分間の拍の数。「指定」を目安に、光に合わせてタップする。拍の数え方は曲に合わせている。"
+    },
+    "width": 375
+  },
+  "result": {
+    "audio": {
+      "banks": 41,
+      "ready": true,
+      "voices": []
+    },
+    "boot": {
+      "errors": [],
+      "failed": [],
+      "loaded": 33,
+      "scripts": 33
+    },
+    "conduct": {
+      "beat": "3",
+      "combo": 4,
+      "count": 3,
+      "events": 7,
+      "from": 0,
+      "judge": {
+        "e": 0,
+        "g": 0,
+        "l": 0,
+        "p": 4
+      },
+      "level": 0.975,
+      "meter": 3,
+      "period": 0.41807685670947264,
+      "phase": "done",
+      "taps": 4,
+      "to": 94
+    },
+    "errors": [],
+    "focus": {
+      "id": "",
+      "inside": true,
+      "text": "演奏おわり"
+    },
+    "footer": {
+      "bottom": 0,
+      "height": 0,
+      "left": 0,
+      "right": 0,
+      "top": 0,
+      "width": 0,
+      "x": 0,
+      "y": 0
+    },
+    "height": 812,
+    "items": [
+      {
+        "rect": {
+          "bottom": 0,
+          "height": 0,
+          "left": 0,
+          "right": 0,
+          "top": 0,
+          "width": 0,
+          "x": 0,
+          "y": 0
+        },
+        "text": "いまのテンポ=144"
+      },
+      {
+        "rect": {
+          "bottom": 0,
+          "height": 0,
+          "left": 0,
+          "right": 0,
+          "top": 0,
+          "width": 0,
+          "x": 0,
+          "y": 0
+        },
+        "text": "指定=72"
+      },
+      {
+        "rect": {
+          "bottom": 0,
+          "height": 0,
+          "left": 0,
+          "right": 0,
+          "top": 0,
+          "width": 0,
+          "x": 0,
+          "y": 0
+        },
+        "text": "4連続"
+      }
+    ],
+    "members": 0.6864548486191779,
+    "notes": [
+      {
+        "dots": 1,
+        "fill": "currentColor",
+        "flags": 0,
+        "label": "付点4分音符",
+        "rect": {
+          "bottom": 0,
+          "height": 0,
+          "left": 0,
+          "right": 0,
+          "top": 0,
+          "width": 0,
+          "x": 0,
+          "y": 0
+        },
+        "unit": "1.5"
+      },
+      {
+        "dots": 1,
+        "fill": "currentColor",
+        "flags": 0,
+        "label": "付点4分音符",
+        "rect": {
+          "bottom": 0,
+          "height": 0,
+          "left": 0,
+          "right": 0,
+          "top": 0,
+          "width": 0,
+          "x": 0,
+          "y": 0
+        },
+        "unit": "1.5"
+      }
+    ],
+    "piece": "valkyrie",
+    "recordings": [
+      {
+        "id": "r2028-10-0-236105",
+        "label": "あなたの指揮：「ワルキューレの騎行」（6月 第3週）"
+      }
+    ],
+    "records": 0.6438707136549056,
+    "scrollHeight": 812,
+    "scrollWidth": 375,
+    "theme": "light",
+    "tips": {
+      "open": false,
+      "parent": "conduct",
+      "text": "拍とテンポ音符ひとつが1拍。数字は1分間の拍の数。「指定」を目安に、光に合わせてタップする。拍の数え方は曲に合わせている。"
+    },
+    "width": 375
+  },
+  "average": {
+    "label": "付点4分音符",
+    "rect": {
+      "bottom": 273.8828125,
+      "height": 51,
+      "left": 24,
+      "right": 114.625,
+      "top": 222.8828125,
+      "width": 90.625,
+      "x": 24,
+      "y": 222.8828125
+    },
+    "text": "=145",
+    "unit": "1.5"
+  },
+  "halfDark": {
+    "audio": {
+      "banks": 41,
+      "ready": true,
+      "voices": []
+    },
+    "boot": {
+      "errors": [],
+      "failed": [],
+      "loaded": 33,
+      "scripts": 33
+    },
+    "conduct": {
+      "beat": "1",
+      "combo": 0,
+      "count": 0,
+      "events": 0,
+      "from": 0,
+      "judge": {
+        "e": 0,
+        "g": 0,
+        "l": 0,
+        "p": 0
+      },
+      "level": 1,
+      "meter": 2,
+      "phase": "count",
+      "taps": 0,
+      "to": 68
+    },
+    "errors": [],
+    "focus": {
+      "id": "cdPad",
+      "inside": true,
+      "text": "\n      \n      タップ大きく小さく\n    "
+    },
+    "footer": {
+      "bottom": 794,
+      "height": 62,
+      "left": 24,
+      "right": 351,
+      "top": 732,
+      "width": 327,
+      "x": 24,
+      "y": 732
+    },
+    "height": 812,
+    "items": [
+      {
+        "rect": {
+          "bottom": 794,
+          "height": 44,
+          "left": 24,
+          "right": 80.640625,
+          "top": 750,
+          "width": 56.640625,
+          "x": 24,
+          "y": 750
+        },
+        "text": "いまのテンポ=--"
+      },
+      {
+        "rect": {
+          "bottom": 794,
+          "height": 44,
+          "left": 92.640625,
+          "right": 164.0546875,
+          "top": 750,
+          "width": 71.4140625,
+          "x": 92.640625,
+          "y": 750
+        },
+        "text": "指定=80"
+      },
+      {
+        "rect": {
+          "bottom": 772,
+          "height": 0,
+          "left": 351,
+          "right": 351,
+          "top": 772,
+          "width": 0,
+          "x": 351,
+          "y": 772
+        },
+        "text": ""
+      }
+    ],
+    "members": 0.6864548486191779,
+    "notes": [
+      {
+        "dots": 0,
+        "fill": "none",
+        "flags": 0,
+        "label": "2分音符",
+        "rect": {
+          "bottom": 785,
+          "height": 26,
+          "left": 24,
+          "right": 44,
+          "top": 759,
+          "width": 20,
+          "x": 24,
+          "y": 759
+        },
+        "unit": "2"
+      },
+      {
+        "dots": 0,
+        "fill": "none",
+        "flags": 0,
+        "label": "2分音符",
+        "rect": {
+          "bottom": 783,
+          "height": 22,
+          "left": 116.640625,
+          "right": 132.640625,
+          "top": 761,
+          "width": 16,
+          "x": 116.640625,
+          "y": 761
+        },
+        "unit": "2"
+      }
+    ],
+    "piece": "ode",
+    "recordings": [],
+    "records": 0.7712433410342783,
+    "scrollHeight": 812,
+    "scrollWidth": 375,
+    "theme": "dark",
+    "tips": {
+      "open": false,
+      "parent": "",
+      "text": ""
+    },
+    "width": 375
+  },
+  "halfDarkPlaying": {
+    "audio": {
+      "banks": 41,
+      "ready": true,
+      "voices": [
+        "SampleVoice"
+      ]
+    },
+    "boot": {
+      "errors": [],
+      "failed": [],
+      "loaded": 33,
+      "scripts": 33
+    },
+    "conduct": {
+      "beat": "1",
+      "combo": 4,
+      "count": 4,
+      "events": 7,
+      "from": 0,
+      "judge": {
+        "e": 0,
+        "g": 0,
+        "l": 0,
+        "p": 4
+      },
+      "level": 0.975,
+      "meter": 2,
+      "period": 0.410769901496998,
+      "phase": "play",
+      "taps": 4,
+      "to": 68
+    },
+    "errors": [],
+    "focus": {
+      "id": "cdPad",
+      "inside": true,
+      "text": "\n      \n      タップ大きく小さく\n    "
+    },
+    "footer": {
+      "bottom": 794,
+      "height": 62,
+      "left": 24,
+      "right": 351,
+      "top": 732,
+      "width": 327,
+      "x": 24,
+      "y": 732
+    },
+    "height": 812,
+    "items": [
+      {
+        "rect": {
+          "bottom": 794,
+          "height": 44,
+          "left": 24,
+          "right": 92.71875,
+          "top": 750,
+          "width": 68.71875,
+          "x": 24,
+          "y": 750
+        },
+        "text": "いまのテンポ=146"
+      },
+      {
+        "rect": {
+          "bottom": 794,
+          "height": 44,
+          "left": 104.71875,
+          "right": 176.1328125,
+          "top": 750,
+          "width": 71.4140625,
+          "x": 104.71875,
+          "y": 750
+        },
+        "text": "指定=80"
+      },
+      {
+        "rect": {
+          "bottom": 782.1953125,
+          "height": 20.3984375,
+          "left": 321.0703125,
+          "right": 351,
+          "top": 761.796875,
+          "width": 29.9296875,
+          "x": 321.0703125,
+          "y": 761.796875
+        },
+        "text": "4連続"
+      }
+    ],
+    "members": 0.6864548486191779,
+    "notes": [
+      {
+        "dots": 0,
+        "fill": "none",
+        "flags": 0,
+        "label": "2分音符",
+        "rect": {
+          "bottom": 785,
+          "height": 26,
+          "left": 24,
+          "right": 44,
+          "top": 759,
+          "width": 20,
+          "x": 24,
+          "y": 759
+        },
+        "unit": "2"
+      },
+      {
+        "dots": 0,
+        "fill": "none",
+        "flags": 0,
+        "label": "2分音符",
+        "rect": {
+          "bottom": 783,
+          "height": 22,
+          "left": 128.71875,
+          "right": 144.71875,
+          "top": 761,
+          "width": 16,
+          "x": 128.71875,
+          "y": 761
+        },
+        "unit": "2"
+      }
+    ],
+    "piece": "ode",
+    "recordings": [],
+    "records": 0.7712433410342783,
+    "scrollHeight": 812,
+    "scrollWidth": 375,
+    "theme": "dark",
+    "tips": {
+      "open": false,
+      "parent": "",
+      "text": ""
+    },
+    "width": 375
+  },
+  "halfDarkCompact": {
+    "audio": {
+      "banks": 41,
+      "ready": true,
+      "voices": [
+        "SampleVoice"
+      ]
+    },
+    "boot": {
+      "errors": [],
+      "failed": [],
+      "loaded": 33,
+      "scripts": 33
+    },
+    "conduct": {
+      "beat": "1",
+      "combo": 4,
+      "count": 4,
+      "events": 7,
+      "from": 0,
+      "judge": {
+        "e": 0,
+        "g": 0,
+        "l": 0,
+        "p": 4
+      },
+      "level": 0.975,
+      "meter": 2,
+      "period": 0.410769901496998,
+      "phase": "play",
+      "taps": 4,
+      "to": 68
+    },
+    "errors": [],
+    "focus": {
+      "id": "cdPad",
+      "inside": true,
+      "text": "\n      \n      タップ大きく小さく\n    "
+    },
+    "footer": {
+      "bottom": 657,
+      "height": 56,
+      "left": 24,
+      "right": 351,
+      "top": 601,
+      "width": 327,
+      "x": 24,
+      "y": 601
+    },
+    "height": 667,
+    "items": [
+      {
+        "rect": {
+          "bottom": 657,
+          "height": 44,
+          "left": 24,
+          "right": 92.71875,
+          "top": 613,
+          "width": 68.71875,
+          "x": 24,
+          "y": 613
+        },
+        "text": "いまのテンポ=146"
+      },
+      {
+        "rect": {
+          "bottom": 657,
+          "height": 44,
+          "left": 104.71875,
+          "right": 176.1328125,
+          "top": 613,
+          "width": 71.4140625,
+          "x": 104.71875,
+          "y": 613
+        },
+        "text": "指定=80"
+      },
+      {
+        "rect": {
+          "bottom": 645.1953125,
+          "height": 20.3984375,
+          "left": 321.0703125,
+          "right": 351,
+          "top": 624.796875,
+          "width": 29.9296875,
+          "x": 321.0703125,
+          "y": 624.796875
+        },
+        "text": "4連続"
+      }
+    ],
+    "members": 0.6864548486191779,
+    "notes": [
+      {
+        "dots": 0,
+        "fill": "none",
+        "flags": 0,
+        "label": "2分音符",
+        "rect": {
+          "bottom": 648,
+          "height": 26,
+          "left": 24,
+          "right": 44,
+          "top": 622,
+          "width": 20,
+          "x": 24,
+          "y": 622
+        },
+        "unit": "2"
+      },
+      {
+        "dots": 0,
+        "fill": "none",
+        "flags": 0,
+        "label": "2分音符",
+        "rect": {
+          "bottom": 646,
+          "height": 22,
+          "left": 128.71875,
+          "right": 144.71875,
+          "top": 624,
+          "width": 16,
+          "x": 128.71875,
+          "y": 624
+        },
+        "unit": "2"
+      }
+    ],
+    "piece": "ode",
+    "recordings": [],
+    "records": 0.7712433410342783,
+    "scrollHeight": 667,
+    "scrollWidth": 375,
+    "theme": "dark",
+    "tips": {
+      "open": false,
+      "parent": "",
+      "text": ""
+    },
+    "width": 375
+  },
+  "quarterLight": {
+    "audio": {
+      "banks": 41,
+      "ready": true,
+      "voices": []
+    },
+    "boot": {
+      "errors": [],
+      "failed": [],
+      "loaded": 33,
+      "scripts": 33
+    },
+    "conduct": {
+      "beat": "1",
+      "combo": 0,
+      "count": 0,
+      "events": 0,
+      "from": 0,
+      "judge": {
+        "e": 0,
+        "g": 0,
+        "l": 0,
+        "p": 0
+      },
+      "level": 1,
+      "meter": 2,
+      "phase": "count",
+      "taps": 0,
+      "to": 80
+    },
+    "errors": [],
+    "focus": {
+      "id": "cdPad",
+      "inside": true,
+      "text": "\n      \n      タップ大きく小さく\n    "
+    },
+    "footer": {
+      "bottom": 794,
+      "height": 62,
+      "left": 24,
+      "right": 351,
+      "top": 732,
+      "width": 327,
+      "x": 24,
+      "y": 732
+    },
+    "height": 812,
+    "items": [
+      {
+        "rect": {
+          "bottom": 794,
+          "height": 44,
+          "left": 24,
+          "right": 80.640625,
+          "top": 750,
+          "width": 56.640625,
+          "x": 24,
+          "y": 750
+        },
+        "text": "いまのテンポ=--"
+      },
+      {
+        "rect": {
+          "bottom": 794,
+          "height": 44,
+          "left": 92.640625,
+          "right": 164.0546875,
+          "top": 750,
+          "width": 71.4140625,
+          "x": 92.640625,
+          "y": 750
+        },
+        "text": "指定=80"
+      },
+      {
+        "rect": {
+          "bottom": 772,
+          "height": 0,
+          "left": 351,
+          "right": 351,
+          "top": 772,
+          "width": 0,
+          "x": 351,
+          "y": 772
+        },
+        "text": ""
+      }
+    ],
+    "members": 0.6864548486191779,
+    "notes": [
+      {
+        "dots": 0,
+        "fill": "currentColor",
+        "flags": 0,
+        "label": "4分音符",
+        "rect": {
+          "bottom": 785,
+          "height": 26,
+          "left": 24,
+          "right": 44,
+          "top": 759,
+          "width": 20,
+          "x": 24,
+          "y": 759
+        },
+        "unit": "1"
+      },
+      {
+        "dots": 0,
+        "fill": "currentColor",
+        "flags": 0,
+        "label": "4分音符",
+        "rect": {
+          "bottom": 783,
+          "height": 22,
+          "left": 116.640625,
+          "right": 132.640625,
+          "top": 761,
+          "width": 16,
+          "x": 116.640625,
+          "y": 761
+        },
+        "unit": "1"
+      }
+    ],
+    "piece": "pomp",
+    "recordings": [],
+    "records": 0.7712433410342783,
+    "scrollHeight": 812,
+    "scrollWidth": 375,
+    "theme": "light",
+    "tips": {
+      "open": false,
+      "parent": "",
+      "text": ""
+    },
+    "width": 375
+  },
+  "eighthLight": {
+    "audio": {
+      "banks": 41,
+      "ready": true,
+      "voices": []
+    },
+    "boot": {
+      "errors": [],
+      "failed": [],
+      "loaded": 33,
+      "scripts": 33
+    },
+    "conduct": {
+      "beat": "1",
+      "combo": 0,
+      "count": 0,
+      "events": 0,
+      "from": 0,
+      "judge": {
+        "e": 0,
+        "g": 0,
+        "l": 0,
+        "p": 0
+      },
+      "level": 1,
+      "meter": 4,
+      "phase": "count",
+      "taps": 0,
+      "to": 64
+    },
+    "errors": [],
+    "focus": {
+      "id": "cdPad",
+      "inside": true,
+      "text": "\n      \n      タップ大きく小さく\n    "
+    },
+    "footer": {
+      "bottom": 794,
+      "height": 62,
+      "left": 24,
+      "right": 351,
+      "top": 732,
+      "width": 327,
+      "x": 24,
+      "y": 732
+    },
+    "height": 812,
+    "items": [
+      {
+        "rect": {
+          "bottom": 794,
+          "height": 44,
+          "left": 24,
+          "right": 80.640625,
+          "top": 750,
+          "width": 56.640625,
+          "x": 24,
+          "y": 750
+        },
+        "text": "いまのテンポ=--"
+      },
+      {
+        "rect": {
+          "bottom": 794,
+          "height": 44,
+          "left": 92.640625,
+          "right": 169.1875,
+          "top": 750,
+          "width": 76.546875,
+          "x": 92.640625,
+          "y": 750
+        },
+        "text": "指定=104"
+      },
+      {
+        "rect": {
+          "bottom": 772,
+          "height": 0,
+          "left": 351,
+          "right": 351,
+          "top": 772,
+          "width": 0,
+          "x": 351,
+          "y": 772
+        },
+        "text": ""
+      }
+    ],
+    "members": 0.6864548486191779,
+    "notes": [
+      {
+        "dots": 0,
+        "fill": "currentColor",
+        "flags": 1,
+        "label": "8分音符",
+        "rect": {
+          "bottom": 785,
+          "height": 26,
+          "left": 24,
+          "right": 44,
+          "top": 759,
+          "width": 20,
+          "x": 24,
+          "y": 759
+        },
+        "unit": "0.5"
+      },
+      {
+        "dots": 0,
+        "fill": "currentColor",
+        "flags": 1,
+        "label": "8分音符",
+        "rect": {
+          "bottom": 783,
+          "height": 22,
+          "left": 116.640625,
+          "right": 132.640625,
+          "top": 761,
+          "width": 16,
+          "x": 116.640625,
+          "y": 761
+        },
+        "unit": "0.5"
+      }
+    ],
+    "piece": "largo",
+    "recordings": [],
+    "records": 0.7712433410342783,
+    "scrollHeight": 812,
+    "scrollWidth": 375,
+    "theme": "light",
+    "tips": {
+      "open": false,
+      "parent": "",
+      "text": ""
+    },
+    "width": 375
+  },
+  "dottedDark": {
+    "audio": {
+      "banks": 41,
+      "ready": true,
+      "voices": []
+    },
+    "boot": {
+      "errors": [],
+      "failed": [],
+      "loaded": 33,
+      "scripts": 33
+    },
+    "conduct": {
+      "beat": "1",
+      "combo": 0,
+      "count": 0,
+      "events": 0,
+      "from": 0,
+      "judge": {
+        "e": 0,
+        "g": 0,
+        "l": 0,
+        "p": 0
+      },
+      "level": 1,
+      "meter": 3,
+      "phase": "count",
+      "taps": 0,
+      "to": 94
+    },
+    "errors": [],
+    "focus": {
+      "id": "cdPad",
+      "inside": true,
+      "text": "\n      \n      タップ大きく小さく\n    "
+    },
+    "footer": {
+      "bottom": 794,
+      "height": 62,
+      "left": 24,
+      "right": 351,
+      "top": 732,
+      "width": 327,
+      "x": 24,
+      "y": 732
+    },
+    "height": 812,
+    "items": [
+      {
+        "rect": {
+          "bottom": 794,
+          "height": 44,
+          "left": 24,
+          "right": 80.640625,
+          "top": 750,
+          "width": 56.640625,
+          "x": 24,
+          "y": 750
+        },
+        "text": "いまのテンポ=--"
+      },
+      {
+        "rect": {
+          "bottom": 794,
+          "height": 44,
+          "left": 92.640625,
+          "right": 161.8671875,
+          "top": 750,
+          "width": 69.2265625,
+          "x": 92.640625,
+          "y": 750
+        },
+        "text": "指定=72"
+      },
+      {
+        "rect": {
+          "bottom": 772,
+          "height": 0,
+          "left": 351,
+          "right": 351,
+          "top": 772,
+          "width": 0,
+          "x": 351,
+          "y": 772
+        },
+        "text": ""
+      }
+    ],
+    "members": 0.6864548486191779,
+    "notes": [
+      {
+        "dots": 1,
+        "fill": "currentColor",
+        "flags": 0,
+        "label": "付点4分音符",
+        "rect": {
+          "bottom": 785,
+          "height": 26,
+          "left": 24,
+          "right": 44,
+          "top": 759,
+          "width": 20,
+          "x": 24,
+          "y": 759
+        },
+        "unit": "1.5"
+      },
+      {
+        "dots": 1,
+        "fill": "currentColor",
+        "flags": 0,
+        "label": "付点4分音符",
+        "rect": {
+          "bottom": 783,
+          "height": 22,
+          "left": 116.640625,
+          "right": 132.640625,
+          "top": 761,
+          "width": 16,
+          "x": 116.640625,
+          "y": 761
+        },
+        "unit": "1.5"
+      }
+    ],
+    "piece": "valkyrie",
+    "recordings": [],
+    "records": 0.7712433410342783,
+    "scrollHeight": 812,
+    "scrollWidth": 375,
+    "theme": "dark",
+    "tips": {
+      "open": false,
+      "parent": "",
+      "text": ""
+    },
+    "width": 375
+  },
+  "dottedDarkPlaying": {
+    "audio": {
+      "banks": 41,
+      "ready": true,
+      "voices": [
+        "SampleVoice"
+      ]
+    },
+    "boot": {
+      "errors": [],
+      "failed": [],
+      "loaded": 33,
+      "scripts": 33
+    },
+    "conduct": {
+      "beat": "1",
+      "combo": 4,
+      "count": 3,
+      "events": 7,
+      "from": 0,
+      "judge": {
+        "e": 0,
+        "g": 0,
+        "l": 0,
+        "p": 4
+      },
+      "level": 0.975,
+      "meter": 3,
+      "period": 0.4161381727979233,
+      "phase": "play",
+      "taps": 4,
+      "to": 94
+    },
+    "errors": [],
+    "focus": {
+      "id": "cdPad",
+      "inside": true,
+      "text": "\n      \n      タップ大きく小さく\n    "
+    },
+    "footer": {
+      "bottom": 794,
+      "height": 62,
+      "left": 24,
+      "right": 351,
+      "top": 732,
+      "width": 327,
+      "x": 24,
+      "y": 732
+    },
+    "height": 812,
+    "items": [
+      {
+        "rect": {
+          "bottom": 794,
+          "height": 44,
+          "left": 24,
+          "right": 92.71875,
+          "top": 750,
+          "width": 68.71875,
+          "x": 24,
+          "y": 750
+        },
+        "text": "いまのテンポ=144"
+      },
+      {
+        "rect": {
+          "bottom": 794,
+          "height": 44,
+          "left": 104.71875,
+          "right": 173.9453125,
+          "top": 750,
+          "width": 69.2265625,
+          "x": 104.71875,
+          "y": 750
+        },
+        "text": "指定=72"
+      },
+      {
+        "rect": {
+          "bottom": 782.1953125,
+          "height": 20.3984375,
+          "left": 321.0703125,
+          "right": 351,
+          "top": 761.796875,
+          "width": 29.9296875,
+          "x": 321.0703125,
+          "y": 761.796875
+        },
+        "text": "4連続"
+      }
+    ],
+    "members": 0.6864548486191779,
+    "notes": [
+      {
+        "dots": 1,
+        "fill": "currentColor",
+        "flags": 0,
+        "label": "付点4分音符",
+        "rect": {
+          "bottom": 785,
+          "height": 26,
+          "left": 24,
+          "right": 44,
+          "top": 759,
+          "width": 20,
+          "x": 24,
+          "y": 759
+        },
+        "unit": "1.5"
+      },
+      {
+        "dots": 1,
+        "fill": "currentColor",
+        "flags": 0,
+        "label": "付点4分音符",
+        "rect": {
+          "bottom": 783,
+          "height": 22,
+          "left": 128.71875,
+          "right": 144.71875,
+          "top": 761,
+          "width": 16,
+          "x": 128.71875,
+          "y": 761
+        },
+        "unit": "1.5"
+      }
+    ],
+    "piece": "valkyrie",
+    "recordings": [],
+    "records": 0.7712433410342783,
+    "scrollHeight": 812,
+    "scrollWidth": 375,
+    "theme": "dark",
+    "tips": {
+      "open": false,
+      "parent": "",
+      "text": ""
+    },
+    "width": 375
+  },
+  "dottedDarkCompact": {
+    "audio": {
+      "banks": 41,
+      "ready": true,
+      "voices": [
+        "SampleVoice"
+      ]
+    },
+    "boot": {
+      "errors": [],
+      "failed": [],
+      "loaded": 33,
+      "scripts": 33
+    },
+    "conduct": {
+      "beat": "2",
+      "combo": 4,
+      "count": 3,
+      "events": 7,
+      "from": 0,
+      "judge": {
+        "e": 0,
+        "g": 0,
+        "l": 0,
+        "p": 4
+      },
+      "level": 0.975,
+      "meter": 3,
+      "period": 0.4161381727979233,
+      "phase": "play",
+      "taps": 4,
+      "to": 94
+    },
+    "errors": [],
+    "focus": {
+      "id": "cdPad",
+      "inside": true,
+      "text": "\n      \n      タップ大きく小さく\n    "
+    },
+    "footer": {
+      "bottom": 657,
+      "height": 56,
+      "left": 24,
+      "right": 351,
+      "top": 601,
+      "width": 327,
+      "x": 24,
+      "y": 601
+    },
+    "height": 667,
+    "items": [
+      {
+        "rect": {
+          "bottom": 657,
+          "height": 44,
+          "left": 24,
+          "right": 92.71875,
+          "top": 613,
+          "width": 68.71875,
+          "x": 24,
+          "y": 613
+        },
+        "text": "いまのテンポ=144"
+      },
+      {
+        "rect": {
+          "bottom": 657,
+          "height": 44,
+          "left": 104.71875,
+          "right": 173.9453125,
+          "top": 613,
+          "width": 69.2265625,
+          "x": 104.71875,
+          "y": 613
+        },
+        "text": "指定=72"
+      },
+      {
+        "rect": {
+          "bottom": 645.1953125,
+          "height": 20.3984375,
+          "left": 321.0703125,
+          "right": 351,
+          "top": 624.796875,
+          "width": 29.9296875,
+          "x": 321.0703125,
+          "y": 624.796875
+        },
+        "text": "4連続"
+      }
+    ],
+    "members": 0.6864548486191779,
+    "notes": [
+      {
+        "dots": 1,
+        "fill": "currentColor",
+        "flags": 0,
+        "label": "付点4分音符",
+        "rect": {
+          "bottom": 648,
+          "height": 26,
+          "left": 24,
+          "right": 44,
+          "top": 622,
+          "width": 20,
+          "x": 24,
+          "y": 622
+        },
+        "unit": "1.5"
+      },
+      {
+        "dots": 1,
+        "fill": "currentColor",
+        "flags": 0,
+        "label": "付点4分音符",
+        "rect": {
+          "bottom": 646,
+          "height": 22,
+          "left": 128.71875,
+          "right": 144.71875,
+          "top": 624,
+          "width": 16,
+          "x": 128.71875,
+          "y": 624
+        },
+        "unit": "1.5"
+      }
+    ],
+    "piece": "valkyrie",
+    "recordings": [],
+    "records": 0.7712433410342783,
+    "scrollHeight": 667,
+    "scrollWidth": 375,
+    "theme": "dark",
+    "tips": {
+      "open": false,
+      "parent": "",
+      "text": ""
+    },
+    "width": 375
+  },
+  "closed": {
+    "audio": {
+      "banks": 41,
+      "ready": true,
+      "voices": []
+    },
+    "boot": {
+      "errors": [],
+      "failed": [],
+      "loaded": 33,
+      "scripts": 33
+    },
+    "conduct": {
+      "beat": "2",
+      "combo": 4,
+      "count": 3,
+      "events": 7,
+      "from": 0,
+      "judge": {
+        "e": 0,
+        "g": 0,
+        "l": 0,
+        "p": 4
+      },
+      "level": 0.975,
+      "meter": 3,
+      "period": 0.4161381727979233,
+      "phase": "idle",
+      "taps": 4,
+      "to": 94
+    },
+    "errors": [],
+    "focus": {
+      "id": "btnConduct",
+      "inside": false,
+      "text": "指揮する"
+    },
+    "footer": {
+      "bottom": 0,
+      "height": 0,
+      "left": 0,
+      "right": 0,
+      "top": 0,
+      "width": 0,
+      "x": 0,
+      "y": 0
+    },
+    "height": 667,
+    "items": [
+      {
+        "rect": {
+          "bottom": 0,
+          "height": 0,
+          "left": 0,
+          "right": 0,
+          "top": 0,
+          "width": 0,
+          "x": 0,
+          "y": 0
+        },
+        "text": "いまのテンポ=144"
+      },
+      {
+        "rect": {
+          "bottom": 0,
+          "height": 0,
+          "left": 0,
+          "right": 0,
+          "top": 0,
+          "width": 0,
+          "x": 0,
+          "y": 0
+        },
+        "text": "指定=72"
+      },
+      {
+        "rect": {
+          "bottom": 0,
+          "height": 0,
+          "left": 0,
+          "right": 0,
+          "top": 0,
+          "width": 0,
+          "x": 0,
+          "y": 0
+        },
+        "text": "4連続"
+      }
+    ],
+    "members": 0.6864548486191779,
+    "notes": [
+      {
+        "dots": 1,
+        "fill": "currentColor",
+        "flags": 0,
+        "label": "付点4分音符",
+        "rect": {
+          "bottom": 0,
+          "height": 0,
+          "left": 0,
+          "right": 0,
+          "top": 0,
+          "width": 0,
+          "x": 0,
+          "y": 0
+        },
+        "unit": "1.5"
+      },
+      {
+        "dots": 1,
+        "fill": "currentColor",
+        "flags": 0,
+        "label": "付点4分音符",
+        "rect": {
+          "bottom": 0,
+          "height": 0,
+          "left": 0,
+          "right": 0,
+          "top": 0,
+          "width": 0,
+          "x": 0,
+          "y": 0
+        },
+        "unit": "1.5"
+      }
+    ],
+    "piece": "valkyrie",
+    "recordings": [],
+    "records": 0.7712433410342783,
+    "scrollHeight": 0,
+    "scrollWidth": 0,
+    "theme": "dark",
+    "tips": {
+      "open": false,
+      "parent": "",
+      "text": ""
+    },
+    "width": 375
+  },
+  "console": []
+}

@@ -1,0 +1,14 @@
+{
+  "build": "succeeded",
+  "install": "succeeded",
+  "launch": "succeeded",
+  "mirroringUsed": false,
+  "visualInteractionVerified": false,
+  "runningProcessVerified": true,
+  "bundleMatches": {
+    "index.html": true,
+    "js/icons.js": true,
+    "js/conduct.js": true,
+    "img/CREDITS.md": true
+  }
+}

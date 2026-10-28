@@ -27,6 +27,11 @@ award:'<circle cx="12" cy="9" r="6"/><path d="m8 14-2 8 6-3 6 3-2-8"/>',
 function uiIcon(name,extra=''){
 return `<svg class="ui-icon ${extra}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">${UI_ICON_PATHS[name]||UI_ICON_PATHS.note}</svg>`;
 }
+// テンポの1拍を、曲で使っている音符の形で描く。楽譜や拍の長さは変えない。
+function uiBeatIcon(unit=1){
+ const value=[.5,1,1.5,2].includes(unit)?unit:1;
+ return `<svg class="ui-icon beat-icon" data-beat-unit="${value}" viewBox="0 0 24 28" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M12.6 20V4"/><ellipse class="beat-head" cx="8" cy="21" rx="5" ry="3.2" transform="rotate(-20 8 21)" fill="${value===2?'none':'currentColor'}"${value===2?'':' stroke="none"'}/>${value===.5?'<path class="beat-flag" d="M12.6 4C12.6 9 20 9 17.7 16C21 8 14.6 8 12.6 4Z" fill="currentColor" stroke="none"/>':''}${value===1.5?'<circle class="beat-dot" cx="20" cy="21" r="1.7" fill="currentColor" stroke="none"/>':''}</svg>`;
+}
 /* 文字列に混ざっている操作記号だけをSVGにする。ラベルとゲームの処理は保持する。 */
 function paintUiIcons(root=document.body){
 if(!root||root.nodeType!==1||root.closest('svg,script,style,select,textarea,canvas'))return;

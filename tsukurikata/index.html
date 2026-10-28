@@ -1543,11 +1543,19 @@ button.wr-person:focus-visible{outline:2px solid var(--brass);outline-offset:2px
 #conduct .cd-beat-row i{display:grid;place-items:center;width:24px;height:24px;font-style:normal;font-size:11px;color:var(--cd-soft);border-radius:50%}
 #conduct .cd-beat-row .counted{box-shadow:inset 0 0 0 1px var(--cd-line)}
 #conduct .cd-beat-row .on{color:var(--cd-paper);background:var(--cd-accent);box-shadow:none}
-#conduct .cd-stats{order:5;align-items:center;gap:13px;flex-shrink:0;min-height:44px;margin-top:auto;padding-top:18px;font-size:10px;color:var(--cd-soft)}
-#conduct .cd-stats>span{white-space:nowrap}
-#conduct .cd-stats b{font:400 23px var(--f-body);color:var(--cd-ink)}
+#conduct .cd-stats{order:5;display:grid;grid-template-columns:auto auto minmax(0,1fr);align-items:center;gap:12px;flex-shrink:0;min-height:44px;margin-top:auto;padding-top:18px;font-size:10px;color:var(--cd-soft)}
+#conduct .cd-stats>span{display:inline-flex;align-items:center;gap:4px;min-width:0;white-space:nowrap}
+#conduct .cd-stats b{font:400 23px var(--f-body);font-variant-numeric:tabular-nums;color:var(--cd-ink);margin-left:0}
 #conduct .cd-stats>span:nth-child(2) b{font-size:14px;color:var(--cd-soft)}
-#conduct .cd-stats .combo{color:var(--cd-accent);font-size:12px}
+#conduct .cd-stats .combo{justify-self:end;justify-content:flex-end;margin-left:0;color:var(--cd-accent);font-size:12px}
+#conduct .cd-tempo-info{min-height:44px;cursor:help}
+#conduct .cd-tempo-info>b{border-bottom:1px dotted var(--cd-line)}
+#conduct .cd-beat{display:inline-flex;align-items:center;justify-content:center;flex:none;width:20px;height:26px}
+#conduct .cd-beat .beat-icon{display:block;width:100%;height:100%;vertical-align:middle}
+#conduct .cd-reference .cd-beat{width:16px;height:22px}
+#conduct .cd-average{display:inline-flex;align-items:center;gap:5px}
+#conduct .cd-average .cd-beat{width:25px;height:34px}
+.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
 #conduct .cd-pad.is-pressed{background:color-mix(in srgb,var(--cd-control) 90%,var(--cd-control-ink))}
 #conduct .cd-feedback{position:absolute;right:6px;top:0;line-height:24px;font:700 15px/24px var(--f-body);letter-spacing:.04em;white-space:nowrap;color:var(--cd-soft);pointer-events:none}
 #conduct .cd-feedback:empty{display:none}
@@ -1722,7 +1730,11 @@ button.wr-person:focus-visible{outline:2px solid var(--brass);outline-offset:2px
     <div class="cd-beat-row" id="cdBeatRow" aria-hidden="true"></div>
   </div>
   <div class="cd-result" id="cdResult" hidden></div>
-  <p class="cd-stats"><span><span class="cd-beat">♩</span>=<b id="cdTempo">--</b></span><span>指定 <span class="cd-beat">♩</span>=<b id="cdRef"></b></span><span class="combo" id="cdCombo" aria-live="off"></span></p>
+  <p class="cd-stats">
+    <span class="cd-tempo-info" role="button" tabindex="0" aria-labelledby="cdTempoLabel cdCurrentBeat cdTempo" data-tipname="拍とテンポ" data-tip="音符ひとつが1拍。数字は1分間の拍の数。「指定」を目安に、光に合わせてタップする。拍の数え方は曲に合わせている。"><span class="sr-only" id="cdTempoLabel">いまのテンポ</span><span class="cd-beat" id="cdCurrentBeat" role="img" aria-label="4分音符"></span><span aria-hidden="true">=</span><b id="cdTempo">--</b></span>
+    <span class="cd-tempo-info cd-reference" role="button" tabindex="0" aria-labelledby="cdRefLabel cdRefBeat cdRef" data-tipname="拍とテンポ" data-tip="音符ひとつが1拍。数字は1分間の拍の数。「指定」を目安に、光に合わせてタップする。拍の数え方は曲に合わせている。"><span id="cdRefLabel">指定</span><span class="cd-beat" id="cdRefBeat" role="img" aria-label="4分音符"></span><span aria-hidden="true">=</span><b id="cdRef"></b></span>
+    <span class="combo" id="cdCombo" aria-live="off"></span>
+  </p>
 </section>
 <section class="conduct tunegame" id="tuneGame" hidden aria-labelledby="tgTitle">
   <div class="cd-top">
@@ -1764,7 +1776,7 @@ button.wr-person:focus-visible{outline:2px solid var(--brass);outline-offset:2px
 </nav>
 
 <script src="js/util.js"></script>
-<script src="js/icons.js?v=roster-find-1"></script>
+<script src="js/icons.js?v=beat-note-1"></script>
 <script src="js/instrument-icons.js?v=selection-polish-1"></script>
 <script src="js/face-cast.js?v=cast100-1"></script>
 <script src="js/faces.js?v=cast100-1"></script>
@@ -1790,7 +1802,7 @@ button.wr-person:focus-visible{outline:2px solid var(--brass);outline-offset:2px
 <script src="js/band.js?v=flute-cast-1"></script>
 <script src="js/game.js?v=flute-cast-1"></script>
 <script src="js/engine.js?v=quiet-intro-1"></script>
-<script src="js/conduct.js?v=dialog-navigation-1"></script>
+<script src="js/conduct.js?v=beat-note-1"></script>
 <script src="js/announce.js?v=result-journal-1"></script>
 <script src="js/tunegame.js"></script>
 <script src="js/fx.js"></script>
