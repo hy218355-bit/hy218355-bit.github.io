@@ -247,6 +247,13 @@ const seatXY = (s, G) => {
 };
 // 再生する録音そのものの部員情報を、演奏の音やセーブとは別に覚える。
 const STAGE_PERFORMERS = new WeakMap();
+const PERFORMANCE_PLAYERS = new WeakMap();
+// 録音の範囲に音符か打楽器の音がある本人を、一度だけ調べる。
+function performanceMemberSounds(perf,id){
+  if(!perf||!id)return false;
+  if(!PERFORMANCE_PLAYERS.has(perf))PERFORMANCE_PLAYERS.set(perf,new Set([...perf.notes,...perf.hits].map(n=>n.mid)));
+  return PERFORMANCE_PLAYERS.get(perf).has(id);
+}
 function rememberStageMembers(perf, members, recorded=true, record=null){ STAGE_PERFORMERS.set(perf,{members:members || [],recorded,record}); return perf; }
 function recordingPlayback(){ return !!((U.playing || U.waitPlay) && U.shown && STAGE_PERFORMERS.get(U.shown)?.recorded); }
 function recordedRangeLabel(perf){
@@ -591,8 +598,10 @@ function renderSelectors(){
   $('#btnSave').disabled = !recs.length;
   const active = U.waitPlay?.perf || (U.playing ? U.shown : null), cast = active && STAGE_PERFORMERS.get(active);
   const recSolo = cast?.recorded && U.solo.startsWith('member:') ? cast.members.find(m => m.id === U.solo.slice(7)) : null;
-  const sel = recSolo || U.recordMember || (U.sel && memberById(U.sel));
-  $('#soloSel').innerHTML = `<option value="all">全員</option>` + SECTIONS.map(s => `<option value="sec:${s.id}">${s.name}だけ</option>`).join('')
+  const person = recSolo || U.recordMember || (U.sel && memberById(U.sel));
+  const sel=person&&(!cast?.recorded||performanceMemberSounds(active,person.id))?person:null;
+  const sections=cast?.recorded?SECTIONS.filter(s=>cast.members.some(m=>SEAT[m.seat]?.sec===s.id&&performanceMemberSounds(active,m.id))):SECTIONS;
+  $('#soloSel').innerHTML = `<option value="all">全員</option>` + sections.map(s => `<option value="sec:${s.id}">${s.name}だけ</option>`).join('')
     + (sel ? `<option value="member:${sel.id}">${esc(sel.name)}だけ</option>` : '');
   if(![...$('#soloSel').options].some(o => o.value === U.solo)){ U.solo = 'all'; applySolo(); }
   $('#soloSel').value = U.solo;
@@ -2097,7 +2106,7 @@ function clearRecordedMember(){
 }
 // 同じボタンで本人と全員を切り替え、操作先と再生位置を保つ。
 function toggleRecordedMemberSolo(){
-  if(!U.recordMember||U.recordPerf!==(U.waitPlay?.perf||(U.playing?U.shown:null)))return;
+  if(!U.recordMember||U.recordPerf!==(U.waitPlay?.perf||(U.playing?U.shown:null))||!performanceMemberSounds(U.recordPerf,U.recordMember.id))return;
   U.solo=U.solo===`member:${U.recordMember.id}`?'all':`member:${U.recordMember.id}`;
   applySolo();renderSelectors();renderRecordedMemberSolo();
 }
@@ -2115,7 +2124,9 @@ function closeMemberCard(){
   U.cardReturn=null;
 }
 function renderRecordedMemberCard(card, m){
-  card.innerHTML=`<button class="help-button mc-close" type="button" data-mact="close" aria-label="閉じる">${uiIcon('close')}</button><div class="mc-portrait">${memberFace(m,112)}<div class="mc-head"><h3>${esc(m.name)}</h3><span class="sub">${instrumentIcon(SEAT[m.seat].inst)}${m.grade ? `${m.grade}年・` : ''}${esc(seatLabel(m.seat))}</span><span class="small">録音時</span></div></div><div class="mc-actions"><button class="btn small" type="button" data-mact="recordsolo" aria-pressed="false">${uiIcon('play')}この人だけ聴く</button></div>${memberCurrentRanks(m)}`;
+  const pc=PIECES[U.recordPerf.pieceId],part=U.recordPerf.from!==0||U.recordPerf.to!==pc.beats;
+  const action=performanceMemberSounds(U.recordPerf,m.id)?`<button class="btn small" type="button" data-mact="recordsolo" aria-pressed="false">${uiIcon('play')}この人だけ聴く</button>`:`<span class="mc-rest">${uiIcon('rest')}${part?'この範囲は休み':'この曲は休み'}</span>`;
+  card.innerHTML=`<button class="help-button mc-close" type="button" data-mact="close" aria-label="閉じる">${uiIcon('close')}</button><div class="mc-portrait">${memberFace(m,112)}<div class="mc-head"><h3>${esc(m.name)}</h3><span class="sub">${instrumentIcon(SEAT[m.seat].inst)}${m.grade ? `${m.grade}年・` : ''}${esc(seatLabel(m.seat))}</span><span class="small">録音時</span></div></div><div class="mc-actions">${action}</div>${memberCurrentRanks(m)}`;
   card.dataset.recorded=m.id;
   renderRecordedMemberSolo();
 }

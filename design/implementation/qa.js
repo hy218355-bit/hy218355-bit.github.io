@@ -175,7 +175,7 @@ function record(){
  report.recordedCard=U.recordMember?{id:U.recordMember.id,name:U.recordMember.name,grade:U.recordMember.grade,seat:U.recordMember.seat,ranks:Object.fromEntries(STAT_KEYS.map(k=>[k,rankOf(U.recordMember.stats[k])]))}:null;
  if(q.has('recordCardAudit')){
   const card=$('#memberCard'),b=card.querySelector('[data-mact="recordsolo"]');
-  report.recordCardUi={state:hash(JSON.stringify(S)),hidden:card.hidden,origin:card.dataset.origin,focus:document.activeElement.id||document.activeElement.dataset.mact||document.activeElement.tagName,button:b?{pressed:b.getAttribute('aria-pressed'),text:b.textContent,rect:b.getBoundingClientRect().toJSON()}:null,card:card.getBoundingClientRect().toJSON(),solo:U.solo,seconds:U.playing?E.now():null,current:U.sel&&memberById(U.sel)?{name:memberById(U.sel).name,seat:memberById(U.sel).seat}:null,canRename:!!card.querySelector('[data-mact="rename"]'),canMove:!!card.querySelector('.mc-move'),nameFormOpen:!!$('#memberNameForm')&&!$('#memberNameForm').hidden,moveOpen:!!card.querySelector('.mc-move')?.open};
+  report.recordCardUi={state:hash(JSON.stringify(S)),hidden:card.hidden,origin:card.dataset.origin,focus:document.activeElement.id||document.activeElement.dataset.mact||document.activeElement.tagName,rest:card.querySelector('.mc-rest')?.textContent,options:[...$('#soloSel').options].map(o=>({value:o.value,text:o.textContent})),sounds:U.recordPerf?{members:[...new Set([...U.recordPerf.notes,...U.recordPerf.hits].map(n=>n.mid))],sections:[...new Set([...U.recordPerf.notes,...U.recordPerf.hits].map(n=>n.sec))]}:null,button:b?{pressed:b.getAttribute('aria-pressed'),text:b.textContent,rect:b.getBoundingClientRect().toJSON()}:null,card:card.getBoundingClientRect().toJSON(),solo:U.solo,seconds:U.playing?E.now():null,current:U.sel&&memberById(U.sel)?{name:memberById(U.sel).name,seat:memberById(U.sel).seat}:null,canRename:!!card.querySelector('[data-mact="rename"]'),canMove:!!card.querySelector('.mc-move'),nameFormOpen:!!$('#memberNameForm')&&!$('#memberNameForm').hidden,moveOpen:!!card.querySelector('.mc-move')?.open};
  }
  report.recordedCast=U.stageMembers?Array.from(U.stageMembers,([seat,m])=>({seat,id:m.id,name:m.name,grade:m.grade,ranks:Object.fromEntries(STAT_KEYS.map(k=>[k,rankOf(m.stats[k])]))})):[];
  report.recordings=S.recs.map(r=>({id:r.id,label:r.label}));
@@ -353,7 +353,7 @@ async function show(next){
   old.members.forEach((m,i)=>{if(i)m.id='m2026-n'+(i+1)+'-f00d';m.grade=3;m.stats={pitch:80,rhythm:80,tone:80,expr:80};m.fam={galop:100};});
   if(q.has('different')){old.pieceId='largo';old.members.forEach(m=>m.fam={galop:100,largo:100,ode:100});}
   addRec(old,'2026年 定期演奏会',{venue:'hall'});
-  if(q.has('different')){old.recs.at(-1).span={from:PIECES.largo.spans[0].from,to:PIECES.largo.spans[0].to};old.pieceId='ode';}
+  if(q.has('different')){if(!q.has('fullRecord'))old.recs.at(-1).span={from:PIECES.largo.spans[0].from,to:PIECES.largo.spans[0].to};old.pieceId='ode';}
   if(q.has('short'))old.recs.at(-1).span={from:0,to:.25};
   old.year=2027;old.members[0].name='田中 葵';old.members[0].stats={pitch:55,rhythm:55,tone:55,expr:55};addRec(old,'2027年 定期演奏会',{venue:'hall'});
   s.recs=clone(old.recs);s.year=2031;s.gradMembers=[];

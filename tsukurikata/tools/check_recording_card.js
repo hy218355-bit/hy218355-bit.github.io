@@ -24,13 +24,14 @@ function fresh(pid='galop'){
  card.dataset.origin='stage';card.hidden=false;U.cardReturn=null;focus='solo';scrolls=0;button.attrs={};tip.hidden=true;form.hidden=true;move.open=false;activeInside=false;
 }
 `,ctx);
+vm.runInContext(ui.slice(ui.indexOf('const STAGE_PERFORMERS ='),ui.indexOf('function levelAt(')),ctx);
 vm.runInContext(ui.slice(ui.indexOf('function releaseRecordedMemberSolo('),ui.indexOf('function renderRecordedMemberCard(')),ctx);
 const keyStart=ui.indexOf("  $('#memberCard').addEventListener('keydown'");
 vm.runInContext(ui.slice(keyStart,ui.indexOf("  $('#week').addEventListener('keydown'",keyStart)),ctx);
 vm.runInContext(`
 let n=0;
 for(const pid of PIECE_IDS){
- fresh(pid);const before=JSON.stringify(S),perf=U.shown,pb=E.pb,person=U.recordMember;
+ fresh(pid);U.recordMember=S.recs[0].snap.members.find(m=>performanceMemberSounds(U.shown,m.id));const before=JSON.stringify(S),perf=U.shown,pb=E.pb,person=U.recordMember;
  toggleRecordedMemberSolo();assert.equal(E.solo.id,person.id);assert.equal(button.attrs['aria-pressed'],'true');assert.ok(button.innerHTML.includes('全員の音にもどす'));
  toggleRecordedMemberSolo();assert.equal(E.solo.type,'all');assert.equal(button.attrs['aria-pressed'],'false');assert.ok(button.innerHTML.includes('この人だけ聴く'));
  assert.equal(U.shown,perf);assert.equal(E.pb,pb);assert.equal(U.playing,true);assert.equal(JSON.stringify(S),before);n++;
