@@ -124,6 +124,10 @@ function record(){
   const buttonId=b=>{if(!memberButtonIds.has(b))memberButtonIds.set(b,++memberButtonId);return memberButtonIds.get(b);};
   report.memberListening={state:hash(JSON.stringify(S)),selected:U.sel,section:m?.seat&&SEAT[m.seat].sec,sourceCurrent:!!active&&active===U.perfNow,cacheCurrent:!!m&&U.memberCardMember===m,hidden:card.hidden,focus:document.activeElement.id||document.activeElement.dataset.mact||document.activeElement.tagName,buttons:[...card.querySelectorAll(':scope>.mc-actions [data-mact]')].map(b=>({id:buttonId(b),act:b.dataset.mact,pressed:b.getAttribute('aria-pressed'),label:b.getAttribute('aria-label'),hidden:b.hidden,checked:!!b.querySelector('path[d="m5 12 4 4L19 6"]'),rect:b.getBoundingClientRect().toJSON()})),details:[...card.querySelectorAll(':scope>details[open]')].map(d=>d.className),draft:$('#memberNameForm')&&!$('#memberNameForm').hidden?$('#memberName').value:null,expected:active?[...new Set([...active.notes,...active.hits].filter(n=>type==='all'||type==='member'&&n.mid===id||type==='sec'&&n.sec===id).map(n=>n.mid))]:[]};
  }
+ if(q.has('currentRestAudit')){
+  const perf=performanceMemo?.perf,rest=$('#memberCard [data-current-rest]');
+  report.currentRest={rest:rest&&!rest.hidden?rest.textContent:null,options:[...$('#soloSel').options].map(o=>o.value),expected:perf?{members:[...new Set([...perf.notes,...perf.hits].map(n=>n.mid))],sections:[...new Set([...perf.notes,...perf.hits].map(n=>n.sec))]}:null,cast:STAGE_PERFORMERS.get(U.perfNow)?.members.map(m=>({id:m.id,seat:m.seat,name:m.name}))};
+ }
  if(q.has('stopAudit')){
   const current=document.activeElement,rect=el=>el.getBoundingClientRect().toJSON();
   report.stopUi={state:hash(JSON.stringify(S)),focus:current.id||current.dataset.tabgo||current.tagName,tab:U.tab,scroll:scrollY,mainHidden:$('#btnStop').hidden,nowHidden:$('#btnNow').hidden,miniHidden:$('#mini').hidden,now:rect($('#btnNow')),miniStop:rect($('#miniStop')),tabButton:rect($('#tabbar [aria-current="page"]')),seconds:U.playing?E.now():null};
@@ -414,6 +418,7 @@ async function show(next){
  if(q.has('hallCarry'))s.hallExp=72;
  if(view==='conduct'&&q.has('longWatch'))s=renameMember(s,s.members[0].id,'あいうえおかきくけこさし');
  if(PIECES[q.get('audioPiece')])s.pieceId=q.get('audioPiece');
+ if(q.has('audioRange')&&(q.get('audioRange')==='all'||PIECES[s.pieceId]?.spans[Number(q.get('audioRange'))]))U.range=q.get('audioRange');
  if(['full','short','off'].includes(q.get('cueFx')))U.fxMode=q.get('cueFx');
  S=s;U.sel=null;hideTip();renderAll();refreshNow();$('#toast').hidden=true;
  const cardView=view==='member'||view.startsWith('member-');

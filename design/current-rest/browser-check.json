@@ -1,0 +1,7598 @@
+[
+  {
+    "case": "front-rest-light",
+    "data": {
+      "ui": {
+        "buttons": [
+          {
+            "act": "solo",
+            "checked": false,
+            "hidden": true,
+            "id": 1,
+            "label": "田中 七海だけ聴く",
+            "pressed": "false",
+            "rect": {
+              "bottom": 0,
+              "height": 0,
+              "left": 0,
+              "right": 0,
+              "top": 0,
+              "width": 0,
+              "x": 0,
+              "y": 0
+            }
+          },
+          {
+            "act": "secsolo",
+            "checked": false,
+            "hidden": true,
+            "id": 2,
+            "label": "フルートだけ聴く",
+            "pressed": "false",
+            "rect": {
+              "bottom": 0,
+              "height": 0,
+              "left": 0,
+              "right": 0,
+              "top": 0,
+              "width": 0,
+              "x": 0,
+              "y": 0
+            }
+          },
+          {
+            "act": "all",
+            "checked": false,
+            "hidden": true,
+            "id": 3,
+            "label": null,
+            "pressed": null,
+            "rect": {
+              "bottom": 0,
+              "height": 0,
+              "left": 0,
+              "right": 0,
+              "top": 0,
+              "width": 0,
+              "x": 0,
+              "y": 0
+            }
+          }
+        ],
+        "cacheCurrent": true,
+        "details": [],
+        "draft": null,
+        "expected": [],
+        "focus": "rename",
+        "hidden": false,
+        "section": "fl",
+        "selected": "m2028-n1-cafe",
+        "sourceCurrent": false,
+        "state": 0.06214514910243451
+      },
+      "rest": {
+        "cast": [
+          {
+            "id": "m2028-n1-cafe",
+            "name": "田中 七海",
+            "seat": "picc1"
+          },
+          {
+            "id": "m2028-n2-cafe",
+            "name": "小川 悠斗",
+            "seat": "fl1a"
+          },
+          {
+            "id": "m2028-n3-cafe",
+            "name": "松井 颯太",
+            "seat": "fl1b"
+          },
+          {
+            "id": "m2028-n4-cafe",
+            "name": "菅原 菜月",
+            "seat": "fl2a"
+          },
+          {
+            "id": "m2028-n5-cafe",
+            "name": "岡本 智也",
+            "seat": "ob1"
+          },
+          {
+            "id": "m2028-n6-cafe",
+            "name": "山口 大翔",
+            "seat": "cl1a"
+          },
+          {
+            "id": "m2028-n7-cafe",
+            "name": "山下 彩花",
+            "seat": "cl1b"
+          },
+          {
+            "id": "m2028-n8-cafe",
+            "name": "高木 瑛太",
+            "seat": "cl1c"
+          },
+          {
+            "id": "m2028-n9-cafe",
+            "name": "清水 菜月",
+            "seat": "asax1"
+          },
+          {
+            "id": "m2028-n10-cafe",
+            "name": "山本 凛",
+            "seat": "asax2"
+          },
+          {
+            "id": "m2028-n11-cafe",
+            "name": "山田 悠真",
+            "seat": "fg1"
+          },
+          {
+            "id": "m2028-n12-cafe",
+            "name": "西村 樹",
+            "seat": "ebcl1"
+          },
+          {
+            "id": "m2028-n13-cafe",
+            "name": "松井 美咲",
+            "seat": "cl2a"
+          },
+          {
+            "id": "m2028-n14-cafe",
+            "name": "阿部 和奏",
+            "seat": "cl2b"
+          },
+          {
+            "id": "m2028-n15-cafe",
+            "name": "前田 紬",
+            "seat": "cl3a"
+          },
+          {
+            "id": "m2028-n16-cafe",
+            "name": "野口 陽翔",
+            "seat": "cl3b"
+          },
+          {
+            "id": "m2028-n17-cafe",
+            "name": "工藤 美月",
+            "seat": "bcl1"
+          },
+          {
+            "id": "m2028-n18-cafe",
+            "name": "中野 透",
+            "seat": "tsax1"
+          },
+          {
+            "id": "m2028-n19-cafe",
+            "name": "木村 湊",
+            "seat": "bsax1"
+          },
+          {
+            "id": "m2028-n20-cafe",
+            "name": "佐々木 彩花",
+            "seat": "hn1"
+          },
+          {
+            "id": "m2028-n21-cafe",
+            "name": "井上 優",
+            "seat": "hn2"
+          },
+          {
+            "id": "m2028-n22-cafe",
+            "name": "酒井 陸",
+            "seat": "hn3"
+          },
+          {
+            "id": "m2028-n23-cafe",
+            "name": "松田 拓海",
+            "seat": "hn4"
+          },
+          {
+            "id": "m2028-n24-cafe",
+            "name": "中村 絢",
+            "seat": "tp1a"
+          },
+          {
+            "id": "m2028-n25-cafe",
+            "name": "林 亮",
+            "seat": "tp1b"
+          },
+          {
+            "id": "m2028-n26-cafe",
+            "name": "岩崎 結衣",
+            "seat": "tp2a"
+          },
+          {
+            "id": "m2028-n27-cafe",
+            "name": "千葉 陸",
+            "seat": "tp3a"
+          },
+          {
+            "id": "m2028-n28-cafe",
+            "name": "竹内 花音",
+            "seat": "tb1"
+          },
+          {
+            "id": "m2028-n29-cafe",
+            "name": "井上 雫",
+            "seat": "tb2"
+          },
+          {
+            "id": "m2028-n30-cafe",
+            "name": "石井 透",
+            "seat": "btb1"
+          },
+          {
+            "id": "m2028-n31-cafe",
+            "name": "山下 茜",
+            "seat": "euph1"
+          },
+          {
+            "id": "m2028-n32-cafe",
+            "name": "渡辺 渚",
+            "seat": "euph2"
+          },
+          {
+            "id": "m2028-n33-cafe",
+            "name": "坂本 雫",
+            "seat": "tuba1"
+          },
+          {
+            "id": "m2028-n34-cafe",
+            "name": "菅原 智也",
+            "seat": "tuba2"
+          },
+          {
+            "id": "m2028-n35-cafe",
+            "name": "高木 明里",
+            "seat": "cb1"
+          },
+          {
+            "id": "m2028-n36-cafe",
+            "name": "佐藤 誠",
+            "seat": "perc1"
+          },
+          {
+            "id": "m2028-n37-cafe",
+            "name": "山田 蓮",
+            "seat": "perc2"
+          },
+          {
+            "id": "m2028-n38-cafe",
+            "name": "原 杏",
+            "seat": "perc3"
+          },
+          {
+            "id": "m2028-n39-cafe",
+            "name": "横山 透",
+            "seat": "perc4"
+          }
+        ],
+        "expected": {
+          "members": [
+            "m2028-n5-cafe",
+            "m2028-n6-cafe",
+            "m2028-n7-cafe",
+            "m2028-n8-cafe",
+            "m2028-n11-cafe",
+            "m2028-n13-cafe",
+            "m2028-n14-cafe",
+            "m2028-n15-cafe",
+            "m2028-n16-cafe",
+            "m2028-n17-cafe",
+            "m2028-n18-cafe",
+            "m2028-n20-cafe",
+            "m2028-n21-cafe",
+            "m2028-n31-cafe",
+            "m2028-n32-cafe",
+            "m2028-n33-cafe",
+            "m2028-n34-cafe",
+            "m2028-n35-cafe"
+          ],
+          "sections": [
+            "dr",
+            "cl",
+            "sax",
+            "hn",
+            "low"
+          ]
+        },
+        "options": [
+          "all",
+          "sec:dr",
+          "sec:cl",
+          "sec:sax",
+          "sec:hn",
+          "sec:low"
+        ],
+        "rest": "この範囲は休み"
+      },
+      "performance": {
+        "expected": 0.36987378587946296,
+        "expectedCohesion": 0.2,
+        "prepared": 0.36987378587946296,
+        "preparedCohesion": 0.2,
+        "shown": 0.36987378587946296,
+        "shownCohesion": 0.2
+      },
+      "playing": false,
+      "waiting": false,
+      "solo": {
+        "type": "all"
+      },
+      "playback": null,
+      "audible": [],
+      "records": 0.8017618958838284,
+      "range": "0",
+      "piece": "largo",
+      "theme": "light",
+      "width": 375,
+      "scrollWidth": 375,
+      "errors": [],
+      "portraits": 39
+    }
+  },
+  {
+    "case": "front-rest-dark",
+    "data": {
+      "ui": {
+        "buttons": [
+          {
+            "act": "solo",
+            "checked": false,
+            "hidden": true,
+            "id": 1,
+            "label": "田中 七海だけ聴く",
+            "pressed": "false",
+            "rect": {
+              "bottom": 0,
+              "height": 0,
+              "left": 0,
+              "right": 0,
+              "top": 0,
+              "width": 0,
+              "x": 0,
+              "y": 0
+            }
+          },
+          {
+            "act": "secsolo",
+            "checked": false,
+            "hidden": true,
+            "id": 2,
+            "label": "フルートだけ聴く",
+            "pressed": "false",
+            "rect": {
+              "bottom": 0,
+              "height": 0,
+              "left": 0,
+              "right": 0,
+              "top": 0,
+              "width": 0,
+              "x": 0,
+              "y": 0
+            }
+          },
+          {
+            "act": "all",
+            "checked": false,
+            "hidden": true,
+            "id": 3,
+            "label": null,
+            "pressed": null,
+            "rect": {
+              "bottom": 0,
+              "height": 0,
+              "left": 0,
+              "right": 0,
+              "top": 0,
+              "width": 0,
+              "x": 0,
+              "y": 0
+            }
+          }
+        ],
+        "cacheCurrent": true,
+        "details": [],
+        "draft": null,
+        "expected": [],
+        "focus": "stage",
+        "hidden": false,
+        "section": "fl",
+        "selected": "m2028-n1-cafe",
+        "sourceCurrent": false,
+        "state": 0.06214514910243451
+      },
+      "rest": {
+        "cast": [
+          {
+            "id": "m2028-n1-cafe",
+            "name": "田中 七海",
+            "seat": "picc1"
+          },
+          {
+            "id": "m2028-n2-cafe",
+            "name": "小川 悠斗",
+            "seat": "fl1a"
+          },
+          {
+            "id": "m2028-n3-cafe",
+            "name": "松井 颯太",
+            "seat": "fl1b"
+          },
+          {
+            "id": "m2028-n4-cafe",
+            "name": "菅原 菜月",
+            "seat": "fl2a"
+          },
+          {
+            "id": "m2028-n5-cafe",
+            "name": "岡本 智也",
+            "seat": "ob1"
+          },
+          {
+            "id": "m2028-n6-cafe",
+            "name": "山口 大翔",
+            "seat": "cl1a"
+          },
+          {
+            "id": "m2028-n7-cafe",
+            "name": "山下 彩花",
+            "seat": "cl1b"
+          },
+          {
+            "id": "m2028-n8-cafe",
+            "name": "高木 瑛太",
+            "seat": "cl1c"
+          },
+          {
+            "id": "m2028-n9-cafe",
+            "name": "清水 菜月",
+            "seat": "asax1"
+          },
+          {
+            "id": "m2028-n10-cafe",
+            "name": "山本 凛",
+            "seat": "asax2"
+          },
+          {
+            "id": "m2028-n11-cafe",
+            "name": "山田 悠真",
+            "seat": "fg1"
+          },
+          {
+            "id": "m2028-n12-cafe",
+            "name": "西村 樹",
+            "seat": "ebcl1"
+          },
+          {
+            "id": "m2028-n13-cafe",
+            "name": "松井 美咲",
+            "seat": "cl2a"
+          },
+          {
+            "id": "m2028-n14-cafe",
+            "name": "阿部 和奏",
+            "seat": "cl2b"
+          },
+          {
+            "id": "m2028-n15-cafe",
+            "name": "前田 紬",
+            "seat": "cl3a"
+          },
+          {
+            "id": "m2028-n16-cafe",
+            "name": "野口 陽翔",
+            "seat": "cl3b"
+          },
+          {
+            "id": "m2028-n17-cafe",
+            "name": "工藤 美月",
+            "seat": "bcl1"
+          },
+          {
+            "id": "m2028-n18-cafe",
+            "name": "中野 透",
+            "seat": "tsax1"
+          },
+          {
+            "id": "m2028-n19-cafe",
+            "name": "木村 湊",
+            "seat": "bsax1"
+          },
+          {
+            "id": "m2028-n20-cafe",
+            "name": "佐々木 彩花",
+            "seat": "hn1"
+          },
+          {
+            "id": "m2028-n21-cafe",
+            "name": "井上 優",
+            "seat": "hn2"
+          },
+          {
+            "id": "m2028-n22-cafe",
+            "name": "酒井 陸",
+            "seat": "hn3"
+          },
+          {
+            "id": "m2028-n23-cafe",
+            "name": "松田 拓海",
+            "seat": "hn4"
+          },
+          {
+            "id": "m2028-n24-cafe",
+            "name": "中村 絢",
+            "seat": "tp1a"
+          },
+          {
+            "id": "m2028-n25-cafe",
+            "name": "林 亮",
+            "seat": "tp1b"
+          },
+          {
+            "id": "m2028-n26-cafe",
+            "name": "岩崎 結衣",
+            "seat": "tp2a"
+          },
+          {
+            "id": "m2028-n27-cafe",
+            "name": "千葉 陸",
+            "seat": "tp3a"
+          },
+          {
+            "id": "m2028-n28-cafe",
+            "name": "竹内 花音",
+            "seat": "tb1"
+          },
+          {
+            "id": "m2028-n29-cafe",
+            "name": "井上 雫",
+            "seat": "tb2"
+          },
+          {
+            "id": "m2028-n30-cafe",
+            "name": "石井 透",
+            "seat": "btb1"
+          },
+          {
+            "id": "m2028-n31-cafe",
+            "name": "山下 茜",
+            "seat": "euph1"
+          },
+          {
+            "id": "m2028-n32-cafe",
+            "name": "渡辺 渚",
+            "seat": "euph2"
+          },
+          {
+            "id": "m2028-n33-cafe",
+            "name": "坂本 雫",
+            "seat": "tuba1"
+          },
+          {
+            "id": "m2028-n34-cafe",
+            "name": "菅原 智也",
+            "seat": "tuba2"
+          },
+          {
+            "id": "m2028-n35-cafe",
+            "name": "高木 明里",
+            "seat": "cb1"
+          },
+          {
+            "id": "m2028-n36-cafe",
+            "name": "佐藤 誠",
+            "seat": "perc1"
+          },
+          {
+            "id": "m2028-n37-cafe",
+            "name": "山田 蓮",
+            "seat": "perc2"
+          },
+          {
+            "id": "m2028-n38-cafe",
+            "name": "原 杏",
+            "seat": "perc3"
+          },
+          {
+            "id": "m2028-n39-cafe",
+            "name": "横山 透",
+            "seat": "perc4"
+          }
+        ],
+        "expected": {
+          "members": [
+            "m2028-n5-cafe",
+            "m2028-n6-cafe",
+            "m2028-n7-cafe",
+            "m2028-n8-cafe",
+            "m2028-n11-cafe",
+            "m2028-n13-cafe",
+            "m2028-n14-cafe",
+            "m2028-n15-cafe",
+            "m2028-n16-cafe",
+            "m2028-n17-cafe",
+            "m2028-n18-cafe",
+            "m2028-n20-cafe",
+            "m2028-n21-cafe",
+            "m2028-n31-cafe",
+            "m2028-n32-cafe",
+            "m2028-n33-cafe",
+            "m2028-n34-cafe",
+            "m2028-n35-cafe"
+          ],
+          "sections": [
+            "dr",
+            "cl",
+            "sax",
+            "hn",
+            "low"
+          ]
+        },
+        "options": [
+          "all",
+          "sec:dr",
+          "sec:cl",
+          "sec:sax",
+          "sec:hn",
+          "sec:low"
+        ],
+        "rest": "この範囲は休み"
+      },
+      "performance": {
+        "expected": 0.36987378587946296,
+        "expectedCohesion": 0.2,
+        "prepared": 0.36987378587946296,
+        "preparedCohesion": 0.2,
+        "shown": 0.36987378587946296,
+        "shownCohesion": 0.2
+      },
+      "playing": false,
+      "waiting": false,
+      "solo": {
+        "type": "all"
+      },
+      "playback": null,
+      "audible": [],
+      "records": 0.8017618958838284,
+      "range": "0",
+      "piece": "largo",
+      "theme": "dark",
+      "width": 375,
+      "scrollWidth": 375,
+      "errors": [],
+      "portraits": 39
+    }
+  },
+  {
+    "case": "front-all-playing",
+    "data": {
+      "ui": {
+        "buttons": [
+          {
+            "act": "solo",
+            "checked": false,
+            "hidden": true,
+            "id": 1,
+            "label": "田中 七海だけ聴く",
+            "pressed": "false",
+            "rect": {
+              "bottom": 0,
+              "height": 0,
+              "left": 0,
+              "right": 0,
+              "top": 0,
+              "width": 0,
+              "x": 0,
+              "y": 0
+            }
+          },
+          {
+            "act": "secsolo",
+            "checked": false,
+            "hidden": true,
+            "id": 2,
+            "label": "フルートだけ聴く",
+            "pressed": "false",
+            "rect": {
+              "bottom": 0,
+              "height": 0,
+              "left": 0,
+              "right": 0,
+              "top": 0,
+              "width": 0,
+              "x": 0,
+              "y": 0
+            }
+          },
+          {
+            "act": "all",
+            "checked": false,
+            "hidden": true,
+            "id": 3,
+            "label": null,
+            "pressed": null,
+            "rect": {
+              "bottom": 0,
+              "height": 0,
+              "left": 0,
+              "right": 0,
+              "top": 0,
+              "width": 0,
+              "x": 0,
+              "y": 0
+            }
+          }
+        ],
+        "cacheCurrent": true,
+        "details": [],
+        "draft": null,
+        "expected": [
+          "m2028-n5-cafe",
+          "m2028-n6-cafe",
+          "m2028-n7-cafe",
+          "m2028-n8-cafe",
+          "m2028-n11-cafe",
+          "m2028-n13-cafe",
+          "m2028-n14-cafe",
+          "m2028-n15-cafe",
+          "m2028-n16-cafe",
+          "m2028-n17-cafe",
+          "m2028-n18-cafe",
+          "m2028-n20-cafe",
+          "m2028-n21-cafe",
+          "m2028-n31-cafe",
+          "m2028-n32-cafe",
+          "m2028-n33-cafe",
+          "m2028-n34-cafe",
+          "m2028-n35-cafe"
+        ],
+        "focus": "BODY",
+        "hidden": false,
+        "section": "fl",
+        "selected": "m2028-n1-cafe",
+        "sourceCurrent": true,
+        "state": 0.06214514910243451
+      },
+      "rest": {
+        "cast": [
+          {
+            "id": "m2028-n1-cafe",
+            "name": "田中 七海",
+            "seat": "picc1"
+          },
+          {
+            "id": "m2028-n2-cafe",
+            "name": "小川 悠斗",
+            "seat": "fl1a"
+          },
+          {
+            "id": "m2028-n3-cafe",
+            "name": "松井 颯太",
+            "seat": "fl1b"
+          },
+          {
+            "id": "m2028-n4-cafe",
+            "name": "菅原 菜月",
+            "seat": "fl2a"
+          },
+          {
+            "id": "m2028-n5-cafe",
+            "name": "岡本 智也",
+            "seat": "ob1"
+          },
+          {
+            "id": "m2028-n6-cafe",
+            "name": "山口 大翔",
+            "seat": "cl1a"
+          },
+          {
+            "id": "m2028-n7-cafe",
+            "name": "山下 彩花",
+            "seat": "cl1b"
+          },
+          {
+            "id": "m2028-n8-cafe",
+            "name": "高木 瑛太",
+            "seat": "cl1c"
+          },
+          {
+            "id": "m2028-n9-cafe",
+            "name": "清水 菜月",
+            "seat": "asax1"
+          },
+          {
+            "id": "m2028-n10-cafe",
+            "name": "山本 凛",
+            "seat": "asax2"
+          },
+          {
+            "id": "m2028-n11-cafe",
+            "name": "山田 悠真",
+            "seat": "fg1"
+          },
+          {
+            "id": "m2028-n12-cafe",
+            "name": "西村 樹",
+            "seat": "ebcl1"
+          },
+          {
+            "id": "m2028-n13-cafe",
+            "name": "松井 美咲",
+            "seat": "cl2a"
+          },
+          {
+            "id": "m2028-n14-cafe",
+            "name": "阿部 和奏",
+            "seat": "cl2b"
+          },
+          {
+            "id": "m2028-n15-cafe",
+            "name": "前田 紬",
+            "seat": "cl3a"
+          },
+          {
+            "id": "m2028-n16-cafe",
+            "name": "野口 陽翔",
+            "seat": "cl3b"
+          },
+          {
+            "id": "m2028-n17-cafe",
+            "name": "工藤 美月",
+            "seat": "bcl1"
+          },
+          {
+            "id": "m2028-n18-cafe",
+            "name": "中野 透",
+            "seat": "tsax1"
+          },
+          {
+            "id": "m2028-n19-cafe",
+            "name": "木村 湊",
+            "seat": "bsax1"
+          },
+          {
+            "id": "m2028-n20-cafe",
+            "name": "佐々木 彩花",
+            "seat": "hn1"
+          },
+          {
+            "id": "m2028-n21-cafe",
+            "name": "井上 優",
+            "seat": "hn2"
+          },
+          {
+            "id": "m2028-n22-cafe",
+            "name": "酒井 陸",
+            "seat": "hn3"
+          },
+          {
+            "id": "m2028-n23-cafe",
+            "name": "松田 拓海",
+            "seat": "hn4"
+          },
+          {
+            "id": "m2028-n24-cafe",
+            "name": "中村 絢",
+            "seat": "tp1a"
+          },
+          {
+            "id": "m2028-n25-cafe",
+            "name": "林 亮",
+            "seat": "tp1b"
+          },
+          {
+            "id": "m2028-n26-cafe",
+            "name": "岩崎 結衣",
+            "seat": "tp2a"
+          },
+          {
+            "id": "m2028-n27-cafe",
+            "name": "千葉 陸",
+            "seat": "tp3a"
+          },
+          {
+            "id": "m2028-n28-cafe",
+            "name": "竹内 花音",
+            "seat": "tb1"
+          },
+          {
+            "id": "m2028-n29-cafe",
+            "name": "井上 雫",
+            "seat": "tb2"
+          },
+          {
+            "id": "m2028-n30-cafe",
+            "name": "石井 透",
+            "seat": "btb1"
+          },
+          {
+            "id": "m2028-n31-cafe",
+            "name": "山下 茜",
+            "seat": "euph1"
+          },
+          {
+            "id": "m2028-n32-cafe",
+            "name": "渡辺 渚",
+            "seat": "euph2"
+          },
+          {
+            "id": "m2028-n33-cafe",
+            "name": "坂本 雫",
+            "seat": "tuba1"
+          },
+          {
+            "id": "m2028-n34-cafe",
+            "name": "菅原 智也",
+            "seat": "tuba2"
+          },
+          {
+            "id": "m2028-n35-cafe",
+            "name": "高木 明里",
+            "seat": "cb1"
+          },
+          {
+            "id": "m2028-n36-cafe",
+            "name": "佐藤 誠",
+            "seat": "perc1"
+          },
+          {
+            "id": "m2028-n37-cafe",
+            "name": "山田 蓮",
+            "seat": "perc2"
+          },
+          {
+            "id": "m2028-n38-cafe",
+            "name": "原 杏",
+            "seat": "perc3"
+          },
+          {
+            "id": "m2028-n39-cafe",
+            "name": "横山 透",
+            "seat": "perc4"
+          }
+        ],
+        "expected": {
+          "members": [
+            "m2028-n5-cafe",
+            "m2028-n6-cafe",
+            "m2028-n7-cafe",
+            "m2028-n8-cafe",
+            "m2028-n11-cafe",
+            "m2028-n13-cafe",
+            "m2028-n14-cafe",
+            "m2028-n15-cafe",
+            "m2028-n16-cafe",
+            "m2028-n17-cafe",
+            "m2028-n18-cafe",
+            "m2028-n20-cafe",
+            "m2028-n21-cafe",
+            "m2028-n31-cafe",
+            "m2028-n32-cafe",
+            "m2028-n33-cafe",
+            "m2028-n34-cafe",
+            "m2028-n35-cafe"
+          ],
+          "sections": [
+            "dr",
+            "cl",
+            "sax",
+            "hn",
+            "low"
+          ]
+        },
+        "options": [
+          "all",
+          "sec:dr",
+          "sec:cl",
+          "sec:sax",
+          "sec:hn",
+          "sec:low"
+        ],
+        "rest": "この範囲は休み"
+      },
+      "performance": {
+        "expected": 0.36987378587946296,
+        "expectedCohesion": 0.2,
+        "prepared": 0.36987378587946296,
+        "preparedCohesion": 0.2,
+        "shown": 0.36987378587946296,
+        "shownCohesion": 0.2
+      },
+      "playing": true,
+      "waiting": false,
+      "solo": {
+        "type": "all"
+      },
+      "playback": 1,
+      "audible": [
+        "m2028-n5-cafe",
+        "m2028-n6-cafe",
+        "m2028-n7-cafe",
+        "m2028-n8-cafe",
+        "m2028-n11-cafe",
+        "m2028-n13-cafe",
+        "m2028-n14-cafe",
+        "m2028-n15-cafe",
+        "m2028-n16-cafe",
+        "m2028-n17-cafe",
+        "m2028-n18-cafe",
+        "m2028-n20-cafe",
+        "m2028-n21-cafe",
+        "m2028-n31-cafe",
+        "m2028-n32-cafe",
+        "m2028-n33-cafe",
+        "m2028-n34-cafe",
+        "m2028-n35-cafe"
+      ],
+      "records": 0.8017618958838284,
+      "range": "0",
+      "piece": "largo",
+      "theme": "dark",
+      "width": 375,
+      "scrollWidth": 375,
+      "errors": [],
+      "portraits": 39
+    }
+  },
+  {
+    "case": "full-restored",
+    "data": {
+      "ui": {
+        "buttons": [
+          {
+            "act": "solo",
+            "checked": false,
+            "hidden": false,
+            "id": 1,
+            "label": "田中 七海だけ聴く",
+            "pressed": "false",
+            "rect": {
+              "bottom": -256.0078125,
+              "height": 44,
+              "left": 52,
+              "right": 183.5,
+              "top": -300.0078125,
+              "width": 131.5,
+              "x": 52,
+              "y": -300.0078125
+            }
+          },
+          {
+            "act": "secsolo",
+            "checked": false,
+            "hidden": false,
+            "id": 2,
+            "label": "フルートだけ聴く",
+            "pressed": "false",
+            "rect": {
+              "bottom": -256.0078125,
+              "height": 44,
+              "left": 191.5,
+              "right": 323,
+              "top": -300.0078125,
+              "width": 131.5,
+              "x": 191.5,
+              "y": -300.0078125
+            }
+          },
+          {
+            "act": "all",
+            "checked": false,
+            "hidden": true,
+            "id": 3,
+            "label": null,
+            "pressed": null,
+            "rect": {
+              "bottom": 0,
+              "height": 0,
+              "left": 0,
+              "right": 0,
+              "top": 0,
+              "width": 0,
+              "x": 0,
+              "y": 0
+            }
+          }
+        ],
+        "cacheCurrent": true,
+        "details": [],
+        "draft": null,
+        "expected": [],
+        "focus": "SUMMARY",
+        "hidden": false,
+        "section": "fl",
+        "selected": "m2028-n1-cafe",
+        "sourceCurrent": false,
+        "state": 0.06214514910243451
+      },
+      "rest": {
+        "cast": [
+          {
+            "id": "m2028-n1-cafe",
+            "name": "田中 七海",
+            "seat": "picc1"
+          },
+          {
+            "id": "m2028-n2-cafe",
+            "name": "小川 悠斗",
+            "seat": "fl1a"
+          },
+          {
+            "id": "m2028-n3-cafe",
+            "name": "松井 颯太",
+            "seat": "fl1b"
+          },
+          {
+            "id": "m2028-n4-cafe",
+            "name": "菅原 菜月",
+            "seat": "fl2a"
+          },
+          {
+            "id": "m2028-n5-cafe",
+            "name": "岡本 智也",
+            "seat": "ob1"
+          },
+          {
+            "id": "m2028-n6-cafe",
+            "name": "山口 大翔",
+            "seat": "cl1a"
+          },
+          {
+            "id": "m2028-n7-cafe",
+            "name": "山下 彩花",
+            "seat": "cl1b"
+          },
+          {
+            "id": "m2028-n8-cafe",
+            "name": "高木 瑛太",
+            "seat": "cl1c"
+          },
+          {
+            "id": "m2028-n9-cafe",
+            "name": "清水 菜月",
+            "seat": "asax1"
+          },
+          {
+            "id": "m2028-n10-cafe",
+            "name": "山本 凛",
+            "seat": "asax2"
+          },
+          {
+            "id": "m2028-n11-cafe",
+            "name": "山田 悠真",
+            "seat": "fg1"
+          },
+          {
+            "id": "m2028-n12-cafe",
+            "name": "西村 樹",
+            "seat": "ebcl1"
+          },
+          {
+            "id": "m2028-n13-cafe",
+            "name": "松井 美咲",
+            "seat": "cl2a"
+          },
+          {
+            "id": "m2028-n14-cafe",
+            "name": "阿部 和奏",
+            "seat": "cl2b"
+          },
+          {
+            "id": "m2028-n15-cafe",
+            "name": "前田 紬",
+            "seat": "cl3a"
+          },
+          {
+            "id": "m2028-n16-cafe",
+            "name": "野口 陽翔",
+            "seat": "cl3b"
+          },
+          {
+            "id": "m2028-n17-cafe",
+            "name": "工藤 美月",
+            "seat": "bcl1"
+          },
+          {
+            "id": "m2028-n18-cafe",
+            "name": "中野 透",
+            "seat": "tsax1"
+          },
+          {
+            "id": "m2028-n19-cafe",
+            "name": "木村 湊",
+            "seat": "bsax1"
+          },
+          {
+            "id": "m2028-n20-cafe",
+            "name": "佐々木 彩花",
+            "seat": "hn1"
+          },
+          {
+            "id": "m2028-n21-cafe",
+            "name": "井上 優",
+            "seat": "hn2"
+          },
+          {
+            "id": "m2028-n22-cafe",
+            "name": "酒井 陸",
+            "seat": "hn3"
+          },
+          {
+            "id": "m2028-n23-cafe",
+            "name": "松田 拓海",
+            "seat": "hn4"
+          },
+          {
+            "id": "m2028-n24-cafe",
+            "name": "中村 絢",
+            "seat": "tp1a"
+          },
+          {
+            "id": "m2028-n25-cafe",
+            "name": "林 亮",
+            "seat": "tp1b"
+          },
+          {
+            "id": "m2028-n26-cafe",
+            "name": "岩崎 結衣",
+            "seat": "tp2a"
+          },
+          {
+            "id": "m2028-n27-cafe",
+            "name": "千葉 陸",
+            "seat": "tp3a"
+          },
+          {
+            "id": "m2028-n28-cafe",
+            "name": "竹内 花音",
+            "seat": "tb1"
+          },
+          {
+            "id": "m2028-n29-cafe",
+            "name": "井上 雫",
+            "seat": "tb2"
+          },
+          {
+            "id": "m2028-n30-cafe",
+            "name": "石井 透",
+            "seat": "btb1"
+          },
+          {
+            "id": "m2028-n31-cafe",
+            "name": "山下 茜",
+            "seat": "euph1"
+          },
+          {
+            "id": "m2028-n32-cafe",
+            "name": "渡辺 渚",
+            "seat": "euph2"
+          },
+          {
+            "id": "m2028-n33-cafe",
+            "name": "坂本 雫",
+            "seat": "tuba1"
+          },
+          {
+            "id": "m2028-n34-cafe",
+            "name": "菅原 智也",
+            "seat": "tuba2"
+          },
+          {
+            "id": "m2028-n35-cafe",
+            "name": "高木 明里",
+            "seat": "cb1"
+          },
+          {
+            "id": "m2028-n36-cafe",
+            "name": "佐藤 誠",
+            "seat": "perc1"
+          },
+          {
+            "id": "m2028-n37-cafe",
+            "name": "山田 蓮",
+            "seat": "perc2"
+          },
+          {
+            "id": "m2028-n38-cafe",
+            "name": "原 杏",
+            "seat": "perc3"
+          },
+          {
+            "id": "m2028-n39-cafe",
+            "name": "横山 透",
+            "seat": "perc4"
+          }
+        ],
+        "expected": {
+          "members": [
+            "m2028-n1-cafe",
+            "m2028-n2-cafe",
+            "m2028-n3-cafe",
+            "m2028-n4-cafe",
+            "m2028-n5-cafe",
+            "m2028-n6-cafe",
+            "m2028-n7-cafe",
+            "m2028-n8-cafe",
+            "m2028-n9-cafe",
+            "m2028-n10-cafe",
+            "m2028-n11-cafe",
+            "m2028-n12-cafe",
+            "m2028-n13-cafe",
+            "m2028-n14-cafe",
+            "m2028-n15-cafe",
+            "m2028-n16-cafe",
+            "m2028-n17-cafe",
+            "m2028-n18-cafe",
+            "m2028-n19-cafe",
+            "m2028-n20-cafe",
+            "m2028-n21-cafe",
+            "m2028-n22-cafe",
+            "m2028-n23-cafe",
+            "m2028-n24-cafe",
+            "m2028-n25-cafe",
+            "m2028-n26-cafe",
+            "m2028-n27-cafe",
+            "m2028-n28-cafe",
+            "m2028-n29-cafe",
+            "m2028-n30-cafe",
+            "m2028-n31-cafe",
+            "m2028-n32-cafe",
+            "m2028-n33-cafe",
+            "m2028-n34-cafe",
+            "m2028-n35-cafe",
+            "m2028-n36-cafe",
+            "m2028-n37-cafe"
+          ],
+          "sections": [
+            "fl",
+            "dr",
+            "cl",
+            "sax",
+            "hn",
+            "tp",
+            "tb",
+            "low",
+            "perc"
+          ]
+        },
+        "options": [
+          "all",
+          "sec:fl",
+          "sec:dr",
+          "sec:cl",
+          "sec:sax",
+          "sec:tp",
+          "sec:hn",
+          "sec:tb",
+          "sec:low",
+          "sec:perc",
+          "member:m2028-n1-cafe"
+        ],
+        "rest": null
+      },
+      "performance": {
+        "expected": 0.1260019768960774,
+        "expectedCohesion": 0.2,
+        "prepared": 0.1260019768960774,
+        "preparedCohesion": 0.2,
+        "shown": 0.1260019768960774,
+        "shownCohesion": 0.2
+      },
+      "playing": false,
+      "waiting": false,
+      "solo": {
+        "type": "all"
+      },
+      "playback": null,
+      "audible": [],
+      "records": 0.8017618958838284,
+      "range": "all",
+      "piece": "largo",
+      "theme": "dark",
+      "width": 375,
+      "scrollWidth": 375,
+      "errors": [],
+      "portraits": 39
+    }
+  },
+  {
+    "case": "full-solo",
+    "data": {
+      "ui": {
+        "buttons": [
+          {
+            "act": "solo",
+            "checked": true,
+            "hidden": false,
+            "id": 1,
+            "label": "田中 七海の音を再生中。押すと全員の音にもどす",
+            "pressed": "true",
+            "rect": {
+              "bottom": 427.9921875,
+              "height": 44,
+              "left": 52,
+              "right": 183.5,
+              "top": 383.9921875,
+              "width": 131.5,
+              "x": 52,
+              "y": 383.9921875
+            }
+          },
+          {
+            "act": "secsolo",
+            "checked": false,
+            "hidden": false,
+            "id": 2,
+            "label": "フルートだけ聴く",
+            "pressed": "false",
+            "rect": {
+              "bottom": 427.9921875,
+              "height": 44,
+              "left": 191.5,
+              "right": 323,
+              "top": 383.9921875,
+              "width": 131.5,
+              "x": 191.5,
+              "y": 383.9921875
+            }
+          },
+          {
+            "act": "all",
+            "checked": false,
+            "hidden": false,
+            "id": 3,
+            "label": null,
+            "pressed": null,
+            "rect": {
+              "bottom": 479.9921875,
+              "height": 44,
+              "left": 52,
+              "right": 323,
+              "top": 435.9921875,
+              "width": 271,
+              "x": 52,
+              "y": 435.9921875
+            }
+          }
+        ],
+        "cacheCurrent": true,
+        "details": [],
+        "draft": null,
+        "expected": [
+          "m2028-n1-cafe"
+        ],
+        "focus": "solo",
+        "hidden": false,
+        "section": "fl",
+        "selected": "m2028-n1-cafe",
+        "sourceCurrent": true,
+        "state": 0.06214514910243451
+      },
+      "rest": {
+        "cast": [
+          {
+            "id": "m2028-n1-cafe",
+            "name": "田中 七海",
+            "seat": "picc1"
+          },
+          {
+            "id": "m2028-n2-cafe",
+            "name": "小川 悠斗",
+            "seat": "fl1a"
+          },
+          {
+            "id": "m2028-n3-cafe",
+            "name": "松井 颯太",
+            "seat": "fl1b"
+          },
+          {
+            "id": "m2028-n4-cafe",
+            "name": "菅原 菜月",
+            "seat": "fl2a"
+          },
+          {
+            "id": "m2028-n5-cafe",
+            "name": "岡本 智也",
+            "seat": "ob1"
+          },
+          {
+            "id": "m2028-n6-cafe",
+            "name": "山口 大翔",
+            "seat": "cl1a"
+          },
+          {
+            "id": "m2028-n7-cafe",
+            "name": "山下 彩花",
+            "seat": "cl1b"
+          },
+          {
+            "id": "m2028-n8-cafe",
+            "name": "高木 瑛太",
+            "seat": "cl1c"
+          },
+          {
+            "id": "m2028-n9-cafe",
+            "name": "清水 菜月",
+            "seat": "asax1"
+          },
+          {
+            "id": "m2028-n10-cafe",
+            "name": "山本 凛",
+            "seat": "asax2"
+          },
+          {
+            "id": "m2028-n11-cafe",
+            "name": "山田 悠真",
+            "seat": "fg1"
+          },
+          {
+            "id": "m2028-n12-cafe",
+            "name": "西村 樹",
+            "seat": "ebcl1"
+          },
+          {
+            "id": "m2028-n13-cafe",
+            "name": "松井 美咲",
+            "seat": "cl2a"
+          },
+          {
+            "id": "m2028-n14-cafe",
+            "name": "阿部 和奏",
+            "seat": "cl2b"
+          },
+          {
+            "id": "m2028-n15-cafe",
+            "name": "前田 紬",
+            "seat": "cl3a"
+          },
+          {
+            "id": "m2028-n16-cafe",
+            "name": "野口 陽翔",
+            "seat": "cl3b"
+          },
+          {
+            "id": "m2028-n17-cafe",
+            "name": "工藤 美月",
+            "seat": "bcl1"
+          },
+          {
+            "id": "m2028-n18-cafe",
+            "name": "中野 透",
+            "seat": "tsax1"
+          },
+          {
+            "id": "m2028-n19-cafe",
+            "name": "木村 湊",
+            "seat": "bsax1"
+          },
+          {
+            "id": "m2028-n20-cafe",
+            "name": "佐々木 彩花",
+            "seat": "hn1"
+          },
+          {
+            "id": "m2028-n21-cafe",
+            "name": "井上 優",
+            "seat": "hn2"
+          },
+          {
+            "id": "m2028-n22-cafe",
+            "name": "酒井 陸",
+            "seat": "hn3"
+          },
+          {
+            "id": "m2028-n23-cafe",
+            "name": "松田 拓海",
+            "seat": "hn4"
+          },
+          {
+            "id": "m2028-n24-cafe",
+            "name": "中村 絢",
+            "seat": "tp1a"
+          },
+          {
+            "id": "m2028-n25-cafe",
+            "name": "林 亮",
+            "seat": "tp1b"
+          },
+          {
+            "id": "m2028-n26-cafe",
+            "name": "岩崎 結衣",
+            "seat": "tp2a"
+          },
+          {
+            "id": "m2028-n27-cafe",
+            "name": "千葉 陸",
+            "seat": "tp3a"
+          },
+          {
+            "id": "m2028-n28-cafe",
+            "name": "竹内 花音",
+            "seat": "tb1"
+          },
+          {
+            "id": "m2028-n29-cafe",
+            "name": "井上 雫",
+            "seat": "tb2"
+          },
+          {
+            "id": "m2028-n30-cafe",
+            "name": "石井 透",
+            "seat": "btb1"
+          },
+          {
+            "id": "m2028-n31-cafe",
+            "name": "山下 茜",
+            "seat": "euph1"
+          },
+          {
+            "id": "m2028-n32-cafe",
+            "name": "渡辺 渚",
+            "seat": "euph2"
+          },
+          {
+            "id": "m2028-n33-cafe",
+            "name": "坂本 雫",
+            "seat": "tuba1"
+          },
+          {
+            "id": "m2028-n34-cafe",
+            "name": "菅原 智也",
+            "seat": "tuba2"
+          },
+          {
+            "id": "m2028-n35-cafe",
+            "name": "高木 明里",
+            "seat": "cb1"
+          },
+          {
+            "id": "m2028-n36-cafe",
+            "name": "佐藤 誠",
+            "seat": "perc1"
+          },
+          {
+            "id": "m2028-n37-cafe",
+            "name": "山田 蓮",
+            "seat": "perc2"
+          },
+          {
+            "id": "m2028-n38-cafe",
+            "name": "原 杏",
+            "seat": "perc3"
+          },
+          {
+            "id": "m2028-n39-cafe",
+            "name": "横山 透",
+            "seat": "perc4"
+          }
+        ],
+        "expected": {
+          "members": [
+            "m2028-n1-cafe",
+            "m2028-n2-cafe",
+            "m2028-n3-cafe",
+            "m2028-n4-cafe",
+            "m2028-n5-cafe",
+            "m2028-n6-cafe",
+            "m2028-n7-cafe",
+            "m2028-n8-cafe",
+            "m2028-n9-cafe",
+            "m2028-n10-cafe",
+            "m2028-n11-cafe",
+            "m2028-n12-cafe",
+            "m2028-n13-cafe",
+            "m2028-n14-cafe",
+            "m2028-n15-cafe",
+            "m2028-n16-cafe",
+            "m2028-n17-cafe",
+            "m2028-n18-cafe",
+            "m2028-n19-cafe",
+            "m2028-n20-cafe",
+            "m2028-n21-cafe",
+            "m2028-n22-cafe",
+            "m2028-n23-cafe",
+            "m2028-n24-cafe",
+            "m2028-n25-cafe",
+            "m2028-n26-cafe",
+            "m2028-n27-cafe",
+            "m2028-n28-cafe",
+            "m2028-n29-cafe",
+            "m2028-n30-cafe",
+            "m2028-n31-cafe",
+            "m2028-n32-cafe",
+            "m2028-n33-cafe",
+            "m2028-n34-cafe",
+            "m2028-n35-cafe",
+            "m2028-n36-cafe",
+            "m2028-n37-cafe"
+          ],
+          "sections": [
+            "fl",
+            "dr",
+            "cl",
+            "sax",
+            "hn",
+            "tp",
+            "tb",
+            "low",
+            "perc"
+          ]
+        },
+        "options": [
+          "all",
+          "sec:fl",
+          "sec:dr",
+          "sec:cl",
+          "sec:sax",
+          "sec:tp",
+          "sec:hn",
+          "sec:tb",
+          "sec:low",
+          "sec:perc",
+          "member:m2028-n1-cafe"
+        ],
+        "rest": null
+      },
+      "performance": {
+        "expected": 0.1260019768960774,
+        "expectedCohesion": 0.2,
+        "prepared": 0.1260019768960774,
+        "preparedCohesion": 0.2,
+        "shown": 0.1260019768960774,
+        "shownCohesion": 0.2
+      },
+      "playing": true,
+      "waiting": false,
+      "solo": {
+        "id": "m2028-n1-cafe",
+        "type": "member"
+      },
+      "playback": 2,
+      "audible": [
+        "m2028-n1-cafe"
+      ],
+      "records": 0.8017618958838284,
+      "range": "all",
+      "piece": "largo",
+      "theme": "dark",
+      "width": 375,
+      "scrollWidth": 375,
+      "errors": [],
+      "portraits": 39
+    }
+  },
+  {
+    "case": "front-clears-solo",
+    "data": {
+      "ui": {
+        "buttons": [
+          {
+            "act": "solo",
+            "checked": false,
+            "hidden": true,
+            "id": 1,
+            "label": "田中 七海だけ聴く",
+            "pressed": "false",
+            "rect": {
+              "bottom": 0,
+              "height": 0,
+              "left": 0,
+              "right": 0,
+              "top": 0,
+              "width": 0,
+              "x": 0,
+              "y": 0
+            }
+          },
+          {
+            "act": "secsolo",
+            "checked": false,
+            "hidden": true,
+            "id": 2,
+            "label": "フルートだけ聴く",
+            "pressed": "false",
+            "rect": {
+              "bottom": 0,
+              "height": 0,
+              "left": 0,
+              "right": 0,
+              "top": 0,
+              "width": 0,
+              "x": 0,
+              "y": 0
+            }
+          },
+          {
+            "act": "all",
+            "checked": false,
+            "hidden": true,
+            "id": 3,
+            "label": null,
+            "pressed": null,
+            "rect": {
+              "bottom": 0,
+              "height": 0,
+              "left": 0,
+              "right": 0,
+              "top": 0,
+              "width": 0,
+              "x": 0,
+              "y": 0
+            }
+          }
+        ],
+        "cacheCurrent": true,
+        "details": [],
+        "draft": null,
+        "expected": [],
+        "focus": "close",
+        "hidden": false,
+        "section": "fl",
+        "selected": "m2028-n1-cafe",
+        "sourceCurrent": false,
+        "state": 0.06214514910243451
+      },
+      "rest": {
+        "cast": [
+          {
+            "id": "m2028-n1-cafe",
+            "name": "田中 七海",
+            "seat": "picc1"
+          },
+          {
+            "id": "m2028-n2-cafe",
+            "name": "小川 悠斗",
+            "seat": "fl1a"
+          },
+          {
+            "id": "m2028-n3-cafe",
+            "name": "松井 颯太",
+            "seat": "fl1b"
+          },
+          {
+            "id": "m2028-n4-cafe",
+            "name": "菅原 菜月",
+            "seat": "fl2a"
+          },
+          {
+            "id": "m2028-n5-cafe",
+            "name": "岡本 智也",
+            "seat": "ob1"
+          },
+          {
+            "id": "m2028-n6-cafe",
+            "name": "山口 大翔",
+            "seat": "cl1a"
+          },
+          {
+            "id": "m2028-n7-cafe",
+            "name": "山下 彩花",
+            "seat": "cl1b"
+          },
+          {
+            "id": "m2028-n8-cafe",
+            "name": "高木 瑛太",
+            "seat": "cl1c"
+          },
+          {
+            "id": "m2028-n9-cafe",
+            "name": "清水 菜月",
+            "seat": "asax1"
+          },
+          {
+            "id": "m2028-n10-cafe",
+            "name": "山本 凛",
+            "seat": "asax2"
+          },
+          {
+            "id": "m2028-n11-cafe",
+            "name": "山田 悠真",
+            "seat": "fg1"
+          },
+          {
+            "id": "m2028-n12-cafe",
+            "name": "西村 樹",
+            "seat": "ebcl1"
+          },
+          {
+            "id": "m2028-n13-cafe",
+            "name": "松井 美咲",
+            "seat": "cl2a"
+          },
+          {
+            "id": "m2028-n14-cafe",
+            "name": "阿部 和奏",
+            "seat": "cl2b"
+          },
+          {
+            "id": "m2028-n15-cafe",
+            "name": "前田 紬",
+            "seat": "cl3a"
+          },
+          {
+            "id": "m2028-n16-cafe",
+            "name": "野口 陽翔",
+            "seat": "cl3b"
+          },
+          {
+            "id": "m2028-n17-cafe",
+            "name": "工藤 美月",
+            "seat": "bcl1"
+          },
+          {
+            "id": "m2028-n18-cafe",
+            "name": "中野 透",
+            "seat": "tsax1"
+          },
+          {
+            "id": "m2028-n19-cafe",
+            "name": "木村 湊",
+            "seat": "bsax1"
+          },
+          {
+            "id": "m2028-n20-cafe",
+            "name": "佐々木 彩花",
+            "seat": "hn1"
+          },
+          {
+            "id": "m2028-n21-cafe",
+            "name": "井上 優",
+            "seat": "hn2"
+          },
+          {
+            "id": "m2028-n22-cafe",
+            "name": "酒井 陸",
+            "seat": "hn3"
+          },
+          {
+            "id": "m2028-n23-cafe",
+            "name": "松田 拓海",
+            "seat": "hn4"
+          },
+          {
+            "id": "m2028-n24-cafe",
+            "name": "中村 絢",
+            "seat": "tp1a"
+          },
+          {
+            "id": "m2028-n25-cafe",
+            "name": "林 亮",
+            "seat": "tp1b"
+          },
+          {
+            "id": "m2028-n26-cafe",
+            "name": "岩崎 結衣",
+            "seat": "tp2a"
+          },
+          {
+            "id": "m2028-n27-cafe",
+            "name": "千葉 陸",
+            "seat": "tp3a"
+          },
+          {
+            "id": "m2028-n28-cafe",
+            "name": "竹内 花音",
+            "seat": "tb1"
+          },
+          {
+            "id": "m2028-n29-cafe",
+            "name": "井上 雫",
+            "seat": "tb2"
+          },
+          {
+            "id": "m2028-n30-cafe",
+            "name": "石井 透",
+            "seat": "btb1"
+          },
+          {
+            "id": "m2028-n31-cafe",
+            "name": "山下 茜",
+            "seat": "euph1"
+          },
+          {
+            "id": "m2028-n32-cafe",
+            "name": "渡辺 渚",
+            "seat": "euph2"
+          },
+          {
+            "id": "m2028-n33-cafe",
+            "name": "坂本 雫",
+            "seat": "tuba1"
+          },
+          {
+            "id": "m2028-n34-cafe",
+            "name": "菅原 智也",
+            "seat": "tuba2"
+          },
+          {
+            "id": "m2028-n35-cafe",
+            "name": "高木 明里",
+            "seat": "cb1"
+          },
+          {
+            "id": "m2028-n36-cafe",
+            "name": "佐藤 誠",
+            "seat": "perc1"
+          },
+          {
+            "id": "m2028-n37-cafe",
+            "name": "山田 蓮",
+            "seat": "perc2"
+          },
+          {
+            "id": "m2028-n38-cafe",
+            "name": "原 杏",
+            "seat": "perc3"
+          },
+          {
+            "id": "m2028-n39-cafe",
+            "name": "横山 透",
+            "seat": "perc4"
+          }
+        ],
+        "expected": {
+          "members": [
+            "m2028-n5-cafe",
+            "m2028-n6-cafe",
+            "m2028-n7-cafe",
+            "m2028-n8-cafe",
+            "m2028-n11-cafe",
+            "m2028-n13-cafe",
+            "m2028-n14-cafe",
+            "m2028-n15-cafe",
+            "m2028-n16-cafe",
+            "m2028-n17-cafe",
+            "m2028-n18-cafe",
+            "m2028-n20-cafe",
+            "m2028-n21-cafe",
+            "m2028-n31-cafe",
+            "m2028-n32-cafe",
+            "m2028-n33-cafe",
+            "m2028-n34-cafe",
+            "m2028-n35-cafe"
+          ],
+          "sections": [
+            "dr",
+            "cl",
+            "sax",
+            "hn",
+            "low"
+          ]
+        },
+        "options": [
+          "all",
+          "sec:dr",
+          "sec:cl",
+          "sec:sax",
+          "sec:hn",
+          "sec:low"
+        ],
+        "rest": "この範囲は休み"
+      },
+      "performance": {
+        "expected": 0.36987378587946296,
+        "expectedCohesion": 0.2,
+        "prepared": 0.36987378587946296,
+        "preparedCohesion": 0.2,
+        "shown": 0.36987378587946296,
+        "shownCohesion": 0.2
+      },
+      "playing": false,
+      "waiting": false,
+      "solo": {
+        "type": "all"
+      },
+      "playback": null,
+      "audible": [],
+      "records": 0.8017618958838284,
+      "range": "0",
+      "piece": "largo",
+      "theme": "dark",
+      "width": 375,
+      "scrollWidth": 375,
+      "errors": [],
+      "portraits": 39
+    }
+  },
+  {
+    "case": "middle-member-rest",
+    "data": {
+      "ui": {
+        "buttons": [
+          {
+            "act": "solo",
+            "checked": false,
+            "hidden": true,
+            "id": 1,
+            "label": "田中 七海だけ聴く",
+            "pressed": "false",
+            "rect": {
+              "bottom": 0,
+              "height": 0,
+              "left": 0,
+              "right": 0,
+              "top": 0,
+              "width": 0,
+              "x": 0,
+              "y": 0
+            }
+          },
+          {
+            "act": "secsolo",
+            "checked": false,
+            "hidden": false,
+            "id": 2,
+            "label": "フルートだけ聴く",
+            "pressed": "false",
+            "rect": {
+              "bottom": -256.0078125,
+              "height": 44,
+              "left": 191.5,
+              "right": 323,
+              "top": -300.0078125,
+              "width": 131.5,
+              "x": 191.5,
+              "y": -300.0078125
+            }
+          },
+          {
+            "act": "all",
+            "checked": false,
+            "hidden": true,
+            "id": 3,
+            "label": null,
+            "pressed": null,
+            "rect": {
+              "bottom": 0,
+              "height": 0,
+              "left": 0,
+              "right": 0,
+              "top": 0,
+              "width": 0,
+              "x": 0,
+              "y": 0
+            }
+          }
+        ],
+        "cacheCurrent": true,
+        "details": [],
+        "draft": null,
+        "expected": [],
+        "focus": "SUMMARY",
+        "hidden": false,
+        "section": "fl",
+        "selected": "m2028-n1-cafe",
+        "sourceCurrent": false,
+        "state": 0.15367852500639856
+      },
+      "rest": {
+        "cast": [
+          {
+            "id": "m2028-n1-cafe",
+            "name": "田中 七海",
+            "seat": "picc1"
+          },
+          {
+            "id": "m2028-n2-cafe",
+            "name": "小川 悠斗",
+            "seat": "fl1a"
+          },
+          {
+            "id": "m2028-n3-cafe",
+            "name": "松井 颯太",
+            "seat": "fl1b"
+          },
+          {
+            "id": "m2028-n4-cafe",
+            "name": "菅原 菜月",
+            "seat": "fl2a"
+          },
+          {
+            "id": "m2028-n5-cafe",
+            "name": "岡本 智也",
+            "seat": "ob1"
+          },
+          {
+            "id": "m2028-n6-cafe",
+            "name": "山口 大翔",
+            "seat": "cl1a"
+          },
+          {
+            "id": "m2028-n7-cafe",
+            "name": "山下 彩花",
+            "seat": "cl1b"
+          },
+          {
+            "id": "m2028-n8-cafe",
+            "name": "高木 瑛太",
+            "seat": "cl1c"
+          },
+          {
+            "id": "m2028-n9-cafe",
+            "name": "清水 菜月",
+            "seat": "asax1"
+          },
+          {
+            "id": "m2028-n10-cafe",
+            "name": "山本 凛",
+            "seat": "asax2"
+          },
+          {
+            "id": "m2028-n11-cafe",
+            "name": "山田 悠真",
+            "seat": "fg1"
+          },
+          {
+            "id": "m2028-n12-cafe",
+            "name": "西村 樹",
+            "seat": "ebcl1"
+          },
+          {
+            "id": "m2028-n13-cafe",
+            "name": "松井 美咲",
+            "seat": "cl2a"
+          },
+          {
+            "id": "m2028-n14-cafe",
+            "name": "阿部 和奏",
+            "seat": "cl2b"
+          },
+          {
+            "id": "m2028-n15-cafe",
+            "name": "前田 紬",
+            "seat": "cl3a"
+          },
+          {
+            "id": "m2028-n16-cafe",
+            "name": "野口 陽翔",
+            "seat": "cl3b"
+          },
+          {
+            "id": "m2028-n17-cafe",
+            "name": "工藤 美月",
+            "seat": "bcl1"
+          },
+          {
+            "id": "m2028-n18-cafe",
+            "name": "中野 透",
+            "seat": "tsax1"
+          },
+          {
+            "id": "m2028-n19-cafe",
+            "name": "木村 湊",
+            "seat": "bsax1"
+          },
+          {
+            "id": "m2028-n20-cafe",
+            "name": "佐々木 彩花",
+            "seat": "hn1"
+          },
+          {
+            "id": "m2028-n21-cafe",
+            "name": "井上 優",
+            "seat": "hn2"
+          },
+          {
+            "id": "m2028-n22-cafe",
+            "name": "酒井 陸",
+            "seat": "hn3"
+          },
+          {
+            "id": "m2028-n23-cafe",
+            "name": "松田 拓海",
+            "seat": "hn4"
+          },
+          {
+            "id": "m2028-n24-cafe",
+            "name": "中村 絢",
+            "seat": "tp1a"
+          },
+          {
+            "id": "m2028-n25-cafe",
+            "name": "林 亮",
+            "seat": "tp1b"
+          },
+          {
+            "id": "m2028-n26-cafe",
+            "name": "岩崎 結衣",
+            "seat": "tp2a"
+          },
+          {
+            "id": "m2028-n27-cafe",
+            "name": "千葉 陸",
+            "seat": "tp3a"
+          },
+          {
+            "id": "m2028-n28-cafe",
+            "name": "竹内 花音",
+            "seat": "tb1"
+          },
+          {
+            "id": "m2028-n29-cafe",
+            "name": "井上 雫",
+            "seat": "tb2"
+          },
+          {
+            "id": "m2028-n30-cafe",
+            "name": "石井 透",
+            "seat": "btb1"
+          },
+          {
+            "id": "m2028-n31-cafe",
+            "name": "山下 茜",
+            "seat": "euph1"
+          },
+          {
+            "id": "m2028-n32-cafe",
+            "name": "渡辺 渚",
+            "seat": "euph2"
+          },
+          {
+            "id": "m2028-n33-cafe",
+            "name": "坂本 雫",
+            "seat": "tuba1"
+          },
+          {
+            "id": "m2028-n34-cafe",
+            "name": "菅原 智也",
+            "seat": "tuba2"
+          },
+          {
+            "id": "m2028-n35-cafe",
+            "name": "高木 明里",
+            "seat": "cb1"
+          },
+          {
+            "id": "m2028-n36-cafe",
+            "name": "佐藤 誠",
+            "seat": "perc1"
+          },
+          {
+            "id": "m2028-n37-cafe",
+            "name": "山田 蓮",
+            "seat": "perc2"
+          },
+          {
+            "id": "m2028-n38-cafe",
+            "name": "原 杏",
+            "seat": "perc3"
+          },
+          {
+            "id": "m2028-n39-cafe",
+            "name": "横山 透",
+            "seat": "perc4"
+          }
+        ],
+        "expected": {
+          "members": [
+            "m2028-n2-cafe",
+            "m2028-n3-cafe",
+            "m2028-n4-cafe",
+            "m2028-n5-cafe",
+            "m2028-n6-cafe",
+            "m2028-n7-cafe",
+            "m2028-n8-cafe",
+            "m2028-n9-cafe",
+            "m2028-n10-cafe",
+            "m2028-n11-cafe",
+            "m2028-n13-cafe",
+            "m2028-n14-cafe",
+            "m2028-n15-cafe",
+            "m2028-n16-cafe",
+            "m2028-n17-cafe",
+            "m2028-n18-cafe",
+            "m2028-n19-cafe",
+            "m2028-n20-cafe",
+            "m2028-n21-cafe",
+            "m2028-n22-cafe",
+            "m2028-n23-cafe",
+            "m2028-n24-cafe",
+            "m2028-n25-cafe",
+            "m2028-n26-cafe",
+            "m2028-n27-cafe",
+            "m2028-n28-cafe",
+            "m2028-n29-cafe",
+            "m2028-n30-cafe",
+            "m2028-n31-cafe",
+            "m2028-n32-cafe",
+            "m2028-n33-cafe",
+            "m2028-n34-cafe",
+            "m2028-n35-cafe",
+            "m2028-n38-cafe",
+            "m2028-n36-cafe",
+            "m2028-n37-cafe",
+            "m2028-n39-cafe"
+          ],
+          "sections": [
+            "fl",
+            "dr",
+            "cl",
+            "sax",
+            "hn",
+            "tp",
+            "tb",
+            "low",
+            "perc"
+          ]
+        },
+        "options": [
+          "all",
+          "sec:fl",
+          "sec:dr",
+          "sec:cl",
+          "sec:sax",
+          "sec:tp",
+          "sec:hn",
+          "sec:tb",
+          "sec:low",
+          "sec:perc"
+        ],
+        "rest": "この範囲は休み"
+      },
+      "performance": {
+        "expected": 0.4695546419825405,
+        "expectedCohesion": 0.2,
+        "prepared": 0.4695546419825405,
+        "preparedCohesion": 0.2,
+        "shown": 0.4695546419825405,
+        "shownCohesion": 0.2
+      },
+      "playing": false,
+      "waiting": false,
+      "solo": {
+        "type": "all"
+      },
+      "playback": null,
+      "audible": [],
+      "records": 0.9970409404486418,
+      "range": "1",
+      "piece": "galop",
+      "theme": "light",
+      "width": 375,
+      "scrollWidth": 375,
+      "errors": [],
+      "portraits": 39
+    }
+  },
+  {
+    "case": "middle-section-playing",
+    "data": {
+      "ui": {
+        "buttons": [
+          {
+            "act": "solo",
+            "checked": false,
+            "hidden": true,
+            "id": 1,
+            "label": "田中 七海だけ聴く",
+            "pressed": "false",
+            "rect": {
+              "bottom": 0,
+              "height": 0,
+              "left": 0,
+              "right": 0,
+              "top": 0,
+              "width": 0,
+              "x": 0,
+              "y": 0
+            }
+          },
+          {
+            "act": "secsolo",
+            "checked": true,
+            "hidden": false,
+            "id": 2,
+            "label": "フルートの音を再生中。押すと全員の音にもどす",
+            "pressed": "true",
+            "rect": {
+              "bottom": 427.9921875,
+              "height": 44,
+              "left": 191.5,
+              "right": 323,
+              "top": 383.9921875,
+              "width": 131.5,
+              "x": 191.5,
+              "y": 383.9921875
+            }
+          },
+          {
+            "act": "all",
+            "checked": false,
+            "hidden": false,
+            "id": 3,
+            "label": null,
+            "pressed": null,
+            "rect": {
+              "bottom": 479.9921875,
+              "height": 44,
+              "left": 52,
+              "right": 323,
+              "top": 435.9921875,
+              "width": 271,
+              "x": 52,
+              "y": 435.9921875
+            }
+          }
+        ],
+        "cacheCurrent": true,
+        "details": [],
+        "draft": null,
+        "expected": [
+          "m2028-n2-cafe",
+          "m2028-n3-cafe",
+          "m2028-n4-cafe"
+        ],
+        "focus": "secsolo",
+        "hidden": false,
+        "section": "fl",
+        "selected": "m2028-n1-cafe",
+        "sourceCurrent": true,
+        "state": 0.15367852500639856
+      },
+      "rest": {
+        "cast": [
+          {
+            "id": "m2028-n1-cafe",
+            "name": "田中 七海",
+            "seat": "picc1"
+          },
+          {
+            "id": "m2028-n2-cafe",
+            "name": "小川 悠斗",
+            "seat": "fl1a"
+          },
+          {
+            "id": "m2028-n3-cafe",
+            "name": "松井 颯太",
+            "seat": "fl1b"
+          },
+          {
+            "id": "m2028-n4-cafe",
+            "name": "菅原 菜月",
+            "seat": "fl2a"
+          },
+          {
+            "id": "m2028-n5-cafe",
+            "name": "岡本 智也",
+            "seat": "ob1"
+          },
+          {
+            "id": "m2028-n6-cafe",
+            "name": "山口 大翔",
+            "seat": "cl1a"
+          },
+          {
+            "id": "m2028-n7-cafe",
+            "name": "山下 彩花",
+            "seat": "cl1b"
+          },
+          {
+            "id": "m2028-n8-cafe",
+            "name": "高木 瑛太",
+            "seat": "cl1c"
+          },
+          {
+            "id": "m2028-n9-cafe",
+            "name": "清水 菜月",
+            "seat": "asax1"
+          },
+          {
+            "id": "m2028-n10-cafe",
+            "name": "山本 凛",
+            "seat": "asax2"
+          },
+          {
+            "id": "m2028-n11-cafe",
+            "name": "山田 悠真",
+            "seat": "fg1"
+          },
+          {
+            "id": "m2028-n12-cafe",
+            "name": "西村 樹",
+            "seat": "ebcl1"
+          },
+          {
+            "id": "m2028-n13-cafe",
+            "name": "松井 美咲",
+            "seat": "cl2a"
+          },
+          {
+            "id": "m2028-n14-cafe",
+            "name": "阿部 和奏",
+            "seat": "cl2b"
+          },
+          {
+            "id": "m2028-n15-cafe",
+            "name": "前田 紬",
+            "seat": "cl3a"
+          },
+          {
+            "id": "m2028-n16-cafe",
+            "name": "野口 陽翔",
+            "seat": "cl3b"
+          },
+          {
+            "id": "m2028-n17-cafe",
+            "name": "工藤 美月",
+            "seat": "bcl1"
+          },
+          {
+            "id": "m2028-n18-cafe",
+            "name": "中野 透",
+            "seat": "tsax1"
+          },
+          {
+            "id": "m2028-n19-cafe",
+            "name": "木村 湊",
+            "seat": "bsax1"
+          },
+          {
+            "id": "m2028-n20-cafe",
+            "name": "佐々木 彩花",
+            "seat": "hn1"
+          },
+          {
+            "id": "m2028-n21-cafe",
+            "name": "井上 優",
+            "seat": "hn2"
+          },
+          {
+            "id": "m2028-n22-cafe",
+            "name": "酒井 陸",
+            "seat": "hn3"
+          },
+          {
+            "id": "m2028-n23-cafe",
+            "name": "松田 拓海",
+            "seat": "hn4"
+          },
+          {
+            "id": "m2028-n24-cafe",
+            "name": "中村 絢",
+            "seat": "tp1a"
+          },
+          {
+            "id": "m2028-n25-cafe",
+            "name": "林 亮",
+            "seat": "tp1b"
+          },
+          {
+            "id": "m2028-n26-cafe",
+            "name": "岩崎 結衣",
+            "seat": "tp2a"
+          },
+          {
+            "id": "m2028-n27-cafe",
+            "name": "千葉 陸",
+            "seat": "tp3a"
+          },
+          {
+            "id": "m2028-n28-cafe",
+            "name": "竹内 花音",
+            "seat": "tb1"
+          },
+          {
+            "id": "m2028-n29-cafe",
+            "name": "井上 雫",
+            "seat": "tb2"
+          },
+          {
+            "id": "m2028-n30-cafe",
+            "name": "石井 透",
+            "seat": "btb1"
+          },
+          {
+            "id": "m2028-n31-cafe",
+            "name": "山下 茜",
+            "seat": "euph1"
+          },
+          {
+            "id": "m2028-n32-cafe",
+            "name": "渡辺 渚",
+            "seat": "euph2"
+          },
+          {
+            "id": "m2028-n33-cafe",
+            "name": "坂本 雫",
+            "seat": "tuba1"
+          },
+          {
+            "id": "m2028-n34-cafe",
+            "name": "菅原 智也",
+            "seat": "tuba2"
+          },
+          {
+            "id": "m2028-n35-cafe",
+            "name": "高木 明里",
+            "seat": "cb1"
+          },
+          {
+            "id": "m2028-n36-cafe",
+            "name": "佐藤 誠",
+            "seat": "perc1"
+          },
+          {
+            "id": "m2028-n37-cafe",
+            "name": "山田 蓮",
+            "seat": "perc2"
+          },
+          {
+            "id": "m2028-n38-cafe",
+            "name": "原 杏",
+            "seat": "perc3"
+          },
+          {
+            "id": "m2028-n39-cafe",
+            "name": "横山 透",
+            "seat": "perc4"
+          }
+        ],
+        "expected": {
+          "members": [
+            "m2028-n2-cafe",
+            "m2028-n3-cafe",
+            "m2028-n4-cafe",
+            "m2028-n5-cafe",
+            "m2028-n6-cafe",
+            "m2028-n7-cafe",
+            "m2028-n8-cafe",
+            "m2028-n9-cafe",
+            "m2028-n10-cafe",
+            "m2028-n11-cafe",
+            "m2028-n13-cafe",
+            "m2028-n14-cafe",
+            "m2028-n15-cafe",
+            "m2028-n16-cafe",
+            "m2028-n17-cafe",
+            "m2028-n18-cafe",
+            "m2028-n19-cafe",
+            "m2028-n20-cafe",
+            "m2028-n21-cafe",
+            "m2028-n22-cafe",
+            "m2028-n23-cafe",
+            "m2028-n24-cafe",
+            "m2028-n25-cafe",
+            "m2028-n26-cafe",
+            "m2028-n27-cafe",
+            "m2028-n28-cafe",
+            "m2028-n29-cafe",
+            "m2028-n30-cafe",
+            "m2028-n31-cafe",
+            "m2028-n32-cafe",
+            "m2028-n33-cafe",
+            "m2028-n34-cafe",
+            "m2028-n35-cafe",
+            "m2028-n38-cafe",
+            "m2028-n36-cafe",
+            "m2028-n37-cafe",
+            "m2028-n39-cafe"
+          ],
+          "sections": [
+            "fl",
+            "dr",
+            "cl",
+            "sax",
+            "hn",
+            "tp",
+            "tb",
+            "low",
+            "perc"
+          ]
+        },
+        "options": [
+          "all",
+          "sec:fl",
+          "sec:dr",
+          "sec:cl",
+          "sec:sax",
+          "sec:tp",
+          "sec:hn",
+          "sec:tb",
+          "sec:low",
+          "sec:perc"
+        ],
+        "rest": "この範囲は休み"
+      },
+      "performance": {
+        "expected": 0.4695546419825405,
+        "expectedCohesion": 0.2,
+        "prepared": 0.4695546419825405,
+        "preparedCohesion": 0.2,
+        "shown": 0.4695546419825405,
+        "shownCohesion": 0.2
+      },
+      "playing": true,
+      "waiting": false,
+      "solo": {
+        "id": "fl",
+        "type": "sec"
+      },
+      "playback": 1,
+      "audible": [
+        "m2028-n2-cafe",
+        "m2028-n3-cafe",
+        "m2028-n4-cafe"
+      ],
+      "records": 0.9970409404486418,
+      "range": "1",
+      "piece": "galop",
+      "theme": "light",
+      "width": 375,
+      "scrollWidth": 375,
+      "errors": [],
+      "portraits": 39
+    }
+  },
+  {
+    "case": "middle-section-dark",
+    "data": {
+      "ui": {
+        "buttons": [
+          {
+            "act": "solo",
+            "checked": false,
+            "hidden": true,
+            "id": 1,
+            "label": "田中 七海だけ聴く",
+            "pressed": "false",
+            "rect": {
+              "bottom": 0,
+              "height": 0,
+              "left": 0,
+              "right": 0,
+              "top": 0,
+              "width": 0,
+              "x": 0,
+              "y": 0
+            }
+          },
+          {
+            "act": "secsolo",
+            "checked": true,
+            "hidden": false,
+            "id": 2,
+            "label": "フルートの音を再生中。押すと全員の音にもどす",
+            "pressed": "true",
+            "rect": {
+              "bottom": 705.4921875,
+              "height": 44,
+              "left": 191.5,
+              "right": 323,
+              "top": 661.4921875,
+              "width": 131.5,
+              "x": 191.5,
+              "y": 661.4921875
+            }
+          },
+          {
+            "act": "all",
+            "checked": false,
+            "hidden": false,
+            "id": 3,
+            "label": null,
+            "pressed": null,
+            "rect": {
+              "bottom": 757.4921875,
+              "height": 44,
+              "left": 52,
+              "right": 323,
+              "top": 713.4921875,
+              "width": 271,
+              "x": 52,
+              "y": 713.4921875
+            }
+          }
+        ],
+        "cacheCurrent": true,
+        "details": [],
+        "draft": null,
+        "expected": [
+          "m2028-n2-cafe",
+          "m2028-n3-cafe",
+          "m2028-n4-cafe"
+        ],
+        "focus": "stage",
+        "hidden": false,
+        "section": "fl",
+        "selected": "m2028-n1-cafe",
+        "sourceCurrent": true,
+        "state": 0.15367852500639856
+      },
+      "rest": {
+        "cast": [
+          {
+            "id": "m2028-n1-cafe",
+            "name": "田中 七海",
+            "seat": "picc1"
+          },
+          {
+            "id": "m2028-n2-cafe",
+            "name": "小川 悠斗",
+            "seat": "fl1a"
+          },
+          {
+            "id": "m2028-n3-cafe",
+            "name": "松井 颯太",
+            "seat": "fl1b"
+          },
+          {
+            "id": "m2028-n4-cafe",
+            "name": "菅原 菜月",
+            "seat": "fl2a"
+          },
+          {
+            "id": "m2028-n5-cafe",
+            "name": "岡本 智也",
+            "seat": "ob1"
+          },
+          {
+            "id": "m2028-n6-cafe",
+            "name": "山口 大翔",
+            "seat": "cl1a"
+          },
+          {
+            "id": "m2028-n7-cafe",
+            "name": "山下 彩花",
+            "seat": "cl1b"
+          },
+          {
+            "id": "m2028-n8-cafe",
+            "name": "高木 瑛太",
+            "seat": "cl1c"
+          },
+          {
+            "id": "m2028-n9-cafe",
+            "name": "清水 菜月",
+            "seat": "asax1"
+          },
+          {
+            "id": "m2028-n10-cafe",
+            "name": "山本 凛",
+            "seat": "asax2"
+          },
+          {
+            "id": "m2028-n11-cafe",
+            "name": "山田 悠真",
+            "seat": "fg1"
+          },
+          {
+            "id": "m2028-n12-cafe",
+            "name": "西村 樹",
+            "seat": "ebcl1"
+          },
+          {
+            "id": "m2028-n13-cafe",
+            "name": "松井 美咲",
+            "seat": "cl2a"
+          },
+          {
+            "id": "m2028-n14-cafe",
+            "name": "阿部 和奏",
+            "seat": "cl2b"
+          },
+          {
+            "id": "m2028-n15-cafe",
+            "name": "前田 紬",
+            "seat": "cl3a"
+          },
+          {
+            "id": "m2028-n16-cafe",
+            "name": "野口 陽翔",
+            "seat": "cl3b"
+          },
+          {
+            "id": "m2028-n17-cafe",
+            "name": "工藤 美月",
+            "seat": "bcl1"
+          },
+          {
+            "id": "m2028-n18-cafe",
+            "name": "中野 透",
+            "seat": "tsax1"
+          },
+          {
+            "id": "m2028-n19-cafe",
+            "name": "木村 湊",
+            "seat": "bsax1"
+          },
+          {
+            "id": "m2028-n20-cafe",
+            "name": "佐々木 彩花",
+            "seat": "hn1"
+          },
+          {
+            "id": "m2028-n21-cafe",
+            "name": "井上 優",
+            "seat": "hn2"
+          },
+          {
+            "id": "m2028-n22-cafe",
+            "name": "酒井 陸",
+            "seat": "hn3"
+          },
+          {
+            "id": "m2028-n23-cafe",
+            "name": "松田 拓海",
+            "seat": "hn4"
+          },
+          {
+            "id": "m2028-n24-cafe",
+            "name": "中村 絢",
+            "seat": "tp1a"
+          },
+          {
+            "id": "m2028-n25-cafe",
+            "name": "林 亮",
+            "seat": "tp1b"
+          },
+          {
+            "id": "m2028-n26-cafe",
+            "name": "岩崎 結衣",
+            "seat": "tp2a"
+          },
+          {
+            "id": "m2028-n27-cafe",
+            "name": "千葉 陸",
+            "seat": "tp3a"
+          },
+          {
+            "id": "m2028-n28-cafe",
+            "name": "竹内 花音",
+            "seat": "tb1"
+          },
+          {
+            "id": "m2028-n29-cafe",
+            "name": "井上 雫",
+            "seat": "tb2"
+          },
+          {
+            "id": "m2028-n30-cafe",
+            "name": "石井 透",
+            "seat": "btb1"
+          },
+          {
+            "id": "m2028-n31-cafe",
+            "name": "山下 茜",
+            "seat": "euph1"
+          },
+          {
+            "id": "m2028-n32-cafe",
+            "name": "渡辺 渚",
+            "seat": "euph2"
+          },
+          {
+            "id": "m2028-n33-cafe",
+            "name": "坂本 雫",
+            "seat": "tuba1"
+          },
+          {
+            "id": "m2028-n34-cafe",
+            "name": "菅原 智也",
+            "seat": "tuba2"
+          },
+          {
+            "id": "m2028-n35-cafe",
+            "name": "高木 明里",
+            "seat": "cb1"
+          },
+          {
+            "id": "m2028-n36-cafe",
+            "name": "佐藤 誠",
+            "seat": "perc1"
+          },
+          {
+            "id": "m2028-n37-cafe",
+            "name": "山田 蓮",
+            "seat": "perc2"
+          },
+          {
+            "id": "m2028-n38-cafe",
+            "name": "原 杏",
+            "seat": "perc3"
+          },
+          {
+            "id": "m2028-n39-cafe",
+            "name": "横山 透",
+            "seat": "perc4"
+          }
+        ],
+        "expected": {
+          "members": [
+            "m2028-n2-cafe",
+            "m2028-n3-cafe",
+            "m2028-n4-cafe",
+            "m2028-n5-cafe",
+            "m2028-n6-cafe",
+            "m2028-n7-cafe",
+            "m2028-n8-cafe",
+            "m2028-n9-cafe",
+            "m2028-n10-cafe",
+            "m2028-n11-cafe",
+            "m2028-n13-cafe",
+            "m2028-n14-cafe",
+            "m2028-n15-cafe",
+            "m2028-n16-cafe",
+            "m2028-n17-cafe",
+            "m2028-n18-cafe",
+            "m2028-n19-cafe",
+            "m2028-n20-cafe",
+            "m2028-n21-cafe",
+            "m2028-n22-cafe",
+            "m2028-n23-cafe",
+            "m2028-n24-cafe",
+            "m2028-n25-cafe",
+            "m2028-n26-cafe",
+            "m2028-n27-cafe",
+            "m2028-n28-cafe",
+            "m2028-n29-cafe",
+            "m2028-n30-cafe",
+            "m2028-n31-cafe",
+            "m2028-n32-cafe",
+            "m2028-n33-cafe",
+            "m2028-n34-cafe",
+            "m2028-n35-cafe",
+            "m2028-n38-cafe",
+            "m2028-n36-cafe",
+            "m2028-n37-cafe",
+            "m2028-n39-cafe"
+          ],
+          "sections": [
+            "fl",
+            "dr",
+            "cl",
+            "sax",
+            "hn",
+            "tp",
+            "tb",
+            "low",
+            "perc"
+          ]
+        },
+        "options": [
+          "all",
+          "sec:fl",
+          "sec:dr",
+          "sec:cl",
+          "sec:sax",
+          "sec:tp",
+          "sec:hn",
+          "sec:tb",
+          "sec:low",
+          "sec:perc"
+        ],
+        "rest": "この範囲は休み"
+      },
+      "performance": {
+        "expected": 0.4695546419825405,
+        "expectedCohesion": 0.2,
+        "prepared": 0.4695546419825405,
+        "preparedCohesion": 0.2,
+        "shown": 0.4695546419825405,
+        "shownCohesion": 0.2
+      },
+      "playing": true,
+      "waiting": false,
+      "solo": {
+        "id": "fl",
+        "type": "sec"
+      },
+      "playback": 1,
+      "audible": [
+        "m2028-n2-cafe",
+        "m2028-n3-cafe",
+        "m2028-n4-cafe"
+      ],
+      "records": 0.9970409404486418,
+      "range": "1",
+      "piece": "galop",
+      "theme": "dark",
+      "width": 375,
+      "scrollWidth": 375,
+      "errors": [],
+      "portraits": 39
+    }
+  },
+  {
+    "case": "middle-all",
+    "data": {
+      "ui": {
+        "buttons": [
+          {
+            "act": "solo",
+            "checked": false,
+            "hidden": true,
+            "id": 1,
+            "label": "田中 七海だけ聴く",
+            "pressed": "false",
+            "rect": {
+              "bottom": 0,
+              "height": 0,
+              "left": 0,
+              "right": 0,
+              "top": 0,
+              "width": 0,
+              "x": 0,
+              "y": 0
+            }
+          },
+          {
+            "act": "secsolo",
+            "checked": false,
+            "hidden": false,
+            "id": 2,
+            "label": "フルートだけ聴く",
+            "pressed": "false",
+            "rect": {
+              "bottom": 427.9921875,
+              "height": 44,
+              "left": 191.5,
+              "right": 323,
+              "top": 383.9921875,
+              "width": 131.5,
+              "x": 191.5,
+              "y": 383.9921875
+            }
+          },
+          {
+            "act": "all",
+            "checked": false,
+            "hidden": true,
+            "id": 3,
+            "label": null,
+            "pressed": null,
+            "rect": {
+              "bottom": 0,
+              "height": 0,
+              "left": 0,
+              "right": 0,
+              "top": 0,
+              "width": 0,
+              "x": 0,
+              "y": 0
+            }
+          }
+        ],
+        "cacheCurrent": true,
+        "details": [],
+        "draft": null,
+        "expected": [
+          "m2028-n2-cafe",
+          "m2028-n3-cafe",
+          "m2028-n4-cafe",
+          "m2028-n5-cafe",
+          "m2028-n6-cafe",
+          "m2028-n7-cafe",
+          "m2028-n8-cafe",
+          "m2028-n9-cafe",
+          "m2028-n10-cafe",
+          "m2028-n11-cafe",
+          "m2028-n13-cafe",
+          "m2028-n14-cafe",
+          "m2028-n15-cafe",
+          "m2028-n16-cafe",
+          "m2028-n17-cafe",
+          "m2028-n18-cafe",
+          "m2028-n19-cafe",
+          "m2028-n20-cafe",
+          "m2028-n21-cafe",
+          "m2028-n22-cafe",
+          "m2028-n23-cafe",
+          "m2028-n24-cafe",
+          "m2028-n25-cafe",
+          "m2028-n26-cafe",
+          "m2028-n27-cafe",
+          "m2028-n28-cafe",
+          "m2028-n29-cafe",
+          "m2028-n30-cafe",
+          "m2028-n31-cafe",
+          "m2028-n32-cafe",
+          "m2028-n33-cafe",
+          "m2028-n34-cafe",
+          "m2028-n35-cafe",
+          "m2028-n38-cafe",
+          "m2028-n36-cafe",
+          "m2028-n37-cafe",
+          "m2028-n39-cafe"
+        ],
+        "focus": "secsolo",
+        "hidden": false,
+        "section": "fl",
+        "selected": "m2028-n1-cafe",
+        "sourceCurrent": true,
+        "state": 0.15367852500639856
+      },
+      "rest": {
+        "cast": [
+          {
+            "id": "m2028-n1-cafe",
+            "name": "田中 七海",
+            "seat": "picc1"
+          },
+          {
+            "id": "m2028-n2-cafe",
+            "name": "小川 悠斗",
+            "seat": "fl1a"
+          },
+          {
+            "id": "m2028-n3-cafe",
+            "name": "松井 颯太",
+            "seat": "fl1b"
+          },
+          {
+            "id": "m2028-n4-cafe",
+            "name": "菅原 菜月",
+            "seat": "fl2a"
+          },
+          {
+            "id": "m2028-n5-cafe",
+            "name": "岡本 智也",
+            "seat": "ob1"
+          },
+          {
+            "id": "m2028-n6-cafe",
+            "name": "山口 大翔",
+            "seat": "cl1a"
+          },
+          {
+            "id": "m2028-n7-cafe",
+            "name": "山下 彩花",
+            "seat": "cl1b"
+          },
+          {
+            "id": "m2028-n8-cafe",
+            "name": "高木 瑛太",
+            "seat": "cl1c"
+          },
+          {
+            "id": "m2028-n9-cafe",
+            "name": "清水 菜月",
+            "seat": "asax1"
+          },
+          {
+            "id": "m2028-n10-cafe",
+            "name": "山本 凛",
+            "seat": "asax2"
+          },
+          {
+            "id": "m2028-n11-cafe",
+            "name": "山田 悠真",
+            "seat": "fg1"
+          },
+          {
+            "id": "m2028-n12-cafe",
+            "name": "西村 樹",
+            "seat": "ebcl1"
+          },
+          {
+            "id": "m2028-n13-cafe",
+            "name": "松井 美咲",
+            "seat": "cl2a"
+          },
+          {
+            "id": "m2028-n14-cafe",
+            "name": "阿部 和奏",
+            "seat": "cl2b"
+          },
+          {
+            "id": "m2028-n15-cafe",
+            "name": "前田 紬",
+            "seat": "cl3a"
+          },
+          {
+            "id": "m2028-n16-cafe",
+            "name": "野口 陽翔",
+            "seat": "cl3b"
+          },
+          {
+            "id": "m2028-n17-cafe",
+            "name": "工藤 美月",
+            "seat": "bcl1"
+          },
+          {
+            "id": "m2028-n18-cafe",
+            "name": "中野 透",
+            "seat": "tsax1"
+          },
+          {
+            "id": "m2028-n19-cafe",
+            "name": "木村 湊",
+            "seat": "bsax1"
+          },
+          {
+            "id": "m2028-n20-cafe",
+            "name": "佐々木 彩花",
+            "seat": "hn1"
+          },
+          {
+            "id": "m2028-n21-cafe",
+            "name": "井上 優",
+            "seat": "hn2"
+          },
+          {
+            "id": "m2028-n22-cafe",
+            "name": "酒井 陸",
+            "seat": "hn3"
+          },
+          {
+            "id": "m2028-n23-cafe",
+            "name": "松田 拓海",
+            "seat": "hn4"
+          },
+          {
+            "id": "m2028-n24-cafe",
+            "name": "中村 絢",
+            "seat": "tp1a"
+          },
+          {
+            "id": "m2028-n25-cafe",
+            "name": "林 亮",
+            "seat": "tp1b"
+          },
+          {
+            "id": "m2028-n26-cafe",
+            "name": "岩崎 結衣",
+            "seat": "tp2a"
+          },
+          {
+            "id": "m2028-n27-cafe",
+            "name": "千葉 陸",
+            "seat": "tp3a"
+          },
+          {
+            "id": "m2028-n28-cafe",
+            "name": "竹内 花音",
+            "seat": "tb1"
+          },
+          {
+            "id": "m2028-n29-cafe",
+            "name": "井上 雫",
+            "seat": "tb2"
+          },
+          {
+            "id": "m2028-n30-cafe",
+            "name": "石井 透",
+            "seat": "btb1"
+          },
+          {
+            "id": "m2028-n31-cafe",
+            "name": "山下 茜",
+            "seat": "euph1"
+          },
+          {
+            "id": "m2028-n32-cafe",
+            "name": "渡辺 渚",
+            "seat": "euph2"
+          },
+          {
+            "id": "m2028-n33-cafe",
+            "name": "坂本 雫",
+            "seat": "tuba1"
+          },
+          {
+            "id": "m2028-n34-cafe",
+            "name": "菅原 智也",
+            "seat": "tuba2"
+          },
+          {
+            "id": "m2028-n35-cafe",
+            "name": "高木 明里",
+            "seat": "cb1"
+          },
+          {
+            "id": "m2028-n36-cafe",
+            "name": "佐藤 誠",
+            "seat": "perc1"
+          },
+          {
+            "id": "m2028-n37-cafe",
+            "name": "山田 蓮",
+            "seat": "perc2"
+          },
+          {
+            "id": "m2028-n38-cafe",
+            "name": "原 杏",
+            "seat": "perc3"
+          },
+          {
+            "id": "m2028-n39-cafe",
+            "name": "横山 透",
+            "seat": "perc4"
+          }
+        ],
+        "expected": {
+          "members": [
+            "m2028-n2-cafe",
+            "m2028-n3-cafe",
+            "m2028-n4-cafe",
+            "m2028-n5-cafe",
+            "m2028-n6-cafe",
+            "m2028-n7-cafe",
+            "m2028-n8-cafe",
+            "m2028-n9-cafe",
+            "m2028-n10-cafe",
+            "m2028-n11-cafe",
+            "m2028-n13-cafe",
+            "m2028-n14-cafe",
+            "m2028-n15-cafe",
+            "m2028-n16-cafe",
+            "m2028-n17-cafe",
+            "m2028-n18-cafe",
+            "m2028-n19-cafe",
+            "m2028-n20-cafe",
+            "m2028-n21-cafe",
+            "m2028-n22-cafe",
+            "m2028-n23-cafe",
+            "m2028-n24-cafe",
+            "m2028-n25-cafe",
+            "m2028-n26-cafe",
+            "m2028-n27-cafe",
+            "m2028-n28-cafe",
+            "m2028-n29-cafe",
+            "m2028-n30-cafe",
+            "m2028-n31-cafe",
+            "m2028-n32-cafe",
+            "m2028-n33-cafe",
+            "m2028-n34-cafe",
+            "m2028-n35-cafe",
+            "m2028-n38-cafe",
+            "m2028-n36-cafe",
+            "m2028-n37-cafe",
+            "m2028-n39-cafe"
+          ],
+          "sections": [
+            "fl",
+            "dr",
+            "cl",
+            "sax",
+            "hn",
+            "tp",
+            "tb",
+            "low",
+            "perc"
+          ]
+        },
+        "options": [
+          "all",
+          "sec:fl",
+          "sec:dr",
+          "sec:cl",
+          "sec:sax",
+          "sec:tp",
+          "sec:hn",
+          "sec:tb",
+          "sec:low",
+          "sec:perc"
+        ],
+        "rest": "この範囲は休み"
+      },
+      "performance": {
+        "expected": 0.4695546419825405,
+        "expectedCohesion": 0.2,
+        "prepared": 0.4695546419825405,
+        "preparedCohesion": 0.2,
+        "shown": 0.4695546419825405,
+        "shownCohesion": 0.2
+      },
+      "playing": true,
+      "waiting": false,
+      "solo": {
+        "type": "all"
+      },
+      "playback": 1,
+      "audible": [
+        "m2028-n2-cafe",
+        "m2028-n3-cafe",
+        "m2028-n4-cafe",
+        "m2028-n5-cafe",
+        "m2028-n6-cafe",
+        "m2028-n7-cafe",
+        "m2028-n8-cafe",
+        "m2028-n9-cafe",
+        "m2028-n10-cafe",
+        "m2028-n11-cafe",
+        "m2028-n13-cafe",
+        "m2028-n14-cafe",
+        "m2028-n15-cafe",
+        "m2028-n16-cafe",
+        "m2028-n17-cafe",
+        "m2028-n18-cafe",
+        "m2028-n19-cafe",
+        "m2028-n20-cafe",
+        "m2028-n21-cafe",
+        "m2028-n22-cafe",
+        "m2028-n23-cafe",
+        "m2028-n24-cafe",
+        "m2028-n25-cafe",
+        "m2028-n26-cafe",
+        "m2028-n27-cafe",
+        "m2028-n28-cafe",
+        "m2028-n29-cafe",
+        "m2028-n30-cafe",
+        "m2028-n31-cafe",
+        "m2028-n32-cafe",
+        "m2028-n33-cafe",
+        "m2028-n34-cafe",
+        "m2028-n35-cafe",
+        "m2028-n38-cafe",
+        "m2028-n36-cafe",
+        "m2028-n37-cafe",
+        "m2028-n39-cafe"
+      ],
+      "records": 0.9970409404486418,
+      "range": "1",
+      "piece": "galop",
+      "theme": "dark",
+      "width": 375,
+      "scrollWidth": 375,
+      "errors": [],
+      "portraits": 39
+    }
+  },
+  {
+    "case": "middle-section-dark-framed",
+    "data": {
+      "ui": {
+        "buttons": [
+          {
+            "act": "solo",
+            "checked": false,
+            "hidden": true,
+            "id": 1,
+            "label": "田中 七海だけ聴く",
+            "pressed": "false",
+            "rect": {
+              "bottom": 0,
+              "height": 0,
+              "left": 0,
+              "right": 0,
+              "top": 0,
+              "width": 0,
+              "x": 0,
+              "y": 0
+            }
+          },
+          {
+            "act": "secsolo",
+            "checked": true,
+            "hidden": false,
+            "id": 2,
+            "label": "フルートの音を再生中。押すと全員の音にもどす",
+            "pressed": "true",
+            "rect": {
+              "bottom": 427.9921875,
+              "height": 44,
+              "left": 191.5,
+              "right": 323,
+              "top": 383.9921875,
+              "width": 131.5,
+              "x": 191.5,
+              "y": 383.9921875
+            }
+          },
+          {
+            "act": "all",
+            "checked": false,
+            "hidden": false,
+            "id": 3,
+            "label": null,
+            "pressed": null,
+            "rect": {
+              "bottom": 479.9921875,
+              "height": 44,
+              "left": 52,
+              "right": 323,
+              "top": 435.9921875,
+              "width": 271,
+              "x": 52,
+              "y": 435.9921875
+            }
+          }
+        ],
+        "cacheCurrent": true,
+        "details": [],
+        "draft": null,
+        "expected": [
+          "m2028-n2-cafe",
+          "m2028-n3-cafe",
+          "m2028-n4-cafe"
+        ],
+        "focus": "all",
+        "hidden": false,
+        "section": "fl",
+        "selected": "m2028-n1-cafe",
+        "sourceCurrent": true,
+        "state": 0.15367852500639856
+      },
+      "rest": {
+        "cast": [
+          {
+            "id": "m2028-n1-cafe",
+            "name": "田中 七海",
+            "seat": "picc1"
+          },
+          {
+            "id": "m2028-n2-cafe",
+            "name": "小川 悠斗",
+            "seat": "fl1a"
+          },
+          {
+            "id": "m2028-n3-cafe",
+            "name": "松井 颯太",
+            "seat": "fl1b"
+          },
+          {
+            "id": "m2028-n4-cafe",
+            "name": "菅原 菜月",
+            "seat": "fl2a"
+          },
+          {
+            "id": "m2028-n5-cafe",
+            "name": "岡本 智也",
+            "seat": "ob1"
+          },
+          {
+            "id": "m2028-n6-cafe",
+            "name": "山口 大翔",
+            "seat": "cl1a"
+          },
+          {
+            "id": "m2028-n7-cafe",
+            "name": "山下 彩花",
+            "seat": "cl1b"
+          },
+          {
+            "id": "m2028-n8-cafe",
+            "name": "高木 瑛太",
+            "seat": "cl1c"
+          },
+          {
+            "id": "m2028-n9-cafe",
+            "name": "清水 菜月",
+            "seat": "asax1"
+          },
+          {
+            "id": "m2028-n10-cafe",
+            "name": "山本 凛",
+            "seat": "asax2"
+          },
+          {
+            "id": "m2028-n11-cafe",
+            "name": "山田 悠真",
+            "seat": "fg1"
+          },
+          {
+            "id": "m2028-n12-cafe",
+            "name": "西村 樹",
+            "seat": "ebcl1"
+          },
+          {
+            "id": "m2028-n13-cafe",
+            "name": "松井 美咲",
+            "seat": "cl2a"
+          },
+          {
+            "id": "m2028-n14-cafe",
+            "name": "阿部 和奏",
+            "seat": "cl2b"
+          },
+          {
+            "id": "m2028-n15-cafe",
+            "name": "前田 紬",
+            "seat": "cl3a"
+          },
+          {
+            "id": "m2028-n16-cafe",
+            "name": "野口 陽翔",
+            "seat": "cl3b"
+          },
+          {
+            "id": "m2028-n17-cafe",
+            "name": "工藤 美月",
+            "seat": "bcl1"
+          },
+          {
+            "id": "m2028-n18-cafe",
+            "name": "中野 透",
+            "seat": "tsax1"
+          },
+          {
+            "id": "m2028-n19-cafe",
+            "name": "木村 湊",
+            "seat": "bsax1"
+          },
+          {
+            "id": "m2028-n20-cafe",
+            "name": "佐々木 彩花",
+            "seat": "hn1"
+          },
+          {
+            "id": "m2028-n21-cafe",
+            "name": "井上 優",
+            "seat": "hn2"
+          },
+          {
+            "id": "m2028-n22-cafe",
+            "name": "酒井 陸",
+            "seat": "hn3"
+          },
+          {
+            "id": "m2028-n23-cafe",
+            "name": "松田 拓海",
+            "seat": "hn4"
+          },
+          {
+            "id": "m2028-n24-cafe",
+            "name": "中村 絢",
+            "seat": "tp1a"
+          },
+          {
+            "id": "m2028-n25-cafe",
+            "name": "林 亮",
+            "seat": "tp1b"
+          },
+          {
+            "id": "m2028-n26-cafe",
+            "name": "岩崎 結衣",
+            "seat": "tp2a"
+          },
+          {
+            "id": "m2028-n27-cafe",
+            "name": "千葉 陸",
+            "seat": "tp3a"
+          },
+          {
+            "id": "m2028-n28-cafe",
+            "name": "竹内 花音",
+            "seat": "tb1"
+          },
+          {
+            "id": "m2028-n29-cafe",
+            "name": "井上 雫",
+            "seat": "tb2"
+          },
+          {
+            "id": "m2028-n30-cafe",
+            "name": "石井 透",
+            "seat": "btb1"
+          },
+          {
+            "id": "m2028-n31-cafe",
+            "name": "山下 茜",
+            "seat": "euph1"
+          },
+          {
+            "id": "m2028-n32-cafe",
+            "name": "渡辺 渚",
+            "seat": "euph2"
+          },
+          {
+            "id": "m2028-n33-cafe",
+            "name": "坂本 雫",
+            "seat": "tuba1"
+          },
+          {
+            "id": "m2028-n34-cafe",
+            "name": "菅原 智也",
+            "seat": "tuba2"
+          },
+          {
+            "id": "m2028-n35-cafe",
+            "name": "高木 明里",
+            "seat": "cb1"
+          },
+          {
+            "id": "m2028-n36-cafe",
+            "name": "佐藤 誠",
+            "seat": "perc1"
+          },
+          {
+            "id": "m2028-n37-cafe",
+            "name": "山田 蓮",
+            "seat": "perc2"
+          },
+          {
+            "id": "m2028-n38-cafe",
+            "name": "原 杏",
+            "seat": "perc3"
+          },
+          {
+            "id": "m2028-n39-cafe",
+            "name": "横山 透",
+            "seat": "perc4"
+          }
+        ],
+        "expected": {
+          "members": [
+            "m2028-n2-cafe",
+            "m2028-n3-cafe",
+            "m2028-n4-cafe",
+            "m2028-n5-cafe",
+            "m2028-n6-cafe",
+            "m2028-n7-cafe",
+            "m2028-n8-cafe",
+            "m2028-n9-cafe",
+            "m2028-n10-cafe",
+            "m2028-n11-cafe",
+            "m2028-n13-cafe",
+            "m2028-n14-cafe",
+            "m2028-n15-cafe",
+            "m2028-n16-cafe",
+            "m2028-n17-cafe",
+            "m2028-n18-cafe",
+            "m2028-n19-cafe",
+            "m2028-n20-cafe",
+            "m2028-n21-cafe",
+            "m2028-n22-cafe",
+            "m2028-n23-cafe",
+            "m2028-n24-cafe",
+            "m2028-n25-cafe",
+            "m2028-n26-cafe",
+            "m2028-n27-cafe",
+            "m2028-n28-cafe",
+            "m2028-n29-cafe",
+            "m2028-n30-cafe",
+            "m2028-n31-cafe",
+            "m2028-n32-cafe",
+            "m2028-n33-cafe",
+            "m2028-n34-cafe",
+            "m2028-n35-cafe",
+            "m2028-n38-cafe",
+            "m2028-n36-cafe",
+            "m2028-n37-cafe",
+            "m2028-n39-cafe"
+          ],
+          "sections": [
+            "fl",
+            "dr",
+            "cl",
+            "sax",
+            "hn",
+            "tp",
+            "tb",
+            "low",
+            "perc"
+          ]
+        },
+        "options": [
+          "all",
+          "sec:fl",
+          "sec:dr",
+          "sec:cl",
+          "sec:sax",
+          "sec:tp",
+          "sec:hn",
+          "sec:tb",
+          "sec:low",
+          "sec:perc"
+        ],
+        "rest": "この範囲は休み"
+      },
+      "performance": {
+        "expected": 0.4695546419825405,
+        "expectedCohesion": 0.2,
+        "prepared": 0.4695546419825405,
+        "preparedCohesion": 0.2,
+        "shown": 0.4695546419825405,
+        "shownCohesion": 0.2
+      },
+      "playing": true,
+      "waiting": false,
+      "solo": {
+        "id": "fl",
+        "type": "sec"
+      },
+      "playback": 2,
+      "audible": [
+        "m2028-n2-cafe",
+        "m2028-n3-cafe",
+        "m2028-n4-cafe"
+      ],
+      "records": 0.9970409404486418,
+      "range": "1",
+      "piece": "galop",
+      "theme": "dark",
+      "width": 375,
+      "scrollWidth": 375,
+      "errors": [],
+      "portraits": 39
+    }
+  },
+  {
+    "case": "middle-section-light-framed",
+    "data": {
+      "ui": {
+        "buttons": [
+          {
+            "act": "solo",
+            "checked": false,
+            "hidden": true,
+            "id": 1,
+            "label": "田中 七海だけ聴く",
+            "pressed": "false",
+            "rect": {
+              "bottom": 0,
+              "height": 0,
+              "left": 0,
+              "right": 0,
+              "top": 0,
+              "width": 0,
+              "x": 0,
+              "y": 0
+            }
+          },
+          {
+            "act": "secsolo",
+            "checked": true,
+            "hidden": false,
+            "id": 2,
+            "label": "フルートの音を再生中。押すと全員の音にもどす",
+            "pressed": "true",
+            "rect": {
+              "bottom": 375.9921875,
+              "height": 44,
+              "left": 191.5,
+              "right": 323,
+              "top": 331.9921875,
+              "width": 131.5,
+              "x": 191.5,
+              "y": 331.9921875
+            }
+          },
+          {
+            "act": "all",
+            "checked": false,
+            "hidden": false,
+            "id": 3,
+            "label": null,
+            "pressed": null,
+            "rect": {
+              "bottom": 427.9921875,
+              "height": 44,
+              "left": 52,
+              "right": 323,
+              "top": 383.9921875,
+              "width": 271,
+              "x": 52,
+              "y": 383.9921875
+            }
+          }
+        ],
+        "cacheCurrent": true,
+        "details": [],
+        "draft": null,
+        "expected": [
+          "m2028-n2-cafe",
+          "m2028-n3-cafe",
+          "m2028-n4-cafe"
+        ],
+        "focus": "all",
+        "hidden": false,
+        "section": "fl",
+        "selected": "m2028-n1-cafe",
+        "sourceCurrent": true,
+        "state": 0.15367852500639856
+      },
+      "rest": {
+        "cast": [
+          {
+            "id": "m2028-n1-cafe",
+            "name": "田中 七海",
+            "seat": "picc1"
+          },
+          {
+            "id": "m2028-n2-cafe",
+            "name": "小川 悠斗",
+            "seat": "fl1a"
+          },
+          {
+            "id": "m2028-n3-cafe",
+            "name": "松井 颯太",
+            "seat": "fl1b"
+          },
+          {
+            "id": "m2028-n4-cafe",
+            "name": "菅原 菜月",
+            "seat": "fl2a"
+          },
+          {
+            "id": "m2028-n5-cafe",
+            "name": "岡本 智也",
+            "seat": "ob1"
+          },
+          {
+            "id": "m2028-n6-cafe",
+            "name": "山口 大翔",
+            "seat": "cl1a"
+          },
+          {
+            "id": "m2028-n7-cafe",
+            "name": "山下 彩花",
+            "seat": "cl1b"
+          },
+          {
+            "id": "m2028-n8-cafe",
+            "name": "高木 瑛太",
+            "seat": "cl1c"
+          },
+          {
+            "id": "m2028-n9-cafe",
+            "name": "清水 菜月",
+            "seat": "asax1"
+          },
+          {
+            "id": "m2028-n10-cafe",
+            "name": "山本 凛",
+            "seat": "asax2"
+          },
+          {
+            "id": "m2028-n11-cafe",
+            "name": "山田 悠真",
+            "seat": "fg1"
+          },
+          {
+            "id": "m2028-n12-cafe",
+            "name": "西村 樹",
+            "seat": "ebcl1"
+          },
+          {
+            "id": "m2028-n13-cafe",
+            "name": "松井 美咲",
+            "seat": "cl2a"
+          },
+          {
+            "id": "m2028-n14-cafe",
+            "name": "阿部 和奏",
+            "seat": "cl2b"
+          },
+          {
+            "id": "m2028-n15-cafe",
+            "name": "前田 紬",
+            "seat": "cl3a"
+          },
+          {
+            "id": "m2028-n16-cafe",
+            "name": "野口 陽翔",
+            "seat": "cl3b"
+          },
+          {
+            "id": "m2028-n17-cafe",
+            "name": "工藤 美月",
+            "seat": "bcl1"
+          },
+          {
+            "id": "m2028-n18-cafe",
+            "name": "中野 透",
+            "seat": "tsax1"
+          },
+          {
+            "id": "m2028-n19-cafe",
+            "name": "木村 湊",
+            "seat": "bsax1"
+          },
+          {
+            "id": "m2028-n20-cafe",
+            "name": "佐々木 彩花",
+            "seat": "hn1"
+          },
+          {
+            "id": "m2028-n21-cafe",
+            "name": "井上 優",
+            "seat": "hn2"
+          },
+          {
+            "id": "m2028-n22-cafe",
+            "name": "酒井 陸",
+            "seat": "hn3"
+          },
+          {
+            "id": "m2028-n23-cafe",
+            "name": "松田 拓海",
+            "seat": "hn4"
+          },
+          {
+            "id": "m2028-n24-cafe",
+            "name": "中村 絢",
+            "seat": "tp1a"
+          },
+          {
+            "id": "m2028-n25-cafe",
+            "name": "林 亮",
+            "seat": "tp1b"
+          },
+          {
+            "id": "m2028-n26-cafe",
+            "name": "岩崎 結衣",
+            "seat": "tp2a"
+          },
+          {
+            "id": "m2028-n27-cafe",
+            "name": "千葉 陸",
+            "seat": "tp3a"
+          },
+          {
+            "id": "m2028-n28-cafe",
+            "name": "竹内 花音",
+            "seat": "tb1"
+          },
+          {
+            "id": "m2028-n29-cafe",
+            "name": "井上 雫",
+            "seat": "tb2"
+          },
+          {
+            "id": "m2028-n30-cafe",
+            "name": "石井 透",
+            "seat": "btb1"
+          },
+          {
+            "id": "m2028-n31-cafe",
+            "name": "山下 茜",
+            "seat": "euph1"
+          },
+          {
+            "id": "m2028-n32-cafe",
+            "name": "渡辺 渚",
+            "seat": "euph2"
+          },
+          {
+            "id": "m2028-n33-cafe",
+            "name": "坂本 雫",
+            "seat": "tuba1"
+          },
+          {
+            "id": "m2028-n34-cafe",
+            "name": "菅原 智也",
+            "seat": "tuba2"
+          },
+          {
+            "id": "m2028-n35-cafe",
+            "name": "高木 明里",
+            "seat": "cb1"
+          },
+          {
+            "id": "m2028-n36-cafe",
+            "name": "佐藤 誠",
+            "seat": "perc1"
+          },
+          {
+            "id": "m2028-n37-cafe",
+            "name": "山田 蓮",
+            "seat": "perc2"
+          },
+          {
+            "id": "m2028-n38-cafe",
+            "name": "原 杏",
+            "seat": "perc3"
+          },
+          {
+            "id": "m2028-n39-cafe",
+            "name": "横山 透",
+            "seat": "perc4"
+          }
+        ],
+        "expected": {
+          "members": [
+            "m2028-n2-cafe",
+            "m2028-n3-cafe",
+            "m2028-n4-cafe",
+            "m2028-n5-cafe",
+            "m2028-n6-cafe",
+            "m2028-n7-cafe",
+            "m2028-n8-cafe",
+            "m2028-n9-cafe",
+            "m2028-n10-cafe",
+            "m2028-n11-cafe",
+            "m2028-n13-cafe",
+            "m2028-n14-cafe",
+            "m2028-n15-cafe",
+            "m2028-n16-cafe",
+            "m2028-n17-cafe",
+            "m2028-n18-cafe",
+            "m2028-n19-cafe",
+            "m2028-n20-cafe",
+            "m2028-n21-cafe",
+            "m2028-n22-cafe",
+            "m2028-n23-cafe",
+            "m2028-n24-cafe",
+            "m2028-n25-cafe",
+            "m2028-n26-cafe",
+            "m2028-n27-cafe",
+            "m2028-n28-cafe",
+            "m2028-n29-cafe",
+            "m2028-n30-cafe",
+            "m2028-n31-cafe",
+            "m2028-n32-cafe",
+            "m2028-n33-cafe",
+            "m2028-n34-cafe",
+            "m2028-n35-cafe",
+            "m2028-n38-cafe",
+            "m2028-n36-cafe",
+            "m2028-n37-cafe",
+            "m2028-n39-cafe"
+          ],
+          "sections": [
+            "fl",
+            "dr",
+            "cl",
+            "sax",
+            "hn",
+            "tp",
+            "tb",
+            "low",
+            "perc"
+          ]
+        },
+        "options": [
+          "all",
+          "sec:fl",
+          "sec:dr",
+          "sec:cl",
+          "sec:sax",
+          "sec:tp",
+          "sec:hn",
+          "sec:tb",
+          "sec:low",
+          "sec:perc"
+        ],
+        "rest": "この範囲は休み"
+      },
+      "performance": {
+        "expected": 0.4695546419825405,
+        "expectedCohesion": 0.2,
+        "prepared": 0.4695546419825405,
+        "preparedCohesion": 0.2,
+        "shown": 0.4695546419825405,
+        "shownCohesion": 0.2
+      },
+      "playing": true,
+      "waiting": false,
+      "solo": {
+        "id": "fl",
+        "type": "sec"
+      },
+      "playback": 2,
+      "audible": [
+        "m2028-n2-cafe",
+        "m2028-n3-cafe",
+        "m2028-n4-cafe"
+      ],
+      "records": 0.9970409404486418,
+      "range": "1",
+      "piece": "galop",
+      "theme": "light",
+      "width": 375,
+      "scrollWidth": 375,
+      "errors": [],
+      "portraits": 39
+    }
+  },
+  {
+    "case": "draft-middle",
+    "data": {
+      "ui": {
+        "buttons": [
+          {
+            "act": "solo",
+            "checked": false,
+            "hidden": true,
+            "id": 1,
+            "label": "田中 七海だけ聴く",
+            "pressed": "false",
+            "rect": {
+              "bottom": 0,
+              "height": 0,
+              "left": 0,
+              "right": 0,
+              "top": 0,
+              "width": 0,
+              "x": 0,
+              "y": 0
+            }
+          },
+          {
+            "act": "secsolo",
+            "checked": true,
+            "hidden": false,
+            "id": 2,
+            "label": "フルートの音を再生中。押すと全員の音にもどす",
+            "pressed": "true",
+            "rect": {
+              "bottom": 559.0859375,
+              "height": 44,
+              "left": 191.5,
+              "right": 323,
+              "top": 515.0859375,
+              "width": 131.5,
+              "x": 191.5,
+              "y": 515.0859375
+            }
+          },
+          {
+            "act": "all",
+            "checked": false,
+            "hidden": false,
+            "id": 3,
+            "label": null,
+            "pressed": null,
+            "rect": {
+              "bottom": 611.0859375,
+              "height": 44,
+              "left": 52,
+              "right": 323,
+              "top": 567.0859375,
+              "width": 271,
+              "x": 52,
+              "y": 567.0859375
+            }
+          }
+        ],
+        "cacheCurrent": true,
+        "details": [
+          "mc-growth-history",
+          "mc-story"
+        ],
+        "draft": "未保存のなまえ",
+        "expected": [
+          "m2028-n2-cafe",
+          "m2028-n3-cafe",
+          "m2028-n4-cafe"
+        ],
+        "focus": "memberName",
+        "hidden": false,
+        "section": "fl",
+        "selected": "m2028-n1-cafe",
+        "sourceCurrent": true,
+        "state": 0.15367852500639856
+      },
+      "rest": {
+        "cast": [
+          {
+            "id": "m2028-n1-cafe",
+            "name": "田中 七海",
+            "seat": "picc1"
+          },
+          {
+            "id": "m2028-n2-cafe",
+            "name": "小川 悠斗",
+            "seat": "fl1a"
+          },
+          {
+            "id": "m2028-n3-cafe",
+            "name": "松井 颯太",
+            "seat": "fl1b"
+          },
+          {
+            "id": "m2028-n4-cafe",
+            "name": "菅原 菜月",
+            "seat": "fl2a"
+          },
+          {
+            "id": "m2028-n5-cafe",
+            "name": "岡本 智也",
+            "seat": "ob1"
+          },
+          {
+            "id": "m2028-n6-cafe",
+            "name": "山口 大翔",
+            "seat": "cl1a"
+          },
+          {
+            "id": "m2028-n7-cafe",
+            "name": "山下 彩花",
+            "seat": "cl1b"
+          },
+          {
+            "id": "m2028-n8-cafe",
+            "name": "高木 瑛太",
+            "seat": "cl1c"
+          },
+          {
+            "id": "m2028-n9-cafe",
+            "name": "清水 菜月",
+            "seat": "asax1"
+          },
+          {
+            "id": "m2028-n10-cafe",
+            "name": "山本 凛",
+            "seat": "asax2"
+          },
+          {
+            "id": "m2028-n11-cafe",
+            "name": "山田 悠真",
+            "seat": "fg1"
+          },
+          {
+            "id": "m2028-n12-cafe",
+            "name": "西村 樹",
+            "seat": "ebcl1"
+          },
+          {
+            "id": "m2028-n13-cafe",
+            "name": "松井 美咲",
+            "seat": "cl2a"
+          },
+          {
+            "id": "m2028-n14-cafe",
+            "name": "阿部 和奏",
+            "seat": "cl2b"
+          },
+          {
+            "id": "m2028-n15-cafe",
+            "name": "前田 紬",
+            "seat": "cl3a"
+          },
+          {
+            "id": "m2028-n16-cafe",
+            "name": "野口 陽翔",
+            "seat": "cl3b"
+          },
+          {
+            "id": "m2028-n17-cafe",
+            "name": "工藤 美月",
+            "seat": "bcl1"
+          },
+          {
+            "id": "m2028-n18-cafe",
+            "name": "中野 透",
+            "seat": "tsax1"
+          },
+          {
+            "id": "m2028-n19-cafe",
+            "name": "木村 湊",
+            "seat": "bsax1"
+          },
+          {
+            "id": "m2028-n20-cafe",
+            "name": "佐々木 彩花",
+            "seat": "hn1"
+          },
+          {
+            "id": "m2028-n21-cafe",
+            "name": "井上 優",
+            "seat": "hn2"
+          },
+          {
+            "id": "m2028-n22-cafe",
+            "name": "酒井 陸",
+            "seat": "hn3"
+          },
+          {
+            "id": "m2028-n23-cafe",
+            "name": "松田 拓海",
+            "seat": "hn4"
+          },
+          {
+            "id": "m2028-n24-cafe",
+            "name": "中村 絢",
+            "seat": "tp1a"
+          },
+          {
+            "id": "m2028-n25-cafe",
+            "name": "林 亮",
+            "seat": "tp1b"
+          },
+          {
+            "id": "m2028-n26-cafe",
+            "name": "岩崎 結衣",
+            "seat": "tp2a"
+          },
+          {
+            "id": "m2028-n27-cafe",
+            "name": "千葉 陸",
+            "seat": "tp3a"
+          },
+          {
+            "id": "m2028-n28-cafe",
+            "name": "竹内 花音",
+            "seat": "tb1"
+          },
+          {
+            "id": "m2028-n29-cafe",
+            "name": "井上 雫",
+            "seat": "tb2"
+          },
+          {
+            "id": "m2028-n30-cafe",
+            "name": "石井 透",
+            "seat": "btb1"
+          },
+          {
+            "id": "m2028-n31-cafe",
+            "name": "山下 茜",
+            "seat": "euph1"
+          },
+          {
+            "id": "m2028-n32-cafe",
+            "name": "渡辺 渚",
+            "seat": "euph2"
+          },
+          {
+            "id": "m2028-n33-cafe",
+            "name": "坂本 雫",
+            "seat": "tuba1"
+          },
+          {
+            "id": "m2028-n34-cafe",
+            "name": "菅原 智也",
+            "seat": "tuba2"
+          },
+          {
+            "id": "m2028-n35-cafe",
+            "name": "高木 明里",
+            "seat": "cb1"
+          },
+          {
+            "id": "m2028-n36-cafe",
+            "name": "佐藤 誠",
+            "seat": "perc1"
+          },
+          {
+            "id": "m2028-n37-cafe",
+            "name": "山田 蓮",
+            "seat": "perc2"
+          },
+          {
+            "id": "m2028-n38-cafe",
+            "name": "原 杏",
+            "seat": "perc3"
+          },
+          {
+            "id": "m2028-n39-cafe",
+            "name": "横山 透",
+            "seat": "perc4"
+          }
+        ],
+        "expected": {
+          "members": [
+            "m2028-n2-cafe",
+            "m2028-n3-cafe",
+            "m2028-n4-cafe",
+            "m2028-n5-cafe",
+            "m2028-n6-cafe",
+            "m2028-n7-cafe",
+            "m2028-n8-cafe",
+            "m2028-n9-cafe",
+            "m2028-n10-cafe",
+            "m2028-n11-cafe",
+            "m2028-n13-cafe",
+            "m2028-n14-cafe",
+            "m2028-n15-cafe",
+            "m2028-n16-cafe",
+            "m2028-n17-cafe",
+            "m2028-n18-cafe",
+            "m2028-n19-cafe",
+            "m2028-n20-cafe",
+            "m2028-n21-cafe",
+            "m2028-n22-cafe",
+            "m2028-n23-cafe",
+            "m2028-n24-cafe",
+            "m2028-n25-cafe",
+            "m2028-n26-cafe",
+            "m2028-n27-cafe",
+            "m2028-n28-cafe",
+            "m2028-n29-cafe",
+            "m2028-n30-cafe",
+            "m2028-n31-cafe",
+            "m2028-n32-cafe",
+            "m2028-n33-cafe",
+            "m2028-n34-cafe",
+            "m2028-n35-cafe",
+            "m2028-n38-cafe",
+            "m2028-n36-cafe",
+            "m2028-n37-cafe",
+            "m2028-n39-cafe"
+          ],
+          "sections": [
+            "fl",
+            "dr",
+            "cl",
+            "sax",
+            "hn",
+            "tp",
+            "tb",
+            "low",
+            "perc"
+          ]
+        },
+        "options": [
+          "all",
+          "sec:fl",
+          "sec:dr",
+          "sec:cl",
+          "sec:sax",
+          "sec:tp",
+          "sec:hn",
+          "sec:tb",
+          "sec:low",
+          "sec:perc"
+        ],
+        "rest": "この範囲は休み"
+      },
+      "performance": {
+        "expected": 0.4695546419825405,
+        "expectedCohesion": 0.2,
+        "prepared": 0.4695546419825405,
+        "preparedCohesion": 0.2,
+        "shown": 0.4695546419825405,
+        "shownCohesion": 0.2
+      },
+      "playing": true,
+      "waiting": false,
+      "solo": {
+        "id": "fl",
+        "type": "sec"
+      },
+      "playback": 2,
+      "audible": [
+        "m2028-n2-cafe",
+        "m2028-n3-cafe",
+        "m2028-n4-cafe"
+      ],
+      "records": 0.9970409404486418,
+      "range": "1",
+      "piece": "galop",
+      "theme": "light",
+      "width": 375,
+      "scrollWidth": 375,
+      "errors": [],
+      "portraits": 39
+    }
+  },
+  {
+    "case": "draft-full",
+    "data": {
+      "ui": {
+        "buttons": [
+          {
+            "act": "solo",
+            "checked": false,
+            "hidden": false,
+            "id": 1,
+            "label": "田中 七海だけ聴く",
+            "pressed": "false",
+            "rect": {
+              "bottom": 559.0859375,
+              "height": 44,
+              "left": 52,
+              "right": 183.5,
+              "top": 515.0859375,
+              "width": 131.5,
+              "x": 52,
+              "y": 515.0859375
+            }
+          },
+          {
+            "act": "secsolo",
+            "checked": false,
+            "hidden": false,
+            "id": 2,
+            "label": "フルートだけ聴く",
+            "pressed": "false",
+            "rect": {
+              "bottom": 559.0859375,
+              "height": 44,
+              "left": 191.5,
+              "right": 323,
+              "top": 515.0859375,
+              "width": 131.5,
+              "x": 191.5,
+              "y": 515.0859375
+            }
+          },
+          {
+            "act": "all",
+            "checked": false,
+            "hidden": false,
+            "id": 3,
+            "label": null,
+            "pressed": null,
+            "rect": {
+              "bottom": 611.0859375,
+              "height": 44,
+              "left": 52,
+              "right": 323,
+              "top": 567.0859375,
+              "width": 271,
+              "x": 52,
+              "y": 567.0859375
+            }
+          }
+        ],
+        "cacheCurrent": true,
+        "details": [
+          "mc-growth-history",
+          "mc-story"
+        ],
+        "draft": "未保存のなまえ",
+        "expected": [],
+        "focus": "memberName",
+        "hidden": false,
+        "section": "fl",
+        "selected": "m2028-n1-cafe",
+        "sourceCurrent": false,
+        "state": 0.15367852500639856
+      },
+      "rest": {
+        "cast": [
+          {
+            "id": "m2028-n1-cafe",
+            "name": "田中 七海",
+            "seat": "picc1"
+          },
+          {
+            "id": "m2028-n2-cafe",
+            "name": "小川 悠斗",
+            "seat": "fl1a"
+          },
+          {
+            "id": "m2028-n3-cafe",
+            "name": "松井 颯太",
+            "seat": "fl1b"
+          },
+          {
+            "id": "m2028-n4-cafe",
+            "name": "菅原 菜月",
+            "seat": "fl2a"
+          },
+          {
+            "id": "m2028-n5-cafe",
+            "name": "岡本 智也",
+            "seat": "ob1"
+          },
+          {
+            "id": "m2028-n6-cafe",
+            "name": "山口 大翔",
+            "seat": "cl1a"
+          },
+          {
+            "id": "m2028-n7-cafe",
+            "name": "山下 彩花",
+            "seat": "cl1b"
+          },
+          {
+            "id": "m2028-n8-cafe",
+            "name": "高木 瑛太",
+            "seat": "cl1c"
+          },
+          {
+            "id": "m2028-n9-cafe",
+            "name": "清水 菜月",
+            "seat": "asax1"
+          },
+          {
+            "id": "m2028-n10-cafe",
+            "name": "山本 凛",
+            "seat": "asax2"
+          },
+          {
+            "id": "m2028-n11-cafe",
+            "name": "山田 悠真",
+            "seat": "fg1"
+          },
+          {
+            "id": "m2028-n12-cafe",
+            "name": "西村 樹",
+            "seat": "ebcl1"
+          },
+          {
+            "id": "m2028-n13-cafe",
+            "name": "松井 美咲",
+            "seat": "cl2a"
+          },
+          {
+            "id": "m2028-n14-cafe",
+            "name": "阿部 和奏",
+            "seat": "cl2b"
+          },
+          {
+            "id": "m2028-n15-cafe",
+            "name": "前田 紬",
+            "seat": "cl3a"
+          },
+          {
+            "id": "m2028-n16-cafe",
+            "name": "野口 陽翔",
+            "seat": "cl3b"
+          },
+          {
+            "id": "m2028-n17-cafe",
+            "name": "工藤 美月",
+            "seat": "bcl1"
+          },
+          {
+            "id": "m2028-n18-cafe",
+            "name": "中野 透",
+            "seat": "tsax1"
+          },
+          {
+            "id": "m2028-n19-cafe",
+            "name": "木村 湊",
+            "seat": "bsax1"
+          },
+          {
+            "id": "m2028-n20-cafe",
+            "name": "佐々木 彩花",
+            "seat": "hn1"
+          },
+          {
+            "id": "m2028-n21-cafe",
+            "name": "井上 優",
+            "seat": "hn2"
+          },
+          {
+            "id": "m2028-n22-cafe",
+            "name": "酒井 陸",
+            "seat": "hn3"
+          },
+          {
+            "id": "m2028-n23-cafe",
+            "name": "松田 拓海",
+            "seat": "hn4"
+          },
+          {
+            "id": "m2028-n24-cafe",
+            "name": "中村 絢",
+            "seat": "tp1a"
+          },
+          {
+            "id": "m2028-n25-cafe",
+            "name": "林 亮",
+            "seat": "tp1b"
+          },
+          {
+            "id": "m2028-n26-cafe",
+            "name": "岩崎 結衣",
+            "seat": "tp2a"
+          },
+          {
+            "id": "m2028-n27-cafe",
+            "name": "千葉 陸",
+            "seat": "tp3a"
+          },
+          {
+            "id": "m2028-n28-cafe",
+            "name": "竹内 花音",
+            "seat": "tb1"
+          },
+          {
+            "id": "m2028-n29-cafe",
+            "name": "井上 雫",
+            "seat": "tb2"
+          },
+          {
+            "id": "m2028-n30-cafe",
+            "name": "石井 透",
+            "seat": "btb1"
+          },
+          {
+            "id": "m2028-n31-cafe",
+            "name": "山下 茜",
+            "seat": "euph1"
+          },
+          {
+            "id": "m2028-n32-cafe",
+            "name": "渡辺 渚",
+            "seat": "euph2"
+          },
+          {
+            "id": "m2028-n33-cafe",
+            "name": "坂本 雫",
+            "seat": "tuba1"
+          },
+          {
+            "id": "m2028-n34-cafe",
+            "name": "菅原 智也",
+            "seat": "tuba2"
+          },
+          {
+            "id": "m2028-n35-cafe",
+            "name": "高木 明里",
+            "seat": "cb1"
+          },
+          {
+            "id": "m2028-n36-cafe",
+            "name": "佐藤 誠",
+            "seat": "perc1"
+          },
+          {
+            "id": "m2028-n37-cafe",
+            "name": "山田 蓮",
+            "seat": "perc2"
+          },
+          {
+            "id": "m2028-n38-cafe",
+            "name": "原 杏",
+            "seat": "perc3"
+          },
+          {
+            "id": "m2028-n39-cafe",
+            "name": "横山 透",
+            "seat": "perc4"
+          }
+        ],
+        "expected": {
+          "members": [
+            "m2028-n1-cafe",
+            "m2028-n2-cafe",
+            "m2028-n3-cafe",
+            "m2028-n4-cafe",
+            "m2028-n5-cafe",
+            "m2028-n6-cafe",
+            "m2028-n7-cafe",
+            "m2028-n8-cafe",
+            "m2028-n9-cafe",
+            "m2028-n10-cafe",
+            "m2028-n11-cafe",
+            "m2028-n12-cafe",
+            "m2028-n13-cafe",
+            "m2028-n14-cafe",
+            "m2028-n15-cafe",
+            "m2028-n16-cafe",
+            "m2028-n17-cafe",
+            "m2028-n18-cafe",
+            "m2028-n19-cafe",
+            "m2028-n20-cafe",
+            "m2028-n21-cafe",
+            "m2028-n22-cafe",
+            "m2028-n23-cafe",
+            "m2028-n24-cafe",
+            "m2028-n25-cafe",
+            "m2028-n26-cafe",
+            "m2028-n27-cafe",
+            "m2028-n28-cafe",
+            "m2028-n29-cafe",
+            "m2028-n30-cafe",
+            "m2028-n31-cafe",
+            "m2028-n32-cafe",
+            "m2028-n33-cafe",
+            "m2028-n34-cafe",
+            "m2028-n35-cafe",
+            "m2028-n36-cafe",
+            "m2028-n37-cafe",
+            "m2028-n39-cafe",
+            "m2028-n38-cafe"
+          ],
+          "sections": [
+            "fl",
+            "dr",
+            "cl",
+            "sax",
+            "hn",
+            "tp",
+            "tb",
+            "low",
+            "perc"
+          ]
+        },
+        "options": [
+          "all",
+          "sec:fl",
+          "sec:dr",
+          "sec:cl",
+          "sec:sax",
+          "sec:tp",
+          "sec:hn",
+          "sec:tb",
+          "sec:low",
+          "sec:perc",
+          "member:m2028-n1-cafe"
+        ],
+        "rest": null
+      },
+      "performance": {
+        "expected": 0.4994142900686711,
+        "expectedCohesion": 0.2,
+        "prepared": 0.4994142900686711,
+        "preparedCohesion": 0.2,
+        "shown": 0.4994142900686711,
+        "shownCohesion": 0.2
+      },
+      "playing": false,
+      "waiting": false,
+      "solo": {
+        "id": "fl",
+        "type": "sec"
+      },
+      "playback": null,
+      "audible": [],
+      "records": 0.9970409404486418,
+      "range": "all",
+      "piece": "galop",
+      "theme": "light",
+      "width": 375,
+      "scrollWidth": 375,
+      "errors": [],
+      "portraits": 39
+    }
+  },
+  {
+    "case": "draft-full-solo",
+    "data": {
+      "ui": {
+        "buttons": [
+          {
+            "act": "solo",
+            "checked": true,
+            "hidden": false,
+            "id": 1,
+            "label": "田中 七海の音を再生中。押すと全員の音にもどす",
+            "pressed": "true",
+            "rect": {
+              "bottom": 428.0859375,
+              "height": 44,
+              "left": 52,
+              "right": 183.5,
+              "top": 384.0859375,
+              "width": 131.5,
+              "x": 52,
+              "y": 384.0859375
+            }
+          },
+          {
+            "act": "secsolo",
+            "checked": false,
+            "hidden": false,
+            "id": 2,
+            "label": "フルートだけ聴く",
+            "pressed": "false",
+            "rect": {
+              "bottom": 428.0859375,
+              "height": 44,
+              "left": 191.5,
+              "right": 323,
+              "top": 384.0859375,
+              "width": 131.5,
+              "x": 191.5,
+              "y": 384.0859375
+            }
+          },
+          {
+            "act": "all",
+            "checked": false,
+            "hidden": false,
+            "id": 3,
+            "label": null,
+            "pressed": null,
+            "rect": {
+              "bottom": 480.0859375,
+              "height": 44,
+              "left": 52,
+              "right": 323,
+              "top": 436.0859375,
+              "width": 271,
+              "x": 52,
+              "y": 436.0859375
+            }
+          }
+        ],
+        "cacheCurrent": true,
+        "details": [
+          "mc-growth-history",
+          "mc-story"
+        ],
+        "draft": "未保存のなまえ",
+        "expected": [
+          "m2028-n1-cafe"
+        ],
+        "focus": "solo",
+        "hidden": false,
+        "section": "fl",
+        "selected": "m2028-n1-cafe",
+        "sourceCurrent": true,
+        "state": 0.15367852500639856
+      },
+      "rest": {
+        "cast": [
+          {
+            "id": "m2028-n1-cafe",
+            "name": "田中 七海",
+            "seat": "picc1"
+          },
+          {
+            "id": "m2028-n2-cafe",
+            "name": "小川 悠斗",
+            "seat": "fl1a"
+          },
+          {
+            "id": "m2028-n3-cafe",
+            "name": "松井 颯太",
+            "seat": "fl1b"
+          },
+          {
+            "id": "m2028-n4-cafe",
+            "name": "菅原 菜月",
+            "seat": "fl2a"
+          },
+          {
+            "id": "m2028-n5-cafe",
+            "name": "岡本 智也",
+            "seat": "ob1"
+          },
+          {
+            "id": "m2028-n6-cafe",
+            "name": "山口 大翔",
+            "seat": "cl1a"
+          },
+          {
+            "id": "m2028-n7-cafe",
+            "name": "山下 彩花",
+            "seat": "cl1b"
+          },
+          {
+            "id": "m2028-n8-cafe",
+            "name": "高木 瑛太",
+            "seat": "cl1c"
+          },
+          {
+            "id": "m2028-n9-cafe",
+            "name": "清水 菜月",
+            "seat": "asax1"
+          },
+          {
+            "id": "m2028-n10-cafe",
+            "name": "山本 凛",
+            "seat": "asax2"
+          },
+          {
+            "id": "m2028-n11-cafe",
+            "name": "山田 悠真",
+            "seat": "fg1"
+          },
+          {
+            "id": "m2028-n12-cafe",
+            "name": "西村 樹",
+            "seat": "ebcl1"
+          },
+          {
+            "id": "m2028-n13-cafe",
+            "name": "松井 美咲",
+            "seat": "cl2a"
+          },
+          {
+            "id": "m2028-n14-cafe",
+            "name": "阿部 和奏",
+            "seat": "cl2b"
+          },
+          {
+            "id": "m2028-n15-cafe",
+            "name": "前田 紬",
+            "seat": "cl3a"
+          },
+          {
+            "id": "m2028-n16-cafe",
+            "name": "野口 陽翔",
+            "seat": "cl3b"
+          },
+          {
+            "id": "m2028-n17-cafe",
+            "name": "工藤 美月",
+            "seat": "bcl1"
+          },
+          {
+            "id": "m2028-n18-cafe",
+            "name": "中野 透",
+            "seat": "tsax1"
+          },
+          {
+            "id": "m2028-n19-cafe",
+            "name": "木村 湊",
+            "seat": "bsax1"
+          },
+          {
+            "id": "m2028-n20-cafe",
+            "name": "佐々木 彩花",
+            "seat": "hn1"
+          },
+          {
+            "id": "m2028-n21-cafe",
+            "name": "井上 優",
+            "seat": "hn2"
+          },
+          {
+            "id": "m2028-n22-cafe",
+            "name": "酒井 陸",
+            "seat": "hn3"
+          },
+          {
+            "id": "m2028-n23-cafe",
+            "name": "松田 拓海",
+            "seat": "hn4"
+          },
+          {
+            "id": "m2028-n24-cafe",
+            "name": "中村 絢",
+            "seat": "tp1a"
+          },
+          {
+            "id": "m2028-n25-cafe",
+            "name": "林 亮",
+            "seat": "tp1b"
+          },
+          {
+            "id": "m2028-n26-cafe",
+            "name": "岩崎 結衣",
+            "seat": "tp2a"
+          },
+          {
+            "id": "m2028-n27-cafe",
+            "name": "千葉 陸",
+            "seat": "tp3a"
+          },
+          {
+            "id": "m2028-n28-cafe",
+            "name": "竹内 花音",
+            "seat": "tb1"
+          },
+          {
+            "id": "m2028-n29-cafe",
+            "name": "井上 雫",
+            "seat": "tb2"
+          },
+          {
+            "id": "m2028-n30-cafe",
+            "name": "石井 透",
+            "seat": "btb1"
+          },
+          {
+            "id": "m2028-n31-cafe",
+            "name": "山下 茜",
+            "seat": "euph1"
+          },
+          {
+            "id": "m2028-n32-cafe",
+            "name": "渡辺 渚",
+            "seat": "euph2"
+          },
+          {
+            "id": "m2028-n33-cafe",
+            "name": "坂本 雫",
+            "seat": "tuba1"
+          },
+          {
+            "id": "m2028-n34-cafe",
+            "name": "菅原 智也",
+            "seat": "tuba2"
+          },
+          {
+            "id": "m2028-n35-cafe",
+            "name": "高木 明里",
+            "seat": "cb1"
+          },
+          {
+            "id": "m2028-n36-cafe",
+            "name": "佐藤 誠",
+            "seat": "perc1"
+          },
+          {
+            "id": "m2028-n37-cafe",
+            "name": "山田 蓮",
+            "seat": "perc2"
+          },
+          {
+            "id": "m2028-n38-cafe",
+            "name": "原 杏",
+            "seat": "perc3"
+          },
+          {
+            "id": "m2028-n39-cafe",
+            "name": "横山 透",
+            "seat": "perc4"
+          }
+        ],
+        "expected": {
+          "members": [
+            "m2028-n1-cafe",
+            "m2028-n2-cafe",
+            "m2028-n3-cafe",
+            "m2028-n4-cafe",
+            "m2028-n5-cafe",
+            "m2028-n6-cafe",
+            "m2028-n7-cafe",
+            "m2028-n8-cafe",
+            "m2028-n9-cafe",
+            "m2028-n10-cafe",
+            "m2028-n11-cafe",
+            "m2028-n12-cafe",
+            "m2028-n13-cafe",
+            "m2028-n14-cafe",
+            "m2028-n15-cafe",
+            "m2028-n16-cafe",
+            "m2028-n17-cafe",
+            "m2028-n18-cafe",
+            "m2028-n19-cafe",
+            "m2028-n20-cafe",
+            "m2028-n21-cafe",
+            "m2028-n22-cafe",
+            "m2028-n23-cafe",
+            "m2028-n24-cafe",
+            "m2028-n25-cafe",
+            "m2028-n26-cafe",
+            "m2028-n27-cafe",
+            "m2028-n28-cafe",
+            "m2028-n29-cafe",
+            "m2028-n30-cafe",
+            "m2028-n31-cafe",
+            "m2028-n32-cafe",
+            "m2028-n33-cafe",
+            "m2028-n34-cafe",
+            "m2028-n35-cafe",
+            "m2028-n36-cafe",
+            "m2028-n37-cafe",
+            "m2028-n39-cafe",
+            "m2028-n38-cafe"
+          ],
+          "sections": [
+            "fl",
+            "dr",
+            "cl",
+            "sax",
+            "hn",
+            "tp",
+            "tb",
+            "low",
+            "perc"
+          ]
+        },
+        "options": [
+          "all",
+          "sec:fl",
+          "sec:dr",
+          "sec:cl",
+          "sec:sax",
+          "sec:tp",
+          "sec:hn",
+          "sec:tb",
+          "sec:low",
+          "sec:perc",
+          "member:m2028-n1-cafe"
+        ],
+        "rest": null
+      },
+      "performance": {
+        "expected": 0.4994142900686711,
+        "expectedCohesion": 0.2,
+        "prepared": 0.4994142900686711,
+        "preparedCohesion": 0.2,
+        "shown": 0.4994142900686711,
+        "shownCohesion": 0.2
+      },
+      "playing": true,
+      "waiting": false,
+      "solo": {
+        "id": "m2028-n1-cafe",
+        "type": "member"
+      },
+      "playback": 3,
+      "audible": [
+        "m2028-n1-cafe"
+      ],
+      "records": 0.9970409404486418,
+      "range": "all",
+      "piece": "galop",
+      "theme": "light",
+      "width": 375,
+      "scrollWidth": 375,
+      "errors": [],
+      "portraits": 39
+    }
+  },
+  {
+    "case": "draft-middle-again",
+    "data": {
+      "ui": {
+        "buttons": [
+          {
+            "act": "solo",
+            "checked": false,
+            "hidden": true,
+            "id": 1,
+            "label": "田中 七海だけ聴く",
+            "pressed": "false",
+            "rect": {
+              "bottom": 0,
+              "height": 0,
+              "left": 0,
+              "right": 0,
+              "top": 0,
+              "width": 0,
+              "x": 0,
+              "y": 0
+            }
+          },
+          {
+            "act": "secsolo",
+            "checked": false,
+            "hidden": false,
+            "id": 2,
+            "label": "フルートだけ聴く",
+            "pressed": "false",
+            "rect": {
+              "bottom": 428.0859375,
+              "height": 44,
+              "left": 191.5,
+              "right": 323,
+              "top": 384.0859375,
+              "width": 131.5,
+              "x": 191.5,
+              "y": 384.0859375
+            }
+          },
+          {
+            "act": "all",
+            "checked": false,
+            "hidden": true,
+            "id": 3,
+            "label": null,
+            "pressed": null,
+            "rect": {
+              "bottom": 0,
+              "height": 0,
+              "left": 0,
+              "right": 0,
+              "top": 0,
+              "width": 0,
+              "x": 0,
+              "y": 0
+            }
+          }
+        ],
+        "cacheCurrent": true,
+        "details": [
+          "mc-growth-history",
+          "mc-story"
+        ],
+        "draft": "未保存のなまえ",
+        "expected": [],
+        "focus": "secsolo",
+        "hidden": false,
+        "section": "fl",
+        "selected": "m2028-n1-cafe",
+        "sourceCurrent": false,
+        "state": 0.15367852500639856
+      },
+      "rest": {
+        "cast": [
+          {
+            "id": "m2028-n1-cafe",
+            "name": "田中 七海",
+            "seat": "picc1"
+          },
+          {
+            "id": "m2028-n2-cafe",
+            "name": "小川 悠斗",
+            "seat": "fl1a"
+          },
+          {
+            "id": "m2028-n3-cafe",
+            "name": "松井 颯太",
+            "seat": "fl1b"
+          },
+          {
+            "id": "m2028-n4-cafe",
+            "name": "菅原 菜月",
+            "seat": "fl2a"
+          },
+          {
+            "id": "m2028-n5-cafe",
+            "name": "岡本 智也",
+            "seat": "ob1"
+          },
+          {
+            "id": "m2028-n6-cafe",
+            "name": "山口 大翔",
+            "seat": "cl1a"
+          },
+          {
+            "id": "m2028-n7-cafe",
+            "name": "山下 彩花",
+            "seat": "cl1b"
+          },
+          {
+            "id": "m2028-n8-cafe",
+            "name": "高木 瑛太",
+            "seat": "cl1c"
+          },
+          {
+            "id": "m2028-n9-cafe",
+            "name": "清水 菜月",
+            "seat": "asax1"
+          },
+          {
+            "id": "m2028-n10-cafe",
+            "name": "山本 凛",
+            "seat": "asax2"
+          },
+          {
+            "id": "m2028-n11-cafe",
+            "name": "山田 悠真",
+            "seat": "fg1"
+          },
+          {
+            "id": "m2028-n12-cafe",
+            "name": "西村 樹",
+            "seat": "ebcl1"
+          },
+          {
+            "id": "m2028-n13-cafe",
+            "name": "松井 美咲",
+            "seat": "cl2a"
+          },
+          {
+            "id": "m2028-n14-cafe",
+            "name": "阿部 和奏",
+            "seat": "cl2b"
+          },
+          {
+            "id": "m2028-n15-cafe",
+            "name": "前田 紬",
+            "seat": "cl3a"
+          },
+          {
+            "id": "m2028-n16-cafe",
+            "name": "野口 陽翔",
+            "seat": "cl3b"
+          },
+          {
+            "id": "m2028-n17-cafe",
+            "name": "工藤 美月",
+            "seat": "bcl1"
+          },
+          {
+            "id": "m2028-n18-cafe",
+            "name": "中野 透",
+            "seat": "tsax1"
+          },
+          {
+            "id": "m2028-n19-cafe",
+            "name": "木村 湊",
+            "seat": "bsax1"
+          },
+          {
+            "id": "m2028-n20-cafe",
+            "name": "佐々木 彩花",
+            "seat": "hn1"
+          },
+          {
+            "id": "m2028-n21-cafe",
+            "name": "井上 優",
+            "seat": "hn2"
+          },
+          {
+            "id": "m2028-n22-cafe",
+            "name": "酒井 陸",
+            "seat": "hn3"
+          },
+          {
+            "id": "m2028-n23-cafe",
+            "name": "松田 拓海",
+            "seat": "hn4"
+          },
+          {
+            "id": "m2028-n24-cafe",
+            "name": "中村 絢",
+            "seat": "tp1a"
+          },
+          {
+            "id": "m2028-n25-cafe",
+            "name": "林 亮",
+            "seat": "tp1b"
+          },
+          {
+            "id": "m2028-n26-cafe",
+            "name": "岩崎 結衣",
+            "seat": "tp2a"
+          },
+          {
+            "id": "m2028-n27-cafe",
+            "name": "千葉 陸",
+            "seat": "tp3a"
+          },
+          {
+            "id": "m2028-n28-cafe",
+            "name": "竹内 花音",
+            "seat": "tb1"
+          },
+          {
+            "id": "m2028-n29-cafe",
+            "name": "井上 雫",
+            "seat": "tb2"
+          },
+          {
+            "id": "m2028-n30-cafe",
+            "name": "石井 透",
+            "seat": "btb1"
+          },
+          {
+            "id": "m2028-n31-cafe",
+            "name": "山下 茜",
+            "seat": "euph1"
+          },
+          {
+            "id": "m2028-n32-cafe",
+            "name": "渡辺 渚",
+            "seat": "euph2"
+          },
+          {
+            "id": "m2028-n33-cafe",
+            "name": "坂本 雫",
+            "seat": "tuba1"
+          },
+          {
+            "id": "m2028-n34-cafe",
+            "name": "菅原 智也",
+            "seat": "tuba2"
+          },
+          {
+            "id": "m2028-n35-cafe",
+            "name": "高木 明里",
+            "seat": "cb1"
+          },
+          {
+            "id": "m2028-n36-cafe",
+            "name": "佐藤 誠",
+            "seat": "perc1"
+          },
+          {
+            "id": "m2028-n37-cafe",
+            "name": "山田 蓮",
+            "seat": "perc2"
+          },
+          {
+            "id": "m2028-n38-cafe",
+            "name": "原 杏",
+            "seat": "perc3"
+          },
+          {
+            "id": "m2028-n39-cafe",
+            "name": "横山 透",
+            "seat": "perc4"
+          }
+        ],
+        "expected": {
+          "members": [
+            "m2028-n2-cafe",
+            "m2028-n3-cafe",
+            "m2028-n4-cafe",
+            "m2028-n5-cafe",
+            "m2028-n6-cafe",
+            "m2028-n7-cafe",
+            "m2028-n8-cafe",
+            "m2028-n9-cafe",
+            "m2028-n10-cafe",
+            "m2028-n11-cafe",
+            "m2028-n13-cafe",
+            "m2028-n14-cafe",
+            "m2028-n15-cafe",
+            "m2028-n16-cafe",
+            "m2028-n17-cafe",
+            "m2028-n18-cafe",
+            "m2028-n19-cafe",
+            "m2028-n20-cafe",
+            "m2028-n21-cafe",
+            "m2028-n22-cafe",
+            "m2028-n23-cafe",
+            "m2028-n24-cafe",
+            "m2028-n25-cafe",
+            "m2028-n26-cafe",
+            "m2028-n27-cafe",
+            "m2028-n28-cafe",
+            "m2028-n29-cafe",
+            "m2028-n30-cafe",
+            "m2028-n31-cafe",
+            "m2028-n32-cafe",
+            "m2028-n33-cafe",
+            "m2028-n34-cafe",
+            "m2028-n35-cafe",
+            "m2028-n38-cafe",
+            "m2028-n36-cafe",
+            "m2028-n37-cafe",
+            "m2028-n39-cafe"
+          ],
+          "sections": [
+            "fl",
+            "dr",
+            "cl",
+            "sax",
+            "hn",
+            "tp",
+            "tb",
+            "low",
+            "perc"
+          ]
+        },
+        "options": [
+          "all",
+          "sec:fl",
+          "sec:dr",
+          "sec:cl",
+          "sec:sax",
+          "sec:tp",
+          "sec:hn",
+          "sec:tb",
+          "sec:low",
+          "sec:perc"
+        ],
+        "rest": "この範囲は休み"
+      },
+      "performance": {
+        "expected": 0.4695546419825405,
+        "expectedCohesion": 0.2,
+        "prepared": 0.4695546419825405,
+        "preparedCohesion": 0.2,
+        "shown": 0.4695546419825405,
+        "shownCohesion": 0.2
+      },
+      "playing": false,
+      "waiting": false,
+      "solo": {
+        "type": "all"
+      },
+      "playback": null,
+      "audible": [],
+      "records": 0.9970409404486418,
+      "range": "1",
+      "piece": "galop",
+      "theme": "light",
+      "width": 375,
+      "scrollWidth": 375,
+      "errors": [],
+      "portraits": 39
+    }
+  },
+  {
+    "case": "whole-piece-rest",
+    "data": {
+      "ui": {
+        "buttons": [
+          {
+            "act": "solo",
+            "checked": false,
+            "hidden": true,
+            "id": 4,
+            "label": "原 杏だけ聴く",
+            "pressed": "false",
+            "rect": {
+              "bottom": 0,
+              "height": 0,
+              "left": 0,
+              "right": 0,
+              "top": 0,
+              "width": 0,
+              "x": 0,
+              "y": 0
+            }
+          },
+          {
+            "act": "secsolo",
+            "checked": false,
+            "hidden": false,
+            "id": 5,
+            "label": "パーカッションだけ聴く",
+            "pressed": "false",
+            "rect": {
+              "bottom": 220.390625,
+              "height": 44,
+              "left": 191.5,
+              "right": 340,
+              "top": 176.390625,
+              "width": 148.5,
+              "x": 191.5,
+              "y": 176.390625
+            }
+          },
+          {
+            "act": "all",
+            "checked": false,
+            "hidden": true,
+            "id": 6,
+            "label": null,
+            "pressed": null,
+            "rect": {
+              "bottom": 0,
+              "height": 0,
+              "left": 0,
+              "right": 0,
+              "top": 0,
+              "width": 0,
+              "x": 0,
+              "y": 0
+            }
+          }
+        ],
+        "cacheCurrent": true,
+        "details": [],
+        "draft": null,
+        "expected": [],
+        "focus": "close",
+        "hidden": false,
+        "section": "perc",
+        "selected": "m2028-n38-cafe",
+        "sourceCurrent": false,
+        "state": 0.9649992033373564
+      },
+      "rest": {
+        "cast": [
+          {
+            "id": "m2028-n1-cafe",
+            "name": "田中 七海",
+            "seat": "picc1"
+          },
+          {
+            "id": "m2028-n2-cafe",
+            "name": "小川 悠斗",
+            "seat": "fl1a"
+          },
+          {
+            "id": "m2028-n3-cafe",
+            "name": "松井 颯太",
+            "seat": "fl1b"
+          },
+          {
+            "id": "m2028-n4-cafe",
+            "name": "菅原 菜月",
+            "seat": "fl2a"
+          },
+          {
+            "id": "m2028-n5-cafe",
+            "name": "岡本 智也",
+            "seat": "ob1"
+          },
+          {
+            "id": "m2028-n6-cafe",
+            "name": "山口 大翔",
+            "seat": "cl1a"
+          },
+          {
+            "id": "m2028-n7-cafe",
+            "name": "山下 彩花",
+            "seat": "cl1b"
+          },
+          {
+            "id": "m2028-n8-cafe",
+            "name": "高木 瑛太",
+            "seat": "cl1c"
+          },
+          {
+            "id": "m2028-n9-cafe",
+            "name": "清水 菜月",
+            "seat": "asax1"
+          },
+          {
+            "id": "m2028-n10-cafe",
+            "name": "山本 凛",
+            "seat": "asax2"
+          },
+          {
+            "id": "m2028-n11-cafe",
+            "name": "山田 悠真",
+            "seat": "fg1"
+          },
+          {
+            "id": "m2028-n12-cafe",
+            "name": "西村 樹",
+            "seat": "ebcl1"
+          },
+          {
+            "id": "m2028-n13-cafe",
+            "name": "松井 美咲",
+            "seat": "cl2a"
+          },
+          {
+            "id": "m2028-n14-cafe",
+            "name": "阿部 和奏",
+            "seat": "cl2b"
+          },
+          {
+            "id": "m2028-n15-cafe",
+            "name": "前田 紬",
+            "seat": "cl3a"
+          },
+          {
+            "id": "m2028-n16-cafe",
+            "name": "野口 陽翔",
+            "seat": "cl3b"
+          },
+          {
+            "id": "m2028-n17-cafe",
+            "name": "工藤 美月",
+            "seat": "bcl1"
+          },
+          {
+            "id": "m2028-n18-cafe",
+            "name": "中野 透",
+            "seat": "tsax1"
+          },
+          {
+            "id": "m2028-n19-cafe",
+            "name": "木村 湊",
+            "seat": "bsax1"
+          },
+          {
+            "id": "m2028-n20-cafe",
+            "name": "佐々木 彩花",
+            "seat": "hn1"
+          },
+          {
+            "id": "m2028-n21-cafe",
+            "name": "井上 優",
+            "seat": "hn2"
+          },
+          {
+            "id": "m2028-n22-cafe",
+            "name": "酒井 陸",
+            "seat": "hn3"
+          },
+          {
+            "id": "m2028-n23-cafe",
+            "name": "松田 拓海",
+            "seat": "hn4"
+          },
+          {
+            "id": "m2028-n24-cafe",
+            "name": "中村 絢",
+            "seat": "tp1a"
+          },
+          {
+            "id": "m2028-n25-cafe",
+            "name": "林 亮",
+            "seat": "tp1b"
+          },
+          {
+            "id": "m2028-n26-cafe",
+            "name": "岩崎 結衣",
+            "seat": "tp2a"
+          },
+          {
+            "id": "m2028-n27-cafe",
+            "name": "千葉 陸",
+            "seat": "tp3a"
+          },
+          {
+            "id": "m2028-n28-cafe",
+            "name": "竹内 花音",
+            "seat": "tb1"
+          },
+          {
+            "id": "m2028-n29-cafe",
+            "name": "井上 雫",
+            "seat": "tb2"
+          },
+          {
+            "id": "m2028-n30-cafe",
+            "name": "石井 透",
+            "seat": "btb1"
+          },
+          {
+            "id": "m2028-n31-cafe",
+            "name": "山下 茜",
+            "seat": "euph1"
+          },
+          {
+            "id": "m2028-n32-cafe",
+            "name": "渡辺 渚",
+            "seat": "euph2"
+          },
+          {
+            "id": "m2028-n33-cafe",
+            "name": "坂本 雫",
+            "seat": "tuba1"
+          },
+          {
+            "id": "m2028-n34-cafe",
+            "name": "菅原 智也",
+            "seat": "tuba2"
+          },
+          {
+            "id": "m2028-n35-cafe",
+            "name": "高木 明里",
+            "seat": "cb1"
+          },
+          {
+            "id": "m2028-n36-cafe",
+            "name": "佐藤 誠",
+            "seat": "perc1"
+          },
+          {
+            "id": "m2028-n37-cafe",
+            "name": "山田 蓮",
+            "seat": "perc2"
+          },
+          {
+            "id": "m2028-n38-cafe",
+            "name": "原 杏",
+            "seat": "perc3"
+          },
+          {
+            "id": "m2028-n39-cafe",
+            "name": "横山 透",
+            "seat": "perc4"
+          }
+        ],
+        "expected": {
+          "members": [
+            "m2028-n1-cafe",
+            "m2028-n2-cafe",
+            "m2028-n3-cafe",
+            "m2028-n4-cafe",
+            "m2028-n5-cafe",
+            "m2028-n6-cafe",
+            "m2028-n7-cafe",
+            "m2028-n8-cafe",
+            "m2028-n9-cafe",
+            "m2028-n10-cafe",
+            "m2028-n11-cafe",
+            "m2028-n12-cafe",
+            "m2028-n13-cafe",
+            "m2028-n14-cafe",
+            "m2028-n15-cafe",
+            "m2028-n16-cafe",
+            "m2028-n17-cafe",
+            "m2028-n18-cafe",
+            "m2028-n19-cafe",
+            "m2028-n20-cafe",
+            "m2028-n21-cafe",
+            "m2028-n22-cafe",
+            "m2028-n23-cafe",
+            "m2028-n24-cafe",
+            "m2028-n25-cafe",
+            "m2028-n26-cafe",
+            "m2028-n27-cafe",
+            "m2028-n28-cafe",
+            "m2028-n29-cafe",
+            "m2028-n30-cafe",
+            "m2028-n31-cafe",
+            "m2028-n32-cafe",
+            "m2028-n33-cafe",
+            "m2028-n34-cafe",
+            "m2028-n35-cafe",
+            "m2028-n36-cafe",
+            "m2028-n37-cafe"
+          ],
+          "sections": [
+            "fl",
+            "dr",
+            "cl",
+            "sax",
+            "hn",
+            "tp",
+            "tb",
+            "low",
+            "perc"
+          ]
+        },
+        "options": [
+          "all",
+          "sec:fl",
+          "sec:dr",
+          "sec:cl",
+          "sec:sax",
+          "sec:tp",
+          "sec:hn",
+          "sec:tb",
+          "sec:low",
+          "sec:perc"
+        ],
+        "rest": "この曲は休み"
+      },
+      "performance": {
+        "expected": 0.1260019768960774,
+        "expectedCohesion": 0.2,
+        "prepared": 0.1260019768960774,
+        "preparedCohesion": 0.2,
+        "shown": 0.1260019768960774,
+        "shownCohesion": 0.2
+      },
+      "playing": false,
+      "waiting": false,
+      "solo": {
+        "type": "all"
+      },
+      "playback": null,
+      "audible": [],
+      "records": 0.5811631304677576,
+      "range": "all",
+      "piece": "largo",
+      "theme": "light",
+      "width": 375,
+      "scrollWidth": 375,
+      "errors": [],
+      "portraits": 39
+    }
+  },
+  {
+    "case": "whole-section-wait",
+    "data": {
+      "ui": {
+        "buttons": [
+          {
+            "act": "solo",
+            "checked": false,
+            "hidden": true,
+            "id": 4,
+            "label": "原 杏だけ聴く",
+            "pressed": "false",
+            "rect": {
+              "bottom": 0,
+              "height": 0,
+              "left": 0,
+              "right": 0,
+              "top": 0,
+              "width": 0,
+              "x": 0,
+              "y": 0
+            }
+          },
+          {
+            "act": "secsolo",
+            "checked": true,
+            "hidden": false,
+            "id": 5,
+            "label": "パーカッションの音を読み込み中。押すと全員の音にもどす",
+            "pressed": "true",
+            "rect": {
+              "bottom": 282.390625,
+              "height": 44,
+              "left": 191.5,
+              "right": 340,
+              "top": 238.390625,
+              "width": 148.5,
+              "x": 191.5,
+              "y": 238.390625
+            }
+          },
+          {
+            "act": "all",
+            "checked": false,
+            "hidden": false,
+            "id": 6,
+            "label": null,
+            "pressed": null,
+            "rect": {
+              "bottom": 334.390625,
+              "height": 44,
+              "left": 35,
+              "right": 340,
+              "top": 290.390625,
+              "width": 305,
+              "x": 35,
+              "y": 290.390625
+            }
+          }
+        ],
+        "cacheCurrent": true,
+        "details": [],
+        "draft": null,
+        "expected": [
+          "m2028-n36-cafe",
+          "m2028-n37-cafe"
+        ],
+        "focus": "secsolo",
+        "hidden": false,
+        "section": "perc",
+        "selected": "m2028-n38-cafe",
+        "sourceCurrent": true,
+        "state": 0.9649992033373564
+      },
+      "rest": {
+        "cast": [
+          {
+            "id": "m2028-n1-cafe",
+            "name": "田中 七海",
+            "seat": "picc1"
+          },
+          {
+            "id": "m2028-n2-cafe",
+            "name": "小川 悠斗",
+            "seat": "fl1a"
+          },
+          {
+            "id": "m2028-n3-cafe",
+            "name": "松井 颯太",
+            "seat": "fl1b"
+          },
+          {
+            "id": "m2028-n4-cafe",
+            "name": "菅原 菜月",
+            "seat": "fl2a"
+          },
+          {
+            "id": "m2028-n5-cafe",
+            "name": "岡本 智也",
+            "seat": "ob1"
+          },
+          {
+            "id": "m2028-n6-cafe",
+            "name": "山口 大翔",
+            "seat": "cl1a"
+          },
+          {
+            "id": "m2028-n7-cafe",
+            "name": "山下 彩花",
+            "seat": "cl1b"
+          },
+          {
+            "id": "m2028-n8-cafe",
+            "name": "高木 瑛太",
+            "seat": "cl1c"
+          },
+          {
+            "id": "m2028-n9-cafe",
+            "name": "清水 菜月",
+            "seat": "asax1"
+          },
+          {
+            "id": "m2028-n10-cafe",
+            "name": "山本 凛",
+            "seat": "asax2"
+          },
+          {
+            "id": "m2028-n11-cafe",
+            "name": "山田 悠真",
+            "seat": "fg1"
+          },
+          {
+            "id": "m2028-n12-cafe",
+            "name": "西村 樹",
+            "seat": "ebcl1"
+          },
+          {
+            "id": "m2028-n13-cafe",
+            "name": "松井 美咲",
+            "seat": "cl2a"
+          },
+          {
+            "id": "m2028-n14-cafe",
+            "name": "阿部 和奏",
+            "seat": "cl2b"
+          },
+          {
+            "id": "m2028-n15-cafe",
+            "name": "前田 紬",
+            "seat": "cl3a"
+          },
+          {
+            "id": "m2028-n16-cafe",
+            "name": "野口 陽翔",
+            "seat": "cl3b"
+          },
+          {
+            "id": "m2028-n17-cafe",
+            "name": "工藤 美月",
+            "seat": "bcl1"
+          },
+          {
+            "id": "m2028-n18-cafe",
+            "name": "中野 透",
+            "seat": "tsax1"
+          },
+          {
+            "id": "m2028-n19-cafe",
+            "name": "木村 湊",
+            "seat": "bsax1"
+          },
+          {
+            "id": "m2028-n20-cafe",
+            "name": "佐々木 彩花",
+            "seat": "hn1"
+          },
+          {
+            "id": "m2028-n21-cafe",
+            "name": "井上 優",
+            "seat": "hn2"
+          },
+          {
+            "id": "m2028-n22-cafe",
+            "name": "酒井 陸",
+            "seat": "hn3"
+          },
+          {
+            "id": "m2028-n23-cafe",
+            "name": "松田 拓海",
+            "seat": "hn4"
+          },
+          {
+            "id": "m2028-n24-cafe",
+            "name": "中村 絢",
+            "seat": "tp1a"
+          },
+          {
+            "id": "m2028-n25-cafe",
+            "name": "林 亮",
+            "seat": "tp1b"
+          },
+          {
+            "id": "m2028-n26-cafe",
+            "name": "岩崎 結衣",
+            "seat": "tp2a"
+          },
+          {
+            "id": "m2028-n27-cafe",
+            "name": "千葉 陸",
+            "seat": "tp3a"
+          },
+          {
+            "id": "m2028-n28-cafe",
+            "name": "竹内 花音",
+            "seat": "tb1"
+          },
+          {
+            "id": "m2028-n29-cafe",
+            "name": "井上 雫",
+            "seat": "tb2"
+          },
+          {
+            "id": "m2028-n30-cafe",
+            "name": "石井 透",
+            "seat": "btb1"
+          },
+          {
+            "id": "m2028-n31-cafe",
+            "name": "山下 茜",
+            "seat": "euph1"
+          },
+          {
+            "id": "m2028-n32-cafe",
+            "name": "渡辺 渚",
+            "seat": "euph2"
+          },
+          {
+            "id": "m2028-n33-cafe",
+            "name": "坂本 雫",
+            "seat": "tuba1"
+          },
+          {
+            "id": "m2028-n34-cafe",
+            "name": "菅原 智也",
+            "seat": "tuba2"
+          },
+          {
+            "id": "m2028-n35-cafe",
+            "name": "高木 明里",
+            "seat": "cb1"
+          },
+          {
+            "id": "m2028-n36-cafe",
+            "name": "佐藤 誠",
+            "seat": "perc1"
+          },
+          {
+            "id": "m2028-n37-cafe",
+            "name": "山田 蓮",
+            "seat": "perc2"
+          },
+          {
+            "id": "m2028-n38-cafe",
+            "name": "原 杏",
+            "seat": "perc3"
+          },
+          {
+            "id": "m2028-n39-cafe",
+            "name": "横山 透",
+            "seat": "perc4"
+          }
+        ],
+        "expected": {
+          "members": [
+            "m2028-n1-cafe",
+            "m2028-n2-cafe",
+            "m2028-n3-cafe",
+            "m2028-n4-cafe",
+            "m2028-n5-cafe",
+            "m2028-n6-cafe",
+            "m2028-n7-cafe",
+            "m2028-n8-cafe",
+            "m2028-n9-cafe",
+            "m2028-n10-cafe",
+            "m2028-n11-cafe",
+            "m2028-n12-cafe",
+            "m2028-n13-cafe",
+            "m2028-n14-cafe",
+            "m2028-n15-cafe",
+            "m2028-n16-cafe",
+            "m2028-n17-cafe",
+            "m2028-n18-cafe",
+            "m2028-n19-cafe",
+            "m2028-n20-cafe",
+            "m2028-n21-cafe",
+            "m2028-n22-cafe",
+            "m2028-n23-cafe",
+            "m2028-n24-cafe",
+            "m2028-n25-cafe",
+            "m2028-n26-cafe",
+            "m2028-n27-cafe",
+            "m2028-n28-cafe",
+            "m2028-n29-cafe",
+            "m2028-n30-cafe",
+            "m2028-n31-cafe",
+            "m2028-n32-cafe",
+            "m2028-n33-cafe",
+            "m2028-n34-cafe",
+            "m2028-n35-cafe",
+            "m2028-n36-cafe",
+            "m2028-n37-cafe"
+          ],
+          "sections": [
+            "fl",
+            "dr",
+            "cl",
+            "sax",
+            "hn",
+            "tp",
+            "tb",
+            "low",
+            "perc"
+          ]
+        },
+        "options": [
+          "all",
+          "sec:fl",
+          "sec:dr",
+          "sec:cl",
+          "sec:sax",
+          "sec:tp",
+          "sec:hn",
+          "sec:tb",
+          "sec:low",
+          "sec:perc"
+        ],
+        "rest": "この曲は休み"
+      },
+      "performance": {
+        "expected": 0.1260019768960774,
+        "expectedCohesion": 0.2,
+        "prepared": 0.1260019768960774,
+        "preparedCohesion": 0.2,
+        "shown": 0.1260019768960774,
+        "shownCohesion": 0.2
+      },
+      "playing": false,
+      "waiting": true,
+      "solo": {
+        "id": "perc",
+        "type": "sec"
+      },
+      "playback": null,
+      "audible": [],
+      "records": 0.5811631304677576,
+      "range": "all",
+      "piece": "largo",
+      "theme": "light",
+      "width": 375,
+      "scrollWidth": 375,
+      "errors": [],
+      "portraits": 39
+    }
+  },
+  {
+    "case": "whole-section-wait-dark",
+    "data": {
+      "ui": {
+        "buttons": [
+          {
+            "act": "solo",
+            "checked": false,
+            "hidden": true,
+            "id": 4,
+            "label": "原 杏だけ聴く",
+            "pressed": "false",
+            "rect": {
+              "bottom": 0,
+              "height": 0,
+              "left": 0,
+              "right": 0,
+              "top": 0,
+              "width": 0,
+              "x": 0,
+              "y": 0
+            }
+          },
+          {
+            "act": "secsolo",
+            "checked": true,
+            "hidden": false,
+            "id": 5,
+            "label": "パーカッションの音を読み込み中。押すと全員の音にもどす",
+            "pressed": "true",
+            "rect": {
+              "bottom": 282.390625,
+              "height": 44,
+              "left": 191.5,
+              "right": 340,
+              "top": 238.390625,
+              "width": 148.5,
+              "x": 191.5,
+              "y": 238.390625
+            }
+          },
+          {
+            "act": "all",
+            "checked": false,
+            "hidden": false,
+            "id": 6,
+            "label": null,
+            "pressed": null,
+            "rect": {
+              "bottom": 334.390625,
+              "height": 44,
+              "left": 35,
+              "right": 340,
+              "top": 290.390625,
+              "width": 305,
+              "x": 35,
+              "y": 290.390625
+            }
+          }
+        ],
+        "cacheCurrent": true,
+        "details": [],
+        "draft": null,
+        "expected": [
+          "m2028-n36-cafe",
+          "m2028-n37-cafe"
+        ],
+        "focus": "secsolo",
+        "hidden": false,
+        "section": "perc",
+        "selected": "m2028-n38-cafe",
+        "sourceCurrent": true,
+        "state": 0.9649992033373564
+      },
+      "rest": {
+        "cast": [
+          {
+            "id": "m2028-n1-cafe",
+            "name": "田中 七海",
+            "seat": "picc1"
+          },
+          {
+            "id": "m2028-n2-cafe",
+            "name": "小川 悠斗",
+            "seat": "fl1a"
+          },
+          {
+            "id": "m2028-n3-cafe",
+            "name": "松井 颯太",
+            "seat": "fl1b"
+          },
+          {
+            "id": "m2028-n4-cafe",
+            "name": "菅原 菜月",
+            "seat": "fl2a"
+          },
+          {
+            "id": "m2028-n5-cafe",
+            "name": "岡本 智也",
+            "seat": "ob1"
+          },
+          {
+            "id": "m2028-n6-cafe",
+            "name": "山口 大翔",
+            "seat": "cl1a"
+          },
+          {
+            "id": "m2028-n7-cafe",
+            "name": "山下 彩花",
+            "seat": "cl1b"
+          },
+          {
+            "id": "m2028-n8-cafe",
+            "name": "高木 瑛太",
+            "seat": "cl1c"
+          },
+          {
+            "id": "m2028-n9-cafe",
+            "name": "清水 菜月",
+            "seat": "asax1"
+          },
+          {
+            "id": "m2028-n10-cafe",
+            "name": "山本 凛",
+            "seat": "asax2"
+          },
+          {
+            "id": "m2028-n11-cafe",
+            "name": "山田 悠真",
+            "seat": "fg1"
+          },
+          {
+            "id": "m2028-n12-cafe",
+            "name": "西村 樹",
+            "seat": "ebcl1"
+          },
+          {
+            "id": "m2028-n13-cafe",
+            "name": "松井 美咲",
+            "seat": "cl2a"
+          },
+          {
+            "id": "m2028-n14-cafe",
+            "name": "阿部 和奏",
+            "seat": "cl2b"
+          },
+          {
+            "id": "m2028-n15-cafe",
+            "name": "前田 紬",
+            "seat": "cl3a"
+          },
+          {
+            "id": "m2028-n16-cafe",
+            "name": "野口 陽翔",
+            "seat": "cl3b"
+          },
+          {
+            "id": "m2028-n17-cafe",
+            "name": "工藤 美月",
+            "seat": "bcl1"
+          },
+          {
+            "id": "m2028-n18-cafe",
+            "name": "中野 透",
+            "seat": "tsax1"
+          },
+          {
+            "id": "m2028-n19-cafe",
+            "name": "木村 湊",
+            "seat": "bsax1"
+          },
+          {
+            "id": "m2028-n20-cafe",
+            "name": "佐々木 彩花",
+            "seat": "hn1"
+          },
+          {
+            "id": "m2028-n21-cafe",
+            "name": "井上 優",
+            "seat": "hn2"
+          },
+          {
+            "id": "m2028-n22-cafe",
+            "name": "酒井 陸",
+            "seat": "hn3"
+          },
+          {
+            "id": "m2028-n23-cafe",
+            "name": "松田 拓海",
+            "seat": "hn4"
+          },
+          {
+            "id": "m2028-n24-cafe",
+            "name": "中村 絢",
+            "seat": "tp1a"
+          },
+          {
+            "id": "m2028-n25-cafe",
+            "name": "林 亮",
+            "seat": "tp1b"
+          },
+          {
+            "id": "m2028-n26-cafe",
+            "name": "岩崎 結衣",
+            "seat": "tp2a"
+          },
+          {
+            "id": "m2028-n27-cafe",
+            "name": "千葉 陸",
+            "seat": "tp3a"
+          },
+          {
+            "id": "m2028-n28-cafe",
+            "name": "竹内 花音",
+            "seat": "tb1"
+          },
+          {
+            "id": "m2028-n29-cafe",
+            "name": "井上 雫",
+            "seat": "tb2"
+          },
+          {
+            "id": "m2028-n30-cafe",
+            "name": "石井 透",
+            "seat": "btb1"
+          },
+          {
+            "id": "m2028-n31-cafe",
+            "name": "山下 茜",
+            "seat": "euph1"
+          },
+          {
+            "id": "m2028-n32-cafe",
+            "name": "渡辺 渚",
+            "seat": "euph2"
+          },
+          {
+            "id": "m2028-n33-cafe",
+            "name": "坂本 雫",
+            "seat": "tuba1"
+          },
+          {
+            "id": "m2028-n34-cafe",
+            "name": "菅原 智也",
+            "seat": "tuba2"
+          },
+          {
+            "id": "m2028-n35-cafe",
+            "name": "高木 明里",
+            "seat": "cb1"
+          },
+          {
+            "id": "m2028-n36-cafe",
+            "name": "佐藤 誠",
+            "seat": "perc1"
+          },
+          {
+            "id": "m2028-n37-cafe",
+            "name": "山田 蓮",
+            "seat": "perc2"
+          },
+          {
+            "id": "m2028-n38-cafe",
+            "name": "原 杏",
+            "seat": "perc3"
+          },
+          {
+            "id": "m2028-n39-cafe",
+            "name": "横山 透",
+            "seat": "perc4"
+          }
+        ],
+        "expected": {
+          "members": [
+            "m2028-n1-cafe",
+            "m2028-n2-cafe",
+            "m2028-n3-cafe",
+            "m2028-n4-cafe",
+            "m2028-n5-cafe",
+            "m2028-n6-cafe",
+            "m2028-n7-cafe",
+            "m2028-n8-cafe",
+            "m2028-n9-cafe",
+            "m2028-n10-cafe",
+            "m2028-n11-cafe",
+            "m2028-n12-cafe",
+            "m2028-n13-cafe",
+            "m2028-n14-cafe",
+            "m2028-n15-cafe",
+            "m2028-n16-cafe",
+            "m2028-n17-cafe",
+            "m2028-n18-cafe",
+            "m2028-n19-cafe",
+            "m2028-n20-cafe",
+            "m2028-n21-cafe",
+            "m2028-n22-cafe",
+            "m2028-n23-cafe",
+            "m2028-n24-cafe",
+            "m2028-n25-cafe",
+            "m2028-n26-cafe",
+            "m2028-n27-cafe",
+            "m2028-n28-cafe",
+            "m2028-n29-cafe",
+            "m2028-n30-cafe",
+            "m2028-n31-cafe",
+            "m2028-n32-cafe",
+            "m2028-n33-cafe",
+            "m2028-n34-cafe",
+            "m2028-n35-cafe",
+            "m2028-n36-cafe",
+            "m2028-n37-cafe"
+          ],
+          "sections": [
+            "fl",
+            "dr",
+            "cl",
+            "sax",
+            "hn",
+            "tp",
+            "tb",
+            "low",
+            "perc"
+          ]
+        },
+        "options": [
+          "all",
+          "sec:fl",
+          "sec:dr",
+          "sec:cl",
+          "sec:sax",
+          "sec:tp",
+          "sec:hn",
+          "sec:tb",
+          "sec:low",
+          "sec:perc"
+        ],
+        "rest": "この曲は休み"
+      },
+      "performance": {
+        "expected": 0.1260019768960774,
+        "expectedCohesion": 0.2,
+        "prepared": 0.1260019768960774,
+        "preparedCohesion": 0.2,
+        "shown": 0.1260019768960774,
+        "shownCohesion": 0.2
+      },
+      "playing": false,
+      "waiting": true,
+      "solo": {
+        "id": "perc",
+        "type": "sec"
+      },
+      "playback": null,
+      "audible": [],
+      "records": 0.5811631304677576,
+      "range": "all",
+      "piece": "largo",
+      "theme": "dark",
+      "width": 375,
+      "scrollWidth": 375,
+      "errors": [],
+      "portraits": 39
+    }
+  },
+  {
+    "case": "wait-range-cancelled",
+    "data": {
+      "ui": {
+        "buttons": [
+          {
+            "act": "solo",
+            "checked": false,
+            "hidden": true,
+            "id": 4,
+            "label": "原 杏だけ聴く",
+            "pressed": "false",
+            "rect": {
+              "bottom": 0,
+              "height": 0,
+              "left": 0,
+              "right": 0,
+              "top": 0,
+              "width": 0,
+              "x": 0,
+              "y": 0
+            }
+          },
+          {
+            "act": "secsolo",
+            "checked": false,
+            "hidden": true,
+            "id": 5,
+            "label": "パーカッションだけ聴く",
+            "pressed": "false",
+            "rect": {
+              "bottom": 0,
+              "height": 0,
+              "left": 0,
+              "right": 0,
+              "top": 0,
+              "width": 0,
+              "x": 0,
+              "y": 0
+            }
+          },
+          {
+            "act": "all",
+            "checked": false,
+            "hidden": true,
+            "id": 6,
+            "label": null,
+            "pressed": null,
+            "rect": {
+              "bottom": 0,
+              "height": 0,
+              "left": 0,
+              "right": 0,
+              "top": 0,
+              "width": 0,
+              "x": 0,
+              "y": 0
+            }
+          }
+        ],
+        "cacheCurrent": true,
+        "details": [],
+        "draft": null,
+        "expected": [],
+        "focus": "BUTTON",
+        "hidden": false,
+        "section": "perc",
+        "selected": "m2028-n38-cafe",
+        "sourceCurrent": false,
+        "state": 0.9649992033373564
+      },
+      "rest": {
+        "cast": [
+          {
+            "id": "m2028-n1-cafe",
+            "name": "田中 七海",
+            "seat": "picc1"
+          },
+          {
+            "id": "m2028-n2-cafe",
+            "name": "小川 悠斗",
+            "seat": "fl1a"
+          },
+          {
+            "id": "m2028-n3-cafe",
+            "name": "松井 颯太",
+            "seat": "fl1b"
+          },
+          {
+            "id": "m2028-n4-cafe",
+            "name": "菅原 菜月",
+            "seat": "fl2a"
+          },
+          {
+            "id": "m2028-n5-cafe",
+            "name": "岡本 智也",
+            "seat": "ob1"
+          },
+          {
+            "id": "m2028-n6-cafe",
+            "name": "山口 大翔",
+            "seat": "cl1a"
+          },
+          {
+            "id": "m2028-n7-cafe",
+            "name": "山下 彩花",
+            "seat": "cl1b"
+          },
+          {
+            "id": "m2028-n8-cafe",
+            "name": "高木 瑛太",
+            "seat": "cl1c"
+          },
+          {
+            "id": "m2028-n9-cafe",
+            "name": "清水 菜月",
+            "seat": "asax1"
+          },
+          {
+            "id": "m2028-n10-cafe",
+            "name": "山本 凛",
+            "seat": "asax2"
+          },
+          {
+            "id": "m2028-n11-cafe",
+            "name": "山田 悠真",
+            "seat": "fg1"
+          },
+          {
+            "id": "m2028-n12-cafe",
+            "name": "西村 樹",
+            "seat": "ebcl1"
+          },
+          {
+            "id": "m2028-n13-cafe",
+            "name": "松井 美咲",
+            "seat": "cl2a"
+          },
+          {
+            "id": "m2028-n14-cafe",
+            "name": "阿部 和奏",
+            "seat": "cl2b"
+          },
+          {
+            "id": "m2028-n15-cafe",
+            "name": "前田 紬",
+            "seat": "cl3a"
+          },
+          {
+            "id": "m2028-n16-cafe",
+            "name": "野口 陽翔",
+            "seat": "cl3b"
+          },
+          {
+            "id": "m2028-n17-cafe",
+            "name": "工藤 美月",
+            "seat": "bcl1"
+          },
+          {
+            "id": "m2028-n18-cafe",
+            "name": "中野 透",
+            "seat": "tsax1"
+          },
+          {
+            "id": "m2028-n19-cafe",
+            "name": "木村 湊",
+            "seat": "bsax1"
+          },
+          {
+            "id": "m2028-n20-cafe",
+            "name": "佐々木 彩花",
+            "seat": "hn1"
+          },
+          {
+            "id": "m2028-n21-cafe",
+            "name": "井上 優",
+            "seat": "hn2"
+          },
+          {
+            "id": "m2028-n22-cafe",
+            "name": "酒井 陸",
+            "seat": "hn3"
+          },
+          {
+            "id": "m2028-n23-cafe",
+            "name": "松田 拓海",
+            "seat": "hn4"
+          },
+          {
+            "id": "m2028-n24-cafe",
+            "name": "中村 絢",
+            "seat": "tp1a"
+          },
+          {
+            "id": "m2028-n25-cafe",
+            "name": "林 亮",
+            "seat": "tp1b"
+          },
+          {
+            "id": "m2028-n26-cafe",
+            "name": "岩崎 結衣",
+            "seat": "tp2a"
+          },
+          {
+            "id": "m2028-n27-cafe",
+            "name": "千葉 陸",
+            "seat": "tp3a"
+          },
+          {
+            "id": "m2028-n28-cafe",
+            "name": "竹内 花音",
+            "seat": "tb1"
+          },
+          {
+            "id": "m2028-n29-cafe",
+            "name": "井上 雫",
+            "seat": "tb2"
+          },
+          {
+            "id": "m2028-n30-cafe",
+            "name": "石井 透",
+            "seat": "btb1"
+          },
+          {
+            "id": "m2028-n31-cafe",
+            "name": "山下 茜",
+            "seat": "euph1"
+          },
+          {
+            "id": "m2028-n32-cafe",
+            "name": "渡辺 渚",
+            "seat": "euph2"
+          },
+          {
+            "id": "m2028-n33-cafe",
+            "name": "坂本 雫",
+            "seat": "tuba1"
+          },
+          {
+            "id": "m2028-n34-cafe",
+            "name": "菅原 智也",
+            "seat": "tuba2"
+          },
+          {
+            "id": "m2028-n35-cafe",
+            "name": "高木 明里",
+            "seat": "cb1"
+          },
+          {
+            "id": "m2028-n36-cafe",
+            "name": "佐藤 誠",
+            "seat": "perc1"
+          },
+          {
+            "id": "m2028-n37-cafe",
+            "name": "山田 蓮",
+            "seat": "perc2"
+          },
+          {
+            "id": "m2028-n38-cafe",
+            "name": "原 杏",
+            "seat": "perc3"
+          },
+          {
+            "id": "m2028-n39-cafe",
+            "name": "横山 透",
+            "seat": "perc4"
+          }
+        ],
+        "expected": {
+          "members": [
+            "m2028-n5-cafe",
+            "m2028-n6-cafe",
+            "m2028-n7-cafe",
+            "m2028-n8-cafe",
+            "m2028-n11-cafe",
+            "m2028-n13-cafe",
+            "m2028-n14-cafe",
+            "m2028-n15-cafe",
+            "m2028-n16-cafe",
+            "m2028-n17-cafe",
+            "m2028-n18-cafe",
+            "m2028-n20-cafe",
+            "m2028-n21-cafe",
+            "m2028-n31-cafe",
+            "m2028-n32-cafe",
+            "m2028-n33-cafe",
+            "m2028-n34-cafe",
+            "m2028-n35-cafe"
+          ],
+          "sections": [
+            "dr",
+            "cl",
+            "sax",
+            "hn",
+            "low"
+          ]
+        },
+        "options": [
+          "all",
+          "sec:dr",
+          "sec:cl",
+          "sec:sax",
+          "sec:hn",
+          "sec:low"
+        ],
+        "rest": "この範囲は休み"
+      },
+      "performance": {
+        "expected": 0.36987378587946296,
+        "expectedCohesion": 0.2,
+        "prepared": 0.36987378587946296,
+        "preparedCohesion": 0.2,
+        "shown": 0.36987378587946296,
+        "shownCohesion": 0.2
+      },
+      "playing": false,
+      "waiting": false,
+      "solo": {
+        "type": "all"
+      },
+      "playback": null,
+      "audible": [],
+      "records": 0.5811631304677576,
+      "range": "0",
+      "piece": "largo",
+      "theme": "dark",
+      "width": 375,
+      "scrollWidth": 375,
+      "errors": [],
+      "portraits": 39
+    }
+  },
+  {
+    "case": "wait-released",
+    "data": {
+      "ui": {
+        "buttons": [
+          {
+            "act": "solo",
+            "checked": false,
+            "hidden": true,
+            "id": 4,
+            "label": "原 杏だけ聴く",
+            "pressed": "false",
+            "rect": {
+              "bottom": 0,
+              "height": 0,
+              "left": 0,
+              "right": 0,
+              "top": 0,
+              "width": 0,
+              "x": 0,
+              "y": 0
+            }
+          },
+          {
+            "act": "secsolo",
+            "checked": false,
+            "hidden": true,
+            "id": 5,
+            "label": "パーカッションだけ聴く",
+            "pressed": "false",
+            "rect": {
+              "bottom": 0,
+              "height": 0,
+              "left": 0,
+              "right": 0,
+              "top": 0,
+              "width": 0,
+              "x": 0,
+              "y": 0
+            }
+          },
+          {
+            "act": "all",
+            "checked": false,
+            "hidden": true,
+            "id": 6,
+            "label": null,
+            "pressed": null,
+            "rect": {
+              "bottom": 0,
+              "height": 0,
+              "left": 0,
+              "right": 0,
+              "top": 0,
+              "width": 0,
+              "x": 0,
+              "y": 0
+            }
+          }
+        ],
+        "cacheCurrent": true,
+        "details": [],
+        "draft": null,
+        "expected": [],
+        "focus": "close",
+        "hidden": false,
+        "section": "perc",
+        "selected": "m2028-n38-cafe",
+        "sourceCurrent": false,
+        "state": 0.9649992033373564
+      },
+      "rest": {
+        "cast": [
+          {
+            "id": "m2028-n1-cafe",
+            "name": "田中 七海",
+            "seat": "picc1"
+          },
+          {
+            "id": "m2028-n2-cafe",
+            "name": "小川 悠斗",
+            "seat": "fl1a"
+          },
+          {
+            "id": "m2028-n3-cafe",
+            "name": "松井 颯太",
+            "seat": "fl1b"
+          },
+          {
+            "id": "m2028-n4-cafe",
+            "name": "菅原 菜月",
+            "seat": "fl2a"
+          },
+          {
+            "id": "m2028-n5-cafe",
+            "name": "岡本 智也",
+            "seat": "ob1"
+          },
+          {
+            "id": "m2028-n6-cafe",
+            "name": "山口 大翔",
+            "seat": "cl1a"
+          },
+          {
+            "id": "m2028-n7-cafe",
+            "name": "山下 彩花",
+            "seat": "cl1b"
+          },
+          {
+            "id": "m2028-n8-cafe",
+            "name": "高木 瑛太",
+            "seat": "cl1c"
+          },
+          {
+            "id": "m2028-n9-cafe",
+            "name": "清水 菜月",
+            "seat": "asax1"
+          },
+          {
+            "id": "m2028-n10-cafe",
+            "name": "山本 凛",
+            "seat": "asax2"
+          },
+          {
+            "id": "m2028-n11-cafe",
+            "name": "山田 悠真",
+            "seat": "fg1"
+          },
+          {
+            "id": "m2028-n12-cafe",
+            "name": "西村 樹",
+            "seat": "ebcl1"
+          },
+          {
+            "id": "m2028-n13-cafe",
+            "name": "松井 美咲",
+            "seat": "cl2a"
+          },
+          {
+            "id": "m2028-n14-cafe",
+            "name": "阿部 和奏",
+            "seat": "cl2b"
+          },
+          {
+            "id": "m2028-n15-cafe",
+            "name": "前田 紬",
+            "seat": "cl3a"
+          },
+          {
+            "id": "m2028-n16-cafe",
+            "name": "野口 陽翔",
+            "seat": "cl3b"
+          },
+          {
+            "id": "m2028-n17-cafe",
+            "name": "工藤 美月",
+            "seat": "bcl1"
+          },
+          {
+            "id": "m2028-n18-cafe",
+            "name": "中野 透",
+            "seat": "tsax1"
+          },
+          {
+            "id": "m2028-n19-cafe",
+            "name": "木村 湊",
+            "seat": "bsax1"
+          },
+          {
+            "id": "m2028-n20-cafe",
+            "name": "佐々木 彩花",
+            "seat": "hn1"
+          },
+          {
+            "id": "m2028-n21-cafe",
+            "name": "井上 優",
+            "seat": "hn2"
+          },
+          {
+            "id": "m2028-n22-cafe",
+            "name": "酒井 陸",
+            "seat": "hn3"
+          },
+          {
+            "id": "m2028-n23-cafe",
+            "name": "松田 拓海",
+            "seat": "hn4"
+          },
+          {
+            "id": "m2028-n24-cafe",
+            "name": "中村 絢",
+            "seat": "tp1a"
+          },
+          {
+            "id": "m2028-n25-cafe",
+            "name": "林 亮",
+            "seat": "tp1b"
+          },
+          {
+            "id": "m2028-n26-cafe",
+            "name": "岩崎 結衣",
+            "seat": "tp2a"
+          },
+          {
+            "id": "m2028-n27-cafe",
+            "name": "千葉 陸",
+            "seat": "tp3a"
+          },
+          {
+            "id": "m2028-n28-cafe",
+            "name": "竹内 花音",
+            "seat": "tb1"
+          },
+          {
+            "id": "m2028-n29-cafe",
+            "name": "井上 雫",
+            "seat": "tb2"
+          },
+          {
+            "id": "m2028-n30-cafe",
+            "name": "石井 透",
+            "seat": "btb1"
+          },
+          {
+            "id": "m2028-n31-cafe",
+            "name": "山下 茜",
+            "seat": "euph1"
+          },
+          {
+            "id": "m2028-n32-cafe",
+            "name": "渡辺 渚",
+            "seat": "euph2"
+          },
+          {
+            "id": "m2028-n33-cafe",
+            "name": "坂本 雫",
+            "seat": "tuba1"
+          },
+          {
+            "id": "m2028-n34-cafe",
+            "name": "菅原 智也",
+            "seat": "tuba2"
+          },
+          {
+            "id": "m2028-n35-cafe",
+            "name": "高木 明里",
+            "seat": "cb1"
+          },
+          {
+            "id": "m2028-n36-cafe",
+            "name": "佐藤 誠",
+            "seat": "perc1"
+          },
+          {
+            "id": "m2028-n37-cafe",
+            "name": "山田 蓮",
+            "seat": "perc2"
+          },
+          {
+            "id": "m2028-n38-cafe",
+            "name": "原 杏",
+            "seat": "perc3"
+          },
+          {
+            "id": "m2028-n39-cafe",
+            "name": "横山 透",
+            "seat": "perc4"
+          }
+        ],
+        "expected": {
+          "members": [
+            "m2028-n5-cafe",
+            "m2028-n6-cafe",
+            "m2028-n7-cafe",
+            "m2028-n8-cafe",
+            "m2028-n11-cafe",
+            "m2028-n13-cafe",
+            "m2028-n14-cafe",
+            "m2028-n15-cafe",
+            "m2028-n16-cafe",
+            "m2028-n17-cafe",
+            "m2028-n18-cafe",
+            "m2028-n20-cafe",
+            "m2028-n21-cafe",
+            "m2028-n31-cafe",
+            "m2028-n32-cafe",
+            "m2028-n33-cafe",
+            "m2028-n34-cafe",
+            "m2028-n35-cafe"
+          ],
+          "sections": [
+            "dr",
+            "cl",
+            "sax",
+            "hn",
+            "low"
+          ]
+        },
+        "options": [
+          "all",
+          "sec:dr",
+          "sec:cl",
+          "sec:sax",
+          "sec:hn",
+          "sec:low"
+        ],
+        "rest": "この範囲は休み"
+      },
+      "performance": {
+        "expected": 0.36987378587946296,
+        "expectedCohesion": 0.2,
+        "prepared": 0.36987378587946296,
+        "preparedCohesion": 0.2,
+        "shown": 0.36987378587946296,
+        "shownCohesion": 0.2
+      },
+      "playing": false,
+      "waiting": false,
+      "solo": {
+        "type": "all"
+      },
+      "playback": null,
+      "audible": [],
+      "records": 0.5811631304677576,
+      "range": "0",
+      "piece": "largo",
+      "theme": "dark",
+      "width": 375,
+      "scrollWidth": 375,
+      "errors": [],
+      "portraits": 39
+    }
+  }
+]

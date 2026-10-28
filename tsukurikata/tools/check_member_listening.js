@@ -23,6 +23,7 @@ function fresh(pid='galop'){
 }
 `,ctx);
 vm.runInContext(ui.slice(ui.indexOf('function rangeSpan('),ui.indexOf('const busy =')),ctx);
+vm.runInContext(ui.slice(ui.indexOf('const PERFORMANCE_PLAYERS ='),ui.indexOf('function rememberStageMembers(')),ctx);
 vm.runInContext(ui.slice(ui.indexOf('function currentCtx(){'),ui.indexOf('function refreshNow(){')),ctx);
 vm.runInContext(ui.slice(ui.indexOf('function applySolo(){'),ui.indexOf('// 録音の参照は')),ctx);
 vm.runInContext(ui.slice(ui.indexOf('function currentMemberListening('),ui.indexOf('function memberCurrentRanks(')),ctx);

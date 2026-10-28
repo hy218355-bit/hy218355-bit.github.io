@@ -1,0 +1,79 @@
+{
+  "audible": [],
+  "card": {
+    "buttons": [
+      {
+        "act": "solo",
+        "checked": true,
+        "hidden": false,
+        "id": 1,
+        "label": "田中 七海の音を再生中。押すと全員の音にもどす",
+        "pressed": "true",
+        "rect": {
+          "bottom": 427.9921875,
+          "height": 44,
+          "left": 52,
+          "right": 183.5,
+          "top": 383.9921875,
+          "width": 131.5,
+          "x": 52,
+          "y": 383.9921875
+        }
+      },
+      {
+        "act": "secsolo",
+        "checked": false,
+        "hidden": false,
+        "id": 2,
+        "label": "フルートだけ聴く",
+        "pressed": "false",
+        "rect": {
+          "bottom": 427.9921875,
+          "height": 44,
+          "left": 191.5,
+          "right": 323,
+          "top": 383.9921875,
+          "width": 131.5,
+          "x": 191.5,
+          "y": 383.9921875
+        }
+      },
+      {
+        "act": "all",
+        "checked": false,
+        "hidden": false,
+        "id": 3,
+        "label": null,
+        "pressed": null,
+        "rect": {
+          "bottom": 479.9921875,
+          "height": 44,
+          "left": 52,
+          "right": 323,
+          "top": 435.9921875,
+          "width": 271,
+          "x": 52,
+          "y": 435.9921875
+        }
+      }
+    ],
+    "cacheCurrent": true,
+    "details": [],
+    "draft": null,
+    "expected": [],
+    "focus": "solo",
+    "hidden": false,
+    "section": "fl",
+    "selected": "m2028-n1-cafe",
+    "sourceCurrent": true,
+    "state": 0.17314153793267906
+  },
+  "errors": [],
+  "playing": true,
+  "range": "0",
+  "solo": {
+    "id": "m2028-n1-cafe",
+    "type": "member"
+  },
+  "waiting": false
+}
