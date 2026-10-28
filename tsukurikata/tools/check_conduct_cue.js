@@ -17,10 +17,10 @@ const playPerf=perf=>{played=perf;};
 `,ctx);
 vm.runInContext(fs.readFileSync(path.join(root,'js/conduct.js'),'utf8'),ctx);
 vm.runInContext(`
-cdClick=()=>{};cdPress=()=>{};
+const clicks=[];cdClick=(at,strong)=>clicks.push(strong);cdPress=()=>{};
 const near=(a,b)=>assert.ok(Math.abs(a-b)<1e-7,a+' ≠ '+b);
 for(const meter of [2,3,4,8]){
- CD.perf={meter,pieceId:'pomp',from:8,to:40,interp:{tempo:1}};
+ CD.perf={meter,pieceId:'pomp',from:meter*2,to:meter*2+32,interp:{tempo:1}};clicks.length=0;
  CD.phase='count';CD.count=[];CD.cueStart=10;CD.cuePeriod=.6;CD.lastTap=0;CD.stage=null;
  CD.judge={p:0,g:0,e:0,l:0};CD.combo=CD.best=0;
  const n=cdCountN(),before=JSON.stringify(CD.perf);
@@ -30,6 +30,7 @@ for(const meter of [2,3,4,8]){
   if(i<n-1){assert.equal(CD.phase,'count');q=cdCueState(E.ac.currentTime+.3);near(q.next[0].distance,.5);assert.equal(q.count,i+1);}
  }
  assert.equal(CD.phase,'play');assert.equal(played,CD.perf);
+ assert.deepEqual(clicks,({2:[true,false,true,false],3:[true,false,false],4:[true,false,false,false],8:[true,false,false,false,false,false,false,false]})[meter],'小節の1拍目で数え始める音を強める');
  const start=10.6+n*.6;near(CD.clock.t0,start);
  q=cdCueState(start-.15);assert.equal(q.next[0].beat,1);near(q.next[0].distance,.25);
  E.ac.currentTime=start;cdTap({preventDefault(){}});assert.equal(CD.judge.p,1,'予告の到着時刻がぴったりの判定と合う');
@@ -45,6 +46,23 @@ for(const pid of PIECE_IDS){
  CD.clock=BeatClock.start(5,from,.5);CD.clock.tap(5);CD.clock.tap(5.8);
  const b=from+1.75,q=cdCueState(CD.clock.timeOf(b));near(q.b,1.75);near(q.next[0].distance,.25);
 }
+// 全曲の練習区間を、楽譜の途中の拍から数える。
+for(const id of PIECE_IDS)for(const span of PIECES[id].spans){
+ const meter=PIECES[id].meter||4;
+ CD.perf={meter,pieceId:id,from:span.from,to:span.to};CD.phase='play';CD.clock=BeatClock.start(10,span.from,.5);
+ const q=cdCueState(10);assert.equal(q.beat,span.from%meter+1,id+'の区間の先頭');
+ assert.equal(q.next[0].beat,(span.from+1)%meter+1);assert.equal(q.next[1].beat,(span.from+2)%meter+1);
+}
+// 春の「鳥の歌」は3拍目、終わりの区間は4拍目から。途中の拍を1拍目へ戻さない。
+for(const [from,first,accent]of [[54,3,[false,false,true,false]],[111,4,[false,true,false,false]]]){
+ CD.perf={meter:4,pieceId:'spring',from,to:from+16,interp:{tempo:1}};
+ CD.phase='count';CD.count=[];CD.cueStart=10;CD.cuePeriod=.5;CD.lastTap=0;CD.stage=null;
+ CD.judge={p:0,g:0,e:0,l:0};CD.combo=CD.best=0;clicks.length=0;
+ assert.equal(cdCueState(10).next[0].beat,first);
+ for(let i=0;i<4;i++){E.ac.currentTime=10.5+i*.5;cdTap({preventDefault(){}});}
+ assert.deepEqual(clicks,accent);assert.equal(cdCueState(CD.clock.t0).beat,first);
+ assert.equal(cdCueState(CD.clock.timeOf(from+(5-first)%4)).beat,1);
+}
 for(const [off,kind]of [[-.2,'e'],[.05,'p'],[.1,'g'],[.2,'l']]){
  CD.judge={p:0,g:0,e:0,l:0};cdJudge({},$('#cdPad').getBoundingClientRect(),off);assert.equal(CD.judge[kind],1,'判定の幅は変えない');
 }
@@ -55,10 +73,15 @@ const n={svg:el(),now:el(),next:[el(),el()],steps:[el(),el(),el(),el()],beats:[e
 CD.cueNodes=n;CD.perf={meter:4,from:0,to:16};CD.phase='play';CD.clock=BeatClock.start(10,0,.5);
 U.fxMode='full';cdDrawCue(10.1);assert.ok(!n.now.classList.values.has('hit'),'到着前に線を光らせない');const moving=n.next[0].attrs.transform;cdDrawCue(10.3);assert.notEqual(n.next[0].attrs.transform,moving);
 cdDrawCue(10.499);assert.equal(n.next[0].attrs.transform,'translate(92.2 0)','到着線へ向かって2拍先の光が近づく');
+cdDrawCue(9.75);assert.ok(n.next[0].classList.values.has('downbeat'),'2拍先の1拍目を予告する');cdDrawCue(10);assert.ok(n.now.classList.values.has('downbeat'));assert.ok(n.pad.classList.values.has('downbeat'));assert.ok(!n.next[1].classList.values.has('downbeat'));
+CD.perf={meter:4,from:54,to:111};CD.phase='count';CD.count=[10];CD.cuePeriod=.5;CD.cueStart=9.5;
+cdDrawCue(10);assert.ok(n.beats[2].classList.values.has('on'));assert.ok(n.beats[2].classList.values.has('counted'));assert.ok(!n.beats[0].classList.values.has('counted'));
+CD.perf={meter:4,from:0,to:16};CD.phase='play';
 for(const mode of ['short','off','reduce']){
  U.fxMode=mode==='reduce'?'full':mode;calm=mode==='reduce';cdDrawCue(10.1);const fixed=n.next[0].attrs.transform;
  cdDrawCue(10.3);assert.equal(n.next[0].attrs.transform,fixed);assert.equal(fixed,'translate(192 0)');
+ cdDrawCue(10);assert.ok(n.now.classList.values.has('downbeat'));assert.ok(n.pad.classList.values.has('downbeat'));
  assert.equal(cdCueHint(),'ラインが光ったらタップ');cdDrawCue(10.5);assert.ok(n.now.classList.values.has('hit'));assert.ok(n.pad.classList.values.has('on-beat'));assert.ok(n.beats[1].classList.values.has('on'));
 }
 `,ctx);
-console.log('2・3・4・8拍の予告と入り／実際のタップから演奏開始・ぴったり判定／全15曲の区間・テンポ変更／演奏と時計の不変／終端・待機・終了／演出なし・短く・動きを減らす設定：確認済み');
+console.log('2・3・4・8拍の予告と入り／実際のタップから演奏開始・ぴったり判定／全15曲の区間・テンポ変更／途中の拍と小節の先頭・数え始めの音／演奏と時計の不変／終端・待機・終了／演出なし・短く・動きを減らす設定：確認済み');

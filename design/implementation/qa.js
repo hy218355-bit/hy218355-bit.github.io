@@ -21,6 +21,17 @@ window.fetch=(input,init)=>{
 };
 if(document.readyState==='loading')await new Promise(r=>document.addEventListener('DOMContentLoaded',r,{once:true}));
 const q=new URLSearchParams(location.search);let view=q.get('view')||'week';
+const cadenceClicks=[],cadenceArrivals=[];
+if(q.has('downbeatAudit')){
+ const click=cdClick;
+ cdClick=(at,strong)=>{cadenceClicks.push({at,strong});click(at,strong);};
+ // 短い点灯中の色と拍を記録し、確認の操作待ちで見逃さないようにする。
+ new MutationObserver(()=>{
+  const now=$('#cdCueNow');
+  if(!now?.matches('.downbeat.hit')||cadenceArrivals.some(a=>a.phase===CD.phase&&a.from===CD.perf.from))return;
+  cadenceArrivals.push({phase:CD.phase,from:CD.perf.from,fill:getComputedStyle(now.querySelector('rect')).fill,pad:$('#cdPad').className,beat:$('#cdBeatRow .on')?.textContent});
+ }).observe($('#cdPattern'),{subtree:true,attributes:true,attributeFilter:['class']});
+}
 const focusKeys=[];
 if(q.has('focusAudit'))window.addEventListener('keydown',e=>{
  if(['Escape','Tab',' ','Enter'].includes(e.key))focusKeys.push({key:e.key,repeat:e.repeat,tipOpen:!$('#tip').hidden,target:e.target.id||e.target.tagName});
@@ -99,6 +110,11 @@ function record(){
   const active=document.activeElement;
   report.conductKeys=focusKeys.slice(-32);
   report.conductFocus={active:active?.id||active?.getAttribute('data-cd')||active?.getAttribute('data-act')||active?.tagName,text:active?.textContent?.trim().slice(0,60),inside:$('#conduct').contains(active),role:$('#conduct').getAttribute('role'),modal:$('#conduct').getAttribute('aria-modal'),background:[...document.querySelectorAll('.app,#tabbar,#mini,#toast')].map(el=>({id:el.id||'app',inert:el.inert})),tipOpen:!$('#tip').hidden,tipOwner:document.querySelector('[aria-describedby~="tip"]')?.id||null};
+ }
+ if(q.has('downbeatAudit')){
+  const cue=E.ac&&CD.perf?cdCueState(E.ac.currentTime):null;
+  const look=el=>{const rect=el.querySelector('rect');return {downbeat:el.classList.contains('downbeat'),fill:rect?getComputedStyle(rect).fill:null,stroke:rect?getComputedStyle(rect).strokeWidth:null};};
+  report.cadence={cue,from:CD.perf?.from,meter:CD.perf?.meter,clicks:cadenceClicks.slice(),arrivals:cadenceArrivals.slice(),next:[...document.querySelectorAll('#cdPattern .cue-next')].map(look),now:$('#cdCueNow')?look($('#cdCueNow')):null,beats:[...document.querySelectorAll('#cdBeatRow i')].map(el=>({text:el.textContent,on:el.classList.contains('on'),counted:el.classList.contains('counted'),color:getComputedStyle(el).backgroundColor})),calm:$('#cdPattern').dataset.calm};
  }
  if(q.has('judgeAudit'))report.conductFeedback=feedbackAudit.slice(-24);
  if(q.has('timingAudit'))report.conductTiming={...timingAudit,inputs:timingAudit.inputs.map(x=>({...x}))};

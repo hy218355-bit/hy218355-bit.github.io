@@ -201,7 +201,7 @@ function cdTap(e){
   $('#cdLevel').style.top = `${(1.45-level)/.95*100}%`;
   if(CD.phase === 'count'){
     CD.count.push(tapped);
-    cdClick(now, CD.count.length === 1);
+    cdClick(now, (CD.perf.from + CD.count.length - 1) % CD.perf.meter === 0);
     if(CD.count.length < cdCountN()){ cdMsg(`あと${cdCountN()-CD.count.length}回`); return; }
     // 叩いた間隔の中央値をテンポにして、次の拍から始める
     const iv = CD.count.slice(1).map((t, i) => t - CD.count[i]).sort((a, b) => a - b);
@@ -260,7 +260,8 @@ function cdCueState(now){
     b=count.length?count.length-1+(now-count[count.length-1])/P:(now-CD.cueStart)/P-1;
   }
   const i=Math.floor(b),f=b-i,meter=CD.perf.meter;
-  const beat=k=>((k%meter)+meter)%meter+1;
+  // 曲の途中から練習するときも、楽譜の拍の位置を保つ。
+  const beat=k=>(((k+CD.perf.from)%meter)+meter)%meter+1;
   return {b,i,f,beat:beat(i),next:[1,2].map(d=>({k:i+d,beat:beat(i+d),distance:d-f,show:CD.phase==='count'||i+d<CD.perf.to-CD.perf.from})),count:CD.count.length};
 }
 function cdBuildCue(){
@@ -282,7 +283,9 @@ function cdDrawCue(now){
   const calm=cdCueCalm(),hit=q.f<0.14&&q.i>=0;
   n.svg.dataset.calm=String(calm);n.svg.dataset.mode=CD.phase;n.svg.dataset.nextBeat=q.next[0].beat;
   n.now.classList.toggle('hit',hit);
+  n.now.classList.toggle('downbeat',q.beat===1);
   n.pad.classList.toggle('on-beat',hit);
+  n.pad.classList.toggle('downbeat',hit&&q.beat===1);
   n.pad.classList.toggle('is-pressed',now<CD.tapUntil);
   for(let i=0;i<2;i++){
     const el=n.next[i],next=q.next[i];
@@ -292,9 +295,10 @@ function cdDrawCue(now){
   }
   // 演出なし・短く・動きを減らす設定では、固定した4つの目印で拍までの残りを示す。
   for(let i=0;i<4;i++)n.steps[i].classList.toggle('on',i<=Math.floor(q.f*4));
+  const meter=CD.perf.meter,start=((CD.perf.from%meter)+meter)%meter;
   n.beats.forEach((el,i)=>{
     el.classList.toggle('on',q.i>=0&&i===q.beat-1);
-    el.classList.toggle('counted',CD.phase==='count'&&i<q.count%CD.perf.meter);
+    el.classList.toggle('counted',CD.phase==='count'&&(i-start+meter)%meter<q.count%meter);
   });
 }
 function cdFrame(){

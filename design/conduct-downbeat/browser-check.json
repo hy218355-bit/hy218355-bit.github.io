@@ -1,0 +1,894 @@
+[
+  {
+    "case": "spring-bird-preview",
+    "data": {
+      "boot": {
+        "errors": [],
+        "failed": [],
+        "loaded": 33,
+        "scripts": 33
+      },
+      "cadence": {
+        "beats": [
+          {
+            "color": "rgba(0, 0, 0, 0)",
+            "counted": false,
+            "on": false,
+            "text": "1"
+          },
+          {
+            "color": "rgba(0, 0, 0, 0)",
+            "counted": false,
+            "on": false,
+            "text": "2"
+          },
+          {
+            "color": "rgba(0, 0, 0, 0)",
+            "counted": true,
+            "on": false,
+            "text": "3"
+          },
+          {
+            "color": "rgb(57, 121, 111)",
+            "counted": true,
+            "on": true,
+            "text": "4"
+          }
+        ],
+        "calm": "false",
+        "clicks": [
+          {
+            "at": 19.221333333333337,
+            "strong": false
+          },
+          {
+            "at": 19.648,
+            "strong": false
+          }
+        ],
+        "cue": {
+          "b": 1.2498249976661495,
+          "beat": 4,
+          "count": 2,
+          "f": 0.24982499766614952,
+          "i": 1,
+          "next": [
+            {
+              "beat": 1,
+              "distance": 0.7501750023338505,
+              "k": 2,
+              "show": true
+            },
+            {
+              "beat": 2,
+              "distance": 1.7501750023338505,
+              "k": 3,
+              "show": true
+            }
+          ]
+        },
+        "from": 54,
+        "meter": 4,
+        "next": [
+          {
+            "downbeat": true,
+            "fill": "rgb(147, 107, 47)",
+            "stroke": "4px"
+          },
+          {
+            "downbeat": false,
+            "fill": "rgb(57, 121, 111)",
+            "stroke": "1px"
+          }
+        ],
+        "now": {
+          "downbeat": false,
+          "fill": "rgb(57, 121, 111)",
+          "stroke": "1px"
+        }
+      },
+      "conduct": {
+        "beat": "1",
+        "combo": 0,
+        "count": 2,
+        "events": 0,
+        "from": 54,
+        "judge": {
+          "e": 0,
+          "g": 0,
+          "l": 0,
+          "p": 0
+        },
+        "level": 1,
+        "meter": 4,
+        "phase": "count",
+        "taps": 0,
+        "to": 111
+      },
+      "errors": [],
+      "scrollWidth": 375,
+      "width": 375
+    }
+  },
+  {
+    "case": "spring-bird-play",
+    "data": {
+      "audio": {
+        "ready": true,
+        "voices": [
+          "SampleVoice"
+        ]
+      },
+      "cadence": {
+        "beats": [
+          {
+            "color": "rgb(147, 107, 47)",
+            "counted": false,
+            "on": true,
+            "text": "1"
+          },
+          {
+            "color": "rgba(0, 0, 0, 0)",
+            "counted": false,
+            "on": false,
+            "text": "2"
+          },
+          {
+            "color": "rgba(0, 0, 0, 0)",
+            "counted": false,
+            "on": false,
+            "text": "3"
+          },
+          {
+            "color": "rgba(0, 0, 0, 0)",
+            "counted": false,
+            "on": false,
+            "text": "4"
+          }
+        ],
+        "calm": "false",
+        "clicks": [
+          {
+            "at": 19.221333333333337,
+            "strong": false
+          },
+          {
+            "at": 19.648,
+            "strong": false
+          },
+          {
+            "at": 63.95733333333333,
+            "strong": false
+          },
+          {
+            "at": 64.40533333333333,
+            "strong": false
+          },
+          {
+            "at": 64.81066666666666,
+            "strong": true
+          },
+          {
+            "at": 65.23733333333334,
+            "strong": false
+          }
+        ],
+        "cue": {
+          "b": 2.964198960289629,
+          "beat": 1,
+          "count": 4,
+          "f": 0.9641989602896288,
+          "i": 2,
+          "next": [
+            {
+              "beat": 2,
+              "distance": 0.035801039710371185,
+              "k": 3,
+              "show": true
+            },
+            {
+              "beat": 3,
+              "distance": 1.0358010397103712,
+              "k": 4,
+              "show": true
+            }
+          ]
+        },
+        "from": 54,
+        "meter": 4,
+        "next": [
+          {
+            "downbeat": false,
+            "fill": "rgb(57, 121, 111)",
+            "stroke": "1px"
+          },
+          {
+            "downbeat": false,
+            "fill": "rgb(57, 121, 111)",
+            "stroke": "1px"
+          }
+        ],
+        "now": {
+          "downbeat": true,
+          "fill": "rgb(57, 121, 111)",
+          "stroke": "1px"
+        }
+      },
+      "conduct": {
+        "beat": "2",
+        "combo": 4,
+        "count": 4,
+        "events": 7,
+        "from": 54,
+        "judge": {
+          "e": 0,
+          "g": 0,
+          "l": 0,
+          "p": 4
+        },
+        "level": 0.975,
+        "meter": 4,
+        "period": 0.4161122439456317,
+        "phase": "play",
+        "taps": 4,
+        "to": 111
+      },
+      "errors": [],
+      "members": 0.6864548486191779,
+      "records": 0.7712433410342783
+    }
+  },
+  {
+    "case": "spring-bird-finish",
+    "data": {
+      "conduct": {
+        "beat": "3",
+        "combo": 4,
+        "count": 4,
+        "events": 7,
+        "from": 54,
+        "judge": {
+          "e": 0,
+          "g": 0,
+          "l": 0,
+          "p": 4
+        },
+        "level": 0.975,
+        "meter": 4,
+        "period": 0.4161122439456317,
+        "phase": "done",
+        "taps": 4,
+        "to": 111
+      },
+      "errors": [],
+      "members": 0.6864548486191779,
+      "recordings": [
+        {
+          "id": "r2028-10-0-293645",
+          "label": "あなたの指揮：《四季》より「春」（6月 第3週）"
+        }
+      ],
+      "result": "演奏おわり\n    平均テンポ=145安定度95%\n    ぴったり4いい感じ0早い・遅い0最大連続4\n    指定よりかなり速め。ぶれない指揮で、部員も安心して吹けた。\n    この演奏は「録音」に残った。会場の響きつきで保存して、何度でも聴き返せる。\n     もう一度聴く 保存するもう一度指揮する閉じる"
+    }
+  },
+  {
+    "case": "spring-ending-preview",
+    "data": {
+      "cadence": {
+        "beats": [
+          {
+            "color": "rgba(0, 0, 0, 0)",
+            "counted": false,
+            "on": false,
+            "text": "1"
+          },
+          {
+            "color": "rgba(0, 0, 0, 0)",
+            "counted": false,
+            "on": false,
+            "text": "2"
+          },
+          {
+            "color": "rgba(0, 0, 0, 0)",
+            "counted": false,
+            "on": false,
+            "text": "3"
+          },
+          {
+            "color": "rgba(0, 0, 0, 0)",
+            "counted": false,
+            "on": false,
+            "text": "4"
+          }
+        ],
+        "calm": "true",
+        "clicks": [],
+        "cue": {
+          "b": -0.9630222222222222,
+          "beat": 3,
+          "count": 0,
+          "f": 0.036977777777777776,
+          "i": -1,
+          "next": [
+            {
+              "beat": 4,
+              "distance": 0.9630222222222222,
+              "k": 0,
+              "show": true
+            },
+            {
+              "beat": 1,
+              "distance": 1.9630222222222224,
+              "k": 1,
+              "show": true
+            }
+          ]
+        },
+        "from": 111,
+        "meter": 4,
+        "next": [
+          {
+            "downbeat": false,
+            "fill": "rgb(169, 214, 204)",
+            "stroke": "1px"
+          },
+          {
+            "downbeat": true,
+            "fill": "rgb(231, 195, 138)",
+            "stroke": "4px"
+          }
+        ],
+        "now": {
+          "downbeat": false,
+          "fill": "rgb(169, 214, 204)",
+          "stroke": "1px"
+        }
+      },
+      "conduct": {
+        "beat": "4",
+        "combo": 0,
+        "count": 0,
+        "events": 0,
+        "from": 111,
+        "judge": {
+          "e": 0,
+          "g": 0,
+          "l": 0,
+          "p": 0
+        },
+        "level": 1,
+        "meter": 4,
+        "phase": "count",
+        "taps": 0,
+        "to": 140
+      },
+      "errors": [],
+      "scrollWidth": 375,
+      "width": 375
+    }
+  },
+  {
+    "case": "spring-ending-play",
+    "data": {
+      "cadence": {
+        "beats": [
+          {
+            "color": "rgba(0, 0, 0, 0)",
+            "counted": false,
+            "on": false,
+            "text": "1"
+          },
+          {
+            "color": "rgba(0, 0, 0, 0)",
+            "counted": false,
+            "on": false,
+            "text": "2"
+          },
+          {
+            "color": "rgb(169, 214, 204)",
+            "counted": false,
+            "on": true,
+            "text": "3"
+          },
+          {
+            "color": "rgba(0, 0, 0, 0)",
+            "counted": false,
+            "on": false,
+            "text": "4"
+          }
+        ],
+        "calm": "true",
+        "clicks": [
+          {
+            "at": 11.968,
+            "strong": false
+          },
+          {
+            "at": 59.050666666666665,
+            "strong": false
+          },
+          {
+            "at": 59.498666666666665,
+            "strong": true
+          },
+          {
+            "at": 59.904,
+            "strong": false
+          },
+          {
+            "at": 60.330666666666666,
+            "strong": false
+          }
+        ],
+        "cue": {
+          "b": 3.030325275172686,
+          "beat": 3,
+          "count": 4,
+          "f": 0.030325275172685903,
+          "i": 3,
+          "next": [
+            {
+              "beat": 4,
+              "distance": 0.969674724827314,
+              "k": 4,
+              "show": true
+            },
+            {
+              "beat": 1,
+              "distance": 1.969674724827314,
+              "k": 5,
+              "show": true
+            }
+          ]
+        },
+        "from": 111,
+        "meter": 4,
+        "next": [
+          {
+            "downbeat": false,
+            "fill": "rgb(169, 214, 204)",
+            "stroke": "1px"
+          },
+          {
+            "downbeat": true,
+            "fill": "rgb(231, 195, 138)",
+            "stroke": "4px"
+          }
+        ],
+        "now": {
+          "downbeat": false,
+          "fill": "rgb(169, 214, 204)",
+          "stroke": "1px"
+        }
+      },
+      "conduct": {
+        "beat": "4",
+        "combo": 4,
+        "count": 4,
+        "events": 7,
+        "from": 111,
+        "judge": {
+          "e": 0,
+          "g": 0,
+          "l": 0,
+          "p": 4
+        },
+        "level": 0.975,
+        "meter": 4,
+        "period": 0.4149887439207776,
+        "phase": "play",
+        "taps": 4,
+        "to": 140
+      },
+      "errors": []
+    }
+  },
+  {
+    "case": "spring-ending-arrival",
+    "data": {
+      "cadence": {
+        "arrivals": [
+          {
+            "beat": "1",
+            "fill": "rgb(231, 195, 138)",
+            "from": 111,
+            "pad": "cd-pad on-beat downbeat is-pressed",
+            "phase": "count"
+          },
+          {
+            "beat": "1",
+            "fill": "rgb(231, 195, 138)",
+            "from": 111,
+            "pad": "cd-pad on-beat downbeat",
+            "phase": "play"
+          }
+        ],
+        "beats": [
+          {
+            "color": "rgba(0, 0, 0, 0)",
+            "counted": false,
+            "on": false,
+            "text": "1"
+          },
+          {
+            "color": "rgba(0, 0, 0, 0)",
+            "counted": false,
+            "on": false,
+            "text": "2"
+          },
+          {
+            "color": "rgb(169, 214, 204)",
+            "counted": false,
+            "on": true,
+            "text": "3"
+          },
+          {
+            "color": "rgba(0, 0, 0, 0)",
+            "counted": false,
+            "on": false,
+            "text": "4"
+          }
+        ],
+        "calm": "true",
+        "clicks": [
+          {
+            "at": 0.576,
+            "strong": false
+          },
+          {
+            "at": 1.0026666666666666,
+            "strong": true
+          },
+          {
+            "at": 1.408,
+            "strong": false
+          },
+          {
+            "at": 1.834666666666667,
+            "strong": false
+          }
+        ],
+        "cue": null,
+        "from": 111,
+        "meter": 4,
+        "next": [
+          {
+            "downbeat": false,
+            "fill": "rgb(169, 214, 204)",
+            "stroke": "1px"
+          },
+          {
+            "downbeat": true,
+            "fill": "rgb(231, 195, 138)",
+            "stroke": "4px"
+          }
+        ],
+        "now": {
+          "downbeat": false,
+          "fill": "rgb(169, 214, 204)",
+          "stroke": "1px"
+        }
+      },
+      "conduct": {
+        "beat": "4",
+        "combo": 4,
+        "count": 4,
+        "events": 7,
+        "from": 111,
+        "judge": {
+          "e": 0,
+          "g": 0,
+          "l": 0,
+          "p": 4
+        },
+        "level": 0.975,
+        "meter": 4,
+        "period": 0.4121530158468817,
+        "phase": "done",
+        "taps": 4,
+        "to": 140
+      },
+      "errors": []
+    }
+  },
+  {
+    "case": "light-arrival",
+    "data": {
+      "cadence": {
+        "arrivals": [
+          {
+            "beat": "1",
+            "fill": "rgb(147, 107, 47)",
+            "from": 111,
+            "pad": "cd-pad on-beat downbeat",
+            "phase": "count"
+          },
+          {
+            "beat": "1",
+            "fill": "rgb(147, 107, 47)",
+            "from": 111,
+            "pad": "cd-pad on-beat downbeat is-pressed",
+            "phase": "play"
+          }
+        ],
+        "beats": [
+          {
+            "color": "rgba(0, 0, 0, 0)",
+            "counted": false,
+            "on": false,
+            "text": "1"
+          },
+          {
+            "color": "rgba(0, 0, 0, 0)",
+            "counted": false,
+            "on": false,
+            "text": "2"
+          },
+          {
+            "color": "rgb(57, 121, 111)",
+            "counted": false,
+            "on": true,
+            "text": "3"
+          },
+          {
+            "color": "rgba(0, 0, 0, 0)",
+            "counted": false,
+            "on": false,
+            "text": "4"
+          }
+        ],
+        "calm": "false",
+        "clicks": [
+          {
+            "at": 0.576,
+            "strong": false
+          },
+          {
+            "at": 13.034666666666666,
+            "strong": false
+          },
+          {
+            "at": 13.461333333333334,
+            "strong": true
+          },
+          {
+            "at": 13.888,
+            "strong": false
+          },
+          {
+            "at": 14.314666666666668,
+            "strong": false
+          }
+        ],
+        "cue": {
+          "b": 3.026101612379179,
+          "beat": 3,
+          "count": 4,
+          "f": 0.026101612379179073,
+          "i": 3,
+          "next": [
+            {
+              "beat": 4,
+              "distance": 0.9738983876208208,
+              "k": 4,
+              "show": true
+            },
+            {
+              "beat": 1,
+              "distance": 1.973898387620821,
+              "k": 5,
+              "show": true
+            }
+          ]
+        },
+        "from": 111,
+        "meter": 4,
+        "next": [
+          {
+            "downbeat": false,
+            "fill": "rgb(57, 121, 111)",
+            "stroke": "1px"
+          },
+          {
+            "downbeat": true,
+            "fill": "rgb(147, 107, 47)",
+            "stroke": "4px"
+          }
+        ],
+        "now": {
+          "downbeat": false,
+          "fill": "rgb(57, 121, 111)",
+          "stroke": "1px"
+        }
+      },
+      "conduct": {
+        "beat": "4",
+        "combo": 4,
+        "count": 4,
+        "events": 7,
+        "from": 111,
+        "judge": {
+          "e": 0,
+          "g": 0,
+          "l": 0,
+          "p": 4
+        },
+        "level": 0.975,
+        "meter": 4,
+        "period": 0.4123656629321491,
+        "phase": "play",
+        "taps": 4,
+        "to": 140
+      },
+      "errors": [],
+      "scrollWidth": 375,
+      "width": 375
+    }
+  },
+  {
+    "case": "two-beat-small-dark",
+    "data": {
+      "cadence": {
+        "arrivals": [
+          {
+            "beat": "1",
+            "fill": "rgb(231, 195, 138)",
+            "from": 0,
+            "pad": "cd-pad on-beat downbeat is-pressed",
+            "phase": "count"
+          },
+          {
+            "beat": "1",
+            "fill": "rgb(231, 195, 138)",
+            "from": 0,
+            "pad": "cd-pad on-beat downbeat",
+            "phase": "play"
+          }
+        ],
+        "beats": [
+          {
+            "color": "rgba(0, 0, 0, 0)",
+            "counted": false,
+            "on": false,
+            "text": "1"
+          },
+          {
+            "color": "rgb(169, 214, 204)",
+            "counted": false,
+            "on": true,
+            "text": "2"
+          }
+        ],
+        "calm": "true",
+        "clicks": [
+          {
+            "at": 22.250666666666667,
+            "strong": true
+          },
+          {
+            "at": 22.656,
+            "strong": false
+          },
+          {
+            "at": 23.082666666666668,
+            "strong": true
+          },
+          {
+            "at": 23.509333333333338,
+            "strong": false
+          }
+        ],
+        "cue": {
+          "b": 3.031041277006745,
+          "beat": 2,
+          "count": 4,
+          "f": 0.03104127700674519,
+          "i": 3,
+          "next": [
+            {
+              "beat": 1,
+              "distance": 0.9689587229932548,
+              "k": 4,
+              "show": true
+            },
+            {
+              "beat": 2,
+              "distance": 1.9689587229932548,
+              "k": 5,
+              "show": true
+            }
+          ]
+        },
+        "from": 0,
+        "meter": 2,
+        "next": [
+          {
+            "downbeat": true,
+            "fill": "rgb(231, 195, 138)",
+            "stroke": "4px"
+          },
+          {
+            "downbeat": false,
+            "fill": "rgb(169, 214, 204)",
+            "stroke": "1px"
+          }
+        ],
+        "now": {
+          "downbeat": false,
+          "fill": "rgb(169, 214, 204)",
+          "stroke": "1px"
+        }
+      },
+      "conduct": {
+        "beat": "1",
+        "combo": 4,
+        "count": 4,
+        "events": 7,
+        "from": 0,
+        "judge": {
+          "e": 0,
+          "g": 0,
+          "l": 0,
+          "p": 4
+        },
+        "level": 0.975,
+        "meter": 2,
+        "period": 0.4187321335428639,
+        "phase": "play",
+        "taps": 4,
+        "to": 80
+      },
+      "errors": [],
+      "pad": {
+        "bottom": 555.1875,
+        "height": 72,
+        "left": 24,
+        "right": 351,
+        "top": 483.1875,
+        "width": 327,
+        "x": 24,
+        "y": 483.1875
+      },
+      "scrollWidth": 375,
+      "stats": {
+        "bottom": 657,
+        "height": 56,
+        "left": 24,
+        "right": 351,
+        "top": 601,
+        "width": 327,
+        "x": 24,
+        "y": 601
+      },
+      "width": 375
+    }
+  },
+  {
+    "case": "tempo-tip",
+    "data": {
+      "conduct": {
+        "beat": "2",
+        "combo": 4,
+        "count": 4,
+        "events": 7,
+        "from": 0,
+        "judge": {
+          "e": 0,
+          "g": 0,
+          "l": 0,
+          "p": 4
+        },
+        "level": 0.975,
+        "meter": 2,
+        "period": 0.4187321335428639,
+        "phase": "play",
+        "taps": 4,
+        "to": 80
+      },
+      "scrollWidth": 375,
+      "tip": "拍とテンポ音符ひとつが1拍。数字は1分間の拍の数。金色は小節のはじめ。どの色でも光に合わせてタップする。「指定」は速さの目安。途中からの練習はその拍から数える。",
+      "tipHidden": false,
+      "width": 375
+    }
+  }
+]

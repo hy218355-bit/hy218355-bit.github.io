@@ -925,6 +925,9 @@ button.wr-person:focus-visible{outline:2px solid var(--brass);outline-offset:2px
 .cue-target{fill:none;stroke:var(--cd-accent);stroke-width:1;stroke-dasharray:2 5}
 .cue-now rect{fill:var(--cd-accent);opacity:0}.cue-now.hit rect{opacity:1}
 .cue-next rect{fill:var(--cd-accent)}.cue-next:nth-of-type(3){opacity:.4}
+.cue-next.downbeat rect{fill:var(--brass);stroke:var(--brass);stroke-width:4}
+.cue-next.downbeat:nth-of-type(3){opacity:.65}
+.cue-now.downbeat.hit rect{fill:var(--brass)}
 .cue-steps path{stroke:var(--cd-line);stroke-width:2;stroke-linecap:round}.cue-steps .on{stroke:var(--cd-accent)}
 .cd-pattern[data-calm="false"] .cue-steps{visibility:hidden}
 .cd-hint{position:absolute;right:15px;font-size:9px;color:var(--cd-control-ink);pointer-events:none}
@@ -1566,12 +1569,14 @@ button.wr-person:focus-visible{outline:2px solid var(--brass);outline-offset:2px
 #conduct .cd-pad strong{font:700 17px var(--f-body);letter-spacing:.12em}
 #conduct .cd-tap-art{width:24px;height:24px}
 #conduct .cd-pad.on-beat{box-shadow:0 0 0 6px color-mix(in srgb,var(--cd-accent) 18%,transparent),0 10px 28px var(--shadow)}
+#conduct .cd-pad.on-beat.downbeat{box-shadow:0 0 0 8px color-mix(in srgb,var(--brass) 24%,transparent),0 10px 28px var(--shadow)}
 #conduct .cd-volume{position:absolute;top:25px;bottom:25px;right:28px;width:2px;background:color-mix(in srgb,var(--cd-control-ink) 20%,transparent)}
 #conduct .cd-volume b{position:absolute;top:47.4%;left:-2px;width:6px;height:6px;margin-top:-3px;background:var(--cd-control-ink);border-radius:50%}
 #conduct .cd-beat-row{display:flex;gap:12px;margin:17px 0 0;min-height:24px;justify-content:flex-start}
 #conduct .cd-beat-row i{display:grid;place-items:center;width:24px;height:24px;font-style:normal;font-size:11px;color:var(--cd-soft);border-radius:50%}
 #conduct .cd-beat-row .counted{box-shadow:inset 0 0 0 1px var(--cd-line)}
 #conduct .cd-beat-row .on{color:var(--cd-paper);background:var(--cd-accent);box-shadow:none}
+#conduct .cd-beat-row .on:first-child{color:var(--on-brass);background:var(--brass)}
 #conduct .cd-stats{order:5;display:grid;grid-template-columns:auto auto minmax(0,1fr);align-items:center;gap:12px;flex-shrink:0;min-height:44px;margin-top:auto;padding-top:18px;font-size:10px;color:var(--cd-soft)}
 #conduct .cd-stats>span{display:inline-flex;align-items:center;gap:4px;min-width:0;white-space:nowrap}
 #conduct .cd-stats b{font:400 23px var(--f-body);font-variant-numeric:tabular-nums;color:var(--cd-ink);margin-left:0}
@@ -1760,8 +1765,8 @@ button.wr-person:focus-visible{outline:2px solid var(--brass);outline-offset:2px
   </div>
   <div class="cd-result" id="cdResult" hidden></div>
   <p class="cd-stats">
-    <span class="cd-tempo-info" role="button" tabindex="0" aria-labelledby="cdTempoLabel cdCurrentBeat cdTempo" data-tipname="拍とテンポ" data-tip="音符ひとつが1拍。数字は1分間の拍の数。「指定」を目安に、光に合わせてタップする。拍の数え方は曲に合わせている。"><span class="sr-only" id="cdTempoLabel">いまのテンポ</span><span class="cd-beat" id="cdCurrentBeat" role="img" aria-label="4分音符"></span><span aria-hidden="true">=</span><b id="cdTempo">--</b></span>
-    <span class="cd-tempo-info cd-reference" role="button" tabindex="0" aria-labelledby="cdRefLabel cdRefBeat cdRef" data-tipname="拍とテンポ" data-tip="音符ひとつが1拍。数字は1分間の拍の数。「指定」を目安に、光に合わせてタップする。拍の数え方は曲に合わせている。"><span id="cdRefLabel">指定</span><span class="cd-beat" id="cdRefBeat" role="img" aria-label="4分音符"></span><span aria-hidden="true">=</span><b id="cdRef"></b></span>
+    <span class="cd-tempo-info" role="button" tabindex="0" aria-labelledby="cdTempoLabel cdCurrentBeat cdTempo" data-tipname="拍とテンポ" data-tip="音符ひとつが1拍。数字は1分間の拍の数。金色は小節のはじめ。どの色でも光に合わせてタップする。「指定」は速さの目安。途中からの練習はその拍から数える。"><span class="sr-only" id="cdTempoLabel">いまのテンポ</span><span class="cd-beat" id="cdCurrentBeat" role="img" aria-label="4分音符"></span><span aria-hidden="true">=</span><b id="cdTempo">--</b></span>
+    <span class="cd-tempo-info cd-reference" role="button" tabindex="0" aria-labelledby="cdRefLabel cdRefBeat cdRef" data-tipname="拍とテンポ" data-tip="音符ひとつが1拍。数字は1分間の拍の数。金色は小節のはじめ。どの色でも光に合わせてタップする。「指定」は速さの目安。途中からの練習はその拍から数える。"><span id="cdRefLabel">指定</span><span class="cd-beat" id="cdRefBeat" role="img" aria-label="4分音符"></span><span aria-hidden="true">=</span><b id="cdRef"></b></span>
     <span class="combo" id="cdCombo" aria-live="off"></span>
   </p>
 </section>
@@ -1804,39 +1809,39 @@ button.wr-person:focus-visible{outline:2px solid var(--brass);outline-offset:2px
   <button type="button" data-tabgo="log"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 5.5C4 4.7 4.7 4 5.5 4H11v16H5.5c-.8 0-1.5-.7-1.5-1.5z"/><path d="M20 5.5c0-.8-.7-1.5-1.5-1.5H13v16h5.5c.8 0 1.5-.7 1.5-1.5z"/></svg><span>日誌</span></button>
 </nav>
 
-<script src="js/util.js?v=qa-tempo-note-1"></script>
-<script src="js/icons.js?v=qa-tempo-note-1"></script>
-<script src="js/instrument-icons.js?v=qa-tempo-note-1"></script>
-<script src="js/face-cast.js?v=qa-tempo-note-1"></script>
-<script src="js/faces.js?v=qa-tempo-note-1"></script>
-<script src="js/instruments.js?v=qa-tempo-note-1"></script>
-<script src="js/venues.js?v=qa-tempo-note-1"></script>
-<script src="js/samples.js?v=qa-tempo-note-1"></script>
-<script src="js/scores.js?v=qa-tempo-note-1"></script>
-<script src="js/pieces/largo.js?v=qa-tempo-note-1"></script>
-<script src="js/pieces/ode.js?v=qa-tempo-note-1"></script>
-<script src="js/pieces/galop.js?v=qa-tempo-note-1"></script>
-<script src="js/pieces/pomp.js?v=qa-tempo-note-1"></script>
-<script src="js/pieces/aida.js?v=qa-tempo-note-1"></script>
-<script src="js/pieces/hero.js?v=qa-tempo-note-1"></script>
-<script src="js/pieces/holst.js?v=qa-tempo-note-1"></script>
-<script src="js/pieces/hungarian.js?v=qa-tempo-note-1"></script>
-<script src="js/pieces/flowers.js?v=qa-tempo-note-1"></script>
-<script src="js/pieces/tell.js?v=qa-tempo-note-1"></script>
-<script src="js/pieces/carmen.js?v=qa-tempo-note-1"></script>
-<script src="js/pieces/valkyrie.js?v=qa-tempo-note-1"></script>
-<script src="js/pieces/swan.js?v=qa-tempo-note-1"></script>
-<script src="js/pieces/spring.js?v=qa-tempo-note-1"></script>
-<script src="js/pieces/canon.js?v=qa-tempo-note-1"></script>
-<script src="js/band.js?v=qa-tempo-note-1"></script>
-<script src="js/game.js?v=qa-tempo-note-1"></script>
-<script src="js/engine.js?v=qa-tempo-note-1"></script>
-<script src="js/conduct.js?v=qa-tempo-note-1"></script>
-<script src="js/announce.js?v=qa-tempo-note-1"></script>
-<script src="js/tunegame.js?v=qa-tempo-note-1"></script>
-<script src="js/fx.js?v=qa-tempo-note-1"></script>
-<script src="js/ui.js?v=qa-tempo-note-1"></script>
+<script src="js/util.js?v=qa-downbeat-1"></script>
+<script src="js/icons.js?v=qa-downbeat-1"></script>
+<script src="js/instrument-icons.js?v=qa-downbeat-1"></script>
+<script src="js/face-cast.js?v=qa-downbeat-1"></script>
+<script src="js/faces.js?v=qa-downbeat-1"></script>
+<script src="js/instruments.js?v=qa-downbeat-1"></script>
+<script src="js/venues.js?v=qa-downbeat-1"></script>
+<script src="js/samples.js?v=qa-downbeat-1"></script>
+<script src="js/scores.js?v=qa-downbeat-1"></script>
+<script src="js/pieces/largo.js?v=qa-downbeat-1"></script>
+<script src="js/pieces/ode.js?v=qa-downbeat-1"></script>
+<script src="js/pieces/galop.js?v=qa-downbeat-1"></script>
+<script src="js/pieces/pomp.js?v=qa-downbeat-1"></script>
+<script src="js/pieces/aida.js?v=qa-downbeat-1"></script>
+<script src="js/pieces/hero.js?v=qa-downbeat-1"></script>
+<script src="js/pieces/holst.js?v=qa-downbeat-1"></script>
+<script src="js/pieces/hungarian.js?v=qa-downbeat-1"></script>
+<script src="js/pieces/flowers.js?v=qa-downbeat-1"></script>
+<script src="js/pieces/tell.js?v=qa-downbeat-1"></script>
+<script src="js/pieces/carmen.js?v=qa-downbeat-1"></script>
+<script src="js/pieces/valkyrie.js?v=qa-downbeat-1"></script>
+<script src="js/pieces/swan.js?v=qa-downbeat-1"></script>
+<script src="js/pieces/spring.js?v=qa-downbeat-1"></script>
+<script src="js/pieces/canon.js?v=qa-downbeat-1"></script>
+<script src="js/band.js?v=qa-downbeat-1"></script>
+<script src="js/game.js?v=qa-downbeat-1"></script>
+<script src="js/engine.js?v=qa-downbeat-1"></script>
+<script src="js/conduct.js?v=qa-downbeat-1"></script>
+<script src="js/announce.js?v=qa-downbeat-1"></script>
+<script src="js/tunegame.js?v=qa-downbeat-1"></script>
+<script src="js/fx.js?v=qa-downbeat-1"></script>
+<script src="js/ui.js?v=qa-downbeat-1"></script>
 <div class="tip" id="tip" role="tooltip" hidden></div>
-<script src="/design/implementation/qa.js?v=qa-tempo-note-1"></script>
+<script src="/design/implementation/qa.js?v=qa-downbeat-1"></script>
 </body>
 </html>
