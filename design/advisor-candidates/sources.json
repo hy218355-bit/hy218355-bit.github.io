@@ -1,0 +1,45 @@
+{
+  "制作": "組み込みimage_genで本作品用に新規制作した架空の若い副顧問の候補。外部作品は使っていない。",
+  "状態": "候補の比較のみ。ゲームには未反映。",
+  "候補": [
+    {
+      "id": "a",
+      "label": "A・明るく親しみやすい先生",
+      "prompt": "Use case: illustration-story. Create ONE ORIGINAL fictional young Japanese female assistant music teacher portrait for an offline high-school wind-band management game. Restrained beautiful hand-drawn semi-realistic Japanese anime editorial illustration, delicate pencil-like ink contours, soft matte painterly shading, subtle natural skin texture. Modern approachable character design. Not a photo, not 3D, not chibi, not glossy idol art. Square frame. Head and upper shoulders, front view, looking at viewer, entire top of hair fully inside the frame with a little margin. Large crisp face in central 70%, eyes and mouth readable when reduced to a 48px circular avatar. Warm solid ivory paper backdrop, soft daylight. Clearly adult teacher around mid-twenties, no student uniform, school ribbons or school tie. No props, no text, labels, watermark, borders or logo. Natural anatomy and ordinary human charm. Character A: 25-year-old Japanese woman with a neat dark-chestnut chin-length bob, gently outward-tucked ends, light side-swept fringe, round-oval face and softly full cheeks, lively warm brown eyes, slightly thick soft eyebrows, short natural nose. Friendly relaxed open smile with a small glimpse of teeth, cheerful without exaggeration. NO glasses. Cream cardigan over a muted navy crew-neck blouse. Fresh, bright, down-to-earth teacher who makes a beginner feel welcome. The face should be distinctly rounder and more energetic than a reserved long-haired teacher.",
+      "source": "/Users/yh/.codex/generated_images/01a175a5-1e3d-71b0-810a-8797cdde01e1/exec-42155f11-b72b-404d-85fc-75285509b7ab.png",
+      "output": "assets/a.webp",
+      "size": [
+        1254,
+        1254
+      ],
+      "quality": 85,
+      "bytes": 166764
+    },
+    {
+      "id": "b",
+      "label": "B・きりっと頼れる先生",
+      "prompt": "Use case: illustration-story. Create ONE ORIGINAL fictional young Japanese female assistant music teacher portrait for an offline high-school wind-band management game. Restrained beautiful hand-drawn semi-realistic Japanese anime editorial illustration, delicate pencil-like ink contours, soft matte painterly shading, subtle natural skin texture. Modern approachable character design. Not a photo, not 3D, not chibi, not glossy idol art. Square frame. Head and upper shoulders, front view, looking at viewer, entire top of hair fully inside the frame with a little margin. Large crisp face in central 70%, eyes and mouth readable when reduced to a 48px circular avatar. Warm solid ivory paper backdrop, soft daylight. Clearly adult teacher around mid-twenties, no student uniform, school ribbons or school tie. No props, no text, labels, watermark, borders or logo. Natural anatomy and ordinary human charm. Character B: 27-year-old Japanese woman with dark nearly-black hair pulled into a low ponytail, clean side-parted fringe, a small understated brass hairpin, elegant slightly long oval face, clear almond-shaped dark-brown eyes, defined straight brows, refined natural nose, confident closed-mouth smile with a tiny lifted corner. NO glasses. Muted navy unstructured adult jacket over a soft ivory collarless blouse. Capable, calm and friendly assistant conductor, with warmth rather than sternness. Avoid a schoolgirl look. Distinct mature facial proportions without looking older than late twenties.",
+      "source": "/Users/yh/.codex/generated_images/01a175a5-1e3d-71b0-810a-8797cdde01e1/exec-45037e1a-0f28-4f6a-80d6-b283b5a8cfd9.png",
+      "output": "assets/b.webp",
+      "size": [
+        1254,
+        1254
+      ],
+      "quality": 85,
+      "bytes": 152260
+    },
+    {
+      "id": "c",
+      "label": "C・やさしく穏やかな先生",
+      "prompt": "Use case: illustration-story. Create ONE ORIGINAL fictional young Japanese female assistant music teacher portrait for an offline high-school wind-band management game. Restrained beautiful hand-drawn semi-realistic Japanese anime editorial illustration, delicate pencil-like ink contours, soft matte painterly shading, subtle natural skin texture. Modern approachable character design. Not a photo, not 3D, not chibi, not glossy idol art. Square frame. Head and upper shoulders, front view, looking at viewer, entire top of hair fully inside the frame with a little margin. Large crisp face in central 70%, eyes and mouth readable when reduced to a 48px circular avatar. Warm solid ivory paper backdrop, soft daylight. Clearly adult teacher around mid-twenties, no student uniform, school ribbons or school tie. No props, no text, labels, watermark, borders or logo. Natural anatomy and ordinary human charm. Character C: 26-year-old Japanese woman with softly waved medium-brown shoulder-length hair, loose center-left part and one side tucked behind the ear, gentle heart-oval face, slightly downturned soft brown eyes with natural subtle double eyelids, fine arched brows, gentle natural nose, a warm reassuring closed-mouth smile. NO glasses. Muted sage-green cardigan over a warm white open-collar cotton blouse. Quietly cheerful, patient, inviting music-room teacher. Charming and memorable without glamour. Make her identity distinctly different from a short-bob energetic woman or a dark-haired ponytail conductor.",
+      "source": "/Users/yh/.codex/generated_images/01a175a5-1e3d-71b0-810a-8797cdde01e1/exec-55c517d0-472a-4dad-b7a7-6fc988e21a4d.png",
+      "output": "assets/c.webp",
+      "size": [
+        1254,
+        1254
+      ],
+      "quality": 85,
+      "bytes": 175308
+    }
+  ]
+}
