@@ -1,0 +1,5273 @@
+{
+  "flow": [
+    {
+      "label": "初回",
+      "year": 2026,
+      "week": 0,
+      "phase": "choose",
+      "tab": "week",
+      "state": 0.1615440601017326,
+      "guide": {
+        "club": "865908558:2026",
+        "active": true,
+        "heard": false
+      },
+      "step": "0",
+      "title": "この5人と、\n最初の音を。",
+      "playing": false,
+      "waiting": false,
+      "focus": "BODY",
+      "width": 375,
+      "scrollWidth": 375,
+      "portrait": {
+        "loaded": true,
+        "natural": 1254
+      },
+      "boot": {
+        "started": "2026-10-29T12:10:33.732Z",
+        "loaded": [
+          "/tsukurikata/js/util.js",
+          "/tsukurikata/js/icons.js",
+          "/tsukurikata/js/instrument-icons.js",
+          "/tsukurikata/js/face-cast.js",
+          "/tsukurikata/js/faces.js",
+          "/tsukurikata/js/instruments.js",
+          "/tsukurikata/js/venues.js",
+          "/tsukurikata/js/samples.js",
+          "/tsukurikata/js/scores.js",
+          "/tsukurikata/js/pieces/largo.js",
+          "/tsukurikata/js/pieces/ode.js",
+          "/tsukurikata/js/pieces/galop.js",
+          "/tsukurikata/js/pieces/pomp.js",
+          "/tsukurikata/js/pieces/aida.js",
+          "/tsukurikata/js/pieces/hero.js",
+          "/tsukurikata/js/pieces/holst.js",
+          "/tsukurikata/js/pieces/hungarian.js",
+          "/tsukurikata/js/pieces/flowers.js",
+          "/tsukurikata/js/pieces/tell.js",
+          "/tsukurikata/js/pieces/carmen.js",
+          "/tsukurikata/js/pieces/valkyrie.js",
+          "/tsukurikata/js/pieces/swan.js",
+          "/tsukurikata/js/pieces/spring.js",
+          "/tsukurikata/js/pieces/canon.js",
+          "/tsukurikata/js/band.js",
+          "/tsukurikata/js/game.js",
+          "/tsukurikata/js/engine.js",
+          "/tsukurikata/js/conduct.js",
+          "/tsukurikata/js/announce.js",
+          "/tsukurikata/js/tunegame.js",
+          "/tsukurikata/js/fx.js",
+          "/tsukurikata/js/advisor.js",
+          "/tsukurikata/js/onboarding.js",
+          "/tsukurikata/js/ui.js",
+          "/design/onboarding/qa.js"
+        ],
+        "failed": [],
+        "errors": [],
+        "ready": true,
+        "globals": {
+          "fx": "object",
+          "season": "function",
+          "engine": "function",
+          "pieces": "object",
+          "game": "function"
+        },
+        "scripts": [
+          "/tsukurikata/js/util.js",
+          "/tsukurikata/js/icons.js",
+          "/tsukurikata/js/instrument-icons.js",
+          "/tsukurikata/js/face-cast.js",
+          "/tsukurikata/js/faces.js",
+          "/tsukurikata/js/instruments.js",
+          "/tsukurikata/js/venues.js",
+          "/tsukurikata/js/samples.js",
+          "/tsukurikata/js/scores.js",
+          "/tsukurikata/js/pieces/largo.js",
+          "/tsukurikata/js/pieces/ode.js",
+          "/tsukurikata/js/pieces/galop.js",
+          "/tsukurikata/js/pieces/pomp.js",
+          "/tsukurikata/js/pieces/aida.js",
+          "/tsukurikata/js/pieces/hero.js",
+          "/tsukurikata/js/pieces/holst.js",
+          "/tsukurikata/js/pieces/hungarian.js",
+          "/tsukurikata/js/pieces/flowers.js",
+          "/tsukurikata/js/pieces/tell.js",
+          "/tsukurikata/js/pieces/carmen.js",
+          "/tsukurikata/js/pieces/valkyrie.js",
+          "/tsukurikata/js/pieces/swan.js",
+          "/tsukurikata/js/pieces/spring.js",
+          "/tsukurikata/js/pieces/canon.js",
+          "/tsukurikata/js/band.js",
+          "/tsukurikata/js/game.js",
+          "/tsukurikata/js/engine.js",
+          "/tsukurikata/js/conduct.js",
+          "/tsukurikata/js/announce.js",
+          "/tsukurikata/js/tunegame.js",
+          "/tsukurikata/js/fx.js",
+          "/tsukurikata/js/advisor.js",
+          "/tsukurikata/js/onboarding.js",
+          "/tsukurikata/js/ui.js",
+          "/design/onboarding/qa.js"
+        ],
+        "resources": [
+          {
+            "file": "/tsukurikata/js/util.js",
+            "status": 200,
+            "bytes": 2477,
+            "ms": 18
+          },
+          {
+            "file": "/tsukurikata/js/instrument-icons.js",
+            "status": 200,
+            "bytes": 2590,
+            "ms": 20
+          },
+          {
+            "file": "/tsukurikata/js/icons.js",
+            "status": 200,
+            "bytes": 4867,
+            "ms": 20
+          },
+          {
+            "file": "/tsukurikata/js/face-cast.js",
+            "status": 200,
+            "bytes": 7048,
+            "ms": 20
+          },
+          {
+            "file": "/tsukurikata/js/venues.js",
+            "status": 200,
+            "bytes": 12996,
+            "ms": 22
+          },
+          {
+            "file": "/tsukurikata/js/samples.js",
+            "status": 200,
+            "bytes": 24975,
+            "ms": 22
+          },
+          {
+            "file": "/tsukurikata/js/instruments.js",
+            "status": 200,
+            "bytes": 27017,
+            "ms": 23
+          },
+          {
+            "file": "/tsukurikata/js/faces.js",
+            "status": 200,
+            "bytes": 4184,
+            "ms": 24
+          },
+          {
+            "file": "/tsukurikata/js/scores.js",
+            "status": 200,
+            "bytes": 22132,
+            "ms": 25
+          },
+          {
+            "file": "/tsukurikata/js/pieces/largo.js",
+            "status": 200,
+            "bytes": 11341,
+            "ms": 24
+          },
+          {
+            "file": "/tsukurikata/js/pieces/ode.js",
+            "status": 200,
+            "bytes": 16000,
+            "ms": 25
+          },
+          {
+            "file": "/tsukurikata/js/pieces/aida.js",
+            "status": 200,
+            "bytes": 20823,
+            "ms": 27
+          },
+          {
+            "file": "/tsukurikata/js/pieces/pomp.js",
+            "status": 200,
+            "bytes": 19299,
+            "ms": 28
+          },
+          {
+            "file": "/tsukurikata/js/pieces/galop.js",
+            "status": 200,
+            "bytes": 22631,
+            "ms": 29
+          },
+          {
+            "file": "/tsukurikata/js/pieces/hero.js",
+            "status": 200,
+            "bytes": 21784,
+            "ms": 32
+          },
+          {
+            "file": "/tsukurikata/js/pieces/holst.js",
+            "status": 200,
+            "bytes": 18482,
+            "ms": 28
+          },
+          {
+            "file": "/tsukurikata/js/pieces/hungarian.js",
+            "status": 200,
+            "bytes": 29740,
+            "ms": 31
+          },
+          {
+            "file": "/tsukurikata/js/pieces/carmen.js",
+            "status": 200,
+            "bytes": 25854,
+            "ms": 33
+          },
+          {
+            "file": "/tsukurikata/js/pieces/flowers.js",
+            "status": 200,
+            "bytes": 25824,
+            "ms": 34
+          },
+          {
+            "file": "/tsukurikata/js/pieces/tell.js",
+            "status": 200,
+            "bytes": 37082,
+            "ms": 34
+          },
+          {
+            "file": "/tsukurikata/js/pieces/swan.js",
+            "status": 200,
+            "bytes": 19332,
+            "ms": 33
+          },
+          {
+            "file": "/tsukurikata/js/pieces/valkyrie.js",
+            "status": 200,
+            "bytes": 20721,
+            "ms": 35
+          },
+          {
+            "file": "/tsukurikata/js/band.js",
+            "status": 200,
+            "bytes": 50853,
+            "ms": 35
+          },
+          {
+            "file": "/tsukurikata/js/pieces/canon.js",
+            "status": 200,
+            "bytes": 13464,
+            "ms": 36
+          },
+          {
+            "file": "/tsukurikata/js/pieces/spring.js",
+            "status": 200,
+            "bytes": 17241,
+            "ms": 36
+          },
+          {
+            "file": "/tsukurikata/js/engine.js",
+            "status": 200,
+            "bytes": 24139,
+            "ms": 40
+          },
+          {
+            "file": "/tsukurikata/js/game.js",
+            "status": 200,
+            "bytes": 189281,
+            "ms": 43
+          },
+          {
+            "file": "/tsukurikata/js/fx.js",
+            "status": 200,
+            "bytes": 11653,
+            "ms": 38
+          },
+          {
+            "file": "/tsukurikata/js/announce.js",
+            "status": 200,
+            "bytes": 10527,
+            "ms": 39
+          },
+          {
+            "file": "/tsukurikata/js/advisor.js",
+            "status": 200,
+            "bytes": 7503,
+            "ms": 40
+          },
+          {
+            "file": "/tsukurikata/js/onboarding.js",
+            "status": 200,
+            "bytes": 8455,
+            "ms": 44
+          },
+          {
+            "file": "/tsukurikata/js/tunegame.js",
+            "status": 200,
+            "bytes": 9322,
+            "ms": 44
+          },
+          {
+            "file": "/tsukurikata/js/conduct.js",
+            "status": 200,
+            "bytes": 30445,
+            "ms": 45
+          },
+          {
+            "file": "/tsukurikata/js/ui.js",
+            "status": 200,
+            "bytes": 238729,
+            "ms": 45
+          },
+          {
+            "file": "/design/onboarding/qa.js",
+            "status": 200,
+            "bytes": 2415,
+            "ms": 44
+          }
+        ]
+      },
+      "errors": []
+    },
+    {
+      "label": "顔への移動",
+      "year": 2026,
+      "week": 0,
+      "phase": "choose",
+      "tab": "week",
+      "state": 0.1615440601017326,
+      "guide": {
+        "club": "865908558:2026",
+        "active": true,
+        "heard": false
+      },
+      "step": "0",
+      "title": "この5人と、\n最初の音を。",
+      "playing": false,
+      "waiting": false,
+      "focus": "BUTTON",
+      "width": 375,
+      "scrollWidth": 375,
+      "portrait": {
+        "loaded": true,
+        "natural": 1254
+      },
+      "boot": {
+        "started": "2026-10-29T12:10:33.732Z",
+        "loaded": [
+          "/tsukurikata/js/util.js",
+          "/tsukurikata/js/icons.js",
+          "/tsukurikata/js/instrument-icons.js",
+          "/tsukurikata/js/face-cast.js",
+          "/tsukurikata/js/faces.js",
+          "/tsukurikata/js/instruments.js",
+          "/tsukurikata/js/venues.js",
+          "/tsukurikata/js/samples.js",
+          "/tsukurikata/js/scores.js",
+          "/tsukurikata/js/pieces/largo.js",
+          "/tsukurikata/js/pieces/ode.js",
+          "/tsukurikata/js/pieces/galop.js",
+          "/tsukurikata/js/pieces/pomp.js",
+          "/tsukurikata/js/pieces/aida.js",
+          "/tsukurikata/js/pieces/hero.js",
+          "/tsukurikata/js/pieces/holst.js",
+          "/tsukurikata/js/pieces/hungarian.js",
+          "/tsukurikata/js/pieces/flowers.js",
+          "/tsukurikata/js/pieces/tell.js",
+          "/tsukurikata/js/pieces/carmen.js",
+          "/tsukurikata/js/pieces/valkyrie.js",
+          "/tsukurikata/js/pieces/swan.js",
+          "/tsukurikata/js/pieces/spring.js",
+          "/tsukurikata/js/pieces/canon.js",
+          "/tsukurikata/js/band.js",
+          "/tsukurikata/js/game.js",
+          "/tsukurikata/js/engine.js",
+          "/tsukurikata/js/conduct.js",
+          "/tsukurikata/js/announce.js",
+          "/tsukurikata/js/tunegame.js",
+          "/tsukurikata/js/fx.js",
+          "/tsukurikata/js/advisor.js",
+          "/tsukurikata/js/onboarding.js",
+          "/tsukurikata/js/ui.js",
+          "/design/onboarding/qa.js"
+        ],
+        "failed": [],
+        "errors": [],
+        "ready": true,
+        "globals": {
+          "fx": "object",
+          "season": "function",
+          "engine": "function",
+          "pieces": "object",
+          "game": "function"
+        },
+        "scripts": [
+          "/tsukurikata/js/util.js",
+          "/tsukurikata/js/icons.js",
+          "/tsukurikata/js/instrument-icons.js",
+          "/tsukurikata/js/face-cast.js",
+          "/tsukurikata/js/faces.js",
+          "/tsukurikata/js/instruments.js",
+          "/tsukurikata/js/venues.js",
+          "/tsukurikata/js/samples.js",
+          "/tsukurikata/js/scores.js",
+          "/tsukurikata/js/pieces/largo.js",
+          "/tsukurikata/js/pieces/ode.js",
+          "/tsukurikata/js/pieces/galop.js",
+          "/tsukurikata/js/pieces/pomp.js",
+          "/tsukurikata/js/pieces/aida.js",
+          "/tsukurikata/js/pieces/hero.js",
+          "/tsukurikata/js/pieces/holst.js",
+          "/tsukurikata/js/pieces/hungarian.js",
+          "/tsukurikata/js/pieces/flowers.js",
+          "/tsukurikata/js/pieces/tell.js",
+          "/tsukurikata/js/pieces/carmen.js",
+          "/tsukurikata/js/pieces/valkyrie.js",
+          "/tsukurikata/js/pieces/swan.js",
+          "/tsukurikata/js/pieces/spring.js",
+          "/tsukurikata/js/pieces/canon.js",
+          "/tsukurikata/js/band.js",
+          "/tsukurikata/js/game.js",
+          "/tsukurikata/js/engine.js",
+          "/tsukurikata/js/conduct.js",
+          "/tsukurikata/js/announce.js",
+          "/tsukurikata/js/tunegame.js",
+          "/tsukurikata/js/fx.js",
+          "/tsukurikata/js/advisor.js",
+          "/tsukurikata/js/onboarding.js",
+          "/tsukurikata/js/ui.js",
+          "/design/onboarding/qa.js"
+        ],
+        "resources": [
+          {
+            "file": "/tsukurikata/js/util.js",
+            "status": 200,
+            "bytes": 2477,
+            "ms": 18
+          },
+          {
+            "file": "/tsukurikata/js/instrument-icons.js",
+            "status": 200,
+            "bytes": 2590,
+            "ms": 20
+          },
+          {
+            "file": "/tsukurikata/js/icons.js",
+            "status": 200,
+            "bytes": 4867,
+            "ms": 20
+          },
+          {
+            "file": "/tsukurikata/js/face-cast.js",
+            "status": 200,
+            "bytes": 7048,
+            "ms": 20
+          },
+          {
+            "file": "/tsukurikata/js/venues.js",
+            "status": 200,
+            "bytes": 12996,
+            "ms": 22
+          },
+          {
+            "file": "/tsukurikata/js/samples.js",
+            "status": 200,
+            "bytes": 24975,
+            "ms": 22
+          },
+          {
+            "file": "/tsukurikata/js/instruments.js",
+            "status": 200,
+            "bytes": 27017,
+            "ms": 23
+          },
+          {
+            "file": "/tsukurikata/js/faces.js",
+            "status": 200,
+            "bytes": 4184,
+            "ms": 24
+          },
+          {
+            "file": "/tsukurikata/js/scores.js",
+            "status": 200,
+            "bytes": 22132,
+            "ms": 25
+          },
+          {
+            "file": "/tsukurikata/js/pieces/largo.js",
+            "status": 200,
+            "bytes": 11341,
+            "ms": 24
+          },
+          {
+            "file": "/tsukurikata/js/pieces/ode.js",
+            "status": 200,
+            "bytes": 16000,
+            "ms": 25
+          },
+          {
+            "file": "/tsukurikata/js/pieces/aida.js",
+            "status": 200,
+            "bytes": 20823,
+            "ms": 27
+          },
+          {
+            "file": "/tsukurikata/js/pieces/pomp.js",
+            "status": 200,
+            "bytes": 19299,
+            "ms": 28
+          },
+          {
+            "file": "/tsukurikata/js/pieces/galop.js",
+            "status": 200,
+            "bytes": 22631,
+            "ms": 29
+          },
+          {
+            "file": "/tsukurikata/js/pieces/hero.js",
+            "status": 200,
+            "bytes": 21784,
+            "ms": 32
+          },
+          {
+            "file": "/tsukurikata/js/pieces/holst.js",
+            "status": 200,
+            "bytes": 18482,
+            "ms": 28
+          },
+          {
+            "file": "/tsukurikata/js/pieces/hungarian.js",
+            "status": 200,
+            "bytes": 29740,
+            "ms": 31
+          },
+          {
+            "file": "/tsukurikata/js/pieces/carmen.js",
+            "status": 200,
+            "bytes": 25854,
+            "ms": 33
+          },
+          {
+            "file": "/tsukurikata/js/pieces/flowers.js",
+            "status": 200,
+            "bytes": 25824,
+            "ms": 34
+          },
+          {
+            "file": "/tsukurikata/js/pieces/tell.js",
+            "status": 200,
+            "bytes": 37082,
+            "ms": 34
+          },
+          {
+            "file": "/tsukurikata/js/pieces/swan.js",
+            "status": 200,
+            "bytes": 19332,
+            "ms": 33
+          },
+          {
+            "file": "/tsukurikata/js/pieces/valkyrie.js",
+            "status": 200,
+            "bytes": 20721,
+            "ms": 35
+          },
+          {
+            "file": "/tsukurikata/js/band.js",
+            "status": 200,
+            "bytes": 50853,
+            "ms": 35
+          },
+          {
+            "file": "/tsukurikata/js/pieces/canon.js",
+            "status": 200,
+            "bytes": 13464,
+            "ms": 36
+          },
+          {
+            "file": "/tsukurikata/js/pieces/spring.js",
+            "status": 200,
+            "bytes": 17241,
+            "ms": 36
+          },
+          {
+            "file": "/tsukurikata/js/engine.js",
+            "status": 200,
+            "bytes": 24139,
+            "ms": 40
+          },
+          {
+            "file": "/tsukurikata/js/game.js",
+            "status": 200,
+            "bytes": 189281,
+            "ms": 43
+          },
+          {
+            "file": "/tsukurikata/js/fx.js",
+            "status": 200,
+            "bytes": 11653,
+            "ms": 38
+          },
+          {
+            "file": "/tsukurikata/js/announce.js",
+            "status": 200,
+            "bytes": 10527,
+            "ms": 39
+          },
+          {
+            "file": "/tsukurikata/js/advisor.js",
+            "status": 200,
+            "bytes": 7503,
+            "ms": 40
+          },
+          {
+            "file": "/tsukurikata/js/onboarding.js",
+            "status": 200,
+            "bytes": 8455,
+            "ms": 44
+          },
+          {
+            "file": "/tsukurikata/js/tunegame.js",
+            "status": 200,
+            "bytes": 9322,
+            "ms": 44
+          },
+          {
+            "file": "/tsukurikata/js/conduct.js",
+            "status": 200,
+            "bytes": 30445,
+            "ms": 45
+          },
+          {
+            "file": "/tsukurikata/js/ui.js",
+            "status": 200,
+            "bytes": 238729,
+            "ms": 45
+          },
+          {
+            "file": "/design/onboarding/qa.js",
+            "status": 200,
+            "bytes": 2415,
+            "ms": 44
+          }
+        ]
+      },
+      "errors": []
+    },
+    {
+      "label": "配置を決定",
+      "year": 2026,
+      "week": 0,
+      "phase": "choose",
+      "tab": "week",
+      "state": 0.5553973726928234,
+      "guide": {
+        "club": "865908558:2026",
+        "active": true,
+        "heard": false
+      },
+      "step": "1",
+      "title": "一緒に育てたい、\n1曲を。",
+      "playing": false,
+      "waiting": false,
+      "focus": "BODY",
+      "width": 375,
+      "scrollWidth": 375,
+      "portrait": {
+        "loaded": true,
+        "natural": 1254
+      },
+      "boot": {
+        "started": "2026-10-29T12:10:33.732Z",
+        "loaded": [
+          "/tsukurikata/js/util.js",
+          "/tsukurikata/js/icons.js",
+          "/tsukurikata/js/instrument-icons.js",
+          "/tsukurikata/js/face-cast.js",
+          "/tsukurikata/js/faces.js",
+          "/tsukurikata/js/instruments.js",
+          "/tsukurikata/js/venues.js",
+          "/tsukurikata/js/samples.js",
+          "/tsukurikata/js/scores.js",
+          "/tsukurikata/js/pieces/largo.js",
+          "/tsukurikata/js/pieces/ode.js",
+          "/tsukurikata/js/pieces/galop.js",
+          "/tsukurikata/js/pieces/pomp.js",
+          "/tsukurikata/js/pieces/aida.js",
+          "/tsukurikata/js/pieces/hero.js",
+          "/tsukurikata/js/pieces/holst.js",
+          "/tsukurikata/js/pieces/hungarian.js",
+          "/tsukurikata/js/pieces/flowers.js",
+          "/tsukurikata/js/pieces/tell.js",
+          "/tsukurikata/js/pieces/carmen.js",
+          "/tsukurikata/js/pieces/valkyrie.js",
+          "/tsukurikata/js/pieces/swan.js",
+          "/tsukurikata/js/pieces/spring.js",
+          "/tsukurikata/js/pieces/canon.js",
+          "/tsukurikata/js/band.js",
+          "/tsukurikata/js/game.js",
+          "/tsukurikata/js/engine.js",
+          "/tsukurikata/js/conduct.js",
+          "/tsukurikata/js/announce.js",
+          "/tsukurikata/js/tunegame.js",
+          "/tsukurikata/js/fx.js",
+          "/tsukurikata/js/advisor.js",
+          "/tsukurikata/js/onboarding.js",
+          "/tsukurikata/js/ui.js",
+          "/design/onboarding/qa.js"
+        ],
+        "failed": [],
+        "errors": [],
+        "ready": true,
+        "globals": {
+          "fx": "object",
+          "season": "function",
+          "engine": "function",
+          "pieces": "object",
+          "game": "function"
+        },
+        "scripts": [
+          "/tsukurikata/js/util.js",
+          "/tsukurikata/js/icons.js",
+          "/tsukurikata/js/instrument-icons.js",
+          "/tsukurikata/js/face-cast.js",
+          "/tsukurikata/js/faces.js",
+          "/tsukurikata/js/instruments.js",
+          "/tsukurikata/js/venues.js",
+          "/tsukurikata/js/samples.js",
+          "/tsukurikata/js/scores.js",
+          "/tsukurikata/js/pieces/largo.js",
+          "/tsukurikata/js/pieces/ode.js",
+          "/tsukurikata/js/pieces/galop.js",
+          "/tsukurikata/js/pieces/pomp.js",
+          "/tsukurikata/js/pieces/aida.js",
+          "/tsukurikata/js/pieces/hero.js",
+          "/tsukurikata/js/pieces/holst.js",
+          "/tsukurikata/js/pieces/hungarian.js",
+          "/tsukurikata/js/pieces/flowers.js",
+          "/tsukurikata/js/pieces/tell.js",
+          "/tsukurikata/js/pieces/carmen.js",
+          "/tsukurikata/js/pieces/valkyrie.js",
+          "/tsukurikata/js/pieces/swan.js",
+          "/tsukurikata/js/pieces/spring.js",
+          "/tsukurikata/js/pieces/canon.js",
+          "/tsukurikata/js/band.js",
+          "/tsukurikata/js/game.js",
+          "/tsukurikata/js/engine.js",
+          "/tsukurikata/js/conduct.js",
+          "/tsukurikata/js/announce.js",
+          "/tsukurikata/js/tunegame.js",
+          "/tsukurikata/js/fx.js",
+          "/tsukurikata/js/advisor.js",
+          "/tsukurikata/js/onboarding.js",
+          "/tsukurikata/js/ui.js",
+          "/design/onboarding/qa.js"
+        ],
+        "resources": [
+          {
+            "file": "/tsukurikata/js/util.js",
+            "status": 200,
+            "bytes": 2477,
+            "ms": 18
+          },
+          {
+            "file": "/tsukurikata/js/instrument-icons.js",
+            "status": 200,
+            "bytes": 2590,
+            "ms": 20
+          },
+          {
+            "file": "/tsukurikata/js/icons.js",
+            "status": 200,
+            "bytes": 4867,
+            "ms": 20
+          },
+          {
+            "file": "/tsukurikata/js/face-cast.js",
+            "status": 200,
+            "bytes": 7048,
+            "ms": 20
+          },
+          {
+            "file": "/tsukurikata/js/venues.js",
+            "status": 200,
+            "bytes": 12996,
+            "ms": 22
+          },
+          {
+            "file": "/tsukurikata/js/samples.js",
+            "status": 200,
+            "bytes": 24975,
+            "ms": 22
+          },
+          {
+            "file": "/tsukurikata/js/instruments.js",
+            "status": 200,
+            "bytes": 27017,
+            "ms": 23
+          },
+          {
+            "file": "/tsukurikata/js/faces.js",
+            "status": 200,
+            "bytes": 4184,
+            "ms": 24
+          },
+          {
+            "file": "/tsukurikata/js/scores.js",
+            "status": 200,
+            "bytes": 22132,
+            "ms": 25
+          },
+          {
+            "file": "/tsukurikata/js/pieces/largo.js",
+            "status": 200,
+            "bytes": 11341,
+            "ms": 24
+          },
+          {
+            "file": "/tsukurikata/js/pieces/ode.js",
+            "status": 200,
+            "bytes": 16000,
+            "ms": 25
+          },
+          {
+            "file": "/tsukurikata/js/pieces/aida.js",
+            "status": 200,
+            "bytes": 20823,
+            "ms": 27
+          },
+          {
+            "file": "/tsukurikata/js/pieces/pomp.js",
+            "status": 200,
+            "bytes": 19299,
+            "ms": 28
+          },
+          {
+            "file": "/tsukurikata/js/pieces/galop.js",
+            "status": 200,
+            "bytes": 22631,
+            "ms": 29
+          },
+          {
+            "file": "/tsukurikata/js/pieces/hero.js",
+            "status": 200,
+            "bytes": 21784,
+            "ms": 32
+          },
+          {
+            "file": "/tsukurikata/js/pieces/holst.js",
+            "status": 200,
+            "bytes": 18482,
+            "ms": 28
+          },
+          {
+            "file": "/tsukurikata/js/pieces/hungarian.js",
+            "status": 200,
+            "bytes": 29740,
+            "ms": 31
+          },
+          {
+            "file": "/tsukurikata/js/pieces/carmen.js",
+            "status": 200,
+            "bytes": 25854,
+            "ms": 33
+          },
+          {
+            "file": "/tsukurikata/js/pieces/flowers.js",
+            "status": 200,
+            "bytes": 25824,
+            "ms": 34
+          },
+          {
+            "file": "/tsukurikata/js/pieces/tell.js",
+            "status": 200,
+            "bytes": 37082,
+            "ms": 34
+          },
+          {
+            "file": "/tsukurikata/js/pieces/swan.js",
+            "status": 200,
+            "bytes": 19332,
+            "ms": 33
+          },
+          {
+            "file": "/tsukurikata/js/pieces/valkyrie.js",
+            "status": 200,
+            "bytes": 20721,
+            "ms": 35
+          },
+          {
+            "file": "/tsukurikata/js/band.js",
+            "status": 200,
+            "bytes": 50853,
+            "ms": 35
+          },
+          {
+            "file": "/tsukurikata/js/pieces/canon.js",
+            "status": 200,
+            "bytes": 13464,
+            "ms": 36
+          },
+          {
+            "file": "/tsukurikata/js/pieces/spring.js",
+            "status": 200,
+            "bytes": 17241,
+            "ms": 36
+          },
+          {
+            "file": "/tsukurikata/js/engine.js",
+            "status": 200,
+            "bytes": 24139,
+            "ms": 40
+          },
+          {
+            "file": "/tsukurikata/js/game.js",
+            "status": 200,
+            "bytes": 189281,
+            "ms": 43
+          },
+          {
+            "file": "/tsukurikata/js/fx.js",
+            "status": 200,
+            "bytes": 11653,
+            "ms": 38
+          },
+          {
+            "file": "/tsukurikata/js/announce.js",
+            "status": 200,
+            "bytes": 10527,
+            "ms": 39
+          },
+          {
+            "file": "/tsukurikata/js/advisor.js",
+            "status": 200,
+            "bytes": 7503,
+            "ms": 40
+          },
+          {
+            "file": "/tsukurikata/js/onboarding.js",
+            "status": 200,
+            "bytes": 8455,
+            "ms": 44
+          },
+          {
+            "file": "/tsukurikata/js/tunegame.js",
+            "status": 200,
+            "bytes": 9322,
+            "ms": 44
+          },
+          {
+            "file": "/tsukurikata/js/conduct.js",
+            "status": 200,
+            "bytes": 30445,
+            "ms": 45
+          },
+          {
+            "file": "/tsukurikata/js/ui.js",
+            "status": 200,
+            "bytes": 238729,
+            "ms": 45
+          },
+          {
+            "file": "/design/onboarding/qa.js",
+            "status": 200,
+            "bytes": 2415,
+            "ms": 44
+          }
+        ]
+      },
+      "errors": []
+    },
+    {
+      "label": "曲への移動",
+      "year": 2026,
+      "week": 0,
+      "phase": "choose",
+      "tab": "week",
+      "state": 0.5553973726928234,
+      "guide": {
+        "club": "865908558:2026",
+        "active": true,
+        "heard": false
+      },
+      "step": "1",
+      "title": "一緒に育てたい、\n1曲を。",
+      "playing": false,
+      "waiting": false,
+      "focus": "model",
+      "width": 375,
+      "scrollWidth": 375,
+      "portrait": {
+        "loaded": true,
+        "natural": 1254
+      },
+      "boot": {
+        "started": "2026-10-29T12:10:33.732Z",
+        "loaded": [
+          "/tsukurikata/js/util.js",
+          "/tsukurikata/js/icons.js",
+          "/tsukurikata/js/instrument-icons.js",
+          "/tsukurikata/js/face-cast.js",
+          "/tsukurikata/js/faces.js",
+          "/tsukurikata/js/instruments.js",
+          "/tsukurikata/js/venues.js",
+          "/tsukurikata/js/samples.js",
+          "/tsukurikata/js/scores.js",
+          "/tsukurikata/js/pieces/largo.js",
+          "/tsukurikata/js/pieces/ode.js",
+          "/tsukurikata/js/pieces/galop.js",
+          "/tsukurikata/js/pieces/pomp.js",
+          "/tsukurikata/js/pieces/aida.js",
+          "/tsukurikata/js/pieces/hero.js",
+          "/tsukurikata/js/pieces/holst.js",
+          "/tsukurikata/js/pieces/hungarian.js",
+          "/tsukurikata/js/pieces/flowers.js",
+          "/tsukurikata/js/pieces/tell.js",
+          "/tsukurikata/js/pieces/carmen.js",
+          "/tsukurikata/js/pieces/valkyrie.js",
+          "/tsukurikata/js/pieces/swan.js",
+          "/tsukurikata/js/pieces/spring.js",
+          "/tsukurikata/js/pieces/canon.js",
+          "/tsukurikata/js/band.js",
+          "/tsukurikata/js/game.js",
+          "/tsukurikata/js/engine.js",
+          "/tsukurikata/js/conduct.js",
+          "/tsukurikata/js/announce.js",
+          "/tsukurikata/js/tunegame.js",
+          "/tsukurikata/js/fx.js",
+          "/tsukurikata/js/advisor.js",
+          "/tsukurikata/js/onboarding.js",
+          "/tsukurikata/js/ui.js",
+          "/design/onboarding/qa.js"
+        ],
+        "failed": [],
+        "errors": [],
+        "ready": true,
+        "globals": {
+          "fx": "object",
+          "season": "function",
+          "engine": "function",
+          "pieces": "object",
+          "game": "function"
+        },
+        "scripts": [
+          "/tsukurikata/js/util.js",
+          "/tsukurikata/js/icons.js",
+          "/tsukurikata/js/instrument-icons.js",
+          "/tsukurikata/js/face-cast.js",
+          "/tsukurikata/js/faces.js",
+          "/tsukurikata/js/instruments.js",
+          "/tsukurikata/js/venues.js",
+          "/tsukurikata/js/samples.js",
+          "/tsukurikata/js/scores.js",
+          "/tsukurikata/js/pieces/largo.js",
+          "/tsukurikata/js/pieces/ode.js",
+          "/tsukurikata/js/pieces/galop.js",
+          "/tsukurikata/js/pieces/pomp.js",
+          "/tsukurikata/js/pieces/aida.js",
+          "/tsukurikata/js/pieces/hero.js",
+          "/tsukurikata/js/pieces/holst.js",
+          "/tsukurikata/js/pieces/hungarian.js",
+          "/tsukurikata/js/pieces/flowers.js",
+          "/tsukurikata/js/pieces/tell.js",
+          "/tsukurikata/js/pieces/carmen.js",
+          "/tsukurikata/js/pieces/valkyrie.js",
+          "/tsukurikata/js/pieces/swan.js",
+          "/tsukurikata/js/pieces/spring.js",
+          "/tsukurikata/js/pieces/canon.js",
+          "/tsukurikata/js/band.js",
+          "/tsukurikata/js/game.js",
+          "/tsukurikata/js/engine.js",
+          "/tsukurikata/js/conduct.js",
+          "/tsukurikata/js/announce.js",
+          "/tsukurikata/js/tunegame.js",
+          "/tsukurikata/js/fx.js",
+          "/tsukurikata/js/advisor.js",
+          "/tsukurikata/js/onboarding.js",
+          "/tsukurikata/js/ui.js",
+          "/design/onboarding/qa.js"
+        ],
+        "resources": [
+          {
+            "file": "/tsukurikata/js/util.js",
+            "status": 200,
+            "bytes": 2477,
+            "ms": 18
+          },
+          {
+            "file": "/tsukurikata/js/instrument-icons.js",
+            "status": 200,
+            "bytes": 2590,
+            "ms": 20
+          },
+          {
+            "file": "/tsukurikata/js/icons.js",
+            "status": 200,
+            "bytes": 4867,
+            "ms": 20
+          },
+          {
+            "file": "/tsukurikata/js/face-cast.js",
+            "status": 200,
+            "bytes": 7048,
+            "ms": 20
+          },
+          {
+            "file": "/tsukurikata/js/venues.js",
+            "status": 200,
+            "bytes": 12996,
+            "ms": 22
+          },
+          {
+            "file": "/tsukurikata/js/samples.js",
+            "status": 200,
+            "bytes": 24975,
+            "ms": 22
+          },
+          {
+            "file": "/tsukurikata/js/instruments.js",
+            "status": 200,
+            "bytes": 27017,
+            "ms": 23
+          },
+          {
+            "file": "/tsukurikata/js/faces.js",
+            "status": 200,
+            "bytes": 4184,
+            "ms": 24
+          },
+          {
+            "file": "/tsukurikata/js/scores.js",
+            "status": 200,
+            "bytes": 22132,
+            "ms": 25
+          },
+          {
+            "file": "/tsukurikata/js/pieces/largo.js",
+            "status": 200,
+            "bytes": 11341,
+            "ms": 24
+          },
+          {
+            "file": "/tsukurikata/js/pieces/ode.js",
+            "status": 200,
+            "bytes": 16000,
+            "ms": 25
+          },
+          {
+            "file": "/tsukurikata/js/pieces/aida.js",
+            "status": 200,
+            "bytes": 20823,
+            "ms": 27
+          },
+          {
+            "file": "/tsukurikata/js/pieces/pomp.js",
+            "status": 200,
+            "bytes": 19299,
+            "ms": 28
+          },
+          {
+            "file": "/tsukurikata/js/pieces/galop.js",
+            "status": 200,
+            "bytes": 22631,
+            "ms": 29
+          },
+          {
+            "file": "/tsukurikata/js/pieces/hero.js",
+            "status": 200,
+            "bytes": 21784,
+            "ms": 32
+          },
+          {
+            "file": "/tsukurikata/js/pieces/holst.js",
+            "status": 200,
+            "bytes": 18482,
+            "ms": 28
+          },
+          {
+            "file": "/tsukurikata/js/pieces/hungarian.js",
+            "status": 200,
+            "bytes": 29740,
+            "ms": 31
+          },
+          {
+            "file": "/tsukurikata/js/pieces/carmen.js",
+            "status": 200,
+            "bytes": 25854,
+            "ms": 33
+          },
+          {
+            "file": "/tsukurikata/js/pieces/flowers.js",
+            "status": 200,
+            "bytes": 25824,
+            "ms": 34
+          },
+          {
+            "file": "/tsukurikata/js/pieces/tell.js",
+            "status": 200,
+            "bytes": 37082,
+            "ms": 34
+          },
+          {
+            "file": "/tsukurikata/js/pieces/swan.js",
+            "status": 200,
+            "bytes": 19332,
+            "ms": 33
+          },
+          {
+            "file": "/tsukurikata/js/pieces/valkyrie.js",
+            "status": 200,
+            "bytes": 20721,
+            "ms": 35
+          },
+          {
+            "file": "/tsukurikata/js/band.js",
+            "status": 200,
+            "bytes": 50853,
+            "ms": 35
+          },
+          {
+            "file": "/tsukurikata/js/pieces/canon.js",
+            "status": 200,
+            "bytes": 13464,
+            "ms": 36
+          },
+          {
+            "file": "/tsukurikata/js/pieces/spring.js",
+            "status": 200,
+            "bytes": 17241,
+            "ms": 36
+          },
+          {
+            "file": "/tsukurikata/js/engine.js",
+            "status": 200,
+            "bytes": 24139,
+            "ms": 40
+          },
+          {
+            "file": "/tsukurikata/js/game.js",
+            "status": 200,
+            "bytes": 189281,
+            "ms": 43
+          },
+          {
+            "file": "/tsukurikata/js/fx.js",
+            "status": 200,
+            "bytes": 11653,
+            "ms": 38
+          },
+          {
+            "file": "/tsukurikata/js/announce.js",
+            "status": 200,
+            "bytes": 10527,
+            "ms": 39
+          },
+          {
+            "file": "/tsukurikata/js/advisor.js",
+            "status": 200,
+            "bytes": 7503,
+            "ms": 40
+          },
+          {
+            "file": "/tsukurikata/js/onboarding.js",
+            "status": 200,
+            "bytes": 8455,
+            "ms": 44
+          },
+          {
+            "file": "/tsukurikata/js/tunegame.js",
+            "status": 200,
+            "bytes": 9322,
+            "ms": 44
+          },
+          {
+            "file": "/tsukurikata/js/conduct.js",
+            "status": 200,
+            "bytes": 30445,
+            "ms": 45
+          },
+          {
+            "file": "/tsukurikata/js/ui.js",
+            "status": 200,
+            "bytes": 238729,
+            "ms": 45
+          },
+          {
+            "file": "/design/onboarding/qa.js",
+            "status": 200,
+            "bytes": 2415,
+            "ms": 44
+          }
+        ]
+      },
+      "errors": []
+    },
+    {
+      "label": "練習へ移動・途中再開",
+      "year": 2026,
+      "week": 0,
+      "phase": "week",
+      "tab": "week",
+      "state": 0.49528505303896964,
+      "guide": {
+        "club": "865908558:2026",
+        "active": true,
+        "heard": false
+      },
+      "step": "2",
+      "title": "最初の1週間、\n合わせてみよう。",
+      "playing": false,
+      "waiting": false,
+      "focus": "practice",
+      "width": 375,
+      "scrollWidth": 375,
+      "portrait": {
+        "loaded": true,
+        "natural": 1254
+      },
+      "boot": {
+        "started": "2026-10-29T12:11:35.514Z",
+        "loaded": [
+          "/tsukurikata/js/util.js",
+          "/tsukurikata/js/icons.js",
+          "/tsukurikata/js/instrument-icons.js",
+          "/tsukurikata/js/face-cast.js",
+          "/tsukurikata/js/faces.js",
+          "/tsukurikata/js/instruments.js",
+          "/tsukurikata/js/venues.js",
+          "/tsukurikata/js/samples.js",
+          "/tsukurikata/js/scores.js",
+          "/tsukurikata/js/pieces/largo.js",
+          "/tsukurikata/js/pieces/ode.js",
+          "/tsukurikata/js/pieces/galop.js",
+          "/tsukurikata/js/pieces/pomp.js",
+          "/tsukurikata/js/pieces/aida.js",
+          "/tsukurikata/js/pieces/hero.js",
+          "/tsukurikata/js/pieces/holst.js",
+          "/tsukurikata/js/pieces/hungarian.js",
+          "/tsukurikata/js/pieces/flowers.js",
+          "/tsukurikata/js/pieces/tell.js",
+          "/tsukurikata/js/pieces/carmen.js",
+          "/tsukurikata/js/pieces/valkyrie.js",
+          "/tsukurikata/js/pieces/swan.js",
+          "/tsukurikata/js/pieces/spring.js",
+          "/tsukurikata/js/pieces/canon.js",
+          "/tsukurikata/js/band.js",
+          "/tsukurikata/js/game.js",
+          "/tsukurikata/js/engine.js",
+          "/tsukurikata/js/conduct.js",
+          "/tsukurikata/js/announce.js",
+          "/tsukurikata/js/tunegame.js",
+          "/tsukurikata/js/fx.js",
+          "/tsukurikata/js/advisor.js",
+          "/tsukurikata/js/onboarding.js",
+          "/tsukurikata/js/ui.js",
+          "/design/onboarding/qa.js"
+        ],
+        "failed": [],
+        "errors": [],
+        "ready": true,
+        "globals": {
+          "fx": "object",
+          "season": "function",
+          "engine": "function",
+          "pieces": "object",
+          "game": "function"
+        },
+        "scripts": [
+          "/tsukurikata/js/util.js",
+          "/tsukurikata/js/icons.js",
+          "/tsukurikata/js/instrument-icons.js",
+          "/tsukurikata/js/face-cast.js",
+          "/tsukurikata/js/faces.js",
+          "/tsukurikata/js/instruments.js",
+          "/tsukurikata/js/venues.js",
+          "/tsukurikata/js/samples.js",
+          "/tsukurikata/js/scores.js",
+          "/tsukurikata/js/pieces/largo.js",
+          "/tsukurikata/js/pieces/ode.js",
+          "/tsukurikata/js/pieces/galop.js",
+          "/tsukurikata/js/pieces/pomp.js",
+          "/tsukurikata/js/pieces/aida.js",
+          "/tsukurikata/js/pieces/hero.js",
+          "/tsukurikata/js/pieces/holst.js",
+          "/tsukurikata/js/pieces/hungarian.js",
+          "/tsukurikata/js/pieces/flowers.js",
+          "/tsukurikata/js/pieces/tell.js",
+          "/tsukurikata/js/pieces/carmen.js",
+          "/tsukurikata/js/pieces/valkyrie.js",
+          "/tsukurikata/js/pieces/swan.js",
+          "/tsukurikata/js/pieces/spring.js",
+          "/tsukurikata/js/pieces/canon.js",
+          "/tsukurikata/js/band.js",
+          "/tsukurikata/js/game.js",
+          "/tsukurikata/js/engine.js",
+          "/tsukurikata/js/conduct.js",
+          "/tsukurikata/js/announce.js",
+          "/tsukurikata/js/tunegame.js",
+          "/tsukurikata/js/fx.js",
+          "/tsukurikata/js/advisor.js",
+          "/tsukurikata/js/onboarding.js",
+          "/tsukurikata/js/ui.js",
+          "/design/onboarding/qa.js"
+        ],
+        "resources": [
+          {
+            "file": "/tsukurikata/js/util.js",
+            "status": 200,
+            "bytes": 2477,
+            "ms": 26
+          },
+          {
+            "file": "/tsukurikata/js/instrument-icons.js",
+            "status": 200,
+            "bytes": 2590,
+            "ms": 25
+          },
+          {
+            "file": "/tsukurikata/js/face-cast.js",
+            "status": 200,
+            "bytes": 7048,
+            "ms": 26
+          },
+          {
+            "file": "/tsukurikata/js/icons.js",
+            "status": 200,
+            "bytes": 4867,
+            "ms": 26
+          },
+          {
+            "file": "/tsukurikata/js/faces.js",
+            "status": 200,
+            "bytes": 4184,
+            "ms": 28
+          },
+          {
+            "file": "/tsukurikata/js/samples.js",
+            "status": 200,
+            "bytes": 24975,
+            "ms": 29
+          },
+          {
+            "file": "/tsukurikata/js/venues.js",
+            "status": 200,
+            "bytes": 12996,
+            "ms": 32
+          },
+          {
+            "file": "/tsukurikata/js/scores.js",
+            "status": 200,
+            "bytes": 22132,
+            "ms": 34
+          },
+          {
+            "file": "/tsukurikata/js/pieces/ode.js",
+            "status": 200,
+            "bytes": 16000,
+            "ms": 33
+          },
+          {
+            "file": "/tsukurikata/js/instruments.js",
+            "status": 200,
+            "bytes": 27017,
+            "ms": 33
+          },
+          {
+            "file": "/tsukurikata/js/pieces/largo.js",
+            "status": 200,
+            "bytes": 11341,
+            "ms": 35
+          },
+          {
+            "file": "/tsukurikata/js/pieces/galop.js",
+            "status": 200,
+            "bytes": 22631,
+            "ms": 33
+          },
+          {
+            "file": "/tsukurikata/js/pieces/pomp.js",
+            "status": 200,
+            "bytes": 19299,
+            "ms": 35
+          },
+          {
+            "file": "/tsukurikata/js/pieces/aida.js",
+            "status": 200,
+            "bytes": 20823,
+            "ms": 36
+          },
+          {
+            "file": "/tsukurikata/js/pieces/hungarian.js",
+            "status": 200,
+            "bytes": 29740,
+            "ms": 37
+          },
+          {
+            "file": "/tsukurikata/js/pieces/holst.js",
+            "status": 200,
+            "bytes": 18482,
+            "ms": 38
+          },
+          {
+            "file": "/tsukurikata/js/pieces/hero.js",
+            "status": 200,
+            "bytes": 21784,
+            "ms": 38
+          },
+          {
+            "file": "/tsukurikata/js/pieces/flowers.js",
+            "status": 200,
+            "bytes": 25824,
+            "ms": 38
+          },
+          {
+            "file": "/tsukurikata/js/pieces/tell.js",
+            "status": 200,
+            "bytes": 37082,
+            "ms": 38
+          },
+          {
+            "file": "/tsukurikata/js/pieces/swan.js",
+            "status": 200,
+            "bytes": 19332,
+            "ms": 40
+          },
+          {
+            "file": "/tsukurikata/js/pieces/valkyrie.js",
+            "status": 200,
+            "bytes": 20721,
+            "ms": 41
+          },
+          {
+            "file": "/tsukurikata/js/pieces/carmen.js",
+            "status": 200,
+            "bytes": 25854,
+            "ms": 42
+          },
+          {
+            "file": "/tsukurikata/js/pieces/spring.js",
+            "status": 200,
+            "bytes": 17241,
+            "ms": 40
+          },
+          {
+            "file": "/tsukurikata/js/pieces/canon.js",
+            "status": 200,
+            "bytes": 13464,
+            "ms": 44
+          },
+          {
+            "file": "/tsukurikata/js/engine.js",
+            "status": 200,
+            "bytes": 24139,
+            "ms": 44
+          },
+          {
+            "file": "/tsukurikata/js/band.js",
+            "status": 200,
+            "bytes": 50853,
+            "ms": 48
+          },
+          {
+            "file": "/tsukurikata/js/game.js",
+            "status": 200,
+            "bytes": 189281,
+            "ms": 49
+          },
+          {
+            "file": "/tsukurikata/js/conduct.js",
+            "status": 200,
+            "bytes": 30445,
+            "ms": 44
+          },
+          {
+            "file": "/tsukurikata/js/announce.js",
+            "status": 200,
+            "bytes": 10527,
+            "ms": 45
+          },
+          {
+            "file": "/tsukurikata/js/tunegame.js",
+            "status": 200,
+            "bytes": 9322,
+            "ms": 46
+          },
+          {
+            "file": "/tsukurikata/js/fx.js",
+            "status": 200,
+            "bytes": 11653,
+            "ms": 49
+          },
+          {
+            "file": "/tsukurikata/js/advisor.js",
+            "status": 200,
+            "bytes": 7503,
+            "ms": 49
+          },
+          {
+            "file": "/tsukurikata/js/onboarding.js",
+            "status": 200,
+            "bytes": 8794,
+            "ms": 48
+          },
+          {
+            "file": "/design/onboarding/qa.js",
+            "status": 200,
+            "bytes": 2415,
+            "ms": 50
+          },
+          {
+            "file": "/tsukurikata/js/ui.js",
+            "status": 200,
+            "bytes": 238729,
+            "ms": 49
+          }
+        ]
+      },
+      "errors": []
+    },
+    {
+      "label": "1週間練習",
+      "year": 2026,
+      "week": 1,
+      "phase": "week",
+      "tab": "week",
+      "state": 0.9416739821899682,
+      "guide": {
+        "club": "865908558:2026",
+        "active": true,
+        "heard": false
+      },
+      "step": "3",
+      "title": "練習した音を、\n聴いてみよう。",
+      "playing": false,
+      "waiting": false,
+      "focus": "onboardingTitle",
+      "width": 375,
+      "scrollWidth": 375,
+      "portrait": {
+        "loaded": true,
+        "natural": 1254
+      },
+      "boot": {
+        "started": "2026-10-29T12:11:35.514Z",
+        "loaded": [
+          "/tsukurikata/js/util.js",
+          "/tsukurikata/js/icons.js",
+          "/tsukurikata/js/instrument-icons.js",
+          "/tsukurikata/js/face-cast.js",
+          "/tsukurikata/js/faces.js",
+          "/tsukurikata/js/instruments.js",
+          "/tsukurikata/js/venues.js",
+          "/tsukurikata/js/samples.js",
+          "/tsukurikata/js/scores.js",
+          "/tsukurikata/js/pieces/largo.js",
+          "/tsukurikata/js/pieces/ode.js",
+          "/tsukurikata/js/pieces/galop.js",
+          "/tsukurikata/js/pieces/pomp.js",
+          "/tsukurikata/js/pieces/aida.js",
+          "/tsukurikata/js/pieces/hero.js",
+          "/tsukurikata/js/pieces/holst.js",
+          "/tsukurikata/js/pieces/hungarian.js",
+          "/tsukurikata/js/pieces/flowers.js",
+          "/tsukurikata/js/pieces/tell.js",
+          "/tsukurikata/js/pieces/carmen.js",
+          "/tsukurikata/js/pieces/valkyrie.js",
+          "/tsukurikata/js/pieces/swan.js",
+          "/tsukurikata/js/pieces/spring.js",
+          "/tsukurikata/js/pieces/canon.js",
+          "/tsukurikata/js/band.js",
+          "/tsukurikata/js/game.js",
+          "/tsukurikata/js/engine.js",
+          "/tsukurikata/js/conduct.js",
+          "/tsukurikata/js/announce.js",
+          "/tsukurikata/js/tunegame.js",
+          "/tsukurikata/js/fx.js",
+          "/tsukurikata/js/advisor.js",
+          "/tsukurikata/js/onboarding.js",
+          "/tsukurikata/js/ui.js",
+          "/design/onboarding/qa.js"
+        ],
+        "failed": [],
+        "errors": [],
+        "ready": true,
+        "globals": {
+          "fx": "object",
+          "season": "function",
+          "engine": "function",
+          "pieces": "object",
+          "game": "function"
+        },
+        "scripts": [
+          "/tsukurikata/js/util.js",
+          "/tsukurikata/js/icons.js",
+          "/tsukurikata/js/instrument-icons.js",
+          "/tsukurikata/js/face-cast.js",
+          "/tsukurikata/js/faces.js",
+          "/tsukurikata/js/instruments.js",
+          "/tsukurikata/js/venues.js",
+          "/tsukurikata/js/samples.js",
+          "/tsukurikata/js/scores.js",
+          "/tsukurikata/js/pieces/largo.js",
+          "/tsukurikata/js/pieces/ode.js",
+          "/tsukurikata/js/pieces/galop.js",
+          "/tsukurikata/js/pieces/pomp.js",
+          "/tsukurikata/js/pieces/aida.js",
+          "/tsukurikata/js/pieces/hero.js",
+          "/tsukurikata/js/pieces/holst.js",
+          "/tsukurikata/js/pieces/hungarian.js",
+          "/tsukurikata/js/pieces/flowers.js",
+          "/tsukurikata/js/pieces/tell.js",
+          "/tsukurikata/js/pieces/carmen.js",
+          "/tsukurikata/js/pieces/valkyrie.js",
+          "/tsukurikata/js/pieces/swan.js",
+          "/tsukurikata/js/pieces/spring.js",
+          "/tsukurikata/js/pieces/canon.js",
+          "/tsukurikata/js/band.js",
+          "/tsukurikata/js/game.js",
+          "/tsukurikata/js/engine.js",
+          "/tsukurikata/js/conduct.js",
+          "/tsukurikata/js/announce.js",
+          "/tsukurikata/js/tunegame.js",
+          "/tsukurikata/js/fx.js",
+          "/tsukurikata/js/advisor.js",
+          "/tsukurikata/js/onboarding.js",
+          "/tsukurikata/js/ui.js",
+          "/design/onboarding/qa.js"
+        ],
+        "resources": [
+          {
+            "file": "/tsukurikata/js/util.js",
+            "status": 200,
+            "bytes": 2477,
+            "ms": 26
+          },
+          {
+            "file": "/tsukurikata/js/instrument-icons.js",
+            "status": 200,
+            "bytes": 2590,
+            "ms": 25
+          },
+          {
+            "file": "/tsukurikata/js/face-cast.js",
+            "status": 200,
+            "bytes": 7048,
+            "ms": 26
+          },
+          {
+            "file": "/tsukurikata/js/icons.js",
+            "status": 200,
+            "bytes": 4867,
+            "ms": 26
+          },
+          {
+            "file": "/tsukurikata/js/faces.js",
+            "status": 200,
+            "bytes": 4184,
+            "ms": 28
+          },
+          {
+            "file": "/tsukurikata/js/samples.js",
+            "status": 200,
+            "bytes": 24975,
+            "ms": 29
+          },
+          {
+            "file": "/tsukurikata/js/venues.js",
+            "status": 200,
+            "bytes": 12996,
+            "ms": 32
+          },
+          {
+            "file": "/tsukurikata/js/scores.js",
+            "status": 200,
+            "bytes": 22132,
+            "ms": 34
+          },
+          {
+            "file": "/tsukurikata/js/pieces/ode.js",
+            "status": 200,
+            "bytes": 16000,
+            "ms": 33
+          },
+          {
+            "file": "/tsukurikata/js/instruments.js",
+            "status": 200,
+            "bytes": 27017,
+            "ms": 33
+          },
+          {
+            "file": "/tsukurikata/js/pieces/largo.js",
+            "status": 200,
+            "bytes": 11341,
+            "ms": 35
+          },
+          {
+            "file": "/tsukurikata/js/pieces/galop.js",
+            "status": 200,
+            "bytes": 22631,
+            "ms": 33
+          },
+          {
+            "file": "/tsukurikata/js/pieces/pomp.js",
+            "status": 200,
+            "bytes": 19299,
+            "ms": 35
+          },
+          {
+            "file": "/tsukurikata/js/pieces/aida.js",
+            "status": 200,
+            "bytes": 20823,
+            "ms": 36
+          },
+          {
+            "file": "/tsukurikata/js/pieces/hungarian.js",
+            "status": 200,
+            "bytes": 29740,
+            "ms": 37
+          },
+          {
+            "file": "/tsukurikata/js/pieces/holst.js",
+            "status": 200,
+            "bytes": 18482,
+            "ms": 38
+          },
+          {
+            "file": "/tsukurikata/js/pieces/hero.js",
+            "status": 200,
+            "bytes": 21784,
+            "ms": 38
+          },
+          {
+            "file": "/tsukurikata/js/pieces/flowers.js",
+            "status": 200,
+            "bytes": 25824,
+            "ms": 38
+          },
+          {
+            "file": "/tsukurikata/js/pieces/tell.js",
+            "status": 200,
+            "bytes": 37082,
+            "ms": 38
+          },
+          {
+            "file": "/tsukurikata/js/pieces/swan.js",
+            "status": 200,
+            "bytes": 19332,
+            "ms": 40
+          },
+          {
+            "file": "/tsukurikata/js/pieces/valkyrie.js",
+            "status": 200,
+            "bytes": 20721,
+            "ms": 41
+          },
+          {
+            "file": "/tsukurikata/js/pieces/carmen.js",
+            "status": 200,
+            "bytes": 25854,
+            "ms": 42
+          },
+          {
+            "file": "/tsukurikata/js/pieces/spring.js",
+            "status": 200,
+            "bytes": 17241,
+            "ms": 40
+          },
+          {
+            "file": "/tsukurikata/js/pieces/canon.js",
+            "status": 200,
+            "bytes": 13464,
+            "ms": 44
+          },
+          {
+            "file": "/tsukurikata/js/engine.js",
+            "status": 200,
+            "bytes": 24139,
+            "ms": 44
+          },
+          {
+            "file": "/tsukurikata/js/band.js",
+            "status": 200,
+            "bytes": 50853,
+            "ms": 48
+          },
+          {
+            "file": "/tsukurikata/js/game.js",
+            "status": 200,
+            "bytes": 189281,
+            "ms": 49
+          },
+          {
+            "file": "/tsukurikata/js/conduct.js",
+            "status": 200,
+            "bytes": 30445,
+            "ms": 44
+          },
+          {
+            "file": "/tsukurikata/js/announce.js",
+            "status": 200,
+            "bytes": 10527,
+            "ms": 45
+          },
+          {
+            "file": "/tsukurikata/js/tunegame.js",
+            "status": 200,
+            "bytes": 9322,
+            "ms": 46
+          },
+          {
+            "file": "/tsukurikata/js/fx.js",
+            "status": 200,
+            "bytes": 11653,
+            "ms": 49
+          },
+          {
+            "file": "/tsukurikata/js/advisor.js",
+            "status": 200,
+            "bytes": 7503,
+            "ms": 49
+          },
+          {
+            "file": "/tsukurikata/js/onboarding.js",
+            "status": 200,
+            "bytes": 8794,
+            "ms": 48
+          },
+          {
+            "file": "/design/onboarding/qa.js",
+            "status": 200,
+            "bytes": 2415,
+            "ms": 50
+          },
+          {
+            "file": "/tsukurikata/js/ui.js",
+            "status": 200,
+            "bytes": 238729,
+            "ms": 49
+          }
+        ]
+      },
+      "errors": []
+    },
+    {
+      "label": "聴く前",
+      "year": 2026,
+      "week": 1,
+      "phase": "week",
+      "tab": "play",
+      "state": 0.9416739821899682,
+      "guide": {
+        "club": "865908558:2026",
+        "active": true,
+        "heard": false
+      },
+      "step": "3",
+      "title": "練習した音を、\n聴いてみよう。",
+      "playing": false,
+      "waiting": false,
+      "focus": "onboardingTitle",
+      "width": 375,
+      "scrollWidth": 375,
+      "portrait": {
+        "loaded": true,
+        "natural": 1254
+      },
+      "boot": {
+        "started": "2026-10-29T12:12:37.502Z",
+        "loaded": [
+          "/tsukurikata/js/util.js",
+          "/tsukurikata/js/icons.js",
+          "/tsukurikata/js/instrument-icons.js",
+          "/tsukurikata/js/face-cast.js",
+          "/tsukurikata/js/faces.js",
+          "/tsukurikata/js/instruments.js",
+          "/tsukurikata/js/venues.js",
+          "/tsukurikata/js/samples.js",
+          "/tsukurikata/js/scores.js",
+          "/tsukurikata/js/pieces/largo.js",
+          "/tsukurikata/js/pieces/ode.js",
+          "/tsukurikata/js/pieces/galop.js",
+          "/tsukurikata/js/pieces/pomp.js",
+          "/tsukurikata/js/pieces/aida.js",
+          "/tsukurikata/js/pieces/hero.js",
+          "/tsukurikata/js/pieces/holst.js",
+          "/tsukurikata/js/pieces/hungarian.js",
+          "/tsukurikata/js/pieces/flowers.js",
+          "/tsukurikata/js/pieces/tell.js",
+          "/tsukurikata/js/pieces/carmen.js",
+          "/tsukurikata/js/pieces/valkyrie.js",
+          "/tsukurikata/js/pieces/swan.js",
+          "/tsukurikata/js/pieces/spring.js",
+          "/tsukurikata/js/pieces/canon.js",
+          "/tsukurikata/js/band.js",
+          "/tsukurikata/js/game.js",
+          "/tsukurikata/js/engine.js",
+          "/tsukurikata/js/conduct.js",
+          "/tsukurikata/js/announce.js",
+          "/tsukurikata/js/tunegame.js",
+          "/tsukurikata/js/fx.js",
+          "/tsukurikata/js/advisor.js",
+          "/tsukurikata/js/onboarding.js",
+          "/tsukurikata/js/ui.js",
+          "/design/onboarding/qa.js"
+        ],
+        "failed": [],
+        "errors": [],
+        "ready": true,
+        "globals": {
+          "fx": "object",
+          "season": "function",
+          "engine": "function",
+          "pieces": "object",
+          "game": "function"
+        },
+        "scripts": [
+          "/tsukurikata/js/util.js",
+          "/tsukurikata/js/icons.js",
+          "/tsukurikata/js/instrument-icons.js",
+          "/tsukurikata/js/face-cast.js",
+          "/tsukurikata/js/faces.js",
+          "/tsukurikata/js/instruments.js",
+          "/tsukurikata/js/venues.js",
+          "/tsukurikata/js/samples.js",
+          "/tsukurikata/js/scores.js",
+          "/tsukurikata/js/pieces/largo.js",
+          "/tsukurikata/js/pieces/ode.js",
+          "/tsukurikata/js/pieces/galop.js",
+          "/tsukurikata/js/pieces/pomp.js",
+          "/tsukurikata/js/pieces/aida.js",
+          "/tsukurikata/js/pieces/hero.js",
+          "/tsukurikata/js/pieces/holst.js",
+          "/tsukurikata/js/pieces/hungarian.js",
+          "/tsukurikata/js/pieces/flowers.js",
+          "/tsukurikata/js/pieces/tell.js",
+          "/tsukurikata/js/pieces/carmen.js",
+          "/tsukurikata/js/pieces/valkyrie.js",
+          "/tsukurikata/js/pieces/swan.js",
+          "/tsukurikata/js/pieces/spring.js",
+          "/tsukurikata/js/pieces/canon.js",
+          "/tsukurikata/js/band.js",
+          "/tsukurikata/js/game.js",
+          "/tsukurikata/js/engine.js",
+          "/tsukurikata/js/conduct.js",
+          "/tsukurikata/js/announce.js",
+          "/tsukurikata/js/tunegame.js",
+          "/tsukurikata/js/fx.js",
+          "/tsukurikata/js/advisor.js",
+          "/tsukurikata/js/onboarding.js",
+          "/tsukurikata/js/ui.js",
+          "/design/onboarding/qa.js"
+        ],
+        "resources": [
+          {
+            "file": "/tsukurikata/js/util.js",
+            "status": 200,
+            "bytes": 2477,
+            "ms": 22
+          },
+          {
+            "file": "/tsukurikata/js/instrument-icons.js",
+            "status": 200,
+            "bytes": 2590,
+            "ms": 23
+          },
+          {
+            "file": "/tsukurikata/js/face-cast.js",
+            "status": 200,
+            "bytes": 7048,
+            "ms": 24
+          },
+          {
+            "file": "/tsukurikata/js/icons.js",
+            "status": 200,
+            "bytes": 4867,
+            "ms": 25
+          },
+          {
+            "file": "/tsukurikata/js/faces.js",
+            "status": 200,
+            "bytes": 4184,
+            "ms": 26
+          },
+          {
+            "file": "/tsukurikata/js/samples.js",
+            "status": 200,
+            "bytes": 24975,
+            "ms": 29
+          },
+          {
+            "file": "/tsukurikata/js/venues.js",
+            "status": 200,
+            "bytes": 12996,
+            "ms": 32
+          },
+          {
+            "file": "/tsukurikata/js/instruments.js",
+            "status": 200,
+            "bytes": 27017,
+            "ms": 32
+          },
+          {
+            "file": "/tsukurikata/js/scores.js",
+            "status": 200,
+            "bytes": 22132,
+            "ms": 32
+          },
+          {
+            "file": "/tsukurikata/js/pieces/largo.js",
+            "status": 200,
+            "bytes": 11341,
+            "ms": 35
+          },
+          {
+            "file": "/tsukurikata/js/pieces/galop.js",
+            "status": 200,
+            "bytes": 22631,
+            "ms": 35
+          },
+          {
+            "file": "/tsukurikata/js/pieces/ode.js",
+            "status": 200,
+            "bytes": 16000,
+            "ms": 36
+          },
+          {
+            "file": "/tsukurikata/js/pieces/aida.js",
+            "status": 200,
+            "bytes": 20823,
+            "ms": 38
+          },
+          {
+            "file": "/tsukurikata/js/pieces/pomp.js",
+            "status": 200,
+            "bytes": 19299,
+            "ms": 39
+          },
+          {
+            "file": "/tsukurikata/js/pieces/hungarian.js",
+            "status": 200,
+            "bytes": 29740,
+            "ms": 39
+          },
+          {
+            "file": "/tsukurikata/js/pieces/hero.js",
+            "status": 200,
+            "bytes": 21784,
+            "ms": 39
+          },
+          {
+            "file": "/tsukurikata/js/pieces/holst.js",
+            "status": 200,
+            "bytes": 18482,
+            "ms": 39
+          },
+          {
+            "file": "/tsukurikata/js/pieces/flowers.js",
+            "status": 200,
+            "bytes": 25824,
+            "ms": 42
+          },
+          {
+            "file": "/tsukurikata/js/pieces/tell.js",
+            "status": 200,
+            "bytes": 37082,
+            "ms": 45
+          },
+          {
+            "file": "/tsukurikata/js/pieces/valkyrie.js",
+            "status": 200,
+            "bytes": 20721,
+            "ms": 46
+          },
+          {
+            "file": "/tsukurikata/js/pieces/carmen.js",
+            "status": 200,
+            "bytes": 25854,
+            "ms": 52
+          },
+          {
+            "file": "/tsukurikata/js/pieces/spring.js",
+            "status": 200,
+            "bytes": 17241,
+            "ms": 43
+          },
+          {
+            "file": "/tsukurikata/js/pieces/swan.js",
+            "status": 200,
+            "bytes": 19332,
+            "ms": 43
+          },
+          {
+            "file": "/tsukurikata/js/engine.js",
+            "status": 200,
+            "bytes": 24139,
+            "ms": 48
+          },
+          {
+            "file": "/tsukurikata/js/band.js",
+            "status": 200,
+            "bytes": 50853,
+            "ms": 50
+          },
+          {
+            "file": "/tsukurikata/js/pieces/canon.js",
+            "status": 200,
+            "bytes": 13464,
+            "ms": 51
+          },
+          {
+            "file": "/tsukurikata/js/game.js",
+            "status": 200,
+            "bytes": 189281,
+            "ms": 54
+          },
+          {
+            "file": "/tsukurikata/js/conduct.js",
+            "status": 200,
+            "bytes": 30445,
+            "ms": 58
+          },
+          {
+            "file": "/tsukurikata/js/announce.js",
+            "status": 200,
+            "bytes": 10527,
+            "ms": 53
+          },
+          {
+            "file": "/tsukurikata/js/tunegame.js",
+            "status": 200,
+            "bytes": 9322,
+            "ms": 53
+          },
+          {
+            "file": "/tsukurikata/js/fx.js",
+            "status": 200,
+            "bytes": 11653,
+            "ms": 55
+          },
+          {
+            "file": "/tsukurikata/js/onboarding.js",
+            "status": 200,
+            "bytes": 8865,
+            "ms": 56
+          },
+          {
+            "file": "/tsukurikata/js/advisor.js",
+            "status": 200,
+            "bytes": 7503,
+            "ms": 58
+          },
+          {
+            "file": "/design/onboarding/qa.js",
+            "status": 200,
+            "bytes": 2415,
+            "ms": 59
+          },
+          {
+            "file": "/tsukurikata/js/ui.js",
+            "status": 200,
+            "bytes": 238729,
+            "ms": 60
+          }
+        ]
+      },
+      "errors": []
+    },
+    {
+      "label": "音が鳴って達成",
+      "year": 2026,
+      "week": 1,
+      "phase": "week",
+      "tab": "play",
+      "state": 0.9416739821899682,
+      "guide": {
+        "club": "865908558:2026",
+        "active": true,
+        "heard": true
+      },
+      "step": "4",
+      "title": "この音が、\n部のはじまりです。",
+      "playing": true,
+      "waiting": false,
+      "focus": "btnStop",
+      "width": 375,
+      "scrollWidth": 375,
+      "portrait": {
+        "loaded": true,
+        "natural": 1254
+      },
+      "boot": {
+        "started": "2026-10-29T12:12:37.502Z",
+        "loaded": [
+          "/tsukurikata/js/util.js",
+          "/tsukurikata/js/icons.js",
+          "/tsukurikata/js/instrument-icons.js",
+          "/tsukurikata/js/face-cast.js",
+          "/tsukurikata/js/faces.js",
+          "/tsukurikata/js/instruments.js",
+          "/tsukurikata/js/venues.js",
+          "/tsukurikata/js/samples.js",
+          "/tsukurikata/js/scores.js",
+          "/tsukurikata/js/pieces/largo.js",
+          "/tsukurikata/js/pieces/ode.js",
+          "/tsukurikata/js/pieces/galop.js",
+          "/tsukurikata/js/pieces/pomp.js",
+          "/tsukurikata/js/pieces/aida.js",
+          "/tsukurikata/js/pieces/hero.js",
+          "/tsukurikata/js/pieces/holst.js",
+          "/tsukurikata/js/pieces/hungarian.js",
+          "/tsukurikata/js/pieces/flowers.js",
+          "/tsukurikata/js/pieces/tell.js",
+          "/tsukurikata/js/pieces/carmen.js",
+          "/tsukurikata/js/pieces/valkyrie.js",
+          "/tsukurikata/js/pieces/swan.js",
+          "/tsukurikata/js/pieces/spring.js",
+          "/tsukurikata/js/pieces/canon.js",
+          "/tsukurikata/js/band.js",
+          "/tsukurikata/js/game.js",
+          "/tsukurikata/js/engine.js",
+          "/tsukurikata/js/conduct.js",
+          "/tsukurikata/js/announce.js",
+          "/tsukurikata/js/tunegame.js",
+          "/tsukurikata/js/fx.js",
+          "/tsukurikata/js/advisor.js",
+          "/tsukurikata/js/onboarding.js",
+          "/tsukurikata/js/ui.js",
+          "/design/onboarding/qa.js"
+        ],
+        "failed": [],
+        "errors": [],
+        "ready": true,
+        "globals": {
+          "fx": "object",
+          "season": "function",
+          "engine": "function",
+          "pieces": "object",
+          "game": "function"
+        },
+        "scripts": [
+          "/tsukurikata/js/util.js",
+          "/tsukurikata/js/icons.js",
+          "/tsukurikata/js/instrument-icons.js",
+          "/tsukurikata/js/face-cast.js",
+          "/tsukurikata/js/faces.js",
+          "/tsukurikata/js/instruments.js",
+          "/tsukurikata/js/venues.js",
+          "/tsukurikata/js/samples.js",
+          "/tsukurikata/js/scores.js",
+          "/tsukurikata/js/pieces/largo.js",
+          "/tsukurikata/js/pieces/ode.js",
+          "/tsukurikata/js/pieces/galop.js",
+          "/tsukurikata/js/pieces/pomp.js",
+          "/tsukurikata/js/pieces/aida.js",
+          "/tsukurikata/js/pieces/hero.js",
+          "/tsukurikata/js/pieces/holst.js",
+          "/tsukurikata/js/pieces/hungarian.js",
+          "/tsukurikata/js/pieces/flowers.js",
+          "/tsukurikata/js/pieces/tell.js",
+          "/tsukurikata/js/pieces/carmen.js",
+          "/tsukurikata/js/pieces/valkyrie.js",
+          "/tsukurikata/js/pieces/swan.js",
+          "/tsukurikata/js/pieces/spring.js",
+          "/tsukurikata/js/pieces/canon.js",
+          "/tsukurikata/js/band.js",
+          "/tsukurikata/js/game.js",
+          "/tsukurikata/js/engine.js",
+          "/tsukurikata/js/conduct.js",
+          "/tsukurikata/js/announce.js",
+          "/tsukurikata/js/tunegame.js",
+          "/tsukurikata/js/fx.js",
+          "/tsukurikata/js/advisor.js",
+          "/tsukurikata/js/onboarding.js",
+          "/tsukurikata/js/ui.js",
+          "/design/onboarding/qa.js"
+        ],
+        "resources": [
+          {
+            "file": "/tsukurikata/js/util.js",
+            "status": 200,
+            "bytes": 2477,
+            "ms": 22
+          },
+          {
+            "file": "/tsukurikata/js/instrument-icons.js",
+            "status": 200,
+            "bytes": 2590,
+            "ms": 23
+          },
+          {
+            "file": "/tsukurikata/js/face-cast.js",
+            "status": 200,
+            "bytes": 7048,
+            "ms": 24
+          },
+          {
+            "file": "/tsukurikata/js/icons.js",
+            "status": 200,
+            "bytes": 4867,
+            "ms": 25
+          },
+          {
+            "file": "/tsukurikata/js/faces.js",
+            "status": 200,
+            "bytes": 4184,
+            "ms": 26
+          },
+          {
+            "file": "/tsukurikata/js/samples.js",
+            "status": 200,
+            "bytes": 24975,
+            "ms": 29
+          },
+          {
+            "file": "/tsukurikata/js/venues.js",
+            "status": 200,
+            "bytes": 12996,
+            "ms": 32
+          },
+          {
+            "file": "/tsukurikata/js/instruments.js",
+            "status": 200,
+            "bytes": 27017,
+            "ms": 32
+          },
+          {
+            "file": "/tsukurikata/js/scores.js",
+            "status": 200,
+            "bytes": 22132,
+            "ms": 32
+          },
+          {
+            "file": "/tsukurikata/js/pieces/largo.js",
+            "status": 200,
+            "bytes": 11341,
+            "ms": 35
+          },
+          {
+            "file": "/tsukurikata/js/pieces/galop.js",
+            "status": 200,
+            "bytes": 22631,
+            "ms": 35
+          },
+          {
+            "file": "/tsukurikata/js/pieces/ode.js",
+            "status": 200,
+            "bytes": 16000,
+            "ms": 36
+          },
+          {
+            "file": "/tsukurikata/js/pieces/aida.js",
+            "status": 200,
+            "bytes": 20823,
+            "ms": 38
+          },
+          {
+            "file": "/tsukurikata/js/pieces/pomp.js",
+            "status": 200,
+            "bytes": 19299,
+            "ms": 39
+          },
+          {
+            "file": "/tsukurikata/js/pieces/hungarian.js",
+            "status": 200,
+            "bytes": 29740,
+            "ms": 39
+          },
+          {
+            "file": "/tsukurikata/js/pieces/hero.js",
+            "status": 200,
+            "bytes": 21784,
+            "ms": 39
+          },
+          {
+            "file": "/tsukurikata/js/pieces/holst.js",
+            "status": 200,
+            "bytes": 18482,
+            "ms": 39
+          },
+          {
+            "file": "/tsukurikata/js/pieces/flowers.js",
+            "status": 200,
+            "bytes": 25824,
+            "ms": 42
+          },
+          {
+            "file": "/tsukurikata/js/pieces/tell.js",
+            "status": 200,
+            "bytes": 37082,
+            "ms": 45
+          },
+          {
+            "file": "/tsukurikata/js/pieces/valkyrie.js",
+            "status": 200,
+            "bytes": 20721,
+            "ms": 46
+          },
+          {
+            "file": "/tsukurikata/js/pieces/carmen.js",
+            "status": 200,
+            "bytes": 25854,
+            "ms": 52
+          },
+          {
+            "file": "/tsukurikata/js/pieces/spring.js",
+            "status": 200,
+            "bytes": 17241,
+            "ms": 43
+          },
+          {
+            "file": "/tsukurikata/js/pieces/swan.js",
+            "status": 200,
+            "bytes": 19332,
+            "ms": 43
+          },
+          {
+            "file": "/tsukurikata/js/engine.js",
+            "status": 200,
+            "bytes": 24139,
+            "ms": 48
+          },
+          {
+            "file": "/tsukurikata/js/band.js",
+            "status": 200,
+            "bytes": 50853,
+            "ms": 50
+          },
+          {
+            "file": "/tsukurikata/js/pieces/canon.js",
+            "status": 200,
+            "bytes": 13464,
+            "ms": 51
+          },
+          {
+            "file": "/tsukurikata/js/game.js",
+            "status": 200,
+            "bytes": 189281,
+            "ms": 54
+          },
+          {
+            "file": "/tsukurikata/js/conduct.js",
+            "status": 200,
+            "bytes": 30445,
+            "ms": 58
+          },
+          {
+            "file": "/tsukurikata/js/announce.js",
+            "status": 200,
+            "bytes": 10527,
+            "ms": 53
+          },
+          {
+            "file": "/tsukurikata/js/tunegame.js",
+            "status": 200,
+            "bytes": 9322,
+            "ms": 53
+          },
+          {
+            "file": "/tsukurikata/js/fx.js",
+            "status": 200,
+            "bytes": 11653,
+            "ms": 55
+          },
+          {
+            "file": "/tsukurikata/js/onboarding.js",
+            "status": 200,
+            "bytes": 8865,
+            "ms": 56
+          },
+          {
+            "file": "/tsukurikata/js/advisor.js",
+            "status": 200,
+            "bytes": 7503,
+            "ms": 58
+          },
+          {
+            "file": "/design/onboarding/qa.js",
+            "status": 200,
+            "bytes": 2415,
+            "ms": 59
+          },
+          {
+            "file": "/tsukurikata/js/ui.js",
+            "status": 200,
+            "bytes": 238729,
+            "ms": 60
+          }
+        ]
+      },
+      "errors": []
+    },
+    {
+      "label": "案内を終了",
+      "year": 2026,
+      "week": 1,
+      "phase": "week",
+      "tab": "week",
+      "state": 0.9416739821899682,
+      "guide": {
+        "club": "865908558:2026",
+        "active": false,
+        "heard": true
+      },
+      "step": null,
+      "title": null,
+      "playing": false,
+      "waiting": false,
+      "focus": "stage",
+      "width": 375,
+      "scrollWidth": 375,
+      "portrait": null,
+      "boot": {
+        "started": "2026-10-29T12:12:37.502Z",
+        "loaded": [
+          "/tsukurikata/js/util.js",
+          "/tsukurikata/js/icons.js",
+          "/tsukurikata/js/instrument-icons.js",
+          "/tsukurikata/js/face-cast.js",
+          "/tsukurikata/js/faces.js",
+          "/tsukurikata/js/instruments.js",
+          "/tsukurikata/js/venues.js",
+          "/tsukurikata/js/samples.js",
+          "/tsukurikata/js/scores.js",
+          "/tsukurikata/js/pieces/largo.js",
+          "/tsukurikata/js/pieces/ode.js",
+          "/tsukurikata/js/pieces/galop.js",
+          "/tsukurikata/js/pieces/pomp.js",
+          "/tsukurikata/js/pieces/aida.js",
+          "/tsukurikata/js/pieces/hero.js",
+          "/tsukurikata/js/pieces/holst.js",
+          "/tsukurikata/js/pieces/hungarian.js",
+          "/tsukurikata/js/pieces/flowers.js",
+          "/tsukurikata/js/pieces/tell.js",
+          "/tsukurikata/js/pieces/carmen.js",
+          "/tsukurikata/js/pieces/valkyrie.js",
+          "/tsukurikata/js/pieces/swan.js",
+          "/tsukurikata/js/pieces/spring.js",
+          "/tsukurikata/js/pieces/canon.js",
+          "/tsukurikata/js/band.js",
+          "/tsukurikata/js/game.js",
+          "/tsukurikata/js/engine.js",
+          "/tsukurikata/js/conduct.js",
+          "/tsukurikata/js/announce.js",
+          "/tsukurikata/js/tunegame.js",
+          "/tsukurikata/js/fx.js",
+          "/tsukurikata/js/advisor.js",
+          "/tsukurikata/js/onboarding.js",
+          "/tsukurikata/js/ui.js",
+          "/design/onboarding/qa.js"
+        ],
+        "failed": [],
+        "errors": [],
+        "ready": true,
+        "globals": {
+          "fx": "object",
+          "season": "function",
+          "engine": "function",
+          "pieces": "object",
+          "game": "function"
+        },
+        "scripts": [
+          "/tsukurikata/js/util.js",
+          "/tsukurikata/js/icons.js",
+          "/tsukurikata/js/instrument-icons.js",
+          "/tsukurikata/js/face-cast.js",
+          "/tsukurikata/js/faces.js",
+          "/tsukurikata/js/instruments.js",
+          "/tsukurikata/js/venues.js",
+          "/tsukurikata/js/samples.js",
+          "/tsukurikata/js/scores.js",
+          "/tsukurikata/js/pieces/largo.js",
+          "/tsukurikata/js/pieces/ode.js",
+          "/tsukurikata/js/pieces/galop.js",
+          "/tsukurikata/js/pieces/pomp.js",
+          "/tsukurikata/js/pieces/aida.js",
+          "/tsukurikata/js/pieces/hero.js",
+          "/tsukurikata/js/pieces/holst.js",
+          "/tsukurikata/js/pieces/hungarian.js",
+          "/tsukurikata/js/pieces/flowers.js",
+          "/tsukurikata/js/pieces/tell.js",
+          "/tsukurikata/js/pieces/carmen.js",
+          "/tsukurikata/js/pieces/valkyrie.js",
+          "/tsukurikata/js/pieces/swan.js",
+          "/tsukurikata/js/pieces/spring.js",
+          "/tsukurikata/js/pieces/canon.js",
+          "/tsukurikata/js/band.js",
+          "/tsukurikata/js/game.js",
+          "/tsukurikata/js/engine.js",
+          "/tsukurikata/js/conduct.js",
+          "/tsukurikata/js/announce.js",
+          "/tsukurikata/js/tunegame.js",
+          "/tsukurikata/js/fx.js",
+          "/tsukurikata/js/advisor.js",
+          "/tsukurikata/js/onboarding.js",
+          "/tsukurikata/js/ui.js",
+          "/design/onboarding/qa.js"
+        ],
+        "resources": [
+          {
+            "file": "/tsukurikata/js/util.js",
+            "status": 200,
+            "bytes": 2477,
+            "ms": 22
+          },
+          {
+            "file": "/tsukurikata/js/instrument-icons.js",
+            "status": 200,
+            "bytes": 2590,
+            "ms": 23
+          },
+          {
+            "file": "/tsukurikata/js/face-cast.js",
+            "status": 200,
+            "bytes": 7048,
+            "ms": 24
+          },
+          {
+            "file": "/tsukurikata/js/icons.js",
+            "status": 200,
+            "bytes": 4867,
+            "ms": 25
+          },
+          {
+            "file": "/tsukurikata/js/faces.js",
+            "status": 200,
+            "bytes": 4184,
+            "ms": 26
+          },
+          {
+            "file": "/tsukurikata/js/samples.js",
+            "status": 200,
+            "bytes": 24975,
+            "ms": 29
+          },
+          {
+            "file": "/tsukurikata/js/venues.js",
+            "status": 200,
+            "bytes": 12996,
+            "ms": 32
+          },
+          {
+            "file": "/tsukurikata/js/instruments.js",
+            "status": 200,
+            "bytes": 27017,
+            "ms": 32
+          },
+          {
+            "file": "/tsukurikata/js/scores.js",
+            "status": 200,
+            "bytes": 22132,
+            "ms": 32
+          },
+          {
+            "file": "/tsukurikata/js/pieces/largo.js",
+            "status": 200,
+            "bytes": 11341,
+            "ms": 35
+          },
+          {
+            "file": "/tsukurikata/js/pieces/galop.js",
+            "status": 200,
+            "bytes": 22631,
+            "ms": 35
+          },
+          {
+            "file": "/tsukurikata/js/pieces/ode.js",
+            "status": 200,
+            "bytes": 16000,
+            "ms": 36
+          },
+          {
+            "file": "/tsukurikata/js/pieces/aida.js",
+            "status": 200,
+            "bytes": 20823,
+            "ms": 38
+          },
+          {
+            "file": "/tsukurikata/js/pieces/pomp.js",
+            "status": 200,
+            "bytes": 19299,
+            "ms": 39
+          },
+          {
+            "file": "/tsukurikata/js/pieces/hungarian.js",
+            "status": 200,
+            "bytes": 29740,
+            "ms": 39
+          },
+          {
+            "file": "/tsukurikata/js/pieces/hero.js",
+            "status": 200,
+            "bytes": 21784,
+            "ms": 39
+          },
+          {
+            "file": "/tsukurikata/js/pieces/holst.js",
+            "status": 200,
+            "bytes": 18482,
+            "ms": 39
+          },
+          {
+            "file": "/tsukurikata/js/pieces/flowers.js",
+            "status": 200,
+            "bytes": 25824,
+            "ms": 42
+          },
+          {
+            "file": "/tsukurikata/js/pieces/tell.js",
+            "status": 200,
+            "bytes": 37082,
+            "ms": 45
+          },
+          {
+            "file": "/tsukurikata/js/pieces/valkyrie.js",
+            "status": 200,
+            "bytes": 20721,
+            "ms": 46
+          },
+          {
+            "file": "/tsukurikata/js/pieces/carmen.js",
+            "status": 200,
+            "bytes": 25854,
+            "ms": 52
+          },
+          {
+            "file": "/tsukurikata/js/pieces/spring.js",
+            "status": 200,
+            "bytes": 17241,
+            "ms": 43
+          },
+          {
+            "file": "/tsukurikata/js/pieces/swan.js",
+            "status": 200,
+            "bytes": 19332,
+            "ms": 43
+          },
+          {
+            "file": "/tsukurikata/js/engine.js",
+            "status": 200,
+            "bytes": 24139,
+            "ms": 48
+          },
+          {
+            "file": "/tsukurikata/js/band.js",
+            "status": 200,
+            "bytes": 50853,
+            "ms": 50
+          },
+          {
+            "file": "/tsukurikata/js/pieces/canon.js",
+            "status": 200,
+            "bytes": 13464,
+            "ms": 51
+          },
+          {
+            "file": "/tsukurikata/js/game.js",
+            "status": 200,
+            "bytes": 189281,
+            "ms": 54
+          },
+          {
+            "file": "/tsukurikata/js/conduct.js",
+            "status": 200,
+            "bytes": 30445,
+            "ms": 58
+          },
+          {
+            "file": "/tsukurikata/js/announce.js",
+            "status": 200,
+            "bytes": 10527,
+            "ms": 53
+          },
+          {
+            "file": "/tsukurikata/js/tunegame.js",
+            "status": 200,
+            "bytes": 9322,
+            "ms": 53
+          },
+          {
+            "file": "/tsukurikata/js/fx.js",
+            "status": 200,
+            "bytes": 11653,
+            "ms": 55
+          },
+          {
+            "file": "/tsukurikata/js/onboarding.js",
+            "status": 200,
+            "bytes": 8865,
+            "ms": 56
+          },
+          {
+            "file": "/tsukurikata/js/advisor.js",
+            "status": 200,
+            "bytes": 7503,
+            "ms": 58
+          },
+          {
+            "file": "/design/onboarding/qa.js",
+            "status": 200,
+            "bytes": 2415,
+            "ms": 59
+          },
+          {
+            "file": "/tsukurikata/js/ui.js",
+            "status": 200,
+            "bytes": 238729,
+            "ms": 60
+          }
+        ]
+      },
+      "errors": []
+    },
+    {
+      "label": "日誌から再開",
+      "year": 2026,
+      "week": 1,
+      "phase": "week",
+      "tab": "week",
+      "state": 0.9416739821899682,
+      "guide": {
+        "club": "865908558:2026",
+        "active": true,
+        "heard": false
+      },
+      "step": "3",
+      "title": "練習した音を、\n聴いてみよう。",
+      "playing": false,
+      "waiting": false,
+      "focus": "onboardingTitle",
+      "width": 375,
+      "scrollWidth": 375,
+      "portrait": {
+        "loaded": true,
+        "natural": 1254
+      },
+      "boot": {
+        "started": "2026-10-29T12:12:37.502Z",
+        "loaded": [
+          "/tsukurikata/js/util.js",
+          "/tsukurikata/js/icons.js",
+          "/tsukurikata/js/instrument-icons.js",
+          "/tsukurikata/js/face-cast.js",
+          "/tsukurikata/js/faces.js",
+          "/tsukurikata/js/instruments.js",
+          "/tsukurikata/js/venues.js",
+          "/tsukurikata/js/samples.js",
+          "/tsukurikata/js/scores.js",
+          "/tsukurikata/js/pieces/largo.js",
+          "/tsukurikata/js/pieces/ode.js",
+          "/tsukurikata/js/pieces/galop.js",
+          "/tsukurikata/js/pieces/pomp.js",
+          "/tsukurikata/js/pieces/aida.js",
+          "/tsukurikata/js/pieces/hero.js",
+          "/tsukurikata/js/pieces/holst.js",
+          "/tsukurikata/js/pieces/hungarian.js",
+          "/tsukurikata/js/pieces/flowers.js",
+          "/tsukurikata/js/pieces/tell.js",
+          "/tsukurikata/js/pieces/carmen.js",
+          "/tsukurikata/js/pieces/valkyrie.js",
+          "/tsukurikata/js/pieces/swan.js",
+          "/tsukurikata/js/pieces/spring.js",
+          "/tsukurikata/js/pieces/canon.js",
+          "/tsukurikata/js/band.js",
+          "/tsukurikata/js/game.js",
+          "/tsukurikata/js/engine.js",
+          "/tsukurikata/js/conduct.js",
+          "/tsukurikata/js/announce.js",
+          "/tsukurikata/js/tunegame.js",
+          "/tsukurikata/js/fx.js",
+          "/tsukurikata/js/advisor.js",
+          "/tsukurikata/js/onboarding.js",
+          "/tsukurikata/js/ui.js",
+          "/design/onboarding/qa.js"
+        ],
+        "failed": [],
+        "errors": [],
+        "ready": true,
+        "globals": {
+          "fx": "object",
+          "season": "function",
+          "engine": "function",
+          "pieces": "object",
+          "game": "function"
+        },
+        "scripts": [
+          "/tsukurikata/js/util.js",
+          "/tsukurikata/js/icons.js",
+          "/tsukurikata/js/instrument-icons.js",
+          "/tsukurikata/js/face-cast.js",
+          "/tsukurikata/js/faces.js",
+          "/tsukurikata/js/instruments.js",
+          "/tsukurikata/js/venues.js",
+          "/tsukurikata/js/samples.js",
+          "/tsukurikata/js/scores.js",
+          "/tsukurikata/js/pieces/largo.js",
+          "/tsukurikata/js/pieces/ode.js",
+          "/tsukurikata/js/pieces/galop.js",
+          "/tsukurikata/js/pieces/pomp.js",
+          "/tsukurikata/js/pieces/aida.js",
+          "/tsukurikata/js/pieces/hero.js",
+          "/tsukurikata/js/pieces/holst.js",
+          "/tsukurikata/js/pieces/hungarian.js",
+          "/tsukurikata/js/pieces/flowers.js",
+          "/tsukurikata/js/pieces/tell.js",
+          "/tsukurikata/js/pieces/carmen.js",
+          "/tsukurikata/js/pieces/valkyrie.js",
+          "/tsukurikata/js/pieces/swan.js",
+          "/tsukurikata/js/pieces/spring.js",
+          "/tsukurikata/js/pieces/canon.js",
+          "/tsukurikata/js/band.js",
+          "/tsukurikata/js/game.js",
+          "/tsukurikata/js/engine.js",
+          "/tsukurikata/js/conduct.js",
+          "/tsukurikata/js/announce.js",
+          "/tsukurikata/js/tunegame.js",
+          "/tsukurikata/js/fx.js",
+          "/tsukurikata/js/advisor.js",
+          "/tsukurikata/js/onboarding.js",
+          "/tsukurikata/js/ui.js",
+          "/design/onboarding/qa.js"
+        ],
+        "resources": [
+          {
+            "file": "/tsukurikata/js/util.js",
+            "status": 200,
+            "bytes": 2477,
+            "ms": 22
+          },
+          {
+            "file": "/tsukurikata/js/instrument-icons.js",
+            "status": 200,
+            "bytes": 2590,
+            "ms": 23
+          },
+          {
+            "file": "/tsukurikata/js/face-cast.js",
+            "status": 200,
+            "bytes": 7048,
+            "ms": 24
+          },
+          {
+            "file": "/tsukurikata/js/icons.js",
+            "status": 200,
+            "bytes": 4867,
+            "ms": 25
+          },
+          {
+            "file": "/tsukurikata/js/faces.js",
+            "status": 200,
+            "bytes": 4184,
+            "ms": 26
+          },
+          {
+            "file": "/tsukurikata/js/samples.js",
+            "status": 200,
+            "bytes": 24975,
+            "ms": 29
+          },
+          {
+            "file": "/tsukurikata/js/venues.js",
+            "status": 200,
+            "bytes": 12996,
+            "ms": 32
+          },
+          {
+            "file": "/tsukurikata/js/instruments.js",
+            "status": 200,
+            "bytes": 27017,
+            "ms": 32
+          },
+          {
+            "file": "/tsukurikata/js/scores.js",
+            "status": 200,
+            "bytes": 22132,
+            "ms": 32
+          },
+          {
+            "file": "/tsukurikata/js/pieces/largo.js",
+            "status": 200,
+            "bytes": 11341,
+            "ms": 35
+          },
+          {
+            "file": "/tsukurikata/js/pieces/galop.js",
+            "status": 200,
+            "bytes": 22631,
+            "ms": 35
+          },
+          {
+            "file": "/tsukurikata/js/pieces/ode.js",
+            "status": 200,
+            "bytes": 16000,
+            "ms": 36
+          },
+          {
+            "file": "/tsukurikata/js/pieces/aida.js",
+            "status": 200,
+            "bytes": 20823,
+            "ms": 38
+          },
+          {
+            "file": "/tsukurikata/js/pieces/pomp.js",
+            "status": 200,
+            "bytes": 19299,
+            "ms": 39
+          },
+          {
+            "file": "/tsukurikata/js/pieces/hungarian.js",
+            "status": 200,
+            "bytes": 29740,
+            "ms": 39
+          },
+          {
+            "file": "/tsukurikata/js/pieces/hero.js",
+            "status": 200,
+            "bytes": 21784,
+            "ms": 39
+          },
+          {
+            "file": "/tsukurikata/js/pieces/holst.js",
+            "status": 200,
+            "bytes": 18482,
+            "ms": 39
+          },
+          {
+            "file": "/tsukurikata/js/pieces/flowers.js",
+            "status": 200,
+            "bytes": 25824,
+            "ms": 42
+          },
+          {
+            "file": "/tsukurikata/js/pieces/tell.js",
+            "status": 200,
+            "bytes": 37082,
+            "ms": 45
+          },
+          {
+            "file": "/tsukurikata/js/pieces/valkyrie.js",
+            "status": 200,
+            "bytes": 20721,
+            "ms": 46
+          },
+          {
+            "file": "/tsukurikata/js/pieces/carmen.js",
+            "status": 200,
+            "bytes": 25854,
+            "ms": 52
+          },
+          {
+            "file": "/tsukurikata/js/pieces/spring.js",
+            "status": 200,
+            "bytes": 17241,
+            "ms": 43
+          },
+          {
+            "file": "/tsukurikata/js/pieces/swan.js",
+            "status": 200,
+            "bytes": 19332,
+            "ms": 43
+          },
+          {
+            "file": "/tsukurikata/js/engine.js",
+            "status": 200,
+            "bytes": 24139,
+            "ms": 48
+          },
+          {
+            "file": "/tsukurikata/js/band.js",
+            "status": 200,
+            "bytes": 50853,
+            "ms": 50
+          },
+          {
+            "file": "/tsukurikata/js/pieces/canon.js",
+            "status": 200,
+            "bytes": 13464,
+            "ms": 51
+          },
+          {
+            "file": "/tsukurikata/js/game.js",
+            "status": 200,
+            "bytes": 189281,
+            "ms": 54
+          },
+          {
+            "file": "/tsukurikata/js/conduct.js",
+            "status": 200,
+            "bytes": 30445,
+            "ms": 58
+          },
+          {
+            "file": "/tsukurikata/js/announce.js",
+            "status": 200,
+            "bytes": 10527,
+            "ms": 53
+          },
+          {
+            "file": "/tsukurikata/js/tunegame.js",
+            "status": 200,
+            "bytes": 9322,
+            "ms": 53
+          },
+          {
+            "file": "/tsukurikata/js/fx.js",
+            "status": 200,
+            "bytes": 11653,
+            "ms": 55
+          },
+          {
+            "file": "/tsukurikata/js/onboarding.js",
+            "status": 200,
+            "bytes": 8865,
+            "ms": 56
+          },
+          {
+            "file": "/tsukurikata/js/advisor.js",
+            "status": 200,
+            "bytes": 7503,
+            "ms": 58
+          },
+          {
+            "file": "/design/onboarding/qa.js",
+            "status": 200,
+            "bytes": 2415,
+            "ms": 59
+          },
+          {
+            "file": "/tsukurikata/js/ui.js",
+            "status": 200,
+            "bytes": 238729,
+            "ms": 60
+          }
+        ]
+      },
+      "errors": []
+    },
+    {
+      "label": "スキップ後の再読み込み",
+      "year": 2026,
+      "week": 1,
+      "phase": "week",
+      "tab": "week",
+      "state": 0.9416739821899682,
+      "guide": {
+        "club": "865908558:2026",
+        "active": false,
+        "heard": false
+      },
+      "step": null,
+      "title": null,
+      "playing": false,
+      "waiting": false,
+      "focus": "BODY",
+      "width": 375,
+      "scrollWidth": 375,
+      "portrait": null,
+      "boot": {
+        "started": "2026-10-29T12:15:07.488Z",
+        "loaded": [
+          "/tsukurikata/js/util.js",
+          "/tsukurikata/js/icons.js",
+          "/tsukurikata/js/instrument-icons.js",
+          "/tsukurikata/js/face-cast.js",
+          "/tsukurikata/js/faces.js",
+          "/tsukurikata/js/instruments.js",
+          "/tsukurikata/js/venues.js",
+          "/tsukurikata/js/samples.js",
+          "/tsukurikata/js/scores.js",
+          "/tsukurikata/js/pieces/largo.js",
+          "/tsukurikata/js/pieces/ode.js",
+          "/tsukurikata/js/pieces/galop.js",
+          "/tsukurikata/js/pieces/pomp.js",
+          "/tsukurikata/js/pieces/aida.js",
+          "/tsukurikata/js/pieces/hero.js",
+          "/tsukurikata/js/pieces/holst.js",
+          "/tsukurikata/js/pieces/hungarian.js",
+          "/tsukurikata/js/pieces/flowers.js",
+          "/tsukurikata/js/pieces/tell.js",
+          "/tsukurikata/js/pieces/carmen.js",
+          "/tsukurikata/js/pieces/valkyrie.js",
+          "/tsukurikata/js/pieces/swan.js",
+          "/tsukurikata/js/pieces/spring.js",
+          "/tsukurikata/js/pieces/canon.js",
+          "/tsukurikata/js/band.js",
+          "/tsukurikata/js/game.js",
+          "/tsukurikata/js/engine.js",
+          "/tsukurikata/js/conduct.js",
+          "/tsukurikata/js/announce.js",
+          "/tsukurikata/js/tunegame.js",
+          "/tsukurikata/js/fx.js",
+          "/tsukurikata/js/advisor.js",
+          "/tsukurikata/js/onboarding.js",
+          "/tsukurikata/js/ui.js",
+          "/design/onboarding/qa.js"
+        ],
+        "failed": [],
+        "errors": [],
+        "ready": true,
+        "globals": {
+          "fx": "object",
+          "season": "function",
+          "engine": "function",
+          "pieces": "object",
+          "game": "function"
+        },
+        "scripts": [
+          "/tsukurikata/js/util.js",
+          "/tsukurikata/js/icons.js",
+          "/tsukurikata/js/instrument-icons.js",
+          "/tsukurikata/js/face-cast.js",
+          "/tsukurikata/js/faces.js",
+          "/tsukurikata/js/instruments.js",
+          "/tsukurikata/js/venues.js",
+          "/tsukurikata/js/samples.js",
+          "/tsukurikata/js/scores.js",
+          "/tsukurikata/js/pieces/largo.js",
+          "/tsukurikata/js/pieces/ode.js",
+          "/tsukurikata/js/pieces/galop.js",
+          "/tsukurikata/js/pieces/pomp.js",
+          "/tsukurikata/js/pieces/aida.js",
+          "/tsukurikata/js/pieces/hero.js",
+          "/tsukurikata/js/pieces/holst.js",
+          "/tsukurikata/js/pieces/hungarian.js",
+          "/tsukurikata/js/pieces/flowers.js",
+          "/tsukurikata/js/pieces/tell.js",
+          "/tsukurikata/js/pieces/carmen.js",
+          "/tsukurikata/js/pieces/valkyrie.js",
+          "/tsukurikata/js/pieces/swan.js",
+          "/tsukurikata/js/pieces/spring.js",
+          "/tsukurikata/js/pieces/canon.js",
+          "/tsukurikata/js/band.js",
+          "/tsukurikata/js/game.js",
+          "/tsukurikata/js/engine.js",
+          "/tsukurikata/js/conduct.js",
+          "/tsukurikata/js/announce.js",
+          "/tsukurikata/js/tunegame.js",
+          "/tsukurikata/js/fx.js",
+          "/tsukurikata/js/advisor.js",
+          "/tsukurikata/js/onboarding.js",
+          "/tsukurikata/js/ui.js",
+          "/design/onboarding/qa.js"
+        ],
+        "resources": [
+          {
+            "file": "/tsukurikata/js/util.js",
+            "status": 200,
+            "bytes": 2477,
+            "ms": 22
+          },
+          {
+            "file": "/tsukurikata/js/icons.js",
+            "status": 200,
+            "bytes": 4867,
+            "ms": 22
+          },
+          {
+            "file": "/tsukurikata/js/instrument-icons.js",
+            "status": 200,
+            "bytes": 2590,
+            "ms": 24
+          },
+          {
+            "file": "/tsukurikata/js/face-cast.js",
+            "status": 200,
+            "bytes": 7048,
+            "ms": 26
+          },
+          {
+            "file": "/tsukurikata/js/faces.js",
+            "status": 200,
+            "bytes": 4184,
+            "ms": 27
+          },
+          {
+            "file": "/tsukurikata/js/venues.js",
+            "status": 200,
+            "bytes": 12996,
+            "ms": 28
+          },
+          {
+            "file": "/tsukurikata/js/instruments.js",
+            "status": 200,
+            "bytes": 27017,
+            "ms": 31
+          },
+          {
+            "file": "/tsukurikata/js/samples.js",
+            "status": 200,
+            "bytes": 24975,
+            "ms": 24
+          },
+          {
+            "file": "/tsukurikata/js/scores.js",
+            "status": 200,
+            "bytes": 22132,
+            "ms": 29
+          },
+          {
+            "file": "/tsukurikata/js/pieces/largo.js",
+            "status": 200,
+            "bytes": 11341,
+            "ms": 32
+          },
+          {
+            "file": "/tsukurikata/js/pieces/ode.js",
+            "status": 200,
+            "bytes": 16000,
+            "ms": 31
+          },
+          {
+            "file": "/tsukurikata/js/pieces/galop.js",
+            "status": 200,
+            "bytes": 22631,
+            "ms": 31
+          },
+          {
+            "file": "/tsukurikata/js/pieces/pomp.js",
+            "status": 200,
+            "bytes": 19299,
+            "ms": 32
+          },
+          {
+            "file": "/tsukurikata/js/pieces/aida.js",
+            "status": 200,
+            "bytes": 20823,
+            "ms": 33
+          },
+          {
+            "file": "/tsukurikata/js/pieces/flowers.js",
+            "status": 200,
+            "bytes": 25824,
+            "ms": 34
+          },
+          {
+            "file": "/tsukurikata/js/pieces/hungarian.js",
+            "status": 200,
+            "bytes": 29740,
+            "ms": 35
+          },
+          {
+            "file": "/tsukurikata/js/pieces/holst.js",
+            "status": 200,
+            "bytes": 18482,
+            "ms": 37
+          },
+          {
+            "file": "/tsukurikata/js/pieces/hero.js",
+            "status": 200,
+            "bytes": 21784,
+            "ms": 36
+          },
+          {
+            "file": "/tsukurikata/js/pieces/carmen.js",
+            "status": 200,
+            "bytes": 25854,
+            "ms": 36
+          },
+          {
+            "file": "/tsukurikata/js/pieces/swan.js",
+            "status": 200,
+            "bytes": 19332,
+            "ms": 37
+          },
+          {
+            "file": "/tsukurikata/js/pieces/spring.js",
+            "status": 200,
+            "bytes": 17241,
+            "ms": 37
+          },
+          {
+            "file": "/tsukurikata/js/pieces/tell.js",
+            "status": 200,
+            "bytes": 37082,
+            "ms": 37
+          },
+          {
+            "file": "/tsukurikata/js/pieces/valkyrie.js",
+            "status": 200,
+            "bytes": 20721,
+            "ms": 42
+          },
+          {
+            "file": "/tsukurikata/js/conduct.js",
+            "status": 200,
+            "bytes": 30445,
+            "ms": 39
+          },
+          {
+            "file": "/tsukurikata/js/pieces/canon.js",
+            "status": 200,
+            "bytes": 13464,
+            "ms": 40
+          },
+          {
+            "file": "/tsukurikata/js/band.js",
+            "status": 200,
+            "bytes": 50853,
+            "ms": 40
+          },
+          {
+            "file": "/tsukurikata/js/tunegame.js",
+            "status": 200,
+            "bytes": 9322,
+            "ms": 41
+          },
+          {
+            "file": "/tsukurikata/js/announce.js",
+            "status": 200,
+            "bytes": 10527,
+            "ms": 41
+          },
+          {
+            "file": "/tsukurikata/js/fx.js",
+            "status": 200,
+            "bytes": 11653,
+            "ms": 42
+          },
+          {
+            "file": "/tsukurikata/js/engine.js",
+            "status": 200,
+            "bytes": 24139,
+            "ms": 43
+          },
+          {
+            "file": "/tsukurikata/js/game.js",
+            "status": 200,
+            "bytes": 189281,
+            "ms": 45
+          },
+          {
+            "file": "/tsukurikata/js/advisor.js",
+            "status": 200,
+            "bytes": 7503,
+            "ms": 47
+          },
+          {
+            "file": "/tsukurikata/js/onboarding.js",
+            "status": 200,
+            "bytes": 8865,
+            "ms": 43
+          },
+          {
+            "file": "/tsukurikata/js/ui.js",
+            "status": 200,
+            "bytes": 238890,
+            "ms": 46
+          },
+          {
+            "file": "/design/onboarding/qa.js",
+            "status": 200,
+            "bytes": 2415,
+            "ms": 48
+          }
+        ]
+      },
+      "errors": []
+    },
+    {
+      "label": "ダークでEnter再生",
+      "year": 2026,
+      "week": 1,
+      "phase": "week",
+      "tab": "play",
+      "state": 0.26009087380953133,
+      "guide": {
+        "club": "3113443066:2026",
+        "active": true,
+        "heard": true
+      },
+      "step": "4",
+      "title": "この音が、\n部のはじまりです。",
+      "playing": true,
+      "waiting": false,
+      "focus": "btnStop",
+      "width": 375,
+      "scrollWidth": 375,
+      "portrait": {
+        "loaded": true,
+        "natural": 1254
+      },
+      "boot": {
+        "started": "2026-10-29T12:15:07.717Z",
+        "loaded": [
+          "/tsukurikata/js/util.js",
+          "/tsukurikata/js/icons.js",
+          "/tsukurikata/js/instrument-icons.js",
+          "/tsukurikata/js/face-cast.js",
+          "/tsukurikata/js/faces.js",
+          "/tsukurikata/js/instruments.js",
+          "/tsukurikata/js/venues.js",
+          "/tsukurikata/js/samples.js",
+          "/tsukurikata/js/scores.js",
+          "/tsukurikata/js/pieces/largo.js",
+          "/tsukurikata/js/pieces/ode.js",
+          "/tsukurikata/js/pieces/galop.js",
+          "/tsukurikata/js/pieces/pomp.js",
+          "/tsukurikata/js/pieces/aida.js",
+          "/tsukurikata/js/pieces/hero.js",
+          "/tsukurikata/js/pieces/holst.js",
+          "/tsukurikata/js/pieces/hungarian.js",
+          "/tsukurikata/js/pieces/flowers.js",
+          "/tsukurikata/js/pieces/tell.js",
+          "/tsukurikata/js/pieces/carmen.js",
+          "/tsukurikata/js/pieces/valkyrie.js",
+          "/tsukurikata/js/pieces/swan.js",
+          "/tsukurikata/js/pieces/spring.js",
+          "/tsukurikata/js/pieces/canon.js",
+          "/tsukurikata/js/band.js",
+          "/tsukurikata/js/game.js",
+          "/tsukurikata/js/engine.js",
+          "/tsukurikata/js/conduct.js",
+          "/tsukurikata/js/announce.js",
+          "/tsukurikata/js/tunegame.js",
+          "/tsukurikata/js/fx.js",
+          "/tsukurikata/js/advisor.js",
+          "/tsukurikata/js/onboarding.js",
+          "/tsukurikata/js/ui.js",
+          "/design/onboarding/qa.js"
+        ],
+        "failed": [],
+        "errors": [],
+        "ready": true,
+        "globals": {
+          "fx": "object",
+          "season": "function",
+          "engine": "function",
+          "pieces": "object",
+          "game": "function"
+        },
+        "scripts": [
+          "/tsukurikata/js/util.js",
+          "/tsukurikata/js/icons.js",
+          "/tsukurikata/js/instrument-icons.js",
+          "/tsukurikata/js/face-cast.js",
+          "/tsukurikata/js/faces.js",
+          "/tsukurikata/js/instruments.js",
+          "/tsukurikata/js/venues.js",
+          "/tsukurikata/js/samples.js",
+          "/tsukurikata/js/scores.js",
+          "/tsukurikata/js/pieces/largo.js",
+          "/tsukurikata/js/pieces/ode.js",
+          "/tsukurikata/js/pieces/galop.js",
+          "/tsukurikata/js/pieces/pomp.js",
+          "/tsukurikata/js/pieces/aida.js",
+          "/tsukurikata/js/pieces/hero.js",
+          "/tsukurikata/js/pieces/holst.js",
+          "/tsukurikata/js/pieces/hungarian.js",
+          "/tsukurikata/js/pieces/flowers.js",
+          "/tsukurikata/js/pieces/tell.js",
+          "/tsukurikata/js/pieces/carmen.js",
+          "/tsukurikata/js/pieces/valkyrie.js",
+          "/tsukurikata/js/pieces/swan.js",
+          "/tsukurikata/js/pieces/spring.js",
+          "/tsukurikata/js/pieces/canon.js",
+          "/tsukurikata/js/band.js",
+          "/tsukurikata/js/game.js",
+          "/tsukurikata/js/engine.js",
+          "/tsukurikata/js/conduct.js",
+          "/tsukurikata/js/announce.js",
+          "/tsukurikata/js/tunegame.js",
+          "/tsukurikata/js/fx.js",
+          "/tsukurikata/js/advisor.js",
+          "/tsukurikata/js/onboarding.js",
+          "/tsukurikata/js/ui.js",
+          "/design/onboarding/qa.js"
+        ],
+        "resources": [
+          {
+            "file": "/tsukurikata/js/instrument-icons.js",
+            "status": 200,
+            "bytes": 2590,
+            "ms": 16
+          },
+          {
+            "file": "/tsukurikata/js/face-cast.js",
+            "status": 200,
+            "bytes": 7048,
+            "ms": 17
+          },
+          {
+            "file": "/tsukurikata/js/icons.js",
+            "status": 200,
+            "bytes": 4867,
+            "ms": 17
+          },
+          {
+            "file": "/tsukurikata/js/util.js",
+            "status": 200,
+            "bytes": 2477,
+            "ms": 18
+          },
+          {
+            "file": "/tsukurikata/js/faces.js",
+            "status": 200,
+            "bytes": 4184,
+            "ms": 19
+          },
+          {
+            "file": "/tsukurikata/js/venues.js",
+            "status": 200,
+            "bytes": 12996,
+            "ms": 19
+          },
+          {
+            "file": "/tsukurikata/js/samples.js",
+            "status": 200,
+            "bytes": 24975,
+            "ms": 19
+          },
+          {
+            "file": "/tsukurikata/js/scores.js",
+            "status": 200,
+            "bytes": 22132,
+            "ms": 20
+          },
+          {
+            "file": "/tsukurikata/js/instruments.js",
+            "status": 200,
+            "bytes": 27017,
+            "ms": 21
+          },
+          {
+            "file": "/tsukurikata/js/pieces/largo.js",
+            "status": 200,
+            "bytes": 11341,
+            "ms": 22
+          },
+          {
+            "file": "/tsukurikata/js/pieces/ode.js",
+            "status": 200,
+            "bytes": 16000,
+            "ms": 21
+          },
+          {
+            "file": "/tsukurikata/js/pieces/galop.js",
+            "status": 200,
+            "bytes": 22631,
+            "ms": 21
+          },
+          {
+            "file": "/tsukurikata/js/pieces/aida.js",
+            "status": 200,
+            "bytes": 20823,
+            "ms": 22
+          },
+          {
+            "file": "/tsukurikata/js/pieces/hungarian.js",
+            "status": 200,
+            "bytes": 29740,
+            "ms": 23
+          },
+          {
+            "file": "/tsukurikata/js/pieces/pomp.js",
+            "status": 200,
+            "bytes": 19299,
+            "ms": 23
+          },
+          {
+            "file": "/tsukurikata/js/pieces/holst.js",
+            "status": 200,
+            "bytes": 18482,
+            "ms": 24
+          },
+          {
+            "file": "/tsukurikata/js/pieces/hero.js",
+            "status": 200,
+            "bytes": 21784,
+            "ms": 24
+          },
+          {
+            "file": "/tsukurikata/js/pieces/flowers.js",
+            "status": 200,
+            "bytes": 25824,
+            "ms": 24
+          },
+          {
+            "file": "/tsukurikata/js/pieces/valkyrie.js",
+            "status": 200,
+            "bytes": 20721,
+            "ms": 25
+          },
+          {
+            "file": "/tsukurikata/js/pieces/carmen.js",
+            "status": 200,
+            "bytes": 25854,
+            "ms": 25
+          },
+          {
+            "file": "/tsukurikata/js/pieces/tell.js",
+            "status": 200,
+            "bytes": 37082,
+            "ms": 25
+          },
+          {
+            "file": "/tsukurikata/js/band.js",
+            "status": 200,
+            "bytes": 50853,
+            "ms": 26
+          },
+          {
+            "file": "/tsukurikata/js/pieces/swan.js",
+            "status": 200,
+            "bytes": 19332,
+            "ms": 27
+          },
+          {
+            "file": "/tsukurikata/js/pieces/canon.js",
+            "status": 200,
+            "bytes": 13464,
+            "ms": 28
+          },
+          {
+            "file": "/tsukurikata/js/pieces/spring.js",
+            "status": 200,
+            "bytes": 17241,
+            "ms": 28
+          },
+          {
+            "file": "/tsukurikata/js/game.js",
+            "status": 200,
+            "bytes": 189281,
+            "ms": 28
+          },
+          {
+            "file": "/tsukurikata/js/engine.js",
+            "status": 200,
+            "bytes": 24139,
+            "ms": 29
+          },
+          {
+            "file": "/tsukurikata/js/conduct.js",
+            "status": 200,
+            "bytes": 30445,
+            "ms": 26
+          },
+          {
+            "file": "/tsukurikata/js/announce.js",
+            "status": 200,
+            "bytes": 10527,
+            "ms": 28
+          },
+          {
+            "file": "/tsukurikata/js/tunegame.js",
+            "status": 200,
+            "bytes": 9322,
+            "ms": 29
+          },
+          {
+            "file": "/tsukurikata/js/advisor.js",
+            "status": 200,
+            "bytes": 7503,
+            "ms": 31
+          },
+          {
+            "file": "/tsukurikata/js/fx.js",
+            "status": 200,
+            "bytes": 11653,
+            "ms": 31
+          },
+          {
+            "file": "/tsukurikata/js/onboarding.js",
+            "status": 200,
+            "bytes": 8865,
+            "ms": 31
+          },
+          {
+            "file": "/design/onboarding/qa.js",
+            "status": 200,
+            "bytes": 2415,
+            "ms": 32
+          },
+          {
+            "file": "/tsukurikata/js/ui.js",
+            "status": 200,
+            "bytes": 238890,
+            "ms": 31
+          }
+        ]
+      },
+      "errors": []
+    },
+    {
+      "label": "既存セーブでは自動表示なし",
+      "year": 2026,
+      "week": 4,
+      "phase": "week",
+      "tab": "week",
+      "state": 0.4074013386853039,
+      "guide": {
+        "club": "1215587236:2026",
+        "active": false,
+        "heard": false
+      },
+      "step": null,
+      "title": null,
+      "playing": false,
+      "waiting": false,
+      "focus": "BODY",
+      "width": 375,
+      "scrollWidth": 375,
+      "portrait": null,
+      "boot": {
+        "started": "2026-10-29T12:17:43.578Z",
+        "loaded": [
+          "/tsukurikata/js/util.js",
+          "/tsukurikata/js/icons.js",
+          "/tsukurikata/js/instrument-icons.js",
+          "/tsukurikata/js/face-cast.js",
+          "/tsukurikata/js/faces.js",
+          "/tsukurikata/js/instruments.js",
+          "/tsukurikata/js/venues.js",
+          "/tsukurikata/js/samples.js",
+          "/tsukurikata/js/scores.js",
+          "/tsukurikata/js/pieces/largo.js",
+          "/tsukurikata/js/pieces/ode.js",
+          "/tsukurikata/js/pieces/galop.js",
+          "/tsukurikata/js/pieces/pomp.js",
+          "/tsukurikata/js/pieces/aida.js",
+          "/tsukurikata/js/pieces/hero.js",
+          "/tsukurikata/js/pieces/holst.js",
+          "/tsukurikata/js/pieces/hungarian.js",
+          "/tsukurikata/js/pieces/flowers.js",
+          "/tsukurikata/js/pieces/tell.js",
+          "/tsukurikata/js/pieces/carmen.js",
+          "/tsukurikata/js/pieces/valkyrie.js",
+          "/tsukurikata/js/pieces/swan.js",
+          "/tsukurikata/js/pieces/spring.js",
+          "/tsukurikata/js/pieces/canon.js",
+          "/tsukurikata/js/band.js",
+          "/tsukurikata/js/game.js",
+          "/tsukurikata/js/engine.js",
+          "/tsukurikata/js/conduct.js",
+          "/tsukurikata/js/announce.js",
+          "/tsukurikata/js/tunegame.js",
+          "/tsukurikata/js/fx.js",
+          "/tsukurikata/js/advisor.js",
+          "/tsukurikata/js/onboarding.js",
+          "/tsukurikata/js/ui.js",
+          "/design/onboarding/qa.js"
+        ],
+        "failed": [],
+        "errors": [],
+        "ready": true,
+        "globals": {
+          "fx": "object",
+          "season": "function",
+          "engine": "function",
+          "pieces": "object",
+          "game": "function"
+        },
+        "scripts": [
+          "/tsukurikata/js/util.js",
+          "/tsukurikata/js/icons.js",
+          "/tsukurikata/js/instrument-icons.js",
+          "/tsukurikata/js/face-cast.js",
+          "/tsukurikata/js/faces.js",
+          "/tsukurikata/js/instruments.js",
+          "/tsukurikata/js/venues.js",
+          "/tsukurikata/js/samples.js",
+          "/tsukurikata/js/scores.js",
+          "/tsukurikata/js/pieces/largo.js",
+          "/tsukurikata/js/pieces/ode.js",
+          "/tsukurikata/js/pieces/galop.js",
+          "/tsukurikata/js/pieces/pomp.js",
+          "/tsukurikata/js/pieces/aida.js",
+          "/tsukurikata/js/pieces/hero.js",
+          "/tsukurikata/js/pieces/holst.js",
+          "/tsukurikata/js/pieces/hungarian.js",
+          "/tsukurikata/js/pieces/flowers.js",
+          "/tsukurikata/js/pieces/tell.js",
+          "/tsukurikata/js/pieces/carmen.js",
+          "/tsukurikata/js/pieces/valkyrie.js",
+          "/tsukurikata/js/pieces/swan.js",
+          "/tsukurikata/js/pieces/spring.js",
+          "/tsukurikata/js/pieces/canon.js",
+          "/tsukurikata/js/band.js",
+          "/tsukurikata/js/game.js",
+          "/tsukurikata/js/engine.js",
+          "/tsukurikata/js/conduct.js",
+          "/tsukurikata/js/announce.js",
+          "/tsukurikata/js/tunegame.js",
+          "/tsukurikata/js/fx.js",
+          "/tsukurikata/js/advisor.js",
+          "/tsukurikata/js/onboarding.js",
+          "/tsukurikata/js/ui.js",
+          "/design/onboarding/qa.js"
+        ],
+        "resources": [
+          {
+            "file": "/tsukurikata/js/util.js",
+            "status": 200,
+            "bytes": 2477,
+            "ms": 23
+          },
+          {
+            "file": "/tsukurikata/js/instrument-icons.js",
+            "status": 200,
+            "bytes": 2590,
+            "ms": 22
+          },
+          {
+            "file": "/tsukurikata/js/face-cast.js",
+            "status": 200,
+            "bytes": 7048,
+            "ms": 24
+          },
+          {
+            "file": "/tsukurikata/js/icons.js",
+            "status": 200,
+            "bytes": 4867,
+            "ms": 25
+          },
+          {
+            "file": "/tsukurikata/js/instruments.js",
+            "status": 200,
+            "bytes": 27017,
+            "ms": 25
+          },
+          {
+            "file": "/tsukurikata/js/faces.js",
+            "status": 200,
+            "bytes": 4184,
+            "ms": 27
+          },
+          {
+            "file": "/tsukurikata/js/venues.js",
+            "status": 200,
+            "bytes": 12996,
+            "ms": 29
+          },
+          {
+            "file": "/tsukurikata/js/scores.js",
+            "status": 200,
+            "bytes": 22132,
+            "ms": 27
+          },
+          {
+            "file": "/tsukurikata/js/samples.js",
+            "status": 200,
+            "bytes": 24975,
+            "ms": 28
+          },
+          {
+            "file": "/tsukurikata/js/pieces/largo.js",
+            "status": 200,
+            "bytes": 11341,
+            "ms": 30
+          },
+          {
+            "file": "/tsukurikata/js/pieces/ode.js",
+            "status": 200,
+            "bytes": 16000,
+            "ms": 32
+          },
+          {
+            "file": "/tsukurikata/js/pieces/holst.js",
+            "status": 200,
+            "bytes": 18482,
+            "ms": 32
+          },
+          {
+            "file": "/tsukurikata/js/pieces/hero.js",
+            "status": 200,
+            "bytes": 21784,
+            "ms": 33
+          },
+          {
+            "file": "/tsukurikata/js/pieces/aida.js",
+            "status": 200,
+            "bytes": 20823,
+            "ms": 35
+          },
+          {
+            "file": "/tsukurikata/js/pieces/galop.js",
+            "status": 200,
+            "bytes": 22631,
+            "ms": 36
+          },
+          {
+            "file": "/tsukurikata/js/pieces/pomp.js",
+            "status": 200,
+            "bytes": 19299,
+            "ms": 36
+          },
+          {
+            "file": "/tsukurikata/js/pieces/flowers.js",
+            "status": 200,
+            "bytes": 25824,
+            "ms": 36
+          },
+          {
+            "file": "/tsukurikata/js/pieces/hungarian.js",
+            "status": 200,
+            "bytes": 29740,
+            "ms": 37
+          },
+          {
+            "file": "/tsukurikata/js/pieces/tell.js",
+            "status": 200,
+            "bytes": 37082,
+            "ms": 36
+          },
+          {
+            "file": "/tsukurikata/js/pieces/carmen.js",
+            "status": 200,
+            "bytes": 25854,
+            "ms": 37
+          },
+          {
+            "file": "/tsukurikata/js/pieces/valkyrie.js",
+            "status": 200,
+            "bytes": 20721,
+            "ms": 38
+          },
+          {
+            "file": "/tsukurikata/js/band.js",
+            "status": 200,
+            "bytes": 50853,
+            "ms": 39
+          },
+          {
+            "file": "/tsukurikata/js/pieces/swan.js",
+            "status": 200,
+            "bytes": 19332,
+            "ms": 41
+          },
+          {
+            "file": "/tsukurikata/js/pieces/spring.js",
+            "status": 200,
+            "bytes": 17241,
+            "ms": 41
+          },
+          {
+            "file": "/tsukurikata/js/pieces/canon.js",
+            "status": 200,
+            "bytes": 13464,
+            "ms": 42
+          },
+          {
+            "file": "/tsukurikata/js/conduct.js",
+            "status": 200,
+            "bytes": 30445,
+            "ms": 44
+          },
+          {
+            "file": "/tsukurikata/js/engine.js",
+            "status": 200,
+            "bytes": 24139,
+            "ms": 45
+          },
+          {
+            "file": "/tsukurikata/js/game.js",
+            "status": 200,
+            "bytes": 189281,
+            "ms": 44
+          },
+          {
+            "file": "/tsukurikata/js/fx.js",
+            "status": 200,
+            "bytes": 11653,
+            "ms": 43
+          },
+          {
+            "file": "/tsukurikata/js/announce.js",
+            "status": 200,
+            "bytes": 10527,
+            "ms": 46
+          },
+          {
+            "file": "/tsukurikata/js/tunegame.js",
+            "status": 200,
+            "bytes": 9322,
+            "ms": 49
+          },
+          {
+            "file": "/tsukurikata/js/advisor.js",
+            "status": 200,
+            "bytes": 7503,
+            "ms": 45
+          },
+          {
+            "file": "/tsukurikata/js/onboarding.js",
+            "status": 200,
+            "bytes": 8865,
+            "ms": 48
+          },
+          {
+            "file": "/design/onboarding/qa.js",
+            "status": 200,
+            "bytes": 2415,
+            "ms": 49
+          },
+          {
+            "file": "/tsukurikata/js/ui.js",
+            "status": 200,
+            "bytes": 238890,
+            "ms": 49
+          }
+        ]
+      },
+      "errors": []
+    },
+    {
+      "label": "既存セーブで案内を開く",
+      "year": 2026,
+      "week": 4,
+      "phase": "week",
+      "tab": "week",
+      "state": 0.4074013386853039,
+      "guide": {
+        "club": "1215587236:2026",
+        "active": true,
+        "heard": false
+      },
+      "step": "overview",
+      "title": "部を育てる、\n4つのこと。",
+      "playing": false,
+      "waiting": false,
+      "focus": "onboardingTitle",
+      "width": 375,
+      "scrollWidth": 375,
+      "portrait": {
+        "loaded": true,
+        "natural": 1254
+      },
+      "boot": {
+        "started": "2026-10-29T12:17:43.578Z",
+        "loaded": [
+          "/tsukurikata/js/util.js",
+          "/tsukurikata/js/icons.js",
+          "/tsukurikata/js/instrument-icons.js",
+          "/tsukurikata/js/face-cast.js",
+          "/tsukurikata/js/faces.js",
+          "/tsukurikata/js/instruments.js",
+          "/tsukurikata/js/venues.js",
+          "/tsukurikata/js/samples.js",
+          "/tsukurikata/js/scores.js",
+          "/tsukurikata/js/pieces/largo.js",
+          "/tsukurikata/js/pieces/ode.js",
+          "/tsukurikata/js/pieces/galop.js",
+          "/tsukurikata/js/pieces/pomp.js",
+          "/tsukurikata/js/pieces/aida.js",
+          "/tsukurikata/js/pieces/hero.js",
+          "/tsukurikata/js/pieces/holst.js",
+          "/tsukurikata/js/pieces/hungarian.js",
+          "/tsukurikata/js/pieces/flowers.js",
+          "/tsukurikata/js/pieces/tell.js",
+          "/tsukurikata/js/pieces/carmen.js",
+          "/tsukurikata/js/pieces/valkyrie.js",
+          "/tsukurikata/js/pieces/swan.js",
+          "/tsukurikata/js/pieces/spring.js",
+          "/tsukurikata/js/pieces/canon.js",
+          "/tsukurikata/js/band.js",
+          "/tsukurikata/js/game.js",
+          "/tsukurikata/js/engine.js",
+          "/tsukurikata/js/conduct.js",
+          "/tsukurikata/js/announce.js",
+          "/tsukurikata/js/tunegame.js",
+          "/tsukurikata/js/fx.js",
+          "/tsukurikata/js/advisor.js",
+          "/tsukurikata/js/onboarding.js",
+          "/tsukurikata/js/ui.js",
+          "/design/onboarding/qa.js"
+        ],
+        "failed": [],
+        "errors": [],
+        "ready": true,
+        "globals": {
+          "fx": "object",
+          "season": "function",
+          "engine": "function",
+          "pieces": "object",
+          "game": "function"
+        },
+        "scripts": [
+          "/tsukurikata/js/util.js",
+          "/tsukurikata/js/icons.js",
+          "/tsukurikata/js/instrument-icons.js",
+          "/tsukurikata/js/face-cast.js",
+          "/tsukurikata/js/faces.js",
+          "/tsukurikata/js/instruments.js",
+          "/tsukurikata/js/venues.js",
+          "/tsukurikata/js/samples.js",
+          "/tsukurikata/js/scores.js",
+          "/tsukurikata/js/pieces/largo.js",
+          "/tsukurikata/js/pieces/ode.js",
+          "/tsukurikata/js/pieces/galop.js",
+          "/tsukurikata/js/pieces/pomp.js",
+          "/tsukurikata/js/pieces/aida.js",
+          "/tsukurikata/js/pieces/hero.js",
+          "/tsukurikata/js/pieces/holst.js",
+          "/tsukurikata/js/pieces/hungarian.js",
+          "/tsukurikata/js/pieces/flowers.js",
+          "/tsukurikata/js/pieces/tell.js",
+          "/tsukurikata/js/pieces/carmen.js",
+          "/tsukurikata/js/pieces/valkyrie.js",
+          "/tsukurikata/js/pieces/swan.js",
+          "/tsukurikata/js/pieces/spring.js",
+          "/tsukurikata/js/pieces/canon.js",
+          "/tsukurikata/js/band.js",
+          "/tsukurikata/js/game.js",
+          "/tsukurikata/js/engine.js",
+          "/tsukurikata/js/conduct.js",
+          "/tsukurikata/js/announce.js",
+          "/tsukurikata/js/tunegame.js",
+          "/tsukurikata/js/fx.js",
+          "/tsukurikata/js/advisor.js",
+          "/tsukurikata/js/onboarding.js",
+          "/tsukurikata/js/ui.js",
+          "/design/onboarding/qa.js"
+        ],
+        "resources": [
+          {
+            "file": "/tsukurikata/js/util.js",
+            "status": 200,
+            "bytes": 2477,
+            "ms": 23
+          },
+          {
+            "file": "/tsukurikata/js/instrument-icons.js",
+            "status": 200,
+            "bytes": 2590,
+            "ms": 22
+          },
+          {
+            "file": "/tsukurikata/js/face-cast.js",
+            "status": 200,
+            "bytes": 7048,
+            "ms": 24
+          },
+          {
+            "file": "/tsukurikata/js/icons.js",
+            "status": 200,
+            "bytes": 4867,
+            "ms": 25
+          },
+          {
+            "file": "/tsukurikata/js/instruments.js",
+            "status": 200,
+            "bytes": 27017,
+            "ms": 25
+          },
+          {
+            "file": "/tsukurikata/js/faces.js",
+            "status": 200,
+            "bytes": 4184,
+            "ms": 27
+          },
+          {
+            "file": "/tsukurikata/js/venues.js",
+            "status": 200,
+            "bytes": 12996,
+            "ms": 29
+          },
+          {
+            "file": "/tsukurikata/js/scores.js",
+            "status": 200,
+            "bytes": 22132,
+            "ms": 27
+          },
+          {
+            "file": "/tsukurikata/js/samples.js",
+            "status": 200,
+            "bytes": 24975,
+            "ms": 28
+          },
+          {
+            "file": "/tsukurikata/js/pieces/largo.js",
+            "status": 200,
+            "bytes": 11341,
+            "ms": 30
+          },
+          {
+            "file": "/tsukurikata/js/pieces/ode.js",
+            "status": 200,
+            "bytes": 16000,
+            "ms": 32
+          },
+          {
+            "file": "/tsukurikata/js/pieces/holst.js",
+            "status": 200,
+            "bytes": 18482,
+            "ms": 32
+          },
+          {
+            "file": "/tsukurikata/js/pieces/hero.js",
+            "status": 200,
+            "bytes": 21784,
+            "ms": 33
+          },
+          {
+            "file": "/tsukurikata/js/pieces/aida.js",
+            "status": 200,
+            "bytes": 20823,
+            "ms": 35
+          },
+          {
+            "file": "/tsukurikata/js/pieces/galop.js",
+            "status": 200,
+            "bytes": 22631,
+            "ms": 36
+          },
+          {
+            "file": "/tsukurikata/js/pieces/pomp.js",
+            "status": 200,
+            "bytes": 19299,
+            "ms": 36
+          },
+          {
+            "file": "/tsukurikata/js/pieces/flowers.js",
+            "status": 200,
+            "bytes": 25824,
+            "ms": 36
+          },
+          {
+            "file": "/tsukurikata/js/pieces/hungarian.js",
+            "status": 200,
+            "bytes": 29740,
+            "ms": 37
+          },
+          {
+            "file": "/tsukurikata/js/pieces/tell.js",
+            "status": 200,
+            "bytes": 37082,
+            "ms": 36
+          },
+          {
+            "file": "/tsukurikata/js/pieces/carmen.js",
+            "status": 200,
+            "bytes": 25854,
+            "ms": 37
+          },
+          {
+            "file": "/tsukurikata/js/pieces/valkyrie.js",
+            "status": 200,
+            "bytes": 20721,
+            "ms": 38
+          },
+          {
+            "file": "/tsukurikata/js/band.js",
+            "status": 200,
+            "bytes": 50853,
+            "ms": 39
+          },
+          {
+            "file": "/tsukurikata/js/pieces/swan.js",
+            "status": 200,
+            "bytes": 19332,
+            "ms": 41
+          },
+          {
+            "file": "/tsukurikata/js/pieces/spring.js",
+            "status": 200,
+            "bytes": 17241,
+            "ms": 41
+          },
+          {
+            "file": "/tsukurikata/js/pieces/canon.js",
+            "status": 200,
+            "bytes": 13464,
+            "ms": 42
+          },
+          {
+            "file": "/tsukurikata/js/conduct.js",
+            "status": 200,
+            "bytes": 30445,
+            "ms": 44
+          },
+          {
+            "file": "/tsukurikata/js/engine.js",
+            "status": 200,
+            "bytes": 24139,
+            "ms": 45
+          },
+          {
+            "file": "/tsukurikata/js/game.js",
+            "status": 200,
+            "bytes": 189281,
+            "ms": 44
+          },
+          {
+            "file": "/tsukurikata/js/fx.js",
+            "status": 200,
+            "bytes": 11653,
+            "ms": 43
+          },
+          {
+            "file": "/tsukurikata/js/announce.js",
+            "status": 200,
+            "bytes": 10527,
+            "ms": 46
+          },
+          {
+            "file": "/tsukurikata/js/tunegame.js",
+            "status": 200,
+            "bytes": 9322,
+            "ms": 49
+          },
+          {
+            "file": "/tsukurikata/js/advisor.js",
+            "status": 200,
+            "bytes": 7503,
+            "ms": 45
+          },
+          {
+            "file": "/tsukurikata/js/onboarding.js",
+            "status": 200,
+            "bytes": 8865,
+            "ms": 48
+          },
+          {
+            "file": "/design/onboarding/qa.js",
+            "status": 200,
+            "bytes": 2415,
+            "ms": 49
+          },
+          {
+            "file": "/tsukurikata/js/ui.js",
+            "status": 200,
+            "bytes": 238890,
+            "ms": 49
+          }
+        ]
+      },
+      "errors": []
+    },
+    {
+      "label": "案内から部員へ移動",
+      "year": 2026,
+      "week": 4,
+      "phase": "week",
+      "tab": "members",
+      "state": 0.4074013386853039,
+      "guide": {
+        "club": "1215587236:2026",
+        "active": false,
+        "heard": false
+      },
+      "step": null,
+      "title": null,
+      "playing": false,
+      "waiting": false,
+      "focus": "h-roster",
+      "width": 375,
+      "scrollWidth": 375,
+      "portrait": null,
+      "boot": {
+        "started": "2026-10-29T12:17:43.578Z",
+        "loaded": [
+          "/tsukurikata/js/util.js",
+          "/tsukurikata/js/icons.js",
+          "/tsukurikata/js/instrument-icons.js",
+          "/tsukurikata/js/face-cast.js",
+          "/tsukurikata/js/faces.js",
+          "/tsukurikata/js/instruments.js",
+          "/tsukurikata/js/venues.js",
+          "/tsukurikata/js/samples.js",
+          "/tsukurikata/js/scores.js",
+          "/tsukurikata/js/pieces/largo.js",
+          "/tsukurikata/js/pieces/ode.js",
+          "/tsukurikata/js/pieces/galop.js",
+          "/tsukurikata/js/pieces/pomp.js",
+          "/tsukurikata/js/pieces/aida.js",
+          "/tsukurikata/js/pieces/hero.js",
+          "/tsukurikata/js/pieces/holst.js",
+          "/tsukurikata/js/pieces/hungarian.js",
+          "/tsukurikata/js/pieces/flowers.js",
+          "/tsukurikata/js/pieces/tell.js",
+          "/tsukurikata/js/pieces/carmen.js",
+          "/tsukurikata/js/pieces/valkyrie.js",
+          "/tsukurikata/js/pieces/swan.js",
+          "/tsukurikata/js/pieces/spring.js",
+          "/tsukurikata/js/pieces/canon.js",
+          "/tsukurikata/js/band.js",
+          "/tsukurikata/js/game.js",
+          "/tsukurikata/js/engine.js",
+          "/tsukurikata/js/conduct.js",
+          "/tsukurikata/js/announce.js",
+          "/tsukurikata/js/tunegame.js",
+          "/tsukurikata/js/fx.js",
+          "/tsukurikata/js/advisor.js",
+          "/tsukurikata/js/onboarding.js",
+          "/tsukurikata/js/ui.js",
+          "/design/onboarding/qa.js"
+        ],
+        "failed": [],
+        "errors": [],
+        "ready": true,
+        "globals": {
+          "fx": "object",
+          "season": "function",
+          "engine": "function",
+          "pieces": "object",
+          "game": "function"
+        },
+        "scripts": [
+          "/tsukurikata/js/util.js",
+          "/tsukurikata/js/icons.js",
+          "/tsukurikata/js/instrument-icons.js",
+          "/tsukurikata/js/face-cast.js",
+          "/tsukurikata/js/faces.js",
+          "/tsukurikata/js/instruments.js",
+          "/tsukurikata/js/venues.js",
+          "/tsukurikata/js/samples.js",
+          "/tsukurikata/js/scores.js",
+          "/tsukurikata/js/pieces/largo.js",
+          "/tsukurikata/js/pieces/ode.js",
+          "/tsukurikata/js/pieces/galop.js",
+          "/tsukurikata/js/pieces/pomp.js",
+          "/tsukurikata/js/pieces/aida.js",
+          "/tsukurikata/js/pieces/hero.js",
+          "/tsukurikata/js/pieces/holst.js",
+          "/tsukurikata/js/pieces/hungarian.js",
+          "/tsukurikata/js/pieces/flowers.js",
+          "/tsukurikata/js/pieces/tell.js",
+          "/tsukurikata/js/pieces/carmen.js",
+          "/tsukurikata/js/pieces/valkyrie.js",
+          "/tsukurikata/js/pieces/swan.js",
+          "/tsukurikata/js/pieces/spring.js",
+          "/tsukurikata/js/pieces/canon.js",
+          "/tsukurikata/js/band.js",
+          "/tsukurikata/js/game.js",
+          "/tsukurikata/js/engine.js",
+          "/tsukurikata/js/conduct.js",
+          "/tsukurikata/js/announce.js",
+          "/tsukurikata/js/tunegame.js",
+          "/tsukurikata/js/fx.js",
+          "/tsukurikata/js/advisor.js",
+          "/tsukurikata/js/onboarding.js",
+          "/tsukurikata/js/ui.js",
+          "/design/onboarding/qa.js"
+        ],
+        "resources": [
+          {
+            "file": "/tsukurikata/js/util.js",
+            "status": 200,
+            "bytes": 2477,
+            "ms": 23
+          },
+          {
+            "file": "/tsukurikata/js/instrument-icons.js",
+            "status": 200,
+            "bytes": 2590,
+            "ms": 22
+          },
+          {
+            "file": "/tsukurikata/js/face-cast.js",
+            "status": 200,
+            "bytes": 7048,
+            "ms": 24
+          },
+          {
+            "file": "/tsukurikata/js/icons.js",
+            "status": 200,
+            "bytes": 4867,
+            "ms": 25
+          },
+          {
+            "file": "/tsukurikata/js/instruments.js",
+            "status": 200,
+            "bytes": 27017,
+            "ms": 25
+          },
+          {
+            "file": "/tsukurikata/js/faces.js",
+            "status": 200,
+            "bytes": 4184,
+            "ms": 27
+          },
+          {
+            "file": "/tsukurikata/js/venues.js",
+            "status": 200,
+            "bytes": 12996,
+            "ms": 29
+          },
+          {
+            "file": "/tsukurikata/js/scores.js",
+            "status": 200,
+            "bytes": 22132,
+            "ms": 27
+          },
+          {
+            "file": "/tsukurikata/js/samples.js",
+            "status": 200,
+            "bytes": 24975,
+            "ms": 28
+          },
+          {
+            "file": "/tsukurikata/js/pieces/largo.js",
+            "status": 200,
+            "bytes": 11341,
+            "ms": 30
+          },
+          {
+            "file": "/tsukurikata/js/pieces/ode.js",
+            "status": 200,
+            "bytes": 16000,
+            "ms": 32
+          },
+          {
+            "file": "/tsukurikata/js/pieces/holst.js",
+            "status": 200,
+            "bytes": 18482,
+            "ms": 32
+          },
+          {
+            "file": "/tsukurikata/js/pieces/hero.js",
+            "status": 200,
+            "bytes": 21784,
+            "ms": 33
+          },
+          {
+            "file": "/tsukurikata/js/pieces/aida.js",
+            "status": 200,
+            "bytes": 20823,
+            "ms": 35
+          },
+          {
+            "file": "/tsukurikata/js/pieces/galop.js",
+            "status": 200,
+            "bytes": 22631,
+            "ms": 36
+          },
+          {
+            "file": "/tsukurikata/js/pieces/pomp.js",
+            "status": 200,
+            "bytes": 19299,
+            "ms": 36
+          },
+          {
+            "file": "/tsukurikata/js/pieces/flowers.js",
+            "status": 200,
+            "bytes": 25824,
+            "ms": 36
+          },
+          {
+            "file": "/tsukurikata/js/pieces/hungarian.js",
+            "status": 200,
+            "bytes": 29740,
+            "ms": 37
+          },
+          {
+            "file": "/tsukurikata/js/pieces/tell.js",
+            "status": 200,
+            "bytes": 37082,
+            "ms": 36
+          },
+          {
+            "file": "/tsukurikata/js/pieces/carmen.js",
+            "status": 200,
+            "bytes": 25854,
+            "ms": 37
+          },
+          {
+            "file": "/tsukurikata/js/pieces/valkyrie.js",
+            "status": 200,
+            "bytes": 20721,
+            "ms": 38
+          },
+          {
+            "file": "/tsukurikata/js/band.js",
+            "status": 200,
+            "bytes": 50853,
+            "ms": 39
+          },
+          {
+            "file": "/tsukurikata/js/pieces/swan.js",
+            "status": 200,
+            "bytes": 19332,
+            "ms": 41
+          },
+          {
+            "file": "/tsukurikata/js/pieces/spring.js",
+            "status": 200,
+            "bytes": 17241,
+            "ms": 41
+          },
+          {
+            "file": "/tsukurikata/js/pieces/canon.js",
+            "status": 200,
+            "bytes": 13464,
+            "ms": 42
+          },
+          {
+            "file": "/tsukurikata/js/conduct.js",
+            "status": 200,
+            "bytes": 30445,
+            "ms": 44
+          },
+          {
+            "file": "/tsukurikata/js/engine.js",
+            "status": 200,
+            "bytes": 24139,
+            "ms": 45
+          },
+          {
+            "file": "/tsukurikata/js/game.js",
+            "status": 200,
+            "bytes": 189281,
+            "ms": 44
+          },
+          {
+            "file": "/tsukurikata/js/fx.js",
+            "status": 200,
+            "bytes": 11653,
+            "ms": 43
+          },
+          {
+            "file": "/tsukurikata/js/announce.js",
+            "status": 200,
+            "bytes": 10527,
+            "ms": 46
+          },
+          {
+            "file": "/tsukurikata/js/tunegame.js",
+            "status": 200,
+            "bytes": 9322,
+            "ms": 49
+          },
+          {
+            "file": "/tsukurikata/js/advisor.js",
+            "status": 200,
+            "bytes": 7503,
+            "ms": 45
+          },
+          {
+            "file": "/tsukurikata/js/onboarding.js",
+            "status": 200,
+            "bytes": 8865,
+            "ms": 48
+          },
+          {
+            "file": "/design/onboarding/qa.js",
+            "status": 200,
+            "bytes": 2415,
+            "ms": 49
+          },
+          {
+            "file": "/tsukurikata/js/ui.js",
+            "status": 200,
+            "bytes": 238890,
+            "ms": 49
+          }
+        ]
+      },
+      "errors": []
+    },
+    {
+      "label": "歓迎演奏の後は自動終了",
+      "year": 2026,
+      "week": 2,
+      "phase": "week",
+      "tab": "week",
+      "state": 0.7190837936941534,
+      "guide": {
+        "club": "3113443066:2026",
+        "active": false,
+        "heard": false
+      },
+      "step": null,
+      "title": null,
+      "playing": false,
+      "waiting": false,
+      "focus": "BODY",
+      "width": 375,
+      "scrollWidth": 375,
+      "portrait": null,
+      "boot": {
+        "started": "2026-10-29T12:20:58.511Z",
+        "loaded": [
+          "/tsukurikata/js/util.js",
+          "/tsukurikata/js/icons.js",
+          "/tsukurikata/js/instrument-icons.js",
+          "/tsukurikata/js/face-cast.js",
+          "/tsukurikata/js/faces.js",
+          "/tsukurikata/js/instruments.js",
+          "/tsukurikata/js/venues.js",
+          "/tsukurikata/js/samples.js",
+          "/tsukurikata/js/scores.js",
+          "/tsukurikata/js/pieces/largo.js",
+          "/tsukurikata/js/pieces/ode.js",
+          "/tsukurikata/js/pieces/galop.js",
+          "/tsukurikata/js/pieces/pomp.js",
+          "/tsukurikata/js/pieces/aida.js",
+          "/tsukurikata/js/pieces/hero.js",
+          "/tsukurikata/js/pieces/holst.js",
+          "/tsukurikata/js/pieces/hungarian.js",
+          "/tsukurikata/js/pieces/flowers.js",
+          "/tsukurikata/js/pieces/tell.js",
+          "/tsukurikata/js/pieces/carmen.js",
+          "/tsukurikata/js/pieces/valkyrie.js",
+          "/tsukurikata/js/pieces/swan.js",
+          "/tsukurikata/js/pieces/spring.js",
+          "/tsukurikata/js/pieces/canon.js",
+          "/tsukurikata/js/band.js",
+          "/tsukurikata/js/game.js",
+          "/tsukurikata/js/engine.js",
+          "/tsukurikata/js/conduct.js",
+          "/tsukurikata/js/announce.js",
+          "/tsukurikata/js/tunegame.js",
+          "/tsukurikata/js/fx.js",
+          "/tsukurikata/js/advisor.js",
+          "/tsukurikata/js/onboarding.js",
+          "/tsukurikata/js/ui.js",
+          "/design/onboarding/qa.js"
+        ],
+        "failed": [],
+        "errors": [],
+        "ready": true,
+        "globals": {
+          "fx": "object",
+          "season": "function",
+          "engine": "function",
+          "pieces": "object",
+          "game": "function"
+        },
+        "scripts": [
+          "/tsukurikata/js/util.js",
+          "/tsukurikata/js/icons.js",
+          "/tsukurikata/js/instrument-icons.js",
+          "/tsukurikata/js/face-cast.js",
+          "/tsukurikata/js/faces.js",
+          "/tsukurikata/js/instruments.js",
+          "/tsukurikata/js/venues.js",
+          "/tsukurikata/js/samples.js",
+          "/tsukurikata/js/scores.js",
+          "/tsukurikata/js/pieces/largo.js",
+          "/tsukurikata/js/pieces/ode.js",
+          "/tsukurikata/js/pieces/galop.js",
+          "/tsukurikata/js/pieces/pomp.js",
+          "/tsukurikata/js/pieces/aida.js",
+          "/tsukurikata/js/pieces/hero.js",
+          "/tsukurikata/js/pieces/holst.js",
+          "/tsukurikata/js/pieces/hungarian.js",
+          "/tsukurikata/js/pieces/flowers.js",
+          "/tsukurikata/js/pieces/tell.js",
+          "/tsukurikata/js/pieces/carmen.js",
+          "/tsukurikata/js/pieces/valkyrie.js",
+          "/tsukurikata/js/pieces/swan.js",
+          "/tsukurikata/js/pieces/spring.js",
+          "/tsukurikata/js/pieces/canon.js",
+          "/tsukurikata/js/band.js",
+          "/tsukurikata/js/game.js",
+          "/tsukurikata/js/engine.js",
+          "/tsukurikata/js/conduct.js",
+          "/tsukurikata/js/announce.js",
+          "/tsukurikata/js/tunegame.js",
+          "/tsukurikata/js/fx.js",
+          "/tsukurikata/js/advisor.js",
+          "/tsukurikata/js/onboarding.js",
+          "/tsukurikata/js/ui.js",
+          "/design/onboarding/qa.js"
+        ],
+        "resources": [
+          {
+            "file": "/tsukurikata/js/util.js",
+            "status": 200,
+            "bytes": 2477,
+            "ms": 18
+          },
+          {
+            "file": "/tsukurikata/js/icons.js",
+            "status": 200,
+            "bytes": 4867,
+            "ms": 18
+          },
+          {
+            "file": "/tsukurikata/js/instrument-icons.js",
+            "status": 200,
+            "bytes": 2590,
+            "ms": 20
+          },
+          {
+            "file": "/tsukurikata/js/face-cast.js",
+            "status": 200,
+            "bytes": 7048,
+            "ms": 21
+          },
+          {
+            "file": "/tsukurikata/js/faces.js",
+            "status": 200,
+            "bytes": 4184,
+            "ms": 22
+          },
+          {
+            "file": "/tsukurikata/js/venues.js",
+            "status": 200,
+            "bytes": 12996,
+            "ms": 20
+          },
+          {
+            "file": "/tsukurikata/js/samples.js",
+            "status": 200,
+            "bytes": 24975,
+            "ms": 21
+          },
+          {
+            "file": "/tsukurikata/js/scores.js",
+            "status": 200,
+            "bytes": 22132,
+            "ms": 23
+          },
+          {
+            "file": "/tsukurikata/js/instruments.js",
+            "status": 200,
+            "bytes": 27017,
+            "ms": 25
+          },
+          {
+            "file": "/tsukurikata/js/pieces/largo.js",
+            "status": 200,
+            "bytes": 11341,
+            "ms": 23
+          },
+          {
+            "file": "/tsukurikata/js/pieces/ode.js",
+            "status": 200,
+            "bytes": 16000,
+            "ms": 24
+          },
+          {
+            "file": "/tsukurikata/js/pieces/pomp.js",
+            "status": 200,
+            "bytes": 19299,
+            "ms": 25
+          },
+          {
+            "file": "/tsukurikata/js/pieces/galop.js",
+            "status": 200,
+            "bytes": 22631,
+            "ms": 25
+          },
+          {
+            "file": "/tsukurikata/js/pieces/hero.js",
+            "status": 200,
+            "bytes": 21784,
+            "ms": 26
+          },
+          {
+            "file": "/tsukurikata/js/pieces/aida.js",
+            "status": 200,
+            "bytes": 20823,
+            "ms": 26
+          },
+          {
+            "file": "/tsukurikata/js/pieces/hungarian.js",
+            "status": 200,
+            "bytes": 29740,
+            "ms": 29
+          },
+          {
+            "file": "/tsukurikata/js/pieces/holst.js",
+            "status": 200,
+            "bytes": 18482,
+            "ms": 32
+          },
+          {
+            "file": "/tsukurikata/js/pieces/flowers.js",
+            "status": 200,
+            "bytes": 25824,
+            "ms": 31
+          },
+          {
+            "file": "/tsukurikata/js/pieces/tell.js",
+            "status": 200,
+            "bytes": 37082,
+            "ms": 31
+          },
+          {
+            "file": "/tsukurikata/js/pieces/carmen.js",
+            "status": 200,
+            "bytes": 25854,
+            "ms": 30
+          },
+          {
+            "file": "/tsukurikata/js/pieces/swan.js",
+            "status": 200,
+            "bytes": 19332,
+            "ms": 31
+          },
+          {
+            "file": "/tsukurikata/js/pieces/spring.js",
+            "status": 200,
+            "bytes": 17241,
+            "ms": 31
+          },
+          {
+            "file": "/tsukurikata/js/pieces/canon.js",
+            "status": 200,
+            "bytes": 13464,
+            "ms": 33
+          },
+          {
+            "file": "/tsukurikata/js/pieces/valkyrie.js",
+            "status": 200,
+            "bytes": 20721,
+            "ms": 33
+          },
+          {
+            "file": "/tsukurikata/js/engine.js",
+            "status": 200,
+            "bytes": 24139,
+            "ms": 33
+          },
+          {
+            "file": "/tsukurikata/js/conduct.js",
+            "status": 200,
+            "bytes": 30445,
+            "ms": 33
+          },
+          {
+            "file": "/tsukurikata/js/announce.js",
+            "status": 200,
+            "bytes": 10527,
+            "ms": 35
+          },
+          {
+            "file": "/tsukurikata/js/band.js",
+            "status": 200,
+            "bytes": 50853,
+            "ms": 35
+          },
+          {
+            "file": "/tsukurikata/js/game.js",
+            "status": 200,
+            "bytes": 189281,
+            "ms": 40
+          },
+          {
+            "file": "/tsukurikata/js/tunegame.js",
+            "status": 200,
+            "bytes": 9322,
+            "ms": 36
+          },
+          {
+            "file": "/tsukurikata/js/fx.js",
+            "status": 200,
+            "bytes": 11653,
+            "ms": 38
+          },
+          {
+            "file": "/tsukurikata/js/advisor.js",
+            "status": 200,
+            "bytes": 7503,
+            "ms": 38
+          },
+          {
+            "file": "/tsukurikata/js/onboarding.js",
+            "status": 200,
+            "bytes": 8870,
+            "ms": 39
+          },
+          {
+            "file": "/tsukurikata/js/ui.js",
+            "status": 200,
+            "bytes": 238904,
+            "ms": 40
+          },
+          {
+            "file": "/design/onboarding/qa.js",
+            "status": 200,
+            "bytes": 2415,
+            "ms": 40
+          }
+        ]
+      },
+      "errors": []
+    }
+  ],
+  "layout": [
+    {
+      "animation": 0,
+      "buttons": [],
+      "images": [],
+      "scrollWidth": 375,
+      "theme": "light",
+      "width": 375
+    },
+    {
+      "animation": 0,
+      "buttons": [
+        {
+          "height": 44,
+          "label": "スキップ"
+        },
+        {
+          "height": 46,
+          "label": "最初の音を聴く"
+        }
+      ],
+      "images": [
+        {
+          "loaded": true,
+          "width": 1254
+        }
+      ],
+      "scrollWidth": 375,
+      "theme": "dark",
+      "width": 375
+    }
+  ],
+  "tabs": [
+    {
+      "theme": "light",
+      "tab": "今週",
+      "current": "今週",
+      "scrollWidth": 375,
+      "width": 375,
+      "snapshot": "- banner:\n  - button \"吹奏楽部の つくりかた ?\":\n    - text: 吹奏楽部の つくりかた ?\n  - paragraph: 県立みなと高校 吹奏楽部 2026年度\n  - generic: 5月 第1週\n  - generic: 次の本番「みなと祭りステージ」まで2週\n  - list"
+    },
+    {
+      "theme": "light",
+      "tab": "合奏",
+      "current": "合奏",
+      "scrollWidth": 375,
+      "width": 375,
+      "snapshot": "- text: \"?\"\n- main:\n  - region \"「天国と地獄」 ?\":\n    - paragraph: 自由曲\n    - button \"「天国と地獄」の難しさ 3/5\":\n      - generic: 難しさ\n    - button \"「天国と地獄」 ?\"\n    - paragraph: "
+    },
+    {
+      "theme": "light",
+      "tab": "部員",
+      "current": "部員",
+      "scrollWidth": 375,
+      "width": 375,
+      "snapshot": "- text: \"? ? ?\"\n- region \"パートと部員\":\n  - heading \"パートと部員\" [level=2]\n  - button \"パートと部員\": \"?\"\n  - search \"部員を探す\":\n    - searchbox \"部員の名前で探す\"\n  - group \"学年\":\n    - "
+    },
+    {
+      "theme": "light",
+      "tab": "日誌",
+      "current": "日誌",
+      "scrollWidth": 375,
+      "width": 375,
+      "snapshot": "- text: \"?\"\n- main:\n  - text: \"?\"\n  - text: \"?\"\n  - region \"部活日誌\":\n    - heading \"部活日誌\" [level=2]\n    - list:\n      - generic \"4月1週 部員が15人より少ないので、今年はB部門に出る。自由曲だ"
+    },
+    {
+      "theme": "dark",
+      "tab": "今週",
+      "current": "今週",
+      "scrollWidth": 375,
+      "width": 375,
+      "snapshot": "- banner:\n  - button \"吹奏楽部の つくりかた ?\":\n    - text: 吹奏楽部の つくりかた ?\n  - paragraph: 県立みなと高校 吹奏楽部 2026年度\n  - generic: 4月 第3週\n  - generic: 次の本番「みなと祭りステージ」まで4週\n  - list"
+    },
+    {
+      "theme": "dark",
+      "tab": "合奏",
+      "current": "合奏",
+      "scrollWidth": 375,
+      "width": 375,
+      "snapshot": "- text: \"?\"\n- main:\n  - region \"《新世界より》第2楽章 ?\":\n    - paragraph: 自由曲\n    - button \"《新世界より》第2楽章の難しさ 1/5\":\n      - generic: 難しさ\n    - button \"《新世界より》第2楽章 ?\"\n    -"
+    },
+    {
+      "theme": "dark",
+      "tab": "部員",
+      "current": "部員",
+      "scrollWidth": 375,
+      "width": 375,
+      "snapshot": "- text: \"? ?\"\n- region \"パートと部員\":\n  - heading \"パートと部員\" [level=2]\n  - button \"パートと部員\": \"?\"\n  - search \"部員を探す\":\n    - searchbox \"部員の名前で探す\"\n  - group \"学年\":\n    - bu"
+    },
+    {
+      "theme": "dark",
+      "tab": "日誌",
+      "current": "日誌",
+      "scrollWidth": 375,
+      "width": 375,
+      "snapshot": "- text: \"?\"\n- main:\n  - text: \"?\"\n  - region \"部活日誌\":\n    - heading \"部活日誌\" [level=2]\n    - list:\n      - generic \"4月3週 【仮入部】入部を迷っている1年生が、音楽室をのぞきに来た。仲間が増えるかもしれないと"
+    }
+  ],
+  "consoleLight": [],
+  "consoleDark": []
+}

@@ -5,6 +5,8 @@ const root=path.join(__dirname,'..'),ctx=vm.createContext({console,assert,clearT
 const html=fs.readFileSync(path.join(root,'index.html'),'utf8'),pieces=[...html.matchAll(/src="js\/(pieces\/[^"?]+)\.js/g)].map(m=>m[1]);
 for(const f of ['util','instruments','venues','scores',...pieces,'band','game'])vm.runInContext(fs.readFileSync(path.join(root,'js',f+'.js'),'utf8'),ctx,{filename:f+'.js'});
 vm.runInContext(`
+// 案内の画面更新は別の検証で確かめ、ここでは従来の再生操作を比べる。
+const onboardingPlayed=()=>{},renderOnboarding=()=>{};
 let S,release,plays=[],failed=false;
 const U={piece:null,range:'all',venue:'room',solo:'all',playing:false,waitPlay:null,shown:null,shownLabel:'',perfNow:null,onEnd:null,pieceListen:null,refreshT:0},CD={phase:'idle'};
 const SAMPLES={use:true,ready:true,error:null,loading:null},window={};

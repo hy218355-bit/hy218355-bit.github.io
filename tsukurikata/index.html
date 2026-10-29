@@ -1632,6 +1632,33 @@ html[data-fx-mode="full"] .recording-save[data-saving="true"]::after{animation:f
 .advisor-message{padding:0 16px 16px 80px}
 .advisor-message p{margin:0;padding-top:12px;border-top:1px solid var(--rule);font-size:13px;line-height:1.9;color:var(--ink)}
 @media(max-width:480px){.advisor>summary{gap:10px;grid-template-columns:48px minmax(0,1fr) 16px}.advisor>summary>img{width:48px;height:48px}.advisor-message{padding-left:16px}.advisor-message p{font-size:13px}}
+/* はじめの部活。操作をふさがず、同じ先生のカードで次の一つを案内する。 */
+.onboarding{padding:18px;margin:0 0 20px;border:1px solid var(--brass);border-radius:16px;background:var(--sheet);color:var(--ink);scroll-margin-top:18px}
+.onboarding-top{display:flex;align-items:center;justify-content:space-between;gap:8px;margin:-6px -4px 10px}
+.onboarding-top>span{font-size:11px;letter-spacing:.12em;color:var(--brass);font-weight:700}
+.onboarding-top>button{min-width:64px;min-height:44px;padding:8px;background:none;border:0;color:var(--ink-soft);font:12px var(--f-body);cursor:pointer}
+.onboarding-person{display:grid;grid-template-columns:88px minmax(0,1fr);align-items:center;gap:14px}
+.onboarding-person>img{display:block;width:88px;height:96px;border-radius:14px;object-fit:cover;border:1px solid var(--rule)}
+.onboarding-person>div{min-width:0}
+.onboarding-person small{display:block;font-size:10px;color:var(--ink-soft);margin-bottom:6px}
+.onboarding-person h3{white-space:pre-line;margin:0;font-family:var(--f-body);font-size:20px;font-weight:700;line-height:1.6;letter-spacing:.02em;overflow-wrap:anywhere}
+.onboarding-steps{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));padding:0;margin:20px 0 16px;list-style:none;gap:6px}
+.onboarding-steps li{position:relative;display:grid;justify-items:center;gap:6px;color:var(--ink-soft)}
+.onboarding-steps li:not(:last-child):after{content:'';height:1px;width:calc(100% - 34px);background:var(--rule);position:absolute;left:calc(50% + 20px);top:17px}
+.onboarding-steps li>span:first-child{display:grid;place-items:center;width:34px;height:34px;border:1px solid var(--rule);border-radius:50%;background:var(--paper)}
+.onboarding-steps .ui-icon{width:17px;height:17px}
+.onboarding-steps b{font-size:11px;font-weight:500}
+.onboarding-steps [aria-current=step],.onboarding-steps .done{color:var(--brass)}
+.onboarding-steps [aria-current=step]>span:first-child{border-color:var(--brass);box-shadow:0 0 0 3px color-mix(in srgb,var(--brass) 13%,transparent)}
+.onboarding-steps .done>span:first-child{border-color:var(--brass);background:color-mix(in srgb,var(--brass) 12%,var(--sheet))}
+.onboarding-copy{margin:0 0 16px;font-size:13px;line-height:1.9;overflow-wrap:anywhere}
+.onboarding-next{width:100%;min-height:46px;justify-content:center}
+.onboarding-links{display:grid;grid-template-columns:1fr 1fr;gap:8px}.onboarding-links>.primary{grid-column:1/-1}
+.onboarding-links>.btn{min-height:46px;justify-content:center}
+.onboarding-target{outline:2px solid var(--brass);outline-offset:4px}
+.onboarding :focus-visible{outline:2px solid var(--brass);outline-offset:3px}
+.onboarding-reopen{display:flex;align-items:center;gap:8px;min-height:44px;margin:12px 0 0;color:var(--ink-soft);font-size:12px}
+@media(max-width:480px){.onboarding{padding:14px}.onboarding-person{grid-template-columns:78px minmax(0,1fr);gap:12px}.onboarding-person>img{width:78px;height:88px}.onboarding-person h3{font-size:18px}}
 </style>
 </head>
 <body>
@@ -1708,6 +1735,7 @@ html[data-fx-mode="full"] .recording-save[data-saving="true"]::after{animation:f
       <section class="panel" data-tab="log" aria-labelledby="h-log">
         <h2 id="h-log">部活日誌</h2>
         <ol class="log" id="log"></ol>
+        <button class="link onboarding-reopen" type="button" data-onboard="open">朝野先生のはじめての案内</button>
         <div class="reset-row"><button class="link" id="btnReset" type="button">最初からやり直す</button></div>
       </section>
     </div>
@@ -1859,7 +1887,8 @@ html[data-fx-mode="full"] .recording-save[data-saving="true"]::after{animation:f
 <script src="js/tunegame.js"></script>
 <script src="js/fx.js?v=stage-cast-1"></script>
 <script src="js/advisor.js?v=asano-1"></script>
-<script src="js/ui.js?v=asakura-1"></script>
+<script src="js/onboarding.js?v=first-club-1"></script>
+<script src="js/ui.js?v=first-club-1"></script>
 <div class="tip" id="tip" role="tooltip" hidden></div>
 </body>
 </html>

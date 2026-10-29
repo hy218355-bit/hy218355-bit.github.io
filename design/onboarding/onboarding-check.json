@@ -1,0 +1,14 @@
+{
+  "playbackGate": true,
+  "steps": [
+    0,
+    1,
+    2,
+    3,
+    4
+  ],
+  "resume": true,
+  "skip": true,
+  "oldSave": true,
+  "blockedStorage": true
+}

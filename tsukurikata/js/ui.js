@@ -119,6 +119,7 @@ function setNowPlaying(){
   updateMini();
 }
 function renderPlayButtons(){
+  renderOnboarding();
   const on = !!(U.playing || U.waitPlay);
   $('#btnStop').hidden = !on; $('#btnNow').hidden = on;
   const moveStop = $('#memberCard [data-mact="movestop"]');
@@ -182,6 +183,7 @@ function playPerf(perf, label, onEnd, opts = {}, onWaitCancel = null){
   const pb = E.play(perf, null, opts);
   if(!pb){ renderPlayButtons(); updateMini(); $('#nowPlaying').textContent = 'このブラウザでは音を鳴らせません。'; return; }
   U.shown = perf; U.shownLabel = label; U.playing = true; U.onEnd = onEnd || null;
+  onboardingPlayed(perf);
   U.lastT = 0;
   if(window.TSUKURIKATA_NATIVE) nativePost({type: 'log', msg: `play start "${label}" ${perf.notes.length} notes, ${perf.total.toFixed(1)}s, audio ${E.ac.state}`});
   nativePost({type: 'playing', on: true});
@@ -894,6 +896,7 @@ function renderWeek(){
   renderWeekBody();
   renderDiagPractice();
   renderAdvisor();
+  renderOnboarding();
   // 長い説明は見出しの吹き出しへ。文章そのものは保持する。
   const intro=$('#week .plan > p.small:first-child');
   if(intro){ $('#h-week').insertAdjacentHTML('beforeend', '<button class="help-button" type="button"'+tipAttr('今週の練習',intro.textContent)+'>?</button>');intro.hidden=true; }
@@ -906,6 +909,7 @@ function renderWeek(){
 }
 // 案内は短いひと言だけを見せ、説明は顔を押して開く。ゲームを止める表示にはしない。
 function renderAdvisor(){
+  if(onboardingActive() && !S.pending) return;
   const w = $('#week'), h = advisorHint(S, U.lineup);
   const key = `${S.recruitSeed}:${S.year}:${S.week}:${S.phase}:${h.key}`;
   w.insertAdjacentHTML('afterbegin', `<details class="advisor" data-advisor="${esc(h.key)}"${U.advisorOpen === key ? ' open' : ''}><summary><img src="img/advisor-asano.webp" width="56" height="56" alt="" decoding="async"><span><small>副顧問・朝野先生</small><b>${esc(h.line)}</b></span>${uiIcon('chevron')}</summary><div class="advisor-message"><p>${esc(h.text)}</p></div></details>`);
@@ -2553,6 +2557,10 @@ function playRec(id){
   playRecording(rec, `${rec.label}（${VENUE[rec.venue].name}で録音）`);
 }
 function bind(){
+  document.addEventListener('click',e=>{
+    const b=e.target.closest('[data-onboard]');
+    if(b) onboardingAction(b.dataset.onboard);
+  });
   $('#recordingList').addEventListener('click',e=>{
     const b=e.target.closest('button');if(!b || b.disabled)return;
     if(b.dataset.recordPlay)listenLibraryRecording(b.dataset.recordPlay);
@@ -2894,7 +2902,11 @@ function bind(){
     else if(act === 'stage') startStage();
     else if(act === 'stageconduct') startStageConduct();
     else if(act === 'reveal'){ stopPlay(); reveal(); }
-    else if(act === 'next'){ stopPlay(); commit(finishStage(S)); renderAll(); refreshNow(); }
+    else if(act === 'next'){
+      stopPlay();const firstGuide=onboardingActive() && onboardingEarly(S);commit(finishStage(S));
+      if(firstGuide && !onboardingEarly(S)){U.onboarding.active=false;saveOnboarding();}
+      renderAll();refreshNow();
+    }
     else if(act === 'newyear'){ stopPlay(); commit(newYear(S)); U.sel = null; U.piece = null; renderAll(); refreshNow(); }
     else if(act === 'gradroll') openGradRoll();
     else if(act === 'winter'){ stopPlay(); commit(startWinter(S)); U.sel = null; renderAll(); refreshNow(); scrollTo(0, 0); }
@@ -2936,7 +2948,7 @@ function bind(){
     }
     rs.classList.remove('armed'); rs.textContent = '最初からやり直す';
     stopPlay();
-    commit(freshState(2026)); U.sel = null; U.piece = null; U.view = 'mel'; U.lineup = false; U.draft = null;
+    commit(freshState(2026)); initOnboarding(S,false,true); U.sel = null; U.piece = null; U.view = 'mel'; U.lineup = false; U.draft = null;
     renderAll(); refreshNow();
   });
   bindConduct();
@@ -2967,8 +2979,10 @@ function bind(){
 
 function start(data){
   if(window.TSUKURIKATA_NATIVE) document.documentElement.classList.add('native');
-  S = (data && data.S && data.S.v === 2) ? data.S : (load() || freshState(2026));
+  const stored = (data && data.S && data.S.v === 2) ? data.S : load();
+  S = stored || freshState(2026);
   loadUI();
+  initOnboarding(S,!stored);
   E.venueId = U.venue; E.posId = U.pos;
   renderAll();
   bind();
