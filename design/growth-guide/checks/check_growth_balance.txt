@@ -2,7 +2,7 @@
   "pieces": [
     {
       "id": "largo",
-      "first": 16.7,
+      "first": 22.3,
       "trained": [
         44,
         57,
@@ -13,7 +13,7 @@
     },
     {
       "id": "ode",
-      "first": 19,
+      "first": 19.1,
       "trained": [
         51.7,
         58.3,
@@ -24,7 +24,7 @@
     },
     {
       "id": "galop",
-      "first": 22.3,
+      "first": 22.5,
       "trained": [
         50,
         60.7,
@@ -35,7 +35,7 @@
     },
     {
       "id": "pomp",
-      "first": 16.7,
+      "first": 18,
       "trained": [
         53.7,
         62,
@@ -46,7 +46,7 @@
     },
     {
       "id": "aida",
-      "first": 26.8,
+      "first": 15.2,
       "trained": [
         50,
         61,
@@ -57,7 +57,7 @@
     },
     {
       "id": "hero",
-      "first": 16.7,
+      "first": 19.1,
       "trained": [
         48,
         62.3,
@@ -68,7 +68,7 @@
     },
     {
       "id": "holst",
-      "first": 21,
+      "first": 19.8,
       "trained": [
         47,
         61.3,
@@ -79,7 +79,7 @@
     },
     {
       "id": "hungarian",
-      "first": 19.2,
+      "first": 18.8,
       "trained": [
         47.7,
         58.7,
@@ -90,7 +90,7 @@
     },
     {
       "id": "flowers",
-      "first": 22.6,
+      "first": 20.4,
       "trained": [
         44.3,
         56,
@@ -101,7 +101,7 @@
     },
     {
       "id": "tell",
-      "first": 19.8,
+      "first": 19.2,
       "trained": [
         52.7,
         59.3,
@@ -112,7 +112,7 @@
     },
     {
       "id": "carmen",
-      "first": 19.6,
+      "first": 21.6,
       "trained": [
         47.7,
         59,
@@ -123,7 +123,7 @@
     },
     {
       "id": "valkyrie",
-      "first": 22.8,
+      "first": 19,
       "trained": [
         45,
         59.3,
@@ -134,7 +134,7 @@
     },
     {
       "id": "swan",
-      "first": 17.1,
+      "first": 14.7,
       "trained": [
         43,
         55.7,
@@ -145,7 +145,7 @@
     },
     {
       "id": "spring",
-      "first": 15.8,
+      "first": 20.1,
       "trained": [
         46.3,
         56,
@@ -156,7 +156,7 @@
     },
     {
       "id": "canon",
-      "first": 21.7,
+      "first": 23.5,
       "trained": [
         49.7,
         62,
@@ -182,12 +182,121 @@
     "concert",
     "result",
     "year",
-    "set"
+    "set",
+    "before-rest",
+    "rest-plan"
   ],
   "manual": {
     "auto": "phrase",
     "chosen": "tune",
     "autoBasics": 35,
-    "manualBasics": 45.333333333333336
-  }
+    "manualBasics": 43.5
+  },
+  "beforeStage": [
+    {
+      "id": "largo",
+      "autoStamina": 25,
+      "restStamina": 79,
+      "auto": 60,
+      "rest": 67
+    },
+    {
+      "id": "ode",
+      "autoStamina": 25,
+      "restStamina": 79,
+      "auto": 61.3,
+      "rest": 69.3
+    },
+    {
+      "id": "galop",
+      "autoStamina": 25,
+      "restStamina": 79,
+      "auto": 61.3,
+      "rest": 69
+    },
+    {
+      "id": "pomp",
+      "autoStamina": 25,
+      "restStamina": 79,
+      "auto": 62.3,
+      "rest": 69
+    },
+    {
+      "id": "aida",
+      "autoStamina": 25,
+      "restStamina": 79,
+      "auto": 60,
+      "rest": 68.3
+    },
+    {
+      "id": "hero",
+      "autoStamina": 25,
+      "restStamina": 79,
+      "auto": 63.3,
+      "rest": 69.7
+    },
+    {
+      "id": "holst",
+      "autoStamina": 25,
+      "restStamina": 79,
+      "auto": 62,
+      "rest": 68.7
+    },
+    {
+      "id": "hungarian",
+      "autoStamina": 25,
+      "restStamina": 79,
+      "auto": 61.3,
+      "rest": 68.7
+    },
+    {
+      "id": "flowers",
+      "autoStamina": 25,
+      "restStamina": 79,
+      "auto": 61,
+      "rest": 68.3
+    },
+    {
+      "id": "tell",
+      "autoStamina": 25,
+      "restStamina": 79,
+      "auto": 62.3,
+      "rest": 71
+    },
+    {
+      "id": "carmen",
+      "autoStamina": 25,
+      "restStamina": 79,
+      "auto": 62.7,
+      "rest": 69
+    },
+    {
+      "id": "valkyrie",
+      "autoStamina": 25,
+      "restStamina": 79,
+      "auto": 62,
+      "rest": 69
+    },
+    {
+      "id": "swan",
+      "autoStamina": 25,
+      "restStamina": 79,
+      "auto": 57,
+      "rest": 66
+    },
+    {
+      "id": "spring",
+      "autoStamina": 25,
+      "restStamina": 79,
+      "auto": 61,
+      "rest": 69
+    },
+    {
+      "id": "canon",
+      "autoStamina": 25,
+      "restStamina": 79,
+      "auto": 62.7,
+      "rest": 70
+    }
+  ]
 }

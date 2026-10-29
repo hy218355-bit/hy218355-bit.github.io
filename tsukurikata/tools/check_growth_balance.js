@@ -57,5 +57,25 @@ report.manual={auto:decideMenu(s,s.members[0]),chosen:plan[s.members[0].id],auto
 s.week=8;assert.equal(decideMenu(s,s.members[0]),'tutti');assert.notEqual(manualPlan(s)[s.members[0].id],'tutti');
 for(const m of s.members)m.fam={galop:50};assert.equal(manualPlan(s)[s.members[0].id],'tutti');
 for(const m of s.members)m.fam={galop:100};s.week=10;assert.equal(manualPlan(s)[s.members[0].id],'tutti');
+// 同じ部員・曲・当日の調子で、本番前の休養が育った力を出すことに役立つ。
+s=freshState(2026);s.members=fullBand({pitch:70,rhythm:70,tone:70,expr:70});s.recruits=null;s.phase='week';s.week=19;s.division='A';s.policy='auto';s.setPiece='ode';s.cohesion=95;s.hallExp=75;s.stamina=35;s.morale=80;s.season=[{level:'pref',award:'gold',rep:true,avg:80}];
+for(const m of s.members){m.sta=35;m.mental=70;m.trait='steady';m.fam=Object.fromEntries(PIECE_IDS.map(id=>[id,95]));}
+s.pieceId='galop';check('before-rest');
+const plannedRest=clone(s);plannedRest.plan=Object.fromEntries(s.members.map(m=>[m.id,'rest']));
+assert.notEqual(advisorHint(plannedRest).key,'before-rest','すでに休ませる指示でも、練習を続ける前提で案内した');
+const plannedBefore=s;s=plannedRest;check('rest-plan');s=plannedBefore;
+report.beforeStage=[];const random=Math.random;Math.random=()=>0.5;
+try{
+ for(const sta of [30,35,59,60,85]){
+  const x=clone(s);for(const m of x.members)m.sta=sta;syncSta(x);
+  assert.equal(advisorHint(x).key==='before-rest',fatigueOf(practiceWeek(x))>0,'前週の体力の案内が実際の疲れと違う');
+ }
+ for(const id of PIECE_IDS){
+  s.pieceId=id;const trained=practiceWeek(s),rested=practiceWeek(s,'rest');
+  const a=beginStage(trained).pending.judge.avg,b=beginStage(rested).pending.judge.avg;
+  assert.ok(b>a+5,id+': 本番前の休養が演奏に返らない');
+  report.beforeStage.push({id,autoStamina:trained.stamina,restStamina:rested.stamina,auto:+a.toFixed(1),rest:+b.toFixed(1)});
+ }
+}finally{Math.random=random;}
 `,ctx);
 console.log(JSON.stringify(report,null,2));

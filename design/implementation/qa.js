@@ -459,6 +459,10 @@ async function show(next){
  if(PIECES[q.get('audioPiece')])s.pieceId=q.get('audioPiece');
  if(q.has('audioRange')&&(q.get('audioRange')==='all'||PIECES[s.pieceId]?.spans[Number(q.get('audioRange'))]))U.range=q.get('audioRange');
  if(['full','short','off'].includes(q.get('cueFx')))U.fxMode=q.get('cueFx');
+ if(q.has('restAdvisor')){
+  s.week=19;s.phase='week';s.division='A';s.setPiece='ode';s.season=[{level:'pref',award:'gold',rep:true,avg:80}];s.episode=null;s.consult=null;s.outing=null;s.policy='auto';s.cohesion=95;s.hallExp=75;s.plan={};
+  for(const m of s.members){m.sta=35;m.fam={[s.pieceId]:95,ode:95};}syncSta(s);
+ }
  S=s;U.sel=null;hideTip();renderAll();refreshNow();$('#toast').hidden=true;
  const cardView=view==='member'||view.startsWith('member-');
  setTab(['log','journal','journal-ambiguous','journal-empty'].includes(view)?'log':['members','flute-cast'].includes(view)?'members':cardView||view==='diag-practice'||view.startsWith('rehearsal')||['stage','recorded-history','record-library','reading-stage','conduct'].includes(view)?'play':'week');

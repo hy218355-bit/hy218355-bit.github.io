@@ -32,8 +32,21 @@ function advisorHint(s, lineup = false){
   if(s.episode || s.consult || s.outing) return hint('story', '部員の話を聞くのも、大切な時間です。',
     '相談や行事も、その子の得意なことや思い出につながります。練習を進めると流れるので、気になる話は先に聞いてみましょう。');
   const ms = seated(s);
+  if(s.members.length && s.members.every(m => planFor(s, m) === 'rest')) return hint('rest-plan',
+    'ひと休みして、次の音につなげましょう。',
+    '今週は休む予定ですね。体力とやる気を戻して、次の練習や本番に備えましょう。「休む」の方針は1週だけで、次の週は「おまかせ」に戻ります。');
   if(ms.some(m => (m.sta ?? 100) < 30)) return hint('rest', '疲れた子は、今週ひと休みさせましょう。',
-    '疲れたままだと練習の効果が落ちます。体力の低い子の顔を押して「休む」を選べます。全員を休ませなくても、その子だけで心配いりませんよ。');
+    '疲れたままだと練習の効果が落ちます。体力の低い子の顔を押して「休む」を選べます。一人ずつ休ませられますよ。');
+  if(stageIn(s, 1)?.w === 1 && s.members.length){
+    // 今選んでいる練習の消費量と毎週の回復だけを見る。来週の出来事や調子は先読みしない。
+    const stamina = s.members.reduce((v, m) => {
+      const mu = MENU_BY[planFor(s, m)];
+      const cost = mu.cost > 0 ? mu.cost * (ev?.costMult || 1) * (1 - SKILLS.tough.cost * skillLv(m, 'tough')) : mu.cost;
+      return v + clamp(clamp((m.sta ?? s.stamina) - cost, 0, 100) + 6, 0, 100);
+    }, 0) / s.members.length;
+    if(stamina < 50) return hint('before-rest', '来週の本番へ、体力も残しましょう。',
+      'このままの練習だと、本番で疲れが残りそうです。体力の少ない子を今週休ませると、育った力を出しやすくなります。顔の横から練習を選べますよ。');
+  }
   if(s.policy === 'basics') return hint('basics', '基礎の成果は、合奏でも確かめましょう。',
     '基礎が育つと、音が安定し、新しい曲の譜読みも早くなります。ただ、基礎だけでは部のまとまりは育ちません。曲の練習や合奏も間に入れて、育った力を音楽につなげましょう。');
   if(s.pieceId && ms.length){

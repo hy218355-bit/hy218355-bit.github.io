@@ -10,6 +10,8 @@ root = folder.parent.parent
 read = lambda p: json.loads((folder / p).read_text())
 checks = read('checks/results.json')
 assert len(checks) == 40 and all(x['exit'] == 0 for x in checks)
+growth = read('checks/check_growth_balance.txt')
+assert len(growth['beforeStage']) == 15 and all(x['rest'] > x['auto'] + 5 for x in growth['beforeStage'])
 averages = read('averages/results.json')
 assert len(averages) == 6 and all(x['exit'] == 0 and x['runsPerPiece'] == 10 for x in averages)
 balance = read('balance.json')
@@ -27,7 +29,7 @@ for piece in long['pieces']:
         assert run['exit'] == 0 and len(re.findall('年度の終わり', text)) == 12
         paths.append(bool(re.search('全日本吹奏楽コンクール：', text)))
     assert any(paths), piece['piece']
-for name in ['intake-light', 'intake-open-light', 'intake-open-dark', 'welcome-light', 'welcome-dark', 'basics-open-light', 'basics-open-dark', 'audition-open-light', 'audition-open-dark', 'first-practice-light', 'first-practice-dark']:
+for name in ['intake-light', 'intake-open-light', 'intake-open-dark', 'welcome-light', 'welcome-dark', 'basics-open-light', 'basics-open-dark', 'audition-open-light', 'audition-open-dark', 'first-practice-light', 'first-practice-dark', 'before-rest-light', 'before-rest-dark', 'rest-planned-dark']:
     r = read(name + '.json')
     assert r['width'] == r['scrollWidth'] == 375
     assert r['advisor']['loaded']
@@ -38,6 +40,8 @@ for tab in ['play', 'members', 'journal']:
         r = read(f'tab-{tab}-{theme}.json')
         assert r['width'] == r['scrollWidth'] == 375
 assert read('intake-light.json')['advisor']['state'] == read('intake-open-light.json')['advisor']['state'] == read('intake-open-dark.json')['advisor']['state']
+assert read('before-rest-light.json')['advisor']['state'] == read('before-rest-dark.json')['advisor']['state']
+assert read('rest-planned-dark.json')['advisor']['key'] == 'rest-plan'
 year = read('new-year-final-dark.json')
 assert year['year'] == 2027 and year['steps'] > 40 and not year['errors']
 assert not year['boot']['errors'] and not year['boot']['failed']

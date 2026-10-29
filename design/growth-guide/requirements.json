@@ -27,9 +27,12 @@
       "balance.json",
       "checks/check_growth_balance.txt",
       "screenshots/basics-open-light.png",
-      "screenshots/basics-open-dark.png"
+      "screenshots/basics-open-dark.png",
+      "screenshots/before-rest-light.png",
+      "screenshots/before-rest-dark.png",
+      "screenshots/rest-planned-dark.png"
     ],
-    "finding": "特定の部員の基礎を先に育てられる。全曲平均の大会点は自動との差が小さく、常に上回るものではない。",
+    "finding": "総合点の差は小さい一方、狙った部員を先に育てられる。同じ疲れた部と当日の調子で比べた実際の審査では、本番前の休養で約6.3〜9点改善。現在の指示による体力の見込みを案内し、休養の指示を出すと案内も切り替わる。",
     "status": "verified"
   },
   {
