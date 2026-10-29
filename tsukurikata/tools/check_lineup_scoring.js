@@ -15,7 +15,8 @@ for(const pid of Object.keys(PIECES)){
  assert.ok(b.q<a.q-3,pid+': 苦手な一人が音の平均に埋もれた');
  assert.ok(c.q<b.q-3,pid+': 苦手な人を増やすと有利になった');
  assert.ok(d.a.fullness>one.a.fullness&&one.a.fullness>a.a.fullness,pid+': 安定した音の重なりが加点されない');
- assert.ok(d.q>a.q+2,pid+': 安定した大編成が小編成より薄い');
+ // 演奏会は割合で課題を評価する。厚みそのものと、大会・演奏会の両方で増員の見返りを見る。
+ assert.ok(d.q>a.q+1&&d.j>a.j+2,pid+': 安定した大編成が小編成より薄い');
  assert.ok(b.a.disruption>=3,pid+': 不安定な演奏の減点が小さい');
  assert.ok(b.a.fullness<=a.a.fullness+0.05,pid+': 人数だけで厚みが加点された');
  assert.equal(JSON.stringify(all),saved,'採点で部員の保存内容が変わった');

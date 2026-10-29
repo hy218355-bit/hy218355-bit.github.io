@@ -287,7 +287,8 @@ const READ_SOLO = 70;
 // 練習の伸びの残り：うまくなるほど伸びにくい。60を越えると急に伸びにくくなり、90から上はなかなか上がらない
 // （初心者は1年で50ほど、2年で70ほど、3年の夏で80ほど。いちばんうまい子でも3年の夏で90ほど）
 const GROW_TOP = 38;
-const growRoom = x => Math.max(0, (1 - x / 125) * clamp((100 - x) / GROW_TOP, 0, 1));
+// 入門の基礎は身につきやすく、60から上の伸び方はこれまでどおり。新人を育て直す時間に見返りを持たせる。
+const growRoom = x => Math.max(0, (1 - x / 125) * clamp((100 - x) / GROW_TOP, 0, 1) * (1 + 0.3 * clamp01((60 - x) / 40)));
 // 練習の伸びの倍率：その子の育ち方・スキルと、同じパートの面倒見のいい部員・柱
 // 付き合っている相手が部にいると、いいところを見せたくて少し身が入る
 const growMult = (s, m, k) => 1 + (m.bent?.[k] || 0) + skillsOf(m).reduce((a, x) => a + (x.grow?.[k] || 0) * x.lv, 0) + sectionAura(s.members, m, 'grow') + (partnerOf(s, m) ? 0.04 : 0);
@@ -1653,7 +1654,7 @@ function concertOutcome(s, ev, q, perf, a){
     const n = clamp(Math.round(1.5 + (s.rep ?? 30) / 8 + (q - 40) / 12 + (s.morale > 70 ? 1 : 0)), 1, Math.max(1, empty + 2));
     const show = showSecs(s), shown = show.length ? `${show.map(x => SEC[x].name).join('や')}を見て、目をかがやかせている子もいた。` : '';
     return {recruits: n, show, text: (q >= 60 ? `演奏が終わると大きな拍手が起きた。${n}人の1年生が入部を考えてくれているらしい。`
-      : q >= 35 ? `拍手はまばらだったが、${n}人の1年生が興味を持ってくれたようだ。` : `体育館の響きにのまれて、何をやっているのか伝わらなかった。それでも${n}人の1年生が見学に来てくれそうだ。`) + shown};
+      : q >= 35 ? `拍手はまばらだったが、${n}人の1年生が興味を持ってくれたようだ。` : `音はまだそろわなかったが、最後まで吹ききった。${n}人の1年生が見学に来てくれそうだ。`) + shown};
   }
   if(ev.id === 'matsuri'){
     const dm = Math.round(q / 10) - 2;

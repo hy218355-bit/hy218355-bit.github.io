@@ -523,8 +523,10 @@ function ensembleOf(perf){
   }
   const qs = [...byMember.values()].map(p => p.sum / p.weight).sort((a, b) => a - b);
   // 全体が育ち始めの部と、育った部で一人だけ大きく乱す場合を分ける。
-  const reference = Math.max(0.4, (qs[Math.floor((qs.length - 1) * 0.75)] || 0) - 0.15);
-  const disruption = Math.min(20, qs.reduce((a, q) => a + 4 * Math.pow(clamp01((reference - q) / 0.5), 2), 0));
+  const reference = Math.max(0.15, (qs[Math.floor((qs.length - 1) * 0.75)] || 0) - 0.15);
+  const strain = qs.reduce((a, q) => a + 4 * Math.pow(clamp01((reference - q) / 0.5), 2), 0);
+  // 一人の乱れは残し、初心者が何人かいるだけで最大減点へ張りつかないよう、重なりをなだらかにする。
+  const disruption = 20 * (1 - Math.exp(-strain / 20));
   // 安定して吹ける人の音を重ねるほど厚くなる。大編成でも加点は頭打ちにする。
   const support = qs.reduce((a, q) => a + clamp01((q - 0.45) / 0.4), 0);
   const fullness = 4 * clamp01((support - 8) / 31);
@@ -622,7 +624,7 @@ function analyze(perf){
   const lack = lackOf(perf.pieceId, perf.secs || SECTIONS.map(s => s.id));
   const ensemble = ensembleOf(perf);
   const penalty = Math.min(25, 200 * wrongRate) + missingMel.length * 8 + missingBass.length * 8 + thin + lack.pts + ensemble.disruption;
-  return {score, penalty, ...ensemble, thin, lack, pitchDev, spread, rhythmMs, drift, cracks, wrong, balanceDb, sec: secOut, missingMel, missingBass, focus: pc.focus, ceiling: pc.ceiling};
+  return {score, penalty, ...ensemble, thin, lack, silent: !perf.notes.length && !perf.hits.length, pitchDev, spread, rhythmMs, drift, cracks, wrong, balanceDb, sec: secOut, missingMel, missingBass, focus: pc.focus, ceiling: pc.ceiling};
 }
 
 /* ===== 審査 ===== */
@@ -691,6 +693,12 @@ function interpNotes(perf){
   if(ip.rub === 2 && perf.cohesion >= 0.75 && perf.bandE >= 0.7){ adj += 2; }
   return {adj, notes: out};
 }
+// 序盤の成長を点に残し、中盤から上の賞には磨き込みを要する。
+// 仕上がった演奏は元の点幅へ戻す。無音は0点、最高の演奏は100点まで届く。
+function contestPoints(x){
+  const finish = clamp01((x - 75) / 20);
+  return clamp(0.85 * x + 9 * clamp01(x / 20) + 6 * finish * finish * (3 - 2 * finish), 0, 100);
+}
 function judge(perf, a, levelId){
   const L = LEVELS[levelId] || LEVELS.pref;
   const it = interpNotes(perf);
@@ -701,7 +709,7 @@ function judge(perf, a, levelId){
     for(const [k, x] of Object.entries(j.w)){ w[k] = x * (a.focus[k] || 1); tot += w[k]; }
     let sc = 0;
     for(const k of Object.keys(w)) sc += a.score[k] * w[k] / tot;
-    sc = Math.round(clamp(sc * a.ceiling - a.penalty + (a.fullness || 0) + it.adj + 2.5 * clampG(gauss('judge', levelId, i, Math.round(sc))), 0, 100));
+    sc = a.silent ? 0 : Math.round(clamp(contestPoints(sc * a.ceiling - a.penalty + (a.fullness || 0) + it.adj) + 2.5 * clampG(gauss('judge', levelId, i, Math.round(sc))), 0, 100));
     // 審査員が重く見る3項目から、ほかの審査員とかぶらない講評を選ぶ
     const dims = Object.entries(w).sort((x, y) => y[1] - x[1]).slice(0, 3).map(([k]) => k);
     const pick = (list, good) => {
@@ -749,8 +757,11 @@ function mergeJudges(js, jf, levelId, w){
 }
 // 演奏会（コンクール以外）の出来：0〜100
 function quality(a){
+  if(a.silent) return 0;
   const w = {pitch: .25, rhythm: .25, tone: .2, expr: .15, balance: .15};
   let s = 0;
   for(const k of Object.keys(w)) s += a.score[k] * w[k];
-  return clamp(s - a.penalty + (a.fullness || 0), 0, 100);
+  // 演奏会では、できた音を基準に、課題の割合で下げる。大会の固定減点はjudgeに残す。
+  // 少人数の最初の音も0点にせず、同じ課題なら演奏の実力が上がるほど出来も伸びる。
+  return clamp(s * Math.exp(-a.penalty / 100) + (a.fullness || 0), 0, 100);
 }
