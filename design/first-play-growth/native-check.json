@@ -1,0 +1,29 @@
+{
+  "build": "成功",
+  "files": {
+    "index.html": {
+      "same": true,
+      "sha256": "d74be2bc9199ca27c24d57e007a1416e6534749802ef51a90e36e100ee912bb4"
+    },
+    "js/ui.js": {
+      "same": true,
+      "sha256": "bdacf0dd0a8dc463a76e161126c55eafc734bd5c9c11ae5931610d2b41d80557"
+    },
+    "js/onboarding.js": {
+      "same": true,
+      "sha256": "c9a51a35fd2804b05e5f8149781b452712c84c84b699aa5cad5af9ba6a89b96b"
+    },
+    "js/growth-listen.js": {
+      "same": true,
+      "sha256": "55e5b994008f4bba1cd13a3616c3ca7bdf7b2f6ff67b2ab5ac09ffe5f7ad236b"
+    },
+    "img/advisor-asano.webp": {
+      "same": true,
+      "sha256": "8bbaf4fb2db4aad1521401b765510a69f92178ac9babd180ea9b71bc4159b7eb"
+    }
+  },
+  "signature": {
+    "command": "codesign --verify --deep --strict",
+    "exit": 0
+  }
+}

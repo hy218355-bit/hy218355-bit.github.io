@@ -463,6 +463,7 @@ html[data-fx-mode="full"] .ens-actions [data-waiting="true"]::after{animation:en
 .btn.guide{outline:2px solid var(--brass);outline-offset:2px;animation:guide 1.8s ease-in-out infinite}
 @keyframes guide{0%,100%{box-shadow:0 0 0 0 color-mix(in srgb,var(--brass) 75%,transparent)}60%{box-shadow:0 0 0 9px color-mix(in srgb,var(--brass) 0%,transparent)}}
 @media (prefers-reduced-motion:reduce){.btn.guide{animation:none}}
+[data-fx-mode="off"] .btn.guide,[data-fx-mode="short"] .btn.guide{animation:none}
 .showinst{margin:10px 0}
 .showinst > .small{display:block;margin-bottom:6px}
 .week{display:grid;gap:12px}
@@ -1658,6 +1659,24 @@ html[data-fx-mode="full"] .recording-save[data-saving="true"]::after{animation:f
 .onboarding-target{outline:2px solid var(--brass);outline-offset:4px}
 .onboarding :focus-visible{outline:2px solid var(--brass);outline-offset:3px}
 .onboarding-reopen{display:flex;align-items:center;gap:8px;min-height:44px;margin:12px 0 0;color:var(--ink-soft);font-size:12px}
+/* 音の成長は、同じ短い範囲を交互に聴く。操作先を保ったまま再生の印だけを変える。 */
+.growth-listen{margin-top:14px;border:1px solid var(--rule);border-radius:12px;background:var(--sheet);overflow:hidden}
+.growth-listen>summary{display:flex;justify-content:space-between;align-items:center;gap:8px;min-height:48px;padding:10px 12px;cursor:pointer;list-style:none}
+.growth-listen>summary::-webkit-details-marker{display:none}
+.growth-listen>summary b{display:flex;align-items:center;gap:6px;font-size:13px;font-weight:600}
+.growth-listen>summary>span{display:flex;align-items:center;gap:4px;font-size:11px;color:var(--ink-soft)}
+.growth-listen[open]>summary{border-bottom:1px solid var(--rule)}
+.growth-listen[open]>summary>span>.ui-icon{transform:rotate(180deg)}
+.growth-body{padding:12px}.growth-heading{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:10px;font-size:12px;color:var(--ink-soft)}
+.growth-heading>span{min-width:0;overflow-wrap:anywhere}.growth-heading>.help-button{min-width:44px;min-height:44px}
+.growth-buttons{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.growth-buttons>.btn{justify-content:center;min-height:48px;font-size:13px}
+.growth-buttons>[aria-pressed=true]{border-color:var(--brass);background:color-mix(in srgb,var(--brass) 14%,var(--sheet));color:var(--ink);box-shadow:inset 0 0 0 1px var(--brass)}
+.growth-people{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;margin-top:14px}
+.growth-person{display:grid;justify-items:center;gap:4px;min-width:0;padding:10px 4px;border-radius:10px;background:var(--paper)}
+.growth-person>b{max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-size:11px;font-weight:500}.growth-person>small{font-size:10px;color:var(--ink-soft)}
+.growth-ranks{display:flex;align-items:center;gap:3px}.growth-ranks>.ui-icon{width:12px;height:12px;transform:rotate(-90deg);color:var(--ink-soft)}
+.growth-listen :focus-visible{outline:2px solid var(--brass);outline-offset:2px}
 @media(max-width:480px){.onboarding{padding:14px}.onboarding-person{grid-template-columns:78px minmax(0,1fr);gap:12px}.onboarding-person>img{width:78px;height:88px}.onboarding-person h3{font-size:18px}}
 </style>
 </head>
@@ -1697,6 +1716,7 @@ html[data-fx-mode="full"] .recording-save[data-saving="true"]::after{animation:f
           <button class="btn brass" id="btnConduct" type="button">指揮する</button>
         </div>
         <p class="now-playing"><span id="nowPlaying" aria-live="polite"></span> <span id="sndStatus" aria-live="polite"></span></p>
+        <details class="growth-listen" id="growthListen" hidden></details>
         <details class="play-detail" id="recordingPanel"><summary><b>録音を聴く</b><small id="recordingCount"></small></summary><div class="recording-list" id="recordingList"></div><div class="recrow" hidden>
           <select id="recSel" aria-label="録音を選ぶ"></select>
           <button class="btn small" id="btnRec" type="button">▶ 聴く</button>
@@ -1887,8 +1907,9 @@ html[data-fx-mode="full"] .recording-save[data-saving="true"]::after{animation:f
 <script src="js/tunegame.js"></script>
 <script src="js/fx.js?v=stage-cast-1"></script>
 <script src="js/advisor.js?v=asano-1"></script>
-<script src="js/onboarding.js?v=first-club-1"></script>
-<script src="js/ui.js?v=first-club-1"></script>
+<script src="js/growth-listen.js?v=first-sound-1"></script>
+<script src="js/onboarding.js?v=first-sound-1"></script>
+<script src="js/ui.js?v=first-sound-1"></script>
 <div class="tip" id="tip" role="tooltip" hidden></div>
 </body>
 </html>

@@ -1,0 +1,137 @@
+[
+  {
+    "file": "check_audition_listen.js",
+    "exit": 0,
+    "output": "前の本人指定を解消／選択と全員と本人の実際の音／チェックと保存を保つ／選び直しと待機中止／古い予約の無効化／自然終了と別の音への切替／0人と本番中の制限：確認済み\n"
+  },
+  {
+    "file": "check_conduct_result.js",
+    "exit": 0,
+    "output": "同じボタンで再生・停止／自然終了で印を戻す／読み込み中止後の遅延再生なし／結果を閉じて再生と待機を停止／別の録音の印を区別／部と録音を増減しない：確認済み\n"
+  },
+  {
+    "file": "check_current_member_listen.js",
+    "exit": 0,
+    "output": "昔の録音・同じidの昔の力から今の本人とパートへ／現在の合奏は止めずに切替／育った後も今の力／停止時の席変更を再確認／部員と録音を変えない：確認済み\n"
+  },
+  {
+    "file": "check_current_rest.js",
+    "exit": 0,
+    "output": "全15曲・全57範囲／休みの延べ301人・音のある延べ1922人・パートの休み41件／休みは試聴しない／本人は休みでもパートを聴ける／範囲変更で古い無音指定を解消／未準備時の判定と操作先／顔と席・部・録音・演奏を保持／演奏ごとの使い回し：確認済み\n"
+  },
+  {
+    "file": "check_ensemble_picked.js",
+    "exit": 0,
+    "output": "0〜8人／選択した本人と候補の順序／外した顔を消す／8枠を保持／読み上げの人数と名前／控えと不在を除外／部と選択を変えない／一覧がない画面：確認済み\n"
+  },
+  {
+    "file": "check_ensemble_preview.js",
+    "exit": 0,
+    "output": "全15曲×3・5・8人の45編成／本番の録音との音符・時刻・音程・音量の一致／本番前の能力・譜読み・会場／選んだ本人の顔／部員・評判・録音・日誌の不変：確認済み\n席がなくなった人と存在しない人だけを選択から外し、部員のデータは保つ：確認済み\n"
+  },
+  {
+    "file": "check_faces.js",
+    "exit": 0,
+    "output": "100人の原画／元の39人の内訳維持／名前生成／名前と顔の対応／旧セーブ不変／キャッシュ／解像度と容量：確認済み\nランクの境界：確認済み\n"
+  },
+  {
+    "file": "check_graduation_album.js",
+    "exit": 0,
+    "output": "本人への移動と前後・集合写真から戻る／決定前の保存なし／録音の再開なし／引退後の39人の録音／最後の確定だけ保存／演出3設定と動きの少ない設定／空の名簿と名前の安全な表示：確認済み\n"
+  },
+  {
+    "file": "check_growth_listening.js",
+    "exit": 0,
+    "output": "{\n  \"pieces\": [\n    {\n      \"pid\": \"largo\",\n      \"from\": 0,\n      \"to\": 16,\n      \"secondsBefore\": 8.78,\n      \"secondsNow\": 8.86,\n      \"qualityBefore\": 19.89,\n      \"qualityNow\": 24.32,\n      \"pitchBefore\": 32.41,\n      \"pitchNow\": 38.77,\n      \"rhythmBefore\": 27.99,\n      \"rhythmNow\": 39.17,\n      \"names\": [\n        \"山本 紗希\",\n        \"長谷川 文香\",\n        \"中山 誠\"\n      ]\n    },\n    {\n      \"pid\": \"ode\",\n      \"from\": 0,\n      \"to\": 14,\n      \"secondsBefore\": 10.62,\n      \"secondsNow\": 10.67,\n      \"qualityBefore\": 36.26,\n      \"qualityNow\": 38.42,\n      \"pitchBefore\": 37.93,\n      \"pitchNow\": 42.07,\n      \"rhythmBefore\": 90.61,\n      \"rhythmNow\": 92.15,\n      \"names\": [\n        \"原田 海斗\",\n        \"森田 渚\",\n        \"林 美咲\"\n      ]\n    },\n    {\n      \"pid\": \"galop\",\n      \"from\": 0,\n      \"to\": 14,\n      \"secondsBefore\": 10.41,\n      \"secondsNow\": 10.43,\n      \"qualityBefore\": 16.82,\n      \"qualityNow\": 20.51,\n      \"pitchBefore\": 38.06,\n      \"pitchNow\": 41.52,\n      \"rhythmBefore\": 24.22,\n      \"rhythmNow\": 27.97,\n      \"names\": [\n        \"藤原 大翔\",\n        \"村上 明里\",\n        \"青木 茜\"\n      ]\n    },\n    {\n      \"pid\": \"pomp\",\n      \"from\": 0,\n      \"to\": 14,\n      \"secondsBefore\": 10.91,\n      \"secondsNow\": 10.99,\n      \"qualityBefore\": 16.82,\n      \"qualityNow\": 20.99,\n      \"pitchBefore\": 41.43,\n      \"pitchNow\": 47.51,\n      \"rhythmBefore\": 39.03,\n      \"rhythmNow\": 45,\n      \"names\": [\n        \"高木 悠真\",\n        \"吉田 陽翔\",\n        \"宮崎 結衣\"\n      ]\n    },\n    {\n      \"pid\": \"aida\",\n      \"from\": 0,\n      \"to\": 16,\n      \"secondsBefore\": 9.12,\n      \"secondsNow\": 9.15,\n      \"qualityBefore\": 28.42,\n      \"qualityNow\": 32.98,\n      \"pitchBefore\": 55.91,\n      \"pitchNow\": 59.73,\n      \"rhythmBefore\": 64.97,\n      \"rhythmNow\": 69.25,\n      \"names\": [\n        \"石田 美咲\",\n        \"藤田 千夏\",\n        \"金子 奏\"\n      ]\n    },\n    {\n      \"pid\": \"hero\",\n      \"from\": 0,\n      \"to\": 8,\n      \"secondsBefore\": 9.1,\n      \"secondsNow\": 9.15,\n      \"qualityBefore\": 26.4,\n      \"qualityNow\": 30.36,\n      \"pitchBefore\": 48.8,\n      \"pitchNow\": 50.19,\n      \"rhythmBefore\": 31.75,\n      \"rhythmNow\": 35.84,\n      \"names\": [\n        \"森 早紀\",\n        \"岡田 航\",\n        \"桜井 千夏\"\n      ]\n    },\n    {\n      \"pid\": \"holst\",\n      \"from\": 0,\n      \"to\": 12,\n      \"secondsBefore\": 9.16,\n      \"secondsNow\": 9.19,\n      \"qualityBefore\": 21.99,\n      \"qualityNow\": 26.34,\n      \"pitchBefore\": 43.87,\n      \"pitchNow\": 48.17,\n      \"rhythmBefore\": 29.48,\n      \"rhythmNow\": 33,\n      \"names\": [\n        \"上田 紗希\",\n        \"近藤 渚\",\n        \"中村 杏\"\n      ]\n    },\n    {\n      \"pid\": \"hungarian\",\n      \"from\": 0,\n      \"to\": 18,\n      \"secondsBefore\": 9.84,\n      \"secondsNow\": 9.87,\n      \"qualityBefore\": 23.29,\n      \"qualityNow\": 26.12,\n      \"pitchBefore\": 37.9,\n      \"pitchNow\": 41.4,\n      \"rhythmBefore\": 39.93,\n      \"rhythmNow\": 44.18,\n      \"names\": [\n        \"加藤 透\",\n        \"上田 蒼\",\n        \"野口 優奈\"\n      ]\n    },\n    {\n      \"pid\": \"flowers\",\n      \"from\": 0,\n      \"to\": 30,\n      \"secondsBefore\": 10.8,\n      \"secondsNow\": 10.83,\n      \"qualityBefore\": 25.97,\n      \"qualityNow\": 28.17,\n      \"pitchBefore\": 51.13,\n      \"pitchNow\": 54.16,\n      \"rhythmBefore\": 43.16,\n      \"rhythmNow\": 47.82,\n      \"names\": [\n        \"中野 恵\",\n        \"原田 杏\",\n        \"石田 茜\"\n      ]\n    },\n    {\n      \"pid\": \"tell\",\n      \"from\": 0,\n      \"to\": 26,\n      \"secondsBefore\": 10.63,\n      \"secondsNow\": 10.63,\n      \"qualityBefore\": 28.09,\n      \"qualityNow\": 31.41,\n      \"pitchBefore\": 51.82,\n      \"pitchNow\": 55.53,\n      \"rhythmBefore\": 54.24,\n      \"rhythmNow\": 58.4,\n      \"names\": [\n        \"長谷川 澪\",\n        \"田中 隼\",\n        \"岩崎 文香\"\n      ]\n    },\n    {\n      \"pid\": \"carmen\",\n      \"from\": 0,\n      \"to\": 20,\n      \"secondsBefore\": 10.44,\n      \"secondsNow\": 10.46,\n      \"qualityBefore\": 18.28,\n      \"qualityNow\": 21.2,\n      \"pitchBefore\": 39.49,\n      \"pitchNow\": 42.52,\n      \"rhythmBefore\": 51.18,\n      \"rhythmNow\": 54.74,\n      \"names\": [\n        \"藤原 遥\",\n        \"渡辺 優奈\",\n        \"森 紗希\"\n      ]\n    },\n    {\n      \"pid\": \"valkyrie\",\n      \"from\": 0,\n      \"to\": 12,\n      \"secondsBefore\": 10.16,\n      \"secondsNow\": 10.2,\n      \"qualityBefore\": 16.93,\n      \"qualityNow\": 19.43,\n      \"pitchBefore\": 17.16,\n      \"pitchNow\": 19.69,\n      \"rhythmBefore\": 43.52,\n      \"rhythmNow\": 47.96,\n      \"names\": [\n        \"山口 花音\",\n        \"菅原 理央\",\n        \"和田 莉子\"\n      ]\n    },\n    {\n      \"pid\": \"swan\",\n      \"from\": 0,\n      \"to\": 16,\n      \"secondsBefore\": 11.63,\n      \"secondsNow\": 11.66,\n      \"qualityBefore\": 26.47,\n      \"qualityNow\": 29.35,\n      \"pitchBefore\": 45.96,\n      \"pitchNow\": 49.88,\n      \"rhythmBefore\": 52.25,\n      \"rhythmNow\": 56.25,\n      \"names\": [\n        \"岡田 颯太\",\n        \"中野 文香\",\n        \"小林 悠斗\"\n      ]\n    },\n    {\n      \"pid\": \"spring\",\n      \"from\": 0,\n      \"to\": 16,\n      \"secondsBefore\": 9.49,\n      \"secondsNow\": 9.51,\n      \"qualityBefore\": 25.72,\n      \"qualityNow\": 27.74,\n      \"pitchBefore\": 46.23,\n      \"pitchNow\": 49.91,\n      \"rhythmBefore\": 43.55,\n      \"rhythmNow\": 47.49,\n      \"names\": [\n        \"三浦 真央\",\n        \"西村 明里\",\n        \"渡辺 陸\"\n      ]\n    },\n    {\n      \"pid\": \"canon\",\n      \"from\": 0,\n      \"to\": 16,\n      \"secondsBefore\": 8.72,\n      \"secondsNow\": 8.76,\n      \"qualityBefore\": 31.95,\n      \"qualityNow\": 36.34,\n      \"pitchBefore\": 52.37,\n      \"pitchNow\": 58.61,\n      \"rhythmBefore\": 56.97,\n      \"rhythmNow\": 60.55,\n      \"names\": [\n        \"伊藤 碧\",\n        \"伊藤 雫\",\n        \"工藤 楓\"\n      ]\n    }\n  ],\n  \"compatibility\": [\n    \"記録なし\",\n    \"去年の記録\",\n    \"違う曲\",\n    \"古い記録の揺れ条件\",\n    \"改名後も当時の名前\",\n    \"席替え後も当時の担当\",\n    \"保存内容を保持\"\n  ],\n  \"venueChange\": {\n    \"comparisonStops\": true,\n    \"normalPlaybackUnchanged\": true\n  }\n}\n"
+  },
+  {
+    "file": "check_live_performance.js",
+    "exit": 0,
+    "output": "相談・冬の練習・行事・新体制後の初回再生／範囲と会場の変更直後／連続更新／再生中の録音を保つ／再生でセーブを書き換えない：確認済み\n"
+  },
+  {
+    "file": "check_member_listening.js",
+    "exit": 0,
+    "output": "全15曲×本人・パートの30通り／同じボタンで全員へ／切替で再生・音・部を保持／ボタンと入力・開いた内容を使い回す／停止後に印を解除し再開／待機を保って全員へ／違う音・成長後は最新へ／録音と控えを区別：確認済み\n"
+  },
+  {
+    "file": "check_member_move_undo.js",
+    "exit": 0,
+    "output": "交代する二人の能力・席・160件の日誌・録音・セーブの復元／控えと空席／直前の1回だけ／改名・練習・本番・停止時の保存を消さない：確認済み\n"
+  },
+  {
+    "file": "check_member_record_stop.js",
+    "exit": 0,
+    "output": "個人録音の待機中止・実際の停止・全員や別の本人への切替／古い待機が鳴らない／本番の終了処理を呼ばない／次の音を止めない／部と録音を変えない：確認済み\n"
+  },
+  {
+    "file": "check_mini_subject.js",
+    "exit": 0,
+    "output": "全15曲／本人の顔と当時の楽器・パート・全員／待機と停止・合奏タブ・人選中の表示／同じ表示を使い回す／名前の安全な表示／部と演奏を保持：確認済み\n"
+  },
+  {
+    "file": "check_model_context.js",
+    "exit": 0,
+    "output": "全15曲×再生・待機の30通り／お手本の見出しと曲／全曲の範囲／自分の部員と指揮を混ぜない／音のあるパートのみ／使い回し／停止・今の部で元へ／部・演奏の不変：確認済み\n"
+  },
+  {
+    "file": "check_onboarding.js",
+    "exit": 0,
+    "output": "{\n  \"noSeatRecovery\": true,\n  \"playbackGate\": true,\n  \"steps\": [\n    0,\n    1,\n    2,\n    3,\n    4\n  ],\n  \"resume\": true,\n  \"skip\": true,\n  \"oldSave\": true,\n  \"blockedStorage\": true\n}\n"
+  },
+  {
+    "file": "check_piece_listening.js",
+    "exit": 0,
+    "output": "全15曲×お手本・いまの部の30通りの実際の音／本人指定を解消／表示どおりの会場／同じボタンで停止／切替・自然終了・待機中止／古い予約を鳴らさない／最新の部・通常の再生を保持／失敗時の印を解除：確認済み\n"
+  },
+  {
+    "file": "check_recording_card.js",
+    "exit": 0,
+    "output": "全15曲の本人・全員の切替／再生と音・部・録音を保持／別の本人・閉じる・待機で指定を解除／パート指定の保持／Escapeの説明・編集・席選び・長押し・変換／舞台・名簿の操作先：確認済み\n"
+  },
+  {
+    "file": "check_recording_rest.js",
+    "exit": 0,
+    "output": "全15曲・全57範囲／休みの延べ301人と音のある延べ1922人／音符・打楽器による区別／本人とパートの一覧／無音の指定を解消／演奏ごとの使い回し／部・録音・演奏の不変／現在の部の設定を保持：確認済み\n"
+  },
+  {
+    "file": "check_sample_retry.js",
+    "exit": 0,
+    "output": "HTTP・音の展開・目録のエラーから再試行／読めた録音と調律情報の保持／残りの読み込みとの競合なし／二重実行なし／再び読めない場合も再試行可：確認済み\n"
+  },
+  {
+    "file": "check_stage_cast.js",
+    "exit": 0,
+    "output": "全15曲の音と記録の不変／音符のない延べ19人を含む全出場者／少人数の人選／改名・席替え・卒業後も当時の本人／アンサンブルで育つ前の力／当日の曲と譜読みのひとこと：確認済み\nA部門の課題曲→自由曲と拍手／課題曲→自由曲の指揮／アンサンブルの実際の開始／出場人数・当日の力・音と結果の保持：確認済み\n当日の記録から空の舞台→入場途中→全39人／今の名簿にいなくても本人を保つ／入場後に一度だけ演奏開始：確認済み\n"
+  },
+  {
+    "file": "check_stage_faces.js",
+    "exit": 0,
+    "output": "240〜720pxの顔の間隔・はみ出し・タップ／楽器決めの位置維持／録音の本人の顔／4枚の読み込みと39個の絵の再利用：確認済み\n100人へ拡張しても原画10枚・丸い画像100個を再利用：確認済み\n"
+  },
+  {
+    "file": "check_stage_reveal.js",
+    "exit": 0,
+    "output": "合奏開始の10通り／舞台が隠れるときだけ表示／停止へ操作先を渡す／部員カードなどの試聴は移動しない／待機・失敗・広い画面・別タブを区別／同じ音を一度だけ再生／部と音を保持：確認済み\n"
+  },
+  {
+    "file": "check_stop_current.js",
+    "exit": 0,
+    "output": "週を進めたあとの停止で今の音と譜面へ戻る／元の部を変えない／終了の通知は1回／次の本番を上書きしない／終了処理後の最新状態を使う：確認済み\n"
+  },
+  {
+    "file": "check_stop_navigation.js",
+    "exit": 0,
+    "output": "合奏・小さな再生バーの停止と自然終了／待機の中止／元の部と演奏を保持／終了の通知は1回／次の音と待機・結果・別の操作を保つ／隠れた操作とモーダルの裏へ戻さない／スクロールを動かさない：確認済み\n"
+  },
+  {
+    "file": "check_week_escape.js",
+    "exit": 0,
+    "output": "練習・行事・本番準備の18通り／説明を先に閉じる／長押し・文字の変換・他のキーは保持／対象外の場所を保持／一度の入力で一つだけ閉じる：確認済み\n"
+  },
+  {
+    "file": "check_stage_preroll.js",
+    "exit": 0,
+    "output": "演奏前の余白・最初の音・読み込み待ち・停止・本番画面で当時の本人を描き、現在の名簿を保つ：確認済み\n"
+  }
+]

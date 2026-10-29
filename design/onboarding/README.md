@@ -14,6 +14,8 @@
 
 ## 確認
 
+以下は初回実装時の記録。聴き比べの追加後の画面・操作・音の確認は `design/first-play-growth/` に残す。確認用HTMLは現在の製品にそろえて更新する。
+
 `python3 design/onboarding/build_qa.py` で製品のHTML・CSSと同じ確認ページを作る。
 `http://127.0.0.1:8005/design/onboarding/` から試せる。
 確認ページのゲームと案内は、専用の保存先 `onboarding-check:*` を使う。

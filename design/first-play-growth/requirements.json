@@ -1,0 +1,76 @@
+{
+  "objective": "1. 初見の導線を確認する。2. 育てた実感を音と部員の成長で確かめる。",
+  "ownerClarification": "今回は初見を想定した検証まででよい",
+  "requirements": [
+    {
+      "item": "初見を想定し最初の本番と結果まで操作できる",
+      "evidence": [
+        "browser-check.json",
+        "first-comparison.png"
+      ],
+      "status": "確認済み"
+    },
+    {
+      "item": "375pxのライトとダーク、4タブ、横にはみ出さず触れる",
+      "evidence": [
+        "browser-check.json",
+        "growth-comparison.png"
+      ],
+      "status": "確認済み"
+    },
+    {
+      "item": "最初の段階・案内・選曲・空の席の扱いをそろえる",
+      "evidence": [
+        "../../tsukurikata/js/ui.js",
+        "../../tsukurikata/js/onboarding.js",
+        "onboarding-check.json"
+      ],
+      "status": "確認済み"
+    },
+    {
+      "item": "4月と現在の音を同じ曲・範囲・テンポ・会場で比べる",
+      "evidence": [
+        "../../tsukurikata/js/growth-listen.js",
+        "sound-check.json",
+        "audio-check.json",
+        "before-after.wav"
+      ],
+      "status": "確認済み"
+    },
+    {
+      "item": "実際に育った部員を顔とG〜Sで示す",
+      "evidence": [
+        "growth-comparison.png",
+        "sound-check.json"
+      ],
+      "status": "確認済み"
+    },
+    {
+      "item": "保存・採点・成長・過去の本人を変えず、読み込み待ちと状態更新を扱う",
+      "evidence": [
+        "sound-check.json",
+        "browser-check.json",
+        "stage-preroll-check.txt",
+        "checks.json"
+      ],
+      "status": "確認済み"
+    },
+    {
+      "item": "オフライン、画像・フォントの外部取得なし、動きの設定を保つ",
+      "evidence": [
+        "../../tsukurikata/index.html",
+        "../../tsukurikata/js/growth-listen.js"
+      ],
+      "status": "確認済み"
+    },
+    {
+      "item": "1年間の画面更新・コンソール・起動・同梱を確認する",
+      "evidence": [
+        "year-check.json",
+        "browser-check.json",
+        "native-check.json"
+      ],
+      "status": "確認済み"
+    }
+  ]
+}

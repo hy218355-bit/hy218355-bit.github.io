@@ -82,7 +82,8 @@ function renderSnd(){
   else st.textContent = '';
 }
 function commit(next){
-  if(ensembleListening()||pieceListening())stopPlay();
+  if(ensembleListening()||pieceListening()||U.growthListen)stopPlay();
+  U.growthPair=null;U.growthListen=null;
   // ほかの操作を巻き戻さないよう、保存する操作で席の取り消しを終える。
   U.moveUndo = null;
   $('#memberCard .mc-undo')?.remove();
@@ -120,6 +121,7 @@ function setNowPlaying(){
 }
 function renderPlayButtons(){
   renderOnboarding();
+  renderGrowthListening();
   const on = !!(U.playing || U.waitPlay);
   $('#btnStop').hidden = !on; $('#btnNow').hidden = on;
   const moveStop = $('#memberCard [data-mact="movestop"]');
@@ -263,6 +265,8 @@ function revealStagePlayback(){
   if(stage.top<top||stage.bottom>actions.top-12)panel.scrollIntoView({block:'start',behavior:'auto'});
 }
 function setVenue(id){
+  // 聴き比べは同じ会場で最初から比べる。途中で会場を変えたら古い聴き比べを終える。
+  if(U.venue!==id && U.growthPair){if(U.growthListen)stopPlay();U.growthPair=null;}
   U.venue = id; saveUI();
   E.setVenue(id);
   renderVenues();
@@ -382,7 +386,7 @@ function drawStage(t = -1, cv = $('#stage'), who = null){
   let portraits=0,focus=null;
   for(const s of SEATS){
     const [x, y] = seatXY(s, G);
-    const cast=main ? (t>=0 || U.waitPlay ? U.stageMembers : null) : CD.stageMembers;
+    const cast=main ? (U.playing || U.waitPlay || t>=0 ? U.stageMembers : null) : CD.stageMembers;
     const person = cast ? cast.get(s.id) : S.members.find(mm => mm.seat === s.id);
     const m = person && (!who || who.has(person.id)) ? person : null;
     const dim = viewSec && s.sec !== viewSec;
@@ -594,7 +598,7 @@ function renderHeader(){
     if(!k){ const mo = document.createElement('span'); mo.className = 'mo'; mo.textContent = '冬'; li.appendChild(mo); }
     ol.appendChild(li);
   });
-  if(S.phase === 'choose' || S.phase === 'chooseSet'){ $('#weekNow').textContent = `${S.year}年 4月・選曲会議`; $('#weeksLeft').textContent = '県大会まで16週'; return; }
+  if(S.phase === 'choose' || S.phase === 'chooseSet'){ $('#weekNow').textContent = `${S.year}年 4月・${recruitsDue(S)?'楽器決め':'選曲会議'}`; $('#weeksLeft').textContent = '県大会まで16週'; return; }
   if(S.phase === 'end'){ $('#weekNow').textContent = `${S.year}年度の本番がすべて終わった`; $('#weeksLeft').textContent = ''; return; }
   if(S.phase === 'winter'){ const st = winterStep(S); $('#weekNow').textContent = `${S.year}年度 ${st.m}月`; $('#weeksLeft').textContent = `冬のあいだ（${S.winter.step + 1}／${WINTER_STEPS.length}）`; return; }
   $('#weekNow').textContent = wkLabel(S.week);
@@ -604,7 +608,7 @@ function renderHeader(){
 }
 function renderPiece(){
   const comparison=pieceListening(),recorded=recordingPlayback(),model=comparison?.kind==='model',ensemble=ensembleListening(),pid=recorded||model?U.shown.pieceId:playPiece(),pc=PIECES[pid];
-  $('#btnConduct').disabled=!!ensemble||recorded||model||busy();
+  $('#btnConduct').disabled=!!ensemble||recorded||model||busy()||!seated(S).length;
   // A部門でコンクールまでは、自由曲と課題曲を切りかえて聴ける
   const two = !recorded && !model && setActive(S) && S.phase === 'week';
   $('#pieceSwitch').hidden = !two;
@@ -904,7 +908,7 @@ function renderWeek(){
   if(!foundingYear(S) || S.week > GUIDE_WEEKS) return;
   const w = $('#week');
   const b = GUIDE_ACTS.map(a => w.querySelector(`[data-act="${a}"]:not([disabled])`)).find(Boolean)
-    || w.querySelector('.tag.fit ~ .row [data-act="choose"]') || w.querySelector('[data-act="choose"]');
+    || (!onboardingActive() && w.querySelector('.tag.fit ~ .row [data-act="choose"]')) || w.querySelector('[data-act="choose"]');
   b?.classList.add('guide');
 }
 // 案内は短いひと言だけを見せ、説明は顔を押して開く。ゲームを止める表示にはしない。
@@ -2447,7 +2451,8 @@ function renderAll(){
   renderStats(); renderWeek(); renderLog();
   renderMemberCard(); renderRoster(); renderHistory();
   renderPieceListening();
-  $('#btnNow').disabled = busy();
+  renderGrowthListening();
+  $('#btnNow').disabled = busy() || !seated(S).length;
 }
 
 /* ===== 操作 ===== */
@@ -2560,6 +2565,9 @@ function bind(){
   document.addEventListener('click',e=>{
     const b=e.target.closest('[data-onboard]');
     if(b) onboardingAction(b.dataset.onboard);
+  });
+  $('#growthListen').addEventListener('click',e=>{
+    const b=e.target.closest('[data-growth]');if(b)listenGrowth(b.dataset.growth);
   });
   $('#recordingList').addEventListener('click',e=>{
     const b=e.target.closest('button');if(!b || b.disabled)return;

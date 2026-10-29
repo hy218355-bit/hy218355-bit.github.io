@@ -1,0 +1,2961 @@
+{
+  "flow": [
+    {
+      "label": "4月の音",
+      "state": 0.8850191982928663,
+      "records": 0.6908491819631308,
+      "members": 0.703509398503229,
+      "year": 2026,
+      "week": 4,
+      "tab": "play",
+      "guide": {
+        "club": "1919992256:2026",
+        "active": false,
+        "heard": false
+      },
+      "playing": true,
+      "waiting": false,
+      "focus": "before",
+      "available": true,
+      "growth": {
+        "side": "before",
+        "perf": 0.615744590992108
+      },
+      "pair": {
+        "pid": "galop",
+        "range": "all",
+        "venue": "room",
+        "reference": "r2026-0-0-583709",
+        "before": 0.615744590992108,
+        "now": null,
+        "current": true,
+        "baseline": [
+          {
+            "id": "m2026-n1-7270c1c0",
+            "name": "山本 紗希",
+            "seat": "fl1a"
+          },
+          {
+            "id": "m2026-n2-7270c1c0",
+            "name": "長谷川 文香",
+            "seat": "tp1a"
+          },
+          {
+            "id": "m2026-n3-7270c1c0",
+            "name": "阿部 翔",
+            "seat": "euph1"
+          },
+          {
+            "id": "m2026-n4-7270c1c0",
+            "name": "森 結衣",
+            "seat": "tsax1"
+          },
+          {
+            "id": "m2026-n5-7270c1c0",
+            "name": "中山 誠",
+            "seat": "cl1a"
+          }
+        ],
+        "latest": [
+          {
+            "id": "m2026-n1-7270c1c0",
+            "name": "山本 紗希",
+            "seat": "fl1a"
+          },
+          {
+            "id": "m2026-n2-7270c1c0",
+            "name": "長谷川 文香",
+            "seat": "tp1a"
+          },
+          {
+            "id": "m2026-n3-7270c1c0",
+            "name": "阿部 翔",
+            "seat": "euph1"
+          },
+          {
+            "id": "m2026-n4-7270c1c0",
+            "name": "森 結衣",
+            "seat": "tsax1"
+          },
+          {
+            "id": "m2026-n5-7270c1c0",
+            "name": "中山 誠",
+            "seat": "cl1a"
+          },
+          {
+            "id": "m2026-n6-7270c1c0",
+            "name": "佐々木 航",
+            "seat": "perc1"
+          },
+          {
+            "id": "m2026-n7-7270c1c0",
+            "name": "石川 菜月",
+            "seat": "tp3a"
+          }
+        ]
+      },
+      "buttons": [
+        {
+          "side": "before",
+          "label": "4月の音を止める",
+          "pressed": "true",
+          "height": 48
+        },
+        {
+          "side": "now",
+          "label": "いまの音を聴く",
+          "pressed": "false",
+          "height": 48
+        }
+      ],
+      "shown": 0.615744590992108,
+      "rangeDisabled": true,
+      "errors": [],
+      "events": [
+        {
+          "button": "",
+          "at": 318
+        },
+        {
+          "button": "4月の音を聴く",
+          "at": 8462
+        }
+      ],
+      "width": 375,
+      "scrollWidth": 375
+    },
+    {
+      "label": "いまの音へ切り替え",
+      "state": 0.8850191982928663,
+      "records": 0.6908491819631308,
+      "members": 0.703509398503229,
+      "year": 2026,
+      "week": 4,
+      "tab": "play",
+      "guide": {
+        "club": "1919992256:2026",
+        "active": false,
+        "heard": false
+      },
+      "playing": false,
+      "waiting": false,
+      "focus": "now",
+      "available": true,
+      "growth": null,
+      "pair": {
+        "pid": "galop",
+        "range": "all",
+        "venue": "room",
+        "reference": "r2026-0-0-583709",
+        "before": 0.615744590992108,
+        "now": 0.488928813720122,
+        "current": true,
+        "baseline": [
+          {
+            "id": "m2026-n1-7270c1c0",
+            "name": "山本 紗希",
+            "seat": "fl1a"
+          },
+          {
+            "id": "m2026-n2-7270c1c0",
+            "name": "長谷川 文香",
+            "seat": "tp1a"
+          },
+          {
+            "id": "m2026-n3-7270c1c0",
+            "name": "阿部 翔",
+            "seat": "euph1"
+          },
+          {
+            "id": "m2026-n4-7270c1c0",
+            "name": "森 結衣",
+            "seat": "tsax1"
+          },
+          {
+            "id": "m2026-n5-7270c1c0",
+            "name": "中山 誠",
+            "seat": "cl1a"
+          }
+        ],
+        "latest": [
+          {
+            "id": "m2026-n1-7270c1c0",
+            "name": "山本 紗希",
+            "seat": "fl1a"
+          },
+          {
+            "id": "m2026-n2-7270c1c0",
+            "name": "長谷川 文香",
+            "seat": "tp1a"
+          },
+          {
+            "id": "m2026-n3-7270c1c0",
+            "name": "阿部 翔",
+            "seat": "euph1"
+          },
+          {
+            "id": "m2026-n4-7270c1c0",
+            "name": "森 結衣",
+            "seat": "tsax1"
+          },
+          {
+            "id": "m2026-n5-7270c1c0",
+            "name": "中山 誠",
+            "seat": "cl1a"
+          },
+          {
+            "id": "m2026-n6-7270c1c0",
+            "name": "佐々木 航",
+            "seat": "perc1"
+          },
+          {
+            "id": "m2026-n7-7270c1c0",
+            "name": "石川 菜月",
+            "seat": "tp3a"
+          }
+        ]
+      },
+      "buttons": [
+        {
+          "side": "before",
+          "label": "4月の音を聴く",
+          "pressed": "false",
+          "height": 48
+        },
+        {
+          "side": "now",
+          "label": "いまの音を聴く",
+          "pressed": "false",
+          "height": 48
+        }
+      ],
+      "shown": 0.8336967658251524,
+      "rangeDisabled": false,
+      "errors": [],
+      "events": [
+        {
+          "button": "",
+          "at": 296
+        },
+        {
+          "button": "4月の音を聴く",
+          "at": 867
+        },
+        {
+          "button": "いまの音を聴く",
+          "at": 1134
+        }
+      ],
+      "width": 375,
+      "scrollWidth": 375
+    },
+    {
+      "label": "4月の読み込み待ち",
+      "state": 0.31015243707224727,
+      "records": 0.2656898363493383,
+      "members": 0.4860899287741631,
+      "year": 2026,
+      "week": 4,
+      "tab": "play",
+      "guide": {
+        "club": "1919992256:2026",
+        "active": false,
+        "heard": false
+      },
+      "playing": false,
+      "waiting": true,
+      "focus": "before",
+      "available": true,
+      "growth": {
+        "side": "before",
+        "perf": 0.615744590992108
+      },
+      "pair": {
+        "pid": "galop",
+        "range": "all",
+        "venue": "room",
+        "reference": "r2026-0-0-583709",
+        "before": 0.615744590992108,
+        "now": null,
+        "current": true,
+        "baseline": [
+          {
+            "id": "m2026-n1-7270c1c0",
+            "name": "山本 紗希",
+            "seat": "fl1a"
+          },
+          {
+            "id": "m2026-n2-7270c1c0",
+            "name": "長谷川 文香",
+            "seat": "tp1a"
+          },
+          {
+            "id": "m2026-n3-7270c1c0",
+            "name": "阿部 翔",
+            "seat": "euph1"
+          },
+          {
+            "id": "m2026-n4-7270c1c0",
+            "name": "森 結衣",
+            "seat": "tsax1"
+          },
+          {
+            "id": "m2026-n5-7270c1c0",
+            "name": "中山 誠",
+            "seat": "cl1a"
+          }
+        ],
+        "latest": [
+          {
+            "id": "m2026-n1-7270c1c0",
+            "name": "山本 紗希",
+            "seat": "fl1a"
+          },
+          {
+            "id": "m2026-n2-7270c1c0",
+            "name": "長谷川 文香",
+            "seat": "tp1a"
+          },
+          {
+            "id": "m2026-n3-7270c1c0",
+            "name": "阿部 翔",
+            "seat": "euph1"
+          },
+          {
+            "id": "m2026-n4-7270c1c0",
+            "name": "森 結衣",
+            "seat": "tsax1"
+          },
+          {
+            "id": "m2026-n5-7270c1c0",
+            "name": "中山 誠",
+            "seat": "cl1a"
+          },
+          {
+            "id": "m2026-n6-7270c1c0",
+            "name": "佐々木 航",
+            "seat": "perc1"
+          },
+          {
+            "id": "m2026-n7-7270c1c0",
+            "name": "石川 菜月",
+            "seat": "tp3a"
+          }
+        ]
+      },
+      "buttons": [
+        {
+          "side": "before",
+          "label": "4月の音を読み込み中。中止する",
+          "pressed": "true",
+          "height": 48
+        },
+        {
+          "side": "now",
+          "label": "いまの音を聴く",
+          "pressed": "false",
+          "height": 48
+        }
+      ],
+      "shown": 0.615744590992108,
+      "rangeDisabled": true,
+      "errors": [],
+      "events": [
+        {
+          "button": "",
+          "at": 300
+        },
+        {
+          "button": "4月の音を聴く",
+          "at": 849
+        }
+      ],
+      "width": 375,
+      "scrollWidth": 375
+    },
+    {
+      "label": "いまの読み込み待ち",
+      "state": 0.31015243707224727,
+      "records": 0.2656898363493383,
+      "members": 0.4860899287741631,
+      "year": 2026,
+      "week": 4,
+      "tab": "play",
+      "guide": {
+        "club": "1919992256:2026",
+        "active": false,
+        "heard": false
+      },
+      "playing": false,
+      "waiting": true,
+      "focus": "now",
+      "available": true,
+      "growth": {
+        "side": "now",
+        "perf": 0.488928813720122
+      },
+      "pair": {
+        "pid": "galop",
+        "range": "all",
+        "venue": "room",
+        "reference": "r2026-0-0-583709",
+        "before": 0.615744590992108,
+        "now": 0.488928813720122,
+        "current": true,
+        "baseline": [
+          {
+            "id": "m2026-n1-7270c1c0",
+            "name": "山本 紗希",
+            "seat": "fl1a"
+          },
+          {
+            "id": "m2026-n2-7270c1c0",
+            "name": "長谷川 文香",
+            "seat": "tp1a"
+          },
+          {
+            "id": "m2026-n3-7270c1c0",
+            "name": "阿部 翔",
+            "seat": "euph1"
+          },
+          {
+            "id": "m2026-n4-7270c1c0",
+            "name": "森 結衣",
+            "seat": "tsax1"
+          },
+          {
+            "id": "m2026-n5-7270c1c0",
+            "name": "中山 誠",
+            "seat": "cl1a"
+          }
+        ],
+        "latest": [
+          {
+            "id": "m2026-n1-7270c1c0",
+            "name": "山本 紗希",
+            "seat": "fl1a"
+          },
+          {
+            "id": "m2026-n2-7270c1c0",
+            "name": "長谷川 文香",
+            "seat": "tp1a"
+          },
+          {
+            "id": "m2026-n3-7270c1c0",
+            "name": "阿部 翔",
+            "seat": "euph1"
+          },
+          {
+            "id": "m2026-n4-7270c1c0",
+            "name": "森 結衣",
+            "seat": "tsax1"
+          },
+          {
+            "id": "m2026-n5-7270c1c0",
+            "name": "中山 誠",
+            "seat": "cl1a"
+          },
+          {
+            "id": "m2026-n6-7270c1c0",
+            "name": "佐々木 航",
+            "seat": "perc1"
+          },
+          {
+            "id": "m2026-n7-7270c1c0",
+            "name": "石川 菜月",
+            "seat": "tp3a"
+          }
+        ]
+      },
+      "buttons": [
+        {
+          "side": "before",
+          "label": "4月の音を聴く",
+          "pressed": "false",
+          "height": 48
+        },
+        {
+          "side": "now",
+          "label": "いまの音を読み込み中。中止する",
+          "pressed": "true",
+          "height": 48
+        }
+      ],
+      "shown": 0.488928813720122,
+      "rangeDisabled": true,
+      "errors": [],
+      "events": [
+        {
+          "button": "",
+          "at": 300
+        },
+        {
+          "button": "4月の音を聴く",
+          "at": 849
+        },
+        {
+          "button": "いまの音を聴く",
+          "at": 10074
+        }
+      ],
+      "width": 375,
+      "scrollWidth": 375
+    },
+    {
+      "label": "読み込み待ちを中止",
+      "state": 0.31015243707224727,
+      "records": 0.2656898363493383,
+      "members": 0.4860899287741631,
+      "year": 2026,
+      "week": 4,
+      "tab": "play",
+      "guide": {
+        "club": "1919992256:2026",
+        "active": false,
+        "heard": false
+      },
+      "playing": false,
+      "waiting": false,
+      "focus": "now",
+      "available": true,
+      "growth": null,
+      "pair": {
+        "pid": "galop",
+        "range": "all",
+        "venue": "room",
+        "reference": "r2026-0-0-583709",
+        "before": 0.615744590992108,
+        "now": 0.488928813720122,
+        "current": true,
+        "baseline": [
+          {
+            "id": "m2026-n1-7270c1c0",
+            "name": "山本 紗希",
+            "seat": "fl1a"
+          },
+          {
+            "id": "m2026-n2-7270c1c0",
+            "name": "長谷川 文香",
+            "seat": "tp1a"
+          },
+          {
+            "id": "m2026-n3-7270c1c0",
+            "name": "阿部 翔",
+            "seat": "euph1"
+          },
+          {
+            "id": "m2026-n4-7270c1c0",
+            "name": "森 結衣",
+            "seat": "tsax1"
+          },
+          {
+            "id": "m2026-n5-7270c1c0",
+            "name": "中山 誠",
+            "seat": "cl1a"
+          }
+        ],
+        "latest": [
+          {
+            "id": "m2026-n1-7270c1c0",
+            "name": "山本 紗希",
+            "seat": "fl1a"
+          },
+          {
+            "id": "m2026-n2-7270c1c0",
+            "name": "長谷川 文香",
+            "seat": "tp1a"
+          },
+          {
+            "id": "m2026-n3-7270c1c0",
+            "name": "阿部 翔",
+            "seat": "euph1"
+          },
+          {
+            "id": "m2026-n4-7270c1c0",
+            "name": "森 結衣",
+            "seat": "tsax1"
+          },
+          {
+            "id": "m2026-n5-7270c1c0",
+            "name": "中山 誠",
+            "seat": "cl1a"
+          },
+          {
+            "id": "m2026-n6-7270c1c0",
+            "name": "佐々木 航",
+            "seat": "perc1"
+          },
+          {
+            "id": "m2026-n7-7270c1c0",
+            "name": "石川 菜月",
+            "seat": "tp3a"
+          }
+        ]
+      },
+      "buttons": [
+        {
+          "side": "before",
+          "label": "4月の音を聴く",
+          "pressed": "false",
+          "height": 48
+        },
+        {
+          "side": "now",
+          "label": "いまの音を聴く",
+          "pressed": "false",
+          "height": 48
+        }
+      ],
+      "shown": 0.8336967658251524,
+      "rangeDisabled": false,
+      "errors": [],
+      "events": [
+        {
+          "button": "",
+          "at": 300
+        },
+        {
+          "button": "4月の音を聴く",
+          "at": 849
+        },
+        {
+          "button": "いまの音を聴く",
+          "at": 10074
+        },
+        {
+          "button": "いまの音を読み込み中。中止する",
+          "at": 10373
+        }
+      ],
+      "width": 375,
+      "scrollWidth": 375
+    },
+    {
+      "label": "中止後に音源読み込み完了",
+      "state": 0.31015243707224727,
+      "records": 0.2656898363493383,
+      "members": 0.4860899287741631,
+      "year": 2026,
+      "week": 4,
+      "tab": "play",
+      "guide": {
+        "club": "1919992256:2026",
+        "active": false,
+        "heard": false
+      },
+      "playing": false,
+      "waiting": false,
+      "focus": "releaseGrowthSamples",
+      "available": true,
+      "growth": null,
+      "pair": {
+        "pid": "galop",
+        "range": "all",
+        "venue": "room",
+        "reference": "r2026-0-0-583709",
+        "before": 0.615744590992108,
+        "now": 0.488928813720122,
+        "current": true,
+        "baseline": [
+          {
+            "id": "m2026-n1-7270c1c0",
+            "name": "山本 紗希",
+            "seat": "fl1a"
+          },
+          {
+            "id": "m2026-n2-7270c1c0",
+            "name": "長谷川 文香",
+            "seat": "tp1a"
+          },
+          {
+            "id": "m2026-n3-7270c1c0",
+            "name": "阿部 翔",
+            "seat": "euph1"
+          },
+          {
+            "id": "m2026-n4-7270c1c0",
+            "name": "森 結衣",
+            "seat": "tsax1"
+          },
+          {
+            "id": "m2026-n5-7270c1c0",
+            "name": "中山 誠",
+            "seat": "cl1a"
+          }
+        ],
+        "latest": [
+          {
+            "id": "m2026-n1-7270c1c0",
+            "name": "山本 紗希",
+            "seat": "fl1a"
+          },
+          {
+            "id": "m2026-n2-7270c1c0",
+            "name": "長谷川 文香",
+            "seat": "tp1a"
+          },
+          {
+            "id": "m2026-n3-7270c1c0",
+            "name": "阿部 翔",
+            "seat": "euph1"
+          },
+          {
+            "id": "m2026-n4-7270c1c0",
+            "name": "森 結衣",
+            "seat": "tsax1"
+          },
+          {
+            "id": "m2026-n5-7270c1c0",
+            "name": "中山 誠",
+            "seat": "cl1a"
+          },
+          {
+            "id": "m2026-n6-7270c1c0",
+            "name": "佐々木 航",
+            "seat": "perc1"
+          },
+          {
+            "id": "m2026-n7-7270c1c0",
+            "name": "石川 菜月",
+            "seat": "tp3a"
+          }
+        ]
+      },
+      "buttons": [
+        {
+          "side": "before",
+          "label": "4月の音を聴く",
+          "pressed": "false",
+          "height": 48
+        },
+        {
+          "side": "now",
+          "label": "いまの音を聴く",
+          "pressed": "false",
+          "height": 48
+        }
+      ],
+      "shown": 0.8336967658251524,
+      "rangeDisabled": false,
+      "errors": [],
+      "events": [
+        {
+          "button": "",
+          "at": 300
+        },
+        {
+          "button": "4月の音を聴く",
+          "at": 849
+        },
+        {
+          "button": "いまの音を聴く",
+          "at": 10074
+        },
+        {
+          "button": "いまの音を読み込み中。中止する",
+          "at": 10373
+        }
+      ],
+      "width": 375,
+      "scrollWidth": 375
+    },
+    {
+      "label": "ダークで交互に再生",
+      "state": 0.31015243707224727,
+      "records": 0.2656898363493383,
+      "members": 0.4860899287741631,
+      "year": 2026,
+      "week": 4,
+      "tab": "play",
+      "guide": {
+        "club": "1919992256:2026",
+        "active": false,
+        "heard": false
+      },
+      "playing": true,
+      "waiting": false,
+      "focus": "now",
+      "available": true,
+      "growth": {
+        "side": "now",
+        "perf": 0.488928813720122
+      },
+      "pair": {
+        "pid": "galop",
+        "range": "all",
+        "venue": "room",
+        "reference": "r2026-0-0-583709",
+        "before": 0.615744590992108,
+        "now": 0.488928813720122,
+        "current": true,
+        "baseline": [
+          {
+            "id": "m2026-n1-7270c1c0",
+            "name": "山本 紗希",
+            "seat": "fl1a"
+          },
+          {
+            "id": "m2026-n2-7270c1c0",
+            "name": "長谷川 文香",
+            "seat": "tp1a"
+          },
+          {
+            "id": "m2026-n3-7270c1c0",
+            "name": "阿部 翔",
+            "seat": "euph1"
+          },
+          {
+            "id": "m2026-n4-7270c1c0",
+            "name": "森 結衣",
+            "seat": "tsax1"
+          },
+          {
+            "id": "m2026-n5-7270c1c0",
+            "name": "中山 誠",
+            "seat": "cl1a"
+          }
+        ],
+        "latest": [
+          {
+            "id": "m2026-n1-7270c1c0",
+            "name": "山本 紗希",
+            "seat": "fl1a"
+          },
+          {
+            "id": "m2026-n2-7270c1c0",
+            "name": "長谷川 文香",
+            "seat": "tp1a"
+          },
+          {
+            "id": "m2026-n3-7270c1c0",
+            "name": "阿部 翔",
+            "seat": "euph1"
+          },
+          {
+            "id": "m2026-n4-7270c1c0",
+            "name": "森 結衣",
+            "seat": "tsax1"
+          },
+          {
+            "id": "m2026-n5-7270c1c0",
+            "name": "中山 誠",
+            "seat": "cl1a"
+          },
+          {
+            "id": "m2026-n6-7270c1c0",
+            "name": "佐々木 航",
+            "seat": "perc1"
+          },
+          {
+            "id": "m2026-n7-7270c1c0",
+            "name": "石川 菜月",
+            "seat": "tp3a"
+          }
+        ]
+      },
+      "buttons": [
+        {
+          "side": "before",
+          "label": "4月の音を聴く",
+          "pressed": "false",
+          "height": 48
+        },
+        {
+          "side": "now",
+          "label": "いまの音を止める",
+          "pressed": "true",
+          "height": 48
+        }
+      ],
+      "shown": 0.488928813720122,
+      "rangeDisabled": true,
+      "errors": [],
+      "events": [
+        {
+          "button": "",
+          "at": 300
+        },
+        {
+          "button": "4月の音を聴く",
+          "at": 849
+        },
+        {
+          "button": "いまの音を聴く",
+          "at": 10074
+        },
+        {
+          "button": "いまの音を読み込み中。中止する",
+          "at": 10373
+        },
+        {
+          "button": "4月の音を聴く",
+          "at": 85035
+        },
+        {
+          "button": "いまの音を聴く",
+          "at": 85316
+        }
+      ],
+      "width": 375,
+      "scrollWidth": 375
+    },
+    {
+      "label": "ライト初回",
+      "state": 0.22696254565380514,
+      "records": 0.7712433410342783,
+      "members": 0.7712433410342783,
+      "year": 2026,
+      "week": 0,
+      "tab": "week",
+      "guide": {
+        "club": "1503009668:2026",
+        "active": true,
+        "heard": false
+      },
+      "playing": false,
+      "waiting": false,
+      "focus": "BODY",
+      "stagePortraits": 0,
+      "available": false,
+      "growth": null,
+      "pair": null,
+      "buttons": [],
+      "shown": 0.31175655382685363,
+      "rangeDisabled": false,
+      "errors": [],
+      "events": [],
+      "width": 375,
+      "scrollWidth": 375
+    },
+    {
+      "label": "お手本を聴く・選曲前",
+      "state": 0.5070264334790409,
+      "records": 0.7712433410342783,
+      "members": 0.30993557488545775,
+      "year": 2026,
+      "week": 0,
+      "tab": "week",
+      "guide": {
+        "club": "1503009668:2026",
+        "active": true,
+        "heard": false
+      },
+      "playing": true,
+      "waiting": false,
+      "focus": "model",
+      "stagePortraits": 5,
+      "available": false,
+      "growth": null,
+      "pair": null,
+      "buttons": [],
+      "shown": 0.45198490913026035,
+      "rangeDisabled": true,
+      "errors": [],
+      "events": [
+        {
+          "button": "",
+          "at": 493
+        },
+        {
+          "button": "5人に会う",
+          "at": 804
+        },
+        {
+          "button": "この配置で決める",
+          "at": 1208
+        },
+        {
+          "button": "曲を聴いて選ぶ",
+          "at": 38644
+        },
+        {
+          "button": "《新世界より》第2楽章をお手本で聴く",
+          "at": 38876
+        }
+      ],
+      "width": 375,
+      "scrollWidth": 375
+    },
+    {
+      "label": "初見・最初の練習",
+      "state": 0.81538673536852,
+      "records": 0.142305864719674,
+      "members": 0.6379047599621117,
+      "year": 2026,
+      "week": 1,
+      "tab": "week",
+      "guide": {
+        "club": "1503009668:2026",
+        "active": true,
+        "heard": false
+      },
+      "playing": false,
+      "waiting": false,
+      "focus": "onboardingTitle",
+      "stagePortraits": 5,
+      "available": true,
+      "growth": null,
+      "pair": null,
+      "buttons": [
+        {
+          "side": "before",
+          "label": "4月の音を聴く",
+          "pressed": "false",
+          "height": 0
+        },
+        {
+          "side": "now",
+          "label": "いまの音を聴く",
+          "pressed": "false",
+          "height": 0
+        }
+      ],
+      "shown": 0.4697803792078048,
+      "rangeDisabled": false,
+      "errors": [],
+      "events": [
+        {
+          "button": "",
+          "at": 493
+        },
+        {
+          "button": "5人に会う",
+          "at": 804
+        },
+        {
+          "button": "この配置で決める",
+          "at": 1208
+        },
+        {
+          "button": "曲を聴いて選ぶ",
+          "at": 38644
+        },
+        {
+          "button": "《新世界より》第2楽章をお手本で聴く",
+          "at": 38876
+        },
+        {
+          "button": "《新世界より》第2楽章をお手本で再生中。押すと止める",
+          "at": 51151
+        },
+        {
+          "button": "決める",
+          "at": 51416
+        },
+        {
+          "button": "今週の練習へ",
+          "at": 51710
+        },
+        {
+          "button": "この内容で1週間すすめる",
+          "at": 51976
+        }
+      ],
+      "width": 375,
+      "scrollWidth": 375
+    },
+    {
+      "label": "初見・4月を聴いても案内は未達成",
+      "state": 0.81538673536852,
+      "records": 0.142305864719674,
+      "members": 0.6379047599621117,
+      "year": 2026,
+      "week": 1,
+      "tab": "play",
+      "guide": {
+        "club": "1503009668:2026",
+        "active": true,
+        "heard": false
+      },
+      "playing": true,
+      "waiting": false,
+      "focus": "before",
+      "stagePortraits": 5,
+      "available": true,
+      "growth": {
+        "side": "before",
+        "perf": 0.1412245819810778
+      },
+      "pair": {
+        "pid": "largo",
+        "range": "all",
+        "venue": "hall",
+        "reference": "r2026-0-0-583709",
+        "before": 0.1412245819810778,
+        "now": null,
+        "current": true,
+        "baseline": [
+          {
+            "id": "m2026-n1-59961b84",
+            "name": "佐々木 颯太",
+            "seat": "ob1"
+          },
+          {
+            "id": "m2026-n2-59961b84",
+            "name": "高木 結衣",
+            "seat": "tp1a"
+          },
+          {
+            "id": "m2026-n3-59961b84",
+            "name": "福田 悠真",
+            "seat": "tuba1"
+          },
+          {
+            "id": "m2026-n4-59961b84",
+            "name": "後藤 薫",
+            "seat": "tb1"
+          },
+          {
+            "id": "m2026-n5-59961b84",
+            "name": "前田 健太",
+            "seat": "bsax1"
+          }
+        ],
+        "latest": [
+          {
+            "id": "m2026-n1-59961b84",
+            "name": "佐々木 颯太",
+            "seat": "ob1"
+          },
+          {
+            "id": "m2026-n2-59961b84",
+            "name": "高木 結衣",
+            "seat": "tp1a"
+          },
+          {
+            "id": "m2026-n3-59961b84",
+            "name": "福田 悠真",
+            "seat": "tuba1"
+          },
+          {
+            "id": "m2026-n4-59961b84",
+            "name": "後藤 薫",
+            "seat": "tb1"
+          },
+          {
+            "id": "m2026-n5-59961b84",
+            "name": "前田 健太",
+            "seat": "bsax1"
+          }
+        ]
+      },
+      "buttons": [
+        {
+          "side": "before",
+          "label": "4月の音を止める",
+          "pressed": "true",
+          "height": 48
+        },
+        {
+          "side": "now",
+          "label": "いまの音を聴く",
+          "pressed": "false",
+          "height": 48
+        }
+      ],
+      "shown": 0.1412245819810778,
+      "rangeDisabled": true,
+      "errors": [],
+      "events": [
+        {
+          "button": "",
+          "at": 493
+        },
+        {
+          "button": "5人に会う",
+          "at": 804
+        },
+        {
+          "button": "この配置で決める",
+          "at": 1208
+        },
+        {
+          "button": "曲を聴いて選ぶ",
+          "at": 38644
+        },
+        {
+          "button": "《新世界より》第2楽章をお手本で聴く",
+          "at": 38876
+        },
+        {
+          "button": "《新世界より》第2楽章をお手本で再生中。押すと止める",
+          "at": 51151
+        },
+        {
+          "button": "決める",
+          "at": 51416
+        },
+        {
+          "button": "今週の練習へ",
+          "at": 51710
+        },
+        {
+          "button": "この内容で1週間すすめる",
+          "at": 51976
+        },
+        {
+          "button": "音を聴き比べる",
+          "at": 74860
+        },
+        {
+          "button": "4月の音を聴く",
+          "at": 75151
+        }
+      ],
+      "width": 375,
+      "scrollWidth": 375
+    },
+    {
+      "label": "初見・いまの音で達成",
+      "state": 0.81538673536852,
+      "records": 0.142305864719674,
+      "members": 0.6379047599621117,
+      "year": 2026,
+      "week": 1,
+      "tab": "play",
+      "guide": {
+        "club": "1503009668:2026",
+        "active": true,
+        "heard": true
+      },
+      "playing": true,
+      "waiting": false,
+      "focus": "now",
+      "stagePortraits": 5,
+      "available": true,
+      "growth": {
+        "side": "now",
+        "perf": 0.980553698958829
+      },
+      "pair": {
+        "pid": "largo",
+        "range": "all",
+        "venue": "hall",
+        "reference": "r2026-0-0-583709",
+        "before": 0.1412245819810778,
+        "now": 0.980553698958829,
+        "current": true,
+        "baseline": [
+          {
+            "id": "m2026-n1-59961b84",
+            "name": "佐々木 颯太",
+            "seat": "ob1"
+          },
+          {
+            "id": "m2026-n2-59961b84",
+            "name": "高木 結衣",
+            "seat": "tp1a"
+          },
+          {
+            "id": "m2026-n3-59961b84",
+            "name": "福田 悠真",
+            "seat": "tuba1"
+          },
+          {
+            "id": "m2026-n4-59961b84",
+            "name": "後藤 薫",
+            "seat": "tb1"
+          },
+          {
+            "id": "m2026-n5-59961b84",
+            "name": "前田 健太",
+            "seat": "bsax1"
+          }
+        ],
+        "latest": [
+          {
+            "id": "m2026-n1-59961b84",
+            "name": "佐々木 颯太",
+            "seat": "ob1"
+          },
+          {
+            "id": "m2026-n2-59961b84",
+            "name": "高木 結衣",
+            "seat": "tp1a"
+          },
+          {
+            "id": "m2026-n3-59961b84",
+            "name": "福田 悠真",
+            "seat": "tuba1"
+          },
+          {
+            "id": "m2026-n4-59961b84",
+            "name": "後藤 薫",
+            "seat": "tb1"
+          },
+          {
+            "id": "m2026-n5-59961b84",
+            "name": "前田 健太",
+            "seat": "bsax1"
+          }
+        ]
+      },
+      "buttons": [
+        {
+          "side": "before",
+          "label": "4月の音を聴く",
+          "pressed": "false",
+          "height": 48
+        },
+        {
+          "side": "now",
+          "label": "いまの音を止める",
+          "pressed": "true",
+          "height": 48
+        }
+      ],
+      "shown": 0.980553698958829,
+      "rangeDisabled": true,
+      "errors": [],
+      "events": [
+        {
+          "button": "",
+          "at": 493
+        },
+        {
+          "button": "5人に会う",
+          "at": 804
+        },
+        {
+          "button": "この配置で決める",
+          "at": 1208
+        },
+        {
+          "button": "曲を聴いて選ぶ",
+          "at": 38644
+        },
+        {
+          "button": "《新世界より》第2楽章をお手本で聴く",
+          "at": 38876
+        },
+        {
+          "button": "《新世界より》第2楽章をお手本で再生中。押すと止める",
+          "at": 51151
+        },
+        {
+          "button": "決める",
+          "at": 51416
+        },
+        {
+          "button": "今週の練習へ",
+          "at": 51710
+        },
+        {
+          "button": "この内容で1週間すすめる",
+          "at": 51976
+        },
+        {
+          "button": "音を聴き比べる",
+          "at": 74860
+        },
+        {
+          "button": "4月の音を聴く",
+          "at": 75151
+        },
+        {
+          "button": "いまの音を聴く",
+          "at": 75425
+        }
+      ],
+      "width": 375,
+      "scrollWidth": 375
+    },
+    {
+      "label": "初見・最初の本番の結果",
+      "state": 0.15171366021968424,
+      "records": 0.5475433634128422,
+      "members": 0.6379047599621117,
+      "year": 2026,
+      "week": 1,
+      "tab": "week",
+      "guide": {
+        "club": "1503009668:2026",
+        "active": false,
+        "heard": true
+      },
+      "playing": false,
+      "waiting": false,
+      "focus": "next",
+      "stagePortraits": 5,
+      "available": true,
+      "growth": null,
+      "pair": null,
+      "buttons": [
+        {
+          "side": "before",
+          "label": "4月の音を聴く",
+          "pressed": "false",
+          "height": 0
+        },
+        {
+          "side": "now",
+          "label": "いまの音を聴く",
+          "pressed": "false",
+          "height": 0
+        }
+      ],
+      "shown": 0.8393056399654597,
+      "rangeDisabled": false,
+      "errors": [],
+      "events": [
+        {
+          "button": "",
+          "at": 493
+        },
+        {
+          "button": "5人に会う",
+          "at": 804
+        },
+        {
+          "button": "この配置で決める",
+          "at": 1208
+        },
+        {
+          "button": "曲を聴いて選ぶ",
+          "at": 38644
+        },
+        {
+          "button": "《新世界より》第2楽章をお手本で聴く",
+          "at": 38876
+        },
+        {
+          "button": "《新世界より》第2楽章をお手本で再生中。押すと止める",
+          "at": 51151
+        },
+        {
+          "button": "決める",
+          "at": 51416
+        },
+        {
+          "button": "今週の練習へ",
+          "at": 51710
+        },
+        {
+          "button": "この内容で1週間すすめる",
+          "at": 51976
+        },
+        {
+          "button": "音を聴き比べる",
+          "at": 74860
+        },
+        {
+          "button": "4月の音を聴く",
+          "at": 75151
+        },
+        {
+          "button": "いまの音を聴く",
+          "at": 75425
+        },
+        {
+          "button": "最初の本番へ",
+          "at": 141505
+        },
+        {
+          "button": "本番の演奏をはじめる",
+          "at": 141796
+        }
+      ],
+      "width": 375,
+      "scrollWidth": 375
+    },
+    {
+      "label": "旧5人の音を再生",
+      "state": 0.7742462872993201,
+      "records": 0.5887967753224075,
+      "members": 0.4860899287741631,
+      "year": 2026,
+      "week": 4,
+      "tab": "play",
+      "guide": {
+        "club": "1919992256:2026",
+        "active": false,
+        "heard": false
+      },
+      "playing": true,
+      "waiting": false,
+      "focus": "before",
+      "stagePortraits": 7,
+      "available": true,
+      "growth": {
+        "side": "before",
+        "perf": 0.615744590992108
+      },
+      "pair": {
+        "pid": "galop",
+        "range": "all",
+        "venue": "room",
+        "reference": "r2026-0-0-583709",
+        "before": 0.615744590992108,
+        "now": null,
+        "current": true,
+        "baseline": [
+          {
+            "id": "m2026-n1-7270c1c0",
+            "name": "山本 紗希",
+            "seat": "fl1a"
+          },
+          {
+            "id": "m2026-n2-7270c1c0",
+            "name": "長谷川 文香",
+            "seat": "tp1a"
+          },
+          {
+            "id": "m2026-n3-7270c1c0",
+            "name": "阿部 翔",
+            "seat": "euph1"
+          },
+          {
+            "id": "m2026-n4-7270c1c0",
+            "name": "森 結衣",
+            "seat": "tsax1"
+          },
+          {
+            "id": "m2026-n5-7270c1c0",
+            "name": "中山 誠",
+            "seat": "cl1a"
+          }
+        ],
+        "latest": [
+          {
+            "id": "m2026-n1-7270c1c0",
+            "name": "山本 紗希",
+            "seat": "fl1a"
+          },
+          {
+            "id": "m2026-n2-7270c1c0",
+            "name": "長谷川 文香",
+            "seat": "tp1a"
+          },
+          {
+            "id": "m2026-n3-7270c1c0",
+            "name": "阿部 翔",
+            "seat": "euph1"
+          },
+          {
+            "id": "m2026-n4-7270c1c0",
+            "name": "森 結衣",
+            "seat": "tsax1"
+          },
+          {
+            "id": "m2026-n5-7270c1c0",
+            "name": "中山 誠",
+            "seat": "cl1a"
+          },
+          {
+            "id": "m2026-n6-7270c1c0",
+            "name": "佐々木 航",
+            "seat": "perc1"
+          },
+          {
+            "id": "m2026-n7-7270c1c0",
+            "name": "石川 菜月",
+            "seat": "tp3a"
+          }
+        ]
+      },
+      "buttons": [
+        {
+          "side": "before",
+          "label": "4月の音を止める",
+          "pressed": "true",
+          "height": 48
+        },
+        {
+          "side": "now",
+          "label": "いまの音を聴く",
+          "pressed": "false",
+          "height": 48
+        }
+      ],
+      "shown": 0.615744590992108,
+      "rangeDisabled": true,
+      "errors": [],
+      "events": [
+        {
+          "button": "",
+          "at": 738
+        },
+        {
+          "button": "4月の音を聴く",
+          "at": 1256
+        },
+        {
+          "button": "4月の音を止める",
+          "at": 1542
+        },
+        {
+          "button": "4月の音を聴く",
+          "at": 22819
+        }
+      ],
+      "width": 375,
+      "scrollWidth": 375
+    },
+    {
+      "label": "部の更新前に比較を再生",
+      "state": 0.7742462872993201,
+      "records": 0.5887967753224075,
+      "members": 0.4860899287741631,
+      "year": 2026,
+      "week": 4,
+      "tab": "play",
+      "guide": {
+        "club": "1919992256:2026",
+        "active": false,
+        "heard": false
+      },
+      "playing": true,
+      "waiting": false,
+      "focus": "now",
+      "stagePortraits": 7,
+      "available": true,
+      "growth": {
+        "side": "now",
+        "perf": 0.488928813720122
+      },
+      "pair": {
+        "pid": "galop",
+        "range": "all",
+        "venue": "room",
+        "reference": "r2026-0-0-583709",
+        "before": 0.615744590992108,
+        "now": 0.488928813720122,
+        "current": true,
+        "baseline": [
+          {
+            "id": "m2026-n1-7270c1c0",
+            "name": "山本 紗希",
+            "seat": "fl1a"
+          },
+          {
+            "id": "m2026-n2-7270c1c0",
+            "name": "長谷川 文香",
+            "seat": "tp1a"
+          },
+          {
+            "id": "m2026-n3-7270c1c0",
+            "name": "阿部 翔",
+            "seat": "euph1"
+          },
+          {
+            "id": "m2026-n4-7270c1c0",
+            "name": "森 結衣",
+            "seat": "tsax1"
+          },
+          {
+            "id": "m2026-n5-7270c1c0",
+            "name": "中山 誠",
+            "seat": "cl1a"
+          }
+        ],
+        "latest": [
+          {
+            "id": "m2026-n1-7270c1c0",
+            "name": "山本 紗希",
+            "seat": "fl1a"
+          },
+          {
+            "id": "m2026-n2-7270c1c0",
+            "name": "長谷川 文香",
+            "seat": "tp1a"
+          },
+          {
+            "id": "m2026-n3-7270c1c0",
+            "name": "阿部 翔",
+            "seat": "euph1"
+          },
+          {
+            "id": "m2026-n4-7270c1c0",
+            "name": "森 結衣",
+            "seat": "tsax1"
+          },
+          {
+            "id": "m2026-n5-7270c1c0",
+            "name": "中山 誠",
+            "seat": "cl1a"
+          },
+          {
+            "id": "m2026-n6-7270c1c0",
+            "name": "佐々木 航",
+            "seat": "perc1"
+          },
+          {
+            "id": "m2026-n7-7270c1c0",
+            "name": "石川 菜月",
+            "seat": "tp3a"
+          }
+        ]
+      },
+      "buttons": [
+        {
+          "side": "before",
+          "label": "4月の音を聴く",
+          "pressed": "false",
+          "height": 48
+        },
+        {
+          "side": "now",
+          "label": "いまの音を止める",
+          "pressed": "true",
+          "height": 48
+        }
+      ],
+      "shown": 0.488928813720122,
+      "rangeDisabled": true,
+      "errors": [],
+      "events": [
+        {
+          "button": "",
+          "at": 738
+        },
+        {
+          "button": "4月の音を聴く",
+          "at": 1256
+        },
+        {
+          "button": "4月の音を止める",
+          "at": 1542
+        },
+        {
+          "button": "4月の音を聴く",
+          "at": 22819
+        },
+        {
+          "button": "4月の音を聴く",
+          "at": 190725
+        },
+        {
+          "button": "4月の音を止める",
+          "at": 191000
+        },
+        {
+          "button": "",
+          "at": 258671
+        },
+        {
+          "button": "",
+          "at": 299195
+        },
+        {
+          "button": "いまの音を聴く",
+          "at": 299474
+        }
+      ],
+      "width": 375,
+      "scrollWidth": 375
+    },
+    {
+      "label": "できごとの決定で再生と比較を解消",
+      "state": 0.3242741064168513,
+      "records": 0.5887967753224075,
+      "members": 0.45751285715959966,
+      "year": 2026,
+      "week": 4,
+      "tab": "week",
+      "guide": {
+        "club": "1919992256:2026",
+        "active": false,
+        "heard": false
+      },
+      "playing": false,
+      "waiting": false,
+      "focus": "BODY",
+      "stagePortraits": 7,
+      "available": true,
+      "growth": null,
+      "pair": null,
+      "buttons": [
+        {
+          "side": "before",
+          "label": "4月の音を聴く",
+          "pressed": "false",
+          "height": 0
+        },
+        {
+          "side": "now",
+          "label": "いまの音を聴く",
+          "pressed": "false",
+          "height": 0
+        }
+      ],
+      "shown": 0.6168245617300272,
+      "rangeDisabled": false,
+      "errors": [],
+      "events": [
+        {
+          "button": "",
+          "at": 738
+        },
+        {
+          "button": "4月の音を聴く",
+          "at": 1256
+        },
+        {
+          "button": "4月の音を止める",
+          "at": 1542
+        },
+        {
+          "button": "4月の音を聴く",
+          "at": 22819
+        },
+        {
+          "button": "4月の音を聴く",
+          "at": 190725
+        },
+        {
+          "button": "4月の音を止める",
+          "at": 191000
+        },
+        {
+          "button": "",
+          "at": 258671
+        },
+        {
+          "button": "",
+          "at": 299195
+        },
+        {
+          "button": "いまの音を聴く",
+          "at": 299474
+        },
+        {
+          "button": "",
+          "at": 299762
+        }
+      ],
+      "width": 375,
+      "scrollWidth": 375
+    },
+    {
+      "label": "ダーク初回・最初の練習",
+      "state": 0.2963080774061382,
+      "records": 0.7299164573196322,
+      "members": 0.9269744218327105,
+      "year": 2026,
+      "week": 1,
+      "tab": "week",
+      "guide": {
+        "club": "647236877:2026",
+        "active": true,
+        "heard": false
+      },
+      "playing": false,
+      "waiting": false,
+      "focus": "onboardingTitle",
+      "stagePortraits": 5,
+      "available": true,
+      "growth": null,
+      "pair": null,
+      "buttons": [
+        {
+          "side": "before",
+          "label": "4月の音を聴く",
+          "pressed": "false",
+          "height": 0
+        },
+        {
+          "side": "now",
+          "label": "いまの音を聴く",
+          "pressed": "false",
+          "height": 0
+        }
+      ],
+      "shown": 0.5912499639671296,
+      "rangeDisabled": false,
+      "errors": [],
+      "events": [
+        {
+          "button": "5人に会う",
+          "at": 71704
+        },
+        {
+          "button": "この配置で決める",
+          "at": 71953
+        },
+        {
+          "button": "曲を聴いて選ぶ",
+          "at": 72236
+        },
+        {
+          "button": "決める",
+          "at": 72504
+        },
+        {
+          "button": "今週の練習へ",
+          "at": 72786
+        },
+        {
+          "button": "この内容で1週間すすめる",
+          "at": 73054
+        }
+      ],
+      "width": 375,
+      "scrollWidth": 375
+    },
+    {
+      "label": "ダーク初回・4月の音",
+      "state": 0.2963080774061382,
+      "records": 0.7299164573196322,
+      "members": 0.9269744218327105,
+      "year": 2026,
+      "week": 1,
+      "tab": "play",
+      "guide": {
+        "club": "647236877:2026",
+        "active": true,
+        "heard": false
+      },
+      "playing": false,
+      "waiting": false,
+      "focus": "before",
+      "stagePortraits": 5,
+      "available": true,
+      "growth": null,
+      "pair": null,
+      "buttons": [
+        {
+          "side": "before",
+          "label": "4月の音を聴く",
+          "pressed": "false",
+          "height": 48
+        },
+        {
+          "side": "now",
+          "label": "いまの音を聴く",
+          "pressed": "false",
+          "height": 48
+        }
+      ],
+      "shown": 0.5912499639671296,
+      "rangeDisabled": false,
+      "errors": [],
+      "events": [
+        {
+          "button": "5人に会う",
+          "at": 71704
+        },
+        {
+          "button": "この配置で決める",
+          "at": 71953
+        },
+        {
+          "button": "曲を聴いて選ぶ",
+          "at": 72236
+        },
+        {
+          "button": "決める",
+          "at": 72504
+        },
+        {
+          "button": "今週の練習へ",
+          "at": 72786
+        },
+        {
+          "button": "この内容で1週間すすめる",
+          "at": 73054
+        },
+        {
+          "button": "音を聴き比べる",
+          "at": 100737
+        }
+      ],
+      "width": 375,
+      "scrollWidth": 375
+    },
+    {
+      "label": "ダーク初回・本番の結果",
+      "state": 0.5873493985272944,
+      "records": 0.886752953985706,
+      "members": 0.9269744218327105,
+      "year": 2026,
+      "week": 1,
+      "tab": "week",
+      "guide": {
+        "club": "647236877:2026",
+        "active": false,
+        "heard": true
+      },
+      "playing": false,
+      "waiting": false,
+      "focus": "next",
+      "stagePortraits": 5,
+      "available": true,
+      "growth": null,
+      "pair": null,
+      "buttons": [
+        {
+          "side": "before",
+          "label": "4月の音を聴く",
+          "pressed": "false",
+          "height": 0
+        },
+        {
+          "side": "now",
+          "label": "いまの音を聴く",
+          "pressed": "false",
+          "height": 0
+        }
+      ],
+      "shown": 0.6134393098764122,
+      "rangeDisabled": false,
+      "errors": [],
+      "events": [
+        {
+          "button": "5人に会う",
+          "at": 71704
+        },
+        {
+          "button": "この配置で決める",
+          "at": 71953
+        },
+        {
+          "button": "曲を聴いて選ぶ",
+          "at": 72236
+        },
+        {
+          "button": "決める",
+          "at": 72504
+        },
+        {
+          "button": "今週の練習へ",
+          "at": 72786
+        },
+        {
+          "button": "この内容で1週間すすめる",
+          "at": 73054
+        },
+        {
+          "button": "音を聴き比べる",
+          "at": 100737
+        },
+        {
+          "button": "4月の音を聴く",
+          "at": 100999
+        },
+        {
+          "button": "いまの音を聴く",
+          "at": 101040
+        },
+        {
+          "button": "最初の本番へ",
+          "at": 101094
+        },
+        {
+          "button": "本番の演奏をはじめる",
+          "at": 101371
+        }
+      ],
+      "width": 375,
+      "scrollWidth": 375
+    },
+    {
+      "label": "会場を変更した直後",
+      "state": 0.3242741064168513,
+      "records": 0.5887967753224075,
+      "members": 0.45751285715959966,
+      "year": 2026,
+      "week": 4,
+      "tab": "play",
+      "guide": {
+        "club": "1919992256:2026",
+        "active": false,
+        "heard": false
+      },
+      "playing": true,
+      "waiting": false,
+      "focus": "before",
+      "stagePortraits": 7,
+      "available": true,
+      "growth": {
+        "side": "before",
+        "perf": 0.615744590992108
+      },
+      "pair": {
+        "pid": "galop",
+        "range": "all",
+        "venue": "room",
+        "reference": "r2026-0-0-583709",
+        "before": 0.615744590992108,
+        "now": null,
+        "current": true,
+        "baseline": [
+          {
+            "id": "m2026-n1-7270c1c0",
+            "name": "山本 紗希",
+            "seat": "fl1a"
+          },
+          {
+            "id": "m2026-n2-7270c1c0",
+            "name": "長谷川 文香",
+            "seat": "tp1a"
+          },
+          {
+            "id": "m2026-n3-7270c1c0",
+            "name": "阿部 翔",
+            "seat": "euph1"
+          },
+          {
+            "id": "m2026-n4-7270c1c0",
+            "name": "森 結衣",
+            "seat": "tsax1"
+          },
+          {
+            "id": "m2026-n5-7270c1c0",
+            "name": "中山 誠",
+            "seat": "cl1a"
+          }
+        ],
+        "latest": [
+          {
+            "id": "m2026-n1-7270c1c0",
+            "name": "山本 紗希",
+            "seat": "fl1a"
+          },
+          {
+            "id": "m2026-n2-7270c1c0",
+            "name": "長谷川 文香",
+            "seat": "tp1a"
+          },
+          {
+            "id": "m2026-n3-7270c1c0",
+            "name": "阿部 翔",
+            "seat": "euph1"
+          },
+          {
+            "id": "m2026-n4-7270c1c0",
+            "name": "森 結衣",
+            "seat": "tsax1"
+          },
+          {
+            "id": "m2026-n5-7270c1c0",
+            "name": "中山 誠",
+            "seat": "cl1a"
+          },
+          {
+            "id": "m2026-n6-7270c1c0",
+            "name": "佐々木 航",
+            "seat": "perc1"
+          },
+          {
+            "id": "m2026-n7-7270c1c0",
+            "name": "石川 菜月",
+            "seat": "tp3a"
+          }
+        ]
+      },
+      "buttons": [
+        {
+          "side": "before",
+          "label": "4月の音を止める",
+          "pressed": "true",
+          "height": 48
+        },
+        {
+          "side": "now",
+          "label": "いまの音を聴く",
+          "pressed": "false",
+          "height": 48
+        }
+      ],
+      "shown": 0.615744590992108,
+      "rangeDisabled": true,
+      "errors": [],
+      "events": [
+        {
+          "button": "",
+          "at": 1016
+        },
+        {
+          "button": "4月の音を聴く",
+          "at": 1625
+        },
+        {
+          "button": "4月の音を聴く",
+          "at": 51825
+        }
+      ],
+      "width": 375,
+      "scrollWidth": 375
+    },
+    {
+      "label": "会場変更後の再生停止とキャッシュ解消",
+      "state": 0.3242741064168513,
+      "records": 0.5887967753224075,
+      "members": 0.45751285715959966,
+      "year": 2026,
+      "week": 4,
+      "tab": "play",
+      "guide": {
+        "club": "1919992256:2026",
+        "active": false,
+        "heard": false
+      },
+      "playing": false,
+      "waiting": false,
+      "focus": "before",
+      "stagePortraits": 7,
+      "available": true,
+      "growth": null,
+      "pair": null,
+      "buttons": [
+        {
+          "side": "before",
+          "label": "4月の音を聴く",
+          "pressed": "false",
+          "height": 48
+        },
+        {
+          "side": "now",
+          "label": "いまの音を聴く",
+          "pressed": "false",
+          "height": 48
+        }
+      ],
+      "shown": 0.2161424746736884,
+      "rangeDisabled": false,
+      "errors": [],
+      "events": [
+        {
+          "button": "",
+          "at": 1016
+        },
+        {
+          "button": "4月の音を聴く",
+          "at": 1625
+        },
+        {
+          "button": "4月の音を聴く",
+          "at": 51825
+        }
+      ],
+      "width": 375,
+      "scrollWidth": 375
+    },
+    {
+      "label": "変更した会場で作り直した音",
+      "state": 0.3242741064168513,
+      "records": 0.5887967753224075,
+      "members": 0.45751285715959966,
+      "year": 2026,
+      "week": 4,
+      "tab": "play",
+      "guide": {
+        "club": "1919992256:2026",
+        "active": false,
+        "heard": false
+      },
+      "playing": true,
+      "waiting": false,
+      "focus": "before",
+      "stagePortraits": 7,
+      "available": true,
+      "growth": {
+        "side": "before",
+        "perf": 0.9199285504873842
+      },
+      "pair": {
+        "pid": "galop",
+        "range": "all",
+        "venue": "hall",
+        "reference": "r2026-0-0-583709",
+        "before": 0.9199285504873842,
+        "now": null,
+        "current": true,
+        "baseline": [
+          {
+            "id": "m2026-n1-7270c1c0",
+            "name": "山本 紗希",
+            "seat": "fl1a"
+          },
+          {
+            "id": "m2026-n2-7270c1c0",
+            "name": "長谷川 文香",
+            "seat": "tp1a"
+          },
+          {
+            "id": "m2026-n3-7270c1c0",
+            "name": "阿部 翔",
+            "seat": "euph1"
+          },
+          {
+            "id": "m2026-n4-7270c1c0",
+            "name": "森 結衣",
+            "seat": "tsax1"
+          },
+          {
+            "id": "m2026-n5-7270c1c0",
+            "name": "中山 誠",
+            "seat": "cl1a"
+          }
+        ],
+        "latest": [
+          {
+            "id": "m2026-n1-7270c1c0",
+            "name": "山本 紗希",
+            "seat": "fl1a"
+          },
+          {
+            "id": "m2026-n2-7270c1c0",
+            "name": "長谷川 文香",
+            "seat": "tp1a"
+          },
+          {
+            "id": "m2026-n3-7270c1c0",
+            "name": "阿部 翔",
+            "seat": "euph1"
+          },
+          {
+            "id": "m2026-n4-7270c1c0",
+            "name": "森 結衣",
+            "seat": "tsax1"
+          },
+          {
+            "id": "m2026-n5-7270c1c0",
+            "name": "中山 誠",
+            "seat": "cl1a"
+          },
+          {
+            "id": "m2026-n6-7270c1c0",
+            "name": "佐々木 航",
+            "seat": "perc1"
+          },
+          {
+            "id": "m2026-n7-7270c1c0",
+            "name": "石川 菜月",
+            "seat": "tp3a"
+          }
+        ]
+      },
+      "buttons": [
+        {
+          "side": "before",
+          "label": "4月の音を止める",
+          "pressed": "true",
+          "height": 48
+        },
+        {
+          "side": "now",
+          "label": "いまの音を聴く",
+          "pressed": "false",
+          "height": 48
+        }
+      ],
+      "shown": 0.9199285504873842,
+      "rangeDisabled": true,
+      "errors": [],
+      "events": [
+        {
+          "button": "",
+          "at": 1016
+        },
+        {
+          "button": "4月の音を聴く",
+          "at": 1625
+        },
+        {
+          "button": "4月の音を聴く",
+          "at": 51825
+        },
+        {
+          "button": "4月の音を聴く",
+          "at": 178806
+        }
+      ],
+      "width": 375,
+      "scrollWidth": 375
+    },
+    {
+      "label": "ダーク初回・本番後の次週",
+      "state": 0.4873649696819484,
+      "records": 0.886752953985706,
+      "members": 0.3136264921631664,
+      "year": 2026,
+      "week": 2,
+      "tab": "week",
+      "guide": {
+        "club": "647236877:2026",
+        "active": false,
+        "heard": true
+      },
+      "playing": false,
+      "waiting": false,
+      "focus": "BODY",
+      "stagePortraits": 5,
+      "available": true,
+      "growth": null,
+      "pair": null,
+      "buttons": [
+        {
+          "side": "before",
+          "label": "4月の音を聴く",
+          "pressed": "false",
+          "height": 0
+        },
+        {
+          "side": "now",
+          "label": "いまの音を聴く",
+          "pressed": "false",
+          "height": 0
+        }
+      ],
+      "shown": 0.36964015709236264,
+      "rangeDisabled": false,
+      "errors": [],
+      "events": [
+        {
+          "button": "5人に会う",
+          "at": 71704
+        },
+        {
+          "button": "この配置で決める",
+          "at": 71953
+        },
+        {
+          "button": "曲を聴いて選ぶ",
+          "at": 72236
+        },
+        {
+          "button": "決める",
+          "at": 72504
+        },
+        {
+          "button": "今週の練習へ",
+          "at": 72786
+        },
+        {
+          "button": "この内容で1週間すすめる",
+          "at": 73054
+        },
+        {
+          "button": "音を聴き比べる",
+          "at": 100737
+        },
+        {
+          "button": "4月の音を聴く",
+          "at": 100999
+        },
+        {
+          "button": "いまの音を聴く",
+          "at": 101040
+        },
+        {
+          "button": "最初の本番へ",
+          "at": 101094
+        },
+        {
+          "button": "本番の演奏をはじめる",
+          "at": 101371
+        },
+        {
+          "button": "次の週へ",
+          "at": 731105
+        }
+      ],
+      "width": 375,
+      "scrollWidth": 375
+    }
+  ],
+  "tabs": [
+    {
+      "theme": "light",
+      "tab": "今週",
+      "current": "今週",
+      "scrollWidth": 375,
+      "width": 375,
+      "snapshot": "- banner:\n  - button \"吹奏楽部の つくりかた ?\":\n    - text: 吹奏楽部の つくりかた ?\n  - paragraph: 県立みなと高校 吹奏楽部 2026年度\n  - generic: 4月 第3週\n  - generic: 次の本番「みなと祭りステージ」まで4週\n  - list"
+    },
+    {
+      "theme": "light",
+      "tab": "合奏",
+      "current": "合奏",
+      "scrollWidth": 375,
+      "width": 375,
+      "snapshot": "- text: \"?\"\n- main:\n  - region \"《新世界より》第2楽章 ?\":\n    - paragraph: 自由曲\n    - button \"《新世界より》第2楽章の難しさ 1/5\":\n      - generic: 難しさ\n    - button \"《新世界より》第2楽章 ?\"\n    -"
+    },
+    {
+      "theme": "light",
+      "tab": "部員",
+      "current": "部員",
+      "scrollWidth": 375,
+      "width": 375,
+      "snapshot": "- text: \"? ?\"\n- region \"パートと部員\":\n  - heading \"パートと部員\" [level=2]\n  - button \"パートと部員\": \"?\"\n  - search \"部員を探す\":\n    - searchbox \"部員の名前で探す\"\n  - group \"学年\":\n    - bu"
+    },
+    {
+      "theme": "light",
+      "tab": "日誌",
+      "current": "日誌",
+      "scrollWidth": 375,
+      "width": 375,
+      "snapshot": "- text: \"?\"\n- main:\n  - text: \"?\"\n  - region \"部活日誌\":\n    - heading \"部活日誌\" [level=2]\n    - list:\n      - generic \"4月3週 【仮入部】入部を迷っている1年生が、音楽室をのぞきに来た。仲間が増えるかもしれないと"
+    },
+    {
+      "theme": "dark",
+      "tab": "今週",
+      "current": "今週",
+      "scrollWidth": 375,
+      "width": 375,
+      "snapshot": "- banner:\n  - button \"吹奏楽部の つくりかた ?\":\n    - text: 吹奏楽部の つくりかた ?\n  - paragraph: 県立みなと高校 吹奏楽部 2026年度\n  - generic: 4月 第3週\n  - generic: 次の本番「みなと祭りステージ」まで4週\n  - list"
+    },
+    {
+      "theme": "dark",
+      "tab": "合奏",
+      "current": "合奏",
+      "scrollWidth": 375,
+      "width": 375,
+      "snapshot": "- text: \"?\"\n- main:\n  - region \"《新世界より》第2楽章 ?\":\n    - paragraph: 自由曲\n    - button \"《新世界より》第2楽章の難しさ 1/5\":\n      - generic: 難しさ\n    - button \"《新世界より》第2楽章 ?\"\n    -"
+    },
+    {
+      "theme": "dark",
+      "tab": "部員",
+      "current": "部員",
+      "scrollWidth": 375,
+      "width": 375,
+      "snapshot": "- text: \"? ?\"\n- region \"パートと部員\":\n  - heading \"パートと部員\" [level=2]\n  - button \"パートと部員\": \"?\"\n  - search \"部員を探す\":\n    - searchbox \"部員の名前で探す\"\n  - group \"学年\":\n    - bu"
+    },
+    {
+      "theme": "dark",
+      "tab": "日誌",
+      "current": "日誌",
+      "scrollWidth": 375,
+      "width": 375,
+      "snapshot": "- text: \"?\"\n- main:\n  - text: \"?\"\n  - region \"部活日誌\":\n    - heading \"部活日誌\" [level=2]\n    - list:\n      - generic \"4月3週 【仮入部】入部を迷っている1年生が、音楽室をのぞきに来た。仲間が増えるかもしれないと"
+    }
+  ],
+  "boot": {
+    "started": "2026-10-29T13:29:44.814Z",
+    "loaded": [
+      "/tsukurikata/js/util.js",
+      "/tsukurikata/js/icons.js",
+      "/tsukurikata/js/instrument-icons.js",
+      "/tsukurikata/js/face-cast.js",
+      "/tsukurikata/js/faces.js",
+      "/tsukurikata/js/instruments.js",
+      "/tsukurikata/js/venues.js",
+      "/tsukurikata/js/samples.js",
+      "/tsukurikata/js/scores.js",
+      "/tsukurikata/js/pieces/largo.js",
+      "/tsukurikata/js/pieces/ode.js",
+      "/tsukurikata/js/pieces/galop.js",
+      "/tsukurikata/js/pieces/pomp.js",
+      "/tsukurikata/js/pieces/aida.js",
+      "/tsukurikata/js/pieces/hero.js",
+      "/tsukurikata/js/pieces/holst.js",
+      "/tsukurikata/js/pieces/hungarian.js",
+      "/tsukurikata/js/pieces/flowers.js",
+      "/tsukurikata/js/pieces/tell.js",
+      "/tsukurikata/js/pieces/carmen.js",
+      "/tsukurikata/js/pieces/valkyrie.js",
+      "/tsukurikata/js/pieces/swan.js",
+      "/tsukurikata/js/pieces/spring.js",
+      "/tsukurikata/js/pieces/canon.js",
+      "/tsukurikata/js/band.js",
+      "/tsukurikata/js/game.js",
+      "/tsukurikata/js/engine.js",
+      "/tsukurikata/js/conduct.js",
+      "/tsukurikata/js/announce.js",
+      "/tsukurikata/js/tunegame.js",
+      "/tsukurikata/js/fx.js",
+      "/tsukurikata/js/advisor.js",
+      "/tsukurikata/js/growth-listen.js",
+      "/tsukurikata/js/onboarding.js",
+      "/tsukurikata/js/ui.js",
+      "/design/onboarding/qa.js",
+      "/design/first-play-growth/audit.js"
+    ],
+    "failed": [],
+    "errors": [],
+    "ready": true,
+    "globals": {
+      "fx": "object",
+      "season": "function",
+      "engine": "function",
+      "pieces": "object",
+      "game": "function"
+    },
+    "scripts": [
+      "/tsukurikata/js/util.js",
+      "/tsukurikata/js/icons.js",
+      "/tsukurikata/js/instrument-icons.js",
+      "/tsukurikata/js/face-cast.js",
+      "/tsukurikata/js/faces.js",
+      "/tsukurikata/js/instruments.js",
+      "/tsukurikata/js/venues.js",
+      "/tsukurikata/js/samples.js",
+      "/tsukurikata/js/scores.js",
+      "/tsukurikata/js/pieces/largo.js",
+      "/tsukurikata/js/pieces/ode.js",
+      "/tsukurikata/js/pieces/galop.js",
+      "/tsukurikata/js/pieces/pomp.js",
+      "/tsukurikata/js/pieces/aida.js",
+      "/tsukurikata/js/pieces/hero.js",
+      "/tsukurikata/js/pieces/holst.js",
+      "/tsukurikata/js/pieces/hungarian.js",
+      "/tsukurikata/js/pieces/flowers.js",
+      "/tsukurikata/js/pieces/tell.js",
+      "/tsukurikata/js/pieces/carmen.js",
+      "/tsukurikata/js/pieces/valkyrie.js",
+      "/tsukurikata/js/pieces/swan.js",
+      "/tsukurikata/js/pieces/spring.js",
+      "/tsukurikata/js/pieces/canon.js",
+      "/tsukurikata/js/band.js",
+      "/tsukurikata/js/game.js",
+      "/tsukurikata/js/engine.js",
+      "/tsukurikata/js/conduct.js",
+      "/tsukurikata/js/announce.js",
+      "/tsukurikata/js/tunegame.js",
+      "/tsukurikata/js/fx.js",
+      "/tsukurikata/js/advisor.js",
+      "/tsukurikata/js/growth-listen.js",
+      "/tsukurikata/js/onboarding.js",
+      "/tsukurikata/js/ui.js",
+      "/design/onboarding/qa.js",
+      "/design/first-play-growth/audit.js"
+    ],
+    "resources": [
+      {
+        "file": "/tsukurikata/js/util.js",
+        "status": 200,
+        "bytes": 2477,
+        "ms": 81
+      },
+      {
+        "file": "/tsukurikata/js/icons.js",
+        "status": 200,
+        "bytes": 4867,
+        "ms": 76
+      },
+      {
+        "file": "/tsukurikata/js/faces.js",
+        "status": 200,
+        "bytes": 4184,
+        "ms": 81
+      },
+      {
+        "file": "/tsukurikata/js/face-cast.js",
+        "status": 200,
+        "bytes": 7048,
+        "ms": 83
+      },
+      {
+        "file": "/tsukurikata/js/instrument-icons.js",
+        "status": 200,
+        "bytes": 2590,
+        "ms": 87
+      },
+      {
+        "file": "/tsukurikata/js/scores.js",
+        "status": 200,
+        "bytes": 22132,
+        "ms": 87
+      },
+      {
+        "file": "/tsukurikata/js/instruments.js",
+        "status": 200,
+        "bytes": 27017,
+        "ms": 87
+      },
+      {
+        "file": "/tsukurikata/js/venues.js",
+        "status": 200,
+        "bytes": 12996,
+        "ms": 89
+      },
+      {
+        "file": "/tsukurikata/js/pieces/largo.js",
+        "status": 200,
+        "bytes": 11341,
+        "ms": 90
+      },
+      {
+        "file": "/tsukurikata/js/samples.js",
+        "status": 200,
+        "bytes": 24975,
+        "ms": 91
+      },
+      {
+        "file": "/tsukurikata/js/pieces/pomp.js",
+        "status": 200,
+        "bytes": 19299,
+        "ms": 94
+      },
+      {
+        "file": "/tsukurikata/js/pieces/hero.js",
+        "status": 200,
+        "bytes": 21784,
+        "ms": 96
+      },
+      {
+        "file": "/tsukurikata/js/pieces/galop.js",
+        "status": 200,
+        "bytes": 22631,
+        "ms": 96
+      },
+      {
+        "file": "/tsukurikata/js/pieces/ode.js",
+        "status": 200,
+        "bytes": 16000,
+        "ms": 99
+      },
+      {
+        "file": "/tsukurikata/js/pieces/aida.js",
+        "status": 200,
+        "bytes": 20823,
+        "ms": 99
+      },
+      {
+        "file": "/tsukurikata/js/pieces/holst.js",
+        "status": 200,
+        "bytes": 18482,
+        "ms": 98
+      },
+      {
+        "file": "/tsukurikata/js/pieces/hungarian.js",
+        "status": 200,
+        "bytes": 29740,
+        "ms": 100
+      },
+      {
+        "file": "/tsukurikata/js/pieces/flowers.js",
+        "status": 200,
+        "bytes": 25824,
+        "ms": 103
+      },
+      {
+        "file": "/tsukurikata/js/pieces/tell.js",
+        "status": 200,
+        "bytes": 37082,
+        "ms": 103
+      },
+      {
+        "file": "/tsukurikata/js/pieces/carmen.js",
+        "status": 200,
+        "bytes": 25854,
+        "ms": 105
+      },
+      {
+        "file": "/tsukurikata/js/pieces/valkyrie.js",
+        "status": 200,
+        "bytes": 20721,
+        "ms": 107
+      },
+      {
+        "file": "/tsukurikata/js/pieces/swan.js",
+        "status": 200,
+        "bytes": 19332,
+        "ms": 110
+      },
+      {
+        "file": "/tsukurikata/js/pieces/spring.js",
+        "status": 200,
+        "bytes": 17241,
+        "ms": 110
+      },
+      {
+        "file": "/tsukurikata/js/pieces/canon.js",
+        "status": 200,
+        "bytes": 13464,
+        "ms": 106
+      },
+      {
+        "file": "/tsukurikata/js/band.js",
+        "status": 200,
+        "bytes": 50853,
+        "ms": 110
+      },
+      {
+        "file": "/tsukurikata/js/conduct.js",
+        "status": 200,
+        "bytes": 30445,
+        "ms": 111
+      },
+      {
+        "file": "/tsukurikata/js/engine.js",
+        "status": 200,
+        "bytes": 24139,
+        "ms": 112
+      },
+      {
+        "file": "/tsukurikata/js/announce.js",
+        "status": 200,
+        "bytes": 10527,
+        "ms": 114
+      },
+      {
+        "file": "/tsukurikata/js/tunegame.js",
+        "status": 200,
+        "bytes": 9322,
+        "ms": 115
+      },
+      {
+        "file": "/tsukurikata/js/fx.js",
+        "status": 200,
+        "bytes": 11653,
+        "ms": 115
+      },
+      {
+        "file": "/tsukurikata/js/advisor.js",
+        "status": 200,
+        "bytes": 7503,
+        "ms": 116
+      },
+      {
+        "file": "/tsukurikata/js/game.js",
+        "status": 200,
+        "bytes": 189281,
+        "ms": 115
+      },
+      {
+        "file": "/tsukurikata/js/growth-listen.js",
+        "status": 200,
+        "bytes": 5893,
+        "ms": 120
+      },
+      {
+        "file": "/design/onboarding/qa.js",
+        "status": 200,
+        "bytes": 2415,
+        "ms": 120
+      },
+      {
+        "file": "/design/first-play-growth/audit.js",
+        "status": 200,
+        "bytes": 8046,
+        "ms": 122
+      },
+      {
+        "file": "/tsukurikata/js/onboarding.js",
+        "status": 200,
+        "bytes": 9039,
+        "ms": 122
+      },
+      {
+        "file": "/tsukurikata/js/ui.js",
+        "status": 200,
+        "bytes": 239475,
+        "ms": 123
+      }
+    ]
+  },
+  "runtime": {
+    "state": 0.6599755170755088,
+    "records": 0.3433155529201031,
+    "members": 0.4860899287741631,
+    "year": 2026,
+    "week": 4,
+    "tab": "play",
+    "guide": {
+      "club": "1919992256:2026",
+      "active": false,
+      "heard": false
+    },
+    "playing": false,
+    "waiting": false,
+    "focus": "before",
+    "stagePortraits": 7,
+    "available": true,
+    "growth": null,
+    "pair": {
+      "pid": "galop",
+      "range": "all",
+      "venue": "room",
+      "reference": "r2026-0-0-583709",
+      "before": 0.615744590992108,
+      "now": null,
+      "current": true,
+      "baseline": [
+        {
+          "id": "m2026-n1-7270c1c0",
+          "name": "山本 紗希",
+          "seat": "fl1a"
+        },
+        {
+          "id": "m2026-n2-7270c1c0",
+          "name": "長谷川 文香",
+          "seat": "tp1a"
+        },
+        {
+          "id": "m2026-n3-7270c1c0",
+          "name": "阿部 翔",
+          "seat": "euph1"
+        },
+        {
+          "id": "m2026-n4-7270c1c0",
+          "name": "森 結衣",
+          "seat": "tsax1"
+        },
+        {
+          "id": "m2026-n5-7270c1c0",
+          "name": "中山 誠",
+          "seat": "cl1a"
+        }
+      ],
+      "latest": [
+        {
+          "id": "m2026-n1-7270c1c0",
+          "name": "山本 紗希",
+          "seat": "fl1a"
+        },
+        {
+          "id": "m2026-n2-7270c1c0",
+          "name": "長谷川 文香",
+          "seat": "tp1a"
+        },
+        {
+          "id": "m2026-n3-7270c1c0",
+          "name": "阿部 翔",
+          "seat": "euph1"
+        },
+        {
+          "id": "m2026-n4-7270c1c0",
+          "name": "森 結衣",
+          "seat": "tsax1"
+        },
+        {
+          "id": "m2026-n5-7270c1c0",
+          "name": "中山 誠",
+          "seat": "cl1a"
+        },
+        {
+          "id": "m2026-n6-7270c1c0",
+          "name": "佐々木 航",
+          "seat": "perc1"
+        },
+        {
+          "id": "m2026-n7-7270c1c0",
+          "name": "石川 菜月",
+          "seat": "tp3a"
+        }
+      ]
+    },
+    "buttons": [
+      {
+        "side": "before",
+        "label": "4月の音を聴く",
+        "pressed": "false",
+        "height": 48
+      },
+      {
+        "side": "now",
+        "label": "いまの音を聴く",
+        "pressed": "false",
+        "height": 48
+      }
+    ],
+    "shown": 0.8336967658251524,
+    "rangeDisabled": false,
+    "errors": [],
+    "events": [
+      {
+        "button": "",
+        "at": 1186
+      },
+      {
+        "button": "4月の音を聴く",
+        "at": 1830
+      }
+    ],
+    "width": 375,
+    "scrollWidth": 375
+  },
+  "console": []
+}

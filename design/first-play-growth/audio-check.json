@@ -1,0 +1,25 @@
+{
+  "done": true,
+  "metrics": {
+    "before": {
+      "sampleRate": 44100,
+      "frames": 610437,
+      "channels": 2,
+      "seconds": 13.842108843537416,
+      "rms": 0.04522800363664182,
+      "peak": 0.35960331559181213,
+      "perf": 0.615744590992108,
+      "samplesReady": true
+    },
+    "now": {
+      "sampleRate": 44100,
+      "frames": 612994,
+      "channels": 2,
+      "seconds": 13.900090702947846,
+      "rms": 0.06533322049299035,
+      "peak": 0.4506099820137024,
+      "perf": 0.488928813720122,
+      "samplesReady": true
+    }
+  }
+}

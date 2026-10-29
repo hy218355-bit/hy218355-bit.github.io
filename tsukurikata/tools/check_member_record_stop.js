@@ -7,7 +7,7 @@ const ctx=vm.createContext({console,assert,tick:()=>new Promise(setImmediate)});
 for(const f of ['util','instruments','venues','scores',...pieces,'band','game'])vm.runInContext(fs.readFileSync(path.join(root,'js',f+'.js'),'utf8'),ctx,{filename:f+'.js'});
 vm.runInContext(`
 // 案内の画面更新は別の検証で確かめ、ここでは従来の再生操作を比べる。
-const onboardingPlayed=()=>{},renderOnboarding=()=>{};
+const onboardingPlayed=()=>{},renderOnboarding=()=>{},renderGrowthListening=()=>{};
 let S,release,plays=[],selectorStates=[];
 const SAMPLES={use:true,ready:false,error:null,loading:null};
 const U={venue:'room',solo:'all',playing:false,waitPlay:null,shown:null,shownLabel:'',perfNow:null,onEnd:null};

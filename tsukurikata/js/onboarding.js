@@ -35,9 +35,9 @@ function onboardingStep(s, guide){
 function onboardingCopy(step){
   return [
     {title:'この5人と、\n最初の音を。', text:'副顧問の朝野です。まずは顔を選んで、希望の楽器を見てみましょう。配置はあとでも変えられます。', action:'5人に会う'},
-    {title:'一緒に育てたい、\n1曲を。', text:'「お手本」で曲を聴けます。星が少ない曲ほど、譜読みは早く進みます。好きな曲を選びましょう。', action:'曲を選ぶ'},
+    {title:'一緒に育てたい、\n1曲を。', text:'「お手本」で聴いて、「決める」で選びます。星が少ない曲ほど、譜読みは早く進みます。', action:'曲を聴いて選ぶ'},
     {title:'最初の1週間、\n合わせてみよう。', text:'今週は「おまかせ」で進められます。顔の横のボタンから、一人ずつ練習を変えられます。', action:'今週の練習へ'},
-    {title:'練習した音を、\n聴いてみよう。', text:'下の「合奏」で、いまの部の音が聴けます。まだ上手でなくても、ここが出発点です。', action:'合奏を開く'},
+    {title:'練習した音を、\n聴いてみよう。', text:'4月の音と、いまの音。聴き比べると、育ったところが見つかります。', action:'音を聴き比べる'},
     {title:'この音が、\n部のはじまりです。', text:'練習を重ねると、一人ひとりの音が変わります。顔を押すと、その子だけの音も聴けますよ。', action:'最初の本番へ'},
   ][step];
 }
@@ -67,8 +67,9 @@ function renderOnboarding(){
   const overview = step === 'overview', copy = overview ? {
     title:'部を育てる、\n4つのこと。', text:'練習で育てて、合奏で聴く。このくり返しで、部の音が変わっていきます。',
   } : onboardingCopy(step);
-  const text = step === 3 && play ? 'いまの部の音を聴いてみましょう。舞台の顔から、一人だけの音も聴けます。' : copy.text;
-  const action = step === 3 && play ? '最初の音を聴く' : step === 4 && (S.pending || eventAt(S,S.week)?.kind !== 'concert') ? '今週へ戻る' : copy.action;
+  const noSeat=step===3 && !seated(S).length;
+  const text = noSeat ? 'いまは全員が控えです。「部員」の顔から席を決めると、音が出ます。' : copy.text;
+  const action = noSeat ? '部員に席を決める' : step === 4 && (S.pending || eventAt(S,S.week)?.kind !== 'concert') ? '今週へ戻る' : copy.action;
   box.innerHTML = `<div class="onboarding-top"><span>はじめの部活</span><button type="button" data-onboard="skip">${overview || step === 4 ? '閉じる' : 'スキップ'}</button></div>
     <div class="onboarding-person"><img src="img/advisor-asano.webp" width="96" height="96" alt="副顧問の朝野先生"><div><small>副顧問・朝野先生</small><h3 id="onboardingTitle" tabindex="-1">${copy.title}</h3></div></div>
     <ol class="onboarding-steps" aria-label="はじめの部活の流れ">${ONBOARD_STEPS.map(([icon,label],i) => `<li${!overview && step === i ? ' aria-current="step"' : ''} class="${!overview && step > i ? 'done' : ''}"><span>${uiIcon(!overview && step > i ? 'check' : icon)}</span><b>${label}</b>${!overview && step > i ? '<span class="sr-only">できた</span>' : ''}</li>`).join('')}</ol>
@@ -109,8 +110,10 @@ function onboardingAction(action){
   else if(step === 1){setTab('week');onboardingFocus(document.querySelector('#week [data-act="model"]'));}
   else if(step === 2){setTab('week');onboardingFocus(document.querySelector('#week [data-act="practice"]'));}
   else if(step === 3){
-    if(U.tab !== 'play'){setTab('play');onboardingFocus(document.querySelector('#onboardingTitle'));}
-    else if(!busy() && !U.playing && !U.waitPlay){
+    if(!seated(S).length){setTab('members');onboardingFocus(document.querySelector('#rosterTable .roster-open'));return;}
+    if(U.tab !== 'play')setTab('play');
+    if(growthAvailable()){openGrowthListening();return;}
+    if(!busy() && !U.playing && !U.waitPlay){
       stopPlay();soloAll();clearRecordedMember();U.piece=null;U.range='all';U.perfNow=null;
       document.querySelector('#btnNow').click();
       renderSelectors();
@@ -123,7 +126,8 @@ function onboardingAction(action){
 }
 function onboardingPlayed(perf){
   // 読み込み待ちやお手本の試聴は、部の音を聴いたことにしない。
-  if(onboardingActive() && onboardingStep(S,U.onboarding) === 3 && perf === U.perfNow && (perf.notes.length || perf.hits.length)){
+  const current=perf===U.perfNow || U.growthPair?.state===S && perf===U.growthPair.perfs.now;
+  if(onboardingActive() && onboardingStep(S,U.onboarding) === 3 && current && (perf.notes.length || perf.hits.length)){
     U.onboarding.heard = true;saveOnboarding();renderOnboarding();
   }
 }

@@ -1,0 +1,365 @@
+{
+  "done": true,
+  "start": 2026,
+  "end": 2027,
+  "steps": [
+    {
+      "year": 2026,
+      "week": 0,
+      "phase": "choose",
+      "members": 5
+    },
+    {
+      "year": 2026,
+      "week": 0,
+      "phase": "week",
+      "members": 5
+    },
+    {
+      "year": 2026,
+      "week": 1,
+      "phase": "week",
+      "members": 5
+    },
+    {
+      "year": 2026,
+      "week": 1,
+      "phase": "week",
+      "event": "shinkan",
+      "members": 5
+    },
+    {
+      "year": 2026,
+      "week": 2,
+      "phase": "week",
+      "event": "shinkan",
+      "members": 5
+    },
+    {
+      "year": 2026,
+      "week": 2,
+      "phase": "week",
+      "members": 5
+    },
+    {
+      "year": 2026,
+      "week": 3,
+      "phase": "week",
+      "members": 5
+    },
+    {
+      "year": 2026,
+      "week": 3,
+      "phase": "week",
+      "members": 6
+    },
+    {
+      "year": 2026,
+      "week": 4,
+      "phase": "week",
+      "members": 6
+    },
+    {
+      "year": 2026,
+      "week": 4,
+      "phase": "week",
+      "members": 6
+    },
+    {
+      "year": 2026,
+      "week": 5,
+      "phase": "week",
+      "members": 6
+    },
+    {
+      "year": 2026,
+      "week": 5,
+      "phase": "week",
+      "members": 6
+    },
+    {
+      "year": 2026,
+      "week": 6,
+      "phase": "week",
+      "members": 6
+    },
+    {
+      "year": 2026,
+      "week": 6,
+      "phase": "week",
+      "event": "matsuri",
+      "members": 6
+    },
+    {
+      "year": 2026,
+      "week": 7,
+      "phase": "week",
+      "event": "matsuri",
+      "members": 6
+    },
+    {
+      "year": 2026,
+      "week": 7,
+      "phase": "week",
+      "members": 8
+    },
+    {
+      "year": 2026,
+      "week": 8,
+      "phase": "week",
+      "members": 8
+    },
+    {
+      "year": 2026,
+      "week": 8,
+      "phase": "week",
+      "members": 8
+    },
+    {
+      "year": 2026,
+      "week": 9,
+      "phase": "week",
+      "members": 8
+    },
+    {
+      "year": 2026,
+      "week": 9,
+      "phase": "week",
+      "members": 8
+    },
+    {
+      "year": 2026,
+      "week": 10,
+      "phase": "week",
+      "members": 8
+    },
+    {
+      "year": 2026,
+      "week": 10,
+      "phase": "week",
+      "members": 8
+    },
+    {
+      "year": 2026,
+      "week": 11,
+      "phase": "week",
+      "members": 8
+    },
+    {
+      "year": 2026,
+      "week": 11,
+      "phase": "week",
+      "event": "joint",
+      "members": 8
+    },
+    {
+      "year": 2026,
+      "week": 12,
+      "phase": "week",
+      "event": "joint",
+      "members": 8
+    },
+    {
+      "year": 2026,
+      "week": 12,
+      "phase": "week",
+      "members": 8
+    },
+    {
+      "year": 2026,
+      "week": 13,
+      "phase": "week",
+      "members": 8
+    },
+    {
+      "year": 2026,
+      "week": 13,
+      "phase": "week",
+      "members": 8
+    },
+    {
+      "year": 2026,
+      "week": 14,
+      "phase": "week",
+      "members": 8
+    },
+    {
+      "year": 2026,
+      "week": 14,
+      "phase": "week",
+      "members": 8
+    },
+    {
+      "year": 2026,
+      "week": 15,
+      "phase": "week",
+      "members": 8
+    },
+    {
+      "year": 2026,
+      "week": 15,
+      "phase": "week",
+      "members": 8
+    },
+    {
+      "year": 2026,
+      "week": 16,
+      "phase": "week",
+      "members": 8
+    },
+    {
+      "year": 2026,
+      "week": 16,
+      "phase": "week",
+      "members": 8
+    },
+    {
+      "year": 2026,
+      "week": 20,
+      "phase": "week",
+      "members": 8
+    },
+    {
+      "year": 2026,
+      "week": 20,
+      "phase": "week",
+      "members": 9
+    },
+    {
+      "year": 2026,
+      "week": 20,
+      "phase": "week",
+      "members": 9
+    },
+    {
+      "year": 2026,
+      "week": 20,
+      "phase": "week",
+      "members": 9
+    },
+    {
+      "year": 2026,
+      "week": 21,
+      "phase": "week",
+      "members": 9
+    },
+    {
+      "year": 2026,
+      "week": 21,
+      "phase": "week",
+      "members": 9
+    },
+    {
+      "year": 2026,
+      "week": 22,
+      "phase": "week",
+      "members": 9
+    },
+    {
+      "year": 2026,
+      "week": 22,
+      "phase": "week",
+      "event": "bunkasai",
+      "members": 9
+    },
+    {
+      "year": 2026,
+      "week": 23,
+      "phase": "week",
+      "event": "bunkasai",
+      "members": 9
+    },
+    {
+      "year": 2026,
+      "week": 23,
+      "phase": "week",
+      "members": 10
+    },
+    {
+      "year": 2026,
+      "week": 23,
+      "phase": "week",
+      "members": 10
+    },
+    {
+      "year": 2026,
+      "week": 24,
+      "phase": "week",
+      "members": 10
+    },
+    {
+      "year": 2026,
+      "week": 24,
+      "phase": "week",
+      "members": 10
+    },
+    {
+      "year": 2026,
+      "week": 25,
+      "phase": "week",
+      "members": 10
+    },
+    {
+      "year": 2026,
+      "week": 25,
+      "phase": "week",
+      "members": 10
+    },
+    {
+      "year": 2026,
+      "week": 26,
+      "phase": "week",
+      "members": 10
+    },
+    {
+      "year": 2026,
+      "week": 26,
+      "phase": "week",
+      "event": "teien",
+      "members": 10
+    },
+    {
+      "year": 2026,
+      "week": 26,
+      "phase": "end",
+      "event": "teien",
+      "members": 10
+    },
+    {
+      "year": 2026,
+      "week": 26,
+      "phase": "winter",
+      "event": "teien",
+      "members": 10
+    },
+    {
+      "year": 2026,
+      "week": 26,
+      "phase": "winter",
+      "event": "teien",
+      "members": 10
+    },
+    {
+      "year": 2026,
+      "week": 26,
+      "phase": "winter",
+      "event": "teien",
+      "members": 10
+    },
+    {
+      "year": 2026,
+      "week": 26,
+      "phase": "winter",
+      "event": "teien",
+      "members": 10
+    },
+    {
+      "year": 2027,
+      "week": 0,
+      "phase": "choose",
+      "event": "teien",
+      "members": 10
+    }
+  ],
+  "errors": []
+}

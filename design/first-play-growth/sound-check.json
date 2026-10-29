@@ -1,0 +1,287 @@
+{
+  "pieces": [
+    {
+      "pid": "largo",
+      "from": 0,
+      "to": 16,
+      "secondsBefore": 8.78,
+      "secondsNow": 8.86,
+      "qualityBefore": 19.89,
+      "qualityNow": 24.32,
+      "pitchBefore": 32.41,
+      "pitchNow": 38.77,
+      "rhythmBefore": 27.99,
+      "rhythmNow": 39.17,
+      "names": [
+        "山本 紗希",
+        "長谷川 文香",
+        "中山 誠"
+      ]
+    },
+    {
+      "pid": "ode",
+      "from": 0,
+      "to": 14,
+      "secondsBefore": 10.62,
+      "secondsNow": 10.67,
+      "qualityBefore": 36.26,
+      "qualityNow": 38.42,
+      "pitchBefore": 37.93,
+      "pitchNow": 42.07,
+      "rhythmBefore": 90.61,
+      "rhythmNow": 92.15,
+      "names": [
+        "原田 海斗",
+        "森田 渚",
+        "林 美咲"
+      ]
+    },
+    {
+      "pid": "galop",
+      "from": 0,
+      "to": 14,
+      "secondsBefore": 10.41,
+      "secondsNow": 10.43,
+      "qualityBefore": 16.82,
+      "qualityNow": 20.51,
+      "pitchBefore": 38.06,
+      "pitchNow": 41.52,
+      "rhythmBefore": 24.22,
+      "rhythmNow": 27.97,
+      "names": [
+        "藤原 大翔",
+        "村上 明里",
+        "青木 茜"
+      ]
+    },
+    {
+      "pid": "pomp",
+      "from": 0,
+      "to": 14,
+      "secondsBefore": 10.91,
+      "secondsNow": 10.99,
+      "qualityBefore": 16.82,
+      "qualityNow": 20.99,
+      "pitchBefore": 41.43,
+      "pitchNow": 47.51,
+      "rhythmBefore": 39.03,
+      "rhythmNow": 45,
+      "names": [
+        "高木 悠真",
+        "吉田 陽翔",
+        "宮崎 結衣"
+      ]
+    },
+    {
+      "pid": "aida",
+      "from": 0,
+      "to": 16,
+      "secondsBefore": 9.12,
+      "secondsNow": 9.15,
+      "qualityBefore": 28.42,
+      "qualityNow": 32.98,
+      "pitchBefore": 55.91,
+      "pitchNow": 59.73,
+      "rhythmBefore": 64.97,
+      "rhythmNow": 69.25,
+      "names": [
+        "石田 美咲",
+        "藤田 千夏",
+        "金子 奏"
+      ]
+    },
+    {
+      "pid": "hero",
+      "from": 0,
+      "to": 8,
+      "secondsBefore": 9.1,
+      "secondsNow": 9.15,
+      "qualityBefore": 26.4,
+      "qualityNow": 30.36,
+      "pitchBefore": 48.8,
+      "pitchNow": 50.19,
+      "rhythmBefore": 31.75,
+      "rhythmNow": 35.84,
+      "names": [
+        "森 早紀",
+        "岡田 航",
+        "桜井 千夏"
+      ]
+    },
+    {
+      "pid": "holst",
+      "from": 0,
+      "to": 12,
+      "secondsBefore": 9.16,
+      "secondsNow": 9.19,
+      "qualityBefore": 21.99,
+      "qualityNow": 26.34,
+      "pitchBefore": 43.87,
+      "pitchNow": 48.17,
+      "rhythmBefore": 29.48,
+      "rhythmNow": 33,
+      "names": [
+        "上田 紗希",
+        "近藤 渚",
+        "中村 杏"
+      ]
+    },
+    {
+      "pid": "hungarian",
+      "from": 0,
+      "to": 18,
+      "secondsBefore": 9.84,
+      "secondsNow": 9.87,
+      "qualityBefore": 23.29,
+      "qualityNow": 26.12,
+      "pitchBefore": 37.9,
+      "pitchNow": 41.4,
+      "rhythmBefore": 39.93,
+      "rhythmNow": 44.18,
+      "names": [
+        "加藤 透",
+        "上田 蒼",
+        "野口 優奈"
+      ]
+    },
+    {
+      "pid": "flowers",
+      "from": 0,
+      "to": 30,
+      "secondsBefore": 10.8,
+      "secondsNow": 10.83,
+      "qualityBefore": 25.97,
+      "qualityNow": 28.17,
+      "pitchBefore": 51.13,
+      "pitchNow": 54.16,
+      "rhythmBefore": 43.16,
+      "rhythmNow": 47.82,
+      "names": [
+        "中野 恵",
+        "原田 杏",
+        "石田 茜"
+      ]
+    },
+    {
+      "pid": "tell",
+      "from": 0,
+      "to": 26,
+      "secondsBefore": 10.63,
+      "secondsNow": 10.63,
+      "qualityBefore": 28.09,
+      "qualityNow": 31.41,
+      "pitchBefore": 51.82,
+      "pitchNow": 55.53,
+      "rhythmBefore": 54.24,
+      "rhythmNow": 58.4,
+      "names": [
+        "長谷川 澪",
+        "田中 隼",
+        "岩崎 文香"
+      ]
+    },
+    {
+      "pid": "carmen",
+      "from": 0,
+      "to": 20,
+      "secondsBefore": 10.44,
+      "secondsNow": 10.46,
+      "qualityBefore": 18.28,
+      "qualityNow": 21.2,
+      "pitchBefore": 39.49,
+      "pitchNow": 42.52,
+      "rhythmBefore": 51.18,
+      "rhythmNow": 54.74,
+      "names": [
+        "藤原 遥",
+        "渡辺 優奈",
+        "森 紗希"
+      ]
+    },
+    {
+      "pid": "valkyrie",
+      "from": 0,
+      "to": 12,
+      "secondsBefore": 10.16,
+      "secondsNow": 10.2,
+      "qualityBefore": 16.93,
+      "qualityNow": 19.43,
+      "pitchBefore": 17.16,
+      "pitchNow": 19.69,
+      "rhythmBefore": 43.52,
+      "rhythmNow": 47.96,
+      "names": [
+        "山口 花音",
+        "菅原 理央",
+        "和田 莉子"
+      ]
+    },
+    {
+      "pid": "swan",
+      "from": 0,
+      "to": 16,
+      "secondsBefore": 11.63,
+      "secondsNow": 11.66,
+      "qualityBefore": 26.47,
+      "qualityNow": 29.35,
+      "pitchBefore": 45.96,
+      "pitchNow": 49.88,
+      "rhythmBefore": 52.25,
+      "rhythmNow": 56.25,
+      "names": [
+        "岡田 颯太",
+        "中野 文香",
+        "小林 悠斗"
+      ]
+    },
+    {
+      "pid": "spring",
+      "from": 0,
+      "to": 16,
+      "secondsBefore": 9.49,
+      "secondsNow": 9.51,
+      "qualityBefore": 25.72,
+      "qualityNow": 27.74,
+      "pitchBefore": 46.23,
+      "pitchNow": 49.91,
+      "rhythmBefore": 43.55,
+      "rhythmNow": 47.49,
+      "names": [
+        "三浦 真央",
+        "西村 明里",
+        "渡辺 陸"
+      ]
+    },
+    {
+      "pid": "canon",
+      "from": 0,
+      "to": 16,
+      "secondsBefore": 8.72,
+      "secondsNow": 8.76,
+      "qualityBefore": 31.95,
+      "qualityNow": 36.34,
+      "pitchBefore": 52.37,
+      "pitchNow": 58.61,
+      "rhythmBefore": 56.97,
+      "rhythmNow": 60.55,
+      "names": [
+        "伊藤 碧",
+        "伊藤 雫",
+        "工藤 楓"
+      ]
+    }
+  ],
+  "compatibility": [
+    "記録なし",
+    "去年の記録",
+    "違う曲",
+    "古い記録の揺れ条件",
+    "改名後も当時の名前",
+    "席替え後も当時の担当",
+    "保存内容を保持"
+  ],
+  "venueChange": {
+    "comparisonStops": true,
+    "normalPlaybackUnchanged": true
+  }
+}

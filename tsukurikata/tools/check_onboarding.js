@@ -19,6 +19,13 @@ onboardingPlayed({notes:[],hits:[]});assert.equal(U.onboarding.heard,false);
 // 録音の読み込みを待つ間にタブを移していても、現在の部の音が鳴れば達成にする。
 U.tab='week';onboardingPlayed(sound);assert.equal(U.onboarding.heard,true);assert.equal(renders,1);
 assert.equal(JSON.stringify(s),beforeListen);assert.equal(onboardingStep(s,U.onboarding),4);
+// 聴き比べの4月だけでは終えず、今の部の短い演奏が鳴ってから達成する。
+U.onboarding.heard=false;const previousClip={notes:[{}],hits:[]},currentClip={notes:[{}],hits:[]};
+U.growthPair={state:s,perfs:{before:previousClip,now:currentClip}};
+onboardingPlayed(previousClip);assert.equal(U.onboarding.heard,false);
+onboardingPlayed(currentClip);assert.equal(U.onboarding.heard,true);
+U.onboarding.heard=false;U.growthPair.state=clone(s);onboardingPlayed(currentClip);assert.equal(U.onboarding.heard,false);
+U.growthPair=null;U.onboarding.heard=true;saveOnboarding();
 initOnboarding(s,false);assert.equal(U.onboarding.heard,true);assert.equal(U.onboarding.active,true);
 U.onboarding.active=false;saveOnboarding();initOnboarding(s,false);assert.equal(U.onboarding.active,false);
 // まだゲームを保存する前に閉じて、別の種で開き直してもスキップを保つ。
@@ -33,6 +40,12 @@ existing.year++;existing.week=0;assert.equal(onboardingStep(existing,U.onboardin
 localStorage.getItem=()=>{throw Error('保存できない端末');};localStorage.setItem=()=>{throw Error('保存できない端末');};
 assert.doesNotThrow(()=>initOnboarding(s,true));assert.equal(U.onboarding.active,true);
 assert.equal('onboarding' in s,false);assert.equal('heard' in s,false);
-report.playbackGate=true;report.steps=[0,1,2,3,4];report.resume=true;report.skip=true;report.oldSave=true;report.blockedStorage=true;
+// 全員を控えにした場合は、無音を聴かせず、部員の席を決める操作へ戻す。
+const firstRow={},document={querySelector:()=>firstRow};let destination=null,focused=null;
+const setTab=tab=>{destination=tab;};onboardingFocus=el=>{focused=el;};
+S=clone(s);for(const m of S.members)m.seat=null;
+U.onboarding={club:onboardingClub(S),active:true,heard:false};onboardingAction('next');
+assert.equal(destination,'members');assert.equal(focused,firstRow);
+report.noSeatRecovery=true;report.playbackGate=true;report.steps=[0,1,2,3,4];report.resume=true;report.skip=true;report.oldSave=true;report.blockedStorage=true;
 `,ctx);
 console.log(JSON.stringify(report,null,2));
