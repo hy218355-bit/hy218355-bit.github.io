@@ -1,0 +1,16 @@
+[
+  {
+    "N": "0",
+    "piece": "galop",
+    "exit": 2,
+    "rejected": true,
+    "hasAverage": false
+  },
+  {
+    "N": "1",
+    "piece": "ない曲",
+    "exit": 1,
+    "rejected": true,
+    "hasAverage": false
+  }
+]

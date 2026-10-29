@@ -1,0 +1,74 @@
+[
+  {
+    "policy": "auto",
+    "pieces": [
+      "largo",
+      "ode",
+      "galop",
+      "pomp",
+      "aida"
+    ],
+    "exit": 0,
+    "runsPerPiece": 10
+  },
+  {
+    "policy": "auto",
+    "pieces": [
+      "hero",
+      "holst",
+      "hungarian",
+      "flowers",
+      "tell"
+    ],
+    "exit": 0,
+    "runsPerPiece": 10
+  },
+  {
+    "policy": "auto",
+    "pieces": [
+      "carmen",
+      "valkyrie",
+      "swan",
+      "spring",
+      "canon"
+    ],
+    "exit": 0,
+    "runsPerPiece": 10
+  },
+  {
+    "policy": "manual",
+    "pieces": [
+      "largo",
+      "ode",
+      "galop",
+      "pomp",
+      "aida"
+    ],
+    "exit": 0,
+    "runsPerPiece": 10
+  },
+  {
+    "policy": "manual",
+    "pieces": [
+      "hero",
+      "holst",
+      "hungarian",
+      "flowers",
+      "tell"
+    ],
+    "exit": 0,
+    "runsPerPiece": 10
+  },
+  {
+    "policy": "manual",
+    "pieces": [
+      "carmen",
+      "valkyrie",
+      "swan",
+      "spring",
+      "canon"
+    ],
+    "exit": 0,
+    "runsPerPiece": 10
+  }
+]

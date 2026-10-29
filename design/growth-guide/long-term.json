@@ -1,0 +1,456 @@
+{
+  "years": 12,
+  "runsPerPiece": 3,
+  "pieces": [
+    {
+      "piece": "largo",
+      "runs": [
+        {
+          "seed": 202610311,
+          "years": 12,
+          "exit": 0,
+          "firstNational": 11,
+          "nationalGold": 1,
+          "pref12": 84.3
+        },
+        {
+          "seed": 202610312,
+          "years": 12,
+          "exit": 0,
+          "firstNational": 11,
+          "nationalGold": 2,
+          "pref12": 86.3
+        },
+        {
+          "seed": 202610313,
+          "years": 12,
+          "exit": 0,
+          "firstNational": 11,
+          "nationalGold": 1,
+          "pref12": 88.0
+        }
+      ],
+      "hasNationalPath": true
+    },
+    {
+      "piece": "ode",
+      "runs": [
+        {
+          "seed": 202610311,
+          "years": 12,
+          "exit": 0,
+          "firstNational": 9,
+          "nationalGold": 3,
+          "pref12": 89.7
+        },
+        {
+          "seed": 202610312,
+          "years": 12,
+          "exit": 0,
+          "firstNational": 9,
+          "nationalGold": 2,
+          "pref12": 90.3
+        },
+        {
+          "seed": 202610313,
+          "years": 12,
+          "exit": 0,
+          "firstNational": 11,
+          "nationalGold": 2,
+          "pref12": 88.3
+        }
+      ],
+      "hasNationalPath": true
+    },
+    {
+      "piece": "galop",
+      "runs": [
+        {
+          "seed": 202610311,
+          "years": 12,
+          "exit": 0,
+          "firstNational": 9,
+          "nationalGold": 3,
+          "pref12": 88.0
+        },
+        {
+          "seed": 202610312,
+          "years": 12,
+          "exit": 0,
+          "firstNational": 12,
+          "nationalGold": 1,
+          "pref12": 88.3
+        },
+        {
+          "seed": 202610313,
+          "years": 12,
+          "exit": 0,
+          "firstNational": 9,
+          "nationalGold": 1,
+          "pref12": 90.3
+        }
+      ],
+      "hasNationalPath": true
+    },
+    {
+      "piece": "pomp",
+      "runs": [
+        {
+          "seed": 202610311,
+          "years": 12,
+          "exit": 0,
+          "firstNational": 7,
+          "nationalGold": 5,
+          "pref12": 88.0
+        },
+        {
+          "seed": 202610312,
+          "years": 12,
+          "exit": 0,
+          "firstNational": 8,
+          "nationalGold": 4,
+          "pref12": 90.0
+        },
+        {
+          "seed": 202610313,
+          "years": 12,
+          "exit": 0,
+          "firstNational": 7,
+          "nationalGold": 3,
+          "pref12": 87.0
+        }
+      ],
+      "hasNationalPath": true
+    },
+    {
+      "piece": "aida",
+      "runs": [
+        {
+          "seed": 202610311,
+          "years": 12,
+          "exit": 0,
+          "firstNational": 9,
+          "nationalGold": 2,
+          "pref12": 84.3
+        },
+        {
+          "seed": 202610312,
+          "years": 12,
+          "exit": 0,
+          "firstNational": null,
+          "nationalGold": 0,
+          "pref12": 89.7
+        },
+        {
+          "seed": 202610313,
+          "years": 12,
+          "exit": 0,
+          "firstNational": 10,
+          "nationalGold": 3,
+          "pref12": 87.7
+        }
+      ],
+      "hasNationalPath": true
+    },
+    {
+      "piece": "hero",
+      "runs": [
+        {
+          "seed": 202610311,
+          "years": 12,
+          "exit": 0,
+          "firstNational": 7,
+          "nationalGold": 6,
+          "pref12": 91.3
+        },
+        {
+          "seed": 202610312,
+          "years": 12,
+          "exit": 0,
+          "firstNational": 8,
+          "nationalGold": 4,
+          "pref12": 90.3
+        },
+        {
+          "seed": 202610313,
+          "years": 12,
+          "exit": 0,
+          "firstNational": 9,
+          "nationalGold": 4,
+          "pref12": 88.3
+        }
+      ],
+      "hasNationalPath": true
+    },
+    {
+      "piece": "holst",
+      "runs": [
+        {
+          "seed": 202610311,
+          "years": 12,
+          "exit": 0,
+          "firstNational": 9,
+          "nationalGold": 3,
+          "pref12": 87.7
+        },
+        {
+          "seed": 202610312,
+          "years": 12,
+          "exit": 0,
+          "firstNational": 9,
+          "nationalGold": 3,
+          "pref12": 88.7
+        },
+        {
+          "seed": 202610313,
+          "years": 12,
+          "exit": 0,
+          "firstNational": 10,
+          "nationalGold": 1,
+          "pref12": 87.3
+        }
+      ],
+      "hasNationalPath": true
+    },
+    {
+      "piece": "hungarian",
+      "runs": [
+        {
+          "seed": 202610311,
+          "years": 12,
+          "exit": 0,
+          "firstNational": 12,
+          "nationalGold": 1,
+          "pref12": 85.0
+        },
+        {
+          "seed": 202610312,
+          "years": 12,
+          "exit": 0,
+          "firstNational": 8,
+          "nationalGold": 1,
+          "pref12": 88.0
+        },
+        {
+          "seed": 202610313,
+          "years": 12,
+          "exit": 0,
+          "firstNational": 8,
+          "nationalGold": 3,
+          "pref12": 88.3
+        }
+      ],
+      "hasNationalPath": true
+    },
+    {
+      "piece": "flowers",
+      "runs": [
+        {
+          "seed": 202610311,
+          "years": 12,
+          "exit": 0,
+          "firstNational": 8,
+          "nationalGold": 1,
+          "pref12": 86.3
+        },
+        {
+          "seed": 202610312,
+          "years": 12,
+          "exit": 0,
+          "firstNational": 8,
+          "nationalGold": 3,
+          "pref12": 88.7
+        },
+        {
+          "seed": 202610313,
+          "years": 12,
+          "exit": 0,
+          "firstNational": 7,
+          "nationalGold": 1,
+          "pref12": 85.0
+        }
+      ],
+      "hasNationalPath": true
+    },
+    {
+      "piece": "tell",
+      "runs": [
+        {
+          "seed": 202610311,
+          "years": 12,
+          "exit": 0,
+          "firstNational": 7,
+          "nationalGold": 3,
+          "pref12": 86.3
+        },
+        {
+          "seed": 202610312,
+          "years": 12,
+          "exit": 0,
+          "firstNational": 9,
+          "nationalGold": 1,
+          "pref12": 89.7
+        },
+        {
+          "seed": 202610313,
+          "years": 12,
+          "exit": 0,
+          "firstNational": null,
+          "nationalGold": 0,
+          "pref12": 85.7
+        }
+      ],
+      "hasNationalPath": true
+    },
+    {
+      "piece": "carmen",
+      "runs": [
+        {
+          "seed": 202610311,
+          "years": 12,
+          "exit": 0,
+          "firstNational": 9,
+          "nationalGold": 3,
+          "pref12": 90.3
+        },
+        {
+          "seed": 202610312,
+          "years": 12,
+          "exit": 0,
+          "firstNational": 11,
+          "nationalGold": 2,
+          "pref12": 89.0
+        },
+        {
+          "seed": 202610313,
+          "years": 12,
+          "exit": 0,
+          "firstNational": 10,
+          "nationalGold": 2,
+          "pref12": 85.7
+        }
+      ],
+      "hasNationalPath": true
+    },
+    {
+      "piece": "valkyrie",
+      "runs": [
+        {
+          "seed": 202610311,
+          "years": 12,
+          "exit": 0,
+          "firstNational": null,
+          "nationalGold": 0,
+          "pref12": 86.7
+        },
+        {
+          "seed": 202610312,
+          "years": 12,
+          "exit": 0,
+          "firstNational": 11,
+          "nationalGold": 1,
+          "pref12": 86.3
+        },
+        {
+          "seed": 202610313,
+          "years": 12,
+          "exit": 0,
+          "firstNational": null,
+          "nationalGold": 0,
+          "pref12": 87.0
+        }
+      ],
+      "hasNationalPath": true
+    },
+    {
+      "piece": "swan",
+      "runs": [
+        {
+          "seed": 202610311,
+          "years": 12,
+          "exit": 0,
+          "firstNational": null,
+          "nationalGold": 0,
+          "pref12": 86.0
+        },
+        {
+          "seed": 202610312,
+          "years": 12,
+          "exit": 0,
+          "firstNational": 11,
+          "nationalGold": 1,
+          "pref12": 88.0
+        },
+        {
+          "seed": 202610313,
+          "years": 12,
+          "exit": 0,
+          "firstNational": 12,
+          "nationalGold": 1,
+          "pref12": 87.7
+        }
+      ],
+      "hasNationalPath": true
+    },
+    {
+      "piece": "spring",
+      "runs": [
+        {
+          "seed": 202610311,
+          "years": 12,
+          "exit": 0,
+          "firstNational": null,
+          "nationalGold": 0,
+          "pref12": 84.3
+        },
+        {
+          "seed": 202610312,
+          "years": 12,
+          "exit": 0,
+          "firstNational": 11,
+          "nationalGold": 2,
+          "pref12": 88.0
+        },
+        {
+          "seed": 202610313,
+          "years": 12,
+          "exit": 0,
+          "firstNational": null,
+          "nationalGold": 0,
+          "pref12": 84.3
+        }
+      ],
+      "hasNationalPath": true
+    },
+    {
+      "piece": "canon",
+      "runs": [
+        {
+          "seed": 202610311,
+          "years": 12,
+          "exit": 0,
+          "firstNational": 9,
+          "nationalGold": 1,
+          "pref12": 84.3
+        },
+        {
+          "seed": 202610312,
+          "years": 12,
+          "exit": 0,
+          "firstNational": 8,
+          "nationalGold": 4,
+          "pref12": 87.7
+        },
+        {
+          "seed": 202610313,
+          "years": 12,
+          "exit": 0,
+          "firstNational": 8,
+          "nationalGold": 3,
+          "pref12": 85.7
+        }
+      ],
+      "hasNationalPath": true
+    }
+  ]
+}

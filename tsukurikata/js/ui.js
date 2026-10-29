@@ -893,6 +893,7 @@ const GUIDE_WEEKS = 3, GUIDE_ACTS = ['assign', 'reveal', 'next', 'stage', 'pract
 function renderWeek(){
   renderWeekBody();
   renderDiagPractice();
+  renderAdvisor();
   // 長い説明は見出しの吹き出しへ。文章そのものは保持する。
   const intro=$('#week .plan > p.small:first-child');
   if(intro){ $('#h-week').insertAdjacentHTML('beforeend', '<button class="help-button" type="button"'+tipAttr('今週の練習',intro.textContent)+'>?</button>');intro.hidden=true; }
@@ -902,6 +903,15 @@ function renderWeek(){
   const b = GUIDE_ACTS.map(a => w.querySelector(`[data-act="${a}"]:not([disabled])`)).find(Boolean)
     || w.querySelector('.tag.fit ~ .row [data-act="choose"]') || w.querySelector('[data-act="choose"]');
   b?.classList.add('guide');
+}
+// 案内は短いひと言だけを見せ、説明は顔を押して開く。ゲームを止める表示にはしない。
+function renderAdvisor(){
+  const w = $('#week'), h = advisorHint(S, U.lineup);
+  const key = `${S.recruitSeed}:${S.year}:${S.week}:${S.phase}:${h.key}`;
+  w.insertAdjacentHTML('afterbegin', `<details class="advisor" data-advisor="${esc(h.key)}"${U.advisorOpen === key ? ' open' : ''}><summary><img src="img/advisor-asano.webp" width="56" height="56" alt="" decoding="async"><span><small>副顧問・朝野先生</small><b>${esc(h.line)}</b></span>${uiIcon('chevron')}</summary><div class="advisor-message"><p>${esc(h.text)}</p></div></details>`);
+  w.querySelector('.advisor').addEventListener('toggle', e => {
+    if(e.target.isConnected) U.advisorOpen = e.target.open ? key : null;
+  });
 }
 function renderWeekBody(){
   const w = $('#week'), ev = eventAt(S, S.week);

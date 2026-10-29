@@ -1,0 +1,162 @@
+[
+  {
+    "test": "check_announce_navigation.js",
+    "exit": 0
+  },
+  {
+    "test": "check_audition_listen.js",
+    "exit": 0
+  },
+  {
+    "test": "check_audition_sound.js",
+    "exit": 0
+  },
+  {
+    "test": "check_conduct_cue.js",
+    "exit": 0
+  },
+  {
+    "test": "check_conduct_result.js",
+    "exit": 0
+  },
+  {
+    "test": "check_conduct_timing.js",
+    "exit": 0
+  },
+  {
+    "test": "check_current_member_listen.js",
+    "exit": 0
+  },
+  {
+    "test": "check_current_rest.js",
+    "exit": 0
+  },
+  {
+    "test": "check_ensemble_picked.js",
+    "exit": 0
+  },
+  {
+    "test": "check_ensemble_preview.js",
+    "exit": 0
+  },
+  {
+    "test": "check_faces.js",
+    "exit": 0
+  },
+  {
+    "test": "check_flute_cast.js",
+    "exit": 0
+  },
+  {
+    "test": "check_graduation_album.js",
+    "exit": 0
+  },
+  {
+    "test": "check_growth_balance.js",
+    "exit": 0
+  },
+  {
+    "test": "check_hall_carry.js",
+    "exit": 0
+  },
+  {
+    "test": "check_lineup_scoring.js",
+    "exit": 0
+  },
+  {
+    "test": "check_listening_mix.js",
+    "exit": 0
+  },
+  {
+    "test": "check_live_performance.js",
+    "exit": 0
+  },
+  {
+    "test": "check_member_listening.js",
+    "exit": 0
+  },
+  {
+    "test": "check_member_move_undo.js",
+    "exit": 0
+  },
+  {
+    "test": "check_member_names.js",
+    "exit": 0
+  },
+  {
+    "test": "check_member_record_stop.js",
+    "exit": 0
+  },
+  {
+    "test": "check_mini_subject.js",
+    "exit": 0
+  },
+  {
+    "test": "check_model_context.js",
+    "exit": 0
+  },
+  {
+    "test": "check_native_file.js",
+    "exit": 0
+  },
+  {
+    "test": "check_piece_listening.js",
+    "exit": 0
+  },
+  {
+    "test": "check_prediction_state.js",
+    "exit": 0
+  },
+  {
+    "test": "check_reading_difficulty.js",
+    "exit": 0
+  },
+  {
+    "test": "check_recording_card.js",
+    "exit": 0
+  },
+  {
+    "test": "check_recording_rest.js",
+    "exit": 0
+  },
+  {
+    "test": "check_recruits.js",
+    "exit": 0
+  },
+  {
+    "test": "check_sample_queue.js",
+    "exit": 0
+  },
+  {
+    "test": "check_sample_retry.js",
+    "exit": 0
+  },
+  {
+    "test": "check_score_balance.js",
+    "exit": 0
+  },
+  {
+    "test": "check_stage_cast.js",
+    "exit": 0
+  },
+  {
+    "test": "check_stage_faces.js",
+    "exit": 0
+  },
+  {
+    "test": "check_stage_reveal.js",
+    "exit": 0
+  },
+  {
+    "test": "check_stop_current.js",
+    "exit": 0
+  },
+  {
+    "test": "check_stop_navigation.js",
+    "exit": 0
+  },
+  {
+    "test": "check_week_escape.js",
+    "exit": 0
+  }
+]

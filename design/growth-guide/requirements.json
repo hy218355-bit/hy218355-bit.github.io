@@ -1,0 +1,74 @@
+[
+  {
+    "id": "1",
+    "requirement": "序盤の厳しさと最初の0点を見直す",
+    "evidence": [
+      "checks/check_growth_balance.txt",
+      "balance.json",
+      "screenshots/welcome-light.png",
+      "screenshots/welcome-dark.png"
+    ],
+    "status": "verified"
+  },
+  {
+    "id": "2",
+    "requirement": "不安定な奏者の減点と育てて出す見返りを調整する",
+    "evidence": [
+      "checks/check_lineup_scoring.txt",
+      "checks/check_growth_balance.txt"
+    ],
+    "status": "verified"
+  },
+  {
+    "id": "3",
+    "requirement": "基礎・譜読み・合奏の手動指示の価値を検証する",
+    "evidence": [
+      "averages/results.json",
+      "balance.json",
+      "checks/check_growth_balance.txt",
+      "screenshots/basics-open-light.png",
+      "screenshots/basics-open-dark.png"
+    ],
+    "finding": "特定の部員の基礎を先に育てられる。全曲平均の大会点は自動との差が小さく、常に上回るものではない。",
+    "status": "verified"
+  },
+  {
+    "id": "4",
+    "requirement": "全15曲の平均と長期進行を確認する",
+    "evidence": [
+      "averages/results.json",
+      "balance.json",
+      "long-term.json",
+      "long-runs/",
+      "verification.txt"
+    ],
+    "status": "verified"
+  },
+  {
+    "id": "advisor",
+    "requirement": "序盤からゲームを説明する若い副顧問を入れる",
+    "evidence": [
+      "screenshots/intake-light.png",
+      "screenshots/intake-open-light.png",
+      "screenshots/first-practice-light.png",
+      "screenshots/first-practice-dark.png",
+      "checks/check_growth_balance.txt",
+      "native-check.json"
+    ],
+    "status": "verified"
+  },
+  {
+    "id": "invariants",
+    "requirement": "前の保存内容、G〜S、オフライン、375px両テーマ、ミラーリング禁止、push禁止を保つ",
+    "evidence": [
+      "checks/results.json",
+      "native-check.json",
+      "portrait-source.json",
+      "glyph-check.txt",
+      "screenshots/",
+      "console-final.json"
+    ],
+    "note": "実機への導入と操作確認は、オーナーの帰宅後に別途行う。現在の依頼の実装・集計・ブラウザ確認は完了。",
+    "status": "verified"
+  }
+]

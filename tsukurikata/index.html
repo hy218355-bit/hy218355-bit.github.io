@@ -1618,6 +1618,20 @@ html[data-fx-mode="full"] .recording-save[data-saving="true"]::after{animation:f
  #conduct .cd-stats{padding-top:12px}
 }
 @media(prefers-reduced-motion:reduce){#conduct .cd-prog i{transition:none}}
+/* 副顧問のひと言。詳しい説明は開いて読む。新しい動きや固定表示は足さない。 */
+.advisor{margin:0 0 16px;border:1px solid var(--rule);border-radius:12px;background:var(--sheet);overflow:hidden}
+.advisor>summary{display:grid;grid-template-columns:56px minmax(0,1fr) 16px;align-items:center;gap:12px;min-height:80px;padding:12px;cursor:pointer;list-style:none}
+.advisor>summary::-webkit-details-marker{display:none}
+.advisor>summary>img{display:block;width:56px;height:56px;object-fit:cover;border-radius:50%;border:1px solid var(--rule)}
+.advisor>summary>span{min-width:0;display:grid;gap:4px}
+.advisor small{font-size:10px;color:var(--ink-soft);font-weight:500;letter-spacing:.04em}
+.advisor b{font-size:13px;line-height:1.65;font-weight:600;color:var(--ink);overflow-wrap:anywhere}
+.advisor>summary>.ui-icon{width:16px;height:16px;color:var(--brass)}
+.advisor[open]>summary>.ui-icon{transform:rotate(180deg)}
+.advisor>summary:focus-visible{outline:2px solid var(--brass);outline-offset:-3px}
+.advisor-message{padding:0 16px 16px 80px}
+.advisor-message p{margin:0;padding-top:12px;border-top:1px solid var(--rule);font-size:13px;line-height:1.9;color:var(--ink)}
+@media(max-width:480px){.advisor>summary{gap:10px;grid-template-columns:48px minmax(0,1fr) 16px}.advisor>summary>img{width:48px;height:48px}.advisor-message{padding-left:16px}.advisor-message p{font-size:13px}}
 </style>
 </head>
 <body>
@@ -1837,14 +1851,15 @@ html[data-fx-mode="full"] .recording-save[data-saving="true"]::after{animation:f
 <script src="js/pieces/swan.js?v=score-balance-1"></script>
 <script src="js/pieces/spring.js?v=score-balance-1"></script>
 <script src="js/pieces/canon.js?v=score-balance-1"></script>
-<script src="js/band.js?v=flute-cast-1"></script>
-<script src="js/game.js?v=flute-cast-1"></script>
+<script src="js/band.js?v=growth-balance-1"></script>
+<script src="js/game.js?v=growth-balance-1"></script>
 <script src="js/engine.js?v=playback-stop-1"></script>
 <script src="js/conduct.js?v=native-export-1"></script>
 <script src="js/announce.js?v=announce-navigation-1"></script>
 <script src="js/tunegame.js"></script>
 <script src="js/fx.js?v=stage-cast-1"></script>
-<script src="js/ui.js?v=native-export-1"></script>
+<script src="js/advisor.js?v=asano-1"></script>
+<script src="js/ui.js?v=asakura-1"></script>
 <div class="tip" id="tip" role="tooltip" hidden></div>
 </body>
 </html>

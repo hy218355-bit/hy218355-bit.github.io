@@ -183,6 +183,8 @@ function record(){
  report.yearGrowth=Array.from(document.querySelectorAll('[data-year-growth]')).map(el=>({id:el.dataset.yearGrowth,name:el.querySelector('b').textContent,ranks:el.querySelector('.yr-grow-ranks').getAttribute('aria-label')}));
  report.year=S.year;report.phase=S.phase;report.pending=S.pending?{kind:S.pending.kind,revealed:!!S.pending.revealed}:null;report.expectedNowLabel=nowLabel();
  report.theme=document.documentElement.dataset.theme;report.width=innerWidth;report.scrollWidth=document.documentElement.scrollWidth;
+ const advisor=$('.advisor'),portrait=advisor?.querySelector('img');
+ report.advisor={key:advisor?.dataset.advisor,open:!!advisor?.open,text:advisor?.innerText,loaded:!!portrait?.naturalWidth,state:hash(JSON.stringify(S))};
  report.faceCount=document.querySelectorAll('.member-face').length;
  report.stagePortraits=Number($('#stage').dataset.portraitCount||0);report.watchPortraits=Number($('#cdStage').dataset.portraitCount||0);
  report.stageSelected=$('#stage').dataset.selectedMember||null;report.watchSelected=$('#cdStage').dataset.selectedMember||null;
@@ -297,7 +299,7 @@ async function show(next){
  document.documentElement.classList.remove('conducting');
  cdDialogRelease();CD.focusToken={};anDialogRelease();AN.focusToken={};
  let s;
- if(view==='balanced-result'||view==='first-year'||view==='first-summary'){
+ if(view==='balanced-result'||view==='first-year'||view==='first-summary'||view==='first-welcome'){
   const random=Math.random;let seed=20261027;
   Math.random=()=>{seed=(Math.imul(seed,1664525)+1013904223)>>>0;return seed/4294967296;};
   try{s=freshState(2026);}finally{Math.random=random;}
@@ -312,6 +314,7 @@ async function show(next){
   s.members=fullBand({pitch:55,rhythm:60,tone:50,expr:48}).slice(0,view==='intake-full'?39:32);s.year=2028;s.week=10;
   s.recruitSeed=12345;s.seq=100;s.recruits=makeRecruits(s,8);s.recruitWhen=s.week;
  }
+ if(view==='first-welcome'){s=practiceWeek(s);s=beginStage(s);s.pending.revealed=true;report.firstQuality=s.pending.q;}
  if(view==='first-summary'){
   while(s.phase!=='end'&&report.steps++<400)s=advance(s);
   if(s.phase!=='end')throw Error('年度の終わりまで進まなかった');
