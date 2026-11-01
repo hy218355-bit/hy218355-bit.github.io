@@ -1,0 +1,24 @@
+{
+  "documents": [
+    "tsukurikata/index.html",
+    "tsukurikata/legal/privacy.html",
+    "tsukurikata-privacy/index.html",
+    "tsukurikata/legal/terms.html",
+    "tsukurikata-terms/index.html",
+    "tsukurikata/legal/support.html",
+    "tsukurikata-support/index.html",
+    "tsukurikata/legal/credits.html",
+    "tsukurikata-credits/index.html"
+  ],
+  "sameSource": true,
+  "offlineResources": true,
+  "localLinks": true,
+  "uniqueIds": true,
+  "gameOutsideLegalUnchanged": true,
+  "scriptOrderUnchanged": true,
+  "collapsedInitially": true,
+  "systemFontForFullText": true,
+  "touchTargetCSS": 48,
+  "privacyManifest": "CA92.1・C617.1／追跡・収集なし",
+  "visualCheck": "未実施：Work設定でブラウザ利用が無効"
+}

@@ -9,6 +9,7 @@ GitHub Pages のサイト。いまの中心は、高校吹奏楽部の顧問に�
 | `tsukurikata/` | ゲーム本体（HTML・JavaScript だけ。ビルドなし） |
 | `tsukurikata-ios/` | iPhone / iPad アプリ（SwiftUI＋WKWebView）。ビルド時に `../tsukurikata` を丸ごと同梱する |
 | `tsukurikata-support/`・`tsukurikata-privacy/` | App Store 用のサポート・プライバシーポリシーのページ |
+| `tsukurikata/legal/` | アプリ内と公開用のポリシー・利用規約・サポート・クレジットの共通原稿。`tools/build_legal.py`で生成し、`--check`で一致を確認する |
 | `.github/workflows/ios.yml` | push のたびに、ビルドとシミュレータでのセルフテスト・スクリーンショット |
 | `.github/workflows/testflight.yml` | 署名して TestFlight に上げる（App Store Connect の API キーが要る） |
 
@@ -101,6 +102,7 @@ GitHub Pages のサイト。いまの中心は、高校吹奏楽部の顧問に�
 - 指揮は演奏の補助。うまく振っても大きな差がつかないようにする。
 - 部員は辞めない（退部の仕組みは入れない）。
 - 文章を足したら `python3 tsukurikata/tools/check_glyphs.py` で、フォントに足りない字がないか見る。足りなければ `tools/build_fonts.py` でフォントを作り直す（元のフォントは google/fonts の `ofl/` の `zenkakugothicnew`・`kleeone`・`delagothicone`・`sharetechmono` の4つ。落とす前にオーナーにたずねる）。
+- 日誌の「このアプリについて」はオフラインの静的な案内。全文は端末標準フォントで表示し、ゲーム用の絞り込みフォントへ法律文書の文字を足さない。`tsukurikata/legal/documents.json`を直して`python3 tsukurikata/tools/build_legal.py`でアプリ内と公開用4ページをそろえる。保存・問い合わせ・共有・通信の説明は実装に合わせ、未公開のURLや未検証のバックアップを使えると断言しない。
 - 点数や伸び方を変えたら、全15曲で `sim_avg.sh` を回して、下の「確かめること」の目標に入っているか見る。
 
 ## デザイン（絵・アイコン・画面の見た目）を入れるとき

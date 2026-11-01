@@ -1678,6 +1678,23 @@ html[data-fx-mode="full"] .recording-save[data-saving="true"]::after{animation:f
 .growth-ranks{display:flex;align-items:center;gap:3px}.growth-ranks>.ui-icon{width:12px;height:12px;transform:rotate(-90deg);color:var(--ink-soft)}
 .growth-listen :focus-visible{outline:2px solid var(--brass);outline-offset:2px}
 @media(max-width:480px){.onboarding{padding:14px}.onboarding-person{grid-template-columns:78px minmax(0,1fr);gap:12px}.onboarding-person>img{width:78px;height:88px}.onboarding-person h3{font-size:18px}}
+/* アプリの案内の表示ここから */
+.legal-info{font-family:-apple-system,BlinkMacSystemFont,"Hiragino Sans","Yu Gothic",system-ui,sans-serif;color:var(--ink);font-size:14px;line-height:1.85;overflow-wrap:anywhere}
+.legal-info summary{display:flex;align-items:center;min-height:48px;cursor:pointer;font-size:14px;font-weight:600;gap:10px;list-style:none}
+.legal-info summary::-webkit-details-marker{display:none}
+.legal-info summary::before{content:"+";color:var(--brass);font-size:20px;flex:none;width:16px;text-align:center}
+.legal-info details[open]>summary::before,.legal-info[open]>summary::before{content:"−"}
+.legal-info .legal-document{border-top:1px solid var(--rule)}
+.legal-info .legal-body{padding:0 4px 20px}
+.legal-info h3{font-size:15px;line-height:1.6;margin:22px 0 6px;color:var(--ink)}
+.legal-info p{margin:8px 0}
+.legal-info .legal-meta{color:var(--ink-soft);font-size:12px}
+.legal-info a{color:var(--brass);text-decoration:underline;text-underline-offset:3px;overflow-wrap:anywhere}
+.legal-info a:focus-visible,.legal-info summary:focus-visible{outline:2px solid var(--brass);outline-offset:3px;border-radius:4px}
+.legal-info pre{font-family:ui-monospace,monospace;white-space:pre-wrap;overflow-wrap:anywhere;font-size:12px;line-height:1.7}
+.legal-info a[href^="mailto:"]{display:inline-flex;align-items:center;min-height:48px;max-width:100%}
+.legal-info .legal-license{border-top:1px solid var(--rule);margin-top:12px}
+/* アプリの案内の表示ここまで */
 </style>
 </head>
 <body>
@@ -1752,6 +1769,421 @@ html[data-fx-mode="full"] .recording-save[data-saving="true"]::after{animation:f
         <p class="diag-note" id="diagNote"></p>
         <details class="diag-practice" id="diagPractice" hidden></details>
       </section>
+<!-- アプリの案内：build_legal.py で生成 -->
+<details class="foot legal-info" id="appInfo" data-tab="log"><summary>このアプリについて</summary>
+<p class="legal-meta">吹奏楽部のつくりかた · バージョン 1.0 · © Yu Studio</p>
+<details class="legal-document" id="legal-privacy"><summary>プライバシーポリシー</summary><div class="legal-body"><p class="legal-meta">更新日：2026年11月1日 · 運営者：Yu Studio</p>
+<p>遊んだ記録は端末に保存します。広告・追跡・アカウント登録はありません。</p>
+<section><h3>対象と運営者</h3><p>「吹奏楽部のつくりかた」のiPhone・iPadアプリとWeb版について、運営者 Yu Studio が情報の取り扱いを説明します。</p></section>
+<section><h3>ゲーム内の情報</h3><p>部員の名前（変更した名前を含む）・練習・結果・演奏の記録と設定、初回案内の進み具合を、遊びを続けるために端末に保存します。開発者のサーバーへ自動送信しません。氏名・住所・位置情報・広告用の識別子をゲームから取得せず、広告・アクセス解析・トラッキング用SDKも使いません。</p></section>
+<section><h3>演奏と端末の機能</h3><p>「録音」はゲームが作った演奏の記録です。マイクで周囲の音や声を録る機能ではありません。カメラ・マイク・連絡先・位置情報へのアクセスは求めません。</p></section>
+<section><h3>保存・バックアップ・削除</h3><p>アプリ版ではWebの保存領域とアプリ内の控えに保存します。端末の設定によっては、OSのバックアップに含まれることがあります。独自のクラウド同期はありません。Web版は利用中のブラウザに保存します。<br>アプリ内のデータを消すには、iOSの設定から「Appを削除」を選びます。「Appを取り除く」ではデータが残ります。Web版はブラウザのサイトデータを削除します。OSのバックアップや、書き出したファイル・送信先のコピーは別に削除してください。バックアップを復元するとデータが戻る場合があります。</p></section>
+<section><h3>自分で書き出す・共有する場合</h3><p>「セーブの書き出し」や演奏の「保存」を操作すると、ファイルを端末内で作り、保存先・共有先を自分で選べます。セーブには部員の名前やプレイの記録が含まれます。音声ファイルには学校名・年度などの情報が含まれる場合があります。選んだ保存先・共有先のサービスの規定が適用されます。クリップボードへのコピーは操作したときだけ行います。</p></section>
+<section><h3>通信する場合</h3><p>アプリ版のゲームとこの案内は同梱され、通信なしで使えます。外部サイトやメールのリンクを自分で開くと、ブラウザ・メールアプリなどが通信します。<br>Web版や公開サポートページの表示には通信が必要です。配信元のGitHub Pagesでは、IPアドレスなどの接続情報をGitHubが取り扱います。詳しくは <a href="https://docs.github.com/en/site-policy/privacy-policies/github-general-privacy-statement" rel="noreferrer">GitHubのプライバシーに関する説明</a> をご確認ください。独自のアクセス解析や広告用Cookieは設置していません。</p></section>
+<section><h3>お問い合わせの情報</h3><p>メールでお送りいただいたメールアドレス・本文・添付ファイルは、回答と不具合の確認に利用します。メールの送受信・保存にはGmailを利用します。対応に必要な期間保管し、不要になった情報を削除します。法令に基づく場合を除き、本人の同意なく広告利用や第三者への提供はしません。削除などのご相談も下記窓口で受け付けます。実名やセーブの送付は必須ではありません。</p></section>
+<section><h3>子どもの利用と変更</h3><p>ゲームは年齢を取得せず、子どもからの情報収集も行いません。お問い合わせに個人情報を含める際は、保護者の方と相談してください。情報の扱いを変える場合は、本ページとアプリ内の案内を更新します。</p></section>
+<section><h3>お問い合わせ</h3><p>運営者：Yu Studio<br>窓口：<a href="mailto:hy218355@gmail.com?subject=%E5%90%B9%E5%A5%8F%E6%A5%BD%E9%83%A8%E3%81%AE%E3%81%A4%E3%81%8F%E3%82%8A%E3%81%8B%E3%81%9F">hy218355@gmail.com</a></p></section></div></details>
+<details class="legal-document" id="legal-terms"><summary>利用規約</summary><div class="legal-body"><p class="legal-meta">更新日：2026年11月1日 · 運営者：Yu Studio</p>
+<p>安心して遊んでもらうための、利用とデータについての案内です。</p>
+<section><h3>対象</h3><p>Yu Studio が提供する「吹奏楽部のつくりかた」に適用します。App Storeから入手したアプリの使用許諾には、Appleの標準使用許諾契約も適用されます。本案内はそれに代わる独自のEULAではありません。<a href="https://www.apple.com/legal/internet-services/itunes/dev/stdeula/" rel="noreferrer">Appleの標準使用許諾契約（外部サイト）</a>。</p></section>
+<section><h3>遊び方と料金</h3><p>アカウント登録・アプリ内課金・広告はありません。アプリ版のゲームは通信なしで遊べます。Web版の表示、メールや外部サイト、ファイルの共有に必要な通信料などは利用者の負担です。</p></section>
+<section><h3>作品と素材の権利</h3><p>本作品のプログラム・文章・自作画像などの権利は、運営者または各権利者に帰属します。使用素材は「クレジット・ライセンス」に記載し、その素材の利用には各ライセンスが適用されます。ゲームは架空の学校・人物・出来事を描いたものです。実在する人物や学校を示すものではなく、実際の演奏指導や審査を保証するものではありません。</p></section>
+<section><h3>プレイの紹介・演奏の共有</h3><p>自分のプレイ画面・動画や、ゲームから書き出した演奏は、法令と素材のライセンスを守って紹介・共有できます。他人の個人情報や権利を侵害せず、本作品の公式配信と誤解されない形にしてください。Weresax音源を含む演奏などを公開する場合は、クレジットにある作者・出典・CC BY 3.0を添えてください。</p></section>
+<section><h3>避けてほしいこと</h3><p>法令や他人の権利を侵害する利用、不正なプログラムの配布、他人になりすましての問い合わせ、運営や配信サービスを妨げる行為はしないでください。</p></section>
+<section><h3>データを守るために</h3><p>進み具合は端末に保存します。削除・端末の故障・ブラウザのデータ消去などで失われる場合があります。日誌の「セーブの書き出し・読み込み」から、ときどき別の場所へ控えを保存してください。すべての端末での動作やデータの復元は保証できません。</p></section>
+<section><h3>更新と責任</h3><p>不具合の修正などで機能・表示・内容を更新する場合があります。重要な変更はアプリ内やサポートページでお知らせします。運営者の故意・重大な過失による責任や、消費者契約法その他の法令で免除・制限できない責任を免除するものではありません。法令上認められた利用者の権利を妨げません。</p></section>
+<section><h3>準拠法・お問い合わせ</h3><p>日本法に従って解釈します。ご不明な点は Yu Studio（<a href="mailto:hy218355@gmail.com?subject=%E5%90%B9%E5%A5%8F%E6%A5%BD%E9%83%A8%E3%81%AE%E3%81%A4%E3%81%8F%E3%82%8A%E3%81%8B%E3%81%9F">hy218355@gmail.com</a>）へご連絡ください。情報の取り扱いはプライバシーポリシーをご覧ください。</p></section></div></details>
+<details class="legal-document" id="legal-support"><summary>サポート・お問い合わせ</summary><div class="legal-body"><p class="legal-meta">更新日：2026年11月1日 · 運営者：Yu Studio</p>
+<p>困ったときの確認方法と、お問い合わせ先です。</p>
+<section><h3>お問い合わせ</h3><p>運営者：Yu Studio<br>窓口：<a href="mailto:hy218355@gmail.com?subject=%E5%90%B9%E5%A5%8F%E6%A5%BD%E9%83%A8%E3%81%AE%E3%81%A4%E3%81%8F%E3%82%8A%E3%81%8B%E3%81%9F">hy218355@gmail.com</a><br>ご利用の機種・OSのバージョン・起きたこと・直前の操作を、分かる範囲でお知らせください。実名やセーブの送付は必須ではありません。添付画像には個人情報が写らないようにしてください。返信までお時間をいただく場合があります。メールアプリの設定と通信が必要です。</p></section>
+<section><h3>音が出ない・小さい</h3><p>端末とイヤホンの音量、Bluetoothなどの出力先を確かめてください。アプリ版は消音モードでも音が出ます。合奏に「読み直す」が出ている場合は試してください。改善しなければ、一度停止してアプリを開き直してください。</p></section>
+<section><h3>電話や別のアプリで止まった</h3><p>アプリへ戻り、再生の状態を確かめてください。音が戻らなければ一度停止して、もう一度再生してください。演奏中は自動ロックを抑えますが、手動のロックや電話などで音が止まる場合があります。</p></section>
+<section><h3>機種変更・セーブを守る</h3><p>日誌の「セーブの書き出し・読み込み」でファイルを保存し、新しい端末で読み込みます。読み込みは今のセーブを上書きするため、先に控えを残してください。OSのバックアップから戻せる場合もありますが、確実な引き継ぎのため手動の書き出しをおすすめします。Web版とアプリ版は自動で同期しません。</p></section>
+<section><h3>演奏を書き出したい</h3><p>本番の結果や合奏の録音一覧の「保存」を使います。アプリ版は通常m4a、変換できないときはWAVで書き出します。Web版はWAVです。保存先や送信先は共有画面で選べます。マイクで録音する機能ではありません。</p></section>
+<section><h3>データを消したい</h3><p>アプリ版はiOSの設定の「Appを削除」、Web版はブラウザのサイトデータを削除します。消す前に必要なセーブを書き出してください。書き出したファイルやOSのバックアップは別に管理してください。「新しい部」で始め直しても、画面設定などは残ります。</p></section>
+<section><h3>料金・通信について</h3><p>アプリ内課金・広告・アカウント登録はありません。アプリ版はすべての曲・音源を同梱しています。メールや外部サイト・共有先を使うときは通信する場合があります。</p></section></div></details>
+<details class="legal-document" id="legal-credits"><summary>クレジット・ライセンス</summary><div class="legal-body"><p class="legal-meta">更新日：2026年11月1日 · 運営者：Yu Studio</p>
+<p>音楽・楽器の録音・絵・文字の出典です。</p>
+<section><h3>音楽</h3><p>原曲は、ドヴォルザーク《新世界より》第2楽章、ベートーヴェン「歓喜の歌」、オッフェンバック「天国と地獄」、エルガー「威風堂々」、ヴェルディ「凱旋行進曲」、ヘンデル「見よ、勇者は帰る」、ホルスト「木星」、ブラームス「ハンガリー舞曲第5番」、チャイコフスキー「花のワルツ」・《白鳥の湖》より「情景」、ロッシーニ「ウィリアム・テル」序曲、ビゼー《カルメン》前奏曲、ワーグナー「ワルキューレの騎行」、ヴィヴァルディ「春」、パッヘルベル「カノン」。パブリックドメインの総譜をもとに本作品用の吹奏楽へ編曲し、一部はPDMX（CC0）も参照しています。演奏は部員の力に応じて端末内で組み立てます。</p></section>
+<section><h3>楽器の録音</h3><p>Versilian Studios「VSCO 2 Community Edition」・「VCSL」、Karoryfer Samples「Bear Sax」はCC0 1.0。アイオワ大学 Electronic Music Studios「Musical Instrument Samples」は、同サイトで用途を制限せず利用可能とされる録音を使用しています。<br><a href="https://github.com/sgossner/VSCO-2-CE" rel="noreferrer">VSCO 2 CE</a> ／ <a href="https://github.com/sgossner/VCSL" rel="noreferrer">VCSL</a> ／ <a href="https://github.com/sfzinstruments/karoryfer.bear-sax" rel="noreferrer">Bear Sax</a> ／ <a href="https://theremin.music.uiowa.edu/MIS.html" rel="noreferrer">アイオワ大学</a>。<br>必要な音を切り出し、モノラル化・頭出し・音量調整・ループ処理をしています。一部は高さを補間し、ユーフォニアムはトロンボーンの録音を加工しています。</p></section>
+<section><h3>Weresax（アルトサックス）</h3><p>Karoryfer Samples「Weresax」。<a href="https://github.com/nbrosowsky/tonejs-instruments" rel="noreferrer">tonejs-instruments</a> 収録音源を同リポジトリの表記に従い <a href="https://creativecommons.org/licenses/by/3.0/" rel="noreferrer">Creative Commons Attribution 3.0 Unported（CC BY 3.0）</a> で利用しています。切り出し・モノラル化・頭出し・音量調整・ループ処理を行っています。作者が本作品を推奨しているという意味ではありません。<br>公開時の表記例：Weresax — Karoryfer Samples / via tonejs-instruments / CC BY 3.0 / 音源を加工して使用。</p></section>
+<section><h3>会場の響き・効果音</h3><p>会場の響きは、部屋の寸法や材質をもとにpyroomacoustics（MIT License）で計算しました。同ライブラリ本体はアプリに同梱していません。拍手や一部の効果音は本作品用に合成しています。</p></section>
+<section><h3>絵・アイコン</h3><p>部員100候補・朝野先生・音楽室は、本作品のために画像生成ツールで制作した架空の絵です。アプリアイコン・楽器・画面内のアイコンは自作です。外部作品の画像を素材として使用していません。</p></section>
+<section><h3>文字</h3><p>Zen Kaku Gothic New・Klee One・Dela Gothic One・Share Tech Monoを、SIL Open Font License 1.1に従って同梱しています。使用文字に絞る加工をしています。著作権表示とライセンス全文は下に掲載します。</p></section>
+<details class="legal-license"><summary>OFL-delagothicone.txt</summary><pre lang="en">Copyright 2020 The Dela Gothic Project Authors (https://github.com/syakuzen/DelaGothic)
+
+This Font Software is licensed under the SIL Open Font License, Version 1.1.
+This license is copied below, and is also available with a FAQ at:
+https://openfontlicense.org
+
+
+-----------------------------------------------------------
+SIL OPEN FONT LICENSE Version 1.1 - 26 February 2007
+-----------------------------------------------------------
+
+PREAMBLE
+The goals of the Open Font License (OFL) are to stimulate worldwide
+development of collaborative font projects, to support the font creation
+efforts of academic and linguistic communities, and to provide a free and
+open framework in which fonts may be shared and improved in partnership
+with others.
+
+The OFL allows the licensed fonts to be used, studied, modified and
+redistributed freely as long as they are not sold by themselves. The
+fonts, including any derivative works, can be bundled, embedded,
+redistributed and/or sold with any software provided that any reserved
+names are not used by derivative works. The fonts and derivatives,
+however, cannot be released under any other type of license. The
+requirement for fonts to remain under this license does not apply
+to any document created using the fonts or their derivatives.
+
+DEFINITIONS
+&quot;Font Software&quot; refers to the set of files released by the Copyright
+Holder(s) under this license and clearly marked as such. This may
+include source files, build scripts and documentation.
+
+&quot;Reserved Font Name&quot; refers to any names specified as such after the
+copyright statement(s).
+
+&quot;Original Version&quot; refers to the collection of Font Software components as
+distributed by the Copyright Holder(s).
+
+&quot;Modified Version&quot; refers to any derivative made by adding to, deleting,
+or substituting -- in part or in whole -- any of the components of the
+Original Version, by changing formats or by porting the Font Software to a
+new environment.
+
+&quot;Author&quot; refers to any designer, engineer, programmer, technical
+writer or other person who contributed to the Font Software.
+
+PERMISSION &amp; CONDITIONS
+Permission is hereby granted, free of charge, to any person obtaining
+a copy of the Font Software, to use, study, copy, merge, embed, modify,
+redistribute, and sell modified and unmodified copies of the Font
+Software, subject to the following conditions:
+
+1) Neither the Font Software nor any of its individual components,
+in Original or Modified Versions, may be sold by itself.
+
+2) Original or Modified Versions of the Font Software may be bundled,
+redistributed and/or sold with any software, provided that each copy
+contains the above copyright notice and this license. These can be
+included either as stand-alone text files, human-readable headers or
+in the appropriate machine-readable metadata fields within text or
+binary files as long as those fields can be easily viewed by the user.
+
+3) No Modified Version of the Font Software may use the Reserved Font
+Name(s) unless explicit written permission is granted by the corresponding
+Copyright Holder. This restriction only applies to the primary font name as
+presented to the users.
+
+4) The name(s) of the Copyright Holder(s) or the Author(s) of the Font
+Software shall not be used to promote, endorse or advertise any
+Modified Version, except to acknowledge the contribution(s) of the
+Copyright Holder(s) and the Author(s) or with their explicit written
+permission.
+
+5) The Font Software, modified or unmodified, in part or in whole,
+must be distributed entirely under this license, and must not be
+distributed under any other license. The requirement for fonts to
+remain under this license does not apply to any document created
+using the Font Software.
+
+TERMINATION
+This license becomes null and void if any of the above conditions are
+not met.
+
+DISCLAIMER
+THE FONT SOFTWARE IS PROVIDED &quot;AS IS&quot;, WITHOUT WARRANTY OF ANY KIND,
+EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO ANY WARRANTIES OF
+MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT
+OF COPYRIGHT, PATENT, TRADEMARK, OR OTHER RIGHT. IN NO EVENT SHALL THE
+COPYRIGHT HOLDER BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY,
+INCLUDING ANY GENERAL, SPECIAL, INDIRECT, INCIDENTAL, OR CONSEQUENTIAL
+DAMAGES, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
+FROM, OUT OF THE USE OR INABILITY TO USE THE FONT SOFTWARE OR FROM
+OTHER DEALINGS IN THE FONT SOFTWARE.</pre></details>
+<details class="legal-license"><summary>OFL-kleeone.txt</summary><pre lang="en">Copyright 2020 The Klee Project Authors (https://github.com/fontworks-fonts/Klee)
+
+This Font Software is licensed under the SIL Open Font License, Version 1.1.
+This license is copied below, and is also available with a FAQ at:
+https://scripts.sil.org/OFL
+
+
+-----------------------------------------------------------
+SIL OPEN FONT LICENSE Version 1.1 - 26 February 2007
+-----------------------------------------------------------
+
+PREAMBLE
+The goals of the Open Font License (OFL) are to stimulate worldwide
+development of collaborative font projects, to support the font creation
+efforts of academic and linguistic communities, and to provide a free and
+open framework in which fonts may be shared and improved in partnership
+with others.
+
+The OFL allows the licensed fonts to be used, studied, modified and
+redistributed freely as long as they are not sold by themselves. The
+fonts, including any derivative works, can be bundled, embedded,
+redistributed and/or sold with any software provided that any reserved
+names are not used by derivative works. The fonts and derivatives,
+however, cannot be released under any other type of license. The
+requirement for fonts to remain under this license does not apply
+to any document created using the fonts or their derivatives.
+
+DEFINITIONS
+&quot;Font Software&quot; refers to the set of files released by the Copyright
+Holder(s) under this license and clearly marked as such. This may
+include source files, build scripts and documentation.
+
+&quot;Reserved Font Name&quot; refers to any names specified as such after the
+copyright statement(s).
+
+&quot;Original Version&quot; refers to the collection of Font Software components as
+distributed by the Copyright Holder(s).
+
+&quot;Modified Version&quot; refers to any derivative made by adding to, deleting,
+or substituting -- in part or in whole -- any of the components of the
+Original Version, by changing formats or by porting the Font Software to a
+new environment.
+
+&quot;Author&quot; refers to any designer, engineer, programmer, technical
+writer or other person who contributed to the Font Software.
+
+PERMISSION &amp; CONDITIONS
+Permission is hereby granted, free of charge, to any person obtaining
+a copy of the Font Software, to use, study, copy, merge, embed, modify,
+redistribute, and sell modified and unmodified copies of the Font
+Software, subject to the following conditions:
+
+1) Neither the Font Software nor any of its individual components,
+in Original or Modified Versions, may be sold by itself.
+
+2) Original or Modified Versions of the Font Software may be bundled,
+redistributed and/or sold with any software, provided that each copy
+contains the above copyright notice and this license. These can be
+included either as stand-alone text files, human-readable headers or
+in the appropriate machine-readable metadata fields within text or
+binary files as long as those fields can be easily viewed by the user.
+
+3) No Modified Version of the Font Software may use the Reserved Font
+Name(s) unless explicit written permission is granted by the corresponding
+Copyright Holder. This restriction only applies to the primary font name as
+presented to the users.
+
+4) The name(s) of the Copyright Holder(s) or the Author(s) of the Font
+Software shall not be used to promote, endorse or advertise any
+Modified Version, except to acknowledge the contribution(s) of the
+Copyright Holder(s) and the Author(s) or with their explicit written
+permission.
+
+5) The Font Software, modified or unmodified, in part or in whole,
+must be distributed entirely under this license, and must not be
+distributed under any other license. The requirement for fonts to
+remain under this license does not apply to any document created
+using the Font Software.
+
+TERMINATION
+This license becomes null and void if any of the above conditions are
+not met.
+
+DISCLAIMER
+THE FONT SOFTWARE IS PROVIDED &quot;AS IS&quot;, WITHOUT WARRANTY OF ANY KIND,
+EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO ANY WARRANTIES OF
+MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT
+OF COPYRIGHT, PATENT, TRADEMARK, OR OTHER RIGHT. IN NO EVENT SHALL THE
+COPYRIGHT HOLDER BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY,
+INCLUDING ANY GENERAL, SPECIAL, INDIRECT, INCIDENTAL, OR CONSEQUENTIAL
+DAMAGES, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
+FROM, OUT OF THE USE OR INABILITY TO USE THE FONT SOFTWARE OR FROM
+OTHER DEALINGS IN THE FONT SOFTWARE.</pre></details>
+<details class="legal-license"><summary>OFL-sharetechmono.txt</summary><pre lang="en">Copyright (c) 2012, Carrois Type Design, Ralph du Carrois (post@carrois.com www.carrois.com), with Reserved Font Name &#x27;Share&#x27;
+
+This Font Software is licensed under the SIL Open Font License, Version 1.1.
+This license is copied below, and is also available with a FAQ at:
+http://scripts.sil.org/OFL
+
+
+-----------------------------------------------------------
+SIL OPEN FONT LICENSE Version 1.1 - 26 February 2007
+-----------------------------------------------------------
+
+PREAMBLE
+The goals of the Open Font License (OFL) are to stimulate worldwide
+development of collaborative font projects, to support the font creation
+efforts of academic and linguistic communities, and to provide a free and
+open framework in which fonts may be shared and improved in partnership
+with others.
+
+The OFL allows the licensed fonts to be used, studied, modified and
+redistributed freely as long as they are not sold by themselves. The
+fonts, including any derivative works, can be bundled, embedded,
+redistributed and/or sold with any software provided that any reserved
+names are not used by derivative works. The fonts and derivatives,
+however, cannot be released under any other type of license. The
+requirement for fonts to remain under this license does not apply
+to any document created using the fonts or their derivatives.
+
+DEFINITIONS
+&quot;Font Software&quot; refers to the set of files released by the Copyright
+Holder(s) under this license and clearly marked as such. This may
+include source files, build scripts and documentation.
+
+&quot;Reserved Font Name&quot; refers to any names specified as such after the
+copyright statement(s).
+
+&quot;Original Version&quot; refers to the collection of Font Software components as
+distributed by the Copyright Holder(s).
+
+&quot;Modified Version&quot; refers to any derivative made by adding to, deleting,
+or substituting -- in part or in whole -- any of the components of the
+Original Version, by changing formats or by porting the Font Software to a
+new environment.
+
+&quot;Author&quot; refers to any designer, engineer, programmer, technical
+writer or other person who contributed to the Font Software.
+
+PERMISSION &amp; CONDITIONS
+Permission is hereby granted, free of charge, to any person obtaining
+a copy of the Font Software, to use, study, copy, merge, embed, modify,
+redistribute, and sell modified and unmodified copies of the Font
+Software, subject to the following conditions:
+
+1) Neither the Font Software nor any of its individual components,
+in Original or Modified Versions, may be sold by itself.
+
+2) Original or Modified Versions of the Font Software may be bundled,
+redistributed and/or sold with any software, provided that each copy
+contains the above copyright notice and this license. These can be
+included either as stand-alone text files, human-readable headers or
+in the appropriate machine-readable metadata fields within text or
+binary files as long as those fields can be easily viewed by the user.
+
+3) No Modified Version of the Font Software may use the Reserved Font
+Name(s) unless explicit written permission is granted by the corresponding
+Copyright Holder. This restriction only applies to the primary font name as
+presented to the users.
+
+4) The name(s) of the Copyright Holder(s) or the Author(s) of the Font
+Software shall not be used to promote, endorse or advertise any
+Modified Version, except to acknowledge the contribution(s) of the
+Copyright Holder(s) and the Author(s) or with their explicit written
+permission.
+
+5) The Font Software, modified or unmodified, in part or in whole,
+must be distributed entirely under this license, and must not be
+distributed under any other license. The requirement for fonts to
+remain under this license does not apply to any document created
+using the Font Software.
+
+TERMINATION
+This license becomes null and void if any of the above conditions are
+not met.
+
+DISCLAIMER
+THE FONT SOFTWARE IS PROVIDED &quot;AS IS&quot;, WITHOUT WARRANTY OF ANY KIND,
+EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO ANY WARRANTIES OF
+MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT
+OF COPYRIGHT, PATENT, TRADEMARK, OR OTHER RIGHT. IN NO EVENT SHALL THE
+COPYRIGHT HOLDER BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY,
+INCLUDING ANY GENERAL, SPECIAL, INDIRECT, INCIDENTAL, OR CONSEQUENTIAL
+DAMAGES, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
+FROM, OUT OF THE USE OR INABILITY TO USE THE FONT SOFTWARE OR FROM
+OTHER DEALINGS IN THE FONT SOFTWARE.</pre></details>
+<details class="legal-license"><summary>OFL-zenkakugothicnew.txt</summary><pre lang="en">Copyright 2022 The Zen Kaku Gothic Project Authors (https://github.com/googlefonts/zen-kakugothic)
+
+This Font Software is licensed under the SIL Open Font License, Version 1.1.
+This license is copied below, and is also available with a FAQ at:
+http://scripts.sil.org/OFL
+
+
+-----------------------------------------------------------
+SIL OPEN FONT LICENSE Version 1.1 - 26 February 2007
+-----------------------------------------------------------
+
+PREAMBLE
+The goals of the Open Font License (OFL) are to stimulate worldwide
+development of collaborative font projects, to support the font creation
+efforts of academic and linguistic communities, and to provide a free and
+open framework in which fonts may be shared and improved in partnership
+with others.
+
+The OFL allows the licensed fonts to be used, studied, modified and
+redistributed freely as long as they are not sold by themselves. The
+fonts, including any derivative works, can be bundled, embedded,
+redistributed and/or sold with any software provided that any reserved
+names are not used by derivative works. The fonts and derivatives,
+however, cannot be released under any other type of license. The
+requirement for fonts to remain under this license does not apply
+to any document created using the fonts or their derivatives.
+
+DEFINITIONS
+&quot;Font Software&quot; refers to the set of files released by the Copyright
+Holder(s) under this license and clearly marked as such. This may
+include source files, build scripts and documentation.
+
+&quot;Reserved Font Name&quot; refers to any names specified as such after the
+copyright statement(s).
+
+&quot;Original Version&quot; refers to the collection of Font Software components as
+distributed by the Copyright Holder(s).
+
+&quot;Modified Version&quot; refers to any derivative made by adding to, deleting,
+or substituting -- in part or in whole -- any of the components of the
+Original Version, by changing formats or by porting the Font Software to a
+new environment.
+
+&quot;Author&quot; refers to any designer, engineer, programmer, technical
+writer or other person who contributed to the Font Software.
+
+PERMISSION &amp; CONDITIONS
+Permission is hereby granted, free of charge, to any person obtaining
+a copy of the Font Software, to use, study, copy, merge, embed, modify,
+redistribute, and sell modified and unmodified copies of the Font
+Software, subject to the following conditions:
+
+1) Neither the Font Software nor any of its individual components,
+in Original or Modified Versions, may be sold by itself.
+
+2) Original or Modified Versions of the Font Software may be bundled,
+redistributed and/or sold with any software, provided that each copy
+contains the above copyright notice and this license. These can be
+included either as stand-alone text files, human-readable headers or
+in the appropriate machine-readable metadata fields within text or
+binary files as long as those fields can be easily viewed by the user.
+
+3) No Modified Version of the Font Software may use the Reserved Font
+Name(s) unless explicit written permission is granted by the corresponding
+Copyright Holder. This restriction only applies to the primary font name as
+presented to the users.
+
+4) The name(s) of the Copyright Holder(s) or the Author(s) of the Font
+Software shall not be used to promote, endorse or advertise any
+Modified Version, except to acknowledge the contribution(s) of the
+Copyright Holder(s) and the Author(s) or with their explicit written
+permission.
+
+5) The Font Software, modified or unmodified, in part or in whole,
+must be distributed entirely under this license, and must not be
+distributed under any other license. The requirement for fonts to
+remain under this license does not apply to any document created
+using the Font Software.
+
+TERMINATION
+This license becomes null and void if any of the above conditions are
+not met.
+
+DISCLAIMER
+THE FONT SOFTWARE IS PROVIDED &quot;AS IS&quot;, WITHOUT WARRANTY OF ANY KIND,
+EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO ANY WARRANTIES OF
+MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT
+OF COPYRIGHT, PATENT, TRADEMARK, OR OTHER RIGHT. IN NO EVENT SHALL THE
+COPYRIGHT HOLDER BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY,
+INCLUDING ANY GENERAL, SPECIAL, INDIRECT, INCIDENTAL, OR CONSEQUENTIAL
+DAMAGES, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
+FROM, OUT OF THE USE OR INABILITY TO USE THE FONT SOFTWARE OR FROM
+OTHER DEALINGS IN THE FONT SOFTWARE.</pre></details></div></details>
+</details>
+<!-- アプリの案内ここまで -->
       <section class="panel" data-tab="log" aria-labelledby="h-log">
         <h2 id="h-log">部活日誌</h2>
         <ol class="log" id="log"></ol>
@@ -1801,7 +2233,6 @@ html[data-fx-mode="full"] .recording-save[data-saving="true"]::after{animation:f
     <div class="row"><button class="btn small primary" type="button" data-sv="load">このセーブで続ける</button></div>
     <p class="small" id="svMsg" aria-live="polite"></p>
   </div></details>
-  <details class="foot" data-tab="log"><summary>この作品について（曲・楽器の音・文字の出典）</summary><p>曲は、パブリックドメインのドヴォルザーク《新世界より》（1893年）、ベートーヴェン《第九》（1824年）、オッフェンバック《天国と地獄》（1858年）、エルガー「威風堂々」第1番（1901年）、ヴェルディ《アイーダ》（1871年）、ヘンデル《ユダス・マカベウス》（1747年）、ホルスト《惑星》（1916年）、ブラームス「ハンガリー舞曲第5番」（1869年）、チャイコフスキー《くるみ割り人形》（1892年）・《白鳥の湖》（1876年）、ロッシーニ《ウィリアム・テル》（1829年）、ビゼー《カルメン》（1875年）、ワーグナー《ワルキューレ》（1856年）、ヴィヴァルディ《四季》（1725年）、パッヘルベル「カノン」（1680年ごろ）です。編曲は、原曲の総譜（できるだけ作曲者のころの版）など、パブリックドメインの楽譜（IMSLP）で楽器ごとの受け持ちを読んで吹奏楽の席に移したもので、一部の曲は PDMX（CC0）の楽譜データも使っています。演奏は、その楽譜からこのページの中で組み立てて鳴らしています。楽器の音は、Versilian Studios「VSCO 2 Community Edition」（CC0）の録音、Karoryfer「Weresax」のアルトサックスの録音（tonejs-instruments 経由、CC BY 3.0）、Versilian Studios「VCSL」のテナーサックスとヴィブラフォンの録音（CC0）、アイオワ大学 Electronic Music Studios「Musical Instrument Samples」の E♭クラリネット・バスクラリネット・バストロンボーンの録音、Karoryfer「Bear Sax」のバリトンサックスの録音（CC0）を使っています。ユーフォニアムはトロンボーンの録音を、明るさを変えて使っています。客席の拍手と、録音を読み込めなかったときの楽器の音は、その場で合成しています。会場の響きは、部屋の寸法と壁・床・客席の材質から pyroomacoustics で計算したものです。文字は Zen Kaku Gothic New・Klee One・Dela Gothic One・Share Tech Mono（SIL Open Font License）です。</p></details>
 </div>
 
 <!-- 指揮：拍に合わせてタップ。上ほど大きく、下ほど小さく -->

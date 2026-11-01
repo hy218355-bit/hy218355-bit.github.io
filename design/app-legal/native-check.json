@@ -1,0 +1,19 @@
+{
+  "build": "成功",
+  "bundledFilesMatch": {
+    "index.html": true,
+    "legal/documents.json": true,
+    "legal/privacy.html": true,
+    "legal/terms.html": true,
+    "legal/support.html": true,
+    "legal/credits.html": true,
+    "legal/style.css": true
+  },
+  "privacyManifestMatches": true,
+  "deviceInstall": "上書き更新成功",
+  "allGameResourcesMatch": 134,
+  "codesign": "成功",
+  "deviceLaunch": "起動成功",
+  "processId": 74042,
+  "mirroring": false
+}

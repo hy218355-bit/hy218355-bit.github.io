@@ -1,0 +1,17 @@
+:root{--paper:#F0EEE5;--sheet:#FFFCF5;--ink:#263D43;--ink-soft:#68736D;--rule:#D4D7C9;--brass:#936B2F;color-scheme:light}@media(prefers-color-scheme:dark){:root{--paper:#12252F;--sheet:#1E343D;--ink:#F3F0E4;--ink-soft:#B7C5BE;--rule:#42565B;--brass:#E7C38A;color-scheme:dark}}
+*{box-sizing:border-box}body{margin:0;background:var(--paper);color:var(--ink);padding:24px 16px 64px}main{max-width:680px;margin:auto}header{padding:12px 0 24px}header img{width:60px;height:60px;border-radius:15px}h1{font-size:26px;line-height:1.45;margin:16px 0}article{background:var(--sheet);border:1px solid var(--rule);border-radius:16px;padding:4px 20px 24px}nav{display:flex;flex-wrap:wrap;gap:4px 16px;margin-top:24px}nav a{display:inline-flex;align-items:center;min-height:48px}footer{margin-top:20px}.legal-info h2{font-size:17px;margin-top:24px}
+.legal-info{font-family:-apple-system,BlinkMacSystemFont,"Hiragino Sans","Yu Gothic",system-ui,sans-serif;color:var(--ink);font-size:14px;line-height:1.85;overflow-wrap:anywhere}
+.legal-info summary{display:flex;align-items:center;min-height:48px;cursor:pointer;font-size:14px;font-weight:600;gap:10px;list-style:none}
+.legal-info summary::-webkit-details-marker{display:none}
+.legal-info summary::before{content:"+";color:var(--brass);font-size:20px;flex:none;width:16px;text-align:center}
+.legal-info details[open]>summary::before,.legal-info[open]>summary::before{content:"−"}
+.legal-info .legal-document{border-top:1px solid var(--rule)}
+.legal-info .legal-body{padding:0 4px 20px}
+.legal-info h3{font-size:15px;line-height:1.6;margin:22px 0 6px;color:var(--ink)}
+.legal-info p{margin:8px 0}
+.legal-info .legal-meta{color:var(--ink-soft);font-size:12px}
+.legal-info a{color:var(--brass);text-decoration:underline;text-underline-offset:3px;overflow-wrap:anywhere}
+.legal-info a:focus-visible,.legal-info summary:focus-visible{outline:2px solid var(--brass);outline-offset:3px;border-radius:4px}
+.legal-info pre{font-family:ui-monospace,monospace;white-space:pre-wrap;overflow-wrap:anywhere;font-size:12px;line-height:1.7}
+.legal-info a[href^="mailto:"]{display:inline-flex;align-items:center;min-height:48px;max-width:100%}
+.legal-info .legal-license{border-top:1px solid var(--rule);margin-top:12px}

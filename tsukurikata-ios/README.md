@@ -12,7 +12,7 @@
 | `Tsukurikata/BundleSchemeHandler.swift` | `app://tsukurikata/…` で同梱ファイルを配る（`file://` だと `fetch()` で録音を読めないため） |
 | `Tsukurikata/SaveStore.swift` | セーブ（localStorage）をアプリ側にも控え、WebKit が消してしまっても書き戻す |
 | `Tsukurikata/selftest.js` | CI用。起動引数 `-selftest` のときだけ、数小節を書き出して音が出るか確かめる |
-| `Tsukurikata/PrivacyInfo.xcprivacy` | プライバシーマニフェスト（追跡なし・データ収集なし） |
+| `Tsukurikata/PrivacyInfo.xcprivacy` | プライバシーマニフェスト（追跡なし・データ収集なし。自分の保存領域・検証用ファイルのサイズ確認を宣言） |
 
 - ゲーム本体は `../tsukurikata` をビルド時にアプリの `Game/tsukurikata/` へコピーします。Web版を直せば、次のビルドでアプリにも入ります。
 - 演奏を聴いているあいだは画面が暗くならないようにしています（ロックされると音が止まるため）。
@@ -56,9 +56,12 @@ Mac にある開発用の証明書からチームを見つけ、ケーブルか�
   - プライバシーポリシーURL：`https://hy218355-bit.github.io/tsukurikata-privacy/`
   - App のプライバシー：「データの収集なし」
   - カテゴリ：ゲーム（シミュレーション）／ミュージック
-  - 年齢制限：4+（暴力・課金・広告・通信なし）
+  - 年齢制限：現在のApp Store Connectの質問票に、実際の内容（部員の恋愛の話など）に沿って回答して決める。広告・課金がないことだけで4+と断定しない
   - 輸出コンプライアンス：暗号化を使わない（`ITSAppUsesNonExemptEncryption = NO` 設定済み）
-- 上の2つのページは、このブランチを main に入れると GitHub Pages で公開されます。
+- ポリシー・サポート・利用規約・クレジットは、ゲーム内の日誌 →「このアプリについて」からオフラインでも読めます。
+- 公開用ページも同じ原稿から作ります。`python3 tsukurikata/tools/build_legal.py`で更新、`--check`で一致を確認します。配信ブランチへ反映してGitHub Pagesへ公開した後、上のURLが実際に開けることを確認してください。ローカル作成だけでは公開されません。
+- 使用許諾はAppleの標準EULAを使います。アプリ内の利用規約をApp Store Connectの「独自のEULA」欄へ貼らないでください。
+- 申請時の項目と未完了の確認は`ReleaseChecklist.md`を参照してください。
 - バージョンはターゲットの `MARKETING_VERSION`（1.0）と `CURRENT_PROJECT_VERSION`（1）。
 - 名前・説明・キーワードなど、App Store Connect に貼る文章は `AppStore.md` にまとめてあります。
 

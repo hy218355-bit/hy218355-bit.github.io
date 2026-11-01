@@ -1,0 +1,32 @@
+{
+  "/tsukurikata/": {
+    "status": 200,
+    "type": "text/html",
+    "bytes": 206332
+  },
+  "/tsukurikata-privacy/": {
+    "status": 200,
+    "type": "text/html",
+    "bytes": 5674
+  },
+  "/tsukurikata-support/": {
+    "status": 200,
+    "type": "text/html",
+    "bytes": 4313
+  },
+  "/tsukurikata-terms/": {
+    "status": 200,
+    "type": "text/html",
+    "bytes": 4771
+  },
+  "/tsukurikata-credits/": {
+    "status": 200,
+    "type": "text/html",
+    "bytes": 23145
+  },
+  "/tsukurikata/legal/style.css": {
+    "status": 200,
+    "type": "text/css",
+    "bytes": 2241
+  }
+}
