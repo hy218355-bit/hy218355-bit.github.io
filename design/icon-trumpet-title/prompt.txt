@@ -1,0 +1,17 @@
+Use case: text-localization / premium Japanese game wordmark.
+Edit the attached square trumpet app-icon artwork by adding a beautifully art-directed JAPANESE TITLE. Preserve the current trumpet, its three piston valves, metal material, camera angle, navy fabric, lighting and instrument anatomy; do not redraw or deform the instrument. Retain the existing polished visual quality.
+
+EXACT TITLE, NO EXTRA WORDS:
+吹奏楽部のつくりかた
+
+Arrange the title as a coherent two-line Japanese wordmark in the upper-left negative space:
+Line 1 exactly: 吹奏楽部
+Line 2 exactly: のつくりかた
+
+TEXT ACCURACY IS CRITICAL: write the correct Japanese characters, no missing or invented strokes, no substitutions, no duplicated characters, no English subtitle, no romanization, no punctuation. Reading order must form exactly 吹奏楽部のつくりかた.
+
+TYPOGRAPHY ART DIRECTION: sophisticated contemporary Japanese school-life game title, warm and youthful, beautifully custom hand-lettered semi-rounded Japanese type, relaxed human rhythm with precisely formed strokes, substantial clean lines and gracefully softened terminals, a gentle notebook-like warmth refined into a professional game logo. Avoid generic default system lettering. Avoid antique formal calligraphy, spindly hairlines, huge chunky cartoon letters, faux gold chrome, rough brush splatters and ornate flourishes. Elegant, intimate, gently playful, highly legible. Very slightly varied hand-lettered character shapes are welcome, but correct spelling and clear counters take precedence.
+
+COMPOSITION: first line substantial and prominent, around 500–560px wide at 1024px canvas scale, second line around the same width, with the initial の a little smaller as a quiet connecting character. Two lines form a compact balanced title block, left aligned at approximately x=92, from y=86 to y=315 at 1024px scale. Warm ivory title color (#FFF3D8), subtle soft deep-indigo shadow/outline for separation only, not a thick sticker stroke. Tiny restrained brass accent or a short tasteful hand-drawn underline may complete the logo, no decorative stars or floating notes. Fit all letterforms within the safe central area so iOS rounded corners will not clip text. Keep the text away from the three piston buttons and the bell; the instrument must remain clearly recognizable. If necessary darken only the softly blurred upper-left window/background behind the lettering with a natural smooth navy tonal gradient, retaining the warm light mood. No opaque label box, no banner, no border, no tile mockup, no rounded outer corners baked into the image. This is a real finished app-icon wordmark integrated into the existing art, not a promotional poster or an overlaid default-font caption.
+
+Output ONE opaque square full-bleed icon image with the correct title and no other writing.
