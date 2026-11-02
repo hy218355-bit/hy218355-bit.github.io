@@ -32,5 +32,14 @@
   "submission": "未実施",
   "storeMetadata": "原稿のみ。App Store Connectは未確認。",
   "screenshots": "最新版の掲載用画像は未確定。",
-  "mirroring": false
+  "mirroring": false,
+  "monetizationPlan": {
+    "download": "無料",
+    "ads": "本番後の区切り",
+    "removeAds": "非消耗型の一度きり購入",
+    "priceJPY": 480,
+    "decidedBy": "オーナー",
+    "implemented": false,
+    "appStoreConnectConfigured": false
+  }
 }
