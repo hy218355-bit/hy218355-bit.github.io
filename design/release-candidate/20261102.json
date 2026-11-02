@@ -1,0 +1,36 @@
+{
+  "date": "2026-11-02",
+  "sourceCommit": "efcfcaa",
+  "price": "無料（オーナー決定）",
+  "archive": "/private/tmp/tsukurikata-release-candidate-20261102.xcarchive",
+  "archiveResult": "成功",
+  "version": "1.0",
+  "build": "1",
+  "signing": "開発用",
+  "strictCodesignCheck": "成功",
+  "matchingGameResources": 134,
+  "publicPages": [
+    {
+      "url": "https://hy218355-bit.github.io/tsukurikata-support/",
+      "status": 404
+    },
+    {
+      "url": "https://hy218355-bit.github.io/tsukurikata-privacy/",
+      "status": 404
+    },
+    {
+      "url": "https://hy218355-bit.github.io/tsukurikata-terms/",
+      "status": 404
+    },
+    {
+      "url": "https://hy218355-bit.github.io/tsukurikata-credits/",
+      "status": 404
+    }
+  ],
+  "exportForAppStore": "未実施",
+  "upload": "未実施",
+  "submission": "未実施",
+  "storeMetadata": "原稿のみ。App Store Connectは未確認。",
+  "screenshots": "最新版の掲載用画像は未確定。",
+  "mirroring": false
+}
