@@ -37,9 +37,10 @@
     "download": "無料",
     "ads": "本番後の区切り",
     "removeAds": "非消耗型の一度きり購入",
-    "priceJPY": 480,
-    "decidedBy": "オーナー",
     "implemented": false,
-    "appStoreConnectConfigured": false
+    "appStoreConnectConfigured": false,
+    "status": "相談中・未決定",
+    "priceJPYProposal": 480,
+    "implementationAuthorized": false
   }
 }
