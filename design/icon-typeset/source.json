@@ -1,0 +1,22 @@
+{
+  "方式": "自作SVGと実フォントから組版。画像生成不使用。",
+  "主案": "paper.svg",
+  "題名": "吹奏楽部のつくりかた",
+  "見出し": "Klee One 600",
+  "添え字": "Zen Kaku Gothic New 500",
+  "元フォント": [
+    "../../tsukurikata/fonts/klee-one-600.woff2",
+    "../../tsukurikata/fonts/zen-kaku-gothic-new-500.woff2"
+  ],
+  "ライセンス": [
+    "../../tsukurikata/fonts/OFL-kleeone.txt",
+    "../../tsukurikata/fonts/OFL-zenkakugothicnew.txt"
+  ],
+  "絵": "手でパスを記述したトランペットの線画。前の生成画像のトレースではない。",
+  "追加ダウンロード": "なし",
+  "1024pxPNGのバイト数": {
+    "paper": 82997,
+    "navy": 82021
+  },
+  "範囲": "比較用。製品のアイコンは未変更。"
+}
