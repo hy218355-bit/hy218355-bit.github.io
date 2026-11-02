@@ -1,0 +1,77 @@
+{
+  "approved": "paper",
+  "files": {
+    "tsukurikata/icon-180.png": {
+      "size": [
+        180,
+        180
+      ],
+      "mode": "RGB",
+      "bytes": 21392,
+      "sha256": "3b0dac832664aacbd06e621d0dd5839946bd45cdb672951e28440f8e531c2dcd"
+    },
+    "tsukurikata/icon-64.png": {
+      "size": [
+        64,
+        64
+      ],
+      "mode": "RGB",
+      "bytes": 4874,
+      "sha256": "699641ee60371182607548955147a1375e75fddc19e9925cdfcaabaaee1cb099"
+    },
+    "tsukurikata-ios/Tsukurikata/Assets.xcassets/AppIcon.appiconset/icon-1024.png": {
+      "size": [
+        1024,
+        1024
+      ],
+      "mode": "RGB",
+      "bytes": 82997,
+      "sha256": "c7dbe515e0e5f000dead223ac9c7bd13bb50ac2358ea460928bf05025c6275b1"
+    }
+  },
+  "matchesApprovedArtwork": true,
+  "noImageGeneration": true,
+  "nativeBuild": "成功",
+  "deviceUpdate": "上書き更新成功",
+  "codesign": "成功",
+  "allBundledGameResourcesMatch": 134,
+  "compiledIcons": {
+    "compiled-iphone-icon.png": {
+      "size": [
+        120,
+        120
+      ],
+      "meanPixelError": [
+        4.836458333333334,
+        4.164583333333334,
+        3.565
+      ],
+      "paperColor": [
+        241,
+        235,
+        221
+      ]
+    },
+    "compiled-ipad-icon.png": {
+      "size": [
+        152,
+        152
+      ],
+      "meanPixelError": [
+        3.974636426592798,
+        3.4128722299168976,
+        2.9202302631578947
+      ],
+      "paperColor": [
+        241,
+        235,
+        221
+      ]
+    }
+  },
+  "deviceLaunch": "起動成功",
+  "mirroring": false,
+  "glyphCheck": "既存の11文字のみ。新しい画面の文章なし。",
+  "legalGenerationCheck": "一致",
+  "browserCheck": "アイコン以外の画面レイアウトは未変更。ブラウザでの確認は未実施。"
+}

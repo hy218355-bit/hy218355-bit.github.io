@@ -28,5 +28,6 @@
 
 ## アプリアイコン
 
-- `app-icon.svg`：LPとゲームの校章・音符を共通にした自作SVG。オーナーが承認した紺と真鍮の案を使用。
-- `../icon-180.png`・`../icon-64.png`・iOSの `icon-1024.png`：同じSVGをローカルブラウザで描画した1024px原稿から書き出し・縮小した。透過なし。外部素材・新しいダウンロードなし。
+- `app-icon.svg`：2026年11月2日にオーナーが承認した、紙色の背景に題名とトランペットの線画を配した自作SVG。画像生成は使わず、管・ベル・ピストンの線を手で記述した。制作原稿は `design/icon-typeset/build.py`。
+- 題名「吹奏楽部」は既存の Klee One 600、添え字「のつくりかた」は既存の Zen Kaku Gothic New 500 を、文字の輪郭へ変換して配置したもの。元のフォントは変更していない。ライセンスは `../fonts/OFL-kleeone.txt` と `../fonts/OFL-zenkakugothicnew.txt`（SIL Open Font License 1.1）。新しいフォントの取得なし。
+- `../icon-180.png`・`../icon-64.png`・iOSの `icon-1024.png`：同じSVGをmacOS標準のNSImageで1024pxへ描画し、承認された原稿から書き出し・縮小した。RGB・透過なし・各200KB未満。外部素材・新しいダウンロードなし。前の校章と音符の案は比較用の履歴に残した。
