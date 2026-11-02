@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1024" height="1024" viewBox="0 0 1024 1024">
+<title>ふたつの音</title>
+<path d="M0 0h1024v1024H0z" fill="#F4EEDF"/>
+<path d="M378 674V351c0-26 14-43 39-49l256-62c28-7 49 9 49 39v202" fill="none" stroke="#234D4A" stroke-width="66" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="m387 405 327-80v87l-327 80z" fill="#234D4A"/>
+<ellipse cx="310" cy="684" rx="102" ry="72" transform="rotate(-20 310 684)" fill="#234D4A"/>
+<ellipse cx="650" cy="609" rx="102" ry="72" transform="rotate(-20 650 609)" fill="#C78C50"/>
+<path d="M722 481v125" fill="none" stroke="#C78C50" stroke-width="66"/>
+</svg>

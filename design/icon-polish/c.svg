@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1024" height="1024" viewBox="0 0 1024 1024">
+<title>音楽室の窓</title>
+<path d="M0 0h1024v1024H0z" fill="#DDDCC9"/>
+<path d="M250 772V461c0-145 117-262 262-262s262 117 262 262v311z" fill="#F9F4E7"/>
+<path d="M306 771V461c0-114 92-206 206-206s206 92 206 206v310z" fill="#23494A"/>
+<circle cx="594" cy="404" r="63" fill="#E6B775"/>
+<path d="M465 648V433c66 3 116 33 132 84-39-24-71-27-94-26v157z" fill="#F9F4E7"/>
+<ellipse cx="434" cy="650" rx="73" ry="51" transform="rotate(-17 434 650)" fill="#F9F4E7"/>
+<path d="M250 762h524v35H250z" fill="#F9F4E7"/>
+</svg>

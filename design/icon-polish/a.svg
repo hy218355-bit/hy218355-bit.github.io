@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1024" height="1024" viewBox="0 0 1024 1024">
+<title>放課後のトランペット</title>
+<path d="M0 0h1024v1024H0z" fill="#1D4643"/>
+<g transform="translate(-61.44 -61.44) scale(1.12) rotate(-24 512 512)">
+<path d="M292 464h328v64H292z" fill="#FFF3D9"/>
+<path d="M610 464c62 0 96-54 153-74v212c-57-20-91-74-153-74z" fill="#E7BC79"/>
+<path d="M339 512v90c0 40 31 72 72 72h75c41 0 72-32 72-72v-90" fill="none" stroke="#FFF3D9" stroke-width="48" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M397 464v-78m72 78v-78m72 78v-78" fill="none" stroke="#FFF3D9" stroke-width="28" stroke-linecap="round"/>
+<path d="M380 378h34m38 0h34m38 0h34M290 496h-51" fill="none" stroke="#FFF3D9" stroke-width="24" stroke-linecap="round"/>
+<path d="M235 474v44" fill="none" stroke="#FFF3D9" stroke-width="20" stroke-linecap="round"/>
+</g></svg>
