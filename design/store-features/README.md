@@ -20,6 +20,7 @@
 - `screenshots/`：日本語・英語、iPhone・iPadの実画面。2028年5月の39人と、同じ部を通常の進行関数で卒業まで進めた記録。能力を上書きしない。
 - `build.py`：見出し・説明・装飾枠と実画面を組み合わせる。実画面の文字・顔・能力・表示内容は書き換えず、縦横比を保って拡大縮小する。iPadは余白を減らすため、該当する実画面を切り出し、「実際のiPad画面の一部を拡大」と明記する。切り出し座標はmanifestに残す。
 - `exports/`：アップロード用RGB PNG。iPhoneは1206×2622、iPadは2064×2752。アルファチャンネルなし。
+- `check_ocr.swift`・`ocr-checks.json`：Mac内蔵のVisionで実画面20枚を検査。OS通知・英語版の日本語本文の検出は0件。ステータスバーの日付は検査から除く。
 - `manifest.json`：掲載順・言語・端末・コピー・撮影元・寸法・容量・SHA-256。
 - `index.html`：全20枚の確認ページ。375px、ライト・ダークで確認する。
 
@@ -28,3 +29,7 @@
 再生成：`python3 design/store-features/build.py`。
 
 App Storeへの差し替えと再提出の最終結果は`store-update.json`へ記録する。ゲームのビルドは1.0（2）のまま。
+
+## 登録と再提出の結果
+
+11月3日19:52（日本時間）、全20枚の登録とApple側の処理完了後に1.0 (2)を再提出した。「1 Item Submitted」と「Waiting for Review」を確認。提出IDは`74aecbfc-068f-46bc-8b84-f5c489dca802`。承認後の手動公開を保ち、一般公開はまだ行っていない。`store-waiting-review.png`と`store-update.json`を参照。

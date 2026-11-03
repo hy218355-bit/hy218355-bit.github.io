@@ -424,5 +424,10 @@
     "brokenImages": []
   },
   "visualReview": "全4組の一覧を確認。通知の写り込み・見出しの欠けなし。",
-  "gameFilesChanged": false
+  "gameFilesChanged": false,
+  "ocr": {
+    "images": 20,
+    "failures": 0,
+    "record": "ocr-checks.json"
+  }
 }

@@ -1,0 +1,206 @@
+{
+  "failures" : 0,
+  "images" : 20,
+  "results" : [
+    {
+      "file" : "en-ipad-graduation-light.png",
+      "notification" : [
+
+      ],
+      "recognizedLines" : 25,
+      "untranslated" : [
+
+      ]
+    },
+    {
+      "file" : "en-ipad-member-light.png",
+      "notification" : [
+
+      ],
+      "recognizedLines" : 42,
+      "untranslated" : [
+
+      ]
+    },
+    {
+      "file" : "en-ipad-members-light.png",
+      "notification" : [
+
+      ],
+      "recognizedLines" : 49,
+      "untranslated" : [
+
+      ]
+    },
+    {
+      "file" : "en-ipad-play-light.png",
+      "notification" : [
+
+      ],
+      "recognizedLines" : 68,
+      "untranslated" : [
+
+      ]
+    },
+    {
+      "file" : "en-ipad-week-light.png",
+      "notification" : [
+
+      ],
+      "recognizedLines" : 46,
+      "untranslated" : [
+
+      ]
+    },
+    {
+      "file" : "en-iphone-graduation-light.png",
+      "notification" : [
+
+      ],
+      "recognizedLines" : 38,
+      "untranslated" : [
+
+      ]
+    },
+    {
+      "file" : "en-iphone-member-light.png",
+      "notification" : [
+
+      ],
+      "recognizedLines" : 27,
+      "untranslated" : [
+
+      ]
+    },
+    {
+      "file" : "en-iphone-members-light.png",
+      "notification" : [
+
+      ],
+      "recognizedLines" : 41,
+      "untranslated" : [
+
+      ]
+    },
+    {
+      "file" : "en-iphone-play-light.png",
+      "notification" : [
+
+      ],
+      "recognizedLines" : 19,
+      "untranslated" : [
+
+      ]
+    },
+    {
+      "file" : "en-iphone-week-light.png",
+      "notification" : [
+
+      ],
+      "recognizedLines" : 31,
+      "untranslated" : [
+
+      ]
+    },
+    {
+      "file" : "ja-ipad-graduation-light.png",
+      "notification" : [
+
+      ],
+      "recognizedLines" : 25,
+      "untranslated" : [
+
+      ]
+    },
+    {
+      "file" : "ja-ipad-member-light.png",
+      "notification" : [
+
+      ],
+      "recognizedLines" : 47,
+      "untranslated" : [
+
+      ]
+    },
+    {
+      "file" : "ja-ipad-members-light.png",
+      "notification" : [
+
+      ],
+      "recognizedLines" : 54,
+      "untranslated" : [
+
+      ]
+    },
+    {
+      "file" : "ja-ipad-play-light.png",
+      "notification" : [
+
+      ],
+      "recognizedLines" : 63,
+      "untranslated" : [
+
+      ]
+    },
+    {
+      "file" : "ja-ipad-week-light.png",
+      "notification" : [
+
+      ],
+      "recognizedLines" : 44,
+      "untranslated" : [
+
+      ]
+    },
+    {
+      "file" : "ja-iphone-graduation-light.png",
+      "notification" : [
+
+      ],
+      "recognizedLines" : 34,
+      "untranslated" : [
+
+      ]
+    },
+    {
+      "file" : "ja-iphone-member-light.png",
+      "notification" : [
+
+      ],
+      "recognizedLines" : 31,
+      "untranslated" : [
+
+      ]
+    },
+    {
+      "file" : "ja-iphone-members-light.png",
+      "notification" : [
+
+      ],
+      "recognizedLines" : 44,
+      "untranslated" : [
+
+      ]
+    },
+    {
+      "file" : "ja-iphone-play-light.png",
+      "notification" : [
+
+      ],
+      "recognizedLines" : 25,
+      "untranslated" : [
+
+      ]
+    },
+    {
+      "file" : "ja-iphone-week-light.png",
+      "notification" : [
+
+      ],
+      "recognizedLines" : 40,
+      "untranslated" : [
+
+      ]
+    }
+  ]
+}

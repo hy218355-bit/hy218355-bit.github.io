@@ -1,6 +1,10 @@
 # 初回公開の入力票
 
-2026年11月3日17:51（日本時間）、日本語・英語対応の1.0（ビルド2）を審査提出した。App Store Connectの「1 Item Submitted」と「Waiting for Review」を確認済み。日本先行・無料・広告なし・アプリ内課金なし。承認後は手動公開。説明文の全文は`AppStore.md`、英語名対応後の検証は`../design/english/README.md`。
+2026年11月3日19:52（日本時間）、掲載画像を全面更新した日本語・英語対応の1.0（ビルド2）を審査へ再提出した。App Store Connectの「1 Item Submitted」と「Waiting for Review」を確認済み。日本先行・無料・広告なし・アプリ内課金なし。承認後は手動公開。説明文の全文は`AppStore.md`、英語名対応後の検証は`../design/english/README.md`。
+
+## 掲載画像の再提出（完了）
+
+オーナーの指示により17:51の提出を取り下げ、日英・iPhone・iPadの全掲載画像を説明付きの各5枚、計20枚へ更新した。Apple側の画像処理完了後、19:52に再提出し「Waiting for Review」を確認済み。ゲームは1.0 (2)のまま。最新状態は`../design/store-features/store-update.json`。
 
 ## 入力する基本情報
 
@@ -25,7 +29,7 @@
 | 配信国・地域 | 日本だけ（オーナー指定、保存済み） |
 | 審査連絡先 | オーナーがApp Store Connectへ直接入力して保存済み。氏名・電話・メールの値はリポジトリに保存しない |
 
-[審査提出の詳細](https://appstoreconnect.apple.com/apps/6830030864/distribution/reviewsubmissions/details/9b47606f-ba75-4fd9-9eb2-ee0b37e5dfff)。11月3日のオーナーの「ぜんぶよろ」でビルド送信・審査提出まで承認を受けた。その後の指定で英語版の部員名をEmma Smithのような英語圏の名前へ表示だけ切り替える修正を行い、検証済みの1.0 (2)を送信・提出。ソースは838e06b。同梱196ファイルと配布署名を照合し、375pxを含む24画面で保存不変・英語名・検索・改名の変更なし保存を確認。英語（米国）の掲載画像もiPhone5枚・iPad3枚を更新し、Appleの画像処理後に提出した。日英の審査メモと連絡先は保存済み。記録はdesign/release-candidate/20261103-english-names.json。
+[最新の審査提出の詳細](https://appstoreconnect.apple.com/apps/6830030864/distribution/reviewsubmissions/details/74aecbfc-068f-46bc-8b84-f5c489dca802)。11月3日のオーナーの「ぜんぶよろ」でビルド送信・審査提出まで承認を受けた。その後の指定で英語版の部員名をEmma Smithのような英語圏の名前へ表示だけ切り替える修正を行い、検証済みの1.0 (2)を送信・提出。ソースは838e06b。同梱196ファイルと配布署名を照合し、375pxを含む24画面で保存不変・英語名・検索・改名の変更なし保存を確認。英語（米国）の掲載画像もiPhone5枚・iPad3枚を更新し、Appleの画像処理後に提出した。日英の審査メモと連絡先は保存済み。記録はdesign/release-candidate/20261103-english-names.json。
 
 ## URL
 
