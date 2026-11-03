@@ -1,0 +1,36 @@
+{
+  "date": "2026-11-03",
+  "sourceCommit": "838e06b697490c0b4ab47630c6b2190849e7415c",
+  "version": "1.0",
+  "build": "2",
+  "languages": [
+    "ja",
+    "en"
+  ],
+  "archive": "/private/tmp/tsukurikata-english-names-release-20261103.xcarchive",
+  "ipa": "/private/tmp/tsukurikata-english-names-export-20261103/Tsukurikata.ipa",
+  "ipaBytes": 43480568,
+  "sha256": "31f2c7e1434f5537de481a5ccf1f581a8fcab8bebd2c94e8980fcd142b335e09",
+  "matchingGameResources": 196,
+  "uploaded": true,
+  "submittedForReview": false,
+  "availableTerritories": [
+    "JP"
+  ],
+  "priceJPY": "0.00",
+  "privacyPublished": true,
+  "reviewContactSaved": true,
+  "englishReviewNotesSaved": true,
+  "nameLocalization": "English given and family names; original save and recording data preserved",
+  "replacesBuild": "1",
+  "codesign": "deep strict verification passed",
+  "debugEntitlement": false,
+  "uploadCompletedAt": "2026-11-03T17:37:41+09:00",
+  "appStoreBuildProcessing": "complete",
+  "appStoreBuildStatus": "Ready to Submit",
+  "submissionBuildSaved": true,
+  "englishStoreImages": "iPhone 5, iPad 3 uploaded; waiting for Apple image processing",
+  "captureChecks": 24,
+  "allCaptureChecksPassed": true,
+  "newJapaneseUIGlyphsCovered": true
+}
