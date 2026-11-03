@@ -840,7 +840,8 @@ tr.empty td{color:var(--ink-soft)}
 @keyframes fxspin{to{transform:rotate(360deg)}}
 @media (prefers-reduced-motion: reduce){.fx-rays{animation:none}.fx-card{transition:none;transform:none}}
 /* 季節の帯（画面のいちばん上） */
-html[data-season] body::before{content:'';position:fixed;top:0;left:0;right:0;height:3px;z-index:60;pointer-events:none;background:var(--season-band)}
+/* 季節の線は別の疑似要素にし、上端の余白を覆う紙の帯を保つ。 */
+html[data-season] body::after{content:'';position:fixed;top:0;left:0;right:0;height:3px;z-index:60;pointer-events:none;background:var(--season-band)}
 html[data-season="sakura"]{--season-band:linear-gradient(90deg,#F6C1D1,#EFA3BC,#F9D7E2)}
 html[data-season="green"]{--season-band:linear-gradient(90deg,#8FC98A,#B5DB8E,#6DB36B)}
 html[data-season="rain"]{--season-band:linear-gradient(90deg,#9DB8D6,#B9CDE4,#7FA0C6)}
