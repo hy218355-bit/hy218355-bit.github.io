@@ -20,7 +20,7 @@
     "JP"
   ],
   "englishStoreDraft": "英語（米国）の名前・副題・紹介文とiPhone5枚・iPad3枚を保存済み",
-  "englishReviewNotesSaved": false,
+  "englishReviewNotesSaved": true,
   "ageRating": "4+",
   "ageRatingSaved": true,
   "ageRatingMadeForKids": false,
@@ -36,12 +36,7 @@
   "freePriceIssue": null,
   "legalPagesHttpStatus": 200,
   "legalPagesPublication": "legal-pages-publication.json",
-  "reviewContactRequiredFields": [
-    "firstName",
-    "lastName",
-    "email",
-    "phoneNumber"
-  ],
+  "reviewContactRequiredFields": [],
   "uploadCompletedAt": "2026-11-03T16:18:31+09:00",
   "uploadTool": "xcodebuild -exportArchive (destination=upload)",
   "uploadResult": "EXPORT SUCCEEDED; Upload succeeded.",
@@ -52,13 +47,10 @@
   "reviewSubmissionAuthorized": true,
   "appStoreBuildStatus": "Ready to Submit",
   "appStoreBuildId": "28abcad9-fd4d-46d3-969b-85736bd977de",
-  "submissionBuildSelectedInForm": true,
+  "submissionBuildSelectedInForm": false,
   "submissionBuildSaved": false,
-  "reviewNotesSaveBlocker": "review-contact-required",
-  "reviewSubmissionPreflightMissing": [
-    "firstName",
-    "lastName",
-    "email",
-    "phoneNumber"
-  ]
+  "reviewNotesSaveBlocker": null,
+  "reviewSubmissionPreflightMissing": [],
+  "supersededBy": "20261103-english-names.json",
+  "reviewContactSaved": true
 }

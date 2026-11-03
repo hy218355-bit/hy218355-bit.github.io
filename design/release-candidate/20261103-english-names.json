@@ -13,7 +13,7 @@
   "sha256": "31f2c7e1434f5537de481a5ccf1f581a8fcab8bebd2c94e8980fcd142b335e09",
   "matchingGameResources": 196,
   "uploaded": true,
-  "submittedForReview": false,
+  "submittedForReview": true,
   "availableTerritories": [
     "JP"
   ],
@@ -29,8 +29,17 @@
   "appStoreBuildProcessing": "complete",
   "appStoreBuildStatus": "Ready to Submit",
   "submissionBuildSaved": true,
-  "englishStoreImages": "iPhone 5, iPad 3 uploaded; waiting for Apple image processing",
+  "englishStoreImages": "iPhone 5, iPad 3 saved; Apple processing completed before submission",
   "captureChecks": 24,
   "allCaptureChecksPassed": true,
-  "newJapaneseUIGlyphsCovered": true
+  "newJapaneseUIGlyphsCovered": true,
+  "submittedAt": "2026-11-03 17:51 JST",
+  "submissionId": "9b47606f-ba75-4fd9-9eb2-ee0b37e5dfff",
+  "submissionUrl": "https://appstoreconnect.apple.com/apps/6830030864/distribution/reviewsubmissions/details/9b47606f-ba75-4fd9-9eb2-ee0b37e5dfff",
+  "reviewStatus": "Waiting for Review",
+  "appStoreBuildId": "060fae9f-7193-4968-91d1-efebbf801a78",
+  "releaseMethod": "manual",
+  "appPublished": false,
+  "submissionScreenshot": "store-waiting-review-build2.png",
+  "submittedConfirmationScreenshot": "store-submitted-build2.png"
 }
