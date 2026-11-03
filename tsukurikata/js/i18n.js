@@ -108,7 +108,8 @@
   const parent=node.parentElement;if(!parent||parent.closest('script,style,pre,textarea,input,[data-no-i18n]'))return;
   const current=node.nodeValue,source=original(node,current,rawText);
   const short=language==='en'&&parent.matches?.('.cal .contest')?{'県':'P','支部':'R','全国':'N'}[source.trim()]:undefined;
-  const next=short??translate(source);
+  const heading=language==='en'&&parent.closest('.rkhead')?{'体力':'Sta.','リズム':'Rhy.','譜読み':'Read.'}[source.trim()]:undefined;
+  const next=short??heading??translate(source);
   if(current!==next)node.nodeValue=next;
   rawText.set(node,{source,last:next});
  }
