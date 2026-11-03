@@ -1,0 +1,37 @@
+{
+  "checkedAt": "2026-11-03T06:51:42.093138+00:00",
+  "files": [
+    {
+      "path": "tsukurikata-support/index.html",
+      "url": "https://hy218355-bit.github.io/tsukurikata-support/",
+      "status": 200,
+      "bytes": 4313,
+      "sha256": "42b2ff7ae9b97376c9191db220479ffc92d351665da7655b7e5151bbbd6c8f4f",
+      "matches": true
+    },
+    {
+      "path": "tsukurikata-privacy/index.html",
+      "url": "https://hy218355-bit.github.io/tsukurikata-privacy/",
+      "status": 200,
+      "bytes": 5674,
+      "sha256": "41a97bd1b93deef7ea6ca7d6af5772ebc02b859a3cbae8c08a38f0289f35f01b",
+      "matches": true
+    },
+    {
+      "path": "tsukurikata-terms/index.html",
+      "url": "https://hy218355-bit.github.io/tsukurikata-terms/",
+      "status": 200,
+      "bytes": 4771,
+      "sha256": "71a3665ed8a94dcbd3cd172cc94dcc5d5396be2a08ea87a1ece8e4a5cb377c92",
+      "matches": true
+    },
+    {
+      "path": "tsukurikata-credits/index.html",
+      "url": "https://hy218355-bit.github.io/tsukurikata-credits/",
+      "status": 200,
+      "bytes": 23145,
+      "sha256": "b80f6a0a66d950b621361a9e96819626ef5d7f86f5d75f1f797c30aa06c112c1",
+      "matches": true
+    }
+  ]
+}

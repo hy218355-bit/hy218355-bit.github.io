@@ -11,31 +11,33 @@
       "bytes": 4313,
       "sha256": "42b2ff7ae9b97376c9191db220479ffc92d351665da7655b7e5151bbbd6c8f4f",
       "url": "https://hy218355-bit.github.io/tsukurikata-support/",
-      "httpStatus": 404
+      "httpStatus": 200
     },
     {
       "path": "tsukurikata-privacy/index.html",
       "bytes": 5674,
       "sha256": "41a97bd1b93deef7ea6ca7d6af5772ebc02b859a3cbae8c08a38f0289f35f01b",
       "url": "https://hy218355-bit.github.io/tsukurikata-privacy/",
-      "httpStatus": 404
+      "httpStatus": 200
     },
     {
       "path": "tsukurikata-terms/index.html",
       "bytes": 4771,
       "sha256": "71a3665ed8a94dcbd3cd172cc94dcc5d5396be2a08ea87a1ece8e4a5cb377c92",
       "url": "https://hy218355-bit.github.io/tsukurikata-terms/",
-      "httpStatus": 404
+      "httpStatus": 200
     },
     {
       "path": "tsukurikata-credits/index.html",
       "bytes": 23145,
       "sha256": "b80f6a0a66d950b621361a9e96819626ef5d7f86f5d75f1f797c30aa06c112c1",
       "url": "https://hy218355-bit.github.io/tsukurikata-credits/",
-      "httpStatus": 404
+      "httpStatus": 200
     }
   ],
   "patch": "legal-pages-main.patch",
-  "pushed": false,
-  "approval": "AGENTS.mdの規則により、公開先mainへのpushはオーナーの明示指示待ち"
+  "pushed": true,
+  "publishedCommit": "50f1f47d42d9507f6713530449cf9e3d729240b3",
+  "liveCheck": "legal-pages-live-check.json",
+  "approval": "2026年11月3日、オーナーが4ページのmainへのpushと公開を承認。全4URLがHTTP 200で、原稿のSHA-256と一致"
 }
