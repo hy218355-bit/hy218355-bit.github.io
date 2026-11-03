@@ -53,6 +53,18 @@
   while(originalNode=originalWalker.nextNode())originals.set(originalNode,originalNode.nodeValue.trim());
   SuibuLanguage.set('en');await new Promise(r=>setTimeout(r,80));
   if(before!==JSON.stringify(S)||saved!==localStorage.getItem(SAVE_KEY))throw Error('言語の変更でセーブが変化');
+  if(scene==='member'){
+   const m=memberById(U.sel),name=SuibuLanguage.name(m.name);
+   if(!/^[A-Za-z]+ [A-Za-z]+$/.test(name))throw Error('英語名が表示されない: '+name);
+   const filter=rosterFilter();filter.name=name;renderRoster();
+   if(!document.querySelector('.mem[data-mid="'+m.id+'"]'))throw Error('英語の名前で検索できない');
+   filter.name='';renderRoster();
+   document.querySelector('#memberCard [data-mact="rename"]').click();
+   if(document.querySelector('#memberName').value!==name)throw Error('改名欄の名前が英語と一致しない');
+   if(!document.querySelector('#memberNameForm label small').textContent.includes('24'))throw Error('英語名の改名欄が24文字にならない');
+   document.querySelector('#memberNameForm').requestSubmit();
+   if(before!==JSON.stringify(S)||saved!==localStorage.getItem(SAVE_KEY))throw Error('英語名をそのまま保存して元の名前が変化');
+  }
   const end=Date.now()+60000;
   while(!SAMPLES.ready||!VIR.man){
    if(SAMPLES.error||VIR.error)throw Error('音源の読み込みに失敗');
@@ -70,7 +82,8 @@
   }
   else window.scrollTo(0,0);
   await new Promise(r=>setTimeout(r,500));
-  const untranslated=[],texts=[];const names=new Set([...S.members,...(S.recruits||[]),...(S.gradMembers||[]),...(S.recs||[]).flatMap(r=>r.snap?.members||[])].flatMap(m=>[m.name,...m.name.split(/[ 　]/)]));
+  // 自動生成した部員の名前も翻訳漏れの対象にする。本人が改名した表記だけを除く。
+  const untranslated=[],texts=[];const names=new Set([...S.members,...(S.recruits||[]),...(S.gradMembers||[]),...(S.recs||[]).flatMap(r=>r.snap?.members||[])].filter(m=>m.originalName&&m.name!==m.originalName).map(m=>m.name));
   const walker=document.createTreeWalker(document.body,NodeFilter.SHOW_TEXT);let n;
   while(n=walker.nextNode()){
    const p=n.parentElement;if(p.closest('script,style,pre,[data-no-i18n]')||!p.getClientRects().length||p.closest('[hidden]'))continue;

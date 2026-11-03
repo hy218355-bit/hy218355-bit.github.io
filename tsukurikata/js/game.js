@@ -2219,10 +2219,12 @@ function assignRecruits(s0, map){
 const recruitsDue = s => !!(s.recruits && s.recruits.length && (s.phase === 'choose' || s.week >= (s.recruitWhen ?? 0)));
 const MEMBER_NAME_MAX = 12;
 const cleanMemberName = value => typeof value === 'string' ? value.trim().replace(/\s+/gu, ' ') : '';
+// 英語の姓名が収まる長さを用意し、日本語の上限は保つ。
+const memberNameMax = value => /^[\p{Script=Latin}\p{M}\p{N} .-]+$/u.test(cleanMemberName(value)) ? 24 : MEMBER_NAME_MAX;
 function memberNameError(s, memberId, value){
   const name = cleanMemberName(value);
   if(!name) return '名前を入力してね。';
-  if(Array.from(name).length > MEMBER_NAME_MAX) return `名前は${MEMBER_NAME_MAX}文字までにしてね。`;
+  if(Array.from(name).length > memberNameMax(name)) return `名前は${memberNameMax(name)}文字までにしてね。`;
   if(!/^[\p{L}\p{M}\p{N} ・.\-]+$/u.test(name) || !/[\p{L}\p{N}]/u.test(name)) return '文字・数字・空白で入力してね（・ー.-も使える）。';
   if(s.members.some(m => m.id !== memberId && cleanMemberName(m.name) === name) || (s.recruits || []).some(m => cleanMemberName(m.name) === name)) return '同じ名前の部員がいるよ。';
   return '';

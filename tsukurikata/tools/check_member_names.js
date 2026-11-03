@@ -29,6 +29,14 @@ for(const name of ['', '   ', 'あいうえおかきくけこさしす', '<img s
 assert.equal(memberNameError(second,id,'あいうえおかきくけこさし'),'');
 assert.equal(memberNameError(second,id,'エミリー・ローズ'),'');
 assert.equal(memberNameError(second,id,'Sora-1'),'');
+assert.equal(memberNameError(second,id,'Charlotte Henderson'),'');
+assert.equal(memberNameError(second,id,'A'.repeat(24)),'');
+assert.ok(memberNameError(second,id,'A'.repeat(25)));
+const english=renameMember(second,id,'Charlotte Henderson');
+assert.equal(english.members[0].name,'Charlotte Henderson');
+assert.equal(english.members[0].originalName,'佐藤 陽菜');
+assert.equal(Faces.fingerprint(english.members[0]),portrait);
+assert.equal(JSON.stringify(english.recs),recordBefore);
 assert.equal(renameMember(second,'存在しない部員','名前'),second);
 assert.equal(renameMember(second,id,second.members[0].name),second);
 save(second);const loaded=load();

@@ -1799,7 +1799,7 @@ function planHtml(ev){
   // 部員の行：名前と体力・力の帯・今週の練習のボタン（押すと練習の一覧が開く）
   const rowOf = m => {
     const auto = decideMenu(S, m), own = ownPlan(m), id = own || auto, open = U.pick === m.id;
-    return `<li class="pm${own ? ' own' : ''}${m.out && m.seat ? ' out' : ''}" data-practice-row="${esc(m.id)}"><span class="who">${memberFace(m,30)}<b>${esc(m.name)}</b><small>${m.grade}年</small></span>
+    return `<li class="pm${own ? ' own' : ''}${m.out && m.seat ? ' out' : ''}" data-practice-row="${esc(m.id)}"><span class="who">${memberFace(m,30)}<b title="${esc(m.name)}">${esc(m.name)}</b><small>${m.grade}年</small></span>
       ${staBar(m)}${rankStrip(m)}
       <button class="pick" type="button" data-pick="${m.id}" aria-expanded="${open}" aria-label="${esc(m.name)}の今週の練習">${practiceIcon(id)}${own ? '' : '<span class="pk">おまかせ</span>'}<b>${MENU_BY[id].name}</b></button>
       ${open ? pickGrid(m.id, own, auto) : ''}${id === 'piece' && S.pieceId ? spanChips(m) : ''}</li>`;
@@ -2265,7 +2265,7 @@ function renderMemberCard(){
   const seat = m.seat && SEAT[m.seat];
   const tr = m.trait && TRAITS[m.trait];
   card.innerHTML = `<button class="help-button mc-close" type="button" data-mact="close" aria-label="閉じる">${uiIcon('close')}</button><div class="mc-portrait">${memberFace(m,112)}<div class="mc-head"><h3>${esc(m.name)}</h3>${m.title ? `<span class="tag">${m.title}</span>` : ''}<span class="sub">${seat?instrumentIcon(seat.inst):''}${m.grade}年・${seat ? PART_LABEL[seat.part] : '控え（席なし）'}</span><button class="mc-name-edit" type="button" data-mact="rename" aria-expanded="false" aria-controls="memberNameForm">名前を変える</button></div></div>
-    <form class="mc-name-form" id="memberNameForm" data-mid="${m.id}" hidden novalidate><label for="memberName">名前<small>${MEMBER_NAME_MAX}文字まで</small></label><input id="memberName" name="memberName" type="text" value="${esc(m.name)}" maxlength="24" autocomplete="off" autocapitalize="off" spellcheck="false" enterkeyhint="done" aria-describedby="memberNameError"><p id="memberNameError" class="mc-name-error" role="alert" hidden></p><div><button class="btn quiet" type="button" data-mact="renamecancel">やめる</button><button class="btn primary" type="submit">保存する</button></div></form>
+    <form class="mc-name-form" id="memberNameForm" data-mid="${m.id}" hidden novalidate><label for="memberName">名前<small>${memberNameMax(window.SuibuLanguage?.name(m.name)||m.name)}文字まで</small></label><input id="memberName" name="memberName" type="text" value="${esc(window.SuibuLanguage?.name(m.name)||m.name)}" maxlength="48" autocomplete="off" autocapitalize="off" spellcheck="false" enterkeyhint="done" aria-describedby="memberNameError"><p id="memberNameError" class="mc-name-error" role="alert" hidden></p><div><button class="btn quiet" type="button" data-mact="renamecancel">やめる</button><button class="btn primary" type="submit">保存する</button></div></form>
     ${canUndoMemberMove() && U.moveUndo.ids.includes(m.id) ? '<div class="mc-undo"><span>席を移した</span><button class="btn small" type="button" data-mact="moveundo">元に戻す</button></div>' : ''}
     ${seat || U.solo !== 'all' ? `<div class="mc-actions">${seat ? `<button class="btn small" type="button" data-mact="solo" aria-pressed="false">${uiIcon('play')}この人だけ聴く</button><span class="mc-rest" data-current-rest hidden>${uiIcon('rest')}<span></span></span><button class="btn small" type="button" data-mact="secsolo" aria-pressed="false">${uiIcon('play')}パートだけ聴く</button>` : ''}<button class="btn small quiet" type="button" data-mact="all"${U.solo==='all'?' hidden':''}>全員の音にもどす</button></div>` : ''}
     <details class="mc-move" data-move-to=""><summary>席を移す</summary>${movePicker(m)}<div class="move-preview" id="movePreview" aria-live="polite" hidden></div><div class="mc-actions move-actions"><button class="btn quiet" type="button" data-mact="movecancel">やめる</button><button class="btn brass" type="button" data-mact="move" disabled>移す</button><button class="btn quiet move-stop" type="button" data-mact="movestop" aria-label="止める"${(U.playing || U.waitPlay) && !tabHidden('play') ? '' : ' hidden'}>${uiIcon('stop')}</button></div>
@@ -2293,7 +2293,7 @@ function rosterFilter(){
 // 空白や文字の表記の違いを吸収する。名前の読み方は推測しない。
 const rosterName = value => String(value || '').normalize('NFKC').toLowerCase().replace(/\s+/gu,'').replace(/[ァ-ヶ]/gu,c=>String.fromCharCode(c.charCodeAt(0)-0x60));
 function rosterMatches(m, f){
-  return (f.grade === 'all' || String(m.grade) === f.grade) && (f.sec === 'all' || (m.seat ? SEAT[m.seat].sec : 'bench') === f.sec) && rosterName(m.name).includes(rosterName(f.name));
+  return (f.grade === 'all' || String(m.grade) === f.grade) && (f.sec === 'all' || (m.seat ? SEAT[m.seat].sec : 'bench') === f.sec) && [m.name,window.SuibuLanguage?.name(m.name)||m.name].some(name=>rosterName(name).includes(rosterName(f.name)));
 }
 function renderRosterFilters(f, count){
   const input=$('#rosterSearch');
@@ -2448,7 +2448,7 @@ function hideTip(){
 /* ===== まとめて描く ===== */
 function renderAll(){
   // 名前は表示の言語が変わっても、本人が付けた文字のまま保つ。
-  window.SuibuLanguage?.names([...(S.members||[]),...(S.gradMembers||[]),...(S.recruits||[]),...(S.recs||[]).flatMap(r=>r.snap?.members||[])].flatMap(m=>[m.name,m.originalName].filter(Boolean)));
+  window.SuibuLanguage?.names([...(S.members||[]),...(S.gradMembers||[]),...(S.recruits||[]),...(S.recs||[]).flatMap(r=>r.snap?.members||[])]);
   hideTip();
   fxMoments();
   renderHeader(); renderPiece(); renderVenues(); renderSelectors();
@@ -2797,11 +2797,19 @@ function bind(){
       toast('席を移した。',1800);
     }
   });
+  $('#memberCard').addEventListener('input', e => {
+    if(e.target.id!=='memberName')return;
+    const hint=$('#memberNameForm label small');
+    if(hint)hint.textContent=`${memberNameMax(e.target.value)}文字まで`;
+  });
   $('#memberCard').addEventListener('submit', e => {
     const form = e.target.closest('#memberNameForm'); if(!form) return;
     e.preventDefault(); if(form.dataset.composing === 'true') return;
     const m = memberById(form.dataset.mid); if(!m) return;
-    const input = $('#memberName'), error = memberNameError(S, m.id, input.value);
+    const input = $('#memberName');
+    // 英語の表示名を変えず保存しても、日本語の元の名前や録音を改名しない。
+    if(input.value===(window.SuibuLanguage?.name(m.name)||m.name)){closeMemberNameForm();return;}
+    const error = memberNameError(S, m.id, input.value);
     if(error){ $('#memberNameError').textContent = error; $('#memberNameError').hidden = false; input.setAttribute('aria-invalid', 'true'); input.focus(); return; }
     haptic('tap'); commit(renameMember(S, m.id, input.value)); renderAll(); refreshNow();
     $('#memberCard [data-mact="rename"]')?.focus({preventScroll: true}); toast('名前を変えた。', 1800);

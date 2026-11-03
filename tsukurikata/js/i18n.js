@@ -5,7 +5,29 @@
  let language='ja';try{language=localStorage.getItem(KEY)||(/^ja\b/i.test(navigator.language)?'ja':'en');}catch(e){}
  if(!['ja','en'].includes(language))language='ja';
  const exact=new Map(),patterns=[],sentences=[],cache=new Map(),rawText=new WeakMap(),rawAttrs=new WeakMap();
- let memberNames=new Set();
+ let memberNames=new Set(),customNames=new Set();
+ const cast=window.SUIBU_EN_NAMES||{family:{},given:{}};
+ const fullNamePattern=new RegExp('('+Object.keys(cast.family).sort((a,b)=>b.length-a.length).join('|')+')[ 　]+('+Object.keys(cast.given).sort((a,b)=>b.length-a.length).join('|')+')','gu');
+ function englishName(value,short=false){
+  const text=String(value??''),trim=text.trim();
+  if(customNames.has(trim))return text;
+  const parts=trim.split(/[ 　]+/),family=cast.family[parts[0]],given=cast.given[parts[1]];
+  if(parts.length===2&&family&&given)return short?given:given+' '+family;
+  return cast.given[trim]||cast.family[trim]||text;
+ }
+ function registerNames(values){
+  memberNames=new Set();customNames=new Set();
+  for(const value of values){
+   const m=typeof value==='string'?{name:value}:value;
+   if(!m)continue;
+   if(m.originalName&&m.name!==m.originalName)customNames.add(m.name);
+   for(const name of [m.name,m.originalName].filter(Boolean)){
+    memberNames.add(name);
+    for(const part of name.split(/[ 　]+/))memberNames.add(part);
+   }
+  }
+  cache.clear();
+ }
  const escape=s=>s.replace(/[.*+?^${}()|[\]\\]/g,'\\$&');
  const balanced=text=>{
   const pairs={'（':'）','「':'」','『':'』'},stack=[];
@@ -43,7 +65,10 @@
  }
  function translate(value,depth=0){
   const text=String(value??'');if(language==='ja'||!japanese.test(text))return text;
-  if(memberNames.has(text.trim()))return text;
+  if(memberNames.has(text.trim()))return englishName(text);
+  // 文中の名前を先に置き換え、姓と名の空白を文章の区切りとして分解しない。
+  const named=text.replace(fullNamePattern,(whole,family,given)=>customNames.has(whole)?whole:cast.given[given]+' '+cast.family[family]);
+  if(named!==text)return translate(named,depth);
   if(cache.has(depth+':'+text))return cache.get(depth+':'+text);
   const trim=text.trim();let result=exact.get(trim);
   const skill=/^(.*)([○◎])$/.exec(trim);
@@ -109,7 +134,8 @@
   const current=node.nodeValue,source=original(node,current,rawText);
   const short=language==='en'&&parent.matches?.('.cal .contest')?{'県':'P','支部':'R','全国':'N'}[source.trim()]:undefined;
   const heading=language==='en'&&parent.closest('.rkhead')?{'体力':'Sta.','リズム':'Rhy.','譜読み':'Read.'}[source.trim()]:undefined;
-  const next=short??heading??translate(source);
+  const person=language==='en'&&parent.matches?.('.pm .who b')?englishName(source,true):undefined;
+  const next=person??short??heading??translate(source);
   if(current!==next)node.nodeValue=next;
   rawText.set(node,{source,last:next});
  }
@@ -159,7 +185,7 @@
   });observe();
   document.addEventListener('click',e=>{const button=e.target.closest('[data-language]');if(button)setLanguage(button.dataset.language);});
  }
- window.SuibuLanguage={get:()=>language,set:setLanguage,text:translate,apply,names:values=>{memberNames=new Set(values);cache.clear();}};
+ window.SuibuLanguage={get:()=>language,set:setLanguage,text:translate,apply,names:registerNames,name:(value,short=false)=>language==='en'?englishName(value,short):String(value??'')};
  for(const name of ['alert','confirm','prompt']){
   const original=window[name];if(typeof original==='function')window[name]=function(message,...args){return original.call(window,translate(message),...args);};
  }
