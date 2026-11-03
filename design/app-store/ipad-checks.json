@@ -1,0 +1,68 @@
+[
+  {
+    "scene": "play",
+    "year": 2028,
+    "week": 5,
+    "members": 39,
+    "width": 1032,
+    "scrollWidth": 1032,
+    "height": 1376,
+    "statusBarBandHeight": 32,
+    "theme": "light",
+    "portraits": 39,
+    "fonts": [
+      "Zen Kaku Gothic New",
+      "Zen Kaku Gothic New",
+      "Zen Kaku Gothic New",
+      "Klee One",
+      "Share Tech Mono"
+    ],
+    "brokenImages": [],
+    "file": "ipad-play-light.png",
+    "matchingGameResources": 193
+  },
+  {
+    "scene": "member",
+    "year": 2028,
+    "week": 5,
+    "members": 39,
+    "width": 1032,
+    "scrollWidth": 1032,
+    "height": 1376,
+    "statusBarBandHeight": 32,
+    "theme": "light",
+    "portraits": 39,
+    "fonts": [
+      "Zen Kaku Gothic New",
+      "Zen Kaku Gothic New",
+      "Zen Kaku Gothic New",
+      "Klee One",
+      "Share Tech Mono"
+    ],
+    "brokenImages": [],
+    "file": "ipad-member-light.png",
+    "matchingGameResources": 193
+  },
+  {
+    "scene": "play",
+    "year": 2028,
+    "week": 5,
+    "members": 39,
+    "width": 1032,
+    "scrollWidth": 1032,
+    "height": 1376,
+    "statusBarBandHeight": 32,
+    "theme": "dark",
+    "portraits": 39,
+    "fonts": [
+      "Zen Kaku Gothic New",
+      "Zen Kaku Gothic New",
+      "Zen Kaku Gothic New",
+      "Klee One",
+      "Share Tech Mono"
+    ],
+    "brokenImages": [],
+    "file": "ipad-play-dark.png",
+    "matchingGameResources": 193
+  }
+]

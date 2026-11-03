@@ -1,0 +1,65 @@
+{
+  "date": "2026-11-03",
+  "sourceCommit": "831c604",
+  "releaseModel": "無料・広告なし・アプリ内課金なし",
+  "archive": "/private/tmp/tsukurikata-release-candidate-20261103.xcarchive",
+  "archiveResult": "成功",
+  "exportResult": "成功",
+  "ipa": "/private/tmp/tsukurikata-store-export-final-20261103/Tsukurikata.ipa",
+  "ipaBytes": 43387809,
+  "ipaSHA256": "971451acdd2edca8287f973f8f611f7a0b8d80c2804b7751f036e13f080c512f",
+  "version": "1.0",
+  "build": "1",
+  "signing": "Apple Distribution",
+  "getTaskAllow": false,
+  "codesignValid": true,
+  "matchingGameResources": 193,
+  "mismatches": [],
+  "tracking": false,
+  "collectedDataTypes": [],
+  "publicPages": [
+    {
+      "url": "https://hy218355-bit.github.io/tsukurikata-support/",
+      "status": 404
+    },
+    {
+      "url": "https://hy218355-bit.github.io/tsukurikata-privacy/",
+      "status": 404
+    },
+    {
+      "url": "https://hy218355-bit.github.io/tsukurikata-terms/",
+      "status": 404
+    },
+    {
+      "url": "https://hy218355-bit.github.io/tsukurikata-credits/",
+      "status": 404
+    }
+  ],
+  "upload": "未実施",
+  "appStoreValidation": "未実施。ローカル署名検証とApp Store側の検証は別。",
+  "submission": "未実施",
+  "mirroring": false,
+  "appStoreConnect": {
+    "appleId": "6830030864",
+    "sku": "tsukurikata-ios",
+    "url": "https://appstoreconnect.apple.com/apps/6830030864/distribution/ios/version/inflight",
+    "recordCreated": true,
+    "japaneseMetadataSaved": true,
+    "iphoneScreenshots": 5,
+    "ipadScreenshots": 3,
+    "releaseMode": "手動",
+    "territories": [
+      "JPN"
+    ],
+    "territoriesSaved": true,
+    "freePriceSaved": false,
+    "priceIssue": "0円は選択できるが次の確認画面へ進まない。設定済みと扱わない。",
+    "macAvailable": false,
+    "visionProAvailable": false,
+    "agreement": "オーナーから同意完了の返信あり",
+    "ageRating": "未回答",
+    "privacy": "未回答",
+    "reviewContact": "未入力"
+  },
+  "englishVersion": "ゲーム内の日本語・英語切り替えを依頼済み。未実装。実装後は新しい配布候補が必要。"
+}

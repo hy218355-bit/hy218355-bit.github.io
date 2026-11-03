@@ -16,6 +16,8 @@
 
 これらのページはローカルで整備済み。公開は別途必要で、申請前にURLの表示を確認する。
 
+11月3日、[App Store Connectの下書き](https://appstoreconnect.apple.com/apps/6830030864/distribution/ios/version/inflight)へ日本語の原稿とiPhone5枚・iPad3枚の画像を保存済み。日本だけでの配信と手動公開を設定。英語版はゲーム内の切り替えも含めて追加依頼あり。審査提出は未実施。
+
 ## 名前（30文字まで）
 
 吹奏楽部のつくりかた
