@@ -39,8 +39,17 @@
     "removeAds": "非消耗型の一度きり購入",
     "implemented": false,
     "appStoreConnectConfigured": false,
-    "status": "相談中・未決定",
+    "status": "将来案として保留・初回公開の対象外",
     "priceJPYProposal": 480,
     "implementationAuthorized": false
+  },
+  "initialReleaseDecision": {
+    "date": "2026-11-03",
+    "status": "オーナー決定",
+    "download": "無料",
+    "ads": false,
+    "inAppPurchases": false,
+    "appStoreConnectConfigured": false,
+    "submission": "未実施"
   }
 }
