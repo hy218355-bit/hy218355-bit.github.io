@@ -1,0 +1,50 @@
+[
+  {
+    "id": 1030,
+    "source": "{0}を{1}",
+    "sample": "1を1",
+    "translated": "1を1"
+  },
+  {
+    "id": 1173,
+    "source": "{3}から{4}",
+    "sample": "1から1",
+    "translated": "1から1"
+  },
+  {
+    "id": 1290,
+    "source": "{0}人{1}",
+    "sample": "1人1",
+    "translated": "1人1"
+  },
+  {
+    "id": 1423,
+    "source": "{0} {1}から{2}",
+    "sample": "1 1から1",
+    "translated": "1 1から1"
+  },
+  {
+    "id": 1483,
+    "source": "{0}年{1}月",
+    "sample": "1年1月",
+    "translated": "1年1月"
+  },
+  {
+    "id": 1486,
+    "source": "{0}{1}から",
+    "sample": "11から",
+    "translated": "11から"
+  },
+  {
+    "id": 1531,
+    "source": "{1} {2}から{3}",
+    "sample": "1 1から1",
+    "translated": "1 1から1"
+  },
+  {
+    "id": 1580,
+    "source": "{0}を{1}{2}",
+    "sample": "1を11",
+    "translated": "1を11"
+  }
+]

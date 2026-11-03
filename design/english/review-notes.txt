@@ -1,0 +1,14 @@
+日本語と英語を切り替えられる高校吹奏楽部育成ゲームです。広告・アプリ内購入・アカウント登録はありません。ゲーム本体・楽器の録音音源・フォント・案内をアプリに同梱し、オフラインで遊べます。
+
+初回は副顧問の案内に従って楽器を決め、曲を聴いて選び、1週間の練習を進めてから「合奏」を開いてください。「いまの音で合奏」で演奏を聴けます。「指揮する」ではタップでテンポを出して演奏できます。案内はスキップでき、「日誌」から再開できます。
+
+「録音」はマイク録音ではなく、ゲームが生成した演奏の記録です。「保存」では端末内で音声を生成してOSの共有シートを開きます。マイクへのアクセスは要求しません。演奏中は画面の自動ロックを抑えます。
+
+セーブは端末内に保存します。ポリシー・利用規約・サポート・素材の出典は「日誌」先頭の「このアプリについて」からオフラインで確認できます。
+
+登場人物は架空の高校生で、部活に加えて告白・交際・失恋などの短い会話があります。他の利用者とのチャットや投稿はありません。
+
+English review guide:
+The app supports Japanese and English. To change language, open Journal > Settings > English. Start with five beginners, assign their instruments, choose a piece and practice for one week. Open Rehearse and tap Play band to hear them. Conduct lets you set the tempo by tapping. The guide can be skipped and reopened from Journal.
+
+The game runs offline, with no ads, purchases or account registration. Recordings are generated game performances, not microphone recordings. Exporting audio opens the iOS share sheet. The app never requests microphone access. Privacy, terms, support and full credits are available offline under Journal > About this app. The fictional high school students have brief conversations about dating, confessions and breakups. There is no user-to-user chat or posting.

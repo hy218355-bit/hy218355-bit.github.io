@@ -1,17 +1,40 @@
 {
-  "status": "掲載用のローカル原稿。ストア未登録・海外配信は未設定",
+  "status": "2026年11月3日、英語（米国）の名前・副題・紹介文・説明・キーワードとiPhone5枚・iPad3枚をApp Store Connectの下書きへ保存済み。未提出・海外配信は未設定",
   "title": "School Band Story",
   "subtitle": "Grow a band. Hear the change.",
   "promotionalText": "Start with five beginners. Choose their practice, hear their progress, and guide your school band from its first rehearsal to the concert stage.",
   "keywords": "music,orchestra,conductor,brass,wind,instrument,training,management,offline,concert,simulation",
   "description": "Five first-year students walk into an empty music room. Your school band begins here.\n\nIn School Band Story, you guide a Japanese high school wind band through practice, performances and graduation. The music changes as your players improve: uncertain tuning, uneven rhythm and hesitant tone gradually become a sound you can be proud of.\n\nHEAR EVERY PLAYER\nThe band plays using recorded instrument sounds, with each member's skills shaping the performance. Listen to the whole ensemble, one section or a single player. Compare an early recording with today's sound and hear how far they have come.\n\nBUILD YOUR BAND\nChoose weekly practice for each member, balance fundamentals with rehearsals, and give tired players time to rest. Every new piece takes time to learn. A growing reputation brings more students to your door, filling up to 39 seats.\n\nMAKE THE LINEUP\nListen before auditions and choose who will take the stage. Stable players add depth to the sound; an unsteady performance can affect the whole ensemble.\n\nTAKE THE PODIUM\nLet the band perform on its own, or tap the beat to conduct. Where you tap controls the volume, and the players follow your tempo. Their preparation still matters.\n\nA SCHOOL YEAR OF STORIES\nWelcome new members, prepare for summer competitions, play at the school festival and send older students off at graduation. Assistant advisor Ms. Asano helps you find your next step.\n\nKEEP THE MEMORIES\nSave and share performance audio, then return to the recordings as your band grows.\n\n15 CLASSICAL PIECES\nPlay wind-band arrangements including Can-Can, Pomp and Circumstance, Ode to Joy, Jupiter, Pachelbel's Canon and Spring from The Four Seasons.\n\nPlay offline. No ads, in-app purchases or account registration. Switch between Japanese and English in the Journal settings.\n\nInstrument samples: VSCO 2 Community Edition, VCSL and Bear Sax (CC0); Weresax (CC BY 3.0); and University of Iowa Musical Instrument Samples. Full credits are included in the app.",
   "markets": [
-    {"country": "US", "angle": "Hear your school band grow, one player at a time."},
-    {"country": "SG", "angle": "From your first rehearsal to the concert stage."},
-    {"country": "AU", "angle": "Build a school concert band. Hear every step forward."}
+    {
+      "country": "US",
+      "angle": "Hear your school band grow, one player at a time."
+    },
+    {
+      "country": "SG",
+      "angle": "From your first rehearsal to the concert stage."
+    },
+    {
+      "country": "AU",
+      "angle": "Build a school concert band. Hear every step forward."
+    }
   ],
-  "releaseOrder": ["JP", "英語版の検証後にUS・SG・AUを試す"],
-  "measurement": ["地域ごとのストア表示からダウンロードまでの割合", "ダウンロード数", "取得できる範囲の継続率・クラッシュ状況", "レビューの内容"],
-  "screenshots": ["合奏の舞台", "部員カード", "毎週の練習", "部員一覧", "ダークの舞台"],
+  "releaseOrder": [
+    "JP",
+    "英語版の検証後にUS・SG・AUを試す"
+  ],
+  "measurement": [
+    "地域ごとのストア表示からダウンロードまでの割合",
+    "ダウンロード数",
+    "取得できる範囲の継続率・クラッシュ状況",
+    "レビューの内容"
+  ],
+  "screenshots": [
+    "合奏の舞台",
+    "部員カード",
+    "毎週の練習",
+    "部員一覧",
+    "ダークの舞台"
+  ],
   "note": "地域別の販売予測ではない。アプリに追跡・解析SDKを追加しない。地域別の継続率はデータ量やAppleの提供範囲により見られない場合がある。"
 }

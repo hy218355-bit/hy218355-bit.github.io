@@ -1,0 +1,30 @@
+{
+  "date": "2026-11-03",
+  "sourceCommit": "ad523113898cf80aa52b8d316a1c4fcb7696a2df",
+  "version": "1.0",
+  "build": "1",
+  "languages": [
+    "ja",
+    "en"
+  ],
+  "archive": "/private/tmp/tsukurikata-english-release-final-20261103.xcarchive",
+  "ipa": "/private/tmp/tsukurikata-english-store-export-20261103/Tsukurikata.ipa",
+  "ipaBytes": 43477905,
+  "sha256": "43c2cf2ef8e7b9e6fee10de88aa836ce1e6ae66054b1f0beeeecdab5b4d3914d",
+  "matchingGameResources": 195,
+  "codesign": "書き出したIPAのdeep strict検証成功",
+  "debugEntitlement": false,
+  "uploaded": false,
+  "submittedForReview": false,
+  "availableTerritories": [
+    "JP"
+  ],
+  "englishStoreDraft": "英語（米国）の名前・副題・紹介文とiPhone5枚・iPad3枚を保存済み",
+  "englishReviewNotesSaved": false,
+  "reviewContactRequiredFields": [
+    "firstName",
+    "lastName",
+    "email",
+    "phoneNumber"
+  ]
+}

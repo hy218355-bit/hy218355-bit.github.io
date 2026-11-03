@@ -133,6 +133,6 @@ CI（`../.github/workflows/ios.yml`）が iPhone 16 Pro Max（6.9インチ）と
 
 英語名は「School Band Story」、副題は「Grow a band. Hear the change.」。ゲーム内は日誌の設定で日本語と英語を切り替える。部員の名前は元の表記を残す。
 
-掲載用の英語原稿は`../design/english/store-en.json`。名前・副題・プロモーション・キーワード・説明は各文字数制限内。英語の掲載画像は`../design/english/screenshots/`に用意する。まだApp Store Connectの英語ローカライズへは登録していない。
+掲載用の英語原稿は`../design/english/store-en.json`。名前・副題・プロモーション・キーワード・説明は各文字数制限内。英語の掲載画像は`../design/english/screenshots/`に用意する。11月3日、App Store Connectの英語（米国）の下書きへ名前・副題・紹介文・説明・キーワードと、iPhone5枚・iPad3枚を登録・保存した。審査用の英語操作案内は原稿を用意したが、ストアへの保存は審査連絡先の入力待ち。
 
 日本を先行し、英語版の確認後にアメリカ・シンガポール・オーストラリアを試す方針。海外向けには、5人の初心者から育てて上達を音で聴けることを中心に紹介する。現在の配信設定は日本のみ。地域別の売上を保証する見立てではない。

@@ -1,0 +1,3 @@
+[web] loaded in 1404ms: 41 banks, 21 rooms, fonts [Zen Kaku Gothic New 400, Zen Kaku Gothic New 500, Zen Kaku Gothic New 700, Klee One 600, Share Tech Mono 400], save yes
+FILE m4a 253792 bytes
+SELFTEST OK peak 0.758 rms -16.5dB nan 0 rendered 7.7s in 895ms, voices 35, ir 102040, schedule all ok in 17396ms, wav 1.55MB -> file ok
