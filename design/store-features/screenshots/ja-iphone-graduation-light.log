@@ -1,0 +1,3 @@
+[web] audio running t=0.14
+[web] play start "2028 定期演奏会（3年生の引退公演）（卒業式で）" 7322 notes, 60.5s, audio running
+[web] CAPTURE_READY {"scene":"graduation","year":2028,"week":26,"members":26,"width":402,"scrollWidth":402,"height":874,"statusBarBandHeight":62,"theme":"light","portraits":39,"fonts":["Zen Kaku Gothic New","Zen Kaku Gothic New","Zen Kaku Gothic New","Klee One","Share Tech Mono"],"brokenImages":[]}

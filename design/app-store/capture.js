@@ -7,6 +7,8 @@
   const fixture=__FIXTURE__;
   stopPlay();U.fxMode='off';U.sfx=false;
   commit(fixture.state);
+  // 英語版の撮影後でも、日本語の掲載画像は日本語で撮る。
+  window.SuibuLanguage?.set('ja');
   U.onboarding={club:onboardingClub(S),active:false,heard:true};
   renderAll();refreshNow();
   setTab(scene==='member'?'members':scene);
