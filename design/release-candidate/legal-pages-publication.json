@@ -1,0 +1,41 @@
+{
+  "date": "2026-11-03",
+  "repository": "hy218355-bit/hy218355-bit.github.io",
+  "targetBranch": "main",
+  "baseCommit": "6f8e55358fc8a782a5f0a9529bb21a229a422507",
+  "deployment": "GitHub Pages: main / (root)",
+  "scope": "サポート・プライバシー・規約・クレジットの4ページだけ。ゲーム本体や既存サイトは変更しない",
+  "files": [
+    {
+      "path": "tsukurikata-support/index.html",
+      "bytes": 4313,
+      "sha256": "42b2ff7ae9b97376c9191db220479ffc92d351665da7655b7e5151bbbd6c8f4f",
+      "url": "https://hy218355-bit.github.io/tsukurikata-support/",
+      "httpStatus": 404
+    },
+    {
+      "path": "tsukurikata-privacy/index.html",
+      "bytes": 5674,
+      "sha256": "41a97bd1b93deef7ea6ca7d6af5772ebc02b859a3cbae8c08a38f0289f35f01b",
+      "url": "https://hy218355-bit.github.io/tsukurikata-privacy/",
+      "httpStatus": 404
+    },
+    {
+      "path": "tsukurikata-terms/index.html",
+      "bytes": 4771,
+      "sha256": "71a3665ed8a94dcbd3cd172cc94dcc5d5396be2a08ea87a1ece8e4a5cb377c92",
+      "url": "https://hy218355-bit.github.io/tsukurikata-terms/",
+      "httpStatus": 404
+    },
+    {
+      "path": "tsukurikata-credits/index.html",
+      "bytes": 23145,
+      "sha256": "b80f6a0a66d950b621361a9e96819626ef5d7f86f5d75f1f797c30aa06c112c1",
+      "url": "https://hy218355-bit.github.io/tsukurikata-credits/",
+      "httpStatus": 404
+    }
+  ],
+  "patch": "legal-pages-main.patch",
+  "pushed": false,
+  "approval": "AGENTS.mdの規則により、公開先mainへのpushはオーナーの明示指示待ち"
+}
