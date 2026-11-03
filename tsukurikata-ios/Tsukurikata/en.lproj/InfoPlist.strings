@@ -1,0 +1,2 @@
+/* ホーム画面の名前を端末の言語に合わせる。 */
+"CFBundleDisplayName" = "School Band";

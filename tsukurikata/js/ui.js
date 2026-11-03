@@ -368,8 +368,10 @@ function stageFloor(g, G, C){
   g.fillStyle=C.brass;g.globalAlpha=.28;
   g.beginPath();g.moveTo(0,0);g.lineTo(34,0);g.quadraticCurveTo(32,34,0,58);g.closePath();g.fill();
   g.beginPath();g.moveTo(G.W,0);g.lineTo(G.W-34,0);g.quadraticCurveTo(G.W-32,34,G.W,58);g.closePath();g.fill();
-  g.globalAlpha=1;g.fillStyle=C.ink;rrect(g,G.cx-19,G.baseY+2,38,13,4);g.fill();
-  g.fillStyle=C.sheet;g.font=`700 9px ${C.fBody}`;g.textAlign='center';g.textBaseline='middle';g.fillText('指揮',G.cx,G.baseY+8.5);
+  // 言語が変わっても、指揮台の文字を背景へ収める。
+  g.font=`700 9px ${C.fBody}`;const labelWidth=Math.max(38,g.measureText('指揮').width+12);
+  g.globalAlpha=1;g.fillStyle=C.ink;rrect(g,G.cx-labelWidth/2,G.baseY+2,labelWidth,13,4);g.fill();
+  g.fillStyle=C.sheet;g.textAlign='center';g.textBaseline='middle';g.fillText('指揮',G.cx,G.baseY+8.5);
 }
 function drawStage(t = -1, cv = $('#stage'), who = null){
   const main = cv.id === 'stage';
@@ -2445,6 +2447,8 @@ function hideTip(){
 
 /* ===== まとめて描く ===== */
 function renderAll(){
+  // 名前は表示の言語が変わっても、本人が付けた文字のまま保つ。
+  window.SuibuLanguage?.names([...(S.members||[]),...(S.gradMembers||[]),...(S.recruits||[]),...(S.recs||[]).flatMap(r=>r.snap?.members||[])].flatMap(m=>[m.name,m.originalName].filter(Boolean)));
   hideTip();
   fxMoments();
   renderHeader(); renderPiece(); renderVenues(); renderSelectors();
@@ -3004,6 +3008,8 @@ function start(data){
   U.shown = U.perfNow; U.shownLabel = nowLabel();
   setNowPlaying(); renderDiag(); drawIdle();
 }
+// 言語を切り替えても部の状態は描き直さず、文字のある舞台だけを更新する。
+document.addEventListener('languagechange',()=>{drawIdle();if(!$('#conduct').hidden)drawStage(-1,$('#cdStage'),CD.who);});
 window.claude?.hot?.snapshot?.(() => ({S}));
 // 画面と共通のスクリプトがそろってから起動する。
 const bootGame=()=>window.claude?.hot?.ready ? window.claude.hot.ready(start) : start(window.claude?.hot?.data ?? {});
