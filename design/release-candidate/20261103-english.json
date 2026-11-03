@@ -14,7 +14,7 @@
   "matchingGameResources": 195,
   "codesign": "書き出したIPAのdeep strict検証成功",
   "debugEntitlement": false,
-  "uploaded": false,
+  "uploaded": true,
   "submittedForReview": false,
   "availableTerritories": [
     "JP"
@@ -26,14 +26,36 @@
   "ageRatingMadeForKids": false,
   "contentRightsSaved": true,
   "privacyDataCollectionDraft": "Data Not Collected",
-  "privacyPolicyUrlSaved": ["ja", "en-US"],
+  "privacyPolicyUrlSaved": [
+    "ja",
+    "en-US"
+  ],
   "privacyPublished": true,
   "privacyConfirmation": "2026年11月3日、オーナーが同意して申告の確定を承認。App Store ConnectのPublished表示を確認",
-  "freePriceSaved": false,
-  "freePriceIssue": "JPY 0.00を選択してNextを押しても同じ画面で進まない。コンソールにObjectのエラーが出たため中止",
+  "freePriceSaved": true,
+  "freePriceIssue": null,
   "legalPagesHttpStatus": 200,
   "legalPagesPublication": "legal-pages-publication.json",
   "reviewContactRequiredFields": [
+    "firstName",
+    "lastName",
+    "email",
+    "phoneNumber"
+  ],
+  "uploadCompletedAt": "2026-11-03T16:18:31+09:00",
+  "uploadTool": "xcodebuild -exportArchive (destination=upload)",
+  "uploadResult": "EXPORT SUCCEEDED; Upload succeeded.",
+  "uploadSourceArchive": "/private/tmp/tsukurikata-english-release-final-20261103.xcarchive",
+  "appStoreBuildProcessing": "complete",
+  "freePriceBaseCountry": "US",
+  "freePriceJapanJPY": "0.00",
+  "reviewSubmissionAuthorized": true,
+  "appStoreBuildStatus": "Ready to Submit",
+  "appStoreBuildId": "28abcad9-fd4d-46d3-969b-85736bd977de",
+  "submissionBuildSelectedInForm": true,
+  "submissionBuildSaved": false,
+  "reviewNotesSaveBlocker": "review-contact-required",
+  "reviewSubmissionPreflightMissing": [
     "firstName",
     "lastName",
     "email",
